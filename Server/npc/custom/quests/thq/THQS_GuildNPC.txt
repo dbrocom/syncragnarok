@@ -1,0 +1,95 @@
+//===== eAthena Script =======================================
+//= Treasure Hunter Script
+//===== Converted By =========================================
+//= Fredzilla
+//= Original
+//////////////////////////////////////////////////////////////
+//                  Treasure Hunter Quests                  //
+//                       By: Ezekial                        //
+//             for the use on nRO run by Newbe5             //
+//                    revised By Warlock                    //
+//////////////////////////////////////////////////////////////
+//===== Version ==============================================
+//= 1.0 - Straight conversion of Aegis NPC file
+//===== Compatible With ======================================
+//= eAthena 1.0
+//===== Description ==========================================
+//= Start for Treasure hunter quests
+//===== Comments =============================================
+//= Event_THQS - Used to check if you have already registered
+//= #Treasure_Token - used to keep track of tokens
+//============================================================
+
+
+yuno_in01,124,164,6	script	Guild Leader	108,{
+	mes "[Keegan]";
+	mes "¿Que te trae por aquí? ¿Tienes algo que decir?";
+	next;
+	menu "Quiero ser un Treasure Hunter",-,"Hacer una Nueva Quest.",N_NQuest,"Llevame a la Official Shop.",N_OShop,"Olvidalo.",N_NVM;
+	if(Event_THQS==1) goto N_AlreadyReg;
+	mes "[Keegan]";
+	mes "Bueno "+strcharinfo(0)+" Si quieres ser un Treasure Hunter primero debes.";
+	mes " ";
+	mes "^FF00001.^000000 Seras cambiado ^FF000025,000z^000000 para los entrenamientos basicos y tu prueba para convertirte en miembro.";
+	mes " ";
+	mes "Umm... Bueno eso es todo lo que necesitas hacer. Hahaha.";
+	next;
+	menu "Pagar ^FF000025,000z^000000.",-,"¡¡Ese es el camino a la grandeza!!",N_HighPrice;
+	if (zeny < 25000) goto N_NoZeny;
+	set Zeny,Zeny-25000;
+	//getitem 7950, 1;
+	//getitem 7951, 1;
+	set Event_THQS,1;
+	mes "[Keegan]";
+	mes "¡Felicidades!";
+	emotion 46;
+	next;
+	mes "[Keegan]";
+	mes "Bienvenido a la Guild de Treasure Hunters.";
+	mes "Ahora deberias hacer una Treasure Hunting Quest si crees poder.";
+	close;
+N_NoZeny:
+	mes "[Keegan]";
+	mes "Hmmm no parece que traigas ^FF000025,000z^000000 "+strcharinfo(0)+". Porfavor regresa cuando lo tengas.";
+	close;
+N_HighPrice:
+	mes "[Keegan]";
+	mes "Si no puedes aportar unos cuantos ^FF000025,000z^000000 no deberías ser un Treasure Hunter todavia.";
+	close;
+N_AlreadyReg:
+	mes "[Keegan]";
+	mes "Ha ha ha... ya eres completamente un miebro.";
+	close;
+N_NQuest:
+	if (Event_THQS!=1) goto A_NeedReg;
+	mes "[Keegan]";
+	mes "Bueno "+strcharinfo(0)+" si deseas hacer una quest ve y habla con el camarada Treasure Hunter en el otro cuarto de ahi.";
+	close;
+A_NeedReg:
+	mes "[Keegan]";
+	mes "Lo siento debes ser un miembro de la Treasure Hunter Guild si quieres hacer una quest.";
+	mes " ";
+	mes "Ademas ahora que eres un miembro sientete libre de usar nuestras tiendas en el momento que lo desees.Todas estan localizadas en este piso.";
+	mes " ";
+	mes "Hay otra tienda solo para miembros, donde cambiamos pequeños diamantes de metal llamados Treasure Hunter Tokens por cosas raras.";
+	mes " ";
+	mes "Tambien tendras acceso a nuestro exclusivo Dungeon personal.";
+	close;
+N_OShop:
+	if (Event_THQS!=1) goto N_NeedMem;
+	mes "[Keegan]";
+	mes "Si "+strcharinfo(0)+" ¡Te llevare de inmediato a nuestra tienda!";
+	next;
+	warp "prt_in",166,171;
+	close;
+	end;
+N_NeedMem:
+	mes "[Keegan]";
+	mes "Lo sentimos solamente miembros pueden visitiar nuestra tienda privada.";
+	close;
+N_NVM:
+	mes "[Keegan]";
+	mes "Muy bien regresa cuando tengas tiempo libre para gastar.";
+	close;
+
+}

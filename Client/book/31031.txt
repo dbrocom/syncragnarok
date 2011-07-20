@@ -1,0 +1,1215 @@
+%faf0e6
+^000088Lista de Premios del Torneo de Gladiadores - Inicio^000000
+
+En esta lista se detallan las carácterísticas de los objetos que se pueden obtener a cambio de 
+los ^880000Puntos de Gladiador^000000 en el siguiente orden:
+
+- Armas
+- Gorros
+- Protecciones
+- Objetos Usables
+- Especiales Ruleta de Estados
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Armas^000000
+
+
+Puntos Necesarios: 400 Puntos
+-----------------
+^880000[Látigo de Zanahoria^000000 - ^880000Carrot Whip]^000000
+Un látigo fruto de un trabajo duro.
+Añade una pequeña posibilidad de usar automáticamente la habilidad ^008800Aumentar Agilidad^000000 en ti mismo cuando atacas.
+El nivel de ^008800Aumentar Agilidad^000000 usado depende del grado de refinamiento de este arma.
+Clase :^777777 Látigo^000000
+Ataque :^777777 185^000000
+Peso :^777777 130^000000
+Propiedad :^777777 Neutral^000000
+Nivel del Arma :^777777 4^000000
+Nivel Necesario :^777777 70^000000
+Profesiones permitidas :^777777 Gypsy^000000
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Armas^000000
+
+
+Puntos Necesarios: 500 Puntos
+-----------------
+^880000[Edge^000000 - ^880000Edge]^000000
+Espada de una mano con la hoja extremadamente afilada, que tiene unas bajas posibilidades de causar ^880000Coma^000000 en los enemigos.
+Añade un 3% de posibilidades de causar ^880000Curse^000000 en el enemigo cuando atacas.
+Clase :^777777 Espada^000000
+Ataque :^777777 115^000000
+Peso :^777777 70^000000
+Nivel del Arma :^777777 4^000000
+Nivel Necesario :^777777 40^000000
+Profesiones permitidas :^777777 Clase Swordman, Clase Merchant, Clase Thief^000000
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Armas^000000
+
+
+Puntos Necesarios: 550 Puntos
+-----------------
+^880000[Guitarra Eléctrica^000000 - ^880000Electric Guitar]^000000
+Una guitarra eléctrica que amplifica el poder de su portador.
+Permite el uso de ^008800Trueno Júpitel [Nivel 1]^000000.
+Añade un 10% de posibilidades de usar automáticamente la habilidad ^008800Trueno Júpitel [Nivel 1]^000000 en el enemigo cuando atacas.
+INT + 2, AGI + 1
+Clase :^777777 Instrumento Musical^000000
+Ataque :^777777 110^000000
+Peso :^777777 180^000000
+Propiedad :^009900 Rayo^000000
+Nivel del Arma :^777777 4^000000
+Nivel Necesario :^777777 70^000000
+Profesiones permitidas :^777777 Bard^000000
+
+^000088Lista de Premios del Torneo de Gladiadores - Armas^000000
+
+
+Puntos Necesarios: 450 Puntos
+-----------------
+^880000[Garrison[2]^000000 - ^880000Garrison[2]]^000000
+Un extraño revolver que solo es fabricado cuando es ordenado especialmente.
+La firma de su creador es usada por los expertos para demostrar su autenticidad.
+Precisión - 10
+Clase :^777777 Revolver^000000
+Ataque :^777777 70^000000
+Peso :^777777 50^000000
+Nivel del Arma :^777777 2^000000
+Nivel Necesario :^777777 55^000000
+Profesiones permitidas :^777777 Gunslinger^000000
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Armas^000000
+
+
+Puntos Necesarios: 600 Puntos
+-----------------
+^880000[Carabina de Jungla[1]^000000 - ^880000Jungle Carbine[1]]^000000
+Un rifle con un cañón más corto para mejorar el uso en las batallas de corto rango como en la selva o en interiores.
+Golpes Críticos + 4, Aumenta la velocidad de ataque en un 10%.
+Por cada 3 puntos de DEX Base, pierdes 1 de Precisión.
+Clase :^777777 Rifle^000000
+Ataque :^777777 170^000000
+Peso :^777777 70^000000
+Nivel del Arma :^777777 3^000000
+Nivel Necesario :^777777 70^000000
+Profesiones permitidas :^777777 Gunslinger^000000
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Armas^000000
+
+
+Puntos Necesarios: 600 Puntos
+-----------------
+^880000[Kamaitachi^000000 - ^880000Kamaitachi]^000000
+Un arma legendaria con las hojas extremadamente afiladas.
+Golpes Críticos + 3, Velocidad de Ataque + 3%
+Rango del Arma + 1
+Clase :^777777 Daga^000000
+Ataque :^777777 125^000000
+Peso :^777777 90^000000
+Propiedad :^009900 Rayo^000000
+Nivel del Arma :^777777 4^000000
+Nivel Necesario :^777777 70^000000
+Profesiones permitidas :^777777 Ninja^000000
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Armas^000000
+
+
+Puntos Necesarios: 300 Puntos
+-----------------
+^880000[Cetro de Poder^000000 - ^880000Mighty Staff]^000000
+Extraño cetro que puede convertir la energia física en fuerza bruta.
+Consume 2 SP con cada ataque físico.
+STR + 10, Ataque Mágico + 15%
+Clase :^777777 Vara^000000
+Ataque :^777777 130^000000
+Peso :^777777 70^000000
+Nivel del Arma :^777777 3^000000
+Nivel Necesario :^777777 24^000000
+Profesiones permitidas :^777777 Clase Mage, Clase Acolyte, Soul Linker^000000
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Armas^000000
+
+
+Puntos Necesarios: 400 Puntos
+-----------------
+^880000[Arco del Trovador[1]^000000 - ^880000Minstrel Bow[1]]^000000
+Instrumento musical remodelado por un bardo errante. Tiene una bonita forma y apariencia que consigue limpiar el espíritu del portador.
+INT + 2,
+Recuperación de SP + 10%
+Clase :^777777 Arco^000000
+Ataque :^777777 120^000000
+Peso :^777777 170^000000
+Nivel del Arma :^777777 4^000000
+Nivel Necesario :^777777 70^000000
+Profesiones permitidas :^777777 Hunter, Bard, Dancer^000000
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Armas^000000
+
+
+Puntos Necesarios: 250 Puntos
+-----------------
+^880000[Cuchillo de Princesa^000000 - ^880000Princess Knife]^000000
+Una hermosa daga de la que se rumorea que fue usada por una antigua princesa para protegerse.
+Todos los Estados + 1
+Clase :^777777 Daga^000000
+Ataque :^777777 84^000000
+Peso :^777777 40^000000
+Nivel del Arma :^777777 4^000000
+Nivel Necesario :^777777 1^000000
+Profesiones permitidas :^777777 Clase Swordman, Clase Mage, Clase Archer, Clase Merchant, Clase Thief, Soul Linker, Ninja^000000
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Armas^000000
+
+
+Puntos Necesarios: 550 Puntos
+-----------------
+^880000[Arco de Pícaro^000000 - ^880000Roguemaster's Bow]^000000
+Arco creado especialmente para ladrones que tiene un buen rango de ataque.
+Rango del Arma + 6
+Clase :^777777 Arco^000000
+Ataque :^777777 75^000000
+Peso :^777777 50^000000
+Nivel del Arma :^777777 4^000000
+Nivel Necesario :^777777 48^000000
+Profesiones permitidas :^777777 Thief^000000
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Armas^000000
+
+
+Puntos Necesarios: 550 Puntos
+-----------------
+^880000[Halcón^000000 - ^880000Windhawk]^000000
+Un hacha que invoca el poder del Rayo otorgandole a su portador una gran velocidad.
+Aumenta la velocidad de ataque en 5%.
+Clase :^777777 Hacha^000000
+Ataque :^777777 115^000000
+Peso :^777777 150^000000
+Propiedad :^777777 Rayo^000000
+Nivel del Arma :^777777 2^000000
+Nivel Necesario :^777777 14^000000
+Profesiones permitidas :^777777 Clase Swordman, Clase Merchant^000000
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 300 Puntos
+-----------------
+^880000[Bendición Angelical^000000 - ^880000Angel Blessing]^000000
+Un deslumbrante y hermoso anillo de oro que ha sido bendecido por un ángel. Este anillo es concedido a los más creyentes.
+Aumenta la resistencia de los ataques de propiedad ^777777Sagrado^000000 en un 5%.
+LUK + 1
+Clase :^777777 Gorros^000000
+Defensa :^777777 0^000000
+Equipado en :^777777 Cabeza^000000
+Peso :^777777 10^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 100 Puntos
+-----------------
+^880000[Máscara de Asesino^000000 - ^880000Assasin Mask]^000000
+Una máscara de un color oscuro que es usado por los asesinos para cubrir su cara.
+Hace sentir que los sentimientos són eliminados cuando la llevas puesta.
+Clase :^777777 Gorros^000000
+Defensa :^777777 0^000000
+Equipado en :^777777 Boca^000000
+Peso :^777777 10^000000
+Nivel Necesario :^777777 70^000000
+Profesiones permitidas :^777777 Priest, Assassin^000000
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 100 Puntos
+-----------------
+^880000[Barba de Bandido^000000 - ^880000Bandit Beard]^000000
+Una barba postiza que es usada por muchos bandidos.
+Clase :^777777 Gorros^000000
+Defensa :^777777 0^000000
+Equipado en :^777777 Boca^000000
+Peso :^777777 10^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 650 Puntos
+-----------------
+^880000[Lacitos Azules[1]^000000 - ^880000Blue Ribbon[1]]^000000
+Unos lazos azules que simbolizan un estudiante ejemplar.
+Añade un 30% de posibilidades de usar automáticamente la habilidad ^008800Aumentar Concentración en Nivel 2^000000 en ti mismo cuando recibes un ataque físico.
+Clase :^777777 Gorros^000000
+Defensa :^777777 1^000000
+Equipado en :^777777 Cabeza^000000
+Nivel Necesario :^777777 45^000000
+Peso :^777777 10^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 300 Puntos
+-----------------
+^880000[Máscara de Novia[1]^000000 - ^880000Bride Mask[1]]^000000
+Una máscara usada por los actores en sus obras. Se dice que esta máscara da un aire mas lindo.
+[^008800Clase TaeKwon^000000]
+LUK + 2, Golpes Críticos + 5
+Clase :^777777 Gorros^000000
+Defensa :^777777 4^000000
+Equipado en :^777777 Cabeza, Ojos^000000
+Peso :^777777 50^000000
+Nivel Necesario :^777777 40^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 250 Puntos
+-----------------
+^880000[Gorro de Cubo[1]^000000 - ^880000Bucket Hat[1]]^000000
+Un sombrero de moda cuyo diseño se basa en los sombreros de estilo antiguo que solía ser usado por los hombres alistados en el ejército.
+Clase :^777777 Gorros^000000
+Defensa :^777777 3^000000
+Equipado en :^777777 Cabeza^000000
+Peso :^777777 30^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 500 Puntos
+-----------------
+^880000[Chullos[1]^000000 - ^880000Chullos[1]]^000000
+Un gorro fabricado con varias pieles de animales.
+Este gorro también puede usarse como orejeras, protegiendo tus orejas del frio.
+Se dice que este gorro es muy tradicional en las zonas heladas.
+Aumenta la resistencia al estado alterado ^880000Freeze^000000 en un 10%.
+Clase :^777777 Gorros^000000
+Defensa :^777777 2^000000
+Equipado en :^777777 Cabeza, Ojos^000000
+Peso :^777777 80^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 250 Puntos
+-----------------
+^880000[Coppola^000000 - ^880000Coppola]^000000
+Gorro favorito de Marco. Andrea escribio las palabras "Sus memorias para ti..." dentro del gorro.
+Clase :^777777 Gorros^000000
+Defensa :^777777 0^000000
+Equipado en :^777777 Cabeza^000000
+Peso :^777777 30^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 200 Puntos
+-----------------
+^880000[Gorro de Cowboy^000000 - ^880000Cowboy Hat]^000000
+Un gorro de cowboy. Da un aspecto más masculino a los hombres y es bonito cuando lo usa una mujer.
+Clase :^777777 Gorros^000000
+Defensa :^777777 4^000000
+Equipado en :^777777 Cabeza^000000
+Peso :^777777 50^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 270 Puntos
+-----------------
+^880000[Peluca de Dokebi^000000 - ^880000Dokebi's Wig]^000000
+Una peluda peluca de estilo afro muy codiciada por los adolescentes. Una vez puesta tendrás unas irremediables ganas de bailar.
+Añade un 30% de posibilidades de usar automáticamente la habilidad ^008800Primeros Auxilios^000000 en ti mismo cuando recibes un ataque físico.
+Aumenta la resistencia de los ataques de propiedad ^777777Neutral^000000 en un 1%.
+Clase :^777777 Gorros^000000
+Defensa :^777777 0^000000
+Equipado en :^777777 Cabeza, Ojos^000000
+Peso :^777777 10^000000
+Nivel Necesario :^777777 10^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 400 Puntos
+-----------------
+^880000[Pergamino Ninja^000000 - ^880000Ninja's Scroll]^000000
+Pergamino que llevan los ninjas para usar sus hechizos.
+Aumenta el Ataque Mágico en un 1%.
+Clase :^777777 Gorros^000000
+Defensa :^777777 0^000000
+Equipado en :^777777 Boca^000000
+Peso :^777777 20^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 300 Puntos
+-----------------
+^880000[Piruleta^000000 - ^880000Sweet Candy]^000000
+Una deliciosa piruleta buena para los niños.
+Clase :^777777 Gorros^000000
+Defensa :^777777 1^000000
+Equipado en :^777777 Boca^000000
+Peso :^777777 10^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Gorros^000000
+
+
+Puntos Necesarios: 250 Puntos
+-----------------
+^880000[Gorro de Oso^000000 - ^880000Teddybear Hat]^000000
+Un gorro creado con el aspecto de la cara de un oso. Podría ser un bonito regalo.
+Clase :^777777 Gorros^000000
+Defensa :^777777 3^000000
+Equipado en :^777777 Cabeza^000000
+Peso :^777777 80^000000
+Nivel Necesario :^777777 50^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 350 Puntos
+-----------------
+^880000[Protector de Brazo[1]^000000 - ^880000Arm Guard[1]]^000000
+Un protector de brazo diseñado exclusivamente para ninjas, este protector esta fabricado con placas de acero para aumentar su defensa y duración.
+Clase :^777777 Escudo^000000
+Defensa :^777777 5^000000
+Peso :^777777 15^000000
+Nivel Necesario :^777777 20^000000
+Profesiones permitidas :^777777 Ninja^000000
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 700 Puntos
+-----------------
+^880000[Botas de Batalla[1]^000000 - ^880000Battle Boots[1]]^000000
+Estas botas no parecen tener diferencia con otras botas. Pero han sido diseñadas exclusivamente para Gunslinger.
+Añade un 1% de resistencia contra los enemigos del tipo Humano.
+Max HP + 100. Defensa Mágica + 1.
+Clase :^777777 Calzado^000000
+Defensa :^777777 3^000000
+Peso :^777777 0^000000
+Nivel Necesario:^777777 80^000000 
+Profesiones permitidas :^777777 Gunslinger^000000
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 350 Puntos
+-----------------
+^880000[Zapatillas de Conejito[1]^000000 - ^880000Bunny Slipper[1]]^000000
+Un par de zapatillas que mejoran el aspecto de las chicas. Algunos chicos lo usan en secreto.
+LUK + 3, Defensa Mágica + 3
+Clase :^777777 Calzado^000000
+Defensa :^777777 3^000000
+Peso :^777777 30^000000
+Nivel Necesario :^777777 30^000000
+Profesiones permitidas :^777777 Solo Mujeres, Cualquier Profesión Excepto Novato^000000
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 400 Puntos
+-----------------
+^880000[Gandora[1]^000000 - ^880000Gandora[1]]^000000
+Ropaje usado en Oriente Medio para soportar el clima de esas regiones.
+AGI + 1
+Evasión + 5, Velocidad de Ataque + 2%
+Clase :^777777 Armadura^000000
+Defensa :^777777 4^000000
+Peso :^777777 30^000000
+Nivel Necesario :^777777 70^000000
+Profesiones permitidas :^777777 Assassin Cross^000000
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 400 Puntos
+-----------------
+^880000[Protector de Brazo Mejorado[1]^000000 - ^880000Improved Arm Guard[1]]^000000
+Un protector de brazo diseñado exclusivamente para ninjas que ha sido mejorado por un gran artesano para otorgar un poco de defensa a la magia.
+Defensa Mágica + 5
+Clase :^777777 Escudo^000000
+Defensa :^777777 4^000000
+Peso :^777777 15^000000
+Nivel Necesario :^777777 50^000000
+Profesiones permitidas :^777777 Ninja^000000
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 500 Puntos
+-----------------
+^880000[Manilla de Hierro^000000 - ^880000Iron Wrist]^000000
+Manilla fabricada totalmente de hierro.
+Aumenta el daño realizado en un 6% con las habilidades ^008800Embestir y Mamonneda^000000.
+Clase :^777777 Accesorio^000000
+Defensa :^777777 1^000000
+Peso :^777777 70^000000
+Nivel Necesario :^777777 50^000000
+Profesiones permitidas :^777777 Swordman, Clase Merchant^000000
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 250 Puntos
+-----------------
+^880000[Broche Lunar[1]^000000 - ^880000Lunatic Brooch[1]]^000000
+Un broche resplandeciente con forma de luna y cubierto de oro.
+[^000088Combo: Arco Lunar^000000]
+Dex + 1, SP + 50, Recuperación de SP + 10%
+Clase :^777777 Accesorio^000000
+Defensa :^777777 0^000000
+Peso :^777777 20^000000
+Nivel Necesario :^777777 65^000000
+Profesiones permitidas :^777777 Clase Archer^000000
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 100 Puntos
+-----------------
+^880000[Escudo Espejo^000000 - ^880000Mirror Shield]^000000
+Escudo con la superficie de espejo que podría reflejar la magia.
+Defensa Mágica + 5
+Clase :^777777 Escudo^000000
+Defensa :^777777 4^000000
+Peso :^777777 100^000000
+Profesiones permitidas :^777777 Clase Swordman, Star Gladiator^000000
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 200 Puntos
+-----------------
+^880000[Escudo de Novato[1]^000000 - ^880000Novice Shield[1]]^000000
+Un bonito escudo creado de un metal especial para Novatos.
+Aumenta la resistencia de los ataques de todos los elementos en un 20% (Excepto ^777777Neutral^000000).
+Clase :^777777 Escudo^000000
+Defensa :^777777 3^000000
+Peso :^777777 100^000000
+Nivel Necesario :^777777 40^000000
+Profesiones permitidas :^777777 Novice^000000
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 250 Puntos
+-----------------
+^880000[Incienso Oculto^000000 - ^880000Occult Incense]^000000
+Un pequeño recipiente con incienso que es usado para evadir al demonio.
+INT + 1, AGI + 1
+Clase :^777777 Accesorio^000000
+Defensa :^777777 0^000000
+Peso :^777777 10^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 250 Puntos
+-----------------
+^880000[Incienso Sagrado^000000 - ^880000Sacred Incense]^000000
+Un pequeño recipiente con incienso que es usado para evadir la mala suerte.
+STR + 1, LUK + 1
+Clase :^777777 Accesorio^000000
+Defensa :^777777 0^000000
+Peso :^777777 10^000000
+Profesiones permitidas :^777777 Cualquier Profesión^000000
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 350 Puntos
+-----------------
+^880000[Escritura Sagrada^000000 - ^880000Sacred Scripture]^000000
+Un libro grueso que contiene las habilidades básicas para un clérigo.
+Recuperación de HP y SP + 3%, INT + 1
+[^000088Combo: Bastón Sagrado^000000]
+Aumenta el daño realizado en un 20% con la habilidad ^008800Exorcismo Mayor^000000.
+Añade un pequeño porcentaje de usar automáticamente la habilidad ^008800Expulsar Muerto Viviente en Nivel 1^000000 en un enemigo cuando recibes un ataque físico.
+Clase :^777777 Escudo^000000
+Defensa :^777777 5^000000
+Peso :^777777 60^000000
+Nivel Necesario :^777777 50^000000
+Profesiones permitidas :^777777 Priest, Monk^000000
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 700 Puntos
+-----------------
+^880000[Malla de Sprint[1]^000000 - ^880000Sprint Mail[1]]^000000
+Una armadura que te ayuda a seguir corriendo a tu máxima velocidad.
+Esta armadura podría parecer una simple camiseta para correr, pero en realidad es una armadura duradera.
+Vit + 1. Recuperación de HP + 5%.
+Aumenta la efectividad de las habilidades ^008800Curación y Lanzar Poción^000000 en un 3%.
+Clase :^777777 Armadura^000000
+Defensa :^777777 3^000000
+Peso :^777777 100^000000
+Nivel Necesario :^777777 70^000000
+Profesiones permitidas :^777777 Trans 2nd Clase^000000
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 300 Puntos
+-----------------
+^880000[Escudo Resistente[1]^000000 - ^880000Strong Shield[1]]^000000
+Un escudo masivo que resiste firmemente cualquier tipo de ataque.
+Aunque su portador recibe un daño extra ya que el escudo no es muy bueno absorbiendo impactos.
+El portador de este escudo no puede ser empujado.
+Todos los tipos de ataques físicos y mágicos dañan un 20% adicional a su portador.
+Clase :^777777 Escudo^000000
+Defensa :^777777 4^000000
+Peso :^777777 250^000000
+Nivel Necesario :^777777 75^000000
+Profesiones permitidas :^777777 Every Rebirth Job except High Novice^000000
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 400 Puntos
+-----------------
+^880000[Piel de Tendrilion[1]^000000 - ^880000Tendrilion Skin[1]]^000000
+Piel de tendrilion con varias plantas creciendo en ella.
+Aumenta la resistencia de los ataques de propiedad ^FF0000Agua^000000 y ^FF0000Tierra^000000 en un 5%.
+Añade un 5% de resistencia contra los enemigos del tipo Planta y del tipo Bestia.
+Clase :^777777 Capa^000000
+Defensa :^777777 3^000000
+Peso :^777777 50^000000
+Nivel Necesario :^777777 70^000000
+Profesiones permitidas :^777777 Trans 2nd Clase^000000
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Protecciones^000000
+
+
+Puntos Necesarios: 300 Puntos
+-----------------
+^880000[Escudo de Pinchos[1]^000000 - ^880000Thorn Shield[1]]^000000
+Un áspero escudo con docenas de pinchos. Si te defiendes con esto parece que el agresor puede recibir algo de daño.
+Defensa Mágica + 2
+[^000088Combo: Cuerno del Bufalo^000000]
+Aumenta la Velocidad de Ataque en un 10%, Refleja un 5% de todo el daño físico recibido.
+Clase :^777777 Escudo^000000
+Defensa :^777777 5^000000
+Peso :^777777 100^000000
+Nivel Necesario :^777777 55^000000
+Profesiones permitidas :^777777 Every Rebirth Job except High Novice^000000
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Objetos Usables^000000
+
+
+Puntos Necesarios: 15 Puntos
+-----------------
+^880000[Poción Azul^000000 - ^880000Blue Potion]^000000
+Poción creada a base de Hierbas Azules machacadas ^000088Recupera aproximadamente 60 SP^000000.
+^ffffff_^000000
+Peso :^777777 15^000000
+
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Objetos Usables^000000
+
+
+Puntos Necesarios: 15 Puntos
+-----------------
+^880000[Filete Picante^000000 - ^880000Bomber Steak]^000000
+Parece un bistec normal, pero es explosivamente sabroso y jugoso.
+STR + 3
+^ffffff_^000000
+Peso :^777777 50^000000
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Objetos Usables^000000
+
+
+Puntos Necesarios: 15 Puntos
+-----------------
+^880000[Sopa de Almejas^000000 - ^880000Clam Soup]^000000
+Sopa de Almejas frescas hervidas en agua. 
+VIT + 3
+^ffffff_^000000
+Peso :^777777 30^000000
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Objetos Usables^000000
+
+
+Puntos Necesarios: 15 Puntos
+-----------------
+^880000[Patatas Fritas Dulces^000000 - ^880000Fried Sweet Potato]^000000
+Dulces patatas fritas cubiertas ligeramente con un poco de sirope. Tienen un sabor dulce y son perfectas para comerlas entre plato y plato.
+LUK + 3
+^ffffff_^000000
+Peso :^777777 50^000000
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Objetos Usables^000000
+
+
+Puntos Necesarios: 15 Puntos
+-----------------
+^880000[Macedonia^000000 - ^880000Fruit Mix]^000000
+Una mezcla de varias frutas en almíbar con un poco de sirope.
+DEX + 3
+^ffffff_^000000
+Peso :^777777 20^000000
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Objetos Usables^000000
+
+
+Puntos Necesarios: 15 Puntos
+-----------------
+^880000[Té con Miel^000000 - ^880000Honey Herbal Tea]^000000
+Hierbas vigorizantes cuyo sabor ha sido mejorado añadiendole un poco de miel.
+INT + 3
+^ffffff_^000000
+Peso :^777777 50^000000
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Objetos Usables^000000
+
+
+Puntos Necesarios: 10 Puntos
+-----------------
+^880000[Poción de Velocidad^000000 - ^880000Speed Potion]^000000
+Poción que aumenta la velocidad de movimiento de un personaje por un periodo de tiempo.
+^ffffff_^000000
+Peso :^777777 10^000000
+
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Objetos Usables^000000
+
+
+Puntos Necesarios: 15 Puntos
+-----------------
+^880000[Tentáculos con Queso^000000 - ^880000Tentacle Cheese Gratin]^000000
+Tentáculos al vapor con queso gratinado que le da un olor exquisito.
+AGI + 3
+^ffffff_^000000
+Peso :^777777 50^000000
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Objetos Usables^000000
+
+
+Puntos Necesarios: 15 Puntos
+-----------------
+^880000[Poción Blanca^000000 - ^880000White Potion]^000000
+Poción creada a base de Hierbas Blancas machacadas ^000088Recupera aproximadamente 325 HP^000000.
+^ffffff_^000000
+Peso :^777777 15^000000
+
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Objetos Usables^000000
+
+
+Puntos Necesarios: 15 Puntos
+-----------------
+^880000[Saco de Máscaras^000000 - ^880000Wrapped Mask]^000000
+Es una máscara pero...¿Que máscara es? Tendras que abrir este saco si quieres averiguarlo.
+^00688BAbriendo este saco recibes una máscara al azar^000000.
+^ffffff_^000000
+Peso :^777777 20^000000
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 25 Puntos
+-----------------
+^880000[Explosión Frutal]^000000
+Desbloquea en tu Ruleta de Estados el especial Explosión Frutal, cuando este especial se 
+active aparecerán muchas frutas en el suelo que podrás recoger y usar como curación extra.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 12 Puntos
+-----------------
+^880000[Trio Goblin]^000000
+Desbloquea en tu Ruleta de Estados el especial Trio Goblin, cuando este especial se active
+aparecerán 3 Goblins dispuestos a ayudarte a acabar con todos tus enemigos.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 70 Puntos
+-----------------
+^880000[Compañera Assassin]^000000
+Desbloquea en tu Ruleta de Estados el especial Compañera Assassin, cuando este especial se active
+aparecerá una Compañera de Clase Assassin que te ayudará a acabar con todos tus enemigos.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 70 Puntos
+-----------------
+^880000[Compañero Hunter]^000000
+Desbloquea en tu Ruleta de Estados el especial Compañero Hunter, cuando este especial se active
+aparecerá un Compañero de Clase Hunter que te ayudará a acabar con todos tus enemigos.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 70 Puntos
+-----------------
+^880000[Compañera Wizard]^000000
+Desbloquea en tu Ruleta de Estados el especial Compañera Wizard, cuando este especial se active
+aparecerá una Compañera de Clase Wizard que te ayudará a acabar con todos tus enemigos.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 70 Puntos
+-----------------
+^880000[Compañero Monk]^000000
+Desbloquea en tu Ruleta de Estados el especial Compañero Monk, cuando este especial se active
+aparecerá un Compañero de Clase Monk que te ayudará a acabar con todos tus enemigos.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 70 Puntos
+-----------------
+^880000[Compañera Priest]^000000
+Desbloquea en tu Ruleta de Estados el especial Compañera Priest, cuando este especial se active
+aparecerá una Compañera de Clase Priest que te ayudará a acabar con todos tus enemigos.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 70 Puntos
+-----------------
+^880000[Compañero Knight]^000000
+Desbloquea en tu Ruleta de Estados el especial Compañero Knight, cuando este especial se active
+aparecerá un Compañero de Clase Knight que te ayudará a acabar con todos tus enemigos.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 30 Puntos
+-----------------
+^880000[Puntos Extra]^000000
+Desbloquea en tu Ruleta de Estados el especial Puntos Extra, cuando este especial se active
+recibirás de 1 a 10 Puntos de Gladiador extras.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 20 Puntos
+-----------------
+^880000[Zeny Extra]^000000
+Desbloquea en tu Ruleta de Estados el especial Zeny Extra, cuando este especial se active
+recibirás de 1.000 a 10.000 Zeny extra.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 30 Puntos
+-----------------
+^880000[Regalo Extra]^000000
+Desbloquea en tu Ruleta de Estados el especial Puntos Extra, cuando este especial se active
+recibirás una Caja de Regalo (Gift Box).
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 12 Puntos
+-----------------
+^880000[Experiencia de Clan Extra]^000000
+Desbloquea en tu Ruleta de Estados el especial Experiencia de Clan Extra, cuando este especial se active
+tu clan recibirá de 1.000 a 10.000 puntos de experiencia.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 50 Puntos
+-----------------
+^880000[Experiencia Base Extra]^000000
+Desbloquea en tu Ruleta de Estados el especial Experiencia Base Extra, cuando este especial se active
+recibirás de 1.000 a 10.000 puntos de experiencia base.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 50 Puntos
+-----------------
+^880000[Experiencia Job Extra]^000000
+Desbloquea en tu Ruleta de Estados el especial Experiencia Job Extra, cuando este especial se active
+recibirás de 1.000 a 10.000 puntos de experiencia de job.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+
+
+
+
+
+
+
+
+^000088Lista de Premios del Torneo de Gladiadores - Especiales Ruleta de Estados^000000
+
+
+Puntos Necesarios: 25 Puntos
+-----------------
+^880000[Poción Extra]^000000
+Desbloquea en tu Ruleta de Estados el especial Poción Extra, cuando este especial se active
+recibirás una poción aleatoria entre: Poción Roja, Poción Amarilla, Poción Naranja, Poción Blanca, Poción Verde y Poción Azul.
+
+(Los especiales solo funcionan en los Torneos, en los Modos no funcionan)
+

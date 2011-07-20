@@ -1,0 +1,2292 @@
+//===== eAthena Script ======================================= 
+//= Assassin Job Quest
+//===== By: ================================================== 
+//= kobra_k88
+//===== Current Version: ===================================== 
+//= 3.3
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Job Change quest for Assassin class.
+//===== Additional Comments: ================================= 
+//= v1.0 Used some dialogue from the aegis Assassin script translated By: Pgro Team (OwNaGe)
+//= Also converted the booby traps from the aegis script.[kobra_k88]
+//= v1.1 Made adjustments to ontouch npcs to work with the new "ontouch" functionality.
+//= Fixed some duplicate npc names.  Added missing waitingroom triggers.
+//= Fixed warp in "TimerSin", was supposed to be an areawarp.
+//= For some reason sometimes the "Nameless One" would have message windows
+//= without controls.  Changed the doevent that triggers him to an
+//= addtimer and that seemed make the prob. go away[kobra_k88]
+//= 1.2 Fixed WRONG skillpoint check! [Lupus]
+//= 1.2b Fixed missing commands and typos [Lupus]
+//= 1.3 Baby class Support added [Lupus]
+//= 1.5 Fixed possible EXP abuse [Lupus]
+//= 1.6 Added a func which prevent advanced classes passing
+//= 2nd Job Quests again. It also guides adv classes where
+//= to go. [Lupus]
+//= 2.0 Changed numbers to constants. [Vicious]
+//= 2.1 Removed Duplicates [Silent]
+//= 2.2 Merged back JFunc. Fixed missing dialogue [Lupus]
+//= 2.3 Fixed typo and change Nameless addtimer to 100 (with 700ms I 
+//= was still able to bypass it) [Toms]
+//= 2.4 Fixed skipping of Nameless NPC [Lupus]
+//= 2.5 Fixed a Rogue exploit [Lupus]
+//= 2.6 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 2.7 Several bugfixes with the help of Samuray22 and Barron-Monster. [L0ne_W0lf]
+//= 2.8 Removed duplicate warps. [L0ne_W0lf]
+//= 2.8a Deleted unused variables. [Samuray22]
+//= 2.8b Fixed error caused in last updated, removed useless variable 'joblvl'. [L0ne_W0lf]
+//= 2.9 Fixed an indent and added a 'break;' in hopes of 'fixing' an error [L0ne_W0lf]
+//= 2.9a Corrected a Typo error ";;". [Samuray22]
+//= 2.9b Moved a wrong 'break'. [Zephyrus_cr]
+//= 3.0 Now uses enable and disable waitingroomevent. [L0ne_W0lf]
+//= 3.1 Fixed problem with waiting room. (bugreport:1099) [L0ne_W0lf]
+//= 3.1a Follow up fix. Forgot to replace a label. [L0ne_W0lf]
+//= 3.1b Fixed waiting room not enabled in some situations [Zephyrus]
+//= 3.2 Fixed a question having all correct answers. [brianluau]
+//= 3.3 Added Quest Log commands. [Kisuka]
+//============================================================ 
+
+in_moc_16,19,33,1	script	Guildsman#asn	55,{
+	if (Upper == 1) {
+		mes "[Ferocious-looking guy]";
+		mes "¿Hm? ¿Tu....?";
+		mes "Puedo sentir que eres diferente a las demás personas...";
+		next;
+		mes "[Ferocious-looking guy]";
+		mes "¡Nunca había conocido a alguien tan intimidante como tu! Por alguna razón, No me agradas. ¡Creo que debería irme!";
+		close;
+	}
+	if (SkillPoint) {
+		mes "[Ferocious-looking guy]";
+		mes "Tu no puedes cambiar de job si no has usados todos tus skill points del 1er job. Mejor vete y usa esos puntos primero.";
+		close;
+	}
+	if (ASSIN_Q == 4) {
+		mes "[Ferocious-looking guy]";
+		mes "Ah, deja de poner esa cara. ¿Será verdad que te duele tanto?";
+		next;
+		mes "[Ferocious-looking guy]";
+		mes "Bla bla bla, Puedo ver, que estas lastimado. Mira, Te restaurare la HP y SP. ¿Contento?";
+		percentheal 100,100;
+		next;
+		mes "[Ferocious-looking guy]";
+		mes "¿Es así de difícil mantenerte vivo?";
+		mes "¿Por qué no te esfuerzas mas la próxima vez? No puedes forzarte demasiado para convertirte en Assassin...";
+		next;
+		if (select("I will become an Assassin no matter what!:Oh man, I gotta take a break.") == 1) {
+			mes "[Ferocious-looking guy]";
+			mes "Ah...";
+			mes "Bien entonces,";
+			mes "¡Ve inténtalo!";
+			close2;
+			set ASSIN_Q,0;
+			warp "in_moc_16",19,76;
+			end;
+		}
+		mes "[Ferocious-looking guy]";
+		mes "¿Tomar un descanso? Ah esta bien, hazlo a tu manera. Cuando te sientas listo para convertirte en un Assassin, regresa.";
+		next;
+		mes "[Ferocious-looking guy]";
+		mes "Tendrás que caminar si quieres regresar a la ciudad. Ah, y no te olvides de grabar tu punto de reaparición, ¿esta bien?";
+		close2;
+		set ASSIN_Q,0;
+		set ASSIN_Q2,0;
+		set ASSIN_Q3,0;
+		savepoint "in_moc_16",18,14;
+		warp "in_moc_16",18,14;
+		end;
+	}
+	if (BaseJob == Job_Thief && countitem(1008) == 0 && ASSIN_Q > 7) {
+		mes "[Assassin Expert 'Huey']";
+		mes "¿Hey, qué paso...? ¿Cómo es que no me trajiste ^006699Necklace of Oblivion^000000? Se supone que deberías andar con eso, así que ¿Dónde está?";
+		next;
+		mes "[Assassin Expert 'Huey']";
+		mes "¡Será mejor que consigas ^006699Necklace of Oblivion^000000 otra vez antes de que el guildmaster se entere! ¡Date prisa, y has tu mejor esfuerzo para conseguirlo!";
+		next;
+		mes "[Assassin Expert 'Huey']";
+		mes "Cuando logres conseguirlo, ¡tráemelo! ^666666*Suspiro...*^000000";
+		close;
+	}
+	if (BaseJob == Job_Thief && countitem(1008) > 0 && ASSIN_Q > 7) {
+		mes "[Assassin Expert 'Huey']";
+		mes "Vaya vaya vaya, lo conseguiste. ¡Felicidades! Pero ya que se ve que esta claramente dañado, no puedo aceptarlo. ¡Tú nunca te convertirás en un  Assassin!";
+		next;
+		mes "[Assassin Expert 'Huey']";
+		mes "¡Jajaja~! Solo estoy bromeando, no lo tomes en serio. Pero si necesito ir a verificar este necklace con el guildmaster primero.";
+		next;
+		mes "[Assassin Expert 'Huey']";
+		mes "...";
+		next;
+		mes "[Assassin Expert 'Huey']";
+		mes "...";
+		mes "......";
+		next;
+		delitem 1008,1; //Frozen_Heart
+		changequest 8007,8008;
+		mes "[Assassin Expert 'Huey']";
+		mes "¡Muy bien!";
+		mes "¡Has sido aprobado!";
+		next;
+		completequest 8008;
+		callfunc "Job_Change",Job_Assassin;
+		callfunc "F_ClearJobVar";		// clears all job variables for the current player
+		mes "[Assassin Expert 'Huey']";
+		mes "¡Ya esta! ¡Esfuérzate por convertirte en un gran Assassin! Viaja con fe y asesina con dignidad. Ven a visitarnos de vez en cuando. Una vez más, felicidades.";
+		close;
+	}
+	else if (countitem(1008) > 0 && BaseJob == Job_Thief && ASSIN_Q < 7) {
+		mes "[Ferocious-looking guy]";
+		mes "¿Eh?";
+		mes "¿Que quieres?";
+		next;
+		mes "[Ferocious-looking guy]";
+		mes "Puedo ver que llevas un ^006699Necklace of Oblivion^000000... Quieres convertirte en un Assassin, ¿No es así? Déjame examinarlo...";
+		next;
+		mes "[Ferocious-looking guy]";
+		mes "...";
+		next;
+		mes "[Ferocious-looking guy]";
+		mes "...";
+		mes "......";
+		next;
+		mes "[Ferocious-looking guy]";
+		mes "Dame un segundo...";
+		mes "¡Pero que rayos BASTARDO! ¡ESTO ES UNA FALSIFICACION!";
+		next;
+		mes "[Ferocious-looking guy]";
+		mes "¡Como te atreves a intentarme engañar con algo falso! ¿¡Eres estúpido o que!? Debería asesinarte...";
+		close2;
+		warp "moc_fild16",206,229;
+		end;
+	}
+	else {
+		mes "[Ferocious-looking guy]";
+		mes "¿Que te trae por aquí?";
+		mes "No me gusta la forma en que me estas mirando... Tonto.";
+		next;
+		if (BaseClass == Job_Novice) {
+			mes "[Ferocious-looking guy]";
+			mes "Hey Hey Principiante. Deberías salir de aquí corriendo tan rápido como puedas. No puedo garantizarte tu seguridad.. Deberias salir de aqui corriendo tan rapido como puedas. No puedo garantizarte tu seguridad.";
+			close;
+		}
+		else if (BaseClass == Job_Swordman) {
+			mes "[Ferocious-looking guy]";
+			mes "¿Que trae a un espadachín por estos lados? Porque no te vas a golpear basura a cualquier otro lugar, cabezón.";
+			close;
+		}
+		else if (BaseClass == Job_Mage) {
+			mes "[Ferocious-looking guy]";
+			mes "Explícame ¿Que hace un usuario de la magia por estos lados?";
+			next;
+			mes "[Ferocious-looking guy]";
+			mes "Hay una librería en Prontera y en Juno, ahí es donde eres bienvenido, así que ¿Por que no haces un truco de magia y desapareces?";
+			close;
+		}
+		else if (BaseClass == Job_Archer) {
+			mes "[Ferocious-looking guy]";
+			mes "Vaya vaya vaya.";
+			mes "Mira ese pobre arco (bow).";
+			next;
+			mes "[Ferocious-looking guy]";
+			mes "No hay muchos arqueros, que si quiera, tengan las agallas de venir cerca de este lugar. Bueno, ¿Que rayos piensas que haces aquí?";
+			close;
+		}
+		else if (BaseClass == Job_Acolyte) {
+			mes "[Ferocious-looking guy]";
+			mes "Ya pensaba yo que algo me olía a gracioso. ¿Que busca un servidor de Dios en un lugar como este? Este no es tu lugar.";
+			close;
+		}
+		else if (BaseClass == Job_Merchant) {
+			mes "[Ferocious-looking guy]";
+			mes "Por estos lugares no nos gustan los odiosos. Será mejor que vayas a vender tus cosas a otro lugar, bolsa de dinero.";
+			close;
+		}
+		else if (BaseJob == Job_Rogue) {
+			mes "[Ferocious-looking guy]";
+			mes "Se te ve que no tienes nada que hacer en este mundo. Bueno, espero que disfrutes la estadía mientras estés aquí. Esta bien, ya que las guilds de los Rogue y los Assassins siempre se han llevado bien.";
+			next;
+			mes "[Ferocious-looking guy]";
+			mes "Por cierto...";
+			mes "¿Has visto a una";
+			mes "muchacha llamada Markie?";
+			next;
+			mes "[Ferocious-looking guy]";
+			mes "Markie...";
+			mes "Prometimos que estaríamos juntos para siempre. ^666666*Suspiro...*^000000 No creo que ella aun recuerde esa promesa. Además, éramos muy jóvenes aquella vez...";
+			close;
+		}
+		else if (BaseJob == Job_Assassin) {
+			mes "[Assassin Expert 'Huey']";
+			mes "Hey, Me acuerdo de ti~";
+			mes "No te llamabas, umm, Me recuerdo porque me sonó gracioso...";
+			next;
+			mes "[Assassin Expert 'Huey']";
+			mes ":+:" + strcharinfo(0) + "¿:+:, verdad?  Vaya, "+ strcharinfo(0) +". Si, ¿Como te esta yendo?";
+			next;
+			mes "[Assassin Expert 'Huey']";
+			mes "Desafortunadamente, no tengo nada que pedirte de parte de la guild en estos momentos. Mantente enfocado en tu entrenamiento. Hasta la próxima, nos vemos.";
+			close;
+		}
+		else if (BaseJob == Job_Thief && JobLevel > 39) {
+			if (SkillPoint) {
+				mes "[Ferocious-looking guy]";
+				mes "No puedes cambiar de Job si aún no has utilizado tus puntos de First Job. Mejor utiliza los Firts points para subir tus skills.";
+				close;
+			}
+			else {
+				mes "[Ferocious-looking guy]";
+				mes "Hmm...";
+				mes "¿Un Thief...?";
+				next;
+				mes "[Ferocious-looking guy]";
+				mes "Y una Buena-Experiencia desde Thief, párese que no puedo encontrar mi billetera. Nosotros necesitamos gente como tu, sabes.";
+				next;
+				mes "[Ferocious-looking guy]";
+				mes "Entonces, ¿Tomarías el próximo paso y te convertirías en un Assassin?";
+				next;
+				switch(select("Yes. I've picked my last pocket.:What's the requirements?:Maybe later, I need to steal some things first.")) {
+				case 1:
+					mes "[Ferocious-looking guy]";
+					mes "Ha pasado un tiempo desde que recibí a un invitado. Te estaré enviando";
+					mes "a la oficina.";
+					close2;
+					set ASSIN_Q,0;
+					if(checkquest(8000) != -1) {
+						changequest 8000,8001;
+					}else{
+						setquest 8001;
+					}
+					warp "in_moc_16",19,76;
+					end;
+				case 2:
+					mes "[Ferocious-looking guy]";
+					mes "¿Requisitos? Bueno, primero tienes que ser un Thief. En segundo lugar, tiene que ser por lo menos Thief con job level 40.";
+					next;
+					mes "[Ferocious-looking guy]";
+					mes "Y en tercer lugar, tiene que pasar un examen para convertirse en un Assassin. ¿Podrás";
+					mes "con todos? Si estás seguro de tu capacidad como Thief, no tendrás de que preocuparte.";
+					close;
+				case 3:
+					mes "[Ferocious-looking guy]";
+					mes "Hmm...";
+					mes "Bien entonces.";
+					mes "Para cuando regreses";
+					mes "piensa que estás listo.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Ferocious-looking guy]";
+			mes "Huh. Usted no está calificado para convertirse en un Assassin aún. Hay requisitos en primer lugar que necesita reunir, usted ya sabe cuales.";
+			next;
+			mes "[Ferocious-looking guy]";
+			mes "Bueno, a seguir con el entrenamiento. Necesita tener por lo menos un job level 40, ¿lo tienes? Pero si está por encima de level 40, probablemente seria aún mejor.";
+			close;
+		}
+	}
+}
+
+in_moc_16,25,90,1	script	Guildsman#ASN2	730,2,2,{
+	mes "[Assassin 'Khai']";
+	mes "¡¿Umm?!";
+	Emotion e_gasp;
+	next;
+	mes "[Assassin 'Khai']";
+	mes "Ven acércate más. Prefiero hablar con la gente de cara a cara. Realmente me irrita si tengo que levantar mi voz, solamente para que puedas oírme.";
+	mes "Me siento irritado cuando alguien me habla a mis espaldas.";
+	close;
+
+OnTouch:
+	if (ASSIN_Q2 == 4) {
+		mes "[Assassin 'Khai']";
+		mes "¿Ehhh?";
+		mes "¿No acaba";
+		mes "de pasarme un minuto?";
+		next;
+		mes "[Assassin 'Khai']";
+		mes "¡¿Eh...?!";
+		mes "¿Fallaste?";
+		mes "¿Incluso en el";
+		mes "test escrito?";
+		mes "Buahahahahaha!";
+		next;
+		mes "[Assassin 'Khai']";
+		mes "Bueno...";
+		mes "Ha pasado un buen tiempo desde que";
+		mes "vi semejante estupidez.";
+		next;
+		mes "[Assassin 'Khai']";
+		mes "¡HAH!";
+		mes "¡Hahahahah~!";
+		mes "Oh, me matas....";
+		next;
+		mes "[Assassin 'Khai']";
+		mes "¡Perdón por reírme, pero esto es gracioso! Hahaha~ ¿Quieres que te de algunos consejos?";
+		next;
+		switch(select("I beg you, give me hints.:Don't laugh at me! Now, give me hints!:...Shut up, I don't need your help!")) {
+		case 1:
+			mes "[Assassin 'Khai']";
+			mes "¡¡¡Haaahahahaha!!!";
+			mes "Bueno, seré honesto. Todavía no eres asesino, pero me estas matando, ¡Te lo digo, me matas!";
+			next;
+			mes "[The Anonymous One]";
+			mes "Ho ho ho...";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "¡¿Escuchaste a ese anónimo?! 'Te ruego, dame pistas.' Hahahah!";
+			next;
+			mes "[The Anonymous One]";
+			mes "Si.";
+			mes "Esto es bastante hilarante";
+			mes "en un sentido algo patético.";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "¡Jajajajajaja!";
+			mes "Entooooonces, ¿Tu querías";
+			mes "algunas pistas, verdad?";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "...";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "...";
+			mes "......";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "...";
+			mes "......";
+			mes ".........";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "...";
+			mes "......";
+			mes ".........";
+			mes "............";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "...";
+			mes "......";
+			mes ".........";
+			mes "............";
+			mes "...............";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "Nah.";
+			mes "¡Cambié de opinión!";
+			mes "No te daré ninguna pista después de todo. Ji ji ji";
+			close;
+		case 2:
+			mes "[Assassin 'Khai']";
+			if (sex) {
+				mes "Huh. Debes tener un montón de confianza para ser un Thief en estos días.";
+				next;
+				mes "[Assassin 'Khai']";
+				mes "Seh seh, entiendo. Todo el mundo mete la pata a veces. Discúlpame por reírme de tus errores.";
+			}
+			else
+				mes "Hmm, me gusta tu actitud. Deberías mantener tu orgullo como Thief. Disculpa por reírme de tus errores. Pienso que lo harás mejor la próxima.";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "No se me permite darte ninguna pista, puedo decirte más acerca de ser un Assassin.";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "Por sobre todo, nosotros valoramos nuestra dignidad. Somos Assassins después de todo y la gente nos necesitará.";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "Si la gente es cercana a ti de algún modo, quizás no entiendan lo que digo. Nacimos para ser solitarios debido a nuestra naturaleza.";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "Imagina si un amante o un amigo viera la sangre en tus manos. Hay una chance de que no se queden contigo.";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "A veces es solitario pero no es tan malo. Al menos puedo hacer lo que quiero, sabes y hacer las cosas a mi modo.";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "Bien, eso es todo lo que puedo decirte por ahora. ¿Ser un Assassin";
+			mes "parece depresivo para tí?";
+			close;
+		case 3:
+			mes "[Assassin 'Khai']";
+			mes "...Hm.";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "Correcto, ese es el espíritu. No permitas que nadie";
+			mes "te menosprecie. Somos Assassins...";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "Me disculpo por reírme de ti antes. Quiero que recuerdes mantener ese sentido de orgullo y dignidad como Assasin.";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "Junto con mantener tu orgullo,";
+			mes "quiero que respetes la sangre que manche tu Katar o Dagger.";
+			next;
+			if (select("...Got you.:...I'm confused.") == 1) {
+				mes "[Assassin 'Khai']";
+				mes "Seh, puedo confiar en tí ahora. Déjame darte algunos consejos importantes.";
+				next;
+				switch(rand(1,3)) {
+				case 1:
+					mes "[Assassin 'Khai']";
+					mes "Primero de todo... Grimtooth es... una habilidad específicamente para Katar. Por ello no requiere skills relacionadas con Dagger.";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "Double attack... ¿No lo has probado? Te permite atacar a un enemigo 2 veces a la vez.";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "Red Blood es una piedra elemental, Blue Gemstone no le sirven a un assassin ¡En lo absoluto!";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "¿Alguna vez has visto a los Mages cazando Elder Willows utilizando la habilidad Cold Bolt? Water sobrepasa Fire. Water pone bajo control a Fire, y Wind pone bajo control a Water.";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "¡Cloaking te esconderá de la vista a la perfección! A menos que algún bastardo use alguna habilidad de detección...";
+					next;
+					break;
+				case 2:
+					mes "[Assassin 'Khai']";
+					mes "'Sharpened Legbone of Ghoul' posee propiedad Undead.";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "¿Qué tipo de arma has usado hasta ahora? ¿Damascus? ¿Gladius? ¿Stiletto? ¿O Main Gauche? ¿Qué es eso que llevas ahora?";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "Es posible conseguir un Katar con Slot de los Desert Wolf. Bien, sólo ten eso en mente. Necesitarás esta información algún día.";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "Puedes conseguir un Jur con Slot de un tipo que vive en un lugar oscuro y derruido bajo tierra. Bien, no tengo idea por qué ese tipo tiene esa arma... ¿Quizás necesita excavar un agujero?";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "Y...";
+					mes "Siempre quise una rana como mascota. ¡Pero es imposible!";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "Hasta donde sé, un Goblin que lleve un martillo posee la propiedad Earth. Ten en mente que Fire sobrepasa a la propiedad Earth.";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "¿Sabes de armas elementales? Los nombres de los Blacksmiths están grabados en ellas usualmente...";
+					next;
+					break;
+				case 3:
+					mes "[Assassin 'Khai']";
+					mes "Vende la Elder Willow Card a los Mage tan pronto como puedas. Estan locos por esa carta por alguna razón. ¿No aumenta la INT de un personaje? Hmmm...";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "Para nosotros, Esquivar y Atacar es más importante que la defensa. No pienses en utilizar un casco. Es pesado, incómodo e incluso bloqueará tu visión.";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "'Increase Dodge' te permite tener +3% flee rate por skill lvl.";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "Como te he dicho repetidamente: ¡Las armas tipo Katar (Jamadhar/Jur/Katar) son de dos manos!";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "La Ciudad del desierto... extraño mi hogar, Morroc. No he estado allí por un largo tiempo. Siento como que me convertí en Thief hace unos días. El tiempo vuela tan rápido...";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "Jeh. Recuerdo mi misión de Thief. Estaba tan nervioso cuando me metí en la granja para conseguir hongos...";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "Los insectos detectan las habilidades de esconderse/ocultarse. Sus antenas nunca fallan en encontrar objetivos.";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "He escuchado que la Baphomet Jr. Card agrega +3 puntos a AGI y +1 punto a Critical Attack...";
+					next;
+					mes "[Assassin 'Khai']";
+					mes "Sí, somos Assassins especializados en entrenar AGI. Podemos ganar un bonus de 10 Agility Points incluso antes de dominar el job level. El problema es que no subirá más luego de eso, sabes.";
+					next;
+				}
+				mes "[Assassin 'Khai']";
+				mes "^666666*Phew*^000000 Eso es todo lo que puedo decirte, aunque fueron un montón de pistas. No dudo que te dije casi todo.";
+				next;
+				mes "[Assassin 'Khai']";
+				mes "Bien entonces, ve a pedir hacer la prueba nuevamente con The Anonymous.";
+				close2;
+				warp "in_moc_16",19,144;
+				end;
+			}
+			mes "[Assassin 'Khai']";
+			mes "^666666*Suspiro...*^000000";
+			mes "¿Como no puedes entender el concepto de dignidad? ¡Acabas de mostrarme algo justo ahora!";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "Oh, ya lo tengo. ¡No era orgullo lo que mostrabas, sólo estabas siendo un idiota!";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "Grrrrr...";
+			mes "¡WARP PORTAL!";
+			close2;
+			warp "c_tower4",64,76;
+			end;
+		}
+	}
+	else {
+		mes "[Assassin 'Khai']";
+		mes "Oh debes ser un aprendiz de Assassin. Estás aquí para convertirte";
+		mes "en Assassin, ¿Verdad?";
+		next;
+		if (select("Yes, I am. :...No, I'm not.") == 1) {
+			mes "[Assassin 'Khai']";
+			mes "De acuerdo, bien. Completemos el formulario de suscripción. Por favor firma con tu nombre e incluye tu Job Level.";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "Veamos.";
+			mes "Tu nombre es";
+			mes "" + strcharinfo(0) + "...";
+			mes "Nivel de Job " + JobLevel + "...";
+			next;
+			if (JobLevel > 48) {
+				mes "[Assassin 'Khai']";
+				mes "Espera, ¡¿Nivel de Job " + JobLevel + "?! ¡Veo que has estado entrenando bastante duro! A mis jefes les gustará esto";
+				next;
+				mes "[Assassin 'Khai']";
+				mes "¿Terminaste? De acuerdo, avanza y dámela. Dame un segundo y te transportaré al Test Hall.";
+				next;
+				mes "[Assassin 'Khai']";
+				mes "De acuerdo entonces,";
+				mes "¡La mejor de las suertes!";
+				close2;
+				set ASSIN_Q3,1;
+				set ASSIN_Q,1;
+				changequest 8001,8002;
+				warp "in_moc_16",19,144;
+				end;
+			}
+			else if (JobLevel < 49) {
+				mes "[Assassin 'Khai']";
+				mes "Bien, pasas";
+				mes "los requerimientos.";
+				mes "Nada mal en absoluto.";
+				next;
+				mes "[Assassin 'Khai']";
+				mes "Adelántate y dame";
+				mes "el formulario cuando hayas";
+				mes "terminado de llenarlo.";
+				mes "De acuerdo, gracias.";
+				next;
+				mes "[Assassin 'Khai']";
+				mes "Te transportaré";
+				mes "al Test Hall.";
+				mes "La mejor de las suertes~";
+				close2;
+				set ASSIN_Q3,2;
+				set ASSIN_Q,1;
+				changequest 8001,8002;
+				warp "in_moc_16",19,144;
+				end;
+			}
+			else {
+				mes "[Assassin 'Khai']";
+				mes "¿Quién demonios";
+				mes "eres tú?";
+				mes "...¡Guardias!";
+				close2;
+				warp "moc_fild16",206,229;
+				end;
+			}
+		}
+		else {
+			mes "[Assassin 'Khai']";
+			mes "¿Huh...?";
+			mes "¿Estas tratando de engañarme o algo? ¿No quieres ser assassin?";
+			next;
+			if (select("No.:Yes, I want to be an Assassin.") == 1) {
+				mes "[Assassin 'Khai']";
+				mes "Eh, sal de aquí.";
+				mes "Deja de hacerme perder el tiempo...";
+				close2;
+				set ASSIN_Q,0;
+				set ASSIN_Q3,0;
+				set ASSIN_Q2,0;
+				erasequest 8001;
+				warp "moc_fild16",206,229;
+				end;
+			}
+			mes "[Assassin 'Khai']";
+			mes "...";
+			mes "¿Que demonios?";
+			mes "De acuerdo, entonces.";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "Completa el formulario de suscripción con tu nombre y tu job level.";
+			next;
+			mes "[Assassin 'Khai']";
+			mes "" + strcharinfo(0) + "?";
+			mes "¿Ese es tu nombre?";
+			mes "Suena gracioso.";
+			mes "Veamos... ¡¿Job Level " + JobLevel + "...";
+			next;
+			if (JobLevel > 48) {
+				mes "[Assassin 'Khai']";
+				mes "Ho?! ¡¿Job Level " + JobLevel + "?! Debes haber estado entrenando muy duro. A los jefes les gustará esto de seguro...";
+				next;
+				mes "[Assassin 'Khai']";
+				mes "¿Terminaste de llenar la el formulario?";
+				next;
+				set ASSIN_Q3,1;
+				set ASSIN_Q,1;
+				changequest 8001,8002;
+				warp "in_moc_16",19,144;
+				end;
+			}
+			else if (JobLevel < 49) {
+				mes "[Assassin 'Khai']";
+				mes "Nada mal. Llenas los requerimientos. Nada mal en absoluto. ¿Has terminado de llenar el formulario?";
+				next;
+				mes "[Assassin 'Khai']";
+				mes "Entonces dame el formulario para que pueda enviarte al Test Hall, ¿De acuerdo?";
+				mes "Buena suerte...";
+				next;
+				set ASSIN_Q3,2;
+				set ASSIN_Q,1;
+				changequest 8001,8002;
+				warp "in_moc_16",19,144;
+				end;
+			}
+			else {
+				mes "[Assassin 'Khai']";
+				mes "¿Cómo demonios";
+				mes "entraste tu aquí?";
+				mes "¡Fuera!";
+				close2;
+				warp "moc_fild16",206,229;
+				end;
+			}
+		}
+	}
+}
+
+in_moc_16,19,154,0	script	nameless_one	-1,8,2,{
+OnTouch:
+	if (ASSIN_Q2 < 3) {
+		mes "[The Anonymous One]";
+		mes "Bienvenido, invitado";
+		mes "Muahaha, es inútil";
+		mes "tratar de encontrarme o verme...";
+		next;
+		mes "[The Anonymous One]";
+		mes "¡Estoy perfectamente escondido!";
+		mes "¡Para volverte indetectable solo puede ser hecho por los más grandes Assassins!";
+		next;
+		mes "[The Anonymous One]";
+		mes "¿No te asusta no poder verme? Podría matarte en cualquier momento y sería tan fácil...";
+		next;
+		if (select("I think I crapped my pants!:You're all talk. I challenge you!") == 1) {
+			mes "[The Anonymous One]";
+			mes "Ahora veo que";
+			mes "no eres más que";
+			mes "un alfeñique.";
+			next;
+			mes "[The Anonymous One]";
+			mes "¡Buahahahahahah!";
+			mes "¡Deja de temblar de miedo!";
+			mes "¡Me hace reír!";
+			close;
+		}
+		mes "[The Anonymous One]";
+		mes "Entonces...";
+		mes "¿Estás deseando";
+		mes "un desafío?";
+		mes "¡¿De mí?!";
+		next;
+		mes "[The Anonymous One]";
+		mes "Un río de sangre sigue cada uno de mis pasos. No tengo nombre, porque la punta de mis armas es todo lo que cualquiera necesita saber.";
+		next;
+		mes "[The Anonymous One]";
+		mes "Estoy aquí para evaluar tu conocimiento, así como tu capacidad para ser descorazonado. Ambos son necesarios para convertirte en Assassin.";
+		next;
+		mes "[The Anonymous One]";
+		mes "Para tu desafío debes";
+		mes "contestar mis preguntas correctamente. Preguntas muy difíciles que solo un assassin puede responder.";
+		next;
+		mes "[The Anonymous One]";
+		mes "Aunque soy descorazonado,";
+		mes "no soy necesariamente cruel. Antes de proceder, ¿Hay algo que desees saber?";
+		next;
+		set ASSIN_Q2,0;
+		while(ASSIN_Q2 < 3) {
+			switch(select("...Skills?:...Stats?:Hmpf, I know it all.")) {
+			case 1:
+				mes "[The Anonymous One]";
+				mes "¿Skills...?";
+				mes "Aunque las habilidades pueden tener aplicaciones circunstanciales, te diré acerca de los conceptos básicos.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Primero, ^3355FFKatar Mastery^000000. Esta habilidad aumenta el daño de las armas de tipo Katar. Mientras más alto el skill level, más daño incrementa.";
+				next;
+				mes "[The Anonymous One]";
+				mes "^3355FFLeft Hand Mastery^000000 y ^3355FFRight Hand Mastery^000000. Los Assassins pueden equipar armas diferentes en cada mano cuando utilizan armas tipo Dagger.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Pero obviamente es más difícil manejar 2 armas a la vez que usar solo una. Las skills Left y Right Hand Mastery incrementa el daño al usar 2 Daggers.";
+				next;
+				mes "[The Anonymous One]";
+				mes "De todos modos, si no quieres usar 2 Daggers, no necesitarás esta habilidad. Verás como \"Left Handr Mastery\" trabaja tan pronto alcances \"Righ Hand Mastery\" Level 2";
+				next;
+				mes "[The Anonymous One]";
+				mes "^3355FFSonic Blow^000000te permite golpear a un enemigo 8 veces a la vez. Esta habilidad solo funciona con armas Katars debido a la velocidad que requiere.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Por supuesto, el daño es afectado por la STR y el daño del arma. Entenderás como esta habilidad trabaja cuando alcances el Level 4 de \"Katar Mastery\".";
+				next;
+				mes "[The Anonymous One]";
+				mes "^3355FFGrimtooth^000000 te permite atacar enemigos mientras te escondes bajo tierra. Mientras la dominas, podrás atacar enemigos a distancia.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Ya que es un ataque a distancia, puede ser muy útil cuando estés rodeado de enemigos.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Debido a que se te requiere poder esconderte perfectamente para usar esta habilidad, primero debes aprender Level 2 de \"Cloakiing\" antes que puedas aprender Grimtooth.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Para aprender ^3355FFCloaking^000000, primero debes aprender Level 2 de \"Hiding\". Entonces podrás moverte mientras te escondes si estas cerca de una pared.";
+				next;
+				mes "[The Anonymous One]";
+				mes "La habilidad ^3355FFEnchant Poison^000000 te permite encantar veneno en el arma que usas. Esto le dará al arma la propiedad Poison temporalmente.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Esto también hará que tus ataques envenenen al enemigo con un porcentaje de éxito. También puedes usar esta habilidad para encantar las armas de los miembros de tu grupo...";
+				next;
+				mes "[The Anonymous One]";
+				mes "^3355FFPoison React^000000 escuda al usuario de ataques con propiedad de veneno, y puede ser usada en otra gente también. De todos modos, debes aprender Level 3 de \"Enchant Poison\" primero.";
+				next;
+				mes "[The Anonymous One]";
+				mes "^3355FFVenom Dust^000000 consume una Red Gemstone para contaminar el área con veneno. La duración de la contaminación incrementa con el Level de la habilidad.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Puedes aprender la habilidad Venom Dust luego de aprender Level 5 de Enchant Poison.";
+				next;
+				mes "[The Anonymous One]";
+				mes "^3355FFVenom Splasher^000000 es una habilidad que, si se usa en un objetivo, le causará una explosión cuando su HP sea menos que una cierta cantidad luego de 3 segundos.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Cuando el objetivo explota, los enemigos cercanos también son dañados. Esta es una habilidad esencial para Assasins. Requiere Level 5 de Posion React y Level 5 de Venom Dust.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Ahora...";
+				mes "Eso es todo lo que tengo para decirte";
+				mes "acerca de habilidades de Assasins.";
+				set ASSIN_Q2,1;
+				next;
+				break;
+			case 2:
+				mes "[The Anonymous One]";
+				mes "Hmm, Stats...";
+				mes "Para Assasins. Agility o AGI, es el stat más importante.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Por el bien de un asesinato, STR (Strength) es probablemente el segunda stat más importante. Pero eso es solo mi recomendación.";
+				next;
+				mes "[The Anonymous One]";
+				mes "No puedo darte un mejor consejo que ese referido a Stats. Deberías investigar y ver que stats te encajan y decidir que tipo de Assasin quieres ser.";
+				set ASSIN_Q2,2;
+				next;
+				break;
+			case 3:
+				if (ASSIN_Q2 == 0) {
+					mes "[The Anonymous One]";
+					mes "¡¿Crees saberlo todo, verdad?!";
+					mes "¡Yo seré el juez de eso!";
+					next;
+				}
+				set ASSIN_Q2,3;
+				break;
+			}
+		}
+		mes "[The Anonymous One]";
+		mes "Hmpf. Es hora de evaluar tu conocimiento. No se te permite errar más de una pregunta.";
+		next;
+		mes "[The Anonymous One]";
+		mes "en otras palabras, si quieres pasar esta prueba, debes darme 9 respuestas correctas de 10 preguntas . No te dejaré saber cual respuesta fue errónea.";
+		next;
+		mes "[The Anonymous One]";
+		mes "¿Estas listo?";
+		mes "¡Prepárate!";
+		next;
+L_AskQuestions:
+		switch(rand(1,3)) {
+		case 1:
+			mes "[The Anonymous One]";
+			mes "1.Elije que habilidad no es requerida para aprender Grimtooth.";
+			next;
+			if (select("Cloaking level 2:Sonic Blow level 5:Katar Mastery level 4:Right hand Mastery level 2") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "2.¿Que propiedad posee Enchant Poison?";
+			next;
+			if (select("Poison:Earth:Fire:Wind") == 1)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "3.¿Como funciona Level 4 de \"Right Hand Mastery\"?";
+			next;
+			if (select("Recover 80% of damage decrease:Recover 90% of damage decrease:Increase 90% of damage:Increase 108% of damage") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "4.¿Cual es el item requerido para usar Venom Dust?";
+			next;
+			if (select("Red Blood:Blue Gemstone:Yellow Gemstone:Red Gemstone") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "5.¿Cual habilidad puedes aprender cuando alcanzas Level 5 de Enchant Poison?";
+			next;
+			if (select("Envenom:Sonic Blow:Venom Splasher:Venom Dust") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "6.Entre las siguientes habilidades, ¿cual te permite caminar mientras estés invisible?";
+			next;
+			if (select("Hiding:Back Slide:Cloaking:Sand Attack") == 3)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "7.Elije la condición que no esta relacionada con Venom Splasher.";
+			next;
+			if (select("Poisoned target.:Red Gemstone.:Remaing HP of Target.") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "8.¿Cual monstruo es débil a un arma con una Vadon Card (agrega 20% de daño a los monstruos de propiedad Fire)?";
+			next;
+			if (select("Steel Chonchon:Deviruchi:Elder Willow:Baphomet") == 3)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "9.¿Cuanto SP necesita";
+			mes "Double Attack?";
+			next;
+			if (select("15:It's a passive skill, so SP use is 0.:It's passive skill, so SP use is 10.:54") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "10.¿Cual es el mejor Main Gauche elemental para cazar en Izlude dungeon?";
+			next;
+			if (select("Wind Main Gauche:Ice Main Gauche:Earth Main Gauche:Fire Main Gauche") == 1)
+				set .@assassin_t,.@assassin_t+10;
+			break;
+		case 2:
+			mes "[The Anonymous One]";
+			mes "1.¿Cual monstruo";
+			mes "suelta una Katar con slot?";
+			next;
+			if (select("Thief Bug:Peco Peco:Desert Wolf:Hammer Cobolt") == 3)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "2.¿Cual monstruo";
+			mes "suelta una Jur con slot?";
+			next;
+			if (select("Martin:Desert Wolf:Marionette:Myst") == 1)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "3.¿A cual clase se le permite crear armas elementales?";
+			next;
+			if (select("Merchant:Blacksmith:Thief:Priest") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "4.Elije el arma que no esta en la clase Katar.";
+			next;
+			if (select("Jamadhar:Jur:Katar:Gladius") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "5.¿Que propiedad tienen los monstruos de Izlude?";
+			next;
+			if (select("Water:Fire:Wind:Earth") == 1)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "6.¿Cual monstruo";
+			mes "no puede ser una Cute Pet?";
+			next;
+			if (select("Poporing:Roda Frog:Smokie:Poison Spore") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "7.Elige un monstruo en el que las Daggers de propiedad Fire funcionan mejor.";
+			next;
+			if (select("Dagger Goblin:Mace Goblin:Morning Star Goblin:Hammer Goblin") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "8.Elije un Katar no elemental de las siguientes:";
+			next;
+			if (select("Katar of Raging Blaze:Katar of Dusty Thornbush:Sharpened Legbone of Ghoul:Infiltrator") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "9.¿Cual es el monstruo menos común?";
+			next;
+			if (select("Poring:Mastering:Ghostring:Spore") == 3)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "10.Elije un monstruo";
+			mes "que no sea Undead.";
+			next;
+			if (select("Drake:Megalodon:Spore:Khalitzburg") == 3)
+				set .@assassin_t,.@assassin_t+10;
+			break;
+		case 3:
+			mes "[The Anonymous One]";
+			mes "1.Elije la cantidad correcta de bonus de esquivar que viene del incremento de la habilidad \"Increase Dodge\" cuando está en Level 10.";
+			next;
+			if (select("30:40:160:20") == 1)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "2.Elije un monstruo que detecta Thieves y Assassins usando Hiding/Cloaking.";
+			next;
+			if (select("Worm Tail:Andre:Mummy:Soldier Skeleton") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "3.Elije un grupo de armas que no pueden ser usadas por un Assassin a la vez.";
+			next;
+			if (select("Main Gaughe + Gladius:Stiletto + Main Gauche:Katar + Maingauche:Hammer + Stiletto") == 3)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "4.Elije un pueblo donde los Thieves pueden cambiar sus profesiones.";
+			next;
+			if (select("Prontera:Lutie:Alberta:Morocc") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "5.Elije una carta que no afecte la stat AGI.";
+			next;
+			if (select("Baphomet Jr. card:Whisper Card:Female Thiefbug card:Male Thiefbug card") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "6.Elije la especialidad correcta de la clase Assassin";
+			next;
+			if (select("Excellent singing talent:Excellent reading talent:Excellent dancing talent:Excellent dodge ability") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "7.Elije el máximo bonus de AGI que un asesino puede tener a Level 50.";
+			next;
+			if (select("7:8:9:10") == 4) 
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "8.Elije un item que un asesino no pueda equipar.";
+			next;
+			if (select("Dagger:Helm:Boots:Brooch") == 2) 
+				set .@assassin_t,.@assassin_t+10;
+			mes "[The Anonymous One]";
+			mes "9. Elije el item de cambio de profesión de Thief.";
+			next;
+			switch(select("Orange Gooey Mushroom:Red Gooey Mushroom:Orange Net Mushroom:Orange Hair Mushroom")) {
+			case 1:
+			case 3:
+				set .@assassin_t,.@assassin_t+10;
+				break;
+			default:
+				break;
+			}
+			mes "[The Anonymous One]";
+			mes "10.Elije una carta que típicamente menos beneficiaría a un Assassin.";
+			next;
+			if (select("Whisper card:Elder Willow card:Soldier Skeleton card:Cobold card") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			break;
+		}
+		if (ASSIN_Q2 == 3) {
+			next;
+			mes "[The Anonymous One]";
+			mes "Hmpf.";
+			mes "De algún modo, tú";
+			mes "me has mostrado";
+			mes "un gran esfuerzo.";
+			next;
+			mes "[The Anonymous One]";
+			mes "Veamos...";
+			mes "Marcaste";
+			mes "" + .@assassin_t + " por ciento...";
+			if (.@assassin_t > 80) {
+				set ASSIN_Q2,5;
+				changequest 8002,8003;
+				mes "Bien hecho.";
+				mes "Pasaste.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Igualmente, otra prueba de aguarda. Cuando vas adentro de la próxima área recibirás tus instrucciones...";
+				close;
+			}
+			else {
+				set ASSIN_Q2,4;
+				mes "¡Eso significa que fallas!";
+				next;
+				mes "[The Anonymous One]";
+				mes "¿Como esperas ser un Assassin con este puntaje? Sigue entrenando y vuelve cuando estés listo.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Le pediré a \"Khai\", el que procesó tu suscripción, por consejo.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Tu también puede usar este código ^880000iro.ragnarokonline.com^000000. De algún modo, estas palabras están vinculadas a un vasto cuerpo de conocimiento de otro mundo...";
+				close2;
+				warp "in_moc_16",19,76;
+				end;
+			}
+		}
+		else if (ASSIN_Q2 == 4) {
+			next;
+			mes "[The Anonymous One]";
+			mes "Me mostraste";
+			mes "un gran esfuerzo...";
+			next;
+			mes "[The Anonymous One]";
+			mes "Veamos...";
+			mes "Marcaste";
+			mes "" + .@assassin_t + " puntos...";
+			if (.@assassin_t > 80) {
+				set ASSIN_Q2,5;
+				changequest 8002,8003;
+				next;
+				mes "[The Anonymous One]";
+				mes "¡No fallaste esta vez! Pero no has terminado aún. Tienes otra prueba por delante. Una vez que procedas, serás  informado acerca de tu próximo reto.";
+				close;
+			}
+			else {
+				set ASSIN_Q2,4;
+				mes "¡Fallaste!";
+				next;
+				mes "[The Anonymous One]";
+				mes "Estas demasiado subcalificado. ¡¿Como puedes siquiera pensar en convertirte en Assassin?!";
+				next;
+				mes "[The Anonymous One]";
+				mes "Estoy sorprendido de que siquiera pudieses convertirte en Thief. Vete y vuelve solamente cuando sepas que diablos estas haciendo.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Hmpf, si realmente no tienes idea, te daré un pequeño consejo.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Ve y pídele a \"Khai\", el tipo que se encarga de tu prueba de suscripción, quizás el te ayuda.";
+				next;
+				mes "[The Anonymous One]";
+				mes "Quizás también desees tomar ventaja del código antiguo, ^3355FFiro.ragnarokonline.com^000000. Supuestamente, esas palabras están vinculadas de algún modo a un conocimiento de otro mundo.";
+				close2;
+				warp "in_moc_16",19,76;
+				end;
+			}
+		}
+	}
+	else if (ASSIN_Q2 < 5) {
+		mes "[The Anonymous One]";
+		mes "¿Teniendo problemas";
+		mes "para pasar una prueba sencilla?";
+		mes "Deberías";
+		mes "saberlo mejor.";
+		next;
+		if (select("Help me, how do I pass?:I challenge you again!") == 1) {
+			mes "[The Anonymous One]";
+			mes "Bueno, esa es una maldita buena pregunta. Pero estas removido del Assassin Guild, así que no me concierne...";
+			close2;
+			warp "moc_fild16",206,151;
+			end;
+		}
+		mes "[The Anonymous One]";
+		mes "Así que ya veo...";
+		mes "Ahora ve, pero no temas. Estaré a tu lado mientras aprendes el resultado de tu elección...";
+		next;
+		mes "[The Anonymous One]";
+		mes "¡Ahora, te evaluaremos una vez más! Ten en mente que debes contestar 9 preguntas sobre 10 correctamente. Recuerda que te estoy haciendo un favor...";
+		next;
+		mes "[The Anonymous One]";
+		mes "Debes contestar 9 preguntas sobre 10 correctamente. Si fallas en más de una, nunca te convertirás en Assassin.";
+		next;
+		mes "[The Anonymous One]";
+		mes "De acuerdo,";
+		mes "¿Estas listo?";
+		mes "Buena suerte.";
+		next;
+		goto L_AskQuestions;
+	}
+	else {
+		mes "[The Anonymous One]";
+		mes "... Te estaré vigilando.";
+		close;
+	}
+
+}
+
+in_moc_16,21,165,2	script	Standby Room#ASNTEST	725,{
+	end;
+
+OnInit:
+	disablenpc "Standby Room#ASNTEST";
+	waitingroom "Standby Room",10,"Standby Room#ASNTEST::OnStartArena",1;
+	enablewaitingroomevent;
+	end;
+
+OnStartArena:
+	warpwaitingpc "in_moc_16", 66, 151;
+	donpcevent "Beholder#ASNTEST::OnEnable";
+	donpcevent "Keeper of the Door#ASN::OnDisable";
+	set getvariableofnpc(.DisableTraps,"Beholder#ASNTEST"),0;
+	disablewaitingroomevent;
+	end;
+
+OnStart:
+	enablewaitingroomevent;
+	end;
+}
+
+in_moc_16,21,165,2	script	Test Guide#ASN	725,4,4,{
+	end;
+
+OnTouch:
+	if (ASSIN_Q2 < 5) {
+		mes "[Barcardi]";
+		mes "No puedes tomar la próxima prueba sin pasar el examen oral primero. Mejor habla con Anonymous One...";
+		close2;
+		warp "in_moc_16",19,76;
+		end;
+	}
+	if (ASSIN_Q == 1 && ASSIN_Q2 == 5) {
+		mes "[Barcardi]";
+		mes "" + strcharinfo(0) + "...";
+		mes "¿Pasaste la prueba...?";
+		next;
+		mes "[Barcardi]";
+		mes "Para ser honesto, quiero darte el cambio de profesión sin ninguna otra condición. Demasiada gente patética ni siquiera tiene los conocimientos básicos para ser Assassins...";
+		next;
+		mes "[Barcardi]";
+		mes "¡Debemos mantener nuestra dignidad como Assassins y ser realmente grandiosos! Lamentablemente, hay muchos idiotas que no tienen ningún orgullo.";
+		next;
+		mes "[Barcardi]";
+		mes "¡Todos los Assassins deben respetar a los enemigos que mate, la sangre que derraman y por sobre todo, mantener su sentido de la dignidad!";
+		next;
+		mes "[Barcardi]";
+		mes "Bien. Esta próxima prueba evaluará tu habilidad para encontrar rápidamente a un objetivo-";
+		next;
+		mes "[Barcardi]";
+		mes "Si vas a ser un Assassin, necesitamos determinar si puedes o no distinguir un amigo de un enemigo en un instante.";
+		next;
+		mes "[Barcardi]";
+		mes "El objetivo principal es encontrar y matar tantos monstruos llamados ^008800Job change target^000000 como sea posible.";
+		next;
+		mes "[Barcardi]";
+		mes "Debes matar al menos";
+		mes "6 monstruos ^008800Job change target^000000. Están mezclados con otros monstruos de apariencia similar, así que necesitas ser cuidadoso.";
+		next;
+		mes "[Barcardi]";
+		mes "Si fallas, tendrás que reiniciar esta prueba. Entra en la habitación de arriba mío";
+		mes "para ser transportado al Test Hall.";
+		next;
+		mes "[Barcardi]";
+		mes "Solo a una persona a la vez se le permite tomar la prueba, así que si alguien esta tomando la prueba, deberás esperar hasta que esa persona termine.";
+		close;
+	}
+	else {
+		mes "[Barcardi]";
+		mes "Hey, no seas tan duro";
+		mes "contigo mismo. ¡Alégrate!";
+		next;
+		mes "[Barcardi]";
+		mes "Hmm. Si estás exhausto, estoy dispuesto a traerte de vuelta. Por supuesto, de hacerlo, tendrás que empezar de nuevo con la prueba. Así que, ¿Que quieres hacer?";
+		next;
+		if (select("Continue!:Quit the job change test for now.") == 1) {
+			mes "[Barcardi]";
+			mes "¡Buena elección!";
+			mes "¡Recuerda, debes";
+			mes "encontrar y matar";
+			mes "6 monstruos ^008800Job change target^000000 !";
+			mes "¡Buena suerte!";
+			close;
+		}
+		mes "[Barcardi]";
+		mes "De acuerdo...";
+		mes "Supongo que";
+		mes "te vendría bien un descanso...";
+		close2;
+		set ASSIN_Q,0;
+		set ASSIN_Q3,0;
+		set ASSIN_Q2,0;
+		changequest 8003,8000;
+		warp "in_moc_16",19,13;
+		end;
+	}
+}
+
+in_moc_16,1,1,0	script	Beholder#ASNTEST	-1,{
+	end;
+
+OnEnable:
+	set .MyMobs,6;
+	// Target mobs
+	monster "in_moc_16",62,161,"Job change target",1002,1,"Beholder#ASNTEST::OnMyMobDead";
+	monster "in_moc_16",85,169,"Job change target",1063,1,"Beholder#ASNTEST::OnMyMobDead";
+	monster "in_moc_16",88,152,"Job change target",1002,1,"Beholder#ASNTEST::OnMyMobDead";
+	monster "in_moc_16",90,143,"Job change target",1113,1,"Beholder#ASNTEST::OnMyMobDead";
+	monster "in_moc_16",74,167,"Job change target",1031,1,"Beholder#ASNTEST::OnMyMobDead";
+	monster "in_moc_16",77,173,"Job change target",1002,1,"Beholder#ASNTEST::OnMyMobDead";
+	// Decoy mobs
+	monster "in_moc_16",62,161,"Job change creature",1063,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",85,169,"Job change creature",1031,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",79,174,"Job change creature",1113,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",85,156,"Job change creature",1063,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",74,171,"Job change monster",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",68,173,"Job change dummy",1113,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",65,158,"Battle test target",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",60,158,"Warrior test target",1113,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",64,169,"Job change targets",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",71,173,"Jobs change target",1063,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",77,172,"Please don't hit me",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",76,172,"Job change sample",1063,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",75,172,"Not me",1113,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",67,167,"I got yours right here",1063,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",86,170,"Job changes target",1031,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",86,171,"Job quest target",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",85,170,"Job target change",1113,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",89,171,"Hit me",1063,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",85,170,"Battle Monster",1031,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",89,156,"Bouncer",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",89,156,"Mungamorp",1113,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",89,156,"Battle test target",1063,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",89,156,"Dew of the Battle field",1113,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",89,156,"Tear of test",1031,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",83,169,"Evil Druid",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",63,158,"Doppelganger",1063,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",63,157,"Job change dummy",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",64,159,"Job ready dummy",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",63,159,"Job change ready",1063,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",63,159,"Archer test target",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",63,159,"Swordman test target",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",83,148,"Thief test target",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",82,148,"Acolyte test target",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",84,148,"Merchant test target",1002,1,"Beholder#ASNTEST::OnMyMobDead2";
+	initnpctimer;
+	end;
+
+OnReset:
+	killmonster "in_moc_16","Beholder#ASNTEST::OnMyMobDead";
+	killmonster "in_moc_16","Beholder#ASNTEST::OnMyMobDead2";
+	stopnpctimer;
+	donpcevent "Standby Room#ASNTEST::OnStart";
+	end;
+
+OnResetmob:
+	killmonster "in_moc_16","Beholder#ASNTEST::OnMyMobDead";
+	killmonster "in_moc_16","Beholder#ASNTEST::OnMyMobDead2";
+	stopnpctimer;
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "in_moc_16","You seem to be doing quite well. Keep it up!",bc_map;
+		set ASSIN_Q,3;
+		changequest 8003,8004;
+		donpcevent "timestopper#1::OnEnable";
+		donpcevent "Keeper of the Door#ASN::OnEnable";
+		donpcevent "Beholder#ASNTEST::OnResetmob";
+		set .DisableTraps,1;
+		stopnpctimer;
+	}
+	else {
+		mapannounce "in_moc_16","Okay, you're doing good! Hang in there, you're almost there!",bc_map;
+	}
+	end;
+
+OnMyMobDead2:
+	mapannounce "in_moc_16",strcharinfo(0) + "! You made a mistake! I'm bringing you back!",bc_map;
+	set ASSIN_Q,2;
+	warp "in_moc_16",19,161;
+	donpcevent "Beholder#ASNTEST::OnReset";
+	end;
+
+OnTimer1000:
+	mapannounce "in_moc_16"," Okay, let the test begin!",bc_map;
+	end;
+
+OnTimer2000:
+	mapannounce "in_moc_16","As you've been told before, find and only kill monsters named 'Job change target!'",bc_map;
+	end;
+
+OnTimer3000:
+	mapannounce "in_moc_16","The purpose of this test is to examine your ability to quickly distinguish enemies from other people!",bc_map;
+	end;
+
+OnTimer4000:
+	mapannounce "in_moc_16","You will have 3 minutes for the test! We will inform you of every minute passed.",bc_map;
+	end;
+
+OnTimer5000:
+	mapannounce "in_moc_16","Ok, now you've got exactly 3 minutes. Move! Move!",bc_map;
+	end;
+
+OnTimer65000:
+	mapannounce "in_moc_16","2 minutes left. As I've told you, get the 'Job change target' monsters!",bc_map;
+	end;
+
+OnTimer125000:
+	mapannounce "in_moc_16","1 minute left.",bc_map;
+	end;
+
+OnTimer180000:
+	mapannounce "in_moc_16","5 seconds left...",bc_map;
+	end;
+
+OnTimer181000:
+	mapannounce "in_moc_16","4 seconds left...",bc_map;
+	end;
+
+OnTimer182000:
+	mapannounce "in_moc_16","3 seconds left...",bc_map;
+	end;
+
+OnTimer183000:
+	mapannounce "in_moc_16","2 seconds left...",bc_map;
+	end;
+
+OnTimer184000:
+	mapannounce "in_moc_16","1 second left.",bc_map;
+	end;
+
+OnTimer185000:
+	mapannounce "in_moc_16","Time's up!",bc_map;
+	mapannounce "in_moc_16","Well, good job... If you wanted to waste your time. You'll have to try again!",bc_map;
+	//set ASSIN_Q,2;
+	end;
+
+OnTimer186000:
+	areawarp "in_moc_16",60,136,93,177,"in_moc_16",19,161;
+	end;
+
+OnTimer187000:
+	donpcevent "Beholder#ASNTEST::OnReset";
+	end;
+}
+
+in_moc_16,68,158,0	script	01_1::SinTrap	-1,0,0,{
+OnTouch:
+	if (getvariableofnpc(.DisableTraps,"Beholder#ASNTEST")  < 1) {
+		mapannounce "in_moc_16",strcharinfo(0) + ", you're trapped. You will be sent back.",bc_map;
+		set ASSIN_Q,2;
+		warp "in_moc_16",19,161;
+		donpcevent "Beholder#ASNTEST::OnResetmob";
+		donpcevent "Standby Room#ASNTEST::OnStart";
+	}
+	end;
+}
+
+in_moc_16,69,158,0	duplicate(SinTrap)	01_2	-1,0,0
+in_moc_16,68,159,0	duplicate(SinTrap)	01_3	-1,0,0
+in_moc_16,69,159,0	duplicate(SinTrap)	01_4	-1,0,0
+in_moc_16,64,162,0	duplicate(SinTrap)	02_1	-1,0,0
+in_moc_16,65,162,0	duplicate(SinTrap)	02_2	-1,0,0
+in_moc_16,64,163,0	duplicate(SinTrap)	02_3	-1,0,0
+in_moc_16,65,163,0	duplicate(SinTrap)	02_4	-1,0,0
+in_moc_16,62,168,0	duplicate(SinTrap)	03_1	-1,0,0
+in_moc_16,63,168,0	duplicate(SinTrap)	03_2	-1,0,0
+in_moc_16,62,169,0	duplicate(SinTrap)	03_3	-1,0,0
+in_moc_16,63,169,0	duplicate(SinTrap)	03_4	-1,0,0
+in_moc_16,66,170,0	duplicate(SinTrap)	04_1	-1,0,0
+in_moc_16,67,170,0	duplicate(SinTrap)	04_2	-1,0,0
+in_moc_16,66,171,0	duplicate(SinTrap)	04_3	-1,0,0
+in_moc_16,67,171,0	duplicate(SinTrap)	04_4	-1,0,0
+in_moc_16,64,174,0	duplicate(SinTrap)	05_1	-1,0,0
+in_moc_16,64,175,0	duplicate(SinTrap)	05_2	-1,0,0
+in_moc_16,65,174,0	duplicate(SinTrap)	05_3	-1,0,0
+in_moc_16,65,175,0	duplicate(SinTrap)	05_4	-1,0,0
+in_moc_16,72,174,0	duplicate(SinTrap)	06_1	-1,0,0
+in_moc_16,72,175,0	duplicate(SinTrap)	06_2	-1,0,0
+in_moc_16,73,174,0	duplicate(SinTrap)	06_3	-1,0,0
+in_moc_16,73,175,0	duplicate(SinTrap)	06_4	-1,0,0
+in_moc_16,72,166,0	duplicate(SinTrap)	07_1	-1,0,0
+in_moc_16,72,167,0	duplicate(SinTrap)	07_2	-1,0,0
+in_moc_16,73,166,0	duplicate(SinTrap)	07_3	-1,0,0
+in_moc_16,73,167,0	duplicate(SinTrap)	07_4	-1,0,0
+in_moc_16,72,168,0	duplicate(SinTrap)	08_1	-1,0,0
+in_moc_16,72,169,0	duplicate(SinTrap)	08_2	-1,0,0
+in_moc_16,73,168,0	duplicate(SinTrap)	08_3	-1,0,0
+in_moc_16,73,169,0	duplicate(SinTrap)	08_4	-1,0,0
+in_moc_16,78,168,0	duplicate(SinTrap)	09_1	-1,0,0
+in_moc_16,78,169,0	duplicate(SinTrap)	09_2	-1,0,0
+in_moc_16,79,168,0	duplicate(SinTrap)	09_3	-1,0,0
+in_moc_16,79,169,0	duplicate(SinTrap)	09_4	-1,0,0
+in_moc_16,80,172,0	duplicate(SinTrap)	10_1	-1,0,0
+in_moc_16,81,172,0	duplicate(SinTrap)	10_2	-1,0,0
+in_moc_16,82,172,0	duplicate(SinTrap)	10_3	-1,0,0
+in_moc_16,83,172,0	duplicate(SinTrap)	10_4	-1,0,0
+in_moc_16,80,173,0	duplicate(SinTrap)	10_5	-1,0,0
+in_moc_16,81,173,0	duplicate(SinTrap)	10_6	-1,0,0
+in_moc_16,82,173,0	duplicate(SinTrap)	10_7	-1,0,0
+in_moc_16,83,173,0	duplicate(SinTrap)	10_8	-1,0,0
+in_moc_16,88,174,0	duplicate(SinTrap)	11_1	-1,0,0
+in_moc_16,88,175,0	duplicate(SinTrap)	11_2	-1,0,0
+in_moc_16,89,174,0	duplicate(SinTrap)	11_3	-1,0,0
+in_moc_16,89,175,0	duplicate(SinTrap)	11_4	-1,0,0
+in_moc_16,86,166,0	duplicate(SinTrap)	12_1	-1,0,0
+in_moc_16,86,167,0	duplicate(SinTrap)	12_2	-1,0,0
+in_moc_16,87,166,0	duplicate(SinTrap)	12_3	-1,0,0
+in_moc_16,87,167,0	duplicate(SinTrap)	12_4	-1,0,0
+in_moc_16,90,164,0	duplicate(SinTrap)	13_1	-1,0,0
+in_moc_16,90,165,0	duplicate(SinTrap)	13_2	-1,0,0
+in_moc_16,91,164,0	duplicate(SinTrap)	13_3	-1,0,0
+in_moc_16,91,165,0	duplicate(SinTrap)	13_4	-1,0,0
+in_moc_16,84,160,0	duplicate(SinTrap)	14_1	-1,0,0
+in_moc_16,85,160,0	duplicate(SinTrap)	14_2	-1,0,0
+in_moc_16,86,160,0	duplicate(SinTrap)	14_3	-1,0,0
+in_moc_16,87,160,0	duplicate(SinTrap)	14_4	-1,0,0
+in_moc_16,88,160,0	duplicate(SinTrap)	14_5	-1,0,0
+in_moc_16,89,160,0	duplicate(SinTrap)	14_6	-1,0,0
+in_moc_16,84,161,0	duplicate(SinTrap)	14_7	-1,0,0
+in_moc_16,85,161,0	duplicate(SinTrap)	14_8	-1,0,0
+in_moc_16,86,161,0	duplicate(SinTrap)	14_9	-1,0,0
+in_moc_16,87,161,0	duplicate(SinTrap)	14_10	-1,0,0
+in_moc_16,88,161,0	duplicate(SinTrap)	14_11	-1,0,0
+in_moc_16,89,161,0	duplicate(SinTrap)	14_12	-1,0,0
+in_moc_16,86,154,0	duplicate(SinTrap)	15_1	-1,0,0
+in_moc_16,86,155,0	duplicate(SinTrap)	15_2	-1,0,0
+in_moc_16,87,154,0	duplicate(SinTrap)	15_3	-1,0,0
+in_moc_16,87,155,0	duplicate(SinTrap)	15_4	-1,0,0
+in_moc_16,84,150,0	duplicate(SinTrap)	16_1	-1,0,0
+in_moc_16,84,151,0	duplicate(SinTrap)	16_2	-1,0,0
+in_moc_16,85,150,0	duplicate(SinTrap)	16_3	-1,0,0
+in_moc_16,85,151,0	duplicate(SinTrap)	16_4	-1,0,0
+in_moc_16,90,150,0	duplicate(SinTrap)	17_1	-1,0,0
+in_moc_16,90,151,0	duplicate(SinTrap)	17_2	-1,0,0
+in_moc_16,91,150,0	duplicate(SinTrap)	17_3	-1,0,0
+in_moc_16,91,151,0	duplicate(SinTrap)	17_4	-1,0,0
+in_moc_16,86,146,0	duplicate(SinTrap)	18_1	-1,0,0
+in_moc_16,86,147,0	duplicate(SinTrap)	18_2	-1,0,0
+in_moc_16,87,146,0	duplicate(SinTrap)	18_3	-1,0,0
+in_moc_16,87,147,0	duplicate(SinTrap)	18_4	-1,0,0
+
+in_moc_16,87,137,0	script	Keeper of the Door#ASN	45,2,1,{
+OnInit:
+	disablenpc "Keeper of the Door#ASN";
+	end;
+
+OnTouch:
+	donpcevent "Thomas#ASNTEST::OnDisable";
+	if (ASSIN_Q == 3)
+		set ASSIN_Q,3;
+	else
+		set ASSIN_Q,4;
+	warp "in_moc_16",87,102;
+	savepoint "in_moc_16",16,13;
+	end;
+
+OnEnable:
+	mapannounce "in_moc_16","The door to the next room, at coordinates 87 137, has opened.",bc_map;
+	enablenpc "Keeper of the Door#ASN";
+	end;
+
+OnDisable:
+	disablenpc "Keeper of the Door#ASN";
+	end;
+}
+
+in_moc_16,3,3,0	script	timestopper#1	-1,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer187000:
+	donpcevent "Thomas#ASNTEST::OnDisable";
+	stopnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	end;
+	
+OnMyMobDead:
+	mapannounce "in_moc_16","Hey, what the hell was that?! I told you: No killing monsters!",bc_map;
+	mapannounce "in_moc_16","I'm bringing you back... *Sigh...*",bc_map;
+	set ASSIN_Q,3;
+	warp "in_moc_16",87,102;
+	killmonsterall "in_moc_16";
+	end;
+}
+
+in_moc_16,89,98,1	script	Thomas#ASNTEST	118,5,1,{
+	end;
+
+OnTouch:
+	if (ASSIN_Q == 4) {
+		mes "[Thomas]";
+		mes "¡Maldición...! Parece que estas sufriendo mucho ^666666*Suspiro*^000000 Dame un segundo, permíteme restaurar tu HP y SP...";
+		percentheal 100,100;
+		next;
+		mes "[Thomas]";
+		mes "Parece que te está siendo difícil. O estas haciéndolo muy duro o no lo estas intentando suficientemente";
+		mes "duro, chico.";
+		next;
+		switch(select("I'm gonna try it again!:I... I quit!")) {
+		case 1:
+			mes "[Thomas]";
+			mes "Hmm, bien, de acuerdo.";
+			mes "Buena suerte ahí afuera.";
+			close;
+		case 2:
+			mes "[Thomas]";
+			mes "Huh...";
+			mes "¿Salir de la prueba eh? Bien, creo que no quieres desperdiciar más de nuestro tiempo.";
+			next;
+			mes "[Thomas]";
+			mes "Oh hey, no olvides de salvar tu punto de regeneración en el pueblo.";
+			close2;
+			mapannounce "in_moc_16",strcharinfo(0) + " got scared and quit the test...Who's Next?!",bc_map;
+			set ASSIN_Q,0;
+			set ASSIN_Q2,0;
+			set ASSIN_Q3,0;
+			changequest 8004,8000;
+			savepoint "in_moc_16",18,14;
+			warp "in_moc_16",18,14;
+			donpcevent "Standby Room#ASNTEST::OnStart";
+			end;
+		}
+	}
+
+	mes "[Thomas]";
+	mes "Hey Soy Thomas. Estoy a cargo de evaluarte en el uso de tu habilidad \"Hiding\". ¿Crees estar a la altura?";
+	next;
+	mes "[Thomas]";
+	mes "Escucha. En esta prueba, no puedes matar ningún monstruo. Tu misión es alcanzar a \"Barcardi\" en el lado opuesto de esta habitación.";
+	next;
+	mes "[Thomas]";
+	mes "Así que, básicamente, llega hasta el otro lado de la habitación y habla con Barcardi sin matar un solo monstruo. ¿Entendido?";
+	next;
+	mes "[Thomas]";
+	mes "Si huyes, te sangra la nariz o te desmayas o algo como eso, te repobaré. Suficiente charla. Veamos que tienes.";
+	close2;
+	set ASSIN_Q,4;
+
+	monster "in_moc_16",81,77,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",82,77,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",83,77,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",84,77,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",85,77,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",86,77,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",88,77,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",89,77,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",90,77,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",77,77,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",78,56,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",79,56,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",80,56,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",81,56,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",91,55,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",92,56,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",93,56,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",94,56,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",95,56,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",96,56,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",97,56,"Mummy",1041,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",76,62,"Hydra",1068,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",79,62,"Hydra",1068,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",79,65,"Hydra",1068,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",76,65,"Hydra",1068,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",96,62,"Hydra",1068,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",96,65,"Hydra",1068,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",99,62,"Hydra",1068,1,"timestopper#1::OnMyMobDead";
+	monster "in_moc_16",99,65,"Hydra",1068,1,"timestopper#1::OnMyMobDead";
+	end;
+
+OnDisable:
+	donpcevent "Standby Room#ASNTEST::OnStart";
+	killmonsterall "in_moc_16";
+	end;
+}
+
+in_moc_16,87,48,2	script	Barcardi#ASN	725,2,2,{
+OnTouch:
+	donpcevent "timestopper#1::OnDisable";
+	donpcevent "Thomas#ASNTEST::OnDisable";
+	mes "[Barcardi]";
+	mes "¡Oh! ¡Felicitaciones!";
+	mes "Puedes proceder a la habitación del Guildmaster. ¡Buena Suerte!";
+	close2;
+	set ASSIN_Q,5;
+	changequest 8004,8005;
+	warp "in_moc_16",181,183;
+	end;
+}
+
+in_moc_16,182,169,0	script	Maze Assistant	45,1,1,{
+OnTouch:
+	if (ASSIN_Q == 5 || ASSIN_Q == 6) {
+		warp "in_moc_16",181,183;
+		set ASSIN_Q,ASSIN_Q+1;
+		changequest 8005,8006;
+	}
+	else {
+		mapannounce "in_moc_16",strcharinfo(0)+" has entered 'Guildmaster's room.'",bc_map;
+		savepoint "in_moc_16",181,183;
+		donpcevent "Guildmaster#ASN2::OnDisable";
+		warp "in_moc_16",167,113;
+		end;
+	}
+}
+
+in_moc_16,167,110,0	script	Guildmaster#ASN1	-1,3,1,{
+OnTouch:
+	savepoint "in_moc_16",167,110;
+	mes "[Guildmaster]";
+	mes "Bienvenido. ";
+	mes "Este lugar es llamado el \"Guildmaster room\". El lugar más profundo del Assasin guild.";
+	next;
+	mes "[Guildmaster]";
+	mes "Voy a darte una prueba sencilla. Por favor halla el camino a través de este laberinto y ven a mí. Es este laberinto el que protege nuestro guild de intrusos.";
+	next;
+	mes "[Guildmaster]";
+	mes "Espero ansiosamente";
+	mes "el encontrarte";
+	mes "al final del laberinto.";
+	close;
+
+OnDisable:
+	mapannounce "in_moc_16","...Next volunteer, please come in.",bc_map;
+	end;
+}
+
+in_moc_16,149,80,4	script	Guildmaster#ASN2	106,1,1,{
+OnTouch:
+	savepoint "morocc",100,100;
+	if (ASSIN_Q == 7 && BaseJob == Job_Thief) {
+		set ASSIN_Q,8;
+		mes "[Guildmaster]";
+		mes "Bienvenido.";
+		mes "Me disculpo por";
+		mes "haberte hecho venir";
+		mes "a través del laberinto.";
+		next;
+		mes "[Guildmaster]";
+		mes "Acabo de ver tu informe. Eres bien conocido como un Thief con agallas. Rara vez recibimos Assassins potenciales de tu talla.";
+		next;
+		mes "[Guildmaster]";
+		mes "¿Puedo preguntarte unas preguntas, si no te importa? No estés nervioso. Solo recuerda.: Si mientes, te mato.";
+		next;
+		mes "[Guildmaster]";
+		mes "Primero, ¿Cual crees que es la prioridad del Assassin?";
+		next;
+		switch(select("More power.:An Assassin's pride.:Endless practice.")) {
+		case 1:
+			mes "[Guildmaster]";
+			mes "Más poder...";
+			mes "Si, quizás pienses";
+			mes "que los Assassins son mucho";
+			mes "más fuertes que los Thieves.";
+			next;
+			mes "[Guildmaster]";
+			mes "Sin embargo, ¿Por que razón deseas más poder? ¿Para lucirte? ¿Venganza personal? ¿Para qué propósito usarías este poder?";
+			next;
+			mes "[Guildmaster]";
+			mes "¿Por que quieres";
+			mes "ser más fuerte";
+			mes "de lo que eres ahora?";
+			next;
+			switch(select("Revenge...!:Money~:I want to travel.")) {
+			case 1:
+				set ASSIN_Q,8;
+				mes "[Guildmaster]";
+				mes "¿Venganza...?";
+				mes "Si, entiendo. Todos nosotros guardamos resentimientos hacia alguien eventualmente.";
+				next;
+				mes "[Guildmaster]";
+				mes "Sin embargo, ten en mente que no se nos permite estar emocionalmente vinculados. Lleva a cabo tus deberes sin preguntar. Ese es nuestro modo.";
+				next;
+				mes "[Guildmaster]";
+				mes "Ser un Assassin significa";
+				mes "abandonar el ego.";
+				next;
+				break;
+			case 2:
+				set ASSIN_Q,9;
+				mes "[Guildmaster]";
+				mes "¿Razones financieras...? No voy a negar que todos nosotros necesitemos dinero para vivir. Pero ser un Assassin significa vivir por un propósito más elevado.";
+				next;
+				mes "[Guildmaster]";
+				mes "Ser un Assassin significa";
+				mes "abandonar tan mundanas";
+				mes "vinculaciones...";
+				next;
+				break;
+			case 3:
+				set ASSIN_Q,10;
+				mes "[Guildmaster]";
+				mes "Buena idea. Viajar alrededor del mundo te permitirá abordar tus experiencias.";
+				next;
+				mes "[Guildmaster]";
+				mes "La mayoría de nosotros tiende a evitar juntarse en grupos, pero estoy seguro de que entendiste eso, ¿si?";
+				next;
+				mes "[Guildmaster]";
+				mes "En cierto sentido, ser un Assassin es vivir la vida en soledad.";
+				next;
+				break;
+			}
+			break;
+		case 2:
+			mes "[Guildmaster]";
+			mes "El orgullo de un Assassin...";
+			mes "¿Los otros Assassins te dijeron eso...?";
+			next;
+			mes "[Guildmaster]";
+			mes "El orgullo es ciertamente importante, pero el orgullo no sirve de nada si no tienes habilidad alguna.";
+			next;
+			mes "[Guildmaster]";
+			mes "La mayoría de los Assassins que has encontrado previamente a mi, son hermanos que han compartido muchas dificultades juntos.";
+			next;
+			mes "[Guildmaster]";
+			mes "Puedo entender por que su orgullo y dignidad son tan importantes para ellos. Ahora, ¿Por que razón deseas convertirte en Assassin?";
+			next;
+			switch(select("I like the solitude.:Making money being an Assassin.:They just look interesting.")) {
+			case 1:
+				set ASSIN_Q,11;
+				mes "[Guildmaster]";
+				mes "Entendiste el punto...";
+				mes "Somos solitarios. Siempre estaremos solos, incluso entre nosotros...";
+				next;
+				mes "[Guildmaster]";
+				mes "En cierto sentido, ser un";
+				mes "Assassin es igual a";
+				mes "nada, diría yo.";
+				next;
+				mes "[Guildmaster]";
+				mes "Pero, como te dije antes, tenemos camaradas. Te recomiendo tener al menos un camarada para respaldarte cuando estás en una misión.";
+				next;
+				break;
+			case 2:
+				set ASSIN_Q,12;
+				mes "[Guildmaster]";
+				mes "Bueno, no puedo negarlo, necesitamos dinero para vivir. Pero ¿No crees que deberíamos perseguir algo incluso más importante que el dinero?";
+				next;
+				break;
+			case 3:
+				set ASSIN_Q,13;
+				mes "[Guildmaster]";
+				mes "El estilo y la apariencia son solo superficiales. Es triste que mucha gente piense así.";
+				next;
+				mes "[Guildmaster]";
+				mes "A tan desgraciados Assassins que han perdido su verdadero foco se los resuelve de nuestro modo...";
+				next;
+				mes "[Guildmaster]";
+				mes "No lo olvides...";
+				mes "Los Assassins no juegan. No estamos en ningún estilo tendencia, y nunca lo estaremos.";
+				next;
+				break;
+			}
+			break;
+		case 3:
+			mes "[Guildmaster]";
+			mes "Práctica sin fin...";
+			mes "Creo que tienen lo que hace falta. ¿Hay una razón por la que quieras ser Assassin?";
+			next;
+			mes "[Guildmaster]";
+			mes "A diferencia de la clase Thief,  el trabajo de Assassin no permite la auto-indulgencia- Dime la";
+			mes "razón por la que entrenas sin fin.";
+			next;
+			switch(select("To broaden my skills.:It's a goal of mine.:For spiritual improvement.")) {
+			case 1:
+				set ASSIN_Q,14;
+				mes "[Guildmaster]";
+				mes "Aprender habilidades viene naturalmente son el trabajo de Assassin. Pero no pienses en las habilidades como el mejor valor de tu entrenamiento.";
+				next;
+				mes "[Guildmaster]";
+				mes "No estarás satisfecho de convertirte en Assassin si piensas así...";
+				next;
+				break;
+			case 2:
+				set ASSIN_Q,15;
+				mes "[Guildmaster]";
+				mes "¿Es una de tus metas, eh? Bueno, creo que tienes que tener metas.";
+				next;
+				mes "[Guildmaster]";
+				mes "Una vez conocí una persona que tenía metas. Hace mucho tiempo, conocí a alguien en una asignación quien quería evitar que lo maten antes de convertirse en Knight Level 54.";
+				next;
+				mes "[Guildmaster]";
+				mes "Que mal que lo tuve que matar antes de que sea level 52 ^666666*suspiro*^000000 Oh bien...";
+				next;
+				mes "Estoy un poco preocupado por ti. Espero que te des cuenta de que una vez que te conviertas en Assassin no hay vuelta atrás...";
+				next;
+				break;
+			case 3:
+				set ASSIN_Q,16;
+				mes "[Guildmaster]";
+				mes "Buena idea...";
+				mes "Ese es un buen modo de mejorarte. He visto mucha gente que sabía como ser fuerte físicamente pero no en su estado mental.";
+				next;
+				mes "[Guildmaster]";
+				mes "Espero que no seas hipócrita. La disciplina espiritual es el mejor modo que tienes para sobrevivir.";
+				next;
+				break;
+			}
+			break;
+		}
+		mes "[Guildmaster]";
+		mes "Tristemente hay algunos descerebrados quienes están ansiosos por ser Assassins aunque no sepan nada...";
+		next;
+		mes "[Guildmaster]";
+		mes "Ellos causan problemas y nos llevan a la desgracia. Sus actividades a veces resultan en situaciones horribles.";
+		next;
+		mes "[Guildmaster]";
+		mes "Ten cuidado de no convertirte en una de ellos una vez que seas Assassin. La responsabilidad descansa solo en tus hombros.";
+		next;
+		mes "[Guildmaster]";
+		mes "Así que si pudieras convertirte en Assassin ahora mismo, ¿Que es la primer cosa que harías?";
+		next;
+		switch(select("I would go hunt right away.:There are people waiting for me.:Check how I can help as an Assassin.")) {
+		case 1:
+			mes "[Guildmaster]";
+			mes "Cazar...";
+			mes "¿Eso es todo...?";
+			next;
+			switch(select("I would level up fast.:I want to explore my Assassin skills.:I will go where I couldn't go as a Thief.")) {
+			case 1:
+				set .@assassin_sangdam,.@assassin_sangdam+10;
+				mes "[Guildmaster]";
+				mes "No actúes imprudentemente...";
+				mes "Ser un Assassin no te hace una persona diferente. Y no te apoyes en la probabilidad.";
+				next;
+				break;
+			case 2:
+				set .@assassin_sangdam,.@assassin_sangdam+5;
+				mes "[Guildmaster]";
+				mes "Es bueno examinarse a uno mismo. Puedo entender que estés emocionado por el gran cambio en tu habilidad.";
+				next;
+				mes "[Guildmaster]";
+				mes "Mientras tanto, espero que no olvides la mentalidad del Assassin.";
+				next;
+				break;
+			case 3:
+				mes "[Guildmaster]";
+				mes "Muy bien...";
+				mes "Explorar lugar que nunca has visto antes. Pero  recuerda que ser un Assassin no te hace ser una persona diferente.";
+				next;
+				mes "[Guildmaster]";
+				mes "No te sobre exijas demasiado.";
+				mes "Tomate tu tiempo y viaja sabiamente.";
+				next;
+				break;
+			}
+			break;
+		case 2:
+			mes "[Guildmaster]";
+			mes "¿Quien esta esperándote,";
+			mes "si puedo preguntar?";
+			next;
+			switch(select("My friends.:My Guildsmen.:My lover.")) {
+			case 1:
+				set .@assassin_sangdam,.@assassin_sangdam+5;
+				mes "[Guildmaster]";
+				mes "Ya veo...";
+				mes "Aprécialos por preocuparse por ti, incluso cuando estés solo.";
+				next;
+				break;
+			case 2:
+				set .@assassin_sangdam,.@assassin_sangdam+5;
+				mes "[Guildmaster]";
+				mes "Genial...";
+				mes "Camaradas por los que morirías...";
+				next;
+				mes "[Guildmaster]";
+				mes "Como un Assassin, encuentra un trabajo que puedas hacer por ellos sin que ellos lo sepan...";
+				next;
+				break;
+			case 3:
+				mes "[Guildmaster]";
+				mes "Jaja, las necesidades del cuerpo son, a veces, difíciles de ignorar. Es mejor aceptar esa parte de la naturaleza humana.";
+				next;
+				mes "[Guildmaster]";
+				if (sex )
+					mes "Pero nunca debes revelarle la parte Assassin de tu vida. Sin importar lo que cueste";
+				else
+					mes "Pero nunca debes revelarle la parte Assassin de tu vida. Sin importar lo que cueste";
+				next;
+				mes "[Guildmaster]";
+				mes "Ama a tu ser querido por siempre, incluso si no puedas expresarlo abiertamente. A veces, la vida no te permite encontrar al verdadero amor más de una vez.";
+				next;
+				break;
+			}
+			break;
+		case 3:
+			mes "[Guildmaster]";
+			mes "Eso es muy admirable. ¿Hay algo que quieras preguntarme?";
+			next;
+			switch(select("Places where Assassins can level up...:Main goals as an Assassin.:Financial consulting.")) {
+			case 1:
+				set .@assassin_sangdam,.@assassin_sangdam+5;
+				mes "[Guildmaster]";
+				mes "Todo depende de tu mente. Cualquier lugar podría ser el mejor pata subir niveles dependiendo de tu estado mental.";
+				next;
+				mes "[Guildmaster]";
+				mes "Debes saber como";
+				mes "sobrevivir en cualquier situación.";
+				next;
+				break;
+			case 2:
+				mes "[Guildmaster]";
+				mes "Hay muchos Assassins ahí afuera. Míralos como tus entrenadores, y pídeles sus opiniones.";
+				next;
+				mes "[Guildmaster]";
+				mes "Espero que te conviertas en un excelente Assassin. Y cuando alcances cierto nivel, debes guiar a los novatos como tus entrenadores han hecho contigo.";
+				next;
+				break;
+			case 3:
+				set .@assassin_sangdam,.@assassin_sangdam+10;
+				mes "[Guildmaster]";
+				mes "Oh mi señor...";
+				mes "¿Estás planeando convertirte en Assassin para conseguir dinero?";
+				next;
+				mes "[Guildmaster]";
+				mes "Gente de esa naturaleza no son bienvenidos. Si esa es tu meta, quizás debas reconsiderar tu profesión...";
+				next;
+				break;
+			}
+			break;
+		}
+		mes "[Guildmaster]";
+		mes "Fue bueno conocerte. Me recordaste de los buenos viejos días.";
+		next;
+		mes "[Guildmaster]";
+		mes "Por favor dame";
+		mes "un segundo...";
+		next;
+		mapannounce "in_moc_16","Those involved with the testing of " + strcharinfo(0) + ", please gather before me.",bc_map;
+		mes "[Guildmaster]";
+		mes "Aquellos involucrados en la evaluación de " + strcharinfo(0) + "por favor reúnanse ante mi.";
+		next;
+		mes "[Guildmaster]";
+		mes "Ellos estarán";
+		mes "aquí pronto.";
+		next;
+		enablenpc "[Huey]";
+		enablenpc "[Khai]";
+		enablenpc "[The Anonymous One]";
+		enablenpc "[Barcardi]";
+		enablenpc "[Beholder]";
+		enablenpc "[Thomas]";
+		enablenpc "[Gayle Maroubitz]";
+		mes "[The Anonymous One]";
+		mes "Estoy aquí.";
+		next;
+		mes "[Guildmaster]";
+		mes "Me gustaría escuchar tu opinión de " + strcharinfo(0) + " para la evaluación de cambio de profesión.";
+		next;
+		mes "[The Anonymous One]";
+		mes "Ah sí...";
+		mes "Pienso que";
+		mes ""+ strcharinfo(0) +"";
+		mes "es decente.";
+		next;
+		mes "[Guildmaster]";
+		mes "Bien...";
+		mes "Anonymous One";
+		mes "te apoya. ¿Que hay";
+		mes "acerca de ti, Huey?";
+		next;
+		if (ASSIN_Q3 == 1) {
+			mes "[Huey]";
+			mes "Una rareza.";
+			mes "Puedes saberlo";
+			mes "por el Job Level.";
+			next;
+			mes "[Huey]";
+			mes "Acuerdo con";
+			mes "Anonymous One.";
+		}
+		else {
+			mes "[Huey]";
+			mes "Aunque "+ strcharinfo(0) +" se ve muy suave y gentil, como un minino, "+ strcharinfo(0) +" tiene lo que se necesita.";
+			next;
+			mes "[Huey]";
+			mes "Si por ustedes esta bien, me gustaría volver a mi trabajo.";
+			next;
+			mes "[Guildmaster]";
+			mes "Si...";
+			mes "Eso es todo, Huey.";
+		}
+		next;
+		mes "[Guildmaster]";
+		mes "Así que...";
+		mes "'Beholder,' ¿Cuál";
+		mes "es tu opinión?";
+		next;
+		donpcevent "[Huey]::OnDisable";
+		mes "[Beholder]";
+		mes "Bueno, no me gusta el puntaje del trayecto. Pero, de algún modo la prueba entera fue superada. No tengo problemas con esta persona.";
+		next;
+		mes "[Guildmaster]";
+		mes "Hmm...";
+		mes "Parece que estamos todos de acuerdo. Bien. No tengo ningún problema con "+ strcharinfo(0) +" también...";
+		next;
+		switch(ASSIN_Q) {
+		case 8:
+			mes "[Guildmaster]";
+			mes "Aunque te mueva la venganza personal, espero que eso se vaya conforme entrenes...";
+			next;
+			break;
+		case 9:
+			mes "[Guildmaster]";
+			mes "Aunque tu principal preocupación por ahora es ser rico, estoy seguro que perseguirás algo incluso mayor...";
+			next;
+			break;
+		case 10:
+			mes "[Guildmaster]";
+			mes "Ansioso por viajar alrededor del mundo, espero que tu verdadera identidad sea encontrada en tus viajes...";
+			next;
+			break;
+		case 11:
+			mes "[Guildmaster]";
+			mes "Pareces saber mucho acerca de los Assassins. No creo que la frustración por estar solo sea una dificultad para ti...";
+			next;
+			break;
+		case 12:
+			mes "[Guildmaster]";
+			mes "Estas idiota por el dinero, pero creo que deberías poder superarlo.";
+			next;
+			mes "[Guildmaster]";
+			mes "Aunque no confío en ti por ahora, te daré una oportunidad.";
+			next;
+			break;
+		case 13:
+			mes "[Guildmaster]";
+			mes "Aunque estés enamorado superficialmente de los Assassins, creo que te percatarás del verdadero valor de la profesión de Assassin tarde o temprano";
+			next;
+			break;
+		case 14:
+			mes "[Guildmaster]";
+			mes "Una de las raras personas que busca mejores habilidades, espero que te des cuenta de la importancia de la disciplina espiritual tarde o temprano.";
+			next;
+			break;
+		case 15:
+			mes "[Guildmaster]";
+			mes "Tarde o temprano encontrarás una nueva meta a la que puedas hacerte devoto...";
+			next;
+			break;
+		case 16:
+			mes "[Guildmaster]";
+			mes "Conozco algunas personas que sólo se preocupan por el entrenamiento físico, pero";
+			mes "Creo que sobresales entre ellos...";
+			next;
+		}
+		if (ASSIN_Q3 == 1 && BaseJob == Job_Thief && ASSIN_Q > 6 && ASSIN_Q < 17) {
+			set ASSIN_Q,17;
+			set ASSIN_Q3,2;
+			mes "[Guildmaster]";
+			mes "Bueno, he dicho demasiado. Por favor, elige un arma como regalo.";
+			next;
+			mes "[Guildmaster]";
+			mes "Puedes elegir entre un Jur, Katar, Main Gauche o un Gladius. Como un maestro, las amo a todas.";
+			next;
+			switch(select("Jur:Katar:Main Gauche:Gladius")) {
+			case 1:
+				mes "[Guildmaster]";
+				mes "Un Jur...";
+				mes "Buena elección, aquí tienes, espero que te sirva bien.";
+				getitem 1251,1; //Jur_
+				break;
+			case 2:
+				mes "[Guildmaster]";
+				mes "Un Katar...";
+				mes "Aquí tienes.";
+				mes "Aunque está usada,";
+				mes "sé que te";
+				mes "servirá bien.";
+				getitem 1253,1; //Katar_
+				break;
+			case 3:
+				mes "[Guildmaster]";
+				mes "Ya veo. Quieres usar ambas manos. Aquí tienes, toma tu Main Gauche.";
+				getitem 1208,1; //Main_Gauche_
+				break;
+			case 4:
+				mes "[Guildmaster]";
+				mes "Una Gladius...";
+				mes "Solía gobernar en el mercado de armas de Assassin. Por favor, cuida de mi Gladius.";
+				getitem 1220,1; //Gladius_
+			}
+			next;
+		}
+		else {
+			set ASSIN_Q,17;
+			mes "[Guildmaster]";
+			mes "Bueno, hablo demasiado.";
+			mes "Por favor toma esto primero.";
+			next;
+			switch(rand(1,5)) {
+			case 1:
+				getitem 1207,1; //Main_Gauche
+				break;
+			case 2:
+				getitem 1250,1; //Jur
+				break;
+			case 3:
+				getitem 1216,1; //Stiletto
+				break;
+			case 4:
+				getitem 1201,1; //Knife
+				break;
+			case 5:
+				getitem 1252,1; //Katar
+			}
+		}
+		mes "[Guildmaster]";
+		mes "Bueno, te estoy dando un símbolo. Por favor regresa con el Assassin experto, Ferocious-Lookin Huey, en la entrada.";
+		next;
+		mes "[Guildmaster]";
+		mes "Al recibir este símbolo, Huey te promoverá a Assassin.";
+		next;
+		mes "[Guildmaster]";
+		mes "Tú, " + strcharinfo(0) + "has elegido vivir como Assassin. Has de aprender nuestros modos y serás un honorable ejemplo para los demás.";
+		savepoint "morocc",100,100;
+		getitem 1008,1; //Frozen_Heart
+		changequest 8006,8007;
+		next;
+		mes "[Guildmaster]";
+		mes "De acuerdo, todos ustedes regresen a sus posiciones. Te enviaré a la entrada. Movámonos...";
+		disablenpc "[Huey]";
+		disablenpc "[Khai]";
+		disablenpc "[The Anonymous One]";
+		disablenpc "[Barcardi]";
+		disablenpc "[Beholder]";
+		disablenpc "[Thomas]";
+		disablenpc "[Gayle Maroubitz]";
+		close2;
+		warp "in_moc_16",17,19;
+		end;
+	}
+	else if (ASSIN_Q == 17) {
+		mes "[Guildmaster]";
+		mes "¿Umm...?";
+		mes "¿Cómo es que estás aquí dentro...?";
+		next;
+		mes "[Guildmaster]";
+		mes "Ya has terminado tu prueba. ¿Por qué no tratas de conseguir el ^006699Necklace of Oblivion^000000? así podrás cambiar tu profesión.";
+		close2;
+		warp "in_moc_16",17,19;
+		end;
+	}
+	else if (ASSIN_Q > 7 && ASSIN_Q < 17) {
+		set ASSIN_Q,7;
+		mes "[Guildmaster]";
+		mes "¿Que demonios? Presionaste \"Cancel\" durante el proceso. ¿Quieres cambiar de profesión o que?";
+		next;
+		mes "[Guildmaster]";
+		mes "^666666*Suspiro...*^000000";
+		mes "De acuerdo, empecemos de nuevo. Si no escuchas esta vez, no saldrás vivo de esta habitación. ¿Entendido?";
+		close;
+	}
+	else {
+		mes "[Guildmaster]";
+		mes "¿Umm? ¿Cómo es que estas aquí dentro?";
+		next;
+		mes "[Guildmaster]";
+		mes "Ya has terminado tu prueba, ve a darle y ^006699Necklace of Oblivion^000000 al Ferocious-looking Huey para poder cambiar de profesión.";
+		close2;
+		warp "in_moc_16",17,19;
+		end;
+	}
+}
+
+in_moc_16,186,81,1	script	Master Assist	55,1,1,{
+	mes "[Assistent Gayle Maroubitz]";
+	mes "Lo lamento, pero no estoy a cargo de cambios de profesión. Ve con el Guildmaster, como él te ha dicho.";
+	close;
+}
+
+in_moc_16,170,90,0	script	info 1	-1,{
+OnTouch:
+	mes "[Guildmaster]";
+	mes "Huh.";
+	mes "Ahora, ese lugar está bloqueado. Quizás quieras revisar el otro lado.";
+	close;
+}
+
+in_moc_16,153,85,0	script	info 2	-1,1,1,{
+OnTouch:
+	mes "[Guildmaster]";
+	mes "Te estás acercando. Casi estás allí. Sólo, da un poco la vuelta.";
+	close;
+}
+
+in_moc_16,160,85,0	script	info 3	-1,1,1,{
+OnTouch:
+	mes "[Guildmaster]";
+	mes "Hmm.";
+	mes "Ahora, ese lugar";
+	mes "está bloqueado.";
+	close;
+}
+
+in_moc_16,175,89,0	script	info 4	-1,1,1,{
+OnTouch:
+	mes "[Guildmaster]";
+	mes "Umm...";
+	mes "Estás dirigiéndote para mi asistente. ¿Aún necesitas hablar con él?";
+	close;
+}
+
+in_moc_16,164,88,0	script	info 5	-1,{
+OnTouch:
+	mes "[Guildmaster]";
+	mes "Bien hecho...";
+	mes "Puedo sentir tus pasos cerca de mí.";
+	close;
+}
+
+in_moc_16,149,95,0	script	info 6	-1,1,1,{
+OnTouch:
+	mes "[Guildmaster]";
+	mes "¿Hm? Nada mal. Casi estás aquí.";
+	close;
+}
+
+in_moc_16,180,101,0	script	info 7	-1,1,1,{
+OnTouch:
+	mes "[Guildmaster]";
+	mes "No creo que estés yendo por el camino correcto.";
+	close;
+}
+
+in_moc_16,186,107,0	script	info 8	-1,1,1,{
+OnTouch:
+	mes "[Guildmaster]";
+	mes "¿No tienes sentido de la dirección, eh?";
+	close;
+}
+
+in_moc_16,156,87,1	script	[Huey]	55,{
+	end;
+
+OnInit:
+	disablenpc "[Huey]";
+	end;
+}
+
+in_moc_16,156,85,1	script	[Khai]	730,{
+	end;
+
+OnInit:
+	disablenpc "[Khai]";
+	end;
+}
+
+in_moc_16,156,83,1	script	[The Anonymous One]	106,{
+	end;
+
+OnInit:
+	disablenpc "[The Anonymous One]";
+	end;
+}
+
+in_moc_16,156,81,2	script	[Barcardi]	725,{
+	end;
+
+OnInit:
+	disablenpc "[Barcardi]";
+	end;
+}
+
+in_moc_16,156,79,1	script	[Beholder]	118,{
+	end;
+
+OnInit:
+	disablenpc "[Beholder]";
+	end;
+}
+
+in_moc_16,156,77,1	script	[Thomas]	118,{
+	end;
+
+OnInit:
+	disablenpc "[Thomas]";
+	end;
+}
+
+in_moc_16,156,75,1	script	[Gayle Maroubitz]	55,{
+	end;
+
+OnInit:
+	disablenpc "[Gayle Maroubitz]";
+	end;
+}

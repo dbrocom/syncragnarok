@@ -1,0 +1,227 @@
+//===== eAthena Script ======================================= 
+//= Lighthalzen Guides
+//===== By: ================================================== 
+//= MasterOfMuppets; L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Guides for the City of Lighthalzen
+//===== Additional Comments: ================================= 
+//= 1.0 First Version [MasterOfMuppets]
+//= 1.1 Removed Duplicates [Silent]
+//= 1.2 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//============================================================
+
+lighthalzen,207,310,5	script	Guide#lhz::LhzGuide	852,{
+	cutin "ein_soldier",2;
+	mes "[Lighthalzen Guide]";
+	mes "Bienvenido a Lighthalzen,";
+	mes "la Corporación Ciudad-Estado.";
+	mes "Si usted necesita cualquier dirección";
+	mes "alrededor de la ciudad, siéntase libre";
+	mes "de preguntarme y haré";
+	mes "lo mejor para ayudarlo.";
+	set .@loop1,1;
+	while (.@loop1) {
+		next;
+		switch(select("City Guide:Remove Marks from Mini-Map:Notice.:Cancel")) {
+		case 1:
+			mes "[Lighthalzen Guide]";
+			mes "Por favor este conciente que estoy";
+			mes "a cargo de proporcionar información";
+			mes "con respecto a el Distrito Oeste";
+			mes "de Lighthalzen. Ahora, por favor";
+			mes "seleccione la ubicación sobre la cual";
+			mes "le gustaría aprender más.";
+			if (.@compass_check == 0) {
+				next;
+				mes "[Lighthalzen Guide]";
+				mes "Pero antes de eso,";
+				mes "le gustaría";
+				mes "marcar los lugares";
+				mes "en el Mini-Mapa?";
+				next;
+				if (select("Yes.:No.") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				switch(select("^FF0000Rekenber Corporation^000000:Train Station:Police Station:Bank:Hotel:Airport:Merchant Guild:Jewelry Shop:Weapon Shop:Departement Store:Cancel")) {
+				case 1:
+					mes "[Lighthalzen Guide]";
+					mes "Corporación Rekenber,";
+					mes "la empresa más grande en";
+					mes "la República Schwaltzvalt,";
+					mes "es localizado en el noroeste de";
+					mes "Lighthalzen. No se puede perder";
+					mes "el edificio de la sede.";
+					if (.@compass_check)
+						viewpoint 1,102,247,2,0xFF0000;
+					break;
+				case 2:
+					mes "[Lighthalzen Guide]";
+					mes "La Estación de Tren es";
+					mes "Está localizada en el centro de";
+					mes "la ciudad, donde tenemos";
+					mes "un ferrocarril directo a Einbroch.";
+					if (.@compass_check)
+						viewpoint 1,233,164,3,0xFF00FF;
+					break;
+				case 3:
+					mes "[Lighthalzen Guide]";
+					mes "Nuestra Estación de Policía está justo al";
+					mes "norte del centro de la ciudad.";
+					mes "Por favor no dude en reportar";
+					mes "cualquier persona sospechosa y";
+					mes "actividad sospechosa, o si tiene cualquier";
+					mes "problema alguno.";
+					if (.@compass_check)
+						viewpoint 1,236,276,4,0x99FFFFF;
+					break;
+				case 4:
+					mes "[Lighthalzen Guide]";
+					mes "El banco esta localizado";
+					mes "en el lado opuesto";
+					mes "a la Estación de Policia de Lighthalzen,";
+					mes "el cual es una buena idea";
+					mes "cuando de hecho lo pienso. ^FFFFFFspacer^000000";
+					if (.@compass_check)
+						viewpoint 1,198,257,5,0x0000FF;
+					break;
+				case 5:
+					mes "[Lighthalzen Guide]";
+					mes "Nuestro Hotel esta localizado en";
+					mes "medio de la Plaza Sur.";
+					mes "Debido a la calidad de sus servicios y";
+					mes "lujosos diseños, este";
+					mes "hotel es extremadamente popular.";
+					if (.@compass_check)
+						viewpoint 1,159,133,6,0x00FF00;
+					break;
+				case 6:
+					mes "[Lighthalzen Guide]";
+					mes "El aeropuerto esta hacia alejado";
+					mes "en dirección oeste de la plaza central.";
+					mes "Puede viajar a donde sea";
+					mes "subiendose en un airship";
+					mes "del Schwaltzvalt Republic.";
+					if (.@compass_check)
+						viewpoint 1,267,75,7,0x00FF00;
+					break;
+				case 7:
+					mes "[Lighthalzen Guide]";
+					mes "La guild de Merchant esta";
+					mes "localizada en la parte";
+					mes "suroeste de  Lighthalzen.";
+					if (.@compass_check)
+						viewpoint 1,74,53,8,0xFF99FF;
+					break;
+				case 8:
+					mes "[Lighthalzen Guide]";
+					mes "La joyeria esta";
+					mes "localizada al oeste de";
+					mes "la Plaza Sur.";
+					if (.@compass_check)
+						viewpoint 1,93,110,9,0xFF9900;
+					break;
+				case 9:
+					mes "[Lighthalzen Guide]";
+					mes "La tienda de armas esta";
+					mes "localizada al final del";
+					mes "corredor central.";
+					mes "Si en serio quieres";
+					mes "Aventurarte por aqui";
+					mes "valdria la pena mirar";
+					if (.@compass_check)
+						viewpoint 1,196,46,10,0x330033;
+					break;
+				case 10:
+					mes "[Lighthalzen Guide]";
+					mes "el Department Store que esta";
+					mes "localizado en el centro de";
+					mes "Lighthalzen y es el mas grande";
+					mes "y mas conveniente lugar para";
+					mes "comprar casi de todo.";
+					if (.@compass_check)
+						viewpoint 1,199,163,11,0xFFFF00;
+					break;
+				case 11:
+					mes "[Lighthalzen Guide]";
+					mes "Porfavor pideme ''Remove";
+					mes "Marks from Mini-Map'' si no";
+					mes "deseas tener mas tiempo";
+					mes "las marcas que se ven";
+					mes "en su Mini-Map.";
+					set .@loop2,0;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,102,247,2,0xFF0000;
+			viewpoint 2,233,164,3,0xFF00FF;
+			viewpoint 2,236,276,4,0x99FFFF;
+			viewpoint 2,198,257,5,0x0000FF;
+			viewpoint 2,159,133,6,0x00FF00;
+			viewpoint 2,267,75,7,0x00FF00;
+			viewpoint 2,74,53,8,0xFF99FF;
+			viewpoint 2,93,110,9,0xFF9900;
+			viewpoint 2,196,46,10,0x330033;
+			viewpoint 2,199,163,11,0xFFFF00;
+			set .@compass_check,0;
+			break;
+		case 3:
+			mes "[Lighthalzen Guide]";
+			mes "Los avances en magia y";
+			mes "tecnologia nos permiten";
+			mes "actualizar nuestro sistema";
+			mes "de informacion, dejandonos marcar";
+			mes "lugares en su Mini-Map";
+			mes "Para una facil navegacion.";
+			next;
+			mes "[Lighthalzen Guide]";
+			mes "Su Mini-Map esta localizado";
+			mes "en la esquina superior derecha";
+			mes "de la pantalla. si no puede";
+			mes "mirarlo, Presione las teclas";
+			mes "Ctrl + Tab o de un click en el boton ''Map'' en su Ventana de Informacion Basica.";
+			next;
+			mes "[Lighthalzen Guide]";
+			mes "En su Mini-Map,";
+			mes "de un click en los simbolos";
+			mes " ''+'' y ''-'' para acercar o";
+			mes "alejar su Mini-Map. Esperamos";
+			mes "disfrute su viaje";
+			mes "aqui en Lighthalzen.";
+			break;
+		case 4:
+			mes "[Lighthalzen Guide]";
+			mes "Lighthalzen esta dividido";
+			mes "en el distrito Este";
+			mes "y Oeste por unas vias que";
+			mes "pasa justo por el centro.";
+			mes "Siempre hay guardias alerta";
+			mes "para proteger la paz.";
+			next;
+			mes "[Lighthalzen Guide]";
+			mes "Por favor no dude";
+			mes "en reportarnos cualquier actividad";
+			mes "o persona sospechosa.";
+			mes "Esperamos y disfrute";
+			mes "nuestra bella ciudad, aventurero.";
+			close2;
+			set .@loop1,0;
+		}
+	}
+	cutin "ein_soldier",255;
+	end;
+}
+
+lighthalzen,220,311,3	duplicate(LhzGuide)	Guide#2lhz	852
+
+lighthalzen,154,100,5	duplicate(LhzGuide)	Guide#3lhz	852
+
+lighthalzen,307,224,3	duplicate(LhzGuide)	Guide#4lhz	852

@@ -1,0 +1,124 @@
+//===== eAthena Script =======================================
+//= Acolyte Skill Quest
+//===== By: ==================================================
+//= kobra_k88
+//===== Current Version: =====================================
+//= 1.5
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quest for skills: Holy Light
+//===== Additional Comments: ================================= 
+//= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.6 Fixed a typo in job check. (Bugreport:1531) [L0ne_W0lf]
+//============================================================
+
+prt_church,173,23,4	script	Cleric#qsk_al	79,{
+	mes "[Acolyte Klift]";
+	mes "¡Ahh, hermanos! ¿Tienes la agobiante ";
+	mes " y agotante tarea de cuidar";
+	mes "ovejas descarriadas?";
+	mes "Estoy aquí para ayudarte.";
+	next;
+	switch(select("^3355FF' About acolyte's hidden ability '^000000 ..:^3355FF' Holy light '^000000 training:End conversation")) {
+	case 1:
+		mes "[Acolyte Klift]";
+		mes "Nuestros miembros del clero";
+		mes "naturalmente aprenden una skill";
+		mes "mientras van madurando. Cuando se aproximan ";
+		mes "a sus últimos años como acolytes";
+		mes "esta skill especial aparece.";
+		next;
+		mes "[Acolyte Klift]";
+		mes "Enfrentados con grandes peligros y";
+		mes "una infinita lucha contra el mal,";
+		mes "muchos de nuestros hermanos necesitaban ayuda.";
+		mes "^3355FF' Holy Light '^000000 es esa skill.";
+		mes "Obtener esta habilidad por ti mismo,";
+		mes "te costará algo de trabajo.";
+		next;
+		mes "[Acolyte Klift]";
+		mes "Para conseguir esta skill, tendrás que encontrar estos ítems.";
+		mes "^FF33551 Opal^000000 ";
+		mes "^FF33551 Crystal Blue^000000 ";
+		mes "^FF33551 Rosary^000000  ";
+		next;
+		mes "[Acolyte Klift]";
+		mes "Para ser capaz de usar esta skill,";
+		mes "tienes que tener la suficiente experiencia como un acolyte.";
+		mes "^FF3355 Job Level 30^000000 ";
+		mes "es lo que necesitas para aprender esta skill.";
+		next;
+		mes "[Acolyte Klift]";
+		mes "Pero para un priest, debido a";
+		mes "su gran experiencia,";
+		mes "podrán aprender esta skill a cualquier";
+		mes "nivel de job.";
+		close;
+	case 2:
+		if (getskilllv("AL_HOLYLIGHT") == 1) {
+			mes "[Acolyte Klift]";
+			mes "Hermano, tu ya posees";
+			mes "la skill de ` Holy Light '.";
+			mes "No puedes aprender una skill";
+			mes "que ya dominas...";
+			mes "Rezo para que estés usando";
+			mes "esta skill para el trabajo de Dios...";
+			close;
+		}
+		else {
+			if (countitem(727) > 0 && countitem(991) > 0 && countitem(2608) > 0) {
+				if ((JobLevel > 29 && BaseJob == Job_Acolyte) || BaseJob == Job_Monk || BaseJob == Job_Priest) {
+					mes "[Acolyte Klift]";
+					mes "Tu fe ha probado que tienes la dignidad y el merito";
+					mes "suficiente para que aprendas la skill  ' Holy Light '.";
+					mes "Tu habilidad es apropiada";
+					mes "para usar esta skill.";
+					mes "Úsala sabiamente...";
+					next;
+					delitem 727,1; //White_Jewel
+					delitem 991,1; //Crystal_Blue
+					delitem 2608,1; //Rosary
+					skill 156,1,0;
+					mes "[Acolyte Klift]";
+					mes "Ahora ya sabes ' Holy Light '";
+					mes "Deberás usarla solo";
+					mes "con la mejor conducta.....";
+					close;
+				}
+			}
+			mes "[Acolyte Klift]";
+			mes "Oh, está claro...";
+			mes "Aun no estás listo para";
+			mes "aprender la skill ' Holy Light '.";
+			next;
+			mes "[Acolyte Klift]";
+			mes "Deberás escuchar cuidadosamente lo que";
+			mes "es necesario para esta skill.";
+			mes "Si escuchas atentamente,";
+			mes "podrás averiguar que te falta.";
+			mes "Así podrás perfeccionar lo que necesites.";
+			close;
+		}
+	case 3:
+		mes "[Acolyte Klift]";
+		mes ". . . . .";
+		mes "Entiendo tu entusiasmo. ^^";
+		mes "Tienes mucho tiempo todavía para";
+		mes "entrenar y ganar experiencia.";
+		mes "Que Dios te bendiga.....";
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= v1.0a Now using functions found in "Global_Functions.txt"
+//= for class checks.
+//= 1.2 Added Baby Class Support [Lupus]
+//= 1.3 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
+//= 1.4 Fixed an exploit [Lupus]
+//= 1.4a changed perm. variables to temp ones [Lupus]
+//============================================================

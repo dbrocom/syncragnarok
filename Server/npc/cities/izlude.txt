@@ -1,0 +1,515 @@
+//===== eAthena Script ======================================= 
+//= Izlude Town
+//===== By: ================================================== 
+//= kobra_k88
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.8a
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Izlude town NPCs
+//===== Additional Comments: ================================= 
+//= Fully working
+//= 1.1 fixed 2 zeny bugs/checks [Lupus]
+//= 1.2 Fixed a lot of typos [Nexon]
+//= 1.3 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
+//= 1.4 Added a Jawaii related npc. 1.4a Fixed a small bug to
+//=	the Jawaii warper, thanks to reddozen and Silent [MasterOfMuppets]
+//= 1.5 Replaced iz_move_alberta with MISC_QUEST & 16 [Lupus]
+//= 1.6 Removed Duplicates [Silent]
+//= 1.7 Split quest to quests/quests_izlude.txt [Evera]
+//= 1.71 Optimized. Also thanks to CAHTEXHuK [Lupus]
+//= 1.72 Small bugfix [Paradox924X]
+//= 1.8 Rescripted to Aegis 10.3 standard. [L0ne_W0lf]
+//=	Removed Honeymoon Helper, as she is a Jawaii NPC.
+//=	Moved Signs to the msg_boards file.
+//= 1.8a Made Red/Cebalis as a single NPC + duplicate [Lupus]
+//= 1.9 Fixed a small problem with Dega. (Ne default case) [L0ne_W0lf]
+//=	Re-added NPC dialog for Cebalis. The dialog differs
+//=	(even if slightly,) after the five or so lines.
+//============================================================
+
+// Izlude
+//============================================================
+izlude,201,181,2	script	Sailor#izlude	100,{
+	mes "[Sailor]";
+	mes "¡Hey todos!";
+	mes "¡Atención, atención!";
+	mes "¡Ven y cabalga el viento";
+	mes "en esta fascinante nave!";
+	mes "¡Apuren, apuren!";
+	next;
+	switch(select("Byalan Island -> 150 Zeny.:Alberta Marina  -> 500 Zeny.:Cancel.")) {
+	case 1:
+		if (zeny < 150) {
+			mes "[Sailor]";
+			mes "¡150 Zeny! ";
+			mes "¡Solo 150 Zeny para andar!";
+			close;
+		}
+		set zeny,zeny-150;
+		warp "izlu2dun",107,50;
+		end;
+	case 2:
+		if (zeny < 500) {
+			mes "[Sailor]";
+			mes "¡500 Zeny! ";
+			mes "¡Solo 500 Zeny para andar!";
+			close;
+		}
+		set zeny,zeny-500;
+		warp "alberta",188,169;
+		end;
+	case 3:
+		close;
+	}
+}
+
+izlude,55,74,2	script	Bonne#izlude	90,{
+	mes "[Bonne]";
+	mes "¡Saludos!";
+	mes "Izlude le da la bienvenida.";
+	next;
+	mes "[Bonne]";
+	mes "Izlude es la ciudad satélite de Prontera, capital del reino de Rune-Midgart.";
+	next;
+	mes "[Bonne]";
+	mes "Izlude es la llave a nuestro reino, porque la Asociación de Swordsman está localizada aquí y por el hecho de que Izlude esta a cargo de proteger las costas de Rune-Midgard.";
+	next;
+	mes "[Bonne]";
+	mes "Sé que, este puente se ve débil y frágil, pero esta construido con los mejores materiales y la más sofisticada tecnología.";
+	next;
+	mes "[Bonne]";
+	mes "No importa que tan fuertes sean las tormentas o cuantas personas se paren en ella, este puente NUUUUNCA colapsara.";
+	next;
+	mes "[Bonne]";
+	mes "Por favor disfrute";
+	mes "su visita";
+	mes "aquí en Izlude.";
+	close;
+}
+
+izlude,135,78,2	script	Charfri#izlude	91,{
+	mes "[Charfri]";
+	switch(rand(2)) {
+	case 1:
+		mes "Algunas personas podrán pensar que Izlude es solo una ciudad satélite de prontera y no es muy importante...";
+		next;
+		mes "[Charfri]";
+		mes "Pero Izlude es un bello pueblo costero y vecino de la bella isla de Byalan.";
+		next;
+		mes "[Charfri]";
+		mes "Tendrás que abordar un navío en el puerto para llegar a la isla de Byalan. Hay calabozos peligrosos en esa isla, así que no vayas a estar husmeando por cualquier lado.";
+		close;
+	Default:
+		mes "Pensándolo bien, es muy bella, la Isla de Byalan tiene un calabozo misterioso que se extiende a las profundidades del mar.";
+		next;
+		mes "[Charfri]";
+		mes "Gente que ha estado ahí ha dicho que si te diriges a lo más profundo del calabozo se desciende bajo el nivel del mar.";
+		next;
+		mes "[Charfri]";
+		mes "Sorpresivamente, una vez estas bajo el agua, puedes respirar como si fueras un pescado, tal vez hay un campo supernatural en acción.";
+		next;
+		mes "[Charfri]";
+		mes "Ah... ";
+		mes "La gente que ha estado bajo el agua ha dicho que es fantástico, que han seguido soñando con eso desde entonces.";
+		next;
+		mes "[Charfri]";
+		mes "Pero desafortunadamente, los monstruos son demasiado fuertes para gente ordinaria, gente que a duras penas van solo a verlo. Pero, por una única vez, me gustaría bajar.";
+		close;
+	}
+}
+
+izlude,119,121,2	script	Cuskoal#izlude	124,{
+	mes "[Cuskoal]";
+	switch(rand(2)) {
+	case 1:
+		mes "La Arena aquí es EL lugar para jóvenes capaces de todo el Reino de Rune-Midgard, para retarse a si mismos y probar sus habilidades.";
+		next;
+		mes "[Cuskoal]";
+		mes "Tú puedes enfrentar monstruos de distintos niveles así que el número de lugares en los que puedes sobrevivir serán como pruebas para tu orgullo de lucha.";
+		next;
+		mes "[Cuskoal]";
+		mes "Así que, ¿qué dices?";
+		close;
+	Default:
+		mes "Las cantinas en Prontera siempre han estado llenas de gente de zonas cercanas o de otros pueblos, por lo que puede ser muy trabajoso.";
+		next;
+		mes "[Cuskoal]";
+		mes "Es un buen lugar para detenerse y pedir información general u oír rumores.";
+		next;
+		mes "[Cuskoal]";
+		mes "Así que escucha cuidadosamente, podrías conseguir información útil y aprender cosas buenas para ti mismo.";
+		close;
+	}
+}
+
+izlude,150,118,2	script	Dega#izlude	84,{
+	mes "[Dega]";
+	switch(rand(3)) {
+	case 1:
+		mes "Mt.Mjornir, esta localizado al norte de Prontera, es pesada";
+		mes "la escalada a la cima.";
+		next;
+		mes "[Dega]";
+		mes "A pesar de los peligros de la montaña en si, hay insectos feroces que viven ahí también que te atacarían sin ninguna razón.";
+		next;
+		mes "[Dega]";
+		mes "Si algún día quieres ir a visitar en algún lado pasando el Mt.Mjolnir, entonces prepárate para el reto o puedes tratar de rodearla.";
+		close;
+	case 2:
+		mes "Algunos monstruos alrededor del mundo tienen la habilidad única de sentir la energía mística y pueden detectar los conjuros mágicos antes de ser conjurados.";
+		next;
+		mes "[Dega]";
+		mes "El Golem del desierto es uno de ellos, no los subestimes por su rigidez...";
+		next;
+		mes "[Dega]";
+		mes "Si intentas conjurar magia cerca de él, lo notara y te saltara encima para aplastarte, así que debes tener cuidado con los Golem.";
+		close;
+	Default:
+		mes "Hay un verdadero lugar especial donde puedes encontrar cualquier";
+		mes "tipo de Poring.";
+		next;
+		mes "[Dega]";
+		mes "Es en algún lugar cerca de un puente conectado al bosque y al desierto, en el camino a la ciudad de Payon, que es al suroeste de aquí.";
+		next;
+		mes "[Dega]";
+		mes "No solo hay Porings Rosados, si no también Drops, que pueden encontrarse en el desierto y los verdes Poporings.";
+		next;
+		mes "[Dega]";
+		mes "Pero ten cuidado, cuando menos lo esperes, puedes enfrentarte cara a cara con el Ghostring, un Poring letal, que flota por el aire como un Fantasma";
+		next;
+		mes "[Dega]";
+		mes "Bueno, por supuesto, son muy bellos, pero el Ghostring es una EXCEPCION. Es muy peligroso.";
+		next;
+		mes "[Dega]";
+		mes "Si tienes mucha suerte, puedes enfrentarte al Angeling, el poring con alas de ángel.";
+		next;
+		while(1) {
+			switch(select("Ghostring?:Angelring?:End Conversation.")) {
+			case 1:
+				mes "[Dega]";
+				mes "Ghostring es un Poring Griseado que flota por el aire como un fantasma y como todo fantasma, los ataques físicos no le darán mucho daño";
+				next;
+				mes "[Dega]";
+				mes "Aquellos que sus tipos de métodos en ataque son Físicos como los Swordman y Archers, deben correr por sus vidas al enfrentarse a los Ghostrings.";
+				next;
+				mes "[Dega]";
+				mes "¡Pero no te vayas aun! Hay buenas noticias para la gente de esos jobs. Hacer un arma con esa propiedad elemental es la llave.";
+				next;
+				mes "[Dega]";
+				mes "Así de esta forma, los Swordman o los Archer pueden inflingir daño, así como la magia lo hace en el Ghostring.";
+				next;
+				break;
+			case 2:
+				mes "[Dega]";
+				mes "Angelings son inmunes a los ataques de Magia, si la gente que solo puede atacar con magia, enfrentan al Angeling, entonces es hora de";
+				mes "que ellos corran.";
+				next;
+				mes "[Dega]";
+				mes "Si tienes una navaja extra o una espada podrías intentarlo, pero sería difícil para una sola persona, ¿no lo crees?";
+				next;
+				break;
+			case 3:
+				mes "[Dega]";
+				mes "Buena Suerte.";
+				close2;
+				end;
+			}
+		}
+	}
+}
+
+izlude,150,143,2	script	Kylick#izlude	97,{
+	mes "[Kylick]";
+	switch(rand(2)) {
+	case 1:
+		mes "¡¿No crees que los Binoculars";
+		mes "son verdaderamente GENIALES?! ¡Puedes";
+		mes "ver todo tipo de lugares...!";
+		next;
+		mes "[Kylick]";
+		mes "Aquí en Izlude, somos responsables de mantener la paz, no solo en nuestra tierra si no también en el mar, por eso es que tenemos en la ciudad un telescopio.";
+		next;
+		mes "[Kylick]";
+		mes "Este telescopio constantemente vigila el mar, así podemos impedir cualquier tipo de problema que pueda suceder, tú sabes...";
+		next;
+		mes "[Kylick]";
+		mes "Es mejor";
+		mes "prevenir que";
+		mes "curar,";
+		mes "¿cierto?";
+		close;
+	Default:
+		mes "Estaba pensando, que igual la gente de Izlude vive cerca del océano...";
+		next;
+		mes "[Kylick]";
+		mes "Hay otras culturas, que tienen todo completamente diseñado para vivir del mar, por supuesto, estoy hablando de Amatsu.";
+		next;
+		mes "[Kylick]";
+		mes "¡He oído que la comida ahí es muy buena! ¡Igual pensando que la idea de comer Raw Fish es nuevo para mí, me encantaría ir ahí e intentarlo una vez!";
+		close;
+	}
+}
+
+izlude,56,126,2	script	Red#izlude::RedCebalis	85,{
+	mes "[Red]";
+	mes "La única Skill que es necesaria para los Swordman es ^FF2400Bash^000000!Bash,Bash, SOLO ^FF2400Bash^000000!no hay que gastar esfuerzo en skills diminutas, todo lo demás es de cobardes y de la plebe.";
+	next;
+	mes "[Cebalis]";
+	mes "¿¡De que estas hablando!? El ideal de un Swordman es estar frente a todo solo, rodeado de enemigos innumerables, aplastándolos a todos con un ataque.";
+	next;
+	mes "[Cebalis]";
+	mes "^EE0000¡MAGNUM BREAK!^000000 ";
+	mes "Así es, ¡Magnum Break";
+	mes "es la skill que hace";
+	mes "el trabajo limpio!";
+	next;
+	mes "[Cebalis]";
+	mes "Bueno... Algunas Veces el daño explosivo puede accidentalmente golpear a los monstruos que andan por ahí, y esos tipos terminan yendo contra ti, ¡¡pero ese es el riesgo que solo un swordman debe tener!!";
+	next;
+	mes "[Red]";
+	mes "Bueno exactamente por eso eres tonto, ¡idiota! y ¿que es esto del ideal de un Swordman?Yo aun recuerdo la ultima vez que usaste Magnum Break...";
+	next;
+	mes "[Red]";
+	mes "Terminaste corriendo de esos monstruos cuando le golpeaste a uno con esa estúpida skill, ¡débil! todos esos porings alrededor tuyo, te golpearon y trataron de matarte. ";
+	next;
+	mes "[Cebalis]";
+	mes "Hmpf... como yo recuerdo, eras tú el que estaba corriendo también, aparentemente estabas muy ocupado con tu precioso bash, en todo caso, ¡¡Magnum Break es LA skill para un Swordman~!!";
+	next;
+	mes "[Cebalis]";
+	mes "Algo simple como Bash";
+	mes "es solo un paso pequeño comparado al Magnum Break.";
+	next;
+	mes "[Red]";
+	mes "Oh dios~";
+	mes "Hey, yo se que";
+	mes "escuchaste todo.";
+	mes "Así que ¿que opinas?";
+	next;
+	mes "[Red]";
+	mes "¿Cual crees que sea la mejor? La skill de daño critico, ^FF2400Bash^000000, o la skill de daño en masivo, ^EE0000Magnum Break^000000?";
+	next;
+	if (select("Bash:Magnum Break") == 1)  {
+		if (BaseClass == Job_Swordman) {
+			mes "[Red]";
+			mes "¡¡¡Jajajajaja!!!¡¡Sabía que verías las cosas igual que yo!!Tu ERES una gran persona indudablemente, solamente ^FF2400Bash^000000 le queda a un Swordman. Por favor díselo a este CABEZA DURA que esta ahí parado~¡Jajajaja!";
+			next;
+			mes "[Red]";
+			mes "Hmm, déjame te doy un consejo, después que hayas logrado tener en lvl 5 'Bash',la cantidad de SP consumida sube en gran cantidad así que vigila tu SP.";
+			close;
+		}
+		mes "[Red]";
+		mes "¡¡Hahahahaha!!¿¡Lo vez!? Alguien que sigue un job diferente, concuerda conmigo ¡Tú en verdad eres un tipo genial! ¡¡Hahaha!! Indudablemente, solo ^FF2400Bash^000000 es lo que fija a un swordman, por favor díselo a este TERCO~ ¡hahaha!";
+		close;
+	}
+	if (BaseClass == Job_Swordman) {
+		mes "[Cebalis]";
+		mes "¡¡BIEN!! ¡¡^EE0000Magnum Break^000000 es la MEJOR!! De eso estoy y hablando~!! Tú si Sabes. ¡HaHaHa!";
+		next;
+		mes "[Cebalis]";
+		mes "¿Quieres saber una información útil? Okay, okay, déjame te digo que Magnum Break tiene una Propiedad de Fuego.";
+		next;
+		mes "[Cebalis]";
+		mes "No afectara mucho a los monstruos que son de la propiedad de agua, pero ¡ESTA Skill sirve contra Undead y Monstruos de Propiedad de Earth!";
+		next;
+		mes "[Cebalis]";
+		mes "Y muy importante, vigila tus alrededores antes de usarla. De lo contrario estarías en un GRAN apuro. ";
+		close;
+	}
+	mes "[Cebalis]";
+	mes "¡¿Correcto?! ¡¡^EE0000Magnum Break^000000 es LO MEJOR!! Sabes de lo que estas hablando, ¿eh? Yo no se porque este cara de mono es tan porfiado.";
+	close;
+}
+	
+izlude,58,126,2	script	Cebalis#izlude	98,{
+	mes "[Red]";
+	mes "La única Skill que necesita un Swordsman es ¡^FF2400Bash^000000! ¡Bash, Bash y solo ^FF2400Bash^000000! No hay necesidad de gastar tiempo y esfuerzo en skills inferiores. Todo lo demás es para cobardes y débiles.";
+	next;
+	mes "[Cebalis]";
+	mes "¿¡De qué hablas!? El Swordman ideal se defiende solo, rodeado por innumerables enemigos, aplastándolos a todos con un terrible ataque...";
+	next;
+	mes "[Cebalis]";
+	mes "^EE0000¡MAGNUM BREAK!^000000 ";
+	mes "Así es, Magnum Break";
+	mes "es la perfecta";
+	mes "habilidad del Swordman.";
+	next;
+	mes "[Cebalis]";
+	mes "Bien...";
+	mes "A veces la explosión accidentalmente alcanza a algunos monstruos que estaban pasando por ahí.";
+	next;
+	mes "[Cebalis]";
+	mes "Entonces todos ellos terminaran persiguiéndote, pero ese es un riesgo que todo Swordman verdadero debe tomar.";
+	next;
+	mes "[Red]";
+	mes "Por eso es que eres tan tonto, ¡idiota! ¿Y qué era eso acerca del Swordman ideal? ¡¿Te acuerdas de la última vez que usaste Magnum Break?!";
+	next;
+	mes "[Red]";
+	mes "¡Tuviste que huir de todos esos porings a los que golpeaste con esa estúpida habilidad! ¡Debilucho! ¡¡¡Todos esos porings a los que les pegaste trataban de matarte!!! ";
+	next;
+	mes "[Cebalis]";
+	mes "Oh cállate. Y esos eran  Poporings. Yo recuerdo que tu también estabas huyendo y, aparentemente, muy ocupado como para usar tu precioso Bash.";
+	next;
+	mes "[Cebalis]";
+	mes "De todas maneras, Magnum Break es ¡¡LA habilidad para un Swordman~!! Algo simple como Bash es solo uno de esos pequeños pasos para Magnum Break.";
+	next;
+	mes "[Red]";
+	mes "Oh dios~";
+	mes "Hey, Te conozco.";
+	mes "Escuchaste todo.";
+	mes "Así que, ¿que opinas?";
+	next;
+	mes "[Red]";
+	mes "¿Cual crees que sea la mejor? ¿La skill de daño critico, ^FF2400Bash^000000 o la skill de daño en masivo, ^EE0000Magnum Break^000000?";
+	next;
+	if (select("Bash:Magnum Break") == 1) {
+		if (BaseClass == Job_Swordman) {
+			mes "[Red]";
+			mes "¡¡¡Hahahaha!!! ¡¡Sabia que tu verías las cosas a mi manera!! ¡¡ERES un gran tipo!! Sin duda, solo ^FF2400Bash^000000 le sirve a un Swordman. Por favor dile al ¡¡TONTO este!! Hahaha.";
+			next;
+			mes "[Red]";
+			mes "Hmm, déjame darte un consejo. Después que llegas a nivel 5 Bash, la cantidad de SP consumida aumenta mucho, así que cuida tu SP.";
+			close;
+		}
+		mes "[Red]";
+		mes "¡¡Hahahaha!! ";
+		mes "¿¡Ves!? ¡Alguien que tiene un job distinto esta de acuerdo conmigo! ¡Eres un gran tipo! ¡¡Hahaha!!";
+		next;
+		mes "[Red]";
+		mes "Sin duda solo ^FF2400Bash^000000 le sirve a un Swordman. Por favor dile a este ¡¡RETARDADO de aquí!! Hahaha~";
+		close;
+	}
+	if (BaseClass == Job_Swordman) {
+		mes "[Cebalis]";
+		mes " ¡¡Bien!! ¡¡^EE0000Magnum Break^000000 es la MEJOR!! ¡¡Ahora estas hablando~!! Tu sabes tus cosas, chico. ¡HaHaHa!";
+		next;
+		mes "[Cebalis]";
+		mes "¿Quieres saber una información útil? ¡Okay, okay déjame decirte! La explosión de 'Magnum Break' tiene la propiedad Fuego.";
+		next;
+		mes "[Cebalis]";
+		mes "Así que no será muy efectiva contra monstruos con propiedad Water, pero es ¡LA skill a usar contra monstruos de propiedad Undead y Earth !";
+		next;
+		mes "[Cebalis]";
+		mes "Y muy importante, vigila a tu alrededor antes de usarla. De lo contrario estarás en un GRAN apuro.";
+		close;
+	}
+	mes "[Cebalis]";
+	mes "¡¿Tengo razón, no?! ¡¡¡^EE0000Magnum Break^000000 es LO MEJOR!!! Sabes de lo que estas hablando, ¿eh? No se porque este CARALARGA es taaaaaaan aburrido.";
+	close;
+}
+
+izlude,124,178,2	script	Soldier#izlude	105,{
+	mes "[Soldier]";
+	mes "HeHeHeHe..HaHaHaHa  ";
+	mes "¿Huh? ¿Por que estoy tan feliz?";
+	mes "¿Quieres saber?";
+	next;
+	if (select("Sure, why?:Not really, I don't care.") == 1) {
+		mes "[Soldier]";
+		mes "Ah~~ No hay mucho que podamos hacer en estos días. Los Merchants compran ítems que botan los monstruos. Pero tu sabias eso, ¿cierto? ";
+		next;
+		if (select("Of course:Eh? Really?") == 1) {
+			mes "[Soldier]";
+			mes "HaHa~ En realidad, eso era parte de nuestro trabajo. Pero habían más y más hunters que venían a que les pagáramos y eso fue mucho para nosotros.";
+			next;
+			mes "[Soldier]";
+			mes "Teníamos que trabajar sobre tiempo todos los días. ¡Ah, era una pesadilla...! De todas maneras, eventualmente el gobierno tomo la sabia decisión de crear el Registration System.";
+			next;
+			mes "[Soldier]";
+			mes "La Oficina de Compensación de Precios le paga solo a los que tienen Registro. Por supuesto tienes que ser un Merchant y quedarte en el mismo lugar todo el día.";
+			next;
+			mes "[Soldier]";
+			mes "La Oficina entrega el Registro a cualquier Merchant que cumpla esos requisitos. Así que ahora los hunters venden su mercadería a los Merchant registrados.";
+			next;
+			mes "[Soldier]";
+			mes "Así que ahora los hunters venden su mercadería a los Merchants registrados.  No mucha gente viene con nosotros en estos días.";
+			next;
+			mes "[Soldier]";
+			mes "Todavía estamos ocupados, pero es nada comparado a como era antes. La gente que ha sufrido sabe apreciar aun el más ligero confort.";
+			close;
+		}
+		mes "[Soldier]";
+		mes "¡¿Que?! ¡¿Como que no sabias?! Tú sabes que puedes conseguir ítems matando monstruos. Si los traes y los vendes a un merchant, puedes ganar algún dinero. ";
+		next;
+		mes "[Soldier]";
+		mes "HaHa, en realidad, era parte de nuestro trabajo. Pero habían más y más hunters que venían a que les pagaran, era tanto que no lo podíamos manejar.";
+		next;
+		mes "[Soldier]";
+		mes "Teníamos que trabajar sobre tiempo todos los días. ¡Ah, era una pesadilla...! De todas maneras, eventualmente el gobierno tomo la sabia decisión de crear el Registration System.";
+		next;
+		mes "[Soldier]";
+		mes " La Oficina de Compensación de Precios le paga solo a los que tienen Registro. Por supuesto que, tienes que ser un merchant y quedarte en un lugar todo el día.";
+		next;
+		mes "[Soldier]";
+		mes " La Oficina de Compensación de Precios le paga solo a los que tienen Registro. Así que hoy en día, los hunters venden sus cosas a los merchant registrados.";
+		next;
+		mes "[Soldier]";
+		mes "Así que hoy en día, los hunters venden sus cosas a los merchant registrados. Ya no viene a nosotros mucha gente por eso.";
+		next;
+		mes "[Soldier]";
+		mes "Quiero decir, todavía estamos ocupados, pero no se compara con como solía ser. La gente que ha sentido el sufrimiento sabe apreciar la más pequeña comodidad.";
+		close;
+	}
+	mes "[Soldier]";
+	mes "Ok Adios~~";
+	close;
+}
+
+// Inside Izlude	
+//============================================================
+izlude_in,125,164,2	script	Aaron#izlude	65,{
+	mes "[Aaron]";
+	mes "¿No crees que una alta VIT y entrenamiento pueda ser un método que habilite un alto HP Recovery y esa sea la gran ventaja para un Swordman?";
+	next;
+	mes "[Aaron]";
+	mes "Si entrenas tus skills arduamente, puede que veas la cantidad de HP que estas recuperando.";
+	mes "La cantidad de HP que recuperas";
+	mes "depende de la vitalidad o VIT.";
+	next;
+	mes "[Aaron]";
+	mes "Así que si inviertes más puntos en VIT recuperaras más HP cuando descansas";
+	next;
+	mes "[Aaron]";
+	mes "Pero por supuesto, seria bueno tener un ataque superior, ¿no? Podrías adquirir una buena arma que eleve tu STR para que apoye tu ataque.";
+	next;
+	mes "[Aaron]";
+	mes "Sabes que necesitas algo de strenght para blandir buenas armas fácilmente.";
+	next;
+	mes "[Aaron]";
+	mes "Otra cosa importante es con cuanta precisión le pegas a tus oponentes. DEX es la clave aquí. Si aumentas DEX, además la brecha entre daño MIN y MAX también disminuye.";
+	next;
+	mes "[Aaron]";
+	mes "Hm... ";
+	mes "¿Estas aburrido con esta conversación? ¿O quieres que siga?";
+	next;
+	if (select("Tell me more please.:End conversation.") == 1) {
+		mes "[Aaron]";
+		mes "Hmm... ";
+		mes "En ese caso, te explicare brevemente los otros atributos. Para atacar y evadir rápidamente, tienes que prestarle atención a AGI. ";
+		next;
+		mes "[Aaron]";
+		mes "En caso que quieras dar más golpes críticos, es una buena idea invertir en LUK. INT también aumenta el SP Max, que se necesita para usar varias skills... Pero esto es a tu gusto.";
+		close;
+	}
+	mes "[Aaron]";
+	mes "Ok entonces,";
+	mes "entrena duro.";
+	close;
+}
+
+// Izlude Dungeon
+//============================================================
+izlu2dun,108,27,0	script	Sailor#2izlude	100,{
+	mes "[Sailor]";
+	mes "¿Quieres que";
+	mes "regresemos?";
+	next;
+	if (select("Yeah, I'm tired to death.:Nope, I love this place!") == 1) {
+		warp "izlude",176,182;
+		end;
+	}
+	close;
+}

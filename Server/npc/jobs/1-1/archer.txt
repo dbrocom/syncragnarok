@@ -1,0 +1,126 @@
+//===== eAthena Script ======================================= 
+//= Renewal Archer Job Change
+//===== By: ================================================== 
+//= Kisuka
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= Job Change to Archer Class
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Kisuka]
+//============================================================ 
+payon_in02,64,71,4	script	Archer Guildsman#archer	85,{
+	if (Upper == 1) {
+		if (Class == Job_Novice_High && (ADVJOB == Job_Sniper || ADVJOB == Job_Clown || ADVJOB == Job_Gypsy)) {
+			mes "[Archer Guildsman]";
+			mes "Oye, yo te conozco.";
+			mes "¿Has pasado este test antes, verdad?";
+			next;
+			mes "[Archer Guildsman]";
+			mes "Ah claro, debes haber estado en el Valhalla y haber renacido.";
+			mes "Wow, ¡eso es impresionante!";
+			next;
+			if (getskilllv("NV_BASIC") < 9) {
+				mes "[Archer Guildsman]";
+				mes "Pero...";
+				mes "Será mejor que aprendas todas las Basic Skills antes de que te puedas convertir en Archer.";
+				next;
+				mes "[Archer Guildsman]";
+				mes "Bueno, nos vemos luego.";
+				close;
+			}
+			mes "[Archer Guildsman]";
+			mes "Vale. Parece que no necesito decirte nada más.";
+			mes "Sé que te convertirás en un gran Archer...";
+			next;
+			skill 143,0,0;
+			jobchange Job_Archer_high;
+			skill 147,1,0;
+			skill 148,1,0;
+			mes "[Archer Guildsman]";
+			mes "Aunque no tengo ninguna recompensa para darte esta vez.";
+			mes "Espero que lo entiendas. Cuídate.";
+			close;
+		}else{
+			mes "[Archer Guildsman]";
+			mes "¿Oh...?";
+			mes "Oye, ¿qué estás haciendo aquí?";
+			next;
+			mes "[Archer Guildsman]";
+			mes "Debo decirte que no tienes las cualidaeds para ser un Archer.";
+			mes "¿No has pensado que lo tuyo puede ser otra cosa?";
+			close;
+		}
+	}
+	mes "[Archer Guildsman]";
+	mes "Es un placer conocerte. ¿En qué puedo ayudarte?";
+	next;
+	switch(select("Me gustaría convertirme en Arquero.:¿Me podrías informar sobre los requisitos, por favor?:Sólo miraba, gracias.")) {
+	case 1:
+		if(Class != Job_Novice && Class != Job_Baby) {
+			mes "[Archer Guildsman]";
+			if(Class == Job_Archer || Class== Job_Baby_Archer) {
+				mes "Jaja, ¿estás de broma?..";
+			}else{
+				mes "Lo siento, pero sólo Novices pueden cambiar de profesión aquí.";
+				mes "Además, tú ya tienes una profesión decente, ¿no es así?";
+			}
+			close;
+		}else{
+			mes "[Archer Guildsman]";
+			mes "Tu nombre es... "+strcharinfo(0)+". ¿Cierto?";
+			next;
+			if (getskilllv("NV_BASIC") < 9) {
+				mes "[Archer Guildsman]";
+				mes "¡Qué mal! No cumples los requisitos básicos.";
+				mes "Tu Job debería ser como mínimo nivel ^4A4AFF10^000000 y las Basic Skill haber alcanzado el^4A4AFFnivel 9";
+				next;
+				mes "[Archer Guildsman]";
+				mes "Estos requisitos son necesarios ya que un Archer necesita una concentración extremadamente alta.";
+				mes "No podemos aceptar a aquellos cuyos nervios se crispen enseguida.";
+				close;
+			}
+			mes "[Archer Guildsman]";
+			mes "Cumples los requisitos mínimos..";
+			mes "....Hm~~ así que parece que estás preparado para ser Archer.";
+			next;
+			mes "[Archer Guildsman]";
+			mes "¡Felicidades! ¡Ahora eres un Arquero! Espero que participes activamente en todos las actividades que puedas del Gremio de Arqueros.";
+			mes "Ah, acaban de llegar los items del departamento de producción. ¡Aquí tienes! Este será tu nuevo equipo.";
+			if (Class == Job_Novice){ callfunc "Job_Change",Job_Archer; }
+			else if (Class == Job_Baby) { callfunc "Job_Change",Job_Baby_Archer; }
+			getitem 1742,1;	// N_Composite_Bow
+			getitem 12004,1;	// Arrow_Container
+			getitem 12009,1;	// Silver_Arrow_Container
+			getitem 12008,1;	// Fire_Arrow_Container
+			next;
+			mes "[Archer Guildsman]";
+			mes "Con arco y flechas ningún enemigo se te resistirá.";
+			mes "Dentro de los Carcaj encontrarás las suficientes flechas para empezar. ¡Recuerda equipártelas!";
+			next;
+			mes "[Archer Guildsman]";
+			mes "Bueno, sinceramente espero poder escuchar buenas noticias sobre tu progreso.";
+			mes "Ha llegado el momento de decir adiós. ¡Adiós, y suerte!";
+			close;
+		}
+	case 2:
+		mes "[Archer Guildsman]";
+		mes "La habilidad principal del Archer consiste en saber manejar un arco.";
+		mes "Sus dotes le permiten atacar enemigos desde largas distancias.";
+		next;
+		mes "[Archer Guildsman]";
+		mes "Aunque un Archer tiene poco HP, el poder atacar a distancia le confiere una gran ventaja,";
+		mes "por lo que los combates no suelen ser ningún problema, ya que su alta precisión y velocidad de ataque permiten acabar con los enemigos antes de que se acerquen lo suficiente.";
+		next;
+		mes "[Archer Guildsman]";
+		mes "^8C2121Un Archer al que le guste la caza puede convertirse en Hunter.^000000";
+		mes "^8C2121Pero también tienes la posibilidad, en tu caso, de convertirte en "+(Sex?"Bard":"Dancer")+".";
+		close;
+	case 3:
+		mes "[Archer Guildsman]";
+		mes "Si tienes cualquier pregunta, no tengas reparos en preguntar.";
+		close;
+	}
+}

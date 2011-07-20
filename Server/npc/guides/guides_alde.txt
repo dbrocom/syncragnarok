@@ -1,0 +1,109 @@
+//===== eAthena Script ======================================= 
+//= Al De Baran Guides
+//===== By: ================================================== 
+//= kobra_k88; L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.7
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= [Aegis conversion]
+//= Guides for the City of Al De Baran
+//===== Additional Comments: ================================= 
+//= Corrected building locations and descriptions
+//= 1.2 Optimized, updated common guide names [Lupus]
+//= 1.3 Updated the guide according to how it is on iRO, thanks [MasterOfMuppets]
+//=     to Muad_Dib
+//= 1.4 Fitted the many lines into 1 or 2, and corrected some typos [erKURITA]
+//= 1.5 Removed Duplicates [Silent]
+//= 1.6 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.6a Changed some "close"s to "close2"s. (bugreport:1597) [Samuray22]
+//= 1.7 Fixed viewpoint coordinates [Playtester]
+//============================================================
+
+aldebaran,139,63,4	script	Soldier#alde	105,{
+	cutin "prt_soldier",2;
+	mes "[Al De Baran Guard]";
+	mes "Solo soy un guardia ordinario";
+	mes "que puedes encontrar en cualquier otra ciudad. No creo tener siquiera un nombre...";
+	next;
+	mes "[Al De Baran Guard]";
+	mes "Estoy encargado del Servicio Guías de la Plaza Al De Baran. Déjame guiarte";
+	mes "por nuestro pueblo!";
+	next;
+	if (select("Get Location Guide.:End conversation.") == 1) {
+		viewpoint 1,61,229,0,0xFF6633;
+		viewpoint 1,72,197,1,0x0000FF;
+		viewpoint 1,223,222,2,0x00FFFF;
+		viewpoint 1,233,105,3,0x515151;
+		viewpoint 1,197,70,4,0x3355FF;
+		viewpoint 1,60,60,5,0xFF5555;
+		mes "^FF6633+^000000 -> Kafra Main Office ";
+		mes "^0000FF+^000000 -> Weapon Shop ";
+		mes "^00FFFF+^000000 -> Sorcerer Guild (Closed)";
+		mes "^515151+^000000 -> Pub";
+		mes "^3355FF+^000000 -> Item Shop";
+		mes "^FF5555+^000000 -> Alchemist Guild";
+		close2;
+		cutin "prt_soldier",255;
+		end;
+	}
+	mes "[Al De Baran Guard]";
+	mes "Nosotros juramos proteger Al De Baran! Que las fuerzas de la maldad siempre sean aplastadas por el";
+	mes "honrado puño del bien!";
+	close2;
+	cutin "prt_soldier",255;
+	end;
+}
+
+aldebaran,133,108,4	script	Soldier#2alde	105,{
+	cutin "prt_soldier",2;
+	mes "[Al De Baran Guard]";
+	mes "Solo soy un";
+	mes "guardia ordinario,";
+	mes "del tipo que tu puedes";
+	mes "encontrar en cualquier otra ciudad.";
+	next;
+	mes "[Al De Baran Guard]";
+	mes "Cuando no estoy muy ocupado";
+	mes "protegiendo la población de";
+	mes "Al De Baran, estoy aquí dando direcciones a los aventureros";
+	mes "como tú.";
+	next;
+	switch(select("Kafra Main Office :Weapon Shop :Sorcerer Guild :Pub :Item Shop :Alchemist Guild :End Conversation ")) {
+	case 1:
+		viewpoint 1,61,229,0,0xFF6633;
+		mes "^FF6633+^000000 -> Kafra Main Office ";
+		break;
+	case 2:
+		viewpoint 1,72,197,1,0x0000FF;
+		mes "^0000FF+^000000 -> Weapon Shop ";
+		break;
+	case 3:
+		viewpoint 1,223,222,2,0x00FFFF;
+		mes "^00FFFF+^000000 -> Sorcerer Guild (Closed)";
+		break;
+	case 4:
+		viewpoint 1,233,105,3,0x515151;
+		mes "^515151+^000000 -> Pub ";
+		break;
+	case 5:
+		viewpoint 1,197,70,4,0x3355FF;
+		mes "^3355FF+^000000 -> Item Shop ";
+		break;
+	case 6:
+		viewpoint 1,60,60,5,0xFF5555;
+		mes "^FF5555+^000000 -> Alchemist Guild";
+		break;
+	case 7:
+		mes "[Al De Baran Guard]";
+		mes "Nosotros juramos";
+		mes "proteger Al De Baran!";
+		mes "Que las fuerzas del bien";
+		mes "siempre prevalezca sobre la maldad~";
+		break;
+	}
+	close2;
+	cutin "prt_soldier",255;
+	end;
+}

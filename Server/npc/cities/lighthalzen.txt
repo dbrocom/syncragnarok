@@ -1,0 +1,3216 @@
+//===== eAthena Script ======================================= 
+//= Lighthalzen City
+//===== By: ================================================== 
+//=  erKURITA, Au{R}oN (Translated by Alan), $ephiroth
+//===== Current Version: ===================================== 
+//= 2.2
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= Lighthalzen NPCs (Temporal names for now) [erKURITA]
+//===== Additional Comments: ==================================
+//= 0.1 Placed temporal names, why there weren't on the SVN before? [erKURITA]
+//= 0.2 Implemented some crap NPCs [MasterOfMuppets]
+//= 0.3 Another load of NPCs. Scripted by Kargha [MasterOfMuppets]
+//= 0.4 More Town NPCs. [Musashiden]
+//= 0.5 Added a BIG load of Lighthalzen NPCs. [musashiden]
+//= 0.6 Fixed some typos+Coordinates. [Musashiden]
+//= 0.7 Implemented some more crap NPCs and the second entrance to biolabs [MasterOfMuppets]
+//= 0.8 Removed Duplicates [Silent]
+//= 0.9 Removed Duplicates [Toms]
+//= 1.0 Added a missing feature to the donation NPC [MasterOfMuppets]
+//= 1.0a added constants to emotions, minor optimization [Lupus]
+//= 1.0b npcid fix [KarLaeda]
+//= 1.1 Added new NPC by $ephiroth and merged other NPCs
+//=	from npc\other\lighthalzen_???.txt [Lupus]
+//= 1.2 Moved some NPCs to Lighthalzen quests. [SinSloth]
+//= 1.3	Moved some other NPCs for quests purposes. [SinSloth]
+//= 1.4 Corrected NPC names to fall within proper resctrictions. [L0ne_W0lf]
+//= 1.5 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
+//= 1.6 Massive NPC clean up, includes corrected dialogs and [L0ne_W0lf]
+//=	added missing dialogs, fixed indentation, corrected some NPC
+//=	facing positions, NPC names are more unique now. Removed 
+//=	whitespace (empty lines after header and before end curly)
+//=	reduced usage of the command "goto", grammatical corrections.
+//=	Added additional missing NPCs.
+//= 1.7 Removed Auciton Staff as the offical auction file has been added. [L0ne_W0lf]
+//=	Corrected Lucius so he checks the donation variable. (bugreport:1103) [L0ne_W0lf]
+//= 1.7a Another fix to Lucius. (bugreport:1118) [L0ne_W0lf]
+//= 1.7b Another fix to Lucius (trivial). (bugreport:1125)
+//= 1.8 Replaced effect numerics with constants. [L0ne_W0lf]
+//= 1.9 Added Cool Corp. Event Staff, who oringialy resided in the DTS_warper script file. [L0ne_W0lf]
+//= 2.0 Added missing Lab Staff#amano08 NPC. (bugreport:4319) [Gepard]
+//= 2.1 Commented out Duplicate NPCs. (bugreport:4555)
+//= 2.2 Added missing NPC found in AEGIS files. [L0ne_W0lf]
+//=============================================================
+
+lighthalzen,198,285,5	script	Jiwon#zen5	862,{
+	mes "[Jiwon]";
+	mes "Yo pienso que nosotros somos";
+	mes "realmente afortunados al poder";
+	mes "vivir en una ciudad tan";
+	mes "hermosa y pacífica como esta.";
+	next;
+	mes "[Jiwon]";
+	mes "Es sencillamente tan";
+	mes "agradable tener este tiempo,";
+	mes "estos exuberantes jardines y";
+	mes "conocer este tipo de gente.";
+	mes "Lighthalzen es como Asgard";
+	mes "en Midgard, el cielo en la tierra~";
+	close;
+}
+
+lighthalzen,220,244,3	script	Samnang#zen2	863,{
+	mes "[Samnang]";
+	mes "^333333*Suspiro...*^000000";
+	mes "Me es más difícil moverme";
+	mes "por aquí como si fuera";
+	mes "más viejo. Eso es entendible para";
+	mes "una persona de edad, ¿no?";
+	next;
+	mes "[Samnang]";
+	mes "Justo el otro día, esos";
+	mes "matones con trajes negros";
+	mes "me estaban gritando para que me quitara";
+	mes "de su camino. Pero,";
+	mes "no me moví lo suficientemente rápido.";
+	mes "Así que ¿qué me hicieron?";
+	next;
+	mes "[Samnang]";
+	mes "Me golpearon.";
+	mes "¡Directo en el estómago!";
+	mes "Sé que no estoy embarazada,";
+	mes "pero ese no es el";
+	mes "problema. Nunca golpees";
+	mes "a una dama, ¡especialmente a una mayor!";
+	close;
+}
+
+lighthalzen,261,112,3	script	Ruth#zen4	862,{
+	mes "[Ruth]";
+	mes "Cielo, ¿no es";
+	mes "agradable estar juntos";
+	mes "bajo esta preciosa";
+	mes "luz? Es perfecto";
+	mes "para nuestra cita.  Ahhhh~";
+	next;
+	mes "[Ruth]";
+	mes "Estoy tan feliz de estar";
+	mes "contigo. Me siento como";
+	mes "si me derritiera de la";
+	mes "alegría. Oh, amo";
+	mes "tanto a Oyoung.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "Whoa...";
+	mes "Esta pareja";
+	mes "se está dirigiendo realmente a";
+	mes "Cloud 9, ¿no?";
+	close;
+}
+
+lighthalzen,259,108,7	script	Oyoung#zen14	869,{
+	mes "[Oyoung]";
+	mes "Chica, parece que";
+	mes "te picó el bicho del";
+	mes "amor. Pero sólo";
+	mes "hay una prescripción para";
+	mes "esa enfermedad, ooooh sí...";
+	next;
+	mes "[Oyoung]";
+	mes "Necesitas tu";
+	mes "dosis diaria de";
+	mes "vitamina O-YOUNG.";
+	mes "Y tus labios parecen que";
+	mes "tienen déficit de vitaminas.";
+	mes "¡es mejor que te cuides~";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "Dulce Hermana!";
+	mes "No sé que es";
+	mes "más alucinante--";
+	mes "El hecho de que usara esa";
+	mes "línea o el que estés";
+	mes "actualmente trabajando...";
+	close;
+}
+
+lighthalzen,233,121,3	script	Kariya#li_01	72,{
+	mes "[Kariya]";
+	mes "Creo qué ''Lighthalzen''";
+	mes "quiere decir ''cresta de";
+	mes "la luz,'' de hecho, escuché que";
+	mes "esta ciudad fue nombrada así después";
+	mes "por alguien. ¿Quién lo sabe?";
+	next;
+	mes "[Kariya]";
+	mes "De hecho, es un nombre";
+	mes "perfecto para la más saludable";
+	mes "y lujosa ciudad de";
+	mes "toda la Republica de Schwaltzvalt .";
+	mes "Así que, ¿te gusta este lugar?";
+	close;
+}
+
+
+lighthalzen,233,82,5	script	Sung#A	716,{
+	mes "[Sung]";
+	mes "Cuando crecía, quería";
+	mes "convertirme en una gran persona";
+	mes "para que me hicieran una";
+	mes "estatua, como esas";
+	mes "estatuas de allí.";
+	next;
+	mes "[Sung]";
+	mes "Entonces la gente diría cosas como,";
+	mes "''Oye. Esa estatua. ¡Aquel";
+	mes "chico debío ser genial!''";
+	mes "Sólo pensar en eso";
+	mes "¡me hace sentir tan bien!";
+	next;
+	mes "[Sung]";
+	mes "Eso es. Voy a";
+	mes "crecer tan pronto como pueda.";
+	mes "Ooh, y mejor crezco alto";
+	mes "y guapo para que mi estatua";
+	mes "sea también aun más asombrosa.";
+	mes "Sí, sí, buena idea, Sung...";
+	close;
+}
+
+lighthalzen,89,73,3	script	Sameer#zen15	854,{
+	mes "[Sameer]";
+	mes "Hay demasiadas";
+	mes "parejas enamoradas en esta ciudad.";
+	mes "Abrazándose y besándose, y";
+	mes "abrazándose y acariciándose. Es...";
+	mes "Es totalmente desagradable.";
+	next;
+	mes "[Sameer]";
+	mes "¡No puedo entender la";
+	mes "indecencia que veo todos los días";
+	mes "al lado de mi propia casa. ¡No saben";
+	mes "otra cosa mejor que ser tan";
+	mes "cariñosos en los sitios";
+	mes "donde la gente puede verlos!";
+	next;
+	mes "[Sameer]";
+	mes "Afortunadamente para";
+	mes "el mundo, soy un baluarte...";
+	mes "de moralidad. De hecho, no";
+	mes "tengo necesidad de una mujer. Todo";
+	mes "lo que necesito son mis modelos de barcos,";
+	mes "novelas de jovenes y dominós.";
+	next;
+	mes "[Sameer]";
+	mes "Soy una persona completamente";
+	mes "ajustada a la vida solitaria, por lo que";
+	mes "las autoridades deben";
+	mes "escucharme cuando les digo";
+	mes "¡que arresten a esas parejas indecentes!";
+	mes "¿¡Pero qué!? ¿¡Acaso no tienen vergüenza!?";
+	close;
+}
+
+lighthalzen,45,59,7	script	Janice#zen03	863,{
+	mes "[Janice]";
+	mes "Oh no, creo que me he";
+	mes "perdido otra vez. ¡Aquí";
+	mes "las calles son tan confusas!";
+	mes "He vivido aquí por tanto tiempo";
+	mes "y aún no puedo";
+	mes "encontrar mi camino...";
+	close;
+}
+
+lighthalzen,66,94,3	script	Elmer Keays#li_03	866,{
+	mes "[Elmer Keays]";
+	mes "Andando de un lado al otro";
+	mes "contigo como que ";
+	mes "recuerdo mis viejos tiempos. Antes";
+	mes "todo el mundo estaba celoso";
+	mes "de que tuviera una mujer";
+	mes "tan bella a mi lado. Heh heh~";
+	next;
+	mes "[Elmer Keays]";
+	mes "Tú eres la cosa";
+	mes "más preciosa para estos";
+	mes "viejos ojos, querida. Soy";
+	mes "realmente afortunado de estar contigo.";
+	emotion e_kis,0,"Margie Keays#li_02";
+	emotion e_kis2;
+	close;
+}
+
+lighthalzen,65,94,5	script	Margie Keays#li_02	863,{
+	mes "[Margie Keays]";
+	mes "Oh querida, el";
+	mes "tiempo es tan agradable";
+	mes "y plácido hoy.";
+	mes "Estoy realmente contento de que";
+	mes "decidiéramos salir a dar";
+	mes "un paseo juntos~";
+	close;
+}
+
+lighthalzen,78,120,3	script	Maivi#zen1	862,{
+	mes "[Maivi]";
+	mes "...";
+	next;
+	mes "[Maivi]";
+	mes "...";
+	mes "......";
+	next;
+	mes "[Maivi]";
+	mes "Ah...";
+	mes "Sólo estaba tomando una agradable";
+	mes "siesta. Este clima";
+	mes "es perfecto para relajarme.";
+	mes "El aire aquí es tan limpio,";
+	mes "no como en Einbroch~";
+	next;
+	mes "[Maivi]";
+	mes "Este ambiente limpio,";
+	mes "prístino es posible gracias a";
+	mes "la Corporación Rekenber .";
+	mes "Es increíble lo que pueden";
+	mes "hacer con la tecnología ahora, ¿no?";
+	mes "Ahhh, es tan apacible~";
+	close;
+}
+
+/*
+lighthalzen,226,210,3	script	Nannan	86,{
+	mes "[Nannan]";
+	mes "Sabes, siempre pensé que";
+	mes "todos los Alchemists eran estudiosos,";
+	mes "tipo estudiante, con sus caras siempre";
+	mes "metidas en los libros y los estudios. Pero";
+	mes "conseguí encontrar uno que no";
+	mes "sigue ese estereotipo.";
+	next;
+	mes "[Nannan]";
+	mes "Este tipo,  Que-fea-es-su-cara,";
+	mes "Broncher, está siempre perdiendo";
+	mes "su tiempo bebiendo. Supongo";
+	mes "que descubrió el secreto de convertir";
+	mes "el agua en alcohol de grado A. Pero";
+	mes "al menos no es del tipo estirado.";
+	next;
+	mes "[Nannan]";
+	mes "No sé cuanta ayuda";
+	mes "tuvo para ser un aspirante a";
+	mes "Alchemist, pero en mi opinión,";
+	mes "¡el tipo es todo un genio en potencia!";
+	mes "Al menos, comparado";
+	mes "con un tipo de la calle como yo...";
+	close;
+}
+*/
+
+lighthalzen,230,182,4	script	Klaubis#zen3	866,{
+	mes "[Klaubis]";
+	mes "Perdone, pero ¿es usted";
+	mes "un turista? Bien, ¡bienvenido";
+	mes "a Lighthalzen! Esta ciudad";
+	mes "tiene todo lo que necesitamos,";
+	mes "pero puede ser demasiado";
+	mes "tranquila y sin incidentes.";
+	next;
+	switch(select("Have you lived in here long?:I agree.:Have you heard about the serial killer?")) {
+	case 1:
+		mes "[Klaubis]";
+		mes "Sí, nuestra familia ha";
+		mes "vivido en esta ciudad durante";
+		mes "mucho tiempo, empezando con";
+		mes "mi bisabuelo. Déjame ver,";
+		mes "mi familia a estado aquí";
+		mes "durante aproximadamente doscientos años.";
+		next;
+		mes "[Klaubis]";
+		mes "Estarías sorprendido de";
+		mes "cuanta gente se queda en su";
+		mes "ciudad natal. Aunque si la";
+		mes "dejas, creo, siempre puedes";
+		mes "regresar. ¿No seria tu^FFFFFF ^000000 ciudad natal si no pudieras, verdad?";
+		close;
+	case 2:
+		mes "[Klaubis]";
+		mes "Sí, la atmósfera";
+		mes "puede ser un poco apagada";
+		mes "por aquí. Pero aún así,";
+		mes "hay montones de cosas";
+		mes "agradables para entretenerte en";
+		mes "Lighthalzen, así que echa un vistazo~";
+		close;
+	case 3:
+		mes "[Klaubis]";
+		mes "¿Quieres decir el Asesino";
+		mes "Serial del Hacha? Creía";
+		mes "que era una vieja historia de fantasmas.";
+		mes "Hmm, creo que esa dama dentro";
+		mes "de la Weapon Shop sabrá";
+		mes "más sobre ese cuento...";
+		close;
+	}
+}
+
+lighthalzen,232,156,3	script	Sigmund#zen3	869,{
+	mes "[Sigmund Ting]";
+	mes "¿Sabes lo que noté?";
+	mes "Los guardias del borde del";
+	mes "barrio pobre a veces parecen";
+	mes "distraídos. Usé uno de los";
+	mes "momentos en que se descuido";
+	mes "y básicamente ¡salté la cerca!";
+	next;
+	mes "[Sigmund Ting]";
+	mes "Pero una vez que estuve en el ";
+	mes "barrio pobre, fue un poco aburrido.";
+	mes "Realmente no hay mucho";
+	mes "que hacer allí. Lo que me parece";
+	mes "increíble... ¿Por qué resguardarlo?";
+	close;
+}
+
+lighthalzen,190,134,5	script	Joyce#zen	862,{
+	mes "[Joyce]";
+	mes "Puedo sentir";
+	mes "tu anhelante mirada desde";
+	mes "las profundidades de mi corazón,";
+	mes "latiendo más y más rápido";
+	mes "con una pasión febril~";
+	close;
+}
+
+lighthalzen,191,134,3	script	Dan Song#zen2	869,{
+	mes "[Dan Song]";
+	mes "Esos ojos tuyos...";
+	mes "Tan puros y tan profundos,";
+	mes "como trémulas piscinas de";
+	mes "luz. Tan, tan bonitos...";
+	close;
+}
+
+lighthalzen,115,159,3	script	Collins#zen1	866,{
+	mes "[Collins]";
+	mes "Realmente deseo que mi";
+	mes "hijo consiga unirse a";
+	mes "la Corporación Rekenber.";
+	mes "Ciertamente proporcionan los mejores";
+	mes "trabajos en Lighthalzen.";
+	next;
+	mes "[Collins]";
+	mes "A pesar de que son una gran";
+	mes "corporación, es casi";
+	mes "imposible conseguir";
+	mes "un empleo con ellos. ¿Cómo";
+	mes "hace la gente para conseguir";
+	mes "el empleo en primer lugar?";
+	close;
+}
+
+lighthalzen,77,157,5	script	Villagomez#li_01	866,{
+	mes "[Villagomez]";
+	mes "Sólo salí para hacerme";
+	mes "un corte de pelo y ahora estoy";
+	mes "perdido. Chico, oh, chico, espero";
+	mes "que mi familia no esté";
+	mes "esperándome. ^333333*Sigh...*^000000";
+	close;
+}
+
+lighthalzen,125,68,5	script	Kemp#zen13	97,{
+	mes "[Kemp]";
+	mes "¿Alguna vez viste a";
+	mes "la gente que trabaja en esa";
+	mes "gran compañía? Creo";
+	mes "que sus empleados están todos un poco";
+	mes "desquiciados por alguna razón.";
+	next;
+	mes "[Kemp]";
+	mes "Nunca he estado allí.";
+	mes "pero algo extraño";
+	mes "está pasando con";
+	mes "toda la gente que trabaja allí.";
+	close;
+}
+
+lighthalzen,138,50,7	script	Mauro#zen3	847,{
+	mes "[Mauro]";
+	mes "La juventud de esta ciudad";
+	mes "no aprecia a sus";
+	mes "mayores, he trabajado";
+	mes "tan duro para ayudar a construir";
+	mes "esta ciudad durante tantos años y";
+	mes "¿este es el agradecimiento?";
+	next;
+	mes "[Mauro]";
+	mes "¡Bah! Si no fuera por nosotros,";
+	mes "¡Lighthalzen no sería";
+	mes "tan prospero como";
+	mes "lo es ahora! Esos niños no";
+	mes "saben que nos deben sus";
+	mes "vidas de lujo...";
+	close;
+}
+
+lighthalzen,132,103,5	script	Sefith#li_01	734,{
+	mes "[Sefith]";
+	mes "Buena apariencia. Inteligencia,";
+	mes "excelente educación. Una barbilla";
+	mes "fuerte y masculina y unos poderosos";
+	mes "ojos penetrantes. Perfecta y balanceada^FFFFFF ^000000 pasión y carisma. Son todas";
+	mes "las cosas buenas que las señoritas quieren.";
+	next;
+	mes "[Sefith]";
+	mes "Pero es mucho sobre mí. Discutamos";
+	mes "sobre lo mal que debería sentirme";
+	mes "por el resto de los hombres que viven";
+	mes "en Lighthalzen. No me llegan";
+	mes "ni a la suela del zapato con respecto a las mujeres~";
+	close;
+}
+
+lighthalzen,239,64,5	script	Jade#zen2	862,{
+	mes "[Jade]";
+	mes "He oído que hay un";
+	mes "extraño reino ahí fuera";
+	mes "que básicamente se gobierna por";
+	mes "la magia y la espada, donde";
+	mes "los aventureros son alistados";
+	mes "para un bien mayor.";
+	next;
+	mes "[Jade]";
+	mes "¿Así que eres de";
+	mes "Rune-Midgard?";
+	mes "¿Qué piensas de";
+	mes "nuestra ciudad con su";
+	mes "avanzada tecnología";
+	mes "y economía? Huh...";
+	next;
+	mes "[Jade]";
+	mes "Algún día, me gustaría";
+	mes "visitar la tierra";
+	mes "de donde vienes.";
+	mes "Parece tan fantástica";
+	mes "y romántica...";
+	close;
+}
+
+lighthalzen,205,208,4	script	Greedy Looking Man#li_01	853,{
+	mes "[Khramptd]";
+	mes "La tierra de por aquí";
+	mes "es un poco cara.";
+	mes "Sí, ¡es perfecta";
+	mes "para construir mi impresionante palacio!";
+	mes "No tengo suficientes fondos en este";
+	mes "momento, pero el día llegará~";
+	close;
+}
+
+lhz_in02,34,212,4	script	Maggie#05	91,{
+	mes "[Maggie]";
+	mes "Seguro, vendo muchas";
+	mes "flores aquí, pero";
+	mes "pero el alquiler en esta ciudad";
+	mes "me hace recortar mis";
+	mes "ganancias, quizás no sea";
+	mes "peor alquilar esta propiedad.";
+	next;
+	mes "[Maggie]";
+	mes "De hecho pago una cantidad";
+	mes "ridícula por el alquiler y las leyes";
+	mes "no me dejan subirle el";
+	mes "precio a mis flores. ¿Por qué";
+	mes "los oficiales de la ciudad son tan avaros?";
+	close;
+}
+
+lighthalzen,202,94,5	script	Wallace#zen2	847,{
+	mes "[Wallace]";
+	mes "......";
+	mes "Esa dama, trabaja";
+	mes "para la compañia";
+	mes "Kafra, Mafra o lo que sea.";
+	mes "Es verdaderamente encantadora.";
+	next;
+	mes "[Wallace]";
+	mes "Ahora, si fuera";
+	mes "treinta años más joven....";
+	mes "¡Espera! Soy un hombre rico y poderoso.";
+	mes "Podría invitarla ahora.";
+	mes "¿Hm? ¿Qué esperas?";
+	close;
+}
+
+lighthalzen,182,102,3	script	Lucius#zen5	866,{
+	if (Zeny < 90000) {
+		mes "[Lucius]";
+		mes "Hola jovencito~";
+		mes "¿Te gustaría hacer";
+		mes "una donación";
+		mes "para ayudar al hambriento?";
+		next;
+		if (select("Sure.:No, thanks.") == 1) {
+			mes "[Lucius]";
+			mes "Pero, puedes donar desde 1 a";
+			mes "30,000 zeny será usado para";
+			mes "ayudar al pobre y alimentar a";
+			mes "los niños hambrientos. Si no quieres";
+			mes "donar, inserta el numero ''0.''";
+			next;
+			input .@input;
+			if (.@input > 30000 || .@input < 0) {
+				mes "[Lucius]";
+				mes "Por favor, inserta alguna cantidad";
+				mes "de 1 a 30,000 zenys";
+				mes "para hacer una donación";
+				mes "a los necesitados jovenes.";
+				close;
+			}
+			else if (.@input == 0) {
+				mes "[Lucius]";
+				mes "Que malo,";
+				mes "pero estoy seguro que tienes";
+				mes "tus razones. Bueno, cuando";
+				mes "quieras donar a los";
+				mes "necesitados, eres bienvenido,";
+				mes "cuando quieras.";
+				close;
+			}
+			mes "[Lucius]";
+			mes "Muchas gracias por";
+			mes "tu donación de " + .@input + " zeny.";
+			mes "Te prometo que tu dinero";
+			mes "será bien usado en";
+			mes "beneficio del pobre y necesitado.";
+			next;
+			if (Zeny < .@input) {
+				mes "[Lucius]";
+				mes "De todos modos, me siento";
+				mes "defraudado. Un aventurero";
+				mes "como tu debería donar";
+				mes "tan cuanto pueda...";
+				close;
+			}
+			set zeny,zeny-.@input;
+			set $donatedzeny,$donatedzeny + .@input;
+			mes "[Lucius]";
+			mes "Aún más, he recibido";
+			mes "un total de " + $donatedzeny + " zeny en";
+			mes "donaciones. Estoy contento de ver";
+			mes "que todavía queda gente";
+			mes "generosa en el mundo.";
+			if ($donatedzeny > 260000) {
+				next;
+				mes "[Lucius]";
+				mes "Esto debería ser suficiente para";
+				mes "enviar a la Organización de Ayuda.";
+				mes "Por favor, acepta";
+				mes "este pequeño regalo como muestra de";
+				mes "gratitud, aventurero. Te bendigo";
+				mes "jovencito y ten cuidado.";
+				set $donatedzeny,0;
+				getitem 603,1; //Old_Blue_Box
+				getitem 12016,1; //Speed_Up_Potion
+			}
+			close;
+		}
+		mes "[Lucius]";
+		mes "Lo entiendo. Pero,";
+		mes "tendré en mente eso cuando";
+		mes "lo des de corazón,";
+		mes "te será devuelto diez veces.";
+		mes "Aunque admito, que los beneficios";
+		mes "no son fácilmente aparentes.";
+		close;
+	}
+	mes "[Lucius]";
+	mes "Hola joven~";
+	mes "Pareces un poco";
+	mes "despreocupado. Es bueno";
+	mes "tener dinero, pero no te";
+	mes "obsesiones con el.";
+	next;
+	mes "[Lucius]";
+	mes "Cuando tengas la oportunidad,";
+	mes "puedes mostrar tu generosidad";
+	mes "a aquellos que";
+	mes "no son tan afortunados como tu.";
+	close;
+}
+
+lighthalzen,147,105,3	script	Laqumet#li_02	869,{
+	mes "[Laqumet]";
+	mes "Seguro, la virilidad es bastante";
+	mes "atractiva, pero creo que las mujeres";
+	mes "prefieren un tipo que pueda";
+	mes "simpatizar y hablar con ellas";
+	mes "¿No estás de acuerdo?";
+	next;
+	mes "[Laqumet]";
+	mes "Quizás no sea como Sefith,";
+	mes "pero espero tener una bonita";
+	mes "sonrisa y una buena personalidad,";
+	mes "además de que soy un dandi. En el mejor de los casos,";
+	mes "mi honestidad y lealtad me";
+	mes "ayudarán a encontrar una buena persona.";
+	close;
+}
+
+lhz_in02,242,172,1	script	Hotel Employee#zen3	868,{
+	mes "[Hotel Employee]";
+	mes "Si estas experimentando";
+	mes "algún tipo de problema,";
+	mes "no dudes y";
+	mes "háznoslo saber en cualquier momento..";
+	next;
+	mes "[Hotel Employee]";
+	mes "Por favor use las escaleras";
+	mes "del fondo al norte para";
+	mes "bajar así podrá ir";
+	mes "a la recepción.";
+	mes "Gracias, espero que disfrute";
+	mes "de su estancia.";
+	close;
+}
+
+lhz_in02,210,189,3	script	Christopher Michael#zen	849,{
+	mes "[Christopher Michael]";
+	mes "OoooOoh~";
+	mes "Muy cómodo.";
+	mes "No me quiero levantar.";
+	mes "No me quiero levantar.";
+	mes "Nunca más. OoOoooh...";
+	close;
+}
+
+lhz_in02,201,181,7	script	Safwat Fahmy	853,{
+	mes "[Safwat Fahmy]";
+	mes "Este hotel es agradable";
+	mes "y es cómodo, pero";
+	mes "para ser franco, las";
+	mes "bebidas son horribles.";
+	mes "No merecen ser bebidas";
+	mes "por hombres como yo.";
+	next;
+	mes "[Safwat Fahmy]";
+	mes "Si este es el mejor hotel,";
+	mes "espero que me proporcionen";
+	mes "el mejor alcohol. Cuando";
+	mes "estoy en un hotel, eso es";
+	mes "lo que quiero. Para no pasar un";
+	mes "momento sobrio.";
+	next;
+	mes "[Safwat Fahmy]";
+	mes "Parece que hoy";
+	mes "iré directo";
+	mes "al bar de nuevo...";
+	mes "Sólo deseo que hubiera";
+	mes "algún lugar silencioso para beber.";
+	close;
+}
+
+lhz_in02,251,212,3	script	Hotel Employee#zen2	868,{
+	mes "[Hotel Employee]";
+	mes "Esta es la Suite Matrimonial.";
+	mes "Un soltero también puede registrarse";
+	mes "allí, pero nuestro hotel";
+	mes "da preferencia a las parejas cuando";
+	mes "asigna esta habitación.";
+	close;
+}
+
+lhz_in02,229,217,3	script	Tanoue#zen04	863,{
+	mes "[Tanoue]";
+	mes "Esta silla parece";
+	mes "muy bonita, pero realmente";
+	mes "me enfría el trasero. ¡Brr...!";
+	mes "¡Es algo incómoda!";
+	next;
+	mes "[Tanoue]";
+	mes "¿Sabes como tendría";
+	mes "que ser la silla";
+	mes "perfecta? Sería";
+	mes "de felpa, debería dar un masaje";
+	mes "electrónico y con control de calor...";
+	close;
+}
+
+lhz_in02,209,277,5	script	Ben Allen#zen11	84,{
+	mes "[Ben Allen]";
+	mes "Aaahhh Oooooh~";
+	mes "Es taaaan cómodo~";
+	mes "El aire es tan fresco y";
+	mes "este sofá es tan lujoso...";
+	mes "¿Por qué mi casa no es como esta?";
+	next;
+	mes "[Ben Allen]";
+	mes "Estuve en esos otros";
+	mes "hoteles y déjame decirte,";
+	mes "este sitio es el mejor de todos.";
+	mes "Después de una noche durmiendo aquí,";
+	mes "¡me siento como un hombre nuevo!";
+	close;
+}
+
+lhz_in02,221,276,1	script	Harp#zen8	869,{
+	mes "[Harp]";
+	mes "Oh dulce cielo...";
+	mes "Esa Kafra Lady es tan ardiente.";
+	mes "Qué cuerpo, y esas gafas.";
+	mes "Sólo quiero invitarle algo.";
+	next;
+	mes "[Harp]";
+	mes "Hm, ¿pero qué debería";
+	mes "hacer? ¿Una carta de amor? Noooo,";
+	mes "eso está pasado de moda.";
+	mes "Argh, ¡No puedo creerlo! ¡Sólo";
+	mes "mirarla me hace sentir";
+	mes "tan feliz! ¡Alabado sea Kafra!";
+	close;
+}
+
+lhz_in02,238,275,5	script	Hotel Employee#zen1	869,{
+	mes "[Hotel Employee]";
+	mes "\"Hospitalidad con una sonrisa";
+	mes "y la total devoción a tu";
+	mes "comfort.'' Ese es el lema";
+	mes "del Royal Dragon Hotel.";
+	mes "Por favor diríjase hacia la";
+	mes "recepción si quiere registrarse.";
+	close;
+}
+
+lhz_in02,247,275,1	script	Hotel Employee#zen4	868,{
+	mes "[Hotel Employee]";
+	mes "Bienvenido al";
+	mes "Bar del Hotel Royal Dragon.";
+	mes "¿Qué tal una agradable";
+	mes "noche antes de ir a la cama?";
+	next;
+	mes "[Hotel Employee]";
+	mes "Si estás buscando";
+	mes "un amigo,";
+	mes "siempre puedes";
+	mes "hacer uno en este bar.";
+	mes "Ciertamente el alcohol es la grasa";
+	mes "de la maquinaria social.";
+	close;
+}
+
+lhz_in02,271,281,2	script	Citizen#amano09	47,{
+	mes "[Hachi]";
+	mes "Oh sí. Yo amo-amo-amo los";
+	mes "bares. Si no vengo aquí";
+	mes "por la bebida, entonces estoy aquí";
+	mes "por todas estas preciosas damas.";
+	next;
+	mes "[Hachi]";
+	mes "Es extraño. Es la primera vez";
+	mes "que pruebo el ron de este sitio,";
+	mes "pero, ¿no te sabe como";
+	mes "a puro erotismo? Huh...";
+	mes "Oh bueno, de nuevo a charlar";
+	mes "con todas estas gallinitas calientes~";
+	close;
+}
+
+lhz_in02,277,285,4	script	Bartender#amano07	61,{
+	mes "[Duff]";
+	mes "Hey, eres de";
+	mes "Rune-Midgarts, ¿verdad?";
+	mes "Por favor siéntete como en casa";
+	mes "mientras estés aquí en";
+	mes "Lighthalzen y pasa";
+	mes "un buen rato.";
+	close;
+}
+
+lhz_in02,281,280,6	script	Customer#amano13	816,{
+	mes "[Rona]";
+	mes "Odio cuando los chicos";
+	mes "simplemente se acercan y";
+	mes "siguen un tipo de protocolo...";
+	mes "Paso Uno y Paso Dos. ¡¡Ah!! Y antes de que";
+	mes "notes algo raro...";
+	mes "El paso 3 es \"Preguntar mi numero telefónico\"";
+	next;
+	mes "[Rona]";
+	mes "Simplemente apreciaría";
+	mes "mucho si un chico agradable";
+	mes "sólo hablara";
+	mes "conmigo sinceramente.";
+	close;
+}
+
+lhz_in02,287,282,4	script	Customer#amano10	853,{
+	mes "[Greenfield]";
+	mes "No lo creo...";
+	mes "Esta racha de mala suerte";
+	mes "nunca terminara, ¿no?";
+	mes "Perdí todas mis Apples";
+	mes "jugando a los dados hoy.";
+	mes "De nuevo. Oh hombre...";
+	next;
+	mes "[Greenfield]";
+	mes "Okay. Okay.";
+	mes "Si sólo pudiera seguir";
+	mes "jugando, alguna vez";
+	mes "ganaría. Quiero decir, que";
+	mes "la probabilidad funciona, ¿no?";
+	mes "Incluso cuando están en contra mío...";
+	close;
+}
+
+lhz_in02,287,273,3	script	Customer#amano11	50,{
+	mes "[Terry]";
+	mes "No bebo mucho,";
+	mes "pero la atmósfera en este";
+	mes "lugar es realmente linda. La";
+	mes "música que tocan siempre es";
+	mes "suave y relajante...";
+	next;
+	mes "[Terry]";
+	mes "Si, este es el paraiso.";
+	mes "Se lo recomiendo a";
+	mes "todos los turistas, de hecho.";
+	mes "¿Por qué no te sientas y";
+	mes "te relajas conmigo?";
+	close;
+}
+
+lhz_in02,283,276,4	script	Customer#amano12	815,{
+	mes "[Sei]";
+	mes "¿Ves a ese tipo?";
+	mes "Ese tipo de allá";
+	mes "siempre me esta viendo.";
+	mes "Me pregunto... ¿Me querra";
+	mes "preguntar algo o qué?";
+	next;
+	mes "[Sei]";
+	if (Sex == 1) {
+		mes "Bueno, si lo quiere,";
+		mes "¿no debe tener";
+		mes "mas bolas? O ¿acaso ";
+		mes "ahora los chicos son mucho más";
+		mes "tímidos que tu?";
+	}
+	else {
+		mes "Bueno, es algo";
+		mes "lindo. Dios, esto sería";
+		mes "mucho más facíl si tan solo el";
+		mes "viniera y";
+		mes "empezara a hablar conmigo...";
+	}
+	close;
+}
+
+lighthalzen,123,212,4	script	Merpi#zen2	700,{
+	mes "[Merpi]";
+	mes "¿No está el tiempo precioso";
+	mes "hoy? Toda esta luz";
+	mes "secará esas ropas";
+	mes "rápido y le darán";
+	mes "un aroma fresco y amoroso.";
+	next;
+	mes "[Merpi]";
+	mes "Oh, un aventurero de";
+	mes "Rune-Midgarts, ¿no?";
+	mes "¿Te gusta la ciudad?";
+	mes "Si tienes alguna pregunta,";
+	mes "siéntete libre de preguntar cualquier cosa";
+	next;
+	switch(select("Well, I have nothing to ask...:Any news or rumors?:I like laundry too.")) {
+	case 1:
+		mes "[Merpi]";
+		mes "Oh, ¿de verdad?";
+		mes "Bueno, si has viajado";
+		mes "alrededor del mundo, quizás";
+		mes "has encontrado un lugar como";
+		mes "Lighthalzen, así que ¿puede";
+		mes "que ya estés cómodo?";
+		close;
+	case 2:
+		mes "[Merpi]";
+		mes "Bueno, las cosas";
+		mes "han estado tranquilas";
+		mes "durante los últimos años.";
+		mes "El único rumor que";
+		mes "hay por aquí es sobre";
+		mes "algunos extraños asesinatos con hacha...";
+		close;
+	case 3:
+		mes "[Merpi]";
+		mes "Oh, ¡eso es maravilloso!";
+		mes "Me encanta hacer la colada";
+		mes "a mano, aunque no se";
+		mes "muy bien por qué. Oh bueno~";
+		close;
+	}
+}
+
+lighthalzen,296,239,3	script	Berru#lhz_01	706,{
+	switch(rand(1,3)) {
+	case 1:
+		mes "[Berru]";
+		mes "¡Papi...! ¡Waaaaah~!";
+		mes "¡Quiero ver a mi papá!";
+		emotion e_sob,0,"Berru#lhz_01";
+		next;
+		mes "[Pilia]";
+		mes "Berru, No creo ";
+		mes "que papá venga";
+		mes "esta noche. Vamos,";
+		mes "deberíamos ir a la cama.";
+		next;
+		mes "[Berru]";
+		mes "No, ¡no voy";
+		mes "a dormir hasta que papá llegue a";
+		mes "casa! ¡Él dijo que nos";
+		mes "traería caramelos esta noche!";
+		mes "¡Te vas a ir a dormir primero, Pilia!";
+		emotion e_ag,0,"Berru#lhz_01"; 
+		next;
+		mes "[Pilia]";
+		mes "¿^333333*Suspiro...*^000000";
+		mes "Donde está nuestro papito?";
+		mes "Dijo que encontró un";
+		mes "buen trabajo, pero no hemos";
+		mes "oído nada de él desde entonces...";
+		emotion e_dots,0,"Pilia#lhz_01"; 
+		close;
+	case 2:
+		mes "[Pilia]";
+		mes "Pero ¿qué es lo que le toma";
+		mes "tanto tiempo? Espero que mi papito";
+		mes "llegue a casa pronto.";
+		mes "Ven, Berru, no llores.";
+		emotion e_dots,0,"Pilia#lhz_01"; 
+		next;
+		mes "[Berru]";
+		mes "^333333*Sollozar...*^000000";
+		mes "¡Pero tengo hambre";
+		mes "y extraño a mi papito!";
+		next;
+		mes "[Pilia]";
+		mes "El tío Toggi vive a un lado de";
+		mes "mi casa y tampoco";
+		mes "ha regresado...";
+		close;
+	case 3:
+		mes "[Pilia]";
+		mes "¿Hmm? Oh, lo siento,";
+		mes "pero mi hermano pequeño";
+		mes "no parará de llorar.";
+		mes "Perdon si somos ruidosos...";
+		emotion e_what,0,"Pilia#lhz_01"; 
+		next;
+		mes "[Pilia]";
+		mes "Nuestro Papá va a trabajar";
+		mes "a algún lugar lejano. Finalmente";
+		mes "consiguió un buen trabajo, pero";
+		mes "a veces no sabemos nada de el";
+		mes "por días. Nos";
+		mes "preocupamos mucho por el.";
+		next;
+		mes "[Pilia]";
+		mes "Mi hermanito Berru siempre";
+		mes "lo extraña mucho. ¡No se";
+		mes "que hacer para que";
+		mes "pare de llorar! ¿Que hago?";
+		emotion e_swt2,0,"Pilia#lhz_01"; 
+		close;
+	}
+}
+
+lighthalzen,297,239,3	duplicate(Berru#lhz_01)	Pilia#lhz_01	818
+
+lighthalzen,312,233,3	script	Beggar#lhz_02	777,3,1,{
+	end;
+
+OnTouch:
+	mes "[Beggar]";
+	mes "Por favor...";
+	mes "Mis hijos están hambrientos...";
+	mes "¿Me daría algo";
+	mes "de dinero?";
+	next;
+	if (select("Give him some money.:Ignore him.") == 1) {
+		if (Zeny < 50) {
+			mes "[Beggar]";
+			mes "Agradezco su";
+			mes "amabilidad, pero parece";
+			mes "que tambien necesitas un poco";
+			mes "de zeny. ¿Querrías";
+			mes "unirte a mi?";
+			emotion e_heh;
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "Aquí va,";
+		mes "toma esto.";
+		set zeny,zeny-50;
+		next;
+		mes "[Beggar]";
+		mes "Muchas gracias.";
+		mes "No tengo nada que ofrecerte";
+		mes "a cambio, pero puedo compartir";
+		mes "una historia contigo y darte algo";
+		mes "de sabiduría de la que";
+		mes "aprendí a lo largo de los años.";
+		emotion e_thx;
+		next;
+		switch(rand(1,3)) {
+		case 1:
+			mes "[Beggar]";
+			mes "Todo el mundo ha estado";
+			mes "en una situación en la que";
+			mes "siente que";
+			mes "tiene que hacer una decisión";
+			mes "entre hacer el bien";
+			mes "y hacer lo que quieras, ¿verdad?";
+			next;
+			mes "[Beggar]";
+			mes "Seguramente te sientes entre la espada y la pared.";
+			mes "Bueno, pues déjame decirte, que cuando";
+			mes "tienes un problema, todas";
+			mes "las soluciones disponibles para";
+			mes "ti no son tan obvias.";
+			mes "Así que cálmate y piensa.";
+			next;
+			mes "[Beggar]";
+			mes "Lo que ves y lo que";
+			mes "entiendes a veces no encajara con";
+			mes "la realidad. Como las estrellas^FFFFFF ^000000 que siempre están ahí, pero no son visibles";
+			mes "durante el día, siempre tendremos^FFFFFF ^000000 fe, incluso cuando no las podemos ver.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			emotion e_dots,1;
+			mes ". . . . . . . . . . . .";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			emotion e_dots,1;
+			mes ". . . . . . . . . . . .";
+			mes ". . . . . . . . . . . .";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			emotion e_dots,1;
+			mes ". . . . . . . . . . . .";
+			mes ". . . . . . . . . . . .";
+			mes ". . . . . . . . . . . .";
+			next;
+			mes "[Beggar]";
+			emotion e_what;
+			mes "¿;Hmm...?";
+			mes "Pareces sorprendido~";
+			close;
+		case 2:
+			mes "[Beggar]";
+			mes "A veces creo en el destino y";
+			mes "a veces no. Déjame explicarte";
+			mes "de esta manera. Vivo mi vida día a";
+			mes "día, cada día cubriendo su";
+			mes "propio espectro con un espejo sobre^FFFFFF ^000000 el final de uno y la tragedia de otro.";
+			next;
+			mes "[Beggar]";
+			mes "Así que cada día tienes la capacidad";
+			mes "de vivir experiencias que pueden ser";
+			mes "buenas, malas o ambas. Creo";
+			mes "que cada persona puede ";
+			mes "tomar un rol activo en formar su";
+			mes "destino, día a día.";
+			next;
+			mes "[Beggar]";
+			mes "Ahora, habrá algunas cosas";
+			mes "que no podrás controlar,";
+			mes "pero incluso un pesimista";
+			mes "podría aceptar que este";
+			mes "es un mundo que no solo es";
+			mes "trágico, sino que es milagroso también.";
+			next;
+			mes "[Beggar]";
+			mes "Levántate cuando caigas";
+			mes "y vive tu vida con pasión.^FFFFFF ^000000 La oportunidad de ser parte de un milagro siempre";
+			mes "estará ahí y también debes saber que";
+			mes "tu puedes ser un milagro en la vida";
+			mes "de otra persona. ¿No es sorprendente?";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			emotion e_dots,1;
+			mes ". . . . . . . . . . . .";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			emotion e_dots,1;
+			mes ". . . . . . . . . . . .";
+			mes ". . . . . . . . . . . .";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			emotion e_dots,1;
+			mes ". . . . . . . . . . . .";
+			mes ". . . . . . . . . . . .";
+			mes ". . . . . . . . . . . .";
+			next;
+			mes "[Beggar]";
+			emotion e_what;
+			mes "¿No me crees?";
+			mes "Bueno, lo veras por";
+			mes "ti mismo, joven.";
+			mes "Hay mucho bien en ti.";
+			close;
+		case 3:
+			mes "[Beggar]";
+			mes "El enojo. La gente trata";
+			mes "eso de forma diferente. Algunos";
+			mes "lo suprimen, algunos lo valoran.";
+			mes "Algunos temen estar enfadados. Ahora,";
+			mes "para ser sencillo, déjame decir que";
+			mes "hay dos tipos de ira.";
+			next;
+			mes "[Beggar]";
+			mes "La primera es el tipo que";
+			mes "no es productiva. Más que";
+			mes "una frustración que puedes";
+			mes "dejar ir. ¿Alguien te robo un";
+			mes "item raro o un amigo, inocentemente^FFFFFF ^000000 olvido tu cumpleaños? No hay problema.";
+			next;
+			mes "[Beggar]";
+			mes "No dejes que este tipo de";
+			mes "cólera te afecte o parecerás ser";
+			mes "un perdedor. Piensa en";
+			mes "un gran paisaje y si te sientes";
+			mes "enfadado aún, toma aire fresco.^FFFFFF ^000000 Se honesto sin lastimar a nadie.";
+			next;
+			mes "[Beggar]";
+			mes "El segundo tipo de Ira";
+			mes "es una ira correcta. Has sido";
+			mes "culpado por algo que no hiciste y necesitas ";
+			mes "alguna forma de retribución. ";
+			mes "Solamente no uses mal esa rabia";
+			mes "y responde apropiadamente.";
+			next;
+			mes "[Beggar]";
+			mes "El segundo tipo de ira es";
+			mes "el enfado justo. Han";
+			mes "abusado y necesitas algún tipo de";
+			mes "retribución. Recuerda";
+			mes "haz confrontaciones apropiadas";
+			mes "y no dirijas mal tu rabia.";
+			next;
+			mes "[Beggar]";
+			mes "Entrar en una lucha con";
+			mes "la cólera justa, es decir para proteger";
+			mes "a alguien querido para ti, te hará";
+			mes "un héroe. Luchar con la ira";
+			mes "producto de tu frustración y harán de ti^FFFFFF ^000000 un villano. Aprende a diferenciarlos.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			emotion e_dots,1;
+			mes ". . . . . . . . . . . .";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			emotion e_dots,1;
+			mes ". . . . . . . . . . . .";
+			mes ". . . . . . . . . . . .";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			emotion e_dots,1;
+			mes ". . . . . . . . . . . .";
+			mes ". . . . . . . . . . . .";
+			mes ". . . . . . . . . . . .";
+			next;
+			mes "[Beggar]";
+			emotion e_what;
+			mes "¿Qué está mal?";
+			mes "Debe ser mucho";
+			mes "para saber, lo sé.";
+			close;
+		}
+	}
+	mes "[" + strcharinfo(0) + "]";
+	mes "...";
+	mes "......";
+	close;
+}
+
+lighthalzen,311,194,3	script	Reuben#lhz_02	870,{
+	if (rand(1,2)) {
+		mes "[Reuben]";
+		mes "Algún día...";
+		mes "¡Algún día simplemente me";
+		mes "convertiré en un conductor de tren";
+		mes "y me largare de aqui!";
+		mes "¡Realmente odio este sitio!";
+		emotion e_ag;
+		next;
+		mes "[Reuben]]";
+		mes "¡J-jo...!";
+		mes "¿Me oíste";
+		mes "hablar?";
+		mes "¡Mierda! ¡No debo ser tan ruidoso!";
+		emotion e_an;
+		close;
+	}
+	mes "[Reuben]";
+	mes "Hey. ¿Qué";
+	mes "haces";
+	mes "mirandome?";
+	mes "No te conozco";
+	mes "así que pierdete~";
+	emotion e_rock;
+	close;
+}
+
+lighthalzen,306,324,3	script	Shengwen#zen7	870,{
+	mes "[Shengwen]";
+	mes "¿Me estoy volviendo";
+	mes "paranoico? Realmente";
+	mes "creo que alguna";
+	mes "gente que conozco";
+	mes "esta desapareciendo";
+	mes "¡sin ninguna explicación!";
+	next;
+	mes "[Shengwen]";
+	mes "Quiero decir, todos mis mejores";
+	mes "amigos están bien,";
+	mes "pero estoy empezando a no ver";
+	mes "algunas relaciones y";
+	mes "caras familiares. Puede que";
+	mes "simplemente esté pensando demasiado...";
+	close;
+}
+
+lhz_in03,26,167,5	script	Shayna#li	850,{
+	mes "[Shayna]";
+	mes "^333333*Suspiro...*^000000";
+	mes "Oh, pobre";
+	mes "chica encantadora...";
+	close;
+}
+
+lhz_in01,134,45,3	script	Cenku Dekdam#delic	869,{
+	mes "[Cenku Dekdam]";
+	mes "Hombre, si fueras";
+	mes "a tomar esta ciudad y";
+	mes "y venderla,";
+	mes "¿qué precio le pondrías a";
+	mes "Lighthalzen?";
+	next;
+	mes "[Cenku Dekdam]";
+	mes "Me refieron a que, esta ciudad";
+	mes "está heacha básicamente";
+	mes "de dinero. El dinero es lo que";
+	mes "hace a esta ciudad tan bonita";
+	mes "y apacible para vivir.";
+	close;
+}
+
+lighthalzen,330,276,3	script	Nun#light	79,{
+	mes "[Angela]";
+	mes "Saludos, aventurero.";
+	mes "Soy Angela, una trabajadora";
+	mes "social de la Organización";
+	mes "de Ayuda al Pobre.";
+	next;
+	mes "[Angela]";
+	mes "Me he dado cuenta de que";
+	mes "la gente que vive aquí tiene";
+	mes "una salud extremadamente mala y";
+	mes "no es sólo es debido";
+	mes "a su situación económica.";
+	next;
+	mes "[Angela]";
+	mes "He llenado un informe";
+	mes "para mis superiores, pero";
+	mes "por alguna razon aún no me";
+	mes "han mandado una respuesta.";
+	mes "Estoy empezando a";
+	mes "estar un poco preocupada por eso...";
+	close;
+}
+
+lighthalzen,337,296,3	script	Employee	867,{
+	if (hg_tre > 54) {
+		mes "[Rekenber Employee]";
+		mes "Saludos. Como parte de nuestros";
+		mes "esfuerzos para ayudar a los pobres,";
+		mes "Rekenber proporciona oportunidades";
+		mes "de trabajo dirigidas a los";
+		mes "ciudadanos de los suburbios.";
+		next;
+		mes "[Rekenber Employee]";
+		mes "Puedes elegir entre trabajar";
+		mes "desde casa o recibir";
+		mes "un poco de entrenamiento para";
+		mes "empleos más profesionales. Ésta";
+		mes "es una gran oportunidad para hacer";
+		mes "la diferencia... y algo de dinero~";
+		emotion e_no1;
+		close;
+	}
+	end;
+}
+
+lhz_in01,134,38,3	script	Bankri Kun#kagun	798,{
+	mes "[Bankri Kun]";
+	mes "Debes trabajar...";
+	mes "Debes enfocarte...";
+	mes "Resistir la somnolencia...";
+	mes "¿Por qué sigo viniendo";
+	mes "aquí? ugh, h-horrible.";
+	next;
+	mes "[Bankri Kun]";
+	mes "Hey, jovencito. ¿Querías";
+	mes "consejo de aventurero? Ok.";
+	mes "Um. Hm. Siempre. Cepilla..";
+	mes "Tus dientes. Cepíllalos";
+	mes "todos los días. Oh, y tampoco";
+	mes "olvides la el hilo dental.";
+	next;
+	mes "[Bankri Kun]";
+	mes "Ahora es el momento";
+	mes "de volver al trabajo.";
+	mes "Te veré más tarde, chico.";
+	mes "Siento que mi consejo sea tan";
+	mes "pobre-- no podía pensar";
+	mes "en nada más que decirte.";
+	close;
+}
+
+lhz_in01,139,40,7	script	Enoz#oz	53,{
+	mes "[Enoz]";
+	mes "Así que, la novela que encargué";
+	mes "al Rune-Midgarts Kingdom";
+	mes "acaba de llegar. En serio^FFFFFF ^000000 bien, fué hecha por el tipo que escribió";
+	mes "''Roda Frog Adventure''";
+	mes "hace años. ¿Lo recuerdas?";
+	next;
+	mes "[Enoz]";
+	mes "De todas formas, este nuevo libro,";
+	mes "''Where the Red Plant Grows''";
+	mes "consiguió el Premio Yggdrasilberry.";
+	mes "Yo... no sé por qué";
+	mes "me sentí obligado a compartir eso";
+	mes "contigo. En serio, yo no...";
+	close;
+}
+
+lhz_in01,124,28,3	script	Ellette#tre	66,{
+	mes "[Ellette]";
+	mes "...";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "Perdón.";
+	next;
+	mes "[Ellette]";
+	mes "...";
+	mes "......";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "¿Hola?";
+	next;
+	mes "[Ellette]";
+	mes "¡...Oh! ¡Todo el mundo!";
+	mes "¡Acabo de completar";
+	mes "otro! ¡Viva!";
+	next;
+	mes "[All other Employees]";
+	mes "¿Q-qué?!";
+	mes "De ninguna manera, ¡no otra vez!";
+	next;
+	mes "[Leekal]";
+	mes "¿Eres humano?";
+	mes "Debes tener algún";
+	mes "secreto para tanta";
+	mes "productividad. Es extraño...";
+	next;
+	mes "[Ellette]";
+	mes "Oh, vamos.";
+	mes "Tal vez sea un poco";
+	mes "bueno en esto, pero no hay";
+	mes "forma de que pueda vencer a Cenku.";
+	close;
+}
+
+lhz_in01,125,40,3	script	Dowbow Ryuei#ryusei	843,{
+	mes "[Dowbow Ryuei]";
+	mes "Sólo tengo, oh no sé.";
+	mes "curiosidad, ¿Cuál palabra";
+	mes "te gusta más? ''Uber-Cool''";
+	mes "o ''Reality?'' Escoge una~";
+	next;
+	if (select("Uber-Cool:Reality") == 1) {
+		mes "[Dowbow Ryuei]";
+		mes "Oh ¿si? ¡Yo también!";
+		mes "Sí, tenemos el mismo";
+		mes "punto de vista de la vida. Si no te importa";
+		mes "me gustaría";
+		mes "estrecharte la mano, aventurero.";
+		emotion e_no1;
+		close;
+	}
+	mes "[Dowbow Ryuei]";
+	mes "Reality, ¿eh?";
+	mes "Bueno, estoy de acuerdo";
+	mes "que ser realista tiene sus";
+	mes "gratificaciones, yo soy más un soñador.";
+	close;
+}
+
+lhz_in01,125,46,3	script	Leekal#lackee	849,{
+	mes "[Leekal]";
+	mes "Así que... estoy arruinado.";
+	mes "¿Por qué gasté tanto";
+	mes "dinero en vino, mujeres y";
+	mes "canciones? Me arrepiento de todos";
+	mes "los placeres que tuvé este mes.";
+	mes "Sí, fué demasiado placer.";
+	next;
+	mes "[Ninjose]";
+	mes "Es lo que pasa";
+	mes "cuando eres irresponsable";
+	mes "con el dinero. Realmente";
+	mes "deberías leer este libro ''Anybody";
+	mes "Can Be Rich''.";
+	close;
+}
+
+lhz_in01,116,53,7	script	Ninjose#nina	841,{
+	mes "[Ninjose]";
+	mes "Bueno, finalmente";
+	mes "compré mi propia casa.";
+	mes "¡Deberías invertir tu dinero";
+	mes "para el futuro! Lee esto,";
+	mes "''¡Anybody Can Be Rich!''";
+	mes "¡Es un gran libro!";
+	close;
+}
+
+lhz_in01,116,39,7	script	Kejulle Rekenber#reken	822,{
+	mes "[Kejulle Rekenber]";
+	mes "¿Hm? Seguro, mi último nombre";
+	mes "es Rekenber y es el mismo";
+	mes "nombre de nuestro presidente,";
+	mes "pero sólo es una coincidencia.";
+	mes "Soy un simple empleado.";
+	mes "Yeah, sin ningún trato especial...";
+	close;
+}
+
+lhz_in01,110,40,3	script	Jorjerro#fhero	89,{
+	mes "^3355FFEste hombre";
+	mes "de aquí está inmóvil,";
+	mes "para todos los";
+	mes "efectos, está";
+	mes "profundamente dormido.^000000";
+	close;
+}
+
+lhz_in01,116,45,7	script	Joshua#aya	704,{
+	mes "[Joshua]";
+	mes "¿Qué estoy haciendo aquí?";
+	mes "Esperar que la mujer";
+	mes "de mis sueños caiga en mi regazo,";
+	mes "¿Qué apariencia tiene?";
+	next;
+	mes "[Joshua]";
+	mes "Alta, rubia, piel";
+	mes "cremosa y suave.";
+	mes "Bien. Vengan";
+	mes "con Joshua, chicas.";
+	mes "Tengo mi atomizador de feromonas";
+	mes "y estoy listo para el viaje~";
+	close;
+}
+
+lighthalzen,326,249,5	script	Grinnel#zen6	870,{
+	mes "[Grinnel]";
+	mes "¿Conoces a los hombres";
+	mes "de negro? Chico, ¡tengo";
+	mes "miedo! ¡Ellos";
+	mes "me persiguen para hacerme";
+	mes "todas esas preguntas extrañas!";
+	next;
+	mes "[Grinnel]";
+	mes "Ellos quieren saber";
+	mes "si alguna vez conocí";
+	mes "a alguien de la Corporación ";
+	mes "Rekenber, o si estuvé en la parte";
+	mes "alta de la ciudad, ese tipo de cosas.";
+	mes "Estoy verdaderamente cagado de miedo.";
+	next;
+	mes "[Grinnel]";
+	mes "Hombre, vivir en el";
+	mes "barrio bajo es difícil.";
+	mes "No sólo la vida es dura,";
+	mes "sino que toda la gente";
+	mes "cree que pueden intimidarte.";
+	mes "Odio Lighthalzen...";
+	close;
+}
+
+lhz_in03,192,19,3	script	Haggar#zen1	855,{
+	mes "[Haggar]";
+	mes "¡Whisky!";
+	mes "¡Necesito algún";
+	mes "licor fuerte ahora!";
+	next;
+	mes "[Haggar]";
+	mes "¿Qué--? ¡Yo no";
+	mes "pedí este ron";
+	mes "apestoso! ¡Yo quiero una";
+	mes "bebida! Dame ¡whiskey!";
+	close;
+}
+
+lhz_in03,193,25,2	script	Bartender#12	61,{
+	mes "[Tony]";
+	if (Sex) {
+		mes "Hey hombre, sé que este";
+	}
+	else {
+		mes "Hey señorita, sé que este";
+	}
+	mes "lugar es para hundirse, cerca";
+	mes "del punto de ser totalmente";
+	mes "un gueto, pero estamos orgullosos";
+	mes "para hacer el mejor ron de todo";
+	mes "Rune-Midgard. Es verdad~";
+	next;
+	mes "[Tony]";
+	mes "Sólo un sorbito de esta";
+	mes "hermosa bebida y";
+	mes "¡estarás en la cima del";
+	mes "mundo! Pero es lo mejor";
+	mes "para ayudarte a relajarte";
+	mes "y olvidar tus preocupaciones.";
+	next;
+	mes "[Tony]";
+	mes "No puedo ser";
+	mes "un poeta, lo sé.";
+	mes "Nuestro ron tiene el";
+	mes "dulce dulce sabor de la";
+	mes "soledad. ¡Realmente";
+	mes "deberías probarlo cuando puedas.";
+	close;
+}
+
+lhz_in03,185,20,6	script	Bad Drunk#amano06	869,2,2,{
+	mes "[Garry]";
+	mes "¡Hey! ¡Hey tú...!";
+	mes "¿Quieres, quieres";
+	mes "escucharme contar";
+	mes "un chiste?! Va...";
+	mes "Um, va como esto...";
+	next;
+	mes "[Garry]";
+	mes "Hey un acertijo,";
+	mes "el gato y el--";
+	mes "¡No! ¡No, maldición!";
+	mes "¡Esa es una canción!";
+	mes "No, espera, no es";
+	mes "una canción...";
+	close;
+}
+
+lhz_in03,186,29,7	script	Bad Drunk#12	869,{
+	mes "[Bonse]";
+	mes "*Hiccup* ¡Aaaaamo";
+	mes "este ron! Tenía un resfriado";
+	mes "y ¡un vaso me";
+	mes "lo curó! ¡En serio, dormí";
+	mes "por una semana, pero no";
+	mes "importa! ¡Pshaw! Ciencia...";
+	next;
+	mes "[Bonse]";
+	mes "Oh, el sabor es tan";
+	mes "limpio, pero también";
+	mes "tiene un poco de algo. No sé";
+	mes "como describirlo.";
+	mes "¿es el sabor de la felicidad?";
+	mes "¡Estoy demasiado borracho para decirlo!";
+	close;
+}
+
+lhz_in02,265,273,6	script	Lab Staff#amano08	865,{ 
+ 		mes "[Assam]";
+ 		mes "Este lugar es bonito"; 
+ 		mes "y normalmente bastante tranquilo.";
+ 		mes "Me gusta venir al salir de";
+		mes "trabajar, tomar un trago y"; 
+ 		mes "hablar con el camarerobartender."; 
+  		next;
+		mes "[Assam]";
+ 		mes "El ambiente es increíblemente";
+ 		mes "bueno también. Diría que es";
+		mes "el mejor del mundo. No sé";
+ 		mes "por qué, pero por alguna razón, esta";
+ 		mes "atmósfera me recuerda al trabajo en equipo~";
+ 		close;
+}
+
+lhz_in03,192,93,3	script	City Girl#amano05	862,{
+	mes "[Lanko]";
+	mes "Oh, sólo estoy trabajando";
+	mes "aquí como camarera";
+	mes "para ayudar a mi padre.";
+	mes "Este trabajo es tan cansado, pero";
+	mes "es agradable ver a gente tan";
+	mes "relajada y pasando un buen rato.";
+	next;
+	mes "[Lanko]";
+	mes "Cuando tengo algo de tiempo";
+	mes "libre, voy a explorar";
+	mes "Lighthalzen y veo todo lo";
+	mes "que hay que ver. Pero por ahora,";
+	mes "no parece que tengamos";
+	mes "algún momento en que falten borrachos...";
+	close;
+}
+
+lhz_in03,189,87,5	script	Drunken Man#amano01	869,{
+	mes "[Enku]";
+	mes "*Sob* ¡Sólo me estoy";
+	mes "desahogando! Sí, creía";
+	mes "que nos íbamos a casar,";
+	mes "¡pero es obvio que estaba equivocado!";
+	mes "¡Maldición Sheryline! ¡Te quiero!";
+	next;
+	mes "[Enku]";
+	mes "No suele importarme la";
+	mes "bebida, especialmente cosas como";
+	mes "la ginebra y el ron, pero hoy,";
+	mes "esto sabe justo como";
+	mes "mi miseria. Esto es toda";
+	mes "la comodidad, que necesito, ¿hey?";
+	close;
+}
+
+lhz_in03,183,82,7	script	Drunken Man#amano02	870,{
+	mes "[Linus]";
+	mes "Después de diez años";
+	mes "de matrimonio. Mi";
+	mes "mujer me dejó...";
+	next;
+	mes "[Linus]";
+	mes "Así que supongo que aquí";
+	mes "lugar para mi excepto aquí";
+	mes "por ahora. Sé lo que es eso,";
+	mes "pero el ron está muy bueno hoy.";
+	mes "Es como, el sabor del";
+	mes "alivio jovial y relajante~";
+	close;
+}
+
+lhz_in03,180,83,6	script	Citizen#amano03	86,{
+	mes "[Mitchell]";
+	mes "Sabes, todo el mundo";
+	mes "es distinto, pero creo que";
+	mes "los humanos se parecen lo suficiente";
+	mes "para conectar significativamente";
+	mes "a algún nivel, ¿no?";
+	next;
+	mes "[Mitchell]";
+	mes "Cierto, una persona rica podría";
+	mes "tener diferentes problemas que";
+	mes "una persona pobre, pero el hecho es que,";
+	mes "¡ambos tienen problemas!";
+	mes "Dolor, placer, tristeza, alegría,";
+	mes "eso nos une a todos.";
+	next;
+	mes "[Mitchell]";
+	mes "Así que intenta no ser quisquilloso";
+	mes "respecto a quien es tu amigo y";
+	mes "quien no. Todos necesitamos";
+	mes "alguien con quien estar, ¿no?";
+	close;
+}
+
+lhz_in03,176,85,5	script	Citizen#amano04	869,{
+	mes "[Dique]";
+	mes "Una de las cosas que espero";
+	mes "con expectación durante todo el día";
+	mes "es la bebida que tomo justo después";
+	mes "del trabajo. Es la cosa más";
+	mes "relajante del mundo.";
+	next;
+	mes "[Dique]";
+	mes "Claro, hay más cosas";
+	mes "en la vida que simplemente";
+	mes "pasar el rato en bares y";
+	mes "tabernas. El hecho es, que en mi caso,";
+	mes "los bares y tabernas son";
+	mes "todo lo que necesito~";
+	close;
+}
+
+lhz_in03,184,38,3	script	Loudmouth	55,{
+	mes "[Loudmouth]";
+	mes "¿Sabes quién soy?";
+	mes "Sólo mira esta pata de palo.";
+	mes "Estuvé en la Guerra de Comodo,";
+	mes "¡División Ski Troop! ¡Perdí mi";
+	mes "pierna para ganar tu libertad!";
+	next;
+	mes "[Loudmouth]";
+	mes "¡H-hey! ¿Qué estás";
+	mes "buscando? ¿Qué,";
+	mes "no me crees?!";
+	close;
+}
+
+lhz_in01,173,28,4	script	Guard#01::LhzRekGuard	868,{
+	mes "[Guard]";
+	mes "Ésta es un";
+	mes "área restringida.";
+	mes "Por favor mantente alejado";
+	mes "si no tienes";
+	mes "autorización especial.";
+	mes "Gracias por cooperar.";
+	close;
+}
+
+lhz_in01,180,28,4	duplicate(LhzRekGuard)	Guard#03	868
+
+lhz_in01,72,209,5	script	Guide#lt0	862,{
+	mes "[Lasoei]";
+	mes "Oh Ajjjj.";
+	mes "Siempre vienen";
+	mes "los mismos clientes,";
+	mes "día tras día. ¿Puede haber";
+	mes "algo menos excitante?";
+	next;
+	mes "[Lasoei]";
+	mes "¡Oh...!";
+	mes "B-bienvenido~";
+	mes "¿P-puedo ayudarte";
+	mes "con algo?";
+	close;
+}
+
+lhz_in01,72,195,0	script	Guide#lt1	90,{
+	mes "[Geonuii]";
+	mes "Saludos. Este";
+	mes "camino lleva a la Librería y al";
+	mes "Laboratorio. Por favor sé";
+	mes "consciente de que estos sitios";
+	mes "tienen el acceso restringido";
+	mes "para el público.";
+	close;
+}
+
+lhz_in01,73,188,0	script	Guide#lt2	862,{
+	mes "[Bonnie]";
+	mes "Oh no...";
+	mes "¿Dónde la pusé?";
+	close;
+}
+
+lhz_in01,35,226,5	script	Rekenber Guard#li01	867,{
+	if (isequipped(2241) && isequipped(2243)) {
+		mes "[Rekenber Guard]";
+		mes "^3355FF(Whoa, es un miembro";
+		mes "del staff!)^000000 ¡Buen dia!";
+		close2;
+		warp "lhz_in01",37,225;
+		end;
+	}
+	mes "[Rekenber Guard]";
+	mes "¡Ésta es un área";
+	mes "restringida! ¡Por favor";
+	mes "enséñame alguna ID inmediatamente!";
+	next;
+	if (select("ID?:Cancel") == 1) {
+		mes "[Rekenber Guard]";
+		mes "¡No sé como los aventureros";
+		mes "hacen las cosas en";
+		mes "Rune-Midgarts, pero aquí";
+		mes "tenemos leyes sobre la entrada ilegal!";
+		close;
+	}
+	mes "[Rekenber Guard]";
+	mes "A menos que tengas una autorización";
+	mes "especial, nadie tiene permitido";
+	mes "entrar en al Laboratorio";
+	mes "Subterráneo por razones de seguridad.";
+	close;
+}
+
+lhz_in01,23,132,3	script	Rekenber Guard#li02	867,5,5,{
+OnTouch:
+	if (isequipped(2241) && isequipped(2243)) {
+		mes "[Rekenber Guard]";
+		mes "Mantén los ojos abiertos.";
+		mes "He oído rumores de que algunos";
+		mes "aventureros de Rune-Midgarts";
+		mes "¡intentan infiltrarse aquí!";
+		mes "Sé que la seguridad es";
+		mes "muy fácil de burlar, pero...";
+		close;
+	}
+	else {
+		mes "[Rekenber Guard]";
+		mes "¡Esta área está restringida";
+		mes "al público! ¡¿Quién eres tú";
+		mes "y cómo entrasté aquí?!";
+		mes "Hey, ¡necesito una copia de seguridad!";
+		close2;
+		warp "lhz_in01",33,224;
+	}
+	end;
+}
+
+lhz_in01,217,121,3	script	Repairman#li_01	851,{
+	if (isequipped(2241) && isequipped(2243)) {
+		mes "[Repairman]";
+		mes "¡No me sorprende que estas cosas";
+		mes "se descompongan a cada rato! ¡Estas";
+		mes "máquinas han sido maltratadas";
+		mes "completamente! Ugh, no hay ninguna";
+		mes "apreciación por toda esta";
+		mes "tecnología...";
+		next;
+		mes "[Repairman]";
+		mes "Si, todo el equipo";
+		mes "de este laboratorio es realmente delicado,";
+		mes "sin mencionar que es caro. Si";
+		mes "alguna vez necesitaras usar estas cosas, deberás tener";
+		mes "algunas precauciones extra.";
+		close;
+	}
+	else {
+		mes "[Repairman]";
+		mes "Hey, tu no trabajes--";
+		mes "¡G-guardias! ¡Apresurense! ¡Por ahí";
+		mes "hay alguien!";
+		emotion e_gasp;
+		close2;
+		warp "lhz_in01",33,224;
+		end;
+	}
+}
+
+lhz_in01,203,123,3	script	Scientist#li_02	750,{
+	if (isequipped(2241) && isequipped(2243)) {
+		mes "[Scientist]";
+		mes "Ok. Saca un tubo de";
+		mes "ensayo de la máquina,";
+		mes "reemplaza el otro tubo de ensayo";
+		mes "de ahí y después";
+		mes "¿limpia el primer tubo de ensayo?";
+		next;
+		mes "[Scientist]";
+		mes "O... lo hago yo,";
+		mes "lo inserto en la máquina y";
+		mes "¿después lo reemplazo por otro?";
+		mes "¡Esto es muy";
+		mes "confuso! Si tan solo no hubiera";
+		mes "perdido las instrucciones...";
+		close;
+	}
+	mes "[Scientist]";
+	mes "Bien. Saco un tubo de";
+	mes "de la máquina,";
+	mes "lo reemplazo y--hey. Tu no";
+	mes "eres Ralphie. Espera. ¡Guardiaaas!";
+	mes "¡Ayudenme, hay un extraño aquí!";
+	emotion e_gasp;
+	close2;
+	warp "lhz_in01",33,224;
+	end;
+}
+
+lhz_in01,199,137,3	script	Scientist#li_03	865,{
+	if (isequipped(2241) && isequipped(2243)) {
+		mes "[Scientist]";
+		mes "¡Whoa whoa~!";
+		mes "¡Por favor! ¡No";
+		mes "toques nada!";
+		mes "¡Estoy usando unos químicos";
+		mes "muy explosivos aquí!";
+		close;
+	}
+	mes "[Scientist]";
+	mes "¡Guardias! ¡Apresurense,";
+	mes "hay alguien";
+	mes "aquí, y creo";
+	mes "que es uno de esos locos";
+	mes "acosadores! ¡¿Por qué, por qué yo?!";
+	emotion e_gasp;
+	close2;
+	warp "lhz_in01",33,224;
+	end;
+}
+
+lhz_in01,46,125,3	script	Rekenber Guard#li03	867,5,5,{
+OnTouch:
+	if (isequipped(2241) && isequipped(2243)) {
+		mes "[Rekenber Guard]";
+		mes "......................";
+		next;
+		if (select("Nice day, huh?:Cancel") == 1) {
+			mes "[Rekenber Guard]";
+			mes "...";
+			emotion e_an;
+			close;
+		}
+		mes "[Rekenber Guard]";
+		mes "...";
+		close;
+	}
+	mes "[Rekenber Guard]";
+	mes "...!";
+	emotion e_gasp;
+	close2;
+	warp "lhz_in01",33,224;
+	end;
+}
+
+lhz_in01,25,141,4	script	Regenschirm Guard	868,{
+
+	mes "[Regenschirm Guard]";
+	if(isequipped(2241) && isequipped(2243)){
+		mes "¿Quieres ir al";
+		mes "subterráneo?";
+		next;
+		if(select("Yes:No")==1){
+			if(isequipped(2657)){
+				warp "lhz_dun01",150,288;
+				end;
+			}
+			mes "[Regenschirm Guard]";
+			mes "Lo siento pero no puedo";
+			mes "permitir empleados sin el pase de autorización";
+			mes "apropiado. Sólo se permite entrar";
+			mes "al subterráneo a los empleados";
+			mes "con el Laboratory Passport.";
+			close;
+
+		}
+		mes "[Regenschirm Guard]";
+		mes "Gracias y que";
+		mes "tenga un buen día.";
+		close;
+	}
+	mes "¡Esta área está restringida";
+	mes "al público! ¡¿Quién eres";
+	mes "y cómo entrasté aquí?!";
+	mes "Hey, ¡necesito una copia de seguridad!";
+	close2;
+	warp "lhz_in01",34,224;
+	end;
+
+}
+
+
+// Lighthalzen Bank Area ------------------------------------------------------
+
+lhz_in02,34,41,1	script	Arthur#zen16	849,{
+	mes "[Arthur]";
+	mes "Las sillas aquí no son";
+	mes "muy ergonómicas. ¡ Y también";
+	mes "son incómodas!";
+	mes "Pero se está taaaan fresco dentro";
+	mes "de este banco y sólo quería estar";
+	mes "lejos de ese calor...";
+	close;
+}
+
+lhz_in02,28,39,3	script	Helen#zen6	703,{
+	mes "[Helen]";
+	mes "Sabes, quizás cuando";
+	mes "crezca, seré un cajero";
+	mes "de banco. Eso suena como un";
+	mes "trabajo verdaderamente bueno, ¿no crees?";
+	mes "Es relajante y elegante..";
+	close;
+}
+
+lhz_in02,31,34,3	script	Tadem#zen6	847,{
+	mes "[Tadem]";
+	mes "También disfruto la";
+	mes "estructura arquitectónica";
+	mes "de este banco. Es bastante";
+	mes "artística con elementos clásicos";
+	mes "y modernos. ¿No estás de acuerdo?";
+	mes "Fascinante...";
+	close;
+}
+
+lhz_in02,31,33,3	script	Gracie#5	863,{
+	mes "[Gracie]";
+	mes "Oh, se está ta bien";
+	mes "aqui~ ¿Sabías que este banco";
+	mes "estuvo paralizado durante";
+	mes "meses debido a un error informático?";
+	next;
+	mes "[Gracie]";
+	mes "Gracias a dios por fin está solucionado.";
+	mes "Además se está tan cómodo aquí,";
+	mes "que creo que me negaré a irme.";
+	mes "Sin embargo, estoy dispuesto a cambiar";
+	mes "mi forma de pensar si puedes encontrar un sitio";
+	mes "que sea más cómodo.";
+	close;
+}
+
+//lhz_in02,21,38,7	script	Bank Clerk#1::BankClerk	86,{
+//	mes "[Bank Clerk]";
+//	mes "Debido a algún sistema crítico de errores,";
+//	mes "todos los servicios del banco";
+//	mes "están temporalmente detenidos.";
+//	mes "Perdón por cualquier inconveniencia y gracias por su entendimiento.";
+//	close;
+//}
+//
+//lhz_in02,21,25,7	duplicate(BankClerk)	Bank Clerk#2	86
+//lhz_in02,34,22,1	duplicate(BankClerk)	Bank Clerk#3	755
+
+// Lightalzen Prison Area -------------------------------------------------------------
+
+lhz_in02,145,177,0	script	Togii#07	849,{
+	mes "[Togii]";
+	mes "Ohhhh si...";
+	mes "Genial.";
+	mes "¡El whisky de Morroc es el mejor!";
+	mes "^333333*Hiccup*^000000 ¡Whoa, esta cosa";
+	mes "trabaja realmente rápido! Heh heh~";
+	close;
+}
+
+lhz_in02,159,198,7	script	Healthy Looking Guy#hol	85,{
+	mes "[Healthy Looking Guy]";
+	mes "¡Grrrrrr! ¡Dejame en paz!";
+	mes "¿Cuántas veces te lo tengo";
+	mes "que decir? ¡Nunca he acumulado";
+	mes "materiales para refinar items!";
+	mes "¡Juro que soy inocente!";
+	close;
+}
+
+lhz_in02,157,201,6	script	Hinkley#06	870,{
+	mes "[Hinkley]";
+	mes "Meh heh heh...";
+	mes "^333333*Hiccup*^000000 Lo creas o";
+	mes "noh, estoy...";
+	mes "caminando en el... Aire...";
+	mes "Nunca pensé que pudiera";
+	mes "s-ser tann liiiiii-breeeeee~";
+	next;
+	mes "^3355FF¡Éste tipo";
+	mes "está completamente";
+	mes "¡fuera";
+	mes "de si!^000000";
+	close;
+}
+
+lhz_in02,153,206,4	script	Millette#05	853,{
+	mes "[Millette]";
+	mes "¡Déjame ir!";
+	mes "¡¡Déjame IR!!";
+	mes "¡¡Déjame IR!!!";
+	mes "¡No hicé nada";
+	mes "malo! ¡Soy inocente!";
+	mes "^333333*Hic-Hic-Hiccup...*^000000";
+	next;
+	mes "[Millette]";
+	mes "¿Qué hay de malo en";
+	mes "beber y cantar";
+	mes "en la calle, huh?";
+	mes "¿Es un crimen tener";
+	mes "una hermosa voz de tenor?!";
+	mes "¡Déjame irme de aquí!";
+	close;
+}
+
+lhz_in02,147,222,3	script	Officer Guo#06::off_guo	85,{
+	mes "[Officer Guo]";
+	mes "¡Dime...!";
+	mes "¡¡DIME...!!";
+	mes "¡¡¡Admite que lo hicisté!!!";
+	next;
+	mes "[Suspect]";
+	mes "¡Maldición!";
+	mes "¡Te estoy diciendo";
+	mes "que no soy culpable!";
+	next;
+	mes "[Officer Guo]";
+	mes "^333333*Sigh...*^000000";
+	next;
+	mes "[Suspect]";
+	mes "Estás perdiendo tu tiempo.";
+	mes "Sólo déjame ir.";
+	next;
+	mes "[Officer Guo]";
+	mes "Así que...";
+	mes "¿Cómo está tu madre?";
+	next;
+	mes "[Suspect]";
+	mes "¡Eso no es de";
+	mes "tu incumbencia!";
+	mes "Supongo, que está bien.";
+	next;
+	mes "[Officer Guo]";
+	mes "¿Cuándo fué la última vez";
+	mes "que la visté?";
+	next;
+	mes "[Suspect]";
+	mes "Ya te dijé,";
+	mes "¡que no es";
+	mes "de tu incumbencia...!";
+	next;
+	mes "[Officer Guo]";
+	mes "Sabes, las madres";
+	mes "del reino animal";
+	mes "instintivamente";
+	mes "cuidan de sus crías.";
+	mes "Los humanos no son una excepción.";
+	mes "La tuya debe estarse muriendo de preocupación.";
+	next;
+	mes "[Suspect]";
+	mes "...";
+	mes "Hombre...";
+	mes "Estás empezando";
+	mes "a asustarme.";
+	next;
+	mes "[Officer Guo]";
+	mes "Es algo gracioso de los humanos,";
+	mes "Parece que su naturaleza";
+	mes "es mentir, aún cuando";
+	mes "saben que los han descubierto. Pero";
+	mes "como todos los animales,";
+	mes "instintivamente tienen miedo del dolor...";
+	next;
+	mes "[Suspect]";
+	mes "N-no, no...";
+	mes "Debes...";
+	mes "Me estás engañando.";
+	mes "¿verdad?";
+	next;
+	mes "[Officer Guo]";
+	mes "NO.";
+	mes "Me estás engañando.";
+	mes "¡Dime...!";
+	mes "¡¡DIME...!!";
+	mes "¡¡Admite que lo hicisté!!";
+	close;
+}
+
+lhz_in02,142,222,6	duplicate(off_guo)	Suspect#6	870
+
+// New ----------------------------------------------------------------------- 
+
+lhz_in01,14,28,3	script	Banquet Staff	109,{
+	mes "[Banquet Staff]";
+	mes "Este Salón de Banquetes suele";
+	mes "alojar eventos tales como";
+	mes "cenas con parejas, clientes";
+	mes "y otros socios, y";
+	mes "conferencias de prensa. Claro, no hay";
+	mes "nada en marcha ahora.";
+	next;
+	mes "[Banquet Staff]";
+	mes "Algunas veces la paz y la tranquilidad";
+	mes "es un cambio bienvenido,";
+	mes "pero ahora mismo estoy un poco";
+	mes "aburrido. A decir verdad creo";
+	mes "que prefiero estar ocupada que";
+	mes "estar sin hacer nada.";
+	close;
+}
+
+lhz_in01,43,52,3	script	Luccet#li_party	703,{
+	mes "[Luccet]";
+	mes "¡Shhhh! Hey, mi hermano está";
+	mes "''ahí,'' debo encontrar algún lugar para";
+	mes "esconderme! Espera, ¿te quedarías";
+	mes "parado ahí? Podría";
+	mes "esconderme detrás de ti! ¿No?";
+	mes "¡Tonterías! ¡Olly olly oxen free!";
+	close;
+}
+
+lhz_in01,28,33,7	script	Hanccet#li_party	706,{
+	mes "[Hanccet]";
+	mes "Hombre... ¡Odio serlo!";
+	mes "¡Soy terrible en este juego!";
+	mes "Está bien, si fuera mi";
+	mes "hermana Luccet, ¿dónde creería";
+	mes "que no buscaría?";
+	mes "¡Por supuesto...! ¡Las alcantarillas!";
+	close;
+}
+
+lhz_in01,21,50,7	script	Annette#li_party	91,{
+	mes "[Annette]";
+	mes "He escuchado que el";
+	mes "El Salón de Banquetes Rekenber";
+	mes "también se usa para celebrar bodas.";
+	mes "Debe ser tan maravilloso~";
+	next;
+	mes "[Annette]";
+	mes "Aunque es más caro,";
+	mes "me gustaría celebrar mi boda";
+	mes "aquí. Sólo me caso una vez en";
+	mes "la vida, perfectamente, así";
+	mes "que me gustaría hacer la mía, la";
+	mes "experiencia más memorable.";
+	close;
+}
+
+lhz_in01,129,54,1	script	Mereth#erem	869,{
+	mes "^3355FF*Shhhhhhzzzz*";
+	mes "*Shhhhhhzzzz*^000000";
+	next;
+	mes "[Mereth]";
+	mes "Shhhhh....";
+	mes "Aaaaaaaahhh...";
+	next;
+	mes "^3355FFEl empleado volteó";
+	mes "su cabeza y se te quedo viendo";
+	mes "a través de la máscara negra";
+	mes "en su cara. Mereth se quedo";
+	mes "observando sin palabras por un momento y";
+	mes "después empezo a bailar";
+	mes "alegremente.^000000";
+	close;
+}
+
+lhz_in01,108,53,3	script	#horri	111,{
+	mes "^3355FFSólo es una pila";
+	mes "de documentos, unos libros y";
+	mes "un retrato familiar.^000000";
+	close;
+}
+
+lhz_in01,108,47,3	script	#never	111,{
+	mes "^3355FFEste escritorio está";
+	mes "muy limpio y muy organizado";
+	mes "a comparación con otros";
+	mes "que has vistó en tu";
+	mes "tiempo. Tomas tu momento";
+	mes "para marvillarte de su limpieza.^000000";
+	close;
+}
+
+lhz_in01,166,55,3	script	#crazy4u	111,{
+	mes "^3355FFEste escritorio tiene un librero";
+	mes "que este lleno con toda clase de";
+	mes "libros. Para quitarte la curiosidad, decides";
+	mes "agarrar uno.^000000";
+	next;
+	mes "^3355FFSin embargo, el libro que";
+	mes "tocasté contiene";
+	mes "una cantidad sorprendente de poder";
+	mes "oscuro, haciendo que lo tires.^000000";
+	specialeffect EF_CURSEATTACK;
+	close;
+}
+
+lhz_in01,148,45,3	script	Noama#amano	97,{
+	mes "[Noama]";
+	mes "¡Hee hee~!";
+	mes "¿Quieres escuchar";
+	mes "algo gracioso?";
+	mes "Escuché que hay un bar en";
+	mes "Prontera, donde este tipo";
+	mes "improvisa solos en Jawa--";
+	next;
+	mes "[Mazwon]";
+	mes "¡Noama...!";
+	mes "¡Estas máquinas";
+	mes "se están revelando! ¡Ven";
+	mes "ahora mismo!";
+	next;
+	mes "[Noama]";
+	mes "¡¿Qué?!";
+	mes "No me molestes,";
+	mes "¡yo no hicé nada!";
+	close;
+}
+
+lhz_in01,147,40,1	script	Mazwon#minus1	828,{
+	mes "[Mazwon]";
+	mes "Crap. ¡Crap! Crap";
+	mes "¡crap crap crap crap!";
+	mes "¡Estas máquinas de escritorio no se";
+	mes "supone que deban trabajar así!";
+	next;
+	mes "[Mazwon]";
+	mes "¡Noama...!";
+	mes "¡Estas máquinas";
+	mes "se están revelando de nuevo! ¡Ven";
+	mes "ahora mismo!";
+	next;
+	mes "[Noama]";
+	mes "¿Qué?!";
+	mes "No me molestes";
+	mes "¡yo no hicé nada!";
+	close;
+}
+
+lhz_in01,157,47,1	script	Mareth#seram	797,{
+	mes "[Mareth]";
+	mes "Yoo hoo hoo~";
+	mes "Oh, ¡Cómo amo";
+	mes "amo amo amo el chocolate!";
+	emotion e_lv;
+	next;
+	mes "[Mareth]";
+	mes "Cómelo...";
+	mes "O sólo huélelo.";
+	mes "Pásalo por todo mi cuerpo.";
+	mes "Ahhhh. Esto es mi nueva aspiración.";
+	close;
+}
+
+lhz_in01,164,45,3	script	Eiya#iaiai	91,{
+	mes "[Eiya]";
+	mes "Jorje está muy gruñón recientemente.";
+	mes "Usualmente es más";
+	mes "tranquilo.";
+	mes "Oh bueno, espero que";
+	mes "se sienta mejor.";
+	next;
+	mes "[Eiya]";
+	mes "Ooh, ¿te gustaría";
+	mes "ver mi colección de muñecas";
+	mes "en miniatura? ¡Amo";
+	mes "coleccionar muñecas lindas!";
+	close;
+}
+
+lhz_in01,135,57,3	script	Blackboard#li	111,{
+	mes "^3355FFEncuentras un pizarrón";
+	mes "lleno de garabatos. Sólo";
+	mes "puedes leer algunos";
+	mes "mensajes que fueron";
+	mes "rápidamente escritos en el.^000000";
+	next;
+	mes "''Asegúrate que todo";
+	mes "esté completado con XX 00.''";
+	mes ":- Jorje";
+	next;
+	mes "Cargos por Pago Atrasado: 59, 990 zeny";
+	next;
+	mes "''Quiero tener''";
+	mes "- Ellette";
+	mes "''¡También quiero $$$!''";
+	mes "- Enoz";
+	mes "''¿Qué me dices de @@@?''";
+	mes "- Ellette";
+	next;
+	mes "''Quiero comprar [#@$].''";
+	mes "- Ninjose";
+	mes "''¡Vamos a comprarlo!''";
+	mes "- Senyu";
+	mes "''Trabajar duro y comprar mucho";
+	mes "es la mejor actitud de un empleado.''";
+	mes "- Mazwon";
+	close;
+}
+
+lhz_in03,100,18,3	script	Rocky#li_house	81,{
+	if (rand(1,2) == 1) {
+		mes "[Rocky]";
+		mes "¡Guau, guau!";
+		close;
+	}
+
+	mes "[Rocky]";
+	mes "Grrrrrrr...";
+	close;
+}
+
+lhz_in03,130,41,5	script	Jay#li_house	706,{
+	mes "[Jay]";
+	mes "Mi mamá y mi papá";
+	mes "siempre regresan tarde a casa,";
+	mes "Así que, ceno solo.";
+	mes "Todo por mi. Todos los días.";
+	next;
+	mes "[Jay]";
+	mes "La comida no sabe tan";
+	mes "bien cuando comes";
+	mes "solo.";
+	mes "Puede que esté solo.";
+	close;
+}
+
+lhz_in03,129,22,7	script	Housemaid Jane#li_house1	850,{
+	mes "[Housemaid Jane]";
+	mes "Esta casa es enorme...";
+	mes "Es claramente demasiado grande";
+	mes "para una familia de tamaño normal.";
+	mes "¡Y siempre me lleva mucho tiempo";
+	mes "estar segura que está limpio!";
+	next;
+	mes "[Housemaid Jane]";
+	mes "No es fácil mantener";
+	mes "las cosas limpias y ordenadas cuando";
+	mes "eres responsable de hectáreas";
+	mes "de espacio interior. Ser";
+	mes "una doncella puede ser bastante duro...";
+	close;
+}
+
+lhz_in03,124,117,1	script	Housemaid Brenda#li	74,{
+	mes "[Housemaid Brenda]";
+	mes "Mejor limpio el polvo";
+	mes "despacio alrededor de este jarrón.";
+	mes "Es peor que diez millones de zeny";
+	mes "y si fuera--- ¡No. No!";
+	mes "¡Ni siquiera voy a pensarlo!";
+	close;
+}
+
+lighthalzen,159,222,1	script	Rekenber Employee#li	109,{
+	mes "[Benatuth]";
+	mes "Allá abajo, el técnico";
+	mes "está terminando el mantenimiento";
+	mes "del Airship privado de nuestro presidente.";
+	mes "¿Puedes imaginar";
+	mes "tener uno de esos";
+	mes "para volar por ahí?";
+	next;
+	mes "[Benatuth]";
+	mes "Sí, el presidente de";
+	mes "la Corporación Rekenber...";
+	mes "Él es una persona muy poderosa.";
+	mes "Casi da miendo lo que puede";
+	mes "hacer con todo su dinero, ¿no?";
+	close;
+}
+
+lighthalzen,162,304,7	script	Rekenber Guard Drew#li	868,{
+	mes "[Rekenber Guard Drew]";
+	mes "Amigo, compruébalo~";
+	mes "Las fotos oficiales de";
+	mes "las Kafra Ladies. Ahora...";
+	mes "¡con un 20% más ligueros!";
+	emotion e_ho;
+	next;
+	mes "[Rekenber Guard Tan]";
+	mes "¿Así que todas usan";
+	mes "ligueros?";
+	mes "Whoa, eso ¿quiere decir que";
+	mes "incluso tienen lentes";
+	mes "geniales para usar? ¡Son las mejores";
+	mes "noticias que escuché en todo el día!";
+	emotion e_omg,0,"Rekenber Guard Tan#li";
+	next;
+	mes "[Rekenber Guard Drew]";
+	mes "De acuerdo amigo, sabes que esta";
+	mes "es una edición limitada";
+	mes "de coleccionista, así que cada una cuesta";
+	mes "300,000 zeny. Quiero decir, tengo";
+	mes "un set extra, pero no sé";
+	mes "si querrías comprarlos--";
+	next;
+	mes "[Rekenber Guard Tan]";
+	mes "Dame todas.";
+	mes "Espera, todas menos";
+	mes "la del chico joven. Sólo";
+	mes "la idea de tener sus glamorosas fotos";
+	mes "conmigo me enciende como un...";
+	mes "Sí, sí, no es bueno.";
+	close;
+}
+
+lighthalzen,163,306,3	script	Rekenber Guard Tan#li	867,{
+	mes "[Rekenber Guard Tan]";
+	mes "Whoa, whoa. Ahora este...";
+	mes "Esto es arte. La luz,";
+	mes "el ángulo, el... el...";
+	mes "tema. Oh sí.";
+	emotion e_swt2;
+	next;
+	mes "[Rekenber Guard Drew]";
+	mes "Hombre, estas deslumbrantes";
+	mes "Kafra Lady... Ellas";
+	mes "merecen todos el zeny que pagamos. Di";
+	mes "adiós  Calendario en Trajes de Baño,";
+	mes "y hoooolaaaaa Kafra Leilah~";
+	next;
+	mes "[Rekenber Guard Tan]";
+	mes "¿Leilah? Oh, ¿Quieres decir";
+	mes "la chica de lentes? Amigo...";
+	mes "Amigo. ¡Ella también es mi favorita!";
+	close;
+}
+
+lighthalzen,70,227,4	script	Delna#li_reken	102,{
+	mes "[Delna]";
+	mes "A veces los placeres simples";
+	mes "pueden darte";
+	mes "la mayor felicidad. Para mi";
+	mes "ir afuera y tomar el sol";
+	mes "es lo mejor~";
+	next;
+	mes "[Delna]";
+	mes "Sí, los baños de sol en un sitio tranquilo y";
+	mes "relajante puede ser";
+	mes "muy refrescante. Y si tienes cuidado";
+	mes "de no quemarte,";
+	mes "un poco de sol";
+	mes "puede ser muy bueno.";
+	close;
+}
+
+lhz_in02,289,277,3	script	Martial Artist#1	753,{
+	mes "[Martial Artist]";
+	mes "Maldición...";
+	mes "He venido";
+	mes "al sitio equivocado";
+	mes "a buscar un desafío.. ¡Nadie";
+	mes "aquí es realmente";
+	mes "tan poderoso o competitivo!";
+	next;
+	mes "[Martial Artist]";
+	mes "Toda la ciudad cree";
+	mes "que puede comprar el poder y la seguridad";
+	mes "con dinero. Ellos no saben";
+	mes "el valor de una buena y amistosa";
+	mes "pelea. Con suerte, encontraré un";
+	mes "rival por aquí pronto...";
+	close;
+}
+
+lighthalzen,107,107,3	script	Kosit#zen1	869,{
+	mes "[Kosit]";
+	mes "Esta ciudad podra tener";
+	mes "más guardias y normas";
+	mes "que otros sitios, pero";
+	mes "no se si sería";
+	mes "realmente seguro vivir aquí.";
+	next;
+	mes "[Kosit]";
+	mes "Quiero decir, la razón por la que";
+	mes "tenemos esas normas es porque todos";
+	mes "los gángsteres pueden";
+	mes "entrar en la ciudad.";
+	mes "Es decir, es relativamente pacífico^FFFFFF ^000000 y todo. Pero estas reglas...";
+	next;
+	mes "[Kosit]";
+	mes "Es bueno estar a salvo,";
+	mes "pero no sé si es";
+	mes "una buena idea sacrificar";
+	mes "nuestras libertades o calidad";
+	mes "de vida, ¿sabes?";
+	close;
+}
+
+lhz_in03,32,99,3	script	Sopheap#zen1	863,{
+	mes "[Sopheap]";
+	mes "Oh, jovencitos.";
+	mes "Siempre viajando alrededor";
+	mes "y teniendo aventuras y";
+	mes "luchando con monstruos. Ciertamente";
+	mes "tuvé suficiente emoción";
+	mes "cuando tenía tu edad, hace tiempo.";
+	next;
+	mes "[Sopheap]";
+	mes "Seguro, fallé haciendo";
+	mes "todo eso, pero ahora estoy contento";
+	mes "relajándome y descansando.";
+	mes "Todavía, hay un muchos viejos que se niegan a quedarse sentados como yo~";
+	close;
+}
+
+lhz_in03,25,105,5	script	Gopal#zen4	869,{
+	mes "[Gopal]";
+	mes "La abuelita estar feliz";
+	mes "asentada en los alrededores y";
+	mes "disfrutando de una vida apacible,";
+	mes "pero ¡yo no! Soy demasiado joven";
+	mes "para ¡relajarme y";
+	mes "dejar pasar los días!";
+	next;
+	mes "[Gopal]";
+	mes "Quiero hace algo por mi.";
+	mes "Quizás algún día,";
+	mes "¡Fundaré una compañía tan";
+	mes "grande como la Corporación Rekenber!";
+	close;
+}
+
+lighthalzen,176,65,5	script	Kimmy#zen3	862,{
+	mes "[Kimmy]";
+	mes "A diferencia de la mayoría de los sitios,";
+	mes "Lighthalzen tiene muchas";
+	mes "tiendas de ropa y";
+	mes "accesorios. ¡Este sitio";
+	mes "es el cielo para";
+	mes "la gente que le gusta la moda como yo~!";
+	next;
+	mes "[Kimmy]";
+	mes "No sé si ustedes";
+	mes "los aventureros están interesados";
+	mes "en la moda, pero pueden tirar";
+	mes "sus viejas ropas y comprar algunos";
+	mes "equipos nuevos, únicos y a la moda";
+	mes "aquí en Lighthalzen~";
+	close;
+}
+
+lighthalzen,364,282,3	script	Bodger#zen5	870,{
+	mes "[Bodger]";
+	mes "Otro día de hambre...";
+	mes "No tengo nada de dinero";
+	mes "y aun si lo tuviera, no hay";
+	mes "sitio donde vendan comida";
+	mes "que pueda comer. Oh, hombre.";
+	mes "Difícilmente vivo así.";
+	next;
+	mes "[Bodger]";
+	mes "Escuché que la ¡gente";
+	mes "que vive en la Zona Residencial come";
+	mes "cosas deliciosas y comida gourmet ocho";
+	mes "veces al día! Espero que sea sólo^FFFFFF ^000000 una exageración. Porque si";
+	mes "no fuera, estaría tan loco...";
+	close;
+}
+
+lhz_in03,239,38,3	script	Avetis#zen10	849,{
+	mes "[Avetis]";
+	mes "A-ack...";
+	mes "^333333*Cough cough*^000000";
+	mes "¿Me darías algo de";
+	mes "m-medicina?";
+	mes "^333333*Cough cough haack*^000000";
+	mes "Dulce Navidad, esto duele...";
+	next;
+	mes "[Avetis]";
+	mes "Me ausenté del trabajo";
+	mes "porque estoy demasiado";
+	mes "enfermo p-para ir. ^333333*Cough*^000000";
+	mes "Pero ahora no tengo";
+	mes "el dinero para ^333333*Haack*^000000";
+	mes "comprar me-medicina. ";
+	close;
+}
+
+lhz_in02,267,25,4	script	Diana#npc	747,{
+	mes "[Diana]";
+	mes "Oh wow, ¡esa arma";
+	mes "es fantástica! Pero estoy seguro";
+	mes "que debe ser verdaderamente";
+	mes "cara. Huh...";
+	next;
+	mes "[Shop Assistant]";
+	mes "Señorita, ¿está hablando";
+	mes "acerca de este Stiletto?";
+	mes "tienes buen ojo para";
+	mes "las armas de calidad. Si";
+	mes "no te importa la pregunta,";
+	mes "¿de dónde eres?";
+
+	next;
+	mes "[Diana]";
+	mes "Oh, nací y";
+	mes "crecí en Morroc.";
+	next;
+	mes "[Shop Assistant]";
+	mes "Ah sí, he escuchado muchas";
+	mes "cosas buenas sobre esa ciudad.";
+	mes "Debo admitir que la";
+	mes "gente de Morroc tiene verdaderamente";
+	mes "buen gusto. Ahora bien, este Stiletto";
+	mes "está valorado en 39,800 zeny...";
+	next;
+	emotion e_omg;
+	mes "[Diana]";
+	mes "¿Huh...?!";
+	mes "¡Eso es ridículo!";
+	mes "No importa, déjame";
+	mes "ver aquel Gladius";
+	mes "de la esquina.";
+	next;
+	mes "[Shop Assistant]";
+	mes "¿El Gladius?";
+	mes "Ah, eso cuesta";
+	mes "39,800 zeny, señorita.";
+	next;
+	mes "[Diana]";
+	mes "Oh, realmente ese es";
+	mes "un buen precio. ¡Me lo llevo!";
+	next;
+	mes "[Shop Assistant]";
+	mes "Sí, esta copia realmente";
+	mes "es idéntica a un";
+	mes "Gladius, ¿no?";
+	mes "Aunque no sea un arma";
+	mes "de verdad, es capaz de";
+	mes "abrir los sobres más gruesos.";
+	next;
+	mes "[Diana]";
+	mes "...";
+	mes "......";
+	mes "Lo devolveré.";
+	mes "Esta tienda realmente apesta.";
+	close;
+}
+
+lhz_in02,267,22,1	script	Shop Assistant#cobo	91,{
+	mes "[Shop Assistant]";
+	mes "Bienvenido a nuestra";
+	mes "tienda, donde ofrecemos";
+	mes "muchos productos únicos que";
+	mes "no puedes encontrar en ningún sitio más.otro lugar.";
+	next;
+	mes "[Shop Assistant]";
+	mes "Sin embargo, las compras sólo están disponibles para nuestros miembros. Hay una";
+	mes "cuota anual de membresía que disminuye cuando gastas una cierta cantidad de dinero";
+	mes "al mes en nuestra tienda. Si invitas a tus amigos, recibirás un--";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "¡N-no gracias!";
+	mes "¡No estoy interesado!";
+	close;
+}
+
+lighthalzen,192,63,4	script	Sergei#zen1	92,{
+	mes "[Sergei]";
+	mes "Sabes, hay una";
+	mes "historia interesante sobre";
+	mes "el hacha que está ahí";
+	mes "¿Quieres";
+	mes "que te la cuente?";
+	next;
+	if (select("Sure.:No, thanks.") == 1) {
+		mes "[Sergei]";
+		mes "El anterior dueño de";
+		mes "esta Weapon Shop era";
+		mes "un asesino en serie convicto.";
+		mes "Cada noche, tomaba esa";
+		mes "hacha y mataba cruelmente";
+		mes "mujeres hermosas como yo.";
+		next;
+		mes "[Sergei]";
+		mes "Cuando finalmente lo";
+		mes "atraparon, le cortaron la cabeza";
+		mes "con su propia hacha.";
+		mes "Desde entonces, dicen que";
+		mes "su fantasma aun persiste y";
+		mes "afila esa hacha por la noche.";
+		next;
+		mes "[Sergei]";
+		mes "¡Sólo con pensarlo";
+		mes "se me pone la piel de gallina!";
+		mes "¡Y se supone que trabajo";
+		mes "aquí! ¡Es tan espeluznante!";
+		close;
+	}
+	mes "[Sergei]";
+	mes "Oh, Que decepcionante~";
+	mes "Es la historia perfecta para";
+	mes "la temporada. Bueno, ahora que";
+	mes "lo pienso, esa historia";
+	mes "es de hecho bastante espeluznante...";
+	close;
+}
+
+lighthalzen,258,223,3	script	Srinivas#zen4	866,{
+	mes "[Srinivas]";
+	mes "Esos edificios en los barrios bajos";
+	mes "son monstruosidad que";
+	mes "ofende a la ciudad entera!";
+	mes "Sólo deseo que los destruyan.";
+	mes "¿Qué me importan";
+	mes "los pobres y necesitados?";
+	close;
+}
+
+lighthalzen,77,203,3	script	Victor Perfecto#zen9	869,{
+	mes "[Victor Perfecto]";
+	mes "He oído que en la";
+	mes "Corporación Rekenber";
+	mes "crearon el";
+	mes "ambiente de Lighthalzen";
+	mes "por medios artificiales.";
+	next;
+	mes "[Victor Perfecto]";
+	mes "Parece que se necesitaron";
+	mes "muchas inversiones, pero";
+	mes "la creación artificial de";
+	mes "un ambiente no es imposible";
+	mes "con los medios que tiene a su disposición";
+	mes "la Corporación Rekenber.";
+	next;
+	mes "[Victor Perfecto]";
+	mes "^333333*Sigh...*^000000";
+	mes "De hecho, es un poco";
+	mes "deprimente pensar";
+	mes "que la belleza de la naturaleza";
+	mes "se puede manufacturar e";
+	mes "igualar al zeny, ¿no crees?";
+	close;
+}
+
+lighthalzen,40,107,4	script	Vergil#zen4	869,{
+	mes "[Vergil]";
+	mes "El clima está tan";
+	mes "bello hoy, como siempre.";
+	mes "Sólo quiero evitar el abandonar,";
+	mes "correr afuera y ejercitarme.";
+	next;
+	switch(select("Where do you want to go?:But shouldn't you go to work?:Have you heard about the serial killer?")) {
+	case 1:
+		mes "[Vergil]";
+		mes "Bueno, esos tipos con";
+		mes "trajes negros, por no mencionar";
+		mes "los rufianes que se las arreglan para";
+		mes "invadir el pueblo, a veces";
+		mes "lo vuelven un poco inseguro como";
+		mes "para salir solo.";
+		next;
+		mes "[Vergil]";
+		mes "Pero yo y un amigo estámos";
+		mes "planeando ir hacia el";
+		mes "Al De Baran Turbo Track";
+		mes "uno de estos días. Chico,";
+		mes "la última vez que fuimos,";
+		mes "el gastó un monton de zeny.";
+		next;
+		mes "[Vergil]";
+		mes "De hecho gano una";
+		mes "especie de poción como premio";
+		mes "y me dejó tenerla. La bebí";
+		mes "y me hizo mover muy";
+		mes "lentamente. ¡¿Que clase de premio";
+		mes "fue eso?!";
+		next;
+		mes "[Vergil]";
+		mes "Creo que mi compañero";
+		mes "fue totalmente estafado.";
+		mes "Fue eso o yo fuí totalmente";
+		mes "enganañado por el para beberlo.";
+		mes "¡Cómo se les ocurre una idea tan ridícula para un premio!";
+		close;
+	case 2:
+		mes "[Vergil]";
+		mes "¡¿Que---?! No dije";
+		mes "que iba a abandonar el trabajo,";
+		mes "sólo dijé que quería!";
+		mes "Pero sólo para molestarte, quizas";
+		mes "sólo quizás, no vaya hoy!";
+		next;
+		mes "[Vergil]";
+		mes "Aunque sin embargo, no";
+		mes "creo que pueda evitar";
+		mes "este proyecto. Maldición.";
+		mes "¡El fin de semana ciertamente";
+		mes "no viene lo suficientemente rápido!";
+		close;
+	case 3:
+		mes "[Vergil]";
+		mes "¿Qué, quieres decir que";
+		mes "esa hacha asesino desde hace";
+		mes "mucho tiempo? Bueno, escuché";
+		mes "un rumor acerca de que no";
+		mes "era así. Veamos, ¿cómo";
+		mes "era la historia?";
+		next;
+		mes "[Vergil]";
+		mes "Escuché que un sombrerero,";
+		mes "el que fabrica";
+		mes "el Smokie Hat, accidentalmente";
+		mes "hizo un Person Headgear";
+		mes "en vez de, por ejemplo, un sombrero hecho";
+		mes "de monstruos. No me preguntes como.";
+		next;
+		mes "[Vergil]";
+		mes "Seh, creo que es pariente";
+		mes "con ese Airship Captain...";
+		mes "Fueron completamente convertidos en";
+		mes "un sombrero por accidente. Supuestamente,";
+		mes "parece un Reindeer Head,";
+		mes "pero bueno, eso es demasiado raro.";
+		close;
+	}
+}
+
+lhz_in01,144,53,3	script	Jorje#zero	98,1,1,{
+OnTouch:
+	switch(rand(1,3)) {
+	case 1:
+		mes "[Jorje]";
+		mes "Arrrgh, ¡No";
+		mes "¡Tengo tiempo para";
+		mes "hablar! ¡Estoy en medio de";
+		mes "una misión";
+		mes "importante! ¡E-espera un segundo!";
+		close;
+	case 2:
+		mes "[Jorje]";
+		mes "¡N-no te acerques";
+		mes "más! Cualquiera que";
+		mes "se me acerque podría";
+		mes "fastidiarme!  ¡Retrocede !";
+		close;
+	case 3:
+		mes "[Jorje]";
+		mes "Oh hombre....";
+		mes "He estado trabajando tan";
+		mes "duro y no he tomado";
+		mes "ningún descanso. Creo que voy a";
+		mes "premiarme y comprar";
+		mes "algo como----";
+		next;
+		mes "[Jorje]";
+		mes "¡No! ¡No voy";
+		mes "a comprar nada!";
+		mes "¡Tengo que pensar en mi";
+		mes "futura esposa! Tengo que...";
+		mes "Ahorrar...más...dinero!";
+		close;
+	}
+	end;
+}
+
+lhz_in01,139,48,7	script	Leimi#mimir	73,{
+	mes "[Leimi]";
+	mes "...";
+	mes "......";
+	next;
+	mes "[Leimi]";
+	mes "¡Oh...!";
+	mes "¡Santos cielos!";
+	mes "Um ¿Puedo ayudarte?";
+	emotion e_omg;
+	if (BaseJob == Job_Assassin) {
+		if (Sex) {
+			next;
+			mes "[Leimi]";
+			mes "¡Oh, eres un Assasin!";
+			mes "Oh, ustedes son taaaaaaaaaan lindos!";
+			mes "¡Y tan geniales y tan misteriosos^FFFFFF ^000000 al mismo tiempo! ¡Los amo!";
+		}
+		else {
+			next;
+			mes "[Leimi]";
+			mes "¿Un Assasin...?";
+			mes "Oh, ¿Acaso no";
+			mes "conocerás algun chico Assasin";
+			mes "que esté soltero, verdad?";
+			mes "Oh-dios-mio, son tan varonilmente ardientes~";
+		}
+	}
+	close;
+}
+
+lhz_in01,138,47,0	script	#mimir_camera	-1,2,2,{
+OnTouch:
+	if (BaseJob == Job_Assassin) {
+		if (Sex) {
+			mes "^3355FF*Click*^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "¿Qué demon...?";
+			mes "Ese sonido. ¿Acaso...";
+
+			mes "¿Acaso alguien acaba";
+			mes "de tomarme una foto?";
+			close;
+		}
+	}
+	end;
+}
+
+lhz_in02,36,274,4	script	Cool Event Staff#Saera	831,{
+	mes "[Saera]";
+	mes "Bienvenido a la";
+	mes "sede temporal de";
+	mes "Cool Event Corporation.";
+	mes "¿En qué puedo ayudarte?";
+	next;
+	switch(select("Temporary headquarters?:Voting:No, thanks.")) {
+	case 1:
+		mes "[Saera]";
+		mes "El edificio principal de la sede";
+		mes "actualmente está en";
+		mes "reconstrución. Debido a eso,";
+		mes "estámos realizando nuestros trabajo en";
+		mes "este lugar por el momento.";
+		close;
+	case 2:
+		if (lhz_boss < 17) {
+			mes "[Saera]";
+			mes "Actualmente, la Corporación Kafra";
+			mes "y Cool Event Corp están trabajando";
+			mes "en colaboración en un programa que";
+			mes "proveerá servicio de teleport";
+			mes "directo a los calabozos.";
+			next;
+			mes "[Saera]";
+			mes "Debido a problemas técnicos,";
+			mes "ambas compañias no pueden";
+			mes "ofrecer el servicio de teleport al";
+			mes "mismo dungeon. Por lo tanto, estarémos";
+			mes "seleccionando a nuestros clientes para que elijan la compañia que quieran.";
+			next;
+			mes "[Saera]";
+			mes "Sólo un número limitado de";
+			mes "votantes serán seleccionados, así";
+			mes "puedes checar tu eligibilidad como";
+			mes "votante en la sede";
+			mes "de ambas compañias participantes. Gracias por su apoyo~";
+			close;
+		}
+		else {
+			mes "[Saera]";
+			mes "Actualmente, la Corporación Kafra";
+			mes "y la Corporación Cool Event están trabajando";
+			mes "en colaboración en un programa que";
+			mes "proveerá servicio de teleport";
+			mes "directo a los calabozos.";
+			next;
+			mes "[Saera]";
+			mes "Debido a cuestiones técnicas,";
+			mes "ambas compañías no pueden proveer";
+			mes "servicio de teleport al mismo";
+			mes "calabozo. Por lo tanto, estarémos";
+			mes "seleccionando a un valioso número de clientes para votar por su elección.";
+			next;
+			mes "[Saera]";
+			mes "Hemos revisado tu";
+			mes "información y nos gustaría";
+			mes "informarte que eres";
+			mes "elegible para votar.";
+			mes "Tu participación en ésta";
+			mes "elección es muy apreciada.";
+			next;
+			mes "[Saera]";
+			mes "Recuerda que las encuestas";
+			mes "de elección pueden ser";
+			mes "en Prontera y también";
+			mes "en Juno. Muchas gracias.";
+			close;
+		}
+	case 3:
+		mes "[Saera]";
+		mes "Gracias.";
+		mes "Que tengas un buen día.";
+		close;
+	}
+}
+
+lhz_in02,40,280,6	script	Event Planner	833,{
+	mes "[Jellarin]";
+	mes "Esto no me gusta.";
+	mes "Pero tampoco me gusta esa";
+	mes "idea. ¿Qué debería";
+	mes "hacer para un nuevo evento, eh?";
+	next;
+	mes "[Jellarin]";
+	mes "Necesito algo";
+	mes "mayor, algo que";
+	mes "realmente sacudirá al mundo,";
+	mes "algo que haga época, ¿pero qué?";
+	mes "¿Hey, tienes alguna idea?";
+	close;
+}
+
+lhz_in02,110,286,5	script	Cool Event Manager	853,{
+	mes "[Baoto]";
+	mes "Hmmm...";
+	mes "Los empleados parecen";
+	mes "divertirse mucho";
+	mes "entre ellos";
+	mes "recientemente. Esto no";
+	mes "augura nada bueno en lo absoluto...";
+	next;
+	mes "[Baoto]";
+	mes "Parece que";
+	mes "voy a tener que";
+	mes "golpear el látigo";
+	mes "más a menudo y más";
+	mes "fuerte. ¡Ha ha ha!";
+	close;
+}
+
+lhz_in02,36,284,0	script	Cool Event Staff#Cesuna	874,{
+	mes "[Cesuna]";
+	mes "¡Ack! ¡Estoy completamente";
+	mes "hundido en todo éste";
+	mes "trabajo! Pero no quiero";
+	mes "hacerlo. ¡Eso es!";
+	mes "Necesito un descanso.";
+	next;
+	mes "[Cesuna]";
+	mes "^333333*Sigh...*^000000";
+	mes "¿Me pregunto si Saera";
+	mes "alguna vez consideraría";
+	mes "salir conmigo?";
+	mes "Eso sería genial~";
+	close;
+}
+
+/*
+lhz_in02,19,274,2	script	Maintenance Guy#lhz	851,{
+	mes "[Kudiuu]";
+	mes "¡Oh Dios...!";
+	mes "¡¿Que éste lugar";
+	mes "nuca se limpiará?!";
+	mes "^333333*Cough cough*^000000 ¡Hay";
+	mes "demasiado polvo aquí, casi";
+	mes "es un riesgo a la salud!";
+	close;
+}
+*/
+
+lighthalzen,337,296,3	script	Rekenber Employee#li_2	868,{
+	if (hg_tre > 54) {
+		mes "[Rekenber Employee]";
+		mes "Greetings. As part of our";
+		mes "effort to relieve the poor,";
+		mes "Rekenber is providing job";
+		mes "opportunities targeted for";
+		mes "citizens of the slum areas.";
+		next;
+		mes "[Rekenber Employee]";
+		mes "You can choose to work";
+		mes "from home, or undergo a";
+		mes "little bit of training for more";
+		mes "professional positions. This";
+		mes "is a great chance to make a";
+		mes "difference... and some money~";
+		emotion e_no1,"Rekenber Employee#li";
+		close;
+	}
+}
+
+lhz_in01,221,131,7	script	Scientist#li_01	865,{
+	if (isequipped(2241) && isequipped(2243)) {
+		if (hg_tre > 54) {
+			mes "[A Scientist]";
+			mes "What happened? All the machines are ruined and the research report are gone! The history of Regenschirm has been hacked!";
+			close;
+		}
+		else {
+			mes "[Scientist]";
+			mes "It takes so long for";
+			mes "this device to process";
+			mes "all the data and give me";
+			mes "the results. Still, the wait";
+			mes "heightens my anticipation...";
+			close;
+		}
+	}
+	else {
+		mes "[Scientist]";
+		mes "What?! Guards!";
+		mes "Hurry, there's an";
+		mes "intruder right here!";
+		emotion e_gasp,"A Scientist#li_01";
+		close2;
+		warp "lhz_in01",33,224;
+		end;
+	}
+}
+
+// Lighthalzen Mushroom.
+// Don't really understand why it's there, but it's funny regardless.
+lhz_in01,157,54,0,0	monster	Red Mushroom	1085,1,120000,100000,0

@@ -1,0 +1,208 @@
+//===== eAthena Script ======================================= 
+//= Renewal Thief Job Change
+//===== By: ================================================== 
+//= Kisuka
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= Job Change to Thief Class
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Kisuka]
+//============================================================ 
+moc_prydb1,39,129,2	script	Thief Guide#thief	69,{
+	if (Upper == 1) {
+		if (ADVJOB == Job_Assassin_Cross || ADVJOB == Job_Stalker) {
+			if (Class == Job_Novice_High) {
+				mes "[Thief Guide]";
+				mes "¿Huh? ¿Te conozco? Acabo de tener un Deja Vu al verte. No tendrás un gemelo, ¿o sí?";
+				next;
+				if (getskilllv("NV_BASIC") < 9) {
+					mes "[Thief Guide]";
+					mes "¿Estás interesado en convertirte en Thief? Pero parece que necesitas más entrenamiento.";
+					next;
+					mes "[Thief Guide]";
+					mes "Tómate tu tiempo para aprender todas las Basic Skills, ¿vale? Así pues, ¡nos vemos luego~!";
+					close;
+				}
+				mes "[Thief Guide]";
+				mes "Debo tener ese sentimiento porque irradias la fuerza de haber llevado toda una vida luchando, por lo que te convertiré en Thief ahora mismo. *Será mejor darle a los tipos duros lo que quieren*...";
+				next;
+				skill 143,0,0;
+				jobchange Job_Thief_High;
+				skill 149,1,0;
+				skill 150,1,0;
+				skill 151,1,0;
+				skill 152,1,0;
+				mes "[Thief Guide]";
+				mes "Ahora que eres un Thief, deberás llevar una vida de Thief. ¡A por ello! Siguiente~";
+				close;
+			}else{
+				mes "[Thief Guide]";
+				if (sex)
+					mes "Hola, tío.";
+				else
+					mes "Hola nena~";
+				close;
+			}
+		}else{
+			mes "[Thief Guide]";
+			if (sex)
+				mes "Hola, tío.";
+			else
+				mes "Hola nena~";
+			mes "...¡Oye! Pareces demasiado buen tipo como para querer convertirte en Thief. Será mejor que busques otro lugar, estoy ocupado. ¡¡Siguiente!!";
+			close;
+		}
+	}
+	if(q_job_thief == 1) {
+		mes "[Thief Guildsman]";
+		mes "Ehh... Pareces "+(Sex?"un niño":"una niña")+" de papá, ¿qué esperas encontrar en este sucio lugar?";
+		next;
+		mes "[Thief Guildsman]";
+		mes "Bueno, yo no me encargo de los candidatos, sólo acepto las solicitudes. ¿Lo entiendes?";
+		mes "Si buscas convertirte en Thief, habla con el chico de mirada afilada que está a mi lado.";
+		close;
+	}
+	if(Class != Job_Novice && Class != Job_Baby) {
+		if(Class == Job_Thief || Class== Job_Baby_Thief) {
+			mes "[Thief Guildsman]";
+			mes "Oye~ si tienes cualquier problema, no te molestes en contármelo, ¿huh?";
+			close;
+		}else{
+			if(Sex) {
+				mes "[Thief Guildsman]";
+				mes "¿Qué coj...?";
+				mes "Huh.. ¡pero si ya eres un "+jobname(Class)+"! ¡Serás cabezacuadrada...!";
+				next;
+				mes "[Thief Guildsman]";
+				mes "Escucha, hermano.";
+				mes "¿Qué haces aquí? Vuelve a tu sitio~ venga, vete ya~~";
+				close;
+			}else{
+				mes "[Thief Guildsman]";
+				mes "¿Qué coñ...?";
+				next;
+				mes "[Thief Guildsman]";
+				mes "Ey, señorita.";
+				mes "¿Qué haces aquí? Vuelve a tu sitio~ venga, vete ya~~";
+				close;
+			}
+		}
+	}
+	mes "[Thief Guildsman]";
+	mes "Ehh... Pareces "+(Sex?"un niño":"una niña")+" de papá, ¿qué esperas encontrar en este sucio lugar?";
+	next;
+	if(select("Quiero convertirme en Thief.:Upps, perdone...") == 2) {
+		mes "[Thief Guildsman]";
+		mes "No puedes convertirte en Thief sin una solicitud.....";
+		mes "¿En qué estabas pensando...?";
+		close;
+	}
+	mes "[Thief Guildsman]";
+	mes "¿Acaso estás orgulloso?";
+	mes "¡Me estás diciendo con orgullo que quieres convertirte en un LADRÓN! ¿Por qué no te acercas a todos los habitantes de la villa y les adviertes de que serás un ladrón?";
+	mes "'¡Ja ja ja! Colócate un cartel que diga 'Seré un orgulloso ladrón que os robará vuestras pertenencias más valiosas'";
+	next;
+	mes "[Thief Guildsman]";
+	mes "¿Seguro que quieres llevar una vida así?";
+	next;
+	switch(select("Sí.:No.:¿Y qué hay de ti?")) {
+	case 1:
+		mes "[Thief Guildsman]";
+		mes "¿Ah sí? ¿Seguro? Bueno... ya estoy acostumbrado a conocer gente rara como tú.";
+		next;
+		break;
+	case 2:
+		mes "[Thief Guildsman]";
+		mes "¿Entonces por qué estás aquí? ¿Piensas que puedes lograr convertirte en Thief tan facilmente?";
+		next;
+		break;
+	case 3:
+		mes "[Thief Guildsman]";
+		mes "¿Eh..? ¿de mí? ¿yo?";
+		mes "Bueno... yo es que encajo en esta profesión... digamos que no le doy importancia a esos problemas morales.";
+		next;
+		break;
+	}
+	mes "[Thief Guildsman]";
+	mes "De todas formas, en el mundo exterior, ¡¡Nunca digas que quieres ser un Thief!!";
+	next;
+	mes "[Thief Guildsman]";
+	mes "¿Así que te presentas candidato para formar parte del Gremio?";
+	next;
+	if(select("Exacto.:No.") == 2) {
+		mes "[Thief Guildsman]";
+		mes "Bien... haz lo que quieras~ Vuelve por donde has venido~";
+		close;
+	}
+	mes "[Thief Guildsman]";
+	mes "Está bien, dime tu nombre. ¿Huh? ¿Cómo?";
+	mes ""+strcharinfo(0)+". Así que "+strcharinfo(0)+", ¿correcto...?";
+	next;
+	if (getskilllv("NV_BASIC") < 9) {
+		mes "[Thief Guildsman]";
+		mes "Se nota que quieres ser un Thief con todas tus fuerza......";
+		mes "Pero sólo eso no es suficiente, ¿no crees?";
+		mes "Deberías alcanzar primero el nivel 9 de Basic Skill.";
+		close;
+	}
+	mes "[Thief Guildsman]";
+	mes "Hmm.... según la agencia de detectives cumples con horones un pasado criminal. Parece que tienes lo que se necesita para lograr ser un buen Thief.";
+	mes ""+strcharinfo(0)+", doy por superada la parte de la entrevista-";
+	next;
+	mes "[Thief Guildsman]";
+	mes "De hecho, no estoy capacitado para otorgarte el rango de Thief. Sólo acepto candidatos, ¿lo entiendes?";
+	mes "Si quieres convertirte en Thief, será mejor que hables con el chico que está a mi lado.";
+	set q_job_thief,1;
+	close;
+}
+
+moc_prydb1,42,133,2	script	Thief Guildsman#thief	118,{
+	if(q_job_thief == 1) {
+		mes "[Thief Guildsman]";
+		mes "Está bien. Yas pasado por la entrevista, ¿no es así?";
+		mes "Pues no hay ningún problema. Te acepto como Thief.";
+		mes "¡Empecemos con la ceremonia de cambio de job de nuestro gremio!";
+		next;
+		mes "[Commander of Thief Guild]";
+		mes "'"+strcharinfo(0)+".'";
+		mes "'A aquellos dispuestos, la luz de la luna guiará sus pasos. Ahora que estás completamente preparado, oficialmente acepto tu entrada en el Gremio de Ladrones.'";
+		if (Class == Job_Novice){ callfunc "Job_Change",Job_Thief; }
+		else if (Class == Job_Baby) { callfunc "Job_Change",Job_Baby_Thief; }
+		set q_job_thief,0;
+		getitem 13041,1; // N_Main_Gauche
+		next;
+		mes "[Commander of Thief Guild]";
+		mes "'Felicidades por convertirte en Thief.'";
+		mes "'Desde ahora, sigue las reglas y honra con tus hechos al Gremio.'";
+		mes "'Si traes la desgracia por incumplimiento de las normas, será mejor que vigiles tu espalda.'";
+		mes "'De todas formas, seguro que te conviertes en un gran thief.'";
+		next;
+		mes "[Brad]";
+		mes "¡Heee~Yaaaa~! ¡Felicidades compañero!";
+		mes "Me llamo 'Brad'. Estoy al cargo de Recursos Humanos.";
+		mes "I'm not sure for now but you'll have more chances to see me later on.";
+		next;
+		mes "[Brad]";
+		mes "Ya no puedo hacer nada más por ti, así que prosigue tu camino. Soy un hombre muy ocupado.";
+		mes "Nos vemos.";
+		close;
+	}
+	if(Class != Job_Novice) {
+		if(Class == Job_Thief) {
+			mes "[Brad]";
+			mes "No tengo nada para ti en estos momentos. Mejor vuelve en otro momento.";
+		}else{
+			mes "[Thief Guildsman]";
+			mes "Ey~ Ey~ ¡No perteneces al Gremio de Ladrones!";
+			mes "¿Qué estás haciendo aquí? No puedes pasearte por ahí como si fuera tu casa~ Hweeeee~ Sal de aquí~";
+		}
+		close;
+	}
+	mes "[Thief Guildsman]";
+	mes "¿Cómo? ¿Qué hace un novice como tú visitando un sitio como este?";
+	mes "Si te interesa el gremio de ladrones, deberías hablar primero con la chica antipática que está a mi lado.";
+	close;
+}

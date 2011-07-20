@@ -1,0 +1,2604 @@
+//===== eAthena Script =======================================
+//= Thanatos Tower Quest
+//===== By: ==================================================
+//= [Ishizu-chan]
+//===== Current Version: =====================================
+//= 2.1
+//===== Compatible With: =====================================
+//= Any eAthena Version i guess?
+//===== Description: =========================================
+//= It's the Thanatos Tower Quest...
+//===== Additional Comments: =================================
+//= 1.0 First Release [Ishizu-chan]
+//= 1.1 Updated Thanatos Tower Quest to official. [SinSloth]
+//= 1.2 Fixed a bug where Reward NPC didn't give you Zeny and Exp. [SinSloth]
+//= 1.3 Added a checking in boss map to reset event if there's no player. [SinSloth]
+//= 1.4 Changed the way the Thanatos Portal works to allow people to enter
+//= as long as Thanatos is alive. [SinSloth]
+//= 1.4a You may enter either "Charmstone" or "Charm Stone" [Lupus]
+//= 1.5 Fixed a bug in the number part of the quest. [SinSloth]
+//= 1.6 Fixed experience gains to match upcoming rate adjustments. [SinSloth]
+//= 1.7 Fixed a minor bug with prevented code part from reseting properly. [SinSloth]
+//= 1.8 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 1.9 Fixed a bug in the last event which allowed an exploit after the first summoning. [SinSloth]
+//= 2.0 Cleaned up the trans-only check, and added expanded classes. [L0ne_W0lf]
+//= 2.1 Replaced effect numerics with constants. [Samuray22]
+//============================================================
+
+hu_fild01,140,163,5	script	Tower Keeper	852,3,3,{
+
+	mes "[Gatei]";
+	mes "Bienvenido, aventurero.";
+	mes "Mi nombre es Gatei Knumm, encargado";
+	mes "del Thanatos Tower.";
+	mes "¿En qué puedo servirle?";
+	next;
+	switch( select( "¿Thanatos Tower? ","Costo de la entrada.","Entrar a la torre","Cancelar" ) )
+	{
+		case 1:
+			mes "[Gatei]";
+			mes "Sí, la torre enfrente";
+			mes "de ustedes fue una antigua ruina";
+			mes "que obtuvo su nombre de unas palabras";
+			mes "escritas en una placa de piedra que se encontraron";
+			mes "adentro. Hoy, este sitio es";
+			mes "una popular atracción turística.";
+			next;
+			mes "[Gatei]";
+			mes "Esta torre aumentó su popularidad";
+			mes "entre los aventureros cuando el";
+			mes "Rekenber Corporation comenzó";
+			mes "con los esfuerzos para la reconstrucción de la torre.";
+			mes "El 1er y 2do piso están ahora";
+			mes "reconstruidos y libres de monstruos.";
+			next;
+			mes "[Gatei]";
+			mes "Sin embargo, la reconstrucción del";
+			mes "3ro piso y los más altos se encuentran";
+			mes "incompletas. Esos niveles están";
+			mes "aun infestadas de monstruos, por eso estamos contratando empleados";
+			mes "temporales para exterminarlos por completo.";
+			next;
+			mes "[Gatei]";
+			mes "Si te interesa el";
+			mes "contrato temporal de trabajo,";
+			mes "o te gustaría conocer más";
+			mes "acerca de este lugar en detalle, por favor";
+			mes "dirígete con uno de los guías adentro.";
+			mes "Gracias y disfruta de tu visita~";
+			close;
+			
+		case 2:
+			mes "[Gatei]";
+			mes "Todos son bienvenidos a";
+			mes "disfrutar de Thanatos Tower.";
+			mes "Solo el 1er y 2do piso";
+			mes "están abiertas al público";
+			mes "a estas horas. El costo de la entrada";
+			mes "es 5,000 zeny por persona.";
+			next;
+			mes "[Gatei]";
+			mes "5,000 zeny puede parecer un poco";
+			mes "excesivo para una atracción turística,";
+			mes "pero confía en mi, esta torre proporciona una experiencia única. Además,";
+			mes "nuestros clientes y empleados leales obtienen descuentos especiales~";
+			close;
+			
+		case 3:
+			mes "[Gatei]";
+			mes "¿Te gustaría";
+			mes "entrar a Thanatos Tower?";
+			mes "El costo de la entrada es ^FF00005,000 zeny^000000.";
+			next;
+			switch( select( "Entrar","Tal vez la próxima vez." ) )
+			{
+				case 1:
+					if (thana_quest)
+					{
+						mes "[Gatei]";
+						mes "Oh,  "+strcharinfo(0)+"!";
+						mes "¡Bienvenido de vuelta! Como has";
+						mes "obtenido un contrato temporal";
+						mes "de Rekenber, el costo de tu entrada";
+						mes "es solo 3,000 zeny.";
+						next;
+						switch( select( "Entrar","No, gracias." ) )
+						{
+							case 1:
+								if (Zeny < 3000)
+								{
+									mes "[Gatei]";
+									mes "Oh, lo siento...";
+									mes "Pero parece que no tienes";
+									mes "suficiente zeny. Bueno,";
+									mes "solo vuelve de nuevo más tarde~";
+									close;
+								}
+								mes "[Gatei]";
+								mes "Gracias, y";
+								mes "por favor continua con";
+								mes "el buen trabajo. Ah, y no";
+								mes "olvides: ¡la seguridad es lo primero";
+								mes "cuando combates esos monstruos!";
+								set Zeny,Zeny - 3000;
+								close2;
+								warp "tha_scene01",131,220;
+								end;
+								
+							case 2:
+								mes "[Gatei]";
+								mes "Oh, lo siento...";
+								mes "Pero parece que no tienes";
+								mes "suficiente zeny. Bueno,";
+								mes "solo vuelve de nuevo más tarde~";
+								close;
+						}
+					}
+					if (Zeny < 5000)
+					{
+						mes "[Gatei]";
+						mes "Bueno...";
+						mes "Hm. Lo siento, pero";
+						mes "parece que no tienes suficiente";
+						mes "zeny para pagar la entrada.";
+						mes "Por favor vuelve más tarde...";
+						close;
+					}
+					mes "[Gatei]";
+					mes "Ah, he recibido tu";
+					mes "pago de la entrada. Te lo agradezco";
+					mes "mucho. Ahora, espero";
+					mes "que disfrutes tu visita";
+					mes "a Thanatos Tower~";
+					set Zeny,Zeny - 5000;
+					close2;
+					warp "tha_scene01",131,220;
+					end;
+				
+				case 2:
+					mes "[Gatei]";
+					mes "Muy bien. Por favor ven";
+					mes "y visítanos de nuevo aquí";
+					mes "en Thanatos Tower.";
+					close;
+			}
+		
+		case 4:
+			mes "[Gatei]";
+			mes "Muy bien. Por favor ven";
+			mes "y visítanos de nuevo aquí";
+			mes "en Thanatos Tower.";
+			close;
+	}
+}
+
+tha_t01,149,78,4	script	Guide	90,{
+
+	if(!thana_quest)
+	{
+		mes "[Ditze]";
+		mes "Bienvenido a Thanatos Tower.";
+		mes "La reconstrucción de la torre es";
+		mes "un proyecto de Rekenber Corporation,";
+		mes "y el 1er y 2do piso están";
+		mes "ahora abiertas al público. Entonces,";
+		mes "¿en qué lo puedo ayudar hoy?";
+		next;
+		switch( select( "Información acerca de la torre","Contrato temporal de trabajo","Cancelar" ) )
+		{
+			case 1:
+				mes "[Ditze]";
+				mes "Cuándo fue esta torre construida,";
+				mes "quién la construyo y su propósito";
+				mes "son un misterio. Hay";
+				mes "muchos rumores acerca de que era";
+				mes "un laboratorio de Mage, un monumento a un héroe,";
+				mes "o la fortaleza de un demonio...";
+				next;
+				mes "[Ditze]";
+				mes "La Rekenber Corporation ha";
+				mes "estado investigando el origen de";
+				mes "esta torre, pero no ha sido posible confirmar nada. Aunque hemos perdido";
+				mes "a muchos investigadores por los monstruos de la torre, ¡no nos rendiremos!";
+				next;
+				mes "[Ditze]";
+				mes "Rekenber está convencido de que esta";
+				mes "torre guarda muchos secretos y";
+				mes "exitosamente se ha reconstruido los";
+				mes "primeros dos pisos de esta torre en";
+				mes "la persecución de este conocimiento.";
+				next;
+				mes "[Ditze]";
+				mes "Actualmente, estamos enfocados en";
+				mes "reconstruir el 3er y 4to";
+				mes "piso de la torre. Por suerte, muchos";
+				mes "aventureros se encuentran exterminando";
+				mes "los monstruos de esos pisos, trabajando bajo contratos temporales.";
+				next;
+				mes "[Ditze]";
+				mes "A este paso, esperamos";
+				mes "completar la reconstrucción";
+				mes "del 3er y 4to piso en";
+				mes "un futuro cercano, llevándonos";
+				mes "más de cerca de nuestra meta, de abrir los 12 pisos del Thanatos Tower.";
+				next;
+L_Ask1:
+				switch( select( "¿Monstruos de la torre?","¿Contrato temporal de trabajo?","......" ) )
+				{
+					case 1:
+						mes "[Ditze]";
+						mes "Sí, cuando comenzamos la";
+						mes "reconstrucción del";
+						mes "Thanatos Tower, estos";
+						mes "monstruos con apariencia de ángeles";
+						mes "aparecieron de la nada";
+						mes "para atacar a todos los trabajadores.";
+						next;
+						mes "[Ditze]";
+						mes "Al principio, testigos pensaron";
+						mes "que estos monstruos podían";
+						mes "ser, tu sabes, ángeles de verdad.";
+						mes "Pero si lo fueran, ¿por qué ellos";
+						mes "atacarían sin ninguna razón?";
+						next;
+						mes "[Ditze]";
+						mes "De todos modos, le pedimos a la Juno ";
+						mes "Sage Academy que los investigaran,";
+						mes "y nos confirmaron que";
+						mes "estas criaturas angelicales eran verdaderos monstruos--su semejanza a";
+						mes "ángeles era mera coincidencia.";
+						next;
+						goto L_Ask1;
+
+					case 2:
+						break;
+												
+					case 3:
+						mes "[Ditze]";
+						mes "Para desarrollar los pisos sobre";
+						mes "el 2do piso, vamos a";
+						mes "necesitar de todos los trabajadores";
+						mes "temporales que podamos contratar. ¿Por qué";
+						mes "no consideras trabajar";
+						mes "para nosotros bajo un contrato temporal?";
+						close;
+				}
+				break;
+				
+			case 2:
+				break;
+				
+			case 3:
+				mes "[Ditze]";
+				mes "Bueno, si tienes alguna";
+				mes "pregunta, siéntete libre de";
+				mes "preguntarme más tarde. Mi nombre es";
+				mes "Ditze Lappa. ¡Que tengas un buen día!";
+				close;
+		}
+		mes "[Ditze]";
+		mes "Ya lo habrás oído";
+		mes "por parte del Tower Keeper, pero";
+		mes "estamos contratando aventureros para que exterminen los monstruos";
+		mes "en el 3er piso y niveles más altos de la torre mediante";
+		mes "la forma de empleado temporal.";
+		next;
+		mes "[Ditze]";
+		mes "Yo estoy encargado de contratar";
+		mes "trabajadores temporales, por eso";
+		mes "háblame si estás interesado. Solo a los trabajadores temporales";
+		mes "se les permite el acceso a niveles superiores";
+		mes "acá en Thanatos Tower.";
+		next;
+		switch( select( "Quizá la próxima vez","Claro, me gustaría trabajar para usted." ) )
+		{
+			case 1:
+				mes "[Ditze]";
+				mes "Bueno, está bien.";
+				mes "Pero ven y habla";
+				mes "conmigo tan pronto como decidas";
+				mes "que quieres ayudar con";
+				mes "la reconstrucción de la torre";
+				mes "trabajando para Rekenber.";
+				close;
+									
+			case 2:
+				mes "[Ditze]";
+				mes "¡Eso es bueno!";
+				mes "¿Me harías el favor de llenar";
+				mes "este acuerdo de";
+				mes "empleo primero? Veamos";
+				mes "Tu nombre es...";
+				mes ""+strcharinfo(0)+", ¿cierto?";
+				next;
+				switch( select( "Sí" ) )
+				{
+					case 1:
+						break;
+				}
+				mes "[Ditze]";
+				mes "Muy bien, por favor lee";
+				mes "cuidadosamente este acuerdo.";
+				mes "Si estás de acuerdo con todas";
+				mes "las condiciones, continua";
+				mes "y solo firma abajo.";
+				next;
+				mes "^3355FFDitze te pasa el documento";
+				mes "Employment Agreement ";
+				mes "para que lo leas.^000000";
+				next;
+				mes "- Employment Agreement - ";
+				mes " ";
+				mes "1. Este employment agreement";
+				mes "es solamente efectivo entre Rekenber";
+				mes "Corporation (''Empleador'') y  "+strcharinfo(0)+"(''Empleado'').";
+				mes "1-1. Este employment agreement";
+				mes "está clasificado como un contrato";
+				mes "mercenario entre las dos partes.";
+				mes "2. Los términos de este contrato";
+				mes "inmediatamente toman efecto una vez que";
+				mes "es firmado por ambas partes";
+				mes "(Empleador y Empleado).";
+				mes "3. Cuando el Empleado realiza";
+				mes "una misión, los resultados de la misión";
+				mes "deberán ser verificados con una prueba física aceptable que deberá";
+				mes "ser presentado al Empleador.";
+				mes "3-1. Por favor refiérase a la Sección";
+				mes "7A para ejemplos sobre pruebas";
+				mes "aceptables de exterminación de monstruos.";
+				mes "3-2. Las pruebas aceptables son";
+				mes "determinadas y definidas por un";
+				mes "representante del Empleado.";
+				mes "4. El empleador no asignará premios";
+				mes "a Empleados luego de recibir";
+				mes "las pruebas de exterminio.";
+				mes "4-1. Posibles premios para";
+				mes "la exterminación de monstruos puede";
+				mes "incluir los siguientes.";
+				mes ".................................................";
+				mes ".................................................";
+				mes ".................................................";
+				mes ".................................................";
+				mes ".................................................";
+				mes "13. Estos términos del contrato son";
+				mes "aplicables solamente dentro del";
+				mes "Thanatos Tower.";
+				mes "14. Los Empleados recibirán";
+				mes "un descuento en el pago de la entrada";
+				mes "a Thanatos Tower.";
+				mes " ";
+				mes " ";
+				mes " ";
+				mes "Firma del Empleador____________";
+				mes "Firma del empleado____________";
+				next;
+				switch( select( "Firmar","No firmar" ) )
+				{
+					case 1:
+						mes "^3355FFTu firmas dos copias del";
+						mes "Employment Agreement.^000000 ";
+						next;
+						mes "[Ditze]";
+						mes "Gracias. Ahora, eres";
+						mes "oficialmente un empleado de";
+						mes "¡Rekenber Corporation! Bueno,";
+						mes "dentro de los límites de esta torre.";
+						mes "Este contrato no aplica";
+						mes "fuera de este lugar.";
+						next;
+						mes "[Ditze]";
+						mes "De ahora en adelante, puedes hablar";
+						mes "con el 2nd Floor Guide para";
+						mes "entrar al 3er piso. Si tienes";
+						mes "alguna pregunta sobre la recompensa";
+						mes "de la misión, por favor pregunta a ^3355FFLiei^000000.";
+						next;
+						mes "[Ditze]";
+						mes "Si quieres revisar";
+						mes "más información acerca";
+						mes "del trabajo, por favor habla";
+						mes "con el 2nd Floor Guide.";
+						mes "Gracias, y bienvenido";
+						mes "a Rekenber Corporation~";
+						set thana_quest,1;
+						close;
+									
+					case 2:
+						mes "[Ditze]";
+						mes "¿Oh? ¿Hubo algún artículo";
+						mes "dentro del contrato en la cual";
+						mes "estás en desacuerdo?";
+						mes "Está bien. Pero si cambias de";
+						mes "opinión, por favor vuelve";
+						mes "y pregúntame en cualquier momento. Gracias~";
+						close;
+				}
+		}
+	}
+	mes "[Ditze]";
+	mes "Para una información más detallada";
+	mes "sobre la exterminación de monstruos,";
+	mes "por favor pregunta al 2nd Floor Guide";
+	mes "y el Guide a mi lado. Bueno,";
+	mes "esperamos que disfrutes tu experiencia trabajando con Rekenber Corporation~";
+	close;
+}
+
+tha_t01,140,78,4	script	Guide#thana	831,{
+
+	if(!thana_quest)
+	{
+		mes "[Liei]";
+		mes "Buen día, soy";
+		mes "Liei Kuniziet de la";
+		mes "Misión del empleado";
+		mes "Departamento de recompensas";
+		mes "acá en Thanatos Tower.";
+		next;
+		switch( select( "¿Recompensa de la misión del empleado?","Continua con el buen trabajo." ) )
+		{
+			case 1:
+				mes "[Liei]";
+				mes "En este momento, Rekenber Corporation";
+				mes "está contratando empleados temporales";
+				mes "para desarrollar los niveles más altos";
+				mes "del Thanatos Tower. Si te gustaría";
+				mes "inscribirte, por favor pregunta a";
+				mes "Ditze justo a mi lado.";
+				close;
+				
+			case 2:
+				mes "[Liei]";
+				mes "Gracias. Ah y espero";
+				mes "que disfrutes tu visita";
+				mes "acá del Thanatos Tower.";
+				close;
+		}
+	}
+	mes "[Liei]";
+	mes "Ah, hola~";
+	mes "¿En qué puedo servirle?";
+	next;
+	switch( select( "Recompensa","Nada" ) )
+	{
+		case 1:
+			mes "[Liei]";
+			mes "Eres "+strcharinfo(0)+", ¿correcto?";
+			mes "Déjame revisar nuestro expedientes";
+			mes "de trabajadores temporales para--ah.";
+			mes "Acá estas, entonces";
+			mes "¿puedes decirme que tipo";
+			mes "de prueba de la misión trajiste?";
+			next;
+			switch( select( "Golden Ornament ","Red Feather ","Blue Feather ","Cursed Seal " ) )
+			{
+				case 1:
+					callfunc "Func_Thana",7435;
+				
+				case 2:
+					callfunc "Func_Thana",7440;
+					
+				case 3:
+					callfunc "Func_Thana",7441;
+				
+				case 4:
+					callfunc "Func_Thana",7442;
+			}
+			
+		case 2:
+			mes "[Liei]";
+			mes "Muy bien, entonces.";
+			mes "Por favor haga su mejor esfuerzo";
+			mes "para exterminar los";
+			mes "monstruos que infestaron";
+			mes "los pisos superiores";
+			mes "del Thanatos Tower~";
+			close;
+	}
+}
+		
+function	script	Func_Thana	{
+
+	if(!countitem(getarg(0)))
+	{
+		mes "[Liei]";
+		mes "Oh, lo siento, pero";
+		mes "no tienes ninguno "+ getitemname(getarg(0)) +"";
+		mes "Por favor revisa tu inventario una vez más...";
+		close;
+	}
+	mes "[Liei]";
+	mes "La recompensa por cada uno";
+	mes ""+ getitemname(getarg(0)) +" es...";
+	mes " ";
+	mes "1,000 zeny ";
+	mes "2,000 EXP ";
+	next;
+	mes "[Liei]";
+	mes "Si entregas tus "+ countitem(getarg(0)) +"";
+	mes ""+ getitemname(getarg(0)) +", entonces";
+	mes "recibirás un total de...";
+	mes " ";
+	mes ""+ countitem(getarg(0)) * 1000 +" zeny ";
+	mes ""+ countitem(getarg(0)) * 2000 +" EXP ";
+	next;
+	mes "[Liei]";
+	mes "¿Te gustaría";
+	mes "cambiar todos tus "+ getitemname(getarg(0)) +"";
+	mes "por una recompensa ahora?";
+	next;
+	switch( select( "Sí","No " ) )
+	{
+		case 1:
+			mes "[Liei]";
+			mes "¡Bien! Aquí esta tu";
+			mes ""+ countitem(getarg(0)) * 1000 +" zeny y";
+			mes ""+ countitem(getarg(0)) * 2000 +" EXP. Gracias,";
+			mes "y por favor sigue adelante";
+			mes "con el buen trabajo~";
+			set Zeny,Zeny + countitem(getarg(0)) * 1000;
+			getexp countitem(getarg(0))*2000,0;
+			delitem getarg(0),countitem(getarg(0));
+			close;
+			
+		case 2:
+			mes "[Liei]";
+			mes "Claro, no hay problema.";
+			mes "Solo vuelve y";
+			mes "habla conmigo cada vez";
+			mes "que quieras recibir";
+			mes "una recompensa, ¿esta bien?";
+			close;
+	}
+}
+
+tha_t02,231,161,5	script	Entrance Guide	874,{
+
+	if(!thana_quest)
+	{
+		mes "[Burled]";
+		mes "Estás frente a la entrada para el 3er piso. Solamente empleados";
+		mes "temporales contratados están autorizados";
+		mes "para entrar a esta área. Para información sobre el contrato temporal de Rekenber,";
+		mes "por favor hablar con el 2nd Floor Guide.";
+		close;
+	}
+	mes "[Burled]";
+	mes "......";
+	mes ".........";
+	mes "............";
+	next;
+	switch( select( "Discúlpame...","........." ) )
+	{
+		case 1:
+			mes "[Burled]";
+			mes "Oh... ";
+			mes "Lo siento, ¿cómo";
+			mes "puedo ayudarte?";
+			next;
+			if(thana_quest < 2)
+			{
+				switch( select( "Entrar al 3er piso","Información de la Puerta" ) )
+				{
+					case 1:
+L_Access3:
+						mes "[Burled]";
+						mes "Oh, bien. Déjame";
+						mes "revisar y ver si estás";
+						mes "en nuestra lista temporal. Hmmm...";
+						mes "Ah, eres "+strcharinfo(0)+", ¿cierto?";
+						set .@thana_level2,getareausers("tha_t02",226,156,236,166);
+						next;
+						if(.@thana_level2 < 5)
+						{
+							mes "[Burled]";
+							mes "Primero, necesitamos esperar hasta";
+							mes "que se reúnan al menos 5 empleados";
+							mes "para formar un grupo de trabajo. En";
+							mes "este momento, hay un total de";
+							mes ""+ .@thana_level2 +" trabajadores temporales esperando para";
+							mes "entrar al 3er piso.";
+							next;
+							mes "[Burled]";
+							mes "Si puedes, trata de conseguir";
+							mes "que tus amigos te ayuden";
+							mes "acercándose a mi. Por favor";
+							mes "entiende que tenemos este";
+							mes "requerimiento del grupo de trabajadores temporales";
+							mes "por varias razones de seguridad.";
+							close;
+						}
+						mes "[Burled]";
+						mes "Muy bien, estás justo";
+						mes "a tiempo. Acabamos de llegar";
+						mes "al mínimo requerido del grupo de 5";
+						mes "trabajadores, procedemos a abrir";
+						mes "la puerta al 3 piso enseguida.";
+						next;
+						mes "[Burled]";
+						mes "La puerta al 3er piso";
+						mes "se cerrará en unos instantes, por favor entra";
+						mes "tan pronto como pueda. Tenemos";
+						mes "que cerrarla rápido porque nosotros";
+						mes "no podemos tener monstruos de la torre";
+						mes "entrando a pisos inferiores.";
+						close2;
+						donpcevent "#thana3::OnOpen";
+						end;
+					
+					case 2:
+L_GateInfo:
+						mes "[Burled]";
+						mes "Esta puerta es la única entrada";
+						mes "que se conecta al 3er piso.";
+						mes "Después del 4to piso, el camino";
+						mes "entre los distintos pisos solo viajan en un";
+						mes "sentido, quiere decir que no puedes salir por";
+						mes "el mismo camino que entraste.";
+						next;
+						mes "[Burled]";
+						mes "Verás, hay un extraño";
+						mes "poder que afecta el 5to";
+						mes "piso, y todos los pisos superiores,";
+						mes "que no permite a las personas";
+						mes "regresar por el mismo camino por la cual entraron al piso.";
+						next;
+						mes "[Burled]";
+						mes "Por eso, si vas a subir más allá del";
+						mes "4to piso, por favor se cuidadoso";
+						mes "y asegúrate de tener";
+						mes "una manera de volver. Además, los";
+						mes "monstruos aumentan de poder";
+						mes "así como vas subiendo la torre...";
+						next;
+						mes "[Burled]";
+						mes "Debido a que los niveles superiores son";
+						mes "muy peligrosos, solo abrimos la";
+						mes "puerta del 3er piso cuando 5 o más";
+						mes "se encuentran reunidos aquí. Por lo tanto,";
+						mes "tendrás que esperar si menos";
+						mes "que 5 trabajadores están reunidos.";
+						close;
+				}
+			}
+			switch( select( "Entrar al 3er piso","Información de la Puerta","Acerca de Satan Morroc..." ) )
+			{
+				case 1:
+					goto L_Access3;
+					
+				case 2:
+					goto L_GateInfo;
+				
+				case 3:
+					mes "[Burled]";
+					mes "¿Satan Morroc...? ";
+					mes "Ummm... ¿no hablas";
+					mes "acerca de ese pequeño tabú?";
+					mes "Quiero decir, las personas se enojan";
+					mes "o se asustan de solo escuchar";
+					mes "ese nombre, ¿sabes?";
+					next;
+					switch( select( "Es importante que yo aprenda más.","Lo siento, yo no sabía..." ) )
+					{
+						case 1:
+							mes "[Burled]";
+							mes "Cuando el Rekenber Corporation";
+							mes "comenzó la reconstrucción del";
+							mes "Thanatos Tower, el Cool Event";
+							mes "Corporation era su mayor";
+							mes "socio de negocios en el proyecto";
+							mes "de reconstrucción de la torre.";
+							next;
+							mes "[Burled]";
+							mes "Sí, yo recuerdo que ese Cool";
+							mes "Event Corp. invirtió grandes";
+							mes "cantidades de zeny y fuerza humana";
+							mes "para reconstruir la torre y expandir";
+							mes "sus relaciones de negocios";
+							mes "con Rekenber Corporation...";
+							next;
+							mes "[Burled]";
+							mes "Pero luego, hubo unos";
+							mes "tipos de accidentes. Una explosión";
+							mes "ocurrió en los pisos superiores";
+							mes "del Thanatos Tower. Algunos dicen";
+							mes "que pudo haber sido Satan Morroc, pero yo no sé con seguridad.";
+							next;
+							mes "[Burled]";
+							mes "Debido a esa explosión,";
+							mes "Cool Event Corporation retiró";
+							mes "su inversión en el proyecto de";
+							mes "reconstrucción de la torre. Ellos";
+							mes "básicamente abandonaron Rekenber Corporation en el esfuerzo por la torre.";
+							next;
+							mes "[Burled]";
+							mes "Pero bueno...";
+							mes "Poco después de que eso pasara,";
+							mes "Rekenber Corporation asumió el control de";
+							mes "Cool Event Corporation. Quiero decir,";
+							mes "que la compañía retiene su nombre, pero es ahora una compañía de Rekenber.";
+							next;
+							mes "[Burled]";
+							mes "Lo sé, lo sé...";
+							mes "Todo suena terriblemente";
+							mes "sombrío. Hazme un favor";
+							mes "y no le digas a nadie que";
+							mes "te conté sobre este rumor, ¿está bien?";
+							close;
+
+						case 2:
+							close;
+					}
+			}
+		
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes ".............";
+			close;
+	}
+}
+
+tha_t02,227,163,1	script	#thana3	45,1,1,{
+
+OnInit:
+	disablenpc "#thana3";
+	end;
+
+OnTouch:
+	if(!thana_quest) warp "tha_t02",227,158;
+	else warp "tha_t03",219,159;
+	end;
+	
+OnOpen:
+	enablenpc "#thana3";
+	initnpctimer;
+	end;
+	
+OnTimer30000:
+	stopnpctimer;
+	disablenpc "#thana3";
+	end;
+}
+
+tha_t03,67,70,0	script	Machine Device#thana1	111,{
+
+	if((countitem(7421)) || (countitem(7426)))
+	{
+		mes "^3355FFEs una máquina peculiar";
+		mes "que emite un extraño ronquido";
+		mes "zumbido. Luego de mirar de cerca,";
+		mes "puedes percibir una débil";
+		mes "barrera de energía alrededor";
+		mes "de la máquina.^000000";
+		close;
+	}
+	mes "^3355FFUn misterioso campo de";
+	mes "energía parece rodear";
+	mes "el dispositivo mecánico y";
+	mes "su poder previene que te";
+	mes "acerques a la máquina.^000000";
+	next;
+	switch( select( "Destruir el Campo de Energía","Retirarse" ) )
+	{
+		case 1:
+			if (getequipweaponlv(4) < 4)
+			{
+				mes "^3355FFGolpeas el campo de energía";
+				mes "con tu arma";
+				mes "usando toda tu fuerza,";
+				mes "pero no fuiste capaz de";
+				mes "romper la barrera.";
+				mes "Probablemente necesites una";
+				mes "arma más poderosa...^000000";
+				close;
+			}
+			mes "^3355FFCon tu "+getequipname(4)+" en";
+			mes "mano, tu golpeas el campo de energía";
+			mes "con toda tu fuerza. Luego de absorber el impacto, el";
+			mes "campo se desvanece con un suave y";
+			mes "gentil sonido a ''pzzzzzh''.^000000";
+			next;
+			switch( select( "Investigar el dispositivo","Retirarse" ) )
+			{
+				case 1:
+					mes "^3355FFMientras investigas el";
+					mes "dispositivo, accidentalmente";
+					mes "presionas un botón, resultando";
+					mes "en un fuerte pitido ruidoso";
+					mes "y la activación de";
+					mes "la pantalla del monitor.^000000";
+					next;
+					switch( select( "Leer la pantalla","Ignorar la pantalla" ) )
+					{
+						case 1:
+							mes "^426F42He usado la tecnología";
+							mes "del Gate Seal para sellar la puerta";
+							mes "y las piedras encantadas. Aunque";
+							mes "los sellos se encuentren en su lugar, no puedo";
+							mes "dejar de preocuparme de que ellos puedan";
+							mes "romperse en el futuro.^000000";
+							next;
+							mes "^426F42No puedo relajarme cuando un, debo";
+							mes "decir, grupo particular codicie";
+							mes "las piedras encantadas y puedan romper";
+							mes "los sellos fácilmente. Para disuadirlos,";
+							mes "he cambiado el destino de la Puerta antes de sellar la Puerta.^000000";
+							next;
+							mes "^426F42No revisé la coordenadas";
+							mes "exactas del destino para";
+							mes "la Puerta después de haberlas cambiado,";
+							mes "pero el destino me da";
+							mes "una cálida y confortante sensación,";
+							mes "así que definitivamente no es el infierno.^000000";
+							next;
+							mes "^3355FFHaz leído todo el";
+							mes "texto mostrado en la";
+							mes "pantalla. Juzgando por el";
+							mes "contenido, probablemente se encontraba";
+							mes "más texto antes y después de la";
+							mes "sección mostrada en la pantalla.^000000";
+							next;
+							switch( select( "Seguir investigando el dispositivo","Terminar la investigación" ) )
+							{
+								case 1:
+									mes "^3355FFHaz encontrado";
+									mes "un pequeña llave en la";
+									mes "esquina de la máquina.";
+									mes "Solo tocando esta llave";
+									mes "te da una extraña sensación.^000000";
+									getitem 7421,1;
+									close;
+									
+								case 2:
+									break;
+							}
+							break;
+							
+						case 2:
+							mes "^3355FFDecides ignorar el";
+							mes "texto mostrado en la pantalla,";
+							mes "e inmediatamente descubres una";
+							mes "pequeña llave tirada en la esquina";
+							mes "de la máquina. Solo tocándola";
+							mes "te da una extraña sensación.^000000";
+							getitem 7421,1;
+							close;
+					}
+					break;
+					
+				case 2:
+					mes "^3355FFDecides dejar";
+					mes "la máquina sola.^000000";
+					close;
+			}
+			break;
+		
+		case 2:
+			break;
+	}
+	mes "^3355FFDecides dejar";
+	mes "la máquina sola.^000000";
+	close;
+}
+
+tha_t04,195,195,0	script	Machine Device#thana2	111,{
+
+	if((countitem(7422)) || (countitem(7427)))
+	{
+		mes "^3355FFEste dispositivo está actualmente";
+		mes "inactiva o no está en";
+		mes "operación. Pero, podrías";
+		mes "haberla usado antes...^000000";
+		close;
+	}
+	mes "^3355FFEncuentras un teclado numérico";
+	mes "debajo del monitor.";
+	mes "Mientras presionas una de los";
+	mes "teclas numéricas, escuchas un";
+	mes "pitido mientras se activa la pantalla.^000000";
+	next;
+	mes "[Screen]";
+	mes "Por favor, introducir un número";
+	mes "de tres dígitos. No digite un";
+	mes "mismo número más de una";
+	mes "vez, ni use el número 0.";
+	next;
+	if(@thanatry) goto L_Input;
+L_Recode:
+	set @thanacode1,rand(1,9);
+	set @thanacode2,rand(1,9);
+	set @thanacode3,rand(1,9);
+	if((@thanacode1 == @thanacode2) || (@thanacode1 == @thanacode3) || (@thanacode2 == @thanacode3)) goto L_Recode;
+L_Input:
+	input @thanainput;
+	if((@thanainput < 100) || (@thanainput > 999))
+	{
+		mes "[Screen]";
+		mes "Introducir número";
+		mes "no se ha cumplido";
+		mes "con el requerimiento.";
+		mes "Por favor introduzca un";
+		mes "número de tres dígitos.";
+		close;
+	}
+	set @thanainput1,@thanainput / 100;
+	set @thanainput2,(@thanainput % 100) / 10;
+	set @thanainput3,@thanainput % 10;
+	if ((@thanainput1 == 0) || (@thanainput2 == 0) || (@thanainput3 == 0))
+	{
+		mes "[Screen]";
+		mes "Violación al parámetro";
+		mes "de entrada del número. El";
+		mes "número 0 ha sido introducido,";
+		mes "o un número se ha";
+		mes "introducido más de una vez.";
+		next;
+		goto L_Input;
+	}
+	mes "[Screen]";
+	mes "Haz introducido...";
+	mes "^0000ff "+@thanainput1+"^000000, ^0000ff "+@thanainput2+"^000000, ^0000ff "+@thanainput3+"^000000";
+	mes " ";
+	mes "Calculando resultados...";
+	mes "Por favor, espere un momento...";
+	set @thanatry,@thanatry +1;
+	next;
+	set @strike,0;
+	set @ball,0;
+	if(@thanainput1 == @thanacode1) set @strike,@strike +1;
+	if(@thanainput2 == @thanacode2) set @strike,@strike +1;
+	if(@thanainput3 == @thanacode3) set @strike,@strike +1;
+	if((@thanainput1 == @thanacode2) || (@thanainput1 == @thanacode3)) set @ball,@ball +1;
+	if((@thanainput2 == @thanacode1) || (@thanainput2 == @thanacode3)) set @ball,@ball +1;
+	if((@thanainput3 == @thanacode1) || (@thanainput3 == @thanacode2)) set @ball,@ball +1;
+	if(@strike == 3)
+	{
+		mes "[Screen]";
+		mes "Número introducido aceptado.";
+		mes "Acceso autorizado.";
+		set @thanatry,0;
+		next;
+		mes "^3355FFLuego de que la pantalla";
+		mes "muestra la noticia del acceso de";
+		mes "autorización, un nuevo texto se";
+		mes "muestra en la pantalla,";
+		mes "y una unidad de almacenaje";
+		mes "se abre debajo del monitor.^000000";
+		next;
+		switch( select( "Leer el texto de la pantalla","Investigar el almacenaje del monitor","Cancelar" ) )
+		{
+			case 1:
+				mes "[Log Entry]";
+				mes "^426F42Eso solo puede decir que ella";
+				mes "vino acá por Santan Morroc.";
+				mes "Luego de haber investigado el área,";
+				mes "encontré rastros de batalla que involucraba";
+				mes "varias criaturas del tamaño humano y un monstruo gigante.^000000";
+				next;
+				mes "[Log Entry]";
+				mes "^426F42Presumo que su grupo";
+				mes "en realidad batallo contra Satan Morroc";
+				mes "y fue capaz de lastimarlo";
+				mes "gravemente. Parece que Satan";
+				mes "Morroc hizo una retirada hacia el sur";
+				mes "y su grupo lo siguió.^000000";
+				next;
+				mes "[Log Entry]";
+				mes "^426F42Extrañamente, no he encontrado";
+				mes "ningún rastro de ella, lo cual";
+				mes "es especialmente sospechoso ya que";
+				mes "las otras evidencias en el área han";
+				mes "permanecido por cientos de años.";
+				mes "Pero no puedo entender el por qué...^000000";
+				next;
+				mes "^3355FFHaz terminado";
+				mes "de leer la bitácora.^000000";
+				next;
+				switch( select( "Investigar el almacenaje del monitor","Cancelar" ) )
+				{
+					case 1:
+						break;
+						
+					case 2:
+						close;
+				}
+			
+			case 2:
+				mes "^3355FFEncuentras una pequeña y brillante";
+				mes "llave en una esquina vacía del";
+				mes "receptáculo del almacenaje del monitor.";
+				mes "Meramente sosteniéndolo te hace";
+				mes "sentir una extraña sensación.^000000";
+				if(thana_quest == 1) set thana_quest,2;
+				getitem 7422,1;
+				close;
+				
+			case 3:
+				mes "^3355FFDespués de un pequeño momento";
+				mes "escuchas un bajo";
+				mes "pitido. El texto en la pantalla";
+				mes "desaparece y el almacenaje";
+				mes "debajo del monitor se desliza";
+				mes "y se cierra, ocultándose.^000000";
+				close;
+		}
+	}
+	mes "[Screen]";
+	mes "*Beeeeep* ";
+	mes "Secuencia numérica";
+	mes "no autorizada.";
+	next;
+	mes "[Screen]";
+	mes "Número correcto";
+	mes "en lugar correcto";
+	mes "total en secuencia: ^FF0000"+@strike+"^000000";
+	mes " ";
+	mes "Total de números correctos: ^FF0000"+@ball+"^000000";
+	next;
+	if(@thanatry > 4)
+	{
+		mes "[Screen]";
+		mes "Número correcto";
+		mes "secuencia";
+		mes "de autorización fue...";
+		mes "^ff0000 "+@thanacode1+"^000000, ^ff0000 "+@thanacode2+"^000000, ^ff0000 "+@thanacode3+"^000000";
+		mes "Número autorizado";
+		mes "cambiara en el reintento.";
+		set @thanatry,0;
+		close;
+	}
+	goto L_Input;
+}
+
+tha_t05,101,37,0	script	Machine Device#thana3	111,{
+
+	if((countitem(7423)) || (countitem(7428)))
+	{
+		mes "^3355FFNo encontrarás nada aquí,";
+		mes "además del desvanecido";
+		mes "patrón que marca el piso.^000000";
+		close;
+	}
+	set .@thana_level5,getareausers("tha_t05",98,34,104,40);
+	if(!.@thana_level5)
+	{
+		mes "^3355FFEstás inexplicablemente atraído";
+		mes "a este dispositivo mecánico.";
+		mes "Aparte de la pantalla verde";
+		mes "en el medio, no hay otros";
+		mes "botones ni interruptores.^000000";
+		if(rand(1,3) == 2)
+		{
+			next;
+			mes "^3355FFPercibes un pequeño texto al";
+			mes "al fondo de la pantalla verde";
+			mes "que lee, \"La operación de este";
+			mes "dispositivo, requiere la presencia de";
+			mes "cuatro o más personas que sean detectadas";
+			mes "por el sistema del plato de presión.''^000000";
+			close;
+		}
+		close;
+	}
+	else if(.@thana_level5 < 4)
+	{
+		mes "^3355FFEstás inexplicablemente atraído";
+		mes "a este dispositivo mecánico.";
+		mes "Aparte de la pantalla verde";
+		mes "en el medio, no hay otros";
+		mes "botónes ni interruptores.^000000";
+		next;
+		mes "^3355FFInvestigas cuidadosamente";
+		mes "los alrededores y notas";
+		mes "un punto brillante en el suelo";
+		mes "a la par del dispositivo mecánico.^000000";
+		close;
+	}
+	else
+	{
+		mes "^3355FFMientras te aproximas al dispositivo, el";
+		mes "piso alrededor de este comienza a resplandecer..";
+		mes "Aparece un texto en la pantalla del";
+		mes "dispositivo, y el receptáculo del almacenaje debajo del monitor se abre..^000000";
+		next;
+		switch( select( "Leer el texto de la pantalla","Investigar el almacenaje del monitor","Cancelar" ) )
+		{
+			case 1:
+				mes "[Log Entry]";
+				mes "^426F42Después de la dura prueba,";
+				mes "decidí retirarme. Pero";
+				mes "antes de que pudiera hacer eso,";
+				mes "tuve que sellar la Puerta";
+				mes "que conduce a ese lugar.^000000";
+				next;
+				mes "[Log Entry]";
+				mes "^426F42ISi alguien fuera a encontrar";
+				mes "esta torre y usar la Puerta";
+				mes "con malas intenciones, el mundo estaría plagado por una era de caos.";
+				mes "Claro, me hubieran detenido si hubieran sabido que estaba sellando la puerta...^000000";
+				next;
+				mes "[Log Entry]";
+				mes "^426F42Me tomo un largo tiempo";
+				mes "pero fui capaz de sellar";
+				mes "la puerta secretamente. Pero antes";
+				mes "de comenzar a sellar la Puerta.";
+				mes "Decidí examinarlo más a";
+				mes "fondo, por si acaso.^000000";
+				next;
+				mes "[Log Entry]";
+				mes "^426F42En mis estudios de la Puerta,";
+				mes "descubrí que su poder";
+				mes "deriva de las Charm";
+				mes "Stones. Por eso, para prevenir";
+				mes "un mal uso de este poder. Sellé las stones separadamente...^000000";
+				next;
+				mes "^3355FFHaz terminado";
+				mes "de leer el texto";
+				mes "que se mostraba";
+				mes "en la pantalla.^000000";
+				close;
+				
+			case 2:
+				mes "^3355FFEncontraste una pequeña";
+				mes "y brillante llave dentro del";
+				mes "receptáculo del almacenaje localizado";
+				mes "debajo del monitor.^000000";
+				getitem 7423,1;
+				close;
+				
+			case 3:
+				close;
+		}
+	}
+}
+
+tha_t06,43,152,0	script	Machine Device#thana4	111,{
+
+	if((countitem(7424)) || (countitem(7429)))
+	{
+		mes "^3355FFEncuentras un dispositivo";
+		mes "mecánico desactivado con un";
+		mes "interesante serie de engranes.^000000";
+		close;
+	}
+	mes "^3355FFEncuentras un dispositivo";
+	mes "mecánico que tiene muchos";
+	mes "engranes. Una pantalla negra";
+	mes "está montada al lado";
+	mes "de la máquina.^000000";
+	next;
+	switch( select( "Investigar","Cancelar" ) )
+	{
+		case 1:
+			if((countitem(7421)) || (countitem(7422)) || (countitem(7423)))
+			{
+				mes "^3355FFMientras escudriñas entre";
+				mes "los engranes, ellos responden a";
+				mes "la llave en tu inventario,";
+				mes "emitiendo luz y extraños";
+				mes "ruidos. Después de un rato, ellos";
+				mes "paran y se vuelven silenciosos.^000000";
+				next;
+				switch( select( "Investigar el chasis de la máquina","Investigar los engranes","Cancelar" ) )
+				{
+					case 1:
+						mes "^3355FFLa llave en tu inventario";
+						mes "no parece afectar";
+						mes "el chasis de la máquina. La";
+						mes "pantalla montada al lado";
+						mes "sigue en blanco y desactivada.^000000";
+						close;
+						
+					case 2:
+						set @thana_small1,0;
+						set @thana_small2,0;
+						set @thana_big1,0;
+						set @thana_big2,0;
+						set @thana_big3,0;
+						mes "^3355FFTocas los engranes y";
+						mes "encuentras que en realidad se";
+						mes "mueven muy lentamente. Notas";
+						mes "que hay 2 engranes pequeños";
+						mes "y 3 engranes grandes, un total de";
+						mes "5 engranes en esta máquina.^000000";
+						next;
+						mes "^3355FFLos engranes grandes se mueven";
+						mes "verticalmente, arriba y abajo, mientras";
+						mes "prensan contra los engranes más";
+						mes "pequeños para hacerlos rotar.^000000";
+						next;
+						mes "^3355FFJuzgando por el sacudir";
+						mes "y los temblorosos sonidos, los";
+						mes "engranes pueden estar mal alineados.";
+						mes "Puedes ser capaz de activar";
+						mes "la máquina con alinear";
+						mes "apropiadamente todos los engranes.^000000";
+L_Wheels:
+						next;
+						mes "^3355FF¿Cuál engranaje te";
+						mes "gustaría cambiar?^000000";
+						switch( select( "1st Small Wheel ","2nd Small Wheel ","1st Big Wheel ","2nd Big Wheel ","3rd Big Wheel ","Checar la configuración actual de los engranes","Reajustar los engranes a la configuración predeterminada" ) )
+						{
+							case 1:
+								set @wheelresult,callfunc("Thana_Wheels","Press Wheel",@thana_small1,2,1,3);
+								if(@wheelresult == 1) break;
+								goto L_Wheels;
+								
+							case 2:
+								set @wheelresult,callfunc("Thana_Wheels","Press Wheel",@thana_small2,3,2,1);
+								if(@wheelresult == 1) break;
+								goto L_Wheels;
+								
+							case 3:
+								set @wheelresult,callfunc("Thana_Wheels","Vertically Shift Wheel",@thana_big1,1,3,2);
+								if(@wheelresult == 1) break;
+								goto L_Wheels;
+										
+							case 4:
+								set @wheelresult,callfunc("Thana_Wheels","Vertically Shift Wheel",@thana_big2,2,3,1);
+								if(@wheelresult == 1) break;
+								goto L_Wheels;
+										
+							case 5:
+								set @wheelresult,callfunc("Thana_Wheels","Vertically Shift Wheel",@thana_big3,2,1,3);
+								if(@wheelresult == 1) break;
+								goto L_Wheels;
+										
+							case 6:
+								if(@thana_small1 == 0) mes "1st Small Wheel: Sin Cambios";
+								else if(@thana_small1 == 1) mes "1st Small Wheel: Abajo ";
+								else if(@thana_small1 == 2) mes "1st Small Wheel: Arriba";
+								else if(@thana_small1 == 3) mes "1st Small Wheel: Presionar";
+								if(@thana_small2 == 0) mes "2nd Small Wheel: Sin Cambios";
+								else if(@thana_small2 == 1) mes "2nd Small Wheel: Presionar ";
+								else if(@thana_small2 == 2) mes "2nd Small Wheel: Abajo ";
+								else if(@thana_small2 == 3) mes "2nd Small Wheel: Arriba ";
+								if(@thana_big1 == 0) mes "1st Big Wheel: Sin Cambios";
+								else if(@thana_big1 == 1) mes "1st Big Wheel: Arriba ";
+								else if(@thana_big1 == 2) mes "1st Big Wheel: Desplazar";
+								else if(@thana_big1 == 3) mes "1st Big Wheel: Abajo";
+								if(@thana_big2 == 0) mes "2nd Big Wheel: Sin Cambios";
+								else if(@thana_big2 == 1) mes "2nd Big Wheel: Desplazar ";
+								else if(@thana_big2 == 2) mes "2nd Big Wheel: Arriba ";
+								else if(@thana_big2 == 3) mes "2nd Big Wheel: Abajo ";
+								if(@thana_big3 == 0) mes "3rd Big Wheel: Sin Cambios ";
+								else if(@thana_big3 == 1) mes "3rd Big Wheel: Abajo ";
+								else if(@thana_big3 == 2) mes "3rd Big Wheel: Arriba ";
+								else if(@thana_big3 == 3) mes "3rd Big Wheel: Desplazar ";
+								goto L_Wheels;
+									
+							case 7:
+								set @thana_small1,0;
+								set @thana_small2,0;
+								set @thana_big1,0;
+								set @thana_big2,0;
+								set @thana_big3,0;
+								goto L_Wheels;
+						}
+						next;
+						mes "^3355FFMientras ajustas los engranes,";
+						mes "repentinamente se inmovilizan con";
+						mes "un firme click. Luego, la pantalla del dispositivo se activa y muestra";
+						mes "un texto mientras que un compartimiento";
+						mes "de almacenaje debajo";
+						mes "del monitor se abre.^000000";
+						next;
+						switch( select( "Leer el texto de la pantalla","Investigar el almacenaje del monitor","Cancelar" ) )
+						{
+							case 1:
+								mes "[Log Entry]";
+								mes "^426F42No fueron ni los humanos";
+								mes "ni los dioses los que construyeron esta";
+								mes "torre: fueron los demonios.";
+								mes "Intrigado por esta información,";
+								mes "decidí tratar de entender por qué construyeron Thanatos Tower.^000000";
+								next;
+								mes "[Log Entry]";
+								mes "^426F42En mi investigación, me enteré";
+								mes "que esta torre fue usada como una";
+								mes "puerta para convocar demonios del infierno durante la guerra de los mil años,";
+								mes "y que el infame Satan Morroc fue uno de los que fueron invocados acá.^000000";
+								next;
+								mes "[Log Entry]";
+								mes "^426F42Satan Morroc... admito";
+								mes "que estoy interesado en aprender";
+								mes "más sobre su aparición, ya que";
+								mes "eso ocurrió cerca del mismo momento que cuando ella vino a";
+								mes "Thanatos Tower...^000000 ";
+								next;
+								mes "^3355FFHas terminado";
+								mes "de leer el texto";
+								mes "que se mostraba";
+								mes "en la pantalla.^000000";
+								close;
+									
+							case 2:
+								mes "^3355FFDentro del compartimiento de";
+								mes "almacenaje del monitor,";
+								mes "encuentras una pequeña y brillante";
+								mes "llave que decides tomar.^000000";
+								getitem 7424,1;
+								close;
+										
+							case 3:
+								break;
+						}
+						break;
+						
+					case 3:
+						break;
+				}
+			}
+			else
+			{
+				mes "^3355FFEste dispositivo mecánico está";
+				mes "activado, como lo evidencia sus";
+				mes "relucientes engranes en movimiento.^000000";
+				close;
+			}
+			
+		case 2:
+			mes "^3355FFNo vez la necesidad de";
+			mes "investigar si nada parece";
+			mes "peculiar o fuera de lugar...^000000";
+			close;
+	}
+			
+}
+
+function	script	Thana_Wheels	{
+
+	switch( select( "Levantar Rueda","Bajar Rueda",getarg(0) ) )
+	{
+		case 1:
+			set getarg(1),getarg(2);
+			if((@thana_small1 == getarg(2)) && (@thana_small2 == getarg(2)) && (@thana_big1 == getarg(2)) && (@thana_big2 == getarg(2)) && (@thana_big3 == getarg(2))) return 1;
+			return 0;
+							
+		case 2:
+			set getarg(1),getarg(3);
+			if((@thana_small1 == getarg(3)) && (@thana_small2 == getarg(3)) && (@thana_big1 == getarg(3)) && (@thana_big2 == getarg(3)) && (@thana_big3 == getarg(3))) return 1;
+			return 0;
+							
+		case 3:
+			set getarg(1),getarg(4);
+			if((@thana_small1 == getarg(4)) && (@thana_small2 == getarg(4)) && (@thana_big1 == getarg(4)) && (@thana_big2 == getarg(4)) && (@thana_big3 == getarg(4))) return 1;
+			return 0;
+	}
+}
+
+tha_t09,19,158,0	script	Machine Device	111,{
+
+	if((countitem(7425)) || (countitem(7430)))
+	{
+		mes "^3355FFEncuentras un peculiar";
+		mes "dispositivo mecánico que";
+		mes "no se encuentra en operación.^000000";
+		close;
+	}
+	mes "^3355FFEncuentras un máquina que";
+	mes "emite una suave luz y un débil";
+	mes "ronquido. Hay un monitor, con";
+	mes "varias ranuras de colores";
+	mes "distintos debajo de él, al";
+	mes "frente de la máquina.^000000";
+	if(!((countitem(7421)) || (countitem(7426))) && ((countitem(7422)) || (countitem(7427))) && ((countitem(7423)) || (countitem(7428))) && ((countitem(7424)) || (countitem(7429)))) close;
+	next;
+	mes "^3355FFTambién notas que hay";
+	mes "varias ranuras que parecen";
+	mes "ser del tamaño perfecto para";
+	mes "tus llaves y las Charm Stones.";
+	next;
+	input @input$;
+	if (@input$ == "Key" || @input$ == "Charmstone" || @input$ == "Charm stone" || @input$ == "Charm Stone")
+	{
+		mes "^3355FFInsertas las llaves en las";
+		mes "ranuras, emparejándolos por";
+		mes "su correspondiente color, y pones";
+		mes "las Charm Stones en las ranuras de la máquina. Las stones comienzan a brillar,";
+		mes "aparece texto en la pantalla y el almacenaje del monitor se abre.^000000";
+		next;
+		switch( select( "Leer el texto de la pantalla","Investigar el almacenaje del monitor","Cancelar" ) )
+		{
+			case 1:
+				mes "[Log Entry]";
+				mes "^426F42Mientras seguía el rastro de ella hacia";
+				mes "el norte, pasé por muchos";
+				mes "lugares desérticos. Finalmente,";
+				mes "pasé por una pequeña aldea";
+				mes "donde me enteré de una torre";
+				mes "que negaba la entrada a humanos.^000000";
+				next;
+				mes "[Log Entry]";
+				mes "^426F42Instantáneamente me di cuenta de que ella";
+				mes "debió haber ido a la torre.";
+				mes "Me dirigí hacia allá y cuando";
+				mes "llegué, quedé impactado: era grotesca y no asemejaba";
+				mes "a un edificio humano para nada.^000000";
+				next;
+				mes "^426F42También estaba sorprendido--";
+				mes "tecnología avanzada fue probablemente";
+				mes "necesario para construir las complejas estructuras de la torre.";
+				mes "Luego descubrí un interesante dato mientras exploraba la torre...^000000";
+				next;
+				mes "^3355FFHas terminado";
+				mes "de leer el texto";
+				mes "que se mostraba";
+				mes "en la pantalla.^000000";
+				close;
+				
+			case 2:
+				mes "^3355FFRegistras el compartimiento";
+				mes "de almacenaje debajo de la";
+				mes "pantalla y encuentras una rara";
+				mes "llave. Tan pronto como lo tomas,";
+				mes "la actividad de la máquina se detiene.";
+				mes "Después, recoges los Charm";
+				mes "Stones y tus otras llaves.^000000";
+				getitem 7425,1;
+				close;
+			
+			case 3:
+				mes "^3355FFRecoges los Charm";
+				mes "Stones y las llaves que";
+				mes "insertaste en la máquina.^000000";
+				close;
+		}
+	}
+	mes "Intentas";
+	mes ""+@input$+",";
+	mes "pero nada sucede.";
+	close;
+}
+
+tha_t04,150,44,0	script	Seal#thana1	111,{
+
+	if(!countitem(7423))
+	{
+		mes "^3355FFEsta área es protegida por";
+		mes "algún poder misterioso.";
+		mes "Tratas de tocar el sello,";
+		mes "pero luego hace un fuerte zumbido";
+		mes "y empuja tu mano lejos.^000000";
+		percentheal -10,0;
+		close;
+	}
+	mes "^3355FFEsta área es protegida por";
+	mes "algún poder misterioso.";
+	mes "Tratas de tocar el sello,";
+	mes "pero luego hace un fuerte zumbido";
+	mes "y empuja tu mano lejos.";
+	mes "con un destello de luz azul.^000000";
+	next;
+	switch( select( "Investigar","¡No hay manera de que pueda romper este sello!" ) )
+	{
+		case 1:
+			input @input$;
+			if (@input$ == "Blue Key")
+			{
+				mes "^3355FFGentilmente sujetas la llave";
+				mes "azul y lo llevas hacia";
+				mes "el sello. Extrañamente, tu";
+				mes "mano no es empujada lejos esta";
+				mes "vez, y el sello comienza a";
+				mes "emitir una misteriosa luz.^000000";
+				next;
+				mes "^3355FFEncuentras una ranura";
+				mes "en el sello, insertas la blue";
+				mes "key y lentamente le das vuelta. La";
+				mes "luz del sello se desvanece, revelando un";
+				mes "Charm Stone. Una vez que tomas";
+				mes "la piedra, la memoria de alguien";
+				mes "es inyectada a tu mente.^000000";
+				next;
+				mes "^333333¡Thanatos! Tenemos un";
+				mes "mensaje de la guild.";
+				mes "¡Quieren que paremos lo que";
+				mes "estamos haciendo y regresar ahora!^000000";
+				mes " ";
+				mes "^333333M-Mejor nos apuramos...^000000";
+				next;
+				mes "......";
+				mes ".........";
+				mes "............";
+				next;
+				mes "^3355FFLas imágenes desvanecen de";
+				mes "tu mente tan rápido como";
+				mes "estas aparecieron. ¿Qué podrá";
+				mes "haber sucedido en el pasado?^000000";
+				delitem 7423,1;
+				getitem 7428,1;
+				close;
+			}
+			mes "^3355FFNecesitarás intentar";
+			mes "algo más para ";
+			mes "poder romper este";
+			mes "sello. ¿Qué es lo que";
+			mes "probablemente necesitarías?^000000";
+			close;
+		
+		case 2:
+			mes "^3355FFTe alejas del";
+			mes "sello, indispuesto a tratar";
+			mes "con el poder que se mantiene";
+			mes "evitando tu avance.^000000";
+			close;
+	}
+}
+
+tha_t05,218,116,0	script	Seal#thana2	111,{
+
+	if(!countitem(7421))
+	{
+		mes "^3355FFEsta área es protegida por";
+		mes "algún poder misterioso.";
+		mes "Tratas de tocar el sello,";
+		mes "pero luego hace un fuerte zumbido";
+		mes "y empuja tu mano lejos.^000000";
+		percentheal -10,0;
+		close;
+	}
+	mes "^3355FFEsta área es protegida por";
+	mes "algún poder misterioso.";
+	mes "Tratas de tocar el sello,";
+	mes "pero luego hace un fuerte zumbido";
+	mes "y empuja tu mano lejos.";
+	mes "con un destello de luz roja.^000000";
+	next;
+	switch( select( "Investigar","¡No hay manera de que pueda romper este sello!" ) )
+	{
+		case 1:
+			input @input$;
+			if (@input$ == "Red Key")
+			{
+				mes "^3355FFGentilmente sujetas la llave";
+				mes "roja y lo llevas hacia";
+				mes "el sello. Extrañamente, tu";
+				mes "mano no es empujada lejos esta";
+				mes "vez, y el sello comienza a";
+				mes "emitir una misteriosa luz.^000000";
+				next;
+				mes "^3355FFEncuentras una ranura";
+				mes "en el sello, insertas la red";
+				mes "key y lentamente le das vuelta. La";
+				mes "luz del sello se desvanece, revelando un";
+				mes "Charm Stone. Una vez que tomas";
+				mes "la piedra, la memoria de alguien";
+				mes "es inyectada a tu mente.^000000";
+				next;
+				mes "...Entonces decidimos";
+				mes "despachar unos Assassin";
+				mes "Cross para derrotar a Satan Morroc.";
+				mes "Pero honestamente, la probabilidad de ";
+				mes "victoria era cerca del 1 por ciento.";
+				mes "Es mejor que nada, pero... es el enloquecido Satan Morroc...^000000";
+				next;
+				mes "......";
+				mes ".........";
+				mes "............";
+				next;
+				mes "^3355FFLas imágenes desvanecen de";
+				mes "tu mente tan rápido como";
+				mes "estas aparecieron. ¿Qué podrá";
+				mes "haber sucedido en el pasado?^000000";
+				delitem 7421,1;
+				getitem 7426,1;
+				close;
+			}
+			mes "^3355FFNecesitarás intentar";
+			mes "algo más para ";
+			mes "poder romper este";
+			mes "sello. ¿Qué es lo que";
+			mes "probablemente necesitarías?^000000";
+			close;
+		
+		case 2:
+			mes "^3355FFTe alejas del";
+			mes "sello, indispuesto a tratar";
+			mes "con el poder que se mantiene";
+			mes "evitando tu avance.^000000";
+			close;
+	}
+}
+
+tha_t06,226,230,0	script	Seal#thana3	111,{
+
+	if(!countitem(7425))
+	{
+		mes "^3355FFEsta área es protegida por";
+		mes "algún poder misterioso.";
+		mes "Tratas de tocar el sello,";
+		mes "pero luego hace un fuerte zumbido";
+		mes "y empuja tu mano lejos.^000000";
+		percentheal -10,0;
+		close;
+	}
+	mes "^3355FFEsta área es protegida por";
+	mes "algún poder misterioso.";
+	mes "Tratas de tocar el sello,";
+	mes "pero luego hace un fuerte zumbido";
+	mes "y empuja tu mano lejos.";
+	mes "con un destello de luz negra.^000000";
+	next;
+	switch( select( "Investigar","¡No hay manera de que pueda romper este sello!" ) )
+	{
+		case 1:
+			input @input$;
+			if (@input$ == "Black Key")
+			{
+				mes "^3355FFGentilmente sujetas la llave";
+				mes "negra y lo llevas hacia";
+				mes "el sello. Extrañamente, tu";
+				mes "mano no es empujada lejos esta";
+				mes "vez, y el sello comienza a";
+				mes "emitir una misteriosa luz.^000000";
+				next;
+				mes "^3355FFEncuentras una ranura";
+				mes "en el sello, insertas la black";
+				mes "key y lentamente le das vuelta. La";
+				mes "luz del sello se desvanece, revelando un";
+				mes "Charm Stone. Una vez que tomas";
+				mes "la piedra, la memoria de alguien";
+				mes "es inyectada a tu mente.^000000";
+				next;
+				mes "^333333¡Lo encontramos! Así que";
+				mes "este debe ser la torre donde";
+				mes "Satan Morroc está reuniendo";
+				mes "sus sirvientes... Oh Dios,";
+				mes "son... Son miles de";
+				mes "ellos... ¿Hay alguna esperanza";
+				mes "para todos nosotros? ¿Para la humanidad?^000000";
+				next;
+				mes "......";
+				mes ".........";
+				mes "............";
+				next;
+				mes "^3355FFLas imágenes desvanecen de";
+				mes "tu mente tan rápido como";
+				mes "estas aparecieron. ¿Qué podrá";
+				mes "haber sucedido en el pasado?^000000";
+				delitem 7425,1;
+				getitem 7430,1;
+				close;
+			}
+			mes "^3355FFNecesitarás intentar";
+			mes "algo más para ";
+			mes "poder romper este";
+			mes "sello. ¿Qué es lo que";
+			mes "probablemente necesitarías?^000000";
+			close;
+		
+		case 2:
+			mes "^3355FFTe alejas del";
+			mes "sello, indispuesto a tratar";
+			mes "con el poder que se mantiene";
+			mes "evitando tu avance.^000000";
+			close;
+	}
+}
+
+tha_t07,113,129,0	script	Seal#thana4	111,{
+
+	if(!countitem(7422))
+	{
+		mes "^3355FFEsta área es protegida por";
+		mes "algún poder misterioso.";
+		mes "Tratas de tocar el sello,";
+		mes "pero luego hace un fuerte zumbido";
+		mes "y empuja tu mano lejos.^000000";
+		percentheal -10,0;
+		close;
+	}
+	mes "^3355FFEsta área es protegida por";
+	mes "algún poder misterioso.";
+	mes "Tratas de tocar el sello,";
+	mes "pero luego hace un fuerte zumbido";
+	mes "y empuja tu mano lejos.";
+	mes "con un destello de luz amarilla.^000000";
+	next;
+	switch( select( "Investigar","¡No hay manera de que pueda romper este sello!" ) )
+	{
+		case 1:
+			input @input$;
+			if (@input$ == "Yellow Key")
+			{
+				mes "^3355FFGentilmente sujetas la llave";
+				mes "amarilla y lo llevas hacia";
+				mes "el sello. Extrañamente, tu";
+				mes "mano no es empujada lejos esta";
+				mes "vez, y el sello comienza a";
+				mes "emitir una misteriosa luz.^000000";
+				next;
+				mes "^3355FFEncuentras una ranura";
+				mes "en el sello, insertas la yellow";
+				mes "key y lentamente le das vuelta. La";
+				mes "luz del sello se desvanece, revelando un";
+				mes "Charm Stone. Una vez que tomas";
+				mes "la piedra, la memoria de alguien";
+				mes "es inyectada a tu mente.^000000";
+				next;
+				mes "^333333Hola, soy Lucil. Lo siento,";
+				mes "llegué tarde, pero estaba muy ";
+				mes "lejos en otra misión...^000000";
+				mes " ";
+				mes "^333333Soy Thanatos...^000000";
+				next;
+				mes "^333333¿Por qué ella me hace";
+				mes "sentir tan extraño por dentro?";
+				mes "Siento todo lo que me";
+				mes "faltaba antes, todas las";
+				mes "cosas que quiero y quiero";
+				mes "ser, ella me da, ella";
+				mes "me completa. Que... gracioso...^000000";
+				mes "'Ella me hace sentirme extraño...como si hubiera encontrado mi otra mitad...'";
+				next;
+				mes "......";
+				mes ".........";
+				mes "............";
+				next;
+				mes "^3355FFLas imágenes desvanecen de";
+				mes "tu mente tan rápido como";
+				mes "estas aparecieron. ¿Qué podrá";
+				mes "haber sucedido en el pasado?^000000";
+				delitem 7422,1;
+				getitem 7427,1;
+				close;
+			}
+			mes "^3355FFNecesitarás intentar";
+			mes "algo más para ";
+			mes "poder romper este";
+			mes "sello. ¿Qué es lo que";
+			mes "probablemente necesitarías?^000000";
+			close;
+		
+		case 2:
+			mes "^3355FFTe alejas del";
+			mes "sello, indispuesto a tratar";
+			mes "con el poder que se mantiene";
+			mes "evitando tu avance.^000000";
+			close;
+	}
+}
+
+tha_t10,129,159,0	script	Seal	111,{
+
+	if(!countitem(7424))
+	{
+		mes "^3355FFEsta área es protegida por";
+		mes "algún poder misterioso.";
+		mes "Tratas de tocar el sello,";
+		mes "pero luego hace un fuerte zumbido";
+		mes "y empuja tu mano lejos.^000000";
+		percentheal -10,0;
+		close;
+	}
+	mes "^3355FFEsta área es protegida por";
+	mes "algún poder misterioso.";
+	mes "Tratas de tocar el sello,";
+	mes "pero luego hace un fuerte zumbido";
+	mes "y empuja tu mano lejos.";
+	mes "con un destello de luz verde.^000000";
+	next;
+	switch( select( "Investigar","¡No hay manera de que pueda romper este sello!" ) )
+	{
+		case 1:
+			input @input$;
+			if (@input$ == "Green Key")
+			{
+				mes "^3355FFGentilmente sujetas la llave";
+				mes "verde y lo llevas hacia";
+				mes "el sello. Extrañamente, tu";
+				mes "mano no es empujada lejos esta";
+				mes "vez, y el sello comienza a";
+				mes "emitir una misteriosa luz.^000000";
+				next;
+				mes "^3355FFEncuentras una ranura";
+				mes "en el sello, insertas la green";
+				mes "key y lentamente le das vuelta. La";
+				mes "luz del sello se desvanece, revelando un";
+				mes "Charm Stone. Una vez que tomas";
+				mes "la piedra, la memoria de alguien";
+				mes "es inyectada a tu mente.^000000";
+				next;
+				mes "^333333Esta batalla determinará";
+				mes "el destino de la humanidad. Debemos";
+				mes "derrotar a Satan Morroc. No hay";
+				mes "alternativa. ¡¿Quién está conmigo?! ";
+				mes "^333333*Cough Cough* ¡El demonio";
+				mes "es muy fuerte! No p-podemos...^000000";
+				next;
+				mes "^333333Tontos humanos debiluchos.";
+				mes "Debieron saberlo.";
+				mes "...¡Esto no puede ser! ¿No es esto--? ";
+				mes "^333333GGGRRRRAH! ¡C-COMO SE ATREVEN";
+				mes "HUMANOS! ¡COMO SE ATREVEEEEEEN...! ";
+				next;
+				mes "......";
+				mes ".........";
+				mes "............";
+				next;
+				mes "^3355FFLas imágenes desvanecen de";
+				mes "tu mente tan rápido como";
+				mes "estas aparecieron. ¿Qué podrá";
+				mes "haber sucedido en el pasado?^000000";
+				delitem 7424,1;
+				getitem 7429,1;
+				close;
+			}
+			mes "^3355FFNecesitarás intentar";
+			mes "algo más para ";
+			mes "poder romper este";
+			mes "sello. ¿Qué es lo que";
+			mes "probablemente necesitarías?^000000";
+			close;
+		
+		case 2:
+			mes "^3355FFTe alejas del";
+			mes "sello, indispuesto a tratar";
+			mes "con el poder que se mantiene";
+			mes "evitando tu avance.^000000";
+			close;
+	}
+}
+
+tha_t12,96,58,0	script	Stone Statue#thana1	111,{
+
+	if(!$@thana_summon)
+	{
+		mes "^3355FFHaz encontrado una ";
+		mes "estatua de piedra con";
+		mes "un visible hueco";
+		mes "en el área del pecho.^000000";
+		if((countitem(7426)) && (countitem(7427)) && (countitem(7428)) && (countitem(7429)) && (countitem(7430)))
+		{
+			next;
+			mes "^3355FFAsí como te acercas a la estatua,";
+			mes "tu Red Charm Stone y";
+			mes "la estatua comienzan a brillar con";
+			mes "una tenue luz roja.^000000";
+			next;
+			switch( select( "Insertar el Charm Stone en el Statue","Cancelar" ) )
+			{
+				case 1:
+					mes "^3355FFUna vez que insertas el";
+					mes "Red Charm Stone, la";
+					mes "estatua brilla aún más fuerte";
+					mes "con una misteriosa luz.^000000";
+					delitem 7426,1;
+					specialeffect EF_BEGINSPELL3;
+					enablenpc "tteffect2";
+					donpcevent "tteffect2::OnGlow";
+					set $@thana_summon,1;
+					close;
+				
+				case 2:
+					mes "^3355FFDecides no";
+					mes "insertar el Charm Stone,";
+					mes "optando por investigar está";
+					mes "área un poco más.^000000";
+					close;
+			}
+		}
+		else if((countitem(7426)) || (countitem(7427)) || (countitem(7428)) || (countitem(7429)) || (countitem(7430)))
+		{
+			next;
+			mes "^3355FFAsí como te acercas a la estatua, una de tus Charm Stones comienza a";
+			mes "brillar. Sin embargo, la misma estatua no está respondiendo. Probablemente";
+			mes "necesites todas las Charm Stones para";
+			mes "poder activarla completamente.^000000";
+			close;
+		}
+		else close;
+	}
+	else if($@thana_summon == 6)
+	{
+		mes "^3355FFLa estatua está emanando una";
+		mes "intensa luz, haciéndola tan caliente";
+		mes "que no puedes acercarte a ella.^000000";
+		close;
+	}
+	else
+	{
+		mes "^3355FFEsta estatua está brillando";
+		mes "con una misteriosa luz.";
+		mes "Alguna extraña fuerte impide";
+		mes "que te aproximes a ella.^000000";
+		close;
+	}
+}
+
+tha_t12,104,18,0	script	Stone Statue#thana2	111,{
+
+	if($@thana_summon == 2)
+	{
+		mes "^3355FFHaz encontrado una ";
+		mes "estatua de piedra con";
+		mes "un visible hueco";
+		mes "en el área del pecho.^000000";
+		if(countitem(7428))
+		{
+			next;
+			mes "^3355FFAsí como te acercas a la estatua,";
+			mes "tu Blue Charm Stone comienza";
+			mes "a brillar con una tenue luz";
+			mes "azul, y la estatua responde";
+			mes "brillando tenuemente con luz roja.^000000";
+			next;
+			switch( select( "Insertar el Charm Stone en el Statue","Cancelar" ) )
+			{
+				case 1:
+					mes "^3355FFUna vez que insertas el";
+					mes "Blue Charm Stone, la";
+					mes "estatua brilla aún más fuerte";
+					mes "con una misteriosa luz.^000000";
+					delitem 7428,1;
+					specialeffect EF_BEGINSPELL3;
+					enablenpc "tteffect5";
+					donpcevent "tteffect5::OnGlow";
+					set $@thana_summon,3;
+					close;
+				
+				case 2:
+					mes "^3355FFDecides no";
+					mes "insertar el Charm Stone,";
+					mes "optando por investigar está";
+					mes "área un poco más.^000000";
+					close;
+			}
+		}
+		close;
+	}
+	else if($@thana_summon == 6)
+	{
+		mes "^3355FFLa estatua está emanando una";
+		mes "intensa luz, haciéndola tan caliente";
+		mes "que no puedes acercarte a ella.^000000";
+		close;
+	}
+	else
+	{
+		mes "^3355FFEsta estatua está brillando";
+		mes "con una misteriosa luz.";
+		mes "Alguna extraña fuerte impide";
+		mes "que te aproximes a ella.^000000";
+		close;
+	}
+}
+
+tha_t12,128,86,0	script	Stone Statue#thana3	111,{
+
+	if($@thana_summon == 3)
+	{
+		mes "^3355FFHaz encontrado una ";
+		mes "estatua de piedra con";
+		mes "un visible hueco";
+		mes "en el área del pecho.^000000";
+		if(countitem(7430))
+		{
+			next;
+			mes "^3355FFAsí como te acercas a la estatua,";
+			mes "tu Black Charm Stone comienza";
+			mes "a emanar una escalofriante oscuridad.";
+			mes "En respuesta, la estatua comienza a resplandecer con una siniestra luz roja.^000000";
+			next;
+			switch( select( "Insertar el Charm Stone en el Statue","Cancelar" ) )
+			{
+				case 1:
+					mes "^3355FFUna vez que insertas el";
+					mes "Black Charm Stone, la";
+					mes "estatua brilla aún más fuerte";
+					mes "con una misteriosa luz.^000000";
+					delitem 7430,1;
+					specialeffect EF_BEGINSPELL7;
+					enablenpc "tteffect1";
+					donpcevent "tteffect1::OnGlow";
+					set $@thana_summon,4;
+					close;
+				
+				case 2:
+					mes "^3355FFDecides no";
+					mes "insertar el Charm Stone,";
+					mes "optando por investigar está";
+					mes "área un poco más.^000000";
+					close;
+			}
+		}
+		close;
+	}
+	else if($@thana_summon == 6)
+	{
+		mes "^3355FFLa estatua está emanando una";
+		mes "intensa luz, haciéndola tan caliente";
+		mes "que no puedes acercarte a ella.^000000";
+		close;
+	}
+	else
+	{
+		mes "^3355FFEsta estatua está brillando";
+		mes "con una misteriosa luz.";
+		mes "Alguna extraña fuerte impide";
+		mes "que te aproximes a ella.^000000";
+		close;
+	}
+}
+
+tha_t12,161,58,0	script	Stone Statue#thana4	111,{
+
+	if($@thana_summon == 1)
+	{
+		mes "^3355FFHaz encontrado una ";
+		mes "estatua de piedra con";
+		mes "un visible hueco";
+		mes "en el área del pecho.^000000";
+		if(countitem(7427))
+		{
+			next;
+			mes "^3355FFAsí como te acercas a la estatua,";
+			mes "tu Yellow Charm Stone";
+			mes "empieza a emanar una brillante luz";
+			mes "amarilla, y la estatua emite";
+			mes "un rojo resplandor.^000000";
+			next;
+			switch( select( "Insertar el Charm Stone en el Statue","Cancelar" ) )
+			{
+				case 1:
+					mes "^3355FFUna vez que insertas el";
+					mes "Yellow Charm Stone, la";
+					mes "estatua brilla aún más fuerte";
+					mes "con una misteriosa luz.^000000";
+					delitem 7427,1;
+					specialeffect EF_BEGINSPELL5;
+					enablenpc "tteffect3";
+					donpcevent "tteffect3::OnGlow";
+					set $@thana_summon,2;
+					close;
+				
+				case 2:
+					mes "^3355FFDecides no";
+					mes "insertar el Charm Stone,";
+					mes "optando por investigar está";
+					mes "área un poco más.^000000";
+					close;
+			}
+		}
+		close;
+	}
+	else if($@thana_summon == 6)
+	{
+		mes "^3355FFLa estatua está emanando una";
+		mes "intensa luz, haciéndola tan caliente";
+		mes "que no puedes acercarte a ella.^000000";
+		close;
+	}
+	else
+	{
+		mes "^3355FFEsta estatua está brillando";
+		mes "con una misteriosa luz.";
+		mes "Alguna extraña fuerte impide";
+		mes "que te aproximes a ella.^000000";
+		close;
+	}
+}
+
+tha_t12,154,18,0	script	Stone Statue#thana5	111,{
+
+	if($@thana_summon == 4)
+	{
+		mes "^3355FFHaz encontrado una ";
+		mes "estatua de piedra con";
+		mes "un visible hueco";
+		mes "en el área del pecho.^000000";
+		if(countitem(7429))
+		{
+			next;
+			mes "^3355FFAsí como te acercas a la estatua,";
+			mes "tu Green Charm Stone empieza";
+			mes "a irradiar una suave luz verde,";
+			mes "y la estatua comienza emanar";
+			mes "un brillante resplandor rojo.^000000";
+			next;
+			switch( select( "Insertar el Charm Stone en el Statue","Cancelar" ) )
+			{
+				case 1:
+					mes "^3355FFUna vez que insertas el";
+					mes "Green Charm Stone, la";
+					mes "estatua brilla aún más fuerte";
+					mes "con una misteriosa luz.^000000";
+					specialeffect EF_BEGINSPELL4;
+					enablenpc "tteffect4";
+					donpcevent "tteffect4::OnGlow";
+					delitem 7429,1;
+					next;
+					mes "^3355FFLa cresta en la tierra";
+					mes "rodeada por las cinco";
+					mes "brillantes estatuas están ahora";
+					mes "activadas, y emiten";
+					mes "un escalofriante y poderosa energía.^000000";
+					set $@thana_summon,5;
+					set $@thana_summon2,0;
+					enablenpc "WarpThana";
+					close;
+				
+				case 2:
+					mes "^3355FFDecides no";
+					mes "insertar el Charm Stone,";
+					mes "optando por investigar está";
+					mes "área un poco más.^000000";
+					close;
+			}
+		}
+		close;
+	}
+	else if($@thana_summon == 6)
+	{
+		mes "^3355FFLa estatua está emanando una";
+		mes "intensa luz, haciéndola tan caliente";
+		mes "que no puedes acercarte a ella.^000000";
+		close;
+	}
+	else
+	{
+		mes "^3355FFEsta estatua está brillando";
+		mes "con una misteriosa luz.";
+		mes "Alguna extraña fuerte impide";
+		mes "que te aproximes a ella.^000000";
+		close;
+	}
+}
+
+tha_t12,129,56,0	script	tteffect1	139,{
+
+OnInit:
+	disablenpc "tteffect1";
+	end;
+	
+OnGlow:
+	initnpctimer;
+	end;
+	
+OnTimer500:
+OnTimer1000:
+OnTimer1500:
+OnTimer2000:
+OnTimer2500:
+	specialeffect EF_BEGINSPELL7;
+	end;
+	
+OnTimer3000:
+	specialeffect EF_BEGINSPELL7;
+	stopnpctimer;
+	if($@thana_summon == 6)	end;
+	initnpctimer;
+	end;
+
+OnStop:
+	stopnpctimer;
+	end;
+}
+
+tha_t12,125,52,0	script	tteffect2	139,{
+
+OnInit:
+	disablenpc "tteffect2";
+	end;
+	
+OnGlow:
+	initnpctimer;
+	end;
+	
+OnTimer500:
+OnTimer1000:
+OnTimer1500:
+OnTimer2000:
+OnTimer2500:
+	specialeffect EF_BEGINSPELL3;
+	end;
+	
+OnTimer3000:
+	specialeffect EF_BEGINSPELL3;
+	stopnpctimer;
+	if($@thana_summon == 6)	end;
+	initnpctimer;
+	end;
+
+OnStop:
+	stopnpctimer;
+	end;
+}
+
+tha_t12,134,52,0	script	tteffect3	139,{
+
+OnInit:
+	disablenpc "tteffect3";
+	end;
+	
+OnGlow:
+	initnpctimer;
+	end;
+	
+OnTimer500:
+OnTimer1000:
+OnTimer1500:
+OnTimer2000:
+OnTimer2500:
+	specialeffect EF_BEGINSPELL5;
+	end;
+	
+OnTimer3000:
+	specialeffect EF_BEGINSPELL5;
+	stopnpctimer;
+	if($@thana_summon == 6)	end;
+	initnpctimer;
+	end;
+	
+OnStop:
+	stopnpctimer;
+	end;
+}
+
+tha_t12,132,47,0	script	tteffect4	139,{
+
+OnInit:
+	disablenpc "tteffect4";
+	end;
+	
+OnGlow:
+	initnpctimer;
+	end;
+	
+OnTimer500:
+OnTimer1000:
+OnTimer1500:
+OnTimer2000:
+OnTimer2500:
+	specialeffect EF_BEGINSPELL4;
+	end;
+	
+OnTimer3000:
+	specialeffect EF_BEGINSPELL4;
+	stopnpctimer;
+	if($@thana_summon == 6)	end;
+	initnpctimer;
+	end;
+	
+OnStop:
+	stopnpctimer;
+	end;
+}
+
+tha_t12,127,47,0	script	tteffect5	139,{
+
+OnInit:
+	disablenpc "tteffect5";
+	end;
+	
+OnGlow:
+	initnpctimer;
+	end;
+	
+OnTimer500:
+OnTimer1000:
+OnTimer1500:
+OnTimer2000:
+OnTimer2500:
+	specialeffect EF_BEGINSPELL2;
+	end;
+	
+OnTimer3000:
+	specialeffect EF_BEGINSPELL2;
+	stopnpctimer;
+	if($@thana_summon == 6)	end;
+	initnpctimer;
+	end;
+	
+OnStop:
+	stopnpctimer;
+	end;
+}
+
+tha_t12,130,52,0	script	WarpThana	45,1,1,{
+
+OnInit:
+	disablenpc "WarpThana";
+	end;
+	
+OnTouch:
+	if($@thana_summon == 5) warp "thana_boss",136,116;
+	else
+	{
+		donpcevent "tteffect1::OnStop";
+		donpcevent "tteffect2::OnStop";
+		donpcevent "tteffect3::OnStop";
+		donpcevent "tteffect4::OnStop";
+		donpcevent "tteffect5::OnStop";
+		disablenpc "WarpThana";
+		end;
+	}
+}
+
+thana_boss,217,167,0	script	Crest#1	111,3,3,{
+
+	end;
+	
+OnTouch:
+	if($@thana_summon == 6)
+	{
+		mes "^3355FFNo puedes acercarte";
+		mes "a la cresta porque está";
+		mes "generando un intenso calor.^000000";
+		close;
+	}
+	mes "^3355FFHay un hueco con";
+	mes "una extraña forma en el";
+	mes "medio de esta cresta morada.^000000";
+	if (countitem(7437))
+	{
+		mes "^3355FFParece que un Fragment";
+		mes "of Sorrow podría ajustarse perfectamente";
+		mes "si la pusieras adentro.^000000";
+	}
+	next;
+	input @input$;
+	if(countitem(7437))
+	{
+		if(@input$ == "Fragment of Sorrow")
+		{
+			mes "^3355FFInsertas el";
+			mes "Fragment of Sorrow ";
+			mes "en la cresta, causando";
+			mes "que intensifique su resplandor.^000000";
+			delitem 7437,1;
+			monster "thana_boss",217,167,"Sorrow",1711,1,"#Death::OnDead";
+			disablenpc "Crest#1";
+			close;
+		}
+	}
+	mes "^3355FFEsa acción no tuvo";
+	mes "efecto. Tendrás que";
+	mes "intentar diferente.^000000";
+	close;	
+}
+
+thana_boss,202,75,0	script	Crest#2	111,3,3,{
+
+	end;
+	
+OnTouch:
+	if($@thana_summon == 6)
+	{
+		mes "^3355FFNo puedes acercarte";
+		mes "a la cresta porque está";
+		mes "generando un intenso calor.^000000";
+		close;
+	}
+	mes "^3355FFHay un hueco con";
+	mes "una extraña forma en el";
+	mes "medio de esta cresta verde.^000000";
+	if (countitem(7436))
+	{
+		mes "^3355FFParece que un Fragment";
+		mes "of Agony podría ajustarse perfectamente";
+		mes "si la pusieras adentro.^000000";
+	}
+	next;
+	input @input$;
+	if(countitem(7436))
+	{
+		if(@input$ == "Fragment of Agony")
+		{
+			mes "^3355FFInsertas el";
+			mes "Fragment of Agony ";
+			mes "en la cresta, causando";
+			mes "que intensifique su resplandor.^000000";
+			delitem 7436,1;
+			monster "thana_boss",202,75,"Agony",1712,1,"#Death::OnDead";
+			disablenpc "Crest#2";
+			close;
+		}
+	}
+	mes "^3355FFEsa acción no tuvo";
+	mes "efecto. Tendrás que";
+	mes "intentar diferente.^000000";
+	close;
+}
+
+thana_boss,80,76,0	script	Crest#3	111,3,3,{
+
+	end;
+	
+OnTouch:
+	if($@thana_summon == 6)
+	{
+		mes "^3355FFNo puedes acercarte";
+		mes "a la cresta porque está";
+		mes "generando un intenso calor.^000000";
+		close;
+	}
+	mes "^3355FFHay un hueco con";
+	mes "una extraña forma en el";
+	mes "medio de esta cresta azul.^000000";
+	if (countitem(7438))
+	{
+		mes "^3355FFParece que un Fragment";
+		mes "of Hatred podría ajustarse perfectamente";
+		mes "si la pusieras adentro.^000000";
+	}
+	next;
+	input @input$;
+	if(countitem(7438))
+	{
+		if(@input$ == "Fragment of Hatred")
+		{
+			mes "^3355FFInsertas el";
+			mes "Fragment of Hatred ";
+			mes "en la cresta, causando";
+			mes "que intensifique su resplandor.^000000";
+			delitem 7438,1;
+			monster "thana_boss",80,76,"Hatred",1709,1,"#Death::OnDead";
+			disablenpc "Crest#3";
+			close;
+		}
+	}
+	mes "^3355FFEsa acción no tuvo";
+	mes "efecto. Tendrás que";
+	mes "intentar diferente.^000000";
+	close;
+}
+
+thana_boss,62,171,0	script	Crest#4	111,3,3,{
+
+	end;
+	
+OnTouch:
+	if($@thana_summon == 6)
+	{
+		mes "^3355FFNo puedes acercarte";
+		mes "a la cresta porque está";
+		mes "generando un intenso calor.^000000";
+		close;
+	}
+	mes "^3355FFHay un hueco con";
+	mes "una extraña forma en el";
+	mes "medio de esta cresta roja.^000000";
+	if (countitem(7439))
+	{
+		mes "^3355FFParece que un Fragment";
+		mes "of Despair podría ajustarse perfectamente";
+		mes "si la pusieras adentro.^000000";
+	}
+	next;
+	input @input$;
+	if(countitem(7439))
+	{
+		if(@input$ == "Fragment of Despair")
+		{
+			mes "^3355FFInsertas el";
+			mes "Fragment of Despair ";
+			mes "en la cresta, causando";
+			mes "que intensifique su resplandor.^000000";
+			delitem 7439,1;
+			monster "thana_boss",62,171,"Despair",1710,1,"#Death::OnDead";
+			disablenpc "Crest#4";
+			close;
+		}
+	}
+	mes "^3355FFEsa acción no tuvo";
+	mes "efecto. Tendrás que";
+	mes "intentar otra cosa.^000000";
+	close;	
+}
+
+thana_boss,141,218,0	script	Crest#5	111,3,3,{
+
+	end;
+	
+OnTouch:
+	if($@thana_summon2 > 3)
+	{
+		mes "^3355FFAsí como te acercas a la";
+		mes "cresta, esta comienza a brillar";
+		mes "más y más hasta que su";
+		mes "iluminación llega a ser cegador.^000000";
+		set $@thana_wave,4;
+		monster "thana_boss",140,217,"Despair",1710,1,"#Death::OnWave";
+		monster "thana_boss",140,216,"Hatred",1709,1,"#Death::OnWave";
+		monster "thana_boss",141,217,"Sorrow",1711,1,"#Death::OnWave";
+		monster "thana_boss",141,216,"Agony",1712,1,"#Death::OnWave";
+		disablenpc "Crest#5";
+		close;
+	}
+	input @input$;
+	mes "^3355FFNada ocurrió.^000000";
+	close;
+}
+
+thana_boss,5,5,0	script	#thanasummon	-1,{
+
+	end;
+
+OnSummon:
+	monster "thana_boss",139,129,"Thanatos Phantom",1708,1,"#Death::OnThanaDead";
+	end;
+
+}
+
+thana_boss,3,3,0	script	#thanatimer	-1,{
+
+OnInit:
+	set $@thana_summon,0;
+	set $@thana_summon2,0;
+	end;
+
+OnActive:
+	initnpctimer;
+	end;
+	
+OnTimer1000:
+	mapannounce "thana_boss","GGGGRRRRRRR!",1;
+	end;
+
+OnTimer2000:
+	mapannounce "thana_boss","*Rumble Rumble*",1;
+	end;
+
+OnTimer3000:
+	mapannounce "thana_boss","*Crik Crik*",1;
+	end;
+
+OnTimer4000:
+	mapannounce "thana_boss","*Zzzzrt Zzzzrt*",1;
+	end;
+
+OnTimer5000:
+	mapannounce "thana_boss","*Crik Crik*",1;
+	end;
+
+OnTimer60000:
+	mapwarp "thana_boss","tha_t12",130,47;
+	set $@thana_summon2,0;
+	enablenpc "Crest#1";
+	enablenpc "Crest#2";
+	enablenpc "Crest#3";
+	enablenpc "Crest#4";
+	enablenpc "Crest#5";
+	end;
+	
+OnTimer7200000:
+	killmonsterall "thana_boss";
+	set $@thana_summon,0;
+	stopnpctimer;
+	end;
+}
+
+thana_boss,1,1,0	script	#Death	-1,{
+
+OnDead:
+	set $@thana_summon2,$@thana_summon2 +1;
+	end;
+
+OnWave:
+	set $@thana_wave,$@thana_wave -1;
+	if($@thana_wave < 1)
+	{
+		donpcevent "#thanasummon::OnSummon";
+	}
+	end;
+	
+OnThanaDead:
+	donpcevent "#thanatimer::OnActive";
+	set $@thana_summon,6;
+	end;
+}
+
+tha_t06,119,120,0	script	thana6-7	45,1,1,{
+	if (((Upper == 1) && ((Class > Job_Thief_High) && (Class < Job_Baby))) || (((Class == Job_Gunslinger) || (Class == Job_Ninja) || (BaseClass == Job_Taekwon)) && (BaseLevel >= 95))) {
+		warp "thana_step",69,369;
+		end;
+	}
+	else {
+		mes "^3355FFUna fuerza abrumadora";
+		mes "actúa en contra tuya, previniendo";
+		mes "que procedas por este camino...^000000";
+		close;
+	}
+}

@@ -1,0 +1,358 @@
+//===== eAthena Script ======================================= 
+//= Quest NPCs related to Lutie
+//===== By: ================================================== 
+//= TonyMan & Samuray22
+//===== Current Version: ===================================== 
+//= 1.3b
+//===== Compatible With: ===================================== 
+//= eAthena 1.0
+//===== Description: ========================================= 
+//= Blush, Cake Hat, Candle, Chef Hat, Raccoon Hat, Rainbow Eggshell,
+//= Spore Hat, Wonder Nutshell Quests
+//===== Additional Comments: ================================= 
+//= 1.1 Optimized [Lupus]
+//= 1.2 Fixed Chef Hat items [Lupus]
+//= 1.3 Update NPC to the Official One. [Samuray22]
+//= 1.3a Changed item names to item IDs. [Samuray22]
+//= 1.3b Removed a scrap " left in a delitem. [L0ne_W0lf]
+//= 1.4 Updated NPCs once again. [L0ne_W0lf]
+//============================================================ 
+
+xmas,117,295,4	script	Vending Machine Man	704,{
+	mes "[Titicupe]";
+	mes "Hmmm...?";
+	mes "Yo, Titicupe, estimado gerente de la fabrica de juguetes y genio inventor, lo ha hecho de nuevo! me acabo de crear el mundo  de las mas sofisticadas maquinas expendedoras!";
+	next;
+	switch(select("Talk to him about the Vending Machine:Items in the Vending Machine:Stop talking")) {
+	case 1:
+		mes "[Titicupe]";
+		mes "Puedes ver el pequeño muñeco de nieve en la parte dizquierda de mi? si nos fijamos en la boca de cerca, veras que ah sido construido en gran medida. usted podria decir, un poco  demasiado grande para fines normal...";
+		next;
+		mes "[Titicupe]";
+		mes "Veras, el muñeco de nieve que es en realidad una increible maquina expendedora que inventaron  de mi sangre, sudor, lagirmas  y la nieve.";
+		next;
+		mes "[Titicupe]";
+		mes "usted puede poner todo tipo de cosas dentro de su boca, y si usted inserta el articulo correcto, usted obtendra algunos sombreros a cambio...";
+		next;
+		mes "[Titicupe]";
+		mes "Sombreros de moda que siemrpe has soñado usar...!!! Bwahahahahahahahahahaha~!";
+		next;
+		mes "[Titicupe]";
+		mes "Oh la creacion de esta mina es tan magnifica!";
+		Emotion e_kis2;
+		next;
+		mes "[Titicupe]";
+		mes "y los headgears--! yo.....yo no pude contenerme!!!!";
+		next;
+		mes "^3355FFGerente de de fabrica de juguetes Titicupe di saltos de alegria. Es evidente que es una locura, pero puede ser posible que pueda ser brillante.^000000";
+		Emotion e_gasp;
+		close;
+	case 2:
+		mes "[Titicupe]";
+		mes "Ah!, usted necesita saber que tipo de Items debe poner en la maquina para conseguir lo que quiere, Si? adelante... pideme~";
+		Emotion e_ic;
+		next;
+		switch(select("Raccoon Hat:Spore Hat:Wonder Nutshell:Ranbow Eggshell:Blush:Chef Hat:Candle:Cake Hat:End Conversation")) {
+		case 1:
+			mes "[Titicupe]";
+			mes "Mapache Hat (Raccoon Hat)?";
+			mes "1 banda de Kitty (Kitty Band)";
+			mes "20 escama de dargon (Dragon Scale)";
+			mes "200 Tallo duro de  Scaleike (Tough Scalelike Stem)";
+			mes "300 Sea-otter Fur";
+			break;
+		case 2:
+			mes "[Titicupe]";
+			mes "¿Spore Hat?";
+			mes "850 Veneno de espora (Poison Spore)";
+			mes "300 Arbol quemado (Burnt Tree)";
+			mes "1 Lengua (Tongue)";
+			break;
+		case 3:
+			mes "[Titicupe]";
+			mes "Cascara de Nuez (Wonder Nutshell)?";
+			mes "1 Cascara de nuez (Nut Shell)";
+			mes "500 alas de dragon volador (Wing of Dragonfly)";
+			break;
+		case 4:
+			mes "[Titicupe]";
+			mes "Arcoiris de cascara de huevo (Rainbow Eggshell)?";
+			mes "1 cascara de huevo (Egg Shell)";
+			mes "1 Colorante azul cobalto (Cobaltblue Dyestuffs)";
+			mes "50 garra de lobos de desierto (Claw of Desert Wolf)";
+			break;
+		case 5:
+			mes "[Titicupe]";
+			mes "¡¿Blush?!";
+			mes "Tu!";
+			mes "Sabes una cosa...";
+			mes "Heh heh~ de todos modos";
+			mes "100 Alice's Apron";
+			break;
+		case 6:
+			mes "[Titicupe]";
+			mes "Chef Hat?";
+			mes "120 Piece of Cake";
+			mes "1 White Dyestuffs";
+			mes "330 Feather";
+			mes "450 Dragon Scale";
+			break;
+		case 7:
+			mes "[Titicupe]";
+			mes "¿Candle?";
+			mes "1 Bomb Wick";
+			mes "50 Matchstick";
+			mes "100 Royal Jelly";
+			break;
+		case 8:
+			mes "[Titicupe]";
+			mes "¿Cake Hat?";
+			mes "10 Candy";
+			mes "5 Candy Cane";
+			mes "15 Well-baked Cookie";
+			mes "20 Piece Of Cake";
+			mes "10 Steel";
+			break;
+		case 9:
+			mes "[Titicupe]";
+			mes "Pidemelo en cualquier momentos. Esta clase de preguntas no son un problema para genios como yo!!!";
+		}
+		next;
+		mes "[Titicupe]";
+		mes "Soy tan feliz!!!";
+		mes "Soy un genio!!!";
+		mes "Ho ho ho";
+		mes "¡Ho ho ho ho!";
+		close;
+	case 3:
+		mes "[Titicupe]";
+		mes "Aveces, no puedo creer como este magnifico invento es mio..!";
+		next;
+		mes "[Titicupe]";
+		mes "yo...";
+		mes "yo te quiero";
+		mes "Mister hombre de nieve (Snowman)";
+		mes "maquina de venta.";
+		Emotion e_kis2;
+		next;
+		mes "^3355FFEl gerente de la Fabrica de jueguetes Titicupe comienza a saltar alrededor y emite gritos de Extasis desenfrenado, eEn este punto, no es dificil para dudar de su cordura, asi como su genio.";
+		close;
+	}
+}
+
+xmas,115,297,4	script	Vending Machine	111,{
+	mes "[Audi]";
+	mes "^555555Apasionadamente de la maquina expendedora de Item. Inventada por el gran Titicupe. Seleccione el elemento deseado y puse los items necesarios en el recipiente de la boca del hombre de nieve .^000000";
+	next;
+	switch(select("^FF3355Notice (Must Read)^000000:Raccoon Hat:Spore Hat:Wonder Nutshell:Rainbow Eggshell:Blush:Chef Hat:Candle:Cake Hat:Cancel")) {
+	case 1:
+		mes "[Audi]";
+		mes "Hola~ !";
+		mes "Tengo que decirte una cosa importante. esta maquina no esta equipada para diferenciar entre las partidas especiales y ordinarias de los Items.";
+		next;
+		mes "[Audi]";
+		mes "Por lo tanto si usted utiliza un Item que ha sido ^FF3355Elevado, o tiene ua carta que se le complica conseguir^000000, no la use ya que cartas o cualquier actualizacion se perderan en la creacion del nuevo Item.";
+		next;
+		mes "[Audi]";
+		mes "Por lo tanto, cuando intente generar el intercambio de Item, porfavor, poner todos los articulos de valor que no va a utilizar en el almacenamiento de Kafra (Kafra Storage).";
+		next;
+		mes "[Audi]";
+		mes "Porfavor, mantenga esto en mente, porque esta maquina expendedora no ofrece ningun retorno, devolucion o cambio.";
+		next;
+		mes "[Audi]";
+		mes "Tienen un gran tiempo!";
+		mes "Gracias!!!";
+		close;
+	case 2:
+		if ((countitem(2213) > 0) && (countitem(1036) > 19) && (countitem(7012) > 199) && (countitem(7065) > 299)) {
+			mes "^3355FFPonga cuidadosamente los Items en la boca del Hombre de nieve.^000000";
+			next;
+			delitem 2213,1;  //Cat_Hairband
+			delitem 1036,20;  //Dragon_Scale
+			delitem 7012,200;  //Tough_Scalelike_Stem
+			delitem 7065,300;  //Sea_Otter_Leather
+			Emotion e_Oh;
+			mes "^3355FF*Vroooooommmm~~*";
+			mes "*Bzzzzzttttt*";
+			mes "*choogagachooga*";
+			mes "*Kapaaang!*^000000";
+			getitem 5033,1; // Smokie_Hat
+			next;
+			mes "[Audi]";
+			mes "^555555Gracias por venir por.";
+			mes "Porfavor venga otra vez!";
+			mes "Ahh, y digale a un amigo!^000000";
+			close;
+		}
+		break;
+	case 3:
+		if ((countitem(7033) > 849) && (countitem(7068) > 299) && (countitem(1015) > 0)) {
+			mes "^3355FFPonga cuidadosamente los items en la boca del Hombre de nieve.^000000";
+			next;
+			delitem 7033,850;  //Poison_Spore
+			delitem 7068,300;  //Burn_Tree
+			delitem 1015,1;  //Thin_N'_Long_Tongue
+			Emotion e_oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*";
+			mes "*Wek Wek*^000000";
+			getitem 5029,1; // Spore_Hat
+			next;
+			mes "^555555Gracias por venir po.";
+			mes "Porfavor venga otra vez!";
+			mes "Ahh, y digale a un amigo!^000000";
+			close;
+		}
+		break;
+	case 4:
+		if ((countitem(5037) > 0) && (countitem(7064) > 499)) {
+			mes "^3355FFPonga cuidadosamente los items enlaboca del hombre de nieve.^000000";
+			next;
+			delitem 5037,1;  //Fruit_Shell
+			delitem 7064,500;  //Dragon_Fly_Wing
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*";
+			mes "*BeepBoopBeepBoop*";
+			mes "*Beeeeeebooooooooop*^000000";
+			Emotion e_oh;
+			getitem 5050,1; // Mystery_Fruit_Shell
+			next;
+			mes "[Audi]";
+			mes "^555555Gracias por venir por,";
+			mes "Porfavor venga otra vez!";
+			mes "Ahh, y digale a un amigo!^000000";
+			close;
+		}
+		break;
+	case 5:
+		if ((countitem(5015) > 0) && (countitem(978) > 0) && (countitem(7030) > 49)){ 
+			mes "^3355FFPonga cuidadosamente los items enla boca del hombre de nieve.^000000";
+			next;
+			delitem 5015,1;  //Egg_Shell
+			delitem 978,1;  //Cobaltblue_Dyestuffs
+			delitem 7030,50;  //Claw_Of_Desert_Wolf
+			Emotion e_oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*OoooEeeeeeee~*^000000";
+			getitem 5039,1; // Mottled_Egg_Shell
+			next;
+			mes "[Audi]";
+			mes "^555555Gracias por venir por.";
+			mes "Porfavor venga otra vez!";
+			mes "Ahh, y digale a un amigo!^000000";
+			close;
+		}
+		break;
+	case 6:
+		if (countitem(7047) > 99) {
+			mes "^3355FFPonga cuidadosamente los items en la boca del hombre de nieve.^000000";
+			next;
+			delitem 7047,100;  //Alice's_Apron
+			Emotion e_oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*";
+			mes "*ChoopChoop*";
+			mes "*Chaaawah!*^000000";
+			getitem 5040,1; // Blush
+			mes "[Audi]";
+			mes "^555555Gracias por venir por.";
+			mes "Porfavor venga otra vez!";
+			mes "Ahh, y digale a un amigo!^000000";
+			next;
+			mes "[Titicupe]";
+			mes "Tienes Blush? uhh. Supongo que realmente glamorosa como buscando~! aùesto a que ahora apreciamos mi genio, Ehh?";
+			close;
+		}
+		break;
+	case 7:
+		if ((countitem(539) > 119) && (countitem(982) > 0) && (countitem(949) > 329) && (countitem(1036) > 449)) {
+			mes "^3355FFPonga cuidadosamente los items en la boca del hombre de nieve.^000000";
+			next;
+			delitem 539,120;  //Piece_Of_Cake
+			delitem 982,1;  //White_Dyestuffs
+			delitem 949,330;  //Feather
+			delitem 1036,450;  //Dragon_Scale
+			Emotion e_oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*";
+			mes "*Muuuuuuugeeee*^000000";
+			getitem 5026,1; // Hat_Of_Cook
+			next;
+			mes "[Audi]";
+			mes "^555555Gracias por venir por.";
+			mes "Porfavor venga otra vez!";
+			mes "ahh, y digale a un amigo^000000";
+			close;
+		}
+		break;
+	case 8:
+		if ((countitem(2279) > 0) && (countitem(7035) > 49) && (countitem(526) > 99)) {
+			mes "^3355FFPorfavor ponga los items en la boca del hombre de nieve.^000000";
+			next;
+			delitem 2279,1;  //Bomb_Wick
+			delitem 7035,50;  //Matchstick
+			delitem 526,100;  //Royal_Jelly
+			Emotion e_oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*^000000";
+			getitem 5028,1; // Candle
+			next;
+			mes "[Audi]";
+			mes "^555555Gracias por venir por.";
+			mes "POrfavor venga otra vez!";
+			mes "Ahh, y digale a un amigo!^000000";
+			close;
+		}
+		break;
+	case 9:
+		if ((countitem(529) > 9) && (countitem(530) > 4) && (countitem(538) > 14) && (countitem(539) > 19) && (countitem(999) > 9)) { 
+			mes "^3355FFPonga los item cuidadosamente en la boca del hombre de nieve .^000000";
+			next;
+			delitem 529,10;  //Candy
+			delitem 530,5;  //Candy_Striper
+			delitem 538,15;  //Well_Baked_Cookie
+			delitem 539,20;  //Piece_Of_Cake
+			delitem 999,10;  //Steel
+			Emotion e_oh;
+			mes "^3355FF*Vroooooom~~*";
+			mes "*Bzzzzzt*";
+			mes "*choogachooga*";
+			mes "*Kapang!*^000000";
+			getitem 5024,1; // Hat_Of_Cake
+			next;
+			mes "[Audi]";
+			mes "^555555Gracias por venir por.";
+			mes "Porfavor venga otra vez!";
+			mes "Ahh, y digale a un amigo!^000000";
+			close;
+		}
+		break;
+	case 10:
+		mes "[Audi]";
+		mes "^555555Porfavor...";
+		mes "Introduzca....";
+		mes "Items....^000000";
+		close;
+	}
+	Emotion e_x;
+	mes "[Audi]";
+	mes "^555555Error Error Error!";
+	mes "items incorrecto!^000000";
+	next;
+	mes "[Titicupe]";
+	mes "Yo...";
+	mes "Supongo que mucha gente haria cualquier cosa para poner las manos sobre algunos Blush";
+	close;
+}

@@ -1,0 +1,136 @@
+//===== eAthena Script ======================================= 
+//= Moscovia Town
+//===== By: ================================================== 
+//= Kisuka
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= Moscovia Town Script
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Kisuka]
+//= 1.1 Removed villagers (they are part of a quest). [Kisuka]
+//============================================================
+
+// Moscovia Transportation
+//============================================================ 
+alberta,245,66,4	script	Moscovia P.R. Officer#1	960,{
+	mes "[Moscovia P.R. Officer]";
+	mes "¡Moscovia! ¿Conoces Moscovia?";
+	mes "el extenso paraíso en los mares sin fin..";
+	mes "Bienvenido a Moscovia";
+	mes "es aventurada y místico.";
+	next;
+	switch(select("About Moscovia...:Go to Moscovia.:Cancel")) {
+		case 1:
+			mes "[Moscovia P.R. Officer]";
+			mes "Moscovia es un hermoso reino";
+			mes "en una isla ubicada al norte de Rune";
+			mes "Midgarts.";
+			next;
+			mes "[Moscovia P.R. Officer]";
+			mes "Estoy seguro de que estarás";
+			mes "absolutamente fascinado";
+			mes "por el paisaje hermoso y ";
+			mes "el maravillos palacio de Moscovia.";
+			next;
+			mes "[Moscovia P.R. Officer]";
+			mes "Ahora que nuestro largo invierno ha";
+			mes "pasado,";
+			mes "me alegra que ahora pueda mostrarte";
+			mes "nuestra hermosa ciudad natal.";
+			next;
+			mes "[Moscovia P.R. Officer]";
+			mes "¡Si te apetece visitar Moscovia";
+			mes "hazlo ahora!";
+			mes "¡Te ayudaré a tener un buen viaje";
+			mes "a Moscovia!";
+			close;
+			
+		case 2:
+			mes "[Moscovia P.R. Officer]";
+			mes "Bueno entonces, empecemos ahora.";
+			mes "Debes pagar 10,000 zeny";
+			mes "para ir a Moscovia.";
+			mes "Pero cuando regreses,";
+			mes "no tienes que pagar.";
+			next;
+			mes "[Moscovia P.R. Officer]";
+			mes "¿Podemos irnos ahora?";
+			next;
+			if (select("Let's go!:Cancel") == 2) {
+				mes "[Moscovia P.R. Officer]";
+				mes "Si estás demasiado ocupado ahora,";
+				mes "por favor dime de nuevo cuando quieras.";
+				mes "Yo siempre estoy dispuesta a guiar a cualquier persona a Moscovia.";
+				close;
+			}
+			if (Zeny < 10000) {
+				mes "[Moscovia P.R. Officer]";
+				mes "Lo siento pero ahora";
+				mes "no tienes suficiente zeny.";
+				mes "Necesitas 10,000 zeny";
+				mes "para ir a Moscovia";
+				mes "Gracias.";
+				close;
+			}else{
+				mes "[Moscovia P.R. Officer]";
+				mes "Bueno entonces, estámos saliendo ahora.";
+				close2;
+				set Zeny,Zeny - 10000;
+				warp "moscovia",163,55;
+				end;
+			}
+		case 3:
+			mes "[Moscovia P.R. Officer]";
+			mes "Si estás demasiado ocupado ahora,";
+			mes "por favor dime de nuevo cuando quieras.";
+			mes "Yo siempre estoy dispuesta a guiar a cualquier persona a Moscovia.";
+			close;
+	}
+}
+
+moscovia,166,53,4	script	Moscovia P.R. Officer#2	960,{
+	mes "[Moscovia P.R. Officer]";
+	mes "¿Cómo estuvó tu viaje?";
+	mes "¿Tienes buenos recuerdos de Moscovia?";
+	mes "Un barco está zarpando ahora";
+	mes "a Rune Midgarts.";
+	next;
+	if (select("Return to Alberta:Cancel") == 2) {
+		mes "[Moscovia P.R. Officer]";
+		mes "Si desea ver más";
+		mes "por favor, toma tu tiempo.";
+		close;
+	}
+	mes "[Moscovia P.R. Officer]";
+	mes "Por favor, ven a visitarnos pronto.";
+	mes "Ok entonces, Vamonos.";
+	close2;
+	warp "alberta",243,67;
+	end;
+}
+
+// Generic Moscovia NPCs
+//============================================================ 
+moscovia,253,166,4	script	Soldier#mosk1	966,{
+	mes "[Soldier]";
+	mes "Nuestro querido Csar Alexsay III esta en el palacio.";
+	mes "Él gobierna Moscovia.";
+	mes "Por favor, ten cuidado de no causarle ningún problema.";
+	close;
+}
+
+// Moscovia Palace
+//============================================================ 
+-	script	Soldier#mosk::MoscSoldier	966,{
+	mes "[Soldier]";
+	mes "Por favor guarda silencio o el Csar se enojará.";
+	close;
+}
+
+mosk_in,118,66,5	duplicate(MoscSoldier)	Soldier#mosk02	966
+mosk_in,133,110,3	duplicate(MoscSoldier)	Soldier#mosk03	966
+mosk_in,133,73,3	duplicate(MoscSoldier)	Soldier#mosk04	966
+mosk_in,113,124,5	duplicate(MoscSoldier)	Soldier#mosk05	966

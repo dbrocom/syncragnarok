@@ -1,0 +1,111 @@
+//===== eAthena Script =======================================
+//= Imitation of Dumpling Festival
+//===== By ===================================================
+//= Massdriller
+//===== Version ==============================================
+//= 1.01
+//===== Compatible With ======================================
+//= eAthena 0.52+
+//===== Description ==========================================
+//= A complete redering of the Dumpling Festival.
+//===== Comments =============================================
+//= Ver 1.0- Duplicate of MRO's Dumpling Event
+//= 1.01 fixed bugs [Lupus]
+//============================================================
+  
+payon,93,81,4	script	Exorcist Master Fahae	834,{
+
+	mes "[Exorcist Master Fahae]";
+	mes "Saludos pequeño guerrero, soy el Exorcist Master Fahae.";
+	mes "Desde hace tiempo, he estado en busca de el elusivo Bacsojin.";
+	next;
+	mes "[Exorcist Master Fahae]";
+	mes "Creo que es tiempo que otro guerrero se encargue";
+	mes "de mi misión. Tengo algunos items para asistirte en mi busqueda.";
+	next;
+	menu "deseo comprar",-, "no gracias",M_FIN;
+  
+	mes "[Exorcist Master Fahae]";
+	mes "tengo 2 items cual crees que sea util para ti.";
+	next;
+	menu "Realgar Wine",-, "Exorcize Herb",M_HERB;
+  
+	mes "[Exorcist Master Fahae]";
+	mes "cuantas necesitas?";
+	mes "solo puedes comprar 5 por vez.";
+	mes "cada una cuesta 20000z.";
+	mes "(escribe 0 para cancelar)";
+	next;
+	input @input;
+	if(@input==0) close;
+	if(@input>5) goto L_SORRY;
+	if(Zeny< @input*20000) goto L_NOZENY;
+	set Zeny,Zeny-20000*@input;
+	getitem 682,@input;
+	mes "[Exorcist Master Fahae]";
+	mes "Aquí tienes, espero que puedas acompletar mi misión.";
+	close;
+  
+L_SORRY:
+	mes "[Exorcist Master Fahae]";
+	mes "Espero que no seas tacaño, el camino de Dios es ser honesto.";
+	close;
+  
+M_FIN:
+	mes "[Exorcist Master Fahae]";
+	mes "El camino para derrotar al mal esta lejos, en el nombre de Dios, ayudame.";
+	close;
+  
+M_HERB:
+	mes "[Exorcist Master Fahae]";
+	mes "¿Cuántos necesitas?";
+	mes "Únicamente puedes comprar 5 a la vez.";
+	mes "Cada una cuesta 10000z.";
+	mes "(Escribe 0 para cancelar)";
+	next;
+	input @input;
+	if(@input==0) close;
+	if(@input>5) goto L_SORRY;
+	if(Zeny< @input*10000) goto L_NOZENY;
+	set Zeny,Zeny-10000*@input;
+	getitem 683,@input;
+	mes "[Exorcist Master Fahae]";
+	mes "Aquí tienes, espero que puedas acompletar mi misión.";
+	close;
+
+L_NOZENY:
+	mes "[Exorcist Master Fahae]";
+	mes "El dinero no da felicidad, sino que necesitamos mantener al templo y también a mi. Por favor, mata algunos monstruos y toma sus  los items que dan.";
+	close;
+}
+  
+//////////////////////////////////////////////
+// Monster Spawning /\Secial only for event.//
+//////////////////////////////////////////////
+  
+// ~Dumpling~
+gef_fild00,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+gef_fild07,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+gef_fild04,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+gef_fild00,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+prt_fild06,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+prt_fild01,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+prt_fild05,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+prt_fild08,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+pay_fild04,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+moc_fild02,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+pay_fild01,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+pay_fild07,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+moc_fild03,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+pay_fild06,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+pay_fild05,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+pay_fild02,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+pay_fild09,0,0,0,0	monster	Dumpling	1520,20,60000,66000
+  
+// ~Bacsojin~
+moc_fild03,0,0,0,0	monster	Bacsojin	1518,1,60000,66000
+  
+// ~Chung E~
+moc_fild03,0,0,0,0	monster	Chung E	1519,1,60000,66000
+moc_fild13,0,0,0,0	monster	Chung E	1519,1,60000,66000
+pay_fild01,0,0,0,0	monster	Chung E	1519,1,60000,66000

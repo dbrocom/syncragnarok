@@ -1,0 +1,603 @@
+//===== eAthena Script =======================================
+//= Official scripts for beginners from iRO
+//===== By: ==================================================
+//= MasterOfMuppets
+//===== Current Version: =====================================
+//= 1.7
+//===== Compatible With: =====================================
+//= Any Athena Version
+//===== Additional Comments: =================================
+//= 1.0 Added Alberta, Prontera, Izlude, Payon, Byalan Island,
+//= 	Archer Village, Payon Cave and Coal Mine
+//= 1.1 Geffen, Orc Dungeon
+//= 1.2 Added 5 more Boards [MasterOfMuppets]
+//= 1.3 Fixed spelling mistakes. [Nexon]
+//= 1.3a Fixed a missing close; [Nexon]
+//= 1.4 Added more BBS MasterOfMuppets
+//= 1.5 Added the last of the bulletin boards, I think... [MasterOfMuppets]
+//= 1.5a Fixed a small screw up with the color codes in the Glastheim BB [MasterOfMuppets]
+//= 1.5b Fixed another small screw up with the color codes in the Glastheim BB [Kayla]
+//= 1.6 Removed Duplicates [Silent]
+//= 1.7 Updated MOrroc NPCs to reflect episode 12.1 changes. [L0ne_W0lf]
+//============================================================
+
+alberta,111,59,5	script	Bulletin Board#1	837,{
+	mes "[Alberta: The Port City]";
+	mes "Bienvenido a Alberta, la Ciudad del Puerto.";
+	next;
+	mes "[Alberta: The Port City]";
+	mes "En Alberta, podrá encontrar el Merchant guild donde los aventureros cambian sus jobs hacia merchants.";
+	next;
+	mes "[Alberta: The Port City]";
+	mes "Como una ciudad que ofrece viajes confiables por mar, Alberta ha proporcionado los medios para el comercio exterior que ha traído la prosperidad a la Runa-Midgarts Reino.";
+	next;
+	mes "[Alberta: The Port City]";
+	mes "En el puerto, encontrará representantes de tierras extranjeras que guiaran a los turistas a sus países.";
+	next;
+	mes "[Alberta: The Port City]";
+	mes "Entre marineros, hay rumores de un lugar conocido como ^338C60Turtle Island^000000. Aquellos aventureros intrépidos pueden buscar para investigar sobre este rumor o para conseguir la verdad.";
+	next;
+	mes "[Alberta: The Port City]";
+	mes "También hay un barco hundido descubierto cerca de Alberta, que se ha convertido en un área muy popular entre aventureros para explorar.";
+	next;
+	mes "[Alberta: The Port City]";
+	mes "Desde Alberta, ^1F3A11Payon^000000 esta localizada hacia el Noroeste. Puede embarcarse en barcos de pasajeros en el muelle para viajar a ^5E5C69Izlude^000000.";
+	mes "Disfrute sus viajes."; 
+	close;
+}
+
+geffen,124,65,5	script	Bulletin Board#2	837,{
+	mes "[Geffen: The City of Magic]";
+	mes "Bienvenido a Geffen, la Ciudad de la Magia. Geffen es conocida por sus variadas leyendas relacionadas a la magia.";
+	next;
+	mes "[Geffen: The City of Magic]";
+	mes "Entre los puntos de interés de la ciudad se encuentran el Forge, donde la gente puede cambiar sus jobs a Blacksmith; la Magic Academy, para aspirantes a mages; y la Geffen Tower para el cambio de job a Wizard.";
+	next;
+	mes "[Geffen: The City of Magic]";
+	mes "Bajo la Geffen Tower está un dungeon en el que, según los rumores dicen, terribles monstruos aparecen.";
+	next;
+	mes "[Geffen: The City of Magic]";
+	mes "Se dice que la ciudad perdida de Gefenia, un lugar de conocimiento élfico y legenda, esta escondido dentro de las profundidades de este dungeon.";
+	next;
+	mes "[Geffen: The City of Magic]";
+	mes "Desde Geffen, el ^828E28Orc Village^000000 esta localizado hacia el Sur, ^4C6055Glast Heim^000000 hacia el Oeste, ^6D6FE0Prontera^000000 hacia el lejano Este, y ^744B2DMt. Mjolnir^000000 hacia el Norte. Disfrute de su estadía en Geffen.";
+	close;
+}
+
+gef_fild10,69,340,5	script	Bulletin Board#3	837,{
+	mes "[Orc Dungeon]";
+	mes "^6B1312¡Cuidado!^000000";
+	mes "El Orc Dungeon consiste en 2 niveles. Mas allá de que no son muy fuertes individualmente, los monstruos atacan en grupos. Tenga cuidado.";
+	next;
+	mes "[Orc Dungeon]";
+	mes "Solo en este dungeon podrá encontrar Orc Skeletons, Zenorcs y Orc Zombies.";
+	next;
+	mes "[Orc Dungeon]";
+	mes "El atributo Holy en las armas será de gran ayuda en este lugar, ya que la mayoría de los monstruos en este calabozo son Undeads.";
+	next;
+	mes "[Orc Dungeon]";
+	mes "Si usted no tiene un arma de Holy y que está asociado con un Priest, èl echizo ASpersio de los Priet's sería de mucha ayuda.";
+	close;
+}	
+
+izlu2dun,104,92,5	script	Bulletin Board#4	837,{
+	mes "[Byalan Island]";
+	mes "^6B1312¡Precaución!^000000";
+	mes "El dungeon de Izlude se compone de 5 niveles. Los primeros niveles son adecuados para los nuevos aventureros.";
+	next;
+	mes "[Byalan Island]";
+	mes "Mientras te adentres más en Byalan dungeon encontrarás monstruos más fuertes y poderosos.";
+	next;
+	mes "[Byalan Island]";
+	mes "Con algunas excepiones, muchos de los monstruos en este dungeon son de atributo Water. Así que un arma con atributo Wind te ayudará mucho.";
+	close;
+}
+	
+izlude,131,116,4	script	Bulletin Board#5	837,{
+	mes "[Izlude: The Satellite City]";
+	mes "Bienvenido a Izlude, el satelite de Prontera. Izlude fué construida para ayudar a la defensa de Prontera y para alojar a su creciente población.";
+	next;
+	mes "[Izlude: The Satellite City]";
+	mes "Los puntos de interes incluyen la Swordsman Association, edificio que permite a los aventureros cambiar su job a Swordsman. Y la Battle Area que está al Norte de Izlude.";
+	next;
+	mes "[Izlude: The Satellite City]";
+	mes "En los muelles puedes tomar un barco y viajar a ^123972Alberta^000000 o ^2F0400Byalan Island^000000.";
+	next;
+	mes "[Izlude: The Satellite City]";
+	mes "Desde Izlude, ^6D6FE0Prontera^000000 está ubicada al Noroeste y ^1F3A11Payon^000000 está ubicada al Sur.";
+	mes "Disfruta de tus recorridos en el Reino Rune-Midgarts.";
+	close;
+}
+	
+payon,178,108,5	script	Bulletin Board#06	837,{
+	mes "[Payon: The Mountain City]";
+	mes "Bienvenido a Payon, la ciudad de las montañas. Payon ha sido renovada recientemente, así que esperamos que disfrutes de las limpias y agradables calles y edificios.";
+	next;
+	mes "[Payon: The Mountain City]";
+	mes "Payon es famosa por ser una ciudad de arqueros. Por mucho tiempo, sus ciudadanos han hecho sus vidas cazando con arcos y fechas. La creación de arcos y entrenamiento también han sido desarrollados aquí en Payon.";
+	next;
+	mes "[Payon: The Mountain City]";
+	mes "Payon tiene varias armaduras y armas, especialmente para las Archer class. Si deseas convertirte en un Archer lo mejor sería que te vayas familiarizando con esta ciudad.";
+	next;
+	mes "[Payon: The Mountain City]";
+	mes "El Payon Palace está ubicado en el centro de la ciudad. La Archer Village está ubicada en la parte norte de Payon. Ahí las personas pueden cambiar sus jobs a Archer.";
+	next;
+	mes "[Payon: The Mountain City]";
+	mes "Cerca de la Archer Village puedes encontrar la ^2F0400Payon Cave^000000 donde residen monstros Undead.";
+	next;
+	mes "[Payon: The Mountain City]";
+	mes "Desde Payon, ^123972Alberta^000000 está ubicada al Sureste y ^866C4BMorroc^000000 está al Oeste. ^5E5C69Izlude^000000 y ^6D6FE0Prontera^000000 están al Norte de Payon.";
+	mes "Disfruta de tus recorridos."; 
+	close;
+}
+	
+pay_arche,79,30,5	script	Bulletin Board#07	837,{
+	mes "[Archer Village]"; 
+	mes "Bienvenido a la Payon Archer Village donde los Novices pueden cambiar sus jobs a Archer.";
+	next;
+	mes "[Archer Village]";
+	mes "La Archer Village provee Bows y Tights que están disponibles para su compra. Estas son necesarias para los nuevos Archers y Hunters.";
+	next;
+	mes "[Archer Village]";
+	mes "Si deseas convertirte en un Archer se sugiere que se familiarice con esta villa. Para los aspirantes a Hunters la Hunter Guild está ubicada en un campo que está al Este de Payon.";
+	close;
+}
+
+pay_arche,40,135,5	script	Bulletin Board#08	837,{
+	mes "[Payon Cave]";
+	mes "^6B1312¡Precaución!^000000";
+	mes "La Payon Cave consta de 5 niveles llenos de monstruos Undead y Demon. Cuidado con los enjambres de Hydra en el tercer y cuarto nivel.";
+	next;
+	mes "[Payon Cave]";
+	mes "En el quinto nivel hay un bonito y terrible boss monster conocido como ^6B1312Moonlight^000000 que aparece en cietos momentos. Entra con extrema precaución.";
+	close;
+}
+	
+prontera,148,49,5	script	Bulletin Board#09	837,{
+	mes "[Prontera: Capital of the]";
+	mes "[Rune-Midgards Kingdom]";
+	mes "Bienvenido a Prontera, la ciudad capital de Rune-Midgard.";
+	next;
+	mes "[Prontera: Capital of the]";
+	mes "[Rune-Midgards Kingdom]";
+	mes "Prontera está ubicada en el centro del continente Rune-Midgard y es muy bien conocida como una ciudad de comercio floreciente.";
+	next;
+	mes "[Prontera: Capital of the]";
+	mes "[Rune-Midgards Kingdom]";
+	mes "En esta ciudad puedes encontrar el Sanctuary donde las personas pueden cambiar sus jobs ah Acolyte y Priest.";
+	next;
+	mes "[Prontera: Capital of the]";
+	mes "[Rune-Midgards Kingdom]";
+	mes "También puedes encontrar el Castle donde las personas pueden cambiar sus jobs a Crusader.";
+	next;
+	mes "[Prontera: Capital of the]";
+	mes "[Rune-Midgards Kingdom]";
+	mes "Por favor siéntete libre de explorar las calles de Prontera ya que hay varias atracciones turísticas en la ciudad.";
+	next;
+	mes "[Prontera: Capital of the]";
+	mes "[Rune-Midgards Kingdom]";
+	mes "Cuando necesites hacer upgrade a tus weapons y armors por favor visita el edificio en la dirección 5 o'clock desde la fuente en el centro de Prontera.";
+	next;
+	mes "[Prontera: Capital of the]";
+	mes "[Rune-Midgards Kingdom]";
+	mes "Desde Prontera, ^5E5C69Izlude^000000 está ubicada al Sureste, ^1F3A11Payon^000000 en el extremo Sur, ^683C1FGeffen^000000 en el extremo Oeste ^2D3832Al De Baran^000000 en el extremo Norte.";
+	mes "Disfruta de tu estancia en Prontera.";
+	close;
+}
+
+mjolnir_02,76,362,5	script	Bulletin Board#10	837,{
+	mes "[Coal Mine]";
+	mes "^6B1312¡Precauciòn!^000000";
+	mes "Coal Mine se compone de un total de 3 niveles. Este dungeon se adapta a los nuevos y experimentados aventureros, en función de la dungeon.";
+	next;
+	mes "[Coal Mine]";
+	mes "En el tercer nivel, los monstruos suelen atacar a los aventureros en enjambres, a fin de evitar ser rodeado. Dado que esta área es una mina, muchos minerales se encuentran en las profundidades de este calabozo.";
+	close;
+}
+
+morocc,152,110,5	script	Bulletin Board#11	837,{
+	mes "[Morroc: The Frontier Town]";
+	mes "Bienvenido a Morroc, la Ciudad del Desierto. Morroc fué construida en un oasis por lo que esta ciudad puede alojar a sus muchos visitantes y viajeros.";
+	next;
+	mes "[Morroc: The Frontier Town]";
+	mes "El Morroc Castle se encuentra en el centro de esta ciudad. Por favor siéntete libre de explorar este pueblo y disfruta de su atmósfera única. Sin embargo vigila tus bolsillos y ten cuidado de los Rogues y Thieves.";
+	next;
+	mes "[Morroc: The Frontier Town]";
+	mes "Desde Morroc, el ^660000Pyramid Dungeon^000000 puede ser encontrado al Noroeste y la ^660000Sphinx Dungeon^000000 puede ser encontrado al Este. Al Suroeste podrías encontrar ^660000Ant Hell^000000.";
+	next;
+	mes "[Morroc: The Frontier Town";
+	mes "Se rumora que la Assassin Guild está ubicada al Sureste. Cuando vayas al Este desde Morrocy después al Norte llegarás a ^3355FFProntera^000000.";
+	close;
+}
+
+comodo,210,148,5	script	Bulletin Board#12	837,{
+	mes "[Comodo: The Beach City]";
+	mes "¡Bienvenido! Esta es la ciudad de Comodo";
+	mes "rodeado de muchas reliquias";
+	mes "de una época olvidada.";
+	next;
+	mes "[Comodo: The Beach City]";
+	mes "Solamente en Comodo se puede encontrar la";
+	mes "Dancer Guild y la Bard Guild que";
+	mes "ofrece la oportunidad a";
+	mes "los aventureros a cambiar su Job";
+	mes "a Dancers para mujeres y Bards para hombres.";
+	next;
+	mes "[Comodo: The Beach City]";
+	mes "También puedes visitar el Casino,";
+	mes "que es muy popular entre los turistas";
+	mes "una atracción y un lugar para descansar.";
+	next;
+	mes "[Comodo: The Beach City]";
+	mes "Puede comprar Berserk Potions, un";
+	mes "producto especial de Comodo, de las";
+	mes "Tool Dealers en la zona.";
+	next;
+	mes "[Comodo: The Beach City]";
+	mes "Hay 3 cuevas en torno a Comodo";
+	mes "que son habitadas por muchos";
+	mes "monstruos diferentes. Si llegara a introducirse";
+	mes "a estas áreas, por favor, sea extremadamente";
+	mes "cuidadoso.";
+	next;
+	mes "[Comodo: The Beach City]";
+	mes "De Comodo, puede viajar a";
+	mes "^866C4BMorroc^000000  a través de una Cueva al Oriente";
+	mes "y ^7D2272Umbala^000000 por el norte";
+	mes "Cueva.";
+	next;
+	mes "[Comodo: The Beach City]";
+	mes "Por el este, se puede encontrar ^BF2B0DParos";
+	mes "^BF2B0DLighthouse^000000, Donde la Rogue Guild";
+	mes "esta localizada. Disfrute la vida nocturna";
+	mes "en Comodo~";
+	close;
+}
+
+umbala,137,94,5	script	Bulletin Board#13	837,{
+	mes "[Umbala: The Utan Village]";
+	mes "Bienvenido a Umbala,";
+	mes "la aldea de la tribu Utan.";
+	next;
+	mes "[Umbala: The Utan Village]";
+	mes "Umbala, así como la tribu Utan";
+	mes "que hablan su propio y único";
+	mes "idioma, ha sido recientemente descubierto";
+	mes "por unos intrépidos aventureros.";
+	next;
+	mes "[Umbala: The Utan Village]";
+	mes "Los estudiosos creen que puede ser Umbala";
+	mes "la frontera entre nuestro mundo";
+	mes "y otro reino. A su juicio, el";
+	mes "cruce entre los mundos podría";
+	mes "ser el árbol Yggdrasil al Norte.";
+	next;
+	mes "[Umbala: The Utan Village]";
+	mes "Los puntos de interés incluyen la";
+	mes "Chief's House, el Shaman's House,";
+	mes "y el Bungee Jump zona. Miles";
+	mes "de turistas visitan el Bungee Jump";
+	mes "Espacio para poner a prueba su valentía.";
+	next;
+	mes "[Umbala: The Utan Village]";
+	mes "Desde de Umbala, diríjase hacia el sur para ir a";
+	mes "^D91B73Comodo^000000. Por favor, disfrute de su";
+	mes "estancia aquí en Umbala.";
+	close;
+}
+
+gef_fild09,227,29,4	script	Bulletin Board::OrcsBoard	835,{
+	mes "[Orc Village]";
+	mes "^6B1312¡Precaución!^000000";
+	mes "Más allá de este punto";
+	mes "se encuentra el Orc Village.";
+	next;
+	mes "[Orc Village]";
+	mes "Tenga en cuenta que este pueblo";
+	mes "está lleno de peligrosos Orcs, a saber:";
+	mes "Orc Warriors, Orc Ladies and High";
+	mes "Orcs. Dos monstruos Boss, ^6B1312Orc Hero^000000";
+	mes "y ^6B1312Orc Lord^000000 también aparecerán en determinados momentos.";
+	close;
+}
+
+gef_fild13,202,31,5	duplicate(OrcsBoard)	Bulletin Board#orc1	835
+
+gef_fild13,29,206,5	script	Bulletin Board::KoboldsBoard	836,{
+
+	mes "[Kobold Village]";
+	mes "^6B1312¡Precaución!^000000";
+	mes "Está dirigiéndose a KOBOLD Village.";
+	mes "Por favor tenga en cuenta que este pueblo está lleno de kobolds.";
+	close;
+}
+
+gef_fild08,211,24,5	duplicate(KoboldsBoard)	Bulletin Board#kb1	836
+
+gef_fild10,109,23,5	script	Bulletin Board#15	836,{
+
+	mes "[Goblin Village]";
+	mes "^6B1312¡Precaución!^000000";
+	mes "Está dirigiéndose a Goblin Village.";
+	mes "Por favor tenga en cuenta que este pueblo esta lleno de Goblins.";
+	close;
+}
+
+prt_fild05,278,220,5	script	Bulletin Board#16	837,{
+	mes "[Culvert]";
+	mes "Culvert se compone de un total de";
+	mes "4 niveles, y es una buena formación";
+	mes "de terreno para los nuevos aventureros.";
+	next;
+	mes "[Culvert]";
+	mes "Para poder acceder a Culver, deberas";
+	mes "ser voluntario como examinador";
+	mes "de monstruos en la Prontera";
+	mes "Chivalry. Recuerda que los";
+	mes "monstruos de aqui pueden atacarte";
+	mes "en grupo.";
+	next;
+	mes "[Culvert]";
+	mes "en el cuarto piso de la Prontera";
+	mes "Culvert, Podras encontrar al boss";
+	mes "monster conocido como ^6B1312Golden Thief";
+	mes "^6B1312Bug^000000. Los nuevos aventureros deberan";
+	mes "tomar precauciones.";
+	close;
+}
+
+yuno,154,112,5	script	Bulletin Board#17	837,{
+	mes "[Juno: Capital of]";
+	mes "[The Schwarzwald Republic]";
+	mes "Bienvenido a Juno, La ciudad de los Sages.";
+	mes "Juno se mantiene flotando en el aire gracias";
+	mes "al poder del Ymir Heart";
+	mes "Pieces";
+	next;
+	mes "[Juno: Capital of]";
+	mes "[The Schwarzwald Republic]";
+	mes "Aquellso interesados en convertirse en Sages";
+	mes "deberan visitar el Sage Castle para";
+	mes "mas informacion sobre el Sage job";
+	mes "y sus requisitos.";
+	next;
+	mes "[Juno: Capital of]";
+	mes "[The Schwarzwald Republic]";
+	mes "Otros lugares notables serian el";
+	mes "Monster Museum, Magic Academy";
+	mes "y la Juno Library.";
+	next;
+	mes "[Juno: Capital of]";
+	mes "[The Schwarzwald Republic]";
+	mes "En algun lugar de Juno, hay";
+	mes "informacion con respecto a accesos secretos";
+	mes "hacia un mundo en donde los aventureros";
+	mes "renacen con una nueva fuerza.";
+	next;
+	mes "[Juno: Capital of]";
+	mes "[The Schwarzwald Republic]";
+	mes "En el suroeste llase el ^6B1312Nogg";
+	mes "^6B1312Road^000000, el Magma Dungeon. Nogg Road";
+	mes "es abominable debido a sus agresivas";
+	mes "creaturas, asi que se cuidadoso";
+	next;
+	mes "[Juno: Capital of]";
+	mes "[The Schwarzwald Republic]";
+	mes "Desde Juno, ^2D3832Al De Baran^000000, una ciudad";
+	mes "del Rune-Midgarts Kingdom, esta";
+	mes "localizada al sur.";
+	close;
+}
+
+aldebaran,145,105,5	script	Bulletin Board#18	837,{
+	mes "[Al De Baran: The Border City]";
+	mes "Bienvenido a Al De Baran, la ciudad";
+	mes "fronteriza del Rune-Midgarts Kingdom.";
+	mes "Al De Baran tiene hermosos canales y";
+	mes "una majestuosa Clock Tower los cuales son";
+	mes "el orgullo de sus ciudadanos.";
+	next;
+	mes "[Al De Baran: The Border City]";
+	mes " Los aventureros pueden explorar la Clock";
+	mes "Tower localizada en el centro de la ciudad.";
+	mes "Otros lugares notables serian las Kafra";
+	mes "Corporation Headquarters, y la";
+	mes "Alchemist Guild que provee el";
+	mes "cambio a Alchemist job .";
+	next;
+	mes "[Al De Baran: The Border City]";
+	mes "hay un muy bien entrenado Santa";
+	mes "Claus en algun lugar de Al De Baran que";
+	mes "puede enviarte a la ciudad magica de";
+	mes "^1D2585Lutie^000000. Si estas interesado en";
+	mes "verla por ti mismo, deberas";
+	mes "buscar a Santa Claus.";
+	next;
+	mes "[Al De Baran: The Border City]";
+	mes "Desde esta ciudad, ^60D5FDJuno^000000 esta localizada hacia";
+	mes "el Norte, y ^6D6FE0Prontera^000000 esta localizada";
+	mes "hacia el Sur.";
+	close;
+}
+
+aldebaran,136,133,5	script	Bulletin Board#19	837,{
+	mes "[Clock Tower]";
+	mes "^6B1312¡Precaución!^000000";
+	mes "Solo aventureros bien-experimentados";
+	mes "deben conciderar entrar a la Clock";
+	mes "Tower. Hay un total de 8";
+	mes "niveles: 4 bajo tierra y 4 sobre ella.";
+	next;
+	mes "[Clock Tower]";
+	mes "La mayoria de los mounstruos de la Clock";
+	mes "Tower son Clocks, Alarms y";
+	mes "Bathories. Cuidado con el Clock";
+	mes "Tower Keepers que patrulla.";
+	next;
+	mes "[Clock Tower]";
+	mes "El camino en la Clock Tower es";
+	mes "disoluto y complicado, asi que por favor";
+	mes "se cuidadose y evita";
+	mes "perderte.";
+	close;
+}
+
+moc_fild19,107,101,5	script	Bulletin Board#20	837,{
+	mes "[Sphinx]";
+	mes "^6B1312Peligro!^000000";
+	mes "La Sphinx consiste en 5 niveles.";
+	mes "Este dungeon es adecuado para los";
+	mes "bien-experimentados aventureros.";
+	next;
+	mes "[Sphinx]";
+	mes "Hay muchos mounstruos agresivos";
+	mes "que residen en la Sphinx, y este es un";
+	mes "aviso para que corras y llagases";
+	mes "a ser rodeado por ellos.";
+	next;
+	mes "[Sphinx]";
+	mes "En el quinto nivel, el boss";
+	mes "monster ^6B1312Pharaoh^000000 aparecera en";
+	mes "determinado momento. Exorcisarlo con";
+	mes "un prejucio exremo.";
+	close;
+}
+
+gef_tower,55,142,5	script	Bulletin Board#21	837,{
+
+	mes "[Geffen Dungeon]";
+	mes "^6B1312Peligro!^000000"; 
+	mes "Geffen dungeon consiste en 3 niveles";
+	mes "es muy dificil de explorar para los nuevos aventureros.";
+	mes "Como los mas principales mounstruos,";
+	mes "Estan ^6B1312Hunter Flies^000000, ^6B1312Nightmares^000000 y ^6B1312Jakks^000000.";
+	mes "Nightmares y Jakks solo aparecen en este dungeon.";
+	next;
+	mes "[Geffen Dungeon]";
+	mes "en el 2do nivel del dungeon,";
+	mes "^6B1312Ogretooth^000000, la creatura de la espada condenada y ^6B1312Dracula^000000,";
+	mes "el boss monster aparece sin previo aviso.";
+	mes "en el 3rer nivel, ^6B1312Doppelganger^000000 uno de los mas fuertes boss monster aparecera en un determinado momento.";
+	close;
+}
+
+xmas_fild01,75,80,5	script	Bulletin Board#22	837,{
+
+	mes "[Winter Town, Lutie]";
+	mes "Bienvenido a Lutie, la ciudad nevada.";
+	mes "El principal negocio en la ciudad es la";
+	mes "manufactura de juguetes en la toy factory.";
+	next;
+	mes "[Winter Town, Lutie]";
+	mes "Puedes acceder al  toy factory dungeon";
+	mes "llendo al norte de Lutie.";
+	mes "Por favor recuerde visitar Lutie en la temporada navideña.";
+	mes "Se llevan a cabo varios alegres eventos.";
+	mes "Cuidado con el ^6B1312Stormy Knight^000000 y ^6B1312Hatii^000000 el boss monsters del toy factory dungeon.";
+	close;
+}
+
+xmas,147,311,5	script	Bulletin Board#23	837,{
+
+	mes "[Toy Factory]";
+	mes "^6B1312Peligro!^000000";
+	mes "Toy Factory consiste en 2 niveles.";
+	mes "Este dungeon no es dificil de explorar para los nuevos aventureros,";
+	mes "pero hay 3 peligrosos boss monsters apareciendo en cualquier momento.";
+	next;
+	mes "[Toy Factory]";
+	mes "en el 1er nivel, te encontraras al boss monster, ^6B1312Angeling^000000.";
+	mes "en el 2do nivel, te encontraras 2 peligrosisimos boss monsters que son";
+	mes "^6B1312Stormy Knight^000000 y ^6B1312Hatii^000000. Este es un aviso asi que sé atento al explorar.";
+	mes "Para referencias, ^6B1312Myst Cases^000000, ^6B1312Cruisers^000000 y ^6B1312Cookies^000000 solo aparecen en este dungeon.";
+	close;
+}
+
+yuno_fild03,37,143,5	script	Bulletin Board#24	837,{
+
+	mes "[The Magma Dungeon, Nogg Road]";
+	mes "^6B1312Peligro!^000000";
+	mes "Nogg Road esta lleno de creaturas muy peligrosas.";
+	mes "Esta limitada la entrada para aventureros bien-experimentados.";
+	next;
+	mes "[The Magma Dungeon, Nogg Road]";
+	mes "Los principales mounstruos del dungeon son";
+	mes "^6B1312Kahos^000000 y ^6B1312Nightmare Terrors^000000.";
+	mes "Por favor este atento.";
+	close;
+}
+
+niflheim,200,191,5	script	Bulletin Board#25	837,{
+
+	mes "[City of the Dead, Nifflheim]";
+	mes "Bienvenido a Nifflheim, La Ciudad de la Muerte.";
+	mes "Nifflheim es conocido como el otro mundo al que";
+	mes "vienes despues de morir.";
+	mes "Sin embargo, recientemente las personas encontraron un pasaje secreto detras de ese misterioso arbol";
+	mes "Asi que, encontraras muchas otras personas viajando por esta area.";
+	next;
+	mes "[City of the Dead, Nifflheim]";
+	mes "Como atraccion turistica, Sugiero el Witch's castle.";
+	mes "A diferencia de las ciudades normaless, esta prohibido save respawn point o";
+	mes "warp point dentro de Nifflheim. Tambien los mounstruos desovan en la ciudad.";
+	next;
+	mes "[City of the Dead, Nifflheim]";
+	mes "Especalmente, por favor este atento del boss monster";
+	mes "llamado ^6B1312Lord of the Death^000000.";
+	next;
+	mes "[City of the Dead, Nifflheim]";
+	mes "Cuando te dirijas al oeste, llegaras al ^6B1312Valley of Gyoll^000000";
+	mes "Donde todos los terrorificos y poderosos mounstruos te detendran.";
+	mes "Si eres un nuevo aventurero sugiero dejar el area inmediatamente.";
+	close;
+}
+
+/*
+moc_fild15,267,264,5	script	Bulletin Board#26	837,{
+
+	mes "[Ant Hell]";
+	mes "^6B1312Caution!^000000";
+	mes "Ant Hell is consisting of 2 levels.";
+	mes "As the name shows, this dungeon is filled with various ants";
+	mes "and good as the training grounds for new adventurers.";
+	next;
+	mes "[Ant Hell]";
+	mes "However, please be aware that ^6B1312Maya Purple^000000 appears in the 1st level";
+	mes "and ^6B1312Maya^000000 does in the 2nd level. They are the queens of ants.";
+	mes "Also, in the field where you're standing";
+	mes "a boss monster called ^6B1312Phreeoni^000000 will appear at certain time.";
+	close;
+}
+*/
+
+moc_ruins,61,164,5	script	Bulletin Board#27	837,{
+
+	mes "[Pyramids]";
+	mes "^6B1312¡Peligro!^000000";
+	mes "Pyramids está compuesto de 7 niveles en total de 4 niveles sobre la tierra y el resto bajo tierra.";
+	mes "En primer lugar algunos niveles son adecuados para los nuevos aventureros para aventurarse, pero yendo más profundp, te encontrarás con monstruos más fuerte.";
+	next;
+	mes "[Pyramids]";
+	mes "En el primer nivel, se encuentra la Thief Guild donde la gente puede cambiar su Job a Thief.";
+	mes "En el 4º nivel, un monstruo llamado ^6B1312Osiris^000000 aparece cada cierto tiempo.";
+	mes "En los 3:d del sótano, ^6B1312Amon Ra^000000 aparece cada cierto tiempo.";
+	close;
+}
+
+glast_01,369,308,5	script	Bulletin Board#28	837,{
+
+	mes "[Glast Heim]";
+	mes "Glast Heim es un enorme dungeon con innumerables niveles.";
+	mes "Este dungeon no es para los nuevos o experimentados aventureros";
+	mes "pero si para los que son expertos en dungeon.";
+	next;
+	mes "[Glast Heim]";
+	mes "Hay muchos monstruos temibles como ^6B1312Dark Lord^000000,";
+	mes "^6B1312Owl Baron^000000, ^6B1312Owl Duke^000000, ^6B1312Dark Illusion^000000, ^6B1312Bloody Knight^000000, ^6B1312Abysmal Knight^000000, ^6B1312Chimera^000000 y diversos tipos de condenadas espadas.";
+	next;
+	mes "[Glast Heim]";
+	mes "Sin embargo, mientas más difícil es la expedición, mayor será la recompensa.";
+	mes "Por lo tanto, este dungeon es bastante popular entre los expertos en dungeon.";
+	mes "Disfrute de su expedición en el calabozo.";
+	close;
+}

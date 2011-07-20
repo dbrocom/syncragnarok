@@ -1,0 +1,49 @@
+//===== eAthena Script =======================================
+//= Quest For Iron Cain
+//===== By: ==================================================
+//= eA Dev Team
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= eAthena 1.0
+//===== Description: =========================================
+//= Iron Cain (lower part of a full helmet)
+//===== Additional Comments: =================================
+//= 1.1 Fixed exploit [Lupus]
+//============================================================
+
+payon,109,118,5	script	Iron Cain Quest	76,{
+	mes "[Iron Cain Quest]";
+	mes "Aqui esta lo que necesitas";
+	mes "Los requerimientos,deberas ser lo sificientemente bravo para recolectarlos, son:";
+	mes "- 200 Orcish vouchers";
+	mes "- 1 Heroic Emblem";
+	next;
+	mes "[Iron Cain Quest]";
+	mes "Estas listo para que te haga ese  item especial?";
+	next;
+	menu "Claro , lo estoy!",-, "Los requerimientos son inconmesurables!",L_Unfathomable;
+
+	mes "[Iron Cain Quest]";
+	if(countitem(931) < 200 || countitem(968) < 1) goto L_NotEnough;
+	delitem 931,200;
+	delitem 968,1;
+	mes "Wow! tu eres autenticamente bravo";
+	next;
+	mes "[Iron Cain Quest]";
+	mes "Disfrutalo!";
+	getitem 2266,1;
+	close;
+
+L_NotEnough:
+	mes "... Lo siento no tienes ni los items ni el zeny suficiente.";
+	mes "No puedo facricar el item si no me traes los items necesarios";
+	mes "Por favor entiende que esto es para el beneficio de heroes como tu!";
+	close;
+
+L_Unfathomable:
+	mes "[Iron Cain Quest]";
+	mes "Que debo ahber pensado que fuera mas unconmesurable";
+	mes "Si obtienes satisfactoriamente esos items , tendras una fuerza increible";
+	close;
+}

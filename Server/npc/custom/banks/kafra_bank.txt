@@ -1,0 +1,118 @@
+//===== eAthena Script ======================================= 
+//= The 2nd Bank of Prontera ( with daily 0.01% income! )
+//===== By: ================================================== 
+//= Lupus (1.0)
+//===== Current Version: ===================================== 
+//= 1.2a
+//===== Compatible With: ===================================== 
+//= eAthena 1.x
+//===== Description: ========================================= 
+//= A bank which has an interest %
+//===== Additional Comments: ================================= 
+// Look for this formula and setup your Bank daily % interest
+// #kafrabank/1000 = 0.1% of interest per day
+// #kafrabank/100  =  1%  of interest per day
+// #kafrabank/10   =  10% of interest per day
+//
+// 1.1 Added log of bank operation -> logmes "some info";
+// 1.2 Set max income to 100,000z. It would help to avoid
+//	zeny exploits when you change DATE at your server
+// 1.2a Corrected bad duplicate names. (bugreport:921) [Samuray22]
+//============================================================ 
+
+prontera,140,181,7	script	Bank Clerk::bankg	833,{  
+	 mes"[Maniss]";
+	 mes strcharinfo(0)+", bienvenido al Banco de Prontera!";
+
+	 set @kb_int,(gettime(6)*31)+gettime(5); //today's number
+	 set @income,0;
+	//calculate %
+	 if (#kafrabank<=0 || #kb_int>=@kb_int) goto L_NoIncomeToday;
+	 set @income,(#kafrabank/800)*(@kb_int-#kb_int); //@income == % of the sum
+	//max income constant:
+	 if (@income>500000) set @income,500000;
+	L_NoIncomeToday:
+	 set #kb_int,@kb_int; //reset days timer
+	  
+	 if(#kafrabank==0) mes "¿Tienes cuenta? Podemos abrirte una...";
+	 if(@income>0) mes "Interés del día: ^135445" + @income + "^000000 zeny.";
+	 set #kafrabank,#kafrabank+@income;
+	 if(#kafrabank>0) mes "Crédito de tu cuenta: ^135445" + #kafrabank + "^000000 zeny.";
+	 mes "¿Qué quieres hacer?";
+	 next;
+	 if(#kafrabank==0) menu "- Abrir una cuenta",-,"- Salir",B_EXIT2;
+	 if(#kafrabank>0) menu "- Depositar dinero",-,"- Retirar dinero",M_WITHDRAW,"- Salir",B_EXIT2;
+
+	 mes "[Maniss]";
+	 mes "Por favor, dígame cuánto zeny quieres depositar.";
+	 next;
+	 if(input(@kafrabank) == 1) goto L_TOO_BIG_AMOUNT;
+	  
+	 if(@kafrabank<1000) goto L_LESS_1000;
+	 if(@kafrabank>zeny) goto L_NOT_ENOUGH;
+	 set zeny,zeny-@kafrabank;
+	 set #kafrabank,#kafrabank+@kafrabank;
+	 mes"[Maniss]";
+	 mes "Has realizado un depósito de ^135445" + @kafrabank + "z^000000.";
+	//we log these zeny operations into the log db
+	 logmes "Bank %: " + @income +"z, Deposit: "+ @kafrabank +"z, Final: "+ #kafrabank +"z"; 
+	 goto B_EXIT;
+
+M_WITHDRAW:  
+	 if(#kafrabank==0) goto L_ZERO_ACCOUNT;
+	 mes"[Maniss]";
+	 mes "Tu cuenta: ^135445" + #kafrabank + "^000000 zeny.";
+	 mes "¿Cuánto dinero quieres retirar?";
+	 next;
+	 if(input(@kafrabank) == 1) goto L_TOO_BIG_AMOUNT;
+	  
+	 if(@kafrabank<1) goto B_EXIT2;
+	 if(@kafrabank>#kafrabank) goto L_NOT_ENOUGH;
+	 set #kafrabank,#kafrabank-@kafrabank;
+	 set zeny,zeny+@kafrabank;
+	 mes"[Maniss]";
+	 mes "Aquí están tus ^135445" + @kafrabank + "z^000000. Firme aquí por favor...";
+	//we log these zeny operations into the log db
+	 logmes "Bank %: " + @income +"z, Withdraw: "+ @kafrabank +"z, Final: "+ #kafrabank +"z";
+	 goto B_EXIT;
+	  
+L_NOT_ENOUGH:  
+	 mes"[Maniss]";
+	 mes "No tienes suficiente dinero para realizar esta operación.";
+	 next;
+	 goto B_EXIT2;
+
+L_ZERO_ACCOUNT:  
+	 mes"[Maniss]";
+	 mes "¡No tienes dinero en tu cuenta!";
+	 next;
+	 goto B_EXIT2;
+
+L_TOO_BIG_AMOUNT:  
+	 mes"[Maniss]";
+	 mes "Lo siento. La cantidad máxima de depósito son 10,000,000 zeny.";
+	 next;
+	 goto B_EXIT2;
+
+L_LESS_1000:  
+	 mes"[Maniss]";
+	 mes "Lo sentimos, la cantidad mínima que puedes depositar es 1,000 zeny.";
+	 next;
+	 goto B_EXIT2;
+	  
+B_EXIT:
+	 mes "Muy bien... ¡vuelva pronto!";
+	 next;
+
+B_EXIT2:  
+	 mes"[Maniss]";
+	 mes "Gracias por usar nuestro Banko. Esperamos verte pronto.";
+	 close;
+}
+
+geffen,139,56,4	duplicate(bankg)	Bank Clerk#2-1	833
+izlude,118,132,1	duplicate(bankg)	Bank Clerk#3-1	833
+morocc,158,97,4	duplicate(bankg)	Bank Clerk#4-1	833
+alberta,61,241,2	duplicate(bankg)	Bank Clerk#5-1	833
+aldebaran,127,109,3	duplicate(bankg)	Bank Clerk#6-1	833
+

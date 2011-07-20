@@ -1,0 +1,7 @@
+// Item DB with logs always enabled
+// Example: 1230,1 // Ice pick YES
+
+7776,1
+8903,1
+8904,1
+8905,1

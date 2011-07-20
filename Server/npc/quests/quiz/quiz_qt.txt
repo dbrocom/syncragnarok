@@ -1,0 +1,2139 @@
+//===== eAthena Script ======================================= 
+//= Quiz (Revolution) Part 1
+//===== By: ================================================== 
+//= CAHTXHuK
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena 1.0
+//===== Description: ========================================= 
+//= 
+//===== Additional Comments: ================================= 
+//= 
+//============================================================ 
+
+//=========================================================================================================================================
+prontera,152,286,4	script	Receptionist::RecepQuiz	755,{
+
+if (countitem(1201) > 3) goto M_MaxItem;
+if (checkweight(1201,3) == 0 ) goto L_OverWeight;
+
+
+if(BaseLevel < 20){
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "Hola";
+			mes "Este es Tsuji quien esta a cargo de";
+			mes "recivir formularios de aplicacion para el";
+			mes "Evento de Quiz Revolution.";
+			next;
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "Corporacion Zonda a preparado";
+			mes "^0000ffQuiz Revolution^000000 evento para";
+			mes "proveer diversion y entuciasmo";
+			mes "para todos ustedes.";
+			mes "Por favor lea la siguiente explicacion y";
+			mes "participe de este evento.";
+			next;
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "Este evento Quiz Revolution es..";
+			mes "operado en diferentes maneras comparado al anterior.";
+			mes "Este evento solo estara abierto para aquellos que deseen participar en el juego.";
+			mes "Tambien, los ^006400Quiz Tickets^000000 seran otorgados a aquellos que";
+			mes "pasen las simples pruebas para verificar si el jugador es digno de";
+			mes "jugar el juego.";
+			next;
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "Las evaluaciones seran hechas a travez de";
+			mes "^006400cuatro simples tests^000000";
+			mes "Para aquellos que pasen las cuatro pruebas";
+			mes "recibiran el ticket de prueba del";
+			mes "Evento Quiz Revolution.";
+			next;
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "¡¿Hmm?! Espera un segundo.";
+			mes "Si usted desea unirse al evento Quiz Revolution";
+			mes "debes tener nivel base de";
+			mes "20 o mas.";
+			mes "Por favor vayase y regrese despues de subir el";
+			mes "nivel para los puntos esperados.";
+			close;
+
+} else if (quiz_rvl > 2) {
+
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "¡Este evento es para todos ustedes!";
+			mes "Cuando comienze el Quiz Revolution.";
+			mes "Por favor muestrenos mucha";
+			mes "participacion.";
+			mes "Y no olvide entregarnos el ticket de admision~~";
+			close;
+
+} else if (quiz_rvl == 2) {
+
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "Usted ya ha pasado la primera prueba.";
+			mes "Por favor visite 'Payon' y busque a";
+			mes "'Seeil'.";
+			mes "Seeil le dara la segunda prueba.";
+			close;
+
+} else if (quiz_rvl == 1) {
+
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "^0000ff" +strcharinfo(0)+ "^000000.";
+			mes "Usted debera retomar el test";
+			mes "para pasar la prueba.";
+			mes "¿Usted acepta?";
+			next;
+				menu "Si",-,"No",sM1_No;
+
+
+						mes "^2f4f4f[Tsuji]^000000";
+						mes "Muy bien.";
+						mes "Espero que esta vez pase la prueba..";
+						mes "Estas son las preguntas.";
+						set @test_soonsu, rand(2);
+						set @score_test, 0;
+						next;
+
+							if (@test_soonsu == 0){
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "1era pregunta.";
+								mes "Ragnarok es un juego MMORPG.";
+								mes "Por favor elija 0 o X.";
+
+								next;
+									menu "O",-,"X",X1;
+
+									set @score_test, @score_test + 10;
+
+								X1:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "2da pregunta.";
+								mes "En Ragnarok la unidad monetaria es el 'Zeny'.";
+								next;
+									menu "O",-,"X",X2;
+
+									set @score_test, @score_test + 10;
+
+								X2:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "3era pregunta.";
+								mes "Si un desconocido esta atacando un monstruo";
+								mes "debes atacar al mismo monstruo juntos.";
+								next;
+									menu "O",X3,"X",-;
+
+									set @score_test, @score_test + 10;
+								X3:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "4ta pregunta.";
+								mes "'Payon' es la capital de 'Rune Midgarts'.";
+								next;
+									menu "O",X4,"X",-;
+
+									set @score_test, @score_test + 10;
+
+								X4:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "5ta pregunta.";
+								mes "Hay barcos en 'Alberta'.";
+								next;
+									menu "O",-,"X",X5;
+
+									set @score_test, @score_test + 10;
+
+								X5:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "6ta pregunta.";
+								mes "Un job class que puede usar";
+								mes "'Grand Cross' es";
+								mes "'Lord Knight'.";
+								next;
+									menu "O",X6,"X",-;
+
+									set @score_test, @score_test + 10;
+
+								X6:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "7ma pregunta.";
+								mes "Cuando un 'Bard' grita, el oponente puede caer bajo el 'estado stun'";
+								mes "en una probabilidad regular.";
+								next;
+									menu "O",X7,"X",-;
+
+									set @score_test, @score_test + 10;
+
+								X7:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "8va pregunta.";
+								mes "'Baphomet' es una herramienta";
+								mes "para matar mosquitos.";
+								next;
+									menu "O",X8,"X",-;
+
+									set @score_test, @score_test + 10;
+
+								X8:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "9na pregunta.";
+								mes "'Swordman' puede cambiar de class a";
+								mes "'Ambernite'.";
+								next;
+									menu "O",X9,"X",-;
+
+									set @score_test, @score_test + 10;
+
+								X9:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "Ultima pregunta.";
+								mes "El fino caballo, que aparece en los Mitos al Norte de Europa";
+								mes "'Sleipnir' tiene 5 piernas.";
+								next;
+									menu "O",X0,"X",-;
+
+									set @score_test, @score_test + 10;
+
+								goto X0;
+
+
+							} else if (@test_soonsu == 1){
+
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "1era pregunta.";
+								mes "Ragnarok es un juego MMORPG.";
+								mes "Por favor elija O o X.";
+								next;
+									menu "O",-, "X",X1_1;
+
+									set @score_test, @score_test + 10;
+
+								X1_1:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "2da pregunta.";
+								mes "'Valkyrie' quien aparece en el Mito al Norte de Europa";
+								mes "es la diosa del Amor.";
+								next;
+									menu "O",X1_2,"X",-;
+										set @score_test, @score_test + 10;
+
+								X1_2:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "3era pregunta.";
+								mes "'Bethoven' compuso el clasico";
+								mes "'Moon Light sonata'.";
+								next;
+									menu "O",-, "X",X1_3;
+
+									set @score_test, @score_test + 10;
+
+								X1_3:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "4ta pregunta.";
+								mes "Orcos que existen en el mundo de Ragnarok";
+								mes "estan divididos en 7 tipos.";
+								next;
+									menu "O",X1_4,"X",-;
+										set @score_test, @score_test + 10;
+
+								X1_4:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "5ta pregunta.";
+								mes "'Cobolt Card' puede instalarse";
+								mes "en";
+								mes "items de escudo.";
+									next;
+									menu "O",X1_5,"X",-;
+										set @score_test, @score_test + 10;
+
+								X1_5:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "6ta pregunta.";
+								mes "El 'Katar' es de uso exclusivo de los Assassins.";
+								next;
+									menu "O",-, "X",X1_6;
+
+									set @score_test, @score_test + 10;
+
+								X1_6:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "7ma pregunta.";
+								mes "'Emperium' es un material para";
+								mes "refinar.";
+									next;
+									menu "O",X1_7,"X",-;
+										set @score_test, @score_test + 10;
+
+								X1_7:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "8va pregunta.";
+								mes "'Payon' es un pueblo de bandidos.";
+									next;
+									menu "O",X1_8,"X",-;
+										set @score_test, @score_test + 10;
+
+								X1_8:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "9na pregunta.";
+								mes "'Prontera' es el unico lugar donde";
+								mes "cambian de class a 'Swordman'.";
+								next;
+									menu "O",X1_9,"X",-;
+										set @score_test, @score_test + 10;
+
+								X1_9:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "Ultima pregunta.";
+								mes "Un monstruo 'Merman' es del tipo human.";
+								next;
+									menu "O",-, "X",X0;
+
+									set @score_test, @score_test + 10;
+
+								goto X0;
+
+								} else if (@test_soonsu == 2){
+
+								mes "1ra pregunta.";
+								mes "Ragnarok es un juego MMORPG.";
+								mes "Por favor elija O o X.";
+								next;
+									menu "O",-, "X",X2_1;
+
+									set @score_test, @score_test + 10;
+
+								X2_1:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "2da pregunta.";
+								mes "El pueblo mas cercano a Pyramid Dungeon es 'Morroc'.";
+								next;
+									menu "O",-, "X",X2_2;
+
+									set @score_test, @score_test + 10;
+
+								X2_2:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "3ra pregunta.";
+								mes "La asociacion de merchant esta ubicada en 'Al De Baran'.";
+								next;
+									menu "O",X2_3,"X",-;
+										set @score_test, @score_test + 10;
+
+								X2_3:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "4ta pregunta.";
+								mes "Un Acolyte puede";
+								mes "cambiar de class a";
+								mes "'Sage' y 'Priest'.";
+								next;
+									menu "O",X2_4,"X",-;
+										set @score_test, @score_test + 10;
+
+								X2_4:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "5ta pregunta.";
+								mes "Cuando se alcanza el nivel base 10";
+								mes "se puede cambiar de class a 1st job10.";
+								next;
+									menu "O",X2_5,"X",-;
+										set @score_test, @score_test + 10;
+
+								X2_5:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "6ta pregunta.";
+								mes "'Bowling Bash' no puede activarse";
+								mes "sin equipar una";
+								mes "'Two handed sword'.";
+								next;
+									menu "O",X2_6,"X",-;
+										set @score_test, @score_test + 10;
+
+								X2_6:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "7ma pregunta.";
+								mes "Cuando un Priest usa 'Signum Crusis'";
+								mes "disminuye la defenza de todos los monstruos";
+								mes "en una probabilidad regular.";
+								next;
+									menu "O",X2_7,"X",-;
+										set @score_test, @score_test + 10;
+
+								X2_7:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "8va pregunta.";
+								mes "'Wizard' usa una Blue gemstone";
+								mes "cuando castea 'Fire Pillar'.";
+								next;
+									menu "O",-, "X",X2_8;
+
+									set @score_test, @score_test + 10;
+
+								X2_8:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "9na pregunta.";
+								mes "Nombre de un arma exclusiva de los Assassin's";
+								mes "'Katar' que otorga";
+								mes "un adicional de 50% de daño a tipos human";
+								mes "es la 'Infiltrator'.";
+								next;
+									menu "O",X2_9,"X",-;
+										set @score_test, @score_test + 10;
+
+								X2_9:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "10ma pregunta.";
+								mes "'Fire' es la propiedad mas";
+								mes "efectiva contra los de propiedad 'water'.";
+								next;
+									menu "O",X0,"X",-;
+										set @score_test, @score_test + 10;
+
+
+							X0:
+							mes "^2f4f4f[Tsuji]^000000";
+							mes "Bien hecho~";
+							mes "Ha resuelto todas las 10 preguntas.";
+							mes "Dejeme verificar";
+							mes "¿Cuantas ha acertado?";
+							mes "^ff0000Si usted no ha obtenido un puntaje perfecto, tendra que rehacer la prueba~^000000";
+							next;
+							mes "^2f4f4f[Tsuji]^000000";
+							mes "Por favor espere un momento.";
+							mes "Calificando.";
+							mes ". . . . . . . . . . . . . . .";
+							mes ". . . . . . . . . . . . . . .";
+							mes ". . . . . . . . . . . . . . .";
+							next;
+							mes "^2f4f4f[Tsuji]^000000";
+							mes "Hum . . . . . . . . . . . . .";
+							mes ". . . . . . . . . . . . . . .";
+							mes ". . . . . . . . . . . . . . .";
+							next;
+							mes "^2f4f4f[Tsuji]^000000";
+							mes "OK, calificacion terminada.";
+							mes "Le dire su puntaje.";
+							next;
+								if (@score_test > 99) {
+									mes "^2f4f4f[Tsuji]^000000";
+									mes "Su puntuacion es ^2f4f4f" + @score_test + "^000000!";
+									mes "Usted ha";
+									mes "calificado para participar en el";
+									mes "Quiz Revolution.";
+									mes "¡Has completado la 1era prueba!";
+									next;
+									mes "^2f4f4f[Tsuji]^000000";
+									mes "Este es un premio";
+									mes "para usted.";
+									mes "Por favor aceptelo.";
+									set quiz_rvl,2;
+									getitem 501,10; //Red_Potion
+									next;
+									mes "^2f4f4f[Tsuji]^000000";
+									mes "Ahora, la 2da prueba esta";
+									mes "lista.";
+									mes "Vaya a 'Payon' y reunace con";
+									mes "'Seeil'.";
+									mes "Podra tener la 2da prueba";
+									mes "de él.";
+									next;
+									mes "^2f4f4f[Tsuji]^000000";
+									mes "Bueno ya no hay ningun asunto importante conmigo";
+									mes "Que tenga un buen dia.";
+									close;
+									}
+								} else	{
+									set quiz_rvl,1;
+									mes "^2f4f4f[Tsuji]^000000";
+									mes "Su puntaje es ^2f4f4f" + @score_test + "^000000.";
+									mes "No ha obtenido un puntaje perfecto.";
+									mes "No le dire";
+									mes "en que se equivoco.";
+									mes "Tendra que tomar la prueba otra vez.";
+									close;
+									}
+
+					sM1_No:
+						mes "^2f4f4f[Tsuji]^000000";
+						mes "¿Oh, en serio?";
+						mes "Bueno, usted decide.";
+						mes "Que mal.";
+						mes "si cambia de opinion,";
+						mes "hazmelo saber.";
+						close;
+
+
+} else if (quiz_rvl == 0) && (BaseLevel > 19) {
+
+
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "Hola";
+			mes "Este es Tsuji quien esta a cargo de";
+			mes "recivir formularios de aplicacion para el";
+			mes "evento de Quiz Revolution.";
+			next;
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "Corporacion Zonda a preparado";
+			mes "^0000ffQuiz Revolution^000000 evento para";
+			mes "proveer diversion y entuciasmo";
+			mes "para todos ustedes.";
+			mes "Por favor lea la siguiente explicacion y";
+			mes "participe de este evento.";
+			next;
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "Este evento Quiz Revolution es..";
+			mes "operado en diferentes maneras comparado al anterior.";
+			mes "Este evento solo estara abierto para aquellos que deseen participar en el juego.";
+			mes "Tambien, los ^006400Quiz Tickets^000000 seran otorgados a aquellos que";
+			mes "pasen las simples pruebas para verificar si el jugador es digno de";
+			mes "jugar el juego.";
+			next;
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "Las evaluaciones seran hechas a travez de";
+			mes "^006400cuatro simples tests^000000";
+			mes "Para aquellos que pasen las cuatro pruebas";
+			mes "recibiran el ticket de prueba del";
+			mes "Evento Quiz Revolution.";
+			next;
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "Hay un dicho,";
+			mes "^dc143c'¡El que no se arriesga, no cruza el rio!'^000000";
+			mes "Hmm.. No creo saber que significa exactamente.";
+			mes "De todos modos. Espero que pases todas las pruebas";
+			mes "y recibas el quiz ticket";
+			mes "requerido para el evento Quiz Revolution.";
+			next;
+			mes "^2f4f4f[Tsuji]^000000";
+			mes "Asi que~ ¿Tomaras Ahora tomaras las";
+			mes "cuatro pruebas para ganar el quiz ticket para";
+			mes "el evento Quiz Revolution?";
+			next;
+				menu "Si",-,"No",sM2_No;
+
+
+						mes "^2f4f4f[Tsuji]^000000";
+						mes "Bien.";
+						mes "La primera es la ^191970'prueba de conocimiento'^000000.";
+						mes "Anunciare las preguntas y el jugador tendra que elegir";
+						mes "una respuesta usando O o X.";
+						next;
+						mes "^2f4f4f[Tsuji]^000000";
+						mes "Para su informacion, el jugador debe tener ^dc143ctodo correcto^000000, ";
+						mes "para tener derecho al evento quiz";
+						mes "asi que por favor tomese su tiempo para resolver las preguntas.";
+						next;
+						mes "^2f4f4f[Tsuji]^000000";
+						mes "Espero la participacion de muchos jugadores para el";
+						mes "evento Quiz Revolution.";
+						mes "Intentare anunciar preguntas";
+						mes "faciles. ¡Muhaha!";
+						next;
+						mes "^2f4f4f[Tsuji]^000000";
+						mes "Entonces vamos a comenzar.";
+						mes "Lea las preguntas con cuidado y elija";
+						mes "la respuesta correcta.";
+						set @test_soonsu, rand(2);
+						set @score_test, 0;
+						next;
+
+
+							if (@test_soonsu == 0) {
+							mes "^2f4f4f[Tsuji]^000000";
+								mes "1era pregunta.";
+								mes "Ragnarok es un juego MMORPG.";
+								mes "Por favor elija O o X.";
+								next;
+									menu "O",-, "X",X3_1;
+
+									set @score_test, @score_test + 10;
+
+								X3_1:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "2da pregunta.";
+								mes "En Ragnarok la unidad monetaria es el 'Zeny'.";
+									next;
+									menu "O",-, "X",X3_2;
+
+									set @score_test, @score_test + 10;
+
+								X3_2:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "3ra pregunta.";
+								mes "Si un desconocido esta atacando un monstruo";
+								mes "debes atacar al mismo monstruo juntos.";
+									next;
+									menu "O",X3_3, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X3_3:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "4ta pregunta.";
+								mes "'Payon' es la capital de 'Rune Midgarts'.";
+									next;
+									menu "O",-, "X",X3_4;
+
+									set @score_test, @score_test + 10;
+
+								X3_4:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "5ta pregunta.";
+								mes "Hay barcos en 'Alberta'.";
+									next;
+									menu "O",-, "X",X3_5;
+
+									set @score_test, @score_test + 10;
+
+								X3_5:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "6ta pregunta.";
+								mes "Un job class que puede usar";
+								mes "'Grand Cross' is";
+								mes "'Lord Knight'.";
+								next;
+									menu "O",X3_6, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X3_6:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "7ma pregunta.";
+								mes "Cuando un 'Bard' grita, el oponente puede caer bajo el 'estado stun'";
+								mes "en una probabilidad regular.";
+									next;
+									menu "O",X3_7, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X3_7:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "8va pregunta.";
+								mes "'Baphomet' es una herramienta";
+								mes "para matar mosquitos.";
+									next;
+									menu "O",X3_8, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X3_8:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "9na pregunta.";
+								mes "'Swordman' puede cambiar de class a";
+								mes "'Ambernite'.";
+									next;
+									menu "O",X3_9, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X3_9:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "Ultima pregunta.";
+								mes "El fino caballo, que aparece en los Mitos al Norte de Europa";
+								mes "'Sleipnir' tiene 5 piernas.";
+									next;
+									menu "O",Y0, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								goto Y0;
+
+
+							} else if (@test_soonsu == 1) {
+
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "1era pregunta.";
+								mes "Ragnarok es un juego MMORPG.";
+								mes "Por favor elija O o X.";
+									next;
+									menu "O",-, "X",X4_1;
+
+									set @score_test, @score_test + 10;
+
+								X4_1:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "2da pregunta.";
+								mes "'Valkyrie' quien aparece en el Mito al Norte de Europa";
+								mes "es la diosa del Amor.";
+									next;
+									menu "O",X4_2, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X4_2:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "3ra pregunta.";
+								mes "'Bethoven' compuso el clasico";
+								mes "'Moon Light sonata'.";
+									next;
+									menu "O",-, "X",X4_3;
+
+									set @score_test, @score_test + 10;
+
+								X4_3:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "4ta pregunta.";
+								mes "Orcos que existen en el mundo de Ragnarok";
+								mes "estan divididos en 7 tipos.";
+									next;
+									menu "O",X4_4, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X4_4:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "5ta pregunta.";
+								mes "'Cobolt Card' puede instalarse";
+								mes "en";
+								mes "items de escudo.";
+									next;
+									menu "O",X4_5, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X4_5:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "6ta pregunta.";
+								mes "El 'Katar' es de uso exclusivo de los Assassins.";
+									next;
+									menu "O",-, "X",X4_6;
+
+									set @score_test, @score_test + 10;
+
+								X4_6:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "7th questino.";
+								mes "'Emperium' es un material para";
+								mes "refinar.";
+									next;
+									menu "O",X4_7, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X4_7:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "8va pregunta.";
+								mes "'Payon' es un pueblo de bandidos.";
+									next;
+									menu "O",X4_8, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X4_8:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "9na pregunta.";
+								mes "'Prontera' es el unico lugar donde";
+								mes "cambian de class a 'Swordman'.";
+									next;
+									menu "O",X4_9, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X4_9:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "Ultima pregunta.";
+								mes "Un monstruo 'Merman' es del tipo human.";
+									next;
+									menu "O",-, "X",Y0;
+
+									set @score_test, @score_test + 10;
+
+								goto Y0;
+
+							} else if (@test_soonsu == 2) {
+
+
+								mes "1era pregunta.";
+								mes "Ragnarok es un juego MMORPG.";
+								mes "Por favor elija O o X.";
+									next;
+									menu "O",-, "X",X5_1;
+
+									set @score_test, @score_test + 10;
+
+								X5_1:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "2da pregunta.";
+								mes "El pueblo mas cercano a Pyramid Dungeon es 'Morroc'.";
+								next;
+									menu "O",-, "X",X5_2;
+
+									set @score_test, @score_test + 10;
+
+								X5_2:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "3ra pregunta.";
+								mes "La asociacion de merchant esta ubicada en 'Al De Baran'.";
+								next;
+									menu "O",X5_3, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X5_3:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "4ta pregunta.";
+								mes "Un Acolyte puede";
+								mes "cambiar de class a";
+								mes "'Sage' y 'Priest'.";
+								next;
+									menu "O",X5_4, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X5_4:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "5ta pregunta.";
+								mes "Cuando se alcanza el nivel base 10";
+								mes "se puede cambiar de class a 1st job10.";
+								next;
+									menu "O",X5_5, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X5_5:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "6ta pregunta.";
+								mes "'Bowling Bash' no puede activarse";
+								mes "sin equipar una";
+								mes "'Two handed sword'.";
+								next;
+									menu "O",X5_6, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X5_6:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "7ma pregunta.";
+								mes "Cuando un Priest usa 'Signum Crusis'";
+								mes "disminuye la defenza de todos los monstruos";
+								mes "en una probabilidad regular.";
+								next;
+									menu "O",X5_7, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X5_7:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "8va pregunta.";
+								mes "'Wizard' usa una Blue gemstone";
+								mes "cuando castea 'Fire Pillar'.";
+								next;
+									menu "O",-, "X",X5_8;
+
+									set @score_test, @score_test + 10;
+
+								X5_8:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "9na pregunta.";
+								mes "Nombre de un arma exclusiva de los Assassin's";
+								mes "'Katar' que otorga";
+								mes "un adicional de 50% de daño a tipos human";
+								mes "es la 'Infiltrator'.";
+								next;
+									menu "O",X5_9, "X",-;
+
+									set @score_test, @score_test + 10;
+
+								X5_9:
+								mes "^2f4f4f[Tsuji]^000000";
+								mes "10th question.";
+								mes "'Fire' es la propiedad mas";
+								mes "efectiva contra los de propiedad 'water'.";
+								next;
+									menu "O",Y0, "X",-;
+
+									set @score_test, @score_test + 10;
+
+
+
+							Y0:
+							mes "^2f4f4f[Tsuji]^000000";
+							mes "Bien hecho~";
+							mes "Ha resuelto todas las 10 preguntas.";
+							mes "Dejeme verificar";
+							mes "¿Cuantas ha acertado?";
+							mes "^ff0000Si usted no ha obtenido un puntaje perfecto, tendra que rehacer la prueba~^000000";
+							next;
+							mes "^2f4f4f[Tsuji]^000000";
+							mes "Por favor espere un momento.";
+							mes "Calificando.";
+							mes ". . . . . . . . . . . . . . .";
+							mes ". . . . . . . . . . . . . . .";
+							mes ". . . . . . . . . . . . . . .";
+							next;
+							mes "^2f4f4f[Tsuji]^000000";
+							mes "Hum . . . . . . . . . . . . .";
+							mes ". . . . . . . . . . . . . . .";
+							mes ". . . . . . . . . . . . . . .";
+							next;
+							mes "^2f4f4f[Tsuji]^000000";
+							mes "OK, calificacion terminada.";
+							mes "Le dire su puntaje.";
+							next;
+								if (@score_test > 99) {
+									mes "^2f4f4f[Tsuji]^000000";
+									mes "Su puntuacion es ^2f4f4f" + @score_test + "^000000!";
+									mes "Usted ha";
+									mes "calificado para participar en el";
+									mes "Quiz Revolution.";
+									mes "¡Has completado la 1era prueba!";
+									next;
+									mes "^2f4f4f[Tsuji]^000000";
+									mes "Este es un premio";
+									mes "para usted.";
+									mes "Por favor aceptelo.";
+									set quiz_rvl,2;
+									getitem 501,10; //Red_Potion
+									next;
+									mes "^2f4f4f[Tsuji]^000000";
+									mes "Ahora, la 2da prueba esta";
+									mes "lista.";
+									mes "Vaya a 'Payon' y reunace con";
+									mes "'Seeil'.";
+									mes "Podra tener la 2da prueba";
+									mes "de él.";
+									next;
+									mes "^2f4f4f[Tsuji]^000000";
+									mes "Bueno ya no hay ningun asunto importante conmigo";
+									mes "Que tenga un buen dia.";
+									close;
+								} else {
+									set quiz_rvl,1;
+									mes "^2f4f4f[Tsuji]^000000";
+									mes "Su puntaje es ^2f4f4f" + @score_test + "^000000.";
+									mes "No ha obtenido un puntaje perfecto.";
+									mes "No le dire";
+									mes "en que se equivoco.";
+									mes "Tendra que tomar la prueba otra vez.";
+									close;
+									}
+
+
+					sM2_No:
+						mes "^2f4f4f[Tsuji]^000000";
+						mes "¿Oh, en serio?";
+						mes "Bueno, usted decide.";
+						mes "Que mal.";
+						mes "si cambia de opinion,";
+						mes "hazmelo saber.";
+						close;
+	}
+}
+M_MaxItem:
+			mes "^2f4f4f[Tsuji]^000000";
+	  		mes "- ¡¡Espere un minuto !! -";
+		 	mes "- Actualmente usted tiene muchos items por lo tanto -";
+	   		mes "- no puede recibir un item. -";
+			mes "- Por favor pierda un poco de peso -";
+	   		mes "- y intente nuevamente. -";
+			close;
+
+L_OverWeight:
+			mes "^2f4f4f[Tsuji]^000000";
+	  		mes "- ¡¡Espere un minuto !! -";
+		 	mes "-Actualmente usted tiene muchos items por lo tanto -";
+	   		mes "- no puede recibir un item. -";
+			mes "- Por favor pierda un poco de peso -";
+	   		mes "- y intente nuevamente. -";
+			close;
+}
+
+//======================================payon=================================
+payon,85,133,4	duplicate(RecepQuiz)	Receptionist#2	755
+//======================================geffen================================
+geffen,111,104,4	duplicate(RecepQuiz)	Receptionist#3	755
+//====================================morocc==================================
+morocc,148,272,5	duplicate(RecepQuiz)	Receptionist#4	755
+//=============================Alberta========================================
+alberta,29,241,4	duplicate(RecepQuiz)	Receptionist#5	755
+//============================================================================
+
+//===================Quiz Revolution 2nd quest collecting job items==================
+payon,111,117,3	script	Seeil	89,{
+if (countitem(1201) > 3) goto M_MaxItem;
+if (checkweight(1201,3) == 0 ) goto L_OverWeight;
+
+	if (quiz_rvl > 13) {
+		mes "[Seeil]";
+		mes "¿Como estuvo la ultima prueba? Espero que que haya hecho";
+		mes "esta bien.";
+		close;
+	} else if (quiz_rvl == 13) {
+		mes "[Seeil]";
+		mes "Ya que has completado las condiciones para recibir la";
+		mes "ultima prueba, por favor ve a visitar a Radeng en Prontera.";
+		mes "Durante este tiempo,";
+		mes "tranferire toda";
+		mes "su informacion.";
+		next;
+		mes "[Seeil]";
+		mes "Asi que en este es el ultimo. ¡Demuestrame un poco de espiritu!";
+		mes "¡Este es un presente para animarte! ¡Tomalo!";		
+		set quiz_rvl,14;
+		getitem 503,10; //Yellow_Potion
+		close;
+
+	} else if (quiz_rvl > 6) && (quiz_rvl < 13) {
+		mes "[Seeil]";
+		mes "¿Eh? No has terminado la prueba de marathon y";
+		mes "saliste a mitad de la prueba.";
+		mes "Oh dios.. no se como saliste, pero";
+		mes "esto no puede pasar. Te enviare";
+		mes "¡una vez mas!";
+		close2;
+		set quiz_rvl,6;
+		warp "quiz_test",385,388;
+		end;
+
+	} else if (quiz_rvl == 6) {
+		mes "[Seeil]";
+		mes "Ho.. Eres rapido. Bueno...";
+		mes "Todas las preparaciones han sido hechas asi que puedo enviarte";
+		mes "al siguiente nivel. Esto probara tu paciencia";
+		mes "y resistencia. No se requerira usar tu cerebro";
+		mes "esta vez. Todo lo que tienes que hacer es.. solo correr.";
+		next;
+		mes "[Seeil]";
+		mes "No puedes volver de ahi hasta";
+		mes "que termines. ¿Estas listo?";
+		mes "¿Tomaras la tercera prueba";
+		mes "ahora?";
+		next;
+		menu "Toma la prueba",-,"Reusa a tomar la prueba",M2_S;
+
+				mes "[Seeil]";
+				mes "¡Okay! Espero que lo haga bien y";
+				mes "pase la prueba.";
+				mes "¡Ve por el!";
+				close2;
+				warp "quiz_test",385,388;
+				end;
+
+			M2_S:
+				mes "[Seeil]";
+				mes "Oh my gosh, no estas listo";
+				mes "aun. No tengo ninguna intencion de";
+				mes "forzarte asi que cuando estes listo";
+				mes "por favor regresa. Ha ha ha.";
+				close;
+
+				
+	} else if (quiz_rvl == 3) {
+		if (countitem(902) > 39) && (countitem(908) > 39) && (countitem(909) > 39) {
+			mes "[Seeil]";
+			mes "Wow. Has recolectado los items requeridos.";
+			mes "Asi que mantendre mi promesa. Antes de";
+			mes "todo este es un presente para ti. Por favor";
+			mes "tomalo.";
+			delitem 902,40;
+			delitem 908,40;
+			delitem 909,40;
+			set quiz_rvl,6;
+			getitem 502,10; //Orange_Potion
+			next;
+			mes "[Seeil]";
+			mes "Luego regresa despues de un rato y hablame.";
+			mes "Necesito preparar algunas cosas para la tercera prueba";
+			mes "asi que... por favor ve y haz alguna otra cosa";
+			mes "para matar el tiempo.";
+			close;
+		}
+
+		mes "[Seeil]";
+		mes "Estas a prueba por lo que debes traer";
+		mes "^FF0000Tree Root^000000, ^FF0000Spawn^000000,";
+		mes "^FF0000Jellopy^000000, 40 ea.";
+		mes "Ve por ellos!";
+		close;
+
+	} else if (quiz_rvl == 4) {
+		if (countitem(905) > 39) && (countitem(920) > 39) && (countitem(909) > 39) {
+			mes "[Seeil]";
+			mes "Ho. Haz recolectado los item requeridos.";
+			mes "Mantendre mi promesa. Pero antes";
+			mes "Resive este obsequio. Porfavor";
+			mes "Tomalo.";
+			delitem 905,40;
+			delitem 920,40;
+			delitem 909,40;
+			set quiz_rvl,6;
+			getitem 502,10;  //Orange_Potion
+			next;
+			mes "[Seeil]";
+			mes "Entonces vuelve aqui en unos momentos.";
+			mes "Tengo que preparar algo asi que";
+			mes "porfavor ve a hacer algo para matar";
+			mes "el tiempo";
+			close;
+		}
+
+		mes "[Seeil]";
+		mes "Estas a prueba por lo que debes traer";
+		mes "^FF0000Stem^000000, ^FF0000Claw of Wolves^000000, ^FF0000Jellopy^000000";
+		mes "40 ea.";
+		mes "Ve por ellos.";
+		close;
+
+	} else if (quiz_rvl == 5) {
+		if (countitem(940) > 39) && (countitem(916) > 39) && (countitem(909) > 39) {
+
+			mes "[Seeil]";
+			mes "Ho. Haz recolectado los item requeridos.";
+			mes "Mantendre mi promesa. Pero antes";
+			mes "Resive este obsequio. Porfavor";
+			mes "tomalo.";
+			delitem 940,40;
+			delitem 916,40;
+			delitem 909,40;
+			set quiz_rvl,6;
+			getitem 502,10;  //Orange_Potion
+			next;
+			mes "[Seeil]";
+			mes "Entonces vuelve aqui en unos momentos.";
+			mes "Tengo que preparar algo asi que";
+			mes "porfavor ve a hacer algo para matar";
+			mes "tiempo.";
+			close;
+			}
+
+		mes "[Seeil]";
+		mes "Estas a prueba por lo que debes traer";
+		mes "^FF0000Grasshopper's Leg^000000, FF0000Feather of Birds^000000, ^FF0000Jellopy^000000";
+		mes "40 ea.";
+		mes "Ve por ellos.";
+		close;
+
+
+	} else if (quiz_rvl == 2) {
+
+		mes "[Seeil]";
+		mes "Hmm? Tu eres uno de los que Tsuji envio?";
+		mes "Tu nombre es... " +strcharinfo(0)+ " Correcto? Esta bien...";
+		mes "Confirmado. Eres tal y como Tsuji";
+		mes "te describio. Bueno, podemos empezar la";
+		mes "Prueba?";
+		next;
+		mes "[Seeil]";
+		mes "No es tan dificil. Todo lo que debes";
+		mes "hacer es traerme ciertos item.";
+		mes "La vida no es tan dificil~";
+		set @japtem,rand(2);
+		next;
+		
+			if (@japtem == 0) {
+				set quiz_rvl,3;
+				mes "[Seeil]";
+				mes "Traeme ^FF0000Tree Root ^000000 40ea, ^FF0000Spawn";
+				mes "^000000 40ea, y ^FF0000Jellopy^000000 40ea";
+				mes "Ya te lo dije. No es tan dificil, cierto?";
+				mes "Me gustaria haberte pedido algunos items dificiles de encontrar";
+				mes "Pero los mayores dijeron que no ";
+				mes "lo hiciera~ Hehe.";
+				next;
+				mes "[Seeil]";
+				mes "Bueno, Traelos tan pronto como puedas. Esta es";
+				mes "una prueba facil, pero tiene limite de tiempo.";
+				mes "Entre mas temprano mejor, A eso es";
+				mes "a lo que me refiero~";
+				close;
+				}
+
+			else if (@japtem == 1) {
+				set quiz_rvl,4;
+				mes "[Seeil]";
+				mes "Traeme ^FF0000Stem^000000 40ea, ^FF0000Wolf Claw^000000 40ea,";
+				mes "y ^FF0000Jellopy^000000 40ea.";
+				mes "Ya te lo dije. No es tan dificil, cierto?";
+				mes "Me gustaria haberte pedido algunos items dificiles de encontrar";
+				mes "Pero los mayores dijeron que no ";
+				mes "lo hiciera~ Hehe.";
+				next;
+				mes "[Seeil]";
+				mes "Bueno, Traelos tan pronto como puedas. Esta es";
+				mes "una prueba facil, pero tiene limite de tiempo.";
+				mes "Entre mas temprano mejor, A eso es";
+				mes "a lo que me refiero~";
+				close;
+				}
+
+			else if (@japtem == 2) {
+				set quiz_rvl,5;
+				mes "[Seeil]";
+				mes "^FF0000Grasshopper's Leg^000000 40ea, ^FF0000Feather of Birds^000000 40ea,";
+				mes "y ^FF0000Jellopy^000000 40ea.";
+				mes "Ya te lo dije. No es tan dificil, cierto?";
+				mes "Me gustaria haberte pedido algunos items dificiles de encontrar";
+				mes "Pero los mayores dijeron que no ";
+				mes "lo hiciera~ Hehe.";
+				next;
+				mes "[Seeil]";
+				mes "Bueno, Traelos tan pronto como puedas. Esta es";
+				mes "una prueba facil, pero tiene limite de tiempo.";
+				mes "Entre mas temprano mejor, A eso es";
+				mes "a lo que me refiero~";
+				close;
+				}
+	} else {
+
+	mes "[Seeil]";
+	mes "Llamame Seeil=Lanchest";
+	mes "Estoy aqui para probar aquel que";
+	mes "Desea unirse a los quiz event..";
+	next;
+	mes "[Seeil]";
+	mes "Estoy a cargo de la segunda y tercera prueba";
+	mes "asi que para poder hacerte la prubea, tu debes";
+	mes "pasar el primer test que es aplicado";
+	mes "por Tsuji.";
+	close;
+}
+M_MaxItem:
+			mes "^800000[Seeil]^000000";
+	  		mes "- Espera un minutos !! -";
+		 	mes "- Llevas tantos items que -";
+	   		mes "- ya no puedes recibir mas. -";
+			mes "- porfavor aligera la carga -";
+	   		mes "- y vuelve a intentarlo. -";
+			close;
+
+L_OverWeight:
+			mes "^800000[Seeil]^000000";
+	  		mes "- Espera un minuto !! -";
+		 	mes "- Llevas tantos items que -";
+	   		mes "- ya no puedes recibir mas. -";
+			mes "- porfavor aligera la carga -";
+	   		mes "- y vuelve a intentarlo. -";
+			close;
+}
+
+//=========================================================================================================================================================
+prontera,116,266,5	script	Receptionist	109,{
+
+if (countitem(1201) > 3) goto M_MaxItem;
+if (checkweight(1201,3) == 0 ) goto L_OverWeight;
+
+
+if(quiz_rvl == 18) {
+
+			mes "^800000[Radeng]^000000";
+			mes "^6b8e23" + strcharinfo(0)+ "^000000?";
+			mes "'Ve y busca a ^b8860b'Kantryl'^000000 ";
+			mes "en Izlude.";
+			close;
+
+
+
+} else if(quiz_rvl == 17) {
+
+			if (countitem(955) > 19) && (countitem(913) > 19) && (countitem(729) > 0) {
+
+				mes "^800000[Radeng]^000000";
+				mes "Oh~";
+				mes "Estas aqui!";
+				mes "Dejame revisar si";
+				mes "Tragiste lo correcto.";
+				next;
+				mes "^800000[Radeng]^000000";
+				mes "Si, es Correcto.";
+				mes "Tragiste lo correcto.";
+				mes "porfavor, espera un segundo y..";
+				mes "Yo debo";
+				mes "ponerte en la lista.";
+				next;
+				mes "^800000[Radeng]^000000";
+				mes "Tu eres..^6b8e23" + strcharinfo(0)+ "^000000 ..correcto?";
+				mes "Hm...";
+				mes "Bien hecho.";
+				mes "Y esta es la compensacion para";
+				mes "aquel que aprobo la prueba.";
+				next;
+				mes "^800000[Radeng]^000000";
+				mes "Todo lo que debes hacer es";
+				mes "encontrarte ^b8860b'Kantryl'^000000";
+				mes "en Izlude.";
+				delitem 955,20;
+				delitem 913,20;
+				delitem 729,1;
+				set quiz_rvl,18;
+				getitem 504,10;  //White_Potion
+				next;
+				mes "^800000[Radeng]^000000";
+				mes "Adios~~.";
+				close;
+			}
+			mes "^800000[Radeng]^000000";
+			mes "Oh~~";
+			mes "Estas aqui!";
+			mes "Dejame revisar si";
+			mes "Tragiste lo correcto.";
+			next;
+			mes "^800000[Radeng]^000000";
+			mes "oh por....";
+			next;
+			mes "^800000[Radeng]^000000";
+			mes "Parece que no preparaste";
+			mes "lo que yo te he pedido.";
+			mes "Te dire que items deberas traer.";
+			mes "No lo volvere a repetir.";
+			mes "Asi que recuerdalo porfavor.";
+			next;
+			mes "^800000[Radeng]^000000";
+			mes "Este item es";
+			mes "^19197020 Warm peeling^000000";
+			mes "^19197020Tooth of Bat^000000";
+			mes "^1919701 Zircon^000000";
+			close;
+
+
+
+
+		
+
+} if(quiz_rvl == 16) {
+			if (countitem(1055) > 29) && (countitem(940) > 29) && (countitem(948) > 29) && (countitem(730) > 0) {
+				mes "^800000[Radeng]^000000";
+				mes "Oh~~~";
+				mes "Estas aqui!";
+				mes "Dejame revisar si ";
+				mes "Tragiste lo correcto.";
+				next;
+				mes "^800000[Radeng]^000000";
+				mes "Si, Es lo correcto.";
+				mes "Tragiste lo correcto.";
+				mes "Porfavor, espera un segundo y..";
+				mes "yo debo";
+				mes "ponerte en la lista.";
+				next;
+				set quiz_rvl,18;
+				getitem 504,10;  //White_Potion
+				delitem 1055,30;
+				delitem 940,30;
+				delitem 948,30;
+				delitem 730,1;
+				mes "^800000[Radeng]^000000";
+				mes "Tu eres..^6b8e23" + strcharinfo(0)+ "^000000..Correcto?";
+				mes "Hm...";
+				mes "Bien hecho.";
+				mes "Y esta es la compensacion para";
+				mes "aquel que aprobo la prueba.";
+				next;
+				mes "^800000[Radeng]^000000";
+				mes "Todo lo que debes hacer es";
+				mes "encontrarte a ^b8860b'Kantryl'^000000";
+				mes "en Izlude.";
+				next;
+				mes "^800000[Radeng]^000000";
+				mes "Adios";
+				close;
+			}
+			mes "^800000[Radeng]^000000";
+			mes "Oh~~~";
+			mes "Aqui etas!";
+			mes "Dejame revisar si";
+			mes "Tragiste lo correcto.";
+			next;
+			mes "^800000[Radeng]^000000";
+			mes "Oh por....";
+			next;
+			mes "^800000[Radeng]^000000";
+			mes "parece que no preparaste";
+			mes "lo que yo te he pedido..";
+			mes "Te dire que items deberas traer..";
+			mes "No lo volvere a repetir.";
+			mes "asi que recuerdalo porfavor..";
+			next;
+			mes "^800000[Radeng]^000000";
+			mes "^191970Earthwarm Peeling^000000 30";
+			mes "^191970Grasshopper's Leg^000000 30";
+			mes "^191970Bear's Footskin^000000 30";
+			mes "^1919701carat Diamond^000000 1.";
+			mes "Esfuerzate.";
+			close;
+
+
+
+
+	
+} else if(quiz_rvl == 15) {
+			mes "^800000[Radeng]^000000";
+			mes "Tu eres....";
+			mes "aquel que se fue antes de decirle su puntuacion";
+			mes "No es asi?";
+			mes "No puedo decirle que fallo. Asi que...";
+			next;
+			mes "si ^800000[Radeng]^000000";
+			mes "^191970Earthwarm Peeling^000000 30";
+			mes "^191970Grasshopper's Leg^000000 30";
+			mes "^191970Bear's Footskin^000000 30";
+			mes "^1919701carat Diamond^000000 1";
+			mes "esta preparado,";
+			mes "Tu has aprobado.";
+			set quiz_rvl,16;
+			close;
+
+} else if(quiz_rvl == 14) {
+			mes "^800000[Radeng]^000000";
+			mes "Hola";
+			mes "Soy 'Radeng'.";
+			mes "Estoy a cargo de la 4ta prueba.";
+			mes "Pareces haber pasado la";
+			mes "3er prueba!";
+			next;
+			mes "^800000[Radeng]^000000";
+			mes "Entonces, Empecemos la 4ta Prueba.";
+			mes "La ultima barrera del Quiz revolution.";
+			mes "Primero que nada,";
+			mes "Ire brevemente aproximandome al final de la prueba";
+			next;
+			mes "^800000[Radeng]^000000";
+			mes "Deberas hacer Quiz y recolectar items";
+			mes " ";
+			mes "Deberas responder 10 preguntas de opcion multiple";
+			mes "y la cantidad de items requeridos cambia ";
+			mes "Segun su puntuacion.";
+			mes " ";
+			next;
+			mes "^800000[Radeng]^000000";
+			mes "Primero,";
+			mes "Si contestas las 10 preguntas correctamente";
+			mes "Pasaras la";
+			mes "prueba de recoleccion de items.";
+			next;
+			mes "^800000[Radeng]^000000";
+			mes "Segundo,";
+			mes "Si tu puntuacion esta entre 50~90";
+			mes "Los items requeridos";
+			mes "No son muchos.";
+			next;
+			mes "^800000[Radeng]^000000";
+			mes "Tercero,";
+			mes "Si tu puntuacion esta entre 0~40";
+			mes "Los items requeridos seran";
+			mes "bastantes.";
+			next;
+			mes "^800000[Radeng]^000000";
+			mes "Bueno, eso es todo acerca de la";
+			mes "4ta prueba.";
+			mes "Entonces, Empecemos!";
+			next;
+				menu "Si",-,"No",M_No;
+
+						mes "^800000[Radeng]^000000";
+						mes "Bueno, Ahora";
+						mes "te hare las 10 Preguntas";
+						mes "Mira con cuidado las ";
+						mes "preguntas y";
+						mes "elige la respuesta correcta.";
+						next;
+						mes "^800000[Radeng]^000000";
+						mes "1era pregunta.";
+						mes "Cuantos jobs";
+						mes "hay en el juego?";
+						set @score_test2, 0;
+						next;
+							menu "22",sM1_1,"28",sM1_1,"32",sM1_1,"34",-;
+				
+								set @score_test2, @score_test2 + 10;
+
+						sM1_1:
+	
+						mes "^800000[Radeng]^000000";
+						mes "2da pregunta.";
+						mes "el nombre del NPC de santa";
+						mes "Que une la ciudad navideña";
+						mes "'Lutie' y 'Aldebaran'?";
+						next;
+							menu "Warp Santa",sM1_2, "Link Santa",-, "Lutie Santa",sM1_2, "Hulk Santa",sM1_2;
+								
+								set @score_test2, @score_test2 + 10;
+
+						sM1_2:
+						mes "^800000[Radeng]^000000";
+						mes "3ra pregunta.";
+						mes "Que nivel de job deberas tener por lo menos";
+						mes "para aprender la skill de novice";
+						mes "'Pretend dead'?";
+						next;
+							menu "Job level4",sM1_3,"Job level5",sM1_3,"Job level6",sM1_3,"Job level7",-;
+								
+								set @score_test2, @score_test2 + 10;
+
+						sM1_3:
+						mes "^800000[Radeng]^000000";
+						mes "4ta pregunta.";
+						mes "Item requerido";
+						mes "para alimentar un Poring?";
+						next;
+							menu "Unripe Apple",-,"Rippen Apple",sM1_4, "Delicious looking Apple",sM1_4, "Apple",sM1_4;
+					
+								set @score_test2, @score_test2 + 10;
+
+						sM1_4:
+						mes "^800000[Radeng]^000000";
+						mes "5ta pregunta";
+						mes "Que doll puedes comprar";
+						mes "a los NPC?";
+						next;
+							menu "Doll",-,"Baphomet Doll",sM1_5,"Yoyo Doll",sM1_5,"Rocker Doll",sM1_5;
+							
+								set @score_test2, @score_test2 + 10;
+
+						sM1_5:
+						mes "^800000[Radeng]^000000";
+						mes "6ta pregunta.";
+						mes "Nombre del monstruo que dropea";
+						mes "'Big Ribbon'?";
+						next;
+							menu "Eclipse",sM1_6,"Dragon Fly",sM1_6,"Vocal",sM1_6,"Toad,",-;
+							
+								set @score_test2, @score_test2 + 10;
+
+						sM1_6:
+						mes "^800000[Radeng]^000000";
+						mes "7ta pregunta";
+						mes "Elige el monstruo con tamaño y forma similar a la del Poring.";
+						next;
+							menu "Pupa",sM1_7,"Fabre",sM1_7,"Wander Man",-,"Golem",sM1_7;
+						
+								set @score_test2, @score_test2 + 10;
+
+						sM1_7:
+						mes "^800000[Radeng]^000000";
+						mes "8va pregunta.";
+						mes "En que momento la Green Herb funciona";
+						mes "con eficacia?";
+						next;
+							menu "Silence",sM1_8,"Sleep",sM1_8,"Poison",-,"Chaos",sM1_8;
+							
+								set @score_test2, @score_test2 + 10;
+
+						sM1_8:
+						mes "^800000[Radeng]^000000";
+						mes "9na pregunta.";
+						mes "Que arma da el mayor daño";
+						mes "a mounstruos de pequeño tamaño?";
+						next;
+							menu "Dagger",-,"Two hand Sword",sM1_9,"Katar",sM1_9,"One hand Sword",sM1_9;
+							
+								set @score_test2, @score_test2 + 10;
+
+						sM1_9:
+						mes "^800000[Radeng]^000000";
+						mes "Ultima pregunta!!";
+						mes "Que no es necesaria cuando aprender";
+						mes "First-aid treatment?";
+						next;
+							menu "Clover",sM1_0,"Red Herb",sM1_0,"Novice Nametag",-,"Sterilized Bandages",sM1_0;
+							
+								set @score_test2, @score_test2 + 10;
+
+						sM1_0:
+						mes "^800000[Radeng]^000000";
+						mes "Terminaste de responder todas las preguntas";
+						mes "Me pregunto cual sera su puntuacion";
+						mes "10 puntos por 1 pregunta.";
+						mes "porfavor espere un segundo.";
+						next;
+						mes "^800000[Radeng]^000000";
+						mes "Porfavor, espere un segundo..";
+						mes "Calificacion.";
+						mes ". . . . . . . . . . . . . . .";
+						mes ". . . . . . . . . . . . . . .";
+						next;
+						mes "^800000[Radeng]^000000";
+						mes "OK.";
+						mes "Tu puntuacion es" + strcharinfo(0)+ "";
+						mes "" + @score_test2 + "!" ;
+						set quiz_rvl,15;
+						next;
+							if (@score_test2 > 40) && (@score_test2 < 90)goto L_Passed;
+							if (@score_test2 >= 90)goto L_Perfect;
+								mes "^800000[Radeng]^000000";
+								mes "tu puntuacon es muy baja.";
+								mes "Tal y como dije antes,";
+								mes "debras traerme un monton de";
+								mes "items para pasar la prueba.";
+								mes " ";
+								next;
+								mes "^800000[Radeng]^000000";
+								mes "Los items requeridos son";
+								mes "^191970Earthworm Peeling^000000 30";
+								mes "^191970Grasshopper's Leg^000000 30";
+								mes "^191970Bear's Footskin^000000 30";
+								mes "^1919701Carat Diamond^000000 1";
+								mes "";
+								next;
+								mes "^800000[Radeng]^000000";
+								mes "Lo siento.";
+								mes "Si tu puntuacion ubiese sido un poco mas alta..";
+								mes ".........";
+								mes "Entonces, busca los items..";
+								set quiz_rvl,16;
+								close;
+
+						L_Passed:
+
+								mes "^800000[Radeng]^000000";
+								mes "Lo hiciste bien. ";
+								mes "pero como dije antes";
+								mes "deberas traer";
+								mes "algunos items mas.";
+								mes " ";
+								next;
+								mes "^800000[Radeng]^000000";
+								mes "Los items requeridos son";
+								mes "^191970Worm Peeling^000000 20";
+								mes "^191970Tooth of Bat^000000 20";
+								mes "^191970Zircon^000000 1.";
+								next;
+								mes "^800000[Radeng]^000000";
+								mes "Lo siento~";
+								mes "Si tu puntuacion ubiese sido un poco mas alta..";
+								mes "Habrias pasado.";
+								mes "(KeKeke)";
+								mes "Entonces, busca los items..";
+								set quiz_rvl,17;
+								close;
+
+						L_Perfect:
+								mes "^800000[Radeng]^000000";
+								mes "Wow! Acertaste en todas!.";
+								mes "Fantastico!!!!";
+								mes "Para aquellos que ";
+								mes "que aciertan en todas no se necesitan asignaciones";
+								mes " ";
+								next;	
+								mes "^800000[Radeng]^000000";
+								mes "" + strcharinfo(0)+ "";
+								mes "has pasados.";
+								mes "Felicidades";
+								mes "Y esta es tu compensacion ";
+								mes "";
+								set quiz_rvl,18;
+								getitem 504,10;  //White_Potion
+								next;
+								mes "^800000[Radeng]^000000";
+								mes "Ahora, encuentrate con";
+								mes "^b8860b'Kantryl'^000000.";
+								mes "en Izlude.";
+								close;
+	
+
+					M_No:
+						mes "^800000[Radeng]^000000";
+						mes "regresa si cambias de idea.";
+						close;
+} else {
+			mes "^800000[Radeng]^000000";
+			mes "Hola~~~";
+			mes "Por favor unase a la llegada de";
+			mes "Quiz Revolution~";
+			mes "Los registros seran hechos";
+			mes "por recepcionistas en cada ciudad.";
+			close;
+}
+M_MaxItem:
+			mes "^800000[Radeng]^000000";		
+	  		mes "- Espera un minuto !! -";
+		 	mes "- Llevas tantos items que -";
+	   		mes "- ya no puedes recibir mas. -";
+			mes "- Porfavor aligera la carga -";
+	   		mes "- y vuelve a intentarlo. -";
+			close;
+
+L_OverWeight:
+			mes "^800000[Radeng]^000000";
+	  		mes "- Espera un minuto !! -";
+		 	mes "- Llevas tantos items que -";
+	   		mes "- ya no puedes recibir mas. -";
+			mes "- Porfavor aligera la carga -";
+	   		mes "- y vuelve a intentarlo. -";
+			close;
+}
+
+//=======================================================================================================================================================
+izlude,106,220,5	script	Kantryl	98,{
+	
+if (countitem(1201) > 3) goto M_MaxItem;
+if (checkweight(1201,3) == 0 ) goto L_OverWeight;
+
+
+if(quiz_rvl == 20) {
+		mes "[Kantryl]";
+		mes "Veo que me has dado una";
+		mes "nota de ausencia...";
+		mes "Bueno, Pero no puedo darte un boleto de entrada.";
+		mes "Quien sabe~~";
+		mes "Espera a que quiz comience";
+		mes "Talvez tengas suerte";
+		close;
+
+}else if(quiz_rvl == 19) {
+		mes "[Kantryl]";
+		mes "Ya has recivido un boleto de entrada";
+		mes "es imposible conseguir";
+		mes "otro.";
+		next; 
+		mes "[Kantryl]";
+		mes "para referencias, los numeros de participantes son";
+		next;
+		mes "[Kantryl]";
+		mes "1ra Quiz Revolution - " + quiz1 + "/200";
+		mes "2da Quiz Revolution - " + quiz2 + "/200";
+		mes "3ra Quiz Revolution - " + quiz3 + "/200";
+		mes "4ta Quiz Revolution - " + quiz4 + "/200";
+		mes "5ta Quiz Revolution - " + quiz5 + "/200";
+		mes "Tengalo en mente";
+		close;
+
+
+} else if(quiz_rvl == 18) {
+
+		mes "[Kantryl]";
+		mes "Tu eres " + strcharinfo(0)+ ".";
+		mes "El que termino la prueba. correcto?";
+		mes "Podria porfavor tomar una decision ";
+		mes "Se unira o no al";
+		mes "Quiz Revolution.";
+		next;
+		mes "[Kantryl]";
+		mes "Le gustara unirse?";
+		mes "Si dice si, podra registrarse en";
+		mes "Quiz Revolution";
+		mes "si elige ^FF0000'NO,No unirme'^000000";
+		mes " entonces ^FF0000'no podra unirse'^000000";
+		mes "Porfavor tome la decision correcta.";
+		next;
+		mes "[Kantryl]";
+		mes "Si no lo has pensado bien,";
+		mes "di si por ahora";
+		mes "y podras cambiar de opinion despues.";
+		mes "Tomalo con calma.";
+		next;
+			menu "Unirse", -, "No unirse.",NJ;
+
+
+				mes "[Kantryl]";
+				mes "Itis ala 1~5 ronda";
+				mes "Los primeros 200 Tienen oportunidad.";
+				mes ""+ strcharinfo(0)+ ", Cuando te gustaria unirte?";
+				mes "Eso es^FF0000Imposible de cancelar^000000";
+				mes "Asi que porfavor tome la decision correcta.";
+				next;
+				mes "[Kantryl]";
+				mes "1ra Quiz Revolution - " + quiz1 + "/200";
+				mes "2da Quiz Revolution - " + quiz2 + "/200";
+				mes "3ra Quiz Revolution - " + quiz3 + "/200";
+				mes "4ta Quiz Revolution - " + quiz4 + "/200";
+				mes "5ta Quiz Revolution - " + quiz5 + "/200";
+				next;
+				menu "Unirse ala 1ra ronda",-,"Unirse ala 2da ronda",s2nd,"Unirse ala 3ra ronda",s3nd,"Unirse ala 4ta ronda",s4nd,"Unirse ala 5ta ronda",s5nd;
+				
+						if(quiz1 > 199){
+							mes "[Kantryl]";
+							mes "Lo sentimos. Tenemos llena la";
+							mes "1ra ronda del quiz revolution";
+							mes "No mas aplicantes para la 1ra ronda.";
+							close;
+
+      						}
+						mes "[Kantryl]";
+						mes "Hm..."+ strcharinfo(0)+" ";
+						mes "He recivido tu aplicacion";
+						mes "Esfuerzate y estudia con ganas.";
+						set quiz_rvl,19;
+						set quiz1,quiz1 + 1;
+						getitem 7280,1; //Quiz_Ticket01
+						close;
+
+
+
+
+					s2nd:
+						if(quiz2 > 199){
+								mes "[Kantryl]";
+							mes "Lo sentimos. Tenemos llena la";
+							mes "2da ronda del quiz revolution";
+							mes "No mas aplicantes para la 2da ronda.";
+							close;
+						}
+					
+						mes "[Kantryl]";
+						mes "Hm..."+ strcharinfo(0)+"";
+						mes "He recivido tu aplicacion";
+						mes "Esfuerzate y estudia con ganas.";
+						set quiz_rvl,19;
+						set quiz2,quiz2 + 1;
+						getitem 7281,1;  //Quiz_Ticket02
+						close;
+					
+
+
+					s3nd:
+						if(quiz3 > 199){
+								mes "[Kantryl]";
+							mes "Lo sentimos. Tenemos llena la";
+							mes "3ra ronda del quiz revolution";
+							mes "No mas aplicantes para la 3ra ronda.";
+							close;
+						}
+						
+						
+						mes "[Kantryl]";
+						mes "Hm..." + strcharinfo(0)+ "";
+						mes "He recivido tu aplicacion";
+						mes "Esfuerzate y estudia con ganas.";
+						set quiz_rvl,19;
+						set quiz3,quiz3 + 1;
+						getitem 7282,1;  //Quiz_Ticket03
+						close;
+					
+
+
+							
+					s4nd:
+						if(quiz4 > 199){
+								mes "[Kantryl]";
+							mes "Lo sentimos. Tenemos llena la";
+							mes "4ta ronda del quiz revolution";
+							mes "No mas aplicantes para la 4ta ronda.";
+							close;
+						}
+					
+						mes "[Kantryl]";
+						mes "Hm..." + strcharinfo(0)+ "";
+						mes "He recivido tu aplicacion";
+						mes "Esfuerzate y estudia con ganas.";
+						set quiz_rvl,19;
+						set quiz4,quiz4 + 1;
+						getitem 7283,1;  //Quiz_Ticket04
+						close;
+						
+
+
+					
+					s5nd:
+						if(quiz5 > 199){
+								mes "[Kantryl]";
+							mes "Lo sentimos. Tenemos llena la";
+							mes "5ta ronda del quiz revolution";
+							mes "No mas aplicantes para la 5ta ronda.";
+							close;
+						}
+
+						mes "[Kantryl]";
+						mes "Hm..." + strcharinfo(0)+ "";
+						mes "He recivido tu aplicacion";
+						mes "Esfuerzate y estudia con ganas.";
+						set quiz_rvl,19;
+						set quiz5,quiz5 + 1;
+						getitem 7284,1;  //Quiz_Ticket05
+						close;
+						
+
+
+
+			NJ:
+				mes "[Kantryl]";
+				mes "Ok, si asi es como piensas.";
+				mes "Tu eliges";
+				mes "De cualquier modo buen trabajo.";
+				set quiz_rvl,20;
+				next;
+				mes "[Kantryl]";
+				mes "De hecho, hemos planeado";
+				mes "Permitir aquellos que no se les ";
+				mes "aplico antes si es que tienen un boleto de entrada.";
+				mes "Si tienes alguna oportunidad de obtener un boleto de entrada,";
+				mes "seras siempre bienvenido";
+				next;
+				mes "[Kantryl]";
+				mes "Ve y preguntales a aquellos";
+				mes "que cambiaron de opinion.";
+				mes "si tienes suerte,";
+				mes "tendras oportunidad.";
+				close;
+} else {
+		mes "[Kantryl]";
+		mes "Hola~";
+		mes "Soy Kantryl=Ranegalf.";
+		mes "Ayudo aquellos que pasaron la prueba";
+		mes "tomare un paso formal.";
+		next;
+		mes "[Kantryl]";
+		mes "Es imposible de aceptar";
+		mes "aplicaciones de aquellso que no";
+		mes "terminaron la prueba.";
+		mes "Ve y visita alguno de nuestro staff que estan por todo";
+		mes "Midgarts";
+		mes "y has la prueba.";
+		next;
+		mes "[Kantryl]";
+		mes "Hasta ese momento, Con mucho gusto";
+		mes "Te aceptare y aceptare la aplicacion.";
+		close;
+}
+M_MaxItem:
+			mes "[Kantryl]";		
+	  		mes "- Espera un minuto !! -";
+		 	mes "- Llevas tantos items que -";
+	   		mes "- no puedes recibir mas. -";
+			mes "- porfavor aligera la carga -";
+	   		mes "- y vuelvelo a intentar. -";
+			close;
+
+L_OverWeight:
+			mes "[Kantryl]";
+	  		mes "- Espera un minuto !! -";
+		 	mes "- Llevas tantos items que -";
+	   		mes "- no puedes recibir mas. -";
+			mes "- porfavor aligera la carga -";
+	   		mes "- y vuelvelo a intentar. -";
+			close;
+}
+
+//============================================================================================================================
+quiz_test,387,350,4	script	"From somewhere::race_monk	45,2,2,{
+OnTouch:
+
+	if (quiz_rvl == 6) {
+	 	set quiz_rvl,7;
+		warp "quiz_test",385,388;
+		end;
+	}else if (quiz_rvl == 7) {
+		set quiz_rvl,8;
+		warp "quiz_test",385,388;
+		end;
+	}else if (quiz_rvl == 8) {
+		set quiz_rvl,9;
+		warp "quiz_test",385,388;
+		end;
+	}else if (quiz_rvl == 9) {
+		set quiz_rvl,10;
+		warp "quiz_test",385,388;
+		end;
+	}else if (quiz_rvl == 10) {
+		announce "You are almost there. Show me your spirit.",bc_blue|bc_map;
+		set quiz_rvl,11;
+		warp "quiz_test",385,388;
+		end;
+	}else if (quiz_rvl == 11) {
+		set quiz_rvl,12;
+		warp "quiz_test",385,388;
+		end;
+	}else if (quiz_rvl == 12) {
+		mes "[Seeil]";
+		mes "Has trabajado duro y has terminado.";
+		mes "No fue tan dificil como creias, huh?";
+		mes "Todo lo que debes hacer es correr en circulos... Bien";
+		mes "Ponte enfrente de mi";
+		announce "Congratulations! " +strcharinfo(0)+ ", you have passed the test!",bc_blue|bc_map;
+		close2;
+		set quiz_rvl,13;
+		warp "payon",109,115;
+		end;
+ }
+
+}
+//=============================hiddenwarp=================================================================
+
+//-----------------------------1111-----------------------------------------------------------------------
+quiz_test,82,384,4	script	Pit::ham_quiz#1-1	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,83,384,4	script	Pit::ham_quiz#1-2	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,82,385,4	script	Pit::ham_quiz#1-3	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,83,385,4	script	Pit::ham_quiz#1-4	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+//-----------------------------2222-----------------------------------------------------------------------
+quiz_test,38,388,4	script	Pit::ham_quiz#2-1	-1,0,1,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,39,388,4	script	Pit::ham_quiz#2-2	-1,0,1,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,38,386,4	script	Pit::ham_quiz#2-3	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,39,386,4	script	Pit::ham_quiz#2-4	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+//-----------------------------3333-----------------------------------------------------------------------
+quiz_test,11,158,4	script	Pit::ham_quiz#3-1	-1,1,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,11,159,4	script	Pit::ham_quiz#3-2	-1,1,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,13,159,4	script	Pit::ham_quiz#3-3	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,13,158,4	script	Pit::ham_quiz#3-4	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+//-----------------------------4444-----------------------------------------------------------------------
+quiz_test,11,30,4	script	Pit::ham_quiz#4-1	-1,3,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,11,31,4	script	Pit::ham_quiz#4-2	-1,3,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,15,30,4	script	Pit::ham_quiz#4-3	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,15,30,4	script	Pit::ham_quiz#4-4	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+//-----------------------------5555-----------------------------------------------------------------------
+quiz_test,70,12,4	script	Pit::ham_quiz#5-1	-1,0,1,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,71,12,4	script	Pit::ham_quiz#5-2	-1,0,1,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,70,10,4	script	Pit::ham_quiz#5-3	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,71,10,4	script	Pit::ham_quiz#5-4	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+//---------------------------6666-------------------------------------------------------------------------
+quiz_test,186,11,4	script	Pit::ham_quiz#6-1	-1,2,3,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,189,11,4	script	Pit::ham_quiz#6-2	-1,0,3,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+//---------------------------7777-------------------------------------------------------------------------
+quiz_test,387,43,4	script	Pit::ham_quiz#7-1	-1,1,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,387,42,4	script	Pit::ham_quiz#7-2	-1,1,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,389,43,4	script	Pit::ham_quiz#7-3	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+quiz_test,389,42,4	script	Pit::ham_quiz#7-4	-1,0,0,{
+OnTouch:
+	announce ""+strcharinfo(0)+" Start running from the beginning. You fell in a pit.",bc_blue|bc_map;
+	warp "quiz_test",387,387;
+	end;
+}
+
+//-------------------------------------------------------------------------------------------------------------
+// Comments
+// 0 = Didn't receive a quest from Tsuji
+// 1 = Failed Tsuji's quest
+// 2 = Pass Tsuji's quest and to 2nd round
+// 3 = Seeil's randomly collecting job item quest 1
+// 4 = Seeil's randomly collecting job item quest 
+// 5 = Seeil's randomly collecting job item quest 
+// 6 = Clear with collecting job item. start Marathon test
+// 7~12 =Checking Marathon quest occasionally.
+// 13 = Use after clearing Marathon quest
+// 14 = Clear 3rd quest, start Radeng(4th) quest
+// 15 = check after reporting errors of Radeng
+// 16 = randomly collecting job items at Radeng quest 1
+// 17 = randomly collecting job items at Radeng quest 2
+// 18 = Radeng quest clear. Possible time to apply. Begin Kantryl apply.
+// 19 = checked if you show intention to join 
+// 20 = checked If you don't show intention to join 
+// 21 = 3 items for the one who gets compansation

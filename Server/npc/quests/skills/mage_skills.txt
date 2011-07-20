@@ -1,0 +1,172 @@
+//===== eAthena Script =======================================
+//= Mage Skill Quest
+//===== By: ==================================================
+//= kobra_k88
+//===== Current Version: =====================================
+//= 1.6
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quest for skills: Energy Coat
+//===== Additional Comments: ================================= 
+//= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.6 Fixed a typo in job check. (Bugreport:1531) [L0ne_W0lf]
+//============================================================
+
+geffen_in,151,119,4	script	Great Wizard#qsk_mg	64,{
+	mes "[BLIZZARDRISS]";
+	mes "¡Hey! ¡Amigo!";
+	mes "Veo que eres un mago.";
+	mes "Mira en ti mismo para descubrir";
+	mes "tus habilidades ocultas.";
+	next;
+	switch(select("About mage's hidden ability:About skill ^3355FF' Energy Coat '^000000:End conversation")) {
+	case 1:
+		mes "[BLIZZARDRISS]";
+		mes "Por muchos años";
+		mes "he estudiado las Arcanas";
+		mes "magias de Geffen.";
+		mes "Hace poco, descubrí";
+		mes "una habilidad olvidada.";
+		mes "¡No te crees afortunado.... ¿no?!";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "La habilidad usa tu energía";
+		mes "mental para bloquear ataques que recibes.";
+		mes "Es como un escudo o Armadura mágica.";
+		mes "Solo las personas más especiales";
+		mes "pueden usar esta maravillosa habilidad.";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "¡Pero la parte mas extraordinaria es";
+		mes "que yo puedo usar esa habilidad!";
+		mes "¡Puedo usarla para protegerme a mi mismo!";
+		mes "¡¡Pu hah hah hah !! ";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "Ok Ok, no te excites tanto.";
+		mes "Escucha con cuidado lo que te digo.";
+		mes "¡Aquellos que usen este encantamiento deben usar";
+		mes "las energías escondidas y habilidades";
+		mes "encerradas en si mismos!";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "Si quieres aprender esta habilidad,";
+		mes "debes tener unos pocos ítems que";
+		mes "serán usados en el proceso.";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "tres ^3355FFGlass Bead^000000 ";
+		mes "un ^3355FF1 carat Diamond^000000 ";
+		mes "cinco ^3355FFShell^000000 ";
+		mes "y una ^3355FFSolid Shell^000000 ";
+		mes "Tráeme esos ítems.";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "Una cosa más también...";
+		mes "debes tener la experiencia suficiente";
+		mes "en las artes mágicas. Es decir debes ser";
+		mes "un wizard o un mage de nivel de job 35+.";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "Los wizards y sages ya han experimentado";
+		mes "el rol de ser un mage";
+		mes "y no necesitan un nivel de job.";
+		mes "En todo caso, quien desee entrenarse";
+		mes "en esta arte debe estar";
+		mes "en un estado mental fuerte y sano.";
+		next;
+		mes "[BLIZZARDRISS]";
+		mes "Okay... ";
+		mes "Nada mas hay que decir, ¿estás interesado?";
+		close;
+	case 2:
+		if (getskilllv("MG_ENERGYCOAT") == 1) {
+			mes "[BLIZZARDRISS]";
+			mes "Parece que ya has ";
+			mes "dominado esta habilidad.";
+			mes "Tu destreza en  'Energy Coat' ";
+			mes "es evidente.";
+			mes "Lo siento, ";
+			mes "No tengo nada mas que enseñarte...";
+			close;
+		}
+		else {
+			if (countitem(746) > 2 && countitem(730) > 0 && countitem(935) > 4 && countitem(943) > 0) {
+				if ((JobLevel > 34 && BaseJob == Job_Mage) || BaseJob == Job_Wizard || BaseJob == Job_Sage) {
+					mes "[BLIZZARDRISS]";
+					mes "Okay, he recibido tu pedido.";
+					mes "Ahora despertaré tus energías escondidas.";
+					mes ". . . . . .";
+					mes ". . . . . . . . . . . . .";
+					mes ". . . . . . . . . . . . . . . . . . . . . . . . . .";
+					next;
+					mes "[BLIZZARDRISS]";
+					mes "¡Arcanos poderes de Geffen!";
+					mes "Busco la luz";
+					mes "y el honor de tu presencia. ";
+					mes "¡Me humillo en tu presencia!";
+					mes " ...";
+					next;
+					mes "[BLIZZARDRISS]";
+					mes "¡Dame tu poder!";
+					mes "Libera tu espíritu.";
+					mes "¡Mana Shield! ¡Metal Armor! ";
+					mes ". . . . . . . . . . . .";
+					mes "¡ ¡ ¡ENERGY COAT! ! ! ";
+					next;
+					delitem 746,3; //Glass_Bead
+					delitem 730,1; //Crystal_Jewel
+					delitem 935,5; //Shell
+					delitem 943,1; //Solid_Shell
+					skill "MG_ENERGYCOAT",1,0;
+					mes "[BLIZZARDRISS]";
+					mes ". . . . .";
+					mes "Está hecho...";
+					mes "Ahora tienes la especial ";
+					mes "habilidad de ^3355FF' Energy Coat '^000000 .";
+					mes "Úsala bien.";
+					next;
+					mes "[BLIZZARDRISS]";
+					mes "No avergüences a nuestra";
+					mes "clase con un mal uso";
+					mes "de esta u otra habilidad.";
+					mes "Tu nuevo poder exige más responsabilidad.";
+					close;
+				}
+			}
+			mes "[BLIZZARDRISS]";
+			mes "¡¡Mira!!";
+			mes "¡¿No escuchaste mi explicación?!";
+			mes "No te preparaste por completo";
+			mes "para que yo te ayude.";
+			mes "Revisa que cumples todos los requerimientos.";
+			next;
+			mes "[BLIZZARDRISS]";
+			mes "Si necesitas que te explique";
+			mes "todo de nuevo, dímelo.";
+			mes "Con gusto te lo explicaría de nuevo";
+			mes "si solo escucharas...";
+			close;
+		}
+	case 3:
+		mes "[BLIZZARDRISS]";
+		mes "¡El sabio debe tener paciencia!";
+		mes "Prepárate otra vez,";
+		mes "y vuelve cuando estés listo.";
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= v1.0a Now using functions found in "Global_Functions.txt"
+//= for class checks.[kobra_k88]
+//= 1.2 Added Baby Class Support [Lupus]
+//= 1.3 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
+//= 1.4 Fixed exploit [Lupus]
+//= 1.4a Fixed some typos [IVBela]
+//= 1.4b changed perm. variables to temp ones [Lupus]
+//============================================================

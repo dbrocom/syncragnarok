@@ -1,0 +1,2262 @@
+//===== eAthena Script ======================================= 
+//= 2005 Headgear Quests
+//===== By: ================================================== 
+//= MasterOfMuppets
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= eAthena
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= 2005 Headgears Official Quest.
+//===== Additional Comments: =================================
+//= 1.0 First version, converted from the official aegis script. [MasterOfMuppets]
+//= 1.1 Updated item ids in the zealotus mask npc, now requires a whip [ultramage]
+//= 1.2 Replaced effect numerics with constants. [L0ne_W0lf]
+//============================================================ 
+
+yuno,222,116,3	script	Kasis#LhzHat	851,{
+
+	if(countitem(519) > 49 && countitem(7031) > 49 && countitem(548) > 49 && countitem(539) > 49)
+	{
+		mes "[Kasis]";
+		mes "Milk, Cheese,";
+		mes "Old Frying Pans,";
+		mes "Pieces of Cake...";
+		mes "Es-eso es todo";
+		mes "Necesito hacer el almuerzo para";
+		mes "mis amigos en la Fábrica!";
+		next;
+		switch( select( "Bueno, yo prometí ayudarte.", "De que estas hablando?" ) )
+		{
+		case 1:
+			mes "[Kasis]";
+			mes "Finalmente puedo darle a mis";
+			mes "compañeros un bonito";
+			mes "festin! Estarán tan complacidos!";
+			mes "Oh, me gustaría poder pagarte";
+			mes "de alguna forma, pero no estoy seguro";
+			mes "que podria darte...";
+			next;
+			mes "[Kasis]";
+			mes "Por supuesto! Por que no";
+			mes "pruebas tu mismo";
+			mes "mi especialidad, Kasis's";
+			mes "Crunch Toast? Se ve";
+			mes "muy simple, pero se";
+			mes "requiere grandes habilidades para hacerla.";
+			next;
+			mes "[Kasis]";
+			mes "Aquí tienes!";
+			mes "Disfrutala y siempre";
+			mes "recuerda que el desayuno es";
+			mes "la comida mas importante del día!";
+			mes "Mejor iré a preparar";
+			mes "esos almuerzos. Adios, mi amigo~";
+			delitem 519,50;
+			delitem 7031,50;
+			delitem 548,50;
+			delitem 539,50;
+			getitem 5107,1;
+			close;
+		break;
+
+		case 2:
+			mes "[Kasis]";
+			mes "Oh...";
+			mes "Oh, Lo siento tanto.";
+			mes "Debo haberte confundido";
+			mes "con alguien mas.";
+			next;
+			mes "[Kasis]";
+			mes "Verás, estuve buscando";
+			mes "a algún aventurero que";
+			mes "pasara por aca y pudiera";
+			mes "proveerme suministros de cocina para";
+			mes "poderle preparar el almuerzo a mis";
+			mes "amigos que están trabajando en Einbroch";
+			next;
+			mes "[Kasis]";
+			mes "Si...";
+			mes "Entonces...";
+			mes "Disculpame...";
+			mes "Por... haberte molesdo.";
+			next;
+			mes "^3355FFComo en un trance,";
+			mes "Kasis continua";
+			mes "mirando a las Milk, Cheese";
+			mes "Old Frying Pans y Pieces";
+			mes "of Cake que estas cargando.^000000";
+			next;
+			switch( select( "Puedes tener estas si quieres.", "Um, por qué te quedas mirando?" ) )
+			{
+			case 1:		
+				mes "[Kasis]";
+				mes "En serio? Tu quieres";
+				mes "que yo tenga todas estas";
+				mes "Milk, Cheese,";
+				mes "Pieces of Cake y estas";
+				mes "Old Frying Pans? Oh, bendito eres";
+				mes "aventurero de buen corazón~";
+				next;
+				mes "[Kasis]";
+				mes "Finalmente podré darles a mis";
+				mes "compañeros un bonito";
+				mes "festín! Estarán tan complacidos!";
+				mes "Oh, me gustaría poder pagarte";
+				mes "de alguna forma, pero no estoy seguro";
+				mes "que podria darte...";
+				next;
+				mes "[Kasis]";
+				mes "Por supuesto! Por que no";
+				mes "pruebas tu mismo";
+				mes "mi especialidad, Kasis's";
+				mes "Crunch Toast? Se ve";
+				mes "muy simple, pero se";
+				mes "requiere grandes habilidades para hacerla.";
+				next;
+				mes "[Kasis]";
+				mes "Aquí tienes!";
+				mes "Disfrutala y siempre";
+				mes "recuerda que el desayuno es";
+				mes "la comida mas importante del día!";
+				mes "Mejor iré a preparar";
+				mes "esos almuerzos. Adios, mi amigo~";
+				delitem 519,50;
+				delitem 7031,50;
+				delitem 548,50;
+				delitem 539,50;
+				getitem 5107,1;
+				close;
+			break;
+
+			case 2:
+				mes "[Kasis]";
+				mes "Oh, dejame disculparme";
+				mes "de nuevo. Pero no puedo ayudarte,";
+				mes "pero admiro la calidad de";
+				mes "tus cisas. Er, tu sabes,";
+				mes "la comida que traes. Despues de todo,";
+				mes "yo soy un chef.";
+				close;
+			break;
+			}
+		break;
+		}
+	}
+	mes "[Kasis]";
+	mes "Lo siento, pero esta cerrado";
+	mes "por el momento. Desafortunadamente, no";
+	mes "tenemos mas pan";
+	mes "en stock. ^333333*Siiiiiiiiigh...*^000000";
+	next;
+	switch( select( "Sucede algo?", "Terminar la conversación." ) )
+	{
+	case 1:
+		mes "[Kasis]";
+		mes "Bueno, el contrato actual";
+		mes "con la compania que me";
+		mes "provee ingredientes";
+		mes "ha expirado. Por supuesto, ya";
+		mes "es suficiente malo que no tenga";
+		mes "la comida para seguir en este negocio.";
+		next;
+		mes "[Kasis]";
+		mes "Pero tambien siento que";
+		mes "estoy perjudicando a mis amigos.";
+		mes "Verás, he estado enviandoles";
+		mes "el almuerzo todos los días";
+		mes "desde que empezaron a trabjar";
+		mes "en la Fábrica en Einbroch.";
+		next;
+		mes "[Kasis]";
+		mes "No puedo hacerles";
+		mes "el almuerzo para ellos en";
+		mes "este momento, pero realmente quiero";
+		mes "ayudar a mis amigos, especialmente";
+		mes "ahora que su situación financiera";
+		mes "esta muy mal.";
+		next;
+		switch( select( "Quieres que te ayude?", "Siento tanto oír eso." ) )
+		{
+		case 1:
+			mes "[Kasis]";
+			mes "Seguro, aceptaré la";
+			mes "ayuda donde sea que pueda";
+			mes "encontrarla. Si pudieras traerme algunos ingredientes";
+			mes "que usaré para preparar los almuerzos";
+			mes "para mis amigos en la Fábrica";
+			next;
+			mes "[Kasis]";
+			mes "Porfavor";
+			mes "podrías conseguirme";
+			mes "^4D4DFF50 Milk^000000,";
+			mes "^4D4DFF50 Cheese^000000,";
+			mes "^4D4DFF50 Pieces of Cake^000000 and";
+			mes "^4D4DFF50 Old Frying Pans^000000?";
+			next;
+			mes "[Kasis]";
+			mes "Realmente apreciaría";
+			mes "tu ayuda. Mis amigos parecen";
+			mes "tan deprimidos de estar trabajando";
+			mes "en esa Fábrica y yo quiero";
+			mes "hacer todo lo que pueda para ayudarlos.";
+			mes "Gracias por tu generosa oferta~";
+			close;
+		break;
+
+		case 2:
+			mes "[Kasis]";
+			mes "He estado tratando de";
+			mes "renovar mi contrato con la";
+			mes "compania que me";
+			mes "provee los ingredientes,";
+			mes "pero no he";
+			mes "conseguido mucho hasta ahora...";
+			next;
+			mes "[Kasis]";
+			mes "No se que";
+			mes "esta pasando, pero afortunadamente";
+			mes "encontraré un nuevo proveedor";
+			mes "pronto. Aunque mas que mi";
+			mes "negocio, me preocupa";
+			mes "mas mis amigos.";
+			close;
+		break;
+		}
+	break;
+
+	case 2:
+		mes "[Kasis]";
+		mes "De todas formas, por favor vuelve";
+		mes "Espero, que";
+		mes "Tengamos aun poco de buen pan";
+		mes "en stock la proxima, okay?";
+		close;
+	break;
+	}
+
+}
+
+lighthalzen,143,68,0	script	Strange Guy#LhzHat	47,{
+
+	if(DTHATQ == 0)
+	{
+		mes "[Strange Guy]";
+		mes "Espera! No digas";
+		mes "nada! Tu debes ser";
+		mes "un aventurero de";
+		mes "el Reino de Rune-Midgarts!";
+		mes "Entonces... tengo razón, verdad?";
+		next;
+		switch( select( "Quien eres?", "Como supiste?", "Ignoralo." ) )
+		{
+		case 1:
+			mes "[Morris]";
+			mes "Permiteme";
+			mes "presentarme.";
+			mes "Mi nombre es Morris Poe,";
+			mes "Aclamado detective";
+			mes "y de fama mundial.";
+			next;
+			switch( select( "Nunca he escuchado de ti.", "Me estás cargando.", "Me voy de aquí." ) )
+			{
+			case 1:
+				mes "[Morris]";
+				mes "Morris Poe?";
+				mes "Detective reconocido?";
+				mes "Abogado por la justicia en";
+				mes "La República de Schwarzwald?";
+				mes "Seguramente reconoceras alguno";
+				mes "de mis estimados títulos.";
+				next;
+				switch( select( "Nope, no te conosco.", "Eres Morris Poe?!" ) )
+				{
+				case 1:
+					mes "[Morris]";
+					mes "Tu no...?";
+					mes "Pero soy un heroe famoso.";
+					mes "Los niños me respetan";
+					mes "y desean crecer";
+					mes "para ser tan sagaces como yo.";
+					next;
+					mes "[Morris]";
+					mes "No lo comprendo.";
+					mes "Soy más famoso que";
+					mes "eso. Un nombre familiar";
+					mes "incluso. Tengo una imagen pública";
+					mes "confiable, como es que";
+					mes "nunca has escuchado de mi...?";
+					close;
+				break;
+
+				case 2:
+				break;
+				}
+			break;
+
+			case 2:
+				mes "[Morris]";
+				mes "Bromeas? Ha ha!";
+				mes "Mira a estos ojos penetrantes,";
+				mes "deductivos, profundos,";
+				mes "analíticos y";
+				mes "dime que estas estas bromeando.";
+				next;
+				switch( select( "Whoa, esos SON unos ojos astutos.", "Ok. Estas bromeando." ) )
+				{
+				case 1:
+					mes "[Morris]";
+					mes "Si, esta agudeza";
+					mes "astucia,";
+					mes "y gran inteligencia";
+					mes "pertenece al luchador del crimen,";
+					mes "mundialmente conocido,";
+					mes "Decetctive Morris Poe!";
+					next;
+					switch( select( "Nunca he oído de ti.", "¡¿¡Dios mío!, Morris Poe?!" ) )
+					{
+					case 1:
+						mes "[Morris]";
+						mes "Nunca has escuchado de...?";
+						mes "Imposible! si hay";
+						mes "dos cosas que detesto mas";
+						mes "que el crimen, son";
+						mes "deshonestidad... y el rechazo";
+						mes "de una mujer bella.";
+						next;
+						mes "[Morris]";
+						mes "Cuando superes tu";
+						mes "sentido del orgullo, y ganes";
+						mes "un poco de madurez, enonces";
+						mes "talvez podramos compartir una verdadera";
+						mes "conversación. hasta entonces,";
+						mes "solo tendras que crecer.";
+						close;
+					break;
+
+					case 2:
+					break;
+					}
+				break;
+
+				case 2:
+					mes "[Morris]";
+					mes "Hahahahahaah--Huh.";
+					mes "Si hay dos cosas que";
+					mes "detesto mas que a los criminales";
+					mes "son el sarcasmo...";
+					mes "y recibir un numero de teléfono";
+					mes "falso de una chica realmente linda.";
+					next;
+					switch( select( "Si,  no eres un Don Juan.", "Lo... lo siento." ) )
+					{
+					case 1:
+						mes "[Morris]";
+						mes "Wah...!";
+						mes "No acabas de--?!";
+						mes "Ugh, eres el peor";
+						mes "tipo de persona, sabes?";
+						emotion e_omg;
+						close;
+					break;
+
+					case 2:
+						mes "[Morris]";
+						mes "creo que es muy tarde para";
+						mes "una disculpa. Por qué tratarias";
+						mes "a alguien de mi estatura";
+						mes "con tal sarcasmo cáustico?!";
+						mes "Que escusa podría";
+						mes "exonerar tu comportamiento?!";
+						next;
+						switch( select( "Yo...Yo estaba intimidado...", "Así es como trato a todos los perdedores." ) )
+						{
+						case 1:
+							mes "[Morris]";
+							mes "Por supuesto: sentimientos intensos";
+							mes "de temor y miedo de mi vasto";
+							mes "intelectio puede resulta en";
+							mes "ese tipo de comportamiento extravagante. Yo";
+							mes "tengo que perdonarte, supongo.";
+							next;
+						break;
+
+						case 2:
+							mes "[Morris]";
+							mes "Que...?!";
+							mes "Morris Poe, un perdedor?";
+							mes "Semejante palabras difamadoras";
+							mes "no pueden ser perdonadas, no";
+							mes "importa cuan infundadas";
+							mes "y descabellados sean!";
+							emotion e_omg;
+							close;
+						break;
+						}
+					break;
+					}
+				break;
+				}	
+			break;
+
+			case 3:
+				mes "[Morris]";
+				mes "Hahaha, oh, eso es";
+				mes "chistoso. espera. Tu estas...";
+				mes "Realmente te estas yendo.";
+				mes "N-no, vuelveeeee!";
+				close;
+			break;
+			}
+		break;
+
+		case 2:
+			mes "[Strange Guy]";
+			mes "Como lo supiste?";
+			mes "elemental, mi amigo.";
+			mes "Habia abundancia";
+			mes "de pistas para";
+			mes "hacer este esa simple deducción";
+			close;
+		break;
+
+		case 3:
+			mes "[Strange Guy]";
+			mes "Hola...?";
+			mes "...............";
+			mes "Oh, esto es vergonzoso.";
+			mes "No puedo creer que estoy obteniendo";
+			mes "el tramtamiento silencioso...";
+			close;
+		break;
+		}
+
+		mes "[Morris]";
+		mes "Si, Yo se que";
+		mes "es difícil creer que";
+		mes "eres lo suficientemente";
+		mes "afortunado para permanecer";
+		mes "en la precencia de un genio. Now,";
+		mes "debes estar pensando...";
+		next;
+		menu "Um, pensando que?",-;
+			mes "[Morris]";
+			mes "Estás pensando,";
+			mes "\"Como en el mundo";
+			mes "puedo ser tan brillante";
+			mes "como Morris Poe, el";
+			mes "detective genio?\"";
+			next;
+			mes "[Morris]";
+			mes "Primero, creo que es justo";
+			mes "que sepas que es";
+			mes "un sueño imposible. Los hombres";
+			mes "como yo solo se destacan en este mundo";
+			mes "solo cada pocas generaciónes.";
+			mes "Lo lamento, pero no te rindas!";
+			next;
+			mes "[Morris]";
+			mes "Ahora, puedes tratar de alcanzar";
+			mes "un nivel de inteligencia";
+			mes "comparable con el mio";
+			mes "uniendote a el Club de Jovenes Detectives";
+			mes "Para convertirte en miembro, solo necesitas una cosa.";
+			next;
+			mes "[Morris]";
+			mes "Si, solo necesitas el";
+			mes "^0000FFRenown Detective's Cap^000000!";
+			mes "Afortunadamente, lo estoy dando";
+			mes "por una economica suma";
+			mes "de materiales";
+			mes "apurate mientras queden.";
+			next;
+			mes "[Morris]";
+			mes "Simplemente traeme";
+			mes "^0000FF10 Magnifiers^000000,";
+			mes "^0000FF1887 Tassels^000000,";
+			mes "^0000FF1Bucket Hat con slot^000000";
+			mes "and ^0000FF1,887 zeny^000000. Eso es todo!";
+			next;
+			mes "[Morris]";
+			mes "Pero primero, permiteme decirte";
+			mes "que no me traigas un ^FF0000slotted Bucket";
+			mes "Hat con alguna carta puesta";
+			mes "en el o con un refinamiento. No me hago responsable por";
+			mes "ninguna perdida resultante de esto,";
+			next;
+			mes "[Morris]";
+			mes "Apurate y traeme";
+			mes "esos items!";
+			mes "solo tengo 20,000,000 Renown";
+			mes "Detective Caps!";
+			mes "Una vez que se acaben,";
+			mes "Sse habran extinguido!";
+			set DTHATQ,1;
+			close;
+	}
+	else if(DTHATQ == 1)
+	{
+		mes "[Morris]";
+		mes "Entonces, quieres";
+		mes "comprar, er, recibir un";
+		mes "Renown Detective's Cap";
+		mes "y convertirte en un honorable";
+		mes "miembro del Club";
+		mes "de Jovenes Detectives?";
+		next;
+		mes "[Morris]";
+		mes "Recuerda, asegurarte";
+		mes "de no traerme";
+		mes "^FF0000slotted Bucket Hats que";
+		mes "hallan sido refinados o";
+		mes " que tengan cartas puestas";
+		mes "porque perderas esas cosas^000000.";
+		next;
+		mes "[Morris]";
+		mes "Ahora, si tan solo tienes";
+		mes "1 Bucket Hat, podremos empezar.";
+		mes "Club de Jovenes Detectives... Salute! ";
+		next;
+		switch( select( "Salute.", "Como sea..." ) )
+		{
+		case 1:
+			mes "[Morris]";
+			mes "Genial, hazlo como un profesional!";
+			mes "Ahora, necesito verificar tu";
+			mes "cuota--digo, materiales.";
+			mes "Veamos, necesito";
+			mes "mirar en tu inventario...";
+			next;
+			set @lhzhatfailed,0;
+			if(countitem(611) < 10)
+			{
+				mes "[Morris]";
+				mes "Espera. No tienes";
+				mes " suficientes Magnifiers.";
+				mes "quieres unirte al club, verdad?";
+				mes "necesitas escuchar los requerimientos otra vez?";
+				mes "los requerimientos otra vez?";
+				set @lhzhatfailed,1;
+				next;
+			}
+			if(countitem(7301) < 1887 && @lhzhatfailed == 0)
+			{
+				mes "[Morris]";
+				mes "Magnifiers. Verificados.";
+				mes "No tienes suficientes Tassels? Verificalo.";
+				set @lhzhatfailed,1;
+				next;
+			}
+			if(countitem(5120) < 1 && @lhzhatfailed == 0)
+			{
+				mes "[Morris]";
+				mes "Magnifiers. Verificado.";
+				mes "Tassels... Verificado.";
+				mes "Hm. Te estas olvidando";
+				mes "el Bucket Hat con slot.";
+				mes "Estabas tan cerca...";
+				set @lhzhatfailed,1;
+				next;
+			}
+			if(Zeny < 1887 && failed == 0)
+			{
+				mes "[Morris]";
+				mes "Magnifiers. Verificado.";
+				mes "Tassels... Verificado.";
+				mes "Bucket Hat con slot. lo tienes.";
+				mes "Hey. donde esta el zeny?!";
+				mes "Es el, ehh, material";
+				mes "mas importante de todos!";
+				set @lhzhatfailed,1;
+				next;
+			}
+			
+			if(@lhzhatfailed == 1)
+			{
+				mes "[Morris]";
+				mes "^333333*Sigh*^000000 Necesitas";
+				mes "^0000FF10 Magnifiers^000000,";
+				mes "^0000FF1887 Tassels^000000,";
+				mes "^0000FF1Bucket Hat con slot^000000";
+				mes "and ^0000FF1,887 zeny^000000. Eso es todo!";
+				emotion e_an;
+				next;
+				mes "[Morris]";
+				mes "Ahora, recuerda todo";
+				mes "lo que necesitas esta vez, dale?";
+				mes "estaré esperando para incluirte";
+				mes "en los rankings de elite ";
+				mes "del Club de Jovenes Detectives.";
+				close;
+			}
+			mes "[Morris]";
+			mes "Magnifiers. verificados.";
+			mes "Tassels... Verificados.";
+			mes "Bucket Hat con slot. lo tienes.";
+			mes "yyyyyyyyyy zeny. Heh heh. Perfecto.";
+			next;
+			mes "[Morris]";
+			mes "Genial!, eso es todo!";
+			mes "Bienvenido al Club!";
+			mes "Aqui esta tu Renown Detective's Cap,";
+			mes "Usalo con orgullo";
+			mes "y participa activamente en";
+			mes "las actividades y promociones de nuestro Club!";
+			delitem 7301,1887;
+			delitem 5120,1;
+			delitem 611,10;
+			set Zeny, Zeny - 1887;
+			set DTHATQ,2;
+			getitem 5108,1;
+			next;
+			switch( select( "Espera, promociones?", "Hooray!" ) )
+			{
+			case 1:
+				mes "[Morris]";
+				mes "Porsupuesto, no es obvio?";
+				mes "Como miembro, uno de tus deberes";
+				mes "es cantar canciones de este club, asi mas personas";
+				mes "se nos unen y obtendran sus";
+				mes "Renown Detective's Caps.";
+				next;
+				mes "[Morris]";
+				mes "Bien.";
+				mes "ahora muestra orgullosamente";
+				mes "tu nuevo elegante";
+				mes "Renown Detective's Cap";
+				mes "a todos tus amigos!";
+				close;
+			break;
+
+			case 2:
+				mes "[Morris]";
+				mes "Bien";
+				mes "ahora muestra orgullosamente";
+				mes "tu nuevo elegante";
+				mes "Renown Detective's Cap";
+				mes "a todos tus amigos!";
+				close;
+			break;
+			}
+		break;
+
+		case 2:
+			mes "[Morris]";
+			mes "Huh. has fallado";
+			mes "\" La Prueba del Respeto\"";
+			mes "No mereces el";
+			mes "honor de usar un";
+			mes "Renowned Detective's Cap!";
+			close;
+		break;
+		}
+	}
+	else if(DTHATQ == 2)
+	{
+		mes "[Morris]";
+		mes "Has venido";
+		mes "para obtener otro";
+		mes "Renown Detective's Cap?";
+		mes "entiendo que un sombrero tan elegante";
+		mes "tiene una gran demanda";
+		next;
+		mes "[Morris]";
+		mes "Recuerda, asegurate";
+		mes "de no traer ningun";
+		mes "^FF0000Bucket Hat con slot";
+		mes "que esten refinados o que tengan";
+		mes "cartas en ellos porque";
+		mes "perderas todas esas cosas^000000.";
+		next;
+		mes "[Morris]";
+		mes "Como un orgulloso miembro";
+		mes "del Club de Jovenes Detectives,";
+		mes "me has traido todo";
+		mes "lo necesario para ganarte";
+		mes "un Renown Detective's Cap?";
+		next;
+		switch( select( "No estoy seguro~", "Seguro!" ) )
+		{
+		case 1:
+			mes "[Morris]";
+			mes "Que...?! Todo buen";
+			mes "detective debe tener una";
+			mes "buena memoria fotografica";
+			mes "y ser capaz de recordar";
+			mes "pequeños detalles para";
+			mes "resolver uncaso.";
+			emotion e_sob;
+			next;
+			mes "[Morris]";
+			mes "recuerda...";
+			mes "^0000FF10 Magnifiers^000000,";
+			mes "^0000FF1887 Tassels^000000,";
+			mes "^0000FF1 Bucket Hat con slot^000000";
+			mes "y ^0000FF1,887 zeny^000000. Ok?";
+			close;
+		break;
+
+		case 2:	
+			mes "[Morris]";
+			mes "Genial!";
+			mes "Ahora dejame";
+			mes "verificar si";
+			mes "trajiste todo...";
+			next;
+			set @lhzhatfailed,0;
+			if(countitem(611) < 10)
+			{
+				mes "[Morris]";
+				mes "Hmm, no tienes";
+				mes "suficientes Magnifiers? pero";
+				mes "esos son herramientas esenciales";
+				mes "para la investigación, vamos,";
+				mes "apurate y trae mas!";
+				set @lhzhatfailed,1;
+				next;
+			}
+			if(countitem(7301) < 1887 && @lhzhatfailed == 0)
+			{
+				mes "[Morris]";
+				mes "Magnifiers. Verificado.";
+				mes "No traes suficientes Tassels? Verificalo.";
+				set @lhzhatfailed,1;
+				next;
+			}
+			if(countitem(5120) < 1 && @lhzhatfailed == 0)
+			{
+				mes "[Morris]";
+				mes "Magnifiers. Verificado.";
+				mes "Tassels... Verificado.";
+				mes "Hm. te estas olvidando";
+				mes "el Bucket Hat con slot.";
+				mes "Estabas tan cerca...";
+				set @lhzhatfailed,1;
+				next;
+			}
+			if(Zeny < 1887 && failed == 0)
+			{
+				mes "[Morris]";
+				mes "Magnifiers. Verificado.";
+				mes "Tassels... Verificado.";
+				mes "Bucket Hat con slot. Lo tienes.";
+				mes "Hey. donde esta el zeny?!";
+				mes "es el...eh, componente";
+				mes "mas importante de todos!";
+				set @lhzhatfailed,1;
+				next;
+			}
+
+			if(@lhzhatfailed == 1)
+			{
+				mes "[Morris]";
+				mes "Recuerda...";
+				mes "^0000FF10 Magnifiers^000000,";
+				mes "^0000FF1887 Tassels^000000,";
+				mes "^0000FF1 Bucket Hat con slot^000000";
+				mes "y ^0000FF1,887 zeny^000000. Ok?";
+				emotion e_an;
+				close;
+			}			set @lhzhatfailed,0;
+			if(countitem(611) < 10)
+			{
+				mes "[Morris]";
+				mes "Hmm, no tienes";
+				mes "suficientes Magnifiers? pero";
+				mes "esos son herramientas esenciales";
+				mes "para la investigación, vamos,";
+				mes "apurate y trae mas!";
+				set @lhzhatfailed,1;
+				next;
+			}
+			if(countitem(7301) < 1887 && @lhzhatfailed == 0)
+			{
+				mes "[Morris]";
+				mes "Magnifiers. Verificado.";
+				mes "No traes suficientes Tassels? Verificalo.";
+				set @lhzhatfailed,1;
+				next;
+			}
+			if(countitem(5120) < 1 && @lhzhatfailed == 0)
+			{
+				mes "[Morris]";
+				mes "Magnifiers. Verificado.";
+				mes "Tassels... Verificado.";
+				mes "Hm. te estas olvidando";
+				mes "el Bucket Hat con slot.";
+				mes "Estabas tan cerca...";
+				set @lhzhatfailed,1;
+				next;
+			}
+			if(Zeny < 1887 && failed == 0)
+			{
+				mes "[Morris]";
+				mes "Magnifiers. Verificado.";
+				mes "Tassels... Verificado.";
+				mes "Bucket Hat con slot. Lo tienes.";
+				mes "Hey. donde esta el zeny?!";
+				mes "es el...eh, componente";
+				mes "mas importante de todos!";
+				set @lhzhatfailed,1;
+				next;
+			}
+
+			if(@lhzhatfailed == 1)
+			{
+				mes "[Morris]";
+				mes "Recuerda...";
+				mes "^0000FF10 Magnifiers^000000,";
+				mes "^0000FF1887 Tassels^000000,";
+				mes "^0000FF1 Bucket Hat con slot^000000";
+				mes "y ^0000FF1,887 zeny^000000. Ok?";
+				emotion e_an;
+				close;
+			}
+			mes "[Morris]";
+			mes "Magnifiers. Verificado.";
+			mes "Tassels... Verificado.";
+			mes "Bucket Hat con slot. Lo tienes.";
+			mes "yyyyyy zeny. Heh heh. Perfecto.";
+			next;
+			mes "[Morris]";
+			mes "Genial! has calificado para";
+			mes "tener otro Renowned";
+			mes "Detective's Cap. Felicitaciones! ahora, dejame tomar";
+			mes "estos items y el zeny de tu parte...";
+			delitem 7301,1887;
+			delitem 5120,1;
+			delitem 611,10;
+			set Zeny, Zeny - 1887;
+			set DTHATQ,2;
+			getitem 5108,1;
+			next;
+			mes "[Morris]";
+			mes "Hahaha! Eso es";
+			mes "lo que esperaba de";
+			mes "uno de nuestro Jovenes Miembros Gold!";
+			mes "Que se siente ser";
+			mes "la crema de la crema de";
+			mes "la cosecha? es genial, verdad?";
+			close;
+		break;
+		}
+	}
+
+}
+
+lighthalzen,360,313,3	script	Boy#LhzHat	706,{
+
+	mes "[Boy]";
+	mes "Hola, Señor!";
+	mes "Um, me haría";
+	mes "un favor?";
+	next;
+	if(countitem(526) && countitem(7270) && countitem(941) && countitem(10004))
+	{
+		mes "[Boy]";
+		mes "Oh! me has traido";
+		mes " unos Royal Jelly para";
+		mes "comer, muchas gracias por todo";
+		mes "Necesito para hacer un Baby Pacifier.";
+		mes "Bien, dejame comenzar con esto. Solo un momento...";
+		next;
+		mes "...";
+		mes "......";
+		next;
+		mes "[Boy]";
+		mes "Maldición.";
+		mes "ese Royal Jelly";
+		mes "estaba exelente!";
+		mes "Ahora puedo hacer tu";
+		mes "Baby Pacifier. Veamos";
+		mes "Aqui. ahi vamos...";
+		delitem 526,1;
+		next;
+		mes "[Boy]";
+		mes "Esta terminado!";
+		mes "Ahora, eres el";
+		mes "orgulloso propietario de tu";
+		mes "propio Baby Pacifier!";
+		mes "Espero que estes feliz";
+		mes "Viaja seguro, dale?";
+		delitem 7270,1;
+		delitem 941,1;
+		delitem 10004,1;
+		getitem 5110,1;
+		close;
+	}
+	switch( select( "Que necesitas?", "Lo lamento, niño..." ) )
+	{
+	case 1:
+		mes "[Boy]";
+		mes "Mi madre ha estado";
+		mes "enferma ultimamente, entonces";
+		mes "no hemos podido comer";
+		mes "hace unos cuantos dias. Pero";
+		mes "si ella no come, como se";
+		mes "supone que se pondrá bien?";
+		emotion e_sob;
+		next;
+		mes "[Boy]";
+		mes "Entonces lo que";
+		mes "que me pregunto es, serias";
+		mes "tan amable de traerme algo de comida?";
+		next;
+		switch( select( "Ayudalo.", "Niégale tu ayuda." ) )
+		{
+		case 1:
+			if(!countitem(526))
+			{
+				mes "[Boy]";
+				mes "si pudieras, crees que";
+				mes "podrías traerme un poco de Royal Jelly";
+				mes "para darselo a mi madre? La anciana que vive al lado dice";
+				mes "que son realmente nutritivos y ayudan a mejorarte mas rapido cuando estás enfermo";
+				next;
+				mes "[Boy]";
+				mes "Mi madre se enojaría";
+				mes "si supiera que estoy";
+				mes "pidiendolo, pero";
+				mes "Los Royal Jelly son muy caros";
+				mes "como para que yo los consiga sin ayuda!";
+				close;
+			}
+			mes "[Boy]";
+			mes "Oh, estaría bien";
+			mes "si me llevo este Royal Jelly?";
+			mes "Reamente le serviría de ayuda a mi madre";
+			mes "para que se sienta mejor. Muchisimas gracias~";
+			delitem 526,1;
+			next;
+			mes "[Boy]";
+			mes "Hey, para pagarte el favor, porque";
+			mes "no te hago un Baby Pacifier?";
+			mes "Aprendí como hacerlos";
+			mes "cuando nació mi hermano mas chico";
+			mes "Pero primero, voy a necesitar";
+			mes "algunos materiales...";
+			next;
+			mes "[Boy]";
+			mes "Podrías";
+			mes "Traerme";
+			mes "^3131FF1 Nursing Bottle^000000,";
+			mes "^3131FF1 Nose Ring^000000 y";
+			mes "^3131FF1 Pacifier^000000? Oh, y otro";
+			mes " ^3131FFRoyal Jelly^000000 para mi~";
+			close;
+		break;
+
+		case 2:
+			mes "[Boy]";
+			mes "Oh... Um, esto";
+			mes "esta perfecto. Talvez estaba";
+			mes "pidiendote demaciado.";
+			mes "digo, es cierto que";
+			mes "tu apenas me conoces...";
+			emotion e_sob;
+			close;
+		break;
+		}
+	break;
+
+	case 2:
+		mes "[Boy]";
+		mes "Es-esta bien.";
+		mes "Imagino que debes";
+		mes "estar tan ocupado que no";
+		mes "debes tener tiempo para";
+		mes "escuchar los problemas";
+		mes "de un joven niño...";
+		emotion e_sob;
+		close;
+	break;
+	}
+
+}
+
+einbech,70,222,5	script	Mater#LhzHat	91,{
+
+	if(countitem(983) && countitem(7267) > 998 && countitem(749) && Zeny > 49999)
+	{
+		mes "[Mater]";
+		mes "Oh, Hola, que es esto?";
+		mes "Estas llevando 1 Black";
+		mes "Dyestuffs, 1 Frozen Rose,";
+		mes "999 Tiger Panties y";
+		mes "50,000 zeny. Eso es";
+		mes "eso es suficiente para hacer un Winter Hat...";
+		next;
+		mes "[Mater]";
+		mes "Um, te importaría darme";
+		mes "esos items así";
+		mes "puedo hacerte un Winter Hat?";
+		mes "Yo nunca podre reunir";
+		mes "esas cosas por mi cuenta...";
+		next;
+		switch( select( "Darle a ella los Items.", "No darle a ella los Items." ) )
+		{
+		case 1:
+			mes "[Mater]";
+			mes "Oh, Muchas gracias!";
+			mes "Siempre quise hacer";
+			mes "este sombrero";
+			mes "aunque sea una vez! pero no";
+			mes "te preocupes, te lo dare a ti~";
+			mes "Ahora por favor, espera un momento...";
+			next;
+			mes "[Mater]";
+			mes "Veamos....";
+			mes "Necesito plegar";
+			mes "la rosa de esta manera...";
+			mes "Ten cuidado con la Tintura...";
+			mes "Donde fue que puse todos esos";
+			mes "pan--Oh, aquí estan.";
+			next;
+			mes "[Mater]";
+			mes "^333333*Whew!*^000000";
+			mes "Finalmente, Esta terminado!";
+			mes "Ahora, si no te importa,";
+			mes "dejame probar este sombrero";
+			mes "tan solo un poquitito.";
+			delitem 983,1;
+			delitem 7267,999;
+			delitem 749,1;
+			set Zeny,Zeny - 50000;
+			getitem 5115,1;
+			next;
+			mes "...";
+			mes "......";
+			next;
+			mes "[Mater]";
+			mes "Ahhhhhh~";
+			mes "Se siente tan...";
+			mes "Se siente tan libre~";
+			mes "Se siente todo";
+			mes "Como lo imagine";
+			next;
+			mes "[Mater]";
+			mes "Aqui tienes, toma";
+			mes "este Winter Hat. Realmente";
+			mes "espero que lo disfrutes";
+			mes "como yo le he disfrutado.";
+			mes "cuidate en tus viajes, ok?";
+			close;
+		break;
+
+		case 2:
+			mes "[Mater]";
+			mes "Disculpa, se que";
+			mes "estoy pidiendo un favor grande";
+			mes "a alguien que acabo de conocer";
+			mes "Espero que entienda";
+			mes "lo mucho que necesito";
+			mes "hacer ese Winter Hat...";
+			close;
+		break;
+		}
+	}
+	mes "[Mater]";
+	mes "Mira hacia el cielo azul";
+	mes "No te imaginas";
+	mes "poder elevarte";
+	mes "atravez de los cielos";
+	mes "con nuestras propias alas?";
+	next;
+	mes "[Mater]";
+	mes "Por supuesto, es un";
+	mes "sueño imposible,";
+	mes "pero con este Winter Hat,";
+	mes "al menos puedes disfrutar";
+	mes "de la sensación de libertad que";
+	mes "un pajaro siente al volar.";
+	next;
+	mes "[Mater]";
+	mes "Si quieres";
+	mes "un sombrero como este";
+	mes "necesito un par de items";
+	mes "que segun creo";
+	mes "nunca podre obtener por mi cuenta.";
+	next;
+	mes "[Mater]";
+	mes "^FF00001 Black Dyestuffs^000000,";
+	mes "^FF0000999 Tiger Panties^000000,";
+	mes "^FF00001 Frozen Rose^000000 and";
+	mes "^FF000050,000 zeny^000000. Si puedes";
+	mes "traerme estos items";
+	mes "te haré un Winter Hat.";
+	close;
+
+}
+
+lhz_in02,91,38,5	script	Margaret Mary#LhzHat	90,{
+
+	mes "[Margaret Mary]";
+	mes "La rosa blanca, en su";
+	mes "puresa y simplicidad, es";
+	mes "como una mujer que no";
+	mes "necesita joyas ni ropas llamativas";
+	mes "para verse noble y hermosa. es el regalo perfecto para una señorita.";
+	next;
+	switch( select( "Hacerme una Mystic Rose.", "Terminar la conversación." ) )
+	{
+	case 1:
+		if(countitem(731) > 9 && countitem(748) > 1 && countitem(982) && Zeny > 49999)
+		{
+			mes "[Margaret Mary]";
+			mes "Ah, veo que has traído";
+			mes "lo que necesito para decolorar el matíz";
+			mes "rojo sangre de estas Witherless";
+			mes "Roses y adornar estas flores";
+			mes "con una elegancia eterna. Puedo usar esos items para hacerte una Mystic Rose?";
+			next;
+			switch( select( "Si", "No" ) )
+			{
+			case 1:
+				mes "[Margaret Mary]";
+				mes "Gracias. Por favor";
+				mes "Ahora; Dejáme";
+				mes "concentrarme para poder";
+				mes "preservar la belleza natural";
+				mes "de estas maravillosas flores...";
+				next;
+				mes "[Margaret Mary]";
+				mes "La rosa realmente es";
+				mes "la reina indisputada de todas";
+				mes "las flores. Cualquier otra flor debe";
+				mes "redirse ante su belleza real.";
+				next;
+				mes "...";
+				mes "......";
+				next;
+				mes "...";
+				mes "......";
+				mes ".........";
+				next;
+				mes "[Margaret Mary]";
+				mes "Listo, está terminado";
+				mes "Porfavor recuerda usar tu Mystic Rose";
+				mes "en tu cabello de una forma";
+				mes "elegante y fina";
+				mes "para no deshonrrar estas hermosas flores.";
+				delitem 731,10;
+				delitem 748,2;
+				delitem 982,1;
+				set Zeny,Zeny - 50000;
+				getitem 5117,1;
+				close;
+			break;
+
+			case 2:
+				mes "[Margaret Mary]";
+				mes "Las rosas blancas espinosas";
+				mes "hacen latir mi corazón";
+				mes "de un modo incesante.";
+				mes "Qué pasaría si me pincho el dedo";
+				mes "y manchara de sangre esos pétalos color nieve?";
+				close;
+			break;
+			}
+		}
+		mes "[Margaret Mary]";
+		mes "Amo las rosas, pero";
+		mes "me entristece que su belleza";
+		mes "acabe tan pronto. Asi que";
+		mes "he encontrado una forma de preservar";
+		mes "la belleza de las rosas,";
+		mes "para toda la eternidad.";
+		next;
+		mes "[Margaret Mary]";
+		mes "Tu también amas las rosas?";
+		mes "Si tu quieres, puedo hacerte una";
+		mes "^3131FFMystic Rose^000000 para que puedas usarla";
+		mes "sobre tu corona. No es fácil";
+		mes "para mi hacerla, pero creo que la disfrutarás.";
+		next;
+		mes "[Margaret Mary]";
+		mes "Porfavor traeme";
+		mes "^3131FF10 2 Carat Diamonds^000000,";
+		mes "^3131FF3 Witherless Roses^000000,";
+		mes "^3131FF1 White Dyestuffs^000000 y";
+		mes "^3131FF50,000 zeny^000000 si quieres";
+		mes "tener una Mystic Rose.";
+		close;
+	break;
+
+	case 2:
+		mes "[Margaret Mary]";
+		mes "Las rosas blancas espinosas";
+		mes "hacen latir mi corazón";
+		mes "de un modo incesante.";
+		mes "Qué pasaría si me pincho el dedo";
+		mes "y manchara de sangre esos pétalos color nieve?";
+		close;
+	break;
+	}
+
+}
+
+lighthalzen,182,89,0	script	Rich Girl#LhzHat	91,{
+
+	if(LHZBTQ == 0)
+	{
+		mes "[Rich Girl]";
+		mes "Hmmm...?";
+		mes "Qué? Nececitas";
+		mes "algo?";
+		next;
+		switch( select( "N-Nada.", "Um, te ves tan relajada." ) )
+		{
+		case 1:
+			mes "[Rich Girl]";
+			mes "Huh.";
+			mes "Ok.";
+			mes "Bueno, trata de no quedarte observando";
+			mes "tanto a la gente.";
+			close;
+		break;
+
+		case 2:
+			mes "[Rich Girl]";
+			mes "En serio? Probablemente seas";
+			mes "la décimo segunda persona que";
+			mes "me dice eso hoy. Mmm.";
+			mes "Qué extraño, no crees?";
+			next;
+			menu "Supongo.",-,"No es para nada extraño.",-;
+			mes "[Rich Girl]";
+			mes "Oh sí.";
+			mes "Cómo te llamas?";
+			mes "Si no te molesta";
+			mes "que pregunte.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "Mi nombre es " + strcharinfo(0) + "";
+			mes "y soy un aventurero~";
+			next;
+			mes "[Achiha]";
+			mes "Oh, uno de esos?";
+			mes "Mi nombre es Achiha, un gusto";
+			mes "conocerte. Realmente no";
+			mes "hago mucho de nada.";
+			mes "Sólo siéntate. Relájate.";
+			set LHZBTQ,1;
+			emotion e_heh;
+			next;
+			mes "[Achiha]";
+			mes "De todas formas,";
+			mes "tengo un hobbie. De vez en cuando,";
+			mes "confecciono un sombrero. Crees que";
+			mes "a un aventurero como tu";
+			mes "le gustaría tener un sombrero hecho por mí?";
+			next;
+			switch( select( "Er, no lo sé.", "Seguro." ) )
+			{
+			case 1:
+				mes "[Achiha]";
+				mes "Mm. Digo, los";
+				mes "Red Bonnets que hago";
+				mes "puede que no sean lo suficientemente";
+				mes "fuertes para las batallas.";
+				mes "Pero que hay de esos";
+				mes "sombreros de pescado y pasteles?";
+				next;
+				mes "[Achiha]";
+				mes "Sombreros...?";
+				mes "Que se ven como";
+				mes "pescados o pasteles? Mm.";
+				mes "Haha. Ya lo entendí.";
+				mes "Eso, eso fue gracioso.";
+				close;
+			break;
+
+			case 2:
+				mes "[Achiha]";
+				mes "De verdad? Bueno, puedo confeccionar";
+				mes "un ^0000FFRed Bonnet^000000.";
+				mes "Se asemeja";
+				mes "al sombrero de un bebé, pero";
+				mes "se ve bien en";
+				mes "la mayor parte de la gente que lo usa.";
+				next;
+				mes "[Achiha]";
+				mes "Um, quieres que te";
+				mes "haga uno para ti? puedo";
+				mes "hacerlo si me traes";
+				mes "los materiales.";
+				mes "Como es solo por diversión,";
+				mes "no te pedire muchos materiales";
+				next;
+				mes "[Achiha]";
+				mes "solo traeme";
+				mes "^0000FF1 Green Lace^000000,";
+				mes "^0000FF1 Silk Ribbon^000000,";
+				mes "^0000FF1 Scarlet Dyestuffs^000000,";
+				mes "^0000FF1 Sunday Hat^000000 y";
+				mes "^0000FF50,000 zeny^000000.";
+				next;
+				mes "[Achiha]";
+				mes "Creo, que voy";
+				mes "a sentarme y relajarme";
+				mes "un rato mas.";
+				mes "pero si quieres que te haga";
+				mes "el sombrero, vuelve";
+				mes "con esos materiales, ok?";
+				set LHZBTQ,2;
+				close;
+			break;
+			}
+		break;
+		}
+	}
+	else if(LHZBTQ == 1)
+	{
+		mes "[Achiha]";
+		mes "Oh, hola.";
+		mes "no es un";
+		mes "bello y pacifico dia?";
+		next;
+		switch( select( "De verdad.", "Por favor, me harías el sombrero?" ) )
+		{
+		case 1:
+			mes "[Achiha]";
+			mes "Si, hoy";
+			mes "sería un lindo dia";
+			mes "para un picnic o un buen paseo.";
+			mes "Pero lo unico que deseo es";
+			mes "sentarme y relajarme...";
+			close;
+		break;
+
+		case 2:
+			mes "[Achiha]";
+			mes "De que hablas?";
+			mes "Oh, te refieres al";
+			mes "Red Bonnet? Buenom supongo";
+			mes "que puedo hacerte uno. Pero creo";
+			mes "que necesito algunos materiales primero.";
+			next;
+			mes "[Achiha]";
+			mes "^0000FF1 Green Lace^000000,";
+			mes "^0000FF1 Silk Ribbon^000000,";
+			mes "^0000FF1 Scarlet Dyestuffs^000000,";
+			mes "^0000FF1 Sunday Hat^000000 y";
+			mes "^0000FF50,000 zeny^000000.";
+			mes "Eso es lo que necesito.";
+			next;
+			mes "[Achiha]";
+			mes "Oh, pero no me siento";
+			mes "como para hacerlo";
+			mes "ahora mismo. Estoy";
+			mes "muy cansada. dejame sentarme,";
+			mes "relajarme, aunque sea";
+			mes "un ratito mas...";
+			set LHZBTQ,2;
+			close;
+		break;
+		}
+	}
+	else if(LHZBTQ == 2)
+	{
+		mes "[Achiha]";
+		mes "Oh, bien, estas aqui.";
+		mes "Te he estado esperando.";
+		mes "Me has traido todo para";
+		mes "que te haga un ^0000FFRed Bonnet^000000?";
+		next;
+		switch( select( "Si.", "Olvide lo que necesitaba." ) )
+		{
+		case 1:
+			if(countitem(10015) < 1 || countitem(10007) < 1 || countitem(975) < 1 || countitem(5032) < 1 || Zeny < 50000)
+			{
+				mes "[Achiha]";
+				mes "Uh oh.";
+				mes "Has olvidado";
+				mes "un par de cosas.";
+				mes "Podrías";
+				mes "recordarme que";
+				mes "necesito traerte?";
+				next;
+				mes "[Achiha]";
+				mes "^0000FF1 Green Lace^000000,";
+				mes "^0000FF1 Silk Ribbon^000000,";
+				mes "^0000FF1 Scarlet Dyestuffs^000000,";
+				mes "^0000FF1 Sunday Hat^000000 y";
+				mes "^0000FF50,000 zeny^000000. Vuelve";
+				mes "cuando tengas todo, ok?";
+				close;
+			}
+			mes "[Achiha]";
+			mes "Oh, me has traido";
+			mes "todo. Eso es";
+			mes "Bueno. Ok, solo";
+			mes "dame las cosas. Um, veamos.";
+			next;
+			mes "[Achiha]";
+			mes "Bien, Termine.";
+			mes "^333333*Yawn*^000000 Y ahora estoy";
+			mes "mucho mas cansada.";
+			mes "Toma tu Red Bonnet.";
+			mes "Espero que te guste~";
+			mes "Creo que es tiempo de relajarse...";
+			delitem 10015,1;
+			delitem 10007,1;
+			delitem 975,1;
+			delitem 5032,1;
+			set Zeny,Zeny - 50000;
+			getitem 5109,1;
+			set LHZBTQ,3;
+			next;
+			mes "[Achiha]";
+			mes "Espero que disfrutes el sombrero~";
+			close;
+		break;
+
+		case 2:
+			mes "[Achiha]";
+			mes "Oh, te has";
+			mes "olvidado? Oh, dejame,";
+			mes "recordarte.";
+			mes "Espero no haberme olvidado yo también...";
+			mes "Oh, si...Ahora recuerdo...";
+			next;
+			mes "[Achiha]";
+			mes "^0000FF1 Green Lace^000000,";
+			mes "^0000FF1 Silk Ribbon^000000,";
+			mes "^0000FF1 Scarlet Dyestuffs^000000,";
+			mes "^0000FF1 Sunday Hat^000000 y";
+			mes "^0000FF50,000 zeny^000000. Vuelve";
+			mes "cuando tengas todo, ok?";
+			close;
+		break;
+		}
+	}
+	else if(LHZBTQ == 3)
+	{
+		mes "[Achiha]";
+		mes "Oh, te recuerdo.";
+		mes "Eres el aventurero";
+		mes "que le gustan mis Red Bonnets";
+		mes "Quieres";
+		mes "que te haga otro?";
+		next;
+		switch( select( "Si.", "He olvidado que se necesita." ) )
+		{
+		case 1:
+			if(countitem(10015) < 1 || countitem(10007) < 1 || countitem(975) < 1 || countitem(5032) < 1 || Zeny < 50000)
+			{
+				mes "[Achiha]";
+				mes "Uh oh.";
+				mes "Has olvidado";
+				mes "un par de cosas.";
+				mes "Quieres que";
+				mes "te recuerde que es";
+				mes "lo que necesitas traerme?";
+				next;
+				mes "[Achiha]";
+				mes "^0000FF1 Green Lace^000000,";
+				mes "^0000FF1 Silk Ribbon^000000,";
+				mes "^0000FF1 Scarlet Dyestuffs^000000,";
+				mes "^0000FF1 Sunday Hat^000000 y";
+				mes "^0000FF50,000 zeny^000000. Vuelve";
+				mes "cuando tengas todo, ok?";
+				close;
+			}
+			mes "[Achiha]";
+			mes "Oh, has traido";
+			mes "todo. Esta";
+			mes "perfecto. Ok, solo dame";
+			mes "las cosas. Uh, veamos.";
+			next;
+			mes "[Achiha]";
+			mes "Bien, he terminado.";
+			mes "^333333*Yawn*^000000 Y ahora";
+			mes "estoy mucho mas cansada.";
+			mes "Toma, aqui tienes tu Red Bonnet.";
+			mes "Espero que te guste~";
+			mes "Creo que voy a descanzar ahora...";
+			delitem 10015,1;
+			delitem 10007,1;
+			delitem 975,1;
+			delitem 5032,1;
+			set Zeny,Zeny - 50000;
+			getitem 5109,1;
+			next;
+			mes "[Achiha]";
+			mes "Espero que disfrutes el sombrero~";
+			close;
+		break;
+
+		case 2:
+			mes "[Achiha]";
+			mes "Oh, te has";
+			mes "olvidado? dejame";
+			mes "recordarte.";
+			mes "Espero no haberme olvidado yo tambien.";
+			mes "Ya lo recuerdo...";
+			next;
+			mes "[Achiha]";
+			mes "^0000FF1 Green Lace^000000,";
+			mes "^0000FF1 Silk Ribbon^000000,";
+			mes "^0000FF1 Scarlet Dyestuffs^000000,";
+			mes "^0000FF1 Sunday Hat^000000 y";
+			mes "^0000FF50,000 zeny^000000. Vuelve";
+			mes "cuando tengas todo, ok?";
+			close;
+		break;
+		}
+	}
+
+}
+
+gl_prison1,137,138,5	script	Zealotus#LhzHat	1200,{
+
+	if(ZLMASKQ == 0)
+	{
+		mes "[Zealotus]";
+		mes "Kneel, worm!";
+		mes "Como gobernante de esta";
+		mes "Underground Prison,";
+		mes "comando a aquellos que pisan";
+		mes "mi reino privado!";
+		next;
+		mes "[Zealotus]";
+		mes "Resistete, y tu seras";
+		mes "castigado! Arrodillate y besa";
+		mes "mis pies, y quizas seas";
+		mes "perdonado. Hohohohoho!";
+		next;
+		switch( select(  "Oh, su Alteza!", "Lo que sea." ) )
+		{
+		case 1:
+			mes "[Zealotus]";
+			mes "La mujer sumisa no es";
+			mes "mas que un sueño ideal";
+			mes "para el hombre arrogante! Una";
+			mes "verdadera mujer revela su poder para";
+			mes "que su hombre cumpla su voluntad!";
+			next;
+			switch( select( "Si, es tan verdadero!", "Boooo!" ) )
+			{
+			case 1:
+				mes "[Zealotus]";
+				mes "No obstante, en mi busqueda de poder, tal vez haya, inadveridamente, aplastado";
+				mes "el espiritu de mi amado y pequeño too harshly. Su orgullo tambalea,";
+				mes "mi hombre, incluso, se acobarda en frente de los humanos. Me duele verlo asi.";
+				next;
+				mes "[Zealotus]";
+				mes "No deberia preguntarte";
+				mes "esto a ti, pero es necesario";
+				mes "un humano como tu para hacerle";
+				mes "recordar quien verdaderamente es,";
+				mes "una orgullosa criatura de la obscuridad";
+				mes "que solo deberia temerme a mi!";
+				next;
+				mes "[Zealotus]";
+				mes "Humano, te ofrezco una pequeña";
+				mes "porcion de mi poder si puedes";
+				mes "agarrar el patetico y lloron";
+				mes "moustro de esquina";
+				mes "de esta prision y hacerlo";
+				mes "recordar su verdadera naturaleza.";
+				set ZLMASKQ,1;
+				close;
+			break;
+
+			case 2:
+				mes "[Zealotus]";
+				mes "Tu, sucio, sucio humano...";
+				mes "Como te atreves a opinar ";
+				mes "algo contrario a lo que yo digo!";
+				mes "No importa, El dia en que toda";
+				mes "tu raza me adore como su \"Reina\" llegara";
+				mes "como su \"Reina\" llegara.";
+				close;
+			break;
+			}
+		break;
+
+		case 2:
+			mes "[Zealotus]";
+			mes "Simple Mortal!";
+			mes "Bah! La burla de";
+			mes "un aburrido mestizo es en vano";
+			mes "para mi. Tengo todo el tiempo";
+			mes "del mundo para reducir tu";
+			mes "orgullo a polvo debajo de mis pies.";
+			close;
+		break;
+		}
+	}
+	else if(ZLMASKQ > 0 && ZLMASKQ < 6)
+	{
+		mes "[Zealotus]";
+		mes "Hm. Si mi amado esta";
+		mes "actuando Terco o se rehusa";
+		mes "a escuchar, eres libre de";
+		mes "tomar medidas drasticas. Solo piensa";
+		mes "que hubiese hecho yo en tu";
+		mes "Lugar. Ohohohohoho~!";
+		close;
+	}
+	else if(ZLMASKQ == 6)
+	{
+		mes "[Zealotus]";
+		mes "Ooh, has regresado.";
+		mes "Phendark ciertamente";
+		mes "ha regresado a si mismo de nuevo,";
+		mes "gracias a tus esfuerzos, Humano.";
+		mes "Si, su furia, su coraje,";
+		mes "y su pasion estan restaurados~";
+		next;
+		mes "[Zealotus]";
+		mes "como prometi, te";
+		mes "dare una parte de mi";
+		mes "poder, Pero, necesito";
+		mes "algunos items para crear";
+		mes "este contrato entre tu y yo.";
+		next;
+		mes "[Zealotus]";
+		mes "Necesito:";
+		mes "^3131FF1 Cat's Eye^000000, ";
+		mes "^3131FF1 Forbidden Red Candle^000000 y ";
+		mes "^3131FF30 Worn-Out Magic Scrolls^000000. ";
+		mes "Entonces, podre garantizarte una porcion";
+		mes "de mi poder, como te pormeti.";
+		set ZLMASKQ,7;
+		close;
+	}
+	else if(ZLMASKQ == 7)
+	{
+		if(countitem(7263) && countitem(660) && countitem(7099) > 29)
+		{
+			mes "[Zealotus]";
+			mes "Veo que has traido lo que";
+			mes "necesitaba para completar";
+			mes "el contrado entre";
+			mes "tu y yo.";
+			mes "Comenzemos humano...";
+			next;
+			mes "^3355FFZealotus agarra la Red";
+			mes "Candle que le diste y derrama";
+			mes "la cera en un palma";
+			mes "abierta. El Cat`s Eye comienza";
+			mes "a brillar con una tenue luz.^000000";
+			next;
+			mes "[Zealotus]";
+			mes "Ahora, coloca tu dedo";
+			mes "indice en mi palma para";
+			mes "que completemos el";
+			mes "ultimo paso del contrato...";
+			next;
+			switch( select( "No completar el contrato.", "Completar el contrato.." ) )
+			{
+			case 1:
+				mes "[Zealotus]";
+				mes "Hm? A que le";
+				mes "temes? Esto es un";
+				mes "contrato menor, asi";
+				mes "que no estas vendiendome";
+				mes "tu alma, o algo de";
+				mes "importancia.";
+				close;
+			break;
+
+			case 2:
+				mes "[Zealotus]";
+				mes "Yo, Zealotus, como gobernante";
+				mes "de este reino, sello";
+				mes "este contrato eterno con este";
+				mes "Forbidden Red Candle. ";
+				next;
+				mes "[Zealotus]";
+				mes "" + strcharinfo(0) + " Debere";
+				mes "compartir mi poder";
+				mes "por siempre. Aquellos";
+				mes "que se inclinen ante mi se inclinaran";
+				mes "tambien " + strcharinfo(0) + "antes el.";
+				specialeffect EF_DEVIL;
+				specialeffect EF_POISONHIT;
+				next;
+				mes "[Zealotus]";
+				mes "Humano, toma esta";
+				mes "mascara como un";
+				mes "imperecedera prueba de";
+				mes "nuestro contrato. Siempre que la";
+				mes "lleves con tigo, Estare a tu";
+				mes "lado. Asi lo ha dicho Zealotus!";
+				delitem 7263,1;
+				delitem 660,1;
+				delitem 7099,30;
+				getitem2 5121,1,1,0,0,254,0,getcharid(0)&0xffff,(getcharid(0)>>16)&0xffff;
+				set ZLMASKQ,8;
+				close;
+			break;
+			}
+		}
+		mes "[Zealotus]";
+		mes "Necesitare";
+		mes "^3131FF1 Cat's Eye^000000, ";
+		mes "^3131FF1 Forbidden Red Candle^000000 y";
+		mes "^3131FF30 Worn-Out Magic Scrolls^000000. ";
+		mes "Entonces podre darte una porcion";
+		mes "de mi poder como te prometi.";
+		close;
+	}
+	else if(ZLMASKQ == 8)
+	{
+		mes "[Zealotus]";
+		mes "Ah, Te libero en";
+		mes "paz, humano. Recuerda";
+		mes "el esplendor de nuestro reino!";
+		mes "Pero, no te culpo";
+		mes "si no tienes interes en";
+		mes "comandar estas Injustices...";
+		next;
+		mes "[Zealotus]";
+		mes "Gracias a tu ayuda,";
+		mes "mi Phendark regreso";
+		mes "a su antigua, moustrosa";
+		mes "y apacionada forma de ser. Ahora puedo";
+		mes "mostrarle la dolorosa marca de amor";
+		mes "de mi latigo! Hohohohohohohohoho!";
+		emotion e_kis;
+		close;
+	}
+
+}
+
+gl_prison1,97,104,1	script	Phendark#LhzHat	1202,{
+
+	if(ZLMASKQ == 0)
+	{
+		mes "[Phendark]";
+		mes "Huh? Oh no! ";
+		mes "Otro h-humano?!";
+		mes "P-Por Favor! A-Alejate,";
+		mes "no te acerques a mi!";
+		close;
+	}
+	else if(ZLMASKQ == 1)
+	{
+		mes "[Phendark]";
+		mes "Huh? Oh no! ";
+		mes "Otro h-humano?!";
+		mes "P-Por Favor! A-Alejate,";
+		mes "no te acerques a mi!";
+		next;
+		mes "[Phendark]";
+		mes "Lo...Lo Juro!";
+		mes "No llevo ningun item";
+		mes "raro o cosas que";
+		mes "puedas usar, asi que por favor no me";
+		mes "golpees! Yo.. Oh dios mios, tu";
+		mes "no me crees. no?";
+		next;
+		mes "[Phendark]";
+		mes "Ustedes los humanos nunca me dejan";
+		mes "en paz! Por que tienen que molestarme";
+		mes "asi?! Honestamente";
+		mes "yo no llevo nada de";
+		mes "valor! Z-Zealotus, por favor!";
+		mes "Zealotus, Ayudameeeeeeeee~!";
+		emotion e_sob;
+
+
+		if(!(
+			countitem(1950) || countitem(1951) || countitem(1952) || 
+			countitem(1953) || countitem(1954) || countitem(1955) || 
+			countitem(1956) || countitem(1957) || countitem(1958) || 
+			countitem(1959) || countitem(1960) || countitem(1961) || 
+			countitem(1962) || countitem(1963) || countitem(1964) || 
+			countitem(1965) || countitem(1966) || countitem(1967) || 
+			countitem(1968) || countitem(1969) || countitem(1970) || 
+			countitem(1971)
+		))
+			close; // no whip equipped or in inventory
+
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Eres Patetico!";
+		mes "No se suponía";
+		mes "que eras un mounstruo? Tu sabes";
+		mes "lo que un Zealotus haría";
+		mes "Si realmente estaría aqui?";
+		next;
+		mes "[Phendark]";
+		mes "^333333*Sniff...*^000000";
+		mes "P-Probablemente...";
+		mes "Probablemente azótarme.";
+		next;
+		mes "^3355FFTu despreocupadamente^000000";
+		mes "^3355FFblandes tu \"Whip\".^000000";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Eso es correcto.";
+		next;
+		mes "^3355FF*Snap!*";
+		mes "*Snap!*";
+		mes "*Crack crack crack!*";
+		mes "*Snap snap snap crack!*^000000";
+		next;
+		mes "[Phendark]";
+		mes "¡Ah! Este dolor picante";
+		mes "que me quema con lujuria!";
+		mes "Es casi tan bueno como";
+		mes "el \"Whip\" de amor de Zealtos's!";
+		next;
+		mes "[Phendark]";
+		mes "Zealotus...";
+		mes "Debe estar molesta";
+		mes "conmigo, pero no puedo";
+		mes "dejar de tenerles miedo a ustedes";
+		mes "los humanos! Malditos sean todos!";
+		set ZLMASKQ,2;
+		close;
+	}
+	else if(ZLMASKQ == 2 || ZLMASKQ == 3)
+	{
+		if(countitem(7315) > 368 && ZLMASKQ == 3)
+		{	
+			mes "[Phendark]";
+			mes "T-tu otra vez!";
+			mes "Porque me persigues?!";
+			mes "N-no hay nada que pueda";
+			mes "darte, por favor";
+			mes "no me lastimes! Oh, oh p-por f-favor...!";
+			emotion e_swt2;
+			next;
+			switch( select( "Alimentarlo con Dark Crystal Fragment.", "Amenazarlo." ) )
+			{
+			case 1:
+				mes "[Phendark]";
+				mes "Que...? Quieres";
+				mes "que me coma esto?";
+				mes "No parece natural,";
+				mes "pero si Rybio dice que puedo,";
+				mes "no puede ser tan malo.";
+				next;
+				mes "...";
+				mes "......";
+				next;
+				mes "[Phendark]";
+				mes "Que se supone";
+				mes "que pasara? Mi";
+				mes "Demonio interior debería";
+				mes "despertarse luego que coma esto?";
+				mes "Eso suena ridiculo!";
+				mes "Sin embargo, me acabo de comer el cristal.";
+				next;
+				mes "[Phendark]";
+				mes "Wh-whoa. Ugh!";
+				mes "Mi pecho! Algo";
+				mes "me quema dentro mi! N-no puedo--!";
+				mes "pensar correctamente...Estoy...";
+				mes "Perdiendo lentamente mi humanidad!";
+				next;
+				mes "[Phendark]";
+				mes "Huh... Huuurg--!";
+				mes "Huk-huk! Heeeeh!";
+				mes "Heeeeeh! Waaoooooh!";
+				next;
+				mes "[Phendark]";
+				mes "...";
+				mes "Grrrrr...!";
+				next;
+				mes "[Phendark]";
+				mes "^333333*Pant pant*^000000";
+				mes "Que....Que..";
+				mes "Que paso?";
+				set ZLMASKQ,4;
+				delitem 7315,369;
+				close;
+			break;
+
+			case 2:
+				mes "[" + strcharinfo(0) + "]";
+				mes "Que pasaría";
+				mes "si decido no";
+				mes "lastimarte? Que";
+				mes "harías entonces, huh?";
+				next;
+				mes "...";
+				mes "......";
+				next;
+				mes "[Phendark]";
+				mes "D-Detente!";
+				mes "Solo-Solo Detente!";
+				close;
+			break;
+			}
+		}
+		mes "[Phendark]";
+		mes "Humanos...";
+		mes "Estan por todos lados!";
+		mes "Ustedes---Yo...";
+		mes "Me estan torturando!";
+		emotion e_sob;
+		close;
+	}
+	else if(ZLMASKQ == 4)
+	{
+		mes "[Phendark]";
+		mes "Mi pecho estaba en llamas,";
+		mes "como yo, supongo,";
+		mes "ardiendo con furia o";
+		mes "algo asi. Se ha";
+		mes "ido ahora, pero que";
+		mes "eran esos cristales?";
+		close;
+	}
+	else if(ZLMASKQ == 5)
+	{
+		mes "[Phendark]";
+		mes "Tu otra vez? Oh no,";
+		mes "no volverás a lastimarme";
+		mes "o hacerme comer esos";
+		mes "cristales raros otra vez, o no?";
+		next;
+		mes "^3131FF[" + strcharinfo(0) + "]^000000";
+		switch( select( "Rybio", "Injustice", "Zealotus" ) )
+		{
+		case 1:
+			mes "Rybio";
+			set @temp1,1;
+		break;
+
+		case 2:
+			mes "Injustice";
+			set @temp1,2;
+		break;
+
+		case 3:
+			mes "Zealotus";
+			set @temp1,3;
+		break;
+		}
+		switch( select( "hates (Odia a)", "likes (Le gusta)" ) )
+		{
+		case 1:
+			mes "hates (Odia a)";
+			set @temp2,1;
+		break;
+
+		case 2:
+			mes "likes (Le gusta)";
+			set @temp2,2;
+		break;
+		}
+		switch( select( "Rybio.", "Injustice.", "Phendark.", "Zealotus." ) )
+		{
+		case 1:
+			mes "Rybio.";
+		break;
+
+		case 2:
+			mes "Injustice.";
+		break;
+
+		case 3:
+			if((@temp1 == 1 || @temp1  == 2) && @temp2 == 1)
+			{
+				mes "[Phendark]";
+				mes "No puedo creer";
+				mes "algo asi!";
+				mes "Oh, eso no importa.";
+				mes "Zealotus es demasiado para mi.";
+				mes "No soy digno de probar";
+				mes "el \"Love Whip\" de Zealotus.";
+				emotion e_sob;
+				close;
+			}
+			else if(@temp1 == 3 && @temp2 == 1)
+			{
+				mes "[Phendark]";
+				mes "...";
+				mes "......";
+				mes "Me odia?";
+				mes "N-no, no puede--";
+				mes "Yo no, eso no--";
+				next;
+				mes "[Phendark]";
+				mes "Huh...?";
+				mes "Que se supone";
+				mes "que significa?";
+				close;
+			}
+			else if(@temp1 == 3 && @temp2 == 2)
+			{
+				mes "[Phendark]";
+				mes "No puedo creer";
+				mes "algo como eso!";
+				mes "Oh, no importa.";
+				mes "Zealotus es demasiado para mi.";
+				mes "No soy digno de probar";
+				mes "el \"Love Whip\" de Zealotus.";
+				emotion e_sob;
+				close;
+			}
+		break;
+
+		case 4:
+			mes "Zealotus.";
+		break;
+		}
+		switch( select( "Insultalo.", "Disculpate." ) )
+		{
+		case 1:
+			mes "[" + strcharinfo(0) + "]";
+			mes "Primero,";
+			mes "Que es exactamente";
+			mes "lo que te separa de todos estos";
+			mes "monstruos";
+			mes "de los que ella puede elegir?";
+			mes "Como si fueras mucho mejor...";
+			next;
+			mes "[Phendark]";
+			mes "...";
+			mes "......";
+			next;
+			switch( select( "Quiebra su orgullo.", "Dile que estabas bromeando." ) )
+			{
+			case 1:
+				mes "^3131FF[" + strcharinfo(0) + "]^000000";
+				mes "Quiero decir, hay tipos";
+				mes "como el Bloody Murderer";
+				mes "alla afuera que son mucho mas";
+				mes "malvados que vos, y lo mejor de todo,";
+				mes "no le temen a los humanos!";
+				next;
+				switch( select( "Ve por el golpe bajo.", "Trata de recuperar tu confianza." ) )
+				{
+				case 1:
+					mes "[" + strcharinfo(0) + "]";
+					mes "Tu sabes, Zealotus y yo";
+					mes "hemos estado hablando de";
+					mes "vos recientemente. Me dijo que";
+					mes "el solo verte, le molesta";
+					mes "Quiero decir, que clase";
+					mes "de monstruo le teme a los humanos?";
+					next;
+					mes "[" + strcharinfo(0) + "]";
+					mes "Ahora, has alcanzado el";
+					mes "punto en donde hasta los Injustice";
+					mes "son mas masculinos que tu,";
+					mes "si sabes a que me refiero!";
+					mes "Hahahahahahahahaha!";
+					next;
+					mes "[Phendark]";
+					mes "...";
+					mes "......";
+					next;
+					mes "[Phendark]";
+					mes "...";
+					mes "......";
+					mes ".........";
+					next;
+					mes "[Phendark]";
+					mes "...";
+					mes "......";
+					mes ".........";
+					mes "............";
+					next;
+					mes "[Phendark]";
+					mes "GRRRRRR!";
+					mes "ES SUFICIENTE!";
+					emotion e_ag;
+					next;
+					mes "[Phendark]";
+					mes "No me importa que";
+					mes "demonios es ella, iré";
+					mes "a ver a Zealotus y le daré";
+					mes "un poco de mi!";
+					mes "Grrrr! Se lamentara tanto!";
+					set ZLMASKQ,6;
+					emotion e_an;
+					close;
+				break;
+
+				case 2:
+					mes "^3131FF[" + strcharinfo(0) + "]^000000";
+					mes "Pero sabes que pienso";
+					mes "sobre eso, talvez tu parescas";
+					mes "mucho mas rudo que un";
+					mes "Bloody Murderer.";
+					next;
+					mes "[Phendark]";
+					mes "*Sniff sniff*";
+					mes "Realmente crees eso?";
+					next;
+					mes "...";
+					mes "......";
+					next;
+					mes "[" + strcharinfo(0) + "]";
+					mes "...Yeeeeeeah.";
+					close;
+				break;
+				}
+			break;
+
+			case 2:
+				mes "[" + strcharinfo(0) + "]";
+				mes "Pero ahora que lo pienso";
+				mes "tu eres";
+				mes "mucho mejor que todos";
+				mes "esos otros montruos.";
+				mes "Eso que he dicho antes?";
+				mes "Solo estaba bromeando.";
+				next;
+				mes "[Phendark]";
+				mes "^333333*Sniff!*^000000";
+				mes "Tu eres...";
+				mes "No estas ayudando!";
+				close;
+			break;
+			}
+		break;
+
+		case 2:
+			mes "[" + strcharinfo(0) + "]";
+			mes "Yo...";
+			mes "Solo estaba bromeando!";
+			mes "Como ella puede odiar";
+			mes "a alguien como tu?";
+			next;
+			mes "[Phendark]";
+			mes "No... No.";
+			mes "Tienes razon.";
+			mes "No meresco amor.";
+			mes "Ni de Zealotus ni";
+			mes "de nadie mas...";
+			close;
+		break;
+		}
+	}
+	else if(ZLMASKQ > 5)
+	{
+		mes "[Phendark]";
+		mes "Zealotus! Como";
+		mes "te atreves a decir esas";
+		mes "cosas en contra de mi!";
+		mes "menos masculino que un Injustice?!";
+		mes "Tengo que provar que se equivoca!";
+		mes "Fuera de mi camino! humano inutil!";
+		close;
+	}
+
+}
+
+gl_prison1,100,48,5	script	Rybio#LhzHat	1201,{
+
+	if(ZLMASKQ == 2)
+	{
+		mes "[Rybio]";
+		mes "Tu sabes, yo normalmente";
+		mes "Correria descontrolado y te acuchillaría";
+		mes "como loco, como dada vez que veo un humano, pero";
+		mes "pero hoy estoy de humor, entonces";
+		mes "te dare una unica posibilidad";
+		mes "de correr por tu vida.";
+		next;
+		switch( select( "Hablale de Phendark.", "Corre por tu vida." ) )
+		{
+		case 1:
+			mes "[Rybio]";
+			mes "Que--? Conoces al";
+			mes "mismo Phendark que yo?";
+			mes "guau! eso es raro. pero";
+			mes "Si, El y Zealotus tienen";
+			mes "algo como...No se que";
+			mes "es, verdaderamente. Um, Amor?";
+			next;
+			mes "[Rybio]";
+			mes "De todas maneras, Phendark ha";
+			mes "estado actuando de forma rara";
+			mes "últimamente. Supongo que Zealotus";
+			mes "lo amó a tal punto que";
+			mes "Ella abusó de el a tal punto";
+			mes "que ahora, el le teme a los humanos.";
+			next;
+			mes "[Rybio]";
+			mes "Huh. Sabes que ayudaría?";
+			mes "Dark Crystal Fragments. Son";
+			mes "inutiles para los humanos, pero si";
+			mes "una criatura de la oscuridad los come,";
+			mes "libera su demonio interior.";
+			mes "Tenebroso, no?";
+			next;
+			mes "[Rybio]";
+			mes "Como Phendark es muy grande, y esta actuando como un tonto, tu";
+			mes "deberias traerle ^3131FF369 Dark Crystal Fragments^000000 para que coma. No";
+			mes "te preocupes, podrás encontrarlos en todo Rune-Midgard.";
+			next;
+			mes "[Rybio]";
+			mes "No tengo idea de porque un humano";
+			mes "como vos querría";
+			mes "ayudar a alguien como nosotros.";
+			mes "Que le encuentras, exactamente?";
+			set ZLMASKQ,3;
+			close;
+		break;
+
+		case 2:
+			mes "[Rybio]";
+			mes "Eso es!";
+			mes "Corre, Fuera de aqui!";
+			mes "Si no eres lo suficientemente rapido,";
+			mes "probablemente te coma, humano!";
+			mes "...Bueno...Probablemente no.";
+			close;
+		break;
+		}
+	}
+	else if(ZLMASKQ == 3)
+	{
+		mes "[Rybio]";
+		mes "No entiendo porque";
+		mes "alguien como tu, un heroico";
+		mes "aventurero, querría ayudar";
+		mes "a Phendark? Acaso Zealotus";
+		mes "te extorsiono o algo?";
+		next;
+		mes "[Rybio]";
+		mes "Bueno, podrías";
+		mes "ayudarlo llevandole";
+		mes "para comer unos";
+		mes "^3131FF369 Dark Crystal Fragments^000000";
+		mes "Para liberar";
+		mes "al demonio que duerme dentro del el, sabes?";
+		close;
+	}
+	else if(ZLMASKQ == 4)
+	{
+		mes "[Rybio]";
+		mes "Dandole de comer todos esos";
+		mes "Dark Crystal Fragments no";
+		mes "funciono? Pero se suponia que era";
+		mes "infalible! Diablos, que";
+		mes "le estara pasando al demonio interior";
+		mes "de  Phendark? Hombre...oh";
+		next;
+		mes "[Rybio]";
+		mes "No tengo idea que mas";
+		mes "podrías probar...";
+		mes "podrías probar motivandolo.";
+		mes "Psicologia Inversa?";
+		mes "Es raro estar hablando de esto";
+		mes "con un humano. Hahahaha~";
+		set ZLMASKQ,5;
+		close;
+	}
+	else if(ZLMASKQ == 5)
+	{
+		mes "[Rybio]";
+		mes "Phendark seguramente luzca";
+		mes "rudo. pero no creo que sea";
+		mes "completamente maligno.";
+		mes "Asi es, Nosotros los monstruos no somos del todo malos...";
+		mes "Solo...Un poco...";
+		close;
+	}
+
+}

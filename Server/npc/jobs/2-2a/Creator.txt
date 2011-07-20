@@ -1,0 +1,136 @@
+//===== eAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,50,3	script	Biochemist#Valkyrie	122,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Biochemist]";
+			mes "Felicidades.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		mes "[Biochemist]";
+		mes "Es extraño que";
+		mes "alguien como yo este aquí,";
+		mes "pero incluso alguien bien experimentado";
+		mes "en los caminos de la ciencia";
+		mes "también puede ser un héroe.";
+		next;
+		mes "[Biochemist]";
+		mes "En esta instancia,";
+		mes "no es necesario que sepas";
+		mes "los medios que he ";
+		mes "utilizado para";
+		mes "lograr obtener";
+		mes "un lugar un Valhalla";
+		close;
+	}
+	else if (ADVJOB == Job_Creator && Class == Job_Merchant_High && JobLevel > 39) {
+		mes "[Biochemist]";
+		mes "Si...";
+		mes "Ya era hora.";
+		mes "Necesitamos más genios";
+		mes "como tú en Rune-Midgar";
+		next;
+		mes "[Biochemist]";
+		mes "¿Te gustaría";
+		mes "ser un Creator?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[Biochemist]";
+			mes "Cuando estés listo,";
+			mes "siéntete libre de volver.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Biochemist]";
+			mes "Aún puedes aprender más habilidades. Por favor usa";
+			mes "todos tus \"Skill Point\" antes de volver conmigo";
+			close;
+		}
+		jobchange Job_Creator;
+		set ADVJOB,0;
+		mes "[Biochemist]";
+		mes "¡Felicidades!";
+		mes "Como Creator";
+		mes "Espero que uses tú";
+		mes "vasto conocimiento para los";
+		mes "propósitos correctos.";
+		close;
+	}
+	else {
+		if (Class == Job_Creator && MISC_QUEST & 64 && getskilllv("AM_BIOETHICS") == 0) {
+			mes "[Biochemist]";
+			mes "Ah, ¿Has venido a";
+			mes "recobrar el tiempo";
+			mes "que perdiste? Si,";
+			mes "debes estar aquí por los";
+			mes "secretos de la vida";
+			mes "que te fueron despojados...";
+			next;
+			if (select("Yes:No") == 1) {
+				mes "[Biochemist]";
+				mes "Cierra tus ojos y";
+				mes "pon tu mente en blanco.";
+				mes "Regresaremos al pasado";
+				mes "para recuperar los";
+				mes "fragmentos de la memoria";
+				mes "que perdiste.";
+				next;
+				mes "[Biochemist]";
+				mes "Cuando abras los ojos,";
+				mes "recordarás claramente";
+				mes "los secretos de la vida.";
+				mes "También recordarás el peso de la";
+				mes "responsabilidad para que uses estos";
+				mes "secretos en la forma correcta...";
+				next;
+				skill 238,1,0;
+				mes "[Biochemist]";
+				mes "Abre tus ojos...";
+				mes "Ahora has";
+				mes "recordado como";
+				mes "crear vida artificial, solo";
+				mes "te rogamos tratar a todas tus";
+				mes "creaciones con respeto.";
+				close;
+			}
+			mes "[Biochemist]";
+			mes "Si deseas";
+			mes "recuperar sus recuerdos";
+			mes "perdidos, por favor";
+			mes "vuelve conmigo.";
+			mes "El secreto de crear";
+			mes "vida no es algo insignificante...";
+			close;
+		}
+		mes "[Biochemist]";
+		mes "Bienvenido";
+		mes "al Valhalla";
+		mes "a la Sala del Honor.";
+		next;
+		mes "[Biochemist]";
+		mes "Por favor, que";
+		mes "tu estancia aquí";
+		mes "sea confortable.";
+		mes "¡Gloria a los guerreros!";
+		close;
+	}
+}
+

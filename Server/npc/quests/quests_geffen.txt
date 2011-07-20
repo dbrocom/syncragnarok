@@ -1,0 +1,168 @@
+//===== eAthena Script ======================================= 
+//= Quest NPCs related to Geffen
+//===== By: ================================================== 
+//= kobra_k88 & Samuray22
+//===== Current Version: ===================================== 
+//= 1.4
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= Welding Mask and Headset Quests.
+//===== Additional Comments: ================================= 
+//= 1.1 Fixed exploits [Lupus]
+//= 1.2 Removed Duplicates [Silent]
+//= 1.3 Updated "Welding Mask" Quest to the Official one. [Samuray22]
+//= 1.3a replaced item "names" with item id. Added missing [Lupus]
+//= 1.4 Updated welding mask and headset quests. [L0ne_W0lf]
+//============================================================ 
+
+//==============================================================================================//
+// 					Blacksmith: 'Welding Mask' Quest
+//==============================================================================================//
+geffen_in,144,166,4	script	Blacksmith	63,{
+	mes "[Blacksmith]";
+	mes "¿Nunca has escuchado hablar de mí? Soy el Blacksmith Veterano de esta tierra. He gastado 30 años en este caliente y sangriento fuego del infierno, doblando metales con mi voluntad de acero!";
+	next;
+	mes "[Blacksmith]";
+	mes "Pero...";
+	mes "Me estoy volviendo viejo y mi valor ha comenzado a desvanecerse con los años. Por lo que he inventado algo para jóvenes, calientes, próximos Blacksmiths, con la esperanza de que ellos también dominen mi arte…";
+	next;
+	switch(select("What is it?:...")) {
+	case 1:
+		mes "[Blacksmith]";
+		mes "Nosotros, los Blacksmiths, debemos manipular siempre el acero bajo el calor extremo, y el aire caliente y los metales fundidos son más que las personas que pueden estar de pie. ";
+		next;
+		mes "[Blacksmith]";
+		mes " Por nuestro arte, nuestra belleza, caras aún masculinas han sido puestas en peligro…";
+		next;
+		mes "[Blacksmith]";
+		mes " Pero con esta maravilla de la tecnología, ya no hay de qué preocuparse! Contempla la ^3355FFWelding Mask^000000 !!";
+		next;
+		mes "[Blacksmith]";
+		mes "Trabaja cubriendo tu cara con una gruesa placa de metal. Realmente, es un objeto que todos deberían desear tener! Pero si tú no la quieres, es una buena idea dárselo a este amigo que está estudiando para ser un herrero.";
+		next;
+		mes "[Blacksmith]";
+		mes "Y qué me dices? Si me traes ^2244FF50 Steel^000000 y ^4422FFonly 2000 Zeny^000000, te haré una al instante~!";
+		next;
+		switch(select("Hm... Not bad. Alright.:How does it work again?")) {
+		case 1:
+			if ((countitem(999) > 49) && (Zeny > 1999)){
+				mes "[Blacksmith]";
+				mes "Ah, veo que aprecias el trabajo duro de los Blacksmith! Bien, pues te haré una al instante!!";
+				next;
+				delitem 999,50;  //Steel
+				set Zeny,Zeny-2000;
+				getitem 2292,1; // Welding_Mask
+				mes "[Blacksmith]";
+				mes "Hahaha~! Dale un buen uso!";
+				close;
+			}
+			else {
+				mes "[Blacksmith]";
+				mes "Hmmm...";
+				mes "No tienes los objetos que necesito.";
+				next;
+				mes "[Blacksmith]";
+				mes "Un Blacksmith común consideraría esto como una falta de respeto, pero voy a hacer como que no ha ocurrido. Sólo no olvides lo que necesito para hacerte esta máscara.";
+				close;
+			}
+		case 2:
+			mes "[Blacksmith]";
+			mes "La ^3355FFWelding Mask^000000 protege tu cara cubriéndola con una gruesa placa de metal. Esta invención es el resultado de 30 años de un sin fin de trabajo duro del martillo y el yunque.";
+			close;
+		}
+	case 2:
+		mes "[Blacksmith]";
+		mes "¡Ah...!";
+		mes "Creo que es la primera vez que conoces a un Blacksmith tan bueno como yo, y parece que estás mudo por el terror. Por Favor tómate tu tiempo, y háblame para cuando estés listo.";
+		next;
+		mes "^3355FFEste tipo parece";
+		mes "muy seguro";
+		mes "de sí mismo.^000000";
+		close;
+	}
+}
+
+
+
+//=============================================================================================//
+//					Eric: Headset Quest
+//=============================================================================================//
+geffen_in,30,71,4	script	Eric	83,{
+	mes "[Eric]";
+	mes "Por favor escucha";
+	mes "to My historia";
+	mes "of mi bendito";
+	mes "abuelo.";
+	next;
+	switch(select("Talk:Ask about Items needed:Manufacture:Quit")) {
+	case 1:
+		mes "[Eric]";
+		mes "My abuelo, quien falleció hace pocos años, era especial para mí. Él siempre estubo conmigo, y siempre me cuidó. Él era mucho mejor que mi padre, quien siempre estaba ocupado trabajando.";
+		next;
+		mes "[Eric]";
+		mes "Para mí, la biblioteca de mi abuelo siempre era como un mundo de fantasía al que yo podía escapar. Pasaba mucho de mi tiempo  ahí.";
+		next;
+		mes "[Eric]";
+		mes "Aprendí millones de cosas gracias a esos libros en la biblioteca. Mi abuelo estaba muy interesado en la alquimia y en la música, y su biblioteca estaba llena de misteriosos libros viejos.";
+		next;
+		mes "[Eric]";
+		mes "Un día...";
+		mes "Como de costumbre, fui a la biblioteca y descubrí un interesante esquema.";
+		next;
+		mes "[Eric]";
+		mes "Mostraba un instrumento que se veía como manguitos de oído, que cuando era llevado en la cabeza, podía transmitir  música o susurros a las orejas pasando por un cable delgado. ";
+		next;
+		mes "[Eric]";
+		mes "Creo que...";
+		mes "Es el trabajo in terminar de mi abuelo. Le pregunté a un par de Alchemists si podían producirlo, pero rechazaban mis pedidos… ";
+		next;
+		mes "[Eric]";
+		mes "Tiempo después, pensé que tenía que hacerlo por mí mismo. Y  busqué por un par de años, y ahora entiendo perfectamente cómo hacer esa cosa. ¡Pero nunca pude encontrar los materiales necesarios para hacerla!";
+		next;
+		mes "[Eric]";
+		mes "Si pudiera encontrar esos artículos, podría construirla en un segundo. Si están interesado en mi idea, me los podrías traer?";
+		next;
+		mes "[Eric]";
+		mes "Todo lo que quiero hacer es construir eso en honor a mi abuelo y terminar el trabajo que él comenzó. Si quieres que me la quede, no importaría. ";
+		close;
+	case 2:
+		mes "[Eric]";
+		mes "40 ^3355FFSteel^000000";
+		mes "1 ^3355FFOridecon^000000";
+		mes "1 ^3355FFAlcohol^000000";
+		mes "1 ^3355FFCoal^000000";
+		mes "Estas son las cosas que necesito para hacer la obra maestra de mi abuelo.";
+		close;
+	case 3:
+		if ((countitem(999) > 39) && (countitem(984) > 0) && (countitem(970) > 0) && (countitem(1003) > 0)) {
+			delitem 999,40;  //Steel
+			delitem 984,1;  //Oridecon
+			delitem 970,1;  //Alchol
+			delitem 1003,1;  //Coal
+			getitem 5001,1; // Headset
+			mes "*¡Tap! ¡Tap! ¡Tap!*";
+			next;
+			mes "[Eric]";
+			mes "Gracias";
+			mes "Gracias a tí, he podido cumplir el deseo de mi abuelo. Él estaría muy feliz si nos mirara desde el Cielo.";
+			next;
+			mes "[Eric]";
+			mes "Como dije, por favor toma esto. Estoy orgulloso de que puedo hacer esto por mí mismo. ";
+			close;
+		}
+		else {
+			mes "[Eric]";
+			mes "Gracias por tratar de ayudarme, pero no has traído todos los objetos que necesito. Pero creo que los encontrarás todos pronto.";
+			close;
+		}
+	case 4:
+		mes "[Eric]";
+		mes "¿N-no?";
+		mes "Bien...";
+		mes "Tienes tus propias";
+		mes "Preocupaciones, supongo.";
+		mes "Adiós.";
+		close;
+	}
+}

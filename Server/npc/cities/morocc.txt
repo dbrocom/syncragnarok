@@ -1,0 +1,782 @@
+//===== eAthena Script ======================================= 
+//= Morroc Town
+//===== By: ================================================== 
+//= kobra_k88; L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 2.2
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Morroc Town NPCs
+//===== Additional Comments: ================================= 
+//= Fully working
+//= Fixed Lapidary sprite, Implemented ANTHELL trigger
+//= (in both NPC/Warps) [Lupus]. Removed it from NPC and put in Warp
+//= 1.3 Removed some NPC due to Assassin Job Quest [kobra_k88]
+//= 1.3b mobs name corrected [Lupus], 1.3c - Adv classes support
+//= 1.4 Fixed typos [Nexon]
+//= 1.5 Added a lvl 4 weapon quest related NPC [MasterOfMuppets]
+//= 1.6 Added Bartender NPC, made by Persian69 [Vicious_Pucca]
+//= 1.7 Removed Duplicates [Silent]
+//= 1.8 Rescripted to Aegis 10.3 Standards. [L0ne_W0lf]
+//= 1.9 Removed duplicate NPC, changed temp char vars to temp npc. [L0ne_W0;f]
+//= 2.0 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
+//= 2.0a Fixed outdated info about Milk [Lupus]
+//= 2.1 Updated/Added NPCs for episode 12.1. [L0ne_W0lf]
+//= 2.2 Removed duplicate bartender NPC. (bugreport:4555) [L0ne_W0lf]
+//============================================================
+
+// Morroc
+//============================================================
+morocc,150,120,5	script	Soldier - Morroc#01::MocSoldier	707,3,3,{
+	mes "[Morroc Soldier]";
+	mes "¡Hey, tú!. Alto ahí.";
+	next;
+	mes "[Morroc Soldier]";
+	mes "Esta es un área restringida. ¡No puedes ir más lejos!";
+	close;
+
+OnTouch:
+	mes "[Morroc Soldier]";
+	mes "¡Hey, tú!. Alto ahí.";
+	next;
+	mes "[Morroc Soldier]";
+	mes "Esta es un área restringida. ¡No puedes ir más lejos!";
+	close;
+}
+
+morocc,202,244,0	script	Volunteer - Morroc#01	745,{
+	mes "[Morroc Volunteer]";
+	mes "Después del terrible incidente que barrió completamente a Morroc, el Reino de Rune-Midgard ha reunido a nosotros los voluntarios para ayudar en la restauración.";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "Es tan importante como parece, todos están siendo cuidadosos, pero siempre hay alguien que no se da cuenta de la situación, ¿no lo crees?";
+	close;
+}
+
+morocc,88,133,3	script	Volunteer - Morroc#02	748,{
+	mes "[Morroc Volunteer]";
+	mes "Estámos... Estámos inundados de trabajo..";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "Este trabajo parece nunca terminar, ¡¡¡sin importar lo duro que trabajemos!!!";
+	mes "¡¡Gente de Rune-Midgard!! ¡¡Por favor dennos una mano!!";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "Haw.... Whew... Ugh...";
+	close;
+}
+
+morocc,202,110,0	script	Volunteer - Morroc#03	730,{
+	mes "[Morroc Volunteer]";
+	mes "Aún no podemos estimar el daño total.";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "Adventurers' Union y Prontera Kingdom están poniendo sus esfuerzos en las restauraciones al igual que en controlar las causas originales del desastre.";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "A menos que establescamos la causa original, el daño incluso se esparcirá fuera de Morroc. Todo lo que queda es empeorar.";
+	close;
+}
+
+morocc,268,287,3	script	Volunteer - Morroc#04	727,{
+	mes "[Morroc Volunteer]";
+	mes "Tan malo como parece, ni siquiera podemos pedir más ayuda.";
+	mes "Este debe ser el peor hecho ocurrido en la historia de Rune-Midgard.";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "Ojala supiera que tan grande es el daño, pero ni siquiera podemos estimarlo. Es como tratar de excavar contra la corriente..";
+	close;
+}
+
+morocc,37,287,0	script	Volunteer - Morroc#05	79,{
+	mes "[Morroc Volunteer]";
+	mes "La ciudad está completamente destrozada, pero el verdadero problema son sus habitantes.";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "Es una verdadera lastima ver a las víctimas de la destrucción, pero los testigos de la catástrofe están demasiado conmocionados. Ahora simplemente no son normales.";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "La gente está aterrorizada, pero esos son afortunados... porque... muchos otros enloquecieron o algo así...";
+	close;
+}
+
+morocc,223,102,0	script	Volunteer - Morroc#06::MocVolunteer	741,{
+	mes "[Morroc Volunteer]";
+	mes "Ugh.. Es escalofriante aqui.. Incluso este viento seco del desierto parece tener una naturaleza oscura.";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "¡¡Ooh!! Hay algo... ¡Puedo sentir algo! ¡¡El oscuro y sombrío aire que fluye al rededor de esta ciudad me da una motivación musical!!";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "¡Claro, creo que deberias escucharla! Su nombre es.. ¡¡'The Rhapsody of Morroc Satan's Rebirth'!!";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "When finally wake up, it's just the same darkness";
+	mes "Failed to be reborn at the same place,";
+	mes "Gotta try harder and harder, never ever give up,";
+	mes "But even after hundreds and thousands of trying,";
+	mes "The great Satan of Morroc can't revive~";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "My stupid button men are useless,";
+	mes "Against those adventurers,";
+	mes "This time I must revive,";
+	mes "Cracking the time and the space,";
+	mes "Will be saved for the last~~~";
+	next;
+	mes "[Ringing Voice]";
+	mes "¡Silencio! ¡¿No ves lo que está pasando?!";
+	specialeffect EF_HIT2,AREA,"Volunteer - Morroc#06";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "Heyyy, está siendo demasiado cruel, Senyorita. Su puño puede ser tan frágil como usted, pero seguro que puede dañar a alguien.";
+	next;
+	mes "[Ringing Voice]";
+	mes "De todos modos, ¿no es eso un robo? Creo que oí algo como eso antes...";
+	next;
+	mes "[Morroc Volunteer]";
+	mes "¿¡No, de ninguna manera!? ¡Estoy,, seguro que no!";
+	close;
+}
+
+morocc,226,102,4	duplicate(MocVolunteer)	Volunteer - Morroc#07	726
+
+moc_ruins,123,154,0	script	Young Man#moc01	99,{
+	mes "[Young Man]";
+	mes "La ciudad está completamente destruida, pero la estructura triangular gigante no ha sufrido daño alguno. Quizá está protegida por alguna clase de poder especial.";
+	next;
+	mes "[Young Man]";
+	mes "Tu lo sabes... Esos construcciones triangulares gigantes en la esquina Noroeste de Morroc conocidas por nosotros como Pirámides...";
+	next;
+	mes "[Young Man]";
+	mes "Esas cosas han estado por aquí durante miles y miles de años. Nadie sabe cuándo y por qué se construyeron, o quién las construyó.";
+	next;
+	mes "[Young Man]";
+	mes "Todo lo que sabemos es que toneladas de monstruos viven dentro de esos edificios extraños. Querrías mantenerte alejado de esos lugares realmente peligrosos.";
+	next;
+	mes "[Young Man]";
+	mes "Esos mounstruos en la Pirámide son muy, muy sensibles al dulce olor de las personas....";
+	close;
+}
+
+moc_ruins,128,153,0	script	Grampa#moc	61,{
+	mes "[Old Scholar]";
+	mes "He dedicado mi vida a  investigar las misteriosas pirámides cerca de Morroc. No he podido confirmar nada en concreto aún, pero ...";
+	next;
+	mes "[Old Scholar]";
+	mes "Estoy seguro de que la pirámide más grande contiene la tumba del antiguo rey, ¡Osiris! ¡Estoy dispuesto a jugarme la mi vida por eso!";
+	close;
+}
+
+moc_ruins,132,144,0	script	Wolf Young Man#moc	85,{
+	mes "[Young Man]";
+	mes "Recuerdo que dijé que los bandidos del desierto son los lobos del desierto.. Esos bastardos siempre andan en manadas y se vuelven tan crueles y salvajes si uno de ellos es atacado.";
+	next;
+	mes "[Young Man]";
+	mes "Son tan perversas, y te lo digo, no es broma. Sólo puedes encontrar algunos huesos y leche podrida en la mochila luego de que esos lobos pasan.";
+	mes "Esas cosas son tan viles y perversas..";
+	next;
+	mes "[Young Man]";
+	mes "Pero la cosa es.. Incluso creo que esos monstruos sanguinarios sin piedad no son algo que temer, comparado con lo que ha ocurrido en Morroc. Morroc es ya un infierno.";
+	close;
+}
+
+moc_ruins,115,144,3	script	Muka Young Man#moc	83,{
+	mes "[Young Man]";
+	mes "Yo trabajo en el comercio, por lo que siempre tengo que cruzar el caliente y seco desierto de Morroc.";
+	next;
+	mes "[Young Man]";
+	mes "Pero no puedo hacerlo más.";
+	next;
+	mes "[Young Man]";
+	mes "Ahora que no puedo, hecho de menos los viejos tiempos.";
+	next;
+	mes "[Young Man]";
+	mes "Una vez, mientras estaba en medio del desierto, tenía mucha sed, por lo capture un cactus.. pero antes que pudiera cortarlo, ¡me abofeteo! Luego me disparó en el trasero con todas esas espinas...";
+	next;
+	mes "[Young Man]";
+	mes "Más tarde aprendí que no había encontrado un cactus normal, sino un mounstruo llamado 'Muka'.";
+	mes "Ahora que lo pienso bien, fué tan divertido como peligroso.";
+	close;
+}
+
+moc_ruins,109,138,0	script	Diamond Young Man#moc	99,{
+	mes "[Young Man]";
+	mes "La indiscutible reina de las joyas ha de ser el Diamante. Después de verlo sólo una vez, nadie puede negar su belleza.";
+	next;
+	mes "[Young Man]";
+	mes "Muchos factores determinan su valor, pero el más importante es su tamaño.";
+	next;
+	mes "[Young Man]";
+	mes "También debe ser un cristal perfecto, ni quebrado ni astillado, si deseas vender el Diamante por una gran cantidad de zeny.";
+	next;
+	mes "[Young Man]";
+	mes "¡Pero mira! ¡La piedra más dura del mundo se rompe en dos!";
+	next;
+	mes "[Young Man]";
+	mes "Se que no es tiempo de preocuparse por una piedras preciosas pero.. erán... todo para mi..";
+	close;
+}
+
+morocc,54,251,0	script	Young Man#moc02	89,{
+	mes "[Drunken Young Man]";
+	mes "¡Espeta un momento..! ¿Tal vez eres un aventurero? ¡Bienvenido! ¿Cómo estuvó tu viaje?";
+	mes "Heh heh~ Permíteme contarte una historia. Sabías que acabo de salir de esa taberna, ahí, ¿huh?";
+	next;
+	mes "[Drunken Young Man]";
+	mes "Esuché que Satan Morroc ha revivido. Simplemente salió abriendo el tiempo y el espacio blar... hic~";
+	next;
+	mes "[Drunken Young Man]";
+	mes "Ah... Tengo ganas de ver a ese Satan con mis propios ojos, ¡pero! Realmente no debería. No debería ni siquiera soñar con ver a Satan en persona.";
+	next;
+	mes "[Drunken Young Man]";
+	mes "Pero creo que no habría nada que perder si tú, una persona valiente, que vino a través del salvaje desierto trata de encontrarlo, ¿no crees? Jeejee~ ¡No te olvides de comprarme un trago cuando lo encuentres!";
+	mes "¡Hic!";
+	next;
+	mes "[Drunken Young Man]";
+	mes "De todas formas, ¿sabes dónde estamos? Yo sólo estaba tomando un pequeño trago en la taberna, pero de repente, cuando sali todo el pueblo había desaparecido... o, ¡¿¿¿pasaron unos quinientos años???!";
+	close;
+}
+
+moc_ruins,94,117,0	script	Pale Looking Young Man	48,{
+	mes "[Pale-looking Young Man]";
+	mes "... Ese día ... Ví la luna sangrienta en el cielo. Y había un silencio escalofriante.";
+	next;
+	mes "[Pale-looking Young Man]";
+	mes "No había siquiera una brisa de viento, y el aire estaba pesado y denso, apenas podía respirar.";
+	next;
+	mes "[Pale-looking Young Man]";
+	mes "Pero entonces, ¡Bang! Fue justo ahí que vi la enorme masa de humo elevándose del Castillo de Morroc con un sonido ensordecedor.";
+	next;
+	mes "[Pale-looking Young Man]";
+	mes "Todo fué demasiado rápido. El oasis del castillo fué drenado y el pueblo fue destruido. Y... y esa voz... Oí una voz.";
+	next;
+	mes "[Pale-looking Young Man]";
+	mes "Sangre... La sangre es lo que se necesita para pagar por el alma... y ese oscuro sonido de risa...";
+	mes "¡¡¡Aah!!! Aún... ¡¡¡Aún suena en mis oidos!!! ¡¡¡¡Aahhhhh!!!!";
+	next;
+	mes "- Es mejor no molestarlo más -";
+	close;
+}
+
+moc_ruins,115,82,0	script	Little Girl#moc	703,{
+	mes "[Little Girl]";
+	mes "-Llanto-";
+	next;
+	mes "[Little Girl]";
+	mes "¡Estoy tan asustado! ¡Dónde están mamá y papá...! hhooooo... Dónde está nuestra casa...";
+	next;
+	mes "[Little Boy]";
+	mes "Por favor deja de llorar, Eliesse... Podrías desmayarte si lloras todo el día, tu sabes...";
+	next;
+	mes "[Little Girl]";
+	mes "¡No! No... Mami... Papi....";
+	close;
+}
+
+moc_ruins,118,82,1	script	Little Boy#moc	706,{
+	mes "[Little Boy]";
+	mes "............... Vamos deja de llorar, Eliese...";
+	next;
+	mes "[Little Girl]";
+	mes "¡¡Nooooooo... Mami... Papi....!!";
+	next;
+	mes "[Little Boy]";
+	mes "Mamá y Papá están ahora...";
+	next;
+	mes "[Little Girl]";
+	mes "No...... noooooo...";
+	next;
+	mes "[Little Boy]";
+	mes "Entonces, ¿te gusta el helado verdad? Yo... Puedo conseguirte un helado si dejas de llorar. No llores, Eliese, por favor.. ¿Ok? No...";
+	close;
+}
+
+moc_ruins,121,116,4	script	Picky Lady#moc	66,{
+	mes "[Syvia]";
+	mes "Los campos de Rune-Midgard están infestados de mounstruos peligrosos.. ¡Pero, debes admitir que algunos son taaaan lindos!.";
+	mes "Ya sabes, como cuando Spore saca la lengua cuando lo matas..";
+	next;
+	mes "[Syvia]";
+	mes "¿O como los pequeños Picky llevan puesta esa diminuta cáscara de huevo a veces?..";
+	next;
+	mes "[Syvia]";
+	mes "No puedo creer lo que ha ocurrido. Nuestra ciudad solía ser esa con los lindos monstruitos, ¡no con ese terrible Mal durmiendo en ella! Whew...";
+	next;
+	mes "[Syvia]";
+	mes "Tengo tanto miedo... Tán sólo quiero calmarme mirando esos adorables pequeños Porings...";
+	next;
+	switch(select("What about Angeling?:How about Ghostring?:Quit Conversation")) {
+	case 1:
+		mes "[Syvia]";
+		mes "¡Ooh! El Angeling es como un Poring, ¡pero con alas de ángel! Claro que no sé si de hecho pueden volar...";
+		next;
+		mes "[Syvia]";
+		mes "Es raro ver Angelings, pero los puede encontrar en grandes grupos de Porings viviendo en uno de los campos al sur de Prontera.";
+		mes "El Angeling es un monstruo de alto nivel con propiedades Holy, así que es inmune a casi toda la magia. A diferencia  de los hechizos que tienen propiedades Neutral o Shadow.";
+		next;
+		mes "[Syvia]";
+		mes "Jeje~ ¿No crees que sé mucho acerca de los Porings? Los amo taaaaanto...";
+		next;
+		mes "[Syvia]";
+		mes "Jeje... Poring... Jee......";
+		close;
+	case 2:
+		mes "[Syvia]";
+		mes "Ghostring es un Poring fantasma malo. Raramente es visto, pero lo puedes encontrar entre grupos de Porings que viven en uno de los campos al sur de Prontera.";
+		next;
+		mes "[Syvia]";
+		mes "Ghostring es un monstruo de nivel alto de tipo Ghost, así que puede resistir todos los ataques físicos.";
+		mes "Sólo se puede atacar al Ghostring con conjuros mágicos o armas con un elemento específico.";
+		next;
+		mes "[Syvia]";
+		mes "Jeje~ ¿No crees que sé mucho acerca de los Porings? Los amo taaaaanto~";
+		next;
+		mes "[Syvia]";
+		mes "Jeje... Poring... Jeejee......";
+		close;
+	case 3:
+		mes "[Syvia]";
+		mes "Jeje... Poring... Jeejee......";
+		close;
+	}
+}
+
+moc_ruins,155,107,4	script	Ant Man#moc	47,{
+	mes "[Akira]";
+	mes "Hey, tú. ¿Cruzasté el desierto?";
+	next;
+	mes "[Akira]";
+	mes "Cuando camines en el desierto un mapa hacia el Norte y 3 hacia el Este, encontrarás la entrada a Ant Hell.";
+	next;
+	mes "[Akira]";
+	mes "Hay dos entradas distintas a Ant Hell. Cuando entras, el 1er y 2do niveles subterráneos de cavernas están conectados entre sí.";
+	next;
+	mes "[Akira]";
+	mes "Estoy realmente soprendido como esas entradas estan despues de la horrible destruccion , pero no puedo ir. Si alguna vez sabes algo , porfavor avisame";
+	next;
+	switch(select("About 'Ant Hell':About Ants:End Conversation")) {
+	case 1:
+		mes "[Akira]";
+		mes "Esa cueva es seguro peligrosa como el infierno , pegajosa y todo. Hay 2 niveles bajo tierra";
+		mes "Solo ve al este hasta que veas el puente que conecta con payon forest";
+		next;
+		mes "[Akira]";
+		mes "En el mapa anterior a ese puente , ve al norte para encontrar la entrada a Ant Hell, aunque no estoy seguro que todavia este ahi";
+		close;
+	case 2:
+		mes "[Akira]";
+		mes "Ant Hell es un enjambre de monstruos hormigas. Notaras que hay distintas clases y nombres";
+		next;
+		mes "[Akira]";
+		mes "Andre es el más débil, Piere es comparado como normal y Deniro es la hormiga más fuerte. Recuerda que puedes pelear contra las hormigas apropiadas para tu nivel.";
+		next;
+		mes "[Akira]";
+		mes "Andre es color marfil, Piere es de color verde amarillento , y el rojo es Deniro";
+		mes "Es realmente facil distinguirlas de Bitata , ya que las hormigas son muy diferentes";
+		next;
+		mes "[Akira]";
+		mes "Oh, y esas hormigas son avaras como porings e intentaran robar tus items , asique ten eso en mente";
+		next;
+		mes "[Akira]";
+		mes "Si alguna vez puedes atravesar el desierto sin ningún tipo de molestias de Satan...";
+		close;
+	case 3:
+		mes "[Akira]";
+		mes "También hay un anciano llamado Guias, el espíritu de la tierra. Es un tipo muy difícil con el quien lidiar";
+		next;
+		mes "[Akira]";
+		mes "Los afilados dientes y las mandíbulas fuertes de las hormigas son algo de lo cual deberías cuidarte, pero las habilidades con la pala de aquel viejo abuelo son muy fuertes y deberías cuidarte de ellas.";
+		next;
+		mes "[Akira]";
+		mes "...Bueno, ¿de qué estoy hablando? ¿Qué es lo que hay que temer cuando Satan of Morroc reviva? Huh..huhhuh...";
+		close;
+	}
+}
+
+moc_ruins,143,43,4	script	Assassin Boy#moc	118,{
+	mes "[Slayer Kid]";
+	mes "Invencible en peleas de hombre a hombre, los Assassins ¡siempre superan a sus enemigo! Emm, siempre vencen a sus enemigos sin dejar rastro.";
+	next;
+	mes "[Slayer Kid]";
+	mes "¡¡¡Pero que hicieron cuando ocurrió ésta destrucción en Morroc!!!";
+	next;
+	switch(select("?????:Where I can find the Assassin clan?:End Conversation")) {
+	case 1:
+		mes "[Slayer Kid]";
+		mes "Escucho que los Assasins practican matando gente, cautelosa y silenciosamente..";
+		next;
+		mes "[Slayer Kid]";
+		mes "Deje mi hogar hace tres años, y he buscado su base secreta desde entonces..";
+		mes "¡¿Realmente son invisibles?!";
+		next;
+		mes "[Slayer Kid]";
+		mes "Bueno.. tal vez es muy tarde ahora..";
+		mes "Ahora que toda la ciudad está destruida.. ni siquiera me interesa lo que pase después...";
+		close;
+	case 2:
+		mes "[Slayer Kid]";
+		mes "Sabes que ..";
+		mes "Parece ser imposible de encontrar.";
+		next;
+		mes "[Slayer Kid]";
+		mes "Bueno, escuché que si abandonas esta ciudad y te dirijes 2 mapas al Este, y 2 mapas al Sur, deberías ser capaz de encontrarlo..";
+		next;
+		mes "[Slayer Kid]";
+		mes "La 'Mirage Tower,' el edificio principal de Sograt Desert, ¡se supone que aparece en esta asombrosa tormenta de arena! Pero, todavía no lo he encontrado.";
+		next;
+		mes "[Slayer Kid]";
+		mes "Si los encuentras, y el jefe del clan piensa que estás calificado, puedes convertirte en ¡Assasin! Ó, por lo menos, eso creo..";
+		next;
+		mes "[Slayer Kid]";
+		mes "Y se que el Assasin más genial de todos ellos es el ¡Assasin Cross! Pero, eso es incluso un misterio más grande~ No seras capaz de verlos al menos que seas un ¡gran thief!";
+		next;
+		mes "[Slayer Kid]";
+		mes "Pero entonces.. ¡¡¡¿¿Qué demonios estaban haciendo cuando Morroc fué destruida??!!!";
+		close;
+	case 3:
+		mes "[Slayer Kid]";
+		mes "El Assassin es uno de los jobs avanzados del Thief y se especializa en pelear con ataques de propiedad Neutral y  Poison.";
+		next;
+		mes "[Slayer Kid]";
+		mes "¡También son muy furtivos! ¡Se que son capaces de desaparecer para que nadie los pueda ver!";
+		next;
+		mes "[Slayer Kid]";
+		mes "Pero entonces.. ¡¡¡¿¿Qué demonios estaban haciendo cuando Morroc fué destruida??!!!";
+		close;
+	}
+}
+
+moc_ruins,173,141,4	script	Dimitri#moc	49,{
+	mes "[Dimitri]";
+	mes "El desierto de Morroc tiene la mayor temperatura promedio de Midgard. Deberías pensarlo dos veces antes de sentarte sobre la arena en el medio del desierto, porque se te tostará el trasero.";
+	next;
+	switch(select("About the desert sands:About the remedy for Fatigue:End Conversation")) {
+	case 1:
+		mes "[Dimitri]";
+		mes ".....A lo que me refiero es..";
+		mes "Parece como si se te fuera a quemar, ¡pero no!";
+		next;
+		mes "[Dimitri]";
+		mes "Puedes sentarte y descansar cuando lo necesites y tu trasero no se quemará. Supongo que la arena de morroc no conduce el calor tanto como debería.";
+		next;
+		mes "[Dimitri]";
+		mes "Es por eso que todos pueden recuperar HP y SP en el medio del desierto.";
+		next;
+		mes "[Dimitri]";
+		mes "Ahora que lo pienso, tal vez la razón por la cual Morroc tiene una temperatura excepcionalmente alta es porque Satan está sellado ahí.";
+		close;
+	case 2:
+		mes "[Dimitri]";
+		mes "¡Recuperación!";
+		mes "¡Para eso son las pociones!";
+		mes "Las Red Potions se han hecho muy populares ya que son muy accesibles, aunque sólo recuperan un poquito de HP.";
+		next;
+		mes "[Dimitri]";
+		mes "Prueba esta poción de ice-cold cuando vayas al oasis alrededor de Pyramid...";
+		mes "Yeah.. necesitas mucho esto, pero la situación no es buena..";
+		close;
+	case 3:
+		mes "[Dimitri]";
+		mes "A veces la \"Milk\" sale de los \"PecoPeco's Egg.\" Ahora..";
+		mes "no estoy seguro de como la leche de vaca sale de un huevo de ave..";
+		next;
+		mes "[Dimitri]";
+		mes "Tal vez no sea un hombre de ciencia, pero ¿cómo es eso posible?";
+		mes "Osea, la leche viene preempaquetada con el huevo, ¿ó termino ahí dentro de algun modo?..";
+		mes "Oh, lo que sea.. No es el momento para esto.";
+		close;
+	}
+}
+
+moc_ruins,174,120,4	script	Fly Man#moc	54,{
+	mes "[Armani]";
+	mes "Ooh, Woooowwww.";
+	next;
+	mes "[Armani]";
+	mes "Yo.. realmente lo ví.. The Fly Lord se rompió en pedazos en un abrir y cerrar de ojos..";
+	next;
+	mes "[Armani]";
+	mes "¿Qué es lo que está pasando realmente? ¿Sería posible que sobrevivamos?";
+	next;
+	switch(select("The Fly Lord?!")) {
+	case 1:
+		mes "[Armani]";
+		mes "¡Si, si! Estoy hablando acerca del Dragon Fly, ¡¡el maestro de las moscas!!";
+		mes "El Dragon Fly es uno especial se encuentra en el Noreste de la ciudad.";
+		next;
+		mes "[Armani]";
+		mes "Es mucho más poderoso que las otras moscas.";
+		next;
+		mes "[Armani]";
+		mes "Y cuando lo matas, incluso tienes una oportunidad de obtener un ^880000Clip^000000.";
+		next;
+		mes "[Armani]";
+		mes "De todas maneras, ¿no crees que Satan Morroc es muy cruel?";
+		mes "Puede que no sea lo mismo, pero ¿No es cruel tomar el alma del monstruo de un sólo golpe?";
+		next;
+		mes "[Armani]";
+		mes "¡Qué haremos cuando este terrible mal vuelva de nuevo a la vida!";
+		close;
+	}
+}
+
+moc_ruins,173,70,4	script	Uncle Morroc#moc	48,{
+	mes "[Phlanette]";
+	mes "Morroc está localizada en una zona extremadamente seca, rodeada por desierto.";
+	mes "Ningún lugar en el mundo es tan caliente como Morroc.";
+	next;
+	mes "[Phlanette]";
+	mes "Tengo una corazonada que este calor y este seco clima en Morroc se deben a que Satan está sellado en lo profundo de la tierra.";
+	next;
+	switch(select("Tell me about the desert.:Quit Conversation")) {
+	case 1:
+		mes "[Phlanette]";
+		mes "Um.. Si deseas saber te explicaé brevemente sobre el desierto.";
+		mes "Debido a la baja precipitación anual, la baja humedad y la alta tasa de evaporación, poca vegetación se puede encontrar en el desierto.";
+		next;
+		mes "[Phlanette]";
+		mes "No obstante, hay algunas plantas que pueden sobrevivir y crecer en el desierto.";
+		next;
+		mes "[Phlanette]";
+		mes "Desafortunadamente alguna de esas plantas que crecen alrededor de Morroc han estado mutado en monstruos.";
+		mes "Uno de esos es Muka, el cactus mutado..";
+		next;
+		mes "[Phlanette]";
+		mes "Sin embargo, ahora que el Satan ha revivido, nadie está seguro que cambios podrían producirse en el ciclo de vida de Morroc.";
+		close;
+	case 2:
+		mes "[Phlanette]";
+		mes "¡Aquí y allá!";
+		mes "Arena por todas partes...";
+		mes "Oh, te maldigo, ¡¡desierto de Morroc!!";
+		mes "¡Maldito!";
+		next;
+		mes "[Phlanette]";
+		mes "Pero con todo este odio, no deseo que sea destruido por completo...";
+		next;
+		mes "[Phlanette]";
+		mes "¿Cómo es que nunca es posible saber el valor mientras todavía se encuentra por aquí?";
+		close;
+	}
+}
+
+moc_fild16,199,212,4	script	 Uncle Assassin#moc	55,{
+	mes "[Hashisid]";
+	mes "...Los Assasins están entrenados";
+	mes "para aproximarse a sus enemigos silenciosamente,";
+	mes " así como";
+	mes "saber sus intenciones.";
+	mes "Para este propósito,";
+	mes "nosotros nunca";
+	mes "miramos a nuestro objetivo a los ojos.";
+	next;
+	switch(select("Notion of Assassin:Quit Conversation")) {
+	case 1:
+		mes "[Hashisid]";
+		mes "Bueno, entonces..";
+		mes "¡Te diré que es!";
+		mes "Assassins ..";
+		mes "Son comunmente conocidos como";
+		mes "espías y asesinos";
+		mes "que matan sin remordimiento";
+		next;
+		mes "[Hashisid]";
+		mes "En la actualidad,";
+		mes "el Assassin Clan";
+		mes "tiene prohibido lastimar gente inocente,";
+		mes "o por lo menos";
+		mes "no sin una buena razón";
+		next;
+		mes "[Hashisid]";
+		mes "Nuestra verdadera misión es matar criaturas malvadas,";
+		mes "y usar nuestro sigilo para reunir inteligencia";
+		mes "por el bien de todo Rune-Midgard.";
+		close;
+	case 2:
+		mes "[Hashisid]";
+		mes "Érase una vez,";
+		mes "nuestros antepasados";
+		mes "fumaban una especie de tabaco llamado \"Hashish\"";
+		mes "antes de cumplir con sus deberes.";
+		mes "Sin embargo, ya no hacemos eso,";
+		mes "ya que los insectos o los monstruos son";
+		mes "muy sensibles al olor.";
+		next;
+		mes "[Hashisid]";
+		mes "Prohibimos estrictamente";
+		mes "fumar o comer";
+		mes "cualquier cosa con";
+		mes "olor fuerte...";
+		mes "Si alguna vez,";
+		mes "intentas comer esos";
+		mes "panes de ajo malolientes con especies,";
+		next;
+		mes "[Hashisid]";
+		mes "e intentas esconderte contra";
+		mes "esos javalíes salvajes o lobos,";
+		mes "creeme,";
+		mes "serás despedazado.";
+		close;
+	}
+}
+
+moc_fild16,211,254,4	script	Assassin#07rhea_30	118,{
+	mes "[La Conte]";
+	mes "Una vez que los Thiefs son promovidos";
+	mes "a Assasins, lo cual es muy profesional";
+	mes "serán capaces de variar";
+	mes "su estilo de pelea.";
+	mes "Hay 2 estilos de batalla principales disponibles para Assassins.";
+	mes "¡Podrán usarse dagas dobles";
+	mes "ó podrán pelear con un set de Katares!";
+	next;
+	switch(select("Specialty of Katar:Specialty of Dual Daggers:Quit Conversation")) {
+	case 1:
+		mes "[La Conte]";
+		mes "Un set de Katares es";
+		mes "usado en ambas manos,";
+		mes "y permite a los Assassins";
+		mes "atacar rápidamente a sus enemigos.";
+		mes "Cualquiera puede comprar un set básico de Katares";
+		mes "en algun lugar de Morroc.";
+		mes "Claro que, sólo los Assassins pueden usarlos.";
+		next;
+		mes "[La Conte]";
+		mes "La Katar derecha";
+		mes "usualmente hace más daño,";
+		mes "mientras que la Katar izquierda";
+		mes "se usa para seguir con el otro ataque.";
+		mes "Pero como las Katares están equipadas en ambas manos,";
+		mes "no puedes equiparte un escudo o un arma extra.";
+		next;
+		mes "[La Conte]";
+		mes "Comparado con las Dagas Dobles,";
+		mes "las Katares tiene una velocidad de ataque mayor.";
+		mes "También, la skill ^663399Sonic Blow^000000";
+		mes "sólo puede ser usada con Katares.";
+		next;
+		mes "[La Conte]";
+		mes "Puedes aprender la skill Sonic Blow";
+		mes "en ^663399Nivel 4 de Katar Mastery^000000.";
+		mes "Si eres Assassin,";
+		mes "es útil conocer esta habilidad.";
+		next;
+		mes "[La Conte]";
+		mes "Sonic Blow es la skill";
+		mes "que inflinge 8 golpes continuos de";
+		mes "daño Neutral.";
+		close;
+	case 2:
+		mes "[La Conte]";
+		mes "Las Dagas Dobles";
+		mes "te permiten equipar";
+		mes "2 tipos diferentes de Dagas";
+		mes "al mismo tiempo.";
+		mes "Por supuesto,";
+		mes "que hay otras armas que puedes equipar";
+		mes "aparte de las dagas,";
+		next;
+		mes "[La Conte]";
+		mes "pero ellas probablemente";
+		mes "disminuirán tu velocidad de ataque.";
+		mes "Por eso sugiero las dagas.";
+		mes "También, sin una daga";
+		mes "en tu mano derecha,";
+		mes " no serás capaz de usar";
+		mes "la skill ^663399Double Attack^000000.";
+		next;
+		mes "[La Conte]";
+		mes "Asi que con las Dagas Dobles,";
+		mes "tendrías un ataque doble";
+		mes "con la daga derecha,";
+		mes " y un ataque simple con tu mano izquierda.";
+		next;
+		mes "[La Conte]";
+		mes "¡Esos son los tres golpes";
+		mes "en un solo ataque!";
+		mes "¡No te puedes quejar";
+		mes "en contra de ese tipo de daño!";
+		close;
+	case 3:
+		mes "[La Conte]";
+		mes "Ojalá que";
+		mes "hagas buen uso de";
+		mes "las armas a tu disposición.";
+		mes "Recuerda";
+		mes "la importancia de";
+		mes "la estrategia y";
+		mes "la planeación tus ataques.";
+		close;
+	}
+}
+
+// Other NPCs
+//============================================================
+//Bartender
+/*
+morocc_in,166,76,3	script	Bartender#02	46,{
+	mes "[Bartender]";
+	mes "¿Qué vas a pedir?";
+	next;
+	switch(select("Tropical Sograt:Vemillion the Beach:Nothing.")) {
+	case 1:
+		if (zeny >= 1000 ) {
+			set zeny,zeny-1000;
+			getitem 12112,1;
+			mes "[Bartender]";
+			mes "Aquí tienes.";
+			mes "Las frutas son el ingrediente principal,";
+			mes "pero no bebas mucho.";
+			close;
+		}
+		break;
+	case 2:
+		if (zeny >= 1000 ) {
+			set zeny,zeny-1000;
+			getitem 12113,1;
+			mes "[Bartender]";
+			mes "Aquí tienes.";
+			mes "pero no bebas mucho.";
+			close;
+		}
+		break;
+	case 3:
+		mes "[Bartender]";
+		mes "Hmm... ";
+		close;
+	}
+	mes "[Bartender]";
+	mes "¿Me estás pidiendo que te lo dé gratis?";
+	mes "Estás loco.";
+	mes "Ni se te ocurra beber si no tienes 1,000 zeny.";
+	close;
+}
+*/
+
+// Assassin Guild Guards
+//===================================================
+moc_fild16,195,281,4	script	Assassin Guardian#1::SinGuard	707,{
+	mes "[Assassin Guardian]";
+	if(BaseJob == Job_Assassin) {
+		mes "Bienvenido.";
+		close;
+	}
+	set .@temp, rand(1,4);
+	if(.@temp == 1) mes "........";
+	if(.@temp == 2) mes "Hmmm.......... ";
+	if(.@temp == 3) mes "Hmmm... no deberías estár aquí.....";
+	if(.@temp == 4) mes "Estás entrando a tierras prohibidas.......";
+	close;
+}
+
+moc_fild16,204,281,4	duplicate(SinGuard)	Assassin Guardian#2	707
+moc_fild16,207,281,4	duplicate(SinGuard)	Assassin Guardian#3	707
+moc_fild16,216,281,4	duplicate(SinGuard)	Assassin Guardian#4	707
+moc_fild16,200,231,4	duplicate(SinGuard)	Assassin Guardian#5	707
+moc_fild16,211,231,4	duplicate(SinGuard)	Assassin Guardian#6	707
+moc_fild16,200,257,4	duplicate(SinGuard)	Assassin Guardian#7	707
+moc_fild16,211,257,4	duplicate(SinGuard)	Assassin Guardian#8	707
+

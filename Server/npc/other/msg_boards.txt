@@ -1,0 +1,288 @@
+//===== eAthena Script ======================================= 
+//= Misc. Message Boards
+//===== By: ================================================== 
+//= kobra_k88
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.6
+//===== Compatible With: ===================================== 
+//= [Aegis Conversion]
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= Misc. Message Boards for:
+//=  - Prontera
+//=  - Morroc
+//-  - Geffen
+//=  - Al De Baran
+//=  - Izlude
+//=  - Alberta
+//===== Additional Comments: ================================= 
+//= Rearranged [Lupus]
+//= Fixed spelling mistakes. [Nexon]
+//= 1.3 Removed Duplicates [Silent]
+//= 1.4 Rescripted to Aegis 10.3 standard. [L0ne_W0lf]
+//= 1.5 Removed a duplicate related to the Sign Quest. [SinSloth]
+//= 1.5 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 1.6 COmmented out conflicting npcs. (bugreport:4093) [L0ne_W0lf]
+//============================================================
+
+// Prontera
+//============================================================
+prontera,158,213,1	script	Sign Post#Prt1	111,{
+	mes "^993300- El Letrero Dice-^000000";
+	mes "Norte a Prontera Castle";
+	mes "Norte a Al De Baran";
+	mes "Noroeste a Geffen";
+	mes "Este a Prontera Fields";
+	mes "Sur a Prontera Fields";
+	mes "Sureste a Alberta";
+	mes "Suroeste a Morroc";
+	mes "Suroeste a Comodo";
+	mes "Oeste a Prontera Fields";
+	close;
+}
+
+//prontera,156,197,1	script	Prontera Bulletin#Prt2	111,{
+//	mes "^993300- El Boletín De Prontera Dice -^000000";
+//	mes "Se Busca: Dos Clip Accessories";
+//	mes "Por favor contactar...";
+//	mes "- El nombre parece estar borroso -";
+//	mes "Se vende: Bastard Sword usada";
+//	mes "¡Tomaré cualquier oferta!";
+//	mes "Contactar a Abramulious";
+//	mes "Se busca ayuda: ¿Compra o venta de un Peco Peco usado?";
+//	mes "¡Contactar a Grasisium en Morroc ahora!";
+//	close;
+//}
+
+prontera,278,212,1	script	Sign#Prt3	111,{
+	mes "^993300- El Letrero Dice -^000000";
+	mes "Por favor ayude a mantener Prontera limpio.";
+	close;
+}
+/*
+prontera,150,326,1	script	Sign#Prt4	111,{
+	mes "^993300- The Sign Reads -^000000";
+	mes "Citizens of Prontera are Welcomed in the Prontera Castle.";
+	close;
+}
+*/
+prontera,31,212,1	script	Billboard#Prt5	111,{
+	mes "^993300- La Cartelera Dice -^000000";
+	mes "~SE BUSCA~";
+	mes "S_F";
+	mes "VIVO o MUERTO";
+	mes "*KS en Glast Heim*";
+	mes "~RECOMPENZA~";
+	mes "50,000 Zeny  ";
+	mes "Contactar a Atlas";
+	close;
+}
+
+prontera,165,305,1	script	Billboard#Prt6	111,{
+	mes "^993300- La Cartelera Dice -^000000";
+	mes "Deseamos que disfrutes tu estancia en Prontera.";
+	close;
+}
+
+prontera,145,304,1	script	Sign#Prt7	111,{
+	mes "^993300- El Letrero Dice -^000000";
+	mes "Nota:";
+	mes "Perdí mi carro en Mt. Mjolnir, si alguien lo encuentra por favor avisarme, ¡mi vida estaba en ese monton de bienes!";
+	close;
+}
+
+// Morroc
+//============================================================
+morocc,144,84,1	script	Sign#Moc1	111,{
+	mes "^993300- El Letrero Dice -^000000";
+	mes "Se Busca: Guardaespaldas para proteger mi tienda de ladrones";
+	mes "Por favor contactar a Butcher";
+	close;
+}
+
+morocc,145,83,1	script	Sign#Moc2	111,{
+	mes "^993300- El Letrero Dice -^000000";
+	mes "¡Se Vende, Peco Peco bien cuidado!";
+	mes "Este hermoso espécimen ha sido montado por mí, viene con montura, un arnés y...";
+	close;
+}
+
+morocc,32,174,1	script	Bulletin#Moc3	111,{
+	mes "^993300- El Letrero Dice -^000000";
+	mes "^0099FF¡Mujeres de Morroc indignadas!^000000";
+	mes "Un estudio reciente demostró que la mayoría de los ciudadanos varones en";
+	mes "Morroc prefieren a las mujeres de Geffen. 90 de 100 ciudadanos varones";
+	mes "de Morroc confiezan haber tenido numerosas relaciones";
+	mes "con las mujeres de Geffen fuera de las Regiones de Morroc.";
+	next;
+	mes "^993300- El Boletín Continúa -^000000";
+	mes "'Yo sólo prefiero su compañía, eso es todo...' dice un hombre de Morroc.";
+	mes "'No es que esté en contra de las mujeres de Morroc ni nada, entonces cuál es el problema...'";
+	mes "Además de los asuntos emocionales y de estrés de las actividades";
+	mes "diarias de estos hombres.";
+	mes "Cazar aún parese ser la prioridad número uno";
+	mes "que encontrar una mujer decente en la región....";
+	close;
+}
+
+morocc,168,266,1	script	Sign#Moc5	111,{
+	mes "^993300- El Letrero Dice -^000000";
+	mes "Bienvenido a Morroc.";
+	close;
+}
+
+morocc,168,264,1	script	Billboard#Moc6	111,{
+	mes "^993300- La Caretelera Dice -^000000";
+	mes "^CC0033¡Batalla Real!^000000";
+	mes "¿Tienes todo lo necesario para enfrentar a alguien en una batalla que no tiene restricción alguna?, ¡Jugador vs Jugador! ¡game of death!";
+	mes "¡Vé a Prontera si piensas que tienes lo necesario¡";
+	close;
+}
+
+morocc,298,211,1	script	Sign#Moc7	111,{
+	mes "^993300- El Letrero Dice -^000000";
+	mes "Bienvenido a Morroc.";
+	close;
+}
+
+// Geffen
+//============================================================
+geffen,116,58,1	script	Geffen Bulletin#Gef1	111,{
+	mes "^993300- El boletín de Geffen dice -^000000";
+	mes "Recuerden Wizard's... No es cuantas habilidades conozcas, ¡Es la magia lo que cuenta!";
+	close;
+}
+/*
+geffen,61,174,1	script	Sign#Gef2	111,{
+	mes "^993300- The Sign Reads -^000000";
+	mes "- Seems to be written in a language unfamiliar to you -";
+	close;
+}
+*/
+geffen,113,104,1	script	Billboard#Gef3	111,{
+	mes "^993300- La Cartelera dice -^000000";
+	mes "Se vende: ¡Chon Chon Doll Nuevos!";
+	mes "¡Qué gran regalo para darselo a un ser querido, contactame ahora mismo!";
+	mes "- Parece que el nombre se mancho -";
+	mes " ";
+	mes "Compro: ¡Manteau!";
+	mes "Me estoy congelando y no tengo zeny, ¡por favor, ayúdame!";
+	mes "Contacte a Edionyus";
+	close;
+}
+
+geffen,119,190,1	script	Sign Post#Gef4	111,{
+	mes "^993300- El Letrero del Correo dice -^000000";
+	mes "Norte a Geffe Fields";
+	mes "Noreste a Al de Baran";
+	mes "Noroeste va a Glast Heim";
+	mes "Este a Geffe Fields";
+	mes "Sur a Morroc";
+	mes "Sureste a Prontera";
+	mes "Sureste a Alberta";
+	mes "Suroeste a Comodo";
+	mes "Oeste a Geffen Fields";
+	close;
+}
+
+geffen,168,175,1	script	Sign#Gef5	111,{
+	mes "^993300- El Letrero dice -^000000";
+	mes "''Siempre eres bienvenido en Geffen''";
+	close;
+}
+
+geffen,183,61,1	script	Sign#Gef6	111,{
+	mes "^993300- El Letrero dice -^000000";
+	mes "Bienvenido.";
+	close;
+}
+
+// Al De Baran
+//============================================================
+aldebaran,181,172,1	script	Billboard#Alde1	111,{
+	mes "^993300- El Cartel dice -^000000";
+	mes "Se Busca:";
+	mes "He perdido a mi Pet Bongun, no fue mi culpa, sólo huyó";
+	mes "Si lo ves, por favor avísenme. ¡Recompensaré a quien lo encuentre!";
+	close;
+}
+
+aldebaran,133,104,1	script	Al De Baran Bulletin#Al2	111,{
+	mes "^993300- El Boletín de Al De Baran dice -^000000";
+	mes "''Disfrute de su estancia en Al De Baran''";
+	close;
+}
+
+aldebaran,54,223,1	script	Billboard#Alde3	111,{
+	mes "^993300- El Cartel dice -^000000";
+	mes "Se busca ayuda:";
+	mes "¡Buscamos de jóvenes, fuertes y atléticos que estén";
+	mes "interesado en una carrera de tiempo completo como Blacksmith. ¡Si estás interesado, por favor contacta a Altiregen";
+	mes "en Geffen!";
+	close;
+}
+
+aldebaran,197,228,1	script	#Alde4	-1,1,1,{
+OnTouch:
+	mes "[Home Owner]";
+	mes "¡Baja de mi techo zaguijuela!";
+	close;
+}
+
+aldebaran,217,222,1	script	Sign#Alde5	111,{
+	mes "^993300- El Letrero dice -^000000";
+	mes "¡Ví a Santa Claus en Lutie!";
+	mes "- El resto se ve como garabatos -";
+	close;
+}
+
+// Izlude
+//============================================================
+izlude,54,139,1	script	Sign#Iz1	111,{
+	mes "^993300- El Letrero dice -^000000";
+	mes "Bienvenido a la Academia de Swordsman.";
+	close;
+}
+
+izlude,144,148,1	script	Sign#Iz2	111,{
+	mes "^993300- El Letrero dice -^000000";
+	mes "Bienvenido.";
+	close;
+}
+
+// Alberta
+//============================================================
+alberta,35,241,1	script	Billboard#Alb1	111,{
+	mes "^993300- El Cartel dice -^000000";
+	mes "Bienvenidos a Alberta, el paraíso de los Merchants.";
+	close;
+}
+
+alberta,37,39,1	script	Billboard#Alb2	111,{
+	mes "^993300- El Cartel dice -^000000";
+	mes "Bienvenido.";
+	close;
+}
+
+alberta,99,151,1	script	Sign#Alb3	111,{
+	mes "^993300- El Letrero dice -^000000";
+	mes "¡Herramientas para el Carro lleno!";
+	mes "¿Necesitas herramientas? ¡Nosotros las tenemos!";
+	mes "¡Entra, nunca cerramos!";
+	close;
+}
+
+alberta,196,152,1	script	Sign#Alb4	111,{
+	mes "^993300- El Letrero dice -^000000";
+	mes "Los tiempos de embarque y Envío están saturados. Para más información en lo que concierne a";
+	mes "Envío y Recepción, por favor..";
+	mes "- No puedes entender el resto -";
+	close;
+}
+
+alberta,149,54,1	script	Sign#Alb5	111,{
+	mes "^993300- El Letrero dice -^000000";
+	mes "Bienvenido.";
+	close;
+}

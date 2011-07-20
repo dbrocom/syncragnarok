@@ -1,0 +1,87 @@
+//===== eAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,42,3	script	Champion#Valkyrie	52,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Champion]";
+			mes "Felicidades.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		mes "[Champion]";
+		mes "Habilidad.";
+		mes "Velocidad.";
+		mes "Fuerza.";
+		mes "Agilidad.";
+		next;
+		mes "[Champion]";
+		mes "Un Champion puede";
+		mes "beneficiarse de todas";
+		mes "esas cosas. Pero uno";
+		mes "puede llegar a dominar";
+		mes "mucho más en la vida....";
+		close;
+	}
+	else if (ADVJOB == Job_Champion && Class == Job_Acolyte_High && JobLevel > 39) {
+		mes "[Champion]";
+		mes "Es hora.";
+		mes "¡Hora de que los grandes héroes";
+		mes "se pongan de pie contra de";
+		mes "las fuerzas del mal que plagan";
+		mes "el mundo de Rune-Midgar!";
+		next;
+		mes "[Champion]";
+		mes "¿Te gustaría";
+		mes "ser un Champion?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[Champion]";
+			mes "Cuando estés listo,";
+			mes "siéntete libre de regresar.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Champion]";
+			mes "Aún puedes aprender más skills. Por favor usa";
+			mes "todos tus \"Skill Point\" antes de volver conmigo.";
+			close;
+		}
+		jobchange Job_Champion;
+		set ADVJOB,0;
+		mes "[Champion]";
+		mes "¡Felicidades!";
+		mes "Vive como un Champion,";
+		mes "y bríndale luz a";
+		mes "este mundo a través de la";
+		mes "fuerza de tus puños.";
+		close;
+	}
+	mes "[Champion]";
+	mes "Bienvenido";
+	mes "al Valhalla,";
+	mes "a la Sala del Honor.";
+	next;
+	mes "[Champion]";
+	mes "Por favor, que";
+	mes "tu estancia aquí";
+	mes "sea confortable.";
+	mes "¡Gloria a los guerreros!";
+	close;
+}

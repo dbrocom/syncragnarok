@@ -1,0 +1,84 @@
+//===== eAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,44,39,5	script	Lord Knight#Valkyrie	56,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Lord Knight]";
+			mes "Felicidades.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		mes "[Lord Knight]";
+		mes "Nosotros, los Knight,";
+		mes "tenemos la grandiosa responsabilidad...";
+		mes "de servir y proteger.";
+		next;
+		mes "[Lord Knight]";
+		mes "Aunque nos cueste";
+		mes "nuestras vidas,";
+		mes "debemos salvaguardar";
+		mes "la vida de nuestros camaradas.";
+		close;
+	}
+	else if (ADVJOB == Job_Lord_Knight && Class == Job_Swordman_High && JobLevel > 39) {
+		mes "[Lord Knight]";
+		mes "¡Tu momento ha llegado!";
+		mes "El mundo te necesita.";
+		mes "Por favor, continua tu vida";
+		mes "como héroe, con una nueva apariencia";
+		next;
+		mes "[Lord Knight]";
+		mes "¿Quieres convertirte ";
+		mes "en Lord Knight?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[Lord Knight]";
+			mes "Cuando estés preparado,";
+			mes "podrás volver.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Lord Knight]";
+			mes "Aún te es posible aprender skills. Por favor";
+			mes "usa todos tus Skill Points restantes antes de volver conmigo.";
+			close;
+		}
+		jobchange Job_Lord_Knight;
+		set ADVJOB,0;
+		mes "[Lord Knight]";
+		mes "¡Felicidades!";
+		mes "¡Como Lord Knight,";
+		mes "espero que estés";
+		mes "en la primera línea de batalla";
+		mes "y lleves a tus aliados a la victoria!";
+		close;
+	}
+	mes "[Lord Knight]";
+	mes "Bienvenido";
+	mes "al Valhalla,";
+	mes "el Salón del Honor.";
+	next;
+	mes "[Lord Knight]";
+	mes "Por favor,";
+	mes "que tu estancia aquí";
+	mes "sea cómoda.";
+	mes "¡Gloria a los guerreros!";
+	close;
+}

@@ -1,0 +1,51 @@
+^000088Canciones SetList^000000
+ === Rock & Pop  1/3 ===
+
+[01]  Warlock - All We Are 
+[02]  Twisted Sister - We're not gonna take it 
+[03]  The Beatles - Love Me Do 
+[04]  The Beatles - Strawberry Fields Forever 
+[05]  Stravaganzza - Hijo de la Luna 
+[06]  SR-71 - Goodbye 
+[07]  SR-71 - Right Now 
+[08]  Dover - Devil Came to Me
+[09]  Rush - The Spirit of Radio 
+[10]  Rolling Stones - Paint it Black 
+[11]  Queen - Another One Bites The Dust 
+[12]  TMN - Get Wild 
+[13]  Poets of the Fall - Lift 
+[14]  Offspring - The Kids Aren't Alright 
+[15]  Nancy Ajram - Ya Salam
+
+^000088Canciones SetList^000000
+ === Rock & Pop  2/3 ===
+
+[16]  Nirvana - Smells Like Teen Spirit
+[17]  Manu Chao - Me gustas Tú
+[18]  La Oreja de Van Gogh - El 28
+[19]  El Canto del Loco - Puede ser
+[20]  Hot Butter - Popcorn
+[21]  Gorillaz - Clint Eastwood
+[22]  Gorillaz - 19-2000
+[23]  Dikers - Las Noches que me inventé
+[24]  YES - Close to the Edge
+[25]  Black Sabbath - Paranoid
+[26]  Bad Religion - Epiphany
+[27]  ACDC - Stiff upper Lip
+[28]  ACDC - Back in Black
+[29]  Sonata Arctica - False News Travel Fast 
+[30]  Sonata Arctica - UnOpened
+
+^000088Canciones SetList^000000
+ === Rock & Pop  3/3 ===
+ 
+[31]  Blind Guardian - Ashes to Ashes
+[32]  Gamma Ray - Heaven or Hell
+[33]  Helloween - If I could Fly
+[34]  Helloween - Escalation 666
+[35]  Edguy - Tears of Mandrake
+[36]  System of a Down - Chop Suey!
+[37]  Van Halen - You Really Got Me Now 
+[38]  Moby - That's When I Reach for my Revolver
+[39]  Hammerfall - Trailblazers
+[40]  Green Day - Boulevard of Broken Dreams

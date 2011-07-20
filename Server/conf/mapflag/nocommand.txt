@@ -1,0 +1,56 @@
+//===== eAthena Script =======================================
+//= NoCommand
+//===== By: ==================================================
+//= eAthena Dev Team
+//===== Current Version: =====================================
+//= 1.0
+//===== Description: =========================================
+//= Can't use any command
+//===== Additional Comments: =================================
+//=
+//============================================================
+
+// Guild Castles ==========
+aldeg_cas01	mapflag	nocommand	40
+aldeg_cas02	mapflag	nocommand	40
+aldeg_cas03	mapflag	nocommand	40
+aldeg_cas04	mapflag	nocommand	40
+aldeg_cas05	mapflag	nocommand	40
+gefg_cas01	mapflag	nocommand	40
+gefg_cas02	mapflag	nocommand	40
+gefg_cas03	mapflag	nocommand	40
+gefg_cas04	mapflag	nocommand	40
+gefg_cas05	mapflag	nocommand	40
+payg_cas01	mapflag	nocommand	40
+payg_cas02	mapflag	nocommand	40
+payg_cas03	mapflag	nocommand	40
+payg_cas04	mapflag	nocommand	40
+payg_cas05	mapflag	nocommand	40
+prtg_cas01	mapflag	nocommand	40
+prtg_cas02	mapflag	nocommand	40
+prtg_cas03	mapflag	nocommand	40
+prtg_cas04	mapflag	nocommand	40
+prtg_cas05	mapflag	nocommand	40
+schg_cas01	mapflag	nocommand	40
+schg_cas02	mapflag	nocommand	40
+schg_cas03	mapflag	nocommand	40
+schg_cas04	mapflag	nocommand	40
+schg_cas05	mapflag	nocommand	40
+arug_cas01	mapflag	nocommand	40
+arug_cas02	mapflag	nocommand	40
+arug_cas03	mapflag	nocommand	40
+arug_cas04	mapflag	nocommand	40
+arug_cas05	mapflag	nocommand	40
+
+//Endless Tower ==================
+//e_tower	mapflag	nocommand	40
+1@tower	mapflag	nocommand	40
+2@tower	mapflag	nocommand	40
+3@tower	mapflag	nocommand	40
+4@tower	mapflag	nocommand	40
+5@tower	mapflag	nocommand	40
+6@tower	mapflag	nocommand	40
+
+
+ini_zero	mapflag	nocommand	40
+valhalla	mapflag	nocommand	40

@@ -1,0 +1,1400 @@
+//===== eAthena Script ======================================= 
+//= Dancer Job Quest
+//===== By: ==================================================
+//= Kalen - Original jAthena
+//= Fredzilla - Converted, Lupus
+//===== Current Version: ===================================== 
+//= 3.7
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Job quest for Dancer classes
+//===== Additional Comments: ================================= 
+//= 3.2 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//=	No longer uses function "F_BlockHigh"
+//= 3.2a Deleted unused variables. [Samuray22]
+//= 3.3 Updated waiting room. (Removes global var) [L0ne_W0lf]
+//= 3.4 Fixed bad variables, bugreport:1685 [Brainstorm]
+//= 3.5 Minor corrections to script. (bugreport:1766) [L0ne_W0lf]
+//= 3.6 Applied Correction bug with for loop. [L0ne_W0lf]
+//= 3.6a Fixed a little Exploit to bug the quest with a timeout. (bugreport:2252) [Samuray22]
+//= 3.7 Added Quest Log commands. [Kisuka]
+//============================================================
+
+comodo,180,153,4	script	Sonotora#1	90,{
+	mes "[Athena Sonotora]";
+	mes "Dicen que";
+	mes "la famosa escuela de baile";
+	mes "se encuentra aquí en Comodo y va a";
+	mes "abrir pronto.";
+	next;
+	mes "[Athena Sonotora]";
+	mes "Aah...";
+	mes "¡Me gustaría ser una prima donna";
+	mes "y ser el centro de atención!";
+	next;
+	mes "[Athena Sonotora]";
+	mes "Quisiera inscribirme también,";
+	mes "pero los requerimientos son";
+	mes "demasiado específicos. Me pregunto si";
+	mes "debería intentar de todas maneras...";
+	close;
+}
+
+comodo,193,151,4	script	Bor Robin#1	86,{
+	mes "[Bor Robin]";
+	mes "Aah....";
+	mes "¡Una prima donna";
+	mes "en el centro del escenario!";
+	mes "¡Seré capaz de verla convertirse en Dancers justo frente a mis ojos...!";
+	next;
+	mes "[Bor Robin]";
+	mes "¡Es genial ser";
+	mes "un hombre hoy en día! ¡Hurra por el Comodo Theater!";
+	next;
+	mes "[Bor Robin]";
+	mes "¿Mm?";
+	mes "¿Quieres";
+	mes "ir, también?";
+	mes "Es una buena oportunidad para observar el examen para convertirse en Dancer.";
+	next;
+	if (select("Go to the Job Change Area:Cancel") == 1) {
+		mes "[Bor Robin]";
+		mes "Yaay~~";
+		mes "¡Vamos!";
+		close2;
+		warp "job_duncer",70,49;
+		end;
+	}
+	mes "[Bor Robin]";
+	mes "Huh...";
+	mes "Bueno, yo no puedo";
+	mes "ayudarte si no";
+	mes "quieres acompañarme.";
+	close;
+}
+
+job_duncer,43,93,4	script	Aile#da	724,{
+	if (Upper == 1) {
+		mes "[Aile]";
+		mes "Uno dos tres cuatro,";
+		mes "Dos dos tres cuatro,";
+		mes "tres cuatro, tres cuatro,";
+		mes "uno dos tres cuatro.";
+		mes "¿Um?";
+		next;
+		mes "[Aile]";
+		mes "Lo siento, pero estás interrumpiendo mi práctica mirándome de esa forma extraña.";
+		next;
+		mes "[Aile]";
+		mes ".......";
+		mes ".....Oye, ¿No te he visto antes?";
+		next;
+		mes "[Aile]";
+		mes "Err...";
+		mes "Qué extraño, no puedo recordar dónde te vi.";
+		close2;
+		cutin "",255;
+		end;
+	}
+	if (BaseJob != Job_Archer) {
+		if (BaseJob == Job_Bard) {
+			cutin "job_dancer_eir01",2;
+			mes "[Aile]";
+			mes "¡Bienvenido~!";
+			mes "Avísame";
+			mes "cuando tengas canciones nuevas. Siempre podemos usar algo de música nueva para complementar nuestras presentaciones.";
+			close2;
+			cutin "",255;
+			end;
+		}
+		else if (BaseJob == Job_Dancer) {
+			cutin "",2;
+			mes "[Aile]";
+			mes "¡Bienvenido~!";
+			mes "¿Cómo estás";
+			mes "en estos días?";
+			mes "¿Mucha gente disfruta";
+			mes "tus presentaciones?";
+			close2;
+			cutin "",255;
+			end;
+		}
+		cutin "job_dancer_eir03",2;
+		mes "[Aile]";
+		mes "Bienve--¿Mmm?";
+		mes "Hey, sólo personal autorizado puede venir aquí. No cualquiera puede entrar a la Dance School.";
+		next;
+		mes "[Aile]";
+		mes "Si quieres mirar, ¿Por qué no vas a la Dance Stage del pueblo?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	if (DANC_Q == 0 && sex == 0 && BaseJob == Job_Archer) {
+		cutin "job_dancer_eir01",2;
+		mes "[Aile]";
+		mes "¡Bienvenido~!";
+		mes "Esta es la";
+		mes "'Escuela de Baile de Comodo,'";
+		mes "donde enseñamos diferentes bailes de distintos países. Proporcionamos entretenimiento para los viajeros de todo el mundo.";
+		next;
+		mes "[Aile]";
+		mes "¡También ofrecemos la oportunidad, a las aspirantes de Dancers, de volverse famosas por todo el Reino de Rune-Midgarts! ¿Bailar y ser el centro de la atención no suena espectacular?";
+		next;
+		mes "[Aile]";
+		mes "Creo que es justo que sepas que nuestra escuela es muy selectiva. Así que no aceptamos estudiantes que no parezcan tener talento para convertirse en Dancers.";
+		next;
+		cutin "job_dancer_eir02",2;
+		mes "[Aile]";
+		mes "¿Qué opinas?";
+		mes "¿Quieres inscribirte? Sólo tienes que escribir un par de cosas en la solicitud y puedes simplemente venir a las lecciones una o dos veces e intentarlo.";
+		next;
+		cutin "job_dancer_eir01",2;
+		mes "[Aile]";
+		mes "Así que,";
+		mes "¿Qué quieres hacer~?";
+		next;
+		if (select("Fill out the application.:I'll pass.") == 1) {
+			if (JobLevel > 39) {
+				cutin "job_dancer_eir02",2;
+				mes "[Aile]";
+				mes "¡¡Buena elección!!";
+				mes "Sólo llena la solicitud justo ahí.";
+				next;
+				mes "...";
+				next;
+				mes "...";
+				mes "......";
+				next;
+				mes "^3355FF*Shuffle Shuffle*^000000";
+				next;
+				cutin "job_dancer_eir01",2;
+				mes "[Aile]";
+				mes "Tu nombre es";
+				mes "" + strcharinfo(0) + "?";
+				mes "¡Wow! ¡Qué lindo nombre! Un momento, tengo que mostrarle esto al director, así que vuelve en un ratito, ¿Si?";
+				close2;
+				cutin "",255;
+				set DANC_Q,1;
+				setquest 7000;
+				end;
+			}
+			else {
+				cutin "job_dancer_eir01",2;
+				mes "[Aile]";
+				mes "Mmm...";
+				mes "Al parecer";
+				mes "no estás lo suficientemente calificada para inscribirte en nuestra escuela aún. Necesitas ser por lo menos Job Level 40.";
+				next;
+				mes "[Aile]";
+				mes "Bueno, espero";
+				mes "que intentes";
+				mes "de nuevo cuando cumplas";
+				mes "los requerimientos.";
+				close2;
+				cutin "",255;
+				end;
+			}
+		}
+		cutin "job_dancer_eir01",2;
+		mes "[Aile]";
+		mes "Aww~";
+		mes "Piensa sobre eso.";
+		mes "No olvides volver pronto";
+		mes "si cambias de opinión.";
+		close2;
+		cutin "",255;
+		end;
+	}
+	else if (sex == 1) {
+		cutin "job_dancer_eir03",2;
+		mes "[Aile]";
+		mes "Bienve--¿Mmm?";
+		mes "Hey, este lugar es sólo para personal autorizado. Si quieres cantar, deberías probar convertirte en Bard.";
+		next;
+		mes "[Aile]";
+		mes "No todos los Archers";
+		mes "pueden convertirse en Dancers.";
+		mes "Por lo menos, no sin algún tipo de cambio de sexo antes~";
+		close2;
+		cutin "",255;
+		end;
+	}
+	else if (DANC_Q == 1) {
+		cutin "job_dancer_eir01",2;
+		mes "[Aile]";
+		mes "Bien.";
+		mes "Ya que te apuntaste hace rato, te diré algunas cosas que necesitas traer para tus lecciones.";
+		next;
+		mes "[Aile]";
+		mes "Andamos cortos de algunos suministros, pero los estarás usando para ti de todas maneras. Sólo míralo como parte de la inscripción, así que no te preocupes demasiado.";
+		next;
+		set .@item_nd,rand(1,10);
+		if (.@item_nd > 0 && .@item_nd < 3) {
+			set DANC_Q,2;
+			changequest 7000,7001;
+			mes "[Aile]";
+			mes "Primero, hay una cuota de inscripción de ^CD688910,000 Zeny^000000. Luego, trae unos ^CD688920 Sticky Mucus^000000 para lustrar zapatos.";
+			next;
+			mes "[Aile]";
+			mes "También, trae ^CD68893 Jellopy^000000 y ^CD68895 Red Potions^000000 para usar como ungüento. Y por supuesto, necesitarás un par de ^CD6889Shoes^000000.";
+			next;
+			mes "[Aile]";
+			mes "Una vez más, serían";
+			mes "^CD688910,000 Zeny^000000,";
+			mes "^CD688920 Sticky Mucus^000000,";
+			mes "^CD68893 Jellopy^000000,";
+			mes "^CD68895 Red Potions^000000 y";
+			mes "^CD68891 Shoes^000000.";
+		}
+		else if (.@item_nd == 4) {
+			set DANC_Q,3;
+			changequest 7000,7002;
+			mes "[Aile]";
+			mes "Primero, hay una cuota de inscripción de ^CD688910,000 Zeny^000000. Luego, trae ^CD68895 Earthworm Peelings^000000 para encerar el piso y, por supuesto, un par de ^CD6889Boots^000000.";
+			next;
+			mes "[Aile]";
+			mes "Una vez más, serían";
+			mes "^CD688910,000 Zeny^000000,";
+			mes "^CD68895 Earthworm Peelings^000000 y ";
+			mes "^CD68891 Boots^000000.";
+		}
+		else {
+			set DANC_Q,4;
+			changequest 7000,7003;
+			mes "[Aile]";
+			mes "Primero, hay una cuota de inscripción de ^CD688910,000 Zeny^000000. Luego, trae ^CD68892 Clam Shells^000000 para tu traje, ^CD68895 Yellow Potions^000000 y ^CD688920 Jellopy^000000 para tratar heridas de los pies.";
+			next;
+			mes "[Aile]";
+			mes "También necesitarás traer ^CD688910 Black Hairs^000000 para hacer pelucas para las presentaciones y, por supuesto, un par de ^CD6889Sandals^000000. Una vez más, serían...";
+			next;
+			mes "[Aile]";
+			mes "^CD688910,000 Zeny^000000,";
+			mes "^CD68892 Clam Shells^000000,";
+			mes "^CD68895 Yellow Potions^000000,";
+			mes "^CD688920 Jellopy^000000,";
+			mes "^CD688910 Black Hairs^000000 y";
+			mes "^CD6889Sandals^000000.";
+		}
+		next;
+		mes "[Aile]";
+		mes "Una vez que hayas juntado todo lo que necesitas, vuelve para que podamos comenzar las lecciones, ¿Comprendido?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	else if (DANC_Q >= 2 && DANC_Q <= 4) {
+		switch(DANC_Q) {
+		case 2: 
+			setarray .@item[0], 938,909,501,2403;
+			setarray .@count[0], 20,3,5,1;
+			break;
+		case 3: 
+			setarray .@item[0], 1055,2405;
+			setarray .@count[0], 5,1;
+			break;
+		case 4: 
+			setarray .@item[0], 965,503,909,1020,2401;
+			setarray .@count[0], 2,5,20,10,1;
+			break;
+		}
+		set .@size, getarraysize(.@item);
+		for( set .@i, 0; .@i < .@size; set .@i,.@i+1 ) {
+			if( countitem(.@item[.@i]) < .@count[.@i] ) {
+				break;
+			}
+		}
+		if( .@i == .@size && Zeny > 9999 ) {
+			cutin "job_dancer_eir02",2;
+			mes "[Aile]";
+			mes "¡Oh...!";
+			mes "¡Trajiste";
+			mes "todo!";
+			mes "Muy bien, entonces,";
+			mes "permíteme cobrar tu";
+			mes "cuota de inscripción.";
+			next;
+			cutin "job_dancer_eir01",2;
+			set zeny,zeny-10000;
+			mes "[Aile]";
+			mes "Entonces, ve con ^CD6889Bijou^000000, quien está a cargo del proceso de la entrevista. Ella necesitara preguntarte un par de cosas.";
+			set DANC_Q,5;
+			if(checkquest(7001) != -1) {
+				changequest 7001,7004;
+			}
+			else if(checkquest(7002) != -1) {
+				changequest 7002,7004;
+			}
+			else {
+				changequest 7003,7004;
+			}
+			close2;
+			cutin "",255;
+			end;
+		}
+		else {
+			cutin "job_dancer_eir01",2;
+			mes "[Aile]";
+			mes "¿Mmm...?";
+			mes "¿Aún no tienes";
+			mes "todo?";
+			mes "Déjame recordártelo";
+			mes "para que puedas traer";
+			mes "lo que necesitas a la próxima.";
+			next;
+			mes "[Aile]";
+			mes "Trae...";
+			mes "^CD688910,000 Zeny^000000,";
+			if (DANC_Q == 2) {
+				mes "^CD6889"+.@count[0]+" "+getitemname(.@item[0])+"^000000,";
+				mes "^CD6889"+.@count[1]+" "+getitemname(.@item[1])+"^000000,";
+				mes "^CD6889"+.@count[2]+" "+getitemname(.@item[2])+"^000000 y";
+				mes "^CD6889"+.@count[3]+" "+getitemname(.@item[3])+"^000000.";
+			}
+			else if (DANC_Q == 3) {
+				mes "^CD6889"+.@count[0]+" "+getitemname(.@item[0])+"^000000 y";
+				mes "^CD6889"+.@count[1]+" "+getitemname(.@item[1])+"^000000.";
+			}
+			else {
+				mes "^CD6889"+.@count[0]+" "+getitemname(.@item[0])+"^000000,";
+				mes "^CD6889"+.@count[1]+" "+getitemname(.@item[1])+"^000000,";
+				mes "^CD6889"+.@count[2]+" "+getitemname(.@item[2])+"^000000,";
+				mes "^CD6889"+.@count[3]+" "+getitemname(.@item[3])+"^000000 y";
+				mes "^CD6889"+.@count[4]+" "+getitemname(.@item[4])+"^000000.";
+			}
+			close2;
+			cutin "",255;
+			end;
+		}
+	}
+	else if (DANC_Q == 5) {
+		cutin "job_dancer_eir01",2;
+		mes "[Aile]";
+		mes "¿Hmm...?";
+		mes "¿Estás teniendo problemas";
+		mes "para encontrar a";
+		mes "^CD6889Bijou^000000?";
+		next;
+		mes "[Aile]";
+		mes "Necesitas hablar con ella porque está a cargo del proceso de la entrevista. No te preocupes, ella debe estar en por aquí, en la Dance School.";
+		close2;
+		cutin "",255;
+		end;
+	}
+	else if (DANC_Q > 5) {
+		cutin "job_dancer_eir01",2;
+		mes "[Aile]";
+		mes "Estaré esperando";
+		mes "una grandiosa";
+		mes "presentación~";
+		close2;
+		cutin "",255;
+		end;
+	}
+	else {
+		cutin "job_dancer_eir03",2;
+		mes "[Aile]";
+		mes "Bienve--¿Hm?";
+		mes "Hey, aquí sólo se";
+		mes "permite personal";
+		mes "autorizado.";
+		next;
+		mes "[Aile]";
+		mes "Si quieres mirar, mantente en silencio y no molestes a las bailarinas. Todas aquí están ocupadas practicando para que puedan convertirse en buenas Dancers.";
+		close2;
+		cutin "",255;
+		end;
+	}
+}
+
+job_duncer,95,93,4	script	Bijou#da	101,{
+	if (SkillPoint) {
+		mes "[Bijou]";
+		mes "No puedes cambiar de jobs";
+		mes "si aún te quedan skill";
+		mes "points. Usa el resto";
+		mes "y vuelve después.";
+		close;
+	}
+	if (BaseJob != Job_Archer) {
+		if (BaseJob == Job_Bard) {
+			mes "[Bijou]";
+			mes "Bienvenido~";
+			mes "Ooh, ¡Un Bard! ¿Tienes canciones nuevas que mostrarnos? Siempre podemos usar algo de acompañamiento musical para nuestros bailes.";
+			close;
+		}
+		else if (BaseJob == Job_Dancer) {
+			mes "[Bijou]";
+			mes "¡Oh vaya...!";
+			mes "Bienvenida de vuelta~";
+			next;
+			mes "[Bijou]";
+			mes "¿Cómo has estado";
+			mes "en estos días?";
+			mes "Mucha gente";
+			mes "debe adorar verte";
+			mes "bailar. ¿Estás disfrutando ser el";
+			mes "centro de la atención?";
+			close;
+		}
+		mes "[Bijou]";
+		mes "Oh cariño~";
+		mes "Pareces haber viajado mucho para ver mi presentación.";
+		next;
+		mes "[Bijou]";
+		mes "Lo lamento, pero ya me retiré. Ahora me enfoco en entrenar nuevas Dancers. Si vas a la Center Stage, puedes ver a mis estudiantes~";
+		close;
+	}
+	else if (DANC_Q < 5) {
+		mes "[Bijou]";
+		mes "Oh vaya~";
+		mes "Quieres";
+		mes "convertirte en Dancer,";
+		mes "¿No?";
+		next;
+		mes "[Bijou]";
+		mes "Sé que estás emocionada, pero el primer paso es la admisión. Ve al lado izquierdo del escenario donde Aile puede ayudarte con eso.";
+		close;
+	}
+	else if (DANC_Q > 4 && DANC_Q < 7) {
+		if (DANC_Q == 5) {
+			mes "[Bijou]";
+			mes "Oh vaya~";
+			mes "Quieres";
+			mes "convertirte en Dancer,";
+			mes "¿No?";
+			next;
+			mes "[Bijou]";
+			mes "¡S-santo cielo!";
+			mes "¡Mira toda esa gordura en el estómago!";
+			mes "Bueno, no es mucha, la bajarás en muy poco tiempo. Especialmente porque yo estaré dirigiendo tu entrenamiento~";
+			next;
+			mes "[Bijou]";
+			mes "Aunque...";
+			mes "La idea del";
+			mes "cuerpo perfecto si";
+			mes "que ha cambiado";
+			mes "desde que era joven. Como sea...";
+			next;
+			mes "[Bijou]";
+			mes "Comencemos";
+			mes "con la entrevista.";
+			mes "Sólo te voy a preguntar";
+			mes "un par de cosas fáciles";
+			mes "así que no te preocupes~";
+			next;
+			mes "[Bijou]";
+			mes "Ok...";
+			mes "Comencemos.";
+			next;
+		}
+		else {
+			mes "[Bijou]";
+			mes "Oh, volviste~";
+			mes "¿Has estudiado";
+			mes "más? Trata de";
+			mes "aprobar esta vez, ¿Ok?";
+			next;
+		}
+		switch(rand(1,3)) {
+		case 1:
+			mes "[Bijou]";
+			mes "1. El baile de Dancer, ^CD6889Lady Luck^000000,";
+			mes "¿Incrementa cuál de las siguientes cosas?";
+			next;
+			if (select("Intelligence (INT):Dexterity (DEX):Vitality (VIT):Critical Attack Rate") == 4)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "2. De las siguientes,";
+			mes "¿Cuál no podrías considerar";
+			mes "que fuera una danza?";
+			next;
+			switch(select("Tango:Tap Dance:HIP-HOP:Hip Shaker:Lightning Bolt")) {
+			default:
+				set .@da_score,.@da_score-10;
+				break;
+			case 5:
+				set .@da_score,.@da_score+10;
+				break;
+			}
+			mes "[Bijou]";
+			mes "3. ¿Cuál de las siguientes frases";
+			mes "describe mejor a una Dancer?";
+			next;
+			if (select("Person who yells.:A loud person.:A person who dances.:A person who sings.") == 3)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "4. ¿Cuál de las siguientes cosas";
+			mes "no puede asociarse con Comodo?";
+			next;
+			if (select("Beach city.:Dancer Job Change.:Always dark like the night.:Dungeons in 3 directions.:A lot of Thieves.") == 5)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "5. Antes de Comodo, ¿Cuál es el nombre de la región al Noreste de la Pharaoh's Lighthouse Island?";
+			next;
+			if (select("Elmeth Plateau:Comuko Beach:Comodo Beach:Ginai Swamp") == 3)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "6. ¿Quién es la bailarina";
+			mes "más bella?";
+			next;
+			switch(select("" + strcharinfo(0) + ":Bijou:Aile:Bonjour")) {
+			case 1:
+				mes "[Bijou]";
+				mes "...";
+				mes "Eso está...";
+				mes "^660000completamente mal^000000.";
+				mes "¡¿Qué acaso no viste las";
+				mes "las otras opciones?!";
+				mes "¡Puntos menos...!";
+				set .@da_score,.@da_score-10;
+				next;
+				break;
+			case 2:
+				set .@da_score,.@da_score+10;
+				break;
+			default:
+				break;
+			}
+			mes "[Bijou]";
+			mes "7. De los siguientes,";
+			mes "¿Quién puede actuar junto";
+			mes "con una Dancer?";
+			next;
+			if (select("Assassin:Bard:Alchemist:Sage") == 2)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "8. ¿Cuál de las siguientes opciones";
+			mes "no es una especialidad de Comodo?";
+			next;
+			if (select("Berserk Potion:Clam Shell:Crab Shell:Shining Stone") == 4)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "9. ¿Quién es el gerente";
+			mes "del Comodo Casino?";
+			next;
+			if (select("Yoo:Moo:Hoon:Roul") == 2)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "10. ¿Quién acepta las";
+			mes "solicitudes para convertirse";
+			mes "en Dancer?";
+			next;
+			if (select("Bijou:Aile:Athena:Sonotora") == 2)
+				set .@da_score,.@da_score+10;
+			break;
+		case 2:
+			mes "[Bijou]";
+			mes "1. ¿Cuál es el efecto";
+			mes "de la skill combinada llamada";
+			mes "^CD6889Mental Sensing^000000?";
+			next;
+			if (select("Instant monster death.:Doubles damage.:Increases experience.:Increases attack speed.") == 3)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "2. ¿Qué se considera de";
+			mes "mala educación en la pista";
+			mes "después del baile?";
+			next;
+			if (select("Thank your partner.:Praise your partner's dance.:Ask to dance a different dance.:Criticize your partner.") == 4)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "3. ¿Cuál no es";
+			mes "una respuesta apropiada";
+			mes "cuando alguien comete";
+			mes "un error mientras";
+			mes "bailan juntos?";
+			next;
+			if (select("Smile at each other and continue dancing.:Point out the mistake.:Ignore it if the dancer does not realize it.:Give them a smile.") == 2)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "4. ¿En cuál pueblo";
+			mes "puedes convertirte";
+			mes "en una Dancer?";
+			next;
+			if (select("Cocomo:Sandarman:Comudo:Comodo") == 4)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "¿Cuántos calabozos (Dungeons)";
+			mes "están directamente conectados";
+			mes "a Comodo?";
+			next;
+			if (select("1:2:3:4") == 3)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "6. ¿Cuál de los siguientes";
+			mes "no es un monstruo para mascota (Cute Pet)?";
+			next;
+			if (select("Isis:Argiope:Dokebi:Deviruchi") == 2)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "7. ¿Quién es la Dancer";
+			mes "con más gracia?";
+			next;
+			switch(select("" + strcharinfo(0) + ":Bijou:Isis:Mercy Bokou")) {
+			case 1:
+				mes "[Bijou]";
+				mes "...";
+				mes "Eso está...";
+				mes "^660000completamente mal^000000.";
+				mes "¡¿Qué acaso no viste";
+				mes "las otras opciones?!";
+				mes "¡Puntos menos...!";
+				set .@da_score,.@da_score-10;
+				next;
+				break;
+			case 2:
+				set .@da_score,.@da_score+10;
+				break;
+			default:
+				break;
+			}
+			mes "[Bijou]";
+			mes "8. ¿Cuál es el";
+			mes "nombre exacto de la";
+			mes "Kafra en Comodo?";
+			next;
+			if (select("Kafra Headquarters:Kafra West Headquarters:Kafra Service:Kafra Headquarters: Western Branch") == 4)
+				set .@da_score,.@da_score+10;
+			mes "[......]";
+			mes "9. ¿Cuál es mi nombre?";
+			next;
+			if (select("Borjuis:Bourgeois:Bijou:Beruberu") == 3)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "10. ¿Cuál es el";
+			mes "efecto de ^CD6889Lullaby^000000?";
+			next;
+			if (select("Casts the Blind effect in the area.:Casts the Sleep effect on the area.:Puts a night effect on the area.:Freezes the area.") == 2)
+				set .@da_score,.@da_score+10;
+			break;
+		case 3:
+			mes "[Bijou]";
+			mes "1. ¿Cuál es el efecto";
+			mes "de la skill ^CD6889Dance Lessons^000000?";
+			next;
+			switch(select("Increases INT:Increases the effect of dancing skills:Increase damage of Whip weapons.:Inflict Stun on a certain area around the caster.")) {
+			default:
+				break;
+			case 2:
+			case 3:
+				set .@da_score,.@da_score+10;
+				break;
+			}
+			mes "[Bijou]";
+			mes "2. ¿Cuál es el baile que utiliza zapatos";
+			mes "diseñados para hacer";
+			mes "sonido cuando la bailarina mueve";
+			mes "sus pies y golpea";
+			mes "el piso para crear ritmo?";
+			next;
+			if (select("Tap Dance:Improve Concentration:Tango:Double Strafing") == 1)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "3. ¿Cuál de las siguientes";
+			mes "no es una característica de una Dancer?";
+			next;
+			if (select("Uses Dance skills. :Attacks from a distance.:Uses Whips.:Uses Two-handed swords.") == 4)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "4. ¿Cuál pueblo tiene";
+			mes "más Dancers?";
+			next;
+			if (select("Al De Baran:Juno:Morroc:Comodo") == 4)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "5. De las siguientes,";
+			mes "¿Quién baila más hermosamente?";
+			next;
+			switch(select("" + strcharinfo(0) + ":Bijou:Isis:Guton Tak")) {
+			case 1:
+				mes "[Bijou]";
+				mes "...";
+				mes "Eso está...";
+				mes "^660000completamente mal^000000.";
+				mes "¡¿Qué acaso no viste";
+				mes "las otras opciones?!";
+				mes "¡Puntos menos...!";
+				set .@da_score,.@da_score-10;
+				next;
+				break;
+			case 2:
+				set .@da_score,.@da_score+10;
+				break;
+			default:
+				break;
+			}
+			mes "[Bijou]";
+			mes "6. ¿En qué es mejor la Dancer";
+			mes "en comparación con los otros";
+			mes "jobs?";
+			next;
+			if (select("Health:Acting :Dancing :Magic ") == 3)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "7. ¿Quién es el gerente";
+			mes "del Comodo Casino?";
+			next;
+			if (select("Ryu:Moo:Roul:Hoon") == 2)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "8. ¿Cuál item no";
+			mes "puede ser equipado por una Dancer?";
+			next;
+			if (select("Kitty Band :Two-handed Sword:Sandals:Earring") == 2)
+				set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "9. ¿Crees que puedes";
+			mes "decir que este examen es";
+			mes "molesto y frustrante?";
+			next;
+			select("Sí:No");
+			set .@da_score,.@da_score+10;
+			mes "[Bijou]";
+			mes "10. ¿Cuál de los siguientes";
+			mes "no es un músico de Jazz?";
+			next;
+			if (select("Art Blakey:Billie Holiday :Louis Armstrong :Bud Powell :Elder Willow ") == 5)
+				set .@da_score,.@da_score+10;
+		}
+		mes "[Bijou]";
+		mes "Buen trabajo~";
+		mes "Al parecer";
+		mes "respondiste todas las";
+		mes "preguntas~";
+		next;
+		mes "[Bijou]";
+		mes "Veamos...";
+		mes "Tu calificación es";
+		mes "" + .@da_score + " puntos...";
+		if (.@da_score == 100) {
+			set DANC_Q,7;
+			mes "¡Muy bien hecho!";
+			mes "¡Una calificación perfecta!";
+			next;
+			mes "[Bijou]";
+			mes "No hay mucha gente que intente ser Dancer con esta clase de conocimiento. Lamento haberte juzgado por tu apariencia~";
+			next;
+			mes "[Bijou]";
+			mes "Whew~";
+			mes "Ahora sólo te falta la Prueba de Baile (Dance Test). Mientras lo preparamos, ¿Por qué no descansas un poco? Ho ho ho~";
+			close;
+		}
+		else if (.@da_score > 70) {
+			set DANC_Q,7;
+			mes "No fue perfecto, pero te aprobare.";
+			close;
+		}
+		else {
+			set DANC_Q,6;
+			mes "Tú... ¡Tú reprobaste!";
+			next;
+			mes "[Bijou]";
+			mes "¿Fue demasiado difícil?";
+			mes "Cuando yo era joven, todas sabían por lo menos lo suficiente como para pasar esta prueba. Ve y estudia más antes de volver, ¿Ok?";
+			close;
+		}
+	}
+	else if (DANC_Q == 7) {
+		mes "[Bijou]";
+		mes "Ok...";
+		mes "¿Estás lista";
+		mes "para la prueba de baile?";
+		mes "Si quieres, puedo";
+		mes "explicarte las instrucciones.";
+		next;
+		if (select("Listen to instructions.:Go to the testing area.") == 1) {
+			mes "[Bijou]";
+			mes "Primero que nada, cada persona cuenta con ^CD68891 minuto^000000 para la prueba y todas bailan de a ^CD6889una a la vez^000000. No te preocupes si nunca has bailado antes~";
+			next;
+			mes "[Bijou]";
+			mes "Una vez que entres al área de pruebas, verás el escenario. Primero, ^CD6889cambia el ángulo de tu cámara para que mire al frente^000000. Probablemente funcione si ^CD6889das doble-click con el botón derecho del mouse^000000.";
+			next;
+			mes "[Bijou]";
+			mes "Si no acomodas el ángulo de la cámara, puede que las comandos de ^CD6889Arriba, Abajo, Izquierda, Derecha^000000 se confundan.";
+			next;
+			mes "[Bijou]";
+			mes "Espera tu turno en la ^CD6889waiting room^000000. Si la persona que esta antes que vos falla, o si es tu turno en la línea, tu prueba comenzará.";
+			next;
+			mes "[Bijou]";
+			mes "Si hay mucha gente, no todos podrán entrar en la sala de espera (waiting room). Si ese es el caso, crea una línea ordenada para mantener tu turno~";
+			next;
+			mes "[Bijou]";
+			mes "Cuando la prueba comience, se te transmitirá la música, al igual que la dirección en que deberás moverte. Sólo sigues las instrucciones y mueve las piernas.";
+			next;
+			mes "[Bijou]";
+			mes "Recuerda, ^CD6889serás descalificada si no realizas los pasos en el tiempo correcto^000000. Ten cuidado, la prueba es muy estricta~";
+			close;
+		}
+		mes "[Bijou]";
+		mes "Bien entonces~";
+		mes "¡¡Buena suerte...!!";
+		changequest 7004,7005;
+		set DANC_Q,8;
+		close2;
+		warp "job_duncer",105,109;
+		end;
+	}
+	else if (DANC_Q == 8) {
+		mes "[Bijou]";
+		mes "Oh vaya...";
+		mes "¿Fallaste";
+		mes "la última vez?";
+		mes "No te preocupes, sólo";
+		mes "intenta sentir el ritmo~";
+		close2;
+		warp "job_duncer",105,109;
+		end;
+	}
+	else if (DANC_Q == 9) {
+		if (SkillPoint) {
+			mes "[Bijou]";
+			mes "No puedes cambiar de job";
+			mes "si aún te quedan skill";
+			mes "points. Usa el resto";
+			mes "y vuelve después.";
+			close;
+		}
+		mes "[Bijou]";
+		mes "Oh vaya...";
+		mes "Vi tu";
+		mes "baile hace rato.";
+		mes "¡Fuiste genial!";
+		next;
+		mes "[Bijou]";
+		mes "Tu presentación demuestra que estás calificada para convertirte en una Dancer. Bien entonces, permíteme cambiar tu job.";
+		next;
+		mes "[Bijou]";
+		mes "Con la bendición de nuestra diosa, renacerás como una Dancer. De ahora en delante, nadie se alejará de tu presencia sin una sonrisa~";
+		next;
+		set .@jlevel,JobLevel;
+		mes "[Bijou]";
+		completequest 7006;
+		callfunc "Job_Change",Job_Dancer;
+		callfunc "F_ClearJobVar";
+		mes "¡Ooh...!";
+		mes "Te ves genial";
+		mes "como una Dancer~";
+		mes "¡Felicidades!";
+		next;
+		mes "[Bijou]";
+		mes "Aquí hay un pequeño";
+		mes "regalo de mi parte.";
+		mes "Por favor acéptalo.";
+		mes "Que tu presentación brinde siempre alegría a tu audiencia~";
+		if (.@jlevel == 50)
+			getitem 1953,1; //Line_
+		else
+			getitem 1950,1; //Rope
+		close;
+	}
+} 
+
+// Waiting Room
+//============================================================ 
+job_duncer,32,154,1	script	Waiting Room#dance	66,{
+OnInit:
+	waitingroom "Waiting Room",20,"Waiting Room#dance::OnStartArena",1;
+	enablewaitingroomevent;
+	end;
+
+OnStartArena:
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	donpcevent "dance#return::OnDisable";
+	warpwaitingpc "job_duncer",69,110,1;
+	donpcevent "Bijou#dance_timer::OnEnable";
+	disablewaitingroomevent;
+	end;
+
+OnEnable:
+	enablewaitingroomevent;
+	end;
+}
+
+job_duncer,32,154,1	script	Waiting Room#click	66,{
+	mes "[Pyorgin]";
+	mes "Por favor espera en";
+	mes "la sala de espera (waiting room).";
+	mes "Clickea en el Chatroom";
+	mes "para entrar.";
+	next;
+	mes "[Pyorgin]";
+	mes "También, aquellas personas quienes";
+	mes "tengan curiosidad sobre";
+	mes "el test, pueden observar";
+	mes "desde atrás del escenario.";
+	close;
+}
+
+// Dance Timer
+//============================================================ 
+job_duncer,69,105,0	script	Bijou#dance_timer	-1,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "job_duncer","Okay, let's begin. Now relax, the test is 1 minute~",bc_map;
+	end;
+
+OnTimer5000:
+	mapannounce "job_duncer"," Up!",bc_map;
+	end;
+
+OnTimer7000:
+	disablenpc "dance#up";
+	enablenpc "dance#down";
+	enablenpc "dance#left";
+	enablenpc "dance#right";
+	enablenpc "dance#cen";
+	end;
+
+OnTimer8000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Down!",bc_map;
+	end;
+
+OnTimer11000:
+	enablenpc "dance#up";
+	disablenpc "dance#down";
+	enablenpc "dance#left";
+	enablenpc "dance#right";
+	enablenpc "dance#cen";
+	end;
+
+OnTimer12000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Left~!",bc_map;
+	end;
+
+OnTimer15000:
+	enablenpc "dance#up";
+	enablenpc "dance#down";
+	disablenpc "dance#left";
+	enablenpc "dance#right";
+	enablenpc "dance#cen";
+	end;
+
+OnTimer16000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Left, then Right~!",bc_map;
+	end;
+
+OnTimer19000:
+	enablenpc "dance#up";
+	enablenpc "dance#down";
+	enablenpc "dance#left";
+	disablenpc "dance#right";
+	enablenpc "dance#cen";
+	end;
+
+OnTimer20000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Back to the Center~ !",bc_map;
+	end;
+
+OnTimer23000:
+	enablenpc "dance#up";
+	enablenpc "dance#down";
+	enablenpc "dance#left";
+	enablenpc "dance#right";
+	disablenpc "dance#cen";
+	end;
+
+OnTimer23500:
+	donpcevent "Backdancer#1::OnSmile";
+	mapannounce "job_duncer"," Hold in place... ",bc_map;
+	end;
+
+OnTimer27000:
+	donpcevent "Backdancer#1::OnSmile";
+	mapannounce "job_duncer"," Hold then 'Improve Concentration!'",bc_map;
+	end;
+
+OnTimer28500:
+	mapannounce "job_duncer"," Pay attention! ",bc_map;
+	end;
+
+OnTimer30000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Left!",bc_map;
+	end;
+
+OnTimer34000:
+	enablenpc "dance#up";
+	enablenpc "dance#down";
+	disablenpc "dance#left";
+	enablenpc "dance#right";
+	enablenpc "dance#cen";
+	end;
+
+OnTimer35000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Down!",bc_map;
+	end;
+
+OnTimer38500:
+	mapannounce "job_duncer"," Down, then Right~ ",bc_map;
+	end;
+
+OnTimer40000:
+	enablenpc "dance#up";
+	enablenpc "dance#down";
+	enablenpc "dance#left";
+	disablenpc "dance#right";
+	enablenpc "dance#cen";
+	mapannounce "job_duncer"," Hold it~",bc_map;
+	end;
+
+OnTimer43000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Left, Center, Right, Up!",bc_map;
+	end;
+
+OnTimer49000:
+	disablenpc "dance#up";
+	enablenpc "dance#down";
+	enablenpc "dance#left";
+	enablenpc "dance#right";
+	enablenpc "dance#cen";
+	end;
+
+OnTimer50000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Right!",bc_map;
+	end;
+
+OnTimer53000:
+	enablenpc "dance#up";
+	enablenpc "dance#down";
+	enablenpc "dance#left";
+	disablenpc "dance#right";
+	enablenpc "dance#cen";
+	end;
+
+OnTimer54000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Left, Center, Down, Up~! ",bc_map;
+	end;
+
+OnTimer60000:
+	disablenpc "dance#up";
+	enablenpc "dance#down";
+	enablenpc "dance#left";
+	enablenpc "dance#right";
+	enablenpc "dance#cen";
+	end;
+
+OnTimer61000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Once again~ Left, Center, Down, Up~ ! ",bc_map;
+	end;
+
+OnTimer66000:
+	disablenpc "dance#up";
+	enablenpc "dance#down";
+	enablenpc "dance#left";
+	enablenpc "dance#right";
+	enablenpc "dance#cen";
+	end;
+
+OnTimer67000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Down~!",bc_map;
+	end;
+
+OnTimer69000:
+	enablenpc "dance#up";
+	disablenpc "dance#down";
+	enablenpc "dance#left";
+	enablenpc "dance#right";
+	enablenpc "dance#cen";
+	end;
+
+OnTimer70000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Left!",bc_map;
+	end;
+
+OnTimer74000:
+	enablenpc "dance#up";
+	enablenpc "dance#down";
+	disablenpc "dance#left";
+	enablenpc "dance#right";
+	enablenpc "dance#cen";
+	end;
+
+OnTimer75000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Center!",bc_map;
+	end;
+
+OnTimer80000:
+	enablenpc "dance#up";
+	enablenpc "dance#down";
+	enablenpc "dance#left";
+	enablenpc "dance#right";
+	disablenpc "dance#cen";
+	end;
+
+OnTimer81000:
+	donpcevent "Backdancer#1::OnSmile";
+	disablenpc "dance#up";
+	disablenpc "dance#down";
+	disablenpc "dance#left";
+	disablenpc "dance#right";
+	disablenpc "dance#cen";
+	mapannounce "job_duncer"," Okay, Finish~ 'Arrow Shower!'",bc_map;
+	end;
+
+OnTimer82000:
+	donpcevent "dance#poring::OnEnable";
+	end;
+
+OnTimer89000:
+	donpcevent "dance#poring::OnDisable";
+	donpcevent "dance#return::OnEnable";
+	end;
+}
+
+job_duncer,69,110,0	script	dance#return	-1,1,4,{
+OnTouch:
+	mapannounce "job_duncer","Good! Well done! Go back to Bijou!",bc_map;
+	set DANC_Q,9;
+	changequest 7005,7006;
+	warp "comodo",188,162;
+	end;
+
+OnDisable:
+	disablenpc "dance#return";
+	donpcevent "dance#return#2::OnDisable";
+	donpcevent "dance#return#3::OnDisable";
+	end;
+
+OnEnable:
+	enablenpc "dance#return";
+	donpcevent "dance#return#2::OnEnable";
+	end;
+}
+
+job_duncer,66,110,0	script	dance#return#2	-1,1,1,{
+OnTouch:
+	set DANC_Q,9;
+	warp "comodo",188,162;
+	end;
+
+OnDisable:
+	disablenpc "dance#return#2";
+	end;
+
+OnEnable:
+	enablenpc "dance#return#2";
+	donpcevent "dance#return#3::OnEnable";
+	end;
+}
+
+job_duncer,72,110,0	script	dance#return#3	-1,1,1,{
+OnTouch:
+	set DANC_Q,9;
+	warp "comodo",188,162;
+	end;
+
+OnDisable:
+	disablenpc "dance#return#3";
+	end;
+
+OnEnable:
+	enablenpc "dance#return#3";
+	donpcevent "Bijou#dance_timer::OnDisable";
+	donpcevent "Waiting Room#dance::OnEnable";
+	end;
+}
+
+// Dance Move Triggers
+//============================================================ 
+-	script	dancestep::StepTrigger	-1,1,1,{
+OnTouch:
+	donpcevent "Backdancer#1::OnOmg";
+	mapannounce "job_duncer"," " + strcharinfo(0) + ", you lack rhythm... Your timing was too late!",bc_map;
+	set DANC_Q,8;
+	donpcevent "Bijou#dance_timer::OnDisable";
+	donpcevent "Waiting Room#dance::OnEnable";
+	warp "comodo",188,162;
+	end;
+}
+
+job_duncer,69,113,0	duplicate(StepTrigger)	dance#up	-1,1,1
+job_duncer,69,107,0	duplicate(StepTrigger)	dance#down	-1,1,1
+job_duncer,66,110,0	duplicate(StepTrigger)	dance#left	-1,1,1
+job_duncer,72,110,0	duplicate(StepTrigger)	dance#right	-1,1,1
+job_duncer,69,110,0	duplicate(StepTrigger)	dance#cen	-1,1,1
+
+job_duncer,10,10,0	script	dance#poring	-1,{
+OnEnable:
+	monster "job_duncer",69,106,"Poring",1002,1,"dance#poring::OnMyMobDead";
+	end;
+
+OnMyMobDead:
+	mapannounce "job_duncer"," Good! Well done! ",bc_map;
+	end;
+
+OnDisable:
+	killmonsterall "job_duncer";
+	end;
+
+}
+
+// Backup Dancers
+//============================================================ 
+job_duncer,63,110,4	script	Backdancer#1::BackDancer	724,{
+	end;
+
+OnSmile:
+	Emotion e_no1;
+	donpcevent "Backdancer#2::OnSmile";
+	donpcevent "Backdancer#3::OnSmile";
+	donpcevent "Backdancer#4::OnSmile";
+	end;
+
+OnOmg:
+	Emotion e_omg;
+	donpcevent "Backdancer#2::OnOmg";
+	donpcevent "Backdancer#3::OnOmg";
+	donpcevent "Backdancer#4::OnOmg";
+	end;
+}
+
+job_duncer,66,113,4	script	Backdancer#2	724,{
+	end;
+
+OnSmile:
+	Emotion e_no1;
+	end;
+
+OnOmg:
+	Emotion e_omg;
+	end;
+}
+
+job_duncer,72,113,4	script	Backdancer#3	724,{
+	end;
+
+OnSmile:
+	Emotion e_no1;
+	end;
+
+OnOmg:
+	Emotion e_omg;
+	end;
+}
+
+job_duncer,75,110,4	script	Backdancer#4	724,{
+	end;
+
+OnSmile:
+	Emotion e_no1;
+	end;
+
+OnOmg:
+	Emotion e_omg;
+	end;
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.1 Removed the warp I left here my accident, added a check for using 
+//=     Improved Concentration and arrow shower, people could get away with it
+//=     [Fredzilla]
+//= 1.0 I tried to keep as much the same from the Jap version as possible
+//=     this turned out to be quite hard, but on the whole it is the same script
+//=     I have added some new things, and changed some of the used commands,
+//=     along with some optimization. [Fredzilla]
+//= 1.5 Added Baby Class Support [Fredzilla]
+//= 1.6 Added a func which prevent advanced classes passing
+//= 2nd Job Quests again. It also guides adv classes where
+//= to go. [Lupus]
+//= 2.0 Changed numbers to constants. [Vicious]
+//= 2.1 Script check #1. [Lance]
+//= 2.2 Fixed unpassable part, thx2 Alis [Lupus]
+//= 2.3 Updated initnpctimer to attach player to jobDq script [Skotlex]
+//= 2.4 Attached chrid to be able obtain player's SP on mobs death, optimized a bit [Lupus]
+//= 2.5 Final fix of chrid issues, changed 'Improved
+//=	Concentration' to 'Attention Concentrate' [Lupus]
+//= 3.0 Some optimization, typos, added missing dialogues (4Kb lighter) [Lupus]
+//= 3.1 Implemented JOBLVL as in other quests [Lupus]

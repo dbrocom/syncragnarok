@@ -1,0 +1,215 @@
+//===== eAthena Script ======================================= 
+//= * Sign Your Items *
+//===== By: ================================================== 
+//= Lupus
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena 1
+//===== Description: ========================================= 
+//= Write you name on your rare equipment or weapon ^_-
+//= Original X-Mas mini-quest(could be used as a permanent one)
+//===== Additional Comments: ================================= 
+//= 1.0 First release
+//============================================================
+
+prt_in,24,61,7	script	Perchik	47,{
+	mes "[Perchik]";
+	if(BaseJob==Job_Novice || BaseLevel<50) {
+		mes "Lo siento, yo no ayudo a novatos. Ve a matar mas Porings";
+		emotion e_sry;
+		close;
+	}
+	mes "Hola, yo puedo ^000090grabar tu nombre^000000 en casi cualquier item raro que tengas.";
+	next;
+	menu "Cuentame mas...",-, "Firma mis items, por favor",M_DO;
+
+	mes "[Perchik]";
+	mes "Yo puedo poner tu nombre en casi cualquier arma o equipo sin slot.";
+	emotion e_ic;
+	next;
+	mes "[Perchik]";
+	mes "Hace una semana, mi jefe me dijo que enviara lejos a los novatos. Yo no entiendo por qué.";
+	next;
+	mes "[Perchik]";
+	mes "Por mi trabajo recivo^0000803 Gift Box^000000es (gray one)";
+	mes "mas ^FF00005000z^000000 por refinar tu item.";
+	next;
+	emotion e_cry;
+	mes "[Perchik]";
+	mes "Alas, tengo 12 niños hambrientos";
+	mes "Y una esposa muy enojada.";
+	next;
+	mes "[Perchik]";
+	mes "O era... 12 niños enojados";
+	mes "y una muy hambrienta esposa...";
+	emotion e_hmm;
+	close;
+
+M_DO:
+	mes "[Perchik]";
+	mes "Muestrame el item a firmar...";
+M_MENU:
+	next;
+	menu getequipname(1),M_PART1,getequipname(9),M_PART9,getequipname(10),M_PART10,getequipname(2),M_PART2,getequipname(4),M_PART4,
+	     getequipname(3),M_PART3,getequipname(5),M_PART5,getequipname(6),M_PART6,getequipname(7),M_PART7,getequipname(8),M_PART8;
+
+	//Head Gear
+	M_PART1:
+		set @part,1;
+		if (getequipisequiped(1)) goto L_CHECK1;
+		mes "[Perchik]";
+		mes "Una cabeza calva debajo de una peluca barata...  No hay nada digno de firmar.";
+		emotion 6;
+		goto M_MENU;
+	M_PART9:
+		set @part,9;
+		if (getequipisequiped(9)) goto L_CHECK1;
+		mes "[Perchik]";
+		mes "Gafas... No veo ningunas gafas...";
+		emotion 20;
+		goto M_MENU;
+	M_PART10:
+		set @part,10;
+		if (getequipisequiped(10)) goto L_CHECK1;
+		mes "[Perchik]";
+		mes "No veo ninguna máscara aquí.";
+		emotion 20;
+		goto M_MENU;
+	//Armor
+	M_PART2:
+		set @part,2;
+		if (getequipisequiped(2)) goto L_CHECK1;
+		mes "[Perchik]";
+		mes "Su vientre...? Si, es algo gordo";
+		emotion 6;
+		goto M_MENU;
+	//Left Hand
+	M_PART3:
+		set @part,3;
+		if (getequipisequiped(3)) goto L_CHECK1;
+		mes "[Perchik]";
+		mes "Firmar su mano izquierda?  No soy una celebridad, usted sabe...";
+		emotion 4;
+		goto M_MENU;
+	//Right Hand
+	M_PART4:
+		set @part,4;
+		if (getequipisequiped(4)) goto L_CHECK1;
+		mes "[Perchik]";
+		mes "No es una armadura...  Es un fango!!!  Lávese las manos más seguido.";
+		emotion 4;
+		goto M_MENU;
+	//Garment
+	M_PART5:
+		set @part,5;
+		if (getequipisequiped(5)) goto L_CHECK1;
+		mes "[Perchik]";
+		mes "Mire... Esta vacio...";
+		goto M_MENU;
+	//Foot Gear
+	M_PART6:
+		set @part,6;
+		if (getequipisequiped(6)) goto L_CHECK1;
+		mes "[Perchik]";
+		mes "Aw!! No me gustan los pies apestozos.";
+		emotion 16;
+		goto M_MENU;
+	//Accessory1
+	M_PART7:
+		set @part,7;
+		if (getequipisequiped(7)) goto L_CHECK1;
+		mes "[Perchik]";
+		mes "Yep... un bolsillo con un enorme agujero...";
+		emotion 20;
+		goto M_MENU;
+	//Accessory2
+	M_PART8:
+		set @part,8;
+		if (getequipisequiped(8)) goto L_CHECK1;
+		mes "[Perchik]";
+		mes "Yo veo su vientre gordo...";
+		emotion 20;
+		goto M_MENU;
+
+L_CHECK1:
+	set @ref,0;
+	set @id,getequipid(@part);
+	if(getequipisidentify(@part)) goto L_CHECK2;
+	mes "[Perchik]";
+	mes "Como podrias tu cargar tal item desconocido?";
+	npctalk "What a sneaky cheater!";
+	emotion e_wah;
+	close;
+
+L_CHECK2:
+	set @ref,getequiprefinerycnt(@part);
+	mes "[Perchik]";
+	mes "Quicieras que firmara tu "+getitemname(@id)+"...";
+	if(BaseJob==Job_Novice) {
+		mes "Pero tu eres un novato. Mi jefe me dijo que enviara lejos a los debiiles.";
+		emotion e_sry;
+		goto M_MENU;
+	}
+	set @slot0,getequipcardid(@part,0);
+	set @slot1,getequipcardid(@part,1);
+	set @slot2,getequipcardid(@part,2);
+	set @slot3,getequipcardid(@part,3);
+
+	if(@slot0==255 || @slot0==254 || @slot0<0) {
+		mes "Alas, este item ya está firmado.";
+		mes "Nunca tocaria un trabajo maestro.";
+		emotion e_hmm;
+		goto M_MENU;
+	}
+	if(@slot0>4000 && @slot0<5000) {
+		mes "Una carta? Aqui?!";
+		mes "Tal como dije antes, no puedo firmar items con cartas.";
+		emotion e_hmm;
+		goto M_MENU;
+	}
+	if(getiteminfo(@id,10)) {
+		mes "Lo siento. No puedo marcar items con slot.";
+		emotion e_sry;
+		goto M_MENU;
+	}
+
+	if(@ref)mes "Esto ha sido refinado "+@ref+" Tiempo... Agrega ^FF00005000z^000000 por tiempo.";
+	mes "Dame ^0000803 gray Gift Boxes^000000";
+	if(@ref)mes "y ^FF0000"+(5000*@ref)+"z^000000.";
+	next;
+	menu "Ok!",-, "Salir",M_END;
+	if(Zeny>=(5000*@ref) && countitem(644)>=3) {
+		delitem 644,3;
+		set Zeny,Zeny-(5000*@ref);
+		goto L_MAKE;
+	}
+	mes "[Perchik]";
+	mes "Yo no trabajo por 'gracias'.";
+	emotion e_sry;
+	close;
+
+L_MAKE:
+	if(countitem2(@id,1,@ref,0,@slot0,@slot1,@slot2,@slot3)==0) {
+		mes "[Perchik]";
+		mes "Donde está ... "+getitemname(@id)+"?";
+		npctalk "You're a snoozy cheater!";
+		logmes "CHEATER: Tried to sign an item not having it: "+getitemname(@id);
+		emotion e_wah;
+		close;
+	}
+	delitem2 @id,1,1,@ref,0,@slot0,@slot1,@slot2,@slot3;
+
+	mes "[Perchik]";
+	mes "Hecho!";
+	emotion e_proud;
+
+	getitem2 @id,1,1,@ref,0,254,0,getcharid(0)&0xffff,(getcharid(0)>>16)&0xffff;
+	close;
+
+M_END:
+	mes "[Perchik]";
+	mes "Nos vemos...";
+	emotion e_yawn;
+	close;
+}

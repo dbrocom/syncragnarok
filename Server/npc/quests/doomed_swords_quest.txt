@@ -1,0 +1,1098 @@
+//===== eAthena Script =======================================
+//= Doomed Swords Quest Part 3
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= [Aegis Conversion]
+//= - Creation of Doomed Swords: Grimtooth, Mysteltain, and
+//=   Executioner.
+//= - Continuation of the Comodo Quest
+//= - Part 1: Found in Quests_Comodo.txt
+//= - Part 2: Found in Quests_Yuno.txt
+//= - Variable in use: dmdswrd_Q (Max 45)
+//===== Additional Comments: =================================
+//= 1.0 First version. [L0ne_W0lf]
+//============================================================
+
+mjolnir_02,186,193,4	script	Middle-Aged Man#magum1	57,{
+	if (dmdswrd_Q > 30) {
+		if (dmdswrd_Q == 31) {
+			mes "[Middle-Aged Man]";
+			mes "Ha pasado tiempo desde";
+			mes "que alguien viene por";
+			mes "aquí. No muchas personas";
+			mes "pasan por aquí, así que rara vez";
+			mes "recibo visitantes. ¿Por qué no";
+			mes "te relajas y platicamos un rato?";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "¿Qué estás haciendo";
+			mes "aquí en esta desolada";
+			mes "zona? ¿No tienes que";
+			mes "trabajar aquí, o si?";
+			next;
+			mes "[Middle-Aged Man]";
+			mes "Bueno, solo manejar esta";
+			mes "casa de verano me da";
+			mes "suficiente ingreso para sobrevivir.";
+			mes "Ah, también hago algunas cosas";
+			mes "a mano como un pasatiempo.";
+			next;
+			mes "[Middle-Aged Man]";
+			mes "Yeap, cuando era más joven,";
+			mes "Tenia mi propia herrería en el pueblo.";
+			mes "Era un buen negocio familiar,";
+			mes "y todos mis hermanos terminaron";
+			mes "haciendo mercancía para señores feudales";
+			mes "e incluso para la familia real.";
+			next;
+			mes "[Middle-Aged Man]";
+			mes "Pero luego, el accidente";
+			mes "paso, y tuvimos";
+			mes "que cerrar la tienda. Bueno, esa";
+			mes "es mi historia. No una muy feliz,";
+			mes "pero, por otro lado";
+			mes "he tenido una larga, feliz vida.";
+			next;
+			mes "[Middle-Aged Man]";
+			mes "Exactamente";
+			mes "¿qué te trae por aquí?";
+			mes "¿Estás explorando";
+			mes "la tierra, o estás";
+			mes "cazando monstruos, o...?";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "De hecho, um,";
+			mes "vine aquí por";
+			mes "una cosa. Es llamada";
+			mes "el Sello de Muriniel.";
+			next;
+			mes "[Middle-Aged Man]";
+			mes "Oh... Oh dios.";
+			mes "Déjame ver eso.";
+			mes "Oh, si. Es el";
+			mes "real. Así que... Al";
+			mes "fin me ha encontrado. Bueno,";
+			mes "creo que estoy a tu servicio.";
+			next;
+			next;
+			mes "[Middle-Aged Man]";
+			mes "Mi nombre es Walker, y";
+			mes "mis hermanos y yo fuimos los 3";
+			mes "forjadores más talentosos";
+			mes "en Juno. Parece que has sido";
+			mes "elegido por el destino, nosotros te";
+			mes "ayudaremos a obtener una espada maldita.";
+			next;
+			mes "[Walker]";
+			mes "Primero que nada las espadas";
+			mes "malditas están selladas en pergaminos";
+			mes "mágicos como pentagramas. Cuando";
+			mes "sus verdaderos dueños aparezcan, ellas";
+			mes "podrán ser liberadas usando";
+			mes "el Sello de Muriniel.";
+			next;
+			mes "[Walker]";
+			mes "Ahora, por mi parte para liberar";
+			mes "las espadas malditas, necesitaré";
+			mes "los materiales de la más alta calidad.";
+			mes "Dame unos minutos y";
+			mes "te diré que necesito";
+			mes "que me traigas.";
+			set dmdswrd_Q,32;
+			close;
+		}
+		else if (dmdswrd_Q == 32) {
+			mes "[Walker]";
+			mes "Ahora, tengo que hacerte";
+			mes "saber que solo puedo formar";
+			mes "una porción del pentagrama";
+			mes "que liberara una de las";
+			mes "espadas malditas. Necesitarás la";
+			mes "ayuda de mis hermano para completarlo.";
+			next;
+			mes "[Walker]";
+			mes "Una vez que el pentagrama";
+			mes "sea completado y activado,";
+			mes "liberarás la espada maldita";
+			mes "que sea mejor para";
+			mes "ti. Lo siento, pero no tengo";
+			mes "forma de predecir cual será.";
+			next;
+			mes "[Walker]";
+			mes "Por ahora, debes dar";
+			mes "el primer paso y traer";
+			mes "los siguientes objetos.";
+			mes "Asegúrate de tomar nota";
+			mes "de lo que requiero...";
+			next;
+			mes "[Walker]";
+			mes "Necesitare";
+			mes "^FF00001 Emperium^000000, ";
+			mes "^FF00003 Tentacles^000000, ";
+			mes "^FF000025 Amulets^000000, ";
+			mes "^FF00001 Coal^000000, and ";
+			mes "^FF00001 Necklace of Oblivion^000000. ";
+			set dmdswrd_Q,33;
+			close;
+		}
+		else if (dmdswrd_Q == 33) {
+			if (countitem(714) > 0 && countitem(962) > 2 && countitem(1003) > 0 && countitem(609) > 24 && countitem(1008) > 0) {
+				mes "[Walker]";
+				mes "Ah, muy bien.";
+				mes "Has traído";
+				mes "todo lo que necesito.";
+				mes "Ahora, por favor espera";
+				mes "un momento mientras termino";
+				mes "los preparativos...";
+				delitem 714,1; //Emperium
+				delitem 962,3; //Tentacle
+				delitem 1003,1; //Coal
+				delitem 609,25; //Amulet
+				delitem 1008,1; //Frozen_Heart
+				set dmdswrd_Q,34;
+				close;
+			}
+			mes "[Walker]";
+			mes "¿Hmm...? Aún";
+			mes "no me has traído";
+			mes "todo lo que necesito para";
+			mes "comenzar el pentagrama de la espada";
+			mes "maldita. Permíteme recordarte";
+			mes "que materiales me traerás.";
+			next;
+			mes "[Walker]";
+			mes "Necesitaré";
+			mes "^FF00001 Emperium^000000, ";
+			mes "^FF00003 Tentacles^000000, ";
+			mes "^FF000025 Amulets^000000, ";
+			mes "^FF00001 Coal^000000, and ";
+			mes "^FF00001 Necklace of Oblivion^000000. ";
+			close;
+		}
+		else if (dmdswrd_Q == 34) {
+			mes "[Walker]";
+			mes "Ah, regresaste.";
+			mes "Logré terminar esto";
+			mes "antes de los esperado porque";
+			mes "me diste materiales de una";
+			mes "calidad excepcional.";
+			next;
+			mes "[Walker]";
+			mes "Hace tiempo cuando tenia 15 años, mis";
+			mes "dos hermanos fueron instruidos por";
+			mes "Dwarves sobre como crear el pentagrama que liberara las espadas malditas.";
+			mes "Sin embargo, les enseñaron diferentes partes del pentagrama a cada uno.";
+			next;
+			mes "[Walker]";
+			mes "Creo que los Dwarves dividieron";
+			mes "nuestro conocimiento porque";
+			mes "querían prolongar el";
+			mes "regreso de la espada";
+			mes "Executioner dentro de nuestra generación.";
+			next;
+			mes "[Walker]";
+			mes "Originalmente, Executioner";
+			mes "fue una de las tres espadas";
+			mes "que los Dwarves fueron";
+			mes "ordenados forjar por una organización";
+			mes "malvada a cambio";
+			mes "de la seguridad de su villa.";
+			next;
+			mes "[Walker]";
+			mes "A pesar de sus increíbles";
+			mes "habilidades herreras, los Dwarves";
+			mes "tuvieron dificultades procurando los";
+			mes "raros materiales requeridos para";
+			mes "forjar las armas dentro";
+			mes "de los 15 días de tiempo límite.";
+			next;
+			mes "[Walker]";
+			mes "Desesperados por ayuda, los";
+			mes "Dwarves viajaron para conocer a";
+			mes "mi padre, un reconocido herrero";
+			mes "y aventurero de ese tiempo. El";
+			mes "fue comprensivo a su apuro";
+			mes "y les dio lo que necesitaban.";
+			next;
+			mes "[Walker]";
+			mes "Como gratitud a la ayuda de mi";
+			mes "padre, los Dwarves instruyeron a mis";
+			mes "hermanos sobre como crear el";
+			mes "pentagrama de las espadas malditas,";
+			mes "pero solo podíamos completarlo";
+			mes "si trabajábamos juntos.";
+			next;
+			mes "[Walker]";
+			mes "Tristemente, escuché que la malvada";
+			mes "organización que forzó a los";
+			mes "Dwarves a forjar las espadas";
+			mes "los asesino cuando se rehusaron";
+			mes "a revelarles su secretos de forja. ";
+			next;
+			mes "[Walker]";
+			mes "Sin embargo, lo que los Dwarves";
+			mes "no revelaron sobre la Executioner es que";
+			mes "fue encantada con una terrible";
+			mes "maldición fortalecida por el odio de";
+			mes "los Dwarves que amenaza la vida";
+			mes "del portador de la Executioner.";
+			next;
+			mes "[Walker]";
+			mes "Oh, pero no te preocupes.";
+			mes "Si logras obtener la";
+			mes "Executioner, el sello debería";
+			mes "haber debilitado la maldición";
+			mes "lo suficiente para que no te asesine";
+			mes "tan rápido. Bueno, entonces...";
+			next;
+			mes "[Walker]";
+			mes "Deberías visitar a mi hermano";
+			mes "Morf para la siguiente parte de el";
+			mes "pentagrama de la espada maldita.";
+			mes "Morf debería ser fácil de encontrar,";
+			mes "porque usualmente bebe";
+			mes "todo el día en la taberna de Payon.";
+			next;
+			mes "[Walker]";
+			mes "Por favor, toma este pergamino";
+			mes "con el pentagrama contigo,";
+			mes "y dale mis respetos a Morf";
+			mes "cuando lo veas. Si logras";
+			mes "obtener una espada maldita, usa su poder responsablemente.";
+			set dmdswrd_Q,35;
+			close;
+		}
+		else if (dmdswrd_Q == 35) {
+			mes "[Walker]";
+			mes "Busca a mi hermano";
+			mes "mayor Morf en la";
+			mes "taberna de Payon-- El";
+			mes "siempre esta bebiendo ahí.";
+			mes "Espero, que el te ayude a terminar el pentagrama de la espada maldita.";
+			close;
+		}
+		else if (dmdswrd_Q == 36) {
+			mes "[Walker]";
+			mes "Ah, así que";
+			mes "¿ya te has encontrado con";
+			mes "Morf? Cuando tengas";
+			mes "la oportunidad, por favor dale";
+			mes "mis saludos y dile";
+			mes "que me está yendo bien.";
+			close;
+		}
+		else if (dmdswrd_Q == 37) {
+			mes "[Walker]";
+			mes "Ah, así que";
+			mes "¿ya te has encontrado con";
+			mes "Morf? Cuando tengas";
+			mes "la oportunidad, por favor dale";
+			mes "mis saludos y dile";
+			mes "que me está yendo bien.";
+			close;
+		}
+		else if (dmdswrd_Q == 38) {
+			mes "[Walker]";
+			mes "¿Y cómo ha estado Morf?";
+			mes "Se que él es excéntrico, y";
+			mes "a veces un poco rudo, pero";
+			mes "él es un muy buen hombre.";
+			close;
+		}
+		else if (dmdswrd_Q == 39) {
+			mes "[Walker]";
+			mes "Que bueno que Morf";
+			mes "fue capaz de ayudarte.";
+			mes "En cuanto a nuestro hermano menor,";
+			mes "Huey, no he escuchado de";
+			mes "él en mucho tiempo. ¿Creo que el esta";
+			mes "viajando cerca de Morroc?";
+			close;
+		}
+		else if (dmdswrd_Q >= 40 && dmdswrd_Q <= 44) {
+			mes "[Walker]";
+			mes "Confió en que Huey";
+			mes "se este cuidando bien";
+			mes "a si mismo. Si logras";
+			mes "verlo de nuevo ¿Podrías";
+			mes "decirle que venga a visitarme";
+			mes "uno de estos días?";
+			close;
+		}
+		else {
+			mes "[Walker]";
+			mes "¡Oh! ¿Has completado";
+			mes "el pentagrama y has venido";
+			mes "por la posesión de una de las";
+			mes "espadas malditas? Estoy";
+			mes "muy feliz de escucharlo. Si papa estuviera";
+			mes "vivo, estaría muy orgulloso.";
+			close;
+		}
+	}
+	else {
+		mes "[Middle-Aged Man]";
+		mes "Ha pasado tiempo desde";
+		mes "que alguien viene por";
+		mes "aquí. No muchas personas";
+		mes "pasan por aquí, así que rara vez";
+		mes "recibo visitantes. Siente libre";
+		mes "de descansar y relajarte un rato~";
+		close;
+	}
+}
+
+payon,248,159,1	script	Old Man#magum1	120,{
+	if (dmdswrd_Q == 35) {
+		mes "[Old Man]";
+		mes "¿Qu--? ¿Quién eres";
+		mes "tú? ¿Qué quieres?";
+		mes "¡Déjame solo para poder";
+		mes "beber en paz! ^333333*Urp*^000000";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Um, disculpa, ¿tú eres";
+		mes "Morf? He sido enviado";
+		mes "por tu hermano, Walker,";
+		mes "para pedirte que me ayudes";
+		mes "con este pentagrama.";
+		next;
+		mes "[Old Man]";
+		mes "¿Huh...? Déjame ver...";
+		mes "Oh. Este es el trabajo";
+		mes "de Walker sin duda. ¿T-tú realmente";
+		mes "quieres una espada maldita, huh?";
+		mes "¿Y-y eso que tienes ahí es realmente";
+		mes "el Sello de Muriel?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "¡Oh, el Sello!";
+		mes "Aquí, mira esto";
+		mes "si quieres. Si no";
+		mes "es el verdadero, entonces";
+		mes "pase por muchos";
+		mes "problemas para obtener una falsificación.";
+		next;
+		mes "[Old Man]";
+		mes "¡Arrrgh! ¡¡Es el real!";
+		mes "¿¡Eso significa";
+		mes "que tengo que trabajar en";
+		mes "esto ahora?! ¡Sigo ebrio!";
+		mes "Rayos... Creo que no tengo otra";
+		mes "opción que ponerme sobrio.";
+		next;
+		mes "[Old Man]";
+		mes "Ugh... Pero voy a";
+		mes "necesitar una ayuda.";
+		mes "¡Hey! ¡Tráeme 20 Yellow";
+		mes "Potions para poder curar";
+		mes "el dolor de cabeza que";
+		mes "tendré! Las necesitaré demasiado...";
+		set dmdswrd_Q,36;
+		close;
+	}
+	else if (dmdswrd_Q == 36) {
+		if (countitem(503) > 19) {
+			mes "[Old Man]";
+			mes "Oh, ¡Gracias a dios que me has";
+			mes "traído las pociones! Ahora,";
+			mes "esto me ayudará a hacer frente a la";
+			mes "sensación poco familiar que las";
+			mes "personas llaman sobriedad. Ugh...";
+			mes "Puedo pensar claramente... ¡Maldición!";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "......";
+			mes ".........";
+			mes "............";
+			next;
+			mes "[Old Man]";
+			mes "Dame el pergamino";
+			mes "con el pentagrama.";
+			mes "Déjame ver. Hey,";
+			mes "Walker hizo un gran trabajo";
+			mes "en esto. Bien, escucha.";
+			mes "Esto es lo que necesitare...";
+			next;
+			mes "[Old Man]";
+			mes "^FF00001 Coal^000000, ";
+			mes "^FF00003 Trunks^000000, ";
+			mes "^FF00003 Old Hilts^000000, ";
+			mes "^FF000050 Ogre Teeth^000000, and ";
+			mes "^FF00001 Foolishness of the Blind^000000. ";
+			next;
+			mes "[Old Man]";
+			mes "Tienes que traerme";
+			mes "esos objetos para poder";
+			mes "continuar formando el pentagrama";
+			mes "de la espada maldita. Estaré";
+			mes "esperando por ti justo aquí.";
+			delitem 503,20; //Yellow_Potion
+			set dmdswrd_Q,37;
+			close;
+		}
+		mes "[Old Man]";
+		mes "¡Arrrgh! ¿Me trajiste";
+		mes "las 20 Yellow Potions?";
+		mes "¡Esta resaca se pone";
+		mes "peor y peor! ¡R-Rápido";
+		mes "tráeme mis medicinas!";
+		close;
+	}
+	else if (dmdswrd_Q == 37) {
+		if (countitem(7022) > 2 && countitem(1003) > 0 && countitem(1019) > 2 && countitem(7021) > 0 && countitem(7002) > 49) {
+			mes "[Morf]";
+			mes "Hey, ¿has traído";
+			mes "todo? Bien, entre";
+			mes "más rápido termine,";
+			mes "más rápido podré volver";
+			mes "a beber. Lo que necesitas";
+			mes "hacer es sentarte y esperar.";
+			next;
+			mes "[Morf]";
+			mes "Bien. Vamos a...";
+			mes "empezar ¿Donde puse esa";
+			mes "cosa que necesitaba? Um...";
+			mes "Ah, Aquí vamos. Hrrrm...";
+			next;
+			mes "^3355FF*Scheeeezzzz*";
+			mes "*Clang Clang*";
+			mes "*Rattle Rattle*";
+			mes "*Th-thump thump*^000000";
+			next;
+			mes "^3355FF*Crrrrrrunch*";
+			mes "*Sh-sh-sh-shoom*";
+			mes "*Rub-rub-rub-rub*";
+			mes "*Flip ka-chink*^000000";
+			next;
+			mes ".........";
+			mes "............";
+			mes "...............";
+			mes "..................";
+			next;
+			mes "^3355FF*Scheeeezzzz*";
+			mes "*Clang Clang*";
+			mes "*Rattle Rattle*";
+			mes "*Th-thump thump*^000000";
+			next;
+			mes "^3355FF*Crrrrrrunch*";
+			mes "*Sh-sh-sh-shoom*";
+			mes "*Rub-rub-rub-rub*";
+			mes "*Flip ka-chink*^000000";
+			next;
+			mes "^3355FF*Rub Rub Rub Rub*";
+			mes "*Rub-Rub-Rub-Rub*";
+			mes "*Rub Rub Rub Rub*";
+			mes "*Rub-Rub-Rub-Rub*";
+			mes "*Rub Rub Rub Rub*";
+			mes "*Rub-Rub-Rub-Rub*^000000";
+			next;
+			mes "^3355FF*Rub-Rub-Rub-Rub*";
+			mes "*Rub Rub Rub Rub*";
+			mes "*Rub-Rub-Rub-Rub*";
+			mes "*Rub Rub Rub Rub*";
+			mes "*Rub-Rub-Rub-Rub*";
+			mes "*Rub Rub Rub Rub*^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Disculpe...";
+			mes "¿Ya está listo?";
+			next;
+			mes ".........";
+			mes "............";
+			mes "...............";
+			mes "..................";
+			next;
+			mes "^3355FF*Scheeeezzzz*";
+			mes "*Clang Clang*";
+			mes "*Rattle Rattle*";
+			mes "*Th-thump thump*^000000";
+			next;
+			mes "^3355FF*Crrrrrrunch*";
+			mes "*Sh-sh-sh-shoom*";
+			mes "*Rub-rub-rub-rub*";
+			mes "*Flip ka-chink*^000000";
+			next;
+			mes "^3355FF*Rub Rub Rub Rub*";
+			mes "*Rub-Rub-Rub-Rub*";
+			mes "*Rub Rub Rub Rub*";
+			mes "*Rub-Rub-Rub-Rub*";
+			mes "*Rub Rub Rub Rub*";
+			mes "*Rub-Rub-Rub-Rub*^000000";
+			next;
+			mes "^3355FF*Rub-Rub-Rub-Rub*";
+			mes "*Rub Rub Rub Rub*";
+			mes "*Rub-Rub-Rub-Rub*";
+			mes "*Rub Rub Rub Rub*";
+			mes "*Rub-Rub-Rub-Rub*";
+			mes "*Rub Rub Rub Rub*^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "H-hey ¿Cuando va a estar";
+			mes "terminada esta cosa?";
+			mes "¿No es tiempo ya?";
+			next;
+			mes "[Morf]";
+			mes "¡Hey! Se paciente,";
+			mes "no puedes apresurar";
+			mes "la perfección. Esto";
+			mes "tomará lo que tenga";
+			mes "que tomar. Pero si,";
+			mes "ya casi está terminado...";
+			next;
+			mes ".........";
+			mes "............";
+			mes "...............";
+			mes "..................";
+			next;
+			mes "[Morf]";
+			mes "Solo...";
+			mes "Solo dame unos";
+			mes "pocos minutos más...";
+			delitem 7022,3; //Old_Hilt
+			delitem 1003,1; //Coal
+			delitem 1019,3; //Wooden_Block
+			delitem 7021,1; //Foolishness_Of_Blind
+			delitem 7002,50; //Ogre_Tooth
+			set dmdswrd_Q,38;
+			close;
+		}
+		mes "[Old Man]";
+		mes "Que, ¿olvidaste";
+		mes "lo que necesito? Grrr, ¡Te";
+		mes "lo diré de nuevo, pero será";
+		mes "mejor que no lo olvides esta vez!";
+		next;
+		mes "[Old Man]";
+		mes "^FF00001 Coal^000000, ";
+		mes "^FF00003 Trunks^000000, ";
+		mes "^FF00003 Old Hilts^000000, ";
+		mes "^FF000050 Ogre Teeth^000000, and ";
+		mes "^FF00001 Foolishness of the Blind^000000. ";
+		close;
+	}
+	else if (dmdswrd_Q == 38) {
+		switch(rand(1,10)) {
+		case 1:
+		case 10:
+			mes "[Morf]";
+			mes "¡Ooh, mi espalda!";
+			mes "El dolor me arde!";
+			mes "Parece que no tengo otra";
+			mes "opción más que tomar";
+			mes "un descanso. ¡Por eso no";
+			mes "debes presionarme!";
+			next;
+			mes "[Morf]";
+			mes "Hey, mientras tenemos un poco";
+			mes "de tiempo, déjame contarte una historia";
+			mes "acerca de Mysteltainn, una de las";
+			mes "espadas malditas que puedes";
+			mes "recibir si logras";
+			mes "completar el pentagrama.";
+			next;
+			mes "[Morf]";
+			mes "Ahora, Mysteltainn es el";
+			mes "nombre del árbol del cual se";
+			mes "obtuvo la ramita que fue";
+			mes "usada para matar a Baldur, dios";
+			mes "de la luz. Fue la única";
+			mes "cosa que pudo herir a Baldur...";
+			next;
+			mes "[Morf]";
+			mes "Por lo que recuerdo, el";
+			mes "dios Loki conspiro para matar a Baldur";
+			mes "porque estaba celoso de";
+			mes "el dios de la luz que cada";
+			mes "ser viviente y objeto";
+			mes "inanimado parecían venerar.";
+			next;
+			mes "[Morf]";
+			mes "Loki engaño a la madre de Baldur";
+			mes "para que le revelara la debilidad secreta";
+			mes "de Baldur. Ahora, los dioses solían jugar un juego de lanzar objetos";
+			mes "como dardos a Baldus ya que él era inmune a todo lo demás.";
+			next;
+			mes "[Morf]";
+			mes "Cuando descubrió que";
+			mes "Mysteltainn podía ser usado";
+			mes "para asesinar a Baldur, tomo una de sus";
+			mes "ramitas y engaño al hermano";
+			mes "ciego de Baldur para que se la lanzara en uno de sus juegos.";
+			next;
+			mes "[Morf]";
+			mes "Y bueno...";
+			mes "Así fue como el";
+			mes "dios de la luz fue asesinado.";
+			mes "Por los engaños de Loki y la";
+			mes "ignorancia del ciego.";
+			mes "Es es la historia de Mysteltainn.";
+			next;
+			mes "[Morf]";
+			mes "Ahora, si logras";
+			mes "obtener la espada maldita";
+			mes "Mysteltainn de su sello, no será";
+			mes "tan poderosa como la original";
+			mes "que, tú sabes, asesino a";
+			mes "un dios. No puede ser reproducida...";
+			next;
+			mes "[Morf]";
+			mes "Aun así, el filo es";
+			mes "increíblemente poderoso y debes";
+			mes "asegurarte de portarla";
+			mes "con responsabilidad, Ahora, se";
+			mes "que debes estar muy enojado por";
+			mes "que esto esta tomando mucho...";
+			next;
+			mes "[Morf]";
+			mes "Por favor entiende que";
+			mes "soy algo viejo ahora y que";
+			mes "el trabajo del pentagrama no es exactamente";
+			mes "fácil. De cualquier forma, mi trabajo está hecho.";
+			mes "Ahora debes buscar a Huey,";
+			mes "mi hermano menor.";
+			next;
+			mes "[Morf]";
+			mes "Huey ha estado";
+			mes "viajando, por lo ultimo que escuché,";
+			mes "y está Morroc. Si logras";
+			mes "encontrarlo, él puede completar";
+			mes "el pentagrama para ti. Bueno,";
+			mes "cuídate, y buena suerte.";
+			set dmdswrd_Q,39;
+			close;
+		case 2:
+			mes "[Morf]";
+			mes "Se paciente, joven,";
+			mes "¡Necesito más tiempo! ¿No";
+			mes "entiendes que si";
+			mes "arruino este pentagrama,";
+			mes "tendrás que empezar todo desde el";
+			mes "principio? Yeah, así es~";
+			close;
+		case 3:
+			mes "[Morf]";
+			mes "No... Está listo... Aún.";
+			mes "Estará listo cuando este";
+			mes "listo, ¿Si? ¿Por qué no";
+			mes "das un paseo o algo";
+			mes "para matar el tiempo, si?";
+			close;
+		case 4:
+			mes "[Morf]";
+			mes "¿Sabes que?";
+			mes "Es hora de tomar otro descanso.";
+			mes "Déjame descansar mis pequeñas manos";
+			mes "y disfrutar una de estas pociones";
+			mes "amarillas que me trajiste.";
+			mes "Yep, esta es una buena idea.";
+			close;
+		case 5:
+			mes "[Morf]";
+			mes "Mira...";
+			mes "Si solo";
+			mes "te quedaras ahí";
+			mes "y respiras bajo mi";
+			mes "cuello mientras trabajo,";
+			mes "serías igual de útil.";
+			next;
+			mes "[Mork]";
+			mes "¡Tráeme algunos";
+			mes "snacks o algo,";
+			mes "o solo vete lejos de";
+			mes "aquí mientras termino!";
+			close;
+		case 6:
+			mes ".........";
+			mes "............";
+			mes "...............";
+			next;
+			mes "^3355FFMorf se ha";
+			mes "quedado profundamente dormido.^000000";
+			close;
+		case 7:
+			mes "[Morf]";
+			mes "No... ";
+			mes "Aún no.";
+			mes "Al igual que la última";
+			mes "vez que preguntaste.";
+			mes "Solo... Espera...";
+			close;
+		case 8:
+			mes ".........";
+			mes "............";
+			mes "...............";
+			next;
+			mes "^3355FFMorf está";
+			mes "en una bonita y descansada";
+			mes "siesta que parece";
+			mes "estar disfrutando mucho.^000000";
+			close;
+		case 9:
+			mes "[Morf]";
+			mes "¿Puedes ver mis manos, cierto?";
+			mes "Cuando no estén ocupadas tratando";
+			mes "de finalizar este pentagrama, ese será una seña de que ";
+			mes "he terminado. Mira, se";
+			mes "mueven, aun se mueven ¿Lo ves?";
+			close;
+		}
+	}
+	else if (dmdswrd_Q == 39) {
+		mes "[Morf]";
+		mes "Si realmente quieres";
+		mes "finalizar este pentagrama,";
+		mes "entonces busca a mi hermano";
+		mes "menor Huey en Morroc.";
+		mes "El debe poder ayudarte.";
+		mes "Quiero decir, si yo pude, ¡Él podrá!";
+		close;
+	}
+	else if (dmdswrd_Q == 40) {
+		mes "[Morf]";
+		mes "¿Lograste encontrar a";
+		mes "Huey? ¿Como está mi pequeño";
+		mes "hermanito? Bueno,";
+		mes "si él esta bien, entonces ponlo a";
+		mes "trabajar en este pentagrama. ¡No quiero que todo mi trabajo se desperdicie!";
+		close;
+	}
+	else if (dmdswrd_Q > 41 && dmdswrd_Q < 45) {
+		mes "[Morf]";
+		mes "Es bueno escuchar";
+		mes "que Huey está bien y";
+		mes "que no hay nada malo con";
+		mes "su salud. En ese caso,";
+		mes "debería escribirme a mi y a";
+		mes "Walker más seguido!";
+		close;
+	}
+	else if (dmdswrd_Q == 45) {
+		mes "[Morf]";
+		mes "Ahora que tienes una";
+		mes "de esas espadas malditas,";
+		mes "quiero que la uses solo por";
+		mes "buenas razones. Las maldiciones";
+		mes "de las espadas son más poderosas cuando dudas de tu convicción.";
+		close;
+	}
+	else {
+		mes "[Old Man]";
+		mes "¡Arrrrrrrrrghhhh~! ";
+		mes "¡Me duele mucho el corazón!";
+		mes "En momentos como estos, seguro";
+		mes "podría usar una poción amarilla para";
+		mes "hacer frente a mi resaca.";
+		mes "Vamos, ¡necesito mucho mis medicinas!";
+		close;
+	}
+}
+
+morocc,248,159,4	script	Young Man#magum1	86,{
+	if (dmdswrd_Q == 39) {
+		mes "[Huey]";
+		mes "Disculpe, pero...";
+		mes "Um ¿Necesita";
+		mes "algo?";
+		mes "Pareces tener";
+		mes "una pregunta para mi.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "¡De hecho, estoy buscando a";
+		mes "alguien llamado Huey!";
+		mes "Escuche que él es el único";
+		mes "capas de ayudarme a terminar";
+		mes "esto... bueno... sabes donde";
+		mes "puedo encontrarlo?";
+		next;
+		mes "[Huey]";
+		mes "S-Si. Y-Yo soy Huey.";
+		mes "Pero ¿Para qué me";
+		mes "buscas? ¡Oh! ¡¿Eres alguna";
+		mes "clase de mensajero de uno";
+		mes "de mis hermano?! No he escuchado";
+		mes "de ellos en mucho tiempo.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Más bien, trato de";
+		mes "obtener una espada maldita.";
+		mes "Para hacer eso, ya he";
+		mes "obtenido el Sello de Muriniel,";
+		mes "y tus hermanos han";
+		mes "empezado este pentagrama.";
+		next;
+		mes "[Huey]";
+		mes "¿Hablas en serio?";
+		mes "¿Has venido desde tan lejos";
+		mes "para obtener una de esas espadas";
+		mes "malditas? Mm. ¿Podrías por favor";
+		mes "dejarme ver ese pentagrama? ¡Oh,";
+		mes "mis hermano hicieron un gran trabajo!";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Ah, si. Aquí.";
+		next;
+		mes "[Huey]";
+		mes "¡No se si tu puedas";
+		mes "apreciar esto pero";
+		mes "este pentagrama es un gran";
+		mes "trabajo! Ahora, si mis";
+		mes "hermanos mayores ya te han^FFFFFF ^000000 ayudado, yo debo hacer lo mismo.";
+		next;
+		mes "[Huey]";
+		mes "Mis hermanos mayores son mejores";
+		mes "forjadores que yo,";
+		mes "si fuiste capaz de convencerlos";
+		mes "de ayudarte, no tengo";
+		mes "el derecho de rechazarte. Además si yo no lo hago...";
+		next;
+		mes "[Huey]";
+		mes "... Entonces el trabajo de mis hermanos";
+		mes "habrá sido por nada.";
+		mes "Y entonces... Ellos podrían venir";
+		mes "a buscarme. Morf";
+		mes "especialmente. ¡Oh cierto! ¡Materiales! ^FFFFFF ^000000 ¡Necesitaré esto para el pentagrama!";
+		next;
+		mes "[Huey]";
+		mes "Por favor tráeme";
+		mes "^FF00009 Rubies^000000, ";
+		mes "^FF00006 Blades of Darkness^000000, ";
+		mes "^FF00009 Bloody Edges^000000, y ";
+		mes "^FF00001 Loki's Whisper^000000. ";
+		next;
+		mes "[Huey]";
+		mes "Mientras terminas de juntar";
+		mes "los ítems necesarios, yo estaré";
+		mes "terminando mis preparativos.";
+		mes "Oh, y tráeme la ^FF0000cantidad";
+		mes "exacta^000000--^FF0000ni uno más^000000, ^FF0000ni uno menos^000000.";
+		mes "Bueno ahora, te veo luego~";
+		set dmdswrd_Q,40;
+		close;
+	}
+	else if (dmdswrd_Q == 40) {
+		if (countitem(7024) == 9 && countitem(7023) == 6 && countitem(723) == 9 && countitem(7019) == 1) {
+			mes "[Huey]";
+			mes "Oh, ya volviste. ¿Me";
+			mes "traes todo lo";
+			mes "que necesito para el pentagrama";
+			mes "en las cantidades exactas? Mmm...";
+			mes "¡Ah! ¡Si, perfecto! Buen trabajo~";
+			next;
+			mes "[Huey]";
+			mes "¿Podrías por favor esperar";
+			mes "mientras termino este pentagrama?";
+			mes "Esto tomará algo de";
+			mes "tiempo, pero créeme, ya casi";
+			mes "hemos terminado. Todo tu esfuerzo";
+			mes "ser remunerado en poco tiempo~";
+			delitem 7024,9; //Bloody_Edge
+			delitem 7023,6; //Blade_Lost_In_Darkness
+			delitem 723,9; //Cardinal_Jewel
+			delitem 7019,1; //Loki's_Whispers
+			set dmdswrd_Q,41;
+			close;
+		}
+		mes "[Huey]";
+		mes "Para poder terminar el";
+		mes "pentagrama, necesitaré algunos";
+		mes "objetos en cantidades exactas--";
+		mes "ni más, ni menos. Si tienes";
+		mes "muchos de los objetos requeridos, por que no los pones en el Storage?";
+		next;
+		mes "[Huey]";
+		mes "Por favor tráeme";
+		mes "^FF00009 Rubies^000000, ";
+		mes "^FF00006 Blades of Darkness^000000, ";
+		mes "^FF00009 Bloody Edges^000000, y ";
+		mes "^FF00001 Loki's Whisper^000000. ";
+		mes "Bien, estaré esperando~";
+		close;
+	}
+	else if (dmdswrd_Q == 41) {
+		mes "[Huey]";
+		mes "Hey, ¡tu sincronización es";
+		mes "perfecta! Ya casi completo";
+		mes "el pentagrama para liberar";
+		mes "una de las espadas malditas.";
+		mes "Solo un último paso...";
+		next;
+		mes "[Huey]";
+		mes "¿Podrías poner el Sello de Murinel en el pentagrama? Eso abrirá";
+		mes "el sello, provocando que la espada que mejor te convenga se manifieste.";
+		mes "Pronto, Grimtooth, Mysteltainn,";
+		mes "o Executioner será tuya...";
+		next;
+		mes "^3355FFColocas cuidadosamente el";
+		mes "Sello de Muriniel en el";
+		mes "pentagrama. Unas pocas partes";
+		mes "del pentagrama inmediatamente";
+		mes "empieza a pulsar suavemente con";
+		mes "un suave y gentil brillo.^000000";
+		next;
+		mes "[Huey]";
+		mes "Está... ¡Está comenzando! Las";
+		mes "secciones del pentagrama";
+		mes "están activándose en el orden";
+		mes "en que fueron completadas.";
+		mes "Las partes que se encendieron ahora";
+		mes "deben ser el trabajo de Walker...";
+		next;
+		mes "^3355FFDe pronto, otra sección";
+		mes "de el pentagrama se activa,";
+		mes "y partes del pentagrama";
+		mes "brillan inestables con una";
+		mes "intensa e irregular luz.^000000";
+		next;
+		mes "[Huey]";
+		mes "Esa debe ser...";
+		mes "Morf debe haber hecho";
+		mes "esa parte. Bien, cuando";
+		mes "la luz se estabilice y";
+		mes "el pentagrama completo este";
+		mes "brillando, estará listo.";
+		next;
+		mes "^3355FFLas porciones inactivas";
+		mes "de el pentagrama se encienden,";
+		mes "y el pentagrama entero";
+		mes "emite un cálido y efusivo brillo.^000000";
+		next;
+		mes "[Huey]";
+		mes "Bien. ¡Esto es importante!";
+		mes "Una de las espadas malditas";
+		mes "se va a manifestar muy pronto.";
+		mes "Cuando puedas ver la espada";
+		mes "dentro de la luz. ¡Tómala rápido! ";
+		next;
+		mes "[Huey]";
+		mes "Espero. ¿Puedes--?";
+		mes "Ahí. ¡Lo vez! Ahora";
+		mes "rápido. ¡tómala! ¡Es tuya!";
+		next;
+		set .@random,rand(1,10);
+		if (.@random >= 1 && .@random <= 5) {
+			callsub S_GetSword,1237,0,1,42;
+			getitem 1237,1; //Grimtooth_
+			close;
+		}
+		else if (.@random >= 6 && .@random <= 8) {
+			callsub S_GetSword,1138,1,1,43;
+			getitem 1138,1; //Mysteltainn_
+			close;
+		}
+		else {
+			callsub S_GetSword,1169,2,1,44;
+			getitem 1169,1; //Executioner_
+			close;
+		}
+	}
+	else if (dmdswrd_Q == 42) {
+		callsub S_GetSword,1237,0,0,0;
+		getitem 1237,1; //Grimtooth_
+		close;
+	}
+	else if (dmdswrd_Q == 43) {
+		callsub S_GetSword,1138,1,0,0;
+		getitem 1138,1; //Mysteltainn_
+		close;
+	}
+	else if (dmdswrd_Q == 44) {
+		callsub S_GetSword,1169,2,0,0;
+		getitem 1169,1; //Executioner_
+		close;
+	}
+	else if (dmdswrd_Q == 45) {
+		mes "[Huey]";
+		mes "Así que ¿Qué te parece";
+		mes "la espada maldita? Hagas";
+		mes "lo que hagas, no abuses de su poder";
+		mes "y estarás bien. Tengo";
+		mes "fe en que nunca";
+		mes "sucumbirás ante la maldición de la espada.";
+		next;
+		mes "[Huey]";
+		mes "de cualquier manera, realmente";
+		mes "debería agradecerte por";
+		mes "la oportunidad de usar";
+		mes "mis habilidades, quiero decir, no";
+		mes "me hubiese gustado que lo que aprendí de";
+		mes "los Dwarves se desperdiciara.";
+		close;
+	}
+	else {
+		mes "[Huey]";
+		mes "Sabes, he viajado";
+		mes "a toda clase de lugares, pero";
+		mes "¡El calor aquí en Morroc";
+		mes "es el peor que he";
+		mes "experimentado! Es tan húmedo";
+		mes "e inconfortable aquí...";
+		close;
+	}
+
+S_GetSword:
+	if (getarg(2) == 1) {
+		mes "^3355FFTe adentras en la";
+		mes "luz cegadora y tomas";
+		mes "el mango de la espada. Cuando";
+		mes "la luz se disipa, tu";
+		mes "puede ver que has";
+		mes "obtenido una "+getitemname(getarg(0))+".^000000";
+		set magum,getarg(3);
+		next;
+	}
+	if (checkweight(getarg(0),1) == 0) {
+		mes "[Huey]";
+		mes "Espera, estas cargando";
+		mes "muchas cosas contigo.";
+		mes "Deberías almacenar algunas cosas";
+		mes "para tener más espacio disponible";
+		mes "en tu inventario. Entonces, podremos finalmente reclamar tu espada maldita.";
+		close;
+	}
+	mes "[Huey]";
+	if (getarg(1) == 0) {
+		mes "¡Es-ese es el Grimtooth!";
+		mes "Incluso cuando fui instruido";
+		mes "para las técnicas del pentagrama";
+		mes "por esos Dwarves, nunca me imagine";
+		mes "que llegaría a ver esa espada. Por favor usa esa arma sabiamente.";
+	}
+	else if (getarg(1) == 1) {
+		mes "¡No puedo creeerlo!";
+		mes "Tú... ¿Tú has sido encontrado";
+		mes "merecedor de la Mysteltainn?";
+		mes "Se cuidadoso, y no permitas";
+		mes "que su poder te corrompa.";
+		mes "Úsala solo para fines justos...";
+	}
+	else if (getarg(1) == 2) {
+		mes "¡Es-Esa es...!";
+		mes "¿La Executioner te ha";
+		mes "elegido para portarla?";
+		mes "Debes tener una extrema";
+		mes "fuerza de voluntad, o algo...";
+		mes "No le des un brillo de sangre.";
+	}
+	next;
+	mes "[Huey]";
+	mes "Bueno. parece que mi";
+	mes "trabajo aquí ha terminado. Estoy feliz";
+	mes "de haber tenido la oportunidad de usar estas";
+	mes "antiguas habilidades y es un honor haber conocido a un virtuoso aventurero.";
+	mes "Mis hermanos deben estar orgullosos.";
+	next;
+	mes "[Huey]";
+	mes "Hablando de eso,";
+	mes "por favor dale a Morf y";
+	mes "a Walker mis saludos si";
+	mes "los vuelves a ver. Bueno";
+	mes "entonces, cuídate, y se cauteloso usando esa espada.";
+	set dmdswrd_Q,45;
+	return;
+}

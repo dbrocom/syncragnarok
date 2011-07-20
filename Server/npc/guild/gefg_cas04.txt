@@ -1,0 +1,134 @@
+//===== eAthena Script =======================================
+//= War of Emperium (Geffen)
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= NPCs that relate to Geffen Guild Castle 4
+//===== Additional Comments: =================================
+//= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
+//= 1.1 Corrected treasure room switch coordinates. [L0ne_W0lf]
+//= 1.2 Removed dialog from interior flags. [L0ne_W0lf]
+//============================================================
+
+// Guild Flag (Town)
+//============================================================
+geffen,127,130,7	script	Bergel#g4-1::Bergel	722,{
+	end;
+
+OnRecvCastleG04:
+	FlagEmblem GetCastleData("gefg_cas04",1);
+	end;
+}
+
+// Guild Flag (Outside Castle)
+//============================================================
+gef_fild13,190,283,3	script	Bergel#g4-2::Bergel2	722,{
+	set .@GID, GetCastleData("gefg_cas04",1);
+	if (.@GID == 0) {
+		mes " [ Decreto del Divino Reino de Rune Midgard ]";
+		mes " ";
+		mes "1. Siguiendo el reglamento del Divino Reino de Rune Midgard, ";
+		mes "Declaramos que";
+		mes "este castillo no tiene un dueño oficial.";
+		mes " ";
+		mes "2. Sólo a quien pueda ";
+		mes "superar todas las pruebas";
+		mes "y destruir el Emperium,";
+		mes "el rey le concederá el";
+		mes "dominio de este castillo.";
+	}
+	else {
+		if (getcharid(2) == .@GID) {
+			mes "Valiente...";
+			mes "¿Desea volver a su honorable lugar?";
+			next;
+			if (select("Return to the guild castle.:Quit.") == 1) {
+				if (getcharid(2) == GetCastleData("gefg_cas04",1)) {
+					warp "gefg_cas04",59,70;
+					//warp "gefg_cas04",168 43;
+					end;
+				}
+			}
+			close;
+		}
+		mes "[ Edict of the Divine Rune Midgard Kingdom ]";
+		mes " ";
+		mes "1. Siguiendo el reglamento del";
+		mes "Divino Reino de Rune Midgard,";
+		mes "aprobamos que este lugar está en";
+		mes "la exclusiva posesión de la Guild^ff0000" + GetGuildName(.@GID) + "^000000.";
+		mes " ";
+		mes "2. El líder de la Guild^ff0000"+ GetGuildName(.@GID) + "^000000 es";
+		mes "^FF0000" + GetGuildMaster(.@GID) + "^000000";
+		mes "Si hay alguien que se oponga,";
+		mes " que pruebe su fuerza y honor con su espada.";
+	}
+	close;
+
+OnRecvCastleG04:
+	FlagEmblem GetCastleData("gefg_cas04",1);
+	end;
+}
+
+gef_fild13,199,274,3	duplicate(Bergel2)	Bergel#g4-3	722
+
+// Guild Flag (Inside Castle)
+//============================================================
+gefg_cas04,24,157,4	script	Bergel#g4-4::Bergel3	722,{
+	end;
+
+OnRecvCastleG04:
+	FlagEmblem GetCastleData("gefg_cas04",1);
+	end;
+}
+
+gefg_cas04,35,158,4	duplicate(Bergel3)	Bergel#g4-5	722
+gefg_cas04,44,184,4	duplicate(Bergel3)	Bergel#g4-6	722
+gefg_cas04,51,184,4	duplicate(Bergel3)	Bergel#g4-7	722
+gefg_cas04,39,212,7	duplicate(Bergel3)	Bergel#g4-8	722
+gefg_cas04,29,212,1	duplicate(Bergel3)	Bergel#g4-9	722
+gefg_cas04,24,73,1	duplicate(Bergel3)	Bergel#g4-10	722
+gefg_cas04,35,73,4	duplicate(Bergel3)	Bergel#g4-11	722
+
+// AGIT Manager
+//============================================================
+gefg_cas04,174,178,0	duplicate(Gld_Agit_Manager)	Agit#gefg_cas04	-1
+
+// Steward
+//============================================================
+gefg_cas04,73,46,3	duplicate(Gld_Mngr_Template)	Kellvahni#gefg_cas04	55
+
+// Guardians
+//============================================================
+gefg_cas04,73,46,3	duplicate(Gld_Guard_Template)	Guardian#gefg_cas04	-1
+
+// Kafra Staff
+//============================================================
+gefg_cas04,59,70,3	duplicate(Gld_Kafra_Template)	Kafra Staff#gefg_cas04	117
+
+// Master's Room Exit
+//============================================================
+gefg_cas04,117,123,0	script	#switch_G04	111,{
+	mes " ";
+	mes "Hay una pequeña palanca, ¿Quieres tirar de ella? ";
+	next;
+	if(select("Pull.:Do not.") == 2) close;
+	warp "gefg_cas04",73,47;
+	end;
+}
+
+// Guild Treasure Protection
+//============================================================
+gefg_cas04,116,119,0	duplicate(Gld_Trea_Protect)	ban_warp#gefg_cas04	-1,6,6
+
+// Guild Treasure Spawns
+//============================================================
+gefg_cas04,116,119,0	duplicate(Gld_Trea_Spawn)	Treasure#gefg_cas04	-1
+
+// Guild Dungeon Switch
+//============================================================
+gefg_cas04,58,75,0	duplicate(Gld_Dun_Template)	#gefg_cas04	111

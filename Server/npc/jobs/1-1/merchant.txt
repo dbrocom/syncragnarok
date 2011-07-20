@@ -1,0 +1,126 @@
+ //===== eAthena Script ======================================= 
+//= Renewal Merchant Job Change
+//===== By: ================================================== 
+//= Kisuka
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= Job Change to Merchant Class
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Kisuka]
+//============================================================ 
+alberta_in,53,43,6	script	Merchant#mer	86,{
+	if (Upper == 1) {
+		if (Class == Job_Novice_High && (ADVJOB == Job_Whitesmith || ADVJOB == Job_Creator)) {
+			mes "[Chief Mahnsoo]";
+			mes "¡Cuánto tiempo sin verte!";
+			mes "Hey, ¿acaso has dejado el negocio?";
+			mes "¿Qué pasó?";
+			next;
+			mes "[Chief Mahnsoo]";
+			mes "Whoa...";
+			mes "¡¿Has estado en el Valhalla?! Wow, has recorrido un largo camino desde que empezaste...";
+			next;
+			if (getskilllv("NV_BASIC") < 9) {
+				mes "[Chief Mahnsoo]";
+				mes "Hmmm...";
+				mes "Sin embargo, parece que todavía no estás listo para volver a ser Merchant. ¿Has pensado en terminar de aprender las Basic Skills de Novice?";
+				next;
+				mes "[Chief Mahnsoo]";
+				mes "No te preocupes, te guardaré la plaza de Merchant. Tan sólo vuelve cuando estés listo, ¿vale?";
+				close;
+			}
+			mes "[Chief Mahnsoo]";
+			mes "Supongo que el destino quiere que nos encontremos una vez más. Está bien.";
+			mes "Volvamos a empezar. ¡Permíteme que te convierta en Merchant!";
+			next;
+			skill 143,0,0;
+			jobchange Job_Merchant_High;
+			skill 153,1,0;
+			skill 154,1,0;
+			skill 155,1,0;
+			mes "[Chief Mahnsoo]";
+			mes "Ah~ cuánta nostalgia. ¡Cómo en los viejos tiempos! Está bien, ¡hazlo lo mejor que puedas!";
+			close;
+		}else{
+			mes "[Chief Mahnsoo]";
+			mes "^333333*Suspiro*^000000";
+			mes "Estoy tan aburrido...";
+			mes "¿Cuándo recibiré la carta de mi capullito?~";
+			close;
+		}
+	}
+	mes "[Guildsman Mahnsoo]";
+	mes "Hey, ¿Qué haces aquí?";
+	next;
+	switch(select("Me gustaría convertirme en Merchant.:Me gustaría conocer más acerca de los Merchants.:¿Qué requisitos se necesitan para ser Merchant?.:Nada por ahora.")) {
+	case 1:
+		if(Class != Job_Novice && Class != Job_Baby) {
+			mes "[Guildsman Mahnsoo]";
+			if(Class == Job_Merchant || Class== Job_Baby_Merchant) {
+				mes ".¿....? ¿Disculpa? ¿Qué estás queriendo decir?";
+				mes "Ya eres un merchant. Por los dioses...";
+				mes "¡¿Qué?! ... ¡¿Tengo que reírme ahora?!";
+			}else{
+				mes "¿Ahh? ¿Estás intentando especializarte en dos campos?";
+				mes "¿O acaso intentas dejar tu profesión actual?";
+				next;
+				mes "[Guildsman Mahnsoo]";
+				mes "Tenemos 'ética en los negocios', ya sabes. Lo que pides es imposible.";
+			}
+			close;
+		}else{
+			mes "[Guildsman Mahnsoo]";
+			mes "¿Quieres convertirte en merchant? Hmm...";
+			next;
+			if (getskilllv("NV_BASIC") < 9) {
+				mes "[Guildsman Mahnsoo]";
+				mes "Pero si quieres convertirte en Merchant, deberías alcanzar el Nivel 9 en las habilidades básicas.";
+				next;
+				mes "[Guildsman Mahnsoo]";
+				mes "¿No crees que debemos saber los conocimientos básicos a pesar de que sólo nos interese el dinero?";
+				close;
+			}
+			mes "[Guildsman Mahnsoo]";
+			mes "Está bien, creo que estás preparado para esto. Satisfaces los requisitos mínimos con creces.";
+			mes "Ahora, permíteme que te inscriba como mercader.";
+			next;
+			mes "[Guildsman Mahnsoo]";
+			mes "¡Felicidades por convertirte en Merchant!";
+			mes "¡Y felicidades por tu ingreso en el Gremio de Mercaderes y ser uno de los nuestros!. Espero que participes activamente con nosotros de ahora en adelante.";
+			if (Class == Job_Novice){ callfunc "Job_Change",Job_Merchant; }
+			else if (Class == Job_Baby) { callfunc "Job_Change",Job_Baby_Merchant; }
+			getitem	1381,1; // N_Battle_Axe
+			next;
+			mes "[Guildsman Mahnsoo]";
+			mes "Por supuesto, necesitamos gente joven que sienta pasión por los negocios, y que incremente el valor del zeny mundialmente. Estás con nosotros, ¿no?";
+			mes "Me desvío del tema... me refiero que lo importante al final, es lograr ganar mucho dinero. Aunque eso ya lo sabes~";
+			close;
+		}
+	case 2:
+		mes "[Guildsman Mahnsoo]";
+		mes "¿Merchant? Para ser breve, es la persona que vende bienes y consigue dinero por ello.";
+		mes "No somos muy buenos luchando y no tenemos skills especiales de ataque o recuperación... pero podemos comprar cosas a precio de coste y venderlas más caras para conseguir dinero.";
+		next;
+		mes "[Guildsman Mahnsoo]";
+		mes "Bueno, miento. Sí tenemos una poderosa habilidad llamada Mammonite que golpea al enemigo usando dinero... Y podemos equiparnos de todo excepto arcos, cetros y espadas a 2 manos. Aunque siempre podemos venderlas~~.";
+		mes "Sí... lo has adivinado. Los merchants siempre estamos pensando en dinero, ¿lo pillas? jeje.";
+		close;
+	case 3:
+		mes "[Guildsman Mahnsoo]";
+		mes "Para convertirse en mercader, aunque nuestro trabajo se base en comprar y vender, necesitarás alcanzar nivel 9 de las habilidades básicas.";
+		next;
+		mes "[Guildsman Mahnsoo]";
+		mes "Y bueno, solíamos pedir una tarifa para poder inscribirse como Merchant. ¿No es tan difícil conseguir dinero, no?";
+		mes "Eso creíamos nosotros. Sin embargo había mucha gente que no podía reunir el dinero y empezó a quejarse.";
+		next;
+		mes "[Guildsman Mahnsoo]";
+		mes "Así que hemos decicido que cualquier Novice que quiera inscribirse en el registro de Merchants pueda hacerlo.";
+		mes "¡Sin tarifas ni preocupaciones!";
+		close;
+	case 4:
+		close;
+	}
+}

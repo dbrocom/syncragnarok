@@ -1,0 +1,132 @@
+//===== eAthena Script =======================================
+//= Hypnotist
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= [Aegis conversion]
+//= Permenent first class, base level 40 and under skill resetter.
+//= First Class characters and expanded classes only.
+//= Baby Classes and First Class trans can't use this service.
+//===== Additional Comments: =================================
+//= 1.0 First version. [L0ne_W0lf]
+//============================================================
+
+prontera,146,232,4	script	Hypnotist#2	124,{
+	mes "[Hypnotist]";
+	mes "Saludos, aventurero.";
+	mes "Soy un miembro de la academia de Hipnotistas de Prontera.";
+	mes "Y como miembro, estoy capacitado para ofrecer servicios de Reset de Skills a determinados personajes.";
+	mes "Como todavía soy estudiante, ¡mis servicios son gratuítos!";
+	next;
+	mes "[Hypnotist]";
+	mes "Sin embargo, como ya he mencionado, todavía estoy estudiando,";
+	mes "por ello, no puedo resetear a personajes de más de ^FF0000Nivel Base 50^000000.";
+	next;
+	mes "[Hypnotist]";
+	mes "Además, mi preparación actual sólo me permite hacer olvidar cosas a:";
+	mes "^FF0000Swordman, Acolyte, Mage,";
+	mes "Thief, Archer, Merchant,";
+	mes "Taekwon Boy, Taekwon Girl, Gunslinger y Ninja^000000";
+	mes "¿Tienes alguna pregunta más?";
+	next;
+	switch(select("¿Reset?:Quiero un Reset de Skills:Nada")) {
+
+	case 1:
+		mes "[Hypnotist]";
+		mes "Mediante mis técnicas de hipnosis,";
+		mes "puedo hacer que olvides la distribución de tus skill,";
+		mes "permitiéndote volver a subir los puntos como más te convenga.";
+		next;
+		mes "[Hypnotist]";
+		mes "Ah, y recuerda deshacerte de todo el peso extra que tengas, así como el carro";
+		mes "que lleves contigo. De otra forma, la hipnosis podría no funcionar correctamente...";
+		next;
+		mes "[Hypnotist]";
+		mes "De momento sólo puedo realizar Resets de Skills. Necesito más estudio y aprendizaje para poder Resetear Stats.";
+		next;
+		mes "[Hypnotist]";
+		if ( HypnoBros == 2 ) {
+			mes "Ya me ha dicho mi hermano que hablaste con él. ¿Todavía buscas más información?";
+			mes "No soy la más adecuada para decirlo... pero dado que es uno de mis Maestros...";
+			mes "Quizá le puedas encontrar investigando por ^FF0000las selvas de Umbala^000000, ^FF0000la cordillera de Mjolnir^000000 o ^FF0000las minas de Einbroch^000000.";
+			next;
+			mes "[Hypnotist]";
+			mes "No se te olvide leer alguno de los libros del Maestro.";
+			mes "Encontrarás los tomos en la biblioteca de Yuno.";
+			close;
+		}
+		mes "Si te interesa, habla con mi hermano. Aunque tenemos la misma edad, va un curso más adelantado que yo y seguramente pueda ayudarte con el Reset de Stats.";
+		mes "Pero dudo que le encuentres paseando por la calle. Se pasa el día ^FF0000estudiando^000000.";
+		set HypnoBros,1;
+		close;
+
+	case 2:
+		mes "[Hypnotist]";
+		mes "¿Estás seguro de que quieres que utilice";
+		mes "mis técnicas de Hipnotismo contigo?";
+		next;
+		if (select("Sí:No, mejor no") == 1) {
+			if (BaseLevel > 50) {
+				mes "[Hypnotist]";
+				mes "Lo siento, no soy capaz de hipnotizar a personajes de más de nivel 50.";
+				close;
+			}
+			if ((Class > 0 && Class < 7 && Upper == 0) || (Class == Job_Gunslinger) || (Class == Job_Ninja) || (Class == Job_Taekwon)) {
+				if (checkcart()) {
+					mes "[Hypnotist]";
+					mes "¡Espera! Mejor deshazte del carro primero.";
+					mes "Gracias por cooperar~";
+					close;
+				}
+//				if (Weight) {
+//					mes "[Hypnotist]";
+//					mes "Recuerda que la hipnosis puede fallar";
+//					mes "si llevas demasiado peso contigo.";
+//					mes "Por favor, deshazte de todo el peso extra,";
+//					mes "y vuelve a verme cuando tu peso se reduzca a 0.";
+//					next;
+//					mes "[Hypnotist]";
+//					mes "¿Por qué no usas el sistema de almacenamiento";
+//					mes "de las kafras?";
+//					mes "Ellas cuidarán de tus pertenencias.";
+//					close;
+//				}
+				mes "[Hypnotist]";
+				mes "¡Concentrate!";
+				mes "Deja tu mente en blanco...";
+				mes "Vas a olvidar todo lo aprendido ";
+				mes "durante tus viajes, aventurero.";
+				ResetSkill;
+				close;
+			}
+			mes "[Hypnotist]";
+			mes "Lo siento, pero no puedo hipnotizarte.";
+			mes "Necesito estudiar y mejorar mucho más";
+			mes "para poder trabajar contigo.";
+			mes "Recuerda que con mi nivel, sólo puedo";
+			mes "ofrecer Reset de Skills a los siguientes Jobs:";
+			next;
+			mes "[Hypnotist]";
+			mes "^FF0000Swordman, Acolyte,";
+			mes "Mage, Thief, Archer,";
+			mes "Merchant, Taekwon";
+			mes "Boy, Taekwon Girl, Gunslinger y Ninja^000000.";
+			close;
+		}
+		mes "[Hypnotist]";
+		mes "Gracias y buena suerte con tus aventuras.";
+		mes "Ten cuidado~";
+		close;
+
+	case 3:
+		mes "[Hypnotist]";
+		mes "Gracias y buena suerte.";
+		mes "Ten cuidado~";
+		close;
+	}
+
+}

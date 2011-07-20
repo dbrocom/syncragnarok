@@ -1,0 +1,84 @@
+//This quest is custom. Don't use it.
+
+geffen,115,107,5	script	Lord Kaho's Servant	61,{
+	mes "[Lord Kaho's Servant]";
+	mes "Trabaje hasta la muerte para lograr las ridiculas expectativas de headgears de Lord Kaho";
+	mes "Ahora que finalmente encontre la formula para el headgear perfecto, Estoy dispuesto a compartir mi tiempo y talentos";
+	next;
+	mes "Necesitas lo siguiente para obtener Kaho horns!";
+	mes "3 emperiums";
+	mes "Oh si..tambien olvide mencionar esto X_X";
+	next;
+	mes "1 Skull - De Dark Lord";
+	mes "1 Heroic Emblem - De Orc Hero";
+	mes "1 Evil Horn - De Baphomet";
+	mes "1 Red Frame - De Doppelganger";
+	mes "1 Smoking Pipe - De Eddga";
+	mes "1 Fang of Garm - De Garm";
+	mes "1 Mother's Nightmare - De Maya";
+	mes "1 Sphynx Hat - De Osiris";
+	mes "1 Diamond Ring - De Mistress";
+	next;
+	mes "Todavia no terminamos cariño..";
+	mes "Soy un gran fan de las muñecas , asique necesitas traerme estas bellezas :";
+	mes "1 Poring Doll -  Poring drop";
+	mes "1 Chonchon Doll -  Chonchon Drop";
+	mes "1 Baphomet Doll -  Baphomet drop";
+	mes "1 Osiris Doll -  Osiris drop";
+	mes "1 Rocker Doll -  Rocker drop";
+	mes "1 Apez Fanitem Doll -  Yoyo drop";
+	mes "1 Racoon Doll -  Smokie drop";
+	mes "1 Spore Doll -  Spore drop";
+	next;
+	mes "Finalmente , he trabajado muy duro para hacer estos horns para mi maestro con todos los items mencionados arriba...";
+	mes "Porfavor incluye 5 millones de zeny por mis esfuerzos"; 
+	next;
+	mes "[Lord Kaho's Servant]";
+	mes ". . . . . .";
+	mes "Estas listo para hacer este item especial?";
+	next;
+	menu "Seguro que lo estoy!",-,"Estos requerimientos son Dificiles de encontrar!",LUnfathomable;
+
+		mes "[Lord Kaho's Servant]";
+		if(countitem(754) < 1 || countitem(753) < 1 || countitem(752) < 1 || countitem(751) < 1 || countitem(750) < 1
+			|| countitem(743) < 1 || countitem(742) < 1 || countitem(741) < 1 || countitem(2613) < 1
+			|| countitem(5053) < 1 || countitem(7020) < 1 || countitem(7036) < 1 || countitem(2268) < 1
+			|| countitem(734) < 1 || countitem(923) < 1 || countitem(968) < 1 || countitem(7005) < 1
+			|| countitem(714) < 3 || Zeny < 5000000) goto LNotEnough;
+		delitem 754,1;
+		delitem 753,1;
+		delitem 752,1;
+		delitem 751,1;
+		delitem 750,1;
+		delitem 743,1;
+		delitem 742,1;
+		delitem 741,1;
+		delitem 2613,1;
+		delitem 5053,1;
+		delitem 7020,1;
+		delitem 7036,1;
+		delitem 2268,1;
+		delitem 734,1;
+		delitem 923,1;
+		delitem 968,1;
+		delitem 7005,1;
+		delitem 714,3;
+		set Zeny,Zeny-5000000;
+		mes "Wow! eres valiente de verdad!";
+		getitem 5013,1;
+		mes ". . . . .";
+		mes "Disfruta siendo Dios de Rune Midgard!";
+		close;
+
+		LNotEnough:
+			mes ". . . . .";
+			mes ". . . Lo siento .. No tienes suficiente dinero ni items..";
+			mes "No puedo hacer esto si no traes todos los materiales qe necesito. Porfavor entiende esto es para beneficar héroes como tu!";
+			close;
+
+	LUnfathomable:
+		mes ". . . . .";
+		mes "Lo que tuve que pasar fue muy dificil";
+		mes "Si logras conseguir estos items , recibiras fuerza increible!";
+		close;
+}

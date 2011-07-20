@@ -1,0 +1,237 @@
+//===== eAthena Script ======================================= 
+//= Bandit Beard Quest
+//===== By: ================================================== 
+//= Mega Man Expert & Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 0.5.2 +
+//===== Description: ========================================= 
+//= A harmless quest for a simply item w/o any bonuses "Bandit Beard"
+//===== Additional Comments: ================================= 
+//= Fully working.
+//= 1.0 First release
+//= 1.1 Fixed some exploits, bugs and typos. Optimized 8) [Lupus]
+//= 1.1b fixed some typos
+//= 1.2 fixed donpcevent label [Lupus]
+//= 1.3 Removed duplicates [L0ne_W0lf]
+//============================================================
+
+umbala,126,129,4	script	Bearded Man#bandit	120,{
+	if(BEARD_QUEST == 4 ) goto L_MAKE;
+	if(BEARD_QUEST >= 5 ) goto L_DONE;
+	if(BEARD_QUEST >= 1 ) goto L_THREAD;
+
+	mes "[Bearded Man]";
+	mes "¡Barbas! ¡Llévense sus magnificas barbas!";
+	mes "¿Te gustaría una barba?";
+	next;
+	menu "Si, ¡me gustaría tenes vello facial!",-,"No gracias, ¡eso es asqueroso!",M_NO;
+
+	mes "[Bearded Man]";
+	mes "HaHa~ Así que quieres tener bigote..";
+	emotion 18;
+	mes "Bueno, te daría mis barbas pero no son baratas.";
+	mes "De hecho me queda solamente una...";
+	mes "pero no la estoy vendiendo.";
+	mes "¡Pero no te enojes! Te puedo hacer una.";
+	next;
+	set BEARD_QUEST,1;
+L_THREAD:
+	mes "[Bearded Man]";
+	mes "Necesitaria algunos ^8080FFThread^000000 para hacerte la Barba.";
+	mes "Habla con mi amigo en Izlude para que consigas el ^8080FFThread^000000.";
+	next;
+
+	mes "[Bearded Man]";
+	mes "También necesito que me consigas algunas cosas para la barba.";
+	mes "Estas son:";
+L_LIST:
+	mes "^8080FFElastic Band^000000";
+	mes "^8080FF5 Animal Skins^000000";
+	mes "^8080FFBlack Dye Stuff^000000";
+	mes "^8080FFGranpa Beard^000000";
+	mes "^8080FF100 sticky Mucus^000000";
+	mes "^8080FFCounteragent^000000";
+	mes " y un ^8080FF2 Carat Diamond^000000";
+	close;
+
+M_NO:
+	mes "[Bearded Man]";
+	mes "Bien, ¡que así sea!";
+	emotion 7;
+	close;
+
+L_DONE:
+	mes "[Bearded Man]";
+	mes "Lo siento, solamente puedo hacer una por persona.";
+	mes "No queremos muchas barbas. ¿Cierto?";
+	emotion 29;
+	close;
+
+L_MAKE:
+	mes "[Bearded Man]";
+	mes "¡Vamos a hacer tu barba!";
+	next;
+	if(countitem(7200) < 1 || countitem(919) < 1 ||	countitem(983) < 1 || countitem(2241) < 1 ||
+	countitem(938) < 100 || countitem(973) < 1 || countitem(731) < 1) goto L_NOITEMS;
+	delitem 7200, 1;
+	delitem 919, 1;
+	delitem 983, 1;
+	delitem 2241, 1;
+	delitem 938, 100;
+	delitem 973, 1;
+	delitem 731, 1;
+	mes "^8080FF~Lo ves cortando y uniendo la barba.~^000000";
+	next;
+	mes "^8080FF~Te entrega la barba finalizada.~^000000";
+	next;
+	getitem 2237, 1;
+	set BEARD_QUEST, 5;
+	mes "[Bearded Man]";
+	mes "¡Que tengas un buen día!";
+	emotion 29;
+	close;
+
+L_NOITEMS:
+	mes "[Bearded Man]";
+	mes "¡Pero que piensas! ¡No puedo hacer una barba sin los items!";
+	mes "Aquí va la lista de nuevo:";
+	emotion 23;
+	goto L_LIST;
+}  
+
+//Master Tailor----------
+izlude_in,123,175,4	script	Master Tailor#bandit	50,{
+	mes "[Master Tailor]";
+	mes "¡Buenas tardes! ¡Soy el Sastre Maestro!";
+	if(BEARD_QUEST != 1 ) close;
+
+	next;
+	mes "[Master Tailor]";
+	mes "¿Qué? Un Hombre Barbudo te envió...";
+	mes "Bueno siento decirlo pero me quedé sin ^8080FFThread^000000.";
+	mes "Pero tengo la dirección del lugar donde me llega el embarque.";
+	mes "Está en Aldebarán Kafra Inc. área de bodegas.";
+	mes "La dirección es: Aldebarán 59, 221.";
+	mes "Nos vemos.";
+	set BEARD_QUEST, 2;
+	close;
+}
+// Karfa Thread Clerk---
+aldeba_in,70,179,5	script	Karfa Clerk#bandit	113,{
+	mes "[Karfa Clerk]";
+	if(BEARD_QUEST == 3 ) goto L_REPEAT;
+	if(BEARD_QUEST > 3 ) goto L_DONE;
+
+	mes "¿Qué puedo hacer por usted?";
+	next;
+	if(BEARD_QUEST == 2 ) goto L_DELIVERY;
+
+	menu "¿Qué hay en las cajas?",-,"Nada.",M_NOPE;
+
+	mes "[Karfa Clerk]";
+	mes "Están vacías.";
+M_NOPE:
+	close;
+
+L_DELIVERY:
+
+	mes "[Karfa Clerk]";
+	mes "Lo siento pero no hemos recibido los ^8080FFThread^000000.";
+	mes "Nuestros embarques han sido retrasados hasta que sea seguro.";
+	mes "Mira, nosotros obtenemos nuestros ^8080FFThread^000000 de Alberta pero mounstros están atacando a nuestros mercaderes.";
+	next;
+	mes "[Karfa Clerk]";
+	mes "Ahora, estos mounstros no hacían eso antes.";
+	mes "Debe ser por el clima más cálido de estos meses.";
+	mes "¡Por favor ayúdanos!";
+	set BEARD_QUEST,3;
+	next;
+	mes "[Karfa Clerk]";
+L_REPEAT:
+	mes "Oh por cierto, ese Mercader de Hilos está entre Alberta 60 y 100...";
+L_DONE:
+	mes "¡Gracias!";
+	close;
+}
+
+//Thread Merchant ------
+alberta,65,123,6	script	Man#bandit	85,{
+	if(BEARD_QUEST == 3 && $@beardMobD) goto L_KILLED;
+	if(BEARD_QUEST > 3) goto L_DONE;
+
+	mes "[Thread Merchant]";
+	mes "¡¡ARGGG!! ¡Nunca puedo hacer llegar mi mercadería a Aldebarán!";
+	mes "Unos insectos me siguen molestando.";
+	mes "Estos insectos de ha robado todos mis suministros y los ^8080FFThread^000000.";
+	next;
+	mes "[Thread Merchant]";
+
+	if(BEARD_QUEST != 3) mes "¿Qué hago?";
+	if(BEARD_QUEST != 3) close;
+
+	if($@beardmob > 0) mes "¡Mátalos! ¡Mátalos de una buena vez!";
+	if($@beardmob > 0) close;
+	mes "¿Estás aquí para ayudarme?";
+	emotion 1;
+	next;
+	menu "Si.",-,"No.",M_NO;
+
+	mes "[Thread Merchant]";
+	mes "Oh gracias a los dioses.";
+	mes "Si solamente pudieras matar a los insectos yo podría hacer mi entrega.";
+	next;
+	mes "[Thread Merchant]";
+	mes "¡Oh no! ¡Aquí vienen!";
+	emotion 19;
+	donpcevent "BRDQ_MOBS::OnStart";
+	close;
+
+L_KILLED:
+	set $@beardMobD,0;
+	mes "[Thread Merchant]";
+	mes "Gracias por matar a los Thief Bugs.";
+	mes "Como muestra de agradecimiento aquí tienes una caja llena de ^8080FFThread^000000.";
+	set BEARD_QUEST,4;
+	close;
+
+L_DONE:
+	mes "[Thread Merchant]";
+	mes "¡Gracias de nuevo!";
+	emotion 15;
+	close;
+
+M_NO:
+	mes "[Thread Merchant]";
+	mes "Qué hacer...";
+	close;
+}
+
+//mobsummons -------
+alberta,1,1,1	script	BRDQ_MOBS	-1,{
+OnStart:
+	set $@beardMob,10;
+	set $@beardMobD,0;
+	monster "alberta",65,120,"Thef Bug Male",1054,1,"BRDQ_MOBS::OnDie";
+	monster "alberta",66,120,"Thef Bug Male",1054,1,"BRDQ_MOBS::OnDie";
+	monster "alberta",67,120,"Thef Bug Male",1054,1,"BRDQ_MOBS::OnDie";
+	monster "alberta",68,120,"Thef Bug Male",1054,1,"BRDQ_MOBS::OnDie";
+	monster "alberta",66,121,"Thef Bug Male",1054,1,"BRDQ_MOBS::OnDie";
+	monster "alberta",67,121,"Thef Bug Male",1054,1,"BRDQ_MOBS::OnDie";
+	monster "alberta",68,121,"Thef Bug Male",1054,1,"BRDQ_MOBS::OnDie";
+	monster "alberta",66,122,"Thef Bug Male",1054,1,"BRDQ_MOBS::OnDie";
+	monster "alberta",67,122,"Thef Bug Male",1054,1,"BRDQ_MOBS::OnDie";
+	monster "alberta",68,122,"Thef Bug Male",1054,1,"BRDQ_MOBS::OnDie";
+	end;
+OnDie:
+	set $@beardmob, $@beardmob - 1;
+	if($@beardmob > 0) end;
+	set $@beardMobD,1;
+	end;
+On1201:
+On0001:
+	set $@beardMob,0;
+	set $@beardMobD,0;
+	end;
+}

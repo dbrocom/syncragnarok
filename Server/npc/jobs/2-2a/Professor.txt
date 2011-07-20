@@ -1,0 +1,93 @@
+//===== eAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,47,3	script	Scholar#Valkyrie	743,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Scholar]";
+			mes "Felicitaciones.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		mes "[Scholar]";
+		mes "Toma todo una vida...";
+		mes "literalmente una vida";
+		mes "para almacenar el conocimiento";
+		mes "necesario para hacerse";
+		mes "un Scholar...";
+		next;
+		mes "[Scholar]";
+		mes "es abrumador.";
+		mes "Mientras mas aprendes,";
+		mes "descubres mas cosas que";
+		mes "no sabes.";
+		mes "No hay fin en el";
+		mes "proceso del aprendizaje...";
+		close;
+	}
+	else if (ADVJOB == Job_Professor && Class == Job_Mage_High && JobLevel > 39) {
+		mes "[Scholar]";
+		mes "Rune-Midgard no";
+		mes "tiene suficiente Scholars para";
+		mes "ayudar a acomodar en una nueva era";
+		mes "de prosperidad. El";
+		mes "mundo te necesita...";
+		next;
+		mes "[Scholar]";
+		mes "¿Tomaras esa";
+		mes "asombrosa responsabilidad?";
+		mes "¿Le serviras a Rune-Midgard";
+		mes "como un Scholar?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[Scholar]";
+			mes "Cuando estés listo,";
+			mes "siéntete libre de volver.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Scholar]";
+			mes "Aún puedes aprender más habilidades. Por favor usa";
+			mes "todos tus Skill Points antes de volver conmigo.";
+			close;
+		}
+		jobchange Job_Professor;
+		set ADVJOB,0;
+		mes "[Scholar]";
+		mes "¡Felicidades!";
+		mes "Como un Professor, espero";
+		mes "que tomes";
+		mes "una parte activa en brindar";
+		mes "la luz de la sabiduria";
+		mes "donde esta la obscuridad.";
+		close;
+	}
+	mes "[Scholar]";
+	mes "Bienvenido";
+	mes "al Valhalla,";
+	mes "a la Sala del Honor.";
+	next;
+	mes "[Scholar]";
+	mes "Por favor, que";
+	mes "tu estancia aquí";
+	mes "sea confortable.";
+	mes "¡Gloria a los Guerreros!";
+	close;
+}
+

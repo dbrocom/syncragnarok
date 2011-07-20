@@ -1,0 +1,395 @@
+//===== eAthena Script ======================================= 
+//= Elemental Stone Trader
+//===== By: ================================================== 
+//= eAthena team & others? & MasterOfMuppets
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Trade impure types of elemental stones for pure ones.
+//===== Additional Comments: ================================= 
+//= 1.0 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//============================================================ 
+
+// Elemental Stone Trader
+//============================================================ 
+ama_in02,61,27,7	script	Alchemist#ama	749,{
+	mes "[Laspuchin Gregory]";
+	mes "KeekeekeeKeheheh.";
+	mes "¡Esto es asombroso!";
+	mes "¡¡Los resultados son extraordinarios!!";
+	next;
+	mes "[Laspuchin Gregory]";
+	mes "Usar mis habilidades en esta distante";
+	mes "tierra era inesperado...";
+	mes "Keheheh... El señor de palacio";
+	mes "fue un poco acomodador.";
+	next;
+	mes "[Laspuchin Gregory]";
+	mes "Oops, debo ser cuidadoso...";
+	mes "Si la guild se entera de mí";
+	mes "paradero... el estupido Myster se";
+	mes "enfadará conmigo.  Kehehehkeh";
+	next;
+	mes "[Laspuchin Gregory]";
+	mes "¿Qué? ¿Quieres decir algo?";
+	mes "Si estas aquí por turismo,";
+	mes "disfruta tu día, y regresa a tu pueblo.";
+	mes "Keekeekee... ¡O si no,";
+	mes "te dejare probar mi acid bottle...!";
+	next;
+	if (select("Please, excuse me:Do you need help?") == 1) {
+		mes "[Laspuchin Gregory]";
+		mes "Keheheh... ¿Oíste";
+		mes "lo que dije? Sería mejor";
+		mes "olvidarlo...";
+		mes "Keekeekeekeekee...";
+		close;
+	}
+	mes "[Laspuchin Gregory]";
+	mes "Ayuda, ¿eh?";
+	mes "Pues, ahora que lo pienso...";
+	mes "Necesito algunos items ahora mismo...";
+	mes "Keeheeheekeehee...";
+	next;
+	mes "[Laspuchin Gregory]";
+	mes "Sir Laspuchin necesita algunos";
+	mes "enchant stones para un experimento";
+	mes "Lo usaré eficientemente...";
+	mes "¿Los tienes ahora?";
+	next;
+	if (select("Nope:I got some") == 1) {
+		mes "[Laspuchin Gregory]";
+		mes "Entonces, encuentra 8 stones de un tipo";
+		mes "Si traes 8 stones de un tipo de";
+		mes "enchant stones, yo las cambiaré";
+		mes "a una mejor...";
+		next;
+		mes "[Laspuchin Gregory]";
+		mes "Entonces, encuentra 8 stones de un tipo.";
+		mes "No las gemstones redondas, sino";
+		mes "enchant stones.";
+		mes "Si traes las stones equivocadas,";
+		mes "¡Te tiraré una flame bottle!";
+		next;
+		mes "[Laspuchin Gregory]";
+		mes "¡¡Tráeme mis stones, esclavo~!!";
+		mes "¡Y mantén tu promesa! Kehehehkehkeh...";
+		close;
+	}
+	mes "[Laspuchin Gregory]";
+	mes "Ah-ha, ¿que trajiste?";
+	next;
+	switch(select("Mystic Frozen:Great Nature:Flame Heart:Rough Wind")) {
+	case 1:
+		if (countitem(995) > 7) {
+			mes "[Laspuchin Gregory]";
+			mes "Yo tomaré 8 de ellas y";
+			mes "te doy una enchant stone.";
+			mes "¿Como te suena eso?";
+			mes "Keheheh...";
+			next;
+			mes "[Laspuchin Gregory]";
+			mes "HeeHee, ¿que quieres? ¡Elige una!";
+			next;
+			switch(select("Great Nature:Flame Heart:Rough Wind:Cancel the trade")) {
+			case 1:
+				delitem 995,8; //Mistic_Frozen
+				getitem 997,1; //Great_Nature
+				mes "[Laspuchin Gregory]";
+				mes "¡Keheheh! ¡Has elegido una buena!";
+				mes "Úsala bien...";
+				mes "Tráeme otras stones si las tienes!";
+				close;
+			case 2:
+				delitem 995,8; //Mistic_Frozen
+				getitem 994,1; //Flame_Heart
+				mes "[Laspuchin Gregory]";
+				mes "¡Keheheh! ¡Has elegido una buena!";
+				mes "Úsala bien...";
+				mes "¡Tráeme otras stones si las tienes!";
+				close;
+			case 3:
+				if (countitem(995) > 11) {
+					delitem 995,12; //Mistic_Frozen
+					getitem 996,1; //Rough_Wind
+					mes "[Laspuchin Gregory]";
+					mes "Kehhehheh, ¿sabes algo?";
+					mes "No tengo muchas de ese tipo";
+					mes "así que voy a tomar ^0000FF12^000000 de los tuyos, si?";
+					mes "Claro, está bien.";
+					mes "¡Es un honor ayudar a Laspuchin!";
+					close;
+				}
+				mes "[Laspuchin Gregory]";
+				mes "Keheheh, ¿sabes algo?";
+				mes "No tengo muchas de estas entonces";
+				mes "no puedo solo tener 8 de los tuyos.";
+				mes "Si las quieres cambiar a Rough Wind,";
+				mes "tráeme 4 stones más.  8 + 4 = 12...";
+				mes "Requiere ^0000FF12^000000 stones.";
+				next;
+				mes "[Laspuchin Gregory]";
+				mes "¡¡Tráeme stones, esclavo~!!";
+				mes "¡Y mantén tu promesa! kehheheheheh...";
+				close;
+			case 4:
+				mes "[Laspuchin Gregory]";
+				mes "Oh, bueno.";
+				mes "No le digas a nadie acerca de mi paradero...";
+				mes "Keheheh... después de todo, tu lo prometiste~";
+				close;
+			}
+		}
+		else if (countitem(995) > 0) {
+			mes "[Laspuchin Gregory]";
+			mes "No puedes ayudar a Laspuchin con solo un par";
+			mes "de enchant stones... ¡Yo dije 8!";
+			mes "¡Solo tráeme 8 stones!";
+			mes "Keheheh...";
+			next;
+			mes "[Laspuchin Gregory]";
+			mes "¡¡Tráeme stones, esclavo~!!";
+			mes "¡Y mantén tu promesa! Keheheheheh...";
+			close;
+		}
+		mes "[Laspuchin Gregory]";
+		mes "Keheheh~ Revisa tus bolsillos";
+		mes "antes de decirme";
+		mes "que tonto eres...";
+		next;
+		mes "[Laspuchin Gregory]";
+		mes "¡Tráeme stones! ¡Dijiste que me ibas a ayudar!";
+		mes "¡Mantén tu promesa! Kehehehkehkeh...";
+		close;
+	case 2:
+		if (countitem(997) > 7) {
+			mes "[Laspuchin Gregory]";
+			mes "Tendré 8 de ellas y";
+			mes "te daré una enchant stone";
+			mes "¿Como te suena eso?";
+			mes "Keheheh...";
+			next;
+			mes "[Laspuchin Gregory]";
+			mes "Keekee, ¿que quieres? ¡Elige una!";
+			next;
+			switch(select("Mystic Frozen:Flame Heart:Rough Wind:Cancel the trade")) {
+			case 1:
+				delitem 997,8; //Great_Nature
+				getitem 995,1; //Mistic_Frozen
+				mes "[Laspuchin Gregory]";
+				mes "¡Keheheh! ¡Has elegido una buena!";
+				mes "Úsala bien...";
+				mes "¡Tráeme otras stones si las tienes!";
+				close;
+			case 2:
+				delitem 997,8; //Great_Nature
+				getitem 994,1; //Flame_Heart
+				mes "[Laspuchin Gregory]";
+				mes "¡Keheheh! ¡Has elegido una buena!";
+				mes "Úsala bien...";
+				mes "¡Traéme otras stones si las tienes!";
+				close;
+			case 3:
+				if (countitem(997) > 11) {
+					delitem 997,12; //Great_Nature
+					getitem 996,1; //Rough_Wind
+					mes "[Laspuchin Gregory]";
+					mes "Keheheh, ¿sabes algo?";
+					mes "Yo no tengo muchas de estas";
+					mes "así que voy a tomar ^0000FF12^000000 de las tuyas ¿ok?";
+					mes "Claro, eso está bien.";
+					mes "¡Es un honor ayudar a Laspuchin!";
+					close;
+				}
+				mes "[Laspuchin Gregory]";
+				mes "Keheheh, ¿sabes algo?";
+				mes "Yo no tengo muchas de estas así que";
+				mes "no puedo solo obtener 8 de las tuyas.";
+				mes "Si las quieres cambiar en un Rough Wind,";
+				mes "tráeme 4 stones más.  8 + 4 = 12...";
+				mes "Require ^0000FF12^000000 stones.";
+				next;
+				mes "[Laspuchin Gregory]";
+				mes "¡¡Tráeme stones, esclavo~!!";
+				mes "¡Y mantén tu promesa! Kehehehkehkeh...";
+				close;
+			case 4:
+				mes "[Laspuchin Gregory]";
+				mes "Oh, bien.";
+				mes "No le digas a nadie acerca de mi paradero...";
+				mes "Keheheh...Tu lo prometiste después de todo...";
+				close;
+			}
+		}
+		else if (countitem(997) > 0) {
+			mes "[Laspuchin Gregory]";
+			mes "No puedes ayudar a Laspuchin con solo un par";
+			mes "de enchant stones... ¡Yo dije 8!";
+			mes "¡Sólo tráeme 8 stones!";
+			mes "Keheheh.....";
+			next;
+			mes "[Laspuchin Gregory]";
+			mes "¡¡Tráeme stones, esclavo!!";
+			mes "¡Y mantén tu promesa! Kehehehkehkeh...";
+			close;
+		}
+		mes "[Laspuchin Gregory]";
+		mes "Keheheh~ Revisa tus bolsillos";
+		mes "antes de decirme";
+		mes "lo estúpido que eres...";
+		next;
+		mes "[Laspuchin Gregory]";
+		mes "¡Tráeme stones!  Tú dijiste que me ayudarías,";
+		mes "¡así que mantén tu promesa! Keheheheheh...";
+		close;
+	case 3:
+		if (countitem(994) > 7) {
+			mes "[Laspuchin Gregory]";
+			mes "Tomaré 8 de ellas y";
+			mes "te doy una enchant stone.";
+			mes "¿Cómo te suena eso?";
+			mes "Keheheh.....";
+			next;
+			mes "[Laspuchin Gregory]";
+			mes "Keekee, ¿que quieres? ¡Elige una!";
+			next;
+			switch(select("Mystic Frozen:Great Nature:Rough Wind:Cancel the trade")) {
+			case 1:
+				delitem 994,8; //Flame_Heart
+				getitem 995,1; //Mistic_Frozen
+				mes "[Laspuchin Gregory]";
+				mes "¡Keheheh! ¡Has elegido una buena!";
+				mes "Úsala bien...";
+				mes "¡Tráeme otras stones si las tienes!";
+				close;
+			case 2:
+				delitem 994,8; //Flame_Heart
+				getitem 997,1; //Great_Nature
+				mes "[Laspuchin Gregory]";
+				mes "¡Keheheh! ¡Has elegido una buena!";
+				mes "Úsala bien...";
+				mes "¡Tráeme otras stones si las tienes!";
+				close;
+			case 3:
+				if (countitem(994) > 11) {
+					delitem 994,12; //Flame_Heart
+					getitem 996,1; //Rough_Wind
+					mes "[Laspuchin Gregory]";
+					mes "Keheheh, ¿sabes algo?";
+					mes "No tengo muchas de estas";
+					mes "así que yo tomaré ^0000FF12^000000 de las tuyas, ¿ok?";
+					mes "Claro, eso esta bien.";
+					mes "¡Es un honor ayudar a Laspuchin!";
+					close;
+				}
+				mes "[Laspuchin Gregory]";
+				mes "Keheheh, ¿Sabes algo?";
+				mes "Yo no tengo muchos de estos entonces";
+				mes "no puedo tener sólo 8 de las tuyas.";
+				mes "Si deseas cambiarlas a  Rough Wind,";
+				mes "tráigame 4 stones más. 8+4 = 12...";
+				mes "Requiere ^0000FF12^000000 stones.";
+				next;
+				mes "[Laspuchin Gregory]";
+				mes "¡¡Tráeme las stone, esclavo ~!!";
+				mes "¡Mantenga su promesa! Kehehehkehkeh ...";
+				close;
+			case 4:
+				mes "[Laspuchin Gregory]";
+				mes "Oh, bueno.";
+				mes "No le digas a nadie acerca de mi paradero ...";
+				mes "Keheheh ... Lo prometiste, después de todo ...";
+				close;
+			}
+		}
+		else if (countitem(994) > 0) {
+			mes "[Laspuchin Gregory]";
+			mes "No puedes ayudar a Laspuchin con solo un par";
+			mes "de enchant stones... ¡Dije 8!";
+			mes "¡Tráeme sólo 8 stones!";
+			mes "Keheheh.....";
+			next;
+			mes "[Laspuchin Gregory]";
+			mes "¡¡Tráeme las stones, esclavo ~!!";
+			mes "Y ¡mantenga su promesa! Kehehehkehkeh ...";
+			close;
+		}
+		mes "[Laspuchin Gregory]";
+		mes "Keheheh, Compruebe sus bolsillos";
+		mes "antes de que me diga";
+		mes "lo tonto que es...";
+		next;
+		mes "[Laspuchin Gregory]";
+		mes "¡Tráeme las stones! Has dicho que me ayudarìas,";
+		mes "¡así que mantén su promesa! Kehehehkehkeh ...";
+		close;
+	case 4:
+		if (countitem(996) > 7) {
+			mes "[Laspuchin Gregory]";
+			mes "Tomaré 8 de ellos y";
+			mes "te daré una enchant stone";
+			mes "¿Que te parece?";
+			mes "Keheheh.....";
+			next;
+			mes "[Laspuchin Gregory]";
+			mes "Keekee, ¿qué quieres? ¡Elija una!";
+			next;
+			switch(select("Mystic Frozen:Great Nature:Flame Heart:Cancel the trade")) {
+			case 1:
+				delitem 996,8; //Rough_Wind
+				getitem 995,1; //Mistic_Frozen
+				mes "[Laspuchin Gregory]";
+				mes "¡Keheheh! ¡Ha elegido muy bien!";
+				mes "Utilízala bien...";
+				mes "¡Tráeme otras stones si las tienes!";
+				close;
+			case 2:
+				delitem 996,8; //Rough_Wind
+				getitem 997,1; //Great_Nature
+				mes "[Laspuchin Gregory]";
+				mes "¡Keheheh! ¡Ha elegido muy bien!";
+				mes "Utilízala bien...";
+				mes "¡Tráeme otras stones si las tienes!";
+				close;
+			case 3:
+				delitem 996,8; //Rough_Wind
+				getitem 994,1; //Flame_Heart
+				mes "[Laspuchin Gregory]";
+				mes "¡Keheheh! ¡Ha elegido muy bien!";
+				mes "Utilízala bien...";
+				mes "¡Tráeme otras stones si las tienes!";
+				close;
+			case 4:
+				mes "[Laspuchin Gregory]";
+				mes "Oh, bueno.";
+				mes "No le digas a nadie sobre mi paradero ...";
+				mes "Keheheh ... Lo prometiste, después de todo ...";
+				close;
+			}
+		}
+		else if (countitem(996) > 0) {
+			mes "[Laspuchin Gregory]";
+			mes "No puedes ayudar a Laspuchin con solo un par";
+			mes "de enchant stones... ¡Dije 8!";
+			mes "¡Tráeme sólo 8 stones!";
+			mes "Keheheh.....";
+			next;
+			mes "[Laspuchin Gregory]";
+			mes "¡¡Tráeme las stones, esclavo ~!!";
+			mes "¡Y mantén tu promesa! Kehehehkehkeh ...";
+			close;
+		}
+		mes "[Laspuchin Gregory]";
+		mes "Keheheh, Revisatus bolsillos";
+		mes "antes de que me digas";
+		mes "lo estupido que eres....";
+		next;
+		mes "[Laspuchin Gregory]";
+		mes "¡Tráeme stones! Has dicho que me ayudarías,";
+		mes "¡así que mantén tu promesa! Kehehehkehkeh ...";
+		close;
+	}
+}

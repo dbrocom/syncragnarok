@@ -1,0 +1,530 @@
+//===== eAthena Script ======================================= 
+//= Knight Skills Quests
+//===== By: ================================================== 
+//= Lupus, Reddozen, Samuray22
+//===== Current Version: ===================================== 
+//= 1.5
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quests for skills: Charge Attack
+//===== Additional Comments: ================================= 
+//= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//============================================================
+
+prt_in,85,99,3	script	Knight#kabuto	734,{
+	if (BaseJob == job_Knight) {
+		if (KNGT_SK == 10) {
+			mes "[Essofeit]";
+			mes "Ah, debe de ser grandioso";
+			mes "ser un Knight aventurero";
+			mes "en este mundo. ¿Debes haber";
+			mes "encontrado todo tipo de";
+			mes "monstruos peligrosos y";
+			mes "enemigos temibles, cierto?";
+			next;
+			mes "[Essofeit]";
+			mes "Casi estoy celoso de";
+			mes "todas las grandes experiencias";
+			mes "que debes estar teniendo.";
+			mes "Algun día, deberas contarme";
+			mes "tus propias historias de valentía.";
+			close;
+		}
+		if (KNGT_SK == 9 && getskilllv("KN_CHARGEATK") == 0) {
+			mes "[Essofeit]";
+			mes "Ah, veo que has";
+			mes "hecho un progeso tremendo";
+			mes "en tu persecusión de la fuerza.";
+			mes "La transcendencia no es";
+			mes "una hazaña pequeña y es un gran honor";
+			mes "recibir el rango de Lord Knight.";
+			next;
+			mes "[Essofeit]";
+			mes "De todos modos, me doy cuenta del";
+			mes "retroceso del borrado de memoria.";
+			mes "Asi es que, asumo que";
+			mes "estas aquí para aprender la habildad Charge Attack";
+			mes "una vez más. Será un";
+			mes "placer instruirte una vez más.";
+			next;
+			mes "[Essofeit]";
+			mes "El Charge Attack es una habilidad que consume 40 SP para dañar";
+			mes "un objetivo. Si estás alejado del objetivo, vas a incrementar el";
+			mes "daño de la habilidad y el retraso";
+			mes "antes del daño se inflija.";
+			next;
+			mes "[Essofeit]";
+			mes "Durante este retraso, estarás";
+			mes "inmobilizado. Por ello,";
+			mes "el costo del daño incrementado";
+			mes "es un gran riesgo para vos mismo.";
+			mes "Por ahora sería mejor practicar esta habilidad por tu cuenta.";
+			set KNGT_SK,10;
+			skill "KN_CHARGEATK",1,0;
+			next;
+			mes "[Essofeit]";
+			mes "Buena Suerte en tus";
+			mes "aventuras, Lord Knight.";
+			mes "Estoy seguro de que vas a hacer buen";
+			mes "uso del Charge Attack";
+			mes "u traeras orgullo a la";
+			mes "Caballeria De Prontera";
+			close;
+		}
+		if (KNGT_SK == 9) {
+			mes "[Essofeit]";
+			mes "Ah debe ser grandioso";
+			mes "ser un Knight aventurero";
+			mes "en este mundo. ¿Debes haber";
+			mes "encontrado todo tipo de";
+			mes "monstruos peligrosos y";
+			mes "enemigos temibles, cierto?";
+			next;
+			mes "[Essofeit]";
+			mes "Casi estoy celoso de";
+			mes "todas las grandes experiencias";
+			mes "que debes estar teniendo.";
+			mes "Algun día, deberas decirme";
+			mes "tus propias historias de valentía.";
+			close;
+		}
+		if (KNGT_SK == 8) {
+			mes "[Essofeit]";
+			mes "He nombrado a esta habilidad,";
+			mes "\"Charge Attack\". No es";
+			mes "un nombre elaborado, pero es suficientemente simple";
+			mes "y directo para que tu";
+			mes "entiendas como trabaja.";
+			mes "Ahora dejame enseñartelo...";
+			next;
+			mes "[Essofeit]";
+			mes "Charge Attack es una habilidad activa que consume 40 SP para dañar";
+			mes "a un objetivo. Si estas alejado del objetivo, vas a incrementar el";
+			mes "daño de la habilidad y el retraso";
+			mes "antes que el daño se inflija.";
+			next;
+			mes "[Essofeit]";
+			mes "Durante este retraso, vas a quedar";
+			mes "inmobilizado. Por ello,";
+			mes "el costo del daño incrementado";
+			mes "es un riesgo aun más grande para ti mismo.";
+			mes "Por ahora, sería mejor practicar esta habilidad por ti mismo.";
+			set KNGT_SK,9;
+			skill "KN_CHARGEATK",1,0;
+			next;
+			mes "[Essofeit]";
+			mes "Espero que hagas buen";
+			mes "uso de la habilidad Charge Attack.";
+			mes "¡Igual que tu, voy a";
+			mes "hacer lo mejor que pueda para traer honor";
+			mes "a la Caballeria con mi";
+			mes "fuerza y coraje!";
+			close;
+		}
+		if (KNGT_SK == 7 && countitem(530) > 4 && countitem(748) > 2) {
+			mes "[Essofeit]";
+			mes "El concepto de honor";
+			mes "parece haberse perdido en los Knights";
+			mes "de hoy en día. Ya no aprecian";
+			mes "el significado de";
+			mes "la frase \"código de caballería\" o el";
+			mes "noble fin de la fuerza...";
+			next;
+			mes "[Essofeit]";
+			mes "¡En mis días, los Knights";
+			mes "eran suficientemente fuertes para conseguir";
+			mes "al menos 5 Candy Canes y";
+			mes "3 Witherless Roses mediante";
+			mes "la caza solamente!";
+			mes "En estos días se han vuelto suaves...";
+			next;
+			if (select("Give him Candy Canes and Witherless Roses:Cancel") == 1) {
+				mes "["+ strcharinfo(0) +"]";
+				mes "Aún hay caballeros";
+				mes "ahi afuera que creen en";
+				mes "arriesgar nuestras vidas honorablemente";
+				mes "para alcanzar la verdadera fuerza...";
+				next;
+				mes "[Essofeit]";
+				mes "Tu...";
+				mes "Tu realmente entiendes.";
+				mes "De verdad sabes el valor";
+				mes "la dificultad. Me";
+				mes "alegra ver que un verdadero";
+				mes "Knight como tu aún existe.";
+				next;
+				mes "[Essofeit]";
+				mes "Jajajaja, Finalmente, he";
+				mes "encontrado a alguien a quien";
+				mes "puedo llamar un verdadero camarada. Somos";
+				mes "los últimos de una raza agonizante por si";
+				mes "no lo notaste, mi amigo. Pero";
+				mes "hay esperanza para los caballeros...";
+				next;
+				mes "[Essofeit]";
+				mes "Esta decidido, entonces.";
+				mes "¡Mientras vivamos,";
+				mes "el código de caballería nunca morirá!";
+				mes "Gracias a ti, mi fe";
+				mes "en la caballería ha";
+				mes "sido restaurada.";
+				next;
+				mes "[Essofeit]";
+				mes "En reconocimiento de que eres";
+				mes "un verdadero Knight, te voy a enseñar";
+				mes "una habilidad especial que he";
+				mes "estado investigando recientemente. ¿Por que";
+				mes "no volves hasta después que haya";
+				mes "completado los preparativos?";
+				delitem 530,5; //Candy_Striper
+				delitem 748,3; //Witherless_Rose
+				set KNGT_SK,8;
+				close;
+			}
+			mes "[Essofeit]";
+			mes "Es vergonzoso...";
+			mes "¡La mayoría de los nuevos reclutas en";
+			mes "la Prontera Chivalry estan";
+			mes "más preocupados por sus";
+			mes "pensiones que por su honor!";
+			close;
+		}
+		if (KNGT_SK == 7) {
+			mes "[Essofeit]";
+			mes "Quizás estoy romanticizando";
+			mes "el pasado, pero no estoy de acuerdo";
+			mes "con toda la burocracia";
+			mes "que está presente hoy día en";
+			mes "la Prontera Chivalry.";
+			next;
+			mes "[Essofeit]";
+			mes "De todos modos, admito";
+			mes "que era mucho más feliz";
+			mes "cuando el honor era";
+			mes "todo lo que necesitabas. Hoy día, ";
+			mes "parece que cualquiera puede ser";
+			mes "un Knight. Er, sin ofender...";
+			close;
+		}
+		if (KNGT_SK == 6) {
+			mes "[Essofeit]";
+			mes "¿Asi que has visto Knights";
+			mes "de la séptima división por lo que";
+			mes "realmente son, eh? Como un Knight colega, quizás entiendas mis";
+			mes "sentimientos de descepción";
+			next;
+			mes "[Essofeit]";
+			mes "Es tan descorazonante...";
+			mes "No se por que somos Knights";
+			mes "o por que entrenamos.";
+			mes "Cuando tenía tu edad, bueno,";
+			mes "quería arriesgar mi vida y";
+			mes "alcanzar la verdadera fuerza.";
+			next;
+			mes "[Essofeit]";
+			mes "Pero... estoy seguro que tu";
+			mes "no quieres oír";
+			mes "los cuentos de un viejo. Todas esas";
+			mes "Batallas maravillosas, esa gloriosa camaradería entre";
+			mes "rivales... Esta todo en el pasado.";
+			next;
+			set KNGT_SK,7;
+			mes "[Essofeit]";
+			mes "Quizás es mejor que";
+			mes "me olvide de mis viejos";
+			mes "ideales. Creo que";
+			mes "los tiempos han cambiado y que";
+			mes "mi idea del Código de Caballería quizá este muerta. ^FFFFFF ^000000";
+			close;
+		}
+		if (KNGT_SK == 1) {
+			mes "[Essofeit]";
+			mes "Hm, ¿Por que no tomas un";
+			mes "tour por la 7º División";
+			mes "y ves la actitud de mis";
+			mes "camaradas por ti mismo? Vas a";
+			mes "ver al Grand Master Maroujje";
+			mes "entrenando a los reclutas afuera.";
+			close;
+		}
+		if (KNGT_SK == 0) {
+			mes "[Essofeit]";
+			mes "Saludos. Soy Essofeit";
+			mes "Lageiya de la 7º División";
+			mes "de la Prontera Chivalry.";
+			mes "Como un orgulloso Knight que sostiene";
+			mes "los principios de honor y";
+			mes "caballerosidad, estoy a tu servicio.";
+			next;
+			mes "[Essofeit]";
+			mes "¿Puedo preguntar de que división";
+			mes "eres?";
+			mes "Un Knight al que le ha sido otorgada";
+			mes "la permisión real para viajar";
+			mes "como se te antoje. Eso debe ser";
+			mes "grandioso, la libertad que debes tener.";
+			next;
+			mes "[Essofeit]";
+			mes "Tristemente, la división de la";
+			mes "cual soy miemrbo es muy";
+			mes "Burocrática. Yo creo que mis";
+			mes "camaradas estan más preocupados";
+			mes "con sus pensiones que con el código de caballería o que defender a los débiles.";
+			next;
+			mes "[Essofeit]";
+			mes "Incluso si quisiera ser";
+			mes "más activo, hay demasiadas";
+			mes "regulaciones que disminuyen";
+			mes "el bien que podemos hacer. A través del tiempo,";
+			mes "la situación se ha puesto^FFFFFF ^000000 peor. Pero no te guies de  mi palabra...";
+			next;
+			mes "[Essofeit]";
+			mes "Quizás sea mejor";
+			mes "si visitas la 7º División";
+			mes "por ti mismo y hablas con los";
+			mes "otros Knights que estan entrenando. Con suerte, verás lo que";
+			mes "he visto por un largo tiempo.";
+			set KNGT_SK,1;
+			close;
+		}
+	}
+	mes "[Essofeit]";
+	mes "Saludos. Soy Essofeit";
+	mes "Lageiya de la 7º División";
+	mes "de la Prontera Chivalry.";
+	mes "Como un orgulloso Knight que sostiene";
+	mes "los principios de honor";
+	mes "y caballería, estoy a tu servicio.";
+	next;
+	mes "[Essofeit]";
+	mes "Solo desearía que los otros en";
+	mes "mi división apreciaran";
+	mes "mis valores y el verdadero valor";
+	mes "de la sangre derramada. Ellos quizás sean";
+	mes "mis camaradas, pero encuentro";
+	mes "dificil confiar en ellos.";
+	close;
+}
+
+prontera,69,351,0	script	#tour	111,5,5,{
+//OnTouch2:
+OnTouch:
+	if (KNGT_SK > 2)
+		end;
+	if (KNGT_SK <= 2) {
+		mes "[?]";
+		mes "¡Kiiiiiiai~!";
+		mes "¡Yaaaaaaaaap!";
+		mes "¡Hoo! ¡Haa! ¡Haiyah!";
+		next;
+		mes "[?]";
+		mes "¡Si-Aiyah!";
+		mes "Rowr rowr rowr";
+		mes "¡GrrrrrrrraaAAHH!";
+		next;
+		mes "^3355FFEstos Knights parecen estar";
+		mes "sometiendose a algún";
+		mes "entrenamiento realmente";
+		mes "dificil. Pero mientras los escuches";
+		mes "un poco más de cerca, sus";
+		mes "gritos parecen un poco exagerados.^000000";
+		if (KNGT_SK == 1) set KNGT_SK,2;
+		close;
+	}
+	mes "^3355FFEstos Knights parecen estar";
+	mes "sometiendose a algún";
+	mes "entrenamiento bastante terrible,";
+	mes "juzgando por el grado de lamento";
+	mes "de sus gritos de batalla.^000000";
+	close;
+}
+
+prontera,72,352,7	script	Grand Master	733,{
+	mes "[Grand Master]";
+	if (KNGT_SK == 2 || KNGT_SK == 3) {
+		mes "De acuerdo hombres, no";
+		mes "necesitan poner^333333tanto^000000 esfuerzo";
+		mes "en su entrenamiento. Tienen";
+		mes "que hacer esto todos los días, así que";
+		mes "asegurense de no quedar exhaustos";
+		mes "innecesariamente.";
+		next;
+		mes "[Grand Master]";
+		mes "La cosa más importante";
+		mes "es que no se lastimen.";
+		mes "Tomenlo con calma";
+		mes "y asegúrense de que";
+		mes "no se desgarren un músculo.";
+		mes "Um, ¡Es una órden!";
+		if (KNGT_SK == 2) set KNGT_SK,3;
+		close;
+	}
+	mes "¡Pongan sus mentes en ello,";
+	mes "hombres! Se que el entrenamiento puede";
+	mes "ser duro pero los hará";
+	mes "más duros, mejores, más rápidos y";
+	mes "más fuertes! ¡La seguridad de Prontera es^FFFFFF ^000000 su responsabilidad, Knights!";
+	next;
+	mes "[Grand Master]";
+	mes "...";
+	mes "Oh, solo estoy bromeando.";
+	mes "Tomemos un descanso, muchachos.";
+	close;
+}
+
+prontera,78,354,3	script	Knight#zabii	734,{
+	if (KNGT_SK == 3 || KNGT_SK == 4) {
+		mes "[Zabi]";
+		mes "Creo que somos más como";
+		mes "empleados gubernamentales";
+		mes "que Knights reales. Tenemos";
+		mes "sobresueldos, y realmente no";
+		mes "tenemos que ahcer otra cosa más que";
+		mes "pretender que entrenamos.";
+		next;
+		mes "[Zabi]";
+		mes "¿Yo? Planeo ordeñar";
+		mes "el sistema por todo lo que";
+		mes "valga. Trabajo aqui unos pocos";
+		mes "años, y vivo el resto";
+		mes "de mi vida de una gorda pensión.";
+		mes "Seh, va a ser grandioso.";
+		next;
+		mes "[Zabi]";
+		mes "Whoa-whoa-whoa,";
+		mes "¡El Grand Master está";
+		mes "mirando hacia aqui!";
+		mes "hablandome y permitiendome";
+		mes "gruñir como si tuviera una hernia.";
+		mes "¡Hooooo-AH! ¡BWAH! ¡HAI-YAH!";
+		if (KNGT_SK == 3) set KNGT_SK,4;
+		close;
+	}
+	mes "[A Knight]";
+	mes "¡Hooooo-AH!";
+	mes "¡BWAH! HAI-YAH!";
+	mes "Ufff , apenas puedo";
+	mes "respirar de todo este";
+	mes "árduo entrenamiento. Ugh,";
+	mes "tan increiblemente enervado...";
+	close;
+}
+
+prontera,73,357,5	script	Knight#drake	734,{
+	if (KNGT_SK == 4 || KNGT_SK == 5) {
+		mes "[Gon]";
+		mes "¿Que conseguiré con";
+		mes "mi próximo cheque?";
+		mes "Ah~ debería conseguir un lindo";
+		mes "collar para mi esposa.";
+		mes "¡Se que ella lo amará!";
+		next;
+		if (KNGT_SK == 4) set KNGT_SK,5;
+		mes "[Gon]";
+		mes "Veamos, ¿Cuantos";
+		mes "días mas hasta cobrar?";
+		mes "Uno, dos... Hmm. Por alguna";
+		mes "razón nunca parece";
+		mes "llegar lo suficientemente pronto, viste?";
+		close;
+	}
+	mes "[A Knight]";
+	mes "Quizás no soy tan bueno";
+	mes "peleando o defendiendo a los";
+	mes "débiles, pero esta posición de Knight";
+	mes "es un buen trabajo. Trabajar";
+	mes "aqyu realmente me permite ahorrar";
+	mes "efectivo para invertir en mi futuro.";
+	next;
+	mes "[A Knight]";
+	mes "Quizás nunca veamos";
+	mes "acción alguna, pero al menos";
+	mes "puedo enorgullecerme de";
+	mes "ser un Knight.";
+	close;
+}
+
+prontera,78,357,3	script	Knight#sasword	734,{
+	mes "[Jiya]";
+	if (KNGT_SK == 5 || KNGT_SK == 6) {
+		mes "Hombre, esta división de";
+		mes "la caballería parece no tener";
+		mes "demasiado potencial.";
+		mes "La mayoría aqui";
+		mes "son de secunda clase, excepto quizás";
+		mes "por ese tipo, Essofeit.";
+		next;
+		set KNGT_SK,6;
+		mes "[Jiya]";
+		mes "En cuanto a mi, no tengo demasiado";
+		mes "en el sentido de la ambición.";
+		mes "Mientras haga lo que me dicen";
+		mes "me van a pagar. Mientras";
+		mes "me paguen, soy feliz.";
+		close;
+	}
+	mes "¡N-no me hables!";
+	mes "Debo... reunión las...";
+	mes "fuerzas para... t-terminar todos";
+	mes "estos... ejercicios de entrenamiento.";
+	mes "De acuerdo hombrem c-concentrate.";
+	close;
+}
+
+prontera,66,358,5	script	Knight#gattack	733,{
+	mes "[Gatack]";
+	if (KNGT_SK == 7) {
+		mes "Espera, ¿Donde esta";
+		mes "Essofeit? No puede";
+		mes "simplemente pasar del entrenamiento diario,";
+		mes "incluso si tiene la distinción";
+		mes "de matar incontables ^FF0000Mystcases^000000";
+		mes "y ^FF0000Obeaunes^000000 en su época.";
+		next;
+		mes "[Gatack]";
+		mes "Dios, estoy harto y cansado de";
+		mes "el hablando de Caballería.";
+		mes "Essofeit insiste que todos los Knights, incluso los completos novatos, deberían";
+		mes "poder obtener 5 Candy Canes y^FFFFFF ^000000 Whiterless Roses de cacería.";
+		next;
+		mes "[Gatack]";
+		mes "Maldición, odio escuchas";
+		mes "su pregón acerca de su gran";
+		mes "experiencia luchando con monstruos.";
+		mes "Pero ahora Essofeit solo investiga cosas adentro del edificio y";
+		mes "no hace mucho más...";
+		close;
+	}
+	mes "Hombre, el entrenamiento de Knight";
+	mes "is bastante rudo. ¿No";
+	mes "saben que soy demasiado";
+	mes "delicado para todo esta";
+	mes "actividad extenuante?";
+	next;
+	mes "[Gatack]";
+	mes "Oh bien, si alguna vez voy";
+	mes "hacia la batalla, no voy a";
+	mes "estar muy sorprendido, viendo";
+	mes "que soy uno de los tipos más débiles";
+	mes "aqui. Pero cuando eso suceda,";
+	mes "voy a estar muy ocupado viendome bien.";
+	close;
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.0 for fully working skills only [Lupus]
+//= 1.1 Added more new skill quests for more classes [Lupus]
+//= Somehow eA engine doesn't let you keep learn't skill V_V'
+//= 1.2 Added to correct locations, correct NPC's, fixed
+//= some of the items required and made them into real
+//= quests. [Reddozen] 
+//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
+//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
+//= 1.3b Splitted into different files [DracoRPG]
+//= 1.4 Updated to the Official One. [Samuray22]
+//= 1.4a replaced item "names" with item id [Lupus]
+//============================================================

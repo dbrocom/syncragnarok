@@ -1,0 +1,100 @@
+//===== eAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,44,58,5	script	Assassin Cross#Valkyrie	725,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Assassin Cross]";
+			mes "Felicitaciones...";
+			next;
+			mes "[Assassin Cross]";
+			mes "...";
+			next;
+			mes "[Assassin Cross]";
+			mes "...";
+			mes "......";
+			next;
+			mes "[Assassin Cross]";
+			mes "...";
+			mes "......";
+			mes "¡Honor para";
+			mes "los guerreros!";
+			close;
+		}
+		mes "[Assassin Cross]";
+		mes "Nosotros somos los guerreros";
+		mes "del desierto. Nadie";
+		mes "nos mira con desprecio.";
+		mes "Nadie...";
+		close;
+	}
+	else if (ADVJOB == Job_Assassin_Cross && Class == Job_Thief_High && JobLevel > 39) {
+		mes "[Assassin Cross]";
+		mes "El tiempo ha llegado.";
+		mes "El mundo te necesita...";
+		mes "más que nunca.";
+		next;
+		mes "[Assassin Cross]";
+		mes "Me pregunto si quieres seguir viviendo en las sombras como un grandioso Assassin, pero con una nueva apariencia.";
+		next;
+		mes "[Assassin Cross]";
+		mes "¿Te convertirias";
+		mes "en Assassin Cross?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[Assassin Cross]";
+			mes "Cuando estés";
+			mes "listo, regresa.";
+			next;
+			mes "[Assassin Cross]";
+			mes "Honor para";
+			mes "los guerreros.";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Assassin Cross]";
+			mes "Aún no has";
+			mes "aprendido todo";
+			mes "lo que puedes.";
+			next;
+			mes "[Assassin Cross]";
+			mes "Usa todos tus";
+			mes "puntos de Skill";
+			mes "y entonces regresa.";
+			close;
+		}
+		jobchange Job_Assassin_Cross;
+		set ADVJOB,0;
+		mes "[Assassin Cross]";
+		mes "¡Felicitaciones!";
+		mes "Como un Assassin Cross,";
+		mes "espero que luches por un futuro más brillante dentro de las tinieblas.";
+		close;
+	}
+	mes "[Assassin Cross]";
+	mes "Bienvenido";
+	mes "a Valhalla,";
+	mes "el Salón del Honor.";
+	next;
+	mes "[Assassin Cross]";
+	mes "Por favor";
+	mes "siéntete cómodo";
+	mes "mientras estas aquí.";
+	mes "¡Honor para los guerreros!";
+	close;
+}

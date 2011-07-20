@@ -1,0 +1,2440 @@
+//===== eAthena Script ======================================= 
+//= Cooking Quest
+//===== By: ================================================== 
+//= Reddozen; L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.8
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Official Cooking Quest (10.3)
+//===== Additional Comments: ================================= 
+//= 1.1 Fixed wrong item ID, added missing ";, optimized [Lupus]
+//= 1.1a minor bugfix, thx 2 Irmin [Lupus]
+//= 1.2 Fixed exploit, some typos [Lupus]
+//= 1.3 Fixed wrong label [Lupus] 1.3a updated to Reddozen's changes
+//= 1.3b Fixed wrong id, fixed Puch quest, added more Pouch Quest
+//= dialogues [Lupus]
+//= 1.4 Fixed spelling, added some dialoguesm optimized
+//= fixed bugs. Tested, fully working [Lupus]
+//= 1.5 More fixes [Lupus]
+//= 1.6 Quest is now up to iRO 10.3 standards. [L0ne_W0lf]
+//= - Not sure what the EnableItemMove is for, as there is no 
+//= command to disable being able to move items.
+//= 1.6a Corrected a bad cutin, a Typo error ";;" and a bad delitem (bugreport:911) [Samuray22]
+//= 1.6b Corrected a "donpcevent" missing a ":". (bugreport:962) [Samuray22]
+//= 1.7 Replaced effect numerics with constants. [L0ne_W0lf]
+//= 1.8 Renamed the variable cooking to cooking_q [ultramage]
+//============================================================ 
+
+prt_castle,43,30,3	script	Charles Orleans#cook	878,{
+	set .@now_weight,MaxWeight-Weight;
+	if (.@now_weight < 2000) {
+		mes "[Charles Orleans]";
+		mes "Dame un segundo.";
+		mes "Estas cargando";
+		mes "muchos ítems";
+		mes "ahora, asi que mejor";
+		mes "deja algunas de tus cosas";
+		mes "en la bodega Kafra, si?";
+		close2;
+		//EnableItemMove;
+		end;
+	}
+	if (BaseJob == Job_Novice) {
+		if (sex) {
+			cutin "orleans_5",0;
+			mes "[Charles Orleans]";
+			mes "Disculpe, monsieur?";
+			mes "Si, tu. Si no estas";
+			mes "contratado para ayudar en la";
+			mes "cocina, tendré que";
+			mes "pedirle que se marche.";
+			next;
+			emotion e_an;
+			mes "[Charles Orleans]";
+			mes "Por favor no se";
+			mes "ofenda, pero no puedo";
+			mes "concentrar me en mi ";
+			mes "cocina cuando novatos";
+			mes "como usted andan corriendo";
+			mes "por aquí como niños.";
+			close;
+		}
+		cutin "orleans_1",0;
+		mes "[Charles Orleans]";
+		mes "Mademoiselle, que";
+		mes "esta haciendo en esta";
+		mes "área del castillo?";
+		mes "Oh, Debes de estar perdida~";
+		next;
+		cutin "orleans_2",0;
+		mes "[Charles Orleans]";
+		mes "Por favor, use las escaleras";
+		mes "a las derecha para llegar a la";
+		mes "parte central de la estructura. Querida,";
+		mes "ten cuidado y cuida tus";
+		mes "pasos cuando subas por";
+		mes "la escalera, esta bien?";
+		goto L_End;
+	}
+	else if (getequipid(1) != 5026) {
+		if (sex) {
+			cutin "orleans_5",0;
+			emotion e_an;
+			mes "[Charles Orleans]";
+			mes "Monsieur, por que";
+			mes "me mira así? Es por la camisa";
+			mes "silk de Morroc que estoy vistiendo, mi";
+			mes "cabello arreglado por Madam Verónica,";
+			mes "o mi muffler de marca";
+			mes "refinada por el Monsieur Antonio?.";
+			next;
+			cutin "orleans_7",0;
+			mes "[Charles Orleans]";
+			mes "Tal vez tu sepas algo";
+			mes "después de todo, de los espectáculos";
+			mes "de moda diseñados por";
+			mes "los artistas de la Renkenber Corporation? Por favor, dime~";
+			next;
+			cutin "orleans_2",0;
+			mes "[Charles Orleans]";
+			mes "Espera, espera un";
+			mes "momento. Es que no sabes";
+			mes "nada de las últimas";
+			mes "tendencias? Tu no pareces";
+			mes "muy a la moda...";
+			next;
+			cutin "orleans_5",0;
+			cutin "orleans_4",0;
+			mes "[Charles Orleans]";
+			mes "Ugh, usualmente, si puedo";
+			mes "evitarlo, prefieron no";
+			mes "asociarme con rufianes.";
+			mes "Pero debo admitir que";
+			mes "los aventureros como tu";
+			mes "tienen sus puntos a favor...";
+			goto L_End;
+		}
+		cutin "orleans_1",0;
+		mes "[Charles Orleans]";
+		mes "Oh! Disculpa el desorden";
+		mes "de mi humilde cocina,";
+		mes "Mademoiselle, pero incluso";
+		mes "el esplendor de los castillos";
+		mes "de prontera, palidecen";
+		mes "a su radiante belleza.";
+		next;
+		cutin "orleans_2",0;
+		mes "[Charles Orleans]";
+		mes "Digame, quien es";
+		mes "la adorable chiquilla del gato";
+		mes "que está a su lado?";
+		mes "Se que es descortés preguntar,";
+		mes "pero estoy envalentonado por";
+		mes "mi, digamosle, curiosidad.";
+		next;
+		switch(select("......?:She is my sister:Actually, I don't know her.")) {
+		case 1:
+			cutin "nyuang_3",2;
+			emotion e_ho,0,"Child with Cat#cook";
+			mes "[The kid with a cat]";
+			mes "Nyajajaja,";
+			mes "Nyajajaja~";
+			mes "Meow~ Meow~";
+			next;
+			cutin "orleans_2",0;
+			emotion e_heh;
+			mes "[Charles Orleans]";
+			mes "Que encantadora niña.";
+			mes "Tranquila como una buena mujercita.";
+			next;
+			break;
+		case 2:
+			cutin "nyuang_1",2;
+			emotion e_what,0,"Child with Cat#cook"; 
+            mes "[Child with Cat]";
+			mes "...Nya?";
+			mes "...Meow?";
+			next;
+			cutin "orleans_2",0;
+			emotion e_lv2;
+			mes "[Charles Orleans]";
+			mes "Ella es encantadora,";
+			mes "aunque ella";
+			mes "no se mira como usted.";
+			mes "Incluso su gato se ve adorable.";
+			break;
+		case 3:
+			cutin "nyuang_2",2;
+			emotion e_pif,0,"Child with Cat#cook"; 
+			mes "[Child with Cat]";
+			mes "Nyahahaha,";
+			mes "Nyahahaha~";
+			mes "Meow, meow~";
+			next;
+			cutin "orleans_4",0;
+			cutin "orleans_3",0;
+			emotion e_swt2;
+			mes "[Charles Orleans]";
+			mes "Ah, de nuevo permítame";
+			mes "disculparme. Hubiera jurado";
+			mes "que esta niña era lo suficientemente";
+			mes "afortunada como para ser la acompañante";
+			mes "de mademoiselle.";
+			break;
+		}
+		next;
+		cutin "orleans_1",0;
+		mes "[Charles Orleans]";
+		mes "Permítame que me";
+		mes "presente, amour.";
+		mes "Yo soy su fiel";
+		mes "siervo, cuyo corazón ha sido";
+		mes "atrapado por su mirada.";
+		mes "Mi nombre es Charles Orleans.";
+		next;
+		cutin "orleans_4",0;
+		mes "[Charles Orleans]";
+		mes "Aunque hay una cosa que me";
+		mes "angustia. Desde que";
+		mes "su alteza, el Rey Tristram III";
+		mes "ha desaparecido, no he encontrado";
+		mes "a una persona digna de degustar de mis creaciones.";
+		mes "Ahora mi vida no tiene sentido...";
+		next;
+		mes "[Charles Orleans]";
+		mes "Por desgracia, recientemente";
+		mes "he sido reducido a enseñar";
+		mes "mis habilidades en";
+		mes "las artes culinarias.";
+		mes "Es frustrante -- muchos de";
+		mes "ellos no tienen ninguna clase de talentos!!";
+		next;
+		cutin "orleans_3",0;
+		mes "[Charles Orleans]";
+		mes "Ah, disculpame, querida";
+		mes "Mademoiselle. Espero";
+		mes "que entienda las dificultades";
+		mes "que me veo obligado a sufrir. La próxima";
+		mes "vez que nos veamos, estaría encantado de darle un delicioso postre.";
+		next;
+		cutin "orleans_1",0;
+		mes "[Charles Orleans]";
+		mes "Si, las mujeres con tu";
+		mes "belleza, definitivamente merecen";
+		mes "los deliciosos sabores";
+		mes "que solo yo puedo ofrecer.";
+		mes "Mientras ese día llegue, me";
+		mes "temo que tendré que despedirme.";
+		goto L_End;
+	}
+	else if (cooking_q == 0) {
+		cutin "orleans_5",0;
+		emotion e_dots;
+		mes "[Charles Orleans]";
+		mes "Oh, has venido aquí";
+		mes "a aprender a cocinar? ^333333*Suspiro*^000000";
+		mes "No me siento con ánimos de";
+		mes "enseñar este día -- de hecho,";
+		mes "creo que enseñar es un desperdicio";
+		mes "de mi tiempo! ^333333*Suspiro*^000000 En fin...";
+		next;
+		switch(select("Um, are you talking to me?:Wait, don't you remember me?:Sir Orleans?")) {
+		case 1:
+			cutin "orleans_7",0;
+			mes "[Charles Orleans]";
+			mes "Con quien es que he";
+			mes "estado hablando?";
+			mes "Con Madeleine de";
+			mes "ahi? O con esa niña";
+			mes "que esta cargando";
+			mes "un gato? Sacrebleu!";
+			next;
+			cutin "nyuang_4",2;
+			mes "[Child with Cat]";
+			mes "Grrrrrrr!";
+			mes "Rrrroreow!";
+			next;
+			cutin "orleans_4",0;
+			cutin "orleans_3",0;
+			emotion e_omg;
+			mes "[Charles Orleans]";
+			mes "Dioses! me asustaste!!";
+			mes "Que niña tan malgeniuda!";
+			mes "Quien trajo a esta niña a aquí?";
+			break;
+		case 2:
+			mes "[Charles Orleans]";
+			mes "No puedo recordar todos los ingredientes";
+			mes "que me pidió para";
+			mes "enseñarme en las artes";
+			mes "culinarias. Podría jurar que habías";
+			mes "estado aquí hace algun tiempo, es solo";
+			mes "que -- cual dijiste que era tu nombre?";
+			next;
+			cutin "orleans_7",0;
+			mes "[Charles Orleans]";
+			mes "Bah!, No importa.";
+			mes "Supongo que eso";
+			mes "no es importante en";
+			mes "este momento.";
+			break;
+		case 3:
+			cutin "orleans_4",0;
+			mes "[Charles Orleans]";
+			mes "D-Disculpa? Podría";
+			mes "enseñarte,  pero podrías";
+			mes "llamarme por mi nombre.";
+			mes "Se que puedo ser estricto,";
+			mes "pero por favor: al final, somos colegas, aunque soy mucho mejor.";
+			next;
+			cutin "orleans_1",0;
+			mes "[Charles Orleans]";
+			mes "Bien, bien...";
+			mes "Si inciste, tal vez debería";
+			mes "llamarme por mi";
+			mes "diminutivo \"Sir Charles\",";
+			mes "guardando el respeto, claramente.";
+			next;
+			cutin "orleans_7",0;
+			mes "[Charles Orleans]";
+			mes "Ah... es por eso que tengo";
+			mes "este fino anillo.";
+			mes "De hecho, este título me lo dió";
+			mes "el Rey mismo, incluso";
+			mes "si soy solo un caballero más en título y clase, que en la msima fuerza.";
+			break;
+		}
+		next;
+		cutin "orleans_7",0;
+		mes "[Charles Orleans]";
+		mes "Bueno, entonces vamos a empezar,";
+		mes "hoy haremos un simple";
+		mes "platillo. Ok ^FF0000 Yo jamás enseño una receta";
+		mes "más de una vez^000000, ^FF0000 así que asegúrate";
+		mes "de apuntar muy bien esto^000000. Ahora,";
+		mes "que sería bueno cocinar?";
+		next;
+		cutin "orleans_6",0;
+		set .@cook_m1,rand(1,6);
+		if (.@cook_m1 == 1) {
+			set cooking_q,1;
+			mes "[Charles Orleans]";
+			mes "Ahhh, que tal";
+			mes "'Fried Grasshopper Legs'?";
+			mes "Para los inexpertos, puede";
+			mes "parecer un platillo asqueroso,";
+			mes "pero creeme, su exquisito sabor es un placer para todo paladar.";
+			next;
+			mes "[Charles Orleans]";
+			mes "Ahora, necesitamos los siguientes ingredientes:";
+			mes "^4D4DFF5 Grasshopper Legs^000000,";
+			mes "^4D4DFF1 Cooking Oil^000000 y";
+			mes "^4D4DFF1 Old Frying Pan^000000.";
+			mes "Con eso podremos empezar.";
+			goto L_End;
+		}
+		else if (.@cook_m1 == 2) {
+			set cooking_q,2;
+			mes "[Charles Orleans]";
+			mes "Ah, lo tengo!";
+			mes "hagamos un delicioso \"Grape Juice";
+			mes "Herbal Tea.'' El tiempo";
+			mes "es perfecto para una";
+			mes "bebida refrescante.";
+			next;
+			mes "[Charles Orleans]";
+			mes "Necesitaremos:";
+			mes "^4D4DFF3 Grapes^000000 y";
+			mes "^4D4DFF2 Red Potions^000000";
+			mes "y con eso podremos";
+			mes "empezar la siguiente lección ~";
+			goto L_End;
+		}
+		else if (.@cook_m1 == 3) {
+			set cooking_q,3;
+			mes "[Charles Orleans]";
+			mes "Listo ~";
+			mes "Ahora podremos hacer";
+			mes "''Honey Grape Juice.''";
+			mes "Por favor, trame los";
+			mes "siguientes ingredientes para";
+			mes "poder iniciar con la siguiente lección.";
+			next;
+			mes "[Charles Orleans]";
+			mes "^4D4DFF1 Honey^000000,";
+			mes "^4D4DFF2 Grapes^000000 y";
+			mes "^4D4DFF1 Red Potion^000000.";
+			goto L_End;
+		}
+		else if (.@cook_m1 == 4) {
+			set cooking_q,4;
+			mes "[Charles Orleans]";
+			mes "Mmm, porque no";
+			mes "hacemos \"Frog Egg and";
+			mes "Squid Ink Soup?'' Los";
+			mes "simples gourmet piensan";
+			mes "que es un platillo repugnante, pero";
+			mes "en realidad es muy delicioso.";
+			next;
+			mes "[Charles Orleans]";
+			mes "Bueno, entonces";
+			mes "por favor traeme:";
+			mes "^4D4DFF1 Bag of Grain^000000,";
+			mes "^4D4DFF10 Spawns^000000 y";
+			mes "^4D4DFF1 Squid Ink^000000.";
+			goto L_End;
+		}
+		else if (.@cook_m1 == 5) {
+			set cooking_q,5;
+			mes "[Charles Orleans]";
+			mes "Ah!, Ya se que";
+			mes "nos caería perfecto en";
+			mes "este momento. \"Steamed Crab";
+			mes "Nippers.'' Ahora, por favor";
+			mes "traeme estos ingredientes";
+			mes "para poder hacer esta sopa.";
+			next;
+			mes "[Charles Orleans]";
+			mes "Necesitaremos:";
+			mes "^4D4DFF10 Green Herbs^000000,";
+			mes "^4D4DFF10 Nippers^000000 y";
+			mes "^4D4DFF1 Yellow Potion^000000.";
+			goto L_End;
+		}
+		set cooking_q,6;
+		mes "[Charles Orleans]";
+		mes "Ooh, sabes";
+		mes "que sería delicioso?";
+		mes "''Fried Monkey Tails.'' Si,";
+		mes "eso suena perfecto!!. Por favor";
+		mes "traeme los siguientes ingredientes para";
+		mes "que pueda enseñarte a hacer este platillo.";
+		next;
+		mes "[Charles Orleans]";
+		mes "Necesitaremos:";
+		mes "^4D4DFF1 Frying Pan^000000,";
+		mes "^4D4DFF5 Yoyo Tails^000000 y";
+		mes "^4D4DFF1 Cooking Oil^000000.";
+		goto L_End;
+	}
+	else if (cooking_q == 1) {
+		if (countitem(940) > 4 && countitem(7031) > 0 && countitem(7457) > 0) {
+			cutin "orleans_4",0;
+			emotion e_an;
+			mes "[Charles Orleans]";
+			mes "Vaya, al fin llegaste!. Nunca";
+			mes "debes olvidar que tus ingredientes deben";
+			mes "estar lo mas frescos posible.";
+			mes "Sino tu cocina será de muy mala calidad. Ahora permíteme";
+			mes "explicarte como hacer este platillo.";
+			next;
+			cutin "orleans_6",0;
+			mes "[Charles Orleans]";
+			mes "Límpia las Grasshopper Legs";
+			mes "lo mejor que puedas antes";
+			mes "de ponerlas sobre el sartén.";
+			mes "Luego, pondremos media botella del Cooking Oil y freirémos las piernas";
+			mes "a fuego alto por 20 minutos.";
+			next;
+			mes "[Charles Orleans]";
+			mes "Ahora, sigue las instrucciones";
+			mes "que te he dado al pie de";
+			mes "la letra!. Hmmm... Bien, bien.";
+			mes "No esta del todo mal. Muy bien,";
+			mes "ya casi está listo...";
+			next;
+			cutin "orleans_7",0;
+			mes "[Charles Orleans]";
+			mes "Listo, ya quedo!";
+			mes "La presentación puede ser";
+			mes "un poquito laboriosa, pero al menos";
+			mes "ya sabes como hacer esta receta. Eso es";
+			mes "todo por el día de hoy, así que por favor";
+			mes "vaya y practique por su cuenta ahora.";
+			delitem 940,5; //Grasshopper's_Leg
+			delitem 7031,1; //Old_Frying_Pan
+			delitem 7457,1; //Cooking_Oil
+			set cooking_q,7;
+			getitem 12041,1; //Str_Dish01
+			goto L_End;
+		}
+		cutin "orleans_6",0;
+		set .@talk_j,rand(1,2);
+		if (.@talk_j == 1) {
+			mes "[Charles Orleans]";
+			mes "Rápido traime";
+			mes "los ingredientes para hacer";
+			mes "Fried Grasshopper Legs!";
+			mes "Si estuvieras en un restaurant y tuvieras";
+			mes "esta orden, no podrías hacerlos";
+			mes "esperar ni un minuto!";
+			goto L_End;
+		}
+		mes "[Charles Orleans]";
+		mes "Así que vaya por uno de esos";
+		mes "graciosos-y-suertudos grasshoppers";
+		mes "que juegan por los campos. Vamos, rápido!, arránquale las";
+		mes "piernas--- claro, lo mas humanamente posible! ";
+		goto L_End;
+	}
+	else if (cooking_q == 2) {
+		if (countitem(514) > 2 && countitem(501) > 1) {
+			cutin "orleans_4",0;
+			mes "[Charles Orleans]";
+			mes "Finalmente regresaste!. Nunca";
+			mes "debes olvidar que tus ingredientes siempre deben";
+			mes "estar lo más frescos posibles.";
+			mes "Sino tu cocina será de muy mala calidad. Ahora permíteme";
+			mes "explicarte como hacer este platillo.";
+			next;
+			cutin "orleans_6",0;
+			mes "[Charles Orleans]";
+			mes "Extrae el jugo";
+			mes "de las uvas así --";
+			mes "no podemos utilizar jugos ya hechos";
+			mes "por que tenemos que cuidar siempre la frescura. Ahora, debemos poner la Red";
+			mes "potion en baño maría...";
+			next;
+			mes "[Charles Orleans]";
+			mes "Cuando la Red Potion";
+			mes "alcance la consistencia adecuada,";
+			mes "mezclaremos con el jugo de uva que acabamos de extraer.";
+			mes "Ahora, quiero que lo pruebes. Hmm... Nada mal... Bien, bien...";
+			next;
+			cutin "orleans_7",0;
+			mes "[Charles Orleans]";
+			mes "Listo, ya lo tienes!";
+			mes "La presentación puede ser";
+			mes "un poquito laboriosa, pero al menos";
+			mes "ya sabes como hacer esta receta. Eso es";
+			mes "todo por el día de hoy, así que por favor";
+			mes "vaya y practique por su cuenta.";
+			delitem 514,3; //Grape
+			delitem 501,2; //Red_Potion
+			set cooking_q,7;
+			getitem 12046,1; //Int_Dish01
+			goto L_End;
+		}
+		cutin "orleans_6",0;
+		set .@talk_j,rand(1,2);
+		if (.@talk_j == 1) {
+			mes "[Charles Orleans]";
+			mes "Qué estas haciendo?";
+			mes "Corre y traime los";
+			mes "ingredientes para el Grape Juice";
+			mes "Herbal Tea!! En un restaurante verdadero, jamás tendrás tiempos";
+			mes "muertos como estos! Rápido!!";
+			goto L_End;
+		}
+		mes "[Charles Orleans]";
+		mes "Tienes problemas para encontrar";
+		mes "las uvas? Solo debes abrir";
+		mes "esos pequeños y preciosos Poporings...";
+		mes "Claro, debes hacelo más";
+		mes "humanamente posible...";
+		goto L_End;
+	}
+	else if (cooking_q == 3) {
+		if (countitem(518) > 0 && countitem(514) > 1 && countitem(501) > 0) {
+			cutin "orleans_4",0;
+			mes "[Charles Orleans]";
+			mes "Vaya, al fin llegaste!. Nunca";
+			mes "debes olvidar que tus ingredientes deben";
+			mes "estar lo mas frescos posible.";
+			mes "Sino tu cocina será de muy mala calidad. Ahora permíteme";
+			mes "explicarte como hacer este platillo.";
+			next;
+			cutin "orleans_6",0;
+			mes "[Charles Orleans]";
+			mes "Primero, pela las uvas";
+			mes "y quítales las semillas. Luego";
+			mes "mezcla las uvas con la";
+			mes "miel. Revulevelo";
+			mes "con el mayor cuidado posible y rosialo";
+			mes "cuidadosamente con la Red Potion...";
+			next;
+			mes "[Charles Orleans]";
+			mes "Cuando todo esté perfectamente";
+			mes "combinado con la red potion,";
+			mes "habrás terminado. Ahora";
+			mes "intenta hacerlo.";
+			mes "Bien, eso esta muy bien. Si...";
+			mes "Espera, espera! Ok, ahí tienes ~";
+			next;
+			cutin "orleans_7",0;
+			mes "[Charles Orleans]";
+			mes "Lo lograste!";
+			mes "La presentación puede ser";
+			mes "un poquito laboriosa, pero al menos";
+			mes "ya sabes como hacer esta receta. Eso es";
+			mes "todo por el día de hoy, así que por favor";
+			mes "vaya y practique por su cuenta ahora.";
+			delitem 518,1; //Honey
+			delitem 514,2; //Grape
+			delitem 501,1; //Red_Potion
+			set cooking_q,7;
+			getitem 12061,1; //Dex_Dish01
+			goto L_End;
+		}
+		cutin "orleans_6",0;
+		set .@talk_j,rand(1,2);
+		if (.@talk_j == 1) {
+			mes "[Charles Orleans]";
+			mes "Porque te gusta estar perdiendo";
+			mes "tiempo? debes tener";
+			mes "los ingredientes listos para";
+			mes "hacer el Honey Grape Juice.";
+			mes "Apresúrate!!.";
+			goto L_End;
+		}
+		mes "[Charles Orleans]";
+		mes "Estás teniendo problemas para";
+		mes "encontrar un poco de miel para";
+		mes "el Honey Grape Juice?";
+		mes "Solo ve y caza algunos osos,";
+		mes "ellos siempre andan cargando";
+		mes "con un poco de miel.";
+		goto L_End;
+	}
+	else if (cooking_q == 4) {
+		if (countitem(577) > 0 && countitem(908) > 9 && countitem(1024) > 0) {
+			cutin "orleans_4",0;
+			mes "[Charles Orleans]";
+			mes "Vaya, al fin llegaste!. Nunca";
+			mes "debes olvidar que tus ingredientes deben";
+			mes "estar lo mas frescos posible.";
+			mes "Sino tu cocina será de muy mala calidad. Ahora permíteme";
+			mes "explicarte como hacer este platillo.";
+			next;
+			cutin "orleans_6",0;
+			mes "[Charles Orleans]";
+			mes "Debemos moler los granos";
+			mes "hasta obtener una fina harina, después";
+			mes "debemos hervir la tinta del calamar";
+			mes "a fuego medio. Una vez que empiece";
+			mes "a hervir, le echaremos la harina.";
+			next;
+			mes "[Charles Orleans]";
+			mes "Mientras la añadimos";
+			mes "deberemos batir la mezcla. Cuando";
+			mes "empiece a hervir de nuevo, bajaremos el";
+			mes "fuego y lo dejaremos por 10 minutos más.";
+			mes "Bien, ahora inténtalo.";
+			mes "Eso es, eso es... Muy bien ~";
+			next;
+			cutin "orleans_7",0;
+			mes "[Charles Orleans]";
+			mes "Listo, ya lo teiens!";
+			mes "La presentación puede ser";
+			mes "un poquito laboriosa, pero al menos";
+			mes "ya sabes como hacer esta receta. Eso es";
+			mes "todo por el día de hoy, así que por favor";
+			mes "vaya y practique por su cuenta ahora.";
+			delitem 577,1; //Grain
+			delitem 908,10; //Spawn
+			delitem 1024,1; //Chinese_ink
+			set cooking_q,7;
+			getitem 12056,1; //Agi_Dish01
+			goto L_End;
+		}
+		cutin "orleans_6",0;
+		set .@talk_j,rand(1,2);
+		if (.@talk_j == 1) {
+			mes "[Charles Orleans]";
+			mes "Qué estás haciendo?";
+			mes "Se supone que debes estar";
+			mes "preparando los ingredientes";
+			mes "para el Frog Egg Squid Ink Soup!";
+			mes "La Ink Soup ahora!";
+			goto L_End;
+		}
+		mes "[Charles Orleans]";
+		mes "Debes ser cuidadoso";
+		mes "cuando manejes los huevos de";
+		mes "rana. Si llegan a quedar";
+		mes "crudos y alguién los prueba, su sabor será";
+		mes "una pobre copia de su verdadero esplendor.";
+		goto L_End;
+	}
+	else if (cooking_q == 5) {
+		if (countitem(960) > 9 && countitem(511) > 9 && countitem(503) > 0) {
+			cutin "orleans_4",0;
+			mes "[Charles Orleans]";
+			mes "Vaya, al fin llegaste!. Nunca";
+			mes "debes olvidar que tus ingredientes deben";
+			mes "estar lo mas frescos posible.";
+			mes "Sino tu cocina será de muy mala calidad. Ahora permíteme";
+			mes "explicarte como hacer este platillo.";
+			next;
+			cutin "orleans_6",0;
+			mes "[Charles Orleans]";
+			mes "Herviremos las pinzas en la Yellow";
+			mes "Potion a fuego lento por unos";
+			mes "30 minutos. Luego , añadiremos";
+			mes "las Green Herbs una por una";
+			mes "con cuidado.";
+			next;
+			mes "[Charles Orleans]";
+			mes "Esta es una receta fácil, pero";
+			mes "aun quiero ver como la haces.";
+			mes "Ok, dejame ver como lo haces...";
+			mes "Vaya, lo haces bien. Ahora, espera...";
+			mes "Bien, bien, ok, esta lista para";
+			mes "que le pongas las Greeen Herbs...";
+			next;
+			cutin "orleans_7",0;
+			mes "[Charles Orleans]";
+			mes "Bien, ya lo tienes!!";
+			mes "La presentación puede ser";
+			mes "un poquito laboriosa, pero al menos";
+			mes "ya sabes como hacer esta receta. Eso es";
+			mes "todo por el día de hoy, así que por favor";
+			mes "vaya y practique por su cuenta.";
+			delitem 960,10; //Nipper
+			delitem 511,10; //Green_Herb
+			delitem 503,1; //Yellow_Potion
+			set cooking_q,7;
+			getitem 12051,1; //Vit_Dish01
+			goto L_End;
+		}
+		cutin "orleans_6",0;
+		set .@talk_j,rand(1,2);
+		if (.@talk_j == 1) {
+			mes "[Charles Orleans]";
+			mes "No deberías de";
+			mes "estar preparando los";
+			mes "ingredientes para el Steamed";
+			mes "Crab Nippers? Necesitas";
+			mes "trabajar rápido para atender";
+			mes "a tus comensales furiosos!";
+			goto L_End;
+		}
+		mes "[Charles Orleans]";
+		mes "No es muy difícil";
+		mes "conseguir las pinzas. Solo";
+		mes "debe encontrar algunos Vadons y aplastarlos,";
+		mes "asegurandote de desprender";
+		mes "las pinzas. Se que suena extraño, pero solo hazlo.";
+		goto L_End;
+	}
+	else if (cooking_q == 6) {
+		if (countitem(942) > 4 && countitem(7031) > 0 && countitem(7457) > 0) {
+			cutin "orleans_4",0;
+			mes "[Charles Orleans]";
+			mes "Vaya, al fin llegaste!. Nunca";
+			mes "debes olvidar que tus ingredientes deben";
+			mes "estar lo mas frescos posible.";
+			mes "Sino tu cocina será de muy mala calidad. Ahora permíteme";
+			mes "explicarte como hacer este platillo.";
+			next;
+			cutin "orleans_6",0;
+			mes "[Charles Orleans]";
+			mes "Quita el pelo de las";
+			mes "colas y enjuagalas bien";
+			mes "con agua fría. Vierte media";
+			mes "botella de Cokking Oul en";
+			mes "una sarten precalentada y pon";
+			mes "a freír las colas.";
+			next;
+			mes "[Charles Orleans]";
+			mes "El truco es freír las colas";
+			mes "rápidamente sin quemarlas,";
+			mes "así que tal vez prefieras freírlas";
+			mes "a un fuego medio-alto.";
+			mes "Ahora muéstrame lo que haz aprendido... Muy bien, nada mal...";
+			next;
+			cutin "orleans_7",0;
+			mes "[Charles Orleans]";
+			mes "Listo, ya lo tienes!";
+			mes "La presentación puede ser";
+			mes "un poquito laboriosa, pero al menos";
+			mes "ya sabes como hacer esta receta. Eso es";
+			mes "todo por el día de hoy, así que por favor";
+			mes "vaya y practique por su cuenta.";
+			delitem 942,5; //Yoyo_Tail
+			delitem 7031,1; //Old_Frying_Pan
+			delitem 7457,1; //Cooking_Oil
+			set cooking_q,7;
+			getitem 12066,1; //Luk_Dish01
+			goto L_End;
+		}
+		cutin "orleans_6",0;
+		set .@talk_j,rand(1,2);
+		if (.@talk_j == 1) {
+			mes "[Charles Orleans]";
+			mes "Vale más que vayas preparando";
+			mes "los ingredientes para esos Fried";
+			mes "Monkey Tails lo más pronto";
+			mes "posible. En un restaurant real";
+			mes "no puedes tomarte todo el";
+			mes "tiempo que quieras.";
+			goto L_End;
+		}
+		mes "[Charles Orleans]";
+		mes "Necesitas más colas?...";
+		mes "Solo busca algunos";
+		mes "Yoyo, matalos rápidamente y";
+		mes "cortale las colas.";
+		mes "Eres un principiante, pero no creas";
+		mes "que te permitiré ser una bestia con esas lindas criaturas!";
+		goto L_End;
+	}
+	else if (cooking_q == 7) {
+		cutin "orleans_7",0;
+		mes "[Charles Orleans]";
+		mes "Oh... estoy tan agotado!";
+		mes "Tengo mucha sabiduría y";
+		mes "habilidades para enseñar! aunque eso";
+		mes "no es algo que me divierta, pero";
+		mes "es necesario que lo haga";
+		mes "para trascender mi cocina...";
+		next;
+		cutin "orleans_1",0;
+		mes "[Charles Orleans]";
+		mes "Ya sea para bien o para mal...";
+		mes "Supongo que tengo";
+		mes "que seguir con esto aunque me duela,";
+		mes "hasta encontrar a alguien que";
+		mes "pueda convertirse en un digno sucesor.";
+		mes "Se que tomará tiempo...";
+		goto L_End;
+	}
+	else if (cooking_q == 8) {
+		cutin "orleans_5",0;
+		mes "[Charles Orleans]";
+		mes "Extraño, extraño...";
+		mes "Que hacen esta niña";
+		mes "y ese gato aquí?";
+		mes "La cocina no es lugar";
+		mes "para-- bueno,";
+		mes "por lo menos para animales domésticos.";
+		next;
+		cutin "orleans_4",0;
+		mes "[Charles Orleans]";
+		mes "Pardon moi, chiquilla,";
+		mes "pero podrías irse";
+		mes "tu y tu gato";
+		mes "de este lugar?. Esta";
+		mes "es una cocina y todo aquí";
+		mes "necesita estar limpio!";
+		next;
+		cutin "nyuang_1",2;
+		mes "[Child with Cat]";
+		mes "...Nyaaa?";
+		mes "...Meow?";
+		next;
+		switch(select("What's your name, kid?:Do you want to eat something?:Here, kitty~:Get out!")) {
+		case 1:
+			emotion e_ok,0,"Child with Cat#cook"; 
+			mes "[Child with Cat]";
+			mes "Nyaaa~";
+			mes "nyaaa~";
+			mes "(Purrrrrr)";
+			next;
+			cutin "orleans_4",0;
+			mes "[Charles Orleans]";
+			mes "..... haz intentado";
+			mes "preguntarle su nombre?";
+			mes "Ni siquiera entiende lo que está diciendo.";
+			goto L_End;
+		case 2:
+			cutin "nyuang_2",2;
+			emotion e_pif,0,"Child with Cat#cook"; 
+			mes "[Child with Cat]";
+			mes "Nyaaaa~";
+			mes "(Purrrrrr~)";
+			next;
+			cutin "orleans_5",0;
+			mes "[Charles Orleans]";
+			mes "Esa es una buena idea...";
+			mes "Ofrecerle algunos alimentos para";
+			mes "que se vaya. Mon dieu, si la";
+			mes "no habla con nosotros...";
+			mes "Aún así, necesitamos que ustedes dos";
+			mes "dejen esta cocina.";
+			goto L_End;
+		case 3:
+			cutin "nyuang_3",2;
+			emotion e_heh,0,"Child with Cat#cook"; 
+			mes "[Child with Cat]";
+			mes "Nyahahaha~";
+			mes "Nyhhahaha~";
+			mes "(Meow, meow~)";
+			next;
+			cutin "orleans_4",0;
+			mes "[Charles Orleans]";
+			mes "... Estas jugando con la niña?...";
+			mes "... Entonces no te necesito aquí.";
+			goto L_End;
+		case 4:
+			emotion e_dots,0,"Child with Cat#cook"; 
+			mes "[Child with Cat]";
+			mes "...";
+			mes "(Meow?)";
+			next;
+			cutin "nyuang_4",2;
+			emotion e_an,0,"Child with Cat#cook"; 
+			specialeffect2 EF_HIT2;
+			percentheal -10,0;
+			mes "[Child with Cat]";
+			mes "Grrrrrrr!";
+			mes "(RRRrrreow!)";
+			next;
+			cutin "orleans_7",0;
+			mes "[Charles Orleans]";
+			mes "Hey, cuidado!";
+			mes "Deberías ser";
+			mes "más cuidadosa";
+			mes "con ese gato...";
+			goto L_End;
+		}
+	}
+	else if (cooking_q == 9) {
+		cutin "orleans_5",0;
+		emotion e_an;
+		mes "[Charles Orleans]";
+		mes "Bien, ya tuve";
+		mes "suficiente. No podemos seguir";
+		mes "cocinando si tenemos";
+		mes "animales en la";
+		mes "cocina. Eso viola nuestros";
+		mes "normas sanitarias!!";
+		next;
+		cutin "orleans_6",0;
+		mes "[Charles Orleans]";
+		mes "Lo lamento, mon chere,";
+		mes "pero tienes que irte.";
+		mes "Pequeña, por favor toma a";
+		mes "tu gato y ve a la puerta";
+		mes "antes de que tu felino toque";
+		mes "cualquiera de los alimentos.";
+		next;
+		cutin "nyuang_4",2;
+		emotion e_an,0,"Child with Cat#cook"; 
+		mes "[Child with Cat]";
+		mes "Grrrrrrr!";
+		mes "RRRRreow!";
+		next;
+		donpcevent "Wickebine#cook::OnEnable";
+		emotion e_omg;
+		emotion e_ho,0,"Child with Cat#cook"; 
+		next;
+		cutin "job_black_hucke01",1;
+		mes "[Wickebine]";
+		mes "Oh...!";
+		mes "Nyuyang, ahí";
+		mes "estabas!. Que estás";
+		mes "haciendo en la cocina";
+		mes "de Charles?";
+		next;
+		cutin "orleans_3",0;
+		mes "[Charles Orleans]";
+		mes "M-Madam Wickebine...!";
+		mes "Perdóneme, me sorprendió";
+		mes "verle aparecer de la nada.";
+		mes "Usted sabe quien es";
+		mes "esta jovencita?";
+		next;
+		cutin "job_black_hucke02",1;
+		mes "[Wickebine]";
+		mes "Oh, Nyuyang es mi";
+		mes "pequeña hermana. Puede ser difícil";
+		mes "ver el parecido...";
+		mes "Como sea, la he estado buscando";
+		mes "por todos lados. Haz estado";
+		mes "molestando a Charles, Nyuyang?";
+		next;
+		cutin "nyuang_3",2;
+		emotion e_heh,0,"Child with Cat#cook"; 
+		mes "[Child with Cat]";
+		mes "Nyuuuunyuuu~";
+		mes "nyuuuunyuuu~";
+		mes "Meooooow~";
+		next;
+		cutin "orleans_3",0;
+		mes "[Charles Orleans]";
+		mes "...!!!";
+		next;
+		cutin "job_black_hucke03",1;
+		mes "[Wickebine]";
+		mes "oh, así que lo";
+		mes "haz estado molestando!";
+		mes "No crees que Charles";
+		mes "quiere que te vayas ya?";
+		next;
+		cutin "orleans_3",0;
+		emotion e_swt2;
+		mes "[Charles Orleans]";
+		mes "Jajajaja, de";
+		mes "que estas habalndo?!";
+		mes "Tonterías! Como puede ";
+		mes "una blle y linda niña";
+		mes "ser un problema para mi?";
+		next;
+		cutin "orleans_7",0;
+		mes "[Charles Orleans]";
+		mes "Incluso,";
+		mes "estaba a punto de";
+		mes "prepara un delicioso platillo";
+		mes "para esta preciosa petit y";
+		mes "su gatito.";
+		mes "Así que no se preocupe, Madam ~";
+		next;
+		cutin "job_black_hucke01",1;
+		emotion e_what,0,"Wickebine#cook"; 
+		mes "[Wickebine]";
+		mes "Estás seguro, Charles?";
+		mes "Yo se que tan enserio te";
+		mes "tomas todo lo relacionado con tu cocina";
+		mes "y no me gustaria que Nyuyang te";
+		mes "esté molestando...";
+		next;
+		cutin "job_black_hucke02",1;
+		mes "[Wickebine]";
+		mes "Oh, Charles, siempre";
+		mes "ha sido muy amable";
+		mes "conmigo. Me alegra que";
+		mes "también tengas los mismos cuidado con Nyuyang.";
+		mes "Bueno, en ese caso, cuidense ~";
+		next;
+		cutin "nyuang_3",2;
+		emotion e_heh,0,"Child with Cat#cook";
+		mes "[Child with Cat]";
+		mes "Nyahahaha~";
+		mes "Nyahahaha~";
+		mes "(Meow, meow~)";
+		next;
+		cutin "job_black_hucke02",255;
+		emotion e_ho,0,"Wickebine#cook";
+		donpcevent "Wickebine#cook::OnDisable";
+		next;
+		emotion e_dots;
+		emotion e_dots,0,"Child with Cat#cook";
+		mes "[Charles Orleans]";
+		mes "......";
+		next;
+		cutin "orleans_6",0;
+		mes "[Charles Orleans]";
+		mes "Ah...";
+		mes "Ahí va una verdadera";
+		mes "dama... Madam Wickebine...";
+		goto L_End;
+	}
+	else if (cooking_q == 10) {
+		cutin "orleans_5",0;
+		mes "[Charles Orleans]";
+		mes "Me he estado preguntando";
+		mes "del porque su alteza";
+		mes "ha estado desaparecido por";
+		mes "tanto tiempo. Por que será";
+		mes "que nadie sabe donde está?";
+		next;
+		cutin "orleans_4",0;
+		cutin "orleans_3",0;
+		mes "[Charles Orleans]";
+		mes "El sabio y benevolente";
+		mes "Rey Tristram III nunca";
+		mes "había abandonado a sus súbditos.";
+		mes "Espero que nada malo";
+		mes "le haya sucedido...";
+		next;
+		cutin "orleans_6",0;
+		mes "[Charles Orleans]";
+		mes "Pudiera ser que";
+		mes "nuestro amado Rey tuviera";
+		mes "enemigos? El no ha";
+		mes "ha traido más que puras cosas";
+		mes "buenas al reino de Rune-Midgarts";
+		mes "y al resto del mundo!!";
+		next;
+		mes "[Charles Orleans]";
+		mes "No puedo imaginar a un";
+		mes "gran hombre como el metido";
+		mes "en cualquier clase de problemas. Y es";
+		mes "hilarante que crean";
+		mes "que podría estar escondido";
+		mes "en la República Schwaltzvalt...";
+		next;
+		emotion e_go;
+		mes "[Charles Orleans]";
+		mes "Gloria y prosperidad a";
+		mes "reino de Rune-Midgarts!!";
+		mes "Larga vida al Rey Tristram III!!!";
+		goto L_End;
+	}
+	else if (cooking_q == 11) {
+		cutin "orleans_5",0;
+		emotion e_dots;
+		mes "[Charles Orleans]";
+		mes "Oh, creo que necesito";
+		mes "un descanzo. Claro, a menos ";
+		mes "que tengas algo increiblemente";
+		mes "importante que preguntarme,";
+		mes "déjame tomar un descanzo.";
+		next;
+		switch(select("I want to learn more recipes.:For whom do you cook?:I'm sorry to bother you...")) {
+		case 1:
+			cutin "orleans_7",0;
+			mes "[Charles Orleans]";
+			mes "Quieres aprender más";
+			mes "recetas?. Supongo que";
+			mes "tendrás que conseguir otro";
+			mes "Cookbook para eso. Pero antes de eso";
+			mes "por favor regresame el que";
+			mes "te he prestado primero, ok?";
+			next;
+			mes "[Charles Orleans]";
+			mes "Ahora, escoge otro de los";
+			mes "libros de recetas entre los niveles";
+			mes "1 y 5 para prestartelo.";
+			mes "Por supuesto, hay libros mas avanzados,";
+			mes "pero esos no los presto.";
+			mes "O puedes escribir 0 para cancerla.";
+			next;
+			input .@new_book;
+			if (.@new_book < 0 || .@new_book > 5) {
+				cutin "orleans_5",0;
+				mes "[Charles Orleans]";
+				mes "Hmm...";
+				mes "Te dije que un nivel";
+				mes "entre el 1 y el 5.";
+				mes "Esos son los únicos";
+				mes "Cookbooks que presto";
+				mes "a mis estudiantes.";
+				goto L_End;
+			}
+			else if (.@new_book == 0) {
+				cutin "orleans_5",0;
+				mes "[Charles Orleans]";
+				mes "Así que cambiaste de idea?";
+				mes "Creo que sería buena idea";
+				mes "que practicaras";
+				mes "tus recetas antes de intentar";
+				mes "con algo nuevo, no crees?.";
+				goto L_End;
+			}
+			mes "[Charles Orleans]";
+			mes "Así que quieres pedir";
+			mes "otro nivel para " + .@new_book + " practicar, eh?";
+			mes "Oh, me recordarías por favor";
+			mes "el nivel del Cookbook";
+			mes "que me estás regresando?";
+			next;
+			input .@old_book;
+			if (.@old_book < 0 || .@old_book > 5) {
+				mes "[Charles Orleans]";
+				mes "Debe haber algun";
+				mes "especie de error -- Yo solo";
+				mes "presto libros de cocina";
+				mes "del nivel 1 al 5. Hmm, bueno, preguntame";
+				mes "de nuevo cuando recuerdes";
+				mes "cual libro de cocina tienes, ok?";
+				goto L_End;
+			}
+			else if (.@old_book == 0) {
+				cutin "orleans_5",0;
+				mes "[Charles Orleans]";
+				mes "Así que cambiaste de parecer?";
+				mes "Creo que sería una buena idea";
+				mes "que practicaras";
+				mes "tus recetas antes de intentar";
+				mes "con algo nuevo, no crees?.";
+				goto L_End;
+			}
+			else if (.@old_book == .@new_book) {
+				cutin "orleans_4",0;
+				mes "[Charles Orleans]";
+				mes "Espera...";
+				mes "Por que quieres";
+				mes "pedir prestado el mismo ejemplar";
+				mes "de cocina que ya";
+				mes "tienes?, Seguro te";
+				mes "estás confundiendo.";
+				goto L_End;
+			}
+			else {
+				if (.@old_book == 1) {
+					if (countitem(7472) < 1) {
+						mes "[Charles Orleans]";
+						mes "Espera...";
+						mes "Por que no tienes";
+						mes "el libro que acabas de";
+						mes "decir que me regresarías?";
+						mes "Primero encuéntralo y entonces";
+						mes "te lo cambiaré por otro libro.";
+						goto L_End;
+					}
+					cutin "orleans_2",0;
+					mes "[Charles Orleans]";
+					mes "Ah, así que ya terminaste";
+					mes "con el Level 1 Cookbook.";
+					mes "Muy bien, eso quiere decir";
+					mes "que ya sabes los fundamentos";
+					mes "básico. A partir de ahora";
+					mes "las recetas serán más difíciles...";
+					next;
+				}
+				else if (.@old_book == 2) {
+					if (countitem(7473) < 1) {
+						mes "[Charles Orleans]";
+						mes "Espera...";
+						mes "Por que no tienes";
+						mes "el libro que acabas de";
+						mes "decir que me regresarías?.";
+						mes "Primero encuéntralo y entonces";
+						mes "te lo cambiaré por otro libro.";
+						goto L_End;
+					}
+					cutin "orleans_2",0;
+					mes "[Charles Orleans]";
+					mes "Ah, que te parecieron";
+					mes "loas recetas del";
+					mes "Level 2 Cookbook?";
+					mes "La cocina doméstica  puede";
+					mes "ser sencilla, pero un buen Chef";
+					mes "jamás debe olvidarla.";
+					next;
+				}
+				else if (.@old_book == 3) {
+					if (countitem(7474) < 1) {
+						mes "[Charles Orleans]";
+						mes "Espera...";
+						mes "Porque no tienes";
+						mes "el libro que acabas de";
+						mes "decir que me regresarías?";
+						mes "Primero encuéntralo y entonces";
+						mes "te lo cambiaré por otro libro.";
+						goto L_End;
+					}
+					cutin "orleans_2",0;
+					mes "[Charles Orleans]";
+					mes "Ah, también terminaste";
+					mes "con el Leve 3 Cookbook? Las recetas";
+					mes "de ahí son excelentes para cenas románticas.";
+					mes "Quedan como anillo al dedo,";
+					mes "si sabes a lo que me refiero.";
+					next;
+				}
+				else if (.@old_book == 4) {
+					if (countitem(7475) < 1) {
+						mes "[Charles Orleans]";
+						mes "Espera...";
+						mes "Por que no tienes";
+						mes "el libro que acabas de";
+						mes "decir que me regresarías?";
+						mes "Primero encuéntralo y entonces";
+						mes "te lo cambiaré por otro libro.";
+						goto L_End;
+					}
+					cutin "orleans_2",0;
+					mes "[Charles Orleans]";
+					mes "Así que terminaste con";
+					mes "el Level 4 Cookbook. Vaya que";
+					mes "eres bueno!. Ahora sabes que";
+					mes "tienes que usar ingredientes muy";
+					mes "extraños para crear excelentes delicias!";
+					next;
+				}
+				else if (.@old_book == 5) {
+					if (countitem(7476) < 1) {
+						mes "[Charles Orleans]";
+						mes "Espera...";
+						mes "Por que no tienes";
+						mes "el libro que acabas de";
+						mes "decir que me regresarías?";
+						mes "Encuéntralo primero y entonces";
+						mes "te lo cambiaré por otro libro.";
+						goto L_End;
+					}
+					cutin "orleans_2",0;
+					mes "[Charles Orleans]";
+					mes "También terminaste ya con el";
+					mes "Level 5 Cookbook?. Buen";
+					mes "trabajo: La mayoría de los principiantes";
+					mes "no llegan hasta este punto. Supongo";
+					mes "que desearás revisar algunas de";
+					mes "las recetas más fáciles ~";
+					next;
+				}
+			}
+			cutin "orleans_1",0;
+			mes "[Charles Orleans]";
+			mes "Antes de que te";
+			mes "preste uno de mi amados";
+			mes "libros de cocina, deberás cumplir";
+			mes "con una pequeña condición. ";
+			next;
+			if (.@new_book == 1) {
+				cutin "orleans_7",0;
+				mes "[Charles Orleans]";
+				mes "Cuando era pequeño";
+				mes "mi familia fue destituída y vivimos";
+				mes "a base de los desperdicios";
+				mes "de comida. Incluso los";
+				mes "Monster's Feed eran una";
+				mes "delicia en esos días.";
+				next;
+				mes "[Charles Orleans]";
+				mes "En aquel entonces, mi padre";
+				mes "siempre nos alimentaba con calabazas.";
+				mes "Obviamente crecí odiándolas, pero";
+				mes "ahora me recuerdan";
+				mes "a esos días de inocencia.";
+				next;
+				mes "[Charles Orleans]";
+				mes "Por que te digo esto?";
+				mes "Si tu me traes 10 Pumpkins,";
+				mes "podría prestarte uno de";
+				mes "mis Level 1 Cookbooks.";
+				if (countitem(535) > 9) {
+					next;
+					if (select("Give 10 Pumpkins and Current Cookbook:Cancel") == 1) {
+						cutin "orleans_6",0;
+						mes "[Charles Orleans]";
+						mes "Perfecto!, haz traido las";
+						mes "10 calabazas!. No puedo";
+						mes "esperar para degustar esos";
+						mes "sabores que me recuerdan";
+						mes "esos días de mi infancia.";
+						next;
+					}
+					else {
+						mes "[Charles Orleans]";
+						mes "Como echo de menos";
+						mes "el sabor de las calabazas!";
+						mes "Ahhhh, que nostalgia ~";
+						goto L_End;
+					}
+				}
+				else goto L_End;
+			}
+			else if (.@new_book== 2) {
+				cutin "orleans_7",0;
+				mes "[Charles Orleans]";
+				mes "Hoy, tengo antojo de una";
+				mes "buena taza de te. Claro,";
+				mes "acompañado de unas crujientes";
+				mes "galletas. Por favor";
+				mes "traeme 5 Well-Baked Cookies";
+				mes "y te prestaré mi Level 2 Cookbook.";
+				if (countitem(538) > 4) {
+					next;
+					if (select("Give Cookies and Current Cookbook:Cancel") == 1) {
+						cutin "orleans_6",0;
+						mes "[Charles Orleans]";
+						mes "Vaya, trajiste las";
+						mes "galletas más rápido";
+						mes "de lo que esperaba!";
+						mes "Excelente, ahora puedo poner a hacer";
+						mes "mi te, relajarme y disfrutar";
+						mes "de una deliciosa merienda ~";
+						next;
+					}
+					else {
+						mes "[Charles Orleans]";
+						mes "Ohh...";
+						mes "Mi te deberá estar muy";
+						mes "pronto... pero no podré";
+						mes "disfrutar de una grata experiencia";
+						mes "sin unas Well-Baked Cookies ~";
+						goto L_End;
+					}
+				}
+				else goto L_End;
+			}
+			else if (.@new_book== 3) {
+				cutin "orleans_7",0;
+				mes "[Charles Orleans]";
+				mes "Sabes cual es la especialidad";
+				mes "de Amatsu? He";
+				mes "tenido muchas ganas probarlo últimamente.";
+				mes "Podrías traerme 5 Sushis?. Entonces";
+				mes "te prestaré mi";
+				mes "Level 3 Cookbook, ok?";
+				if (countitem(551) > 4) {
+					next;
+					if (select("Give Sushi and Current Cookbook:Cancel")) {
+						cutin "orleans_6",0;
+						mes "[Charles Orleans]";
+						mes "Ooh, esto se ve tan fresco!!";
+						mes "Y la presentación es";
+						mes "maravillosa!. Seguro fue preparado";
+						mes "por un Chef experto! ";
+						next;
+					}
+					else {
+						mes "[Charles Orleans]";
+						mes "Ahhh, Sushi...";
+						mes "Es una de las pocas";
+						mes "cosas que no se";
+						mes "como hacer muy bien.";
+						mes "Puedes creerlo?";
+						goto L_End;
+					}
+				}
+				else goto L_End;
+			}
+			else if (.@new_book== 4) {
+				cutin "orleans_7",0;
+				mes "[Charles Orleans]";
+				mes "Oh, estoy de humor para";
+				mes "preparar algun platillo originario de Kunlun.";
+				mes "Podría conseguirme algunos";
+				mes "deliciosos Bao?, 5 estarían";
+				mes "muy bien. Entonces podré";
+				mes "prestarte mi Level 4 Cookbook.";
+				if (countitem(553) > 4) {
+					next;
+					if (select("Give Bao and Current Cookbook:Cancel") == 1) {
+						cutin "orleans_6",0;
+						mes "[Charles Orleans]";
+						mes "Bien, los trajiste";
+						mes "todos!. Esos Baos";
+						mes "se ven especialmente";
+						mes "deliciosos! No puedo";
+						mes "esperar a darles una mordida!";
+						next;
+					}
+					else {
+						mes "[Charles Orleans]";
+						mes "Oh...";
+						mes "Ha pasado mucho tiempo";
+						mes "desde la última vez que";
+						mes "pobre un Bao tan delicioso.";
+						mes "Los cocinaría yo mismo, pero";
+						mes "no se el secreto!.";
+						goto L_End;
+					}
+				}
+				else goto L_End;
+			}
+			else if (.@new_book== 5) {
+				cutin "orleans_7",0;
+				mes "[Charles Orleans]";
+				mes "Ultimamente, mi despensa ha estado";
+				mes "con la necesidad de Shoots.";
+				mes "Tienen un sabroso ingrediente con un";
+				mes "nada ignorable valor nutrimental. Traeme";
+				mes "10 de esos, y podras";
+				mes "pedir prestado un Level 5 Cookbook.";
+				if (countitem(711) > 9) {
+					next;
+					if (select("Give Shoots and Current Cookbook:Quit") == 1) {
+						cutin "orleans_6",0;
+						mes "[Charles Orleans]";
+						mes "Dios, Estos son";
+						mes "algunos Shoots de alta calidad!";
+						mes "Se ven muy bien, Estoy";
+						mes "seguro que podrias";
+						mes "hasta comerlos crudos!";
+						next;
+					}
+					else {
+						mes "[Charles Orleans]";
+						mes "Voy a tener";
+						mes "que cosinar con esos Shoots";
+						mes "pronto, asi que te agradeceria";
+						mes "si podrias hacerme este pequeño favor~";
+						goto L_End;
+					}
+				}
+				else goto L_End;
+			}
+
+			if (.@old_book == 1) delitem 7472,1; //Cookbook01
+			else if (.@old_book == 2) delitem 7473,1; //Cookbook02
+			else if (.@old_book == 3) delitem 7474,1; //Cookbook03
+			else if (.@old_book == 4) delitem 7475,1; //Cookbook04
+			else if (.@old_book == 5) delitem 7476,1; //Cookbook05
+			if (.@new_book == 1) {
+				delitem 535,10; //Pumpkin
+				getitem 7472,1; //Cookbook01
+			}
+			else if (.@new_book== 2) {
+				delitem 538,5; //Well_Baked_Cookie
+				getitem 7473,1; //Cookbook02
+			}
+			else if (.@new_book== 3) {
+				delitem 551,5; //Shusi
+				getitem 7474,1; //Cookbook03
+			}
+			else if (.@new_book== 4) {
+				delitem 553,5; //Bun
+				getitem 7475,1; //Cookbook05
+			}
+			else if (.@new_book== 5) {
+				delitem 711,10; //Shoot
+				getitem 7476,1; //Cookbook05
+			}
+			mes "[Charles Orleans]";
+			mes "Bueno, como prometi,";
+			mes "aqui esta el cookbook";
+			mes "Es lo que buscabas. Cuidalo";
+			mes "y no lo vendas";
+			mes "o pierdas o nada";
+			mes "parecido. Ahora buena suerte cocinando~";
+			goto L_End;
+
+		case 2:
+			cutin "orleans_3",0;
+			mes "[Charles Orleans]";
+			mes "A que te refieres,";
+			mes "''por que cocino?''";
+			mes "Que extraña pregunta";
+			mes "con una simple respuesta. Soy";
+			mes "un artista que brindara";
+			mes "mas de su arte para el mundo.";
+			next;
+			cutin "orleans_3",0;
+			mes "[Charles Orleans]";
+			mes "Espera, espera...";
+			mes "Has estado hablando";
+			mes "con Madeleine Chu? Ella";
+			mes "no me dijo nada";
+			mes "fuera de lo normal, Verdad?";
+			mes "Por que si lo hizo, ignorale!";
+			next;
+			cutin "orleans_6",0;
+			mes "[Charles Orleans]";
+			mes "No. No hay";
+			mes "alguna razon especial";
+			mes "por la que mi espiritu cree";
+			mes "obras maestras culinarias como";
+			mes "las que he creado ultimamente...";
+			goto L_End;
+
+		case 3:
+			cutin "orleans_5",0;
+			mes "[Charles Orleans]";
+			mes "Porfavor, No tiene que preocuparse";
+			mes "por ello. Solo";
+			mes "dejeme descanzar por ahora~";
+			goto L_End;
+
+		}
+	}
+	else {
+		mes "[Charles Orleans]";
+		mes "¡Dios Mio!";
+		mes "A ocurrido un";
+		mes "error";
+		goto L_End;
+	}
+
+L_End:
+	close2;
+	cutin "",255;
+	end;
+}
+
+prt_castle,45,35,5	script	Madeleine Chu#cook	886,{
+	set .@now_weight,MaxWeight-Weight;
+	if (.@now_weight < 2000) {
+		mes "[Madeleine Chu]";
+		mes "Lo siento, pero por ahora";
+		mes "estas cargando demasiados";
+		mes "items. Deberias poner las";
+		mes "cosas extra en la Kafra Storage,";
+		mes "Y entonces habla conmigo de nuevo, okay? ";
+		close2;
+		//EnableItemMove
+		end;
+	}
+	if (cooking_q == 0) {
+		mes "[Madeleine Chu]";
+		mes "Oh, hola~";
+		mes "Soy Madeleine Chu,";
+		mes "Aprendis de chef del";
+		mes "Sir Charles. Puedo ayudarle";
+		mes "con algo este dia?";
+		next;
+		switch(select("What do you do as a chef?:Which foods can you make?:I want to learn cooking too!")) {
+		case 1:
+			mes "[Madeleine Chu]";
+			mes "Que es lo que hago como chef?";
+			mes "Bueno, Soy solo un aprendis por el momento, asi que aun aprendo como cocinar.";
+			mes "Pero algun dia, Quiero convertirme";
+			mes "en un gran chef y todos ronoceran";
+			mes "mi talento culinario~";
+			next;
+			mes "[Madeleine Chu]";
+			mes "Trabajar en la cocina";
+			mes "es muy agotador";
+			mes "tanto como tener una gran finura";
+			mes "debo controlar mejor el fuego";
+			mes "como un bombero y un artesano";
+			mes "y mis platos como un artista";
+			next;
+			mes "[Madeleine Chu]";
+			mes "Bueno, Exagere";
+			mes "un poco, pero cocinar";
+			mes "a un cierto nivel es mucho";
+			mes "mas dificil de lo que parece.";
+			close;
+
+		case 2:
+			mes "[Madeleine Chu]";
+			mes "Bueno, Solo se recetas";
+			mes "basicas por el momento. Sir Charles";
+			mes "dice que incluso el mejor chef";
+			mes "sabe como darle sabor";
+			mes "sabor hasta las comidas mas comunes.";
+			next;
+			mes "[Madeleine Chu]";
+			mes "Dice que debo desarrollar";
+			mes "mis habilidades culinarias hasta que pueda";
+			mes "aprender recetas mas avanzadas.";
+			mes "Algun dia, avanzare y entonces";
+			mes "sabre todo lo necesario para crear mis";
+			mes "propios y unicos, deliciosos platillos!";
+			next;
+			mes "[Madeleine Chu]";
+			mes "Sir Charles podria ser duro";
+			mes "con sus estudiantes, pero sus habilidades";
+			mes "son inigualables. Una vez intentente uno";
+			mes "de sus postres, y fue";
+			mes "la mas celestial experiencia.";
+			mes "Juro que vi corazones alados~!";
+			next;
+			mes "[Madeleine Chu]";
+			mes "Lamentablemente, Aun tengo un largo camino";
+			mes "por recorrer sobre hacer ";
+			mes "sus especialidades, Chocolates";
+			mes "a mano. antes de eso, Necesito";
+			mes "dominar esas extrañas recetas";
+			mes "que aun me sigue enseñando...";
+			close;
+
+		case 3:
+			mes "[Madeleine Chu]";
+			mes "Si te gustaria aprender a cocinar,";
+			mes "no le preguntas a Sir Charles?";
+			mes "Podra ser muy duro con sus estudiantes, pero no lo hace con mala intencion.";
+			mes "El exige nada menos que";
+			mes "perfeccion absoluta, Ya sabes.";
+			next;
+			mes "[Madeleine Chu]";
+			mes "Si pretendes que";
+			mes "Sir Charles te enseñe";
+			mes "una receta, Deberas practicar";
+			mes "una y otra vez para afinar";
+			mes "tus habilidades. Entonces,  Te encontraras";
+			mes "provandote a ti mismo como cocinero.";
+			next;
+			mes "[Madeleine Chu]";
+			mes "Ahora, Sir Charles enseñara";
+			mes "solo a estudiantes que en verdad";
+			mes "se comprometan a cocinar.";
+			mes "Deberas mostrar tu";
+			mes "dedicacion con la vestimenta";
+			mes "apropiada... como un Chef Hat.";
+			next;
+			mes "[Madeleine Chu]";
+			mes "Pero si, Sir Charles";
+			mes "Tiene muy poca paciencia para";
+			mes "los principiantes, digo que";
+			mes "deberas ser paciente";
+			mes "con sus metodos de enseñanza...";
+			close;
+		}
+	}
+	else if (cooking_q > 0 && cooking_q < 7) {
+		mes "[Madeleine Chu]";
+		mes "Hola, Hay algun";
+		mes "modo en el que pueda ayudarlo hoy?";
+		mes "Oh, si estas estudiando cocina";
+		mes "Bajo el mando de Sir Charles, puedo recordarte";
+		mes "los ingredientes que necesitaras";
+		mes "si los llegas a olvidar~";
+		next;
+		switch(select("Fried Grasshopper Legs:Grape Juice Herbal Tea:Honey Grape Juice:Frog Egg and Squid Ink Soup:Steamed Crab Nippers:Fried Monkey Tails")) {
+		case 1:
+			mes "[Madeleine Chu]";
+			mes "Oh! Necesitaras";
+			mes "^4D4DFF5 Grasshopper Legs^000000,";
+			mes "^4D4DFF1 Cooking Oil^000000, y";
+			mes "^4D4DFF1 Old Frying Pan^000000 para hacer";
+			mes "fried Grasshopper Legs.";
+			break;
+
+		case 2:
+			mes "[Madeleine Chu]";
+			mes "Oh! Necesitaras";
+			mes "^4D4DFF3 Grapes^000000, y";
+			mes "^4D4DFF2 Red Potions^000000 para hacer";
+			mes "Grape Juice Herbal Tea.";
+			break;
+
+		case 3:
+			mes "[Madeleine Chu]";
+			mes "Oh! Necesitaras";
+			mes "^4D4DFF1 Honey^000000,";
+			mes "^4D4DFF2 Grapes^000000, y";
+			mes "^4D4DFF1 Red Potion^000000.";
+			break;
+
+		case 4:
+			mes "[Madeleine Chu]";
+			mes "Oh! Necesitaras";
+			mes "^4D4DFF1 Bag of Grain^000000,";
+			mes "^4D4DFF10 Spawns^000000, y";
+			mes "^4D4DFF1 Squid Ink^000000 para hacer";
+			mes "Frog Egg and Squid Ink soup.";
+			break;
+
+		case 5:
+			mes "[Madeleine Chu]";
+			mes "Oh! Necesitaras";
+			mes "^4D4DFF10 Green Herbs^000000,";
+			mes "^4D4DFF10 Nippers^000000, y";
+			mes "^4D4DFF1 Yellow Potion^000000 para hacer";
+			mes "Steamed Crab Nippers.";
+			break;
+
+		case 6:
+			mes "[Madeleine Chu]";
+			mes "Oh! Necesitaras";
+			mes "^4D4DFF1 Frying Pan^000000,";
+			mes "^4D4DFF5 Yoyo Tails^000000, y";
+			mes "^4D4DFF1 Cooking Oil^000000 para hacer";
+			mes "Fried Monkey Tails.";
+			break;
+		}
+		next;
+		mes "[Madeleine Chu]";
+		mes "Se que Sir Charles";
+		mes "es testarudo y no te dira";
+		mes "los ingredientes de nuevo";
+		mes "si los olvidas. de cualquier modo, Espero";
+		mes "que los recolectes todos y completes";
+		mes "la receta tan rapido como puedas~";
+		close;
+	}
+	else if (cooking_q == 7) {
+		mes "[Madeleine Chu]";
+		mes "Sir Charles te enseño";
+		mes "una receta? Es grandioso!";
+		mes "Espero recuerdes que la";
+		mes "de tus platillos se basa";
+		mes "en tus habilidades, asi que recuerda manterte practicando.";
+		next;
+		mes "[Madeleine Chu]";
+		mes "Ah, Sabes lo que puede";
+		mes "ayudarte a mejorar tus";
+		mes "habilidades culinarias? Por que no";
+		mes "pide prestado este cookbook";
+		mes "e intenta alguna de sus recetas?";
+		next;
+		mes "[Madeleine Chu]";
+		mes "antes de cocinar, asegurate";
+		mes "que tienes los ingredientes";
+		mes "suficientes Oh, y manten el";
+		mes "cookbook cerca cuando estes";
+		mes "cocinando. Probablemente necesitaras";
+		mes "tomar referencias muy a menudo...";
+		next;
+		mes "[Madeleine Chu]";
+		mes "Podrias fallar al hacer";
+		mes "los alimentos durante tus";
+		mes "prmeros intentos, pero iras";
+		mes "mejorando con la practica. ";
+		mes "Porfavor toma este cookbook";
+		mes "con las recetas basicas de nivel 1.";
+		set cooking_q,8;
+		getitem 7472,1; //Cookbook01
+		next;
+		mes "[Madeleine Chu]";
+		mes "Una vez aprendas todas,";
+		mes "sientete libre de venir por mas, okay? ademas, necesitaras";
+		mes "esos cooking kits para practicar.";
+		mes "Puedes llevartelos gratis, y comprarme mas despues~";
+		getitem 12125,10; //Outdoor_Cooking_Kits
+		close;
+	}
+	else if (cooking_q == 8) {
+		mes "[Madeleine Chu]";
+		mes "Y como ha estado";
+		mes "su cocina? Necesitaras";
+		mes "practicar para desarrollar";
+		mes "tus habilidades culinarias. Ahora,";
+		mes "Puedo ayudarte en algo?";
+		next;
+		switch(select("I need some Cooking Kits.:Will you try the food I cooked?:How does the food I cooked look?")) {
+		case 1:
+			mes "[Madeleine Chu]";
+			mes "Seguro, que tipo";
+			mes "de Cooking Kits";
+			mes "Necesitas?";
+			next;
+			switch(Select("Outdoor Cooking Kit - 500z:Home Cooking Kit - 1,000z:Quit")) {
+			case 1:
+				callsub S_SellSets,12125;
+				close;
+			case 2:
+				mes "[Madeleine Chu]";
+				mes "Oh, Lo siento, pero";
+				mes "no tienes las habilidades suficientes";
+				mes "para usar un Home Cooking Kit.";
+				mes "Porfavor practica un poco mas";
+				mes "cocinando al aire libre";
+				mes "Kits de primera, Cierto?";
+				close;
+			case 3:
+				mes "[Madeleine Chu]";
+				mes "Porfavor vuelva y";
+				mes "hagame saber si necesita";
+				mes "comprar algunos otros Cooking";
+				mes "Kits, correcto? Hasta luego~";
+				close;
+			}
+
+		case 2:
+			if (countitem(12041) > 0 && countitem(12046) > 0 && countitem(12061) > 0 && countitem(12056) > 0 && countitem(12051) > 0 && countitem(12066) > 0) {
+				mes "[Madeleine Chu]";
+				mes "Oh, has hecho una muestra";
+				mes "de cada receta detallada en";
+				mes "este basic cookbook, verdad?";
+				mes "Debe haber sido un muy buen entrenamiento para tus habilidades culinarias.";
+				next;
+				mes "[Madeleine Chu]";
+				mes "Amo como sabe tu";
+				mes "comida y te dare mi opinion,";
+				mes "Pero le molestaria si le pido";
+				mes "un favor primero? Tengo";
+				mes "un amigo en Payon que solia";
+				mes "estudiar cocina en Prontera.";
+				next;
+				mes "[Madeleine Chu]";
+				mes "Como sea, se frustro";
+				mes "debido alas clases de cocina y";
+				mes "se mudo a Payon de nuevo. Te importaria";
+				mes "pedirle que los";
+				mes "probara? Aqui, envolvere la";
+				mes "comida en este tejido...";
+				next;
+				delitem 12041,1; //Str_Dish01
+				delitem 12046,1; //Int_Dish01
+				delitem 12061,1; //Dex_Dish01
+				delitem 12056,1; //Agi_Dish01
+				delitem 12051,1; //Vit_Dish01
+				delitem 12066,1; //Luk_Dish01
+				set cooking_q,9;
+				getitem 12111,1; //Food_Package
+				mes "[Madeleine Chu]";
+				mes "Eso es, estas listo";
+				mes "para la entrega. Ahora, asegurate";
+				mes "de no abrirlo antes";
+				mes "de darselo a mi viejo amigo,";
+				mes "Chulsoo. Lo podras encontrar";
+				mes "en algun lugar de Payon...";
+				next;
+				mes "[Madeleine Chu]";
+				mes "Podras encontrarlo";
+				mes "Chulsoo cerca del";
+				mes "molino de agua o en el bar de";
+				mes "Payon. Oh, y no";
+				mes "olvides decirle que";
+				mes "yo te envie, okay? Gracias~";
+				close;
+			}
+			mes "[Madeleine Chu]";
+			mes "Hmm... Creo que ubiera sido";
+			mes "mejor si ubieras intentado";
+			mes "cada receta en el";
+			mes "basic cookbook qure te di";
+			mes "primero. De esta forma, Podre";
+			mes "juzgar con precision tus habilidades";
+			next;
+			mes "[Madeleine Chu]";
+			mes "no esta mal centrarse";
+			mes "en solo una receta, pero";
+			mes "como principiante, Deberas";
+			mes "cubrir todo lo basico.";
+			mes "Porfavor lee el cookbook que te di cuidadosamente, okay?";
+			close;
+
+		case 3:
+			if (countitem(12041) > 0 || countitem(12046) > 0 || countitem(12061) > 0 || countitem(12056) > 0 || countitem(12051) > 0 || countitem(12066) > 0) {
+				mes "[Madeleine Chu]";
+				mes "Oh, Veo que has";
+				mes "intentado algunas recetas del";
+				mes "basic cookbook que te di";
+				mes "Todo lo que has hecho se ve";
+				mes "delicioso. Todo lo que falta";
+				mes "es alguien que los pruebe...";
+				close;
+			}
+			mes "[Madeleine Chu]";
+			mes "Bueno... No se...";
+			mes "Creo que realmente deberias intentar";
+			mes "cada una de la lista de recetas";
+			mes "en el cookbook que";
+			mes "te di primero. Entonces, Podras";
+			mes "traerme tus platillos~";
+			close;
+		}
+	}
+	else if (cooking_q == 9) {
+		if (countitem(12111) > 0) {
+			mes "[Madeleine Chu]";
+			mes "Porfavor encuentra a mi amigo";
+			mes "Chulsoo en Payon y";
+			mes "llevale este paquete de";
+			mes "comida para que pruebe";
+			mes "los platillos que has hecho.";
+			close;
+		}
+		else {
+			mes "[Madeleine Chu]";
+			mes "Ah, hola~ oh, me darias un segundo?";
+			mes "Ahora mismo, estoy friendo algo, Necesito concentracion para trabajar por un tiempo.";
+			mes "Hahahaha.";
+			next;
+			mes "[Madeleine Chu]";
+			mes "Oh, te has encontrado";
+			mes "a mi amigo Chulsoo?";
+			mes "le llevaste el";
+			mes "paquete de comida, cierto?";
+			mes "Me desepcionaria si";
+			mes "lo ubieras perdido o vendido...";
+			next;
+			if (select("I did!:I lost the Bundle of Food!") == 1) {
+				mes "[Madeleine Chu]";
+				mes "Hahaha, supuse que lo";
+				mes "harias. pero si aun no lo has hecho";
+				mes "aun, asegurate de hacerlo";
+				mes "pronto, correcto? Sos vemos~";
+				close;
+			}
+			if (countitem(7472) > 0) {
+				mes "[Madeleine Chu]";
+				mes "Lo has perdido? Oh, esto";
+				mes "no es bueno. como pudiste ";
+				mes "faltarle el respeto a los artistas";
+				mes "culinarios de este modo? Estoy tan";
+				mes "pero tan avergonzado de ti..";
+				next;
+				delitem 7472,1; //Cookbook01
+				set cooking_q,0;
+				mes "[Madeleine Chu]";
+				mes "Primero que nada, Me gustaria";
+				mes "que me devolvieras mi cookbook.";
+				mes "Quiero que reflexiones sobre";
+				mes "lo que has hecho, y despues aprenderas";
+				mes "habilidades de cocina de Sir Charles, empezando desde el comienzo.";
+				close;
+			}
+			mes "[Madeleine Chu]";
+			mes "Oh, Debes estar bromeando~";
+			mes "De seguro lo has";
+			mes "escondido en algun lugar.";
+			mes "De cualquier modo, Entrega este";
+			mes "paquete de comida a Chulsoo.";
+			close;
+		}
+	}
+	else if (cooking_q == 10) {
+		mes "[Madeleine Chu]";
+		mes "Solo he recivido un";
+		mes "mensaje de  Chulsoo";
+		mes "agradeciendome por haberte";
+		mes "hecho llevarle ati la comida.";
+		mes "Me parece que le";
+		mes "a gustado un monton.";
+		next;
+		mes "[Madeleine Chu]";
+		mes "Creo que ahora estas listo para";
+		mes "usar herramientas de cocina de mayor grado";
+		mes "pero nunca olvides que tus";
+		mes "habilidades son lo mas importante";
+		mes "factor de calidad en la cocina.";
+		next;
+		set cooking_q,11;
+		getitem 12126,10; //Indoor_Cooking_Kits
+		mes "[Madeleine Chu]";
+		mes "Porfavor no intente estas afuera";
+		mes "Cooking Kits para ayudarte a";
+		mes "a crear platillos mas delicados.";
+		mes "Cuando se te acaben, sientete libre de";
+		mes "comprarme mas, okay?";
+		next;
+		mes "[Madeleine Chu]";
+		mes "ademas, si quieres";
+		mes "aprender una nueva receta,";
+		mes "por que no intentas hablar con Sir";
+		mes "Charles otravez? Okay entonces,";
+		mes "Buena suerte, y te vere despues~ ";
+		close;
+	}
+	else if (cooking_q == 11) {
+		mes "[Madeleine Chu]";
+		mes "Como estas? Espero";
+		mes "hallas mejorado";
+		mes "habilidades cocinando desde";
+		mes "la ultima vez que nos encontramos.";
+		mes "Ahora, seria de ayuda";
+		mes "para algo en particular?";
+		next;
+		switch(select("I need some Cooking Kits.:How is Sir Charles?:Um, who's that kid?")) {
+		case 1:
+			mes "[Madeleine Chu]";
+			mes "Seguro, Que tipo";
+			mes "de Cooking Kits";
+			mes "Necesitas?";
+			next;
+			switch(select("Outdoor Cooking Kit - 500z:Home Cooking Kit - 1,000z:Show me a different kit.:Quit")) {
+			case 1:
+				callsub S_SellSets,12125;
+				close;
+
+			case 2:
+				callsub S_SellSets,12126;
+				close;
+
+			case 3:
+				mes "[Madeleine Chu]";
+				mes "Bueno, Solo tengo 2";
+				mes "tipos de cooking kits,";
+				mes "Tengo uno muy superior llamado";
+				mes "Professional Cooking Kit que";
+				mes "solo verdaderos expertos, como Sir Charles,";
+				mes "usan. increible, no es asi?";
+				next;
+				mes "[Madeleine Chu]";
+				mes "Aun eres un novato, asi que";
+				mes "mis kits te seran utiles. ";
+				mes "Sabes, hay un rumor acerca de un cooking kit que puede hacer";
+				mes "perfectamente cualquier receta, siempre y cuando tengas todos los ingredientes.";
+				next;
+				mes "[Madeleine Chu]";
+				mes "Por supuesto, es solo";
+				mes "un rumor, probablemente";
+				mes "el resultado de alguien";
+				mes "con una rara imaginacion. aun asi";
+				mes "sigo crellendo que la habilidad es el";
+				mes "ingrediente mas importante~";
+				close;
+
+			case 4:
+				mes "[Madeleine Chu]";
+				mes "porfavor vuelve y";
+				mes "dime si necesitas";
+				mes "comprar algunos Cooking";
+				mes "Kits, correcto? Hasta luego~";
+				close;
+			}
+
+		case 2:
+			mes "[Madeleine Chu]";
+			mes "Hm? Sir Charles es";
+			mes "beno, pero ultimamente se";
+			mes "molesta un poco incluso";
+			mes "por cosas pequeñas. Aun asi,";
+			mes "supongo que es comprensible.";
+			next;
+			set .@talk_j,rand(1,3);
+			if (.@talk_j == 1) {
+				mes "[Madeleine Chu]";
+				mes "Sabes, cuando";
+				mes "lo conoci, crei que solo era";
+				mes "bueno cocinando dulces";
+				mes "como chocolates o caramelos.";
+				mes "sin embargo, es realmente habil";
+				mes "cocinando casi todo!";
+				next;
+				mes "[Madeleine Chu]";
+				mes "Supuse que tamben estuvo concentrandose";
+				mes "en otras comidas aparte de los postres";
+				mes "desde que nuestro rey desaparecio. Me pregunto si la desaparicion del rey";
+				mes "Tristram III' esta relacionado con el cambio";
+				mes "en el estado de animo de Sir Charles?";
+				close;
+			}
+			else if (.@talk_j == 2) {
+				mes "[Madeleine Chu]";
+				mes "Digo Sir Charles parece";
+				mes "tener algun tipo de problema";
+				mes "para abrirse con las personas.";
+				mes "Esto podria explicar por que es mas";
+				mes "agradaable para las mujeres que para los hombres.";
+				mes "Que es lo no tiene sentido?";
+				close;
+			}
+			mes "[Madeleine Chu]";
+			mes "Sera por que ha estado";
+			mes "experimentando con";
+			mes "una nueva receta ultimamente. Creo que";
+			mes "menciono algo acerca de";
+			mes "esperar a encontrar una mujer";
+			mes "para la mas fina comida jamas hecha.";
+			next;
+			mes "[Madeleine Chu]";
+			mes "jamas vi a Sir Charles";
+			mes "san entusiasmado antes. Esta mujer";
+			mes "debe ser muy suertuda: Ya que tendra";
+			mes "la oportunidad de comer  lo que cocicna todos";
+			mes "los dias que quiera! Casi siento";
+			mes "celos de ella, lo sabias?";
+			close;
+
+		case 3:
+			mes "[Madeleine Chu]";
+			mes "Oh, te refieres a la";
+			mes "niña con el gato?";
+			mes "No estoy seguro, pero creo";
+			mes "que de casualidad podria ser";
+			mes "la hermana pequeña de";
+			mes "Madame Wickebine.";
+			next;
+			mes "[Madeleine Chu]";
+			mes "Me pregunto por que Sir Charles";
+			mes "le daba Madam Wickebine tal";
+			mes "trato especial. Siempre";
+			mes "Se lo preguntaba, pero el solo";
+			mes "se ponia nervioso y no me contestaba!";
+			next;
+			cutin "orleans_6",0;
+			mes "[Charles Orleans]";
+			mes "¡Delgado entonces!";
+			mes "Solo sentia un escalofrio bajando por";
+			mes "mi espina... Podria alguien";
+			mes "estar hablando de mi?";
+			close2;
+			cutin "",255;
+			end;
+		}
+	}
+	mes "[Madeleine Chu]";
+	mes "Ecurrio un error.";
+	close;
+
+S_SellSets:
+	set .@item_cost,getiteminfo(getarg(0),0);
+	set .@item_weight,getiteminfo(getarg(0),6);
+	mes "[Madeleine Chu]";
+	mes "Cuantos " + (getarg(0)==12125 ? "Outdoor":"Indoor");
+	mes "Cooking Kits would";
+	mes "gustaria comprar? si desea";
+	mes "cancelar , porfavor";
+	mes "ingrese el numero 0.";
+	next;
+	while(1) {
+		input .@sell;
+		if (.@sell == 0) {
+			mes "[Madeleine Chu]";
+			mes "Has cambiado de";
+			mes "opinion? Bueno, Si necesitas";
+			mes "comprar "+getitemname(getarg(0));
+			mes "Kits luego, solo regresa";
+			mes "cuando quieras, bien?";
+			close;
+		}
+		else if (.@sell > 100) {
+			mes "[Madeleine Chu]";
+			mes "Oh, Lo siento, pero";
+			mes "No puedo vender mas";
+			mes "100 "+getitemname(getarg(0));
+			mes "de una vez, solo para estar seguro";
+			next;
+		}
+		else break;
+	}
+	set .@total_cost,.@sell * .@item_cost;
+	set .@total_weight,.@sell * .@item_weight;
+	if (zeny < .@total_cost) {
+		mes "[Madeleine Chu]";
+		mes "Oh, Lo siento, pero no";
+		mes "puede pagar esta cantidad";
+		mes getitemname(getarg(0));
+		mes "Porfavor verifique su zeny";
+		mes "Antes de comprar mis kits~";
+		close;
+	}
+	if (!checkweight(getarg(0),.@sell)) {
+		mes "[Madeleine Chu]";
+		mes "Lo siento, Pero no";
+		mes "tienes suficiente espacio en tu";
+		mes "inventario para esta cantidad";
+		mes getitemname(getarg(0))+"...";
+		close;
+	}
+	set zeny,zeny-.@total_cost;
+	getitem getarg(0),.@sell;
+	mes "[Madeleine Chu]";
+	mes "Aqui tiene~";
+	mes "Mejor suerte con";
+	mes "entrenamiento culinario!";
+	return;
+}
+
+prt_castle,45,28,3	script	Child with Cat#cook	877,{
+	set .@nyu,rand(1,2);
+	if (.@nyu == 1) {
+		cutin "nyuang_1",2;
+		emotion e_what;
+		mes "[Child with Cat]";
+		mes "¿...Nya?";
+		mes "(¿...Meow?)";
+		close2;
+		cutin "nyuang_1",255;
+		end;
+	}
+	cutin "nyuang_3",2;
+	emotion e_ho;
+	mes "[Child with Cat]";
+	mes "Nyahahahaha,";
+	mes "nyahahahaha~";
+	mes "(Meow~, meow~)";
+	close2;
+	cutin "nyuang_1",255;
+	end;
+}
+
+prt_castle,44,30,5	script	Wickebine#cook	725,{
+	disablenpc "Wickebine#cook";
+	end;
+
+OnInit:
+	disablenpc "Wickebine#cook";
+	end;
+
+OnEnable:
+	enablenpc "Wickebine#cook";
+	end;
+
+OnDisable:
+	disablenpc "Wickebine#cook";
+	end;
+}
+
+payon,209,127,3	script	Servant	88,{
+	if (!checkweight(555,1)) {
+		mes "[Chulsoo]";
+		mes "espera, llevas contigo";
+		mes "demasiados items.";
+		mes "por que no dejas";
+		mes "algunas cosas en la Kafra Storage";
+		mes "antes de venir conmigo?";
+		close2;
+		//EnableItemMove;
+		end;
+	}
+	if (cooking_q == 10) {
+		mes "[Chulsoo]";
+		mes "Cuando tengas la oportunidad,";
+		mes "Dale a Madeline las";
+		mes "Gracias. Visitare prontera";
+		mes "pronto para verlar, tan pronto como";
+		mes "me disculpe con Sir Charles.";
+		close;
+	}
+	else if (cooking_q == 9) {
+		mes "[Chulsoo]";
+		mes "Le gustaria";
+		mes "comprar un Rice Cake?";
+		mes "son solo 200 zeny, pero";
+		mes "es oh-muy-delicioso~";
+		next;
+		switch(select("Sure, I'll buy one!:No, thanks.:Actually, Madeleine sent me...")) {
+		case 1:
+			if (zeny < 200) {
+				mes "[Chulsoo]";
+				mes "Oh, Lo siento, pero";
+				mes "no tienes suficiente";
+				mes "dinero para comprar un Rice Cake...";
+				mes "Aun asi, Sera facil";
+				mes "conseguir 200 zeny, cierto?";
+				close;
+			}
+			set zeny,zeny-200;
+			getitem 555,1; //Rice_Cake
+			mes "[Chulsoo]";
+			mes "Te lo agradesco";
+			mes "mucho! Espero que";
+			mes "Disfrute su Rice Cake~";
+			close;
+
+		case 2:
+			mes "[Chulsoo]";
+			mes "Estas seguro sobre";
+			mes "esto? No podras";
+			mes "conseguir un";
+			mes "Rice Cake tan delicioso";
+			mes "en ningun otro lugar. Oh Bueno,";
+			mes "eso significa mas para mi~";
+			close;
+
+		case 3:
+			if (countitem(12111) > 0) {
+				mes "["+strcharinfo(0)+"]";
+				mes "De hecho, Madeleine";
+				mes "me envio a encontrarme";
+				mes "contigo. Ella dijo que tu";
+				mes "aceptarias la prueba de probar";
+				mes "la comida de este paquete...";
+				next;
+				mes "[Chulsoo]";
+				mes "Madeleine? Te refieres a";
+				mes "Madeleine Chu? Oh, No he";
+				mes "escuchado de ella en mucho";
+				mes "tiempo! magnifico, Dejame ver el";
+				mes "paquete que me ha enviado . Ah, Todo se ve tan apetitoso!";
+				next;
+				mes "[Chulsoo]";
+				mes "Oh, espera. Hasta ha";
+				mes "incluido un mensage";
+				mes "dentro del paquete.";
+				mes "Veamos, aqui...";
+				next;
+				mes "^333333Querido Chulsoo,";
+				mes " Ha pasado mucho tiempo.";
+				mes "Se que dejaste Prontera";
+				mes "por los mal entendidos con Sir Charles,";
+				mes "Pero porfavor comprende que solo";
+				mes "esta dando su mejor esfuerzo para";
+				mes "ayudarte a mejorar tu cocina.^000000";
+				next;
+				mes "^333333 Sir Charles siempre deseo";
+				mes "que ampliaras tu repertorio, para que hicieras este tipo";
+				mes "de comidas algun dia. La persona";
+				mes "que te entrego la comisa tambien";
+				mes "los cocino. Porfavor intentalo...^000000";
+				next;
+				mes "^333333 Suerte, Seras";
+				mes "capas de comprender a ";
+				mes "Sir Charles un poco mejor ";
+				mes "Despues de probar esta comida.";
+				mes " ";
+				mes " Tu amiga, Madeleine^000000";
+				next;
+				mes "[Chulsoo]";
+				mes "Ahora lo entiendo...";
+				mes "Estas son las recetas";
+				mes "que Sir Charles intento";
+				mes "enseñarme. pero me negue";
+				mes "a aprender por que pense";
+				mes "que eres demaciado intolerable...";
+				next;
+				mes "[Chulsoo]";
+				mes "......";
+				mes ".........";
+				mes "Es tan delicioso.. Estas";
+				mes "seguro de que eres solo un";
+				mes "Principiante? No... Esto debe";
+				mes "ser de lo que me estaba perdiendo...";
+				next;
+				mes "[Chulsoo]";
+				mes "Esto es lo que mi maestro";
+				mes "siempre intento enseñarme,";
+				mes "pero estaba tan impaciente que";
+				mes "no lo aprendi correctamente. El mayor";
+				mes "ingrediente de todos ellos... ^D02090alma^000000. despues de todo este tiempo, Lo entiendo.";
+				next;
+				mes "[Chulsoo]";
+				mes "Gracias por traeme";
+				mes "esta comida. la disfrutare";
+				mes "a fondo, y reflecionare";
+				mes "lo que mi antiguo maestro intentaba";
+				mes "decirme. En agradecimiento, toma uno de mis humildes Rice Cakes.";
+				next;
+				delitem 12111,1; //Food_Package
+				set cooking_q,10;
+				getitem 555,1; //Rice_Cake
+				mes "[Chulsoo]";
+				mes "Sera mejor que visite Prontera";
+				mes "otra vez pronto. Ha pasado mucho tiempo";
+				mes "de4sde que vi a Madeleine.";
+				mes "Mas importante aun, Creo que";
+				mes "debo disculparme con Sir Charles. ";
+				close;
+			}
+			mes "["+strcharinfo(0)+"]";
+			mes "De hecho, Madeleine";
+			mes "me envio aqui para";
+			mes "contrarte. dijo que";
+			mes "aceptarias probar";
+			mes "la comida de este paquete...";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Espera, espera...";
+			mes "No lo tengo!";
+			mes "Donde puse el";
+			mes "Paquete de comida?";
+			close;
+		}
+	}
+	else if (cooking_q == 8) {
+		mes "[Chulsoo]";
+		mes "Ultimamente, parece que";
+		mes "nadie quiere comprar mis";
+		mes "Rice Cakes. ha sido asi";
+		mes "desde que deje Prontera... ";
+		next;
+		mes "[Chulsoo]";
+		mes "Veras, solia estudiar";
+		mes "en esa ciudad como un de los aprendices de";
+		mes " Sir Charles. solo fue";
+		mes "por unos cuantos meses, pero";
+		mes "Me emocionaba la idea de";
+		mes "poder aprender de el.";
+		next;
+		mes "[Chulsoo]";
+		mes "Al menos, Me emocionaba";
+		mes "al principio. Sir Charles realmente";
+		mes "me frustraba: solo queria";
+		mes "enseñarme ha hacer esas";
+		mes "recetas con nombres realmente asquerosos! como Grasshopper Legs and-- ugh!";
+		next;
+		mes "[Chulsoo]";
+		mes "Permanecio insistiendo pero";
+		mes "me olvideo del ingrediente";
+		mes "mas importante, y es lo que";
+		mes "hace posible hacer las cosas";
+		mes "como Fried Monkey Tails deliciosas. Pero no podia creer tales tonterias!";
+		next;
+		mes "[Chulsoo]";
+		mes "Al final, Hui.";
+		mes "Por alguna razon, Me sentia";
+		mes "me sentia un poco arrepentido y avergonzado";
+		mes "por lo que hice. Aun asi, nunca entendi";
+		mes "a lo que Sir Charles se referia...";
+		close;
+	}
+	else {
+		mes "[Chulsoo]";
+		mes "Le gustaria";
+		mes "comprar un Rice Cake?";
+		mes "son solo 200 zeny, pero";
+		mes "es oh-muy-delicioso~";
+		next;
+		if (select("Sure, I'll buy one!:No, thanks.") == 1) {
+			if (zeny < 200) {
+				mes "[Chulsoo]";
+				mes "Oh, Lo siento, pero";
+				mes "pero no tienes suficiente";
+				mes "dinero para comprar un Rice Cake...";
+				mes "Aun asi, sera facil";
+				mes "conseguir 200 zeny, cierto?";
+				close;
+			}
+			set zeny,zeny-200;
+			getitem 555,1; //Rice_Cake
+			mes "[Chulsoo]";
+			mes "Te lo agradesco";
+			mes "mucho! Espero que";
+			mes "disfrute su Rice Cake~";
+			close;
+		}
+		mes "[Chulsoo]";
+		mes "Estas seguro sobre";
+		mes "esto? no podras";
+		mes "conseguir un";
+		mes "Rice Cake tan delicioso";
+		mes "en ningun lugar. Oh Bueno,";
+		mes "Eso significa mas para mi~";
+		close;
+	}
+}

@@ -1,0 +1,683 @@
+//===== eAthena Script =======================================
+//= Rachel City NPCs
+//===== By: ==================================================
+//= First Version: Tsuyuki and Harp
+//= iRO Version: L0ne_W0lf
+//===== Current Version: =====================================
+//= 0.9
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= [Partial Aegis Conversion]
+//= Arunafeltz NPCs
+//===== Additional Comments: =================================
+//= 0.5 Text translated from Korean > English, incomplete, 
+//= possibly missing some NPCs and missing all quests.
+//= 0.6 Removed Inn Keeper (it's in inn.txt), name duplicates [Lupus]
+//= 0.7 Total update of most if not all NPCs. [L0ne_W0lf]
+//= 0.8 Updated "Frozen Boy" dialog. (euRO) [L0ne_W0lf]
+//= 0.9 Replaced effect numerics with constants. [L0ne_W0lf]
+//============================================================
+
+//===== Set 1 ================================================
+ice_dun04,33,166,3	script	Frozen Boy	925,{
+	cutin "ra_sboy.bmp",2;
+	mes "["+strcharinfo(0)+"]";
+	mes "Éste chico debe ser uno de los que Ktullanux trató de proteger.";
+	next;
+	mes "- El chico fué congelado dentro de un cubo de hielo, parece como si estuviera dormido en vez de muerto. -";
+	next;
+	mes "- Empiezas a sentir más frio mientras te acercas al cubo de hielo que contiene al chico,";
+	mes "- pero por alguna razón, sientes un extraño poder de el cubo. -";
+	next;
+	mes "- El chico parece ser blanco como la nieve y bello desde la cabeza hasta los pies. -";
+	next;
+	mes "- Te preguntas que por qué un pequeño tuvo que ser encerrado en esta cueva desolada, -";
+	mes "- instintivamente te das cuenta de que no hay mago en éste mundo que lo pueda liberar.";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "¿Qué le pasaó a este chico?";
+	close2;
+	cutin "",255;
+	end;
+}
+
+ra_san04,137,48,3	script	Loomin-1st Class Secret	111,{
+	mes "^3131FFSurge, el chico";
+	mes "atrapado en Ice Cave.^000000";
+	mes "Clase: 1ra";
+	mes " ";
+	mes " ";
+	mes " ";
+	mes "^333333El papa nació junto";
+	mes "con un hermano gemelo, un chico";
+	mes "flacucho de piel pálida";
+	mes "y cabello plateado. Esto";
+	mes "nunca antes había pasado";
+	mes "y presentó un problema único";
+	mes " ";
+	mes "La High Priest Niren actúa como";
+	mes "su enfermera de maternidad y";
+	mes "vinó a Rachel, donde los";
+	mes "gemelos fueron atendidos por los";
+	mes "Priests. Todos ellos discutierón";
+	mes "sobre el destino del varón.";
+	mes " ";
+	mes "Nadie dudó de que el";
+	mes "niño erá espiritualmente poderoso, pero";
+	mes "¿erá el un complemento sagrado para";
+	mes "su hermana o un gran mal que";
+	mes "estaba en oposición directamente a";
+	mes "ella? Fué una discusión abrumadora.";
+	mes " ";
+	mes "Al final, los High Priests";
+	mes "decidierón que el varón representaba";
+	mes "un gran riesgo la sociedad.";
+	mes "La gente tal vez no considere";
+	mes "el nacimiento del papa como divino si";
+	mes "supieran que ella tiene un hermano gemelo.";
+	mes " ";
+	mes "Sin embargo, temiendo";
+	mes "la furia de los dioses, los";
+	mes "High Priests no mataron al";
+	mes "niño. Sino que, ellos lo";
+	mes "encerraron en Ice Cave.";
+	mes " ";
+	mes "Los High Priests hicieron";
+	mes "un trato con Ktullanux,";
+	mes "un temible monstruo de hielo, para";
+	mes "vigilar la prisión del niño, y";
+	mes "para asegurar que nadie lo encuentrara.";
+	close;
+}
+
+rachel,124,132,1	script	Citizen#1 	921,{
+	mes "[Citizen]";
+	mes "¡Que Freya te";
+	mes "bendiga, y te de";
+	mes "mucha salud,";
+	mes "fortuna, éxito y felicidad!";
+	next;
+	mes "[Citizen]";
+	mes "Freya es la diosa del";
+	mes "amor y la belleza. ¿Piensas";
+	mes "que si rezo lo";
+	mes "suficiente, ella me ayude a";
+	mes "conseguir una novia realmente bella?";
+	close;
+}
+
+rachel,74,150,7	script	Girl#1	914,{
+	mes "[Girl]";
+	mes "Yo nunca antes he visto a nuestro papa,";
+	mes "escucé que ella tiene";
+	mes "cabello rubio platinado y";
+	mes "piel blanca. Mi padre dice que";
+	mes "sólo una chica es como ella";
+	mes "en cada generación.";
+	next;
+	mes "[Girl]";
+	mes "Mi padre dice que el papa es";
+	mes "muy especial para nosotros porque";
+	mes "ella es Freya. Quiero decir, Freya";
+	mes "es una diosa, pero ella también";
+	mes "se convierte en gente como nosotros para hablarnos.";
+	mes "Bueno, solo a los priests...";
+	next;
+	mes "[Girl]";
+	mes "No lo entiendo del todo,";
+	mes "pero suena como si";
+	mes "ella fuera una princesa secreta.";
+	mes "¿Eso no suena genial?";
+	mes "¡Pero cuando le digo eso a papá,";
+	mes "él se enojó mucho conmigo! Oh, bien.";
+	close;
+}
+
+rachel,144,243,5	script	Cheshrumnir Guard::ChesGuard	934,{
+	mes "[Cheshrumnir Guard]";
+	mes "Estás en Cheshrumnir,";
+	mes "los campos encantados ocupados";
+	mes "por nuestro papa, la encarnación";
+	mes "mortal de Freya. En respeto por";
+	mes "su Excelencia, espero que";
+	mes "entre con un corazón piadoso.";
+	close;
+}
+
+rachel,155,243,3	duplicate(ChesGuard)	Cheshrumnir Guard	934
+
+
+rachel,209,198,3	script	Kinos#aru	921,{
+	mes "[Kid]";
+	mes "¡Si abren esta puerta, podrán";
+	mes "entrar a la casa,";
+	mes "y vivir en una de las habitaciones!";
+	mes "¡Entonces, pueden agregar sus adornos";
+	mes "y una cama, y todas sus cosas!";
+	next;
+	mes "[Kid]";
+	mes "Todo lo que tiene que hacer es...";
+	mes "¡Ugh! Girar esta perilla";
+	mes "y... ¡Grrrrah! Abrir";
+	mes "esta puerta...Pero es";
+	mes "casi imposible...";
+	close;
+}
+
+rachel,260,175,3	script	Anku#aru	914,{
+	mes "[Anku]";
+	mes "¡Ha pasado tanto";
+	mes "ya! No puedo encontrar";
+	mes "¡Himuhimu! Las escondidas";
+	mes "no deberían tomar tanto tiempo";
+	next;
+	mes "[Anku]";
+	mes "Oh, ya estoy hambriento";
+	mes "¡Himuhimu, sal para que así";
+	mes "podamos ir a casa y comer!";
+	mes "¡Himuhimu! ¡Me rindo!";
+	mes "¿H-Himuhimu...? ";
+	close;
+}
+
+rachel,272,141,3	script	Himuhimu#aru	921,{
+	mes "[Himuhimu]";
+	mes "Zzzz...Z... ";
+	mes "Anku, tú nunca";
+	mes "me en... nunca me encontraras";
+	mes "aquí... Zzzz...";
+	mes "... Estoy hambriento...";
+	close;
+}
+
+rachel,268,120,1	script	Rachel Guard#1aru::RaGuard	934,{
+	mes "[Rachel Guard]";
+	mes "Bienvenido a Rachel";
+	mes "la capital de  Arunafeltz.";
+	mes "Por favor pregunta a nuestro guía";
+	mes "en el centro de la ciudad";
+	mes "por información y";
+	mes "servicio para invitados.";
+	close;
+}
+
+rachel,125,33,5	duplicate(RaGuard)	Rachel Guard#2aru	934
+
+rachel,31,130,3	duplicate(RaGuard)	Rachel Guard#3aru	934
+
+rachel,76,77,3	script	Rachel Priest	927,{
+	mes "[Rachel Priest]";
+	mes "¡Bwahahaha! ¡De alguna manera,";
+	mes "las bebidas saben mucho mejor";
+	mes "durante las horas de trabajo!";
+	close;
+}
+
+ra_fild12,45,230,3	script	Airship Guide#Fild	934,{
+	mes "[Airship Guide]";
+	mes "El servicoi de Airship de la";
+	mes "República de Schwaltzvalt para";
+	mes "Arunafeltz sólo puede ser";
+	mes "abordado en Rachel. Por favor";
+	mes "sigue la marca en tu";
+	mes "Mini-Mapa para encontrar el Aeropuerto.";
+	viewpoint 1,293,208,1,0xFF0000;
+	close;
+}
+
+//rachel,201,174,3	script	Freya's Follower	927,{
+rachel,201,174,3	script	Freya's Follower	926,{
+	mes "[Freya's Follower]";
+	mes "Todos los Arunafeltz creen";
+	mes "en la diosa Freya, pero";
+	mes "hay algunos de nosotros que";
+	mes "estamos más seriamente envueltos";
+	mes "en la adoración y la veneración.";
+	next;
+	mes "[Freya's Follower]";
+	mes "Primero, están los \"Seguidores";
+	mes "de Freya\" hombres y mujeres";
+	mes "como yo que visten máscaras sagradas";
+	mes "y túnicas. Yo creo que nuestro";
+	mes "traje puede verse un poco peculiar";
+	mes "para ti, pero así es.";
+	next;
+	mes "[Freya's Follower]";
+	mes "Luego, están los Priests";
+	mes "quienes visten túnicas blancas";
+	mes "sueltas y limpias. Ellos trabajan en";
+	mes "el templo y sirven a la";
+	mes "comunidad como líderes religiosos.";
+	next;
+	mes "[Freya's Follower]";
+	mes "Entre estos priests están";
+	mes "los High Priests de élite que";
+	mes "asisten directamente a nuestro  papa.";
+	mes "Ellos usan ropas más";
+	mes "coloridas como símbolo de su";
+	mes "alto estatus en Rachel.";
+	next;
+	mes "[Freya's Follower]";
+	mes "Todos nosotros trabajamos arduamente";
+	mes "para traer prosperidad a";
+	mes "Arunafeltz, y para cumplir";
+	mes "las enseñanzas de nuestra";
+	mes "adorada diosa Freya.";
+	close;
+}
+
+rachel,206,30,3	script	Freya's Priest#play	920,{
+	mes "[Freya's Priest]";
+	mes "Esto...";
+	mes "me aburre...";
+	next;
+	mes "[Freya's Priest]";
+	mes "¡Tú!";
+	mes "¡Entretenme!";
+	Emotion e_ag;
+	next;
+	if (select("What? You can't tell me what to do!:You got it.") == 1) {
+		mes "[Freya's Priest]";
+		mes "Oh. Todo eso es";
+		mes "verdad, supongo.";
+		close;
+	}
+	mes "[Freya's Priest]";
+	mes "Bien, entonces,";
+	mes "¿qué harás para";
+	mes "entretenerme?";
+	next;
+	if (select("Here's a funny story...:I will do what you want me to do.") == 1) {
+		mes "^3355FFLe dijisté la primer";
+		mes "historia graciosa en";
+		mes "la que puedisté pensar.^000000";
+		specialeffect2 EF_TALK_FROSTJOKE;
+		next;
+		mes "[Freya's Priest]";
+		mes "¿Se supone que eso";
+		mes "es gracioso? Yo creí";
+		mes "que no entendía";
+		mes "el humor popular.";
+		close;
+	}
+	mes "[Freya's Priest]";
+	mes "Bien, bien~";
+	mes "Permíteme ver que";
+	mes "puede hacer ese item tuyo...";
+	mes "¿Oh? ¡Oh! ¡Es maravilloso!";
+	close2;
+	set .@play,rand(1,10);
+	if (.@play == 1) warp "Random",0,0;
+	else if (.@play == 2) warp "Random",0,0;
+	else if (.@play == 3) sc_start SC_SpeedUp1,5000,0;
+	else if (.@play == 4) sc_start SC_SpeedUp1,5000,0;
+	else sc_start SC_SlowDown,5000,0;
+	end;
+}
+
+rachel,197,137,3	script	Bard#aru	51,{
+	mes "[Bard]";
+	mes "He vagado por esta";
+	mes "tierra, cantando mis canciones~";
+	mes "Buscando a alguien";
+	mes "que desee mi corazón.";
+	next;
+	mes "[Bard]";
+	mes "¿Podré satisfacer ésta esperanza~?";
+	mes "Conociendo a la niña de";
+	mes "piel tan blanca como las azucenas,";
+	mes "de ojos brillosos como las estrellas~";
+	mes "Si, estoy hablando del papa~";
+	mes "Papa, si~ Papa, si~";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "¡Debes estar fuera de lugar";
+	mes "rockero cantando esa clase";
+	mes "de canción aquí";
+	mes "en Arunafeltz!";
+	next;
+	mes ".........";
+	mes ".........";
+	mes ".........";
+	Emotion e_sob;
+	close;
+}
+
+ra_temple,148,91,3	script	Follower Akarna	916,{
+	mes "[Follower Akarna]";
+	mes "Cheshrumnir... ";
+	mes "Esta dicho que un";
+	mes "día, nuestra diosa Freya";
+	mes "descenderá a este lugar";
+	mes "en toda su gloria. Espero";
+	mes "vivir para ver eso.";
+	close;
+}
+
+ra_temple,115,148,7	script	Follower Yakum	916,{
+	mes "[Follower Yakum]";
+	mes "......";
+	mes ".........";
+	mes "............";
+	next;
+	mes "^3355FFElla está completamente";
+	mes "sumergida en lo profundo,";
+	mes "de su oración.";
+	mes "Sería grosero";
+	mes "perturbarla ahora.^000000";
+	close;
+}
+
+ra_temin,287,88,7	script	Follower Lekua	926,{
+	mes "[Follower Lekua]";
+	mes "Mira estas flores.";
+	mes "¿Acaso no son hermosas?";
+	mes "He gastado mucho tiempo";
+	mes "cultivando este jardín de flores.";
+	next;
+	mes "[Follower Lekua]";
+	mes "Creo que es la";
+	mes "voluntad de Freya que nosotros";
+	mes "traigamos tanta belleza";
+	mes "como podamos a éste mundo. ¿Qué";
+	mes "piensas sobre eso?";
+	close;
+}
+
+//ra_temin,228,303,5	script	Freya's Follower#in1	927,{
+ra_temin,228,303,5	script	Freya's Follower#in1	926,{
+	mes "[Freya's Follower]";
+	mes "Una vez más, no conseguí";
+	mes "dormir ayer... Estoy";
+	mes "rezando tanto por la segunda";
+	mes "venida de Freya. Estoy agotada,";
+	mes "pero me siento bastante bien";
+	mes "al hacer ese pequeño sacrificio.";
+	close;
+}
+
+//ra_temin,230,303,3	script	Freya's Follower#in2	927,{
+ra_temin,230,303,3	script	Freya's Follower#in2	926,{
+	mes "[Freya's Follower]";
+	mes "Haz hecho bien,";
+	mes "mi hermano. Estoy seguro";
+	mes "que Freya estará orgullosa";
+	mes "de todos tus esfuerzos.";
+	close;
+}
+
+ra_temin,138,64,5	script	Child Follower#in1	921,{
+	mes "[Child Follower]";
+	mes "¡No! ¡Mi Mingming está muerto!";
+	next;
+	select("¿Mingming?");
+	mes "[Child Follower]";
+	mes "Mingming es un pájaro enfermo";
+	mes "que encontré en la calle y";
+	mes "yo solo quería que descansara";
+	mes "y que estuviera sano otra vez.";
+	mes "¡pero murió! ¡Waaaaah!";
+	emotion e_sob;
+	next;
+	mes "[Child Follower]";
+	mes "¡V... voy a";
+	mes "tratar de pedirle al Papa!";
+	mes "¡T-tal vez ella pueda traer a";
+	mes "Mingming de vuelta a la vida!";
+	mes "¿Sabes como puedo";
+	mes "encontrar a nuestro papa?";
+	close;
+}
+
+
+//===== Set 2 ================================================
+ra_fild12,283,208,3	script	Apprentice Priestess	914,{
+	if ($rachel_donate < 10000) {
+		mes "[Papaii]";
+		mes "¡Bienvenido a Arunafeltz,";
+		mes "aventurero! ¡Disfruta tu estadía~";
+		next;
+		if (select("Are you a guide?:Thanks, have a good day.") == 1) {
+			mes "[Papaii]";
+			mes "Oh, de hecho, si";
+			mes "quieres hablar con un guía,";
+			mes "ve al oeste de Rachel, y";
+			mes "después ve al norte de la plaza";
+			mes "en el centro de la ciudad.";
+			mes "Encontrarás uno ahí.";
+			next;
+			mes "[Papaii]";
+			mes "Mi nombre es Papaii,";
+			mes "y fui enviadó aquí para";
+			mes "promover el  próximo festival";
+			mes "en honor a Freya. Anímate";
+			mes "a donar para nuestro festival";
+			mes "si que puedes gastar zeny.";
+			next;
+			mes "[Papaii]";
+			mes "Si estás interesado en";
+			mes "aprender más, entonces por favor";
+			mes "visita nuestro templo, el cual";
+			mes "acepta donaciones y";
+			mes "organiza el festival, y";
+			mes "habla con la Priestess Nemma.";
+			next;
+			mes "[Papaii]";
+			mes "Si donas puedes";
+			mes "recibir Lottery Tickets";
+			mes "que puedes cambiar aleatoriamente";
+			mes "por items del almacén";
+			mes "del templo.";
+			mes "Que Freya te bendiga, viajero~";
+			close;
+		}
+		mes "[Papaii]";
+		mes "Que Freya te bendiga.";
+		mes "Si tiene tiempo, por favor";
+		mes "visite nuestro templo y haz";
+		mes "una donación si puedes~";
+		close;
+	}
+	mes "[Papaii]";
+	mes "Bienvenido a  Arunafeltz!";
+	mes "La ciudad tras la muralla";
+	mes "es Rachel, la capital de";
+	mes "Arunafeltz. Si quieres";
+	mes "descansar de tus viajes, ¿por";
+	mes "qué no visitas Rachel?";
+	next;
+	if (select("Are you a guide?:Tell me more about Rachel.") == 1) {
+		mes "[Papaii]";
+		mes "De hecho mi nombre es";
+		mes "Papaii, y estoy situado";
+		mes "aquí en representación del templo";
+		mes "esparciendo conocimiento sobre nuestra";
+		mes "religión a los turistas que nos visitan.";
+		next;
+		mes "[Papaii]";
+		mes "Toda la nación de";
+		mes "Arunafeltz rinde culto a";
+		mes "la diosa Freya y la mayoría";
+		mes "de los aspectos de nuestra vida están";
+		mes "influenciados por nuestra";
+		mes "religión. ¿Sabías eso?";
+		next;
+		mes "[Papaii]";
+		mes "Te invito a visitar";
+		mes "nuestro templo si es que quieres";
+		mes "aprender más sobre la diosa";
+		mes "Freya. ¡Que Freya te guíe";
+		mes "en todo lo que hagas y que te";
+		mes "proteja en todos tus viajes!";
+		next;
+		mes "[Papaii]";
+		mes "¡Bienvenido a  Arunafeltz!";
+		mes "La ciudad tras la muralla";
+		mes "es Rachel, la capital de";
+		mes "Arunafeltz. Si quieres";
+		mes "descansar de tus viajes, ¿por";
+		mes "qué no visitas Rachel?";
+		close;
+	}
+	mes "[Papaii]";
+	mes "Bien, Rachel solía ser un";
+	mes "desierto inhabitado hasta que";
+	mes "la diosa condujo a nuestros ancestros";
+	mes "a ésta tierra. Ellos cultivaron el";
+	mes "desierto por la gracia de Freya, e";
+	mes "hicieron ésta área habitable.";
+	next;
+	mes "[Papaii]";
+	mes "Todo lo que ves aquí";
+	mes "ha sido creado artificialmente";
+	mes "por humanos. ¿Ves? Las bendiciones";
+	mes "de Freya realmente nos permiten";
+	mes "hacer cosas milagrosas. Las podrás";
+	mes "ver una vez que entres a la capital.";
+	close;
+}
+
+rachel,127,117,4	script	Child Follower#2	914,{
+	mes "[Deno]";
+	mes "Aunque nosotros rezamos";
+	mes "a la diosa Freya y";
+	mes "le pedimos toda clase de";
+	mes "cosas, no podemos esperar";
+	mes "que ella haga todo por nosotros.";
+	next;
+	mes "[Deno]";
+	mes "Como humanos es nuestra";
+	mes "responsabilidad hacer todo";
+	mes "lo que esté a nuestro alcance para";
+	mes "concebir nuestra felicidad. Nosotros";
+	mes "creemos que si es la voluntad de";
+	mes "Freya, entonces así será.";
+	next;
+	emotion e_what;
+	mes "[Deno]";
+	mes "Yo sé que puede ser";
+	mes "un poco confuso para";
+	mes "un extranjero, la idea de ser";
+	mes "dependientes de nuestra diosa";
+	mes "mientras que contamos con nosotros mismos.";
+	close;
+}
+
+ra_temple,167,155,4	script	Child Follower#3	914,{
+	mes "[Lewei]";
+	mes "¡Shushh! ";
+	mes "Silencio.";
+	next;
+	mes "[Lewei]";
+	mes "......";
+	mes ".........";
+	next;
+	mes "[Lewei]";
+	mes "¡Vete de aquí! ¡Si alguien";
+	mes "te ve, me van a";
+	mes "agarrar! ¡Idiota!";
+	next;
+	if (select("What are you doing?:Alright.") == 1) {
+		mes "[Lewei]";
+		mes "¿Holaaa~?";
+		mes "¿No ves?";
+		mes "Se llama las escondidas.";
+		mes " ¡Estupendo!";
+		mes "¡Rápido vete de aquí!";
+		close;
+	}
+	mes "[Lewei]";
+	mes "¡Apúrate y sal";
+	mes "de aquí!";
+	close;
+}
+
+ra_temple,179,161,7	script	Child Follower#4	921,{
+	mes "[Zhikka]";
+	mes "¡Shh! Estoy jugando";
+	mes "a las escondidas. ¿Podrías";
+	mes "dejarme solo, por favor?";
+	mes "¡No quiero que me atrapen otra vez!";
+	mes "Tal vez sea por que siempre";
+	mes "uso el mismo escondite...";
+	close;
+}
+
+ra_temple,77,114,7	script	Child Follower#5	921,{
+	mes "[Emmet]";
+	mes "¡Oh por Freya! ¡Me asustaste!";
+	mes "¡Yo creí que eras uno de los";
+	mes "chicos que juegan a las Escondidas!";
+	mes "¡Ack! ¡alejate, alejate!";
+	mes "¡No puedo dejar que me encuentren!";
+	close;
+}
+
+ra_temple,172,113,5	script	Child Follower#6	921,{
+	mes "[Harse]";
+	mes "Dónde estaaaas~";
+	mes "Sal, sal";
+	mes "de dónde quiera que estés~";
+	next;
+	mes "[Harse]";
+	mes "¿Pero qué...?";
+	mes "¿Qué hace un adulto";
+	mes "por aquí?";
+	mes "¿No ves que estoy jugando";
+	mes "a las Escondidas?";
+	close;
+}
+
+airplane,238,54,7	script	Adventurer	59,{
+	if ($rachel_donate < 10000) {
+		mes "[Adventurer]";
+		mes "¿Sabías que el templo";
+		mes "en Rachel está aceptando";
+		mes "donaciones? Ellos no necesitan";
+		mes "mucho zeny, pero mis amigos";
+		mes "y yo donamos de todas formas. ¡Al diablo! nosotros";
+		mes "queríamos ver que cosa podíamos ganar~";
+		next;
+		mes "[Adventurer]";
+		mes "¡Uno de mis amigos fue";
+		mes "un maldito suertudo! El";
+		mes "gano un tipo de álbum,";
+		mes "lo abrió y encontró";
+		mes "una clase de carta adentro.";
+		mes "Una cosa realmente bella.";
+		next;
+		mes "[Adventurer]";
+		mes "Otro de mis amigos,";
+		mes "No tan suertudo. Ganó una";
+		mes "Condensed White Potion... ";
+		mes "Si, no lo culpo por sentirse";
+		mes "un poco defraudado, pero el";
+		mes "donó por una buena causa, ¿cierto?";
+		next;
+		mes "[Adventurer]";
+		mes "¡Yo? gane una fruta";
+		mes "amarilla. No me senti";
+		mes "muy bien como para comerla,";
+		mes "pero después de darle una mordida,";
+		mes "fué como...whoa.";
+		mes "¡Tan refrescante!";
+		next;
+		mes "[Adventurer]";
+		mes "De todas formas, las donaciones";
+		mes "se usaran para financiar un";
+		mes "festival. Así que,";
+		mes "no creo que mantengan este";
+		mes "evento de la lotería después";
+		mes "de que junten el dinero, ¿sabes?";
+		close;
+	}
+	mes "[Adventurer]";
+	mes "Sabes, uno de los";
+	mes "priests en el templo";
+	mes "de Rachel parece estar en problemas";
+	mes "por alguna razón. Debí";
+	mes "haberle preguntado si algo la incomodaba,";
+	mes "y ofrecerle mi ayuda. Mmm, nah.";
+	close;
+}

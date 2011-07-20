@@ -1,0 +1,82 @@
+//===== eAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,44,42,5	script	High Priest#Valkyrie	60,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[High Priest]";
+			mes "¡Felicidades!";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		mes "[High Priest]";
+		mes "A través del poder";
+		mes "divino, quizás nosotros podremos";
+		mes "encontrar paz, fuerza";
+		mes "y protección. Líbranos";
+		mes "de las fuerzas diabólicas.";
+		close;
+	}
+	else if (ADVJOB == Job_High_Priest && Class == Job_Acolyte_High && JobLevel > 39) {
+		mes "[High Priest]";
+		mes "Nuestro mundo";
+		mes "necesita personas";
+		mes "con talento y determinación.";
+		mes "Por favor continúa";
+		mes "tus buenas acciones como";
+		mes "el héroe divino que eres...";
+		next;
+		mes "[High Priest]";
+		mes "¿Quieres convertirte";
+		mes "en High Priest?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[High Priest]";
+			mes "Cuando estés preparado,";
+			mes "podrás volver.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[High Priest]";
+			mes "Aún te es posible aprender skills. Por favor,";
+			mes "usa todos tus Skill Points restantes antes de volver conmigo.";
+			close;
+		}
+		jobchange Job_High_Priest;
+		set ADVJOB,0;
+		mes "[High Priest]";
+		mes "¡Felicidades!";
+		mes "Como High Priest,";
+		mes "espero que guíes";
+		mes "a otros por el camino";
+		mes "divino...";
+		close;
+	}
+	mes "[High Priest]";
+	mes "Bienvenido";
+	mes "a Valhalla,";
+	mes "el Salón del Honor.";
+	next;
+	mes "[High Priest]";
+	mes "Por favor,";
+	mes "que tu estancia aquí";
+	mes "sea confortable.";
+	mes "¡Gloria a los guerreros!";
+	close;
+}

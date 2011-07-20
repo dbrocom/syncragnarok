@@ -1,0 +1,95 @@
+//===== eAthena Script =======================================
+//= Twin Towers NPCs
+//===== By: ==================================================
+//= sEiKaN (1.0)
+//===== Current Version: =====================================
+//= 1.6
+//===== Compatible With: =====================================
+//= Any Athena Version; 0315+
+//===== Description: =========================================
+//= mRO Event: Twin Towers NPCs
+//===== Additional Comments: =================================
+//= 1.2 by Akaru 1.3 by massdriller(Fixed typos)
+//= 1.4 fixed coords, according to off. src [Lupus]
+//= 1.5 Removed Duplicates [Silent]
+//= 1.6 Fixed wrong sprite id on main npc [ultramage]
+//============================================================
+
+prontera,146,92,4	script	Twin Towers#tt1::Twin-Towers	812,{
+	mes "[Twin Towers]";
+	mes "¿Como estás? Nosotros somos las Torres Gemelas.";
+	mes "Es un placer poder reunirme con ustedes aqui.";
+	mes "Supongo que saben que este es Ragnarok En Linea, una tierra de sueños y fantasias.";
+	mes "¿Estan teniendo una aventura amena y una experiancia emocionante?";
+	next;
+	mes "[Twin Towers]";
+	mes "Sin embargo nosotras no podemos movernos alrededor ni vivir de la froma que ustedes lo hacen,";
+	mes "¡nosotras amamos el mundo tanto como ustedes!";
+	next;
+	mes "[Twin Towers]";
+	mes "¡Pueden experimentar la sensacion de este mundo amoro!";
+	mes "Por esta razón, nosotras estamos aqui a su sevicio con nuestra magia especial.";
+	mes "Amablemente dejenos saber.";
+	next;
+	menu "Yo debiera aceptar tu oferta.",YES,"Solicitaré tu sevicio la próxima vez.",NO;
+
+	NO:	
+	mes "[Twin Towers]"; 
+	mes "Er, que lástima.`Viajar por tí mismo es aún la mejor evidencia de aventura.";
+	mes "¿No prueba esto que aún eres jóven?";
+	mes "Respetamos corazones valientes como este.";
+	next;
+	mes "[Twin Towers]";
+	mes "Hay buenos y malos momentos en la vida, ademas, en primer lugar aventura no es una tarea fácil.";
+	mes "¿No es esto cierto?";
+	mes "Sientete libre de venir a nosotras, siempre estaremos aqui para sevirte.";
+	next;
+	mes "[Twin Towers]";
+	mes "Olvida todos tus problemas, y crea una esplendida leyenda en este maravilloso mundo.";
+	mes "¡Este es un maravilloso mundo, y estarás siempre en una gran aventura!";
+	close;
+	YES:	
+	mes "[Twin Towers]";
+	mes "La ardiente pasion de un aventurero,";
+	mes "El deseo de explorar los reinos desconocidos,";
+	mes "La dedicación y compromiso a lograr la aspiración...";
+	mes "Tú eres simplemente un aventurero real con tal compasión.";
+	next;
+	mes "[Twin Towers]";
+	mes "Nosotras deseamos ayudar en aventruras apasionadas.";
+	mes "Sin embargo nosotras no podemos movernos, por suerte tenemos la habilidad especial que podemos llevartea lugares de peligro y emoción.";
+	next;
+	mes "[Twin Towers]";
+	mes "¡Vengan! ¿Donde desean ir?";
+	mes "Solo dejenos saber su destino deseado y nosotras los enviaremos alla!";
+	menu "Templo Escondido", HiddenTemple,"Calabozo de Orcos",OrcDungeon,"Infierno de Hormigas",AntHell,"Basurero de Mjolnir",MjolnirWastePit,"Esfinge",Sphinx,"Glast Heim",GlastHeim,"Comodo",Comodo;
+		HiddenTemple:
+			warp "prt_fild01",136,368;
+			close;
+		OrcDungeon:
+			warp "gef_fild10",67,334;
+			close;
+		AntHell:
+			warp "moc_fild04",210,329;
+			close;
+		MjolnirWastePit:
+			warp "mjolnir_02",79,361;
+			close;
+		Sphinx:
+			warp "moc_fild19",105,99;
+			close;
+		GlastHeim:
+			warp "gef_fild06",45,304;
+			close;
+		Comodo:
+			warp "cmd_fild01",30,317;
+			close;
+}
+
+morocc,160,97,4	duplicate(Twin-Towers)	Twin Towers#tt2	812
+payon,176,226,4	duplicate(Twin-Towers)	Twin Towers#tt3	812
+izlude,134,92,4	duplicate(Twin-Towers)	Twin Towers#tt4	812
+alberta,25,238,4	duplicate(Twin-Towers)	Twin Towers#tt5	812
+geffen,120,60,4	duplicate(Twin-Towers)	Twin Towers#tt6	812
+aldebaran,143,116,4	duplicate(Twin-Towers)	Twin Towers#tt7	812
+comodo,194,158,4	duplicate(Twin-Towers)	Twin Towers#tt8	812

@@ -1,0 +1,69 @@
+// ---- MVP ARENA!!!!!! By Darkchild with 16 diff MVP's inside
+// -- Optimised The MVP arena!!!! By massdriller
+// - NPC in prontera
+
+// --- Optimising Functions
+
+function	script	Ramvp_1	{
+
+	mes "[ ^0065DFAlpha MVP^000000 ]";
+		mes "¡Aquí tienes!";
+			return;
+}
+
+function	script	Ramvp_2	{
+
+	mes "[ ^0065DFBeta MVP^000000 ]";
+		mes "¡Aquí tienes!";
+			return;
+}
+
+function	script	Ramvp_3	{
+
+	mes "[ ^0065DFTheta MVP^000000 ]";
+		mes "¡Aquí tienes!";
+			return;
+
+}
+
+
+function	script	Ramvp_4	{
+
+	mes "[ ^0065DFEpsilon MVP^000000 ]";
+		mes "¡Aquí tienes!";
+			return;
+
+}
+
+function	script	Ramvp_M	{
+
+	mes "¿Como te puedo ayudar?.";
+	menu "Monstruos Dificiles",L_Next,"Heal Por favor",L_Heal,"Salir",L_Leave;
+
+	L_Next:
+		return;
+
+	L_Heal:
+		percentheal 100,100;
+		close;
+
+	L_Leave:
+		warp "prontera",156,179;
+		close;
+
+}
+
+function	script	Ramvp_M2	{
+
+	mes "¿Como te puedo ayudar?";
+	menu "Heal Por favor",L_Heal,"Salir",L_Leave;
+
+	L_Heal:
+		percentheal 100,100;
+		close;
+
+	L_Leave:
+		warp "prontera",156,179;
+		close;
+
+}

@@ -1,0 +1,83 @@
+//===== eAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,56,3	script	Gypsy#Valkyrie	101,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Gypsy]";
+			mes "Felicidades.";
+			mes "¡Gloria a los Guerreros!";
+			close;
+		}
+		mes "[Gypsy]";
+		mes "¡Izquierda,";
+		mes "derecha~!";
+		mes "Y un paso a...!";
+		mes "Bailar puede ser";
+		mes "mas que un hobby.";
+		mes "Para mi, es una forma de vida~";
+		close;
+	}
+	else if (ADVJOB == Job_Gypsy && Class == Job_Archer_High && JobLevel > 39) {
+		mes "[Gypsy]";
+		mes "La tierra de Rune-Midgard";
+		mes "necesita mujeres talentosas";
+		mes "para cambiar sutilmente el balance";
+		mes "en la batalla entre el bien";
+		mes "y el mal.";
+		next;
+		mes "[Gypsy]";
+		mes "¿Estas lista";
+		mes "para tomar este rol,";
+		mes "y hacerte una Gypsy?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[Gypsy]";
+			mes "Cuando estés lista,";
+			mes "siéntete libre de volver.";
+			mes "¡Gloria a los Guerreros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Gypsy]";
+			mes "Aún puedes aprender más habilidades. Por favor usa";
+			mes "todos tus Skill Points  antes de volver conmigo.";
+			close;
+		}
+		jobchange Job_Gypsy;
+		set ADVJOB,0;
+		mes "[Gypsy]";
+		mes "¡Felicidades!";
+		mes "Como una Gypsy, se";
+		mes "que tus actos";
+		mes "balanceara los corazones de todos";
+		mes "aquellos que estén mirando...";
+		close;
+	}
+	mes "[Gypsy]";
+	mes "Bienvenido";
+	mes "al Valhalla,";
+	mes "a la Sala del Honor.";
+	next;
+	mes "[Gypsy]";
+	mes "Por favor, que";
+	mes "tu estancia aquí";
+	mes "sea confortable.";
+	mes "¡Gloria a los Guerreros!";
+	close;
+}

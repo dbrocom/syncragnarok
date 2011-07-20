@@ -1,0 +1,140 @@
+//===== eAthena Script =======================================
+//= Valentine Event Script
+//===== By: ==================================================
+//= Muad_Dib(Prometheus Project)
+//===== Current Version: =====================================
+//= 1.01
+//===== Compatible With: =====================================
+//= Any Athena Version
+//===== Description: =========================================
+//
+//===== Additional Comments: =================================
+//= 07/06/05 : Added 1st Version. [Muad_Dib]
+//= 08/28/05 : Ver. 1.01 Added a missing close; [Muad_Dib]
+//= Converted to eAthena format by Dr.Evil
+//============================================================
+
+
+// Stephen - Valentine Event Chocolate seller ------------------
+alberta,26,243,4	script	Stephen	58,{
+	mes "[Stephen]";
+	mes "adivinen que tengo?";
+	mes "algo muy delicioso y dificil de encontrar en Rune-Midgard....";
+	next;
+	mes "[Stephen]";
+	mes "¡Chocolate!";
+	mes "asi es acaso no amas el chocolate..... yo si lo amo.";
+	mes "estas de suerte por que estoy vendiendo el chocolate 5,000 zeny cada uno!";
+	next;
+	menu "quiero chocolate!",M_CHOCO,"No gracias",-;
+	mes "[Stephen]";
+	mes "no quieres chocolate?";
+	mes "telo digo! te arrepentiras!";
+	mes "Mejor consigue algo ahora... no volveras a conseguir chocolate como este jamas";
+	mes "Piensalo y visitame otra vez algun dia";
+	close;
+
+M_CHOCO:
+	mes "[Stephen]";
+	mes "Hah";
+	mes "Lo sabia!!";
+	mes "Pero no te puedo vender mas de 5... pero si de verdad necesitas mas.....";
+	mes "Puedes volver de nuevo";
+	mes "¿Entoces cuantos quieres?";
+	next;
+	set @needmon,0;
+	input @flag_num;
+	if (@flag_num <= 0) goto L_NONE;
+	if (@flag_num > 5) goto L_ERR;
+	set @needmon,@flag_num*5000;
+	if (Zeny < @needmon) goto L_NOTENO;
+	set Zeny,Zeny - @needmon;
+	getitem 558,@flag_num;
+	mes "[Stephen]";
+	mes "¡Aqui tienes!";
+	mes "Se los pueedes dar a alguien como regalo o los puedes disfrutar tu mismo";
+	mes "Hmmm... Dulce chocolate";
+	mes "Visitame cuando quieras";
+	close;
+
+L_ERR:
+	mes "[Stephen]";
+	mes "Lo siento pero no te puedo dar tantos";
+L_NONE:
+	close;
+
+L_NOTENO:
+	mes "[Stephen]";
+	mes "Lo siento pero parece que  tu no puedes pagar todo eso";
+	close;
+}
+
+// Jainie -- Gives information about Valentine Event ------------------------
+alberta,29,243,4	script	Jainie	53,{
+	mes "[Jainie]";
+	mes "¿Sabias que?  Los chocolates que mi novio vende son mios";
+	mes "Los hize yo misma";
+	next;
+	mes "[Jainie]";
+	mes "Tu Sabes.... en algunos paises... ahi una tradicion de regalar chocolates a la persona que amas";
+	mes "Ellos lo llaman , ^3355FFEl dia de San Valentin^000000.";
+	next;
+	mes "[Jainie]";
+	mes "Entonces yo le di a el un delicioso chocolate";
+	mes "Y el me hizo cocinar mucho mas";
+	mes "Y ahora el le vende a todos";
+	mes "Supongo que de verdad le encantaron";
+	mes "Pero me siento bien, cuando la gente me compra algo que he hecho";
+	next;
+	mes "[Jainie]";
+	mes "Seria grandioso si me compraras algo tambien";
+	mes "Estaria haciendo chocolates por un tiempo..";
+	close;
+}
+
+// Carl Orleans -- Valentine Event Chocolate maker ------------------
+prt_castle,54,34,4	script	Carl Orleans	47,{
+	mes "[Carl Orleans]";
+	mes "Si?";
+	next;
+	menu "Quiero un poco de chocolate hecho a mano",-,"Estoy perdido, perdon por molestarte",M_WAT;
+     
+	mes "[Carl Orleans]";
+	mes "Bueno., Solo hare lo que necesitas";
+	next;
+	if (countitem(558) >=3) goto L_ENO;
+	mes "Lo siento pero no tienes suficiente chocolate para hacer esto";
+	close;
+
+L_ENO:
+	delitem 558,3;
+	mes "[Carl Orleans]";
+	mes "Veo que tienes 3 piezas de puro chocolate";
+	mes "Damelas a mi";
+	next;
+	mes "Ok.. ahora creare mi chocolate hecho a mano, si tu me prometes usarlo bien";
+	next;
+	mes "....Hmmmmmm.....";
+	mes "Bueno....";
+	next;
+	mes "Aqui";
+	getitem 559,1;
+	mes "Espero se lo des a alguien especial, porque es un chocolate especial";
+	mes "Como tu sabes solo yo lo puedo crear";
+	next;
+	mes "Disfrutalo";
+	close;
+
+M_WAT:
+	mes "[Carl Orleans]";
+	mes "Oh bien si quieres hacer un poco de mi chocolate especial";
+	mes "Necesitaras por lo menos darme ^0000FF 3 Chocolates^000000.";
+	next;
+	mes "[Carl Orleans]";
+	mes "Eso es correcto solo ^0000FF 3 Chocolates^000000";
+	mes "Traemelos y obtendras por lo que venistes";
+	next;
+	mes "[Carl Orleans]";
+	mes "Nos vemos";
+	close;
+}

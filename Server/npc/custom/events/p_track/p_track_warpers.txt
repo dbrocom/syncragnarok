@@ -1,0 +1,73 @@
+//===== eAthena Script =======================================
+//= Poring Track Warpers
+//===== By: ==================================================
+//= erKURITA
+//===== Current Version: =====================================
+//= 0.0000000000000002
+//===== Compatible With: =====================================
+//= eAthena 1.0
+//===== Description: =========================================
+//= NPC's for the City of Hugel.
+//===== Additional Comments: =================================
+//= 0.0000000000000002 Removed Duplicates [Silent]
+//============================================================
+//| Warp-in npcs
+hugel,58,72,5	script	Yan#track1	86,{
+//callfunc "P_TrackEnt",npcname,map name;
+callfunc "P_TrackEnt","[Yan]","p_track01";
+end;
+}
+hugel,62,68,1	script	Yalmire#track1	86,{
+//callfunc "P_TrackEnt",npcname,map name;
+callfunc "P_TrackEnt","[Yalmire]","p_track02";
+end;
+}
+
+//| Warp-out npcs
+
+p_track01,76,36,2	script	Yan#track2	86,{
+end;
+}
+
+p_track02,76,36,2	script	Yalmire#track2	86,{
+end;
+}
+
+function	script	P_TrackEnt	{
+
+mes getarg(0);
+mes "Hola "+strcharinfo(0)+", Bienvenido al Poring Track!";
+menu "Información",-,"Quiero hacer la prueba",L_Try,"Hoy no, gracias.",L_End;
+		next;
+		mes getarg(0);
+		mes "Bla blah, tan divertido";
+		close;
+	L_Try:
+		next;
+		mes getarg(0);
+		mes "Ok, el monto de la entrada es de 500z, te gustaría entrar?";
+		menu "Si, por favor",-,"No, gracias.",L_End2;
+				if (Zeny < 500) {
+					next;
+					mes getarg(0);
+					mes "Lo lamento pero no tienes 500z, no puedes entrar";
+					close;
+				} else
+				next;
+				mes getarg(0);
+				mes "¡Aqui vamos!";
+				close2;
+				set Zeny,Zeny-500;
+				warp getarg(1),75,41;
+				end;
+			L_End2:
+				next;
+				mes getarg(0);
+				mes "Ah bueno, tu te lo pierdes";
+				close;
+	L_End:
+		next;
+		mes getarg(0);
+		mes "¡Ok, nos vemos luego!";
+		close;
+}

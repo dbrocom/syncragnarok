@@ -1,0 +1,109 @@
+//===== eAthena Script ======================================= 
+//= Official Skill Resetter Event in Yuno (kRO & idRO)
+//===== By: ================================================== 
+//= $ephiroth
+//===== Current Version: ===================================== 
+//= 1.02
+//===== Compatible With: ===================================== 
+//= eAthena 1.0
+//===== Description: ========================================= 
+//= 2006 - Edition Skill Reset NPC
+//= 2006/11/16: 1.0 Release and fully working. [$ephiroth]
+//= 1.01 Checked, fixed typos, now uses MISC_QUEST var [Lupus]
+//= 1.02 Added missing message,comment,etc. [$ephiroth]
+//===== Additional Comments: =================================
+//= Skill Reset with payment, minimum BaseLv.60 to reset skill.
+//= Each 1 BaseLv need 20.000 Zeny, so be careful to use skill.
+//============================================================
+yuno,138,187,4	script	Hypnotist Teacher	124,{
+	set @npcname$,"[^D5A500Hypnotist^000000]";
+	mes @npcname$;
+
+	if(MISC_QUEST & 1024){
+		mes "Ya he dicho que sólo puedes completar este evento una vez.";
+		close;
+	}
+	if(BaseLevel < 60) {
+		mes "Por favor, regrese cuando alcance BaseLv 60 o superior.";
+		close;
+	}
+	if(SkillPoint != 0) {
+		mes "Tendrá que utilizar todos tus puntos de Skill si quieres que continue.";
+		mes "¡Vuelve de nuevo pronto!";
+		close;
+	}
+	if(Weight || checkfalcon() || checkcart() || checkriding()) {
+		mes "¿Desearìa resetear sus Skills?";
+		mes "Lo siento, pero...";
+		next;
+		mes @npcname$;
+		if(Weight) {
+			mes "No se pueden restablecer las Skills";
+			mes "cuando conservas";
+			mes "algún objeto";
+		} else if(checkcart())
+			mes "Por favor, deje su carro y continuemos.";
+		else if(checkfalcon())
+			mes "Por favor, liberese de su Falcon y continuemos.";
+		else if(checkriding())
+			mes "Por favor, liberese de su PecoPeco y continuemos.";
+		next;
+		mes @npcname$;
+		mes "¡Vuelve pronto!";
+		close;
+	}
+	mes "Hola, Soy el Skill Resetter.";
+	mes "Tu nombre es ^0080FF"+strcharinfo(0)+"^000000.";
+	mes "¿En que puedo ayudarle?";
+	next;
+	menu "^009500Informacion sobre Resetear skills.^000000",L_Info,"^00B6FFResetear skills.^000000",L_Reset,"^000088Olvídalo^000000",-;
+
+	mes @npcname$;
+	mes "Saves dond encontrarme,";
+	mes "¡Si alguna vez quisieras un reset!"; 
+	close;
+
+L_Info:	
+	mes @npcname$;
+	mes "¡Esta Skill no se restablece SIN CARGO!";
+	mes "Gastos para el restablecimiento de Skill es ^D5A50020000 Zeny x BaseLv^000000.";
+	mes "Yeah ... cada BaseLv cuesta 20000 Zeny para restablecer las Skills.";
+	next;
+	mes @npcname$;
+	mes "¡Sí, claro, una cosa más!";
+	mes "Cualquier carro, Falcone o Peco puedes equiparte";
+	mes "Se eliminará si restablecimiento tus Skills.";
+	next;
+	mes @npcname$;
+	mes "Sólo una hora sale de nuevo a agitar el Skill punto";
+	mes "Cuidado con sus Skills a partir de ahora.";
+	close;
+	
+L_Reset:
+	mes @npcname$;
+	mes "Antes de reiniciar la Skill en la puesta en marcha.";
+	mes "Tendrás a la primera me dices tu Base Level."; 
+	next;
+	mes "^D5A500[" + strcharinfo(0) + "]^000000";
+	mes "Mi Base Level es ^AA00AALevel " + BaseLevel + "Nivel de base.^000000"; 
+	next;
+	set @zeny,BaseLevel*20000;
+	mes @npcname$;
+	mes "Total zeny para el restablecimiento de la cantidad de Skill ^529DFF" + @zeny + "Zeny^000000  para el servicio de resetesar la Skill.";
+	next;
+	if(Zeny < @zeny) {
+		mes @npcname$;
+		mes "Parece que usted no tiene suficiente dinero.";
+		mes "Además espera de la oportunidad.";
+		emotion e_hmm;
+		close;
+	}
+	set Zeny, Zeny-@zeny;
+	set MISC_QUEST,MISC_QUEST | 1024;
+	resetskill;
+	mes @npcname$;
+	mes "Gracias.";
+	emotion e_thx;
+	logmes "SKILL RESET EVENT";
+	close;
+}

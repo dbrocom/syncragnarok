@@ -1,0 +1,94 @@
+^000088Canciones SetList^000000
+ === RO BGMs  1/5 ===
+
+[01]  Title 
+[02]  Gambler of Highway 
+[03]  Peaceful Forest 
+[04]  I Miss You
+[05]  Tread on the Ground 
+[06]  Risk Your Life
+[07]  Wind of Tragedy 
+[08]  Theme of Prontera 
+[09]  Great Honor 
+[10]  Divine Grace 
+[11]  Theme of Morroc
+[12]  Streamside
+[13]  Theme of Geffen 
+[14]  Theme of Payon
+[15]  Theme of Alberta 
+
+^000088Canciones SetList^000000
+ === RO BGMs  2/5 ===
+
+[16]  Labyrinth 
+[17]  Treasure Hunter 
+[18]  Time Up!! 
+[19]  Under the Ground
+[20]  Ancient Groover
+[21]  Through the Tower
+[22]  Backattack!!
+[23]  Travel 
+[24]  Desert
+[25]  Plateau
+[26]  Everlasting Wanderers
+[27]  Dreamer's Dream
+[28]  You're in Ruins
+[29]  Be Nice'n Easy
+[30]  One Step Closer
+
+^000088Canciones SetList^000000
+ === RO BGMs  3/5 ===
+
+[31]  Brassy Road
+[32]  -No existe-
+[33]  Yuna Song
+[34]  Pampas Upas
+[35]  Tempoison
+[36]  Nano East
+[37]  Temporsche
+[38]  Hamatan
+[39]  Theme of Al de Baran
+[40]  Fear...
+[41]  Rag All Night Long
+[42]  Curse'n Pain
+[43]  Morning Gloomy
+[44]  Temp It Up 
+[45]  Don't Piss Me Off
+
+^000088Canciones SetList^000000
+ === RO BGMs  4/5 ===
+
+[46]  An Ant-Lion's Pit
+[47]  Welcome Mr. Hwang
+[48]  Help Yourself
+[49]  Watery Grave
+[50]  Out of Curiosity 
+[51]  Believe in Mysel
+[52]  Ready~
+[53]  White Christmas
+[54]  Come on my deer!!
+[55]  Welcome, my lord
+[56]  Silver Bell
+[57]  Don't cry, baby
+[58]  Jingle Bell on Ragnarok
+[59]  Theme of Lutie
+[60]  Aeon
+
+^000088Canciones SetList^000000
+ === RO BGMs  5/5 ===
+
+[61]  Zingaro
+[62]  High Roller Coaster
+[63]  Mucho Gusto
+[64]  One Fine Day
+[65]  Into the Abyss
+[66]  Wanna be free!!
+[67]  TemPotato
+[68]  Jazzy Funky Sweety
+[69]  Retro Metro
+[70]  Theme of Juno
+[71]  Antique Cowboy
+[72]  Big Guys Love This
+[73]  Higher than the sun
+[74]  Not so far away
+[75]  Come, and get it!
