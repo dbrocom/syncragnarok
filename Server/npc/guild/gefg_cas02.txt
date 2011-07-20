@@ -1,0 +1,134 @@
+//===== eAthena Script =======================================
+//= War of Emperium (Geffen)
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= NPCs that relate to Geffen Guild Castle 2
+//===== Additional Comments: =================================
+//= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
+//= 1.1 Removed dialog from interior flags. [L0ne_W0lf]
+//============================================================
+
+// Guild Flag (Town)
+//============================================================
+geffen,113,130,1	script	Eeyolbriggar#g2-1::Eeyolbriggar	722,{
+	end;
+
+OnRecvCastleG02:
+	FlagEmblem GetCastleData("gefg_cas02",1);
+	end;
+}
+
+// Guild Flag (Outside Castle)
+//============================================================
+gef_fild13,303,243,4	script	Eeyolbriggar#g2-2::Eeyolbriggar2	722,{
+	set .@GID, GetCastleData("gefg_cas02",1);
+	if (.@GID == 0) {
+		mes " [ Decreto del Divino Reino de Rune Midgard ]";
+		mes " ";
+		mes "1. Siguiendo el reglamento del Divino Reino de Rune Midgard, ";
+		mes "Declaramos que";
+		mes "este castillo no tiene un dueño oficial.";
+		mes " ";
+		mes "2. Sólo a quien pueda ";
+		mes "superar todas las pruebas";
+		mes "y destruir el Emperium,";
+		mes "el rey le concederá el";
+		mes "dominio de este castillo.";
+	}
+	else {
+		if (getcharid(2) == .@GID) {
+			mes "Valiente...";
+			mes "¿Desea volver a su honorable lugar?";
+			next;
+			if (select("Return to the guild castle.:Quit.") == 1) {
+				if (getcharid(2) == GetCastleData("gefg_cas02",1)) {
+					warp "gefg_cas02",23,66;
+					//warp "gefg_cas02",178,43;
+					end;
+				}
+			}
+			close;
+		}
+		mes "[ Edict of the Divine Rune Midgard Kingdom ]";
+		mes " ";
+		mes "1. Siguiendo el reglamento del";
+		mes "Divino Reino de Rune Midgard,";
+		mes "aprobamos que este lugar está en";
+		mes "la exclusiva posesión de la Guild^ff0000" + GetGuildName(.@GID) + "^000000.";
+		mes " ";
+		mes "2. El líder de la Guild^ff0000"+ GetGuildName(.@GID) + "^000000 es";
+		mes "^FF0000" + GetGuildMaster(.@GID) + "^000000";
+		mes "Si hay alguien que se oponga,";
+		mes " que pruebe su fuerza y honor con su espada.";
+	}
+	close;
+
+OnRecvCastleG02:
+	FlagEmblem GetCastleData("gefg_cas02",1);
+	end;
+}
+
+gef_fild13,312,243,4	duplicate(Eeyolbriggar2)	Eeyolbriggar#g2-3	722
+gef_fild13,290,243,4	duplicate(Eeyolbriggar2)	Eeyolbriggar#g2-4	722
+gef_fild13,324,243,4	duplicate(Eeyolbriggar2)	Eeyolbriggar#g2-5	722
+
+// Guild Flag (Inside Castle)
+//============================================================
+gefg_cas02,65,130,5	script	Eeyolbriggar#g2-6::Eeyolbriggar3	722,{
+	end;
+
+OnRecvCastleG02:
+	FlagEmblem GetCastleData("gefg_cas02",1);
+	end;
+}
+
+gefg_cas02,30,123,5	duplicate(Eeyolbriggar3)	Eeyolbriggar#g2-7	722
+gefg_cas02,65,139,6	duplicate(Eeyolbriggar3)	Eeyolbriggar#g2-8	722
+gefg_cas02,37,177,6	duplicate(Eeyolbriggar3)	Eeyolbriggar#g2-9	722
+gefg_cas02,37,168,6	duplicate(Eeyolbriggar3)	Eeyolbriggar#g2-10	722
+gefg_cas02,68,47,2	duplicate(Eeyolbriggar3)	Eeyolbriggar#g2-11	722
+gefg_cas02,68,36,2	duplicate(Eeyolbriggar3)	Eeyolbriggar#g2-12	722
+
+// AGIT Manager
+//============================================================
+gefg_cas02,176,178,0	duplicate(Gld_Agit_Manager)	Agit#gefg_cas02	-1
+
+// Steward
+//============================================================
+gefg_cas02,12,66,5	duplicate(Gld_Mngr_Template)	Esmarehk#gefg_cas02	55
+
+// Guardians
+//============================================================
+gefg_cas02,12,66,5	duplicate(Gld_Guard_Template)	Guardian#gefg_cas02	-1
+
+// Kafra Staff
+//============================================================
+gefg_cas02,23,66,3	duplicate(Gld_Kafra_Template)	Kafra Staff#gefg_cas02	117
+
+// Master's Room Exit
+//============================================================
+gefg_cas02,145,115,0	script	#switch_G02	111,{
+	mes " ";
+	mes "Hay una pequeña palanca, ¿Quieres tirar de ella? ";
+	next;
+	if(select("Pull.:Do not.") == 2) close;
+	warp "gefg_cas02",12,67;
+	end;
+}
+
+// Guild Treasure Protection
+//============================================================
+gefg_cas02,140,116,0	duplicate(Gld_Trea_Protect)	ban_warp#gefg_cas02	-1,6,6
+
+// Guild Treasure Spawns
+//============================================================
+gefg_cas02,140,116,0	duplicate(Gld_Trea_Spawn)	Treasure#gefg_cas02	-1
+
+// Guild Dungeon Switch
+//============================================================
+gefg_cas02,167,40,0	duplicate(Gld_Dun_Template)	#gefg_cas02	111

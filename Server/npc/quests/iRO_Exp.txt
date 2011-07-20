@@ -1,0 +1,851 @@
+//===== eAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= Kisuka
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= Each of these quests are repeatable.
+//= Therefore, you are able to get a character from 
+//= levels 2 - 85 using only these quests instead of 
+//= normal monster killing. 
+//=
+//= Note: Before enabling remove
+//= 1) 925,Bill_Of_Birds; 2) 7106,Goat's_Horn
+//= From Vendor shops in npc/merchants/shops.txt
+//===== Additional Comments: =================================
+//= 1.0 First version. [Kisuka]
+//= 1.1 Moved Jeremy and Gregor to different maps. [L0ne_W0lf]
+//= 1.2 Fixed the engrish and typos.
+//============================================================
+
+// Yullo - 25 Porcupine Quill
+//============================================================
+mjolnir_01,296,29,5	script	Yullo#iROExp	95,{
+	if((BaseLevel < 24)) {
+		mes "[Yullo]";
+		mes "Hmm, esto podria ser más de lo";
+		mes "que podrías hacer. Vuelve cuando seas";
+		mes "más grande y más fuerte.";
+		close;
+	}
+	else if((BaseLevel > 60)) {
+		mes "[Yullo]";
+		mes "Hola, mi nombre es Yullo";
+		mes "Espera un segundo, ¿No serás";
+		mes "algo alto de nivel para esta quest?";
+		next;
+		close;
+	}
+	mes "[Yullo]";
+	mes "No puedo, no más, en serio.";
+	mes "Mirame, estoy hablando en serio, no puedo";
+	mes "juntar una más de estas cosas.";
+	next;
+	mes "[Yullo]";
+	mes "Sabes algo, tengo una idea.";
+	mes "Tu puedes juntarlas y yo te daré";
+	mes "¡Una reconmpenza por tu esfuerzo!";
+	next;
+	mes "[Yullo]";
+	mes "Ok, so I need 25 Porcupine";
+	mes "Quills";
+	mes "Por favor dime que tienes algunas o que";
+	mes "puedes ayudarme.";
+	next;
+	if (select("I have Porcupine Quills:Well I don't think I can help.") == 2) {
+		mes "[Yullo]";
+		mes "I need ^00CE0025 Porcupine Quills^000000.";
+		close;
+	}
+	if (countitem(1027) < 25) {
+		mes "[Yullo]";
+		mes "¿Donde estan las Porcupine Quills?";
+		mes "¿Creías que no me daria cuenta?";
+		close;
+	}else{
+		delitem 1027,25;
+		getitem 501,10;
+		getexp 10425,6272;
+		mes "[Yullo]";
+		mes "¡Excelente, tienes suficientes!";
+		mes "Como lo prometí, una pequeña";
+		mes "recompensa.";
+		close;
+	}
+}
+
+// Shone - 25 Earthworm Peeling
+//============================================================
+moc_fild17,208,346,5	script	Shone#iROExp	707,{
+	if((BaseLevel < 25)) {
+		mes "[Shone]";
+		mes "necesitas ayuda, pero yo";
+		mes "no te la puedo dar. Vuelve";
+		mes "cuando seas más fuerte y";
+		mes "hayas ganado mas sabiduria.";
+		close;
+	}
+	else if((BaseLevel > 60)) {
+		mes "[Shone]";
+		mes "¡Eres muy fuerte para andar";
+		mes "peleando por estas cosas!";
+		next;
+		close;
+	}
+	mes "[Shone]";
+	mes "¡Espara! ¿Me puedes ver?";
+	mes "Oh, bien, no he maximizado mis";
+	mes "habilidades.";
+	next;
+	mes "[Shone]";
+	mes "Oye ¿crees que me podrias ayudar?";
+	mes "am trying to collect ^00CE0025 Earthworm^000000";
+	mes "^00CE00Peelings^000000. Te recompenzare si me";
+	mes "ayudas.";
+	next;
+	if (select("I have 25 Earthworm Peelings:What was it again?") == 2) {
+		mes "[Shone]";
+		mes "I need ^00CE0025 Earthworm Peelings^000000.";
+		close;
+	}
+	if (countitem(1055) < 25) {
+		mes "[Shone]";
+		mes "No veo ninguno por aqui ^00CE00Earthworm Peerlings^000000.";
+		mes "¿Estas tratando de engañarme?";
+		close;
+	}else{
+		delitem 1055,25;
+		getitem 502,10;
+		getexp 15775,1125;
+		mes "[Shone]";
+		mes "Thank you for the 25 Earthworm";
+		mes "Peelings!";
+		mes "Aqui esta esa recompensa que te prometi,";
+		mes "y espero que esta sabiduria que poseo";
+		mes "pase contigo y lo compartas";
+		mes "con otros.";
+		close;
+	}
+}
+
+// Langry - 25 Fluff
+//============================================================
+gef_fild07,321,193,3	script	Langry#iROExp	754,{
+	if((BaseLevel < 2)) {
+		mes "[Langry]";
+		mes "Podrias ser tu la persona menos";
+		mes "indicada,";
+		mes "recicla unos pocos Fabres y regresa";
+		mes "conmigo.";
+		close;
+	}
+	if((BaseLevel > 20)) { mes "[Langry]"; }
+	mes "Hola,mi nombre es Langry.";
+	mes "Tengo que completar este servicio a";
+	mes "la comunidad, pero soy demasiado flojo.";
+	next;
+	if((BaseLevel > 20)) { close; }
+	mes "[Langry]";
+	mes "¿Crees que me podrias ayudar?";
+	mes "¿Por favor?";
+	next;
+	mes "[Langry]";
+	mes "I need to collect ^0000CE25 Fluff^000000 to";
+	mes "completar este proyecto de servicio";
+	mes " a la comunidad.";
+	mes "¿Sabes que? Te podrias recompensar";
+	mes "un poco por ayudarme.";
+	next;
+	if (select("I have some Fluff:What was that again?") == 2) {	
+		mes "[Langry]";
+		mes "I need ^00CE0025 Fluff^000000.";
+		close;
+	}
+	if (countitem(914) < 25) {
+		mes "[Langry]";
+		mes "Ya veo, no hay fluff, espera, si ya la veo,";
+		mes "son las mentiras que salen de tu boca.";
+		close;
+	}else{
+		delitem 914,25;
+		getexp 385,30;
+		mes "[Langry]";
+		mes "Gracias por las Fluff. Esto me ayudara";
+		mes "bastante.";
+		mes "¡Oh, aqui tienes, esto ayudara";
+		mes "a que seas mas fuerte, y rapido!";
+		close;
+	}
+}
+
+// Halgus - 25 Chrysalis
+//============================================================
+gef_fild04,191,54,4	script	Halgus#iROExp	123,{
+	if((BaseLevel < 2)) {
+		mes "[Halgus]";
+		mes "Por favor regresa conmigo cuando";
+		mes "seas un poco mas fuerte.";
+		close;
+	}
+	else if((BaseLevel > 20)) {
+		mes "[Halgus]";
+		mes "Aun no eres lo suficientemente fuerte";
+		mes "para cazar estas cosas tan pequeñas.";
+		next;
+		close;
+	}
+	mes "[Halgus]";
+	mes "¿Nuevo por aqui? Bueno, me gusta ayudar";
+	mes "a nuevas caras por aui.";
+	mes "Y seamos honestos, tu no eres";
+	mes "la cara mas bonita que he visto por aqui.";
+	next;
+	mes "[Halgus]";
+	mes "Como sea, mi hija quisiera";
+	mes "un collar nuevo.";
+	mes "No soy rico, asì que estoy buscando";
+	mes "recolectar Chrysalis de";
+	mes "las Pupa's de esta area.";
+	next;
+	mes "[Halgus]";
+	mes "Can you collect ^00CE0025 Chrysalis^000000 and";
+	mes "traermelas a mi, y prometo";
+	mes "recompenzarte muy bien";
+	next;
+	if (select("I have Chrysalis:What did you need?") == 2) {
+		mes "[Halgus]";
+		mes "I need ^00CE0025 Chrysalis^000000.";
+		close;
+	}
+	if (countitem(915) < 25) {
+		mes "[Halgus]";
+		mes "I need ^00CE0025 Chrysalis^000000 and no less";
+		mes "por favor.";
+		close;
+	}else{
+		delitem 915,25;
+		getexp 385,30;
+		mes "[Halgus]";
+		mes "Me sorprende que encontraras tantas";
+		mes "y tan rapido.";
+		mes "Como lo prometi, dame las";
+		mes "Chrysalis y te recompensare";
+		mes "con mi sabiduria.";
+		close;
+		
+	}
+}
+
+// Laertes - 25 Powder of Butterfly
+//============================================================
+prt_fild04,356,148,3	script	Laertes#iROExp	798,{
+	if((BaseLevel < 15 )) {
+		mes "¡Tu nivel es muy bajo!";
+		next;
+		mes "¡Ve a matar mas Porings!";
+		close;
+	}
+	mes "[Laertes]";
+	mes "¡Buenos dias!";
+	next;
+	if((BaseLevel < 45)) { mes "[Laertes]"; }
+	mes "Trabajo para una apotecaria en";
+	mes "Prontera";
+	if((BaseLevel > 45)) {
+		mes "Vine para recolectar materiales";
+		mes "para medicinas";
+		close;
+	}
+	mes "Y necesito un buen surtido";
+	mes "de ^FF0000Powder of Butterfly^000000";
+	next;
+	if (select("I have Powder of Butterfly:What did you need?") == 2) {
+		mes "[Laertes]";
+		mes "Si me traes";
+		mes "^FF000025 Powder of Butterfly^000000,";
+		mes "Te dare unas cuantas";
+		mes "medicinas.";
+		close;
+	}
+	if (countitem(924) < 25) {
+		mes "[Laertes]";
+		mes "No parece";
+		mes "que tengas suficientes.";
+		next;
+		mes "[Laertes]";
+		mes "Si me traes";
+		mes "^FF000025 Powder of Butterfly^000000,";
+		mes "Te dare unas cuantas";
+		mes "medicinas.";
+		close;
+	}else{
+		delitem 924,25;
+		getitem 502,5;
+		getexp 2950,1125;
+		mes "[Laertes]";
+		mes "Oye, gracias de nuevo.";
+		mes "Aqui tienes, como lo prometi.";
+		close;
+	}
+}
+
+// Nutters - 25 Acorn
+//===========================================================
+//mjolnir_01,293,20,3	script	Nutters#iROExp	779,{
+//	if((BaseLevel < 18)) {
+//		mes "[Nutters]";
+//		mes "You are just too small to fight";
+//		mes "these things for me. Can you get a";
+//		mes "little taller then return?";
+//
+//	}
+//	else if((BaseLevel > 60)) {
+//		mes "[Nutters]";
+//		mes "You are much to strong to be";
+//		mes "fighting these things!";
+//		next;
+//		close;
+//	}
+//	mes "[Nutters]";
+//	mes "I..I just can't seem to find any.";
+//	mes "Pesky Coco's have hidden all the";
+//	mes "Acorns.";
+//	next;
+//	mes "[Nutters]";
+//	mes "Can you help me find ^00CE0025 Acorns^000000.";
+//	mes "I will reward you with much if you can.";
+//	next;
+//	if (select("I have 25 Acorns:Please come again?") == 2) {
+//		mes "[Nutters]";
+//		mes "I need ^00CE0025 Acorns^000000.";
+//		close;
+//	}
+//	if (countitem(1026) < 25) {
+//		mes "[Nutters]";
+//		mes "Where are my ^00CE00Acorns^000000? Hey, I'm not";
+//		mes "playing, you better not hold out on me.";
+//		close;
+//	}else{
+//		mes "[Nutters]";
+//		mes "Oh great you found out where they";
+//		mes "were hiding them. Gimme Gimme!!!";
+//		next;
+//		delitem 1026,25;
+//		getitem 502,5;
+//		getexp 3600,3905;
+//		mes "[Nutters]";
+//		mes "Oh thats right, sorry I just love";
+//		mes "roasting Acorns. Mmm.";
+//		mes "Here is what I promised you.";
+//		close;
+//	}
+//}
+
+// Cuir - 25 Anolian Skin
+//===========================================================
+cmd_fild01,362,256,3	script	Cuir#iROExp	106,{
+	if((BaseLevel < 45)) {
+		mes "[Cuir]";
+		mes "Seguramente eres valiente, pero";
+		mes "la valentia se convierte es estupidez si";
+		mes "continuas yendo al Este.";
+		mes "Quizas cuando seas mas fuerte tu";
+		mes "y yo podamos hacer negocios.";
+		close;
+	}
+	else if((BaseLevel > 80)) {
+		mes "[Cuir]";
+		mes "Eres demasiado poderoso para esta tarea,";
+		mes "necesito las pieles en condiciones,";
+		mes "¡no reventadas!";
+		next;
+		close;
+	}
+	mes "[Cuir]";
+	mes "¡Pareces un aventurero bastante terco!";
+	mes "¿Que te pareceria ayudarme a mi a";
+	mes "hacer plata vendiendo piel de lagarto?";
+	next;
+	mes "[Cuir]";
+	mes "If you can bring me ^00CE0020 Anolian^000000";
+	mes "^00CE00Skin^000000. Te podria ayudar a hacerte mas fuerte.";
+	next;
+	if (select("I've the Anolian Skins:Gators bite!") == 2) {
+		mes "[Cuir]";
+		mes "I need ^00CE0020 Anolian Skin^000000.";
+		close;
+	}
+	if (countitem(7003) < 20) {
+		mes "[Cuir]";
+		mes "Reconozco una piel de lagarto cuando la veo";
+		mes "and I don't see ^00CE0020 Anolian Skins^000000.";
+		close;
+	}else{
+		delitem 7003,20;
+		getitem 503,10;
+		getexp 68950,43300;
+		mes "[Cuir]";
+		mes "Thank you for the ^00CE0020 Anolian^000000";
+		mes "^00CE00Skins^000000!";
+		mes "Espero puedas seguir ayudandome";
+		mes "colectando las pieles.";
+		mes "Los creadores de armas por todo el mundo";
+		mes "claman por ellos.";
+		close;
+	}
+}
+
+// Li - 50 Dokebi Horns
+//===========================================================
+pay_fild10,108,357,5	script	Li#iROExp	90,{
+	if((BaseLevel < 35)) {
+		mes "¡Este lugar es peligroso!";
+		next;
+		mes "¡Deverias irte cuanto antes!";
+		close;
+	}
+	else if((BaseLevel > 70)) {
+		mes "[Li]";
+		mes "Hola";
+		mes "Leo la fortuna";
+		mes "en Payon.";
+		close;
+	}
+	mes "[Li]";
+	mes "Hola";
+	next;
+	mes "[Li]";
+	mes "Mi negocio de leer la fortuna";
+	mes "necesita buenas cantidades";
+	mes "de ^FF0000Dokebi Horn^000000";
+	mes "para darle a mis clientes buena fortuna.";
+	next;
+	if(select("I have some Dokebi Horns:What did you need?") == 2) {
+		mes "[Li]";
+		mes "Si me traes";
+		mes "^FF000050 Dokebi Horn^000000,";
+		mes "Te podria dar a ti algode buena suerte.";
+		close;
+	}
+	if (countitem(1021) < 50) {
+		mes "[Li]";
+		mes "No me parece";
+		mes "que tengas suficientes.";
+		next;
+		mes "[Li]";
+		mes "I need ^FF000050 Dokebi Horn^000000.";
+		mes "para predecir las fortunas de las personas.";
+		close;
+	}else{
+		delitem 1021,50;
+		getexp 42000,36000;
+		mes "[Li]";
+		mes "¡Oh, grandioso!";
+		mes "Muchas gracias por los cuernos.";
+		close;
+	}
+}
+
+// Lemly - 25 Frill
+//===========================================================
+moc_fild17,66,273,5	script	Lemly#iROExp	725,{
+	if((BaseLevel < 30)) {
+		mes "¿Que haces por aqui?";
+		next;
+		mes "¡El desierto te matara aqui!";
+		close;
+	}
+	else if((BaseLevel > 65)) {
+		mes "[Lemly]";
+		mes "Hola Hola";
+		next;
+		mes "[Lemly]";
+		mes "Estas lagartijas son asquerosas.";
+		next;
+		mes "[Lemly]";
+		mes "No puedo creer que estoy atascado";
+		mes "haciedo esto.";
+		close;
+	}
+	mes "[Lemly]";
+	mes "¡Hola lindura!";
+	next;
+	mes "[Lemly]";
+	mes "Estoy en busca de";
+	mes "^FF0000Frills^000000.";
+	next;
+	mes "Las lagarijas por aqui";
+	mes "tienes una forna natural de sigilo,";
+	mes "propiedad que la organizaciìn";
+	mes "de asesinos quiere estudiar.";
+	next;
+	if(select("I have some Frills:What did you need?") == 2) {
+		mes "[Lemly]";
+		mes "Necesito";
+		mes "^FF000025 Frill^000000";
+		mes "para la organizaciòn de asesinos.";
+		close;
+	}
+	if (countitem(1012) < 25) {
+		mes "[Lemly]";
+		mes "Que triste,";
+		mes "Por favor no desperdicies mi tiempo.";
+		next;
+		mes "[Lemly]";
+		mes "Necesito";
+		mes "^FF000025 Frill^000000";
+		mes "para la organizaciòn de asesinos.";
+		close;
+	}else{
+		delitem 1012,25;
+		getexp 30000,23000;
+		mes "[Lemly]";
+		mes "Oh, gracias.";
+		mes "Estos son bastante desagradables.";
+		close;
+	}
+}
+
+// Private Jeremy - 25 Stone Heart
+//===========================================================
+moc_fild11,57,138,7	script	Private Jeremy#iROExp	707,{
+	if((BaseLevel < 25)) {
+		mes "[Private Jeremy]";
+		mes "Es peligroso por aqui";
+		mes "ciudadano.";
+		close;
+	}	
+	mes "[Private Jeremy]";
+	mes "¡en hora buena ciudadano!";
+	next;
+	if((BaseLevel > 60)) {
+		mes "[Private Jeremy]";
+		mes "Por favor no interrumpa";
+		mes "mi misiòn para";
+		mes "la Guardia de Morroc.";
+		close;
+	}
+	mes "[Private Jeremy]";
+	mes "La Guardia de Morroc";
+	mes "necesita ^FF0000Stone Hearts^000000";
+	mes "para nuestro regimen de entrenamiento";
+	next;
+	if(select("I have Stone Hearts:What did you need?") == 2) {
+		mes "[Private Jeremy]";
+		mes "La Guardia de Morroc necesita";
+		mes "^FF000025 Stone Heart^000000,";
+		mes "para nuestro regimen de entrenamiento.";
+		close;
+	}
+	if (countitem(953) < 25) {
+		mes "[Private Jeremy]";
+		mes "No parece que";
+		mes "tengas suficientes.";
+		next;
+		mes "[Private Jeremy]";
+		mes "La Guardia de Morroc necesita";
+		mes "^FF000025 Stone Heart^000000,";
+		mes "para nuestro regimen de entrenamiento.";
+		close;
+	}else{
+		delitem 953,25;
+		getexp 14000,9000;
+		mes "[Private Jeremy]";
+		mes "La Guardia de Morroc te agradece,";
+		mes "ciudadano.";
+		close;
+	}
+}
+
+// Gregor - 25 Bill of Birds
+//===========================================================
+moc_fild02,74,329,3	script	Gregor#iROExp	97,{
+	if((BaseLevel < 10)) {
+		mes "[Gregor]";
+		mes "Oye, por ahi...";
+		next;
+		mes "[Gregor]";
+		mes "Esas pickys por alla";
+		mes "parecen ser como de tu";
+		mes "velocidad.";
+		close;
+	}
+	else if((BaseLevel > 30)) {
+		mes "[Gregor]";
+		mes "Aqui peco peco peco";
+		next;
+		mes "[Gregor]";
+		mes "Ven aqui peco.";
+		close;
+	}
+	mes "[Gregor]";
+	mes "Son fascinantes los peco peco.";
+	mes "Necesito un poco de";
+	mes "^FF0000Bill of Birds^000000";
+	mes "para mi, uh, investigaciòn...";
+	next;
+	if(select("I have some Bill of Birds:What did you need?") == 2) {
+		mes "[Gregor]";
+		mes "¿Me podria ayudar";
+		mes "a traerme";
+		mes "^FF000025 Bill of Birds^000000?";
+		close;
+	}
+	if (countitem(925) < 25) {
+		mes "[Gregor]";
+		mes "No parece que";
+		mes "tengas suficientes.";
+		next;
+		mes "[Gregor]";
+		mes "¿Me podrias ayudar";
+		mes "a traerme";
+		mes "^FF000025 Bill of Birds^000000?";
+		close;
+	}else{
+		delitem 925,25;
+		getexp 4000,2000;
+		mes "[Gregor]";
+		mes "Muchisimas gracias.";
+		next;
+		mes "[Gregor]";
+		mes "¡Esta sera";
+		mes "delicioso!";
+		close;
+	}
+}
+
+// Lilla - 50 Sharp Leaf
+//===========================================================
+um_fild01,35,281,5	script	Lilla#iROExp	724,{
+	if((BaseLevel < 60)) {
+		mes "[Lilla]";
+		mes "Tu eres muy pequeño como para";
+		mes "ayudarme. Muchas gracias por ofrecerte";
+		mes "a ayudarme.";
+		close;
+	}
+	else if((BaseLevel > 85)) {
+		mes "[Lilla]";
+		mes "¡Lo siento pero me pareces algo viejo";
+		mes "y tenebroso como para hablarle!";
+		next;
+		close;
+	}
+	mes "[Lilla]";
+	mes "¿Por que hola?";
+	mes "Pareces alguien que";
+	mes "tiene la voluntad de ayudar una cosita tan pequeña";
+	mes "como yo de su problema.";
+	next;
+	mes "[Lilla]";
+	mes "I really need to gather ^00CE0050 Sharp^000000";
+	mes "^00CE00Leaf^000000 para mi fiesta de Tè en el jardin.";
+	mes "¿Tendras alguna?";
+	next;
+	if(select("I have 50 Sharp Leaf:What, sorry I was day dreaming") == 2) {
+		mes "[Lilla]";
+		mes "I need ^00CE0050 Sharp Leafs^000000.";
+		close;
+	}
+	if (countitem(7100) < 50) {
+		mes "[Lilla]";
+		mes "Porque, te parecere algo tontita y linda pero";
+		mes "por favor no juegues conmigo.";
+		close;
+	}else{
+		mes "[Lilla]";
+		mes "Hey, que linda cosa eres.";
+		mes "¡Muchas gracias por ayudarme!";
+		next;
+		delitem 7100,50;
+		getitem 504,10;
+		getexp 262485,141835;
+		mes "[Lilla]";
+		mes "Oh, casi lo olvido. Tengo";
+		mes "algo para ti ^_^";
+		mes "Muchas gracias de nuevo por tu";
+		mes "ayuda.";
+		close;
+	}
+}
+
+// Lella - 50 Huge Leaf
+//============================================================
+ayo_fild01,44,241,5	script	Lella#iROExp	877,{
+	if((BaseLevel < 36)) {
+		mes "[Lella]";
+		mes "¡Huye rapido, antes de que pongan";
+		mes "sus garras en tu salud mental!";
+		close;
+	}
+	else if((BaseLevel > 65)) {
+		mes "[Lella]";
+		mes "No estoy segure de porque estas aqui,";
+		mes "pero no te puede ofrecer una recompenza";
+		mes "pues no habra esfuerzo";
+		mes "alguno en que lo hagas!";
+		close;
+	}
+	mes "[Lella]";
+	mes "¡Porque hola!";
+	mes "Pareces alguien que esta";
+	mes "dispuesto a ayudar a alguien";
+	mes "que lentamente esta enloqueciendo.";
+	next;
+	mes "[Lella]";
+	mes "I really need to gather ^00CE0050 Huge^000000";
+	mes "^00CE00Leaf^000000 por mi salud mental..";
+	mes "¿Tendras alguna?";
+	next;
+	if(select("I have 50 Huge Leaf:What, sorry I was day dreaming") == 2) {
+		mes "[Lella]";
+		mes "I need ^00CE0050 Huge Leafs^000000.";
+		close;
+	}
+	if (countitem(7198) < 50) {
+		mes "[Lella]";
+		mes "Meow meow meow meow meow...";
+		mes "NOOOOOOOOOOOO.";
+		close;
+	}else{
+		mes "[Lella]";
+		mes "¡Grandioso, puedo decir que esta un poco";
+		mes "mas callado por aqui!";
+		next;
+		delitem 7198,50;
+		getitem 503,10;
+		getexp 25740,31512;
+		mes "[Lella]";
+		mes "Entre mas hojas recolecto";
+		mes "parece haber menos ruido.";
+		close;
+	}
+}
+
+// Vegetable Farmer - 50 Antelope Horn
+//============================================================
+ein_fild06,82,171,7	script	Vegetable Farmer#iROExp	919,{
+	if((BaseLevel < 70)) {
+		mes "[Vegetable Farmer]";
+		mes "¿Mis plantitas, a donde fueron a parar?";
+		mes "¡¡¡Oh, no..no!!!";
+		close;
+	}
+	else if((BaseLevel > 84)) {
+		mes "[Vegetable Farmer]";
+		mes "¡Oh cielos, Oh cielos!";
+		next;
+		mes "[Vegetable Farmer]";
+		mes "Lo siento no puedo hablar ahora";
+		mes "pues estoy en un mundo de sufrimiento aqui,";
+		mes "estas malditas Cabras me van a";
+		mes "por favor.";
+		close;
+	}
+	mes "[Vegetable Farmer]";
+	mes "¡Oh grandioso!";
+	mes "¿Estas aqui para ayudarme, no?";
+	mes "Si no, entonces estoy en un mundo de dolor.";
+	next;
+	mes "[Vegetable Farmer]";
+	mes "Estas cabras cabras no dejan de comerse";
+	mes "mis vegetales.";
+	mes "¿Puedes hacer lo que puedas para";
+	mes "ayudarme?";
+	mes "Necesito ^FF0000Antelope Horns^000000";
+	mes "para verificar tu trabajo, y yo";
+	mes "te recompenzare.";
+	next;
+	if(select("I have Antelope Horns:What did you need?") == 2) {
+		mes "[Vegetable Farmer]";
+		mes "Necesito ver que has";
+		mes "juntado";
+		mes "^FF000050 Antelope Horns^000000,";
+		mes "y despues te recompenzare.";
+		close;
+	}
+	if (countitem(7106) < 50) {
+		mes "[Vegetable Farmer]";
+		mes "No parece que";
+		mes "tengas sificientes.";
+		next;
+		mes "[Vegetable Farmer]";
+		mes "Necesito ver lo que has";
+		mes "juntado";
+		mes "^FF000050 Antelope Horns^000000,";
+		mes "y despues te recompenzare.";
+		close;
+	}else{
+		delitem 7106,50;
+		getitem 504,10;
+		getexp 258490,155155;
+		mes "[Vegetable Farmer]";
+		mes "Sorprendente, lo hiciste con rapides. Yo";
+		mes "estoy realmente agradecido.";
+		close;
+	}
+}
+
+// Local Villager - 50 Bacillus
+//============================================================
+ein_fild01,43,249,7	script	Local Villager#iROExp	898,{
+	if((BaseLevel < 60)) {
+		mes "[Local Villager]";
+		mes "Es asombroso, realmente lo es. Solo";
+		mes "quisiera salirme de estos lios.";
+		close;
+	}
+	else if((BaseLevel > 75)) {
+		mes "[Local Villager]";
+		mes "Um, um. No creo..";
+		next;
+		mes "[Local Villager]";
+		mes "Oh, lo siento no puedo hablar";
+		mes "ahora mismo.";
+		close;
+	}
+	mes "[Local Villager]";
+	mes "Hey tu.¡Si tu!";
+	mes "¿Crees que me podrias ayudar con";
+	mes "algo?";
+	next;
+	mes "[Local Villager]";
+	mes "Estoy tratando de hacerme camino";
+	mes "pero no puedo pasar sobre estos";
+	mes "Demon Pungus. ¿Podrias ayudar";
+	mes "colectando ^FF0000Bacillus^000000?";
+	mes "Yo te recompenzare por ayudarme";
+	mes "en este problema.";
+	next;
+	if(select("I have Bacillus:What did you need?") == 2) {
+		mes "[Local Villager]";
+		mes "Necesito ver lo que has";
+		mes "juntado";
+		mes "^FF000050 Bacillus^000000,";
+		mes "y despues podre recompenzarte.";
+		close;
+	}
+	if (countitem(7119) < 50) {
+		mes "[Local Villager]";
+		mes "No parece que";
+		mes "que tengas suficientes.";
+		next;
+		mes "[Local Villager]";
+		mes "Necesito ver lo que has";
+		mes "juntado.";
+		mes "^FF000050 Bacillus^000000,";
+		mes "y despues podre recompenzarte.";
+		close;
+	}else{
+		delitem 7119,50;
+		getitem 504,10;
+		getexp 250266,144452;
+		mes "[Local Villager]";
+		mes "Tuve mis dudas, pero tu has";
+		mes "provado que estaba equivocado.";
+		close;
+	}
+}

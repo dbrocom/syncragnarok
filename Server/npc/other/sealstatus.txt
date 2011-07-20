@@ -1,0 +1,94 @@
+//===== eAthena Script ======================================= 
+//= God Item Seal Status
+//===== By: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Goid Item Seal Status.
+//===== Additional Comments: ================================= 
+//= 1.0 First version. [L0ne_W0lf]
+//= 1.1 Now checks proper char vars. [L0ne_W0lf]
+//============================================================ 
+
+prontera,113,294,3	script	Sign Post	837,{
+	mes "======== Estado del God Seal ========";
+	if ($god1 == 0) {
+		mes "Sello de Sleipnir: Oculto";
+	}
+	else if ($god1 < 50) {
+		mes "Sello de Sleipnir: Activo";
+	}
+	else if ($god1 < 100) {
+		mes "Sello de Sleipnir: Ha aparecido";
+	}
+	else {
+		mes "Sello de Sleipnir: Liberado";
+	}
+	if ($god2 == 0) {
+		mes "Sello de Megingjard: Oculto";
+	}
+	else if ($god2 < 50) {
+		mes "Sello de Megingjard: Activo";
+	}
+	else if ($god2 < 100) {
+		mes "Sello de Megingjard: Ha aparecido";
+	}
+	else {
+		mes "Sello de Megingjard: Liberado";
+	}
+	if ($god3 == 0) {
+		mes "Sello de Brisingamen: Oculto";
+	}
+	else if ($god3 < 50) {
+		mes "Sello de Brisingamen: Activo";
+	}
+	else if ($god3 < 100) {
+		mes "Sello de Brisingamen: Ha aparecido";
+	}
+	else {
+		mes "Sello de Brisingamen: Liberado";
+	}
+	if ($god4 == 0) {
+		mes "Sello de Mjolnir: Oculto";
+	}
+	else if ($god4 < 50) {
+		mes "Sello de Mjolnir: Activo";
+	}
+	else if ($god4 < 100) {
+		mes "Sello de Mjolnir: Ha aparecido";
+	}
+	else {
+		mes "Sello de Mjolnir: Liberado";
+	}
+	mes "";
+	mes "======= El Estado de tu Sello ========";
+	if (god_sl_1 < 51) {
+		mes "^ff0000Sello de Sleipnir: Incompleto^000000";
+	}
+	else {
+		mes "^00ff00Sello de Sleipnir: Completado^000000";
+	}
+	if (god_eremes < 28) {
+		mes "^ff0000Sello de Megingjard: Incompleto^000000";
+	}
+	else {
+		mes "^00ff00Sello de Megingjard: Completado^000000";
+	}
+	if (god_brising < 50) {
+		mes "^ff0000Sello de Brisingamen: Incompleto^000000";
+	}
+	else {
+		mes "^00ff00Sello de Brisingamen: Completado^000000";
+	}
+	if (god_mjo_0 < 11) {
+		mes "^ff0000Sello de Mjolnir: Incompleto^000000";
+	}
+	else {
+		mes "^00ff00Sello de Mjolnir: Completado^000000";
+	}
+	close;
+}

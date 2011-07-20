@@ -1,0 +1,41 @@
+// item id,sprite id
+// Replaces an item client-side while keeping them separate server-side.
+// Think of it as a way to disguise items.
+// If 0 is used then item will be disabled.
+2240,2241 //Beard - Grampa Beard
+
+//Treasure Hunters Quest Items
+//use these aliases if your game client doesn't support them normally
+//7950,7021
+//7951,7042
+//1998,1250
+//1999,1472
+
+//St. Patric's Day Quest (2008) Items
+//Enable if you plan to use the quest.
+//12715,7721
+//7915,673
+//7916,675
+
+//Bomberman
+32005,12258
+
+//Contención
+30788,14042
+30789,7042
+30790,7173
+30791,12104
+
+//Cartas
+30792,7276
+
+//Pastillas raciales
+30691,12257
+30692,12257
+30693,12257
+30694,12257
+30695,12257
+30696,12257
+30697,12257
+30698,12257
+30699,12257

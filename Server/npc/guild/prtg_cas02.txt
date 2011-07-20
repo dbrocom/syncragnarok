@@ -1,0 +1,139 @@
+//===== eAthena Script =======================================
+//= War of Emperium (Prontera)
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= NPCs that relate to Prontera Guild Castle 1
+//===== Additional Comments: =================================
+//= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
+//= 1.1 Removed dialog from interior flags. [L0ne_W0lf]
+//============================================================
+
+// Guild Flag (Town)
+//============================================================
+prontera,172,126,4	script	Swanhild#p2-1::Swanhild	722,{
+	end;
+
+OnRecvCastlePt02:
+	FlagEmblem GetCastleData("prtg_cas02",1);
+	end;
+}
+
+// Guild Flag (Outside Castle)
+//============================================================
+prt_gld,244,126,8	script	Swanhild#p2-2::Swanhild2	722,{
+	set .@GID, GetCastleData("prtg_cas02",1);
+	if (.@GID == 0) {
+		mes " [ Decreto del Divino Reino de Rune Midgard ]";
+		mes " ";
+		mes "1. Siguiendo el reglamento del Divino Reino de Rune Midgard, ";
+		mes "declaramos que";
+		mes "este castillo no tiene un dueño oficial.";
+		mes " ";
+		mes "2. Aquel que pueda ";
+		mes "superar todas las pruebas";
+		mes "y destruir el Emperium,";
+		mes "el rey le concederá el";
+		mes "dominio de este castillo.";
+	}
+	else {
+		if (getcharid(2) == .@GID) {
+			mes "Valientes...";
+			mes "¿Desean regresar a su lugar de honor?";
+			next;
+			if (select("Return to the guild castle.:Quit.") == 1) {
+				if (getcharid(2) == GetCastleData("prtg_cas02",1)) {
+					warp "prtg_cas02",71,36;
+					//warp "prtg_cas02",169,55;
+					end;
+				}
+			}
+			close;
+		}
+		mes "[ Edict of the Divine Rune Midgard Kingdom ]";
+		mes " ";
+		mes "1. Siguiendo el reglamento del";
+		mes "Divino Reino de Rune Midgard,";
+		mes "aprobamos que este lugar está en";
+		mes "la exclusiva posesión de la Guild^ff0000" + GetGuildName(.@GID) + "^000000.";
+		mes " ";
+		mes "2. El líder de la Guild^ff0000"+ GetGuildName(.@GID) + "^000000 es";
+		mes "^FF0000" + GetGuildMaster(.@GID) + "^000000";
+		mes "Si hay alguien que se oponga,";
+		mes " que pruebe su fuerza y honor con su espada.";
+	}
+	close;
+
+OnRecvCastlePt02:
+	FlagEmblem GetCastleData("prtg_cas02",1);
+	end;
+}
+
+prt_gld,244,128,8	duplicate(Swanhild2)	Swanhild#p2-3	722
+prt_gld,236,126,8	duplicate(Swanhild2)	Swanhild#p2-4	722
+prt_gld,236,128,8	duplicate(Swanhild2)	Swanhild#p2-5	722
+
+// Guild Flag (Inside Castle)
+//============================================================
+prtg_cas02,40,227,4	script	Swanhild#p2-6::Swanhild3	722,{
+	end;
+
+OnRecvCastlePt02:
+	FlagEmblem GetCastleData("prtg_cas02",1);
+	end;
+}
+
+prtg_cas02,46,227,4	duplicate(Swanhild3)	Swanhild#p2-7	722
+prtg_cas02,11,219,4	duplicate(Swanhild3)	Swanhild#p2-8	722
+prtg_cas02,11,214,4	duplicate(Swanhild3)	Swanhild#p2-9	722
+prtg_cas02,20,219,4	duplicate(Swanhild3)	Swanhild#p2-10	722
+prtg_cas02,20,214,4	duplicate(Swanhild3)	Swanhild#p2-11	722
+prtg_cas02,79,227,8	duplicate(Swanhild3)	Swanhild#p2-12	722
+prtg_cas02,70,227,8	duplicate(Swanhild3)	Swanhild#p2-13	722
+prtg_cas02,38,189,8	duplicate(Swanhild3)	Swanhild#p2-14	722
+prtg_cas02,34,189,8	duplicate(Swanhild3)	Swanhild#p2-15	722
+prtg_cas02,153,161,4	duplicate(Swanhild3)	Swanhild#p2-16	722
+prtg_cas02,162,161,4	duplicate(Swanhild3)	Swanhild#p2-17	722
+
+// AGIT Manager
+//============================================================
+prtg_cas02,158,174,0	duplicate(Gld_Agit_Manager)	Agit#prtg_cas02	-1
+
+// Steward
+//============================================================
+prtg_cas02,94,61,4	duplicate(Gld_Mngr_Template)	Roy#prtg_cas02	55
+
+// Guardians
+//============================================================
+prtg_cas02,94,61,4	duplicate(Gld_Guard_Template)	Guardian#prtg_cas02	-1
+
+// Kafra Staff
+//============================================================
+prtg_cas02,71,36,4	duplicate(Gld_Kafra_Template)	Kafra Staff#prtg_cas02	117
+
+// Master's Room Exit
+//============================================================
+prtg_cas02,207,228,0	script	#switch_Pt02	111,{
+	mes " ";
+	mes "Hay una pequeña palanca, ¿Quieres tirar de ella? ";
+	next;
+	if(select("Pull.:Do not.") == 2) close;
+	warp "prtg_cas02",94,62;
+	end;
+}
+
+// Guild Treasure Protection
+//============================================================
+prtg_cas02,202,228,0	duplicate(Gld_Trea_Protect)	ban_warp#prtg_cas02	-1,6,6
+
+// Guild Treasure Spawns
+//============================================================
+prtg_cas02,202,228,0	duplicate(Gld_Trea_Spawn)	Treasure#prtg_cas02	-1
+
+// Guild Dungeon Switch
+//============================================================
+prtg_cas02,84,72,0	duplicate(Gld_Dun_Template)	#prtg_cas02	111

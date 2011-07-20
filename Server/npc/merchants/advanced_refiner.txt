@@ -1,0 +1,168 @@
+//===== eAthena Script =======================================
+//= Advanced Refiner
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.4
+//===== Compatible With: =====================================
+//= Eathena SVN
+//===== Description: =========================================
+//= [Aegis Conversion]
+//= Refiner that uses Enriched ores to increase upgrade success.
+//= After a conversation with Doddler, it's been established that
+//= the advanced refiner works similar the the "Bubble Gum" item.
+//= The success percentage is not "increased" however, if it fails
+//= You get a second try. This tries twice at the same time,
+//= effectively giving you a re-roll on your attempt.
+//= - Dialog is only partly official to iRO.
+//= - Uses the iRO position for this NPC.
+//===== Additional Comments: =================================
+//= 1.0 First Version. [L0ne_W0lf]
+//= 1.1 Fixed a weird carriage return. o_o [L0ne_W0lf]
+//= 1.2 Optimizing refine method [Zephyrus]
+//= 1.3 Typo fixes [Yommy]
+//= 1.4 Removed unnecessary dialogs [Zephyrus]
+//============================================================
+
+payon,174,138,0	script	Suhnbi#cash	85,{
+	mes "[Suhnbi]";
+	mes "Soy el refinador";
+	mes "Puedo refinar cualquier tipo de arma,";
+	mes "armadura y equipamiento, así que dime";
+	mes "¿qué es lo que quieres que refine?";
+	next;
+	
+	setarray .@position$[1], "Head","Body","Left hand","Right hand","Robe","Shoes","Accessory 1","Accessory 2","Head 2","Head 3";
+	set .@menu$,"";
+	for( set .@i,1; .@i <= 10; set .@i,.@i+1 )
+	{
+		if( getequipisequiped(.@i) )
+			set .@menu$, .@menu$ + .@position$[.@i] + "-" + "[" + getequipname(.@i) + "]";
+
+		set .@menu$, .@menu$ + ":";
+	}
+	set .@part,select(.@menu$);
+
+	if( !getequipisequiped(.@part) )
+		close;
+
+	if( !getequipisenableref(.@part) )
+	{
+		mes "[Suhnbi]";
+		mes "No creo que pueda refinar este ítem.";
+		close;
+	}
+	if( !getequipisidentify(.@part) )
+	{
+		mes "[Suhnbi]";
+		mes "Esto no ha sido identificado. Entonces, así, no puedo refinarlo...";
+		close;
+	}
+	if( getequiprefinerycnt(.@part) >= 10 )
+	{
+		mes "[Suhnbi]";
+		mes "Este ítem no puede ser refinado porque ha alcanzado su máximo nivel...";
+		close;
+	}
+
+	// Make sure you have the neccessary items and Zeny to refine your items
+	// Determines chance of failure and verifies that you want to continue.
+	switch( getequipweaponlv(.@part) )
+	{
+		case 1: callsub S_RefineValidate,1,7620,50,.@part; break;
+		case 2: callsub S_RefineValidate,2,7620,200,.@part; break;
+		case 3: callsub S_RefineValidate,3,7620,5000,.@part; break;
+		case 4: callsub S_RefineValidate,4,7620,20000,.@part; break;
+		default: callsub S_RefineValidate,0,7619,2000,.@part; break;
+	}
+
+	if( getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100) )
+	{
+		mes "[Suhnbi]";
+		mes "¡Clink! ¡Clank! ¡Clunk!";
+		SuccessRefItem .@part;
+		next;
+		Emotion e_no1;
+		mes "[Suhnbi]";
+		mes "Aquí tienes. Esta hecho.";
+		mes "Ha pasado tiempo desde que hice un arma tan fina. ¡Debes de estar feliz porque ahora es más fuerte!";
+		close;
+	}
+	else
+	{
+		mes "[Suhnbi]";
+		mes "¡Clink! ¡Clank! ¡Clunk!";
+		FailedRefItem .@part;
+		next;
+		if (rand(5) == 1)
+			Emotion e_cash;
+		else 
+			Emotion e_omg;
+		mes "[Suhnbi]";
+		mes "¡¡¡Cough!!!!";
+		next;
+		mes "[Suhnbi]";
+		mes "Cough...Cough...";
+		mes "Que lastima...";
+		mes "Tu equipo se ha quebrado durante el proceso de refinamiento. ¡Te había dicho antes que esto podría pasar!";
+		close;
+	}
+
+S_RefineValidate:
+	mes "[Suhnbi]";
+	if (getarg(0))
+		mes "Un arma nivel " + getarg(0) + "...";
+	mes "Para refinar esto necesito un ^ff9999" + getitemname(getarg(1)) + "^000000 y por el servicio me debes pagar " + getarg(2) + " Zeny.";
+	mes "¿Quieres continuar?";
+	next;
+	if( select("Si:No") == 1 )
+	{
+		if( getequippercentrefinery(getarg(3)) < 100 )
+		{
+			mes "[Suhnbi]";
+			mes "¡¡Wow!!";
+			mes "Esta arma, probablemente";
+			mes "parece haber sido refinada...";
+			mes "muchas veces...";
+			mes "Tal vez se rompa si";
+			mes "la refinas otra vez.";
+			next;
+			mes "Y si se rompe,";
+			mes "no la podrás usar nunca más.";
+			mes "Todas las cartas en ella y sus";
+			mes "propiedades";
+			mes "^ff0000se perderán^000000!!";
+			mes "^ff0000 además, ¡el equipo se romperá!^000000";
+			mes " ";
+			mes "¿Todavía estas seguro de querer continuar?";
+			next;
+			if( select("Si:No") == 2 )
+			{
+				mes "[Suhnbi]";
+				mes "Estoy completamente de acuerdo...";
+				mes "Yo podré ser un gran refinador, pero a veces hasta yo cometo errores.";
+				close;
+			}
+		}
+		if( countitem(getarg(1)) > 0 && Zeny > getarg(2) )
+		{
+			delitem getarg(1), 1;
+			set Zeny, Zeny - getarg(2);
+			return;
+		}
+		else
+		{
+			mes "[Suhnbi]";
+			mes "No me parece que tengas suficiente cantidad de Zeny o " + getitemname(getarg(1)) + "...";
+			mes "Ve a conseguir más. Estaré aquí todo el día si me necesitas";
+			close;
+		}
+	}
+	else
+	{
+		mes "[Suhnbi]";
+		mes "Sí... No hay necesidad de apresurarse.";
+		mes "Tómate tu tiempo.";
+		close;
+	}
+}

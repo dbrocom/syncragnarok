@@ -1,0 +1,222 @@
+//===== eAthena Script ======================================= 
+//= Bunny Band Quest
+//===== By: ================================================== 
+//= eAthena Dev Team
+//===== Current Version: ===================================== 
+//= v1.5
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quest to obtain a Bunny Band headgear.
+//===== Additional Comments: ================================= 
+//= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//	Changed @BUNYBAN back to a BUNYBAND, it hsoudl be this way.
+//	Removed duplicates. NPC is ALberta-only.
+//============================================================ 
+
+alberta,26,229,0	script	Kafra Employee#bunny	83,{
+	if (BUNYBND == 1) {
+		mes "[Kafra Employee]";
+		mes "¡Hola~!";
+		mes "Te gustaría";
+		mes "participar en el especial";
+		mes "de la Corporación Kafra ";
+		mes "^529DFFEvento Bunny Band^000000? ";
+		next;
+		switch(select("Sure, I brought the items.:Event Information:Cancel")) {
+		case 1:
+			mes "[Kafra Employee]";
+			mes "De acuerdo~";
+			mes "Déjame comprobar";
+			mes "que trajiste ";
+			mes "todos los ítems...";
+			next;
+			if (countitem(949) < 100) {
+				mes "[Kafra Employee]";
+				mes "Ooh, lo siento,";
+				mes "pero necesitas";
+				mes "traerme al menos";
+				mes "100 Feathers. ";
+				close;
+			}
+			if (countitem(706) == 0) {
+				mes "[Kafra Employee]";
+				mes "Ooh, lo siento";
+				mes "pero necesitas";
+				mes "traerme al menos";
+				mes "1 Four-Leaf Clover. ";
+				close;
+			}
+			if (countitem(722) == 0) {
+				mes "[Kafra Employee]";
+				mes "Ooh, lo siento";
+				mes "pero necesitas";
+				mes "traerme al menos";
+				mes "1 Pearl. ";
+				close;
+			}		
+			if (countitem(2213) == 0) {
+				mes "Ooh, lo siento";
+				mes "pero necesitas";
+				mes "traerme al menos";
+				mes "1 Kitty Band. ";
+				close;
+			}
+			mes "[Kafra Employee]";
+			mes "Perfecto, veo que";
+			mes "has conseguido";
+			mes "todo lo que necesito para";
+			mes "hacerte la Bunny Band";
+			mes "Por favor espera un momento";
+			mes "mientras uno todo...";
+			next;
+			if (countitem(949) < 100) {
+				mes "[Kafra Employee]";
+				mes "¿Hm? Lo siento,";
+				mes "pero ahora no puedo";
+				mes "crear esto.";
+				mes "Necesitas 100 Feathers";
+				mes "para que pueda hacer esta";
+				mes "Bunny Band.";
+				close;
+			}
+			if (countitem(706) < 1) {
+				mes "[Kafra Employee]";
+				mes "¿Hm? Lo siento,";
+				mes "pero ahora no puedo";
+				mes "crear esto.";
+				mes "Necesitas 1 Four-Leaf Clover";
+				mes "para que pueda hacer esta";
+				mes "Bunny Band...";
+				close;
+			}
+			if (countitem(722) < 1) {
+				mes "[Kafra Employee]";
+				mes "¿Hm? Lo siento,";
+				mes "pero ahora no puedo";
+				mes "crear esto.";
+				mes "Necesitas 1 Pearl";
+				mes "para que pueda hacer esta";
+				mes "Bunny Band...";
+				close;
+			}
+			if (countitem(2213) < 1) {
+				mes "[Kafra Employee]";
+				mes "¿Hm? Lo siento,";
+				mes "pero ahora no puedo";
+				mes "crear esto. Tu";
+				mes "necesitas1 Kitty Band";
+				mes "para que pueda hacer esta";
+				mes "Bunny Band...";
+				close;
+			}
+			delitem 949,100; //Feather
+			delitem 706,1; //Four_Leaf_Clover
+			delitem 722,1; //Scarlet_Jewel
+			delitem 2213,1; //Cat_Hairband
+			mes "[Kafra Employee]";
+			mes "Ah, aquí tienes~";
+			mes "La perfecta ¡Bunny Band!";
+			mes "Bueno, espero que la disfrutes.";
+			getitem 2214,1; //Bunny_Band
+			set BUNYBND,0;
+			next;
+			mes "[Kafra Employee]";
+			mes "Gracias por";
+			mes "participar en este";
+			mes "evento especial y por";
+			mes "tu continua preferencia";
+			mes "de los Servicios Kafra~";
+			close;
+		case 2:
+			mes "[Kafra Employee]";
+			mes "En favor a nuestros valiosos";
+			mes "clientes, La Corporación Kafra";
+			mes "ha preparado un evento especial";
+			mes "donde un Kafra Employee dará";
+			mes "Bunny Bands a los aventureros";
+			mes "quienes le lleven los ítems requeridos.";
+			next;
+			mes "[Kafra Employee]";
+			mes "Para este evento especial";
+			mes "se pide la siguiente lista de ítems:";
+			mes "100 Feathers,";
+			mes "1 Four-Leaf Clover, ";
+			mes "1 Kitty Band y";
+			mes "1 Pearl. ";
+			next;
+			mes "[Kafra Employee]";
+			mes "Cuando estés listo,";
+			mes "vuelve y dame";
+			mes "todos esos ítems a mi.";
+			mes "(Patrocinado por";
+			mes "Alberta Merchant Guild). ";
+			close;
+		case 3:
+			close;
+		}
+	}
+	mes "[Kafra Employee]";
+	mes "¡Hola~! ¿No te gustaría";
+	mes "participar en nuestro el especial ^529DFFEvento Bunny";
+	mes "Band^000000 Organizada por la ";
+	mes "Corporación Kafra y patrocinado por";
+	mes "Alberta Merchant Guild.";
+	next;
+	switch(select("Join the Event:Event Information:Cancel")) {
+	case 1:
+		set BUNYBND,1;
+		mes "[Kafra Employee]";
+		mes "¡Genial! ¡Gracias por";
+		mes "participar! Por si no";
+		mes "habías oído aún,";
+		mes "necesitas conseguir estos";
+		mes "ítems si quieres que yo te haga";
+		mes "una Bunny Band...";
+		next;
+		mes "[Kafra Employee]";
+		mes "100 Feathers, ";
+		mes "1 Four-Leaf Clover, ";
+		mes "1 Kitty Band and ";
+		mes "1 Pearl. Eso es todo!";
+		mes "Buena suerte y estaré";
+		mes "esperando por ti aquí.";
+		close;
+	case 2:
+		mes "[Kafra Employee]";
+		mes "Gracias a nuestros valiosos";
+		mes "clientes, la Corporación Kafra";
+		mes "ha preparado un evento especial";
+		mes "donde un Kafra Employee dará";
+		mes "Bunny Bands a los aventureros";
+		mes "quienes le lleven los ítems requeridos.";
+		next;
+		mes "[Kafra Employee]";
+		mes "Para este evento especial";
+		mes "se pide la siguiente lista de ítems:";
+		mes "100 Feathers,";
+		mes "1 Four-Leaf Clover, ";
+		mes "1 Kitty Band and ";
+		mes "1 Pearl. ";
+		next;
+		mes "[Kafra Employee]";
+		mes "Cuando estés listo";
+		mes "vuelve y tráeme";
+		mes "todos esos ítems a mi.";
+		mes "(Patrocinada por";
+		mes "la Guild de Merchants de Alberta).";
+		close;
+	case 3:
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.1 using duplicate command
+//= 1.2 Fixed NPC location, removed NPC dupes [Lupus]
+//= 1.3 RE-Fixed exploit V_V, also cleared used VAR [Lupus]
+//= 1.4 replaced BUNYBND with @BUNYBND [Lupus]
+//============================================================ 

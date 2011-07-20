@@ -1,0 +1,149 @@
+// for mobs
+// mob_id,sprite_id,equip #
+// Use another mob's sprite for a monster.  0 for sprite will disable mob.
+// Mob must have an equipment it's pet counterpart can use or it will cause problems.  If no equip use 0.
+// The following if a player sprite is used
+// MobID,SpriteID,Sex,Hair,Hair_Color,Weapon,Shield,Head_Top,Head_Middle,Head_Bottom,Option,Dye_Color
+// Use Item ID for weapons and shields, not View ID.
+
+//1002,1039	//Poring,Baphomet (Make Porings look like Baphomet)
+//1970,1002,10013	// new mob that looks like a Poring with a backpack
+
+// Easter Event Monsters
+//1920,1047,0
+//1921,1093,0
+
+// eAthena Dev Team
+// Valaris
+//1900,4013,1,1,1,1254,0,67,12,54,16,1
+// Valaris Worshiper
+//1901,6,1,1,1,1219,2101,67,12,54,0,1
+// MC Cameri
+//1902,14,1,6,6,1101,2105,0,0,0,32,3
+// Poki#3
+//1903,4012,1,21,0,1720,0,102,184,57,16,0
+// Sentry
+//1904,1286,0
+
+// iRO Halloween Event 2008
+//3000,1015,0
+//3001,1036,0
+//3002,1298,0
+
+// iRO Halloween Event 2009
+//3014,1179,0
+//3015,1272,0
+
+// -- MOBS SIN DROP NI EXP --
+3500,1631
+3501,1013
+3502,1864
+3503,1031
+3504,1062
+3505,1904
+
+// Illion (v2.6) [Ivion]
+2485,1664
+2486,1665
+2487,1666
+2488,1667
+2489,1664
+2490,1665
+2491,1666
+2492,1667
+2493,1977
+2495,1676
+2496,1738
+2497,1738
+
+// The Invasor (v10) [Ivion]
+2500,1833
+2501,1831
+2502,1832
+2503,1894
+2504,2016
+2505,1112
+2506,1777
+2507,1252
+2508,1779
+2509,1991
+2510,1885
+2511,1957
+2512,1919
+2513,1785
+2514,1916
+2515,1978
+2516,1623
+2517,1685
+2518,1618
+2519,2087
+2520,1147
+2521,1987
+2522,1871
+2523,1874
+2524,1262
+2525,1720
+2526,2022
+2527,1704
+2528,1921
+2529,1768
+2530,1992
+2531,1918
+2532,1931
+2533,1870
+2534,1038
+2535,1373
+2536,1920
+2537,1389
+2538,1929
+2539,1702
+2540,1268
+2541,2018
+2542,1518
+2543,1492
+2544,1418
+
+//Compañero Knight
+2907,7,1,6,1,1137,2101,226,0,0,0,3
+//Compañera Priest
+2909,8,2,7,1,1623,2101,64,0,0,0,1
+//Compañera Wizard
+2911,9,2,8,1,1623,2101,285,47,0,0,1
+//Compañero Hunter
+2916,11,1,10,2,1735,0,72,83,0,0,3
+//Compañera Assassin
+2917,12,2,11,1,1278,0,39,0,0,0,1
+//Compañero Monk
+2921,15,1,13,1,1804,0,58,0,0,0,3
+
+2999,0,1,1,0,638,0,0,0,0,0,0
+
+//Bomberman
+// le 65535 sert à activer le mod source
+// 2000 = mob serveur
+// 7000 = mob client
+
+2000,7000,65535
+3506,1288
+
+//Dance
+3900,1002
+3901,1031
+3902,1595
+3903,1836
+3904,1582
+3905,1096
+3906,1388
+3907,1904
+
+//NPC based (walking)
+3896,96
+3897,97
+3899,98
+3899,99
+3800,100
+3801,101
+3802,102
+3803,103
+3805,105
+3823,423

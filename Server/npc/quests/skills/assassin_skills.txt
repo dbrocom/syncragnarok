@@ -1,0 +1,1001 @@
+//===== eAthena Script ======================================= 
+//= Assassin Skills Quests
+//===== By: ================================================== 
+//= Lupus, Reddozen
+//===== Current Version: ===================================== 
+//= 1.5
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quests for skills: Venom Knife, Sonic Acceleration
+//===== Additional Comments: ================================= 
+//= 1.4 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.5 Replaced effect numerics with constants. [L0ne_W0lf]
+//============================================================
+
+in_moc_16,14,27,5	script	Assassin#realman	884,{
+	if (BaseJob == Job_Assassin && ASSN_SK2 == 1) {
+		if (getskilllv("AS_VENOMKNIFE") == 0) {
+			mes "[Killtin]";
+			mes "Ah sí, esa es la razón por la cual";
+			mes "pareces tan familiar. Eres";
+			mes "de aquellas personas a las que he enseñado";
+			mes "la skill ^990099Venom Knife^000000. Entonces, ¿qué";
+			mes "te trae otra vez a mí?";
+			next;
+			mes "[Killtin]";
+			mes "¡¿Qué es eso ...?!";
+			mes "¿Quieres que te lo enseñe";
+			mes "una vez más?";
+			mes "Es una lástima que lo hayas olvidado,";
+			mes "pero supongo que no podras ser ayudado. Bien, bien, voy a enseñarte.";
+			next;
+			mes "[Killtin]";
+			mes "En primer lugar, es necesario equiparte";
+			mes "una arma de clase Knife , y";
+			mes "después selecciona Envenom y úsalo en tu";
+			mes "knife. ¿Lanzar la cuchilla?";
+			mes "Todo está en la muñeca. Ahora,";
+			mes "observa de cerca y toma nota.";
+			next;
+			mes "[Killtin]";
+			mes "¿Ves? Es esencial";
+			mes "estar en buena forma";
+			mes "para realizar técnicas";
+			mes "impecables. Siempre lo básico";
+			mes "antes de los detalles. Ahora,";
+			mes "¿por qué no lo pruebas?";
+			specialeffect EF_INVENOM;
+			next;
+			mes "[Killtin]";
+			mes "Bien... Muy bien...";
+			mes "En perfecta forma. Sí...";
+			mes "Hmm. ¿Estás seguro de que";
+			mes "no se te olvidó de cómo hacer la";
+			mes "skill? Supongo que todo lo que";
+			mes "necesitas es un repaso rápido.";
+			specialeffect2 EF_INVENOM;
+			next;
+			mes "[Killtin]";
+			mes "Bien, creo que se";
+			mes "puede decir con seguridad que has";
+			mes "dominado la skill Venom";
+			mes "Knife. ¡Ahora déjame, y";
+			mes "lucha siempre por el honor";
+			mes "de la Assassin Guild!";
+			skill "AS_VENOMKNIFE",1,0;
+			close;
+		}
+		else {
+			mes "[Killtin]";
+			mes "Entonces, ¿cómo te ha resultado";
+			mes "la skill de ^990099Venom Knife^000000";
+			mes "en tus batallas?";
+			mes "¡Anda con cuidado, y asegúrate de";
+			mes "darle siempre a tus";
+			mes "víctimas lo que se merecen!";
+			close;
+		}
+	}
+	else if (ASSN_SK2 == 1 && ASSN_SK == 7) {
+		mes "[Killtin]";
+		mes "Así que has aprendido todas";
+		mes "las Skills especializadas para";
+		mes "Assassin, ¿eh? Vale, pero no";
+		mes "te confíes demasiado. Esfúerzate";
+		mes "siempre para ser mejor por";
+		mes "el honor de la Assassin Guild.";
+		close;
+	}
+	else if (ASSN_SK2 == 1) {
+		mes "[Killtin]";
+		mes "Entonces, ¿cómo te ha resultado";
+		mes "la skill ^990099Venom Knife^000000";
+		mes "en tus batallas?";
+		mes "¡Anda con cuidado, y asegúrate de";
+		mes "darle siempre a tus";
+		mes "víctimas lo que se merecen!";
+		close;
+	}
+	else {
+		if (BaseJob == Job_Assassin) {
+			mes "[Killtin]";
+			mes "¿Hm? Ah, eres definitivamente";
+			mes "un miembro de la Assassin";
+			mes "Guild. Genial, has llegado";
+			mes "en el momento oportuno.";
+			next;
+			mes "[Killtin]";
+			mes "Nuestro guildmaster ha logrado";
+			mes "recientemente el desarrollo de dos";
+			mes "nuevas skills para el Assassins. A él";
+			mes "se le confió la misión de";
+			mes "la enseñanza de estas nuevas skills para";
+			mes "todos los moembros de nuestra guild.";
+			next;
+			select("¿Nuevas skills?");
+			mes "[Killtin]";
+			mes "Así es, "+ strcharinfo(0) +".";
+			mes "La primera skill específica";
+			mes "el uso de la skill Sonic";
+			mes "Blow, y la segunda skill";
+			mes "es un ataque de largo alcance que se";
+			mes "llama ''^990099Venom Knife^000000.''";
+			next;
+			mes "[Killtin]";
+			mes "Si tienes alguna pregunta,";
+			mes "no dudes en preguntarme acerca de";
+			mes "cualquiera de estas nuevas skills.";
+			mes "Mi trabajo consiste en enseñarte lo más que pueda";
+			mes "acerca de ellos.";
+			next;
+			while(1) {
+				switch(select("^0000FFSonic Blow Enhancement^000000:^990099Venom Knife^000000:Continue Conversation")) {
+				case 1:
+					mes "[Killtin]";
+					mes "Si has sido un Assassin";
+					mes "por un tiempo, entonces debes";
+					mes "estar familiarizado con la Skill";
+					mes "Sonic Blow, que inflinge 8";
+					mes "poderosos ataques a un enemigo";
+					mes "en un ataque cegadoramente rápido.";
+					next;
+					mes "[Killtin]";
+					mes "Sin embargo, debido a la velocidad";
+					mes "que implica esa skill, Sonic";
+					mes "Blow no es tan preciso como";
+					mes "debería. Después de años de pruebas";
+					mes "e investigación, nuestro guildmaster";
+					mes "ha desarrollado una manera de solucionar este problema.";
+					next;
+					mes "[Killtin]";
+					mes "Él creó una nueva skill";
+					mes "llamada ''Sonic Acceleration''";
+					mes "que los assassins pueden usar";
+					mes "en sí mismos para mejorar";
+					mes "su precisión y puntería rápidamente";
+					mes "y también encontrar puntos débiles.";
+					next;
+					mes "[Killtin]";
+					mes "En efecto, Sonic Acceleration";
+					mes "duplica aproximadamente el daño";
+					mes "que se puede infligir con";
+					mes "Sonic Blow. Si usas Sonic";
+					mes "Blow muy a menudo, entonces esta";
+					mes "skill será muy útil.";
+					next;
+					mes "[Killtin]";
+					mes "Yo te sugiero que aprendas";
+					mes "la skill Venom Knife";
+					mes "primero. Entonces, podrás hablar";
+					mes "con Esmille, la preciosa";
+					mes "Assassin Cross que esta a mi derecha^FFFFFF ^000000 , para aprender el Sonic Acceleration.";
+					next;
+					break;
+				case 2:
+					mes "[Killtin]";
+					mes "Como sabrás, nuestro";
+					mes "job se conoce por no realizar";
+					mes "ataques de largo alcance. Sí,";
+					mes "podemos usar arcos, y tenemos";
+					mes "algunas skills de larga distancia, pero";
+					mes "su uso son en cierto modo, limitado.";
+					next;
+					mes "[Killtin]";
+					mes "La skill Venom Knife surgió";
+					mes "teniendo en cuenta nuestra debilidad";
+					mes "con los ataques a distancia. Básicamente, usamos la skill Envenom";
+					mes "en un cuchillo y lo tiramos a^FFFFFF ^000000 un enemigo alejado para envenenarlo.";
+					next;
+					break;
+				case 3:
+					mes "[Killtin]";
+					mes "Ahora, si quieres, yo puedo";
+					mes "enseñarte la skill ^009900Venom Knife^000000";
+					mes "ahora mismo. No nos llevará";
+					mes "mucho tiempo, así que ¿que";
+					mes "dices? ¿listo para aprender la skill?";
+					next;
+					while(1) {
+						if (select("Learn Venom Knife:I d-don't wanna learn!") == 1) {
+							mes "[Killtin]";
+							mes "Primero, necesitas equiparte";
+							mes "un arma de clase Knife, y";
+							mes "y entonces usas Envenom en tu";
+							mes "daga. ¿Lanzar la daga?";
+							mes "Está todo esta en la muñeca. Ahora";
+							mes "obsérvame cuidadosamente y toma nota.";
+							next;
+							mes "[Killtin]";
+							mes "¿Lo ves? Estar";
+							mes "en buena forma es esencial";
+							mes "para ejecutar perfectamente";
+							mes "esta técnica. Siempre lo básico";
+							mes "antes de los detalles. Ahora,";
+							mes "¿Por qué lo intentas?";
+							specialeffect EF_INVENOM;
+							next;
+							mes "[Killtin]";
+							mes "Hey, eso está muy bien.";
+							mes "Lo estás entendiendo";
+							mes "perfectamente. Jeje, pero aún así";
+							mes "creo que puedo acreditarme algo de";
+							mes "mérito por mi excelente";
+							mes "instrucción. Ah, muy bien.";
+							next;
+							specialeffect2 EF_INVENOM;
+							next;
+							mes "[Killtin]";
+							mes "Bien, puede que necesites";
+							mes "practicar un poco más";
+							mes "esta skill, pero yo opino";
+							mes "que ya puedes usar Venom";
+							mes "Knife fácilmente en batalla.";
+							set ASSN_SK2,1;
+							set ASSN_SK,1;
+							skill "AS_VENOMKNIFE",1,0;
+							next;
+							mes "[Killtin]";
+							mes "Bueno, eso es todo lo que puedo";
+							mes "enseñarte. Usa esta skill";
+							mes "con destreza, ¡y acongoja a";
+							mes "tus enemigos por el honor";
+							mes "de la Assassin Guild!";
+							close;
+						}
+						if (.@teach ==1) {
+							mes "[Killtin]";
+							mes "¿N-no quieres";
+							mes "aprender? ¡Rufián! Es mi";
+							mes " trabajo enseñar la skill Venom";
+							mes "Knife a cada miembro";
+							mes "del Assassin Guild! ¡Tú no^FFFFFFaaaaa^000000 te vas hasta que yo te lo diga!";
+							next;
+						}
+						else {
+							mes "[Killtin]";
+							mes "Tú no puedes rechazar una";
+							mes "orden de nuestro guildmaster...";
+							mes "Te guste o no, esta skill te hará";
+							mes "un mejor Assassin.";
+							mes "Confía en mí y tan sólo di que sí";
+							mes "para aprender esta técnica, ¿ok?";
+							next;
+						}
+					}
+				}
+			}
+		}
+		else if (BaseJob == Job_Thief) {
+			mes "[Killtin]";
+			mes "¿Un Thief...? Huh.";
+			mes "Ese es un respetable";
+			mes "job. Pero escucha, si tú";
+			mes "quieres que yo te";
+			mes "enseñe algo,";
+			mes "necesitarás hacerte más fuerte primero.";
+			close;
+		}
+		else {
+			mes "[Assassin]";
+			mes "...............................";
+			mes "Así que largo de aquí.";
+			close;
+		}
+	}
+}
+
+in_moc_16,23,27,5	script	Assassin#realgirl	885,{
+	if (BaseJob == Job_Assassin && ASSN_SK == 7) {
+		if (getskilllv("AS_SONICACCEL") == 0) {
+			mes "[Esmille]";
+			mes "¿Mm? Ah, tú has trascendido";
+			mes "y también te convertiste en Assassin Cross.";
+			mes "Comprendo los problemas por que tuviste que pasar";
+			mes "para renacer con esta nueva fuerza.";
+			next;
+			mes "[Esmille]";
+			mes "Probablemente necesitas aprender";
+			mes "la skill Sonic Acceleration";
+			mes "otra vez después de haber perdido un poco";
+			mes "de tu memoria. Me compadezco";
+			mes "realmente, y gustosamente";
+			mes "te la enseñaré otra vez.";
+			next;
+			if (getskilllv("AS_SONICBLOW") == 0) {
+				mes "[Esmille]";
+				mes "Primero, ve y aprende la";
+				mes "skill Sonic Blow. La skill";
+				mes "que te enseñaré sera completamente";
+				mes "inútil si no aprendes cómo";
+				mes "a hacer un Sonic Blow. Yo te estaré esperando^FFFFFF ^000000 aquí mismo hasta entoces.";
+				close;
+			}
+			mes "[Esmille]";
+			mes "Ahora bien, antes de";
+			mes "ejecutar el Sonic Blow, asegúrate";
+			mes "de que tus pies esten posicionados";
+			mes "de esta forma. Luego, tan suave y";
+			mes "rápidamente como puedas, cambia";
+			mes "tu peso sobre este lado.";
+			specialeffect EF_SONICBLOW;
+			next;
+			mes "[Esmille]";
+			mes "Observa cuidadosamente, que ésta es";
+			mes "la parte más importante.";
+			mes "¿Ves dónde estan mis manos";
+			mes "respecto al ángulo de mis";
+			mes "brazos? Ésta es la forma";
+			mes "que debes memorizar.";
+			specialeffect EF_SONICBLOW;
+			next;
+			mes "[Esmille]";
+			mes "Bien, eso es todo";
+			mes "lo que necesitas saber. Ahora,";
+			mes "por favor inténtalo para que pueda";
+			mes "decirte qué tal lo has hecho.";
+			next;
+			specialeffect2 EF_SONICBLOW;
+			next;
+			mes "[Esmille]";
+			mes "Hmm, estas cambiando";
+			mes "tu peso con";
+			mes "inestabilidad. Podría";
+			mes "ayudar si tu centro de";
+			mes "gravedad fuera así...";
+			next;
+			specialeffect2 EF_SONICBLOW;
+			next;
+			mes "[Esmille]";
+			mes "Ah, estas muy cerca";
+			mes "de conseguirlo a la perfección.";
+			mes "Enfoca más suavidad";
+			mes "en el movimiento de tu";
+			mes "postura para hacer la acción.";
+			next;
+			mes "[Esmille]";
+			mes "Sí, ¡eso es!";
+			mes "Lo hiciste muy bien.";
+			mes "Buen trabajo, "+ strcharinfo(0) +".";
+			skill "AS_SONICACCEL",1,0;
+			set ASSN_SK,7;
+			next;
+			mes "[Esmille]";
+			mes "¿lo entiendes ahora?";
+			mes "No deberías tener problemas";
+			mes "en recordar esta habilidad.";
+			mes "Ya no puedo enseñarte nada más,";
+			mes "así que todo lo que puedo hacer ahora es desearte";
+			mes "suerte en tus viajes.";
+			close;
+		}
+		else {
+			mes "[Esmille]";
+			mes "Espero que usar";
+			mes "el Sonic Acceleration en";
+			mes "combate te haya dado una";
+			mes "ventaja sobre tus enemigos. Honra";
+			mes "a nuestra Assassin Guild";
+			mes "derrotando a tus enemigos con rapidez.";
+			close;
+		}
+	}
+	else if (ASSN_SK == 7) {
+		mes "[Esmille]";
+		mes "Espero que usar";
+		mes "Sonic Acceleration en";
+		mes "batalla te de";
+		mes "ventaja sobre el enemigo. Dales";
+		mes "a tus enemigos lo que se merecen como un rayo";
+		mes "para honrar la Assassin Guild's.";
+		close;
+	}
+	else if (ASSN_SK == 6) {
+		mes "[Esmille]";
+		mes "Por favor, concentrate en el";
+		mes "entrenamiento... Si seguimos";
+		mes "siendo interrumpidos, nunca";
+		mes "podrás aprender nada.";
+		mes "Ahora, escucha de cerca por favor.";
+		next;
+		mes "[Esmille]";
+		mes "Ahora, justo antes de que";
+		mes "realices un Sonic Blow,";
+		mes "asegúrate de que tus pies estén posicionados";
+		mes "de este modo. Entonces suavemente";
+		mes "y lo más rápido posible, cambia";
+		mes "tu peso sobre este lado.";
+		specialeffect EF_SONICBLOW;
+		next;
+		mes "[Esmille]";
+		mes "Mira cuidadosamente, ésta";
+		mes "es la parte más importante.";
+		mes "¿Ves donde mis manos";
+		mes "están y el ángulo de mis";
+		mes "brazos? Lo tienes que memorizar";
+		mes "de esta manera.";
+		specialeffect EF_SONICBLOW;
+		next;
+		mes "[Esmille]";
+		mes "Bien, eso es todo";
+		mes "lo que necesitas saber. Ahora,";
+		mes "inténtalo tú mismo por favor, para poder";
+		mes "decirte qué tal lo has hecho.";
+		next;
+		specialeffect2 EF_SONICBLOW;
+		next;
+		mes "[Esmille]";
+		mes "Hmm, estás cambiando";
+		mes "tu peso inestablemente.";
+		mes "Podrías mejorar";
+		mes "si tu centro de";
+		mes "gravedad fuera así...";
+		next;
+		specialeffect2 EF_SONICBLOW;
+		next;
+		mes "[Esmille]";
+		mes "Eso está un poco mejor.";
+		mes "Hmmm. Intenta pensar en";
+		mes "el punto débil de los enemigos";
+		mes "y síguelos con el";
+		mes "movimiento de apuñalar.";
+		next;
+		specialeffect2 EF_SONICBLOW;
+		next;
+		mes "[Esmille]";
+		mes "Ah, ya estás muy";
+		mes "cerca de la perfección.";
+		mes "Concéntrate más en pasar";
+		mes "de esa posición a la acción";
+		mes "más suavemente.";
+		specialeffect2 EF_SONICBLOW;
+		next;
+		mes "[Esmille]";
+		mes "¡Sí, eso es...!";
+		mes "Muy bien hecho.";
+		mes "Gran trabajo, "+ strcharinfo(0) +".";
+		skill "AS_SONICACCEL",1,0;
+		set ASSN_SK,7;
+		next;
+		mes "[Esmille]";
+		mes "¿Ya lo entiendes?";
+		mes "No deberías tener problemas";
+		mes "en recordar esta habilidad.";
+		mes "Ya no puedo enseñarte nada más,";
+		mes "así que todo lo que puedo hacer ahora es desearte";
+		mes "suerte en tus viajes.";
+		close;
+	}
+	else if (ASSN_SK == 5) {
+		mes "[Esmille]";
+		mes "¿Qué tal te va con";
+		mes "tu pequeño encargo?";
+		mes "Espero que hayas hecho";
+		mes "lo que te mandé.";
+		next;
+		if ((ASSN_SK == 5 && countitem(726) > 0) || (ASSN_SK == 5 && countitem(723) > 0) || (ASSN_SK == 5 && countitem(720) > 0)) {
+			select("¿Qué tal esto como tesoro?");
+			mes "[Esmille]";
+			mes "¡Oh, esa joya...!";
+			mes "Es tan cautivadora~";
+			mes "No había visto algo";
+			mes "tan hermoso en mucho";
+			mes "tiempo. Lo has hecho muy bien...";
+			next;
+			mes "[Esmille]";
+			mes "Puedes quedarte con";
+			mes "esa joya. En realidad,";
+			mes "no necesito  ningún tesoro, sólo^FFFFFF ^000000 una prueba para calificarte.";
+			mes "Me parece que ya estás preparado^FFFFFF ^000000 para aprender Sonic Acceleration.";
+			set ASSN_SK,6;
+			next;
+			mes "[Esmille]";
+			mes "Ahora, justo antes de";
+			mes "realizar un Sonic Blow,";
+			mes "asegúrate de que tus pies estén posicionados";
+			mes "de este modo. Entonces suavemente";
+			mes "y lo más rápido posible, cambia";
+			mes "tu peso sobre este lado.";
+			specialeffect EF_SONICBLOW;
+			next;
+			mes "[Esmille]";
+			mes "Mira cuidadosamente, ésta";
+			mes "es la parte más importante.";
+			mes "¿Ves donde mis manos";
+			mes "están y el ángulo de mis";
+			mes "brazos? Lo tienes que memorizar";
+			mes "de esta manera.";
+			specialeffect EF_SONICBLOW;
+			next;
+			mes "[Esmille]";
+			mes "Bien, eso es todo";
+			mes "lo que necesitas saber. Ahora,";
+			mes "inténtalo tú mismo por favor, para poder";
+			mes "decirte qué tal lo has hecho.";
+			next;
+			specialeffect2 EF_SONICBLOW;
+			next;
+			mes "[Esmille]";
+			mes "Hmm, estás cambiando";
+			mes "tu peso inestablemente.";
+			mes "Podrías mejorar";
+			mes "si tu centro de";
+			mes "gravedad fuera así...";
+			next;
+			specialeffect2 EF_SONICBLOW;
+			next;
+			mes "[Esmille]";
+			mes "Eso está un poco mejor.";
+			mes "Hmmm. Intenta pensar en";
+			mes "el punto débil de los enemigos";
+			mes "y síguelos con el";
+			mes "movimiento de apuñalar.";
+			next;
+			specialeffect2 EF_SONICBLOW;
+			next;
+			mes "[Esmille]";
+			mes "¡Sí, eso es...!";
+			mes "Muy bien hecho.";
+			mes "Buen trabajo, "+ strcharinfo(0) +".";
+			skill 1003,1,0;
+			set ASSN_SK,7;
+			next;
+			mes "[Esmille]";
+			mes "¿Ya lo entiendes?";
+			mes "No deberías tener problemas";
+			mes "en recordar esta habilidad.";
+			mes "Ya no puedo enseñarte nada más,";
+			mes "así que todo lo que puedo hacer ahora es desearte";
+			mes "suerte en tus viajes.";
+			close;
+		}
+		else {
+			mes "[Esmille]";
+			mes "Hmmm...";
+			close;
+		}
+	}
+	else if (ASSN_SK == 2 || ASSN_SK == 3 || ASSN_SK == 4) {
+		mes "[Esmille]";
+		mes "¿Qué tal te va con";
+		mes "tu pequeño encargo?";
+		mes "Si has olvidado el lugar";
+		mes "donde te dije que";
+		mes "buscaras el tesoro, entonces";
+		mes "te lo recordaré brevemente.";
+		next;
+		mes "[Esmille]";
+		mes "Encuentra cosas valiosas";
+		if (ASSN_SK == 2) {
+			mes "para mí buscando en los";
+			mes "^FF0000sarcófagos^000000 en Sphinx.";
+		}
+		else if (ASSN_SK == 3) {
+			mes "para mí buscando en las";
+			mes "^FF0000estatuas de piedra^000000 de Sphinx.";
+		}
+		else if (ASSN_SK == 4) {
+			mes "en la ^FF0000cripta inundada";
+			mes "del último piso^000000 en Pyramids.";
+		}
+		mes "Sólo los más fuertes pueden explorar";
+		mes "ese área, así que haciendo esto";
+		mes "me demostrarás que vales.";
+		close;
+	}
+	else if (ASSN_SK == 1) {
+		mes "[Esmille]";
+		mes "Ah. Hola, camarada.";
+		mes "¿Has oído las";
+		mes "últimas noticias de";
+		mes "la Assassin Guild?";
+		mes "Ah, ya hablaste con";
+		mes "Killtin. Bien, bien...";
+		next;
+		mes "[Esmille]";
+		mes "Me han encargado";
+		mes "el deber de enseñar";
+		mes "la habilidad de Sonic Acceleration a cualquier assassin que le interese.";
+		mes "Si quieres te puedo contar más";
+		mes "si Killtin no te lo explicó del todo.";
+		next;
+		while(1) {
+			switch(select("Please tell me more...:I want to learn Sonic Acceleration!")) {
+			case 1:
+				mes "[Esmille]";
+				mes "Sonic Acceleration es";
+				mes "una ^FF0000skill de apoyo usada en";
+				mes "conjunto con Sonic Blow^000000.";
+				mes "Assassins sólo pueden usar esto";
+				mes "sobre sí mismos para";
+				mes "su propio beneficio.";
+				next;
+				mes "[Esmille]";
+				mes "Si usas bastante";
+				mes "Sonic Blow, sabrás ya que";
+				mes "es difícil inflingir daño fatal";
+				mes "con esa habilidad.";
+				mes "Es demasiado rápida para";
+				mes "atacar con precisión...";
+				next;
+				mes "[Esmille]";
+				mes "Sin embargo, aprendiendo";
+				mes "Sonic Acceleration, podrás";
+				mes "superar este problema de";
+				mes "puntería y que tus Sonic Blow";
+				mes "hagan el daño máximo";
+				mes "posible.";
+				next;
+				mes "[Esmille]";
+				mes "Esta técnica es en verdad genial.";
+				mes "Y nuestro guildmaster,";
+				mes "el que lo inventó,";
+				mes "lo es también... Él es un hombre";
+				mes "entre hombres, he de decir.";
+				Emotion e_lv;
+				next;
+				break;
+			case 2:
+				mes "[Esmille]";
+				mes "Ah, me alegra ver";
+				mes "que estás tan ilusionado";
+				mes "por aprender esta habilidad.";
+				mes "Pero primero, tenemos que";
+				mes "completar los prerrequisitos... ^FFFFFF ^000000";
+				next;
+				if (getskilllv("AS_SONICBLOW") == 0) {
+					mes "[Esmille]";
+					mes "Primero, ve y aprende la";
+					mes "skill de Sonic Blow. Lo que";
+					mes "te enseñaré es totalmente";
+					mes "inútil si no aprendes a hacer";
+					mes "un Sonic Blow. Te estaré^FFFFFF ^000000 esperando aquí mismo hasta entonces.";
+					close;
+				}
+				mes "[Esmille]";
+				mes "Tu tarea será traer";
+				switch(rand(1,3)) {
+				case 1:
+					mes "un tesoro de Sphinx.";
+					mes "Busca en los ^FF0000sarcófagos^000000";
+					mes "que hay y encuentra";
+					mes "cosas de valor. Considera esto";
+					mes "un test de fuerza.";
+					set ASSN_SK,2;
+					next;
+					mes "[Esmille]";
+					mes "Que completes o no";
+					mes "esta prueba determinará";
+					mes "si eres lo suficientemente bueno";
+					mes "para que te enseñe";
+					mes "la habilidad de Sonic Acceleration.";
+					mes "Mucha suerte, y date prisa por favor.";
+					close;
+				case 2:
+					mes "un tesoro de Sphinx.";
+					mes "Busca en las ^FF0000estatuas de piedra^000000";
+					mes "que hay y encuentra cosas de valor.";
+					mes "Considéralo como una excursión";
+					mes "para medir tu fuerza.";
+					set ASSN_SK,3;
+					next;
+					mes "[Esmille]";
+					mes "Que completes o no";
+					mes "esta prueba determinará";
+					mes "si eres lo suficientemente bueno";
+					mes "para que te enseñe";
+					mes "la habilidad de Sonic Acceleration.";
+					mes "Mucha suerte, y date prisa por favor.";
+					close;
+				case 3:
+					mes "un tesoro de Pyramids.";
+					mes "Busca en la ^FF0000cripta inundada en";
+					mes "el último piso y encuentra cosas";
+					mes "de valor^000000. Considera esto";
+					mes "como un test de fuerza.";
+					set ASSN_SK,4;
+					next;
+					mes "[Esmille]";
+					mes "Que completes o no";
+					mes "esta prueba determinará";
+					mes "si eres lo suficientemente bueno";
+					mes "para que te enseñe";
+					mes "Mucha suerte, y date prisa por favor.";
+					mes "Mucha suerte, y date prisa por favor.";
+					close;
+				}
+			}
+		}
+	}
+	else {
+		if (BaseJob == Job_Assassin) {
+			mes "[Assassin]";
+			mes "Ah. Hola, camarada.";
+			mes "¿Has oído las";
+			mes "últimas noticias de";
+			mes "la Assassin Guild?";
+			Emotion e_heh;
+			next;
+			select("¿Noticias de la Assassin Guild?");
+			mes "[Assassin]";
+			mes "Hm. Supongo que no lo";
+			mes "has oído entonces. Si te interesa";
+			mes "saber más, deberías";
+			mes "hablar con Killtin, que está";
+			mes "justo al lado mío. Él te";
+			mes "explicará todo claramente.";
+			close;
+		}
+		mes "[Assassin]";
+		mes "Hm... ¿conoces a algún";
+		mes "Assassin? Diles que";
+		mes "pasen por aquí si";
+		mes "todavía no han venido.";
+		close;
+	}
+}
+
+in_sphinx2,259,213,0	script	Old Coffin#qsk_as	-1,7,8,{
+OnTouch:
+	if (ASSN_SK == 2) {
+		mes "^3355FFEs un ataúd antiguo";
+		mes "con la tapa rota";
+		mes "y medio abierta.";
+		mes "Ves un destello de";
+		mes "algo brillante dentro.^000000";
+		specialeffect EF_CONE;
+		next;
+		while(1) {
+			switch(select("Put your hand inside:Inspect the coffin's opening:Lift the lid:Turn the coffin upside down:Ignore it")) {
+			case 1:
+				mes "^3355FFMetes la mano con cuidado";
+				mes "dentro del ataúd";
+				mes "e intentas agarrar el";
+				mes "objeto brillante";
+				mes "que viste antes.";
+				mes "...............................^000000";
+				next;
+				mes "^3355FF¡Algo dentro del";
+				mes "ataúd te muerde";
+				mes "la mano fuertemente!^000000";
+				sc_start SC_Poison,30000,0;
+				sc_start SC_Bleeding,10000,0;
+				Emotion e_omg,1;
+				close;
+			case 2:
+				mes "^3355FFIntentas mirar";
+				mes "dentro del sarcófago";
+				mes "por la abertura";
+				mes "entre la tapa";
+				mes "y el borde de piedra.";
+				mes "...............................^000000";
+				next;
+				mes "^3355FFApenas puedes";
+				mes "percibir algo que";
+				mes "se retuerce dentro";
+				mes "del ataúd, pero está demasiado";
+				mes "oscuro como para ver nada más.^000000";
+				sc_start SC_Blind,30000,0;
+				next;
+				break;
+			case 3:
+				mes "^3355FFNo eres tan fuerte";
+				mes "como para mover";
+				mes "algo tan pesado";
+				mes "como la tapa de este sarcófago...^000000";
+				sc_start SC_Curse,30000,0;
+				next;
+				break;
+			case 4:
+				mes "^3355FFNo tienes la fuerza";
+				mes "necesaria para dar";
+				mes "la vuelta a este ataúd.^000000";
+				next;
+				break;
+			case 5:
+				close;
+			}
+		}
+	}
+}
+
+in_sphinx2,212,267,0	script	Old Coffin#qsk_as2	-1,5,6,{
+OnTouch:
+	if (ASSN_SK == 2) {
+		mes "^3355FFEs un ataúd antiguo";
+		mes "con la tapa rota";
+		mes "y medio abierta.";
+		mes "Ves un destello de";
+		mes "algo brillante dentro.^000000";
+		specialeffect EF_CONE;
+		next;
+		while(1) {
+			switch(select("Put your hand inside:Inspect the coffin's opening:Lift the lid:Turn the coffin upside down:Ignore it")) {
+			case 1:
+				mes "^3355FFMetes la mano con cuidado";
+				mes "dentro del ataúd";
+				mes "e intentas agarrar el";
+				mes "objeto brillante";
+				mes "que viste antes.";
+				mes "...............................^000000";
+				next;
+				if (rand(1,3) != 3) {
+					mes "^3355FFMetes la mano con cuidado";
+					mes "dentro del ataúd";
+					mes "e intentas agarrar el";
+					mes "objeto brillante";
+					mes "que viste antes.";
+					mes "...............................^000000";
+					next;
+					mes "^3355FF¡Algo dentro del";
+					mes "ataúd te muerde";
+					mes "la mano fuertemente!^000000";
+					sc_start SC_Poison,30000,0;
+					sc_start SC_Bleeding,10000,0;
+					Emotion e_omg,1;
+					close;
+				}
+				else {
+					mes "^3355FFTus dedos consiguen";
+					mes "alcanzar un objeto sólido";
+					mes "que sacas del";
+					mes "ataúd. Has obtenido";
+					mes "un Sapphire un Esmille.^000000";
+					set ASSN_SK,5;
+					getitem 726,1; //Blue_Jewel
+					close;
+				}
+			case 2:
+				mes "^3355FFIntentas mirar";
+				mes "dentro del sarcófago";
+				mes "por la abertura";
+				mes "entre la tapa";
+				mes "y el borde de piedra.";
+				mes "...............................^000000";
+				next;
+				mes "^3355FFApenas puedes";
+				mes "percibir algo que";
+				mes "se retuerce dentro";
+				mes "del ataúd, pero está demasiado";
+				mes "oscuro como para ver nada más.^000000";
+				sc_start SC_Blind,30000,0;
+				next;
+				break;
+			case 3:
+				mes "^3355FFNo eres tan fuerte";
+				mes "como para mover";
+				mes "algo tan pesado";
+				mes "como la tapa de este sarcófago...^000000";
+				sc_start SC_Curse,30000,0;
+				next;
+				break;
+			case 4:
+				mes "^3355FFNo tienes la fuerza";
+				mes "necesaria para dar";
+				mes "la vuelta a este ataúd.^000000";
+				next;
+				break;
+			case 5:
+				close;
+			}
+		}
+	}
+}
+
+in_sphinx2,13,163,0	script	Stone Statue#qsk_as	-1,7,7,{
+OnTouch:
+	if (ASSN_SK == 3) {
+		specialeffect EF_CONE;
+		mes "^3355FFEsta estatua ancestral";
+		mes "está cubierta de grietas";
+		mes "y parece que se va a romper.";
+		mes "La luz de algo brillante";
+		mes "sale de debajo de uno de";
+		mes "los pies. El suelo parece";
+		mes "lo suficientemente blando como para cavar...^000000";
+		specialeffect EF_CONE;
+		next;
+		if (select("Dig to retrieve the shining object:Ignore it") == 1) {
+			mes "^3355FFMientras cavas con los dedos,";
+			mes "el blando suelo emite^000000";
+			if (rand(1,3) != 3){
+				mes "^3355FFun gas amarillo que nubla";
+				mes "tus sentidos y por un momento";
+				mes "te deja inconsciente.^000000";
+				sc_start SC_Sleep,30000,0;
+				close;
+			}
+			mes "^3355FFun gas amarillo. Sin embargo,";
+			mes "aguantas el aliento y sueltas";
+			mes "el gas en tus pulmones rápido";
+			mes "para que no te afecte. Has";
+			mes "conseguido un Ruby para Esmille.^000000";
+			set ASSN_SK,5;
+			getitem 723,1; //Cardinal_Jewel
+		}
+		close;
+	}
+}
+
+in_sphinx2,13,146,0	script	Stone Statue#qsk_as2	-1,7,7,{
+OnTouch:
+	if (ASSN_SK == 3) {
+		specialeffect EF_CONE;
+		mes "^3355FFEsta estatua ancestral";
+		mes "está cubierta de grietas";
+		mes "y parece que se va a romper.";
+		mes "La luz de algo brillante";
+		mes "sale de debajo de uno de";
+		mes "los pies. El suelo parece";
+		mes "lo suficientemente blando como para cavar...^000000";
+		specialeffect EF_CONE;
+		next;
+		if (select("Dig to retrieve the shining object:Ignore it") == 1) {
+			mes "^3355FFMientras cavas con los dedos,";
+			mes "el blando suelo emite^000000";
+			if (rand(1,3) != 3) {
+				mes "^3355FFun gas amarillo que nubla";
+				mes "tus sentidos y por un momento";
+				mes "te deja inconsciente.^000000";
+				sc_start SC_Sleep,30000,0;
+				close;
+			}
+			mes "^3355FFun gas amarillo. Sin embargo,";
+			mes "aguantas el aliento y sueltas";
+			mes "el gas en tus pulmones rápido";
+			mes "para que no te afecte. Pero por desgracia,";
+			mes "el objeto brillante sólo era un cristal roto.^000000";
+			Emotion e_omg,1;
+		}
+		close;
+	}
+}
+
+moc_pryd04,85,96,0	script	¡¡#crypt	-1,3,3,{
+OnTouch:
+	if (ASSN_SK == 4) {
+		specialeffect EF_CONE;
+		mes "^3355FFHay algo que";
+		mes "está brillando bajo";
+		mes "la superficie del agua...^000000";
+		next;
+		if (select("Pick it up:Ignore it") == 1) {
+			mes "^3355FFCuando metes tu mano";
+			mes "en el agua, el frío";
+			mes "helado del agua se extiende";
+			mes "por tu brazo hacia arriba. ";
+			mes "¡Date prisa antes de que te congeles!^000000";
+			next;
+			if (rand(1,3) != 3) {
+				mes "^3355FF¡Demasiado tarde!";
+				mes "Tu cuerpo se acaba";
+				mes "de congelar totalmente.^000000";
+				sc_start SC_Freeze,10000,0;
+				close;
+			}
+			mes "^3355FFAgarras rápidamente";
+			mes "el objeto brillante";
+			mes "antes de que el agua";
+			mes "te congele. Has obtenido";
+			mes "un Aquamarine para Esmille.^000000";
+			set ASSN_SK,5;
+			getitem 720,1; //Skyblue_Jewel
+		}
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.0 for fully working skills only [Lupus]
+//= 1.1 Added more new skill quests for more classes [Lupus]
+//= Somehow eA engine doesn't let you keep learn't skill V_V'
+//= 1.2 Added to correct locations, correct NPC's, fixed
+//= some of the items required and made them into real
+//= quests. [Reddozen] 
+//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
+//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
+//= 1.3b Splitted into different files [DracoRPG]
+//============================================================

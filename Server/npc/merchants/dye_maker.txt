@@ -1,0 +1,236 @@
+//===== eAthena Script ======================================= 
+//= Dye Maker
+//===== By: ================================================== 
+//= eAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.4
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//===== Additional Comments: ================================= 
+//= 1.0 Fully working [kobra_k88]
+//= 1.1 Spell Checked [Nexon] 
+//= 1.2 Rescripted to Aegis 10.3 standard. [L0ne_W0lf]
+//= 1.2b Fixed typos in variable names [ultramage]
+//= 1.3 Made the checks more dynamic [ultramage]
+//= 1.3b Fixed incorrect checking loop structure [ultramage]
+//= 1.4 Added a checkweight. [L0ne_W0lf]
+//============================================================ 
+
+morocc_in,146,99,3	script	Java Dullihan	58,{
+	if ((MaxWeight-Weight) < 200 || checkweight(1201,1) == 0) {
+		mes "- ¡Espera un momento! -";
+		mes "- Llevas demasiado peso contigo. -";
+		mes "- Deja algo en el almacén, -";
+		mes "- y vuelve más tarde. -";
+		close;
+	}
+	mes "[Dye Maker Java Dullihan]";
+	mes "Wow...";
+	mes "¡Qué buen día hace!. Estos días son perfectos para crear tintes.";
+	next;
+	switch(select("Hablar:Crear un Tinte:Cancelar")) {
+	case 1:
+		mes "[Dye Maker Java Dullihan]";
+		mes "Ehmm, no tengo mucho que decirte. Pero si quieres que te cuente cosas sobre mi vida, puedo hacerlo. Es un poco largo y aburrido, pero ¿te interesaría escucharme?";
+		next;
+		if (select("Escuchar:No escuchar") == 1) {
+			mes "[Dye Maker Java Dullihan]";
+			mes "Desde que tengo memoria, recuerdo a mi padre creando tintes. Él solía gastar horas y horas preparando tintes de diferentes colores.";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "Un día, me rebelé y me escapé de casa. No quería continuar el trabajo familiar, así que salí a buscar cosas diferentes.";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "De todos modos...";
+			mes "Acabé volviendo a casa y continuando el negocio familiar. Ya llevo 15 años creando tintes. Creo que lo llevo en la sangre.";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "A veces recuerdo aquellos días en los que no comprendía a mi padre. Su devoción por fabricar tintes...";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "En medio de tanto trabajo tedioso, seguramente sintió la mágica de los colores.";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "Al igual que yo, su hijo. He logrado ampliar el negocio fabricando nuevos colores que nunca nadie había conseguido. Soy todo un orgullo para la familia.";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "¿Qué cómo lo conseguí? Bueno, pasó hace un par de años. Empecé a entender lo que los colores querían decirme.";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "Finalmente, tras mucho probar y errar, conseguí crear los colores que mi padre estuvo tantos años buscando, pero nunca consiguió.";
+			close;
+		}
+		mes "[Dye Maker Java Dullihan]";
+		mes "Ajajajaja...";
+		mes "Supongo que a nadie le interesan las historias de un Fabricante de Tintes. Jajajaa....";
+		close;
+
+	case 2:
+		query_sql "SELECT hobby FROM `gremios` WHERE char_id = "+getcharid(0),.@hobby$[0];
+		mes "[Dye Maker Java Dullihan]";
+		mes "¡Fantástico! Si lo quieres, te lo prepararé para ti. ¿Qué color andabas buscando? El coste es diferente dependiendo del color.";
+		next;
+		mes "[Dye Maker Java Dullihan]";
+		mes "¿Por qué? Pues porque algunos son más difíciles de conseguir que otros. Y normalmente requieren más esfuerzo y trabajo. Tampoco te pienses que son muy caros.";
+		next;
+		mes "[Dye Maker Java Dullihan]";
+		mes "Cada tinte es especial. A cada uno le entrego toda mi alma y dedicación.";
+		set .@menu$, "Ninguno, gracias:White Dyestuffs:Scarlet Dyestuffs:Lemon Dyestuffs:Cobaltblue Dyestuffs:Darkgreen Dyestuffs";
+		if ( .@hobby$[0] == "Moledor" ){ set .@menu$, .@menu$ + ":Orange Dyestuffs:Violet Dyestuffs:Black Dyestuffs:Brown Dyestuffs:Grey Dyestuffs:Pink Dyestuffs:Cyan Dyestuffs"; }
+		next;
+		switch(select(.@menu$)) {
+			case 1: 
+					mes "[Dye Maker Java Dullihan]";
+					mes "¡¡Eeeehhhh!! ¿Qué pasa? ¿¡Has cambiado de idea!? Qué decepción...";
+					close;
+			case 2: callsub S_MakeDye,7,4; break;
+			case 3: callsub S_MakeDye,1,1; break;
+			case 4: callsub S_MakeDye,2,1; break;
+			case 5: callsub S_MakeDye,3,2; break;
+			case 6: callsub S_MakeDye,4,3; break;
+			
+			case 7: callsub S_MakeDye,5,4; break;
+			case 8: callsub S_MakeDye,6,4; break;
+			case 9: callsub S_MakeDye,8,4; break;
+			case 10: callsub S_MakeDye,9,5; break;
+			case 11: callsub S_MakeDye,10,5; break;
+			case 12: callsub S_MakeDye,11,5; break;
+			case 13: callsub S_MakeDye,12,5; break;
+		}
+
+	case 3:
+		mes "[Dye Maker Java Dullihan]";
+		mes "Si alguna vez necesitas un tinte, no dudes en buscarme. Te haré un precio especial.";
+		close;
+	}
+
+S_MakeDye:
+	mes "[Dye Maker Java Dullihan]";
+	switch(getarg(0)) {
+	case 1:
+		mes "Mmm... Necesito Pigmento Rojo, 1 Counteragent, y 1 Medicine Bowl para crear un tinte Rojo. El precio es de sólo 3500 zeny.";
+		setarray .@item[0], 30403, 973, 71344;
+		setarray .@count[0], 1,   1,   1;
+		set .@cost,3500;
+		set .@dyestuff,973;
+		break;
+	case 2:
+		mes "Mmm... Necesito Pigmento Amarillo, 1 Mixture, y 1 Medicine Bowl para crear un tinte Amarillo. El precio es de sólo 3500 zeny.";
+		setarray .@item[0], 30402, 974, 7134;
+		setarray .@count[0], 1,   1,   1;
+		set .@cost,3500;
+		set .@dyestuff,976;
+		break;
+	case 3:
+		mes "Mmm... Necesito Pigmento Azul, 1 Mixture, y 1 Medicine Bowl para crear un tinte Azul. La tarifa será de 3500 zeny.";
+		setarray .@item[0], 30404, 974, 7134;
+		setarray .@count[0], 1,   1,   1;
+		set .@cost,3500;
+		set .@dyestuff,978;
+		break;
+	case 4:
+		mes "Mmm... Necesito Pigmento Verde, 1 Mixture, y 1 Medicine Bowl para crear un tinte Verde. La tarifa será de 3500 zeny.";
+		setarray .@item[0], 30401, 974, 7134;
+		setarray .@count[0],  1,   1,   1;
+		set .@cost,3500;
+		set .@dyestuff,979;
+		break;
+	case 5:
+		mes "Mmm... Necesito Pigmento Naranja, 1 Counteragent, y 1 Medicine Bowl para crear un tinte Naranja. El coste ascenderá a 5000 zeny.";
+		setarray .@item[0], 30410, 973,7134;
+		setarray .@count[0], 1,   1,   1;
+		set .@cost,5000;
+		set .@dyestuff,980;
+		break;
+	case 6:
+		mes "Mmm... Necesito Pigmento Violeta, 1 Mixture, y 1 Medicine Bowl para crear un tinte Violeta. El coste ascenderá a 5000 zeny.";
+		setarray .@item[0], 30405, 974, 7134;
+		setarray .@count[0], 1,   1,   1;
+		set .@cost,5000;
+		set .@dyestuff,981;
+		break;
+	case 7:
+		mes "Mmm... Necesito Pigmento Blanco, 1 Mixture, y 1 Medicine Bowl para crear un tinte Blanco. La tarifa será de sólo 3000 zeny.";
+		setarray .@item[0], 30407, 974, 7134;
+		setarray .@count[0], 1,   1,   1; 
+		set .@cost,3000;
+		set .@dyestuff,982;
+		break;
+	case 8:
+		mes "Mmm... Necesito Pigmento Negro, 1 Mixture, 1 Counteragent, y 1 Medicine Bowl.  El coste ascenderá a 5000 zeny.";
+		setarray .@item[0], 30407, 973, 974, 7134;
+		setarray .@count[0], 1,   1,   1,   1;
+		set .@cost,5000;
+		set .@dyestuff,983;
+		break;
+	case 9:
+		mes "Mmm... Necesito Pigmento Marrón, 1 Mixture, 1 Counteragent, y 1 Medicine Bowl. Aunque es muy difícil de conseguir el tinte Marrón, me siento muy orgulloso de él. Su tarifa es de 8500 zeny.";
+		setarray .@item[0], 30409, 973, 974, 7134;
+		setarray .@count[0], 1,   1,   1,   1;
+		set .@cost,8500;
+		set .@dyestuff,30700;
+		break;
+	case 10:
+		mes "Mmm... Necesito Pigmento Gris, 1 Mixture, y 1 Medicine Bowl. Aunque es muy difícil de conseguir el tinte Gris, me siento muy orgulloso de él. Su tarifa es de 8500 zeny.";
+		setarray .@item[0], 30408, 974, 7134;
+		setarray .@count[0], 1,   1,   1;
+		set .@cost,8500;
+		set .@dyestuff,30701;
+		break;
+	case 11:
+		mes "Mmm... Necesito Pigmento Rosa,  1 Counteragent, y 1 Medicine Bowl. Aunque es muy difícil de conseguir el tinte Rosa, me siento muy orgulloso de él. Su tarifa es de 8500 zeny.";
+		setarray .@item[0], 30411, 973, 7134;
+		setarray .@count[0], 1,   1,   1;
+		set .@cost,8500;
+		set .@dyestuff,30702;
+		break;
+	case 12:
+		mes "Mmm... Necesito Pigmento Cyan, 1 Mixture, y 1 Medicine Bowl. Aunque es muy difícil de conseguir el tinte Cyan, me siento muy orgulloso de él. Su tarifa es de 8500 zeny.";
+		setarray .@item[0], 30412, 974, 7134;
+		setarray .@count[0], 1,   1,   1;
+		set .@cost,8500;
+		set .@dyestuff,30703;
+		break;
+	}
+	next;
+	mes "[Dye Maker Java Dullihan]";
+	switch(getarg(1)) {
+		case 1: mes "¡Ah! Creo que ya tienes todo listo. ¿Quieres empezar el proceso?"; break;
+		case 2: mes "¡Okay! Creo que tienes todo listo. ¿Quieres empezar el proceso?"; break;
+		case 3: mes "¡Okay! Creo que está todo listo. ¿Quieres que empecemos el proceso?"; break;
+		case 4: mes "¡Okay! Creo que está todo preparado. ¿Quieres empezar el proceso?"; break;
+		case 5: mes "¡Preparados! Este es uno de mis tintes especiales. ¿Empezamos el proceso?"; break;
+	}
+	next;
+	if (select("Crear el tinte:Cancelar el proceso") == 1) {
+		set .@size, getarraysize(.@item);
+		// check requirements
+		for( set .@i,0 ; .@i < .@size ; set .@i,.@i+1 )
+			if( countitem(.@item[.@i]) < .@count[.@i] )
+				break;
+		if( .@i < .@size || Zeny < .@cost ) {
+			mes "[Dye Maker Java Dullihan]";
+			mes "Hmmm... No es suficiente...";
+			mes "No creo que sea capaz de crear el color que necesitas con esos materiales. ¿Por qué no buscas alguno más...?";
+			close;
+		}
+		// delete items
+		for (set .@i, 0; .@i < .@size ; set .@i, .@i+1)
+			delitem .@item[.@i], .@count[.@i];
+		set zeny,zeny-.@cost;
+		getitem .@dyestuff,1;
+
+		mes "[Dye Maker Java Dullihan]";
+		mes "Hmmm... Ha quedado bastante bien. Un color muy intenso.";
+		next;
+		mes "[Dye Maker Java Dullihan]";
+		mes "Ya está todo. Pásate por aquí si necesitas algún tinte más.";
+		close;
+	}
+	mes "[Dye Maker Java Dullihan]";
+	mes "¡¡Eeeehhhh!! ¿Qué pasa?";
+	mes "¿¡Has cambiado de idea!? Qué decepción...";
+	return;
+}

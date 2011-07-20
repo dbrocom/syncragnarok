@@ -1,0 +1,757 @@
+//===== eAthena Script ======================================= 
+//= Theif Mage Quest Story Mode
+//===== By: ================================================== 
+//= Fix up by Jukka
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= eAthena SVN (Testet in Trunk 88xx)
+//===== Description: ========================================= 
+//=
+//===== Additional Comments: ================================= 
+//= 1.0 Fully working
+//= 1.1 optimized [Lupus]
+//=	TODO: Test, Add correct misceffects numbers
+//= 1.2 Changed "battle_trace" to "Trace of Battle". [L0ne_W0lf]
+//============================================================ 
+
+
+//=================================================Battle Traces 1====================================================
+moc_fild12,166,369,0	script	Trace of Battle#1	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 5){
+			mes "^3355FFHay restos de veneno usado en una batalla. Puedes sentir su poder y decides que sería mas seguro no acercarse demasiado.^000000";
+			close;
+		} else if(tu_thief01 == 5){
+			mes "^3355FFHay restos de veneno usado en una batalla. Despues de examinar la escena cuidadosamente, me siento un poco mareado.";
+			set tu_thief01, 6;
+			//#####		GetHEALTHSTATE VAR_POISON 60#####
+			//misceffect EF_VENOMDUST2;
+			close;
+		} else if(tu_thief01 == 6){
+			mes "^3355FFHay restos de veneno usado en una batalla. Despues de examinar la escena cuidadosamente, me siento un poco mareado.";
+			//#####		GetHEALTHSTATE VAR_POISON 60#####
+			//misceffect EF_VENOMDUST2;
+			close;
+		} else if(tu_thief01 == 7){
+			mes "^3355FFHay restos de veneno usado en una batalla. Puedes sentir su poder y decides que sería mas seguro no acercarse demasiado.^000000";
+			close;
+		} else if(tu_thief01 == 8){
+			mes "^3355FFHay signos de una persecusión que se encamina al sur.^000000";
+			set tu_thief01, 9;
+			close;
+		} else {
+			mes "^3355FFLos rastros de batalla parecen dirigirse en diferentes direcciones. Del olor peculiar que impregna el área, parece que alguna clase de veneno letal fue usado en la pelea...^000000";
+			close;
+		}
+	}
+	if(BaseClass == Job_Mage){
+		if(tu_magician01 < 8){
+			mes "Hay restos de veneno usado en una batalla. Puedes sentir su poder y decides que sería mas seguro no acercarse demasiado.^000000";
+			//misceffect EF_VENOMDUST2;
+			close;
+		} else if(tu_magician01 == 8){
+			mes "^3355FFHay signos de una persecución que se encamina al sur.^000000";
+			set tu_magician01, 9;
+			close2;
+		} else {
+			mes "^3355FFLos restos de batalla parecen dirigirse en diferentes direcciones. Del olor peculiar que impregna el área, parece que alguna clase de veneno letal fue usado en la pelea...^000000";
+			close;
+		}
+	}
+	mes "^3355FFHay signos que muestran que alguna clase de riña pudo haber ocurrido aquí, pero no puedo decirte lo que paso exactamente.^000000";
+	close;
+}
+
+//=================================================Battle Traces 2====================================================
+moc_fild12,173,215,0	script	Battle Traces#2	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 9){
+			mes "Hay rastros de varias personas pasando.";
+			close;
+		} else if(tu_thief01 == 9){
+			mes "Los rastros se encaminan al este. Hay una huella peculiar entre todas que captó mi atención. Parece como la de la persona siendo perseguida.";
+			set tu_thief01, 10;
+			close;
+		} else {
+			mes "Los rastros se encaminan al este.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 9){
+			mes "Hay rastros de muchas personas pasando.";
+			close;
+		} else if(tu_magician01 == 9){
+			mes "Los rastros se encaminan al este. Hay una huella peculiar entre todas que captó mi atención. Parece como la de la persona siendo perseguida.";
+			set tu_magician01, 10;
+			close;
+		} else {
+			mes "Los rastros se encaminan al este.";
+			close;
+		}
+	}
+	mes "^3355FFHay signos que muestran que alguna clase de riña pudó haber ocurrido aquí, pero no puedo decirte exactamente que sucedió.^000000";
+	close;
+}
+
+//=================================================Battle Traces 3====================================================
+moc_fild12,276,165,0	script	Trace of Battle#3	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 10){
+			mes "Hay rastros de que muchos han pasado por aquí.";
+			close;
+		} else if(tu_thief01 == 10){
+			mes "Las huellas de aquel siendo perseguido es bastante peculiar. Casi parece que fue dejada alli a próposito.";
+			set tu_thief01, 11;
+			close;
+		} else {
+			mes "Hay un grupo peculiar de huellas.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 10){
+			mes "Hay rastros de muchas personas pasando.";
+			close;
+		} else if(tu_magician01 == 10){	//CHECK
+			mes "Los huellas de aquel siendo perseguido es bastante peculiar. Casi parece que fue dejada allí a próposito.";
+			set tu_magician01, 11;//Check
+			close;
+		} else {
+			mes "Hay un grupo peculiar de huellas.";
+			close;
+		}
+	}
+	mes "Hay algunos rastros, pero no puedo decirte que son.";
+	close;
+}
+
+//=================================================Battle Traces 4====================================================
+moc_fild11,39,163,0	script	Trace of Battle#4	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 11){
+			mes "Hay rastros de varias personas que han pasado.";
+			close;
+		} else if(tu_thief01 == 11){
+			mes "Otro rastro peculiar ha sido agregado. A diferencia de los otros, es pequeña y clara, parece que otra persona lo ha agregado.";
+			set tu_thief01, 12;
+			close;
+		} else {
+			mes "Un nuevo rastro ha sido agregado.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 11){
+			mes "Hay rastros de varios que han pasado.";
+			close;
+		} else if(tu_magician01 == 11){
+			mes "Otro rastro peculiar ha sido agregado.";
+			mes "A diferencia de las otras, es pequeña y clara.";
+			mes "Parece que otra persona lo ha agregado.";
+			set tu_magician01, 12;
+			close;
+		} else {
+			mes "Un nuevo rastro ha sido agregado.";
+			close;
+		}
+	}
+	mes "^3355FFHay signos que muestran que alguna clase de riña pudó haber ocurrido aquí, pero no puedo decirte que paso exactamente.^000000";
+	close;
+}
+
+//=================================================Battle Traces 5====================================================
+moc_fild11,205,52,0	script	Trace of Battle#5	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 12){
+			mes "Hay rastros de varios que han pasado.";
+			close;
+		} else if(tu_thief01 == 12){
+			mes "Los restos están divididos entre unos que vienen del Este";
+			mes "y se reparte hacia el Norte y el Sur.";
+			if(countitem(506) == 0){	// Green_Potion
+				mes "Siento un veneno fuerte cerca así que";
+				mes "es díficil acercarse.";
+				mes "Será díficil sin deshacerse del veneno primero.";
+				close;
+			} else {
+				mes "Es díficil acercarse debido al fuerte veneno.";
+				mes "Puedes neutralizar el veneno momentaneamente";
+				mes "con la Green Potion.";
+				next;
+				switch(select("Use Green Potion.:Don't use it.")){
+				case 1:
+					mes "El veneno se ha debilitado. Después de investigar la escena donde el veneno se ha despejado veo un fragmento de ropa.";
+					next;
+					switch(select("Don't investigate.", "Investigate.")){
+					case 1:
+						mes "No es algo para estar preocupado.";
+						close;
+						break;
+					case 2:
+						mes "La ropa empapada en sangre tiene extrañas letras. Puede ser una buena pista.";
+						set tu_thief01, 13;
+						next;
+						mes "Encontraste un fragmento de ropa.";
+						close;
+						break;
+					}
+					break;
+				case 2:
+					mes "Sería mas rápido seguir los rastros que investigar la escena.";
+					close;
+					break;
+				}
+			}
+		} else {
+			mes "No puedo encontrar nada más. Solo los rastros que se reparten en dos permanecen.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 12){
+			mes "Hay rastros de varios que han pasado.";
+			close;
+		} else if(tu_magician01 == 12){
+			mes "Los rastros del este se reparten entre";
+			mes "el norte y sur";
+			if(countitem(506) == 0){	// Green_Potion
+				mes "Siento un fuerte veneno cerca así que";
+				mes "es dificil aproximarse";
+				mes "Será díficil sin deshacerse del veneno primero.";
+				close;
+			} else {
+				mes "Es díficil aproximarse debido a un veneno fuerte.";
+				mes "Puedes neutralizar el veneno momentaneamente";
+				mes "con la Green Potion.";
+				next;
+				switch(select("Use Green Potion.", "Don't use it.")){
+				case 1:
+					mes "El veneno se debilitó después de usar la poción.";
+					mes "Después de investigar la escena donde el veneno";
+					mes "esta despejado veo un fragmento de ropa.";
+					next;
+					switch(select("Don't investigate.", "Investigate.")){
+					case 1:
+						mes "No es algo para preocuparse.";
+						close;
+						break;
+					case 2:
+						mes "La ropa empapada en sangre tiene extrañas";
+						mes "letras. Puede ser una buena pista.";
+						set tu_magician01, 13;
+						next;
+						mes "Encontraste un fragmento de ropa.";
+						close;
+						break;
+					}
+					break;
+				case 2:
+					mes "Sería mas rápido seguir los restos";
+					mes "que investigar la escena.";
+					close;
+					break;
+				}
+			}
+		} else {
+			mes "No se puede encontrar otra cosa.";
+			mes "Solo los rastros que se reparten entre dos permanecen.";
+			close;
+		}
+	}
+	mes "Hay algunos rastros, pero no puedo decirte que son.";
+	close;
+}
+
+//=================================================Battle Traces 6====================================================
+moc_fild11,226,235,0	script	Trace of Battle#6	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 13){
+			mes "Hay rastros de varios que han pasado.";
+			close;
+		} else {
+			mes "Hay un rastro del sur. Parece estar dirigiendose al norte pero parece que no soy capaz de decir eso aún.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 13){
+			mes "Hay rastros de varios que han pasado.";
+			close;
+		} else {
+			mes "Hay un rastro del sur. Parece estar dirigiendose al norte pero parece que no soy capaz de decir eso aún.";
+			close;
+		}
+	}
+	mes "Hay algunos rastros, pero no puedo decir que son.";
+	close;
+}
+
+//=================================================Battle Traces 7====================================================
+moc_fild11,184,342,0	script	Trace of Battle#7	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 13){
+			mes "Hay rastros de muchos que se han detenido aquí.";
+			close;
+		} else {
+			mes "Muchos de los rastros están conectados. Parecen haberse detenido aquí por un tiempo, pero se dirigieron al norte.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 13){
+			mes "Hay rastros de muchos que se han detenido aqui.";
+			close;
+		} else {
+			mes "Muchos de los rastros están conectados. Parecen haberse detenido aqui por un tiempo, pero entonces se dirgieron al norte.";
+			close;
+		}
+	}
+	mes "Hay algunos rastros, pero no puedo decirte que son.";
+	close;
+}
+
+//=================================================Battle Traces 8====================================================
+moc_fild17,213,358,0	script	Trace of Battle#8	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 13){
+			mes "Hay rastros de dos personas que se detuvieron.";
+			close;
+		} else if(tu_thief01 == 13){
+			mes "No puedo ver mas los rastros de aquellos que estaban persiguiendo. Solo veo los rastros de los dos.";
+			set tu_thief01, 14;
+			close;
+		} else {
+			mes "Hay rastros de un pequeño monto de gente.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 13){
+			mes "Parece haber rastros de aproximadamente dos personas que se detuvieron.";
+			close;
+		} else if(tu_magician01 == 13){
+			mes "No puedo ver mas los restos de aquellos que estaban persiguiendo. Solo veo los restos de los dos.";
+			set tu_magician01, 14;
+			close;
+		} else {
+			mes "Hay rastros de una pequeña cantidad de gente.";
+			close;
+		}
+	}
+	mes "Hay algunos rastros, pero no puedo decirte que son.";
+	close;
+}
+
+//=================================================Battle Traces 9====================================================
+moc_fild17,228,274,0	script	Trace of Battle#9	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 14){
+			mes "Hay rastros de una pequeña batalla.";
+			close;
+		} else if(tu_thief01 == 14){
+			mes "Parece haber sido una pequeña batalla. Los rastros que vienen del norte y algunos del sureste están mezclados.";
+			next;
+			mes "Entonces los rastros se dirigen al este. Más cosas pueden ser encontradas investigando mas.";
+			set tu_thief01, 15;
+			close;
+		} else if(tu_thief01 == 15){
+			set @seek_tm, rand(1,10);
+			if(@seek_tm == 7){
+				mes "Encontre un fragmento de ropa con sangre como antes.";
+				next;
+				mes "Has descubierto un fragmento de ropa con sangre-";
+				set tu_thief01, 16;
+				close;
+			} else {
+				mes "No pude encontrar algunos otros rastros. Debes seguir investigando..";
+				close;
+			}
+		} else {
+			mes "No hay otros rastros peculiares que uno dirigiendose al oeste.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 14){
+			mes "Hay rastros de una pequeña batalla.";
+			close;
+		} else if(tu_magician01 == 14){
+			mes "Parece haber sido una batalla pequeña. Los rastros que vienen del norte y algunos del sureste estan mezclados juntos.";
+			next;
+			mes "Entonces los rastros se dirigen al este. Más puede ser encontrado investigando más.";
+			set tu_magician01, 15;
+			close;
+		} else if(tu_magician01 == 15){
+			set @seek_tm1, rand(1,10);
+			if(@seek_tm1 == 7){
+				mes "Encontre un fragmento de ropa con sangre como antes.";
+				next;
+				mes "- Descubriste un fragmento de ropa con sangre -";
+				set tu_magician01, 16;
+				close;
+			} else {
+				mes "No pude encontrar algún otro rastros. Más investigación debe seguir.";
+				close;
+			}
+		} else {
+			mes "No hay otros rastros peculiares que aquel dirigiendose al oeste.";
+			close;
+		}
+	}
+	mes "Hay algunos rastros, pero no puedo decir que son.";
+	close;
+}
+
+//=================================================Battle Traces 10====================================================
+moc_fild17,34,292,0	script	Trace of Battle#10	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 16){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_thief01 == 16){
+			mes "Traces lead from the east. Ones of the pursuer and the one being pursued have become similar. The gap in between must be decreasing.";
+			set tu_thief01, 17;
+			close;
+		} else {
+			mes "Los rastros encaminan hacia el Este.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 16){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_magician01 == 16){
+			mes "Traces lead from the east. Ones of the pursuer and the one being pursued have become similar. The gap in between must be decreasing.";
+			set tu_magician01, 17;
+			close;
+		} else {
+			mes "Los rastros encaminan hacia el Este.";
+			close;
+		}
+	}
+	mes "There are some traces remaining, but I cannot tell what they are.";
+	close;
+}
+
+//=================================================Battle Traces 11====================================================
+moc_fild18,346,296,0	script	Trace of Battle#11	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 17){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_thief01 == 17){
+			mes "Los restos de la persecusión continuan. Viendo esta sangre, alguien debe haber sido herido.";
+			set tu_thief01, 18;
+			close;
+		} else {
+			mes "Hay sangre aquí y allí de modo que otros rastros seran fáciles de hallar.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 17){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_magician01 == 17){
+			mes "Los rastros de la persecusión continuan. Viendo esta sangre, alguien debe haber sido herido.";
+			set tu_magician01, 18;
+			close;
+		} else {
+			mes "There is blood here and there so other traces should be easy to find.";
+			close;
+		}
+	}
+	mes "There are some traces remaining, but I cannot tell what they are.";
+	close;
+}
+
+//=================================================Battle Traces 12====================================================
+moc_fild18,309,257,0	script	Trace of Battle#12	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 18){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_thief01 == 18){
+			mes "Traces lead to the north. Ones of the pursuer and the one being pursued have become similar. The gap in between must be decreasing.";
+			set tu_thief01, 19;
+			close;
+		} else {
+			mes "Los rastros encaminan hacia el Norte.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 18){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_magician01 == 18){
+			mes "Traces lead to the north. Ones of the pursuer and the one being pursued have become similar. The gap in between must be decreasing.";
+			set tu_magician01, 19;
+			close;
+		} else {
+			mes "Los rastros encaminan hacia el Norte.";
+			close;
+		}
+	}
+	mes "There are some traces remaining, but I cannot tell what they are.";
+	close;
+}
+
+//=================================================Battle Traces 13====================================================
+moc_fild18,177,333,0	script	Trace of Battle#13	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 19){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_thief01 == 19){
+			mes "Traces leading to the north have changed direction to the southwest. More pursuers seem to have joined and stalled the group.";
+			set tu_thief01, 20;
+			close;
+		} else {
+			mes "Within the traces of the battle, there are some leading to the southwest.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 19){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_magician01 == 19){
+			mes "Traces leading to the north have changed direction to the southwest. More pursuers seem to have joined and stalled the group.";
+			set tu_magician01, 20;
+			close;
+		} else {
+			mes "Within the traces of the battle, there are some leading to the southwest.";
+			close;
+		}
+	}
+	mes "There are some traces remaining, but I cannot tell what they are.";
+	close;
+}
+
+//=================================================Battle Traces 14====================================================
+moc_fild18,111,303,0	script	Trace of Battle#14	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 20){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_thief01 == 20){
+			mes "Los rastros encaminan hacia el Sur. Más perseguidores se han unido desde el norte haciendo los rastros mas claros.";
+			set tu_thief01, 21;
+			close;
+		} else {
+			mes "Los rastros encaminan hacia el Sur.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 20){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_magician01 == 20){
+			mes "Traces lead to the south. More pursuers have joined from the north making the traces clearer.";
+			set tu_magician01, 21;
+			close;
+		} else {
+			mes "Los rastros encaminan hacia el Sur.";
+			close;
+		}
+	}
+	mes "There are some traces remaining, but I cannot tell what they are.";
+	close;
+}
+
+//=================================================Battle Traces 15====================================================
+moc_fild18,109,197,0	script	Trace of Battle#15	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 21){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_thief01 == 21){
+			mes "There are traces of a harsh battle. Poison seems to have been used here and there.";
+			next;
+			switch(select("Continue following the traces.", "Look around a little more.")){
+			case 1:
+				mes "No se encontro nada en especial.";
+				close;
+				break;
+			case 2:
+				mes "There seem to be some traps related to some different types of poison. Ones that have gone off and others that have not are mixed together.";
+				set tu_thief01, 22;
+				close;
+				break;
+			}
+		} else if(tu_thief01 == 22){
+			set @trap_tm, rand(1,3);
+			if(@trap_tm == 3){
+				mes "A peculiar looking trap is found. How about pouring some Green Potion on it like before?";
+				next;
+				switch(select("Pour Green Potion.", "Do something else.")){
+				case 1:
+					if(countitem(506) < 1){	// Green_Potion
+						mes "...........";
+						mes "No hay Green Potion en posesión.";
+						close;
+					} else {
+						mes "No tuvo ningún efecto. Otras cosas pueden ser necesarias.";
+						delitem 506, 1;
+						set tu_thief01, 23;
+						close;
+					}
+					break;
+				case 2:
+					mes "Investigar el area un poco mas.";
+					close;
+					break;
+				}
+			} else {
+				mes "Golpear la trampa por accidente.";
+				//#####			GetHEALTHSTATE VAR_POISON 60#####
+				//misceffect EF_VENOMDUST2;
+				percentheal -30,0;
+				close;
+			}
+		} else if(tu_thief01 == 23){
+			if(countitem(511) > 0 || countitem(716) > 0){	// Green_Herb || Red_Gemstone
+				if(countitem(511) > 0 && countitem(716) > 0){	// Green_Herb && Red_Gemstone
+					mes "Make powder out of Green Herb and sprinkle it. When placing a Red Gemstone on the trap, it glows and disappears. The trap is dismantled.";
+					delitem 511, 1;
+					delitem 716, 1;
+					set tu_thief01, 24;
+					close;
+				} else if(countitem(511) > 0){	// Green_Herb	
+					mes "Make powder out of Green Herb and sprinkle it. Nothing happens. It may need some other catalyst.";
+					close;
+				} else {
+					mes "Make powder out of Red Gemstone and sprinkle it. Nothing happens. It may need some other catalyst.";
+					close;
+				}
+			} else {
+				mes "Parece necesitar algun otro catalizador.";
+				close;
+			}
+		} else if(tu_thief01 == 24){
+			mes "En frente de la trampa desmantelada, un trozo de tela empapada en sangre se encuentra existente";
+			next;
+			mes "Found 'Blood Stained Cloth'.";
+			set tu_thief01, 25;
+			close;
+		} else {
+			mes "There seem to be no other Traps. Traces lead to the south.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 21){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_magician01 == 21){
+			mes "There are traces of a harsh battle. Poison seems to have been used here and there.";
+			next;
+			switch(select("Continue following the traces.", "Look around a little more.")){
+			case 1:
+				mes "No se encontro nada en especial.";
+				close;
+				break;
+			case 2:
+				mes "There seem to be some traps related to some different types of poison. Ones that have gone off and others that have not are mixed together.";
+				set tu_magician01, 22;
+				close;
+				break;
+			}
+		} else if(tu_magician01 == 22){
+			set @trap_tm, rand(1,3);
+			if(@trap_tm == 3){
+				mes "A peculiar looking trap is found. How about pouring some Green Potion on it like before?";
+				next;
+				switch(select("Pour Green Potion.", "Do something else.")){
+				case 1:
+					if(countitem(506) < 1){	// Green_Potion
+						mes "...........";
+						mes "No hay Green Potion en posesión.";
+						close;
+					} else {
+						mes "It did not affect anything. Other things may be necessary.";
+						delitem 506, 1;
+						set tu_magician01, 23;
+						close;
+					}
+					break;
+				case 2:
+					mes "Investigar el area un poco mas.";
+					close;
+					break;
+			}
+		} else {
+			mes "Golpear la trampa por accidente.";
+			//#####			GetHEALTHSTATE VAR_POISON 60#####
+			//misceffect EF_VENOMDUST2;
+			percentheal -30,0;
+			close;
+		}
+		} else if(tu_magician01 == 23){
+			if(countitem(511) > 0 || countitem(716) > 0){	// Green_Herb || Red_Gemstone
+				if(countitem(511) > 0 && countitem(716) > 0){	// Green_Herb && Red_Gemstone
+					mes "Make powder out of Green Herb and sprinkle it. When placing a Red Gemstone on the trap, it glows and disappears. The trap is dismantled.";
+					delitem 511, 1;
+					delitem 716, 1;
+					set tu_magician01, 24;
+					close;
+				} else if(countitem(511) > 0){	// Green_Herb
+					mes "Make powder out of Green Herb and sprinkle it. Nothing happens. It may need some other catalyst.";
+					close;
+				} else {
+					mes "Make powder out of Red Gemstone and sprinkle it. Nothing happens. It may need some other catalyst.";
+					close;
+				}
+			} else {
+				mes "Parece necesitar algun otro catalizador.";
+				close;
+			}
+		} else if(tu_magician01 == 24){
+			mes "En frente de la trampa desmantelada, un trozo de tela empapada en sangre se encuentra existente";
+			next;
+			mes "Found 'Blood Stained Cloth'.";
+			set tu_magician01, 25;
+			close;
+		} else {
+			mes "There seem to be no other Traps. Traces lead to the south.";
+			close;
+		}
+
+	}
+	mes "There are some traces remaining, but I cannot tell what they are.";
+	close;
+}
+
+//=================================================Battle Traces 16====================================================
+moc_fild18,156,96,0	script	Trace of Battle#16	844,{
+	if(BaseClass == Job_Thief){
+		if(tu_thief01 < 25){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_thief01 == 25){
+			mes "Traces lead to the end of the cliff. No other traces can be found.";
+			next;
+			mes "...............";
+			next;
+			mes "It seems like the ones being pursued fell off the cliff. Traces of those pursuiting are here and there but seem to be divided into two.";
+			next;
+			mes "Regresa con los datos por ahora";
+			set tu_thief01, 26;
+			close;
+		} else {
+			mes "No hay mas rastros distintos a los del norte.";
+			close;
+		}
+	} else if(BaseClass == Job_Mage){
+		if(tu_magician01 < 25){
+			mes "Un gran grupo de personas que parecen haber pasado.";
+			close;
+		} else if(tu_magician01 == 25){
+			mes "Traces lead to the end of the cliff. No other traces can be found.";
+			next;
+			mes "...............";
+			next;
+			mes "It seems like the ones being pursued fell off the cliff. Traces of those pursuiting are here and there but seem to be divided into two.";
+			next;
+			mes "Regresa con los datos por ahora";
+			set tu_magician01, 26;
+			close;
+		} else {
+			mes "No hay mas rastros distintos a los del norte.";
+			close;
+		}
+	}
+	mes "Hay algunos rastros. pero no puedo decir lo que son";
+	close;
+}

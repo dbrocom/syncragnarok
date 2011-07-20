@@ -1,0 +1,450 @@
+//===== eAthena Script ======================================= 
+//= Monk Skills Quests
+//===== By: ================================================== 
+//= Lupus, Reddozen, Samuray22
+//===== Current Version: ===================================== 
+//= 1.5
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quests for skills: Spiritual Bestowment, Excruciating Palm
+//===== Additional Comments: ================================= 
+//= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//============================================================
+
+prt_monk,270,198,3	script	Apprentice Monk#qsk_mo	753,{
+	if (BaseJob == Job_Monk) {
+		if (MONK_SK == 7) {
+			mes "[Monk]";
+			mes "Tomarte el tiempo de";
+			mes "contemplar tu más";
+			mes "importante meta, tu mayor";
+			mes "prioridad, nunca es un desperdicio.";
+			mes "Nunca confundas tus medios";
+			mes "para alcanzar la meta que deseas,";
+			close;
+		}
+		if (MONK_SK == 6 && getskilllv("MO_KITRANSLATION") == 0) {
+			mes "[Monk]";
+			mes "¿Has olvidado lo";
+			mes "básico detrás de desempeñar el";
+			mes "Spiritual Bestowment?";
+			mes "¿Cómo puede ser... ?";
+			next;
+			mes "[Monk]";
+			mes "Ah, ahora entiendo.";
+			mes "Has trascendido las";
+			mes "limitaciones que solían";
+			mes "retenerte, y te has";
+			mes "convertido en Champion.";
+			mes "Lamento haberte subestimado.";
+			next;
+			mes "[Monk]";
+			mes "Muy bien. Será un honor";
+			mes "para mi el ayudarte a reaprender";
+			mes "la habilidad Spiritual Bestowment. Como";
+			mes "un efecto secundario, probablemente reaprendas Excruciating Palm también.";
+			next;
+			mes "[Monk]";
+			mes "Ahora quedate quierto y relajate";
+			mes "mientras hago mi tratamiento";
+			mes "especial de acupultura que";
+			mes "insertará estos skills en";
+			mes "tu sistema nervioso y tu ";
+			mes "memoria motora...";
+			next;
+			mes "^3355FF*Tap-tap-tap-tap-tap-tap-tap-tap- tap-tap-tap-tap-tap-tap-tap-tap-";
+			mes "tap-tap-tap-tap-tap-tap-tap-tap- tap-tap-tap-tap-tap-tap-tap-tap-";
+			mes "tap-tap-tap-tap-tap-tap-tap-tap- tap-tap-tap-tap-tap-tap-tap-tap-";
+			mes "tap-tap-tap-tap-tap-tap* *POKE*^000000";
+			set MONK_SK,7;
+			skill "MO_KITRANSLATION",1,0;
+			skill "MO_BALKYOUNG",1,0;
+			next;
+			mes "[Monk]";
+			mes "Está listo. Porfavor";
+			mes "continúa utilizando estas";
+			mes "habilidades especiales para promopever";
+			mes "la paz y la harmonía en este";
+			mes "mundo. Adios, amigo mio.";
+			close;
+		}
+		if (MONK_SK > 2) {
+			mes "[Monk]";
+			mes "Tomarte el tiempo de";
+			mes "contemplar tu más";
+			mes "importante meta, tu mayor";
+			mes "prioridad, nunca es un desperdicio.";
+			mes "Nunca confundas tus medios";
+			mes "para alcanzar la meta que deseas.";
+			next;
+			mes "[Monk]";
+			mes "Ah, tengo un favor que pedirte.";
+			mes "Porfavor no le digas a los otros que";
+			mes "te he enseñano Spiritual";
+			mes "Bestowment. No desea";
+			mes "pasar mi tiempo enseñando";
+			mes "esta habilidad a mucha gente...";
+			close;
+		}
+		if (MONK_SK == 2) {
+			if (Weight == 0) {
+				mes "[Monk]";
+				mes "Ah. Bien echo. Veo";
+				mes "que has conseguido apender";
+				mes "la cosa más importante:";
+				mes "el altruismo, por ti mismo.";
+				mes "Ahora confío en que no";
+				mes "abuses de lo que devo enseñarte.";
+				next;
+				mes "[Monk]";
+				mes "Puede que mi examen se vea muy estricto,";
+				mes "pero es imposible aprender";
+				mes "Spiritual Bestowment sin^FFFFFF ^000000 la disciplina adecuada. Cómo con todas";
+				mes "las cosas, la preparación precede a todas las formas de realización.";
+				next;
+				mes "[Monk]";
+				mes "Ahora sólo relajate un momento.";
+				mes "Usaré mi acupultura para";
+				mes "entrenar tu sistema nervioso para";
+				mes "memorizar físicamente el";
+				mes "flujo de energía y movimientos requeridos";
+				mes "para Spiritual Bestowment.";
+				next;
+				mes "^3355FF*Tap... tap*";
+				mes "*Tap... Tap*";
+				mes "*Tap tap tap*^000000";
+				next;
+				mes "^3355FF*Tap tap tap*";
+				mes "*Tap tap tap*";
+				mes "*Tap... Tap tap*^000000";
+				next;
+				mes "^3355FF*Tap-tap-tap-tap-tap-tap-tap-tap- tap-tap-tap-tap-tap-tap-tap-tap-";
+				mes "tap-tap-tap-tap-tap-tap-tap-tap- tap-tap-tap-tap-tap-tap-tap-tap-";
+				mes "tap-tap-tap-tap-tap-tap-tap-tap- tap-tap-tap-tap-tap-tap-tap-tap-";
+				mes "tap-tap-tap-tap-tap-tap* *POKE*^000000";
+				next;
+				mes "[Monk]";
+				mes "Está listo. Ahora eres";
+				mes "capaz de utilizar Spiritual";
+				mes "Bestowment. Ah, si. Realmente nunca";
+				mes "nombré esta habilidad, pero asi es como normalmente la llaman";
+				mes "los otros Monks que la han visto.";
+				next;
+				mes "[Monk]";
+				mes "Recuerda que esta habilidad tiene un";
+				mes "largo tiempo de casteo y de demora,";
+				mes "asi que utilizalo muy cuidadosamente. Esta";
+				mes "habilidad te permitirá darle una Spirit Sphere a uno de los";
+				mes "miembros de tu party consumiendo 40 SP.";
+				next;
+				mes "[Monk]";
+				mes "Entenderás mejor la";
+				mes "utilidad de esta skill si tu la";
+				mes "practicas. Ten en mente que";
+				mes "pelear puede ser necesario algunas";
+				mes "veces, pero en un medio para";
+				mes "un fin, no un fin en sí.";
+				set MONK_SK,3;
+				skill "MO_KITRANSLATION",1,0;
+				next;
+				mes "[Monk]";
+				mes "Nuestras habilidades no deverian";
+				mes "ser utilizadas para derrapar sangre. Si tu";
+				mes "puedes trascender los conflictos,";
+				mes "sabrás que pelear no tiene";
+				mes "ningún valor en absoluto. La";
+				mes "paz sea contigo, mi amigo.";
+				close;
+			}
+			else {
+				mes "[Monk]";
+				mes "Has aprendido el significado";
+				mes "del altruismo?";
+				mes "Cuando abandonas la codicioa";
+				mes "y deseos del mundo,";
+				mes "estarás listo para mis enseñanzas. ^FFFFFF ^000000";
+				close;
+			}
+		}
+		if (MONK_SK == 1) {
+			mes "[Monk]";
+			mes "Pelear no tiene ningún sentido.";
+			mes "Trascender los conflictos y las";
+			mes "diferencias através de la";
+			mes "realizacion de que todos son";
+			mes "uno. Disciplina tu mente";
+			mes "y la verdad será revelada.";
+			next;
+			mes "[Monk]";
+			mes "Hm? Con que proposito has";
+			mes "venido a visitarme? Ah, asi que";
+			mes "deseas aprender la habilidad que^FFFFFF ^000000 he creado.Mi colega";
+			mes "tenía razón: más y más gente han estado deseando aprender esto.";
+			next;
+			mes "[Monk]";
+			mes "No me mal interpretes.";
+			mes "Es verdad que el poder y la";
+			mes "justicia, sabiduría y acción";
+			mes "deven ser balanceados. Sin embargo,";
+			mes "he sido visitado por mucha gente hambrienta de poder, gente sedienta de sangre.";
+			next;
+			mes "[Monk]";
+			mes "Siendo justos, yo deveria";
+			mes "darte una oportunidad para provarme";
+			mes "que usarías las habilidades";
+			mes "que te enseñaría para";
+			mes "la paz y la justicia. Prueva que";
+			mes "estás libre de egoísmo.";
+			set MONK_SK,2;
+			close;
+		}
+	}
+	mes "[Monk]";
+	mes "Pelear no tiene sentido.";
+	mes "Trascender los conflictos y";
+	mes "diferenciar a través de la";
+	mes "realización de que todos son";
+	mes "uno. Disciplina tu mente y";
+	mes "la verdad será revelada.";
+	close;
+}
+
+monk_test,316,69,5	script	Monk#qsk_mo	823,{
+	if (BaseJob == Job_Monk) {
+		if (MONK_SK == 6) {
+			mes "[Monk]";
+			mes "Cómo convenciste";
+			mes "a ese Monk de enseñarte";
+			mes "Spiritual Bestowment? Sería";
+			mes "bueno popularizar ambas";
+			mes "nuestras habilidades especiales, pero el mundo puede noe star listo aún.";
+			close;
+		}
+		if (MONK_SK == 5) {
+			mes "[Monk]";
+			mes "Para comenzar, Excruciating Palm";
+			mes "es desempeñada al tomar tu";
+			mes "fuerza interior y covnertirla en";
+			mes "fuerza física. Entonces,";
+			mes "enfocas todo eso en la palma de tu mano. Explotarás si lop haces mal.";
+			next;
+			mes "[Monk]";
+			mes "Esta habilidad en verdad causa";
+			mes "un dolor espantoso, consumiendo";
+			mes "20 SP e incluso 10 HP.";
+			mes "empuja hacia atrás al monstruo con";
+			mes "una probabilidad de aturdirlos, pero sólo el monstruo golpeado es dañado.";
+			next;
+			mes "[Monk]";
+			mes "Si usas esta habilidad en";
+			mes "otros jugadores, causará";
+			mes "cierta cantidad dd daño,";
+			mes "pero no empujará a otros";
+			mes "jugadores cercanos al objetivo original. Tiene eso sentido?";
+			next;
+			mes "[Monk]";
+			mes "De cualquier forma, continúa practicando";
+			mes "estos principios y tu";
+			mes "dominarás Excruciating Palm.";
+			mes "Definitivamente deberías der capaz";
+			mes "de hacerlo, ya que has aprendido";
+			mes "Spiritual Endowment.";
+			set MONK_SK,6;
+			skill "MO_BALKYOUNG",1,0;
+			next;
+			mes "[Monk]";
+			mes "Bueno, hemos completado";
+			mes "la lacción. Espero que";
+			mes "uses tus nuevas habilidades para";
+			mes "pelear por la justicia y";
+			mes "combatir el mal. Adiós";
+			mes "por ahora, amigo mio.";
+			close;
+		}
+		if (MONK_SK == 4 && countitem(905) > 19 && countitem(711) > 2) {
+			mes "[Monk]";
+			mes "Que es esto...?";
+			mes "Has aprendido la habilidad";
+			mes "Spiritual Bestowment?";
+			mes "Supongo que deseas aprender";
+			mes "Excruciating Palm ahora,";
+			mes "correcto?";
+			next;
+			mes "[Monk]";
+			mes "Hm. Bueno, eres lo suficientemente fuerte";
+			mes "para eficazmente vencer";
+			mes "a un buen número de Mandragoras.";
+			mes "Está bien. Pareces estar listo. Vuelbe en un rato";
+			mes "para que pueda terminar con los preparativos";
+			delitem 905,20; //Stem
+			delitem 711,3; //Shoot
+			set MONK_SK,5;
+			close;
+		}
+		if (MONK_SK == 4) {
+			mes "[Monk]";
+			mes "Que es esto... ?";
+			mes "Has aprendido la habilidad";
+			mes "Spiritual Bestowment?";
+			mes "Supongo que deseas";
+			mes "aprender Excruciating Palm ahora";
+			mes "Estoy en lo correcto?";
+			next;
+			mes "[Monk]";
+			mes "Justo como te mencioné";
+			mes "antes, deves subyugar";
+			mes "Mandragoras para probar que";
+			mes "estás calificado, en términos de";
+			mes "fuerza y compasión,";
+			mes "para aprender Excruciating Palm.";
+			next;
+			mes "[Monk]";
+			mes "Pelea para protejes a esos";
+			mes "inocentes aterrorizados por";
+			mes "las agresivas Mandragoras.";
+			mes "Si me traés ^FF000020 Stems^000000 y";
+			mes "^FF00003 Shoots^000000, Estaré satisfecho^FFFFFF ^000000 con esta prueba de tu habilidad.";
+			next;
+			mes "[Monk]";
+			mes "Lo entiendes ahora?";
+			close;
+		}
+		if (MONK_SK == 3) {
+			mes "[Monk]";
+			mes "Has venido a aprender";
+			mes "Excruciating Palm? Si tan sólo";
+			mes "eso fuera posible. Hay";
+			mes "dos obstáculos que se presentan";
+			mes "para realizar tu petición.";
+			next;
+			mes "[Monk]";
+			mes "Para empezar, deves aprender";
+			mes "la habilidad Spiritual Bestowment";
+			mes "antes. Será dificil";
+			mes "conseguir que ese monk";
+			mes "te la enseñe, si no es que";
+			mes "rotundamente imposible.";
+			next;
+			mes "[Monk]";
+			mes "Segundo, necesitarás";
+			mes "pasar mi pequeña prueba";
+			mes "de feurza, para asegurarme";
+			mes "de qeu tu cuerpo pueda soportar";
+			mes "el asombroso poder involucrado";
+			mes "al usar Excruciating Palm.";
+			next;
+			mes "[Monk]";
+			mes "Mm. Sé que las Mandragoras";
+			mes "han estado amenazando a los viajeros,";
+			mes "asi que si puedes probarme que has";
+			mes "estado cazandolas, probarás";
+			mes "que eres merecedor de aprender";
+			mes "Excruciating Palm.";
+			next;
+			mes "[Monk]";
+			mes "Si puedes de alguna manera convencer";
+			mes "a ese monk de que se enseñe como";
+			mes "utilizar Spiritual Bestowment,";
+			mes "entonces te pediría traer";
+			mes "^FF000020 Stems^000000 y ^FF00003 Shoots^000000 de";
+			mes "cazar Mandragoras.";
+			next;
+			mes "[Monk]";
+			mes "Claro que, completar";
+			mes "mi prueba es insignificante si";
+			mes "no aprendes primero la";
+			mes "habilidad Spiritual Bestowment.";
+			mes "Te deseo suerte con eso...";
+			set MONK_SK,4;
+			close;
+		}
+		if (MONK_SK == 1) {
+			mes "[Monk]";
+			mes "Hay un Monk pacífico";
+			mes "viviendo en aislamento que";
+			mes "puede enseñarte la habilidad";
+			mes "Spiritual Bestowment. Sin embargo,";
+			mes "es terco, y se ha negado a^FFFFFF ^000000 muchos que deseaban aprender de el.";
+			next;
+			mes "[Monk]";
+			mes "Sería bueno si";
+			mes "puedieras convencerlo de";
+			mes "enseñartela, ya que es";
+			mes "imposible aprender como";
+			mes "utilizar esta habilidad por ti mismo.";
+			mes "Es realmente una lastima...";
+			close;
+		}
+		if (MONK_SK == 0) {
+			mes "[Monk]";
+			mes "El poder sin justicia no";
+			mes "durará. La justicia din";
+			mes "poder no puede ser mantenida.";
+			mes "El poder no equivale a";
+			mes "la justicia, pero la justicia verdadera";
+			mes "puede ser un medio hacia el poder.";
+			next;
+			mes "[Monk]";
+			mes "Siempre recuerda esta verdad.";
+			mes "Justicia y poder, compación";
+			mes "y fuerza, sabiduría y acción. Estos son todos complementos que";
+			mes "son útiles y deben siempre";
+			mes "estar balanceados en harmonía.";
+			next;
+			mes "[Monk]";
+			mes "Es lo mismo con algunas habilidades.";
+			mes "He creado una habilidad";
+			mes "que es la manifestación pura";
+			mes "del poder, Excruciating Palm!";
+			mes "Sin embargo, es inútil sin";
+			mes "su complemento para balancearla.";
+			next;
+			mes "[Monk]";
+			mes "El complemento de mi habilidad es";
+			mes "una habilidad conocida como Spiritual";
+			mes "Bestowment, la cuál sólo puede ser";
+			mes "enseñada por un Monk. Sin embargo,";
+			mes "se niega a enseñarsela a los demás, creyendo que no son dignos.";
+			next;
+			mes "[Monk]";
+			mes "Aunque lo he echo saber";
+			mes "que debería popularizar su";
+			mes "enseñanza de esa habilidad, debo respetar su desición. Aún asi,";
+			mes "podrias intentar hablar con el si deseas aprender algunas habilidades nuevas.";
+			set MONK_SK,1;
+			next;
+			mes "[Monk]";
+			mes "Para encontrarlo, simplemente busca al";
+			mes "monk que siempre";
+			mes "predica el significado vacío";
+			mes "de pelear. Ese será él.";
+			close;
+		}
+	}
+	mes "[Monk]";
+	mes "El poder sin justicia";
+	mes "no durará. La justicia sin";
+	mes "poder no puede ser mantenida,";
+	mes "El poder no equivale a";
+	mes "justicia, pero la justicia puede ser";
+	mes "un medio para el poder.";
+	close;
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.0 for fully working skills only [Lupus]
+//= 1.1 Added more new skill quests for more classes [Lupus]
+//= Somehow eA engine doesn't let you keep learn't skill V_V'
+//= 1.2 Added to correct locations, correct NPC's, fixed
+//= some of the items required and made them into real
+//= quests. [Reddozen] 
+//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
+//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
+//= 1.3b Splitted into different files [DracoRPG]
+//= 1.4 Updated to the official one. [Samuray22]
+//= 1.4a replaced item "names" with item id. [Lupus]
+//============================================================

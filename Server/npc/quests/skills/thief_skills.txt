@@ -1,0 +1,528 @@
+//===== eAthena Script ======================================= 
+//= Thief Skills Quests
+//===== By: ================================================== 
+//= kobra_k88
+//===== Current Version: ===================================== 
+//= 1.6
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quests for skills: Sand Attack, Back Slide, Find Stone, 
+//= Stone Fling.
+//===== Additional Comments: ================================= 
+//= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.6 Fixed a Exploit for Assassins and Rogues. (bugreport:2332) [Samuray22]
+//============================================================ 
+
+moc_prydb1,154,128,4	script	Alcouskou#qsk_tf	118,{
+	if (BaseClass == Job_Thief) {
+		mes "[Alcouskou]";
+		mes "A medida que creces encontrarás";
+		mes "muchas cosas. A veces no";
+		mes "entenderás y te preguntarás por qué";
+		mes "algunas cosas son tan importantes. Tal vez pienses";
+		mes "que es una tonería, pero no lo es.";
+		mes "Deja que te explique.";
+		next;
+		switch(select("Sand Attack:Back Slide:Find Stone:Stone Fling:I will be back later.")) {
+		case 1:
+			switch(THIEF_SK) {
+			case 0:
+				if (countitem(7041) > 4 && ((BaseJob == Job_Thief && JobLevel > 24) || BaseJob == Job_Assassin || BaseJob == Job_Rogue)) {
+					mes "[Alcouskou]";
+					mes "Afortunadamente, has traído algo";
+					mes "de arena contigo. Es muy importante";
+					mes "para un thief llevar siempre";
+					mes "una poca. La mayoría de la gente";
+					mes "no se da cuenta de lo valiosa que es";
+					mes "esa simple sustancia.";
+					next;
+					mes "[Alcouskou]";
+					mes "Si te encuentras con un monstruo";
+					mes "poderoso en una dungeon sin suelo";
+					mes "arenoso, podrías usar esta arena para";
+					mes "cegar al monstruo y correr.";
+					mes "Deberías tener una bolsita para arena.";
+					next;
+					mes "[Alcouskou]";
+					mes "¿Qué? ¿No pensarás que";
+					mes "lo voy a conseguir por ti, no?";
+					mes "¡¡¡Mira que eres vago!!!";
+					mes "Bueno, encuentra a ese al que llaman";
+					mes "RuRumuni. Él te hará una bolsa";
+					mes "de cuero para arena.";
+					next;
+					mes "[Alcouskou]";
+					mes "Yo estaré aquí preparándome para";
+					mes "cuando regreses. Encuentra a RuRumuni";
+					mes "al oeste de Payon. Ahí es donde";
+					mes "me han dicho que está últimamente.";
+					delitem 7041,5; //Fine_Grit
+					set THIEF_SK,1;
+					close;
+				}
+				else {
+					mes "[Alcouskou]";
+					mes "Lo más importante de ser";
+					mes "un buen thief es el esconderte.";
+					mes "Un thief nunca debe ser visto o";
+					mes "tocado a no ser que él así lo quiera.";
+					mes "Algunos dicen que es algo de cobardes";
+					mes "pero yo opino diferente.";
+					next;
+					mes "[Alcouskou]";
+					mes "Según yo, vivimos en un mundo donde";
+					mes "la regla del más fuerte";
+					mes "impera nuestras vidas. ";
+					mes "Puede que opinen mal de mí por usar";
+					mes "esta habilidad especial... ¿que qué habilidad?";
+					mes "La habilidad de cegar con arena.";
+					next;
+					mes "[Alcouskou]";
+					mes "Si puedes lanzar arena en";
+					mes "los ojos de tu oponente,";
+					mes "no sólo disminuyen sus defensas,";
+					mes "sino que su ataque también baja.";
+					mes "Es tan efectivo que hasta puede que lo atontes.";
+					next;
+					mes "[Alcouskou]";
+					mes "Bueno, tenemos que sobrevivir...";
+					mes "es nosotros o ellos.";
+					mes "Creo que es importante y vital";
+					mes "que preparemos algo de arena.";
+					mes "¿Qué opinas? Si quieres ";
+					mes "ve y tráeme cinco Fine Grit.";
+					next;
+					mes "[Alcouskou]";
+					mes "Seguro que te mueres por aprender esta";
+					mes "habilidad, pero primero debes traerme cinco Fine Grit.";
+					mes "Hasta que no los tengas,";
+					mes "no te puedo enseñar.";
+					mes "No te desanimes, ve y búscalos.";
+					next;
+					mes "[Alcouskou]";
+					mes "¡¡Ah, casi me olvido!!";
+					mes "Si quieres aprender esta habilidad ";
+					mes "especial, asegúrate de ser lo";
+					mes "suficientemente diestro para";
+					mes "usarla correctamente. O sea";
+					mes "que has de tener al menos job 25.";
+					close;
+				}
+			case 1:
+				mes "[Alcouskou]";
+				mes "Ve al oeste de Payon y encuentra a";
+				mes "RuRumuni. Él te hará una";
+				mes "bolsita de calidad para tu";
+				mes "arena.";
+				next;
+				mes "[Alcouskou]";
+				mes "Me quedaré con estos cinco Fine Grit";
+				mes "y los prepararé para ti mientras espero.";
+				close;
+			case 2:
+				mes "[Alcouskou]";
+				mes "¡Bien! ¡¡Genial!!";
+				mes "¡Esa sí que es una buena bolsa!";
+				mes "Pequeña y fácil de llevar, con suficiente";
+				mes "capacidad para bastante arena. ";
+				mes "¡¡Ésta es una perfecta ^3355FFLeather Bag of Infinity^000000";
+				mes "para usarla con esta habilidad!!";
+				next;
+				mes "[Alcouskou]";
+				mes "Bueno, veamos cómo se te da";
+				mes "arrojar arena...";
+				mes "¡Inténtalo!";
+				next;
+				mes "[Alcouskou]";
+				mes "¡¡Ahhhg, cuidado con mis ojos!!";
+				mes "^5533FF- *tiras arena* -^000000";
+				next;
+				mes "^5533FF- *lanzas más arena* -^000000";
+				next;
+				mes "[Alcouskou]";
+				mes "Jojojo... ¡Se te da muy bien!";
+				mes "¡Excelente!";
+				mes "Supongo que no tengo nada más";
+				mes "que enseñarte.";
+				mes "Espero que esta habilidad";
+				mes "te sirva en un futuro.";
+				delitem 7042,1; //Leather_Bag_Of_Infinity
+				skill 149,1,0;
+				close;
+			}
+		case 2:
+			if (countitem(940) > 19  && ((BaseJob == Job_Thief && JobLevel > 34) || BaseJob == Job_Assassin || BaseJob == Job_Rogue)) {
+				mes "[Alcouskou]";
+				mes "Bueno, vamos a practicar.";
+				next;
+				mes "[Alcouskou]";
+				mes "Suuu Suuu uk -";
+				next;
+				mes "[Alcouskou]";
+				mes "Suuuuk - -";
+				next;
+				mes "[Alcouskou]";
+				mes "Suk - Suuuk - - -";
+				next;
+				mes "[Alcouskou]";
+				mes "¡Genial! A este paso";
+				mes "seguro que mejorarás tu";
+				mes "habilidad por ti mismo.";
+				delitem 940,20; //Grasshopper's_Leg
+				skill 150,1,0;
+				close;
+			}
+			else {
+				mes "[Alcouskou]";
+				mes "Normalmente pensamos en el";
+				mes "ataque y el daño, pero es";
+				mes "importante recordar que";
+				mes "huir es tan importante";
+				mes "como atacar.";
+				mes "Nos enorgullece nuestra rapidez";
+				next;
+				mes "[Alcouskou]";
+				mes "y nuestra capacidad para esquivar,";
+				mes "pero estoy seguro de que alguna vez";
+				mes "te has fijado mientra luchas que";
+				mes "incluso aunque esquives casi todo,";
+				mes "si te pegan tan sólo una vez";
+				mes "estás en grave peligro.";
+				next;
+				mes "[Alcouskou]";
+				mes "Es cierto que a veces nos reímos";
+				mes "de otros al ver cómo fácilmente";
+				mes "esquivamos sus ataques.";
+				mes "Pero si nos ataca más de uno";
+				mes "a la vez, recuerda que";
+				mes "no tendremos espacio para evadir.";
+				next;
+				mes "[Alcouskou]";
+				mes "Debes tomar una decisión rápida";
+				mes "y huir. Cualquiera correría inmediatamente,";
+				mes "pero no tenemos por qué.";
+				mes "Incluso si no vemos salida,";
+				mes "nuestra habilidad nos permite escapar";
+				mes "de un destino fatal.";
+				next;
+				mes "[Alcouskou]";
+				mes "Esta habilidad usa nuestra energía para";
+				mes "dejarnos escapar sin que nos vean.";
+				mes "Con esta habilidad podremos";
+				mes "alejarnos mucho de nuestro oponente ";
+				mes "casi instantáneamente.";
+				mes "Esta habilidad requiere horas y horas de";
+				next;
+				mes "[Alcouskou]";
+				mes "entrenamiento para que salga bien.";
+				mes "Si quieres aprender y practicar,";
+				mes "necesitarás algunos objetos.";
+				mes "Tráeme ^3355FF20 Grasshopper's Leg^";
+				mes "para comenzar tu entrenamiento.";
+				next;
+				mes "[Alcouskou]";
+				mes "Oh, por cierto...";
+				mes "Debes tener algo de maestría";
+				mes "en las habilidades de un thief para que";
+				mes "te salga bien. O sea que al menos";
+				mes "has de tener el nivel de job a ^3355FF35^000000 .";
+				mes "Si no no puedo enseñarte.";
+				close;
+			}
+		case 3:
+			if (countitem(912) > 0 && countitem(948) > 0 && countitem(908) > 4 && ((BaseJob == Job_Thief && JobLevel > 19) || BaseJob == Job_Assassin || BaseJob == Job_Rogue)) {
+				mes "[Alcouskou]";
+				mes "Wow, ¿ya estás preparado?";
+				mes "Genial, eres un alumno prometedor.";
+				mes "Tu fervor es sincero de verdad.";
+				mes "Bueno, ¿comenzamos?";
+				mes "Tirar piedras.........";
+				mes "Encuentra una piedra lisa con buen peso.";
+				next;
+				mes "[Alcouskou]";
+				mes "Elegir la piedra adecuada es muy ";
+				mes "importante para que salga bien.";
+				mes "Bueno, podría explicartelo mil veces,";
+				mes "pero es mejor que lo veas por ti mismo.";
+				mes "Intenta tirar la piedra aquí,";
+				mes "donde yo te vea bien.";
+				next;
+				mes "^3355FF- Shweeput ! -^000000";
+				next;
+				mes "^3355FF- Cheeeguk! -^000000";
+				next;
+				mes "^3355FF- Shyaaaakkk ! -^000000";
+				next;
+				mes "[Alcouskou]";
+				mes "Muy bien. Parece que lo estás";
+				mes "entendiendo fácilmente.";
+				mes "Puedes mejorar esta habilidad";
+				mes "practicando por tu cuenta también.";
+				mes "Espero que te ayude en el futuro.";
+				mes ".......Espero verte pronto.";
+				delitem 912,1; //Zargon
+				delitem 948,1; //Bear's_Foot
+				delitem 908,5; //Spawn
+				skill 151,1,0;
+				close;
+			}
+			else {
+				mes "[Alcouskou]";
+				mes "¡Los miembros de nuestra guild";
+				mes "son tan diestros que siempre son útiles!";
+				mes "Pueden agarrar una piedra pequeña";
+				mes "por el camino y usarla para golpear a";
+				mes "un enemigo fácil y rápidamente";
+				mes "desde lejos.";
+				next;
+				mes "[Alcouskou]";
+				mes "Se dieron cuenta de que era un desperdicio";
+				mes "no enseñar esto a los demás.";
+				mes "Organizaron un grupo para entrenar";
+				mes "a otros en esta habilidad.";
+				mes "Así es como ^3355FF' Find Stone '^000000 y";
+				mes "^3355FF' Stone Fling '^000000 surgieron.";
+				next;
+				mes "[Alcouskou]";
+				mes "Siempre es útil el poder encontrar una piedra";
+				mes "en cualquier lado y tener la habilidad";
+				mes "para lanzarla contra un enemigo lejano.";
+				mes "Una habilidad valiosa sin duda.";
+				mes "Sin costar ni un zeny, tienes esta";
+				mes "habilidad a tu disposición.";
+				next;
+				mes "[Alcouskou]";
+				mes "Pienso que es una habilidad genial.";
+				mes "¿Tú qué opinas?";
+				mes ". . . . . Hah Hah Hah . . . . . .";
+				next;
+				mes "[Alcouskou]";
+				mes "^3355FF' Find Stone ! '^000000";
+				mes "puede ser utilizada en todos lados.";
+				mes "Recoger piedras del suelo que sean";
+				mes "lisas y con un buen peso para";
+				mes "lanzarlas. Necesitas familiarizarte";
+				mes "un poco con ella para que la aprendas bien.";
+				next;
+				mes "[Alcouskou]";
+				mes "Conlleva poco entrenamiento, pero";
+				mes "tienes que dedicarle todo tu";
+				mes "esfuerzo.....";
+				mes "..........*Ejem*...........";
+				mes "Empecemos practicando cómo recoger";
+				mes "un ^3355FFBear's Footskin^000000 para que te familiarices con la acción.";
+				next;
+				mes "[Alcouskou]";
+				mes "Y en vez de una piedra, recoge un";
+				mes " ^3355FFZargon^000000 !";
+				mes "¿Es muy pequeño?";
+				mes "¡¡Pues añadamos un ^3355FF5 Spawn^000000 !!";
+				mes "¡A ver cómo lo haces!";
+				mes "Consigue esas cosas del modo que te parezca.";
+				close;
+			}
+		case 4:
+			if (countitem(910) > 1 && countitem(911) > 1 && ((BaseJob == Job_Thief && JobLevel > 14) || BaseJob == Job_Assassin || BaseJob == Job_Rogue)) {
+				mes "[Alcouskou]";
+				mes "¡¿Wow, a tienes todo?!";
+				mes "Muy bien, ¿quieres empezar?";
+				mes "Prepara los objetos que has traído...";
+				next;
+				mes "^3355FF- Shyuuk ! -^000000";
+				next;
+				mes "^3355FF- Shyuuuk Tuk. . -^000000";
+				next;
+				mes "^3355FF- Shyupattt !! - Tauk !! -^000000";
+				next;
+				mes "[Alcouskou]";
+				mes "Pewwww~~~!!";
+				mes "¡Excelente!";
+				mes "Sabes que tienes suficiente";
+				mes "poder y maña.";
+				next;
+				mes "[Alcouskou]";
+				mes "Vale, pues ya sabes cómo";
+				mes "hacerlo. La manera en que lo uses";
+				mes "en el futuro depende de ti...";
+				mes "¡Te deseo suerte!";
+				delitem 910,2; //Garlet
+				delitem 911,2; //Scell
+				skill 152,1,0;
+				close;
+			}
+			else {
+				mes "[Alcouskou]";
+				mes "¡Los miembros de nuestra guild";
+				mes "son tan diestros que siempre son útiles!";
+				mes "Pueden agarrar una piedra pequeña";
+				mes "por el camino y usarla para golpear a";
+				mes "un enemigo fácil y rápidamente";
+				mes "desde lejos.";
+				next;
+				mes "[Alcouskou]";
+				mes "Se dieron cuenta de que era un desperdicio";
+				mes "no enseñar esto a los demás.";
+				mes "Organizaron un grupo para entrenar";
+				mes "a otros en esta habilidad.";
+				mes "Así es como ^3355FF' Find Stone '^000000 y";
+				mes "^3355FF' Stone Fling '^000000 skills surgieron.";
+				next;
+				mes "[Alcouskou]";
+				mes "Siempre es útil el poder encontrar una piedra";
+				mes "en cualquier lado y tener la habilidad";
+				mes "para lanzarla contra un enemigo lejano.";
+				mes "Una habilidad valiosa sin duda.";
+				mes "Sin costar ni un zeny, tienes esta";
+				mes "habilidad a tu disposición.";
+				next;
+				mes "[Alcouskou]";
+				mes "Pienso que es una habilidad genial.";
+				mes "¿Tú qué opinas?";
+				mes ". . . . . Hah Hah Hah . . . . . .";
+				next;
+				mes "[Alcouskou]";
+				mes "^3355FFStone Fling !!^000000";
+				mes "Puedes usar esta habilidad";
+				mes "fácilmente y no te cuesta";
+				mes "nada de dinero si sabes recoger";
+				mes "piedras bien...";
+				mes "Si no sabes elegir piedras";
+				next;
+				mes "[Alcouskou]";
+				mes "muy bien, siempre puedes comprarlas";
+				mes "a gente que sí sabe.";
+				mes "Si sabes elegir piedras buenas,";
+				mes "puedes hacer un negocio con ello.";
+				mes "¿Qué opinas? ¿Te gusta la idea?";
+				next;
+				mes "[Alcouskou]";
+				mes "Si quieres aprender esta habilidad,";
+				mes "tendrás que practicar bastante.";
+				mes "El entrenamiento requiere algunas cosas";
+				mes "que no serán fáciles de encontrar...";
+				mes "Claro que yo sé que no será";
+				mes "imposible del todo para ti...";
+				next;
+				mes "[Alcouskou]";
+				mes "Necesitarás dos ^3355FF' Garlet '^000000";
+				mes "y dos ^3355FF' Scell '^000000 para empezar.";
+				mes "Asegúrate de que sean parecidas a piedras";
+				mes "y que se puedan lanzar. Cuando tengas";
+				mes "estas cosas, estaré encantado";
+				mes "de enseñarte.";
+				close;
+			}
+		case 5:
+			mes "[Alcouskou]";
+			mes "Parece que no eres lo suficientemente bueno...";
+			mes "Tal vez necesitemos más tiempo para reflexionar sobre ti.";
+			close;
+		}
+	}
+	else {
+		mes "[Alcouskou]";
+		mes "La mayoría de los thiefs y assassins";
+		mes "tienen las habilidades básicas para";
+		mes "hacer bien su trabajo. Sin embargo,";
+		mes "las habilidades que yo enseño aquí";
+		mes "no las enseñan en ningún otro lado.";
+		mes "Si algún día decides";
+		next;
+		mes "[Alcouskou]";
+		mes "hacerte thief o assassin,";
+		mes "o conoces a alguien que lo es,";
+		mes "ven o diles que vengan aquí.";
+		mes "Esas nuevas habilidades se deberían";
+		mes "enseñar a todo aquel que quiera aprenderlas.";
+		close;
+	}
+}
+
+payon,91,77,3	script	Bag Seller#qsk_tf	99,{
+	mes "[RuRumuni]";
+	mes "Yo soy un mercader honrado aquí";
+	mes "en Payon. Compro pieles de";
+	mes "animales traídos por los";
+	mes "cazadores y hago bolsas de cuero";
+	mes "para vender. Aprendí";
+	mes "desde pequeño y ahora soy bastante bueno.";
+	next;
+	switch(THIEF_SK) {
+	case 0:
+		mes "[RuRumuni]";
+		mes "Hay una guild de thiefs en";
+		mes "algún sitio por Morroc. Sé que alguien";
+		mes "de allí me manda thiefs que necesitan";
+		mes "cosas que fabrico como por ejemplo";
+		mes "^3355FF' Leather Bag of Infinity '^000000.";
+		mes "Vienen muchos a menudo.";
+		close;
+	case 1:
+		if (countitem(952) > 0 && countitem(1055) > 0 && countitem(1025) > 0) {
+			mes "[RuRumuni]";
+			mes "Ahhh... así que viniste a por una bolsa de cuero.";
+			mes "Muy bien, muy bien.";
+			mes "Te haré la bolsa de cuero en";
+			mes "seguida, me llevará poco tiempo.";
+			mes "TuTak TuTak Shyuku Shyuku Shyuku~~~";
+			mes "- - - - -";
+			next;
+			mes "[RuRumuni]";
+			mes "Listo, aquí la tienes.";
+			mes "Lleva esta bolsa de cuero a";
+			mes "Alcouskou de la Thief Guild.";
+			mes "Cuando se la des, él te";
+			mes "enseñará la habilidad que ";
+			mes "quieres aprender.";
+			delitem 952,1; //Cactus_Needle
+			delitem 1055,1; //Earthworm_Peeling
+			delitem 1025,1; //Spiderweb
+			set THIEF_SK,2;
+			getitem 7042,1; //Leather_Bag_Of_Infinity
+			close;
+		}
+		else {
+			mes "[RuRumuni]";
+			mes "Encuentra a Alcouskou de la Thief Guild";
+			mes "para que te envíe una orden de pedido.";
+			mes "Ya sabrás que la bolsa que me pides";
+			mes "lleva mucho tiempo y esfuerzo para hacerla.";
+			mes "Para fabricártela, tendrás que";
+			mes "traerme los materiales que requiere.";
+			next;
+			mes "Y los materiales son";
+			mes "los siguientes  ....";
+			mes "^3355FF' Earthworm Peeling '^000000";
+			mes "^3355FF' Cobweb '^000000";
+			mes "^3355FF' Cactus Needle '^000000";
+			mes "Necesito uno de cada.";
+			close;
+	}
+	case 2:
+		mes "[RuRumuni]";
+		mes "Aquí tienes la bolsa que me pediste.";
+		mes "Llévala a la Thief Guild,";
+		mes "dásela a Alcouskou y dile ";
+		mes "que ya estás preparado para aprender";
+		mes "la habilidad.";
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= v1.0 Fully working
+//= v1.1 Changed Sand Attack requirements from 5 Grit to 5 Fine Grit and a
+//= Leather Bag of Infinity.  These are the official RO requirements
+//= Added npc RuRumuni, maker of Leather Bag of Infinity. [kobra_k88]
+//= v1.1a Now using functions found in "Global_Functions.txt" for
+//= class checks.[kobra_k88]
+//= 1.2 Added Baby Class Support [Lupus]
+//= 1.3 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
+//= 1.4 Fixed exploit [Lupus]
+//= 1.4a Fixed some typos [IVBela]
+//= 1.4b changed perm. variables to temp ones [Lupus]
+//============================================================ 

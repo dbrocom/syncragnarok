@@ -1,0 +1,1264 @@
+//===== eAthena Script ======================================= 
+//= Quest NPCs related to Juno
+//===== By: ================================================== 
+//= eAthena Dev Team; L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 2.0a
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Metto Quest:
+//= - Not really sure exaclty what it's for. :P
+//= - Variable in use: metto_q (max 9)
+//= Alchemist Brothers:
+//= - Used in part of the Alchemist job quest.
+//= - Variable in use: bros_q (max 1)
+//= Doomed Swords Part 2:
+//= - Continuation of the Comodo Quest
+//= - Part 1: Found in Quests_Comodo.txt
+//= - Part 3: Found in Doomed_Swords.txt
+//= - Variable in use dmdswrd_Q (Max 45)
+//===== Additional Comments: ================================= 
+//= v1.1 Re-did the text and re-organized the script.  Corrected some items. [kobra_k88]
+//= v1.2 Added part to Bro's for alchemist quest [Darkchild]
+//= 1.3 fixed that part of Alch Job Quest. [Lupus]
+//= 1.4 Fixed exploit [Lupus]
+//= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//=	Merged metto_quest.txt into Juno quest file.
+//=	Added the Juno portion of the Doomed Swords quest.
+//= 1.6 Fixed various errors in the Bajin NPC. [L0ne_W0lf]
+//= 1.7 Changed ALCH_Q check and set to corrispond to new alchemist job quest. [L0ne_W0lf]
+//= 1.8 Fixed metto_q never reaching 2. Made some names more unique. [L0ne_W0lf]
+//= 1.9 Fixed Missing Variables in Metto quest. (bugreport:473) [Samuray22]
+//= 2.0 Added missing checkweights. [L0ne_W0lf]
+//= 2.0a Fixed several typos (bugreport:1786) [akrus]
+//============================================================ 
+
+// Metto Quest
+
+yuno_in03,26,39,3	script	Metto#juno	709,{
+	mes "[Metto]";
+	if (metto_q == 0) {
+		mes "En el Laboratorio hoy, en el laboratorio mañana! Todos los dias esta lleno de investigaciones! Esto me toma la vida entera, Pero no me dare por vencido hasta lograr crear un nuevo Yuno...";
+		next;
+		mes "[Metto]";
+		mes "¡Un nuevo Yuno en el que todos puedan disfrutar la luz de mi genio! si yo puediera aprovechar el poder del vuelo... Yo se, se que puede Hacerlo!";
+		next;
+		mes "[Metto]";
+		mes "^FF0000Wagan^000000 Dice que mi idea es Demaciado loca e imposible. Pero yo no soy tonto, ¡Yo no me dare por vencido por sus Burlas!";
+		close;
+	}
+	else if (metto_q == 1) {
+		set metto_q,2;
+		mes "Iré a preguntarle a mi colega ^FF0000Stangckle^000000 si me puede ayudar. Estoy seguro que el estara dispuesto a ayudar a un viejo amigo.";
+		next;
+		mes "[Metto]";
+		mes "Si logro tener su ayuda, todo esto será mucho mas fácil. ¡Rezaré! ¡Rezaré a Dios tu crees que esto susedera!";
+		close;
+	}
+	else if (metto_q == 3) {
+		set metto_q,4;
+		mes "¿Que? ¿esa basura de Stangckle dijo que no quería ayudarme?! Esto no es bueno. Esto alentará mi investigación considerablemente.";
+		next;
+		mes "[Metto]";
+		mes "...";
+		mes "¿Qué";
+		mes "voy a hacer ahora?";
+		next;
+		mes "[Metto]";
+		mes "Por suerte, yo tengo otro plan. Estoy seguro que mi amigo y colega  ^FF0000Kato^000000  me prestara su ayuda.";
+		next;
+		mes "[Metto]";
+		mes "Si solo puediera investigar su super robot, Great Z, podría continuar mi investicación";
+		next;
+		mes "[Metto]";
+		mes "Supongo que si Stangckle no quere ayudarme, el puede tomar su camino. yo continuare mi investigación , Sin importar si el me ayuda o no.";
+		next;
+		mes "[Metto]";
+		mes "Especulo grandes cosas, joven amigo. Muahahaha";
+		close;
+	}
+	else if (metto_q == 5) {
+		set metto_q,6;
+		mes "¿Qué?  me estas diciendo que la cosa que necesito para continuar mis investigaciones, el  grandioso Great Z, ¡¿fue destruido?!";
+		next;
+		mes "[Metto]";
+		mes "¡¡Nooooo!! ¿Cómo? ¿cómo hizo esto? ¡¿Están los dioses maldiciendome?!";
+		next;
+		mes "[Metto]";
+		mes "Espera, necesito...";
+		mes "Calmarme...";
+		next;
+		mes "[Metto]";
+		mes "Si pudiera tener la ayuda del profesor ^FF0000CiCi^000000  con su teoría de ingeniería de montaje, yo seria capas de terminar mi investigación...";
+		next;
+		mes "[Metto]";
+		mes "Aún..";
+		mes "¡tengo esperanza!";
+		mes "¡Ha Ha Ha!";
+		close;
+	}
+	else if (metto_q == 7) {
+		set metto_q,8;
+		mes "...";
+		next;
+		mes "[Metto]";
+		mes "...";
+		mes "......";
+		next;
+		mes "[Metto]";
+		mes "¿Cómo pudo pasar 3 veces seguidas? es verdad, ¡los dioses me han abandonado! Estoy arruinado.. ¡¡¡ARRUINADO!!!";
+		next;
+		mes "[Metto]";
+		mes "¿Qué puedo hacer ahora...? En verdad ¿ha llegado el momento para mí de renunciar a todos mis años de investigación?";
+		next;
+		mes "[Metto]";
+		mes "Se que te he decepcionado, pero por favor, olvida todo sobre mi.";
+		next;
+		mes "[Metto]";
+		mes "¿Quién me hizo esto? ¿que tipo de persona maliciosa destruiría los sueños de un hombre?";
+		next;
+		mes "[Metto]";
+		mes "Estoy cansado de esto... creo que es el tiempo de que me de por vencido. Todo se acabo. Por favor no te decepciones...";
+		close;
+	}
+	else if (metto_q == 8) {
+		mes "Quizás debería buscar un trabajo nuevo.. Escuche que es una decisión popular en estos dias...";
+		next;
+		mes "[Metto]";
+		mes "Me pregunto ¿qué debería tener en cuenta? Todo lo que se de seguro es que no seré científico nunca mas. Termine con las investigaciones...";
+		close;
+	}
+	else {
+		mes "Iré a ver algo nuevo. ¿Que estas haciendo aún aqui? Yo ya me estoy retirando de aqui.";
+		next;
+		mes "[Metto]";
+		mes "¡Necesito estar listo! tu deverias seguir adelante, yo me iré pronto..";
+		close;
+	}
+}
+
+yuno_in01,17,30,5	script	Wagan#juno	85,{
+	mes "[Wagan]";
+	if (metto_q == 0) {
+		mes "Estoy seguro de que tu sabes que nuestra ciudad a estado viviendo de nuestras investigación por muchos años.";
+		next;
+		mes "[Wagan]";
+		mes "Nosotros debemos esta calidad de vida a los que han dedicado sus vidas a estudiar e investigar.";
+		next;
+		mes "[Wagan]";
+		mes "Por eso nosotros nos ayudamos el uno al otro y estudiamos juntos. Es agradable tener una ayuda solida cuando nosotros llevamos acabo nuestras investigaciones.";
+		next;
+		mes "[Wagan]";
+		mes "Pero aqui hay algunas malas manzanas que me vuelven loco...";
+		next;
+		mes "[Wagan]";
+		mes "Es bueno tratar con los difícil, pero aquí hay científicos egoístas y locos que hacen las cosas difíciles para el resto de nosotros.";
+		next;
+		mes "[Wagan]";
+		mes "Fuera de esto, ^FF0000Metto^000000 es el peor de todos por mucho, el está en las cosas mas locas...";
+		next;
+		mes "[Wagan]";
+		mes "Para la ciencia , el destruyo todas las facilidades públicas, el fue el causante del ruido, la contaminación y disturbar la paz...";
+		next;
+		mes "[Wagan]";
+		mes "¡Y el justifica su comportamiento bajo la escusa de investigacion! ¡El es un loco quien ha ido muy lejos!";
+		next;
+		mes "[Wagan]";
+		mes "Yo deseo que exista una forma de detenerlo por molestarnos al resto de nosotros. Alguien valiente, atrevido capaz de hacer algo...";
+		next;
+		if (select("Leave it to me.:I wish your village luck in doing so.") == 1) {
+			if (Class == Job_Novice) {
+				mes "[Wagan]";
+				mes "Hmm...";
+				mes "Gracias por la oferta, pero no pienso que sea algo que tu puedas hacer...";
+				next;
+				mes "[Wagan]";
+				mes "Yo creo que que necesitamos a alguen un poco mas severo para ayudarnos. Yo creo que esto es mucho para un pequeño Novice.";
+				next;
+				mes "[Wagan]";
+				mes "Por favor no estes";
+				mes "ofendido por esto.";
+				close;
+			}
+			set metto_q,1;
+			mes "[Wagan]";
+			mes "Oh, ¿tu te haras cargo de esto por nosotros? nosotros estaremos muy agradecidos.";
+			next;
+			mes "[Wagan]";
+			mes "Pero ¿Cómo planeas hacer al respeto? Es mas difícil de lo que suena...";
+			next;
+			if (select("Of course I have a plan.:I guess I need a plan.") == 1) {
+				mes "[Wagan]";
+				mes "Tengo fé en ti. Tu debes saber que el cree en el destino. Usa eso como ventaja.";
+				next;
+				mes "[Wagan]";
+				mes "Estoy mucho mas tranquilo sabiendo que te haras cargo con este pequeño problema...";
+				close;
+			}
+			mes "[Wagan]";
+			mes "Hmmm... admiro tu valentia, pero ¿cómo esperas lograr algo sin un plan?";
+			next;
+			mes "[Wagan]";
+			mes "Tú necesitas algo para engañarlo. Algo sutil... como... Hmm...";
+			next;
+			mes "[Wagan]";
+			mes "...¡Sabotear sus experimentos y hacerlo creer que el destino le falló!";
+			next;
+			mes "[Wagan]";
+			mes "Él es muy hablador, asi que aprovecha eso para que el te cuente todo lo que necesitas saber.";
+			next;
+			mes "[Wagan]";
+			mes "Si...";
+			mes "He estado pensando sobre este plan por un rato..";
+			close;
+		}
+		mes "[Wagan]";
+		mes "Nosotros tendremos que rezarle al destino para que nos ayude. Ahora que lo pienso, Metto es un fuerte creedor del destino.";
+		next;
+		mes "[Wagan]";
+		mes "Si solo puedieramos usar esto para nuestra ventaja...";
+		close;
+	}
+	else if (metto_q == 8) {
+		mes "Gracias por tu ayuda. Porque con tu trabajo de deshacerte de Metto, tenemos un problema menos.";
+		next;
+		mes "[Wagan]";
+		mes "Estoy seguro que la gente de Yuno está realmente agradecida. Aqui hay un pequeño regalo como muestra de apreciación...";
+		next;
+		mes "[Wagan]";
+		if (Class == Job_Sage) {
+			set .@now_weight,maxweight - weight;
+			if (.@now_weight < 300) {
+				mes "Oh no, ¡tal parece llevas mucho equipaje!, ¿Harías algo de espacio?";
+				close;
+			}
+			set metto_q,9;
+			mes "Te deseo suerte en tus futuros esfuerzos...";
+			getitem 715,10; //Yellow_Gemstone
+			close;
+		}
+		set .@now_weight,maxweight - weight;
+		if (.@now_weight < 150) {
+			mes "Oh no, ¡tal parece llevas mucho equipaje!, ¿Harías algo de espacio?";
+			close;
+		}
+		set metto_q,9;
+		mes "Te deseo suerte en tus futuros esfuerzos...";
+		getitem 717,5; //Blue_Gemstone
+		close;
+	}
+	else if (metto_q == 9) {
+		mes "Las cosas aqui se ven mucho mas pacíficas sin Metto. ¡Gracias por tu ayuda!";
+		close;
+	}
+	else {
+		mes "¿Como va tu trabajo con Metto? Por suerte el plan esta llendo bien, lamento mucho molestarte con tal pedido.";
+		close;
+	}
+}
+
+yuno_in01,17,95,5	script	Stangckle#juno	99,{
+	mes "[Stangckle]";
+	if (metto_q == 2) {
+		mes "¿Que puedo hacer por ti? Mi Colega Metto esta apunto de llegar, Asi que no tengo mucho tiempo. Entonces ¿que me decias que necesitabas?.";
+		next;
+		if (select("I'm here to stop your research.:I don't need anything.") == 1) {
+			set metto_q,3;
+			mes "[Stangckle]";
+			mes "...";
+			next;
+			mes "[Stangckle]";
+			mes "...";
+			mes "......";
+			next;
+			mes "[Stangckle]";
+			mes "...";
+			mes "......";
+			mes ".........";
+			next;
+			mes "[Stangckle]";
+			mes "¿Es eso cierto? Metto no piensa en mi como un colega, aun asi ¿el quiere que lo ayude?";
+			next;
+			mes "[Stangckle]";
+			mes "¡¿Él solo me ve como un asistente y quere robarme todo el crédito por nuestros descubrimientos?!";
+			next;
+			mes "[Stangckle]";
+			mes "¡No se puede confiar en este tipo! los rumores eran ciertos; ¡el es realmente malo!";
+			next;
+			mes "[Stangckle]";
+			mes "Y ahora que lo pienso, ¡yo realmente respetaba a ese Traidor! Jamás podre verle la cara de nuevo.";
+			next;
+			mes "[Stangckle]";
+			mes "Estoy feliz que una persona honesta y confiable como tu  haya tenido las agallas para contarme. Gracias.";
+			next;
+			mes "[Stangckle]";
+			mes "Ahora si me disculpas, tengo trabajo que hacer.";
+			close;
+		}
+		mes "[Stangckle]";
+		mes "¿Que estas haciendo? Deja de gastar mi tiempo.";
+		close;
+	}
+	else if (metto_q == 0) {
+		mes "Soy uno de los científicos de esta ciudad. Mi nombre es Stangckle";
+		next;
+		mes "[Stangckle]";
+		mes "Deverías recordar mi nombre, te sera útil en el futuro.";
+		close;
+	}
+	else if (metto_q == 1) {
+		mes "Soy uno de los científicos en esta ciudad. Mi Nombre es Stangckle";
+		next;
+		mes "[Stangckle]";
+		mes "Deverías recordar mi nombre, te sera útil en el futuro..";
+		close;
+	}
+	else {
+		mes "Asi que Metto se convirtió en uno de esos científicos locos. Supongo que es la ultima elección que ha hechoen su vida.";
+		close;
+	}
+}
+
+yuno_in01,19,183,5	script	Kato#juno	55,{
+	mes "[Kato]";
+	if (metto_q == 4) {
+		mes "Yo soy un científico investigador de todas las pequeñas cosas.";
+		next;
+		mes "[Kato]";
+		mes "Por supuesto, mi investigación es privada y confidencial. pero ¿hay algo que pueda hacer por ti?";
+		next;
+		if (select("I want to stop you from making a mistake.:Just saying hello.") == 1) {
+			set metto_q,5;
+			mes "[Kato]";
+			mes "¿Qué? Metto dijo, ¿mi Great Z es inferior a la investigación de Stangckles?";
+			next;
+			mes "[Kato]";
+			mes "¿E-El Dijo que debería renombrar mi invento a \" Lame Z\"? *Sniff* Yo.. yo no lo puedo creer... *sob*";
+			next;
+			mes "[Kato]";
+			mes "S-si mi invento no es bueno, entonces yo supongo que debería destruir my Great Z... *sigh*";
+			next;
+			mes "[Kato]";
+			mes "Gracias por Informarme a tiempo. Sé que no fue fácil decirmelo.";
+			close;
+		}
+		mes "[Kato]";
+		mes ".........................";
+		mes "Okay..";
+		mes "Um... Oye";
+		close;
+	}
+	else if (metto_q == 6 || metto_q == 7 || metto_q == 8 || metto_q == 9) {
+		mes "Estoy interesado en investigar la inteligencia artificial. Ya sabes como los robots.";
+		next;
+		mes "[Kato]";
+		mes "Se que es muy difícil de conseguir, pero donde este un deseo, esta un camino.";
+		next;
+		mes "[Kato]";
+		mes "Y si tu ves algo realmente impresionante como esto, tu sabras que es mi trabajo.";
+		close;
+	}
+	else {
+		mes "Soy un científico de la Inteligencia Artificial y Robots";
+		next;
+		mes "[Kato]";
+		mes "No tengo un projecto específico ahora mismo, pero my última creación, el \"Great Z\", es el producto de un GRAN Genio.";
+		close;
+	}
+}
+
+yuno_in03,178,43,0	script	CiCi#juno	121,{
+	if (metto_q == 6) {
+		mes "[CiCi]";
+		mes "Mi nombre es CiCi. Soy uno de las tres Grandes cientificos de esta ciudad.";
+		next;
+		mes "[CiCi]";
+		mes "Hay muchos grandes científicos en esta ciudad, pero estar en el top tress es un verdadero honor. ¿No lo crees?";
+		next;
+		mes "[CiCi]";
+		mes "Bien, creo que he estado un poco ocupado ahora mismo, ¿que puedo hacer por ti?";
+		next;
+		switch(select("I want to warn you.:Nothing, just saying Hi.")) {
+		case 1:
+			set metto_q,7;
+			mes "[CiCi]";
+			mes "¿Hm? ¿Metto dijo que no necesitava mi teoría de ingeniería de montaje? Hmpf, ¡que Ingrato!";
+			next;
+			mes "[CiCi]";
+			mes "Él no tiene ni la mitad de cerebro, para aprender algo sobre la verdadera ciencia y una investigación inteligente.";
+			next;
+			mes "[CiCi]";
+			mes "¡¿El piensa que le debo una disculpa?! ¿De qué? ¡¿Por que debería perdonarlo...?!";
+			next;
+			mes "[CiCi]";
+			mes "Como sea, Yo realmente no tengo las partes necesarias para ayudarlo. Supongo, de cualquier forma, el no tendrá una oportunidad.";
+			next;
+			mes "[CiCi]";
+			mes "Hazle entender que yo realmente no quiero ser parte de nada que el haga. El ni siquiera esta haciendo el tipo de investigación que nosotros capaces de publicar.";
+			close;
+			break;
+		case 2:
+			mes "[CiCi]";
+			mes "¿Que? ¿Eso es? Estaba aburrido antes de que llegaras, pero tu has llegado a aburrirme mas.";
+			break;
+		}
+	}
+	else if (metto_q < 6) {
+		mes "[CiCi]";
+		mes "Mi Nombre es CiCi. Soy uno de los 3 mas importantes científicos de esta ciudad.";
+		next;
+		mes "[CiCi]";
+		mes "Hay muchos científicos en esta ciudad, pero estar entre los primeros 3 es un honor, no?";
+		close;
+	}
+	else {
+		mes "[CiCi]";
+		mes "Hmmm...";
+		mes "Yo quero mejorar la \"Riding Engine\" en un nuevo camino, pero no tengo todo lo que necesito...";
+		next;
+		mes "[CiCi]";
+		mes "Que dolor de cabeza. Y Metto nunca me a ofrecido ayuda al final. Esto no será fácil.";
+		close;
+	}
+}
+
+// Alechmist Brothers
+yuno_in01,103,157,3	script	Bain#juno	98,{
+	if (checkweight(1201,1) == 0) {
+		mes "-¡¡Espera un Minuto!! -";
+		mes "- Actualmente tu llevas -";
+		mes "- Muchos Items contigo -";
+		mes "- Por favor intenta de nuevo -";
+		mes "- Después de que pierdas algo de peso -";
+		close;
+	}
+	if (countitem(974) > 0 && countitem(612) > 4 && countitem(1003) > 4 && countitem(7068) > 4 && countitem(7043) > 4 && countitem(757) > 2 && countitem(756) > 2 && Zeny > 2000) {
+		if (ALCH_Q == 23) set ALCH_Q,24;
+		set .@kyulkwa,rand(1,10);
+		mes "[Bain]";
+		mes "Oh ho ho.. Aquí estan las partes que necesitaba. Muchas gracias.";
+		next;
+		mes "[Bain]";
+		mes "Okay, Tratemos de que funcione. ¡Espera por un segundo!";
+		next;
+		mes "^3355FF*Vrrrmmmmm*^000000";
+		next;
+		mes "^3355FF*Pakakkakakakkakaakapakakkakak*^000000";
+		next;
+		mes "^3355FF*Shakakakakkakakakakkakakakakka!*^000000";
+		next;
+		if (.@kyulkwa < 4 || .@kyulkwa > 8)
+			callsub S_DelItems,1002,5,1;
+		if (.@kyulkwa == 5 || .@kyulkwa == 6 || .@kyulkwa == 8)
+			callsub S_DelItems,723,5,1;
+		else if (.@kyulkwa == 7)
+			callsub S_DelItems,969,2,0;
+	}
+	if (bros_q == 1) {
+		mes "[Bain]";
+		mes "En el caso de que tu";
+		mes "olvides, aqui estan";
+		mes "los materiales requeridos";
+		mes "Escribelos abajo si es necesario";
+		next;
+		mes "[Bain]";
+		mes "^FF00001 Mixture^000000, ^FF00005 Mini-Furnace^000000,";
+		mes "^FF00005 Burnt Tree^000000 , ^FF00005 Coal^000000,";
+		mes "^FF00005 Fine Sand^000000, ^FF00003 Rough Elunium^000000,";
+		mes "^FF00003 Rough Oridecon^000000^000000.";
+		next;
+		mes "[Bain]";
+		mes "Y como adición para esto, tu ";
+		mes "necesitaras 2.000 zeny.";
+		mes "Buena Suerte...";
+		close;
+	}
+	if (bros_q == 0) {
+		mes "[Bain]";
+		mes "Nosotros inventaremos una marioneta que pueda hablar y comunicarse!. Bueno. al menos, estoy tratando.";
+		next;
+		mes "[Bain]";
+		mes "Tengo una idea para una historia legendaria. Yo figuro que si se ha hecho antes, este proyecto es totalmente posible.";
+		next;
+		mes "[Bain]";
+		mes "Pero ahora mismo, me faltan suministros";
+		mes "y partes que yo necesito esto para";
+		mes "este reto. No sé como";
+		mes "ellos juntaron todos los materiales necesarios...";
+		next;
+		mes "[Bain]";
+		mes "El dinero solo puede comprar algunos de los que yo";
+		mes "necesito. Pero hay algunos item";
+		mes "que necesitan ser tomados de";
+		mes "montruos que son realmente";
+		mes "poderosos. ¿Cómo podré continuar mi investigación?";
+		next;
+		if (select("I'll get them for you.:Good luck.") == 1) {
+			set bros_q,1;
+			mes "[Bain]";
+			mes "¿En serio? esa benevolencia es rara";
+			mes "en este dia y año. Nosotros estaremos";
+			mes "muy agradecidos por tu ayuda.";
+			mes "Aqui estan los item que nosotros";
+			mes "necesitamos:";
+			next;
+			mes "[Bain]";
+			mes "^FF00001 Mixture^000000, ^FF00005 Mini-Furnace^000000,";
+			mes "^FF00005 Burnt Tree^000000 , ^FF00005 Coal^000000,";
+			mes "^FF00005 Fine Sand^000000, ^FF00003 Rough Elunium^000000,";
+			mes "^FF00003 Rough Oridecon^000000^000000.";
+			next;
+			mes "[Bain]";
+			mes "Nosotros además necesitamos 2.000 zeny";
+			mes "El dinero nos ayudara a pagar por los";
+			mes "gastos menores que participan en la realización de esta tarea.";
+			mes "Que dios le ayude";
+			close;
+		}
+		mes "[Bain]";
+		mes "Deseo que pudiera ser";
+		mes "un fuerte aventurero";
+		mes "como tu.";
+		close;
+	}
+
+S_DelItems:
+	delitem 974,1; //Mixture
+	delitem 612,5; //Portable_Furnace
+	delitem 1003,5; //Coal
+	delitem 7068,5; //Burn_Tree
+	delitem 7043,5; //Fine_Sand
+	delitem 757,3; //Elunium_Stone
+	delitem 756,3; //Oridecon_Stone
+	set zeny,zeny-2000;
+	getitem getarg(0),getarg(1); //Gold
+	mes "[Bain]";
+	mes "AHHH, funciono!!";
+	mes "Nosé si podremos hacer algo mas,";
+	if (getarg(2) == 1)
+		mes "Pero esta vez hemos creado.. "+getarg(1);
+	else 
+		mes "pero esta vez hemos creado..";
+	mes "^FF0000"+getitemname(getarg(0))+"^000000 !";
+	next;
+	mes "[Bain]";
+	mes "Ahora que sabemos que funciona";
+	mes "No tengo ninguna necesidad de esto.";
+	mes "¿Por qué no lo tomas? Oh,";
+	mes "y si encuentras más partes,";
+	mes "damelas a mi de nuevo. Heheheheheh..";
+	next;
+	mes "[Bain]";
+	mes "Gracias por Ayudarme.";
+	mes "Tienes mi eterna gratitud.";
+	mes "¡Te deseo suerte en tus viajes!";
+	close;
+}
+	
+yuno_in01,100,153,7	script	Bajin	47,0,0,{
+	if (checkweight(1201,1) == 0) {
+		mes "- Espera un Minuto -";
+		mes "- Actualmente tu traes -";
+		mes "- muchos items contigo. -";
+		mes "- Por favor intenta de nuevo -";
+		mes "- Cuando pierdas algo de peso. -";
+		close;
+	}
+	if (countitem(974) > 0 && countitem(612) > 4 && countitem(1003) > 4 && countitem(7068) > 4 && countitem(7043) > 4 && countitem(757) > 2 && countitem(756) > 2 && Zeny > 2000) {
+		if (ALCH_Q == 23) set ALCH_Q,24;
+		set .@kyulkwa,rand(1,10);
+		mes "[Bajin]";
+		mes "Oh ho ho... Aquí estan las partes!";
+		mes "Que necesito. Muchas Gracias";
+		mes "Okay, ¡Probemos!";
+		mes "¡Espera por un segundo!";
+		next;
+		mes "^3355FF*Vrrrmrmrmrmrmrmrmrmrmrmmmmm*^000000";
+		next;
+		mes "^3355FF*Pakakkakakakkakaakapakakkakak*^000000";
+		next;
+		mes "^3355FF*Shakakakakkakakakakkakakakakka!*^000000";
+		next;
+
+		if (.@kyulkwa < 4 || .@kyulkwa > 8)
+			callsub S_DelItems,1002,5,1;
+		if (.@kyulkwa == 5 || .@kyulkwa == 6 || .@kyulkwa == 8)
+			callsub S_DelItems,723,5,1;
+		else if (.@kyulkwa == 7)
+			callsub S_DelItems,984,3,1;
+	}
+	if (bros_q == 1) {
+		mes "[Bajin]";
+		mes "En el caso de que";
+		mes "olvidado, estos son los";
+		mes "los materiales necesarios.";
+		mes "Anótelo si es necesario.";
+		next;
+		mes "[Bajin]";
+		mes "^FF00001 Mixture^000000, ^FF00005 Mini-Furnace^000000,";
+		mes "^FF00005 Burnt Tree^000000 , ^FF00005 Coal^000000,";
+		mes "^FF00005 Fine Sand^000000, ^FF00003 Rough Elunium^000000,";
+		mes "^FF00003 Rough Oridecon^000000^000000.";
+		next;
+		mes "[Bajin]";
+		mes "Y ademas, ";
+		mes "Necesitamos 2.000 zenny";
+		mes "Buena Suerte!";
+		close;
+	}
+	if (bros_q == 0) {
+		mes "[Bajin]";
+		mes "Vamos a inventar una muñeca que puede hablar y comunicarse! Bueno, al menos, estoy intentando.";
+		next;
+		mes "[Bajin]";
+		mes "Tengo una idea para una historia Legendaria. este projecto Funcionara!";
+		next;
+		mes "[Bajin]";
+		mes "Pero ahora, me faltan suministros";
+		mes "y partes para terminarlo";
+		mes "esta hazaña. No sé cómo..";
+		mes "recogieron todos los materiales necesarios ....";
+		next;
+		mes "[Bajin]";
+		mes "El dinero Solo puede comprar algunos de ellos y";
+		mes "hay algunos que ..";
+		mes "Tienen que ser Sacados desde";
+		mes "Moustros que son muy..";
+		mes "poderosos. Como podré continuar mi investigación?";
+		next;
+		if (select("I'll get them for you.:Good luck.") == 1) {
+			set bros_q,1;
+			mes "[Bajin]";
+			mes "Oh, eres muy amable.";
+			mes "Nosotros Agradecemos Enormemente tu Ayuda.";
+			mes "Aquí estan los item que nosotros";
+			mes "Necesitamos.";
+			next;
+			mes "[Bajin]";
+			mes "^FF00001 Mixture^000000, ^FF00005 Mini-Furnace^000000,";
+			mes "^FF00005 Burnt Tree^000000 , ^FF00005 Coal^000000,";
+			mes "^FF00005 Fine Sand^000000, ^FF00003 Rough Elunium^000000,";
+			mes "^FF00003 Rough Oridecon^000000^000000.";
+			next;
+			mes "[Bajin]";
+			mes "y necesitamos 2.000";
+			mes "El dinero ayudará a pagar por el";
+			mes "menores gastos en la realización de esta tarea.";
+			mes "Velocidad de los dioses.!";
+			close;
+		}
+		close;
+	}
+
+S_DelItems:
+	delitem 974,1; //Mixture
+	delitem 612,5; //Portable_Furnace
+	delitem 1003,5; //Coal
+	delitem 7068,5; //Burn_Tree
+	delitem 7043,5; //Fine_Sand
+	delitem 757,3; //Elunium_Stone
+	delitem 756,3; //Oridecon_Stone
+	set zeny,zeny-2000;
+	getitem getarg(0),getarg(1); //Gold
+	mes "[Bajin]";
+	mes "AHHH, Funciono!!";
+	mes "No sé si podemos hacer otra cosa,";
+	if (getarg(2) == 1)
+		mes "pero esta vez hemos creado "+getarg(1);
+	else 
+		mes "pero esta vez hemos creado";
+	mes "^FF0000"+getitemname(getarg(0))+"^000000 !";
+	next;
+	mes "[Bajin]";
+	mes "Ahora que sabemos que funciona";
+	mes "no tengo ninguna necesidad de esto.";
+	mes "¿Por qué no lo tomas? Oh,";
+	mes "Y si encuentras mas partes";
+	mes "Traemelas a mi de nuevo. Heheheheh.";
+	next;
+	mes "[Bajin]";
+	mes "Gracias por Ayudarme";
+	mes "Tienes mi eterna gratitud.";
+	mes "¡Te deseo suerte en tus viajes!";
+	close;
+}
+
+// Doomed Swords - Juno Portion
+//============================================================ 
+yuno,157,87,4	script	A Citizen of Juno#juno	102,{
+	mes "[Shalima]";
+	mes "Cuando vayas al norte de Al De Baran, llegarás a 'Elmeth Plateau, \"un lugar cubierto con roca fundida.";
+	next;
+	mes "[Shalima]";
+	mes "En la cima de una montaña conectado a la meseta, tu puedes encontrar un puente que conduce a este lugar!  !, ^3355FFJuno,^000000 La ciudad de los Sages.!";
+	next;
+	if (dmdswrd_Q == 23) {
+		mes "[Shalima]";
+		mes "Oh...?";
+		mes "Que es ese objeto birllante que traes contigo? sera...??";
+		next;
+		mes "[Shalima]";
+		mes "la ^3355FFStamp of Muriniel^000000? Que sorpresa!";
+		next;
+		mes "[Shalima]";
+		mes "Cuando vallas al este desde la entrada de Juno, Tu encontraras la calle de las tiendas de libors, si tiene algo de tiempo porfavor visitia ^3355FFSir Yklah^000000 ya que es uno de los 3 mas reconocidos sages en Juno.";
+		next;
+		mes "[Shalima]";
+		mes "Yo creo Que el tendrá un interes en especial Por la estampilla que tu traes..";
+		close;
+	}
+	else {
+		mes "[Shalima]";
+		mes "En Juno, se puede visitar lugares como el \"Juphero Plaza\", \"Yuno Sala de Congresos\", \"Magia Schweicherbil Academia ', o el  \"Museo de Moustros. \" Estos lugares son famosos en todo el mundo!";
+		next;
+		mes "[Shalima]";
+		mes "Y si estas interesados Puedes ir al \"Sage Castle\" donde la gente cambia su job a Sage, una de las clases mas únicas.";
+		next;
+		mes "[Shalima]";
+		mes "Si estas Interesado en el Job Sage, porque no vas a dar una vuelta por el castillo?";
+		close;
+	}
+}
+
+yuno,261,99,4	script	Sage Yklah#juno	735,{
+	if (dmdswrd_Q == 23 || dmdswrd_Q == 24 || dmdswrd_Q == 25) {
+		switch(dmdswrd_Q) {
+		case 23:
+			mes "[Yklah]";
+			mes "- ! ! ! -";
+			next;
+			mes "[Yklah]";
+			mes "Ese item..";
+			mes "Ese brillante item que tu estas trayendo, es la ^3355FFStamp of Muriniel^000000?! Oh! Que sorpresa!!";
+			next;
+			mes "[Yklah]";
+			mes "He oído que es una de las mas calientes y secas la tierra, pero nunca me imaginé ser capaz de verla con mis propios ojos!";
+			next;
+			mes "[Yklah]";
+			mes "¿Quién eres tu ...? Porque tu Traes ese Legendario item";
+			next;
+			switch(select("(Show him the slate):I'm a genius!:I'm a GM!")) {
+			case 1:
+				mes "[Yklah]";
+				mes "No lo puedo creer!! Solo El Elegido puede poseer la Stamp of Muriniel...";
+				next;
+				mes "[Yklah]";
+				mes "Oh si. es Verdad, es Verdad.. Tu no sabes como usar ese item cierto?";
+				next;
+				mes "[Yklah]";
+				mes "hay una vieja canción en Yuno, About ^3355FF'The Doomed Sword'^000000 Que seguro tu habras escuchado..";
+				next;
+				mes "[Yklah]";
+				mes "'Even if you're running toward a light on the other side of the mist, you can't reach it.'";
+				next;
+				mes "[Yklah]";
+				mes "'The chime of the bell from across the valley cannot be held in your hand.'";
+				next;
+				mes "[Yklah]";
+				mes "Sí, es un tipo de canción difícil de entender, pero supone que expresa cómo sabios en la antigüedad se sienten acerca de la obtención de las doomed swords.";
+				//mes "that's how exactly sages in ancient ages felt about obtaining the doomed sword.";
+				next;
+				mes "[Yklah]";
+				mes "Si tienes idea de como obtener la Doomed sword, ven y dimelo";
+				next;
+				mes "[Yklah]";
+				mes "Como tu ya tienes el Stamp of Muriniel, Estoy en la mejor dispocision de ayudarte.";
+				set dmdswrd_Q,24;
+				close;
+			case 2:
+				mes "[Yklah]";
+				mes "¿Hmm?";
+				mes "Dijiste Genio? Como puedes decir eso en una ciudad llena de gente tan brillante? Eso no tiene nada de especial.";
+				next;
+				mes "[Yklah]";
+				mes "Además, si tu eres colega, Creo que te recordaría. No acostumbro olvidar gente con quien he tratdo al menos una vez.";
+				close;
+			case 3:
+				mes "[Yklah]";
+				mes "Un...";
+				mes "¿GM?";
+				next;
+				mes "[Yklah]";
+				mes "No entiendo de que estas hablando. Pero hay una antigua cancion de JUNO acerca de este GM del que hablas...";
+				next;
+				mes "[Yklah]";
+				mes "'^FF3355Hacerse pasar por un GM se castiga con un bloqueo permanente de cuenta^000000.' Pero que podria significar esto?";
+				next;
+				mes "^3355FFQue descepcionante!^000000";
+				close;
+			}
+		case 24:
+			if (countitem(7030) > 2 && countitem(913) > 9 && countitem(7032) > 0) {
+				mes "[Yklah]";
+				mes "Hmm! Buen trabajo, trajiste todos los \"items\". Trata de insertarlos en las ranuras.";
+				next;
+				mes "[Yklah]";
+				mes "Para ser honesto, pense en esto antes, pero esta es la primera vez que realmente intento este experimento. Adelante, quiero ver que pasa!";
+				next;
+				mes "^3355FFInsertas los \"items\"";
+				mes "en las ranuras .^000000";
+				delitem 7030,3; //Claw_Of_Desert_Wolf
+				delitem 913,10; //Tooth_Of_Bat
+				delitem 7032,1; //Piece_Of_Egg_Shell
+				next;
+				mes "^3355FF*Crank Crank*^000000";
+				mes "^3355FFEscuchas un sonido extraño que proviene desde adentro de la estatua.^000000";
+				next;
+				mes "^3355FF*Click*";
+				mes "*Click Click*^000000";
+				next;
+				mes "^3355FFUn pequeño orificio se abre cerca del pie de la estatua, y un ^9999FF Stamp of Muriniel^3355FF sale de el.^000000";
+				next;
+				mes "^3355FFTu tienes ^9999FFUn pedazo del Stamp of Muriniel^3355FF.^000000";
+				next;
+				mes "[Yklah]";
+				mes "Huh?! Ese pedazo parece ser la pieza que faltaba del stamp que tienes. Porque no tratas de unirlas?";
+				next;
+				mes "^3355FFUnes las dos espampas.^000000";
+				next;
+				mes "^3355FFY obtienes la";
+				mes "Verdadera Stamp of Muriniel.^000000";
+				set dmdswrd_Q,25;
+				next;
+				mes "[Yklah]";
+				mes "Oh? Este patron es...!! Ah, ahora entiendo como funciona. Ahora, por favor pon atencion...";
+				next;
+				mes "[Yklah]";
+				mes "Me gustaría traer a la \"slate\" a Snotora, la isla de los conocimientos, que es una parte de Juno. Alli encontraras una estatua de la Diosa Snotora en algún lugar de la isla.";
+				next;
+				mes "[Yklah]";
+				mes "Cerca de la estatua, encontraras a^3355FFSyklah^000000, uno de los 3 famosos sages de Juno. Habla con el, el te dira algo referente al patron del \"slate\".";
+				next;
+				mes "[Yklah]";
+				mes "Santo cielo";
+				mes "Apresurate...";
+				close;
+			}
+			else {
+				mes "[Yklah]";
+				mes "Dejame decirte todo lo que se acerca de la \"doomed sword\". Hay una antigua cancion que se refiere a la legend \"doomed sword\"...";
+				next;
+				mes "[Yklah]";
+				mes "^3355FFTu, aquel con fe sincera, aquel que humildemente accepta la prosperidad de Mineta, el conocimiento de Snotora y el honor de Solomon...^000000";
+				next;
+				mes "[Yklah]";
+				mes "^3355FFYo te otorgo esta columna de luz. Los 3 Sages de Juno seran ahora tu guia^000000.";
+				next;
+				mes "[Yklah]";
+				mes "Bueno, si tu ya sabes algo acerca de Juno, deberas de saber que Juno se compone de 3 islas que representan, prosperidad, conocimiento y honorresent propsperity, knowledge and honor.";
+				next;
+				mes "[Yklah]";
+				mes "Los 3 sages descritos en la cancion, representan cada isla. En este momento, probablemente te estas preguntando si  yo soy uno de ellos.";
+				next;
+				mes "[Yklah]";
+				mes "Existe una antigua tradicion en Juno, en la cual los tres mejores sages son seleccionados para representar a cada una de las islas de Juno.";
+				next;
+				mes "[Yklah]";
+				mes "Como uno de los tres, yo sere uno de tus guias en esta parte de tu viaje por la \"doomed sword\".";
+				next;
+				mes "^3355FFYklah apunto al poste de la estatua con su dedo, y tu viste que hay un extraño patron gravado en el poste.^000000";
+				next;
+				mes "[Yklah]";
+				mes "Ahora, fijate bien. Esta estatua fue construida como tributo a uno de los 3 primeros sages. Cuando tu ves la parte baja del poste, podras der muchas pequeñas ranuras.";
+				next;
+				mes "[Yklah]";
+				mes "Si insertas algunos \"items\" en las ranuras, puedes obtener mas pistas relacionadas con la \"doomed sword\"";
+				next;
+				mes "[Yklah]";
+				mes "Por las historias que he escuchado acerca de los grandes Sages, he descubierto cuales son los items que necesitas poner en las ranuras.";
+				next;
+				mes "[Yklah]";
+				mes "Vas a necesitar...";
+				mes "^3355FF3 Claw of Desert Wolf^000000";
+				mes "^3355FF10 Tooth of Bat^000000";
+				mes "^3355FF1 Piece of Egg Shell^000000.";
+				next;
+				mes "[Yklah]";
+				mes "Regresa cuando hallas conseguido esos items y hablaremos mas de la \"doomed sword\".";
+				next;
+				mes "[Yklah]";
+				mes "Para tu información, puedes obtener claw of desert wolf en el desierto de Morroc, y el tooth of bat puede ser obtenido en cualquier cueva.";
+				next;
+				mes "[Yklah]";
+				mes "Finalmente, el \"piece of egg shell\" se obtiene de mounstros con forma de huevo en Payon Dungeon.";
+				close;
+			}
+		case 25:
+			mes "[Yklah]";
+			mes "Por las historias que he escuchado acerca de los grandes Sages, he descubierto cuales son los items que necesitas poner en las ranuras.";
+			next;
+			mes "[Yklah]";
+			mes "Vas a necesitar...";
+			mes "^3355FF3 Claw of Desert Wolf^000000";
+			mes "^3355FF10 Tooth of Bat^000000";
+			mes "^3355FF1 Piece of Egg Shell^000000.";
+			next;
+			mes "[Yklah]";
+			mes "Regresa cuando hallas conseguido esos items y hablaremos mas de la \"doomed sword\".";
+			next;
+			mes "[Yklah]";
+			mes "Para tu informacion, puedes obtener claw of desert wolf en el desierto de Morroc, y el tooth of bat puede ser obtenido en cualquier cueva.";
+			next;
+			mes "[Yklah]";
+			mes "Finalmente, el \"piece of egg shell\" se obtiene de mounstros con forma de huevo en Payon Dungeon.";
+			close;
+		}
+	}
+	else {
+		mes "[Yklah]";
+		mes "^3355FFJuphero^000000...";
+		mes "Ese era el nombre de una ciudad que existio en tiempos antiguos.";
+		next;
+		mes "[Yklah]";
+		mes "La gente mas inteligente y talentosa de aquiella epoca vivia alli, utilizando las piezas del \"Yamir's hart\" para fortalacer su civilización.";
+		next;
+		mes "[Yklah]";
+		mes "Desafortunadamente, sucedio que abusaron de ese grandioso poder y de alguna forma fueron destruidos.";
+		next;
+		mes "[Yklah]";
+		mes "Si estas buscando adquirir el conocimiento de Dios, primero debe ser humilde. De lo contrario ...";
+		close;
+	}
+}
+	
+yuno,305,207,4	script	Sage Syklah#juno	735,{
+	if (dmdswrd_Q == 25 || dmdswrd_Q == 26 || dmdswrd_Q == 27) {
+		switch(dmdswrd_Q) {
+		case 25:
+			mes "[Syklah]";
+			mes "Que es eso?!";
+			mes "Puede ser acaso el \"Stamp of Muriniel\"?";
+			next;
+			mes "[Syklah]";
+			mes "Ahoram debemos luchar a muerte para saber si tu eres digno de tenere ese item. Preparate!";
+			next;
+			mes "[Syklah]";
+			mes "...";
+			mes "Muhahahahaha!!! No te preocupes, solo estoy bromeando. Yklah me dijo que tu vendrias.";
+			next;
+			mes "[Syklah]";
+			mes "Se dice que el \"Stamp of Muriniel\" elige a su dueño,  y es a el a quien se le aparece.";
+			next;
+			mes "[Syklah]";
+			mes "Apesar de ser uno de los 2 grandes Sages de Juno, Nunca habia visto este item antes.";
+			next;
+			mes "[Syklah]";
+			mes "Yklah me dio una idea acerca de la \"Stamp of Muriniel\" que tienes, porlo que trataremos esto tambien.";
+			next;
+			mes "[Syklah]";
+			mes "El patron Grabado en la \"Stamp of Muriniel\" tiene texturas que son similares al patron grabado en esta ^3355FFStatue of the Goddess Snotora^000000.";
+			next;
+			mes "^3355FFTu viste eso por ti msimo, el grabado en la \"statue of the Goddess Snotora\" concuerda con el de la \"Stamp of Muriniel\".^000000";
+			next;
+			mes "[Syklah]";
+			mes "Cuando era joven, aprendí sobre una stamping ink legendaria relacionada con esta estatua. Pero esta vez, no le encuentro sentido. ¿Vamos, Que tan Legendaria puede ser la stamping ink?";
+			next;
+			mes "[Syklah]";
+			mes "Pero ahora creo que esta stamping ink puede ser usada con la Stamp of Muriniel.";
+			next;
+			mes "[Syklah]";
+			mes "Pero siempre pense que habia aprendido como crear esta especial stamping ink, esto es muy dificil para mi recolectar los materiales nesezarios para crear esta.";
+			next;
+			mes "[Syklah]";
+			mes "Okay, sí tu estas listo, por favot traeme los siguientes items. Nesecito esto para la creacion de la legendary red ink, asi que traeme...";
+			next;
+			mes "[Syklah]";
+			mes "^3355FF20 Red Herb^000000,";
+			mes "^3355FF5 Stone^000000 y";
+			mes "^3355FF1 Stone Heart^000000.";
+			mes "El Stone Heart puede ser usado como una botella para contener esta especial Tinta(ink).";
+			next;
+			mes "[Syklah]";
+			mes "Pienzo que es todo lo que nesecito. De todas formas, creo que recolectar estos items no puede ser una dificil tarea para ti. ¡Buena Suerte!.";
+			set dmdswrd_Q,26;
+			close;
+		case 26:
+			if (countitem(7049) > 4 && countitem(953) > 0 && countitem(507) > 19) {
+				mes "[Syklah]";
+				mes "¡Hahaha...!";
+				mes "Asi que ya has terminado de recolectar los items que te pedi. Bien, Bien, bien, Vamos a empezar...";
+				delitem 7049,5; //Stone
+				delitem 953,1; //Stone_Heart
+				delitem 507,20; //Red_Herb
+				next;
+				mes "^3355FFSage Syklah machaco las stones y el stone heart y moldeo ellos in una extraña textura.^000000";
+				next;
+				mes "^3355FFMolio las red herbs y puso ellas en el molde de piedra.^000000";
+				next;
+				mes "^3355FFDespues, el tomo una capsula con textura extraña de su bolso, Salpico algun liquido de esta, y comenzoa recitar un hechizo...^000000";
+				next;
+				mes "[Syklah]";
+				mes "Haooooh...";
+				mes "Doo de doo de~ Dah dah dah Dan dan dan Dah dah dah! Nu ha nu ha nu hahaha... Moo hee moo hee moo hee~";
+				mes "- ¡¡Pah ahhhh !! -";
+				next;
+				mes "^3355FFLa Stamping Ink of Muriniel Ha sido creada, y ha sido entregada a ti por el sage Syklah.^000000";
+				set dmdswrd_Q,27;
+				next;
+				mes "[Syklah]";
+				mes "ahora, con esta stamping ink, tu eres capas de usar la Stamp of Muriniel.";
+				next;
+				mes "[Syklah]";
+				mes "Ahora, No pienzo que tu puedas usar la stamp dondequiera. Despues de todo, Este es un item Legendario.";
+				next;
+				mes "[Syklah]";
+				mes "Por favor visita al Tercer Sage ^3355FFEsklah^000000 Quien se queda en Solomon, La isla de Prosperidad, aqui en Juno.";
+				next;
+				mes "[Syklah]";
+				mes "El puede ser capas de decirte mas sobre donde usar esta stamp. Como sea, Se cuidadoso. El es el mas Fastidioso sage de todos nosotros.";
+				close;
+			}
+			else {
+				mes "[Syklah]";
+				mes "Espero que puedas traerme pronto lo que nesecito para crear la 'Stamp of Muriniel' ink.";
+				next;
+				mes "[Syklah]";
+				mes "Nesecitare...";
+				mes "^3355FF20 Red Herb^000000,";
+				mes "^3355FF5 Stone^000000 y";
+				mes "^3355FF1 Stone Heart^000000.";
+				close;
+			}
+		case 27:
+			mes "[Syklah]";
+			mes "Por favor visita a ^3355FFEsklah^000000 en la isla de prosperidad, Solomon. Pero se cuidadoso. Él es el más exigente Sage de todos nosotros.";
+			close;
+		}
+	}
+	else {
+		mes "[Syklah]";
+		mes "Las personas aquí continuan hablando de algunos Hombres sospechosos viviendo en Juno.";
+		next;
+		mes "[Syklah]";
+		mes "Supuestamente, El es muuy Peligroso, y esta siempre inmerso en el mismo en alguna clase de busqueda.";
+		next;
+		mes "[Syklah]";
+		mes "Las personas realmente lo consideran a el como un 'Mad Scientist,' Gastando su tiempo estudiando cosas impracticas, lejos del entendimiento de la gente normal.";
+		next;
+		mes "[Syklah]";
+		mes "Este es un rumor que este cientifico es responsable por crear a 'Blazer,' un monstruo hecho de Fuego Magico.";
+		next;
+		mes "[Syklah]";
+		mes "Es un monstruo Peligrosisimo y Temidisimo que lanza hechizos como Fire Bolt y Fire Ball que vive fuera de Juno.";
+		close;
+	}
+}
+	
+yuno,213,298,4	script	Sage Esklah#juno	735,{
+	if (dmdswrd_Q == 27 || dmdswrd_Q == 28 || dmdswrd_Q == 29 || dmdswrd_Q == 30) {
+		switch(dmdswrd_Q) {
+		case 27:
+			mes "[Esklah]";
+			mes "¿Hm...?";
+			mes "Tú debes ser la persona que tiene la Stamp of Muriniel...";
+			next;
+			mes "[Esklah]";
+			mes "Heh, ¡Tu no lo parecieras. Pero incluso pensando que tu te vez tan ordinario, Tu posees el item Legendario!";
+			next;
+			mes "[Esklah]";
+			mes "Solo unas cuantas personas en la historia de Rune-Midgard's  han sido elegidos para usar el ^3355FFStamp of Muriniel.^000000";
+			next;
+			mes "[Esklah]";
+			mes "Como sea, Es mi trabajo probar si estas realmete calificado o no para poseerlo.";
+			next;
+			mes "[Esklah]";
+			mes "Dejame decirte sobre el stamp craftman ^3355FFMuriniel^000000.";
+			next;
+			mes "[Esklah]";
+			mes "Este hombre vivió hace tiempo, en algun lugar en Mt. Mjornir. Él era entusiasta en sus estudios, y quiso reconstruir cada Sello que existe en el mundo.";
+			next;
+			mes "[Esklah]";
+			mes "Creia que la gente era obstáculo a su estudio de sellos, El vivio en reclucion, Estudiando SOLO.";
+			next;
+			mes "[Esklah]";
+			mes "Mientras el estudiaba sus sellos un día, él logro encontrar un círculo mágico que conectó este mundo con otro.";
+			next;
+			mes "[Esklah]";
+			mes "Este círculo era totalmente diferente de los utilizados por Mages, Wizards o Sages. Este Sello tenia el poder de invocar una Demoniaca Creatura desde el otro Mundo.";
+			next;
+			mes "[Esklah]";
+			mes "Para convocar a la criatura, el Sello debe ser creado en la localización perfecta. Muriniel comenzó a explorar varios lugares y finalmente logro encontrar el punto que él buscaba.";
+			next;
+			mes "[Esklah]";
+			mes "El lugar que el encontro es ahora el ^3355FFMuriniel's Cottage^000000. Pero para ver este lugar, tu primero puedes nesecitar el ^3355FFCompass of Muriniel^000000.";
+			next;
+			mes "[Esklah]";
+			mes "Heh heh. Esto es correcto, Hacer el Compass of Muriniel puede ser mi prueba para ti.";
+			next;
+			mes "[Esklah]";
+			mes "Ahora escucha cuidadosamente, No te lo dire mas de una vez. Necesitare que recolectes siertos items para crear el ^3355FFCompass of Muriniel^000000.";
+			next;
+			mes "[Esklah]";
+			mes "Traemelos...";
+			mes "^3355FF2 Iron Ore^000000,";
+			mes "^3355FF10 Acorn^000000 y";
+			mes "^3355FF5 Decayed Nail^000000.";
+			next;
+			mes "[Esklah]";
+			mes "Para alguien que busca la doomed sword,esto debe ser una tarea relativamente simple. Ahora ve, y traeme lo qué he pedido."			;
+			set dmdswrd_Q,28;
+			close;
+		case 28:
+			if (countitem(1002) > 1 && countitem(1026) > 9 && countitem(957) > 4) {
+				mes "[Esklah]";
+				mes "Vamosa  ver.";
+				mes "2 Iron Ore...";
+				mes "10 Acorn...";
+				mes "5 Decayed Nail...";
+				mes "¡BIEN! ¡Eso es Todo!";
+				delitem 1002,2; //Iron_Ore
+				delitem 1026,10; //Acorn
+				delitem 957,5; //Decayed_Nail
+				next;
+				mes "[Esklah]";
+				mes "Buen trabajo. Ahora, mientras yo creo el cuerpo del compass, puedes ir a traerme el resto de los items, Nesecitare.";
+				next;
+				mes "[Esklah]";
+				mes "Muhahahaha! ¿Que con esa mirada? ¡Tu sabes como son esta clase de negocios!";
+				next;
+				mes "[Esklah]";
+				mes "Ahora para de quejarte";
+				mes "Y ve a traerme...";
+				mes "^3355FF2 Brigan^000000 y";
+				mes "^3355FF1 Phracon^000000.";
+				mes "¿Ahora no is tan simple?";
+				mes "¡Muhahahaha!!";
+				set dmdswrd_Q,29;
+				close;
+			}
+			mes "[Esklah]";
+			mes "Ahora escucha cuidadosamente. No te lo dire mas de una vez. Necesitare algunos items para crear el ^3355FFCompass of Muriniel^000000.";
+			next;
+			mes "[Esklah]";
+			mes "Traeme...";
+			mes "^3355FF2 Iron Ore^000000,";
+			mes "^3355FF10 Acorn^000000, y";
+			mes "^3355FF5 Decayed Nail^000000.";
+			close;
+		case 29:
+			if (countitem(7054) > 1 && countitem(1010) > 0) {
+				mes "[Esklah]";
+				mes "Ahora...";
+				mes "Muestrame";
+				mes "lo que tragiste";
+				mes "Estos 2 Brigan y...";
+				mes "1 Phracon. Hmm. Muy Bien.";
+				mes "Ahora, dejame trabajar.";
+				delitem 7054,2; //Brigan
+				delitem 1010,1; //Phracon
+				next;
+				mes "[Esklah]";
+				mes "Hmm...";
+				mes "Vamos a ver...";
+				mes "Aqui, Esta terminado.";
+				next;
+				mes "^3355FFSage Esklah te entrega el ^3355FFCompass of Muriniel^000000.";
+				next;
+				mes "^3355FFEn la direccion que le compas apunta, algunas palabras son grabadas...^000000";
+				next;
+				mes "^3355FF- Mountain Mjornir -^000000";
+				mes "^3355FF- mjolnir_02 . 170 193 -^000000";
+				next;
+				mes "[Esklah]";
+				mes "Mira el centro del compass cuidadosamente para encontrar el lugar en que debes usar el stamp. Te deseo la mejor de las suertes en tu viaje.";
+				set dmdswrd_Q,30;
+				close;
+			}
+			mes "[Esklah]";
+			mes "¡Escucha cuidadosamente!";
+			mes "Quiero que me traigas...";
+			mes "^3355FF2 Brigan^000000 y";
+			mes "^3355FF1 Phracon^000000";
+			mes "¿No es tan simple y facil?";
+			mes "¡Muhahaha! ¡Ahora, Vamos a movernos!";
+			close;
+		case 30:
+			mes "^3355FFMiras en el compass of Muriniel y tomas nota del gravado...^000000";
+			next;
+			mes "^3355FF- Mountain Mjornir -^000000";
+			mes "^3355FF- mjolnir_02 . 170 193 -^000000";
+			close;
+		}
+	}
+	else {
+		mes "[Esklah]";
+		mes "Recuerdo mirar una inofensiva";
+		mes "Pieza de papel Flotando";
+		mes "atravez del aire...";
+		next;
+		mes "[Esklah]";
+		mes "Estaba pensando de que tan maravillosamente poética era la imagen, Entonces el Papel repentinamente me ataco, a Mi  ¡uno de los Grandes Sages de Juno's!";
+		next;
+		mes "[Esklah]";
+		mes "Intenté defenderme con mi espada de confianza, pero siendo un papel pequño, este monstruo logro esquivar todos mis golpes. Tube que Castear Magia para lograr destruirlo.";
+		next;
+		mes "[Esklah]";
+		mes "Después, Descubrí que ese monstruo es conocido como ^3355FFThe Paper^000000.";
+		next;
+		mes "[Esklah]";
+		mes "Era una parte de un libro viejo que contenía mucho conocimiento antiguo sobre Juno, pero de alguna manera, se convirtió un monstruo.¿No es eso peculiar?";
+		close;
+	}
+}
+	
+mjolnir_02,170,193,4	script	Muriniel's Cottage#juno	111,{
+	if (dmdswrd_Q == 30 || dmdswrd_Q == 31) {
+		switch(dmdswrd_Q) {
+		case 30:
+			mes "^3355FFMuriniel's pattern es grabado en el piso de madera.^000000";
+			next;
+			mes "^3355FFUsando la  ^9999FFStamp of Muriniel^3355FF y el  ^9999FFStamping Ink of Muriniel^3355FF, Tu pones el sello en la marca en el piso.^000000";
+			next;
+			mes "^3355FF*Woon Woon*^000000";
+			next;
+			mes "^3355FFFinalmente pedes oir suavemente en la distancia la voz de alguien.^000000";
+			next;
+			mes "[Muriniel's Recording]";
+			mes "Tu, quién están en el futuro, dejame presentarme.";
+			next;
+			mes "[Muriniel's Recording]";
+			mes "Mi nombre es Muriniel, el stamp craftman vivendo en tu pasado. Aprecio que tu hayas sobrepasado muchos obstaculos para llegar a este lugar.";
+			next;
+			mes "[Muriniel's Recording]";
+			mes "Como sea, tu primero debes provar que estas calificado para portar el gran poder de la doomed sword.";
+			next;
+			mes "[Muriniel's Recording]";
+			mes "Los grandes Sages en Juno me han ayudado a instalar este sistema mágico en mi cabaña para darte mi mensage a ti, aventurero del futuro.";
+			next;
+			mes "[Muriniel's Recording]";
+			mes "Se que buscas mas poder para obtener la doomed sword. Pero no es algo que cualquiera pueda tener la fuerza de una doomed sword.";
+			next;
+			mes "[Muriniel's Recording]";
+			mes "Y me estremezo para pensar qué sucedería si tal energía fuera caer en las manos equivocadas. La prueba que me he preparado no puede comenzar hasta que el Otoño siga a un Verano Caliente.";
+			next;
+			mes "[Muriniel's Recording]";
+			mes "Te daré un item como promesa de tu quest te lo dare en el futuro. Regresa a este lugar cuando los arboles empiezen a dejar caer sus hojas...";
+			next;
+			mes "[Muriniel's Recording]";
+			mes "Hasta que sea tiempo, entrenate. Y quedate vivo.";
+			next;
+			mes "^3355FF*¡Bzzzt!*";
+			mes "*Bzzzzzzt--*^000000";
+			next;
+			mes "^3355FFRepentinamente, la Stamp of Muriniel y el Compass of Muriniel se rompen para rebelar un pequeño, objeto brillante.^000000";
+			next;
+			mes "^3355FFHas recivido la ^9999FFDignity of Muriniel^000000.";
+			set dmdswrd_Q,31;
+			close;
+		case 31:
+			mes "^3355FFPuedes finalmente oir la voz de alguien viniendo de algún lugar...^000000";
+			next;
+			mes "[Muriniel's Recording]";
+			mes "Por favor recuerda regresar a este lugar cuando los árboles empiezen a dejar caer sus hojas. Hasta entonces, entrenate y mantente con vida.";
+			close;
+		}
+	}
+	else {
+		mes "'Muriniel's Cottage'";
+		next;
+		mes "^3355FFPor alguna razón, este mensage esta escrito en este lugar. ¡Pero que puede eso significar en una cabaña como esta?^000000";
+		close;
+	}
+}

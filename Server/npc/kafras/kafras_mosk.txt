@@ -1,0 +1,153 @@
+//===== eAthena Script ======================================= 
+//= Moscovia Kafras
+//===== By: ================================================== 
+//= Kisuka
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= Kafras for the town of Moscovia.
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Kisuka]
+//============================================================ 
+
+moscovia,223,191,4	script	Kafra Staff#mosk	114,{
+	cutin "kafra_04",2;
+	mes "[Kafra Staff]";
+	mes "Bienvenido a la";
+	mes "Corporación Kafra.";
+	mes "Los servicios Kafra";
+	mes "están siempre de su lado.";
+	mes "¿Cómo puedo ayudarle?";
+	next;
+	switch(select("Save:Use Storage:Rent a Pushcart:Check Other Information:Cancel")) {
+		case 1:
+			mes "[Kafra Staff]";
+			mes "Su Punto de Reaparición (Respawn Point) ha";
+			mes "sido grabado en la ciudad de";
+			mes "Moscovia. Gracias por";
+			mes "usar el Servicio Kafra.";
+			savepoint "moscovia",221,194;
+			close2;
+			cutin "", 255;
+			end;
+		case 2:
+			if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
+				mes "[Kafra Staff]";
+				mes "Lo siento, pero";
+				mes "necesita el Basic Skill";
+				mes "de Novice a nivel 6 para";
+				mes "usar el Servicio de Almacenamiento (Storage Service).";
+				close2;
+				cutin "", 255;
+				end;
+			}
+			if(countitem(7059)) delitem 7059,1;
+			else {
+				if(Zeny<80){
+					mes "[Kafra Staff]";
+					mes "Lo siento, pero no tiene";
+					mes "suficiente zeny para usar";
+					mes "El Servicio de Almacenamiento (Storage Service). Nuestra";
+					mes "cuota de acceso al Almacén (Storage) es de 80 zeny.";
+					close2;
+					cutin "", 255;
+					end;
+				}
+				set Zeny, Zeny-80;
+				set RESRVPTS, RESRVPTS + (80/5);
+			}
+			mes "[Kafra Staff]";
+			mes "Bien, déjeme abrir";
+			mes "su Almacén (Storage) por usted.";
+			mes "Gracias por usar";
+			mes "el Servicio Kafra.";
+			
+			callfunc("F_CheckKafCode");	//check your storage password, if set
+			
+			close2;
+			openstorage;
+			cutin "", 255;
+			end;
+		case 3:
+			if(baseClass != Job_Merchant){
+				mes "[Kafra Staff]";
+				mes "Lo siento, pero el";
+				mes "servicio de renta de Pushcart";
+				mes "sólo se encuentra disponible para los Merchants,";
+				mes "Blacksmiths, Master Smiths,";
+				mes "Alchemists y Biochemists.";
+				close2;
+				cutin "", 255;
+				end;
+			}
+
+			else if(checkcart() == 1){
+				mes "[Kafra Staff]";
+				mes "Usted trae ya";
+				mes "un Pushcart equipado.";
+				mes "Desafortunadamente, no podemos";
+				mes "rentar más de uno a la vez";
+				mes "a cada cliente.";
+				close2;
+				cutin "", 255;
+				end;
+			}
+
+			if(countitem(7061) > 0) delitem 7061,1;
+			else {
+				mes "[Kafra Staff]";
+				mes "La cuota de renta del";
+				mes "Pushcart es de 700 zeny. ¿Le";
+				mes "gustaría rentar un Pushcart?";
+				next;
+				if(select("Rent a Pushcart.:Cancel.") == 1) {
+					if(Zeny<700){
+						mes "[Kafra Staff]";
+						mes "Lo siento, pero no";
+						mes "posee el suficiente";
+						mes "zeny para pagar la cuota de renta";
+						mes "de 700 zeny por el Pushcart.";
+						close2;
+						cutin "", 255;
+						end;
+					}
+					set Zeny,Zeny-700;
+					set RESRVPTS, RESRVPTS + 48;
+				}else{
+					close2;
+					cutin "", 255;
+					end;
+				}
+			}
+			setcart;
+			close2;
+			cutin "", 255;
+			end;
+		case 4:
+			if(select("Check Special Reserve Points.:Cancel") == 2) {
+				cutin "", 255;
+				close;
+			}
+			mes "[Kafra Staff]";
+			mes strcharinfo(0) + ", posee un total de";
+			mes RESRVPTS+ " Puntos Especiales de Reserva (Special Reserve Points).";
+			next;
+			mes "[Kafra Staff]";
+			mes "Puede canjear sus";
+			mes "Puntos Especiales de Reserva por";
+			mes "recompensas en la Oficina Principal Kafra en Al De Baran. Por favor, use";
+			mes "nuestros convenientes servicios para ver los beneficios de nuestro programa de recompensas.";
+			close2;
+			cutin "", 255;
+			end;
+		case 5:
+			mes "[Kafra Staff]";
+			mes "Nosotros, aquí en la Corporación Kafra,";
+			mes "estamos siempre esforzándonos para proporcionarle los mejores servicios. Esperamos satisfacer sus aventureras necesidades y estándares de excelencia.";
+			close2;
+			cutin "", 255;
+			end;
+	}
+}

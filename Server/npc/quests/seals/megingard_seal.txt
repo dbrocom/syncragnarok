@@ -1,0 +1,3360 @@
+//===== eAthena Script ======================================= 
+//= Megingjard seal unlocking NPCs.
+//===== By: ================================================== 
+//= SinSloth
+//===== Current Version: ===================================== 
+//= 1.9
+//===== Compatible With: ===================================== 
+//= eAthena
+//===== Description: ========================================= 
+//= Quest for breaking the seal of Megingjard.
+//===== Additional Comments: =================================
+//= 1.0 First version. Thanks to SinSloth for scripting it. [MasterOfMuppets]
+//= 1.1 fixed exploit [Lupus]
+//= 1.2 Fixed experience gains to match upcoming rate adjustments. [SinSloth]
+//= 1.3 Updated several aspects of the script. [L0ne_W0lf]
+//= 1.4 Minor Touchups to quest. [L0ne_W0lf]
+//= 1.5 Fixed missing close2 in Rebarev Doug. [L0ne_w0lf]
+//= 1.6 Corrected mismatched variables. [L0ne_W0lf]
+//= 1.7 Replaced effect numerics with constants. [Samuray22]
+//= 1.8 Corrected how exp reward is applied. [L0ne_W0lf]
+//= 1.9 Fixed some input checks and variable types. [brianluau]
+//============================================================
+
+prt_castle,44,151,0	script	Rebarev Doug	56,{
+	cutin "god_rebeireb",2;
+	if ((countitem(7080) > 3) && (countitem(7081) > 4) && (countitem(7082) > 3) && (countitem(7084) > 2) && (countitem(7085) > 2)) {
+		mes "[Rebarev Doug]";
+		mes "¿Qué es esto?";
+		mes "¡Tú...! ¡Tienes";
+		mes "todo lo que necesito para";
+		mes "crear a Gleipnir!";
+		next;
+		switch(select("Make Gleipnir.:Cancel.")) {
+		case 1:
+			mes "[Rebarev Doug]";
+			mes "Soy el único humano sobre esta tierra";
+			mes "bendita con la habilidad para crear a Gleipnir. Aparte de los Enanos ¡Soy la única persona que puede hacer ese objeto!";
+			next;
+			delitem 7080,4;  //Foot_Step_Of_Cat
+			delitem 7081,5;  //Beard_Of_Women
+			delitem 7082,4;  //Root_Of_Stone
+			delitem 7084,3;  //Saliva_Of_Bird
+			delitem 7085,3;  //Tendon_Of_Bear
+			getitem 7058,1; // Gullraifnir
+			mes "[Rebarev Doug]";
+			mes "¡Aquí lo tienen!";
+			next;
+			mes "[Rebarev Doug]";
+			mes "¡Se dice que Gleipnir es tan fuerte que ni siquiera el Lovo Fenrir podría romperlo! ¡Me siento muy orgulloso de ser capaz de crear esto!";
+			break;
+		case 2:
+			break;
+		}
+	}
+	if ($God1 < 50) {
+		mes "[Rebarev Doug]";
+		mes "Somos Cruzados que hemos";
+		mes "sido entrenados para prepararnos";
+		mes "para la Guerra Santa que está por venir.";
+		next;
+		mes "[Rebarev Doug]";
+		mes "Como nuestros antepasados lo han";
+		mes "hecho desde hace mil años atras, debemos exterminar las hordes de Demonios cuando el día venga.";
+		next;
+		mes "[Rebarev Doug]";
+		mes "Si tienes alguna pregunta acerca de los Cruzados, sientete libre de preguntarme.";
+		mes "Talvez soy muy viejo y débil para pelear, pero voy a propagar nuestro mensaje tanto como pueda.";
+		next;
+		switch(select("What is Holy Cross?:What is Grand Cross?:What is Sacrifice?:What is Gleipnir?")) {
+		case 1:
+			mes "[Rebarev Doug]";
+			mes "Cruz Santa es la primera manifestación de fe de un cruzado. Haciendo la señal de la cruz, los Cruzados pueden infringir un ataque sagrado sobre sus enemigos.";
+			next;
+			mes "[Rebarev Doug]";
+			mes "Los montruos que son débiles contra lo sagrado, particularmente los No-muertos, seran segados por la luz de la Holy Cross. Lo único que pueden hacer es esperar por el juicio santo.";
+			next;
+			mes "[Rebarev Doug]";
+			mes "Basados en nuestras últimas investigaciones,";
+			mes "la Cruz Santa puede infringir 4.5 veces más daño que un ataque normal una vez que es dominada.";
+			break;
+		case 2:
+			mes "[Rebarev Doug]";
+			mes "Grand Cross...!";
+			mes "La furia santa de Dios toma";
+			mes "forma de esta habilidad destructiva.";
+			next;
+			mes "[Rebarev Doug]";
+			mes "Dios no brinda su poder para que";
+			mes "podamos castigar a las fuerzas del mal, y la ira de uno es convertida en un gran crucifijo de poder.";
+			next;
+			mes "[Rebarev Doug]";
+			mes "El poder del crucifijo de luz puede dañar al enemigo tres veces. Cada golpe tendran cinco veces la fuerza de tus ataques normales.";
+			next;
+			mes "[Rebarev Doug]";
+			mes "Sin embargo, cuando los Cruzados usan Gran Cruz, deben tener extrema precaución. El cuerpo humano es muy débil para abrasar completamente la voluntad de Dios.";
+			next;
+			mes "[Rebarev Doug]";
+			mes "Además, usando esta habilidad, causará que los Cruzados sufran daño. Sin embargo, este daño puede";
+			mes "ser reducido a la mitad con Fe.";
+			break;
+		case 3:
+			mes "[Rebarev Doug]";
+			mes "Practicando lo que predicamos, los Cruzados escogemos proteger";
+			mes "a otros soportando el sufrimiento del prójimo.";
+			next;
+			mes "[Rebarev Doug]";
+			mes "La habilidad Sacrificio permite a los Cruzados para mantener a sus camaradas libres de peligro por medio de recibir el daño que les ocasionarían.";
+			next;
+			mes "[Rebarev Doug]";
+			mes "Es las más grande demostración de fe,";
+			mes "tanto como el amor por tus camaradas. ¡Tal actitud es esencial para un sirviente de Dios!";
+			next;
+			mes "[Rebarev Doug]";
+			mes "Sin embargo, si las personas que quieres proteger estan lejos de tí, no puedes usar la habilidad Sacrificio para ellos a menos que se acerquen a tí de nuevo.";
+			next;
+			mes "[Rebarev Doug]";
+			mes "Como puedes visualizar el sufrimiento de aquellos que quieres proteger, nunca dudaras de sacrificarte a tí mismo.";
+			next;
+			mes "[Rebarev Doug]";
+			mes "Gracias, Dios, por concederme el poder para proteger a mi gente.";
+			break;
+		case 4:
+			mes "[Rebarev Doug]";
+			mes "Gleipnir es la escencia de Megingjard por lo cual he estado investigando.";
+			next;
+			mes "[Rebarev Doug]";
+			mes "Es el unico lazo lo suficientemente fuerte que le permitiran a un humano vestir Megingjard alrededor de su cintura.";
+			next;
+			mes "[Rebarev Doug]";
+			mes "Aunque no puedo pelear más, he estado estudiando como crear a Gleipnir por años. Estoy más que dispuesto a crearlo si me puedes traer...";
+			next;
+			mes "[Rebarev Doug]";
+			mes "^0000FF4 Cat Tread^000000,";
+			mes "^0000FF5 Woman's Moustache^000000,";
+			mes "^0000FF4 Root of Stone^000000,";
+			mes "^0000FF3 Sputum of Bird^000000 and";
+			mes "^0000FF3 Sinew of Bear^000000.";
+			break;
+		}
+	}
+	else if($God1 > 49 && $God2 < 100) {
+		if(BaseLevel > 59) {
+			if(god_eremes == 0) {
+				mes "[Rebarev Doug]";
+				mes "...";
+				next;
+				mes "[Rebarev Doug]";
+				mes "¿Por qué estas vagando";
+				mes "alrededor de este lugar sagrado?";
+				mes "¿No entiendes que";
+				mes "debemos prepararnos para";
+				mes "la Guerra Santa?";
+				next;
+				mes "[Rebarev Doug]";
+				mes "No importa cuantas veces te lo explique, el ignorante nunca entiende completamente  la importancia de nuestra tarea. ¡El balance de poder se inclinará cuando menos lo esperemos!";
+				next;
+				mes "[Rebarev Doug]";
+				mes "Desearía poder regresar";
+				mes "a aquellos tiempos donde yo";
+				mes "entrenaría Cruzados, en vez de";
+				mes "predicarle al ignorante.";
+				next;
+				mes "[Rebarev Doug]";
+				mes "Extraño a mis Cruzados que";
+				mes "eran entusiastas para escuchar lo que tenía que decir, y seguían las ordenes con lealtad.";
+				next;
+				mes "[Rebarev Doug]";
+				mes "Me pregunto";
+				mes "a donde se";
+				mes "han ido...";
+				next;
+				mes "[Rebarev Doug]";
+				mes "...";
+				mes "......";
+				mes ".........";
+				next;
+				mes "[Rebarev Doug]";
+				mes "Aventurero, si tienes el tiempo para escucharme hablar a mí mismo, ¿por qué no haces una tarea para mí?";
+				next;
+				mes "[Rebarev Doug]";
+				mes "Podría ser una experiencia";
+				mes "enriquecedora para tí. Es posible que incluso tengas una apreciación más grande por los Cruzados.";
+				next;
+				switch(select("What is it?:I'm sick and tired of doin' favors.")) {
+				case 1:
+					mes "[Rebarev Doug]";
+					mes "Quiero que encuentres a los miembros del 1er Escuadrón en el 3er Pelotón de la 3ra Compañía. Si pasa que los encuentras en tus viajes, por favor preguntales como estan.";
+					next;
+					mes "[Rebarev Doug]";
+					mes "No debe ser difícil de hacer y no sería pérdida de tu tiempo si estas planeando";
+					mes "explorar el mundo.";
+					next;
+					switch(select("Sure, why not.:I'm sorry, but no.")) {
+					case 1:
+						mes "[Rebarev Doug]";
+						mes "¡Excelente!";
+						mes "Lo único que quiero que hagas  es encontrar a mis viejos camaradas e informarme como";
+						mes "estan.";
+						next;
+						mes "[Rebarev Doug]";
+						mes "Sin embargo...";
+						mes "Hay un problema.";
+						mes "No sé donde estan.";
+						next;
+						mes "[Rebarev Doug]";
+						mes "Podrías encontrar un registro de cambio de residencia por medio de los ciudadanos del Reino de Rune-Midgarts en";
+						mes "la Librería de Prontera.";
+						next;
+						mes "[Rebarev Doug]";
+						mes "Sin embargo, los registros del";
+						mes "personal de los Cruzados es considerado confidencial, así que no estoy seguro si puedes o no verlos.";
+						next;
+						mes "[Rebarev Doug]";
+						mes "Debes entender, mi posición requiere que me mantenga en esta area las 24 horas, 7 días a la semana. No puedo irme sin el consentimiento de una instancia superior.";
+						next;
+						mes "[Rebarev Doug]";
+						mes "Sin embargo, sé que tienes la libertad y el tiempo para ir donde te plasca. Yo lo apreciaría si haces esto por mí.";
+						next;
+						mes "[Rebarev Doug]";
+						mes "Mis viejos camaradas de armas.";
+						mes "No tienes idea cuanto";
+						mes "los extraño...";
+						set god_eremes,1;
+						break;
+					case 2:
+						mes "[Rebarev Doug]";
+						mes "^333333*Suspira...*^000000";
+						mes "Por favor entiende que";
+						mes "no te pediría esto";
+						mes "de tí sino fuera por";
+						mes "las restricciones de";
+						mes "mi posición.";
+						next;
+						mes "[Rebarev Doug]";
+						mes "Tengo una obligación con este Reino de mantener mi posición e";
+						mes "informar a aventureros acerca de la";
+						mes "clase de los Cruzados. Por esta";
+						mes "asombrosa responsabilidad, debo";
+						mes "mantenerme aquí, siempre vigilante.";
+						next;
+						mes "[Rebarev Doug]";
+						mes "Si no puedes entenderlo, entonces debes tomar tu libertad como concedida...";
+						break;
+					}
+					break;
+				case 2:
+					mes "[Rebarev Doug]";
+					mes "Hasta donde puedo recordar, esta es la primera vez que te he pedido que me hagas un favor.";
+					next;
+					mes "[Rebarev Doug]";
+					mes "No como tú, conosco el significado";
+					mes "de responsabilidad. Me mantengo aquí, ayudando a aventureros inquisitivos por el bien del Rey y el País.";
+					next;
+					mes "[Rebarev Doug]";
+					mes "Aun así...";
+					mes "conoce esto.";
+					mes "Aunque los resultados no sean inmediatos, siempre serás recompensado cuando ayudas a otros.";
+					next;
+					mes "[Rebarev Doug]";
+					mes "Por favor considéralo";
+					mes "cuando tengas tiempo.";
+					break;
+				}
+			}
+			else if(god_eremes > 0 && god_eremes < 4) {
+				if(rand(1,10) > 6 && god_eremes == 2) {
+					mes "[Rebarev Doug]";
+					mes "Me pregunto como estan";
+					mes "mis viejos camaradas ahora.";
+					mes "Ni siquiera puedo recordar";
+					mes "la última vez que los ví...";
+					next;
+					mes "[Rebarev Doug]";
+					mes "Hmm...?";
+					mes "¿Aun no has ido";
+					mes "a buscar?";
+					next;
+					switch(select("Where should I go?:I am about to leave.:What do you mean by final mission?")) {
+					case 1:
+						mes "[Rebarev Doug]";
+						mes "Bueno...";
+						mes "Deberías ser capaz";
+						mes "de encontrar algunas pistas así como";
+						mes "donde encontarlas atravez de";
+						mes "^0000FFLos Registros del Pelotón^000000 en";
+						mes "la Librería de Prontera.";
+						break;
+					case 2:
+						mes "[Rebarev Doug]";
+						mes "Oh, tú eres...";
+						mes "Me pregunto que";
+						mes "han estado haciendo desde";
+						mes "nuestra ^0000FFúltima misión^000000...";
+						break;
+					case 3:
+						mes "[Rebarev Doug]";
+						mes "¿Última misión...?";
+						mes "Bueno, no puedo recordar";
+						mes "todo en este momento,";
+						mes "pero fue la razón porque";
+						mes "nuestro escuadrón se separó.";
+						next;
+						mes "[Rebarev Doug]";
+						mes "Eramos un gran equipo.";
+						mes "pero en el sistema militar,";
+						mes "necesitas seguir ordenes";
+						mes "de tus superiores...";
+						next;
+						mes "[Rebarev Doug]";
+						mes "Si solo...";
+						mes "^660000Él^000000 no hubiera interferido...";
+						next;
+						mes "[Rebarev Doug]";
+						mes "...";
+						next;
+						mes "[Rebarev Doug]";
+						mes "...";
+						mes "......";
+						next;
+						mes "[Rebarev Doug]";
+						mes "No hablemos de eso. Lo que es importante es que nuestro escuadrón fue disuelto debido a que fallamos nuestra última misión. Ahora, ¿podrías ir a encontrar^0000FFLos Registros del 3er Pelotón ^000000 en la Librería de Prontera para mí?";
+						set god_eremes,3;
+						next;
+						mes "[Rebarev Doug]";
+						mes "Recuerda, sería de ayuda preguntarle al Bibliotecario por un archivo con un registro de ^660000la última misión del 1er escuadrón^000000.";
+						break;
+					}
+				}
+				else {
+					mes "[Rebarev Doug]";
+					mes "Me pregunto como estan";
+					mes "mis viejos camaradas.";
+					mes "Nisiquiera puedo recordar";
+					mes "la última vez que los ví...";
+					next;
+					mes "[Rebarev Doug]";
+					mes "Hmm...?";
+					mes "¿Aun no te has ido";
+					mes "en su busqueda?";
+					next;
+					switch(select("Where should I go?:I am about to leave.")) {
+					case 1:
+						mes "[Rebarev Doug]";
+						mes "Bueno...";
+						mes "Deberías ser capaz";
+						mes "de encontrar algunas pistas así como";
+						mes "donde encontarlas atravez de";
+						mes "^0000FFLos Rgistros del 3er Pelotón^000000 en";
+						mes "la Librería de prontera.";
+						break;
+					case 2:
+						mes "[Rebarev Doug]";
+						mes "Oh, tú eres...";
+						mes "Me pregunto que";
+						mes "han estado haciendo desde";
+						mes "nuestra ^0000FFúltima misión^000000...";
+						set god_eremes,2;
+						break;
+					}
+				}
+			}
+			else if(god_eremes > 3 && god_eremes < 18) {
+				mes "[Rebarev Doug]";
+				mes "Huh...?";
+				mes "¿El Bibliotecario";
+				mes "no te dejó";
+				mes "leer los registros?";
+				next;
+				mes "[Rebarev Doug]";
+				mes "Puede que él tenga responsabilidd,";
+				mes "pero al final del día, él es como tú y yo. Puedes encontrar alguna manera de convencerlo para que te ayude, estoy seguro.";
+				next;
+				mes "[Rebarev Doug]";
+				mes "Por favor, te lo suplico,";
+				mes "podrías averiguar";
+				mes "¿qué pasó con el";
+				mes "resto del 1er escuadrón?";
+				next;
+				mes "[Rebarev Doug]";
+				mes "Oh...";
+				mes "Podría ser de ayuda saber que eramos la ^660000Cruzados Tercera Compañia, Tercer Pelotón, Primer escuadrón ^000000.";
+			}
+			else if(god_eremes > 17 && god_eremes < 20) {
+				if(god_megin_1 > 0 || god_megin_2 > 0 || god_megin_3 > 0 || god_megin_4 > 0 || god_megin_5 > 0 || god_megin_6 > 0) {
+					mes "[Rebarev Doug]";
+					mes "Oh...";
+					mes "¿Así que los encontrastes?";
+					mes "¿Estan todos bien?";
+					next;
+					mes "^3355FFLe dices a Rebarev Doug";
+					mes "que aunque ellos estan";
+					mes "sufriendo de migrañas";
+					mes "y perdida de memoria, el resto";
+					mes "del 1er escuadrón estan bien.";
+				}
+				else {
+					mes "^3355FFLe dices a Rebarev Doug";
+					mes "que has leído los";
+					mes "registros del 3er Pelotón y";
+					mes "le explicas lo que te has";
+					mes "arreglado en aprender.^000000";
+					next;
+					mes "[Rebarev Doug]";
+					mes "Oh, ¡estoy contento de oír que";
+					mes "fuistes capaz de leer los";
+					mes "registros! Pero no confío";
+					mes "lo que está escrito en papel.";
+					mes "Despues de todo, puede que no";
+					mes "esten actualizados...";
+					next;
+					mes "[Rebarev Doug]";
+					mes "Si es posible, espero que puedas encontrar al resto del 1er Escuadrón cara a cara, para poder asegurarme de que estan bien.";
+					next;
+					mes "[Rebarev Doug]";
+					mes "La vida de un hombre es demasiado";
+					mes "corta y sus amigos";
+					mes "son muy pocos. Por favor investiga";
+					mes "como estan mis";
+					mes "viejos camaradas.";
+				}
+			}
+			else if(god_eremes > 19 && god_eremes < 23) {
+				mes "[Rebarev Doug]";
+				mes "Bienvenido otra vez~";
+				mes "A pasado tiempo desde que te ví la última vez. ¿Has encontrado al resto";
+				mes "del 1er Escuadrón?";
+				next;
+				mes "[Rebarev Doug]";
+				mes "Hm...?";
+				mes "¿Por qué esa";
+				mes "mirada extraña?";
+				next;
+				switch(select("Confront Rebarev Doug.:Act unsuspicious.")) {
+				case 1:
+					mes "^3355FFConfrontas a Revarev Doug acerca de los problemas de memoria y las migrañas del 1er Escuadrón...^000000";
+					next;
+					mes "^3355FFPensando acerca la historia de la Neblina Royal y las menciones de Egnigem comienzan a divagar tus pensamientos...^000000";
+					next;
+					mes "[Rebarev Doug]";
+					mes "¿De qué estas hablando? No entiendo, ¡estas hablando acerca de muchas cosas diferentes de una sola vez!";
+					next;
+					mes "[Rebarev Doug]";
+					mes "No me mires así. Si ya terminaste de hablar, por favor";
+					mes "disculpame y dime tus noticias otro día.";
+					next;
+					mes "[Rebarev Doug]";
+					mes "Aprecio que hayas traído noticias de mis viejos camaradas.";
+					mes "Ahora, necesito continuar mi investigación bajo el comando de su majestad.";
+					set god_eremes,21;
+					break;
+				case 2:
+					mes "^3355FFMantienes tus sospechas para tí mismo y le dices a Rebarev Doug acerca de los miembros";
+					mes "del 1er Escuadrón.^000000";
+					next;
+					mes "^3355FFClaro, guardas algunos detalles y solo le dices lo que parece que él quiere oír.^000000.";
+					next;
+					mes "[Rebarev Doug]";
+					mes "¡Grandioso!";
+					mes "¡Me da gusto oír";
+					mes "que estan bien!";
+					mes "Ha ha! Hahahahahahaahah!";
+					next;
+					mes "[Rebarev Doug]";
+					mes "Aprecio que me hayas traído noticias de mis viejos camaradas.";
+					mes "Ahora, necesito continuar mi investigación bajo el comando de su Majestad. Una vez más, gracias por tu ayuda.";
+					set god_eremes,22;
+					break;
+				}
+			}
+			else if(god_eremes > 22 && god_eremes < 25) {
+				mes "^3355FFConfrontas a";
+				mes "Rebarev Doug con la";
+				mes "información que aprendistes";
+				mes "de Egnigem.^000000";
+				next;
+				mes "^3355FFSin embargo, no";
+				mes "parecía agitado ni siquiera un poco. De hecho, exudaba una calma que te hace sentir nervioso.^000000";
+				next;
+				mes "[Rebarev Doug]";
+				mes "Es demasiado tarde para hablar de eso, aunque siento pena por tí por saber demasiado. En este punto, no hay nada que puedas probar.";
+				next;
+				mes "[Rebarev Doug]";
+				mes "¿No lo entiendes?";
+				mes "La elite y poderosos rigen este mundo. ¡Soy intocable! ¡Y el débil y el pobre pueden podrirse en el infierno! ¡Heh heh!";
+				next;
+				mes "[Rebarev Doug]";
+				mes "¿Me odias?";
+				mes "¿Realmente me odias?";
+				mes "Mira esta cara.";
+				next;
+				mes "[Rebarev Doug]";
+				mes "¡Esta es la cara";
+				mes "de la autoridad!";
+				mes "¡Vé y reportame al juez encargado de los crimenes militares! ¡Está justo detras de mí!";
+				next;
+				mes "[Rebarev Doug]";
+				mes "Si al menos 100 personas reportan el mismo crimen, entonces talvez él haría";
+				mes "un juicio. Pero ¿de verdad quieres revelar esto al público?";
+			}
+			else if(god_eremes > 23 && god_eremes < 26) {
+				mes "[Rebarev Doug]";
+				mes "No creí";
+				mes "que lo harias.";
+				mes "Pero lo lamentaras despues...";
+			}
+			else {
+				mes "[Rebarev Doug]";
+				mes "¿No lo entiendes?";
+				mes "La elite y poderosos rigen este mundo. ¡Soy intocable! ¡Y el débil y el pobre pueden podrirse en el infierno! ¡Heh heh!";
+			}
+		}
+		else {
+			mes "[Rebarev Doug]";
+			mes "no estas capasitado";
+			mes "siquiera de hablarme.";
+			mes "Incluso si eres un aventurero...";
+		}
+	}
+	else {
+		mes "[Rebarev Doug]";
+		mes "Nosotros somos Cruzados que hemos";
+		mes "sido entrenados en preparación";
+		mes "para la Guerra Santa que se avesina.";
+		next;
+		mes "[Rebarev Doug]";
+		mes "Como nuestros antepasados lo han";
+		mes "hecho desde hace mil años, debemos eliminar las hordes de Demonios cuando el día venga.";
+	}
+	close2;
+	cutin "god_rebeireb",255;
+	end;
+}
+
+prt_castle,48,164,0	script	Crusader#God	734,{
+	if($God1 > 49 && $God2 < 100) {
+		if(god_eremes > 22 && god_eremes < 25) {
+			mes "[Max Von Shedough]";
+			mes "¡Bienvenido, amigo!";
+			mes "Aquí en el Castillo de Prontera, nosotros los Cruzados estamos ocupados preparandonos para la Guerra Santa que está por venir.";
+			next;
+			mes "[Max Von Shedough]";
+			mes "Déjame presentarme.";
+			mes "Mi nombre es Max Von Shedough, ¡el juez militar! ¿quiere algo de mí?";
+			next;
+			mes "^3355FFLe entregas a";
+			mes "Max Von Shedough";
+			mes "tu petición en contra de";
+			mes "Rebarev Doug basado en";
+			mes "tu investigación";
+			mes "con Egnigem.^000000";
+			next;
+			mes "[Max Von Shedough]";
+			mes "¿Hm? Esto es serio.";
+			mes "De acuerdo. Voy a investigar tu queja lo mejor que pueda.";
+			next;
+			mes "[Max Von Shedough]";
+			mes "Sin embargo, desde ahora, la petición que me acabas de dar es conciderada información clasificada. Por favor manten esto como secreto militar.";
+			set $God2,$God2+1;
+			if($God2 == 50) {
+				announce "The 2nd seal of [Megingjard] has appeared.",bc_all;
+			}
+			else if($God1 > 99 && $God2 > 99 && $God3 > 99 && $God4 > 99) {
+				announce "Four seals have been released at the same time with the seal of [Megingjard].",bc_all;
+			}
+			else if($God2 > 99) {
+				announce "The 2nd seal of [Megingjard] has been released.",bc_all;
+			}
+			if(god_eremes == 23) {
+				set god_eremes,25;
+			}
+			else if(god_eremes == 24) {
+				set god_eremes,26;
+			}
+			close;
+		}
+		else if(god_eremes > 26) {
+			mes "[Max Von Shedough]";
+			mes "Desafortunadamente, no estoy seguro si es posible hacer un juicio en contra de Revarev Doug.";
+			next;
+			mes "[Max Von Shedough]";
+			mes "Desgraciadamente, parece ser que aun tiene demasiada influencia. Aun así, déjame asegurarte que voy a hacer todo lo que pueda...";
+			next;
+			mes "[Max Von Shedough]";
+			mes "Pero cuenta conmigo,";
+			mes "Voy a dar lo";
+			mes "mejor de mí para ponerlo tras las rejas.";
+			close;
+		}
+		else {
+			mes "[Max Von Shedough]";
+			mes "¡Bienvenido, amigo!";
+			mes "Aquí en el Castillo de Prontera, nosotros los Cruzados estamos muy ocupados preparandonos para la Guerra Santa que se acerca.";
+			next;
+			mes "[Max Von Shedough]";
+			mes "Déjame presentarme a mí mismo.";
+			mes "Mi nombre es Max Von Shedough, ¡el juez militar! Tristemente, incluso los Cruzados no son inmunes a la corrupción...";
+			close;
+		}
+	}
+	else {
+		mes "[Max Von Shedough]";
+		mes "¡Bienvenido, amigo!";
+		mes "Aquí en el Castillo de Prontera, nosotros los Cruzados estamos muy ocupados preparandonos para la Guerra Santa que se acerca.";
+		next;
+		mes "[Max Von Shedough]";
+		mes "Déjame presentarme a mí mismo.";
+		mes "Mi nombre es Max Von Shedough,";
+		mes "¡el juez militar! Tristemente, incluso los Cruzados no son inmunes a la corrupción...";
+		close;
+	}
+}
+
+prt_in,172,109,0	script	A File#megin1	111,{
+	if(god_eremes == 12) {
+		mes "^3355FFHas encontrado";
+		mes "^660000Los Registros del 3er Pelotón^3355FF!^000000";
+		close;
+	}
+	else if(god_eremes > 6 && god_eremes < 12) {
+		if(rand(1,10) > 6 && god_eremes > 6) {
+			mes "^3355FFMiras un estante lleno de muchos archivos. Comienzas a buscar en ellos, uno por uno.^000000";
+			set god_eremes,god_eremes+1;
+			close;
+		}
+		else {
+			mes "^3355FFMiras un estante lleno de muchos archivos. Comienzas a buscar en ellos, uno por uno.^000000";
+			close2;
+		}
+	}
+	else if(god_eremes < 7) {
+		mes "[Librarian Jekan]";
+		if(Sex) {
+			mes "Lo siento señor,";
+		}
+		else {
+			mes "Lo siento señora,";
+		}
+		mes "pero una autorización especial es requerida para acceder a esa sección. De otra forma, está fuera de los límites.";
+		close;
+	}
+	 else {
+		mes "[Librarian Jekan]";
+		mes "¡Es-espera!";
+		mes "¡Esa sección";
+		mes "está fuera de los Límites!";
+		close;
+	}
+}
+
+prt_in,170,109,0	script	A File#megin2	111,{
+	if(god_eremes == 12) {
+		mes "Has encontrado ^0000FFLos registros del 3er Pelotón^000000!";
+		close;
+	}
+	else if(god_eremes > 6 && god_eremes < 12) {
+		if (rand(1,10) > 6 && god_eremes > 6) {
+			mes "^3355FFMiras un estante lleno de muchos archivos. Comienzas a buscar en ellos, uno por uno.^000000";
+			set god_eremes,god_eremes+1;
+			close;
+		}
+		else {
+			mes "^3355FFMiras un estante lleno de muchos archivos. Comienzas a buscar en ellos, uno por uno.^000000";
+			close;
+		}
+	}
+	else if(god_eremes < 7) {
+		mes "[Librarian Jekan]";
+		mes "¡Es-espera!";
+		mes "¡Esa sección";
+		mes "está fuera de los Límites!";
+		close;
+	}
+	else {
+		mes "[Librarian Jekan]";
+		mes "¡Es-espera!";
+		mes "¡Esa sección";
+		mes "está fuera de los Límites!";
+		close;
+	}
+}
+
+prt_in,168,109,0	script	A File#megin3	111,{
+	if(god_eremes == 12) {
+		mes "Has encontrado";
+		mes "^0000FFLos Registros del 3er Pelotón^000000!";
+		close;
+	}
+	else if(god_eremes > 6 && god_eremes < 12) {
+		if (rand(1,10) > 6 && god_eremes > 6) {
+			mes "^3355FFMiras un estante lleno de muchos archivos. Comienzas a buscar en ellos, uno por uno.^000000";
+			set god_eremes,god_eremes+1;
+			close;
+		}
+		else {
+			mes "^3355FFMiras un estante lleno de muchos archivos. Comienzas a buscar en ellos, uno por uno.^000000";
+			close;
+		}
+	}
+	else if(god_eremes < 7) {
+		mes "[Librarian Jekan]";
+		mes "¡Es-espera!";
+		mes "¡Esa sección";
+		mes "está fuera de los Límites!";
+		close;
+	}
+	else {
+		mes "[Librarian Jekan]";
+		mes "¡Es-espera!";
+		mes "¡Esa sección";
+		mes "está fuera de los Límites!";
+		close;
+	}
+}
+
+prt_in,169,109,0	script	A File#megin4	111,{
+	if(god_eremes == 12) {
+		mes "Has encontrado ^0000FFLos Registros del 3er Pelotón^000000!";
+		close;
+	}
+	else if(god_eremes > 6 && god_eremes < 12) {
+		if (rand(1,10) > 6 && god_eremes > 6) {
+			mes "^3355FFMiras un estante lleno de muchos archivos. Comienzas a buscar en ellos, uno por uno.^000000";
+			set god_eremes,god_eremes+1;
+			close;
+		}
+		else {
+			mes "^3355FFMiras un estante lleno de muchos archivos. Comienzas a buscar en ellos, uno por uno.^000000";
+			close;
+		}
+	}
+	else if(god_eremes < 7) {
+		mes "[Librarian Jekan]";
+		mes "¡Es-espera!";
+		mes "¡Esa sección";
+		mes "está fuera de los Límites!";
+		close;
+	}
+	else {
+		mes "[Librarian Jekan]";
+		mes "¡Es-espera!";
+		mes "¡Esa sección";
+		mes "está fuera de los Límites!";
+		close;
+	}
+}
+
+prt_in,166,109,0	script	A File#megin5	111,{
+	if(god_eremes == 12) {
+		mes "Has encontrado";
+		mes "^0000FFLos Registros del 3er Pelotón^000000!";
+		close;
+	}
+	else if(god_eremes > 6 && god_eremes < 12) {
+		if (rand(1,10) > 6 && god_eremes > 6) {
+			mes "^3355FFMiras un estante lleno de muchos archivos. Comienzas a buscar en ellos, uno por uno.^000000";
+			set god_eremes,god_eremes+1;
+			close;
+		}
+		else {
+			mes "^3355FFMiras un estante lleno de muchos archivos. Comienzas a buscar en ellos, uno por uno.^000000";
+			close;
+		}
+	}
+	else if(god_eremes < 7) {
+		mes "[Librarian Jekan]";
+		mes "¡Es-espera!";
+		mes "¡Esa sección";
+		mes "está fuera de los Límites!";
+		close;
+	}
+	else {
+		mes "[Librarian Jekan]";
+		mes "¡Es-espera!";
+		mes "¡Esa sección";
+		mes "está fuera de los Límites!";
+		close;
+	}
+}
+
+prt_in,172,106,0	script	Librarian#megin	833,{
+	if($God1 > 49 && $God2 < 100) {
+		if(god_eremes > 2 && god_eremes < 7) {
+			mes "[Librarian Jekan]";
+			mes "Ah, por favor no";
+			mes "toques los archivos";
+			mes "de esta sección.";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Algo de la información";
+			mes "de aquí es clasificada, y es por consiguiente prohibida por los Militares de Prontera";
+			mes "el revisarlas.";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Ahorita estoy en el proceso de busqueda de los archivos clasificados en esta sección, para poder separarlos de la información que es del dominio público.";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Apreciaría";
+			mes "grandemente";
+			mes "si tú ^660000no^000000";
+			mes "interfirieras con mi trabajo.";
+			next;
+			mes "[Librarian Jekan]";
+			mes "¡Rayos...!";
+			mes "¡No puedo leer nada cuando la luz es tan tenue! Es muy malo mis ojos estan mal...";
+			next;
+			while(1) {
+				switch(select("You have bad eyes?:I want to read some documents.:Let me help you find those files...:What kind of files are you looking for?")) {
+				case 1:
+					mes "[Librarian Jekan]";
+					mes "He trabajado";
+					mes "bajo luz tenue";
+					mes "por tanto tiempo,  mis ojos";
+					mes "estan mal. Deberían conseguirme ^0000FFuna nueva lámpara^000000, de otra forma me voy a quedar ciego tarde o temprano......";
+					if(god_eremes == 5 && ( countitem(2203) > 0 || countitem(1041) > 0 ) ) {
+						next;
+						mes "[Librarian Jekan]";
+						mes "Olle, esa es una cosa muy útile la que tienes ahí. ¿Te importaría si la tomo por un momento? me ayudaría para encontrar aquellos archivos...";
+						next;
+						switch(select("Yes, I mind!:No, I don't mind.")) {
+						case 1:
+							mes "[Librarian Jekan]";
+							mes "^333333*Aspira*^000000";
+							mes "ol- olvidalo...";
+							close;
+						case 2:
+							mes "[Librarian Jekan]";
+							mes "¡Oh, eres tan bueno!";
+							mes "T-tú quieres";
+							mes "ayudarme ¿verdad?";
+							if(countitem(2203) && countitem(1041)) {
+								delitem 1041,countitem(1041);  //Lantern
+								delitem 2203,1;  //Spectacles
+							}
+							else if(countitem(2203)) {
+								delitem 2203,1;
+							}
+							else if(countitem(1041)) {
+								delitem 1041,countitem(1041);
+							}
+							set god_eremes,6;
+							next;
+							mes "[Librarian Jekan]";
+							mes "Gracias...";
+							mes "Ahora no tendré que";
+							mes "preocuparme tanto por";
+							mes "encontrar ese archivo.";
+							next;
+							mes "[Librarian Jekan]";
+							mes "Si no te importa,";
+							mes "¿me ayudarías";
+							mes "a encontrarlo...?";
+							close;
+						}
+					}
+					else if(god_eremes > 5) {
+						next;
+						mes "[Librarian Jekan]";
+						mes "Gracias...";
+						mes "La cosa que me permitistes";
+						mes "tomar realmente me";
+						mes "ayudará a encontrar";
+						mes "todos esos archivos...";
+					}
+					break;
+				case 2:
+					if(god_eremes == 6) {
+						mes "[Librarian Jekan]";
+						mes "¿Leer algunos documentos?";
+						mes "Bueno, has venido aquí";
+						mes "a la librería. Ese es";
+						mes "un buen comienzo.";
+						next;
+						mes "[Librarian Jekan]";
+						mes "Bueno, en tanto";
+						mes "sepas que clase";
+						mes "de documentos estas";
+						mes "buscando, seras";
+						mes "capaz de encontrarlos.";
+						next;
+						mes "[Librarian Jekin]";
+						mes "¡Debo encontrar esos";
+						mes "archivos clasificados tan pronto";
+						mes "como pueda!";
+						close2;
+						set god_eremes,7;
+						end;
+					}
+					else {
+						mes "[Librarian Jekan]";
+						mes "Hmm...?";
+						mes "Olle, ¿no te lo he";
+						mes "dicho aun?";
+						next;
+						mes "[Librarian Jekan]";
+						mes "¡Está prohibido para el público revisar los archivos en esta sección! ¿Cuantas veces tengo que repetirlo?";
+						close;
+					}
+				case 3:
+					if(god_eremes == 4) {
+						mes "[Librarian Jekan]";
+						mes "Me agradaría aceptar tu";
+						mes "ayuda si no fuera por el hecho que no puedo permitir que información clasificada se revele al público.";
+						next;
+						mes "[Librarian Jekan]";
+						mes "No tengo idea como algo tan importante fue puesto en los archivos aquí en la Librería de Prontera, pero no podemos permitirle el acceso al público.";
+						next;
+						mes "[Librarian Jekan]";
+						mes "Aun así, ese archivo no parece ser tan importante, pero aun así tengo que perder el tiempo en encontrarlo...";
+						next;
+						mes "[Librarian Jekan]";
+						mes "Maldición, mis ojos estan irritados.";
+						mes "Trabajando como un oficial del gobierno es fácil esperar por las veces que los burocratas te hacen hacer cosas como esta.";
+						set god_eremes,5;
+					}
+					else if(god_eremes > 4) {
+						mes "[Librarian Jekan]";
+						mes "¡Creo que me voy a volver";
+						mes "loco buscando este archivo...!";
+						next;
+						mes "[Librarian Jekan]";
+						mes "¿;Huh...?";
+						mes "¿Acabas de decir";
+						mes "que querías";
+						mes "ayudarme? Lo apreciaría.";
+					}
+					else {
+						mes "[Librarian Jekan]";
+						mes "Um, se supone";
+						mes "que nisiquiera deberías saber que";
+						mes "clase de archivo estoy buscando. incluso si lo sabes, ¡no me está permitido enseñarte lo que contiene!";
+						close;
+					}
+					break;
+				case 4:
+					mes "[Librarian Jekan]";
+					mes "Hmm. Realmente no me está permitido revelar cualquier información relacionada con ese archivo. Lo siento por eso.";
+					next;
+					mes "[" + strcharinfo(0) + "]";
+					mes "Pero ¿el archivo";
+					mes "no se trataba acerca de...";
+					input @str$;
+					mes "^0000FF" + @str$ + "?";
+					next;
+					if (@str$ == "the 1st squad's final mission") {
+						mes "[Librarian Jekan]";
+						mes "¿Hmm...?";
+						mes "¿Como supistes";
+						mes "acerca de eso?";
+						set god_eremes,4;
+					}
+					else {
+						mes "[Librarian Jekan]";
+						mes "Errmmm...";
+						mes "¿No lo creo...?";
+					}
+				}
+			}
+		}
+		else if(god_eremes == 2) {
+			mes "[Librarian Jekan]";
+			mes "Ah, por favor no toques los archivos en esta sección. Usualmente, es de dominio público pero parece ser que un archivo clasificado se las arregló para ser mal puesto aquí.";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Por ahora, no puedo dejar que nadie sin autorización especial vea esa sección. Debo encontrar ese archivo y enviarlo a los militares de Prontera tan pronto como pueda.";
+			next;
+			mes "[Librarian Jekan]";
+			mes "¡Ergh! esta luz no es lo suficientemente brillante para mis ojos. Estan comenzando a irritarse otra vez...";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Así que ¿qué te trae por aquí? Si estas buscando algo en particular, deberías tratar en otra sección.";
+			next;
+			switch(select("I want to read some documents.:Do you have bad eyes?:Let me help you to find the files.:What kind of files are you looking for?")) {
+			case 1:
+				mes "[Librarian Jekan]";
+				mes "¡Ya te lo dije! ¡Los archivos de esta sección no estan abiertos al público en este momento! ¡No me hagas repetirlo!";
+				close;
+			case 2:
+				mes "[Librarian Jekan]";
+				mes "Desde que empecé a trabajar bajo una luz tenue hace tiempo, mis ojos han estado mal.";
+				mes "Deberían conseguirme una nueva lámpara, de otra forma me quedaré ciego tarde o temprano....";
+				close;
+			case 3:
+				mes "[Librarian Jekan]";
+				mes "¿Um? ¿Como sabes que archivo estoy buscando?";
+				mes "¿Ni siquiera sabes que tiene escrito?";
+				mes "Para de interrumpirrme, ¡vete!";
+				close;
+			case 4:
+				mes "[Librarian Jekan]";
+				mes "Hmm...No me está permitido revelar nada relacionado con ese archivo.";
+				next;
+				mes "[" + strcharinfo(0) + "]";
+				mes "No es el archivo...";
+				input @str$;
+				mes "[" + strcharinfo(0) + "]";
+				mes "^0000FF" + @str$ + "?";
+				next;
+				mes "[Librarian Jekan]";
+				mes "Talvez...";
+				mes "Talvez no~";
+				close;
+			}
+		}
+		else if(god_eremes > 6 && god_eremes < 12) {
+			if(rand(1,10) > 4) {
+				mes "[Librarian Jekan]";
+				mes "¿Hmm? ¿Así que lo encontrastes? He estado buscando ese archivo por largo tiempo, pero no he sido capaz de encontrarlo.";
+				next;
+				mes "[Librarian Jekan]";
+				mes "Me adelantaré y buscaré en la parte derecha, así que ¿no crees que podrías buscar en la parte izquierda?";
+			}
+			else {
+				mes "[Librarian Jekan]";
+				mes "¿Aun no lo has encontrado? Todo este tiempo, y aun no he podido encontrar ese archivo.";
+				next;
+				mes "[Librarian Jekan]";
+				mes "Me adelantaré y revisaré la parte izquierda, así que ¿buscarías en la parte central o de la derecha?";
+			}
+		}
+		else if(god_eremes == 12) {
+			mes "[Librarian Jekan]";
+			mes "¡Ah! ¡ Ahí está!";
+			mes "¡Muchísimas gracias!";
+			mes "Me da gusto ver que aun hay personas buenas y confiables en el mundo.";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Quiero darte algo para mostrarte mi gratitud, pero tengo que enviar esto a los Militares de Prontera ahora mismo.";
+			next;
+			select("Quiero leer el documento.");
+			mes "[Librarian Jekan]";
+			mes "Oh, cierto, mencionaste eso ¿verdad? no parece ser";
+			mes "tan importante, pero no estoy tan seguro...";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Bueno, no sería malo si hago una copia primero para que la leas, pero voy a necesitar algunos materiales.";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Incluso voy a invocar la";
+			mes "Magia de Busqueda en él, así será justo como el original. De acuerdo, necesito las siguientes cosas para hacer una copia...";
+			next;
+			mes "[Librarian Jekan]";
+			mes "2 Slick Paper,";
+			mes "1 Oil Paper,";
+			mes "3 Squid Ink,";
+			mes "3 Feather of Birds and";
+			mes "20 Blue Gemstones.";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Por favor traelos lo más pronto posible, voy a estar aquí haciendo otros preparativos para hacer la copia.";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Además, voy a guardar esta copia en la Librería par que lo leas, y para prevenir que se filtre al público. Así que tendras que venir a visitarme cada vez que desees leerlo, ¿de acuerdo?";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Está bien, ahora...";
+			mes "Regresa tan";
+			mes "pronto como puedas.";
+			set god_eremes,13;
+			close;
+		}
+		else if(god_eremes == 13) {
+			if(countitem(7111) > 1 && countitem(7151) && countitem(1024) > 2 && countitem(916) > 2 && countitem(717) > 19) {
+				mes "[Librarian Jekan]";
+				mes "Oh, regresastes.";
+				mes "No esperaba que regresaras tan pronto. Lo que sea que contenga debe ser muy importante para tí saberlo.";
+				next;
+				mes "[Librarian Jekan]";
+				mes "Como sea, por favor";
+				mes "dame un momento";
+				mes "mientras hago esa";
+				mes "copia para tí.";
+				delitem 7111,2;  //Smooth_Paper
+				delitem 7151,1;  //Oil_Paper
+				delitem 1024,3;  //Chinese_Ink
+				delitem 916,3;  //Feather_Of_Birds
+				delitem 717,20;  //Blue_Gemstone
+				set god_eremes,14;
+				next;
+				mes "[Librarian Jekan]";
+				mes "De acuerdo entonces...";
+				mes "Te veré en un instante.";
+				close;
+			}
+			else {
+				mes "[Librarian Jekan]";
+				mes "¿Has olvidado";
+				mes "lo que necesitas para hacer";
+				mes "una copia? De acuerdo, dejame";
+				mes "decirtelo de nuevo...";
+				next;
+				mes "[Librarian Jekan]";
+				mes "2 Slick Paper,";
+				mes "1 Oil Paper,";
+				mes "3 Squid Ink,";
+				mes "3 Feather of Birds and";
+				mes "20 Blue Gemstones.";
+				next;
+				mes "[Librarian Jekan]";
+				mes "Por favor regresa";
+				mes "con esos objetos";
+				mes "lo más pronto que puedas.";
+				close;
+			}
+		}
+		else if(god_eremes > 13 && god_eremes < 16) {
+			if(rand(1,10) > 4) {
+				mes "[Librarian Jekan]";
+				mes "Déjame continuar y revisar el documento antes de hacer una copia...";
+			}
+			else {
+				mes "[Librarian Jekan]";
+				mes "Déjame continuar y revisar el documento antes de hacer una copia...";
+				set god_eremes,god_eremes+1;
+			}
+			close;
+		}
+		else if(god_eremes == 16) {
+			mes "[Librarian Jekan]";
+			mes "Aquí lo tienes. Como lo pensé, en documento no parecía contener información crucial o importante.";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Solo recuerda, esta copia necesita quedarse en la Librería de Prontera. Eso significa que tienes que regresar si necesitas leer el documento otra vez.";
+			set god_eremes,17;
+			close;
+		}
+		else if(god_eremes > 16) {
+			mes "[Librarian Jekan]";
+			mes "¡Bienvenido, mi amigo!";
+			mes "Así que, ¿que necesitas hoy?";
+			next;
+			while(1) {
+				switch(select("Record Search.:Quit searching.:Search Help:Converse.")) {
+				case 1:
+					mes "^663300- Buscador mágico activado -";
+					mes "- Por favor introdusca palabra clave. -";
+					mes " ";
+					mes "*El Buscador Mágico es";
+					mes " muy sensitivo.";
+					mes "Por favor no use";
+					mes "letras mayúsculas.^000000";
+					next;
+					input .@input$;
+					if (compare(.@input$,"crusader") == 1) {
+						mes "^663300[Palabra clave: ^996633Cruzado^663300]";
+						mes "Los Cruzados son guerreros preparados para la Guerra Santa que se avesina contra el Mal. Espadachines experimentados, usualmente con remarcable poder espiritual.^000000";
+						close2;
+						if (compare(.@input$,"3rd_company") == 1) {
+							mes "^663300[Palabra clave: ^9966333ra Compañía^663300]";
+							mes "Solo los mejores Cruzados son seleccionados para formar los rangos de todos los escuadrones en la 3ra compañía. La mayoría de los registros de transferencia de los Escuadrones de la 3ra Compañía no estan disponibles.^000000";
+							next;
+							mes "^663300[Palabra clave: ^9966333ra Compañía^663300]";
+							mes "El 1er escuadrón de la 3ra Compañía es una escepción, ya que todos los miembros estan retirados o fueron transferidos a otras fuerzas. Información más especifica puede ser encontrada buscando ^9966333er Pelotón^663300.";
+							close2;
+							if (compare(.@input$,"3rd_platoon") == 1) {
+								mes "^663300[Palabra clave: ^9966333er Pelotón^663300]";
+								mes "El tercer pelotón es considerado la fuerza élite en la 3ra Compañía. Solo registros del 1er Escuadrón en el 3er Pelotón actualmente existen debido a circunstancias especiales.^000000";
+								next;
+								mes "^663300[Palabra clave: ^9966333er Pelotón^663300]";
+								mes "Más información específica puede ser encontrada buscando ^9966331er Escuadrón^663300.";
+								close2;
+								if (compare(.@input$,"1st_squad") == 1) {
+									mes "^663300[Palabra clave: ^9966331er Escuadrón^663300]";
+									mes "1er Escuadrón.";
+									mes "Complete la";
+									mes "Lista de Miembros";
+									mes "...^000000";
+									next;
+									mes "^663300[Palabra clave: ^9966331er Escuadrón^663300]";
+									mes "^0000FF : Rebarev Doug";
+									mes " : Jack O";
+									mes " : Zan.Huadoku";
+									mes " : Cuaque Donon";
+									mes " : Emma Searth";
+									mes " : Royal Myst";
+									mes " : The Nineball^000000";
+									if (god_eremes == 17) {
+										set god_eremes,18;
+									}
+									close2;
+									if (compare(.@input$,"record") == 1) {
+										mes "^663300[Palabra clave: ^996633Registros del 1er Escuadrón^663300]";
+										mes "El 1er Escuadrón fue conocido como el grupo de busqueda más habilidoso de los Cruzados. Sin embargo, fue disuelto como resultado de su última misión.^000000";
+										next;
+										mes "^663300[Palabra clave: ^996633Registros del 1er Escuadrón^663300]";
+										mes "El 1er escuadrón fue secretamente";
+										mes "asignado por la corte real para encontrar y adquirir ^996633 artefactos de los dioses^663300.";
+										mes "Sin embargo, la misión falló debido a una disputa faccional causada por un acto de insubordinación de uno de los miembros.^000000";
+										next;
+										mes "^663300[Palabra clave: ^996633Registros del 1er Escuadrón^663300]";
+										mes "El miembro culpable de insubordinación fue botado del escuadrón durante la misión. Sin embargo, sus acciones fueron suficientes para que resultara fallida la misión final del 1er Escuadrón.^000000";
+										next;
+										mes "^663300[Palabra clave: ^996633Registros del 1er Escuadrón^663300]";
+										mes "Debido al desagradable incidente, el 1er Escuadrón fue disuelto y";
+										mes "sus miembros han sido enviados a reentrenamiento disciplinario por 3 meses.";
+										next;
+										mes "^663300[Palabra clave: ^996633Registros del 1er Escuadrón^663300]";
+										mes "La mayoria de los miembros del 1er Escuadrón fueron transferidos a otros escuadrones o estan retirados. Su lider formador, Revarev Doug, actualmente está a cargo de la investigación de artefactos de los dioses.^000000";
+										close2;
+										if (god_eremes == 18) {
+											set god_eremes,19;
+										}
+									}
+								}
+								else {
+									mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+									mes "- No se han encontrado resultados.-";
+									close2;
+								}
+							}
+						}
+						else if(compare(.@input$,"3rd_platoon") == 1) {
+							mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+							mes "Cada Compañia consiste";
+							mes "de 4 Pelotones. Por favor";
+							mes "especifique Compañia.^000000";
+							next;
+							close2;
+						}
+						else if(compare(.@input$,"1st_squad") == 1) {
+							mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+							mes "El 1er Escuadrón: Cruzados.";
+							mes "Cada pelotón consiste de 4 escuadrones. Por favor especifique Compañia y Pelotón para información de un escuadrón específico.^000000";
+							close2;
+						}
+						else if(compare(.@input$,"record") == 1) {
+							mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+							mes "- No se han encontrado resultados.-";
+							close2;
+						}
+						else {
+							mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+							mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+							mes "-busca con una palabra clave : "+.@input$+" -";
+							mes "- No se han encontrado resultados.-";
+							close2;
+						}
+					}
+					else if (compare(.@input$,"3rd_company") == 1) {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "^663300[Palabra clave: ^9966333ra Compañia^663300]";
+						mes "Solo los mejores Cruzados son seleccionados para formar los rangos de todos los escuadrones en la 3ra Compañía. La mayoría de los registros de transferencia no estan disponibles.^000000";
+						next;
+						mes "^663300[Palabra clave: ^9966333ra Compañia^663300]";
+						mes "El 1er Escuadrón del 3er Pelotón es una excepción, como todos los miembros estan retirados o transferidos a otras fuerzas. Información más específica puede ser encontrado buscando ^9966333er Pelotón^663300.";
+						close2;
+						if (compare(.@input$,"3rd_platoon") == 1) {
+							mes "^663300[Palabra clave: ^9966333er Pelotón^663300]";
+							mes "El 3er Pelotón es considerado la fuerza élite en la 3ra Compañia. Solo registros del 1er Escuadrón actualmente existen debido a circunstancias especiales.^000000";
+							next;
+							mes "^663300[Palabra clave: ^9966333er Pelotón^663300]";
+							mes "Más información específica puede ser encontrada buscando ^9966331er Escuadrón^663300.";
+							close2;
+							if (compare(.@input$,"1st_squad") == 1) {
+								mes "^663300[Palabra clave: ^9966331er Escuadrón^663300]";
+								mes "1er Escuadrón.";
+								mes "Complete la";
+								mes "Lista de Miembros";
+								mes "...^000000";
+								next;
+								mes "^663300[Palabra clave: ^9966331er Escuadrón^663300]";
+								mes "^0000FF : Rebarev Doug";
+								mes " : Jack O";
+								mes " : Zan.Huadoku";
+								mes " : Cuaque Donon";
+								mes " : Emma Searth";
+								mes " : Royal Myst";
+								mes " : The Nineball^000000";
+								close2;
+								if (god_eremes == 17) {
+									set god_eremes,18;
+								}
+								if (compare(.@input$,"record") == 1) {
+									mes "^663300[Palabra clave: ^996633Registros del 1er Escuadrón^663300]";
+									mes "El 1er Escuadrón fue conocido como el grupo de búsqueda más habilidoso de los Cruzados. Sin embargo, fue disuelto como resultado de su misión final.^000000";
+									next;
+									mes "^663300[Palabra clave: ^996633Registros del 1er Escuadrón^663300]";
+									mes "El 1er Esuadrón fue secretamente";
+									mes "asignado por la corte real para encontrar y adquirir ^996633Artefacto de los dioses^663300.";
+									mes "Sin embargo, la misión falló debido a una disputa faccional causado por un acto de insubordinación de uno de los miembros.^000000";
+									next;
+									mes "^663300[Palabra clave: ^996633Registros del 1er escuadrón^663300]";
+									mes "El miembro culpable de insubordinación fue botado del escuadrón durante la misión. Sin embargo, sus acciones fueron suficiente para que resultara fallida la misión final del 1er Escuadrón.^000000";
+									next;
+									mes "^663300[Palabra clave: ^996633Registro del 1er Escuadrón^663300]";
+									mes "Debido a su desagradable incidente, el 1er Escuadrón fue disuelto y";
+									mes "sus miembros han sido enviados a reentrenamiento disciplinario por 3 meses.";
+									next;
+									mes "^663300[Palabra clave: ^996633Registros del 1er Escuadrón^663300]";
+									mes "La mayoría de los miembros del 1er escuadrón fueron transferidos a otros escuadrones o estan retirados. Su lider Fundador, Revarev Doug, está actualmente a cargo de la investigación de artefactos de los dioses bajo edicto real.^000000";
+									close2;
+									if (god_eremes == 18) {
+										set god_eremes,19;
+									}
+								}
+							}
+							else {
+								mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+								mes "- No se han encontrado resultados.-";
+								close2;
+							}
+						}
+					}
+					else if(compare(.@input$,"3rd_platoon") == 1) {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "El 3er Pelotón : ";
+						mes "- No se han encontrado resultados.-";
+						mes "- Se sugiere usar palabras claves más especificas.-";
+						close2;
+					}
+					else if(compare(.@input$,"1st_squad") == 1) {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "La 3ra Compañía : ";
+						mes "- No se han encontrado resultados.-";
+						mes "- Se sugiere usar palabras claves más específicas.-";
+						close2;
+					}
+					else if((compare(.@input$,"record") == 1) && (god_eremes > 17)) {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "- No se han encontrado resultados.-";
+						mes "- Se sugiere usar un nombre específico de la fuerza para una mejor busqueda.-";
+						next;
+						close2;
+					}
+					else if(compare(.@input$,"rebarev_doug") == 1) {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Líder formador de la";
+						mes "3ra Compañía, 3er Pelotón,";
+						mes "1er Escuadrón. Sirve como instructor de Cruzados en el campo de entrenamiento y está actualmente";
+						mes "conduciendo una investigación por edicto real.^000000";
+						next;
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Localización actual:";
+						mes "^996633Castillo de Prontera, Prontera^663300.^000000";
+						close2;
+					}
+					else if(compare(.@input$,"egnigem") == 1) {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "^FF0000Término de Busqueda Prohibido!^000000";
+						close2;
+					}
+					else if(compare(.@input$,"zan.huadoku") == 1) {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Miembro formador de la";
+						mes "3ra Compañía, 3er Pelotón";
+						mes "1er Escuadrón. Sirviendo como arma en el cuartel general desde la disolución";
+						mes "del 1er Escuadrón.";
+						next;
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Localización actual:";
+						mes "^996633Clan de Herreros, Geffen^663300.^000000";
+						close2;
+					}
+					else if(compare(.@input$,"cuaque_donon") == 1) {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Miembro fundador de la";
+						mes "3ra Compañía, 3er Pelotón";
+						mes "1er Escuadrón. Retirado del servicio";
+						mes "y ahora trabaja en la Posada.";
+						next;
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Localización actual:";
+						mes "^996633Posada, Morroc^663300.^000000";
+						close2;
+					}
+					else if(compare(.@input$,"jack_o") == 1) {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Miembro fundador de la";
+						mes "3ra Compañía, 3er Pelotón";
+						mes "1er Escuadrón. Sirviendo como oficial recluta desde la disolución del 1er Escuadrón.";
+						next;
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Localización actual:";
+						mes "^996633Puerto de Alberta^663300.^000000";
+						close2;
+					}
+					else if(compare(.@input$,"emma_searth") == 1) {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Miembro fundador de la";
+						mes "3ra Compañía, 3er Pelotón";
+						mes "1er Escuadrón. Retirado desde la";
+						mes "disolución del 1er Escuadrón.";
+						next;
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Localización actual:";
+						mes "^996633Al De Baran^663300.^000000";
+						close2;
+					}
+					else if(compare(.@input$,"royal_myst") == 1) {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Miembro fundador de la";
+						mes "3ra Compañía, 3er Pelotón";
+						mes "1er Escuadrón. Deber actual desconocido.";
+						next;
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Localización actual:";
+						mes "^996633Casino, Comodo^663300.^000000";
+						close2;
+					}
+					else if(compare(.@input$,"the_nineball") == 1) {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Miembro fundador de la";
+						mes "3ra Compañía, 3er Pelotón";
+						mes "1er Escuadrón. Sirve como oficial de seguridad desde la disolución del 1er Escuadrón.";
+						next;
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "Localización actual:";
+						mes "^996633Taverna, Hawaii^663300.^000000";
+						close2;
+					}
+					else {
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "^663300[Palabra clave: ^996633"+.@input$+"^663300]";
+						mes "No se han encontrado resultados.";
+						close2;
+					}
+					break;
+				case 2:
+					mes "^663300- Buscador Mágico -";
+					mes "está siendo apagado. -^000000";
+					next;
+					mes "^663300- ... -^000000";
+					next;
+					mes "^663300- ... -^000000";
+					mes "^663300- ... -^000000";
+					next;
+					mes "^663300- Buscador Mágico -";
+					mes "- Desactivado. -^000000";
+					close;
+				case 3:
+					mes "[Librarian Jekan]";
+					mes "Bueno...";
+					mes "Esta es una versión";
+					mes "bastante obsoleta del";
+					mes "Buscador Mágico,";
+					mes "así que entiendo si te";
+					mes "está dando problemas.";
+					next;
+					mes "[Librarian Jekan]";
+					mes "Ahora...";
+					mes "Primero, si vas a introducir un simple término de busqueda, como el nombre de alguien, deberías introducir'^660000lee_hester^000000' si estuvieras buscando a 'Lee Hester.'";
+					next;
+					mes "[Librarian Jekan]";
+					mes "¡No uses ninguna";
+					mes "letra mayúscula!";
+					mes "Y usa guión bajo para";
+					mes "indicar espacios entre el nombre y el apellido y con los nombres de unidades militares.";
+					next;
+					mes "[Librarian Jekan]";
+					mes "Por ejemplo, la Cuarta Compañía sería introducido como ^6600004ta_compañía^000000. Ahora... esperemos.";
+					next;
+					mes "[Librarian Jekan]";
+					mes "Si estas buscando información de un escuadrón específico, necesitas saber el Pelotón y la Compañía a la que pertenece.";
+					next;
+					mes "[Librarian Jekan]";
+					mes "Por ejemplo, si querías buscar al 4to Ecuadrón de Cruzados del 4to Pelotón de la 4ta Compañia, deberías introducir...";
+					next;
+					mes "[Librarian Jekan]";
+					mes "'^660000registros de cruzados 4ta_compañía 4to_pelotón 4to_escuadrón^000000' todo en una sola linea exactamente así. espero que esto te ayude en tu busqueda...";
+					next;
+					break;
+				case 4:
+					mes "[Librarian Jekan]";
+					mes "Puedes decir que nuestro";
+					mes "gobierno realmente";
+					mes "no sabe como";
+					mes "distribuir los fondos";
+					mes "y los recursos.";
+					next;
+					mes "[Librarian Jekan]";
+					mes "Primero, está Hawaii.";
+					mes "De verdad necesitan los";
+					mes "recien casados una isla para ellos solos? Una vez más, Soy soltero así que probablemente estoy perjudicado.";
+					next;
+					mes "[Librarian Jekan]";
+					mes "Y mírame.";
+					mes "¡No se supone que los Genios desperdicien su precioso tiempo haciendo cosas inútiles para las librerías!";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Librarian Jekan]";
+			mes "Ah, por favor no toques ningun libro de esta sección. ...Estoy seguro que no hay  nada aca que pueda serte útil.";
+			next;
+			switch(select("Ignore him and check books.:Step back.")) {
+			case 1:
+				mes "[Librarian Jekan]";
+				mes "¡Olle...!";
+				mes "¡Creí que te había dicho";
+				mes "que no tocaras eso!";
+				close2;
+				warp "prontera",120,264;
+				end;
+			case 2:
+				mes "[Librarian Jekan]";
+				mes "Gracias. Sientete";
+				mes "libre de revisar";
+				mes "las otras secciones.";
+				next;
+				mes "[Librarian Jekan]";
+				mes "Es realmente bueno tenes visitantes en la Librería, especialmente cuando muchas personas no leen libros en estos días.";
+				close;
+			}
+		}
+	}
+	else {
+		mes "[Librarian Jekan]";
+		mes "Ah, por favor no";
+		mes "toques ningun libro en";
+		mes "esta sección. No hay";
+		mes "nada útil en esta";
+		mes "sección de todos modos.";
+		next;
+		switch(select("Ignore him and check books.:Step back.")) {
+		case 1:
+			mes "[Librarian Jekan]";
+			mes "¡Te lo dije!";
+			mes "¡No toques";
+			mes "los libros aquí!";
+			close2;
+			warp "prontera",120,264;
+			end;
+		case 2:
+			mes "[Librarian Jekan]";
+			mes "Gracias. Sientete";
+			mes "libre de revisar";
+			mes "las otras secciones.";
+			next;
+			mes "[Librarian Jekan]";
+			mes "Es realmente bueno tenes visitantes en la Librería, especialmente cuando muchas personas no leen libros en estos días.";
+			close;
+		}
+	}
+	close;
+}
+
+geffen_in,109,161,3	script	Crusader#God1	751,{
+	if($God1 > 49 && $God2 < 100) {
+		if(god_eremes > 17 && god_megin_1 < 2) {
+			mes "[Zan.Huadoku]";
+			mes "^333333*Phew...*^000000";
+			mes "Este trabajo me está consumiendo. Ir a una misión con mis camaradas suena mucho mejor que esto.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Al menos en aqullos días, ¡Sentí como si de verdad estaba haciendo algo útil!";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Olle...";
+			mes "¿Puedo ayudarte";
+			mes "en algo?";
+			next;
+			switch(select("Ask him about the 1st Squad.:Ask him how he's been doing.:Ask him about the 1st Squad's last mission.")) {
+			case 1:
+				if(god_eremes == 18) {
+					mes "[Zan.Huadoku]";
+					mes "Si, fuí un miembro del 1er Escuadrón en el 3er Pelotón hace tiempo. ¿Como supistes eso?";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "Extraño a los chicos del escuadrón. Me pregunto como está nuestro lider en estos días...";
+					next;
+					mes "^3355FFLe dices a Zan acerca de Rebarev Doug, y acerca de que ahora es instructor de Cruzados en un campo de entrenamiento. Parece que él está sumergido en sus recuerdos del pasado.^000000";
+					close;
+				}
+				else if(god_eremes > 18) {
+					mes "[Zan.Huadoku]";
+					mes "Si, fuí un miembro del 1er Escuadrón en el 3er Pelotón hace tiempo. ¿Como supistes eso?";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "Extraño a los chicos del escuadrón. Me pregunto como está nuestro lider en estos días...";
+					next;
+					mes "^3355FFLe dices a Zan acerca de Rebarev Doug, y acerca de que ahora es instructor de Cruzados en un campo de entrenamiento. Parece que él está sumergido en sus recuerdos del pasado.^000000";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "...";
+					mes "......";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "Antes de que saliéramos a nuestra última misión, nosotros los siete eramos como hermanos y hermanas. Si ^FF0000él^000000 no hubiera desobedecido las ordenes, aun estaríamos juntos hoy.";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "Espera...";
+					mes "¿Cual era su nombre...?";
+					mes "No hay manera que pudiera olvidar  algo como eso...";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "¡Co-como es que no";
+					mes "recuerdo su nombre!";
+					mes "El es la razón";
+					mes "de que mi vida esté...!";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "^333333*Quejido...*^000000";
+					mes "Yo... Mi cabeza...";
+					mes "Me duele la cabeza...";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "^3355FFZan parece muy confundido y sus ojos empiezan a nublarse con una mirada distraída. Tratas de hablarle, pero no responde.^000000";
+					if(!god_megin_1) {
+						set god_megin_1,1;
+					}
+					close;
+				}
+			case 2:
+				mes "[Zan.Huadoku]";
+				mes "¿Qué he estado haciendo?";
+				mes "Bueno, trabajo para el Clan de los Herreros,haciendo buenas armas.";
+				mes "para suplir a los Cruzados.";
+				next;
+				mes "[Zan.Huadoku]";
+				mes "Algunas veces, verdaderamente me";
+				mes "con lo que estoy haciendo. Sigo intentando convencerme que mi trabajo es importante para el futuro de los Cruzados, pero...";
+				next;
+				mes "[Zan.Huadoku]";
+				mes "¿Sabes que?";
+				mes "Muchas personas me han estado haciendo preguntas extrañas acerca de mi persona últimamente. Me siento como que me estan vigilando, pero talvez solo estoy paranóico.";
+				close;
+			case 3:
+				if(god_eremes == 18) {
+					mes "[Zan.Huadoku]";
+					mes "Si, en nuestra";
+					mes "misión final...";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "¿Final...? Sé que pasó, pero por alguna razón, todo lo que puedo visualizar es un completo vacío cuando trato de pensar en ello.";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "Yo...";
+					mes "¿Creo que necesito algo que me lo recuerde? Sé lo que pasó, pero... estoy tan confundido.";
+					next;
+					mes "^3355FFZan parece estar teniendo problemas recordando ese momento específico de su pasado.^000000";
+					close;
+				}
+				else if(god_eremes > 18 && god_megin_1 > 0) {
+					mes "[Zan.Huadoku]";
+					mes "La última misión...";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "Umm...";
+					mes "Huh. No";
+					mes "recuerdo nada.";
+					mes "Eso es extraño.¿Talvez";
+					mes "necesito una Pista?";
+					next;
+					mes "^3355FFZan.Huadoku parece estar";
+					mes "teniendo un mal momento recordando lo que pasó en el pasado. Comienzas a compartir con él lo que habías leído en la librería acerca del 1er EScuadrón...^000000";
+					next;
+					mes "...";
+					next;
+					mes "...";
+					mes "......";
+					next;
+					mes ".....";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "¡S-si cierto! y entonces despues de tres dias comenzamos la misión, encontramos algo como...";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "Bueno, no estoy seguro que era. Pero encontramos un ^0000FF fragmento desconocido^000000 ¡eso fue una señal de Dios! ¡Y entonces...!";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "Y entonces...";
+					mes "Oh. Oh Dios.";
+					mes "No puedo recordarlo...";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "No puedo pensar en nada más que eso. ni siquiera puedo recordar lo que encontramos. Pero estoy seguro que era muy importante.";
+					next;
+					mes "^3355FFZan se mantuvo en silencio, con una mirada de dolor en su rostro .^000000";
+					if(god_megin_1 == 1) {
+						set god_megin_1,2;
+					}
+					close;
+				}
+				else {
+					mes "[Zan.Huadoku]";
+					mes "La última misión...";
+					next;
+					mes "[Zan.Huadoku]";
+					mes "Umm...";
+					mes "Huh. no";
+					mes "recuerdo nada.";
+					mes "Eso es raro. ¿Talvez";
+					mes "necesito una pista?";
+					close;
+				}
+			}
+		}
+		else if(god_megin_1 > 1 && god_megin_1 < 3) {
+			mes "...";
+			next;
+			mes "...";
+			mes ".....";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "¡S-si cierto! y entonces despues de tres dias comenzamos la misión, encontramos algo como...";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Bueno, no estoy seguro que era. Pero encontramos un ^0000FF fragmento desconocido^000000 ¡eso fue una señal de Dios! ¡Y entonces...!";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Y entonces...";
+			mes "Oh. Oh Dios.";
+			mes "No puedo recordarlo...";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "No puedo pensar en nada más que eso. ni siquiera puedo recordar lo que encontramos. Tres meses despues de que todo pasara, he tenido estos problemas mentales...";
+			next;
+			mes "^3355FFZan se mantuvo en silencio, con una mirada de dolor en su rostro .^000000";
+			set god_megin_1,3;
+			close;
+		}
+		else if(god_megin_1 > 2) {
+			mes "^3355FFAgarrando su cabeza,";
+			mes "agitando sus manos y retorciendose en agonía, Zen se mantuvo repitiendo las mismas palabras una y otra vez...^000000";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "¡3 días despues!";
+			mes "¡En-encontramos algo como un ^0000FFfragmento^000000!";
+			mes "¡fue una señal de Dios! Pero ¡¿por qué";
+			mes "no puedo recordarlo?! ¡¿Por qué?!";
+			close;
+		}
+		else {
+			mes "[Zan.Huadoku]";
+			mes "Olle tú.";
+			mes "¿Puedo ayudarte?";
+			close;
+		}
+	}
+	else {
+		mes "[Zan.Huadoku]";
+		mes "¡Buen día!";
+		mes "¿Conoces la";
+		mes "importancia de los suministros?";
+		next;
+		switch(select("No.:Yes!")) {
+		case 1:
+			mes "[Zan.Huadoku]";
+			mes "Cualquier fuerza militar o grupo necesitan que sus sumunistros sean abastecidos si van a continuar batallando por un período de tiempo prolongado.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Por ejemplo, digamos que tu grupo va de casería sin un curador. En este caso, todos consumirían items para restaurar la salud, como pociones.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Desde que solo puedes cargar varios items de una sola vez, eventualmente se te acabaran las pociones.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Pero si uno de los miembros del grupo viajó entre un pueblo y un área de caza, él podríasuplir a tu grupo con nuevos items curativos.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Suplir a tu grupo de esta manera te dejará cazar con menos preocupaciones. Para ese tarbajo, la clase Mercante sería mejor por el uso de sus Carros.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Supongo que es porque estoy trabajando aquí en el Clan De los Herreros. Como maestro de armas, estoy obligado a proveer suministros para las fuerzas de los Cruzados.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Los Herreros en este clan tambien me ayudan a proveer armas de alta calidad para los Cruzados.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Si te pasa  que se te acaban los items curativos mientras cazas, ¿por qué no le pides ayuda a un Mercante?";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Más aun, ellos tendrán algunos items que le sobren y estarían dispuestos a compartirlos contigo si se lo pides lo suficientemente amable.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "¡Espero verte otra vez más tarde! Que Odin te proteja en tus viajes.";
+			close;
+		case 2:
+			mes "[Zan.Huadoku]";
+			mes "Oh...";
+			mes "Entonces.";
+			mes "En ese caso.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Déjame decirte acerca de cierto conocimiento útil aprendido mientras trabajaba con los Herreros.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Las habilidades para forjar de un personaje Herrero son afectadas por los estatus de DESTREZA y SUERTE. La DESTREZA y la SUERTE tambien afectan la habilidad de crear items para un Alquimista.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Desde que me he estado quedando aquí en el Clan de los Herreros, estoy tratando de entender mejor a los Herreros y desarrollar una apreciación más profunda de su trabajo.";
+			next;
+			mes "[Zan.Huadoku]";
+			mes "Está bien entonces...";
+			mes "Calmate.";
+			close;
+		}
+	}
+}
+
+morocc_in,146,179,0	script	Employee#megin1	66,{
+	if($God1 > 49 && $God2 < 100) {
+		if(god_eremes > 17 && god_megin_2 < 1) {
+			mes "^3355FFLos ojos de la Empleada";
+			mes "de la Posada te mira sospechosamente.^000000";
+			next;
+			mes "[Inn Employee]";
+			mes "Disculpame.";
+			mes "¿Puedo ayudarte?";
+			mes "¿Estas buscando a";
+			mes "alguien...?";
+			next;
+			input @str$;
+			if (@str$ == "Cuaque Donon" || @str$ == "Cuaque" || @str$ == "Donon") {
+				mes "[" + strcharinfo(0) + "]";
+				mes "Conoces a una persona llamada " + @str$ + " ...?";
+				if (god_eremes == 18) {
+					mes "[Inn Employee]";
+					mes "Creo que no";
+					mes "conosco a esa persona.";
+					mes "Creo que ese tipo se fue";
+					mes "antes de que comensara a trabajar";
+					mes "aquí, ¿talvez?";
+					close;
+				}
+				else if(god_eremes > 18) {
+					next;
+					mes "^3355FFUna vez que dijistes ese nombre, ella inmediatamente se te acerco";
+					mes "y comenzó a hablar en un tono bajo y amenasador.^000000";
+					next;
+					mes "[Scary Inn Employee]";
+					mes "¿Quien demonios eres?";
+					mes "Si intentas algo raro,";
+					mes "¡Te sacaré el corazón!";
+					mes "¡¿Por qué eres tan curioso?!";
+					mes "¡¿Eres uno de ellos?!";
+					next;
+					switch(select("Rebarev Doug sent me!:Wait, is he in hiding?:Just... curious.")) {
+					case 1:
+						if(rand(1,10) > 3) {
+							mes "[Ms. Scary Inn Employee]";
+							mes "¡¿Rebarev Doug...?!";
+							mes "Ese viejo excéntrico debe estar con miedo";
+							mes "por los rumores que estamos esparciendo. ¡¿Está lo suficientemente desesperado para enviar a su hombre?!";
+							next;
+							mes "[Ms. Scary Inn Employee]";
+							mes "Pero...";
+							mes "No estoy de humor para";
+							mes "guiarte donde está";
+							mes "Cuaque Donon...";
+							next;
+							mes "^3355FFEl empleado de la Posada";
+							mes "te saca~^000000";
+							close2;
+							percentheal -100,0;
+							end;
+						}
+						else {
+							mes "[Ms. Scary Inn Employee]";
+							mes "¡¿Rebarev Doug...?!";
+							mes "Ese viejo excéntrico debe estar con miedo";
+							mes "por los rumores que estamos esparciendo. ¡¿Está lo suficientemente desesperado para enviar a su hombre?!";
+							next;
+							mes "[Ms. Scary Inn Employee]";
+							mes "Hmm...";
+							mes "No sería una mala idea dejar a alguien como tú para hablar con Cuaque Donon. No te ves como alguien malo...";
+							next;
+							mes "[Ms. Scary Inn Employee]";
+							mes "Pero solo reciviras una pista,";
+							mes "y solo te lo voy a decir una vez...";
+							mes "^0000FFAragham nunca ocultó";
+							mes "items de mejoramiento.^000000";
+							set god_megin_2,1;
+							close;
+						}
+					case 2:
+						if(rand(1,10) > 4) {
+							mes "[Ms. Scary Inn Employee]";
+							mes "Cierto.";
+							mes "Si estas aquí";
+							mes "buscandolo,";
+							mes "definitivamente sabes";
+							mes "porque se está escondiendo.";
+							next;
+							mes "[Ms. Scary Inn Employee]";
+							mes "Como te atreves...";
+							mes "¡¿Como te atreves a hacerte";
+							mes "el tonto conmigo?!";
+							next;
+							mes "^3355FFEl empleado de la Posada";
+							mes "te saca~^000000";
+							close2;
+							percentheal -100,0;
+						}
+						else {
+							mes "[Ms. Scary Inn Employee]";
+							mes "Cierto.";
+							mes "Si estas aquí";
+							mes "buscandolo,";
+							mes "definitivamente sabes";
+							mes "porque se está escondiendo.";
+							next;
+							mes "[Ms. Scary Inn Employee]";
+							mes "Bueno, talvez no.";
+							mes "Quien sabe que clase";
+							mes "de amigos hizo Cuaque";
+							mes "cuando era Cruzado.";
+							mes "De acuerdo, pero escucha...";
+							next;
+							mes "[Ms. Scary Inn Employee]";
+							mes "Te voy a dar";
+							mes "esta pista solo una vez...";
+							mes "^0000FFAragham nunca ocultó";
+							mes "items de mejoramiento.^000000";
+							set god_megin_2,1;
+							close;
+						}
+					case 3:
+						if (rand(1,10) > 3) {
+							mes "[Ms. Scary Inn Employee]";
+							mes "¿Solo curiosidad?";
+							mes "Huh. Tienes muchas agallas, ¿no es verdad? Lo siento por decirte esto pero...";
+							next;
+							mes "[Ms. Scary Inn Employee]";
+							mes "No estoy de humor";
+							mes "para guiarte hacia";
+							mes "Cuaque Donon...";
+							mes "Heh heh heh...";
+							next;
+							mes "^3355FFEl empleado de la Posada";
+							mes "te saca~^000000";
+							close2;
+							percentheal -100,0;
+							end;
+						}
+						else {
+							mes "[Ms. Scary Inn Employee]";
+							mes "¿Solo curiosidad?";
+							mes "Huh. Tienes muchas agallas, ¿no es verdad? Lo siento por decirte esto pero...";
+							next;
+							mes "[Ms. Scary Inn Employee]";
+							mes "Realmente no puedo decirte";
+							mes "exactamente donde";
+							mes "está. Lo más que puedo hacer";
+							mes "es darte una pequeña pista.";
+							mes "Ahora escucha atentamente...";
+							mes "Lo diré solo una vez.";
+							next;
+							mes "[Ms. Scary Inn Employee]";
+							mes "^0000FFAragham nunca";
+							mes "ocultó items de mejoramiento.^000000";
+							mes "¡Ahora, no lo olvides!";
+							set god_megin_2,1;
+							close;
+						}
+					}
+				}
+			}
+			else {
+				mes "[Inn Employee]";
+				mes "¿qué...?";
+				mes "No conosco";
+				mes "a nadie llamado así.";
+				mes "Si es que es un nombre...";
+				close2;
+			}
+		}
+		else if(god_megin_2 > 0) {
+			mes "[Inn Employee]";
+			mes "Bienvenido a la Posada.";
+			mes "Cuando vas a la entrada, puedes incluso entrar a la zona PVP atravez de un portero PVP.";
+			next;
+			mes "[Inn Employee]";
+			mes "Usualmente, puedes visitar posadas en las grandes ciudades. Si quieres descansar o competir con otros, una Posada es donde tienes que ir.";
+			next;
+			mes "^3355FFElla te da la bienvenida";
+			mes "muy profecionalmente,";
+			mes "como si nada";
+			mes "hubiera pasado.^000000";
+			close;
+		}
+		else {
+			mes "[Inn Employee]";
+			mes "Bienvenido a la Posada.";
+			mes "Cuando vas a la entrada, puedes incluso entrar a la zona PVP atravez de un portero PVP.";
+			next;
+			mes "[Inn Employee]";
+			mes "Usualmente, puedes visitar posadas en las grandes ciudades. Si quieres descansar o competir con otros, una Posada es donde tienes que ir.";
+			close2;
+		}
+	}
+	else {
+		mes "[Inn Employee]";
+		mes "Bienvenido a la Posada.";
+		mes "Cuando vas a la entrada, puedes incluso entrar a la zona PVP atravez de un portero PVP.";
+		next;
+		mes "[Inn Employee]";
+		mes "Usualmente, puedes visitar posadas en las grandes ciudades. Si quieres descansar o competir con otros, una Posada es donde tienes que ir.";
+		next;
+		mes "[Inn Employee]";
+		mes "¡Oh, y tengo un pequeño secreto...! Escuché al dueño de la Posada está planeando alguna clase de negocio turbio. Es una clase de proyecto mayor, ¡pero no dejes que nadie sepa que te dije!";
+		close;
+	}
+}
+
+in_rogue,243,61,0	script	Suspicious Man#megin	748,{
+	if($God1 > 49 && $God2 < 100) {
+		if(god_eremes == 18) {
+			mes "[Cuaque Donon]";
+			mes "¿Qu-quien eres?";
+			mes "¿Como diablos";
+			mes "llegastes aquí?";
+			mes "¡Alejate de mí!";
+			mes "¡Veteeeeeeeeeee!";
+			close;
+		}
+		else if(god_eremes > 18) {
+			if(god_megin_2 > 0 && god_megin_2 < 4) {
+				mes "[Cuaque Donon]";
+				mes "¿Qu-quien eres?";
+				mes "¿Como diablos";
+				mes "llegastes aquí?";
+				mes "¡Alejate de mí!";
+				mes "¡Veteeeeeeeeeee!";
+				next;
+				mes "^3355FFHaces lo que puedes para calmarlo y decirle lo que has encontrado en el documento.^000000";
+				next;
+				if ((countitem(740) > 0) || (countitem(741) > 0) || (countitem(742) > 0) || (countitem(743) > 0) || (countitem(750) > 0) || (countitem(751) > 0) || (countitem(752) > 0) || (countitem(753) > 0) || (countitem(754) > 0) || (countitem(7206) > 0) || (countitem(7212) > 0)){
+					if (countitem(740) > 0) {
+						set .@toy$,"Puppet";
+					}
+					else if(countitem(741) > 0) {
+						set .@toy$,"Poring Doll";
+					}
+					else if(countitem(742) > 0) {
+						set .@toy$,"Chonchon Doll";
+					}
+					else if(countitem(743) > 0) {
+						set .@toy$,"Spore Doll";
+					}
+					else if (countitem(744) > 0) {
+						set .@toy$,"Baphomet Doll";
+					}
+					else if(countitem(751) > 0) {
+						set .@toy$,"Osiris Doll";
+					}
+					else if(countitem(752) > 0) {
+						set .@toy$,"Rocker Doll";
+					}
+					else if(countitem(753) > 0) {
+						set .@toy$,"Yoyo Doll";
+					}
+					else if(countitem(754) > 0) {
+						set .@toy$,"Racoon Doll";
+					}
+					else if(countitem(7206) > 0) {
+						set .@toy$,"Black Cat Doll";
+					}
+					else {
+						set .@toy$,"Hung Doll";
+					}
+					mes "^3355FFJalas una "+ .@toy$ +"";
+					mes "para cubrir tu rostro, y cacudes sus brazos como si estuvieran hablando.^000000";
+				}
+				else {
+					mes "^3355FFDebes encontrar algo";
+					mes "que pueda calmar a Cuaque Donon.^000000";
+					next;
+					mes "^3355FFTristemente, parece que Chaque Donon";
+					mes "tiene una regresión mental muy infantíl. Quizas si trajeras algo que le guste a los niños. Algo que les ofreciera confort...^000000";
+					close;
+				}
+				next;
+				mes "^3355FFChaque Donon cabesea";
+				mes "y felizmente chupó su pulgar. Te entristece ver un Cruzado fundador reducido a ese estado.^000000";
+				next;
+				switch(select("Ask him about the Inn Maid.:Ask him how he's been doing.:Ask about 1st Squad's Final Mission.")) {
+				case 1:
+					mes "[Cuaque Donon]";
+					mes "E-ella es mi hermana.";
+					mes "Y tambien es una Rogue.";
+					mes "Cuando estaba retirado del servicio...";
+					next;
+					mes "[Cuaque Donon]";
+					mes "...";
+					mes "......";
+					next;
+					mes "[Cuaque Donon]";
+					mes "Mi familia siempre esperaba";
+					mes "demasiado de mí. Por eso solía ser un Cruzado. quiero decir, ellos me pagaban bien y me respetaban.";
+					next;
+					mes "[Cuaque Donon]";
+					mes "Cuando me retiré, mi hermana estaba tan enojada. Ella era la única de la cual podía depender, pero ahora que he estropeado mi vida así...";
+					next;
+					mes "[Cuaque Donon]";
+					mes "Pero incluso despues de gritarme, y decirme que era un inútil, de todas maneras ";
+					mes "me dió un trabajo en su Posada.";
+					next;
+					mes "[Cuaque Donon]";
+					mes "He estado trabajando allá,";
+					mes "viviendo una vida calmada. Pero ahora, por alguna razón, muchas personas quieren hablarme acerca de algo importante.";
+					next;
+					mes "[Cuaque Donon]";
+					mes "No se lo que dije o hice, pero creo que cuando les dí la respuesta correcta, despues  de que pude finalmente recordar algo, trataron de lastimarme.";
+					next;
+					mes "[Cuaque Donon]";
+					mes "Así que mi hermana me ha estado escondiendo";
+					mes "aquí. Es aburrido y solitario, y el tipo de las escaleras de abajo está siempre gritandome que me vaya.";
+					next;
+					mes "[Cuaque Donon]";
+					mes "Incluso el Clan de Rogues del cual";
+					mes "¡mi hermana es parte vienen a veces a gritarme. Todos quieren que les diga algo que supuestamente se!";
+					next;
+					mes "[Cuaque Donon]";
+					mes "¡Pero no puedo recordar nada!";
+					mes "Este lugar es seguro de gente peligrosa, pero no se por cuanto tiempo.";
+					next;
+					mes "[Cuaque Donon]";
+					mes "Incluso mi hermana dice que tengo que decirle al Clan de Rogues lo que debería saber, o no nos protejeran más.";
+					next;
+					mes "[Cuaque Donon]";
+					mes "Se miró muy triste cuando";
+					mes "dijo eso. No quiero decepcionarla o molestarla. Ella es";
+					mes "todo lo que me queda...";
+					if (god_megin_2 == 2) {
+						next;
+						mes "[Cuaque Donon]";
+						mes "¡Oh, Recuerdo algo!";
+						mes "Mi hermana me dijo que no le dijera a nadie, pero te lo voy a decir...";
+						next;
+						mes "^3355FFCuaque Donon";
+						mes "te susurra al oído.^000000";
+						next;
+						mes "[Cuaque Donon]";
+						mes "^666666Ella dijo que el Clan de Rogues quería algo de mí. Así que ella va a enviar unas buenas personas que podemos confiar y que pueden ayudarme.^000000";
+						next;
+						mes "[Cuaque Donon]";
+						mes "^666666Aun así, este es el lugar más seguro para mí por el momento. Pero siempre estoy listo para escapar si tengo que hacerlo.^000000";
+						set god_megin_2,3;
+					}
+					close;
+				case 2:
+					mes "[Cuaque Donon]";
+					mes "¿Como he estado?";
+					mes "Muchas personas han estado viniendo";
+					mes "a verme. ¡Todos quieren algo que ni siquiera se!";
+					next;
+					mes "[Cuaque Donon]";
+					mes "El Clan de Rogues me prometió";
+					mes "protegerme, pero me asustan mucho cuando se aparecen de pronto.";
+					next;
+					mes "[Cuaque Donon]";
+					mes "Oh, y mi hermana dijo que se va a";
+					mes "a quejar con mi viejo jefe acerca de algo. Ella dijo que solía estar bien, pero ahora que estoy retirado, ya no soy el mismo.";
+					next;
+					mes "[Cuaque Donon]";
+					mes "Pero mi viejo jefe de cuando yo era un Cruzado no quiere ver a mi hermana. Así que ella va a pedir la ayuda de otros Rogues para esparcir algunos rumores...";
+					next;
+					mes "[Cuaque Donon]";
+					mes "Como cualquiera que trabaja como Cruzado bajo el mando de mi viejo jefe va a terminar como yo. Sabes...quebrado.";
+					if (god_megin_2 == 1) {
+						set god_megin_2,2;
+					}
+					close;
+				case 3:
+					mes "[Cuaque Donon]";
+					mes "No lo se...";
+					mes "Ni siquiera recuerdo.";
+					if (god_megin_2 == 3) {
+						next;
+						mes "[Cuaque Donon]";
+						mes "¡Espera, es cierto!";
+						mes "^0000FFMegingjard^000000! Cierto.";
+						mes "¡Lo encontramos, y";
+						mes "y sabíamos lo que era";
+						mes "solo con verlo!";
+						next;
+						if (rand(1,10) > 4) {
+							switch(select("^FF0000Megingjard^000000!:^FFFFFFListen to him quietly^000000.")) {
+							case 1:
+								mes "[Cuaque Donon]";
+								mes "Waaaaaaaah~!";
+								mes "¡Eres igual a";
+								mes "todos los demas!";
+								mes "¡Déjame solo!";
+								set god_megin_2,0;
+								close;
+							case 2:
+								mes "[Cuaque Donon]";
+								mes "Recuerdo que despues de que lo encontramos. Uno de nosotros del escuadrón tuvo una disputa con nuestro viejo lider. Yo estaba de guardia en la noche y lo escuché. Creo que nuestro lider estaba fuera de orden...";
+								next;
+								mes "[Cuaque Donon]";
+								mes "Ergh...";
+								mes "No puedo recordar";
+								mes "nada más que eso...";
+								set god_megin_2,4;
+								close;
+							}
+						}
+						else {
+							switch( select( "^FF0000Megingjard^000000!", "^FFFFFFMegingjard!^000000.", "^FFFFFFEscúchalo calmadamente^000000" ) ) {
+							case 1:
+								mes "[Cuaque Donon]";
+								mes "Waaaaaaaah~!";
+								mes "¡Eres igual a";
+								mes "todos los demas!";
+								mes "¡Déjame solo!";
+								set god_megin_2,0;
+								close;
+							case 2:
+								mes "[Cuaque Donon]";
+								mes "Waaaaaaaah~!";
+								mes "¡Eres igual a";
+								mes "todos los demas!";
+								mes "¡Déjame solo!";
+								set god_megin_2,0;
+								close;
+							case 3:
+								mes "[Cuaque Donon]";
+								mes "Recuerdo que despues de que lo encontramos. Uno de nosotros del escuadrón tuvo una disputa con nuestro viejo lider. Yo estaba de guardia en la noche y lo escuché. Creo que nuestro lider estaba fuera de orden...";
+								next;
+								mes "[Cuaque Donon]";
+								mes "Ergh...";
+								mes "No puedo recordar";
+								mes "nada más que eso...";
+								set god_megin_2,4;
+								close;
+							}
+						}
+					}
+					close2;
+				}
+			}
+			else if (god_megin_2 == 4) {
+				mes "[Cuaque Donon]";
+				mes "Recuerdo que despues de que encontramos el Megingjard. Uno de nosotros del escuadrón tuvo una disputa con nuestro viejo lider. Yo estaba de guardia en la noche y lo escuché. Creo que nuestro lider estaba fuera de orden...";
+				next;
+				mes "[Cuaque Donon]";
+				mes "Ergh...";
+				mes "No puedo recordar";
+				mes "nada más que eso...";
+				next;
+				mes "[Cuaque Donon]";
+				mes "Me está dando sueño";
+				mes "y me duele la cabeza.";
+				mes "Ahora dejame descansar...";
+				close2;
+			}
+			else {
+				mes "[Cuaque Donon]";
+				mes "¡¿Quien eres?!";
+				mes "¿Como diablos";
+				mes "llegastes aquí?!";
+				mes "¡Aléjate de mí!";
+				mes "¡Veteeeeeeeee!";
+				close2;
+			}
+		}
+	}
+	else {
+		mes "[Cuaque Donon]";
+		mes "¿Qu-quien eres?!";
+		mes "¿Como diablos";
+		mes "llegastes aquí?!";
+		next;
+		mes "[Cuaque Donon]";
+		mes "Wahhhhh...!";
+		mes "¡Mi cabeza!";
+		mes "¡Me duele mucho!";
+		mes "¡Estoy tan a-asustado!";
+		close;
+	}
+}
+
+alberta,196,146,0	script	Crusader#megin2	751,{
+	if ($God1 > 49 && $God2 < 100) {
+		if(god_eremes == 18) {
+			mes "[Jack O]";
+			mes "^333333*Bosteza...*^000000";
+			mes "Está calmo y aburrido, como lo usual. Veamos si hay algunos Espadachines que pueda reclutar hoy.";
+			next;
+			mes "[Jack O]";
+			mes "¿Eh...?";
+			next;
+			switch(select("Ask him about Rebarev Doug.:Ask him how he's been doing.:Ask him about the last mission of the 1st Squad.")) {
+			case 1:
+				mes "[Jack O]";
+				mes "¡Ah! Si, nuestro viejo líder del 1er Escuadrón.eh. No lo he visto desde que fuimos separados.";
+				close;
+			case 2:
+				mes "[Jack O]";
+				mes "¿Yo? Si, Siempre estoy ocupado reclutando futuros Cruzados.";
+				mes "¡Siempre le damos la bienvenida a Espadachines";
+				mes "con grandes habilidades!";
+				next;
+				mes "[Jack O]";
+				mes "¿Como suena eso? ¿Por qué no te haces voluntario para converertirte en un Cruzado?";
+				close;
+			case 3:
+				mes "[Jack O]";
+				mes "¿Última misión?";
+				mes "Eh, Realmente no lo recuerdo.";
+				close;
+			}
+		}
+		else if (god_eremes > 18) {
+			if (god_megin_3 == 0 || god_megin_3 == 1) {
+				mes "[Jack O]";
+				mes "^333333*Bosteza...*^000000";
+				mes "Está calmo y aburrido, como lo usual. Veamos si hay algunos Espadachines que pueda reclutar hoy.";
+				next;
+				mes "[Jack O]";
+				mes "¿Eh...?";
+				next;
+				switch(select("Ask him about Rebarev Doug.:Ask him how he's been doing.:Ask about 1st Squad's final mission.")) {
+				case 1:
+					if (god_megin_3 == 1) {
+						mes "[Jack O]";
+						mes "Ah cierto. Nuestro viejo lider.";
+						mes "Ahora recuerdo: ¡Él era";
+						mes "un gran tonto moralista";
+						mes "ahora que lo pienso!";
+						next;
+						mes "[Jack O]";
+						mes "¿Puedes creer que él solía decir que ^0000FFnadie era más religioso que él en este mundo^000000?! Eso es puro egoísmo. Y talvez locura.";
+						next;
+						mes "[Jack O]";
+						mes "Como sea, todos en el escuadrón";
+						mes "sentían orgullo de su fe. Cuando";
+						mes "estás pasando por tiempos duros en el";
+						mes "mundo real, dependes de la religión, ¿sabes?";
+						next;
+						mes "[Jack O]";
+						mes "Como sea, en los registros acerca de";
+						mes "nuestro escuadrón, dice que uno de nosotros fue castigado por insubordinación, rebelión o algo. Eso es";
+						mes "una completa mentira.";
+						next;
+						mes "[Jack O]";
+						mes "Durante nuestra misión final,";
+						mes "nuestro viejo lider tuvo una gran discusión con uno de nosotros acerca de algo que encontramos. Lo recuerdo siendo alguna clase de artefacto de los dioses, pero no recuerdo claramente que era.";
+						next;
+						mes "[Jack O]";
+						mes "Aunque hubo una obvia disputa, creo que era nuetro lider del escuadrón el que se salió de la linea.";
+						mes "Yo... yo no puedo decirlo realmente...";
+						next;
+						mes "[Jack O]";
+						mes "No puedo por mi vida";
+						mes "recordar como el tipo que";
+						mes "discutió con el lider del escuadrón";
+						mes "se miraba. Los esteroides";
+						mes "debieron hacerme algo...";
+						next;
+						mes "[Jack O]";
+						mes "Como sea, estoy seguro que lo que haya sido lo que ese tipo hizo, no fue insubordinación. De hecho, ¡Debió estar en lo correcto!";
+						next;
+						mes "[Jack O]";
+						mes "Eso es todo lo que puedo recordar.";
+						mes "Será mejor que tome algunas Hierbas verdes ahora. Mi cabeza da vueltas como loca cada vez que pienso en esa vez.";
+						set god_megin_3,2;
+						close;
+					}
+					else {
+						mes "[Jack O]";
+						mes "¡Ah! Si, nuestro viejo lider del 1er Escuadrón. Heh. No lo he visto desde que nos separamos.";
+						close;
+					}
+				case 2:
+					mes "[Jack O]";
+					mes "¿Yo? Si, no me está yendo tan mal. Manteniendome ocupado reclutando futuros Cruzados. Le damos la bienvenida a todos";
+					mes "los Espadachines si muestran potencial~";
+					close;
+				case 3:
+					mes "[Jack O]";
+					mes "¿Huh...?";
+					mes "¿Por qué";
+					mes "querrías saber?";
+					next;
+					mes "^3355FFLe dices lo que habías leído en los registros del 1er Escuadrón. Enseguida, Jack O se mira un poco confundido.^000000";
+					next;
+					mes "[Jack O]";
+					mes "¿Huh...?";
+					mes "Quizas no sea capaz de recordar";
+					mes "mucho de ese entonces, pero la parte acerca de la ^0000FFisubordinación^000000 no puede ser cierta. Estoy seguro de eso.";
+					if (god_megin_3 == 0) {
+						set god_megin_3,1;
+					}
+					close;
+				}
+			}
+			else if (god_megin_3 == 2) {
+				mes "[Jack O]";
+				mes "Nuestro viejo lider era";
+				mes "tan arrogante hasta el punto";
+				mes "de sobrepasar los límites.";
+				next;
+				mes "[Jack O]";
+				mes "Quiero decir, la gente normal";
+				mes "no dice cosas como '^0000FF¡Yo soy el hombre más religioso del universo! ¡Arrodíllense ante mí!^000000' Si. No es una cosa normal para decir..";
+				next;
+				mes "[Jack O]";
+				mes "Como sea, si el lider";
+				mes "del escuadrón castigaba a alguien por insubordinación, estoy seguro que eso fue sin consentimiento. No recuerdo tanto, pero estoy seguro de eso.";
+				next;
+				mes "[Jack O]";
+				mes "Disculpame, Necesito tomar algunas Hierbas verdes. Tomando unas de estas parece";
+				mes "ser la única cosa que funciona para mi dolor de cabeza.";
+				next;
+				mes "^3355FFJack O trabajosamente masticó";
+				mes "algunas Hierbas verdes.";
+				mes "Pareció que le aliviaron en gran manera su dolor de cabeza.^000000";
+				close;
+			}
+			else {
+				mes "[Jack O]";
+				mes "^333333*Bosteza...*^000000";
+				mes "Está calmo y aburrido, como lo usual. Veamos si hay algunos Espadachines que pueda reclutar hoy.";
+				close;
+			}
+		}
+		else {
+			mes "[Jack O]";
+			mes "¡Olle muchacho!";
+			mes "¿Nunca has pensado en";
+			mes "ser un Cruzado?";
+			close2;
+		}
+	}
+	else {
+		if (BaseClass == Job_Swordman){
+			mes "[Jack O]";
+			mes "¡Olle muchacho!";
+			mes "¿Nunca has pensado en";
+			mes "ser un Cruzado?";
+			next;
+			mes "[Jack O]";
+			mes "Básicamente, serías voluntario para ser parte de nuestros militares, tan bien entrenado para la Guerra Santa.";
+			next;
+			mes "[Jack O]";
+			mes "Si tienes algo de fe y sabes como empuñar una espada, serías más que bienvenido aquí.";
+			next;
+			mes "[Jack O]";
+			mes "Solo piensa en mi sugerencia";
+			mes "y regresa si estás intereasado. Correcto entonces, te veo luego~";
+			close;
+		}
+		else {
+			mes "[Jack O]";
+			mes "^333333*Bosteza...*^000000";
+			mes "Está calmo y aburrido, como lo usual. Veamos si hay algunos Espadachines que pueda reclutar hoy.";
+			next;
+			mes "[Jack O]";
+			mes "¿Huh...?";
+			mes "¿Estás interesado en conocer más acerca de los Cruzados? Hahaha, Creo que ese debe ser el caso.";
+			next;
+			mes "[Jack O]";
+			mes "Por cierto, trae un muñeco a";
+			mes "la niña que está en frente de mí. Si tienes suerte, te dará algo bonito a cambio. Que es esto, no lo sé. No tengo ningun muñeco.";
+			next;
+			mes "[Jack O]";
+			mes "De acuerdo con el código de los Cruzados, no se supone que mienta. ¡Así que, puedes confiar en mí!";
+			close2;
+		}
+	}
+}
+
+aldebaran,66,213,0	script	Lady#megin	69,{
+	if ($God1 > 49 && $God2 < 100) {
+		if(god_eremes == 18) {
+			mes "[Emma Searth]";
+			mes "^333333*Exala...*^000000 No he recibido ninguna respuesta de ellos. No sé";
+			mes "si pueda esperar por más tiempo para unirme a la Corporación Kafra.";
+			close;
+		}
+		else if(god_eremes > 18 && god_eremes < 26) {
+			if (god_megin_4 < 2) {
+				mes "[Emma Searth]";
+				mes "^333333*Exala...*^000000 No he recibido ninguna respuesta de ellos. No sé";
+				mes "si pueda esperar por más tiempo para unirme a la Corporación Kafra.";
+				next;
+				mes "[Emma Searth]";
+				mes "¡Oh, un aventurero! Yo solía trabajar en el mismo campo que tú. Más especificamente, Solía ser un Cruzado.";
+				next;
+				mes "[Emma Searth]";
+				mes "Mi nombre es Emma Searth. En este momento, estoy siguiendo mi sueño y aplicando para ser una Señorita Kafra. Así que los dias en que empuñé una espada se acabaron.";
+				next;
+				mes "[Emma Searth]";
+				mes "Tristemente, aun no he tenido éxito porque fuí diagnosticada con";
+				mes "alguna rara ^0000FFamnesia^000000.";
+				next;
+				mes "[Emma Searth]";
+				mes "Por supuesto, entiendo que la";
+				mes "Corporación Kafra es grande, una compañía profesional, pero";
+				mes "si puedo trabajar para ellas incluso si es solo medio-tiempo...";
+				next;
+				mes "[Emma Searth]";
+				mes "¿Es esto un gran problema?";
+				mes "Supongo que están preocupadas";
+				mes "de que olvidara información importante de los clientes una vez contratada.";
+				next;
+				mes "[Emma Searth]";
+				mes "Es extraño. Cuando yo fuí";
+				mes "un Cruzado, recordaba";
+				mes "todo lucidamente, y nunca tuve problemas recordando el pasado.";
+				next;
+				mes "[Emma Searth]";
+				mes "Pero ahora tengo estas migrañas cada vez que quiero concentrarme en las memorias de aquellos tiempos";
+				mes "cuando solía pelear en la Prontera Militar.";
+				next;
+				mes "[Emma Searth]";
+				mes "^333333*Suspira...*^000000";
+				next;
+				switch(select("About her past.:Why be a Kafra Lady?:About memories she can remember.")) {
+				case 1:
+					if (countitem(7015) > 0) {
+						mes "^3355FFLa fragancia de tu";
+						mes "Separador de Libros";
+						mes "parece traerle claridad";
+						mes "a su mente.^000000";
+						next;
+						mes "[Emma Searth]";
+						mes "Yo nací en una familia adinerada en donde fuí criada para aprender de etiqueta, ataque y defensa, montar Peco, y lecciones de música desde que";
+						mes "nací. Supongo que puede decir que estoy bien educada.";
+						next;
+						mes "[Emma Searth]";
+						mes "Sin embargo, mis padres no estaban";
+						mes "complacidos cuando se dieron cuenta que quería comvertirme en una Señorita Kafra.";
+						next;
+						mes "[Emma Searth]";
+						mes "Mis padres insistieron que";
+						mes "me convirtiera en una Sabia o un Profesor.";
+						mes "Al final, terminé escapando";
+						mes "de ellos uniendome a los Cruzados.";
+						next;
+						mes "[Emma Searth]";
+						mes "afortunadamente, los Cruzados estaban anunciando el reclutamiento en ese tiempo, así que aproveché la oportunidad. Además, ¡tener experiencia militar podría ayudarme a unirme a las Kafras!";
+						next;
+						mes "[Emma Searth]";
+						mes "Desde que lo hice tan bien en el Campo de Entrenamiento,";
+						mes "Tuve la oportunidad de unirme a un escuadrón élite. Amenudo nuestro escuadrón era asignado a misiones difíciles, y nunca fallamos en completarlas.";
+						next;
+						mes "[Emma Searth]";
+						mes "Eventualmente, mi reputación como una mujer Cruzada, y estando en una posición militar respetable, fue suficiente para satisfacer a mi familia.";
+						next;
+						mes "[Emma Searth]";
+						mes "Pero despues de ese día,";
+						mes "todo salió mal.";
+						mes "Solo recuerdo que";
+						mes "fue muy triste y deprimente.";
+						mes "De alguna manera, siento que fuimos";
+						mes "incluso traicionados...";
+						next;
+						mes "[Emma Searth]";
+						mes "Creo que puedo";
+						mes "intentar recordar a";
+						mes "mis camaradas...";
+						set god_megin_4,1;
+						close;
+					}
+					else {
+						mes "[Emma Searth]";
+						mes "Ah, no hablemos de eso. Es muy deprimente. Talvez si tuvieras algo que ayude a la ^0000FFmemoria^000000, podría ser capaz de recordar mi pasado olvidado. Cualquier cosa, como un recordatorio, una agenda, un separador de libro, una cuerda...";
+						close;
+					}
+				case 2:
+					mes "[Emma Searth]";
+					mes "Un día, pasó que fuí a ver a la Señora Leilah a su trabajo aquí en Al De Baran. Estaba radiante de confianza e infundía respeto, ¡incluso a los clientes!";
+					next;
+					mes "[Emma Searth]";
+					mes "Ella se comportó como una profesional, sin importar la situación. Incluso aunque yo sabía que estaba cansada de trabajar en el calor del verano, ¡ella hizo ver todo como si no se esforzara!";
+					next;
+					mes "[Emma Searth]";
+					mes "Cuando un cliente varón trata de ligarsela, ella nunca pierde su pose. Solo ajusta sus anteojos y hace lo que necesita hacer.";
+					next;
+					mes "[Emma Searth]";
+					mes "Para mí, a ella le gusta un solitario, angel guardian. En ese momento, parecía que el mundo existía solo para ser burlado por la Señora Leila.";
+					next;
+					mes "[Emma Searth]";
+					mes "Tambien escuché que las Señoritas Kafra siempre estan viajando alrededor del mundo, lo cual es algo había soñado en hacer.";
+					next;
+					mes "[Emma Searth]";
+					mes "La Señora Lailah es mi ídolo,";
+					mes "y ella es la razón para";
+					mes "querer convertirme en una Señorita Kafra.";
+					close;
+				case 3:
+					if (countitem(511) > 0 && god_megin_3 > 1) {
+						mes "^3355FFEmma Searth se toma de la cabeza y se masajea como si estuviera sufriendo de otra migraña.^000000";
+						next;
+						mes "^3355FF Recordando que una Hierba Verde fue capaz de aliviar a Jack O, le diste una Hierba Verde a Emma. Ella la toma, y se mira un poco más relajada.^000000";
+						next;
+						mes "[Emma Searth]";
+						mes "Ni siquiera estoy segura";
+						mes "cuanto puedo recordar";
+						mes "y cuanto he";
+						mes "olvidado.";
+						next;
+						mes "[Emma Searth]";
+						mes "Dejame...";
+						mes "Tratar de recordar a todos los de nuestro escuadrón. Dejame ver, estaba Jack O, El Nineball. Z-Zan. Zan.H-Huadoku. C-Cuaque Donon. Um, E... Eni... Egni... Um...";
+						next;
+						mes "[Emma Searth]";
+						mes "Egni...";
+						mes "¿Egnigem?^000000";
+						mes "¿Quien era ese?";
+						mes "Oh no. Estoy segura que él";
+						mes "debe tener, no, ¿Había alguien";
+						mes "llamado así con nosotros?";
+						close2;
+						set god_megin_4,2;
+						end;
+					}
+					else {
+						mes "^3355FFEmma Searth se toma de la cabeza y se masajea como si estuviera sufriendo de otra migraña.^000000";
+						next;
+						mes "[Emma Searth]";
+						mes "Ni siquiera estoy segura";
+						mes "cuanto puedo recordar";
+						mes "y cuanto he";
+						mes "olvidado.";
+						close;
+					}
+				}
+			}
+			else if(god_megin_4 > 1) {
+				mes "[Emma Searth]";
+				mes "^0000FFJack O, El Nineball, Zan.Huadoku, Cuaque Donon, Egnigem.^000000 Oh, realmente los extraño mucho...";
+				close;
+			}
+			else {
+				mes "[Emma Searth]";
+				mes "^333333*Suspira...*^000000 No he recibido ninguna respuesta de ellos. No sé";
+				mes "si pueda esperar por más tiempo para unirme a la Corporación Kafra.";
+				close;
+			}
+		}
+		else if (god_eremes == 25) {
+			mes "[Emma Searth]";
+			mes "Egnigem...";
+			mes "Ese nombre hace";
+			mes "sentir muy triste. No estoy";
+			mes "segura por que, pero...";
+			close;
+		}
+		else if (god_eremes == 26 || god_eremes == 27) {
+			mes "[Emma Searth]";
+			mes "Egnigem...";
+			mes "Ese nombre hace";
+			mes "sentir muy triste. No estoy";
+			mes "segura por que, pero...";
+			next;
+			mes "^3355FFEmma se voltea antes de que la puedas ver llorar. Aun así, sus hombros se retuercen con cada sollozo y te imaginas las dificultades que ha tenido que soportar.^000000";
+			next;
+			mes "[Emma Searth]";
+			mes "Quisiera saber que significa ese nombre realmente. Estoy segura que está ligado a un recuerdo muy importante de mi pasado.";
+			next;
+			mes "[Emma Searth]";
+			mes "Realmente aprecio que vengas a hablarme de los viejos tiempos. Yo, yo quiero que tengas esto.";
+			set god_eremes,28;
+			getitem 603,1; // Old_Blue_Box
+			getexp 1220358,0;
+			close;
+		}
+		else if (god_eremes == 28) {
+			mes "[Emma Searth]";
+			mes "Egnigem...";
+			mes "Ese nombre hace";
+			mes "sentir muy triste. No estoy";
+			mes "segura por que, pero...";
+			next;
+			mes "^3355FFEmma se voltea antes de que la puedas ver llorar. Aun así, sus hombros se retuercen con cada sollozo y te imaginas las dificultades que ha tenido que soportar.^000000";
+			close;
+		}
+		else {
+			mes "[Emma Searth]";
+			mes "^333333*Suspira...*^000000 No he recibido ninguna respuesta de ellos. No sé";
+			mes "si pueda esperar por más tiempo para unirme a la Corporación Kafra.";
+			close;
+		}
+	}
+	else {
+		mes "[Emma Searth]";
+		mes "Escuché que las Señoritas Kafras viajan a todo el mundo, es algo que ¡siempre he soñado hacer! Afortunadamente uno de estos días, seré capaz de trabajar para la Corporación Kafra tambien.";
+		next;
+		mes "[Emma Searth]";
+		mes "^333333*Suspira...*^000000";
+		mes "Aun así, es desalentador. No he escuchado nada de ellos...";
+		close;
+	}
+}
+
+cmd_in02,190,94,3	script	Man#megin	828,{
+	if ($God1 > 49 && $God2 < 100) {
+		if (god_eremes == 18) {
+			mes "[Royal Myst]";
+			mes "¿Qué...?";
+			mes "¿Quieres hablar?";
+			next;
+			mes "[Royal Myst]";
+			mes "¿Qué soy, tu psiquiatra personal? Déjame solo,";
+			mes "¡Estoy ocupado! De acuerdo, ahora";
+			mes "¿A cual le debería apostar...?";
+			next;
+			switch(select("Speak of Rebarev Doug.:Speak of the 1st Squad.:Talk about gambling.:Discuss hobbies.")) {
+			case 1:
+				mes "[Royal Myst]";
+				mes "¿Qué--? ¿otra vez él? ¡Dile que estoy bien! ¡más que eso! ¿Por qué tiene que enviar a toda estas personas solo para hacer";
+				mes "preguntas tontas?";
+				close;
+			case 2:
+				mes "[Royal Myst]";
+				mes "¿1er Escuadrón? Sí, solía estar en eso. Todos nosotros los del escuadrón solíamos ser buenos amigos tambien.";
+				next;
+				mes "[Royal Myst]";
+				mes "Zan.Huadoku, Cuaque Donon,";
+				mes "Jack O, Emma Searth y El Nineball. Si... ¿Me pregunto como estan?";
+				close;
+			case 3:
+				mes "[Royal Myst]";
+				mes "¿Apuestas? Las amo,¿sabes?";
+				mes "Eh, No gano todo el tiempo, ¡amo más cuando me voy con más dinero del que traje! ¡Hahaha!";
+				close;
+			case 4:
+				mes "[Royal Myst]";
+				mes "¿Pasatiempos?";
+				mes "¿Por qué vienes";
+				mes "a mí?";
+				next;
+				mes "[Royal Myst]";
+				mes "El pasatiempo de un hombre  es beber, o ¿no lo sabías? ¡Creo que soy muy bueno para eso tambien! ¡Mwahahaha!";
+				close;
+			}
+		}
+		else if (god_eremes > 18 && god_eremes < 21) {
+			if (god_megin_6 == 0 && god_megin_5 > 4 && god_megin_4 > 1 && god_megin_3 > 1 && god_megin_2 > 3 && god_megin_1 > 2) {
+				mes "[Royal Myst]";
+				mes "¿Que..?";
+				mes "¿Quieres hablar?";
+				next;
+				mes "[Royal Myst]";
+				mes "¿Quien soy, tu psiquiatra personal? Déjame solo,";
+				mes "¡Estoy ocupado! bien, ahora";
+				mes "¿a quien le apuesto...?";
+				next;
+			}
+			else if(god_megin_6 > 0) {
+				mes "[Royal Myst]";
+				mes "¿Hmm?";
+				mes "¿Que pasa?";
+				next;
+			}
+			else {
+				mes "[Royal Myst]";
+				mes "¿Que..?";
+				mes "¿Quieres hablar?";
+				next;
+				mes "[Royal Myst]";
+				mes "¿Quien soy, tu psiquiatra personal? Déjame solo,";
+				mes "¡Estoy ocupado! bien, ahora";
+				mes "¿a quien le apuesto...?";
+				close;
+			}
+			if (god_megin_6 < 16) {
+				switch( select("Habla de Rebarev Doug.", "Habla del 3er Escuadrón.", "Habla de las apuestas.", "Discute de pasatiempos.") ) {
+				case 1:
+					if (god_megin_6 == 0) {
+						mes "[Royal Myst]";
+						mes "¿Huh? ¿Qué quiere ese viejo tonto esta vez? Dile que estoy bien, ¡estupendo! ¿Por qué siguen enviando gente...";
+						set god_megin_6,1;
+						close;
+					}
+					else if (god_megin_6 > 0 && god_megin_6 < 15) {
+						mes "[Royal Myst]";
+						mes "¿Que diablos te pasa? ¡Para de hablar de él! ¡Nunca más quiero volver a ver su rostro! ¡Dile que me deje solo maldita sea!";
+						close;
+					}
+					else if (god_megin_6 > 14) {
+						mes "[Royal Myst]";
+						mes "Maldito imbécil...";
+						mes "¿Cuanto le están pagando por estudiar lo que encontramos? Eh, de alguna manera, no me importa en tanto";
+						mes "me pague...";
+						next;
+						mes "[Royal Myst]";
+						mes "Si...";
+						mes "Es solo que";
+						mes "ya no me importa.";
+						close;
+					}
+				case 2:
+					if (god_megin_6 < 15) {
+						mes "[Royal Myst]";
+						mes "¿1er Escuadrón? Sí, solía estar en eso. Todos nosotros los del escuadrón solíamos ser buenos amigos tambien.";
+						next;
+						mes "[Royal Myst]";
+						mes "Zan.Huadoku, Cuaque Donon,";
+						mes "Jack O, Emma Searth y El Nineball. Si... ¿Me pregunto como estan?";
+					}
+					else if (god_megin_6 > 14) {
+						mes "[Royal Myst]";
+						mes "¿1er Escuadrón?";
+						mes "No sé, no me importa~";
+						mes "¿Acaso lusco como un estupido Cruzado?";
+					}
+					close;
+				case 3:
+					if (god_megin_6 < 15) {
+						mes "[Royal Myst]";
+						mes "¿Apuestas? Oh amigo...";
+						mes "¡Amo las apuestas, sabes!";
+						mes "Heh, pero no he tenido la suficiente suerte para ganar aun. Hahaha~!";
+						close;
+					}
+					else if (god_megin_6 > 14) {
+						mes "[Royal Myst]";
+						mes "¡Apuestas...!";
+						mes "Heh heh! Tomas algunos riesgos,";
+						mes "y otros que no deberías.";
+						mes "Lo más que puedo es sentir lástima por aquel tipo, E--";
+						next;
+						mes "[Royal Myst]";
+						mes "¿Ergh...?";
+						mes "Diablos, ni siquiera puedo recordar su nombre. Creerías que yo podría olvidar a aquel tipo al que estoy refiriendome... Eh, Lo recordaré una vez que esté sobrio.";
+						next;
+						mes "[Royal Myst]";
+						mes "Olle, ¿Qué crees que le pasa a los Cruzados que son rodeados y asesinados, huh? ¿A donde van exactamente? Nifleheim, Vahalla...?";
+						set god_eremes,20;
+						close;
+					}
+				case 4:
+					if (god_megin_6 == 0) {
+						mes "¿Pasatiempos?";
+						mes "¿Qué, vines";
+						mes "ante mí?";
+						next;
+						mes "[Royal Myst]";
+						mes "El pasatiempo de un hombre es beber, ¿o no sabías eso? ¡Me la paso muy bien haciendolo! ¡Mwahahaha!";
+						close;
+					}
+					else if (god_megin_6 > 0 && god_megin_6 < 15) {
+						if (countitem(970) > 0) {
+							mes "[Royal Myst]";
+							mes "Hablando de eso,";
+							mes "no he tomado un trago";
+							mes "en muchisino tiempo. Casi";
+							mes "un par de horas.";
+							next;
+							mes "[Royal Myst]";
+							mes "Oooh, parece que tienes un sabroso brebaje que puedo disfrutar. ¡Bwahahaha! ¡Dámelo~!";
+							next;
+							mes "^3355FFAntes de que puedas siquiera pensar,";
+							mes "Royal Myst mete su mano en tu inventario y coge un Alcohol.^000000";
+							delitem 970,1;
+							set god_megin_6,god_megin_6 +2;
+							close;
+						}
+						else {
+							mes "[Royal Myst]";
+							mes "¿Por qué lo mencionas? ¿Vas a traerme algo que me guste? ¡Porque estoy más que dispuesto para tomarlo! ¡Bwahahaha!";
+							close;
+						}
+					}
+					else if (god_megin_6 > 14) {
+						mes "[Royal Myst]";
+						mes "^333333*Hiccup*^000000 Oh si, ésta es. No como la porquería de imitación que han estado sirviendo en los bares hoy en día...";
+						next;
+						mes "[Royal Myst]";
+						mes "¡Olle! ¿Hay algo que quieras";
+						mes "saber de mí? Me hiciste un favor, ¡así que te diré lo que sea! ¡Lo que seaaaaaaa~~!!";
+						close;
+					}
+				}
+			}
+		}
+		else {
+			mes "[Royal Myst]";
+			mes "Eh heh heh~";
+			mes "¡Solo sé";
+			mes "que voy a ganar";
+			mes "esta vez!";
+			close;
+		}
+	}
+	else {
+		mes "[Royal Myst]";
+		mes "¿Que...?";
+		mes "¿Quieres hablar?";
+		next;
+		mes "[Royal Myst]";
+		mes "¿Quien soy, tu psiquiatra personal? Déjame solo,";
+		mes "¡Estoy ocupado! De acuerdo, ahora";
+		mes "¿A cual le debería apostar...?";
+		close;
+	}
+}
+
+jawaii_in,44,110,0	script	Security Officer#megin	734,{
+	if ($God1 > 49 && $God2 < 100) {
+		if (god_eremes == 18) {
+			mes "[The Nineball]";
+			mes "¡Bienvenido a Hawaii,";
+			mes "el paraíso para disfrutar!";
+			next;
+			mes "[The Nineball]";
+			mes "Soy 'El Nineball', ¡el oficial de seguridad de Hawaii! Si tienes algún problema, o encuentras algún Soltero, por favor no dudes en reportarmelo tan pronto puedas~";
+			next;
+			mes "[The Nineball]";
+			mes "Me han dicho que han";
+			mes "habido varios borrachos aquí";
+			mes "últimamente, pero es nuestro más grande interés hacer que tu experiencia aquí sea tan agradable como sea posible.";
+			close;
+		}
+		else if (god_eremes > 18) {
+			if (god_megin_5 < 5) {
+				mes "[The Nineball]";
+				mes "¡Bienvenido a Hawaii,";
+				mes "el paraíso para disfrutar!";
+				next;
+				mes "[The Nineball]";
+				mes "Soy 'El Nineball', ¡el oficial de seguridad de Hawaii! Si tienes algún problema, o encuentras algún Soltero, por favor no dudes en reportarmelo tan pronto puedas~";
+				next;
+				mes "[The Nineball]";
+				mes "Me han dicho que han";
+				mes "habido varios borrachos aquí últimamente, pero es nuestro más grande interés hacer que tu experiencia aquí sea tan agradable como sea posible.";
+				set god_megin_5,god_megin_5 +1;
+				close;
+			}
+			else if (god_megin_5 == 5) {
+				mes "^3355FFÉl actuó inteligente y amistoso, pero por un breve momento, eres capaz de ojear una pizca de tristeza en sus hojos.^000000";
+				next;
+				mes "^3355FFNo parece ser que";
+				mes "serás capaz de hacer";
+				mes "que hable acerca de lo que exactamente";
+				mes "pasó en el 1er Escuadrón...^000000";
+				close;
+			}
+		}
+	}
+	else {
+		mes "[The Nineball]";
+		mes "¡Bienvenido a Hawaii,";
+		mes "el paraíso para disfrutar!";
+		next;
+		mes "[The Nineball]";
+		mes "Soy 'El Nineball', ¡el oficial de seguridad de Hawaii! Si tienes algún problema, o encuentras algún Soltero, por favor no dudes en reportarmelo tan pronto puedas~";
+		next;
+		mes "[The Nineball]";
+		mes "Me han dicho que han";
+		mes "habido varios borrachos aquí últimamente, pero es nuestro más grande interés hacer que tu experiencia aquí sea tan agradable como sea posible.";
+		close;
+	}
+
+}
+
+niflheim,109,254,0	script	Egnigem	796,{
+	if ($God1 > 49 && $God2 < 100) {
+		if (god_eremes > 19 && god_eremes < 25) {
+			if (god_eremes > 22) {
+				mes "[Egnigem]";
+				mes "¿Por qué has regresado a";
+				mes "éste solitario lugar de oscuridad?";
+				next;
+				mes "[Egnigem]";
+				mes "Por favor regresa al mundo";
+				mes "de los vivos. El estar aquí es sufrir, tal es la naturaleza de Nifheim.";
+				close;
+			}
+			else {
+				mes "[Egnigem]";
+				mes "Saludos...";
+				mes ""+ strcharinfo(0) +".";
+				mes "Te he estado observando en el";
+				mes "mundo de los vivos. Veo que has estado ocupado buscando la verdad del 1er Escuadrón, ¿Verdad?";
+				next;
+				mes "[Egnigem]";
+				mes "Puedo darte las respuestas. Despues de todo, Soy el único miembro del 1er Escuadrón que retiene su memoria...";
+				next;
+				mes "[Egnigem]";
+				mes "Heh heh...";
+				mes "Dejame decirte todo";
+				mes "acerca del 1er Escuadrón que ha";
+				mes "sido olvidado...";
+				while(1) {
+					next;
+					switch(select("The Mission:Fate of the 1st Squad:Why are you in Niflheim?:Thanks, I've heard enough.")) {
+					case 1:
+						mes "[Egnigem]";
+						mes "Primero que todo, el registro oficial de nuestra misión está desviada.";
+						mes "Contiene algunas verdades, basadas";
+						mes "en evidencia verval, pero los detalles más importantes han sido omitidos o cambiados.";
+						next;
+						mes "[Egnigem]";
+						mes "Ahora, fuimos secretamente asignados";
+						mes "para encontrar un ^0000FFartefacto de los dioses^000000 por decreto real. En tan solo tres días, ¡Lo conseguimos y encontramos a Megingjard!";
+						next;
+						mes "[Egnigem]";
+						mes "Ahora, los registros dicen que la misión fue insatisfactoria, ¿correcto? Eso sería por mí causa.";
+						next;
+						mes "[Egnigem]";
+						mes "¿Estás conciente que Megingjard";
+						mes "fue un cinturón usado por los dioses? De hecho fue una de las llaves de la gran fuerza de Thor. Otro nombre para él es la 'Guirnalda de fuerza'.";
+						next;
+						mes "[Egnigem]";
+						mes "Ahora, si un humano lo";
+						mes "usara, hay una posibilidad que Megingjard le daría una fuerza comparable a la de un dios. Naturalmente, tendrías miedo de que tal cosa callera en las manos equivocadas.";
+						next;
+						mes "[Egnigem]";
+						mes "En la mente de Rebarev Doug, él";
+						mes "era la única persona digna del cinturón desde que se consideraba a sí mismo como la persona más religiosa viva, y por tanto, el más cercano a los dioses.";
+						next;
+						mes "[Egnigem]";
+						mes "Él nos lo hizo ver que solo él vestiría Megingjard. Aunque era nuestro lider, alguno de nosotros sentimos intranquilidad acerca de que vistiera el cinturón y que no se lo diera a sus superiores, el objeto de nuestra misión.";
+						next;
+						mes "[Egnigem]";
+						mes "Naturalmente, me opuse. Claramente estaba desbalanceado, y sería peligroso darle el control de tal poder. Eso condujo la primera pelea entre nosotros.";
+						next;
+						mes "[Egnigem]";
+						mes "El resto del escuadrón no podrían";
+						mes "estar o no deacuerdo debíamos simplemente obedecer a nuestro lider y dejarlo tener el cinturón. Algunos solo querían completar la misión, mientraslos demás estaban temerosos de lo que pudiera pasar.";
+						next;
+						mes "[Egnigem]";
+						mes "Pero Revarev no nos esperó para decidir. ël destruyó a Megingjard en piezas, intentando mantener la mayoría y de alguna manera reconstruirlo más tarde, y solo llevar una pieza a los Militares de Prontera.";
+						next;
+						mes "[Egnigem]";
+						mes "Él sabía que no podría";
+						mes "escapar con Megingjard para él solo, por que el escuadrón entero fácilmente lo desacreditaría.";
+						next;
+						mes "[Egnigem]";
+						mes "Pero Rebarev sabía";
+						mes "que podría engañar a sus";
+						mes "superiores dandoles solo un fragmento del artefacto, y decir que el resto fue destruído.";
+						next;
+						mes "[Egnigem]";
+						mes "Descubrí sus intenciones cuando";
+						mes "lo encontré desarmando a Megingjard. Antes de que lo pudiera detener,";
+						mes "fuí asesinado. Ese bastardo tenía";
+						mes "una trampa lista para mí...";
+						next;
+						mes "[Egnigem]";
+						mes "Despues de la misión, Rebarev Doug le dió una pieza del cinturón a los superiores, y les dijo";
+						mes "una historia diferente a la que en realidad había pasado...";
+						break;
+					case 2:
+						mes "[Egnigem]";
+						mes "Una vez que la misión fue completada, Rebarev Doug se reportó a los Militares de Prontera con la intención de quedarse con la mayor parte de Megingjard para sí mismo.";
+						next;
+						mes "[Egnigem]";
+						mes "Por alguna razón, él tenía una gran influencia en la gerarquía militar. Ahora, en este momento, estoy seguro que el escuadrón se dió cuenta que él me mató.";
+						next;
+						mes "[Egnigem]";
+						mes "Pero Rebarev Doug lo esperaba, y le explicó a sus superiores que el escuadrón fué tentado por el poder de Megingjard y que dirijí a algunos  de nosotros en un motín en su contra.";
+						next;
+						mes "[Egnigem]";
+						mes "Él le dijo a sus superiores uqe Megingjard fue dañado mientras";
+						mes "peleabamos uno en contra del otro, y que el fragmento que les dió era todo lo que quedaba.";
+						next;
+						mes "[Egnigem]";
+						mes "Por la naturaleza confidencial de nuestra misión, el 1er Escuadrón fue disuelto y no nos dijeron la historia con que Rebarev Doug alimentó a los burocratas hasta que fue demasiado tarde.";
+						next;
+						mes "[Egnigem]";
+						mes "El escuadrón fue castigado y";
+						mes "enviado para reentrenamiento disciplinario por tres meses. Durante este tiempo, memorias específicas fueron borradas de una manera no natural a los miembros del escuadrón.";
+						next;
+						mes "[Egnigem]";
+						mes "Al final, todos fueron transferidos a otros escuadrónes y posiciones. Mi nombre tuvo que ser removido de todos los registros ya que escuchar o leer mi nombre podría deshacer el lavado de cerebro.";
+						next;
+						mes "[Egnigem]";
+						mes "Sin embargo, aun necesitaban un chivo expiatorio oficial, asi que usaron el nombre de Royal Mist en los registros. Posiblemente es el por qué del que esté pasando momentos difíciles ahora mismo.";
+						next;
+						mes "[Egnigem]";
+						mes "Y ahora Rebarev Doug ha estado estudiando los artefactos de los dioses basado en las piezas de Megingjard que encontramos en esa misión usando fondos de investigación del reino. Algún día, será capaz de recontruir el cinturón.";
+						next;
+						mes "[Egnigem]";
+						mes "Hay tambien";
+						mes "algunas preguntas que";
+						mes "Nunca he sido capaz";
+						mes "de responder.";
+						next;
+						mes "[Egnigem]";
+						mes "Nunca he sabido por qué el Rey Tristram III ordenó la investigación de los artefactos de los dioses. Incluso me molesta que Rebarev Doug está a cargo de la investigación de Megingjard. Debe haber alguna razón.";
+						next;
+						mes "[Egnigem]";
+						mes "En cualquier caso, por el bien de Rune-Midgard, será tu responsabilidad el encontrar las respuestas.";
+						next;
+						mes "[Egnigem]";
+						mes "No hay mucho que un hombre muerto";
+						mes "pueda hacer. Pero qué es lo peor que nadie pueda recordarme más. Morí solo y todavía lo estoy en este lugar de la muerte.";
+						break;
+					case 3:
+						mes "[Egnigem]";
+						mes "La peor parte de que los del escuadrón";
+						mes "tengan su memoria borrada es";
+						mes "que Emma Searth no tenga";
+						mes "ningún recuerdo de mí en lo absoluto.";
+						next;
+						mes "[Egnigem]";
+						mes "¿Te importaría escucharme";
+						mes "por un momento? Eres";
+						mes "la única persona con quien";
+						mes "puedo hablar de esto...";
+						next;
+						mes "[Egnigem]";
+						mes "Desde aquí, he visto que Emma";
+						mes "está persiguiendo su sueño otra vez, y";
+						mes "estoy feliz por ella. Pero todavía no es";
+						mes "fácil, saber que la mujer que";
+						mes "amas te ha olvidado totalmente.";
+						next;
+						mes "[Egnigem]";
+						mes "Recuerdo la primera vez que la ví. Creo que fue amor a primera vista. Pero fuí demaciado cobarde para confesarle mi amor, así que desprecié cuando ella se unió a los Cruzados.";
+						next;
+						mes "[Egnigem]";
+						mes "Me tomó un tiempo, pero lo pensé y me enlisté como Cruzado";
+						mes "tambien. Quería estar cerca de ella tanto.";
+						next;
+						mes "[Egnigem]";
+						mes "Ahora, despues de todas nuetras aventuras y buenos tiempos juntos, estoy en el peor escenario posible.";
+						next;
+						mes "[Egnigem]";
+						mes "Estoy muerto...";
+						mes "Pero ni siquiera tengo el consuelo de que ella está";
+						mes "llorando mi pérdida.";
+						next;
+						mes "[Egnigem]";
+						mes "Supongo que es la razón por el cual estoy aquí";
+						mes "en Nifheim. No puedo ir al cielo, Valhalla o cualquier otro lugar sin ella.";
+						next;
+						mes "[Egnigem]";
+						mes "Como sea, ve y visita el Cuartel General de los Cruzados. Seras capaz de aprender más de Rebarev Doug y detener cualquier cosa turbia que él esté confabulando. Buena suerte, mi amigo.";
+						break;
+					case 4:
+						mes "[Egnigem]";
+						mes "Gracias por";
+						mes "escucharme...";
+						if (god_eremes == 21) {
+							set god_eremes,23;
+						}
+						else if (god_eremes == 22) {
+							set god_eremes,24;
+						}
+						close;
+					}
+				}
+			}
+		}
+		else if (god_eremes == 25) {
+			mes "[Egnigem]";
+			mes "Como un cruzado...";
+			mes "Esto es la mejor cosa";
+			mes "que puedo hacer a cambio de lo";
+			mes "que has hecho por mí.";
+			next;
+			mes "[Egnigem]";
+			mes "Escucha...";
+			mes "Te voy a";
+			mes "invadir con el";
+			mes "^666666lúltimo vastigio de mi fuerza^000000...";
+			specialeffect EF_BEGINSPELL5;
+			specialeffect2 EF_HOLYHIT;
+			next;
+			mes "[Egnigem]";
+			mes "Que los cielos";
+			mes "me respondan cuando llamo a la";
+			mes "luz de la justicia que le dé poder a los defensores de la verdad, y amenace a los enemigos de la paz.";
+			specialeffect EF_BEGINSPELL6;
+			specialeffect2 EF_HOLYHIT;
+			next;
+			mes "[Egnigem]";
+			mes "Que brilles siempre";
+			mes "con la luz de la verdad. Deja que la luz en tí erradique las sombras";
+			mes "de la decepción, miedo y malicia.";
+			specialeffect EF_BEGINSPELL6;
+			specialeffect2 EF_HOLYHIT;
+			next;
+			mes "[Egnigem]";
+			mes "Por los poderes sagrados";
+			mes "investidos en mí, yo humíldemente te entrego mi fuerza restante. Pelea honorablemente y no pierdas de vista la rectitud.";
+			specialeffect EF_LOCKON;
+			specialeffect2 EF_HOLYCROSS;
+			set god_eremes,27;
+			getexp 1220358,0;
+			close;
+		}
+		else if (god_eremes == 26) {
+			mes "[Egnigem]";
+			mes "Como Cruzado...";
+			mes "Esto es la mejor cosa";
+			mes "que puedo hacer a cambio de lo";
+			mes "que has hecho por mí.";
+			next;
+			mes "[Egnigem]";
+			mes "Escucha...";
+			mes "Te voy a";
+			mes "invadir con el";
+			mes "^666666lúltimo vastigio de mi fuerza^000000...";
+			specialeffect EF_BEGINSPELL5;
+			specialeffect2 EF_HOLYHIT;
+			next;
+			mes "[Egnigem]";
+			mes "Que los cielos";
+			mes "me respondan cuando llamo a la";
+			mes "luz de la justicia que le dé poder a los defensores de la verdad, y amenace a los enemigos de la paz.";
+			specialeffect EF_BEGINSPELL6;
+			specialeffect2 EF_HOLYHIT;
+			next;
+			mes "[Egnigem]";
+			mes "Que brilles siempre";
+			mes "con la luz de la verdad. Deja que la luz en tí erradique las sombras";
+			mes "de la decepción, miedo y malicia.";
+			specialeffect EF_BEGINSPELL6;
+			specialeffect2 EF_HOLYHIT;
+			next;
+			mes "[Egnigem]";
+			mes "Por los poderes sagrados";
+			mes "investidos en mí, yo humíldemente te entrego mi fuerza restante. Pelea honorablemente y no pierdas de vista la rectitud.";
+			specialeffect EF_LOCKON;
+			specialeffect2 EF_HOLYCROSS;
+			set god_eremes,27;
+			getexp 1220358,0;
+			close;
+		}
+		else if (god_eremes < 20) {
+			mes "[Egnigem]";
+			mes "¿Fuistes traicionado por el destino tambien, o eres simplemente un vagabundo que está perdido en esta tierra de oscuridad?";
+			next;
+			mes "[Egnigem]";
+			mes "Hmm, los vivos no merecen";
+			mes "estar en este reino de frío y sufrimiento. Pero solo puedo ayudarte a escapar diciendote lo poco";
+			mes "que se.";
+			next;
+			switch(select("Ask him about buildings.:Remove marks on mini-map.:Cancel.")) {
+			case 1:
+				mes "[Egnigem]";
+				mes "Ya veo. si entiendes mejor las formas de Nifheim, tendrás una oportunidad más grande de sobrevivir y escapar.";
+				next;
+				switch(select("Witch's Castle:Tool Shop:Weapon Shop:Tavern:Cancel")) {
+				case 1:
+					mes "[Egnigem]";
+					mes "La bruja de Nifheim...";
+					mes "Puedes encontrar su castillo en la ^FF3355+^000000 marca que he hecho en tu mini-mapa.";
+					next;
+					mes "[Egnigem]";
+					mes "Hrrrm...";
+					mes "Parece ser que los vivos que vienen a Nifheim están buscando a la bruja. Pero no entiendo mucho por que es tan importante.";
+					viewpoint 1,253,191,2,0xFFFF33;
+					break;
+				case 2:
+					mes "[Egnigem]";
+					mes "¿La tienda de Herramientas(Tool Shop)? Aquí en Nifheim, ellos venden objetos únicos que";
+					mes "no puedes comprar en cualquier otro lugar.";
+					next;
+					mes "[Egnigem]";
+					mes "Quizas quieras ver sus";
+					mes "bodegas por tí mismo. He dibujado";
+					mes "un(a) ^CE6300+^000000 en tu mini-mapa para marcar";
+					mes "su localización.";
+					viewpoint 1,217,196,3,0xFFCE63;
+					break;
+				case 3:
+					mes "[Egnigem]";
+					mes "He marcado la localización de la Tienda de Armas(Weapon Shop) ^55FF33+^000000. Aunque no hay nada tan especial allá.";
+					viewpoint 1,216,171,4,0xFF55FF;
+					break;
+				case 4:
+					mes "[Egnigem]";
+					mes "La Taverna está ^3355FF+^000000. Aunque solo venden tragos para los muertos...";
+					viewpoint 1,189,207,5,0xFF3355;
+					break;
+				case 5:
+					mes "[Egnigem]";
+					mes "Escoge 'Remover las marcas en tu mini-mapa' del menú para remover todas las localizaciones de los edificios que he hecho.";
+					close;
+				}
+				close;
+			case 2:
+				viewpoint 2,253,191,2,0xFF00FF;
+				viewpoint 2,217,196,3,0xFF00FF;
+				viewpoint 2,216,171,4,0xFF00FF;
+				viewpoint 2,189,207,5,0xFF00FF;
+				mes "[Egnigem]";
+				mes "Bien, todas las marcas han sido removidas de tu mini-mapa. Si quieres revisar las locaciones en Nifheim otra vez, preguntame de nuevo.";
+				close;
+			case 3:
+				mes "[Egnigem]";
+				mes "¿Vas a explorar este lugar tú solo? ¿Eres muy valiente, o no? Solo ten cuidado: aquí en Nifheim, la oscuridad reina supremamente.";
+				close;
+			}
+		}
+		else {
+			mes "[Egnigem]";
+			mes "Realmente deseo que";
+			mes "Emma Searth pudiera";
+			mes "recordarme...";
+			next;
+			mes "^3355FFSus ojos parecían";
+			mes "humedecerse con tristeza.";
+			mes "¿Es realmente posible para los";
+			mes "muertos derramar lágrimas?^000000";
+			close;
+		}
+	}
+	else {
+		mes "[Egnigem]";
+		mes "¿Fuistes traicionado por el destino tambien, o eres simplemente un vagabundo que está perdido en esta tierra de oscuridad?";
+		next;
+		mes "[Egnigem]";
+		mes "Hmm, los vivos no merecen";
+		mes "estar en este reino de frío y sufrimiento. Pero solo puedo ayudarte a escapar diciendote lo poco";
+		mes "que se.";
+		next;
+		switch(select("Ask him about buildings.:Remove marks on mini-map.:Cancel.")) {
+		case 1:
+			mes "[Egnigem]";
+			mes "...ya veo. Ahora, ¡déjame enseñarte todos los edificios en Nifheim!";
+			next;
+			switch(select("Witch's Castle:Tool Shop:Weapon Shop:Tavern:Cancel")) {
+			case 1:
+				mes "[Egnigem]";
+				mes "La bruja de Nifheim...";
+				mes "Puedes encontrar su castillo en la ^FF3355+^000000 marca que he hecho en tu mini-mapa.";
+				next;
+				mes "[Egnigem]";
+				mes "Hrrrm...";
+				mes "Parece ser que los vivos que vienen a Nifheim están buscando a la bruja. Pero no entiendo mucho por que es tan importante.";
+				viewpoint 1,253,191,6,0xFFFF33;
+				break;
+			case 2:
+				mes "[Egnigem]";
+				mes "¿La tienda de Herramientas(Tool Shop)? Aquí en Nifheim, ellos venden objetos únicos que";
+				mes "no puedes comprar en cualquier otro lugar.";
+				next;
+				mes "[Egnigem]";
+				mes "Quizas quieras ver sus";
+				mes "bodegas por tí mismo. He dibujado";
+				mes "un(a) ^CE6300+^000000 en tu mini-mapa para marcar";
+				mes "su localización.";
+				viewpoint 1,217,196,7,0xFFCE63;
+				break;
+			case 3:
+				mes "[Egnigem]";
+				mes "He marcado la localización de la Tienda de Armas(Weapon Shop) ^55FF33+^000000. Aunque no hay nada tan especial allá.";
+				viewpoint 1,216,171,8,0xFF55FF;
+				break;
+			case 4:
+				mes "[Egnigem]";
+				mes "La Taverna está ^3355FF+^000000. Aunque solo venden tragos para los muertos...";
+				viewpoint 1,189,207,9,0xFF3355;
+				break;
+			case 5:
+				mes "[Egnigem]";
+				mes "Escoge 'Remover las marcas en tu mini-mapa' del menú para remover todas las localizaciones de los edificios que he hecho.";
+				close;
+				break;
+			}
+			close;
+		case 2:
+			viewpoint 2,253,191,6,0xFF00FF;
+			viewpoint 2,217,196,7,0xFF00FF;
+			viewpoint 2,216,171,8,0xFF00FF;
+			viewpoint 2,189,207,9,0xFF00FF;
+			mes "[Egnigem]";
+			mes "Bien, todas las marcas han sido removidas de tu mini-mapa. Si quieres revisar las locaciones en Nifheim otra vez, preguntame de nuevo.";
+			close;
+		case 3:
+			mes "[Egnigem]";
+			mes "¿Vas a explorar este lugar tú solo? ¿Eres muy valiente, o no? Solo ten cuidado: aquí en Nifheim, la oscuridad reina supremamente.";
+			close;
+		}
+		close2;
+	}
+}

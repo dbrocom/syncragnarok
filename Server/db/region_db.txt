@@ -1,0 +1,33 @@
+// This is the region database, to group maps
+// Also requires to add mapflags
+// RegionID;Region Name;Bonus Exp;Bonus Job;Tax;+%DropRate
+
+// Rune Midgard Republic
+1;Región de Prontera, Capital de Rune Midgard;0;0;0;0
+7;Región de Payon, la tierra rodeada de Bosques;0;0;0;0
+8;Región de Morroc, la ciudad Oasis;0;0;0;0
+9;Villa de la Tribu Wootan, Umbala;0;0;0;0
+10;Región de Comodo, la ciudad del Juego;0;0;0;0
+11;Niflheim, Dominio de los Muertos;0;0;0;0
+12;Región de Aldebaran, la ciudad de los Canales;0;0;0;0
+13;Región de Geffen, Capital de la Magia;0;0;0;0
+
+// Schwarzwald Republic
+2;Región de Yuno, Capital de Schwarzwald;0;0;0;0
+3;Región de Hugel, la pintoresca Ciudad Jardín;0;0;0;0
+4;Región de Lighthalzen, Ciudad de la Prosperidad;0;0;0;0
+5;Región de Einbroch, la Ciudad del Acero;0;0;0;0
+6;Región de Einbech, la Villa Minera;0;0;0;0
+
+// Arunafelz United States
+14;Región de Rachel, Capital de Arunafelz;0;0;0;0
+15;Región de Veins, la Villa del Desierto;0;0;0;0
+
+// Islands
+16;La Isla Sin Nombre;0;0;0;0
+17;Región de Louyang, las Tierras Altas;0;0;0;0
+18;Región de Gonryun, la Tierra Eremita;0;0;0;0
+19;Región de Ayothaya, la ciudad de Oro y Esmeralda;0;0;0;0
+20;Región de Moscovia, Tierra de Leyendas;0;0;0;0
+21;Región de Lutie, la Villa Navideña;0;0;0;0
+22;Región de Amatsu, la Tierra del Destino;0;0;0;0

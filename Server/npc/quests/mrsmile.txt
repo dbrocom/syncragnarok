@@ -1,0 +1,111 @@
+//===== eAthena Script ======================================= 
+//= Mr. Smile Quest
+//===== By: ================================================== 
+//= kobra_k88, Akaru
+//===== Current Version: ===================================== 
+//= 1.4a
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Trade Clover, Fluff and Jellopy for a Mr. Smile mask.
+//===== Additional Comments: ================================= 
+//= 1.4 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.4a Fixed a little Typo error in duplicates. (bugreport:749) [Samuray22]
+//============================================================ 
+
+prontera,171,226,3	script	Smile Assistance#prt::SmileHelper	92,{
+	mes "[Smile Girl]";
+	mes "Hola hola!!";
+	mes "Esto es Smile Assistance.";
+	mes "¿Cómo puedo ayudarte?";
+	next;
+	switch(select("^3355FFMr. Smile^000000 ?:Construct ^3355FFMr. Smile^000000 :Quit")) {
+	case 1:
+		mes "[Smile Girl]";
+		mes "Evento Nacional llevado a cabo bajo el mando de ^5577FFSu majestad Tristram III^000000,";
+		mes "con el intento de animar a la nación del reino Rune-Midgarts";
+		mes " para jugar en una atmósfera más agradable!";
+		mes "Yo soy ^3355FF' Smile Assistance '^000000,";
+		mes ".. quien lidera el evento nacional llamado ";
+		mes "^3355FFSonrisas por todo el reino Rune-Midgarts^000000";
+		next;
+		mes "[Smile Girl]";
+		mes "Por objetos simples y fáciles de obtener,";
+		mes "te puedo proporcionar";
+		mes "^3355FF' Mr. Smile '^000000. ";
+		mes "Los requerimientos son los siguientes.";
+		next;
+		mes "[Smile Girl]";
+		mes "^3355FF10 Jellopy^000000 ";
+		mes "^3355FF10 Fluff^000000 ";
+		mes "^3355FF10 Clover^000000 ";
+		next;
+		mes "[Smile Girl]";
+		mes "Con este evento";
+		mes "todo el mundo estará feliz y sonriente,";
+		mes "en armonía con otras personas,";
+		mes "y trataremos de hacer Ragnarok el juego mas divertido del mundo.";
+		close;
+	case 2:
+		if (countitem(909) > 9 && countitem(914) > 9 && countitem(705) > 9) {
+			mes "[Smile Girl]";
+			mes "Enhorabuena !";
+			mes "Ahora, por favor toma este Mr.Smile.";
+			next;
+			delitem 909,10; //Jellopy
+			delitem 914,10; //Fluff
+			delitem 705,10; //Clover
+			getitem 2278,1; //Mr_Smile
+			mes "[Smile Girl]";
+			mes "Su majestad, Tristram III";
+			mes "ha prometido intentar hacer todo lo posible para hacer Ragnarok mejor y mas divertido.";
+			next;
+			mes "El hecho arriba mencionado";
+			mes "fue anunciado por";
+			mes "por el Departamento de Información Pública del reino Rune-Midgarts.";
+			close;
+		}
+		else {
+			mes "[Smile Girl]";
+			mes "Oh - desafortunadamente";
+			mes "no has traído";
+			mes "suficientes ítems para el Mr. Smile.";
+			mes "^3355FF10 Jellopy^000000 ";
+			mes "^3355FF10 Fluff^000000 ";
+			mes "^3355FF10 Clover^000000 ";
+			mes "Por favor, revisa estos requerimientos.";
+			close;
+		}
+	case 3:
+		mes "[Smile Girl]";
+		mes "Gracias por visitarnos.";
+		mes "Nosotros ..";
+		mes "El reino de Rune-Midgarts";
+		mes "siempre trata de hacer Ragnarok";
+		mes "un juego mejor y mas divertido.";
+		next;
+		mes "[Smile Girl]";
+		mes "Te pedimos sinceramente";
+		mes "que cooperes.";
+		mes "El hecho arriba mencionado";
+		mes "fué anunciado por el Departamento de Información Pública del reino Rune-Midgarts.";
+		close;
+	}
+}
+
+// Additional Smile Assistance staff
+moc_ruins,59,154,3	duplicate(SmileHelper)	Smile Assistance#moc	92
+aldebaran,136,135,4	duplicate(SmileHelper)	Smile Assistance#alde	92
+geffen,119,107,4	duplicate(SmileHelper)	Smile Assistance#gef	92
+alberta,70,72,4	duplicate(SmileHelper)	Smile Assistance#alb	92
+payon,186,104,5	duplicate(SmileHelper)	Smile Assistance#pay	92
+izlude,129,118,4	duplicate(SmileHelper)	Smile Assistance#iz	92
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= Fully working. 1.1 Optimized
+//= 1.2 updated Payon coords [Lupus]
+//= 1.3 fixed exploit [Lupus]
+//============================================================ 

@@ -1,0 +1,125 @@
+//===== eAthena Script ======================================= 
+//= Renewal Swordman Job Change
+//===== By: ================================================== 
+//= Kisuka
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= Job Change to Swordman Class
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Kisuka]
+//============================================================ 
+izlude_in,74,172,4	script	Swordman#swd	119,{
+	if (Upper == 1) {
+		if (Class == Job_Novice_High && (ADVJOB == Job_Lord_Knight || ADVJOB == Job_Paladin)) {
+			mes "[Swordman]";
+			mes "Puede ser...";
+			mes "sí, es posible...";
+			mes "¿acaso has renacido?";
+			next;
+			mes "[Swordman]";
+			mes "¡Me enorgullece saber que vuelves a querer seguir el camino del Swordman! Lo sabía, jaja. ¡¡Una vez que empuñas una espada por primera vez, no puedes pensar en hacer otra cosa!!";
+			next;
+			if (getskilllv("NV_BASIC") < 9) {
+				mes "[Swordman]";
+				mes "¿Hmm? Pero creo que primero será mejor que recuerdes claramente cómo se usan las Habilidades Básicas.";
+				next;
+				mes "[Swordman]";
+				mes "Una vez aprendas las Habilidades Básicas de Novice, no dudes en regresar para convertirte en Swordman.";
+				close;
+			}
+			mes "[Swordman]";
+			mes "¡Excelente! ¡Permíteme que te promocione a Swordman!";
+			next;
+			skill 143,0,0;
+			jobchange Job_Swordman_High;
+			skill 144,1,0;
+			skill 145,1,0;
+			skill 146,1,0;
+			mes "[Swordman]";
+			mes "Hmm... por tu postura diría que ya eres un avezado Swordman. Sin embargo, no olvides que deberás entrenar para mejorar tus habilidades y ganar fuerza.";
+			close;
+		}else{
+			mes "[Swordman]";
+			mes "Hm...?";
+			mes "Pareces un guerrero renacido.";
+			mes "¿Me equivoco?";
+			next;
+			mes "[Swordman]";
+			mes "Hmmm...";
+			mes "Pero parece que ser un Swordman no es parte de tu destino.";
+			mes "Lo siento, pero no puedo hacer nada por ti.";
+			close;
+		}
+	}
+	mes "[Swordman Guildsman]";
+	mes "Este es el Gremio de Espadachines.";
+	mes "¿Qué te trae a este lugar?";
+	next;
+	switch(select("Quisiera información sobre los Swordman.:Me gustaría convertirme en Swordman.:Sólo curioseaba...")) {
+	case 1:
+		mes "[Swordman Guildsman]";
+		mes "Así que deseas información sobre los poderosos Swordman, ¿eh? ¡Okay!";
+		next;
+		mes "[Swordman Guildsman]";
+		mes "El Swordman muestra sus habilidades en el combate cuerpo a cuerpo.";
+		mes "Y partiendo de eso, ¡nos distinguimos del resto de profesiones en tres principales razones!";
+		next;
+		mes "[Swordman Guildsman]";
+		mes "Primero, los Swordman tenemos un HP más alto que el resto de profesiones.";
+		mes "Segundo, salvo por los arcos y los cetros, los Swordman pueden usar cualquier arma, por lo que podemos luchar en cualquier situación de forma eficaz.";
+		mes "Y tercero, la mayoría de las habilidades de Swordman proporcionan poderosos ataques físicos.";
+		next;
+		mes "[Swordman Guildsman]";
+		mes "Aunque te he proporcionado una explicación muy simple, creo que has entendido perfectamente lo que implica convertirse en Swordman.";
+		mes "En mi opinión, ¡los Swordman somos los mejores!";
+		close;
+	case 2:
+		if(Class != Job_Novice && Class != Job_Baby) {
+			mes "[Swordman Guildsman]";
+			if(Class == Job_Swordman || Class== Job_Baby_Swordman) {
+				mes "Ya eres un excelente Swordman, ¿o me equivoco?";
+				mes "Deberías marcarte una meta y luchar por tus sueños.";
+			}else{
+				mes "¿No me digas? Ya has escogido otra Profesión";
+				mes "La broma ha llegado muy lejos, joven. ¬¬";
+			}
+			close;
+		}else{
+			if (getskilllv("NV_BASIC") < 9) {
+				mes "[Swordman Guildsman]";
+				mes "Siento decirte esto, pero... no podemos aceptarte como parte del Gremio hasta que consigas al menos ^4A4AFFNivel 10 de Job^000000.";
+				mes "y ^4A4AFFBasic Skill Nivel 9^000000.";
+				next;
+				mes "[Swordman Guildsman]";
+				mes "¿Piensas que puedes convertirte en Swordman sin cumplir los requerimientos mínimos?";
+				mes "No es tan fácil como pueda parecer...";
+				close;
+			}
+			mes "[Swordman Guildsman]";
+			mes "Hmm, parece que cumples los requisitos. Eso está bien.";
+			mes "Entonces, ¿estás seguro de querer convertirte en un Swordman?";
+			next;
+			if(select("Sí, lo estoy.:Permíteme reconsiderarlo...") == 2) {
+				mes "[Swordman Guildsman]";
+				mes "No te preocupes. Se necesita prudencia para escoger la profesión adecuada.";
+				mes "Pero es triste que prefieras reconsidearlo antes que intentar superar todas las dificultades....";
+				close;
+			}
+			mes "[Swordman Guildsman]";
+			mes "¡Felicidades! Desde ahora, te tocará llevar una vida de Swordman.";
+			mes "¡Una nueva vida comienza ahora!";
+			next;
+			mes "[Swordman Guildsman]";
+			mes "Mis felicitaciones por haber escogido ser un Swordman, y espero que participes en muchas actividades que dejen en muy buen lugar al gremio.";
+			if (Class == Job_Novice){ callfunc "Job_Change",Job_Swordman; }
+			else if (Class == Job_Baby) { callfunc "Job_Change",Job_Baby_Swordman; }
+			getitem 13415,1; // N_Falchion
+			close;
+		}
+	case 3:
+		close;
+	}
+}

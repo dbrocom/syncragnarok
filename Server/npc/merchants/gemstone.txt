@@ -1,0 +1,117 @@
+//===== eAthena Script ======================================= 
+//= Gemstone trader
+//===== By: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= eAhena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Trade various colors of gemstones for other color gemstones.
+//===== Additional Comments: ================================= 
+//= 1.0 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//=	Any notes pertaining to the prior trader may be found
+//=	in the cities/payon.txt
+//= 1.1 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 1.2 Updated input with min/max values. [L0ne_W0lf]
+//=	Added a checkweight. 
+//============================================================ 
+
+payon,173,238,5	script	Jade#pay	754,{
+	if (checkweight(1201,1) == 0) {
+		mes "^3355FF¡Un momento! Estas cargando demasiados items. Regresa cuando hayas dejado algunas cosas en la Kafra Storage.^000000";
+		close;
+	}
+	mes "[Jade]";
+	mes "Tráeme 2";
+	mes "Gemstones del";
+	mes "mismo color y te las";
+	mes "cambiaré por Gemstones";
+	mes "de un color diferente.";
+	next;
+	switch(select("Blue Gemstones into Red ones!:Red Gemstones into Yellow ones!:Yellow Gemstones into Blue ones!")) {
+	case 1: callsub S_TradeGems,717,716;
+	case 2: callsub S_TradeGems,716,715;
+	case 3: callsub S_TradeGems,715,717;
+	}
+
+S_TradeGems:
+	if (countitem(getarg(0)) < 2) {
+		mes "[Jade]";
+		mes "¡Hah...! ";
+		mes "Estás bromeando, ¿no?";
+		mes "¡No puedo brindarte el";
+		mes "servicio si no";
+		mes "me das al menos";
+		mes "2 "+getitemname(getarg(0))+"s! ";
+		close;
+	}
+	else {
+		set .@gems,countitem(getarg(0))/2;
+		mes "[Jade]";
+		mes "Creo que puedo crear";
+		mes "un total de " + .@gems + " " + getitemname(getarg(1)) + "s ";
+		mes "usando las "+getitemname(getarg(0))+"s ";
+		mes "que tienes.";
+		mes "¿Qué quieres que haga?";
+		next;
+		switch(select("Give me as many as you can.:I want to set the amount.:I quit.")) {
+		case 1:
+			delitem getarg(0),.@gems * 2;
+			getitem getarg(1),.@gems;
+			mes "[Jade]";
+			mes "Aquí tienes...";
+			mes "Vuelve";
+			mes "cuando quieras...";
+			mes "Hm, ¿Por qué esa mirada?";
+			mes "¿Tengo algo en mi cara?";
+			close;
+		case 2:
+			mes "[Jade]";
+			mes "Entonces... ¿Cuántas";
+			mes "quieres?";
+			mes "El número máximo";
+			mes "que puedes ingresar es 100.";
+			next;
+			while(1) {
+				input .@input,0,101;
+				if (.@input == 0) {
+					mes "[Jade]";
+					mes "¿Ninguna?";
+					mes "Supongo que";
+					mes "cambiaste de idea.";
+					close;
+				}
+				else if (.@input > 100) {
+					mes "[Jade]";
+					mes "Errm... ";
+					mes "Te pedí que ingreses";
+					mes "un valor no mayor";
+					mes "a 100, ¿recuerdas?";
+					next;
+				}
+				else {
+					break;
+				}
+			}
+
+			if (.@gems > .@input) {
+				delitem getarg(0),.@input * 2;
+				getitem getarg(1),.@input;
+				mes "[Jade]";
+				mes "Aquí tienes...";
+				mes "Vuelve";
+				mes "cuando quieras...";
+				mes "Hm, ¿Por qué esa mirada?";
+				mes "¿Tengo algo en mi cara?";
+			}
+			close;
+		case 3:
+			mes "[Jade]";
+			mes "Seguro, no hay problema...";
+			mes "Vuelve cuando quieras...";
+			close;
+		}
+	}
+}

@@ -1,0 +1,85 @@
+//===== eAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,39,3	script	Paladin#Valkyrie	752,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Paladin]";
+			mes "¡Felicidades!";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		mes "[Paladin]";
+		mes "¡No olvides";
+		mes "que la guerra santa";
+		mes "se apróxima!";
+		mes "¡Debemos prepararnos!";
+		mes "¡Que la luz de la justicia";
+		mes "siempre ilumine nuestro camino!";
+		close;
+	}
+	else if (ADVJOB == Job_Paladin && Class == Job_Swordman_High && JobLevel > 39) {
+		mes "[Paladin]";
+		mes "La guerra santa";
+		mes "llegará antes de que nos demos cuenta.";
+		mes "Más que nunca,";
+		mes "necesitamos la ayuda de hombres y mujeres";
+		mes "fuertes que luchen";
+		mes "por el bien y la justicia.";
+		next;
+		mes "[Paladin]";
+		mes "¿Lucharás en el";
+		mes "lado de correcto";
+		mes "como Paladin?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[Paladin]";
+			mes "Cuando estés preparado,";
+			mes "podrás volver.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Paladin]";
+			mes "Aún puedes aprender más habilidades. Por favor usa";
+			mes "usa todos tus Skill Points antes de volver conmigo.";
+			close;
+		}
+		jobchange Job_Paladin;
+		set ADVJOB,0;
+		mes "[Paladin]";
+		mes "¡Felicidades!";
+		mes "Como Paladin, espero";
+		mes "que protejas a aquellas personas";
+		mes "más débiles que tú";
+		mes "y nos lleves a la victoria";
+		mes "en la guerra del bien contra el mal.";
+		close;
+	}
+	mes "[Paladin]";
+	mes "Bienvenido";
+	mes "al Valhalla,";
+	mes "la Sala del Honor.";
+	next;
+	mes "[Paladin]";
+	mes "Por favor, que";
+	mes "tu estancia aquí";
+	mes "sea confortable.";
+	mes "¡Gloria a los guerreros!";
+	close;
+}

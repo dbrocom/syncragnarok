@@ -1,0 +1,1183 @@
+//===== eAthena Script =======================================
+//= Doomed Swords Quest
+//===== By: ==================================================
+//= kobra_k88; L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.4
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= [Aegis Conversion]
+//= Doomed Swords Quest:
+//= - Quest for Doomed Swords: Grimtooth, Mysteltain, Executioner.
+//=   Although this quest is enabled on iRO, the Mysteltainn
+//=   portion is NOT completable as the item "Young Twig" does
+//=   not drop.
+//= - Variable in use: event_magum (max 6)
+//= - Variable in use: dmdswrd_Q2 (bits 1 - 32)
+//===== Additional Comments: =================================
+//= 1.1 Fixed items count check. For all 3 swords... [Lupus]
+//= 1.3 Fixed exploit [Lupus]
+//= 1.4 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//=	Moved all non-related NPCs to their repsective files.
+//= 1.5 Added missing checkweight. [L0ne_W0lf]
+//============================================================
+
+prt_in,162,11,2	script	Ghatu#magum	86,{
+	if (event_magum == 0) {
+		if (dmdswrd_Q2 & 1 || dmdswrd_Q2 & 2 || dmdswrd_Q2 & 4 || dmdswrd_Q2 & 8 || dmdswrd_Q2 & 16 || dmdswrd_Q2 & 32) {
+			mes "[Ghatu]";
+			mes "He oido hablar de un extraño";
+			mes "herrero \"blacksmith\" que vive";
+			mes "aislado en las profundidades";
+			mes "del bosque de Payon. Él era";
+			mes "famoso por su";
+			mes "legendaria habilidad de forjar...";
+			next;
+			mes "[Ghatu]";
+			mes "Hay rumores que él está";
+			mes "escondido en las montañas";
+			mes "porque existen personas que quieren^FFFFFF ^000000 usar su talento para malos";
+			mes "propositos. Al parecer, ^FFFFFF ^000000 las armas que él forja tienen una habilidad sobrehumana...";
+			set event_magum,1;
+			close;
+		}
+		mes "[Ghatu]";
+		mes "¿Recuerda a el herrero";
+		mes "del que le mencione la ultima vez?";
+		mes "parece que sus armas estaban";
+		mes "en gran demanda en el mercado porque";
+		mes "estaban encantadas";
+		mes "con magia tremendamente poderosa.";
+		next;
+		mes "[Ghatu]";
+		mes "Sin embargo, el hombre fué forzado";
+		mes "por el poder del hambre y la";
+		mes "opresión para crear armas";
+		mes "con fines egoístas e inmorales.";
+		mes "no es de extrañar que por eso";
+		mes "se haya ocultado hasta el final...";
+		next;
+		mes "[Ghatu]";
+		mes "Es triste, realmente.";
+		mes "él solia ser";
+		mes "una buena persona";
+		mes "hasta que fué obligado a trabajar";
+		mes "en contra de su voluntad. Poco a poco el^FFFFFF ^000000 se convirtió en alguien triste e intimidado...";
+		next;
+		mes "[Ghatu]";
+		mes "pero supongo que un herrero";
+		mes "nunca renunciaria a";
+		mes "su trabajo. si usted puede";
+		mes "encontrarlo, posiblemente ¿puede pedirle";
+		mes "que forje algo para usted?";
+		set event_magum,5;
+		close;
+
+	}
+	else if (event_magum == 1) {
+		mes "[Ghatu]";
+		mes "¿Recuerda a el herrero";
+		mes "que le mencione la ultima vez?";
+		mes "parece que sus armas estaban";
+		mes "en gran demanda en el mercado porque";
+		mes "estas estaban escantadas ";
+		mes "con magia tremendamente poderosa.";
+		next;
+		mes "[Ghatu]";
+		mes "Sin embargo, el hombre fue forzado,";
+		mes "por el hambre y la opresión,";
+		mes "a crear armas";
+		mes "con fines egoistas e inmorales.";
+		mes "No es de extrañar que por eso";
+		mes "al final paso a la clandestinidad...";
+		next;
+		mes "[Ghatu]";
+		mes "Es triste realmente.";
+		mes "ese herrero solia ser";
+		mes "una buena persona";
+		mes "hasta que fué obligado a trabajar";
+		mes "encontra de su voluntad. Poco a poco ^FFFFFF ^000000 se convirtió en alguien triste e intimidado...";
+		next;
+		mes "[Ghatu]";
+		mes "Pero supongo que un herrero";
+		mes "nunca renunciaria a";
+		mes "su trabajo. si usted puede";
+		mes "encontrarlo, posiblemente ¿puede pedirle";
+		mes "que forje algo para usted?";
+		set event_magum,5;
+		close;
+	}
+	mes "[Ghatu]";
+	mes "Ese misterioso herrero...";
+	mes "me pregunto cómo le hizo";
+	mes "para encantar esas armas.";
+	mes "He oido que podria ser";
+	mes "por el arte oscuro,";
+	mes "pero eso no suena lógico.";
+	close;
+}
+
+prontera,197,188,2	script	Veeyop#magum	50,{
+	if (dmdswrd_Q2 & 1) {
+		mes "[Veeyop]";
+		mes "Hablando";
+		mes "de la Mysteltainn y";
+		mes "la muerte de Baldur solo...";
+		mes "no se me habia ocurrido hasta";
+		mes "ahora que empieza a tener todo";
+		mes "sentido. Si, si, lo sé.";
+		close;
+	}
+	mes "[Veeyop]";
+	mes "¿Ha escuchado hablar de la";
+	mes "Leyenda de Mysteltainn?";
+	mes "Es un arbol conocido por ser";
+	mes "el unico que puede herir a";
+	mes "Baldur, \"la Diosa de la luz\". De hecho,";
+	mes "solo una de sus ramas la mato.";
+	next;
+	mes "[Veeyop]";
+	mes "Ahora, no se si sea";
+	mes "cierto, pero he escuchado";
+	mes "que alguien ya forjó";
+	mes "una espada tan poderosa,";
+	mes "que es digna de llevar el nombre de";
+	mes "''MYSTELTAINN''.";
+	next;
+	mes "[Veeyop]";
+	mes "Solo hay una persona";
+	mes "en todo Midgar que puede forjar";
+	mes "la espada Mysteltainn, yo....";
+	mes "creo que solia vivir en";
+	mes "Prontera, pero se fué";
+	mes "de ahi por alguna extraña razon.";
+	if (event_magum == 1)
+		set event_magum,5;
+	set dmdswrd_Q2,dmdswrd_Q2 | 1;
+	close;
+}
+
+morocc,281,178,2	script	Cetsu#magum	97,{
+	if (dmdswrd_Q2 & 2) {
+		mes "[Cetsu]";
+		mes "He estado pensando en";
+		mes "Grimtooth, y se me ocurre";
+		mes "que el hechizo utilizado para";
+		mes "encantar la daga con su";
+		mes "fuerza probablemente no es la magia";
+		mes "con la cual estamos familiarizados.";
+		next;
+		mes "[Cetsu]";
+		mes "Se dicen muchas historias";
+		mes "raras a los alrededores.";
+		mes "Incluso escuche";
+		mes "que Grimtooth";
+		mes "¿podría tener algun tipo de";
+		mes "extraña maldicion?";
+		close;
+	}
+	mes "[Cetsu]";
+	mes "Hay muchas";
+	mes "historias acerca de una";
+	mes "poderosa daga que es";
+	mes "más fuerte que el acero.";
+	mes "Creo que fue hecha";
+	mes "¿con dientes de Ogro?";
+	next;
+	mes "[Cetsu]";
+	mes "De todos modos,no es solo";
+	mes "los dientes de Ogro lo que le dan";
+	mes "el poder a la daga. Creo";
+	mes "que tuvo que ser encantada con";
+	mes "un hechizo especial o algo por el estilo.";
+	next;
+	mes "[Cetsu]";
+	mes "Esta daga, la Grimtooth,";
+	mes "puede ser hecha por una sola persona";
+	mes "en todo Midgar. Élvivia en Prontera, pero se";
+	mes "se fué por alguna razon.";
+	next;
+	mes "[Cetsu]";
+	mes "Me pregunto...";
+	mes "¿Qué lo hizo pasar";
+	mes "a la clasdestinidad? sus armas";
+	mes "solían ser muy";
+	mes "solicitadas en el mercado en ese entonces...";
+	if (event_magum == 1)
+		set event_magum,5;
+	set dmdswrd_Q2,dmdswrd_Q2 | 2;
+	close;
+}
+
+izlude_in,173,88,2	script	Nain#magum	102,{
+	if (dmdswrd_Q2 == 4) {
+		mes "[Nain]";
+		mes "no importa que tan";
+		mes "poderoso sea la Executioner:";
+		mes "si fuera a terminar en";
+		mes "mis manos, me desharia";
+		mes "de ella inmediatamente. Nunca correría el riesgo de perder mi mente por esa maldicion...";
+		close;
+	}
+	mes "[Nain]";
+	mes "Hace mucho tiempo, una espada";
+	mes "fué utilizada para decapitar a todos";
+	mes "los criminales que habian sido";
+	mes "condenados a muerte.";
+	mes "La espada es conocida";
+	mes "con el nombre de \"Executioner\"";
+	next;
+	mes "[Nain]";
+	mes "La Executioner mató";
+	mes "muchos criminales, la ira y";
+	mes "sangre de sus victimas se empezó a";
+	mes "acumular en la espada.";
+	mes "A pesar de que la espada adquirió gran^FFFFFF ^000000 fuerza, fué encantada por el mal.";
+	next;
+	mes "[Nain]";
+	mes "la ultima persona que utilizó";
+	mes "la Executioner casi perdió";
+	mes "su juicio, se ^FFFFFF ^000000salvó porque le otorgó la espada a un talentoso";
+	mes "herrero para que la destuyera^FFFFFF ^000000, salvando asi su alma.";
+	next;
+	mes "[Nain]";
+	mes "Este misterioso herrero";
+	mes "no fué visto nuca más en";
+	mes "Prontera, pero hay rumores";
+	mes "que si puede encontrarlo, él";
+	mes "puede forjar nuevamente la";
+	mes "espada Executioner...";
+	if (event_magum == 1)
+		set event_magum,5;
+	set dmdswrd_Q2,dmdswrd_Q2 | 4;
+	close;
+}
+
+pay_fild08,218,283,2	script	Mysterious Man#magum	89,{
+	if (checkweight(1201,1) == 0) {
+		mes "[Mysterious Man]";
+		mes "Espere.";
+		mes "Usted esta cargando";
+		mes "demasiados items";
+		mes "consigo. Hable conmigo";
+		mes "despues de colocar sus";
+		mes "items dentro de el \"Kafra Storage\".";
+		close;
+	}
+	if (event_magum == 0) {
+		if (dmdswrd_Q2 & 1 || dmdswrd_Q2 & 2 || dmdswrd_Q2 & 4 || dmdswrd_Q2 & 8 || dmdswrd_Q2 & 16 || dmdswrd_Q2 & 32) {
+			mes "[Mysterious Man]";
+			mes "¿Y bien...?";
+			mes "¿Qué diablos";
+			mes "estas mirando? ¿eh?";
+			next;
+			if (select("Have you heard of the Doomed Swords?:I... I...") == 1) {
+				mes "[Mysterious Man]";
+				mes "...!";
+				mes "¿Cómo diablos voy";
+				mes "a saber acerca de eso?";
+				mes "¡Déjame en paz!";
+				close;
+			}
+			mes "[Mysterious Man]";
+			mes "...";
+			next;
+			mes "[Mysterious Man]";
+			mes "...";
+			mes "......";
+			next;
+			mes "[Mysterious Man]";
+			mes "Desaparece de mi vista.";
+			close;
+		}
+		else {
+			mes "[Mysterious Man]";
+			mes "¿Y bien...?";
+			mes "¿Qué diablos";
+			mes "estas mirando?";
+			next;
+			if (select("Um, er...:Nothing, sir.") == 1) {
+				mes "[Mysterious Man]";
+				mes "¿Qué...?!";
+				next;
+				mes "^3355FF ¡Este chic@ es";
+				mes "realmente intimidante!^000000";
+				close;
+			}
+			mes "[Mysterious Man]";
+			mes "nada, ¿huh?";
+			mes "Bien, en este momento estoy";
+			mes "buscando a un aventurero";
+			mes "problemático! Vete de aquí";
+			mes "y ¡dejame solo!";
+			close;
+		}
+	}
+	else if (event_magum == 1) {
+		mes "[Mysterious Man]";
+		mes "¿Y bien...?";
+		mes "¿Qué diablos";
+		mes "estas mirando? ¿eh?";
+		next;
+		if (select("Do you happen to be a blacksmith?:No-Nothing!") == 1) {
+			mes "[Mysterious Blacksmith]";
+			mes "Hmpf. Asi que no";
+			mes "eres un perfecto imbecil despues del todo. Si,";
+			mes "yo solia forjar, pero";
+			mes "no hago el sencillo trabajo";
+			mes "que la mayoría de los herreros";
+			mes "hacen actualmente...";
+			close;
+		}
+		mes "[Mysterious Blacksmith]";
+		mes "...";
+		mes "......";
+		next;
+		mes "[Mysterious Blacksmith]";
+		mes "Sal de mi vista.";
+		close;
+	}
+	else if (event_magum == 5) {
+		mes "[Mysterious Blacksmith]";
+		mes "¿Y bien...?";
+		mes "¿Qué diablos";
+		mes "estas mirando? ¿eh?";
+		next;
+		if (select("I want you to make me a Doomed Sword.:Er, nothing!") == 1) {
+			mes "[Mysterious Blacksmith]";
+			mes "hmm. yo no se donde";
+			mes "diablos pudiste haber escuchado";
+			mes "de mi, pero supuse que algun día";
+			mes "alguno de ustedes me encontraría";
+			mes "pronto. Dime, ¿cuál de las";
+			mes "espadas tener en tu poder?";
+			next;
+			switch(select("Mysteltainn.:Grimtooth.:Executioner.:I ch-changed my mind!")) {
+			case 1:
+				if (dmdswrd_Q2 & 1) {
+					mes "[Mysterious Blacksmith]";
+					mes "¿Tu quieres....";
+					mes "esa espada???";
+					mes "no digas su";
+					mes "nombre ¡¡¡tan a la ligera!!!";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "¿Entiendes la maldición";
+					mes "que hay sobre esa espada? The Mysteltainn,";
+					mes "deriva su poder oscuro de la";
+					mes "rama que se mató a Baldur, Diosa de la luz, dejame contarte";
+					mes "la historia tan breve como pueda...";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "En la era de los Dioses,";
+					mes "la hermosa, pura y";
+					mes "alegre Baldur fue amada por todas";
+					mes "las criaturas vivientes, exepto por";
+					mes "uno: Loki, el Dios del Engaño.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Cuando Loki, cegado de los celos";
+					mes "decidio matar a Baldur, la";
+					mes "Diosa Freyja tuvo un sueño";
+					mes "sobre la muerte de Baldur, temiendo";
+					mes "a que el sueño se hiciera realidad,";
+					mes "aconsejo a los Dioses.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Para proteger a Baldur, los Dioses";
+					mes "decidieron crear un juramento";
+					mes "de nunca dañar a Baldur con";
+					mes "ninguna criatura, objetos o";
+					mes "fuerzas naturales. Todos fueron";
+					mes "informados acerca de este juramento.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "de todos los seres vivos y objetos";
+					mes "en el universo, Freyja ignoró";
+					mes "informar a un árbol";
+					mes "hacer este juramento: The Mysteltainn. Ella pensó que era demasiado";
+					mes "pequeño e insignificante para informarle.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Creyendo que todo";
+					mes "en el universo habia jurado";
+					mes "no dañar a Baldur, los Dioses";
+					mes "hicieron un nuevo pasatiempo y";
+					mes "empezaron a lanzar dagas y cuchillos";
+					mes "al ser más cercanos e invencible a Dios.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Sin embargo, Loki estaba decidido";
+					mes "a matar a Baldur y encubrirse";
+					mes "asi mismo, educadamente le pregunta a Freyja";
+					mes "sí existe algun objeto";
+					mes "en el mundo que no halla tomado el";
+					mes "juramento para no dañar a Baldur.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Freyja no sospechó su accción,";
+					mes "le dijo a Loki acerca del secreto de";
+					mes "Mysteltainn. La siguiente vez que los^FFFFFF ^000000 Dioses jugaron nuevamente a lanzar";
+					mes "objetos a Baldur, Loki estaba ahi con una pequeña ramita del Mystelainn.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Entonces, decidido a su";
+					mes "tracicion, Loki engañó a";
+					mes "Hod, El hermano gemelo de Baldur que estaba ciego,";
+					mes "en tirar la";
+					mes "ramita directo al corazon. De";
+					mes "esa manera, la Diosa de la Luz fue asesinada.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "A lo largo de los años,";
+					mes "Mysteltainn a crecido";
+					mes "en la espada";
+					mes "que posiblemente tu ya habias";
+					mes "escuchado. Su poder esta";
+					mes "estrictamente prohibido por los Dioses.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Sin embargo, si estas dispuesto";
+					mes "a arriesgarte a la maldición de la espada";
+					mes "por su poder,";
+					mes "voy a crearla para ti,";
+					mes "pero necesito los siguientes";
+					mes "materiales. Puede que halla escuchado de ellos...";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "^0099FF1 Young Twig^000000,";
+					mes "^0099FF1 Emperium^000000,";
+					mes "^0099FF1 Loki's Whispers^000000,";
+					mes "^0099FF1 Mother's Nightmare^000000 y";
+					mes "^0099FF1 Foolishness of the Blind^000000.";
+					mes "Eso es lo que necesito.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "No estoy pidiendo mucho.";
+					mes "Solo traeme los materiales";
+					mes "con los que forjare la espada,";
+					mes "y un emperium para demostrarme que";
+					mes "eres digno de portarla. Voy a esperar a";
+					mes "tu regreso, aventurero.";
+					set dmdswrd_Q2,dmdswrd_Q2 | 8;
+					set event_magum,6;
+					close;
+				}
+				mes "[Mysterious Blacksmith]";
+				mes "Solo con verte,";
+				mes "puedo estar seguro que no sabes";
+				mes "lo suficiente acerca de Mysteltainn";
+				mes "para que entiendas completamente el";
+				mes "riesgo que trae el portar^FFFFFF ^000000 la espada. Si, eres un completo novato.";
+				next;
+				mes "[Mysterious Blacksmith]";
+				mes "No puedo tomar el riesgo";
+				mes "de crear esa";
+				mes "espada si no sabes";
+				mes "lo suficiente acerca de ella";
+				mes "debes estar plenamente preparado para cualquier";
+				mes "consecuencia...";
+				close;
+			case 2:
+				if (dmdswrd_Q2 & 2) {
+					mes "[Mysterious Blacksmith]";
+					mes "Ah, si. Posiblemente te";
+					mes "preguntes como una  pequeña";
+					mes "daga puede tener ese poder.";
+					mes "es simple. yo conjuro la magia";
+					mes "prohibida a la daga^FFFFFF ^000000 de ahi su enorme poder de destruccion.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "El conjuro que invoco es";
+					mes "tan poderoso que si lo uso";
+					mes "en una daga de metal, se derritiría";
+					mes "inmediatamente.";
+					mes "El \"Ogre Tooth\" es el unico material";
+					mes "que puede soportar el conjuro mágico.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Por supuesto, debo";
+					mes "advertirte que";
+					mes "el poder de ese conjuro";
+					mes "es tal que entre más";
+					mes "uses la Grimtooth, más ^FFFFFF ^000000 absorvera tu alma...";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Estoy dispuesto a forjar";
+					mes "la Grimtooth si tu puedes";
+					mes "demostrar ser digno de";
+					mes "controlar su poder y traerme todos los";
+					mes "materiales que necesito...";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Lo que necesito es...";
+					mes "^0099FF1 Emperium^000000,";
+					mes "^0099FF100 \"Ogre Teeth\"^000000,";
+					mes "^0099FF10 \"Blades of Darkness\"^000000,";
+					mes "^0099FF5 \"Cursed Rubies\"^000000 y";
+					mes "^0099FF1 \"Broken Sword Handle\"^000000.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "El emperio no es un material";
+					mes "necesario para crear";
+					mes "la daga, pero";
+					mes "con el me desmostraras";
+					mes "que eres digno del poder de la Grimtooth.";
+					mes "Puedes realmente manejarlo?";
+					set dmdswrd_Q2,dmdswrd_Q2 | 16;
+					set event_magum,6;
+					close;
+				}
+				mes "[Mysterious Blacksmith]";
+				mes "WTF. no sabes realmente";
+				mes "lo que me esta pidiendo";
+				mes "verdad? no voy a crear";
+				mes "ese tipo de armas para cualquier";
+				mes "pendejo ignorante, aprende mas acerca";
+				mes "de la Grimtooth antes de volverme a preguntar!!!";
+				close;
+			case 3:
+				if (dmdswrd_Q2 & 4) {
+					mes "[Mysterious Blacksmith]";
+					mes "asi que usted me esta diciendo";
+					mes "que quiere una espada que ah sido";
+					mes "maldecida por todas las almas que";
+					mes "murieron a causa de las miles de condenas de muertes que se llevaron a cabo?";
+					mes "Ha ha ha! muy interesante!";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Si... cada vez que esta";
+					mes "espada ejecutaba una condena a los";
+					mes "criminales, la espada fue";
+					mes "maldecida por la ira y";
+					mes "pesar de los muertos.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Con el tiempo, The Executioner";
+					mes "acumulo un poder verdaderamente";
+					mes "terrible del odio";
+					mes "de los que habian matado, sin embargo, el que utiliza";
+					mes "esta espada corre el riesgo de quedarse consumido por la locura y el odio.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "La ultima persona por quien";
+					mes "cree esta espada me pidio";
+					mes "que la destruyera, por temor a que su";
+					mes "mente se corronpiera con la";
+					mes "lujuria de sangre. Pero si tu crees^FFFFFF ^000000 que puedes soportarlo, te la forjare...";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Solo traeme...";
+					mes "^0099FF50 amuletos \"Amulets\"^000000,";
+					mes "^0099FF1 Emperium^000000,";
+					mes "^0099FF2 Guantes de verdugo \"Executioner's Gloves\"^000000,";
+					mes "^0099FF10 bordes sangrientos \"Bloody Edges\"^000000 y";
+					mes "^0099FF3 collares de oblivion \"Necklaces of Oblivion\"^000000.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "esos son los elementos que necesito";
+					mes "para crear una espada impregnada";
+					mes "con el poder del mal. En cuanto a la emperium, consideremosla como si es mi pureba";
+					mes "realmente capaces de esgrimir";
+					mes "la madita Executioner...";
+					set dmdswrd_Q2,dmdswrd_Q2 | 32;
+					set event_magum,6;
+					close;
+				}
+				mes "[Mysterious Blacksmith]";
+				mes "tan siquiera sabes que";
+				mes "es lo que estas pidiendome...?";
+				mes "Tonto!!! ve y aprende mas";
+				mes "acerca de The Executioner! entonces,";
+				mes "talvez entenderas lo";
+				mes "verdaderamente peligrosa que puede ser la espada";
+				close;
+			case 4:
+				mes "[Mysterious Blacksmith]";
+				mes "Hmm....?";
+				mes "es un hecho?";
+				close;
+			}
+		}
+		close;
+	}
+	else if (event_magum == 6) {
+		mes "[Mysterious Blacksmith]";
+		mes "Hmmm....";
+		mes "has traido";
+		mes "los items requeridos?";
+		mes "o se le olvido lo que";
+		mes "necesitas traerme?";
+		next;
+		switch(select("Er, what were the items again?:Yes, I brought all the required items.:Oh! Um, never mind!")) {
+		case 1:
+			mes "[Mysterious Blacksmith]";
+			mes "%$%$%. Asi pense.";
+			mes "ahora, que espada";
+			mes "quieres que te forje?";
+			next;
+			switch(select("Mysteltainn.:Grimtooth.:Executioner.:Wait! I just remembered!")) {
+			case 1:
+				if (dmdswrd_Q2 & 1 || dmdswrd_Q2 & 8) {
+					mes "[Mysterious Blacksmith]";
+					mes "^0099FF1 jovenes ramitas \"Young Twig\"^000000,";
+					mes "^0099FF1 Emperium^000000,";
+					mes "^0099FF1 Loki's Whispers^000000,";
+					mes "^0099FF1 pesadillas de la madre \"Mother's Nightmare\"^000000 y";
+					mes "^0099FF1 insensatez de los ciegos \"Foolishness of the Blind\"^000000.";
+					mes "eso es lo que necesito.";
+					close;
+				}
+				mes "[Mysterious Blacksmith]";
+				mes "Hmm. no sabes sabes";
+				mes "suficiente acerca de Mysteltainn para";
+				mes "me es un riesgo crear es espada";
+				mes "para ti, piensa denuevo: cual";
+				mes "espada quieres pedirme que te cree?";
+				close;
+			case 2:
+				if (dmdswrd_Q2 & 2 || dmdswrd_Q2 & 16) {
+					mes "[Mysterious Blacksmith]";
+					mes "necesitare";
+					mes "^0099FF1 Emperium^000000,";
+					mes "^0099FF100 dientes de ogro \"Ogre Teeth\"^000000,";
+					mes "^0099FF10 espadas de la oscuridad \"Blades of Darkness\"^000000,";
+					mes "^0099FF5 rubies malditos \"Cursed Rubies\"^000000 y";
+					mes "^0099FF1 mango de espada rota \"Broken Sword Handle\"^000000.";
+					close;
+				}
+				mes "[Mysterious Blacksmith]";
+				mes "Hmm. tu no sabessuficiente";
+				mes "acerca de la Grimtooth, para mi es un";
+				mes "riesgo creala para ti, aprende";
+				mes "mas acerca de esta daga si tu";
+				mes "realmente la quieres...";
+				close;
+			case 3:
+				if (dmdswrd_Q2 & 4 || dmdswrd_Q2 & 32) {
+					mes "[Mysterious Blacksmith]";
+					mes "solo traeme...";
+					mes "^0099FF50 amuletos \"Amulets\"^000000,";
+					mes "^0099FF1 Emperium^000000,";
+					mes "^0099FF2 Guantes de verdugo \"Executioner's Gloves\"^000000,";
+					mes "^0099FF10 bordes sangrientos \"Bloody Edges\"^000000 y";
+					mes "^0099FF3 collares de oblivion \"Necklaces of Oblivion\"^000000.";
+					close;
+				}
+				mes "[Mysterious Blacksmith]";
+				mes "no sabes nada";
+				mes "acerca de The Executioner, Aprende";
+				mes "mas acerca de esta espada antes";
+				mes "de que consideres pedrime que";
+				mes "forge esa mounstrocidad.";
+				close;
+			case 4:
+				mes "[Mysterious Blacksmith]";
+				mes "bien.";
+				mes "traeme todos";
+				mes "los items necesarios";
+				mes "cuando esten listos.";
+				close;
+			}
+		case 2:
+			mes "[Mysterious Blacksmith]";
+			mes "Asi que crees estar";
+			mes "listo, ahora, cual espada";
+			mes "quieres que te cree?";
+			next;
+			switch(select("Mysteltainn:Grimtooth:Executioner:I ch-changed my mind!")) {
+			case 1:
+				if (dmdswrd_Q2 & 8) {
+					mes "[Mysterious Blacksmith]";
+					mes "Mysteltainn. Hmmm....";
+					mes "permitame estar segurp";
+					mes "que trajo todo";
+					mes "las cosas que necesito";
+					mes "para crear esta espada";
+					next;
+					if (countitem(7018) < 1) {
+						mes "[Mysterious Blacksmith]";
+						mes "bien, bien,";
+						mes "hs olvidado";
+						mes "traerme ^0099FF1 joven ramita \"Young Twig\"^000000,";
+						mes "la incorporacion de la";
+						mes "ramita de  Mysteltainn es usada para^FFFFFF ^000000 matar a  Baldur. rapido traemela...";
+						close;
+					}
+					if (countitem(7019) < 1) {
+						mes "[Mysterious Blacksmith]";
+						mes "Hmm. has olvidado traerme";
+						mes "^0099FF1 Loki's Whispers^000000. la necesitamos";
+						mes "para envolver a la espada con";
+						mes "el inmenso, poder del mal. Ve y";
+						mes "encuentrala lo mas rapido que puedas! ^FFFFFF ^000000";
+						close;
+					}
+					if (countitem(7020) < 1) {
+						mes "[Mysterious Blacksmith]";
+						mes "Hmm, todavia necesitas";
+						mes "traerme ^0099FF1 pesadillas de la madre \"Mother's Nightmare\"^000000";
+						mes "para inculcar el poder de la miseria";
+						mes "en esta espada... ^FFFFFF ^000000";
+						close;
+					}
+					if (countitem(7021) < 1) {
+						mes "[Mysterious Blacksmith]";
+						mes "Hm, todavia necesitas";
+						mes "traerme ^0099FF1 estupidez";
+						mes "de los ciegos \"Foolishness of the blind\"^000000 para ponerle";
+						mes "energia del tragico lamento dentro";
+						mes "de la maldicion de la espada... ^FFFFFF ^000000";
+						close;
+					}
+					if (countitem(714) < 1) {
+						mes "[Mysterious Blacksmith]";
+						mes "tienes todo lo que";
+						mes "necesitas para forjar";
+						mes "The Mysteltainn, pero todavia debes";
+						mes "demostrar su capacidad de";
+						mes "portar la misma, traigame ^0099FF1 Emperium^000000 y voy a reconocer su valor.";
+						close;
+					}
+					if (countitem(7018) > 0 && countitem(7019) > 0 && countitem(7020) > 0 && countitem(7021) > 0 && countitem(714) > 0) {
+						mes "[Mysterious Blacksmith]";
+						mes "bien hecho, aventurero.";
+						mes "todo parece estar en disposicion.";
+						mes "dame un minuto para invocar";
+						mes "el poder de la oscuridad para forjar";
+						mes "la espada prohibida, Mysteltainn.";
+						next;
+						mes "[Mysterious Blacksmith]";
+						mes "y..o... y..o... yo nunca pense";
+						mes "que alguna vez volveria a ver";
+						mes "esta espada de nuevo. Tomala,";
+						mes "rapido!!!! yo n..o no quiero";
+						mes "tocarla si puedo evitarlo.";
+						delitem 7018,1; //Young_Twig
+						delitem 7019,1; //Loki's_Whispers
+						delitem 7020,1; //Mother's_Nightmare
+						delitem 7021,1; //Foolishness_Of_Blind
+						delitem 714,1; //Emperium
+						getitem 1138,1; //Mysteltainn_
+						next;
+						mes "[Mysterious Blacksmith]";
+						mes "ten mucho cuidado.";
+						mes "no dejes ser";
+						mes "consumido por el";
+						mes "poder de esa espada!";
+						mes "Por todos los medios, resiste";
+						mes "la tragica maldicion de la Mysteltainn!";
+						close;
+					}
+				}
+				else if (dmdswrd_Q2 & 1) {
+					mes "[Mysterious Blacksmith]";
+					mes "Tu quieres...";
+					mes "esa espada?";
+					mes "No digas su nombre";
+					mes "a la ligera!!!";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Comprendes la maldicion que hay";
+					mes "en esta espada? The Mysteltainn";
+					mes "deriva su poder oscuro de la";
+					mes "ramita que se uso para matar a Baldur, Dios de la luz, permitame relatarte la";
+					mes "historia brevemente como pueda...";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "En la era de los dioses";
+					mes "la hermosa, pura y";
+					mes "algre Bladur quien era amada por";
+					mes "toda criatura viviente, salvo por uno:";
+					mes "Loki, el dios del enagño.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Cuando Loki, cegado por los celos,";
+					mes "decidio asesinar a Baldur, la";
+					mes "Diosa Freyja tuvo un sueño";
+					mes "sobre la muerte de Baldur. temiendo";
+					mes "que este sueño se realizara";
+					mes "ella aconsejo a los Dioses";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "para protejer a Baldur, los Dioses";
+					mes "decidieron extraer un juramento";
+					mes "para nunca causar daño a Baldur, de";
+					mes "cada creatura, objeto y";
+					mes "fuerza natural. todos fueron";
+					mes "consultados para hacer este juramento.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "De todos los seres y objetos";
+					mes "en el universo, Freyja solamente";
+					mes "descuido de pedirle a un arbol que";
+					mes "hiciera el juramento: The Mysteltainn. Freyja creyendo que este era demasiado";
+					mes "pequeño e insignificante para preguntarle.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "creyendo que todo";
+					mes "en el universo habia jurado";
+					mes "no dañar a Baldur, los Dioses";
+					mes "crearon un nuevo pasatiempos, era";
+					mes "lanzar dagas y cuchillos a";
+					mes "el ahora casi imbencible Dios.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "sin embargo, Loki estaba convencido";
+					mes "de matar a Baldur y, encubrirse";
+					mes "asi mismo, educadamente Freyja pregunta";
+					mes "si hay algun objeto en el";
+					mes "mundo que no tome el";
+					mes "juramento de no dañar a Baldur.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Freyja sin sospechar nada le";
+					mes "cuenta a Loki acerca del secreto de";
+					mes "Mysteltainn. La siguiente ves que los^FFFFFF ^000000 juagaban el juego de lanzar";
+					mes "objetos a Baldur, Loki trai con el una pequeña ramita de Mysteltainn.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "luego, dispuesto a su";
+					mes "traicion, Loki engaña a";
+					mes "Hod, (el hermano gemelo ciego de Baldur)";
+					mes "para que lanze la";
+					mes "ramita directo al corazon de Baldur. Y";
+					mes "asi, el Dios de la luz fue asesinado.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "a lo largo de los años";
+					mes "Mysteltainn a crecido";
+					mes "dentro de la espada";
+					mes "que talvez ya conoces";
+					mes "hoy en dia. Es la poderosa y";
+					mes "estrictamente prohibida por los dioses.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Sin embargo, si usted esta dispuesto";
+					mes "a arriesgarse a la maldicion de esa espada";
+					mes "por la causa de su poder,";
+					mes "yo podria crearla para ti";
+					mes "si puedes traerme los siguientes";
+					mes "items. ellos tienen sentidos...";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "^0099FF1 joven ramita \"Young Twig\"^000000,";
+					mes "^0099FF1 Emperium^000000,";
+					mes "^0099FF1 Loki's Whispers^000000,";
+					mes "^0099FF1 pesadillas de la madre \"Mother's Nightmare\"^000000 y";
+					mes "^0099FF1 insensatez de los ciegos \"Foolishness of the Blind\"^000000.";
+					mes "eso es lo que necesito.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "No estoy pidiendo mucho.";
+					mes "solamente me traeras la materia";
+					mes "prima para crear la espada";
+					mes "y el emperium es para";
+					mes "provar su valor para mi";
+					mes "su regreso aventurero.";
+					set dmdswrd_Q2,dmdswrd_Q2 | 8;
+					close;
+				}
+				mes "[Mysterious Blacksmith]";
+				mes "Hm. si tu realmente quieres la";
+				mes "Mysteltainn, te aconsejo";
+				mes "aprendas mas sobre ella. Tu";
+				mes "debes saber el riesgo envuelto";
+				mes "en portar este tipo de poder... ^FFFFFF ^000000";
+				close;
+			case 2:
+				if (dmdswrd_Q2 & 16) {
+					mes "[Mysterious Blacksmith]";
+					mes "Tu me quieres para";
+					mes "forjarte la Grimtooth.";
+					mes "primero, permiteme ver";
+					mes "si traes todos";
+					mes "los items requeridos.";
+					next;
+					if (countitem(7002) < 100) {
+						mes "[Mysterious Blacksmith]";
+						mes "hmm. necesito";
+						mes "^0099FF100 dientes de Ogro \"Ogre Teeth\"^000000 para";
+						mes "crear una espada que pueda";
+						mes "resistir el poder de la";
+						mes "maldicion de la magia Grimtooth.";
+						mes "ve y traelos pronto.";
+						close;
+					}
+					if (countitem(724) < 5) {
+						mes "[Mysterious Blacksmith]";
+						mes "con el fin de";
+						mes "la maldicion de la";
+						mes "Grimtooth es un inmenso";
+						mes "poder, necesito que me traigas";
+						mes "^0099FF5 rubies malditos \"Cursed Rubies\"^000000. Rapido";
+						mes "y traeme eso pronto.";
+						close;
+					}
+					if (countitem(7023) < 10) {
+						mes "[Mysterious Blacksmith]";
+						mes "Hm. necesito";
+						mes "^0099FF10 espadas de la oscuridad \"Blades of Darkness\"^000000";
+						mes "con el fin de crear";
+						mes "la Grimtooth, traemela";
+						mes "tan pronto como puedas.";
+						close;
+					}
+					if (countitem(7022) < 1) {
+						mes "[Mysterious Blacksmith]";
+						mes "Hm. tienes casi todo listo";
+						mes "pero";
+						mes "neesitare ^0099FF1 mango de espada rota \"Broken Sword";
+						mes "Handle\"^000000 con el fin de crear";
+						mes "la Grimtooth. Rapido y";
+						mes "traemelo una ves que lo consigas...";
+						close;
+					}
+					if (countitem(714) < 1) {
+						mes "[Mysterious Blacksmith]";
+						mes "Tienes todo lo que necesito";
+						mes "para crear la espada, pero no la creare hasta que me demuestres que";
+						mes "eres capaz de controlar este";
+						mes "poder, traeme un emperium";
+						mes "como prueba de tu valor.";
+						close;
+					}
+					if (countitem(7002) > 99 && countitem(724) > 4 && countitem(7023) > 9 && countitem(7022) > 0 && countitem(714) > 0) {
+						mes "[Mysterious Blacksmith]";
+						mes "veo que tiene";
+						mes "todo preparado.";
+						mes "talvez usted";
+						mes "necesita el poder del Grimtooth.";
+						mes "dame un momento para crear";
+						mes "esta espada maldita para ti...";
+						next;
+						mes "[Mysterious Blacksmith]";
+						mes "listo, esta terminada!";
+						mes "ahora rapido y tomala";
+						mes "Yo, no quiero manejar";
+						mes "la Grimtooth mas que esto,";
+						mes "usted entendera";
+						mes "una vez que la use...";
+						delitem 7002,100; //Ogre_Tooth
+						delitem 724,5; //Cardinal_Jewel_
+						delitem 7023,10; //Blade_Lost_In_Darkness
+						delitem 7022,1; //Old_Hilt
+						delitem 714,1; //Emperium
+						getitem 1237,1; //Grimtooth_
+						next;
+						mes "[Mysterious Blacksmith]";
+						mes "se que usted podria";
+						mes "tener buenas intenciones para";
+						mes "el poder de la Grimtooth, perono";
+						mes "lo subestimare!!!";
+						mes "Siempre tenga cuiado de la Grimtooth";
+						mes "y no dejes que consuma tu alma!";
+						close;
+					}
+				}
+				else if (dmdswrd_Q2 & 2) {
+					mes "[Mysterious Blacksmith]";
+					mes "Ah, si. Usted debe";
+					mes "como una pequeña daga";
+					mes "puede contener ese poder.";
+					mes "Es simple. Yo hago magia";
+					mes "maldita prohibida a la daga^FFFFFF ^000000 de ahi su destructivo poder.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "La maldicion que yo invoco";
+					mes "tan poderosa que si lo uso";
+					mes "en una daga de metal, se derrite";
+					mes "inmediatamente.";
+					mes "Los dientes de Ogros \"Grimtooth\" es el unico material";
+					mes "que puede soportar la maldicion magica.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Por supuesto, es justo";
+					mes "advertir que";
+					mes "el poder de la maldicion";
+					mes "es tal que mientras mas tu";
+					mes "uses la Grimtooth, mas lejos^FFFFFF ^000000 llegaran las quemaduras en sus almas...";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "estoy dispuesto a forjar";
+					mes "la Grimtooth si tu puedes";
+					mes "mostrar ser digno de";
+					mes "poder y proveer todos los";
+					mes "materiales que necesito para crearla";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "necesitare...";
+					mes "^0099FF1 Emperium^000000,";
+					mes "^0099FF100 dientes de Ogro \"Ogre Teeth\"^000000,";
+					mes "^0099FF10 espadas de la oscuridad \"Blades of Darkness\"^000000,";
+					mes "^0099FF5 rubies malditos \"Cursed Rubies\"^000000 y";
+					mes "^0099FF1 mango de espada rota \"Broken Sword Handle\"^000000.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "no necesitas el";
+					mes "Emperium para crearla";
+					mes "la maldita espada, pero yo";
+					mes "requiero que me demuestres";
+					mes "que eres digno del poder de la Grimtooth.";
+					mes "Puedes realmente manejarla?";
+					set dmdswrd_Q2,dmdswrd_Q2 | 16;
+					close;
+				}
+				mes "[Mysterious Blacksmith]";
+				mes "hmm... no puedo considerar";
+				mes "crear la Grimtooth para ti";
+				mes "cuando tu sabes muy poco";
+				mes "acerca de ella. mejor aprende mas";
+				mes "acerca de esta espada antes de";
+				mes "pedrime acerca de esto de nuevo.";
+				close;
+			case 3:
+				if (dmdswrd_Q2 & 32) {
+					mes "[Mysterious Blacksmith]";
+					mes "la espada Executioner.";
+					mes "dejame ver si esta";
+					mes "preparado para ejercer esa espada";
+					mes "con sus propias manos...";
+					next;
+					if (countitem(7017) < 2) {
+						mes "[Mysterious Blacksmith]";
+						mes "Hm. en fin para";
+						mes "forjarte la Executioner,";
+						mes "necesito que me traigas";
+						mes "^0099FF2 guantes de verdugo \"Executioner's Gloves\"^000000.";
+						close;
+					}
+					if (countitem(7024) < 10) {
+						mes "[Mysterious Blacksmith]";
+						mes "Con el fin de  enbarcar";
+						mes "la espada necesito por lo menos";
+						mes "^0099FF10 bordes sangrientos \"Bloody Edges\"^000000. encuentral";
+						mes "lo mas rapido que sea posible";
+						mes "y traigamelos.";
+						close;
+					}
+					if (countitem(1008) < 3) {
+						mes "[Mysterious Blacksmith]";
+						mes "Con el fin de encantar";
+						mes "la executioner con";
+						mes "este poder oscuro,";
+						mes "necesitare que me traiga";
+						mes "^0099FF3 collares de oblivion \"Necklaces of Oblivion\"^000000.";
+						mes "Ve, rapido y traemelos!";
+						close;
+					}
+					if (countitem(609) < 50) {
+						mes "[Mysterious Blacksmith]";
+						mes "Hm. has olvidado";
+						mes "traerme ^0099FF50 amuletos \"Amulets\"^000000. los necesito";
+						mes "esto con el fin de envolver";
+						mes "la increible energia";
+						mes "que le da ala Executioner su";
+						mes "fuerza mounstrosa...";
+						close;
+					}
+					if (countitem(714) < 1) {
+						mes "[Mysterious Blacksmith]";
+						mes "Tienes lo necesario";
+						mes "para forjar la Executioner, pero";
+						mes "no estoy seguro si son";
+						mes "capaces de manejar su";
+						mes "poder, Para que mis temores se dicipen";
+						mes "debera traerme ^0099FF1 Emperium^000000.";
+						close;
+					}
+					if (countitem(7017) > 1 && countitem(7024) > 9 && countitem(1008) > 2 && countitem(609) > 49 && countitem(714) > 0) {
+						mes "[Mysterious Blacksmith]";
+						mes "grandioso, veo que has";
+						mes "preparado todo lo que";
+						mes "eh pedido. Dame un momento";
+						mes "mientras convoco las fuerzas";
+						mes "de la oscuridad requerida para forjar";
+						mes "La Executioner....";
+						next;
+						mes "[Mysterious Blacksmith]";
+						mes "ya hace un largo tiempo";
+						mes "desde que no veia esta";
+						mes "aterradora espada. ahora";
+						mes "tenga cuidado, y no";
+						mes "se deje consumir por la sangre lujuriosa!";
+						delitem 7017,2; //Executioner's_Mitten
+						delitem 7024,10; //Bloody_Edge
+						delitem 1008,3; //Frozen_Heart
+						delitem 609,50; //Amulet
+						getitem 1169,1; //Executioner_
+						close;
+					}
+				}
+				else if (dmdswrd_Q2 & 4) {
+					mes "[Mysterious Blacksmith]";
+					mes "asi que usted me esta diciendo";
+					mes "que quiere una espada que ah sido";
+					mes "maldecidas por todas las almas que";
+					mes "murieron a causa de las miles de condenas de muertes que se llevaron a cabo?";
+					mes "Ha ha ha! muy interesante!";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Si... cada ves que";
+					mes "la espada ejecutaba un acondena";
+					mes "a los criminales, la espada fue";
+					mes "maldecida por la ira y";
+					mes "y pesar de ls muertos.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Con el tiempo, la Executioner";
+					mes "acumulo un poder verdaderamente terrible";
+					mes "terrible del odio";
+					mes "de los que habian matado, sin embargo, el que utiliza";
+					mes "esta espada corre el riesgo de quedar consumido por la locura y el odio.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "La ultima persona para quien";
+					mes "cree esta espada me pidio";
+					mes "destruirla, por temor a que su";
+					mes "mente se corronpiera con";
+					mes "lujuria de sangre. Pero si tu crees^FFFFFF ^000000 que puedes soportarlo, te la forjare...";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Solamente traeme...";
+					mes "^0099FF50 amuletos \"Amulets\"^000000,";
+					mes "^0099FF1 Emperium^000000,";
+					mes "^0099FF2 guantes de verdugo \"Executioner's Gloves\"^000000,";
+					mes "^0099FF10 bordes sangrientos \"Bloody Edges\"^000000 y";
+					mes "^0099FF3 collares de oblivion \"Necklaces of Oblivion\"^000000.";
+					next;
+					mes "[Mysterious Blacksmith]";
+					mes "Esos son los items que necesito";
+					mes "para crear una espada envuelta con";
+					mes "el poder del mal, respecto al emperium, cosideralo como mi prueba para ver si tu";
+					mes "verdaderamente eres capas de controlar";
+					mes "la maldicion de la Executioner";
+					set dmdswrd_Q2,dmdswrd_Q2 | 4;
+					close;
+				}
+				mes "[Mysterious Blacksmith]";
+				mes "Hmpf. no creo que";
+				mes "entiendas mucho";
+				mes "acerca de la Executioner para";
+				mes "pedrime que la cree. Mejor";
+				mes "aprende mas acerca esta espada";
+				mes "maldita si relamente la quieres";
+				close;
+			case 4:
+				mes "[Mysterious Blacksmith]";
+				mes "¿Hmm...?";
+				mes "Es un hecho?";
+				close;
+			}
+		case 3:
+			mes "[Mysterious Blacksmith]";
+			mes "Hmpf...";
+			mes "Bien entonces, regresa";
+			mes "cuando sepas";
+			mes "exactamente lo que quieras,";
+			mes "hacia mí, aventurero.";
+			close;
+		}
+	}
+}

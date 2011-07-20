@@ -1,0 +1,450 @@
+//===== eAthena Script ======================================= 
+//= Wizard Skills Quests
+//===== By: ================================================== 
+//= Lupus, Reddozen
+//===== Current Version: ===================================== 
+//= 1.5
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quests for skills: Sight Blaster
+//===== Additional Comments: ================================= 
+//= 1.4 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.5 Replaced effect numerics with constants. [L0ne_W0lf]
+//============================================================
+
+gef_tower,115,36,4	script	Meow#q_wiz	876,{
+	if (BaseJob == Job_Wizard) {
+		if (WIZ_SK == 100) {
+			if (getskilllv("WZ_SIGHTBLASTER") == 0) {
+				mes "[Meow]";
+				mes "¡¿Qué... ?! ¿Has olvidado la";
+				mes "habilidad impresionante que te enseñé?";
+				mes "¡Trascender no es excusa";
+				mes "para olvidarla! Está bien, así que";
+				mes "que quieres que te enseñe, ¿eh?";
+				mes "Está bien, ¡aquí está tu lección!";
+				next;
+				mes "^3355FF*¡BAM! ¡BOOM! ¡CRASH!*^000000";
+				specialeffect2 EF_SUI_EXPLOSION;
+				next;
+				mes "[Meow]";
+				mes "¡No te atrevas a ponerte";
+				mes "de chulo conmigo, sólo";
+				mes "porque has renacido!";
+				mes "¡Será mejor qur recuerdes cómo";
+				mes "realizar esta técnica antes de que";
+				mes "te dé tu merecido otra vez!";
+				next;
+				mes "^3355FFMilagrosamente recuerdas";
+				mes "la habilidad Sight Blaster antes de que";
+				mes "Meow pueda darte otra";
+				mes "cruel paliza.";
+				specialeffect2 EF_ABSORBSPIRITS;
+				skill "WZ_SIGHTBLASTER",1,0;
+				next;
+				mes "[Meow]";
+				mes "¿Recuerdas ahora?";
+				mes "Genial. Ahora me";
+				mes "voy a echarme una siesta";
+				mes "Como se te ocurra";
+				mes "molestarme, haré";
+				mes "que te arrepientas. ¡Recuerda mis palabras!";
+				close;
+			}
+			else {
+				mes "[Meow]";
+				mes "Zzz... Zzz...";
+				mes "Catherine... Haré";
+				mes "que te arrepientas de";
+				mes "haberme convertido en gato...";
+				mes "Voy a ... a... Zzz...";
+				close;
+			}
+		}
+		else if (WIZ_SK == 0) {
+			mes "[Meow]";
+			mes "*Yaaawn~*";
+			mes "Qué sueño...";
+			mes "¿Hm? ¿Querías";
+			mes "hablar conmigo? ¡No";
+			mes "me molestes si";
+			mes "no tienes nada que decirme!";
+			next;
+			if (select("A cat?:Now I'm sleepy, too...") == 1) {
+				mes "[Meow]";
+				mes "Sí. Sí, soy un gato.";
+				mes "Por ahora, al menos. ¡Estúpida";
+				mes "Catherine! Ella me convirtió";
+				mes "en esto cuando le tomé prestadas unas";
+				mes "gemas sin su consentimiento.";
+				mes "¡Iba a decirle!";
+				next;
+				mes "[Meow]";
+				mes "Una vez convertido en humano";
+				mes "cuando recupere mis poderes,";
+				mes "voy a estar más cabreado que";
+				mes "un oso. Catherine, tú, todos.";
+				mes "¡Los convertiré a todos en gatos!";
+				close;
+			}
+			mes "[Meow]";
+			mes "¡JA! Sí...";
+			mes "Echarme una siesta es la mejor";
+			mes "idea quehe tenido nunca-- oh.";
+			mes "Espera. Tú eres un Wizard, ¿verdad?";
+			mes "Estaba tan dormido que ni";
+			mes "me di cuenta. Ah, esto es bueno~";
+			next;
+			mes "[Meow]";
+			mes "Ahora se supone que debo";
+			mes "enseñar a los Wizards esta nueva";
+			mes "habilidad en nombre de la Wizard";
+			mes "Guild. A pesar de que en realidad";
+			mes "no quiero, no tengo^FFFFFF ^000000 elección .¿Qué dices?";
+			next;
+			if (select("Nah, I'm too sleepy...:Sure, I'd like to learn a new skill.") == 1) {
+				mes "[Meow]";
+				mes "^333333*Yaaaawn*^000000";
+				mes "Está bien. Si quieres";
+				mes "aprenderla más tarde, entonces";
+				mes "regresa y recúerdame que te";
+				mes "lo enseñe. Bue... de vuelta";
+				mes "a mi siesta... Zzz... Zzz...";
+				close;
+			}
+			mes "[Meow]";
+			mes "¿En serio? Estupendo, estupendo.";
+			mes "Para que lo sepas, yo";
+			mes "sólo enseño esta habilidad para";
+			mes "que Catherine me regrese";
+			mes "a mi forma humana. ¡Es demasiado";
+			mes "humillante ser un gato!";
+			next;
+			mes "[Meow]";
+			mes "Espera, ahora que lo pienso";
+			mes "ese perro llamado Maria";
+			mes "ha estado con Catherine";
+			mes "por muchísimo tiempo, pero";
+			mes "nunca le devolvió a su forma humana.";
+			mes "¡N-no! ¡No puedo perder la esperanza ahora!";
+			next;
+			mes "[Meow]";
+			mes "Oh, acabemos de una vez con esto.";
+			mes "Bueno. Como ya sabes, los";
+			mes "Wizards tenemos muchos ataques a distancia";
+			mes "pero somos débiles en";
+			mes "ballatas cuerpo a cuerpo, ¿verdad?";
+			next;
+			mes "[Meow]";
+			mes "Esta nueva habilidad que te";
+			mes "voy a enseñar, ha sido";
+			mes "diseñada para compensarnos";
+			mes "por ser tan débiles en";
+			mes "cuerpo a cuerpo. Primero,";
+			mes "formulas el hechizo...";
+			next;
+			mes "[Meow]";
+			mes "Después, mientras dure la habilidad,";
+			mes "estarás protegido por un escudo que repelerá y dañará";
+			mes "a enemigos que se acercan demasiado. ¿No suena súper útil";
+			mes "para momentos críticos en batalla?";
+			next;
+			select("¿Que si puedes apartar enemigos de tí?");
+			mes "[Meow]";
+			mes "¡Sí que puedes! Bueno, cuando";
+			mes "aprendas la técnica, claro. Pero";
+			mes "puede que necesites algo más";
+			mes "de teoría sobre cómo alejar";
+			mes "enemigos de tí antes de que";
+			mes "puedas aprender a hacerlo...";
+			next;
+			mes "[Meow]";
+			mes "Ah, ¿sabes qué? Los Knights son";
+			mes "unos maestros en lanzar";
+			mes "lejos a los enemigos, así que";
+			mes "vete a Prontera y encuentra a alguno que te explique la teoría.";
+			next;
+			mes "[Meow]";
+			mes "A las 11 en punto del";
+			mes "mapa de Prontera en tu";
+			mes "mini-mapa, está la Knight";
+			mes "Chivalry. Seguro que alguien de allí";
+			mes "te podrá enseñar más acerca";
+			mes "de alejar a los enemigos con técnicas...";
+			set WIZ_SK,1;
+			close;
+		}
+		else if (WIZ_SK == 1) {
+			mes "[Meow]";
+			mes "¿Qué haces aún aquí?";
+			mes "¿No te dije que fueras a la";
+			mes "Chivalry de Prontera a";
+			mes "preguntarle a alguien y";
+			mes "que te enseñe más teoría?";
+			close;
+		}
+		else if (WIZ_SK == 2) {
+			mes "[Meow]";
+			mes "¿Hm? Ah, bien, ya aprendiste";
+			mes "lo básico sobre cómo alejar a";
+			mes "los enemigos. Ahora estás";
+			mes "casi listo para aprender la habilidad";
+			mes "que se supone que te tengo que enseñar.";
+			next;
+			mes "[Meow]";
+			mes "No soy un filántropo, ¡así que";
+			mes "más te vale recompensarme";
+			mes "por mis clases y esfuerzos!";
+			mes "Hmm... ¿de qué modo podrías";
+			mes "pagarme? Ah, ya casi";
+			mes "no me quedan gemas~";
+			next;
+			mes "[Meow]";
+			mes "Ve y tráeme";
+			mes "^FF000010 Crystal Blues^000000,";
+			mes "^FF000010 Green Lives^000000,";
+			mes "^FF000010 Red Bloods^000000 and";
+			mes "^FF000010 Winds of Verdure^000000.";
+			next;
+			mes "[Meow]";
+			mes "No es para tanto,";
+			mes "así que no te quejes y";
+			mes "ven tan pronto como puedas";
+			mes "Mientras tú te vas a buscarlas";
+			mes "yo me voy a echar otra siesta~";
+			set WIZ_SK,3;
+			close;
+		}
+		else if (WIZ_SK == 3) {
+			if (countitem(991) < 10 || countitem(993) < 10 || countitem(990) < 10 || countitem(992) < 10) {
+				mes "[Meow]";
+				mes "^333333*Yaaaaaawn~*^000000 ¿Hm?";
+				mes "¡¿C-cómo te atreves a";
+				mes "regresar sin tener";
+				mes "todo lo que te pedí?!";
+				mes "Te olvidaste de lo que tenías";
+				mes "que traer, ¿no? Grrrr....";
+				next;
+				mes "[Meow]";
+				mes "Te dije que trajeras";
+				mes "^ff000010 Crystal Blues^000000,";
+				mes "^ff000010 Green Lives^000000,";
+				mes "^ff000010 Red Bloods^000000 and";
+				mes "^ff000010 Winds of Verdure^000000!";
+				next;
+				mes "[Meow]";
+				mes "¡No lo olvides esta vez!";
+				mes "¡Y no se te ocurra";
+				mes "despertarme hasta que";
+				mes "encuentres todos los ítems!";
+				close;
+			}
+			mes "[Meow]";
+			mes "*Yaaaawn~* ¿Q-qué?";
+			mes "Ah, eres tú. Entonces,";
+			mes "¿me trajiste las gemas?";
+			mes "Mmm. Bien, déjame ver si";
+			mes "las trajiste todas...";
+			mes "Una, dos, tres...";
+			next;
+			mes "[Meow]";
+			mes ".................";
+			mes "Bah, paso. No me apetece";
+			mes "contarlas todas.";
+			mes "Simplemente dámelas";
+			mes "y te enseñaré la habilidad";
+			mes "para poder irme a dormir.";
+			next;
+			mes "[Meow]";
+			mes "Esta técnica se llama";
+			mes "''^FF0000Sight Blaster^000000.'' Genial,";
+			mes "¿no? Es una técnica con";
+			mes "atributo de fuego que requiere";
+			mes "que uses Sight antes de";
+			mes "que la puedas activar. Inténtalo.";
+			next;
+			specialeffect2 EF_SUI_EXPLOSION;
+			mes "^3355FF*BAM! BOOM!*^000000";
+			next;
+			mes "[Meow]";
+			mes "......";
+			mes "Uh... no fue del todo correcto,";
+			mes "pero no estuvo mal para ser tu primera vez.";
+			mes "Tienes que desearlo con fuerza";
+			mes "para que ocurra de verdad.";
+			mes "Intentémoslo de nuevo, ¿ok?";
+			next;
+			mes "[Meow]";
+			mes "Tienes que desearlo.";
+			mes "¡¡Empuja!! ¡¡Empuja con";
+			mes "todas tus fuerzas!!";
+			mes "Bien, empuja las llamas";
+			mes "que invocaste con Sight";
+			mes "con tu mente. ¡No es tan difícil!";
+			next;
+			mes "[Meow]";
+			mes "¡Al fin...!";
+			mes "¡Ya lo aprendiste!";
+			mes "Llevó mucho trabajo, pero";
+			mes "ya terminamos con esto.";
+			specialeffect2 EF_ABSORBSPIRITS;
+			delitem 991,10; //Crystal_Blue
+			delitem 993,10; //Yellow_Live
+			delitem 990,10; //Boody_Red
+			delitem 992,10; //Wind_Of_Verdure
+			set WIZ_SK,100;
+			skill "WZ_SIGHTBLASTER",1,0;
+			next;
+			mes "[Meow]";
+			mes "Estoy tan cansado después";
+			mes "de enseñar tanto...";
+			mes "Me merezco una siesta";
+			mes "ahora mismo. Vete ya,";
+			mes "y si conoces a algún Wizard,";
+			mes "diles que vengan por aquí, supongo...";
+			close;
+		}
+		else {
+			mes "[Meow]";
+			mes "Zzz... Zzz...";
+			mes "Catherine... haré";
+			mes "que te arrepientas por";
+			mes "convertime en gato...";
+			mes "Voy a.... a.... Zzz....";
+			close;
+		}
+	}
+	else {
+		mes "[Meow]";
+		mes "*Yaaawn~*";
+		mes "Qué sueño...";
+		mes "¿hm? ¿Querías";
+		mes "hablar conmigo? ¡No";
+		mes "me molestes si";
+		mes "no tienes nada que decir!";
+		next;
+		if (select("A cat?:Now I'm sleepy, too...") == 1) {
+			mes "[Meow]";
+			mes "Sí. Sí, soy un gato.";
+			mes "Por ahora, al menos. Estúpida";
+			mes "Catherine... me convirtió en";
+			mes "gato cuando le tomé prestadas";
+			mes "aquellas gemas sin permiso.";
+			mes "¡Se lo iba a contar!";
+			next;
+			mes "[Meow]";
+			mes "Cuando me vuelva humano";
+			mes "y recupere mis poderes,";
+			mes "voy a estar más cabreado que";
+			mes "un oso. Catherine, tú, todos.";
+			mes "¡Los convertiré en gatos!";
+			close;
+		}
+		mes "[Meow]";
+		mes "¡JA! Sí.....";
+		mes "Echarme una siesta es";
+		mes "la mejor idea que he tenido";
+		mes "en todo el día. Hm. ^333333*Yaaawwn~*^000000";
+		mes "Allá voy, hora de dormir...";
+		mes "ZzzzzzzZZZzzz... ZzZzzzz...";
+		close;
+	}
+}
+
+prt_in,82,98,3	script	Simon Mayace#q_wiz	46,{
+	if (WIZ_SK == 1) {
+		mes "[Simon]";
+		mes "Ah, tú debes ser un experto";
+		mes "en magia. Hmm... sí.";
+		mes "Debes de ser uno de esos magos...";
+		mes "¿High Wizards? La verdad es";
+		mes "que no los diferencio bien.";
+		mes "¿Puedo ayudarte?";
+		next;
+		if (select("I'm fine, thank you.:I want to learn about push backs.") == 1) {
+			mes "[Simon]";
+			mes "Me sorprende que eligieras";
+			mes "practicar magia... por tu";
+			mes "constitución yo diría que";
+			mes "se te daría mejor usar^FFFFFF ^000000 una espada. Claro, que esa";
+			mes "es mi humilde opinión.";
+			close;
+		}
+		mes "[Simon]";
+		mes "Espera, ¿que quieres que";
+		mes "te enseñe la técnica";
+		mes "Push-Back? Pero si te";
+		mes "puedes defender mucho";
+		mes "mejor usando algo como";
+		mes "Fire Wall o Fire Bolt, ¿no?";
+		next;
+		select("Pero cuerpo a cuerpo...");
+		mes "[Simon]";
+		mes "Ah, ya veo. Ya, los Wizards";
+		mes "no son efectivos cuerpo";
+		mes "a cuerpo. Ya, ya, ya veo";
+		mes "por qué te gustaría aprender";
+		mes "la técnica Push-Back. Vale,";
+		mes "yo te puedo enseñar lo básico.";
+		next;
+		mes "[Simon]";
+		mes "Bueno, todo el mundo sabe";
+		mes "lo básico sobre el ataque.";
+		mes "Tú golpeas, y te preparas para";
+		mes "la siguiente acción, que puede ser";
+		mes "otro golpe, esquivar, o";
+		mes "protegerte. Muy simple, ¿no?";
+		next;
+		mes "[Simon]";
+		mes "Para alejar a un enemigo de tí,";
+		mes "tienes que atacar usando un golpe";
+		mes "de fuerza contínua. El truco está";
+		mes "en seguir al enemigo. Si le";
+		mes "das en la cabeza, la distancia";
+		mes "del empujón será muy corta.";
+		next;
+		mes "[Simon]";
+		mes "Si en vez de eso le";
+		mes "empujas por las piernas,";
+		mes "el enemigo caerá sobre tí.";
+		mes "La mejor zona para empujar";
+		mes "es claramente el pecho, ya que";
+		mes "permite más control sobre el empujón.";
+		next;
+		mes "[Simon]";
+		mes "Bueno, ya te expliqué";
+		mes "lo de empujar lo mejor que pude.";
+		mes "Concéntrate y practica la";
+		mes "teoría por tí mismo, y serás";
+		mes "capaz de hacerlo. Buena^FFFFFF ^000000suerte en tus viajes, aventurero~";
+		set WIZ_SK,2;
+		close;
+	}
+	else {
+		mes "[Simon]";
+		mes "No te confundas;";
+		mes "la espada es todo un arte.";
+		mes "Puede que las técnicas parezcan";
+		mes "brutas al princpio, pero hay";
+		mes "una estrategia infalible que los";
+		mes "Knights siempre comprenden.";
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.0 for fully working skills only [Lupus]
+//= 1.1 Added more new skill quests for more classes [Lupus]
+//= Somehow eA engine doesn't let you keep learn't skill V_V'
+//= 1.2 Added to correct locations, correct NPC's, fixed
+//= some of the items required and made them into real
+//= quests. [Reddozen] 
+//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
+//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
+//= 1.3b Splitted into different files [DracoRPG]
+//= 1.3c Removed duplicates [Toms]
+//============================================================

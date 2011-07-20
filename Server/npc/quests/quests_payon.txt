@@ -1,0 +1,323 @@
+//===== eAthena Script ======================================= 
+//= Quest NPCs related to Payon
+//===== By: ================================================== 
+//= kobra_k88
+//===== Current Version: ===================================== 
+//= 1.7
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= Pretend Murder, Ear Muffs, Oxygen, Derivuchi Cap, Helm of Angel Quests.
+//===== Additional Comments: ================================= 
+//= Fully working
+//= 1.1 Helm of Angel bug fixed [Lupus]
+//= 1.2 Fixed skirt of virgin [Lupus]
+//= 1.3 Fixed exploits [Lupus]
+//= 1.4 Removed Duplicates [Silent]
+//= 1.5 Updated Dialogs from "Pretend Murdered Quest" [Samuray22]
+//= 1.5a replaced item "names" with item id. [Lupus]
+//= 1.6 Updated Dialogs from "Oxygen Mask Quest" [Samuray22]
+//= 1.7 Updated headgear quests. [L0ne_W0lf]
+//============================================================ 
+
+
+
+//==========================================================================================//
+//				Pretend Murdered quest
+//==========================================================================================//
+payon_in01,99,72,4	script	Granny	103,{
+	if (checkweight(908,1) == 0) {
+		mes "^3355FFEspera un segundo! Ahora mismo, Tu estas cargando muchos objetos. Porfavor vuelve despues de dejar algunas cosas en la bodega Kafra.^000000";
+		close;
+	}
+	if (countitem(1049) > 3) {
+		mes "[Granny]";
+		mes "Desearia poder hacer algunas prendas para mis nietos por el festival de temporada...";
+		next;
+		mes "[Granny]";
+		mes "Oh! ¿Podrias darme tu ^3355FFSkirt of Virgin^000000? Necesitare 4 de ellos. Porfavor, Te lo ruego.";
+		next;
+		switch(select("Alright.:No way!")) {
+		case 1:
+			delitem 1049,4;  //Skirt_Of_Virgin
+			mes "[Granny]";
+			mes "Oh! Te lo agradesco mucho~ Ahora puedo hacer algunas prendas para Kitty Cutty~";
+			next;
+			mes "[Granny]";
+			mes "Ah, Espera! Casi lo olvido. Yo era una actriz muy popular en mi juventud. Mis amigos actores ne dieron un regalo de bodas cuando deje la compañia de teatro. Lo eh conservado para recordar aquellos preciosos tiempos.";
+			next;
+			mes "[Granny]";
+			mes "Si te parece bien...";
+			mes "Me gustaria darte esto.";
+			next;
+			getitem 2293,1; // Pretend_Murdered
+			mes "[Granny]";
+			mes "Adios, aventurero~!";
+			mes "Gracias por hacer muy feliz a una anciana";
+			close;
+		case 2:
+			mes "[Granny]";
+			mes "*Sigh* ¿Como puedo obtener ^3355FFSkirt of Virgin^000000 por mi cuenta? Soy tan debil y fragil, aunque este en mi mecedora me agota. *Sniff* Todo lo que quiero es hacer a mis nietos felices...";
+			close;
+		}
+	}
+	else {
+		mes "[Granny]";
+		mes "Yo consigo Hongos en las montañas de Payon todos los dias. El tiempo transcurre y antes de que me entere, ya esta el festival de temporada. Desearia poder hacer unas prendas para mi familia en esta epoca del año.";
+		next;
+		mes "[Granny]";
+		mes "...";
+		mes "Pero para eso, necesito ^3355FF4 Skirt of Virgin^000000...";
+		next;
+		mes "[Granny]";
+		mes "Joven viajero, porfavor ayudame. Cuando encuentres algunas ^3355FFSkirt of Virgin^000000, porfavor traemelas. Realmente lo apreciaria...";
+		close;
+	}
+}
+
+//========================================================================================//
+//					Ear Muffs Quest
+//========================================================================================//
+payon_in01,18,10,4	script	Mystic Lady	76,{
+	mes "[Mystic Lady]";
+	mes "Mi familia a producido y vendido un producto especial de invierno ^3355FFEar Muffs^000000 por muchos años. Nosotros nos mudamos aqui hace poco, pero el clima es calido siempre asi que dificil nos ganamos la vida..";
+	next;
+	mes "[Mystic Lady]";
+	mes "Si planeas viajar a regiones mas heladas, sugiero que lleves algunos ^3355FFEar Muffs^000000...";
+	Emotion e_dots;
+	next;
+	mes "[Mystic Lady]";
+	mes "Ear Muffs son la especialidad de mi familia, y se lo brindamos a los clientes que tienen ^FF33551 Cursed Ruby^000000, ^3311AA1 Headset,^000000 ^3355FF 200 Feathers^000000 and ^DDDD005000 Zeny^000000.";
+	Emotion e_dots;
+	next;
+	switch(select("Oh Yeah? That sounds good.:No thank you, Ma'am.")) {
+	case 1:
+		if ((countitem(724) > 0) && (countitem(949) > 199) && (countitem(5001) > 0) && (Zeny > 4999)) {
+			mes "[Mystic Lady]";
+			delitem 724,1;  //Cardinal_Jewel_
+			delitem 949,200;  //Feather
+			delitem 5001,1;  //Headset
+			set Zeny,Zeny-5000;
+			mes "Toma, te dare estas prefabricadas.";
+			getitem 2283,1; // Ear_Mufs
+			next;
+			mes "[Mystic Lady]";
+			mes "Gracias por comprar nuestra mercancia. No te arrepentiras de haber comprado unos Ear Muffs: Satisfaccion garantisada~";
+			Emotion e_dots;
+			close;
+		}
+		else {
+			mes "[Mystic Lady]";
+			mes "Ay cariño...";
+			mes "No tienes suficientes objetos ni dinero. Desafortunadamente no damos descuentos. Porfavor entiende que de esta forma nos ganamos la vida...";
+			Emotion e_dots;
+			close;
+		}
+	case 2:
+		mes "[Mystic Lady]";
+		mes "Esta bien.";
+		mes "Espero que";
+		mes "nos veamos de nuevo.";
+		mes "...Alguno de estos dias.";
+		Emotion e_dots;
+		close;
+	}
+}
+
+//========================================================================================//
+//					Oxygen Mask Quest
+//========================================================================================//
+payon_in02,25,71,4	script	Boy	86,{
+	if (countitem(701) > 4) {
+		mes "[Young Man]";
+		mes "ArrrGggghh!";
+		mes "Ah, No puedo...";
+		next;
+		mes "[Young Man]";
+		mes "*Huk*";
+		mes "Ahora hasta mis ojos estan locos!! Porque de pronto estos insectos se ven tan tiernos?! Nooooooo~!!!";
+		next;
+		switch(select("Show Ora Ora:Give Ora Ora:Cancel")) {
+		case 1:
+			mes "[Young Man]";
+			mes "Oooooohhhh!!!";
+			mes "es, es esto";
+			mes "el unico?!";
+			mes "Esto es...";
+			mes "Ora Ora!!";
+			next;
+			mes "[Young Man]";
+			mes "Te lo pondre simple! Damelo, y te dare mi tesoro! ¿Como suena la idea? ¿Quiere aceptar el trato?";
+			close;
+		case 2:
+			if (countitem(701) > 4) {
+				delitem 701,5;  //Ora_Ora
+			}
+			mes "[Young Man]";
+			mes "Muhahahahah!!!";
+			mes "Finalmente lo tengo";
+			mes "Ora Ora!";
+			mes "Estupidos y desagradables";
+			mes "Thief Bugs!!";
+			mes "Lo pagaran!!!";
+			next;
+			mes "[Young Man]";
+			mes "Huk...Huk...";
+			mes "Lo siento estaba fuera de control de tanto placer hace un momento. Ahora te dare mi tesoro como te prometi.";
+			next;
+			getitem 5004,1; // Oxygen_Mask
+			mes "[Young Man]";
+			mes "Cuando te lo pongas en la boca y respires, Este limpiara la suciedad sin que llegue a tus pulmones.";
+			next;
+			mes "[Young Man]";
+			mes "Kakakakakaka!";
+			mes "No puedo esperar";
+			mes "para usar esto";
+			mes "Ora Ora!";
+			close;
+		case 3:
+			mes "[Young Man]";
+			mes "Huhuhuhuhu...";
+			mes "Y que si no me puedo deshacer de estos insectos? Talvez aprenda a quererlos... *Huk*";
+			close;
+		}
+	}
+	else {
+		mes "[Young Man]";
+		mes "Wahhhhhh! I, I...";
+		mes "No puedo soportarlo mas!";
+		mes "Ustedes pequeños apestosos y sucios bastardos";
+		next;
+		switch(select("Continue:Cancel")) {
+		case 1:
+			mes "[Young Man]";
+			mes "Oh hombre...";
+			mes "Todo empezo cuando mis padres fallecieron cuando apenas era un niño. Pronto tuve que empezar a trabajar para vivir, fue muy dificil.";
+			next;
+			mes "[Young Man]";
+			mes "Eh trabajado por 10 años con la esperansa de comprar la casa de mis sueños donde podria encontrar paz y comodidad de nuevo.  Eventualmente consegui suficiente zeny para pagar mi dulce hogar.";
+			next;
+			mes "[Young Man]";
+			mes "Desafortunadamente no tuve suficiente dinero como para comprar la casa que tenia en mente. Pero luego, encontre esta casa, que era mas grande y barata que la primera. La compre sin dudarlo...";
+			next;
+			mes "[Young Man]";
+			mes "Dulce Jesus! Ahora resulta, que esto es un paraiso para losThief Bugs!!!";
+			next;
+			mes "[Young Man]";
+			mes "Trate todo lo que pude. Los persuadi, los mate, Pero solo daba paz por un tiempo! Hasta intente quemar la casa...!";
+			next;
+			mes "[Young Man]";
+			mes "*Gasp* digo, realmente, necesito los ^3355FF Ora Ora^000000 para deshacerme de ellos? Dicen que es rara vez se encuentra en paisas lejanos.";
+			next;
+			mes "[Young Man]";
+			mes "Si tan solo pudiera consegur 5 de esos, No tendria que estarme mortificando con estos insectos nunca mas...";
+			close;
+		case 2:
+			mes "[Young Man]";
+			mes "Esta lucha sin fin contra los insectos me ha dejado muy agotado. Me rindo. Hagan lo que quieran sabandijas!";
+			close;
+		}
+	}
+}
+
+//========================================================================================//
+//			Derivuchi Cap(Hat of Petite Diablo), Helm of Angel
+//========================================================================================//
+payon_in01,56,12,7	script	Young man#12	89,{
+	mes "[Young man]";
+	mes "...¿Que es esto?";
+	next;
+	switch(select("Can you make me a special item?:Hey.")) {
+	case 1:
+		mes "[Young man]";
+		mes "¿Huh? ¿Asi que ya sabes en que me especializo realmente, eh? Supongo que no es necesaria la descrecion usual. Dime que es lo que quieres.";
+		next;
+		switch(select("Helm of Angel.:Deviruchi cap.:I will come next time.")) {
+		case 1:
+			mes "[Young man]";
+			mes "1 Helm (con slot).";
+			mes "Un Angel Wing.";
+			mes "5 Fang of Garm.";
+			mes "Eso es todo lo que necesito.";
+			next;
+			mes "[Young man]";
+			mes "Espera! solo para que lo sepas, no me importa si los objetos en tu inventario han sido mejorados o llevan cartas anexadas";
+			next;
+			mes "[Young man]";
+			mes "Quiero decir, que cualquier carta o mejora en los objetos que usare para crear algo se perdera una vez que realize el nuevo objeto. Asi que ten cuidado cuando me entregues las cosas";
+			next;
+			mes "[Young man]";
+			mes "¿Consegusite los objetos? Bueno damelos.";
+			next;
+			switch(select("Give him the items.:Don't give him the items.")) {
+			case 1:
+				if ((countitem(2229) > 0) && (countitem(2254) > 0) && (countitem(7036) > 4)) {
+					mes "[Young man]";
+					mes ".....Hm.";
+					mes "Bien, Aqui esta tu Helm of Angel. Tomalo.";
+					delitem 2229,1;  //Helm_
+					delitem 2254,1;  //Angelic_Chain
+					delitem 7036,5;  //Fang_Of_Garm
+					close2;
+					getitem 5025,1; // Helm_Of_Angel
+					end;
+				}
+				else {
+					mes "[Young man]";
+					mes "...El numero de objetos no es el correcto. Sera mejor que revises de nuevo.";
+					close;
+				}
+			case 2:
+				mes "[Young man]";
+				mes "Como desees...";
+				close;
+			}
+		case 2:
+			mes "[Young man]";
+			mes "600 Little Evil Horn.";
+			mes "40 Talon of Griffon.";
+			mes "Eso es todo lo que necesito.";
+			next;
+			mes "[Young man]";
+			mes "Espera! solo para que lo sepas, no me importa si los objetos en tu inventario han sido mejorados o llevan cartas anexadas";
+			next;
+			mes "[Young man]";
+			mes "Quiero decir, que cualquier carta o mejora en los objetos que usare para crear algo se perdera una vez que realize el nuevo objeto. Asi que ten cuidado cuando me entregues las cosas";
+			next;
+			mes "[Young man]";
+			mes "¿Consegusite los objetos? Bueno damelos.";
+			next;
+			switch(select("Give him the items.:Don't give him the items.")) {
+			case 1:
+				if ((countitem(1038) > 599) && (countitem(7048) > 39)) {
+					mes "[Young man]";
+					mes ".....Hm. Aqui esta tu Deviruchi Hat. Porfavor tomalo.";
+					delitem 1038,600;  //Petite_DiablOfs_Horn
+					delitem 7048,40;  //Talon_Of_Griffin
+					close2;
+					getitem 5038,1; // Deviruchi_Cap
+					end;
+				}
+				else {
+					mes "[Young man]";
+					mes "...El numero de objetos no es el correcto. Sera mejor que revises de nuevo.";
+					close;
+				}
+			case 2:
+				mes "[Young man]";
+				mes "Como desees..";
+				close;
+			}
+		case 3:
+			mes "[Young man]";
+			mes "Hm. Muy bien.";
+			mes "Entonces talvez nos veamos despues.";
+			close;
+		}
+	case 2:
+		mes "[Young man]";
+		mes "mmm.";
+		mes "Cuidate";
+		close;
+	}
+}

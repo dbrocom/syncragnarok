@@ -1,0 +1,58 @@
+//===== eAthena Script =======================================
+//= Reset NPC for Athena by Script & DB Team
+//===== By: ================================================== 
+//= eAthena Team
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= Any eAthena Version
+//===== Description: ========================================= 
+//= Resets skills, stats, or both.
+//===== Additional Comments: ================================= 
+//= 1.0 First Version
+//= 1.1 Optimized for the greater good. [Kisuka]
+//============================================================ 
+prontera,150,193,4	script	Reset Girl	124,{
+	mes "[Reset Girl]";
+	mes "Soy la chica para resetar";
+	mes "Resetear Stats: 5,000z";
+	mes "Resetear skills: 9,000z";
+	mes "Resetear ambos: 9,000z";
+	mes "Por favor seleccione el servicio que desee:";
+	next;
+	switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Quit")) {
+		case 1:
+			mes "[Reset Girl]";
+			if (Zeny < 5000) {
+				mes "Lo siento, no tiene suficiente Zeny";
+				close;
+			}
+			mes "Muy bien, prepérece... Recuerde, los cambios no se efectuaran hasta que se conecte de nuevo";
+			set Zeny,zeny-5000;
+			ResetSkill;
+			close;
+		case 2:
+			mes "[Reset Girl]";
+			if (Zeny < 5000) {
+				mes "Lo siento, no tiene suficiente Zeny";
+				close;
+			}
+			mes "Muy bien, hagámozlo... Recuerde, los cambios no se efectuaran hasta que se conecte de nuevo";
+			set Zeny,zeny-5000;
+			ResetStatus;
+			close;
+		case 3:
+			mes "[Reset Girl]";
+			if (Zeny < 9000) {
+				mes "Lo siento, no tiene suficiente Zeny";
+				close;
+			}
+			mes "Bien, aquí vamos... Recuerde, los cambios no se efectuaran hasta que se conecte de nuevo";
+			set Zeny,zeny-9000;
+			ResetSkill;
+			ResetStatus;
+			close;
+		case 4:
+			close;
+	}
+}

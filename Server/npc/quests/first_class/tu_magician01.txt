@@ -1,0 +1,749 @@
+//===== eAthena Script ======================================= 
+//= Magican Class Tutorial and Job Specific Quest
+//===== By: ================================================== 
+//= Fix up by Jukka
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= eAthena SVN (Testet in Trunk 88xx)
+//===== Description: ========================================= 
+//=
+//===== Additional Comments: ================================= 
+//= 1.0 Fully working
+//= 1.1 Optimized [Lupus]
+//=	TODO: Test, Add proper misceffects
+//= 1.2 Fixed experience gains to match upcoming rate adjustments. [SinSloth]
+//============================================================ 
+
+
+//=================================================Sign====================================================
+geffen,61,174,4	script	Sign#M	111,{
+  mes "~Señales leidas...~";
+  mes "Fantastico!! Esta es la Academia de Magia de Geffen. Ven si estas interesado en la magia!";
+  close;
+}
+
+
+//=================================================New Mage Manager====================================================
+geffen,67,180,4	script	New Mage Manager#M	102,{
+	mes "[Mana]";
+	if(Class == Job_Novice){
+		mes "[Mana]";
+		mes "No estas";
+		mes "listo aun.";
+		mes "Vuelve despues";
+		mes "cuando hayas entrenado mas.";
+		close;
+	}
+	if(BaseClass != Job_Mage){
+		mes "Ten mas confianza en tu trabajo";
+		mes "Algunos otros trabajos pueden parecer";
+		mes "mejores pero mira dentro tuyo";
+		mes "un poco mas. Debes recuperar la confianza";
+		mes "al hacerlo";
+		close;
+	}
+	if(eaclass()&(EAJL_UPPER|EAJL_2) && tu_magician01 < 7){
+		mes "[Mana]";
+		mes "Mi entrenamiento no es muy util para aquellos que ya son magos. Me temo que tendrás que confiar en ti mismo para mejorar tus habilidades.";
+		close;
+	}
+	switch(tu_magician01){
+	case 0:
+		mes "Bienvenido!";
+		mes "Soy Mana, Un entrenador a cargo  quienes se han sumando a la  Mage Guild.";
+		next;
+		mes "[Mana]";
+		mes "Solo estoy haciendo esto por un rato, pero estoy aqui para ayudarte si quieres aprender mas sobre el Job de Mage";
+		next;
+		if(select("Will you teach me?", "Perhaps later...")==2){
+			mes "[Mana]";
+			mes "Bien, adivino";
+			mes "que deberia estar bien.";
+			mes "espero con ansias";
+			mes "que nos reunamos otra vez";
+			close;
+		}
+		mes "[Mana]";
+		mes "Por supuesto!";
+		mes "Y no te preocupes.";
+		mes "Todos son principiantes";
+		mes "en una cosa u otra";
+		mes "Tu solo debes hacer lo mejor!";
+		next;
+		mes "[Mana]";
+		mes "Bien,";
+		mes "Vamos a emprezar";
+		mes "con lo básico entonces?";
+		next;
+		mes "[Mana]";
+		mes "En lugar de el daño físico, los Mages usan el poder de los elementos: ^ff0000Fire^000000, ^5C4033Earth^000000, ^93DB70Wind^000000, ^0000FFWater^000000. los Mages incluso han usado hechizos de propiedad ^CFB53BGhost^000000.";
+		next;
+		mes "[Mana]";
+		mes "Ahora si un enemigo tiene propiedades elementales, puede tener mas resistencia a un elemento que a otro.";
+		next;
+		mes "[Mana]";
+		mes "Escucha cuidadosamente.";
+		mes "^FF0000Fire^000000 es fuerte contra  Earth pero debil contra Water.  Ahora, ^5C4033Earth^000000 es fuerte contra Wind, pero debil contra Fire.";
+		next;
+		mes "[Mana]";
+		mes "^0000FFWater^000000 es fuerte contra Fire pero es debil contra Wind. Y finalmente, ^93DB70Wind^000000 es fuerte contra Water pero debil contra Earth.";
+		next;
+		mes "[Mana]";
+		mes "¿Estaba hablando demasiado?";
+		mes "Vamos a tomar un descanso y continuar en otro momento. Estoy todavía a este nuevo, así que estoy un poco bushed ~!";
+		set tu_magician01, 1;
+		getexp BaseLevel*30,BaseLevel*15;
+		//misceffect EF_HIT5;
+		close;
+		break;
+	case 1:
+		mes "¿Estas listo?";
+		mes "para continuar nuestra";
+		mes "¿discucion sobre los elementos?";
+		next;
+		mes "[Mana]";
+		mes "Recuerde que cada monstruo tiene una propiedad elemental y que cada propiedad tiene un nivel. La comprensión de los elementos que le ayudará a ganar batallas.";
+		next;
+		mes "[Mana]";
+		mes "En otras palabras, incluso las mismas propiedades";
+		mes "tienen diferentes características que deben ser considerados.";
+		mes "Te voy a explicar las propiedades ahora";
+		next;
+		while((1)){
+			switch(select("^ff0000Fire^000000", "^5C4033Earth^000000", "^93DB70Wind^000000", "^0000FFWater^000000", "^CFB53BGhost^000000", "Quit.")){
+			case 1:
+				mes "[Mana]";
+				mes "En general, los monstruos que tienen la '^ff0000Fire^000000'";
+				mes "propiedad tienen mas fuertes ataques";
+				mes "Por lo tanto, Magos, que generalmente son físicamente más débiles.";
+				mes "Incluso el más mínimo éxito puede ser crítica.";
+				next;
+				mes "[Mana]";
+				mes "Los skill con propiedad de '^ff0000fire^000000'";
+				mes "son 'Sight', 'Fire Bolt' 'Fire Wall'";
+				mes "y 'Fire Ball'.";
+				next;
+				mes "[Mana]";
+				mes "Cuando luchas contra monstruos de propiedad '^ff0000fire^000000'";
+				mes "¿.... por lo general, cuando estan a solas?";
+				mes "Usa 'Frost Diver' para congelar el monstruo en primer lugar";
+				next;
+				mes "[Mana]";
+				mes "Si usted lucha  '^ff0000fire^000000' con '^ff0000fire^000000'";
+				mes "haras poco o ningun daño en absoluto";
+				next;
+				mes "[Mana]";
+				mes "El mas distintivo de la propiedad  '^ff0000fire^000000'";
+				mes "Es el skill 'Fire Wall'. Se puede usar";
+				mes "Hasta 3 veces en pantalla";
+				next;
+				mes "[Mana]";
+				mes "El 'Fire Wall' sigue sobre el terreno";
+				mes "y cualquier monstro que se ejecuta en ella se";
+				mes "empiaza a hacer daño, entonces el monstro se aleja";
+				mes "en la dirección opuesta a partir de la cual";
+				mes "se acercaban";
+				next;
+				mes "[Mana]";
+				mes "Pero los monstros  'Undead' son solo heridos";
+				mes "ligeramente y todavia se mueven en la misma";
+				mes "dirección a fin de tener cuidado.";
+				set tu_mana,tu_mana|1;
+				next;
+				break;
+			case 2:
+				mes "[Mana]";
+				mes "Por lo general los monstros de propiedad '^5C4033Earth^000000'";
+				mes "Tienen una buena orinetacion, Por lo tanto no importa como";
+				mes "esquivar su alto dodge, es decir, incluso Magos";
+				mes "tienen dificultad para evitar los ataques.";
+				next;
+				mes "[Mana]";
+				mes "'^5C4033Earth^000000'son propiedad hechizos";
+				mes "'Stone Curse' pero es dificil";
+				mes "clasificar como  '^5C4033Earth^000000' pero por ahora";
+				mes "vamos a dejarlo como está.";
+				next;
+				mes "[Mana]";
+				mes "'^5C4033Earth^000000' propiedad de los monstruos son";
+				mes "generalmente debil contra 'Fire Wall'.";
+				next;
+				mes "[Mana]";
+				mes "'^5C4033Earth^000000' es débil contra el  '^ff0000fire^000000'";
+				mes "a fin de  'Fire Wall' se detiene el monstruo y";
+				mes "hace daño";
+				next;
+				mes "[Mana]";
+				mes "de la misma manera los hechizos de propiedad '^ff0000fire^000000'";
+				mes "tales como 'Fire Ball' o 'Fire Bolt' pueden";
+				mes "ser utilizados para hacer daño de los monstruos tambien";
+				next;
+				mes "[Mana]";
+				mes "Oh....y";
+				mes "Cuando 'Stone Curse' un monstruo";
+				mes "se convierte en la propiedad de  '^5C4033earth^000000'";
+				mes "Si utiliza este punto muy bien, usted puede hacer";
+				mes "mucho más cuando damange luchando.";
+				set tu_mana,tu_mana|2;
+				next;
+				break;
+			case 3:
+				mes "[Mana]";
+				mes "En general los monstruos de propiedad '^93DB70wind^000000'";
+				mes "evitar los ataques muy bien.";
+				next;
+				mes "[Mana]";
+				mes "Pero los Magos nunca realmente atacan directamente";
+				mes "por lo que no hay necesidad de preocuparse por";
+				mes "este aspecto";
+				next;
+				mes "[Mana]";
+				mes "Pero los monstruos de propiedad '^93DB70wind^000000'";
+				mes "Son rapidos, por lo que debes tener ciudado a la hora de atacar";
+				next;
+				mes "[Mana]";
+				mes "Los skill de propiedad '^93DB70Wind^000000' incluyen";
+				mes "'Lightning Bolt' y 'Thunder Storm'.";
+				next;
+				mes "[Mana]";
+				mes "Al atacar a monstruos de propiedad  '^93DB70wind^000000'";
+				mes "Es bueno utilizar skill de propiedad  '^5C4033earth^000000'";
+				mes "Sin embargo, aunque tienen Asistentes de la capacidad de hacer muy";
+				mes "algunos daños, Magos todavía no tienen el poder de";
+				mes "'un ataque con un skill de propiedad  ^5C4033earth^000000'";
+				next;
+				mes "[Mana]";
+				mes "Por lo tanto es bueno utilizar un ataque de elemento '^ff0000fire^000000'";
+				mes "skill de propiedad '^93DB70Wind^000000' o";
+				mes "skill de poca propiedad'^0000FFwater^000000'";
+				mes "o daños a la propiedad '^93DB70wind^000000'";
+				set tu_mana,tu_mana|4;
+				next;
+				break;
+			case 4:
+				mes "[Mana]";
+				mes "Los monstruos que tienen propiedad  '^0000FFWater^000000'";
+				mes "Son fuertes de salud  Cuando la lucha es contra ellos";
+				mes "por lo general toma más tiempo que otros.";
+				next;
+				mes "[Mana]";
+				mes "sin embargo los monstruos de propiedad '^0000FFwater^000000' son";
+				mes "más afectados por el nivel de los monstruos de otras";
+				mes "propiedades";
+				next;
+				mes "[Mana]";
+				mes "En otras palabras, un monstruo que es nivel 2 de '^93DB70wind^000000'";
+				mes "recive un daño de '150' por cualquier skill de tipo '^5C4033earth^000000',";
+				mes "un mostruo al nivel 2 de propiedad '^0000FFwater^000000'";
+				mes "recivira '175' de daño por cualquier skill de tipo '^93DB70wind^000000'.";
+				next;
+				mes "[Mana]";
+				mes "Si tu utilizas estas propiedades deberia ser";
+				mes "posible pelear '^0000FFagua^000000' propiedad mounstruos rapidamente";
+				next;
+				mes "[Mana]";
+				mes "'^0000FFAgua^000000' Propiedad de la habilidad  'Cold Bolt'";
+				mes "y 'Frost Driver'.";
+				mes "'^ff0000Fuego^000000' Las propiedades de los mounstruos son deviles contra los ataques.";
+				mes "Oh, y el  'Frost Diver' tiene una caracteristica especial.";
+				next;
+				mes "[Mana]";
+				mes "Cuando atacas a un mounstruo con 'Frost Driver'";
+				mes "este tiene una probabilidad de que ese mounstruo sea congelado.";
+				mes "En esa vez que el mounstruo sea temporalmente transformado en";
+				mes "'^0000FFAgua^000000' Propiedad.";
+				next;
+				mes "[Mana]";
+				mes "si tu usas esta idea, Luego te sera mas facil";
+				mes "Combate con los mounstruos.";
+				set tu_mana,tu_mana|8;
+				next;
+				break;
+			case 5:
+				mes "[Mana]";
+				mes "Dejame explicarte un poco sobre el  '^CFB53Bghost^000000' propiedad.";
+				mes "Estos son muchos '^CFB53Bfantasma^000000' propiedad de moustruos";
+				mes "esto es un poco molesto.";
+				next;
+				mes "[Mana]";
+				mes "'^CFB53BFantasma^000000' propiedad magica incluida";
+				mes "'Napalm Beat' y 'Soul Strike' y es tambien";
+				mes "difícil de clasificar 'Safety Wall'.";
+				next;
+				mes "[Mana]";
+				mes " Las dos primeras son muy útiles cuando atacas '^CFB53Bghost^000000' property";
+				mes "Mounstruos, pero si el mounstruo no tiene esa propiedad, ";
+				mes "las habilidades no pueden hacer daño alguno.";
+				next;
+				mes "[Mana]";
+				mes "Así que ten cuidado cuando se decidas a utilizarlas.";
+				mes "Mmm .. y \"Muro de Seguridad 'es un poco diferente";
+				mes "habilidad. Hace un muro que rodea a";
+				mes "una persona que puede entrar y ser protegida de ";
+				mes "Ataques fisicos cuerpo a cuerpo.";
+				next;
+				mes "[Mana]";
+				mes "Pero no puedes ser protegido de su distancia";
+				mes "ataques o propiedades de ataques de mousntruos fuertes";
+				mes "Así que ten cuidado cuando se decidas a utilizarla.";
+				set tu_mana,tu_mana|16;
+				next;
+				break;
+			case 6:
+				mes "[Mana]";
+				mes "En serio?";
+				mes "Estoy bastante ocupada por lo que no puedo explicarlo varias veces.";
+				mes "Así que escucha con atencíon asta que tu hallas comprendido toda";
+				mes "la informacíon esta vez.";
+				next;
+				if(select("Then the explanation..", "Quit for sure.")==2){
+					mes "[Mana]";
+					mes "Pasaremos al siguiente tema a continuacíon.";
+					mes "Hoho...";
+					set tu_magician01, 2;
+					//misceffect EF_HIT5;
+					if(tu_mana&1){
+						getexp 150,70;
+					}
+					if(tu_mana&2){
+						getexp 150,70;
+					}
+					if(tu_mana&4){
+						getexp 150,70;
+					}
+					if(tu_mana&8){
+						getexp 150,70;
+					}
+					if(tu_mana&16){
+						getexp 150,70;
+					}
+					set tu_mana,0;
+				}
+				close;
+				break;
+			}
+		}
+		break;
+	case 2:
+		mes "Tu has comprendido el concepto de propiedades ahora?";
+		mes "Puede ser un poco confuso, pero con el tiempo";
+		mes "tu debes ser capaz de comprenderlo.";
+		mes "Ahora te explicare sobre la magia y las habilidades.";
+		//next;
+		//misceffect EF_SIGHT;
+		next;
+		mes "[Mana]";
+		mes "Hare la primera explicacion de las habilidades basicas.";
+		mes "'Fire Bolt' 'Cold Bolt'";
+		mes "'Lightning Bolt' 'Napalm Beat'";
+		mes "Estos son las cuatro básicas.";
+		//next;
+		//misceffect EF_NAPALMBEAT;
+		next;
+		mes "[Mana]";
+		mes "Estas pueden hacer daño a un oponente o mounstruo.";
+		mes "La mayoría de las otras habilidades requieren el";
+		mes "Conocimiento de estas habilidades basicas primero.";
+		//next;
+		//misceffect EF_LIGHTBOLT;
+		next;
+		mes "[Mana]";
+		mes "'Rayo de fuego' Tiene la  '^ff0000ffuego^000000' propiedad,";
+		mes "'Rayo Frio' tiene la '^0000FFagua^000000' propiedad,";
+		mes "Lightning Bolt' es de propiedad '^93DB70wind^000000',";
+		mes "and 'Napalm Beat' es de propiedad '^CFB53Bghost^000000'.";
+		//next;
+		//misceffect EF_STONECURSE;
+		next;
+		mes "[Mana]";
+		mes "El daño que estas habilidades basicas pueden hacer";
+		mes "crece de acuerdo a el nivel que tengas.";
+		mes "Y estas son otras habilidades básicas";
+		mes "como 'Visión', 'Maldición de Piedra' y";
+		mes "'Incremento SP Recuperacion'.";
+		next;
+		mes "[Mana]";
+		mes "'Premunicion' revela enemigos ocultos pero el";
+		mes "area no es tan extensa como se cree.";
+		next;
+		mes "[Mana]";
+		mes "'Stone curse', como mencionamos antes";
+		mes "maldice a un objetivo con cierta probabilidad.";
+		mes "Pero para poder ser usada necesitas una 'Red Gemstone'";
+		mes "para que esta habilidad funcione.";
+		next;
+		mes "[Mana]";
+		mes "Oponentes son maldecidos con 'Stone Curse'";
+		mes "se convierte '^5C4033tierra^000000' propiedad.";
+		mes "Y un enemigo maldecido no puede moverse";
+		mes "libremente.";
+		next;
+		mes "[Mana]";
+		mes "\"Aumento de recuperación de SP\" es un poco dificil";
+		mes "se le puede llamar habilidad mágica. Aumenta el";
+		mes "monto de SP que tu recuperas cuando estas sentado";
+		mes "descansando";
+		next;
+		mes "[Mana]";
+		mes "Lo que reducirá el tiempo necesario para";
+		mes "sentarse y descansar. No te ayudara directamente";
+		mes "cuando estes en la batalla, pero hace las cosas mucho más fácil.";
+		next;
+		mes "[Mana]";
+		mes "Hmm....";
+		mes "Esto debería ser suficiente para explicar acerca de las";
+		mes "las habilidades básicas. Ahora, antes de pasar a la";
+		mes "habilidades de nivel superior, en este caso tengo una mision";
+		mes "para ti. Hoho..";
+		next;
+		mes "[Mana]";
+		mes "Si vas al norte de aquí, Geffen, hay";
+		mes "un gran puente y monstruos llamado \"Pupas\".";
+		mes "Ellos no se mueven y no atacan cuando son";
+		mes "son atacadas.";
+		next;
+		mes "[Mana]";
+		mes "Ataca a esos \"Pupas\" y reune 10 'Crisálidas'";
+		mes "Ten cuidado porque estos \"Pupas\" pueden convertise a su vez";
+		mes "en 'Creamy'.";
+		next;
+		mes "[Mana]";
+		mes "Puede ser difícil para usted para luchar contra un 'Creamy' aún";
+		mes "si la \"Pupa\" está actuando extraño debes ser extremadamente cuidadoso.";
+		set tu_magician01, 3;
+		getexp 400,200;
+		//misceffect EF_HIT5;
+		close;
+		break;
+	case 3:
+		mes "Ah ~ Estás aquí?";
+		mes " Vamos a ver si reuniste todos los objetos que se necesitaba.";
+		next;
+		if(countitem(915) < 10){
+			mes "[Mana]";
+			mes "No es suficiente.";
+			mes "Vuelve cuando hallas reunido algunos más ..";
+			mes "Esto es un bono.";
+			set tu_magician01, 4;
+			percentheal 100,0;
+			percentheal 0,100;
+			close;
+		} else {
+			mes "[Mana]";
+			mes "Oh has reunido todos.";
+			mes "Ahora están más acostumbrado a utilizar estas habilidades?";
+			mes "Una vez que tu has entrenado, tu puedes";
+			mes "combinar diferentes habilidades para formar fuertes ataques.";
+			next;
+			mes "[Mana]";
+			mes "Ahora tomaremos un descanso antes de que";
+			mes "pasemos a explicar otras habilidades.";
+			set tu_magician01, 5;
+			getexp 400,200;
+			//misceffect EF_HIT5;
+			close;
+		}
+		break;
+	case 4:
+		mes "Ah ~ Estás aquí?";
+		mes "Vamos a ver si has reunido todo los que se necesita.";
+		next;
+		if(countitem(915) < 10){
+			mes "[Mana]";
+			mes "Tu necesitas un poco más.";
+			mes "Tu puedes hacerlo!";
+			mes "'10 ^ff0000Chisalidas^000000', de acuerdo?";
+			close;
+		} else {
+			mes "[Mana]";
+			mes "Oh las has consegido todas.";
+			mes "Ahora estas más acostumbrado a utilizar tus habilidades?";
+			mes "Una vez que has entrenado más, puede";
+			mes "combinar diferentes habilidades para formar fuertes ataques.";
+			next;
+			mes "[Mana]";
+			mes "Ahora tomaremos un descanso antes de que";
+			mes "pasemos a explicar otras habilidades.";
+			set tu_magician01, 5;
+			getexp 400,200;
+			//misceffect EF_HIT5;
+			close;
+		}
+		break;
+	case 5:
+		mes "Ahora vamos a hablar de habilidades más avanzadas?";
+		next;
+		while(1){
+			switch(select("Soul Strike", "Safety Wall", "Fire Ball", "Frost Diver", "Thunderstorm", "Fire Wall", "Energy Coat", "Quit.")){
+			case 1:
+				mes "[Mana]";
+				mes "'Soul Strike' es una skill con propiedad '^CFB53Bghost^000000'";
+				mes "habilidad. Una vez que tu hayas aprendido una cierta cantidad de niveles de";
+				mes "tu podras aprender 'Napalm Beat'.";
+				//next;
+				//misceffect EF_SOULSTRIKE;
+				next;
+				mes "[Mana]";
+				mes "Cuando tu entrenas la potencia de";
+				mes "'Soul Strike' sera mayor y ";
+				mes "serás capaz de lanzarlos más rápidamente.";
+				set tu_mana,tu_mana|1;
+				next;
+				break;
+			case 2:
+				mes "[Mana]";
+				mes "'Muro de seguridad \"se puede aprender después de haber ";
+				mes "subido sierto nivel de  'Napalm Beat'";
+				mes "y 'Soul Strike'. Como mencione antes,";
+				mes "bloquea ataques cercanos.";
+				//next;
+				//misceffect EF_GLASSWALL;
+				next;
+				mes "[Mana]";
+				mes "Pero no bloquea infinitamente. Sólo se";
+				mes "proporcionara un escudo para una cierta cantidad de";
+				mes "ataques y veces. Por supuesto, esto varía";
+				mes "dependiendo de cuánto tu entrenes.";
+				set tu_mana,tu_mana|2;
+				next;
+				break;
+			case 3:
+				mes "[Mana]";
+				mes "'Fire Ball' es una skill con propiedad'^ff0000fire^000000'";
+				mes "y puede ser aprendida despues de haber obtenido cierta cantidad de niveles de 'Fire Bolt'";
+				//next;
+				//misceffect EF_FIREBALL;
+				next;
+				mes "[Mana]";
+				mes "Si 'Fire Bolt' ataca a un oponente 'Fire Ball'";
+				mes "producirá varios ataques dentro de un cierto rango.";
+				next;
+				set tu_mana,tu_mana|4;
+				break;
+			case 4:
+				mes "[Mana]";
+				mes "'Frost Diver' es una skill con propiedad '^0000FFwater^000000'";
+				mes "habilidad y puede ser aprendida despues de haber aprendido cierta cantidad de niveles de 'Cold Bolt'";
+				mes "Cuando tu  puedas dañar al oponente, el principal";
+				mes "proposito, es congelar al enemigo.";
+				//next;
+				//misceffect EF_FROSTDIVER;
+				//misceffect EF_FROSTDIVER2;
+				next;
+				mes "[Mana]";
+				mes "El enemigo golpeado por 'Frost Diver' sera dañado";
+				mes "y congelado al mismo tiempo por una cierta";
+				mes "probabilidad.";
+				next;
+				mes "[Mana]";
+				mes "Cuando el enemigo es congelado el cambiara";
+				mes "teniendo la  '^0000FFwater^000000' property.";
+				mes "El daños y la oportunidad de ser";
+				mes "congelados incrementaran con el nivel de la habilidad.";
+				set tu_mana,tu_mana|8;
+				next;
+				break;
+			case 5:
+				mes "[Mana]";
+				mes "'Thunderstorm' es una skill con propiedad '^93DB70wind^000000'";
+				mes "habilidad y puede ser aprendida despues de haber aprendido cierta cantidad de niveles de 'Lightning Bolt'";
+				//next;
+				//misceffect EF_THUNDERSTORM;
+				next;
+				mes "[Mana]";
+				mes "Mientras 'Lightning Bolt' ataca a un objetivo";
+				mes "enemigo, 'Thunderstorm' ataca a todos los enemigos";
+				mes "en una cierta area. Es algo similar";
+				mes "a como funciona 'Fire Ball'.";
+				set tu_mana,tu_mana|16;
+				next;
+				break;
+			case 6:
+				mes "[Mana]";
+				mes "'Fire Wall' es una skill con propiedad '^ff0000fire^000000'";
+				mes "esa habilidad puede ser aprendida despues de entrenar 'Bola de Fuego'";
+				mes "y 'Vision'.";
+				//next;
+				//misceffect EF_FIREWALL;
+				next;
+				mes "[Mana]";
+				mes "'Muro de fuego' funciona diferente de las";
+				mes "otras habilidades. Cuando otras habilidades atacan";
+				mes "un oponente en particular, \"Muro de fuego'";
+				mes "hace objetivo a un area.";
+				next;
+				mes "[Mana]";
+				mes "Así es como ....";
+				mes "     oponente";
+				mes "     *********";
+				mes "          yo";
+				next;
+				mes "[Mana]";
+				mes "El objetivo no es el enemigo, sino más bien el";
+				mes "espacio entre tu mismo y el enemigo.";
+				mes "o en el piso. Puede ser usado para hacer un ";
+				mes "'Muro de Fuego' entre tu mismo y el enemigo";
+				mes "y bloquear su camino.";
+				next;
+				mes "[Mana]";
+				mes "Durante ese tiempo, puedes empezar a utilizar";
+				mes "una habilidad que causara mas daño con seguridad.";
+				mes "Dependiendo como tu uses 'Muro de Fuego'";
+				mes "puede llegar a ser muy poderoso.";
+				set tu_mana,tu_mana|32;
+				next;
+				break;
+			case 7:
+				mes "[Mana]";
+				mes "'Escudo de Energía 'es mmm .....";
+				mes "una habilidad única y no puede ser aprendida";
+				mes "en forma normal. Sólo se puede aprender";
+				mes "la habilidad de 'Blizardis' que se encuentra en";
+				mes "en el Lugar de cambio de Trabajo a Mago.";
+				//next;
+				//misceffect EF_ENERGYCOAT ;
+				next;
+				mes "[Mana]";
+				mes "'Blizardis' te contara los detalles.";
+				set tu_mana,tu_mana|64;
+				next;
+				break;
+			case 8:
+				mes "[Mana]";
+				mes "¿Has entendido la explicación?";
+				mes "Mmm .... yo quería darte algo más";
+				mes "como una misión, pero necesitamos más información";
+				mes "antes de hacer algo más.";
+				mes "Voy a hacerte saber cuando se realizan.";
+				next;
+				mes "[Mana]";
+				mes "Ah y esto es un regalo.";
+				mes "Conviertete en un gran mago ~";
+				set tu_magician01, 6;
+				getitem 1604, 1;
+				//misceffect EF_HIT5;
+				if(tu_mana&1){
+					getexp 300,100;
+				}
+				if(tu_mana&2){
+					getexp 300,100;
+				}
+				if(tu_mana&4){
+					getexp 300,100;
+				}
+				if(tu_mana&8){
+					getexp 300,100;
+				}
+				if(tu_mana&16){
+					getexp 300,100;
+				}
+				if(tu_mana&32){
+					getexp 300,100;
+				}
+				if(tu_mana&64){
+					getexp 300,100;
+				}
+				set tu_mana,0;
+				close;
+			default: 
+				break;
+			}
+		}
+		close;
+		break;
+	case 6:
+		mes "Ah bien, usted vino.";
+		mes "Hay muchas de cosas extrañas";
+		mes "en estos días y ha sido poca la";
+		mes "ayuda. Algo ocurrió hace poco en Morroc.";
+		next;
+		mes "[Mana]";
+		mes "Por lo tanto, hemos recibido un par de solicitudes del gremio Ladrónes.";
+		mes "Pero todo el mundo está ocupado trabajando por lo que está teniendo problemas.";
+		next;
+		mes "[Mana]";
+		mes "Si es posible, ¿crees que tu puedas ir?";
+		mes "Por supuesto que se recompensará cuando";
+		mes "regreses y te daremos algunas cosas para ayudarte.";
+		mes "¿Qué te gustaría hacer?";
+		next;
+		if(select("Do it.", "Don't do it.")==1){
+			mes "[Mana]";
+			mes "Hoho..por supuesto...";
+			mes "Voy a enviarle a Morroc.";
+			mes "Iras a conocer a \"Eirhan ' delante de la Pirámide de Morroc.";
+			mes "Gracias~";
+			next;
+			mes "[Mana]";
+			mes "Ah y cuando haya terminado, asegúrese de volver.";
+			mes "Hoho...";
+			set tu_magician01, 7;
+			emotion e_heh;
+			warp "morocc",182,286;
+			close;
+		} else {
+			mes "[Mana]";
+			mes "Mmm...";
+			mes "Ah bien. Si quieres ayudar más tarde";
+			mes "no dudes en volver. Estamos muy";
+			mes "necesitados de manos que ayuden en estos días.";
+			close;
+		}
+		break;
+	case 7:
+		mes "No estoy seguro si pueda ser.";
+		mes "Sin embargo, se ha mantenido un buen trabajo.";
+		mes "Hoho...";
+		close;
+		break;
+	case 27:
+		mes "Se me dijo antes de tiempo que usted";
+		mes "Ha realizado su mision muy";
+		mes "bien.. hoho.";
+		next;
+		mes "[Mana]";
+		mes "parece un problema, las dos";
+		mes "organizaciones estan secretamente activas ";
+		mes "puede haber causado... ";
+		mes "Yo pienso que ellos fueron separados....";
+		next;
+		mes "[Mana]";
+		mes "Sin embargo, parece que los dos pueden tener una relacion";
+		mes "mas profunda de lo que yo habia pensado.";
+		mes "Todo lo demas esta fuera de tu alcanze...";
+		mes "asi que deja descansar a la guild.";
+		mes "Muchas gracias.";
+		next;
+		mes "[Mana]";
+		mes "Ah, y esto es en agradecimiento";
+		mes "por ayudar a la guild.";
+		mes "Hoho...";
+		set tu_magician01, 28;
+		getitem 2321, 1;
+		set Zeny, Zeny + 3000;
+		getexp 3000,1000;
+		close;
+		break;
+	default:
+		if(tu_magician01 < 27){
+			mes "Hmm...";
+			mes "Ya veo....";
+			mes "Es algo que ocurre con el reino de";
+			mes "Rune Midgar seguro. Es por eso que nuestra";
+			mes "guild esta muy ocupada";
+			next;
+			mes "[Mana]";
+			mes "Mantenganse al dia con el buen trabajo por favor.";
+			mes "....";
+			mes "Ah .. y 'Eirhan' también lo está haciendo bastante bien, ¿verdad?";
+			mes "Hoho...";
+			close;
+		} else {
+			mes "Parece que tu has entrenado muy duro.";
+			mes "No ahy mucho que yo pueda enseñarte.";
+			mes "Tu debes buscar tu propia forma de entranar ahora.";
+			close;
+		}
+	}
+}

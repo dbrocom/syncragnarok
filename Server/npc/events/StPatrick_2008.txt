@@ -1,0 +1,726 @@
+//===== eAthena Script =======================================
+//= St. Patrick's Day (2008)
+//===== By: ==================================================
+//= Kisuka
+//===== Current Version: =====================================
+//= 1.5
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= iRO St. Patrick's Day. (2008)
+//= Find O'Riley's treasure for him, then hunt down coinds from
+//= the snakes to get Green Ale in return for them.
+//=
+//= Mobs 1841 through 1844 have been modified for this event
+//= you must use the mob edits provided for this quest.
+//= Enable in mob_db2.txt
+//=
+//= The item 12715 Black_Treasure_Chest contains a script 
+//= that relies explicitly on this script being loaded.
+//= Remove the "end" from the item script to enable.
+//= In addition to that, you must enable the item_avail
+//= entries if you are using a kRO client, as the items
+//= were removed from the client between testing and this
+//= updated.
+//===== Additional Comments: =================================
+//= 1.0 First version. [Kisuka]
+//= 1.1 Fixed checkitems for ale, fixed ale prize(gives the correct one now). [Kisuka]
+//= 1.2 Optimized. Uses only one variable now. [L0ne_W0lf]
+//=	Corrected EXP rewards, and some typos.
+//= 1.3 Corrected random in item function. [L0ne_W0lf]
+//= 1.4 Replaced effect numerics with constants. [Samuray22]
+//= 1.5 Revamped the script. [Kisuka]
+//============================================================
+
+prt_fild05,170,286,4	script	Anxious Leprechaun#8pday	954,{
+	if (StPatrick2008 < 1) {
+		mes "[O'Riley the Leprechaun]";
+		mes "Hmm...";
+		mes "Este sera un buen día";
+		mes "Si tienes un momento de sobra";
+		mes "Ven aquí ahora, ven que te diré algo";
+		next;
+		select("Adelante");
+		mes "[O'Riley the Leprechaun]";
+		mes "Estos años pasados he venido a ver el mundo y cada ves las serpientes me han robado mi tesoro";
+		next;
+		select("¿Oh?");
+		mes "[O'Riley the Leprechaun]";
+		mes "Si bien amigos de esta tierra ha sido tan gracioso recobrar mi tesoro una y otra vez";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "He aprendido mi lección y nunca olvidaré cómo esas viles serpientes me han hecho mal";
+		next;
+		select("que hicistes?");
+		mes "[O'Riley the Leprechaun]";
+		mes "Hize un lugar seguro para esconder mi tesoro,";
+		mes "lo escondi en un lugar muy escondido donde estara seguro  hasta que lo regrese al mundo el año siguiente";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Este año, he hecho un viaje para ver el mundo exterior una vez más.";
+		mes "He viajado para ver cómo estaba mi oro, y lo encontré seguro e inmutado.";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Pensé que era muy astuto al esconder el tesoro de las serpientes.";
+		mes "Pero he sido un completo idiota.";
+		next;
+		select("¿Qué pasó?");
+		mes "[O'Riley the Leprechaun]";
+		mes "Mi escondite fue muy bueno";
+		mes "he empujado y jalado";
+		mes "pero el escondite parecia no";
+		mes "moverse";
+		mes "entonces una vez mas estoy sin";
+		mes "mi tesoro este año";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Ni siquiera he comenzado a preparar mi famoso green ale a cuenta de este desorden.";
+		mes "Podrías, ¿ayudarme a tener mi tesoro de vuelta?";
+		next;
+		if (select("Claro, por supuesto:Estoy muy ocupado.") == 2) {
+			mes "[O'Riley the Leprechaun]";
+			mes "A ya veo, entiendo.";
+			mes "Gracias por escuchar mi historia";
+			close;
+		}
+		mes "[O'Riley the Leprechaun]";
+		mes "Para que encuentres mi tesoro tendré que compartir mi secreto contigo";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Ahora escucha bien y no interrumpas.";
+		mes "Haz un viaje a la ciudad de los magos,";
+		mes "Cerca del puente y a través del agua,";
+		mes "sube la montaña hasta el norte hasta donde no puedas viajar más";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Pasando el camino de piedra colocado en el aire,";
+		mes "Escondidos en la ladera de la montaña, encontrarás mi tesoro";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Débese encontrar una manera de romperlo.";
+		mes "Una gran explosión seguro que lo libera.";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Puedes usar unos explosivos.";
+		mes "Aunque necesitarás un gran número de ellos, al menos ^FF0000200 Explosivos^000000";
+		set StPatrick2008,1;
+		close;
+	}
+	else if (StPatrick2008 == 1) {
+		mes "[O'Riley the Leprechaun]";
+		mes "Este un buen día será";
+		mes "Aún no has econtrado mi tesoro, ¿o sí?";
+		mes "Mi escondite un lugar difícil de encontrar es.";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Puedes usar unos explosivos.";
+		mes "Aunque necesitarás un gran número de ellos, al menos ^FF0000200 Explosivos^000000";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Entenderé que no puedas encontrar mi tesoro.";
+		close;
+	}
+	else if (StPatrick2008 == 2) {
+		mes "[O'Riley the Leprechaun]";
+		mes "Oh, bienvenido de nuevo";
+		mes "Gracias por devolverme ¡mi tesoro!";
+		mes "Mi gratitud no tiene límites";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Estoy tan feliz";
+		mes "Comenzaré a preparar mi brebaje ahora mismo.";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Parece que las serpientes han vuelto este año,";
+		mes "y estan aqui para robar mi tesoro otra vez";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Estas serpientes llevan mis monedas y deben ser castigadas.";
+		mes "Pero has tenido un largo viaje, por el cual te estoy muy agradecido";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Cuando hayas descansado las piernas,";
+		mes "ven a hablar de nuevo y talvez hablemos de nuevo";
+		close2;
+		set StPatrick2008,3;
+		getexp 200000,70000;
+		delitem 7721,1;
+		end;
+	}
+	else if (StPatrick2008 == 3) {
+		mes "[O'Riley the Leprechaun]";
+		mes "Ah, bien descansado espero.";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Gracias por venir por aqui de nuevo";
+		mes "Las serpientes se han llevado las monedas de mis parientes y deben ser castigadas";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Seré tan generoso de darte alguno de mis famosos brebajes si eres capaz de traerme los bienes mal habidos que esas viles serpientes se llevaron.";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Y si tu encuentras uno de esos tesoros de mis parientes, en traérmelos no dudes.";
+		set StPatrick2008,4;
+		close;
+	}
+	else if (StPatrick2008 == 4) {
+		mes "[O'Riley the Leprechaun]";
+		mes "Las serpientes se han llevado muchas de mis monedas.";
+		mes "Si me las devuelves, te recompensaré con alguno de mis brebajes.";
+		next;
+		mes "[O'Riley the Leprechaun]";
+		mes "Te premiaré con jugo de cerveza";
+		mes "por ^0000FF1 Monedas de oro^000000, ^0000FF5 Monedas de plata^000000,";
+		mes "o ^0000FF10 Monedas de Bronce^000000.";
+		mes "Es fácil para un explorador el conseguir monedas.";
+		mes "¿Has conseguido alguna?";
+		next;
+		switch(select("Bronze Coins:Silver Coins:Gold Coins:Salir.")) {
+		case 1:
+			mes "[O'Riley the Leprechaun]";
+			mes "Gracias aquí tienes tu cerveza.";
+			if (countitem(7915) >= 10) {
+				getitem 12135,1; 
+				delitem 7915,10;
+			}
+			close;
+		case 2:
+			mes "[O'Riley the Leprechaun]";
+			mes "Gracias aquí está tu cerveza";
+			if (countitem(7916) >= 5) {
+				getitem 12135,1; 
+				delitem 7916,5;
+			}
+			close;
+		case 3:
+			mes "[O'Riley the Leprechaun]";
+			mes "Gracias aquí tienes tu cerveza";
+			if (countitem(7720) >= 1) {
+				getitem 12135,1; 
+				delitem 7720,1;
+			}
+			close;
+		case 4:
+			mes "[O'Riley the Leprechaun]";
+			mes "Tendrás tu premio por si consigues";
+			mes "^0000FF1 Monedas de oro^000000, ^0000FF5 Monedas de plata^000000,";
+			mes "o ^0000FF10 Monedas de bronce^000000.";
+			close;
+		}
+	}
+}
+
+mjolnir_01,272,363,4	script	Rocks#08StPattysDay	-1,1,1,{
+	end;
+
+OnTouch:
+	if (StPatrick2008 < 1) {
+		mes "Has encontrado una pila de rocas cubiertas de aceite";
+		close;
+	}
+	if (StPatrick2008 == 1) {
+		mes "Has encontrado una pila de rocas cubiertas de aceite";
+		next;
+		if (countitem(12018) < 200) {
+			mes "Las rocas no se romperán tal vez O´Riley sepa como mover la roca";
+			close;
+		}
+		else {
+			if (select("Usear Firecrackers.:Ignorar") == 2) {
+				close;
+			}
+			mes "Has enterrado 200 explosivos debajo de la pila de rocas.";
+			mes "Enciendes la mecha y...";
+			next;
+			mes "*¡BOOM!*";
+			specialeffect2 EF_LORD;
+			next;
+			mes "Después de que la nube de polvo y humo se disipa,";
+			mes "Encuentras una caja entre la rocas.";
+			mes "Debe ser algo interesante para O´Rileys";
+			mes "Será mejor llevárselo.";
+			close2;
+			set StPatrick2008,2;
+			delitem 12018,200;
+			getitem 7721,1;
+		}
+	}
+	end;
+}
+
+function	script	F_08stpattyseventbox	{
+	switch(rand(1,6)) {
+	case 1:
+		getitem 7915,1;
+		end;
+	case 2:
+		getitem 7915,1;
+		getitem 7916,1;
+		getitem 7720,1;
+		end;
+	case 3:
+		getitem 7720,1;
+		end;
+	case 4:
+		getitem 7915,1;
+		getitem 7916,1;
+		end;
+	case 5:
+		getitem 7916,2;
+		end;
+	case 6:
+		getitem 7915,2;
+		end;
+	}
+}
+
+
+// Snake Spawns.
+ein_fild03,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+ein_fild04,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+ein_fild06,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+ein_fild07,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+ein_fild08,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+ein_fild09,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+ein_fild10,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild00,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild02,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild03,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild04,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild05,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild07,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild08,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild09,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild10,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild11,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild12,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild13,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gef_fild14,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+glast_01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+lhz_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+lhz_fild02,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+lhz_fild03,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+mjolnir_01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+mjolnir_02,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+mjolnir_03,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+mjolnir_04,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+mjolnir_05,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+mjolnir_06,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+mjolnir_07,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+mjolnir_08,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+mjolnir_09,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+mjolnir_10,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+mjolnir_11,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+mjolnir_12,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild02,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild03,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild04,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild05,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild06,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild07,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild08,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild09,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild10,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild11,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild12,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild13,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild14,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild03,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild16,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild17,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+moc_fild18,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+pay_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+pay_fild02,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+pay_fild03,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+pay_fild04,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+pay_fild05,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+pay_fild06,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+pay_fild07,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+pay_fild08,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+pay_fild09,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+pay_fild10,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+pay_fild11,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+prt_fild00,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+prt_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+prt_fild02,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+prt_fild03,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+prt_fild04,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+prt_fild05,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+prt_fild06,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+prt_fild07,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+prt_fild08,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+prt_fild09,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+prt_fild10,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+prt_fild11,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+xmas_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+cmd_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+cmd_fild02,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+cmd_fild03,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+cmd_fild04,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+cmd_fild05,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+cmd_fild06,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+cmd_fild07,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+cmd_fild08,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+cmd_fild09,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+yuno_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+yuno_fild02,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+yuno_fild03,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+yuno_fild04,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+yuno_fild05,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+yuno_fild06,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+yuno_fild07,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+yuno_fild08,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+yuno_fild09,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+yuno_fild11,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+yuno_fild12,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+ama_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+gon_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+um_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+um_fild02,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+um_fild03,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+um_fild04,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+nif_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+nif_fild02,0,0,0,0 	monster	Snake Lord's Minon	1841,3,0,0,0
+lou_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+hu_fild01,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+hu_fild04,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+hu_fild05,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+hu_fild07,0,0,0,0	monster	Snake Lord's Minon	1841,3,0,0,0
+ein_fild03,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+ein_fild04,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+ein_fild06,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+ein_fild07,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+ein_fild08,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+ein_fild09,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+ein_fild10,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild00,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild02,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild03,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild04,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild05,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild07,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild08,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild09,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild10,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild11,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild12,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild13,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gef_fild14,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+glast_01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+lhz_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+lhz_fild02,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+lhz_fild03,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+mjolnir_01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+mjolnir_02,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+mjolnir_03,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+mjolnir_04,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+mjolnir_05,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+mjolnir_06,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+mjolnir_07,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+mjolnir_08,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+mjolnir_09,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+mjolnir_10,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+mjolnir_11,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+mjolnir_12,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild02,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild03,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild04,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild05,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild06,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild07,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild08,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild09,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild10,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild11,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild12,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild13,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild14,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild03,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild16,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild17,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+moc_fild18,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+pay_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+pay_fild02,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+pay_fild03,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+pay_fild04,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+pay_fild05,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+pay_fild06,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+pay_fild07,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+pay_fild08,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+pay_fild09,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+pay_fild10,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+pay_fild11,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+prt_fild00,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+prt_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+prt_fild02,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+prt_fild03,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+prt_fild04,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+prt_fild05,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+prt_fild06,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+prt_fild07,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+prt_fild08,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+prt_fild09,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+prt_fild10,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+prt_fild11,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+xmas_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+cmd_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+cmd_fild02,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+cmd_fild03,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+cmd_fild04,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+cmd_fild05,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+cmd_fild06,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+cmd_fild07,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+cmd_fild08,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+cmd_fild09,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+yuno_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+yuno_fild02,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+yuno_fild03,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+yuno_fild04,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+yuno_fild05,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+yuno_fild06,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+yuno_fild07,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+yuno_fild08,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+yuno_fild09,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+yuno_fild11,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+yuno_fild12,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+ama_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+gon_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+um_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+um_fild02,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+um_fild03,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+um_fild04,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+nif_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+nif_fild02,0,0,0,0 	monster	Snake Lord's Minon	1842,3,0,0,0
+lou_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+hu_fild01,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+hu_fild04,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+hu_fild05,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+hu_fild07,0,0,0,0	monster	Snake Lord's Minon	1842,3,0,0,0
+ein_fild03,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+ein_fild04,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+ein_fild06,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+ein_fild07,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+ein_fild08,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+ein_fild09,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+ein_fild10,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild00,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild02,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild03,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild04,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild05,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild07,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild08,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild09,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild10,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild11,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild12,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild13,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gef_fild14,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+glast_01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+lhz_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+lhz_fild02,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+lhz_fild03,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+mjolnir_01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+mjolnir_02,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+mjolnir_03,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+mjolnir_04,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+mjolnir_05,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+mjolnir_06,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+mjolnir_07,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+mjolnir_08,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+mjolnir_09,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+mjolnir_10,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+mjolnir_11,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+mjolnir_12,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild02,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild03,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild04,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild05,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild06,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild07,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild08,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild09,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild10,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild11,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild12,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild13,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild14,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild03,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild16,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild17,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+moc_fild18,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+pay_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+pay_fild02,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+pay_fild03,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+pay_fild04,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+pay_fild05,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+pay_fild06,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+pay_fild07,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+pay_fild08,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+pay_fild09,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+pay_fild10,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+pay_fild11,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+prt_fild00,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+prt_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+prt_fild02,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+prt_fild03,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+prt_fild04,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+prt_fild05,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+prt_fild06,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+prt_fild07,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+prt_fild08,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+prt_fild09,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+prt_fild10,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+prt_fild11,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+xmas_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+cmd_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+cmd_fild02,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+cmd_fild03,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+cmd_fild04,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+cmd_fild05,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+cmd_fild06,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+cmd_fild07,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+cmd_fild08,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+cmd_fild09,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+yuno_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+yuno_fild02,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+yuno_fild03,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+yuno_fild04,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+yuno_fild05,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+yuno_fild06,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+yuno_fild07,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+yuno_fild08,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+yuno_fild09,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+yuno_fild11,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+yuno_fild12,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+ama_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+gon_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+um_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+um_fild02,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+um_fild03,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+um_fild04,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+nif_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+nif_fild02,0,0,0,0 	monster	Snake Lord's Minon	1843,2,0,0,0
+lou_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+hu_fild01,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+hu_fild04,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+hu_fild05,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+hu_fild07,0,0,0,0	monster	Snake Lord's Minon	1843,2,0,0,0
+ein_fild03,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+ein_fild04,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+ein_fild06,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+ein_fild07,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+ein_fild08,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+ein_fild09,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+ein_fild10,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild00,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild03,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild04,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild05,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild07,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild08,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild09,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild10,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild11,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild11,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild13,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gef_fild14,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+glast_01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+lhz_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+lhz_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+lhz_fild03,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+mjolnir_01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+mjolnir_01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+mjolnir_03,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+mjolnir_04,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+mjolnir_05,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+mjolnir_06,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+mjolnir_07,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+mjolnir_08,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+mjolnir_09,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+mjolnir_10,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+mjolnir_11,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+mjolnir_11,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild03,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild04,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild05,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild06,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild07,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild08,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild09,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild10,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild11,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild11,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild13,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild14,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild03,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild16,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild17,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+moc_fild18,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+pay_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+pay_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+pay_fild03,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+pay_fild04,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+pay_fild05,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+pay_fild06,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+pay_fild07,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+pay_fild08,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+pay_fild09,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+pay_fild10,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+pay_fild11,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+prt_fild00,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+prt_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+prt_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+prt_fild03,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+prt_fild04,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+prt_fild05,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+prt_fild06,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+prt_fild07,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+prt_fild08,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+prt_fild09,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+prt_fild10,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+prt_fild11,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+xmas_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+cmd_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+cmd_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+cmd_fild03,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+cmd_fild04,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+cmd_fild05,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+cmd_fild06,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+cmd_fild07,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+cmd_fild08,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+cmd_fild09,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+yuno_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+yuno_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+yuno_fild03,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+yuno_fild04,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+yuno_fild05,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+yuno_fild06,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+yuno_fild07,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+yuno_fild08,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+yuno_fild09,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+yuno_fild11,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+yuno_fild11,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+ama_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+gon_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+um_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+um_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+um_fild03,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+um_fild04,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+nif_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+nif_fild01,0,0,0,0 	monster	Snake Lord's Minon	1844,1,0,0,0
+lou_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+hu_fild01,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+hu_fild04,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+hu_fild05,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0
+hu_fild07,0,0,0,0	monster	Snake Lord's Minon	1844,1,0,0,0

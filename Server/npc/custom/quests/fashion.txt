@@ -1,0 +1,69 @@
+//===== eAthena Script =======================================
+//= Quest for Fashion Glasses (Daily Job Quest)
+//===== By: ==================================================
+//= 1.1 None
+//===== Current Version: =====================================
+//= Any
+//===== Compatible With: =====================================
+//= eAthena
+//===== Description: =========================================
+//= Quest for Fashion Glasses
+//===== Additional Comments: =================================
+//= 1.0 Fully Working [Lupus]
+//= 1.1 fixed exploit [Lupus]
+//============================================================
+
+izlude,135,96,5	script	Fashion Glasses Quest	76,{
+	mes "[Fashionable Glasses Quest]"; 
+	mes "Hola, la quest de ho dia es..."; 
+	mes "Ah, the ^CC6633Fashionable Glasses^000000 Quest!"; 
+	next; 
+	menu "Requerimientos",M_INFO,"Hacer item",-,"Cancelar",M_CANCEL;
+
+	mes "[Fashionable Glasses Quest]";
+	mes "Bien bien , dejame solo confirmar";
+	next;   
+	if(countitem(2271)<1 || countitem(975)<1) goto M_NOITEMS;
+	delitem 2271,1;
+	delitem 975,1;
+	mes "[Fashionable Glasses Quest]";
+	mes "Dame un segundo.....";
+	next;
+	getitem 5047,1;
+	mes "[Fashionable Glasses Quest]";
+	mes "Ok listo!";
+	close;
+
+M_NOITEMS:
+	mes "[Fashionable Glasses Quest]";
+	mes "No cumples con los requerimientos";
+	mes "Porfavor regresa en cualquier otro momento";
+	close;
+
+M_INFO: 
+	mes "[Fashionable Glasses Quest]";
+	mes "Ok todo lo que tienes qe conseguir es"; 
+	mes "^CC66331 Jack'a Dandy^000000"; 
+	mes "and ^CC66331 Scalet Dyestuffs^000000.";
+	next;
+	menu "Aceptar",-,"Abandonar",M_LEAVE;
+	
+	mes "[Fashionable Glasses Quest]";
+	mes "Cuando termines , traeme los items a mi.";
+	mes "Buena suerte encontrando esos items.";
+	close;
+
+M_LEAVE:
+	mes "[Fashionable Glasses Quest]";
+	mes "¿Tal vez en otro momento?";
+	close;
+
+M_CANCEL:
+	mes "[Fashionable Glasses Quest]";
+	mes "Aw, que pena";
+	mes "¿Rindiendote ahora?";
+	mes "Oh bueno talvez lo hagas";
+	mes "participa mañana en la";
+	mes "quest.";
+	close;
+}

@@ -1,0 +1,1133 @@
+//===== eAthena Script =======================================
+//= 2006 Headgear
+//===== By: ==================================================
+//= DiviniaRO members, cleaned by reddozen
+//===== Current Version: =====================================
+//= 1.4
+//===== Compatible With: =====================================
+//= SVN eA
+//===== Description: =========================================
+//= [Aegis Conversion]
+//= Censor Bar, Feather Beret, Valk. Helm, Hahoe Mask,
+//= Mythical Lion Mask, Bride Mask, Magistrate Hat and Ayam
+//===== Additional Comments: =================================
+//= NPC id's and dialog are custom, please replace
+//= 1.0a fixed typos, added missing names, more cleaned and
+//= standartized stuff a bit [Lupus]
+//= 1.0b fixed Helm of Valkyries ingredients
+//= 1.0c corrected item names according to item_db [Lupus]
+//= 1.1 Full update. EuRO (?) dialogs, and positions. [L0ne_W0lf]
+//= 1.2 Fixed bugs in the Hahoe/Lion/Bride Mask NPC. [L0ne_W0lf]
+//=	Fixed some of the names to iRO.
+//= 1.3 Fixed some color code bugs in Ghenirhemin. Thanks to yyCC. [L0ne_W0lf]
+//= 1.3a Fixed wrong item names (due to copy/paste) [Lupus]
+//= 1.4 Chungwolmang now checks if the last item set should be deleted. (bugreport:4719) [L0ne_W0lf]
+//============================================================
+
+//===================== Censor Bar =====================================================
+rachel,91,273,8	script	?	930,{
+	if (countitem(983) > 0 && countitem(7111) > 99 && countitem(938) > 98 && Zeny > 99999) {
+		mes "[?]";
+		mes "Giggle giggle...¿no es ese mi compañero, ah?";
+		mes "Asi que, ¿has traido todo lo que te pedi?";
+		mes "¡Genial, ahora puedo hacer el objeto que te podra ayudar";
+		mes "a cubrir tu identidad! Giggle giggle...";
+		next;
+		mes "- Bzzz Bzzz Click Click -";
+		mes "- Fumble Fumble Fumble Fumble -";
+		mes "- Bzzz Bzzz Click Click -";
+		mes "- Fumble Fumble Fumble Fumble -";
+		next;
+		mes "[?]";
+		mes "...Hey, no mires por encima de mi hombro.";
+		mes "No quiero compartir";
+		mes "mi secreto de negocios contigo, ¿sabes?";
+		next;
+		mes "- Bzzz Bzzz Click Click -";
+		mes "- Fumble Fumble Fumble Fumble -";
+		mes "- Bzzz Bzzz Click Click -";
+		mes "- Fumble Fumble Fumble Fumble -";
+		next;
+		delitem 983,1; //Black_Dyestuffs
+		delitem 7111,100; //Smooth_Paper
+		delitem 938,99; //Sticky_Mucus 
+		set Zeny,Zeny-100000;
+		getitem 5175,1; //Anonimity_Request
+		mes "[?]";
+		mes "Phew...listo. Bueno, no fue tan dificil de hacer, pero...";
+		mes "Giggle giggle, lo importante es que";
+		mes "ahora puedes ocultar tu indentidad. Ahora, toma esto.";
+		mes "Espero, esta mascar te ayude";
+		mes "a evitar encontrarte con tus enemigos. ¡Ahahaha!";
+		close;
+	}
+	mes "[?]";
+	mes "...De ninguna manera! ¡No te atrevas a investigar acerca de mi!";
+	mes "¡Nisiquiera me hables!";
+	mes "Shushhh! ¡No permitas a mi enemigo saber donde estoy!";
+	next;
+	mes "[?]";
+	mes "¿Err? Tu eres una persona como de mi tipo.";
+	mes "Asi que, estas huyendo de algo,";
+	mes "y quieres ocultar tu identidad, ¿estoy en lo cierto?";
+	mes "Yeah... Creo que estoy en lo correcto... Giggle giggle.";
+	next;
+	mes "[?]";
+	mes "Bueno, Deberia ser amable con mi camarada.";
+	mes "Aunque no puedo revelarte mi identidad,";
+	mes "puedo ayudarte a esconderte seguro de tus enemigos.";
+	next;
+	mes "[?]";
+	mes "Traeme ^FF00001 Black Dyestuffs^000000,";
+	mes "^FF0000100 Slick Paper^000000, ^FF000099 Sticky Mucus^000000,";
+	mes "y ^FF0000100,000 zeny^000000.";
+	mes "Entonces te ayudaré, giggle giggle.";
+	next;
+	mes "[?]";
+	mes "Ahora puedes retirarte.";
+	mes "De alguna manera podemos sernos utiles el uno al otro.";
+	mes "Una vez que hayas terminado de reunir todo el material,";
+	mes "regresa sin que nadie se entere. Giggle giggle.";
+	close;
+}
+
+//======================== Feather Beret ================================================
+rachel,152,131,3	script	Sakjul	928,{
+	if (countitem(5172) > 0 && countitem(7063) > 99 && countitem(982) > 0) {
+		mes "[Sakjul]";
+		mes "Genial, has traido todo";
+		mes "para hacer el ^FF0000Feather Beret^000000!";
+		mes "Para recompensar tu labor,";
+		mes "Debo personalmente proceder con la creacion del sombrero.";
+		next;
+		mes "[Sakjul]";
+		mes "Quedate a mi lado, y mira solemnemente el proceso de creación.";
+		mes "¡Manten tu integridad parandote recto,";
+		mes "y mirando recto hacia adelante!";
+		next;
+		mes "[Sakjul]";
+		mes "¡Si no haces lo que acabo de decir,";
+		mes "^FF0000esta creación de sombrero podria resultar fracasando!";
+		mes "Y, si tu fallas en crear el sombrero,";
+		mes "perderas todos los materiales,";
+		mes "¡y yo no me voy a tomar responsabilidad de tu error!^000000";
+		next;
+		mes "- THUD THUD -";
+		mes "- THUD THUD -";
+		mes "- THUD THUD -";
+		mes "- BOOM -";
+		next;
+		mes "- THUD THUD -";
+		mes "- THUD THUD -";
+		mes "- THUD THUD -";
+		mes "- BOOM -";
+		next;
+		set .@result,rand(1,10);
+		if (.@result == 4) {
+			delitem 5172,1; //Beret 
+			delitem 7063,100; //Soft_Feather 
+			delitem 982,1; //White_Dyestuffs
+			mes "[Sakjul]";
+			mes "He logrado hacer el sombrero,";
+			mes "!pero no puedo dejarlo caer en las manos de alguien mas!";
+			mes "Lo esencial de Feather Beret es";
+			mes " el preciso angulo de la boina y la pluma,";
+			mes "!pero el angulo de este sombrero es ligeramente tortuoso,";
+			mes "y la calidad se a vuelto demasiado pobre para ser mi obra de arte!";
+			next;
+			mes "[Sakjul]";
+			mes "Comprendo que te sientes un tanto desafortunado";
+			mes "con este resultado. Como sea, te ruego no estes";
+			mes "muy decepcionado, !y trates de nuevo!";
+			mes "No hay imposibles en el mundo, !asi que tu puedes hacerlo!";
+			next;
+			mes "[Sakjul]";
+			mes "Ahora, ¡levantante!";
+			mes "Tu lo has hecho esto antes,";
+			mes "asi tu puedes hecerlo de nuevo facilmente.";
+			mes "Si tu has entendido, ahora, ve, ¡ve a reunir los material de nuevo!";
+			close;
+		}
+		delitem 5172,1; //Beret 
+		delitem 7063,100; //Soft_Feather 
+		delitem 982,1; //White_Dyestuffs
+		getitem 5170,1; //Feather_Beret 
+		mes "[Sakjul]";
+		mes "Genial, lo he logrado! Mira eta hermosa coordinación";
+		mes "entre la pluma y la boina,";
+		mes "puedes sentir la moderacion en la coordinacion.";
+		mes "Debo decir que este sombrero debe ser";
+		mes "una de las cosas necesarias para los jovenes actualmente.";
+		next;
+		mes "[Sakjul]";
+		mes "Como he creado este sombrero con tus materiales,";
+		mes "el te pertenece.";
+		mes "Conserva este sombrero con cuidado, y se una gran, persona confiada.";
+		close;
+	}
+	mes "[Sakjul]";
+	mes "¡Enderesate, y manten tu tension!";
+	mes "¡Mantente controlado, y muevete con integridad!";
+	mes "Asi es como un hombre respetable carga consigo mismo!";
+	mes "Los jovenes actualmente son muy tiernos y debiles.";
+	mes "No estas de acuedo conmigo, joven aventurero?";
+	next;
+	if (select("Yes, sir!:No.") == 1) {
+		mes "[Sakjul]";
+		mes "¡Ah! ¡me gusta tu respuesta!";
+		mes "Ultimamente, he encontrado muy difil ver jovenes tan disiplinados como tu.";
+		mes "Desafortunadamente, ¿incluso tu no eres tan disciplinado como yo esperaba!";
+		mes "Hmm....Oh, si, probablemente el ^FF0000Feather Beret^000000";
+		mes "quizas te ayude a verte mas disciplinado.";
+		next;
+		mes "[Sakjul]";
+		mes "Me gustaria complementar tu actitud.";
+		mes "Por lo tanto,estoy dispuesto a crear un Feather Beret para ti";
+		mes "solamente si tu me traes los materiales. ¿Entendido?";
+		next;
+		mes "[Sakjul]";
+		mes "Los materiales son  ^FF00001 Beret^000000, ^FF0000100 Soft Feather^000000,";
+		mes "y ^FF00001 White Dyestuffs^000000.";
+		mes "Asegurate de que recordaras todos ellos, ¡y traeme";
+		mes "la cantidad exacta de materiales!";
+		next;
+		mes "[Sakjul]";
+		mes "Agradeseme por la oferta";
+		mes "por que el sombrero terminara tu aspecto";
+		mes "¡para ser mas mejestuoso y elegante!";
+		mes "Si has entendido, ve,";
+		mes "¡ve a reunir los materiales tan pronto como puedas!";
+		close;
+	}
+	mes "[Sakjul]";
+	mes "¡No puedo escucharte! !no siento ninguna comfianza de tu voz¡";
+	mes "¿Como puedes tu vivir este mundo dificil con esa debil actitud?";
+	mes "Comportate, ¡ahora mismo!";
+	close;
+}
+
+//============================ Valkyrie Helm =====================================================
+hugel,147,130,3	script	Ghenirhemin	897,{
+	if (moza_valkylie == 5) {
+		set .@val2,rand(1,10);
+		if (.@val2 == 3) {
+			misceffect 348; //EF_LIGHTSPHERE
+			mes "[Ghenirhemin]";
+			mes "Los materiales aun estan siendo fusionados.";
+			next;
+			mes "[Ghenirhemin]";
+			mes "Umm?! Oh...oh?! No es este...";
+			mes "No es este...?!";
+			next;
+			misceffect 322; //EF_FORESTLIGHT2
+			mes "[Ghenirhemin]";
+			mes "Ah...ahahaha, ¡lo hemos logrado! ¡Lo hemos logrado!";
+			mes "Valkyre's Helm...Hemos recreado el Valkyre's Helm,";
+			mes "¡una gloriosa armadura divina!";
+			mes "Ah...esto significa...?";
+			next;
+			mes "[Ghenirhemin]";
+			mes "¡Estamos escribiendo nueva historia!";
+			mes "Si, nosotros acabamos de empezar a escribir nueva historia.";
+			next;
+			mes "[Ghenirhemin]";
+			mes "Te agradesco mucho por darme la oportunidad de participar en esto.";
+			mes "Estoy seguro de que mis ancestros en el cielo estaran agradesidos";
+			mes "de ver la to see this exitosa cracion del Valkyre's Helm.";
+			mes "¡Hahahahaha!";
+			next;
+			mes "[Ghenirhemin]";
+			mes "Por favor tomo este casco.";
+			mes "Como lo prometi, esto es tuyo.";
+			mes "Por favor enorgullesete de ti mismo, y";
+			mes "no desgracies este casco con maldades.";
+			next;
+			set moza_valkylie,0;
+			getitem 5171,1; //Valkyrie_Helm
+			mes "[Ghenirhemin]";
+			mes "Que dios bendiga este aventurero";
+			mes "Que ha escrito nueva historia.";
+			mes "Yo, Gheirhemin rezo a dios por seguridad en su viaje";
+			mes "Quien esta en camina a la nueva historia.";
+			close;
+		}
+		misceffect 348; //EF_LIGHTSPHERE
+		mes "[Ghenirhemin]";
+		mes "Los materiales aun estan siendo fusionados.";
+		close;
+	}
+	else if (moza_valkylie == 4) {
+		set .@val,rand(1,10);
+		if (.@val == 7) {
+			mes "[Ghenirhemin]";
+			mes "............";
+			next;
+			misceffect 348; //EF_LIGHTSPHERE
+			mes "[Ghenirhemin]";
+			mes "Oh...oh? Ellos....¡Ellos han empezado a fusionarse!";
+			mes "¡Mira esta brillante luz!";
+			mes "No puedo...No lo puedo creer";
+			mes "Esto es lo que paso en Valhala!";
+			next;
+			set moza_valkylie,5;
+			mes "[Ghenirhemin]";
+			mes "Ahora nosotros somos testigos de la gracia de Dios...ah....";
+			close;
+		}
+		mes "[Ghenirhemin]";
+		mes "....Esperemos un poco mas.";
+		close;
+	}
+	else if (moza_valkylie == 3) {
+		set moza_valkylie,4;
+		mes "[Ghenirhemin]";
+		mes "¿Podrias dejar de estar ansioso?";
+		mes "Solo relajate y espera, ¿Podrias?";
+		mes "En un sentido, estamos realizando un rito sagrado,";
+		mes "y no va a pasar mas rapido,";
+		mes "solo por que tu, un humano quiera que pase mas rapido.";
+		close;
+	}
+	else if (moza_valkylie == 2 && Zeny > 9999999 && countitem(4219) > 0 && countitem(4114) > 0 && countitem(4177) > 0 && countitem(4259) > 0 && countitem(4212) > 0 && countitem(4073) > 0 && countitem(4112) > 0 && countitem(4081) > 0 && countitem(4251) > 0 && countitem(4166) > 0 && countitem(7511) > 999 && countitem(7563) > 999) {
+		mes "[Ghenirhemin]";
+		mes "Hmm...Estoy impresionado de que hallas traido todo";
+		mes "a pesar de la dificultad en reunirlos. Fue dificil, ¿lo fue verdad?";
+		mes "Haha, Lo puedo decir solo de mirar tu rostro.";
+		mes "Buen trabajo, mi amigo, tu hiciste un buen trabajo.";
+		next;
+		mes "[Ghenirhemin]";
+		mes "Ahora, por favor entregamelos.";
+		mes "Si los coloco todos juntos en un solo lugar,";
+		mes "estoy muy seguro que ellos empezaran";
+		mes "a fusionarse en un casco con sus propios misteriosos poderes.";
+		next;
+		if (select("Give him the items.:Don't give him the items.") == 1) {
+			mes "[Ghenirhemin]";
+			mes "Excelente. Ahora, todo o que tenemos que hacer";
+			mes "es solamente esperar hasta que se terminen de fusionar en uno solo.";
+			next;
+			delitem 4219,1; //Sageworm_Card
+			delitem 4114,1; //Argiope_Card
+			delitem 4177,1; //Dryad_Card
+			delitem 4259,1; //Wooden_Golem_Card
+			delitem 4212,1; //Bon_Gun_Card
+			delitem 4073,1; //Pirate_Skel_Card
+			delitem 4112,1; //Marduk_Card
+			delitem 4081,1; //Hode_Card
+			delitem 4251,1; //Elder_Card
+			delitem 4166,1; //Nightmare_Terror_Card
+			delitem 7511,1000; //Rune_Of_Darkness
+			delitem 7563,1000; //Bloody_Rune
+			set Zeny,Zeny-10000000;
+			set moza_valkylie,3;
+			mes "[Ghenirhemin]";
+			mes "Ahora estoy todo nervioso";
+			mes "en aticipación de un buen resultado. Hahahaha.";
+			close;
+		}
+		mes "[Ghenirhemin]";
+		mes "?";
+		close;
+	}
+	else if (moza_valkylie == 2) {
+		mes "[Ghenirhemin]";
+		mes "Por favor traeme";
+		mes "^FF00001 Sage Worm Card, 1Argiope Card,";
+		mes "^FF00001 Dryad Card, 1 Wooden Golem Card,";
+		mes "^FF00001 Bongun Card, 1 Pirate Skeleton Card,";
+		mes "^FF00001 Marduk Card, 1 Hode Card,";
+		mes "^FF00001 Elder Card, 1 Nightmare Terror Card,^000000";
+		next;
+		mes "[Ghenirhemin]";
+		mes "^FF00001,000 Rune of the Darkness,";
+		mes "^FF00001,000 Bloody Rune,";
+		mes "^FF0000y el precio del casco, 10,000,000 zeny^000000.";
+		next;
+		mes "[Ghenirhemin]";
+		mes "Seguramente es un precio razonable considerando que ";
+		mes "tu estas a punto de obtener un poder divino, ¿no lo crees?";
+		next;
+		set moza_valkylie,2;
+		mes "[Ghenirhemin]";
+		mes "Discutamoslo despues";
+		mes "una ves prepares el dinero y los objetos.";
+		mes "Ahora estoy tan exahusto";
+		mes "como ha pasado un tiempo desde que hable tanto.";
+		mes "Disculpeme.";
+		close;
+	}
+	else if (moza_valkylie == 1) {
+		mes "[Ghenirhemin]";
+		mes "Tu debes estar muy sorprendido en este momento.";
+		mes "Si, es muy comprendible.";
+		mes "Si has viajado por muchos lugares,";
+		mes "y escuchadp muchas historias, tu deberias saber que es esto.";
+		mes "Si, esto es el ^FF0000Valkyre's Helm^000000.";
+		next;
+		mes "[Ghenirhemin]";
+		mes "Un legendario casco solo permitido a los hombres";
+		mes "que han transcendido su limite.";
+		mes "Una armadura divina que esta bendesida con un increible poder.";
+		mes "¿Puedes ver ahora que mi historia es verdad?";
+		next;
+		mes "[Ghenirhemin]";
+		mes "Ha pasado por muchos años, y de este modo";
+		mes "su poder se ha debilitado,";
+		mes "pero tu aun puedes sentir algo sagrado acerca del casco.";
+		mes "¿No lo crees?";
+		next;
+		mes "[Ghenirhemin]";
+		mes "Bien...Yo no estoy permitido para usar este casco.";
+		mes "Asi que, si yo encuentro a alguien que sea simplemente perfecto para este casco,";
+		mes "Voy a darselo sin ninguna excusa.";
+		next;
+		mes "[Ghenirhemin]";
+		mes "Por supuesto, yo no puedo dejar ir";
+		mes "algo tan valioso sin pedir algo a cambio.";
+		mes "Asi es como funciona, ¿Sabes?";
+		mes "Yo quizas piense en dartelo a ti";
+		mes "por que pareces ser mas rico que otros,";
+		mes "y puedo sentir una aura especial de ti.";
+		next;
+		mes "[Ghenirhemin]";
+		mes "Asi que, ¿que dices?";
+		mes "yo pienso que tengo un ojo para los hombres adecuados.";
+		mes "yo siento que tu seras capas de recrear completamente este Valkyre's Helm";
+		mes "asi como usarlo su maximo potencial.";
+		next;
+		if (select("Sure.:No, thanks.") == 1) {
+			mes "[Ghenirhemin]";
+			mes "Tu eres un hombre ambisioso como yo esperaba.";
+			mes "Es de seguro una gran ventaja.";
+			mes "Bien, te dire lo que se de ahora en adelante.";
+			mes "Asi que, escucha con cuidado.";
+			next;
+			mes "[Ghenirhemin]";
+			mes "Primero, necesitamos restaurar por completo el poder del casco.";
+			mes "Para hacerlo, debemos encontrar cartas de monstruos";
+			mes "que poseen misteriosos poderes.";
+			next;
+			mes "[Ghenirhemin]";
+			mes "Eso no es todo. Tu sabes,";
+			mes "que no podemos solo pegar esas cartas de monstruos";
+			mes "al casco. Asi que, necesitamos un poder que";
+			mes "nos permita fusionar las cartas y el casco en uno solo";
+			next;
+			mes "[Ghenirhemin]";
+			mes "Antiguas runas son perfectas para proveer el poder,";
+			mes "especialmenre necesitamos Rune of the Darkness, y Bloody Rune.";
+			mes "¿Quizas, ellas fueron escojidas a causa de su poder oscuro sellado";
+			mes "y sangriento poder? Esa es mi suposicion solamente, ¡hahahaha!";
+			next;
+			mes "[Ghenirhemin]";
+			mes "Una vez yas exitosamente restaurado el poder al casco,";
+			mes "tu podras comprar el casco de mi.";
+			mes "Como dije antes, Yo no voy a";
+			mes "dejar ir algo tan valioso sin obtener algo a cambio.";
+			mes "tan bien demostrara que estas calificado para combertirte en el dueño del casco.";
+			next;
+			mes "[Ghenirhemin]";
+			mes "Basicamente, tienes que traerme...";
+			mes "Ah, son demasiadas cosas que necesitas traerme.";
+			mes "Te sugiero anotarlos, y memorizarlos.";
+			next;
+			mes "Por favor traeme";
+			mes "^FF00001 Sage Worm Card, 1Argiope Card,";
+			mes "1 Dryad Card, 1 Wooden Golem Card,";
+			mes "1 Bongun Card, 1 Pirate Skeleton Card,";
+			mes "1 Marduk Card, 1 Hode Card,";
+			mes "1 Elder Card, 1 Nightmare Terror Card,^000000";
+			next;
+			mes "[Ghenirhemin]";
+			mes "^FF00001,000 Rune of the Darkness,";
+			mes "1,000 Bloody Rune,";
+			mes "y el precio del casco, 10,000,000 zeny^000000.";
+			next;
+			mes "[Ghenirhemin]";
+			mes "es de seguro un precio rzonable considerando que ";
+			mes "estas a punto de obtener un poder divino, ¿no lo crees?";
+			next;
+			set moza_valkylie,2;
+			mes "[Ghenirhemin]";
+			mes "Discutamoslo luego";
+			mes "una vez que hayas preparado el dinero y los objetos.";
+			mes "Ahora estoy tan exhausto";
+			mes "como ha pasado un tiempo desde que hable tanto.";
+			mes "Disculpame.";
+			close;
+		}
+		mes "[Ghenirhemin]";
+		mes "Haha, Lo entiendo";
+		mes "no es una decicion facil de hacer.";
+		mes "Tomate tu tiempo, mi amigo.";
+		mes "Si tu todavia no quieres el casco, yo respeto tu decision.";
+		close;
+	}
+	else if (Zeny > 9999999) {
+		mes "[Ghenirhemin]";
+		mes "Hmm...tu luses como un pobre vagabundo,";
+		mes "pero tu pareces tener una enorme cantidad de dinero contigo.";
+		mes "Supongo que el viejo dicho es cierto:";
+		mes "''No jusguez un libro por su portada.''";
+		next;
+		mes "[Ghenirhemin]";
+		mes "Quizas entiendas mi historia.";
+		mes "¿Te gustaria escuchar mi larga historia?";
+		mes "Quizas sea o no interesante para ti,";
+		mes "pero te garantizo que no te aburrira en ninguna manera.";
+		next;
+		if (select("Listen.:Don't listen.") == 1) {
+			mes "[Ghenirhemin]";
+			mes "Bien, dejame presentarme.";
+			mes "Mi nombre es Ghenirhemin.";
+			mes "No soy diferente que otros,";
+			mes "si hablo solo para mi propio veneficio,";
+			mes "yo tengo un poco mas de dinero que ellos. Hahaha.";
+			next;
+			mes "[Ghenirhemin]";
+			mes "De cualquier manera, yo no gane ningun dinero,";
+			mes "pero la recibi de mis ancestros,";
+			mes "que eran talentosos hombres de negocios.";
+			mes "yo le agradesco a el por acerse de tan grande fortuna.";
+			next;
+			mes "[Ghenirhemin]";
+			mes "De hecho, estoy avergonzado te decirte que";
+			mes "yo no se exactamente que hicieron mis ancestros";
+			mes "para hacer esta fortuna. Quizas algunos pudieron tener negocios,";
+			mes "algnos otros pudieron haber sido grandes artistas...";
+			next;
+			mes "[Ghenirhemin]";
+			mes "Nuestra familia esta simplemente bendecida lo suficiente para tener";
+			mes "esa clase de grandes ancestros, quienes trajeron riqueza a su familia.";
+			mes "Me tomaria al menos una semana para listar";
+			mes "cada uno de mis exitosos ancestros.";
+			next;
+			mes "[Ghenirhemin]";
+			mes "De cualquier manera, me gustaria hablarte acerca de uno de mis sorprendentes ancestros,";
+			mes "quien se a comvertido en el heroe de la familia.";
+			next;
+			mes "[Ghenirhemin]";
+			mes "Bien, actualmente no se exactamente";
+			mes "que fue lo que hizo, pero se que";
+			mes "el trajo gloria y fama";
+			mes "a nuestra familia por primera vez.";
+			mes "De culquier manera, como ha pasado mucho tiempo, no tenemos";
+			mes "ningun documento acerca de el, asi que...";
+			next;
+			mes "[Ghenirhemin]";
+			mes "Claramente recuerdo una cosa acerca de el aunque.";
+			mes "El fue el unico humano que fue capaz de";
+			mes "estar cerca de los dioses, y el demostro";
+			mes "su poder divino al brindar luz a nosotros, los humanos.";
+			next;
+			mes "[Ghenirhemin]";
+			mes "No se como el obtuvo el poder divino,";
+			mes "o como el pudo estar cerca a los dioses.";
+			mes "Solamente recuerdo estas cosas por que se me conto repetidas veces";
+			mes "acerca de su sorprendente historia desde que yo naci...";
+			next;
+			mes "[Ghenirhemin]";
+			mes "Yo puedo mostrarte que no lo estoy inventando.";
+			mes "Te dije que no tenemos ningun documento acerca de el, ¿verdad?";
+			mes "De cualquier manera, hay algo que puedo mostrarte.";
+			mes "Ahora, echa una mirada a esto.";
+			next;
+			set moza_valkylie,1;
+			mes "[Ghenirhemin]";
+			mes "¿Ves? ¡Esto de seguro te dice que";
+			mes "no me lo estoy inventando!";
+			mes "¿Esto es lo que mis ancestros acostumbraban usar!";
+			close;
+		}
+		mes "[Ghenirhemin]";
+		mes "¡Que pena! Como sea, no quero forsarte a";
+		mes "hacer algo que no quieras hacer. Hahaha.";
+		mes "Solo recuerda, solo has hecho otra eleccion para tu vida.";
+		close;
+	}
+	mes "[Ghenirhemin]";
+	mes "Todo tiene un significado y una razon de existir en este mundo.";
+	mes "Tu y yo, estamos destinados a conocernos el uno al otro este día.";
+	next;
+	mes "[Ghenirhemin]";
+	mes "Bueno...aunque yo dije que todo tiene un significado,";
+	mes "desafortunadamente tu no eres interesante para mi en lo absoluto.";
+	mes "Llamame un dedicado al dinero,";
+	mes "pero me gusta la gente rica.";
+	next;
+	mes "[Ghenirhemin]";
+	mes "Si me pruebas que eres adinerado,";
+	mes "quizas cambie de opinion, y me interese en tí.";
+	mes "Pero, yo decidire si estoy o no interesado en tí";
+	mes "cuando tu me muestres tu dinero. ¡Hahahaha!";
+	close;
+}
+//======================= Hahoe Mask / Mythical Lion Mask / Bride Mask ===============================
+payon,135,320,3	script	Chungwolmang	97,{
+	if (moza_tal == 2) {
+		if (countitem(7015) > 19 && countitem(952) > 99 && countitem(1028) > 99) {
+			//Hahoe_Mask: Bookclip_In_Memory, Cactus_Needle, Wild_Boar's_Mane
+			callsub S_MakeMask,5176,7015,20,952,100,1028,100,0,0;
+		}
+		if (countitem(1048) > 499 && countitem(1053) > 1 && countitem(980) > 0) {
+			//Guardian_Lion_Mask: Slender_Snake, Tooth_Of_Ancient_Fishm Orange_Dyestuffs
+			callsub S_MakeMask,5177,1048,500,1053,2,980,1,0,0;
+		}
+		if (countitem(1049) > 19 && countitem(1059) > 499 && countitem(1054) > 1 && countitem(1024) > 99) {
+			//Bride_Mask: Skirt_Of_Virgin, Transparent_Cloth, Lip_Of_Ancient_Fish, Chinese_Ink
+			callsub S_MakeMask,5169,1049,20,1059,500,1054,2,1024,100;
+		}
+		mes "[Chungwolmang]";
+		mes "Bueno bueno, ¿no has reunido los materiales todavia?";
+		mes "Sera mejor que te apresures ¡por que yo no puedo esperar por mucho!";
+		mes "Espera, ¿que mascara me pediste que hiciera de cualquier manera?";
+		next;
+		switch(select("Hahoe Mask:Bride Mask:Mythical Lion Mask")) {
+		case 1:
+			mes "[Chungwolmang]";
+			mes "Oh, si, tu quieres Hahoe Mask.";
+			mes "Entonces necesitas traer... ^FF000020 Bookclip in Memory^000000,";
+			mes "^FF0000100 Cactus Needle^000000, y";
+			mes "^FF0000100 Mane^000000.";
+			break;
+		case 2:
+			mes "[Chungwolmang]";
+			mes "Oh, si, tu quieres Bride Mask.";
+			mes "Entonces necesitas traer... ^FF000020 Skirt of Virgin^000000,";
+			mes "^FF0000500 Fabric^000000, ^FF00002 Ancient Lips^000000,";
+			mes "y ^FF0000100 Squid Ink^000000.";
+			break;
+		case 3:
+			mes "[Chungwolmang]";
+			mes "Oh, si, tu quieres Mythical Lion Mask.";
+			mes "Entonces necesitas traer... ^FF0000500 Horrendous Hair^000000,";
+			mes "^FF00002 Ancient Tooth^000000, y";
+			mes "^FF00001 Orange Dyestuffs^000000.";
+			break;
+		}
+		mes "Traeme la cantidad exacta de materiales, entonces te dare la mascara de inmediato.";
+		close;
+	}
+	if (countitem(7201) > 499) && (countitem(7200) > 9 && moza_tal == 1) {
+		mes "[Chungwolmang]";
+		mes "¡Ah, un trevol de cuatro hojas debe traerme suerte";
+		mes "por que regresaste mas rapido de lo que pense! Wow...";
+		mes "Muchas gracias, ahora creo que";
+		mes "tengo la fortuna de mi lado. ¡Hahaha!";
+		next;
+		mes "[Chungwolmang]";
+		mes "¡Muy bien! Te regresare el favor como prometi.";
+		mes "Te dire todo. De hecho,";
+		mes "yo soy un artesano de mascaras tradicionales.";
+		mes "¡Estoy orgulloso de decirte que nadie puede vencerme";
+		mes "en hacer mascaras tradicionales! ¡Ahem!";
+		next;
+		mes "[Chungwolmang]";
+		mes "Yo he experimentado inestabilidad emocional";
+		mes "asi como he tenido mala suerte con todo a causa de varias razones.";
+		mes "Pero, ¡ahora eso es historia! estoy de regreso, ¡hahahaha!";
+		next;
+		mes "[Chungwolmang]";
+		mes "Me siento bien, y tengo la fortuna de regreso a mi lado.";
+		mes "De verdad te aprecio por ayudarme a sentir mejor.";
+		mes "¡En agradecimiento, voy a hacerte una mascara tradicional! ¡Hahaha!";
+		mes "Deberias estar agradecido por que estoy ofreciendote un gran regalo.";
+		next;
+		mes "[Chungwolmang]";
+		mes "¿Sabes por que? Por que no hay nadie qque pueda ofrecerte";
+		mes "un objeto tan valioso excepto yo.";
+		mes "De cualquier manera, puedo hacer 3 diferentes mascaras:";
+		mes "Hahoe Mask, Bride Mask y Mythical Lion Mask.";
+		mes "¿Cual quieres tener? Escoje una.";
+		next;
+		switch(select("Hahoe Mask:Bride Mask:Mythical Lion Mask")) {
+		case 1:
+			mes "[Chungwolmang]";
+			mes "Grandioso, ¿tu quieres Hahoe Mask, eh? ¡Eso es facil!";
+			mes "Entonces tienes que traer... ^FF000020 Bookclip in Memory^000000,";
+			mes "^FF0000100 Cactus Needle^000000, y";
+			mes "^FF0000100 Mane^000000.";
+			mes "Traeme la cantidad exacta de materiales, entonces te dare la mascara de inmediato.";
+			break;
+		case 2:
+			mes "[Chungwolmang]";
+			mes "Grandioso, ¿tu quieres Bride Mask, eh? ¡Eso es facil!";
+			mes "Entonces tienes que traer... ^FF000020 Skirt of Virgin^000000,";
+			mes "^FF0000500 Fabric^000000, ^FF00002 Ancient Lips^000000,";
+			mes "y ^FF0000100 Squid Ink^000000.";
+			mes "Traeme la cantidad exacta de materiales, entonces te dare la mascara de inmediato.";
+			break;
+		case 3:
+			mes "[Chungwolmang]";
+			mes "Grandioso, ¿tu quieres Mythical Lion Mask, eh? ¡Eso es facil!";
+			mes "Entonces tienes que traer... ^FF0000500 Horrendous Hair^000000,";
+			mes "^FF00002 Ancient Tooth^000000, y";
+			mes "^FF00001 Orange Dyestuffs^000000.";
+			mes "Traeme la cantidad exacta de materiales, entonces te dare la mascara de inmediato.";
+			break;
+		}
+		delitem 7201,500; //Log
+		delitem 7200,10; //Flexible_String
+		set moza_tal,2;
+		next;
+		mes "[Chungwolmang]";
+		mes "...¿Por que me estas mirando?";
+		mes "¿Que?, ¿esperabas que haria la mascara gratis?";
+		mes "si lo hiciste, debes pensarlo de esta manera.";
+		mes "Mi termino de pago es usar mis abilidades,";
+		mes "y permitirte tener mi preciosa mascara,";
+		mes "no haciendo la mascara para ti libre de cargo, ¿entendido?";
+		next;
+		mes "[Chungwolmang]";
+		mes "Almenos no te estoy cargando con un pago, ¿estoy?";
+		mes "Solo traeme los materiales, ¡Yo hare mi mejor esfuerzo";
+		mes "para hacer una increible mascara para ti!";
+		next;
+		mes "[Chungwolmang]";
+		mes "Mientras tanto, Voy a preparar";
+		mes "el trabajo usando esta Log y Elastic Band.";
+		mes "Asi que regresa tan pronto como puedas, ¿si?";
+		close;
+	}
+	if (moza_tal == 1) {
+		mes "[Chungwolmang]";
+		mes "Umm...las cosas que te pedi fueron";
+		mes "^FF0000500 Log^000000 y ^FF000010 Elastic Band^000000.";
+		mes "Gracias por adelantado.";
+		close;
+	}
+	if (countitem(706) > 0) {
+		mes "[Chungwolmang]";
+		mes "¡Ah ...! Hey! Puedo decirte algo único sobre ti.";
+		mes "¿Tendrias un Four Leaf Clover por casualidad?";
+		mes "Te importaría si te pido que me des el clover?";
+		next;
+		mes "[Chungwolmang]";
+		mes "No te pido que me lo des a cambio de nada.";
+		mes "Aunque no pueda asegurartelo,";
+		mes "Seré capaz de devolverte el favor tarde o temprano.";
+		mes "Entonces, Puedo Tomarlo?";
+		next;
+		if (select("Sure.:No, you can't.") == 1) {
+			mes "[Chungwolmang]";
+			mes "Oh! Muchas Gracias!";
+			mes "Muhahahahahaha! Ahora me convertire en un tipo afortunado!";
+			mes "Con el clover, la fortuna estara de mi lado otra vez!";
+			next;
+			mes "[Chungwolmang]";
+			mes "Oh, si! casi lo olvido.";
+			mes "Prometí pagarte el favor, verdad?";
+			mes "Se que esto puede sonarte un poco egoista,";
+			mes "pero, hey, podrias hacerme un favor mas?";
+			mes "Ya que me has hecho un favor antes,";
+			mes "no creo que que sea";
+			mes "tan complicado para vos ayudarme una vez mas?";
+			mes "Por favor, mostrame tu generosidad~";
+			next;
+			mes "[Chungwolmang]";
+			mes "Necesito... ^FF0000500 Log^000000 y";
+			mes "^FF000010 Elastic Band^000000.";
+			mes "Serias tan amable de traerme esas cosas?";
+			mes "De hecho, no puedo pagarte si no me traes esos items.";
+			next;
+			delitem 706,1; //Four_Leaf_Clover
+			set moza_tal,1;
+			mes "[Chungwolmang]";
+			mes "Quieres que te pague, verdad?";
+			mes "Entonces, por favor traeme esos items, please~";
+			close;
+		}
+		mes "[Chungwolmang]";
+		mes "Ya veo... Sabras, no me es facil darle de el amuleto de la suerte";
+		mes "a un extraño sin pensarlo dos veces.";
+		mes "...Haha, pero eso no hace que deje de estar molesto.";
+		mes "Como te atreves a rechazar mi pedido? Hah!";
+		close;
+	}
+	mes "[Chungwolmang]";
+	mes "Arrrgghhh... necesitooo... necesito...";
+	next;
+	mes "[Chungwolmang]";
+	mes "Quiero ser afortunado! Alguien, Por favor, deme suerte!";
+	mes "No pido mucho! Solo necesito una cosa!";
+	next;
+	mes "[Chungwolmang]";
+	mes "Necesito un ^FF0000Four Leaf Clover^000000!";
+	mes "Alguien, Por favor deme un Four Leaf Clover!";
+	close;
+
+S_MakeMask:
+	mes "[Chungwolmang]";
+	mes "Oh, me has traido todo";
+	mes "Para hacer un "+getitemname(getarg(0))+".Exelente.";
+	mes "Por favor dame los materiales. Te haré la mascara ahora mismo.";
+	next;
+	if (select("Give him the items.:Don't give him the items.") == 1) {
+		mes "[Chungwolmang]";
+		mes "Genial, Me gusta tu actitud inmediata!";
+		mes "Ok entonces, Te haré la mascara lo mas rapido que pueda!";
+		next;
+		mes "[Chungwolmang]";
+		mes "- Fumble Fumble Fumble -";
+		mes "- Fumble Fumble Fumble -";
+		mes "- Fumble Fumble Fumble -";
+		mes "- Thud Thud Thud Thud -";
+		next;
+		mes "[Chungwolmang]";
+		mes "- Fumble Fumble Fumble -";
+		mes "- Fumble Fumble Fumble -";
+		mes "- Fumble Fumble Fumble -";
+		mes "- Thud Thud Thud Thud -";
+		next;
+		delitem getarg(1),getarg(2);
+		delitem getarg(3),getarg(4);
+		delitem getarg(5),getarg(6);
+		if (getarg(0) == 5169)
+			delitem getarg(7),getarg(8);
+		getitem getarg(0),1;
+		set moza_tal,0;
+		mes "[Chungwolmang]";
+		mes "Wow, Fue pan comido!";
+		mes "Tu sabes, No solo tengo el titulo de artista.";
+		mes "Hahaha, aqui, toma tu "+getitemname(getarg(0))+".";
+		mes "Espero que lo uses con orgullo, hahaha!";
+		next;
+		mes "[Chungwolmang]";
+		mes "Bueno, Necesito descanzar";
+		mes "Hasta que tenga otro cliente. Hahaha, adios!";
+		close;
+	}
+	mes "[Chungwolmang]";
+	mes "Err? no querias "+getitemname(getarg(0))+"?";
+	mes "Bueno entonces...cobarde.";
+	close;
+}
+
+
+//====================== Magistrate Hat / Ayam =============================================
+payon_in03,139,124,3	script	Han Garam	88,{
+	if (moza_korea == 2 && countitem(954) > 299 && countitem(733) > 4 && countitem(975) > 0 && countitem(7166) > 49) {
+		mes "[Han Garam]";
+		mes "Has vuelto mas rapido de lo que creí.";
+		mes "Genial, estoy altamente motivado por el hecho de que";
+		mes "mi Ayam va a pertenecer a alguien como vos,";
+		mes "ya que eres competente y confiable.";
+		next;
+		mes "[Han Garam]";
+		mes "Ok entonces, te haré el sombrero tan rapido como pueda.";
+		mes "Ahora, dame todos los materiales.";
+		next;
+		if (select("Give him the items.:Don't give him the items.") == 1) {
+			mes "[Han Garam]";
+			mes "Excelente! no necesito ser canalizado";
+			mes "por el Dios Dragon para este trabajo";
+			mes "porque puedo hacerlo perfectamente yo solo.";
+			mes "Entonces, sosntelo justo ahi, okay?";
+			next;
+			mes "[Han Garam]";
+			mes "Si...veamos...umm hmm.";
+			next;
+			mes "[Han Garam]";
+			mes ".................";
+			next;
+			mes "- Han Garam empezó a martillar, -";
+			mes "- and unir todos los materiales sin decir una palabra -";
+			next;
+			mes "[Han Garam]";
+			mes ".................";
+			next;
+			mes "[Han Garam]";
+			mes "Uff, fue un poco dificil,";
+			mes "hacía rato que no hacia algo asi.";
+			next;
+			mes "[Han Garam]";
+			mes "Aun me siento bien por tener la posibilidad";
+			mes "De ejercitar mis habilidades, tu sabes. fue divertido, también.";
+			mes "Por favor toma este Ayam.";
+			mes "Como lo prometí, este es mi regalo para ti.";
+			next;
+			delitem 954,300; //Shining_Scales
+			delitem 733,5; //Crystal_Jewel___
+			delitem 975,1; //Scarlet_Dyestuffs
+			delitem 7166,50; //Soft_Silk_Cloth
+			set moza_korea,0;
+			getitem 5174,1; //A_yam
+			mes "[Han Garam]";
+			mes "Ahora necesito reunirme con el Dios Dragon otra vez,";
+			mes "si queres que te haga algun otro sombrero...umm...";
+			mes "veamos, de alguna forma fui capas de hacerte uno esta vez con tu ayuda,";
+			mes "asi que supongo que la proxima vez sucedera cuando deba suceder.";
+			next;
+			mes "[Han Garam]";
+			mes "Muchas gracias! Por favor toma mi Ayam con cariño,";
+			mes "y esta argulloso de ser el dueño de un Ayam!";
+			close;
+		}
+		mes "[Han Garam]";
+		mes "...? Que? Necesitas mas tiempo?";
+		mes "No puedes darmelos aun?";
+		close;
+	}
+	else if (moza_korea == 2 && countitem(954) > 299 && countitem(733) > 4 && countitem(983) > 0 && countitem(2221) > 0) {
+		mes "[Han Garam]";
+		mes "Has vuelto mas rápido de lo que esperaba .";
+		mes "Genial, estoy altamente motivado por el hecho de que";
+		mes "mi Magistrate Hat va a pertenecer a alguien como vos,";
+		mes "ya que eres competente y confiable.";
+		next;
+		mes "[Han Garam]";
+		mes "Ok entonces, te haré el sombrero tan rapido como pueda.";
+		mes "Ahora, dame todos los materiales.";
+		next;
+		if (select("Give him the items.:Don't give him the items.") == 1) {
+			mes "[Han Garam]";
+			mes "Excelente! no necesito ser canalizado";
+			mes "por el Dios Dragon para este trabajo";
+			mes "porque puedo hacerlo perfectamente yo solo.";
+			mes "Entonces, sosntelo justo ahi, okay?";
+			next;
+			mes "[Han Garam]";
+			mes "Si...veamos...umm hmm.";
+			next;
+			mes "[Han Garam]";
+			mes ".................";
+			next;
+			mes "- Han Garam empezó a martillar, -";
+			mes "- and unir todos los materiales sin decir una palabra -";
+			next;
+			mes "[Han Garam]";
+			mes ".................";
+			next;
+			mes "[Han Garam]";
+			mes "Uff, fue un poco dificil,";
+			mes "hacía rato que no hacia algo asi.";
+			next;
+			mes "[Han Garam]";
+			mes "Aun me siento bien por tener la posibilidad";
+			mes "De ejercitar mis habilidades, tu sabes. fue divertido, también.";
+			mes "Por favor toma este Magistrate Hat.";
+			mes "Como lo prometí, este es mi regalo para ti.";
+			next;
+			delitem 954,300; //Shining_Scales
+			delitem 733,5; //Crystal_Jewel___
+			delitem 983,1; //Black_Dyestuffs
+			delitem 2221,1; //Hat_
+			set moza_korea,0;
+			getitem 5173,1; //Judge_Hat
+			mes "[Han Garam]";
+			mes "Ahora necesito reunirme con el Dios Dragon otra vez,";
+			mes "si queres que te haga algun otro sombrero...umm...";
+			mes "veamos, de alguna forma fui capas de hacerte uno esta vez con tu ayuda,";
+			mes "asi que supongo que la proxima vez sucedera cuando deba suceder.";
+			next;
+			mes "[Han Garam]";
+			mes "Muchas gracias! Por favor toma mi Magistrate Hat con cariño,";
+			mes "y esta argulloso de ser el dueño de un Magistrate Hat!";
+			close;
+		}
+		mes "[Han Garam]";
+		mes "...? Que? Necesitas mas tiempo?";
+		mes "No puedes darmelos aun?";
+		close;
+	}
+	else if (moza_korea == 2) {
+		mes "[Han Garam]";
+		mes "Para hacer un Ayam, necesito";
+		mes "^FF0000300 Shining Scale^000000, ^FF00005 Cracked Diamond^000000,";
+		mes "^FF00001 Scarlet Dyestuffs^000000, and";
+		mes "^FF000050 Soft Silk^000000!";
+		next;
+		mes "[Han Garam]";
+		mes "Para hacer Magistrate Hat, Necesito";
+		mes "^FF0000300 Shining Scale^000000, ^FF00005 Cracked Diamond^000000,";
+		mes "^FF00001 Black Dyestuffs^000000, and ^FF00001 Slotted Hat^000000!";
+		next;
+		mes "[Han Garam]";
+		mes "...Eso es lo que he dicho.";
+		mes "Entonces, elige el sombrero, y traeme";
+		mes "sus materiales sin olvidarte nada.";
+		next;
+		mes "[Han Garam]";
+		mes "Ah~ Ha sido un largo tiempo desde la ultima vez que sentí al Dios Dragon en mi.";
+		mes "Siento como si he aprendido algo inexplicable.";
+		close;
+	}
+	else if (moza_korea == 1) {
+		mes "[Han Garam]";
+		mes ".............";
+		next;
+		mes "[Han Garam]";
+		mes ".............";
+		next;
+		mes "[Han Garam]";
+		mes ".............";
+		next;
+		mes "[Han Garam]";
+		mes "...*Tremble Tremble*...El...El esta aqui...El esta aqui!";
+		mes "*Tremble Tremble* I can feel";
+		mes "El Dios Dragon Esta dentro mio! Waaah!";
+		mes "El esta moviendo su cola, y mostrandome el futuro!";
+		mes "Aaaaaahhhhhhh!";
+		next;
+		misceffect 90; //EF_LORD;
+		mes "[Han Garam]";
+		mes "Waaaahhhh!";
+		next;
+		mes "[Han Garam]";
+		mes ".............";
+		next;
+		mes "[Han Garam]";
+		mes ".............";
+		next;
+		mes "[Han Garam]";
+		mes "Si... Si, yo puedo! Puedo hacerte un ^FF0000Ayam^000000";
+		mes "y un ^FF0000Magistrate Hat^000000 ahora!";
+		mes "Oh, Puedo ver como hacerlos,";
+		mes "Ya se que necesito para hacerlos! Todo esta en mi vision!";
+		mes "Ya siento como si estuviera haciendo uno!";
+		next;
+		mes "[Han Garam]";
+		mes "Para hacer un Ayam, Necesito";
+		mes "^FF0000300 Shining Scale^000000, ^FF00005 Cracked Diamond^000000,";
+		mes "^FF00001 Scarlet Dyestuffs^000000, and";
+		mes "^FF000050 Soft Silk^000000!";
+		next;
+		mes "[Han Garam]";
+		mes "Para hacer un Magistrate Hat, Necesito";
+		mes "^FF0000300 Shining Scale^000000, ^FF00005 Cracked Diamond^000000,";
+		mes "^FF00001 Black Dyestuffs^000000, and ^FF00001 Slotted Hat^000000!";
+		next;
+		mes "[Han Garam]";
+		mes "A cualquiera que me traiga eso, le hare un sombrero!";
+		mes "Ahhh~ Dios Dragon!";
+		next;
+		misceffect 7; //EF_EXIT;
+		mes "[Han Garam]";
+		mes ".............";
+		next;
+		mes "[Han Garam]";
+		mes ".............";
+		next;
+		mes "[Han Garam]";
+		mes "Uff... El Dios Dragon se ha ido.";
+		mes "Sin embargo, Aun puedo recordar claramente";
+		mes "lo que necesito, y como hacer los sombreros.";
+		mes "Entonces, no debes preocuparte por eso.";
+		mes "Tu sabes...son aquellos Ayam y Magistrate Hat?";
+		next;
+		mes "[Han Garam]";
+		mes "Has escuchado que necesito para hacerlos, o no?";
+		mes "Elije un sombrero, y traeme los materiales sin olvidarte nada.";
+		next;
+		set moza_korea,2;
+		mes "[Han Garam]";
+		mes "Ok entonces, estare esperando hasta que vuelvas.";
+		close;
+	}
+	if (countitem(7446) > 6 && countitem(7448) > 6 && countitem(7445) > 6 && countitem(7447) > 6) {
+		mes "[Han Garam]";
+		mes "Mi nombre es Han Garam,";
+		mes "Soy el orgulloso heredero de una familia renombrada... ¿eh?";
+		mes "Espera, Puedo sentir algo misteriosamente familiar en ti...";
+		mes "Hey, Acaso tienes 7 Bijous de los 4 colores de Bijou ?";
+		next;
+		mes "[Han Garam]";
+		mes "...Wow! Eso es loco! Las tienes, ¿verdad?";
+		mes "Wow, ¿Cómo las conseguiste? Son tan dificiles de encontrar...";
+		next;
+		mes "[Han Garam]";
+		mes "........Umm.";
+		next;
+		mes "[Han Garam]";
+		mes "Hey, Si no te importa, ¿Puedes darmelas?";
+		mes "De hecho, soy el unico artesano de sombreros tradicionales";
+		mes "en el reino de Rune-Midgarts.";
+		mes "Sin embargo, recientemente me he metido en un problema,";
+		mes "y no he podido enfocarme en mis negocios.";
+		next;
+		mes "[Han Garam]";
+		mes "El problema es que me he quedado sin Bijous.";
+		mes "Tu sabes, Esas cuentas coloridas que tu tienes.";
+		mes "podria reiniciar mi negocios otra vez,";
+		mes "si tan solo las tuviera...*Sigh*";
+		next;
+		mes "[Han Garam]";
+		mes "Por favor podrias darmelas?";
+		mes "Te pagaré con uno de mis orgullosos sombreros traducionales.";
+		mes "Bien, desde que soy el unico que puede hacerlos,";
+		mes "de hecho, tu negocio conmigo no puede darte perdida, no lo crees?";
+		next;
+		mes "[Han Garam]";
+		mes "por favor? te aseguro que puedo hacerte sombreros tradicionales.";
+		next;
+		if (select("Give him the items.:Don't give him the items.") == 1) {
+			mes "[Han Garam]";
+			mes "Wow, wow, Muchisimas gracias!";
+			mes "Como te prometí, te haré un sombrero a cambio.";
+			mes "Pero, Puedes esperarme un poco?";
+			mes "Para hacer el sombrero, Debo contactar al Dios Dragon primero.";
+			next;
+			delitem 7446,7; //Blue_Orb
+			delitem 7448,7; //Yellow_Orb
+			delitem 7445,7; //Green_Orb
+			delitem 7447,7; //Red_Orb
+			set moza_korea,1;
+			mes "[Han Garam]";
+			mes "...Ok, dame algo de tiempo para focalizar.";
+			close;
+		}
+		mes "[Han Garam]";
+		mes "Bah, eso es tu elección.";
+		mes "si cambias de opinión, dimelo inmediatamente.";
+		mes "Deberias saber";
+		mes "estas cosas perteneces a alguien mas, no a ti.";
+		close;
+	}
+	mes "[Han Garam]";
+	mes "Yo soy Han Garam, y soy el heredero de una antigua renombrada familia.";
+	mes "Sabes porque digo ''antiguamente renombrada''?";
+	mes "Porque mi abuelo perdió la fortuna de mi familia,";
+	mes "y ahora somos como cualquier otra familia común, hahahaha!";
+	next;
+	mes "[Han Garam]";
+	mes "No he heredado nada mas que esta habilidad tradicional para hacer sombreros.";
+	mes "Aún mas, es un poco extraordinaria esta herencia,";
+	mes "ya que soy el unico en el reino de Rune-Midgarts";
+	mes "que puede hacer sombreros tradicionales..";
+	next;
+	mes "[Han Garam]";
+	mes "Lamentablemente, no he podido";
+	mes "ejercitar mi habilidad porque aún no he hecho contacto con el Dios Dragon...";
+	mes "Eh? Que quieres decir, que preguntas?";
+	mes "Sabes lo que hacen los medium, verdad?";
+	mes "Ellos reciben espiritus en sus cuerpos,";
+	mes "y pueden comunicarse con ellos.";
+	next;
+	mes "[Han Garam]";
+	mes "Entonces, en mi caso, un Dios Dragon entra en mi cuerpo,";
+	mes "y me da fuerza y conocimiento.";
+	mes "Cuando mi familia era adinerada,";
+	mes "tenemos suficientes materiales de invocación";
+	mes "para invocar al Dios Dragon,";
+	mes "Pero ahora, como veras,";
+	mes "No puedo costearme esas cosas tan caras.";
+	next;
+	mes "[Han Garam]";
+	mes "Basicamente, He heredado el don de mi familia,";
+	mes "pero no puedo usarlo";
+	mes "porque no puedo comprar los materiales de invocación.";
+	next;
+	mes "[Han Garam]";
+	mes "Para invocar al Dios Dragon,";
+	mes "debo tener ^FF00007 Bijous de cada uno de los 4 colores de Bijou^000000.";
+	mes "^FF0000I necesito 7 Bijous De las azules, ";
+	mes "^FF0000Amarillas, Verdes, y Rojas^000000.";
+	mes "Basicamente necesito en total 28 Bijous...umm.";
+	next;
+	mes "[Han Garam]";
+	mes "Como he dicho antes, no solo son caras,";
+	mes "sino tambien dificiles de encontrar...";
+	mes "*Sigh* Lamentablemente la habilidad de mi familia";
+	mes "se verá discontinuada en mi generación...";
+	close;
+}

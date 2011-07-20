@@ -1,0 +1,187 @@
+//===== eAthena Script ======================================= 
+//= War of Emperium - Time Setter
+//===== By: ================================================== 
+//= Fredzilla
+//===== Current Version: ===================================== 
+//= 1.5a
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 Final TXT
+//===== Description: ========================================= 
+//= Lets a GM set WoE times from inside the game
+//===== Additional Comments: ================================= 
+//= Loops used = 4 (I like loops ^_^)
+//= Only GM's of lvl 99 can use it
+//= If anyone else tries to use it they will just get a list of WoE times
+//= It give you the option, as a GM, to Add a new time, Reset all times, 
+//= or just view the current set times
+//= If a WoE is in Progress no time reset is possible
+//= A maximum of 200 WoE times can be set, if that is even possible ;)
+//= Added in v1.5
+//= Change day setting to a menu call, more GUI this way
+//= You can choose for the WoE to last between days
+//= IE, Sat 23 till Sun 01, is now possible
+//= Not even the normal WoE script can do this (by dafault)
+//= Removed the need for disabling the normal agit_event
+//= 1.5a Applied Playtester's fix. [Vicious]
+//============================================================ 
+prontera,162,194,5	script	WoE Setter	806,{
+	mes "[Woe Setter]";
+	if(getgmlevel()<99) goto L_NotGM;
+	mes "Bienvenido, puedo ajustar la hora de las WoE para ti";
+	mes "Simplemente sigue las instrucciones y estarán ajustadas y listar para usar.";
+	next;
+	mes "[Woe Setter]";
+	mes "Ahora es cuando empieza la diversión.";
+	mes "Selecciona que es lo que deseas hacer";
+	next;
+	menu "Añadir una hora WoE",L_Add,"Reajustar todas las horas WoE",L_Reset,"Ver las horas WoE actuales",-;
+	mes "[Woe Setter]";
+	mes "Bien, actualmente tienes la hora de WoE ajustada así:";
+	set @num,0;
+L_LoopList:
+	if($sday[@num] == 0 && $eday[@num] == 0 && $woetime[@num] == 0 && $woetime2[@num] == 0) goto L_LoopListEnd;
+	if($sday[@num]==0) set $@tempday$,"Sunday";
+	if($sday[@num]==1) set $@tempday$,"Monday";
+	if($sday[@num]==2) set $@tempday$,"Tuesday";
+	if($sday[@num]==3) set $@tempday$,"Wednesday";
+	if($sday[@num]==4) set $@tempday$,"Thursday";
+	if($sday[@num]==5) set $@tempday$,"Friday";
+	if($sday[@num]==6) set $@tempday$,"Saturday";
+	if($eday[@num]==0) set $@tempday2$,"Sunday";
+	if($eday[@num]==1) set $@tempday2$,"Monday";
+	if($eday[@num]==2) set $@tempday2$,"Tuesday";
+	if($eday[@num]==3) set $@tempday2$,"Wednesday";
+	if($eday[@num]==4) set $@tempday2$,"Thursday";
+	if($eday[@num]==5) set $@tempday2$,"Friday";
+	if($eday[@num]==6) set $@tempday2$,"Saturday";
+	if($eday[@num]==$sday[@num]) mes $@tempday$+" desde "+$woetime[@num]+":00 hasta "+$woetime2[@num]+":00";
+	if($eday[@num]!=$sday[@num]) mes "Desde "+$@tempday$+" "+$woetime[@num]+":00 hasta "+$@tempday2$+" "+$woetime2[@num]+":00";
+	set @num,@num+1;
+	goto L_LoopList;
+L_LoopListEnd:
+	close;
+L_Add:
+	set @num,0;
+L_AddLoop:
+	if($sday[@num] == 0 && $eday[@num] == 0 && $woetime[@num] == 0 && $woetime2[@num] == 0) goto L_AddLoopEnd;
+	set @num,@num+1;
+	goto L_AddLoop;
+L_AddLoopEnd: 
+	mes "[Woe Setter]";
+	mes "¿Cuando deseas que la WoE comience ^FF0000comience^000000?";
+	next;
+	menu "Domingo",-,"Lunes",-,"Martes",-,"Miércoles",-,"Jueves",-,"Viernes",-,"Sábado",-;
+	if(@menu==1) set $sday[@num],0;
+	if(@menu==2) set $sday[@num],1;
+	if(@menu==3) set $sday[@num],2;
+	if(@menu==4) set $sday[@num],3;
+	if(@menu==5) set $sday[@num],4;
+	if(@menu==6) set $sday[@num],5;
+	if(@menu==7) set $sday[@num],6;
+	mes "[Woe Setter]";
+	mes "Bien, ahora dime la hora en la que quieres que ^FF0000comience^000000";
+	mes "Esto basado en un reloj de 24 horas";
+	mes "00 = Media noche";
+	mes "12 = Medio día";
+	mes "23 = 11pm";
+	next;
+	input @input;
+	if (@input < 0 || @input > 24) goto L_BadNumber;
+	set $woetime[@num],@input;
+	mes "[Woe Setter]";
+	mes "¿Cuándo deseas que ^FF0000termine^000000 la WoE?";
+	next;
+	menu "Igual que cuando comenzó.",-,"Domingo",-,"Lunes",-,"Martes",-,"Miércoles",-,"Jueves",-,"Viernes",-,"Sábado",-;
+	if(@menu==1) set $eday[@num],$sday[@num];
+	if(@menu==2) set $eday[@num],0;
+	if(@menu==3) set $eday[@num],1;
+	if(@menu==4) set $eday[@num],2;
+	if(@menu==5) set $eday[@num],3;
+	if(@menu==6) set $eday[@num],4;
+	if(@menu==7) set $eday[@num],5;
+	if(@menu==8) set $eday[@num],6;
+	mes "[Woe Setter]";
+	mes "Muy bien, ahora dime a que hora deseas que ^FF0000termine^000000 la WoE";
+	mes "Igualmente utilizando un reloj de 24 horas";
+	mes "00 = Media noche";
+	mes "12 = Medio día";
+	mes "23 = 11pm";
+	next;
+	input @input;
+	if (@input < 0 || @input > 24) goto L_BadNumber;
+	set $woetime2[@num],@input;
+	mes "[Woe Setter]";
+	mes "La hora de tu WoE ha sido ajustada";
+	mes "Para confirmar, pídeme que te muestre ^FF0000'Ver las Horas Actuales de WoE'^000000";
+	close;
+L_Reset:
+	mes "[Woe Setter]";
+	mes "Estás por reajustar todas las horas de WoE que has creado";
+	mes "¿Estás seguro/a?";
+	next;
+	menu "No, en que estaba pensando",L_No,"Si de verdad quiero hacerlo",-;
+	if(agitcheck()) goto L_WoEOn;
+	deletearray $sday[0],200;
+	deletearray $eday[0],200;
+	deletearray $woetime[0],200;
+	deletearray $woetime2[0],200;	
+	mes "[Woe Setter]";
+	mes "Han sido borradas, por favor recuerda ajustar de nuevo las horas WoE";
+	close;
+L_WoEOn:
+	mes "[Woe Setter]";
+	mes "Lo siento, debido a que hay una WoE en proceso no puedes reajustar las horas WoE";
+	close;
+L_No:
+	mes "[Woe Setter]";
+	mes "Oh, muy bien, vuelve cuando gustes.";
+	close;
+L_NotGM:
+	mes "Las horas de WoE actuales son:";
+	set @num,0;
+	goto L_LoopList;
+	end;
+L_BadNumber:
+	mes "[Woe Setter]";
+	mes "Lo siento, ese es un número inválido, inténtalo de nuevo.";
+	close;
+}
+-	script	Agit_Event2	-1,{
+	end;
+OnInit:
+disablenpc "Agit_Event";
+OnMinute00:
+OnAgitInit:
+
+// starting time check
+	set $@num,0;
+L_StartLoop:
+	if($sday[$@num] == 0 && $eday[$@num] == 0 && $woetime[$@num] == 0 && $woetime2[$@num] == 0) goto L_StartLoopEnd;
+	if(gettime(4)==$sday[$@num] && gettime(3)>=$woetime[$@num] && (gettime(3)<$woetime2[$@num] || $sday[$@num]!=$eday[$@num])) goto L_Start;
+	set $@num,$@num+1;
+	goto L_StartLoop;
+
+// end time checks
+	L_StartLoopEnd:
+	set $@num,0;
+	L_EndLoop:
+	if($eday[$@num] == 0 && $woetime[$@num] == 0 && $woetime2[$@num] == 0) end;
+	if((gettime(4)==$eday[$@num]) && (gettime(3)==$woetime2[$@num])) goto L_End;
+	set $@num,$@num+1;
+	goto L_EndLoop;
+	end;
+
+// Stop WoE
+L_End:
+	if(!agitcheck()) end;
+	Announce "The War Of Emperium is over!",8;
+	AgitEnd;
+	end;
+
+// Start WoE
+L_Start:
+	if(agitcheck()) end;
+	Announce "The War Of Emperium has begun!",8;
+	AgitStart;
+	end;
+}

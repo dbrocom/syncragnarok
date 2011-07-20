@@ -1,0 +1,67 @@
+//===== eAthena Script =======================================
+//= Quest for 99 Base Level Players
+//===== By: ==================================================
+//= Lupus
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= Any eAthena Version
+//===== Description: =========================================
+//= It makes players stay longer at 99th level and get a
+//= Jewel Case as a reward
+//===== Additional Comments: =================================
+//= 
+//============================================================
+
+
+lighthalzen,108,229,2	script	La Fenn	766,{
+	mes "[La Fenn]";
+	if(BaseLevel<99) {
+		if(Q_99LVL) {
+			mes "Tu... Tu te has hecho joven!!! Pero ere definitivamente TU!";
+			mes "No podia creer que eras capaz de reconocer mi condicion...";
+			emotion e_hmm;
+			next;
+			mes "[La Fenn]";
+			mes "Este es tu premio. Es tuyo para siempre";
+			set Q_99LVL,0;
+			getitem 12106,1; //Jewel Case
+			emotion e_grat;
+		} else {
+			mes callfunc("F_Hi");
+			mes "...";
+			emotion e_yawn;
+			next;
+			mes "[La Fenn]";
+			mes "Tengo un enigma para un fuerte hombre 2nd Class y Nivel base 99";
+			mes "*Bostezo* si conoce a alguno de ellos , porfavor cuenteles acerca de mi enigma";
+		}
+		close;
+	}
+	if(BaseLevel==99 && Upper==0) {
+		if(Q_99LVL) {
+			mes "Ahora ve y hazte joven!";
+			mes "Si resolviste mi engima, entonces te dare una magical Jewel Case con un raro accesorio";
+		} else {
+			mes callfunc("F_Hi")+" El Heroe!";
+			if(BaseExp<1000000) {
+				mes "Ahora eres fuerte";
+				mes "Pero..no tan fuerte para mi enigma";
+				if(rand(2)) {
+					mes "Mata "+((1000000-BaseExp)/3765+1)+" mas Seals y regresa";
+				} else {
+					mes "Mata "+((1000000-BaseExp)/81+1)+" mas Poporings y regresa";
+				}
+			} else {
+				mes "Ahora eres realmente fuerte";
+				mes "Y si te haces mas joven qe ahora te dare mi tesoro";
+				set Q_99LVL,1;
+				emotion e_no1;
+			}
+		}
+		close;
+	}
+	emotion e_hmm;
+	mes "...";
+	close;
+}

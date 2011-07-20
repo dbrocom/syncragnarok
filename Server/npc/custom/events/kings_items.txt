@@ -1,0 +1,178 @@
+//===== eAthena Script ======================================= 
+//= Event King Items
+//===== By: ================================================== 
+//= $ephiroth
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena Version
+//===== Description: ========================================= 
+//= Grand Circlet Quest combined with Excalibur Quest.
+//= Converted to eAthena format from Fusion.
+//= 2006/09/27: 1.0 Release and fully working. [$ephiroth]
+//============================================================
+
+prt_castle,80,170,4	script	King of Prontera	108,{
+	set @npcname$,"[King of Prontera]";
+
+	mes @npcname$;
+	mes "Hola puedes ayudarme?";
+	next;
+	menu "Seguro, que puedo hacer?",L_Sure,"No lo siento ando ocupado",L_Quit;
+
+L_Sure:
+	mes @npcname$;
+	mes "Gracias.";
+	mes "Bien, mi hija enseguida de mi es un poco escandalosa.";
+	mes "Si tu le traes esos items estoy seguro que ella se calmara.";
+	mes "Si tu me traes sos items te dare mi corona o mi espada";
+	mes "Ambos son muy especiales.";
+	next;
+	menu "Ok que necesitas?",L_Req,"Tengo los items",L_Have,"olvidalo",L_Quit;
+
+L_Req:
+	mes @npcname$;
+	mes "Si uedes traerme:";
+	mes "^00B6FF30 Chonchon doll^000000";
+	mes "^D5A50050 Poring doll^000000";
+	mes "^0080FF20 Yoyo doll^000000";
+	mes "^CC66331 3carat diamond^000000";
+	mes "^3131FF20 Illusion Flowers^000000";
+	mes "^AA00AA20 Singing Flowers^000000";
+	mes "Te dare mi corona.";
+	next;
+	mes @npcname$;
+	mes "Si puedes traerme:";
+	mes "^0000881 Angel Band^000000";
+	mes "^4422FF1 Heaven Ring^000000";
+	mes "^AA00AA1 Emperium^000000";
+	mes "Te dare mi espada.";
+	mes "Una vez que los tengas, vuelve conmigo.";
+	close;
+
+L_Have:
+	mes @npcname$;
+	mes "Que item deseas?";
+	next;
+	menu "Corona",L_crown,"Espada",L_sword;
+
+L_crown:
+	if(countitem(742)<30) goto L_Error; 
+	if(countitem(741)<50) goto L_Error1;
+	if(countitem(753)<20) goto L_Error2;
+	if(countitem(732)<1) goto L_Error3;
+	if(countitem(710)<20) goto L_Error4;
+	if(countitem(629)<20) goto L_Error5;
+	delitem 742,30;
+	delitem 741,50;
+	delitem 753,20;
+	delitem 732,1;
+	delitem 710,20;
+	delitem 629,20;
+	mes @npcname$;
+	mes "MUCHISIMAS GRACIAS!!!!";
+	mes "Esto seguro que la tranquilizara.";
+	mes "Dejame tomar los items.";
+	next;
+	mes @npcname$;
+	mes "Como lo rometi aqui esta mi corona.";
+	getitem 5007,1;
+	next;
+	mes @npcname$;
+	mes "Bien, ahora tengo que tranquilizarla.";
+	mes "Gracias de nuevo!";
+	close;
+L_sword:
+	if(countitem(2254)<1) goto L_NoAngel;
+	if(countitem(2282)<1) goto L_NoHeaven;
+	if(countitem(714)<1) goto L_NoEmp;
+	delitem 2254,1;
+	delitem 2282,1;
+	delitem 714,1;
+	mes @npcname$;
+	mes "MUCHISIMAS GRACIAS!!!";
+	mes "Esto seguro que la calmara.";
+	mes "Dejame tomar los items.";
+	next;
+	mes @npcname$;
+	mes "Como lo prometi aqui esta mi espada.";
+	getitem 1137,1;
+	next;
+	mes @npcname$;
+	mes "Bien, ahora tengo que calmarla.";
+	mes "Gracias de nuevo!";
+	close;
+
+L_NoAngel:
+	mes @npcname$;
+	mes "Lo siento pero debes tener al menos un Angel Band.";
+	mes "Vuelve cuando tengas TODOS los items.";
+	close;
+
+L_NoHeaven:
+	mes @npcname$;
+	mes "Lo siento pero al menos debes tener un Heaven Ring.";
+	mes "Vuelve cuando tengas TODOS los items.";
+	close;
+
+L_NoEmp:
+	mes @npcname$;
+	mes "Lo siento pero al menos debes tener un Emperium.";
+	mes "Vuelve cuando tengas TODOS los items.";
+	close;
+
+L_Error:
+	mes @npcname$;
+	mes "Oh maldicion, necesitas 30 Chonchon Dolls.";
+	close;
+
+L_Error1:
+	mes @npcname$;
+	mes "Oh maldicion, necesitas 50 Poring dolls.";
+	close;
+
+L_Error2:
+	mes @npcname$;
+	mes "Oh maldicion, necesitas 20 Yoyo dolls.";
+	close;
+
+L_Error3:
+	mes @npcname$;
+	mes "Oh maldicion, necesitas un 3 Carat Diamond.";
+	close;
+
+L_Error4:
+	mes @npcname$;
+	mes "Oh maldicion, necesitas 20 Illusion Flowers.";
+	close;
+
+L_Error5:
+	mes @npcname$;
+	mes "Oh maldicion, necesitas 20 Singing Flowers.";
+	close;
+
+L_Quit:
+	mes @npcname$;
+	mes "Ok, esta bien. Estoy seguro que alguien mas ayudara.";
+	close;
+}
+
+prt_castle,84,170,4	script	King's Daughter	62,{
+	set @npcname$,"[King's Daughter]";
+
+	mes @npcname$;
+	mes "Hashh, Odio a mi papa!!";
+	next;
+	menu "Porque?",L_Why,"Ok.. A mi que...",L_Quit;
+
+L_Why:
+	mes @npcname$;
+	mes "Pues, No me quiere dar lo que yo quiero!!";
+	mes "El es el Rey de Prontera, deberia darme Cualquier Cosa!!!";
+	close;
+
+L_Quit:
+	mes @npcname$;
+	mes "BIEN ENTONCES AshH!!!";
+	close;
+}

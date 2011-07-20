@@ -1,0 +1,202 @@
+//===== eAthena Script =======================================
+//= Easter Egg Event
+//===== By: ==================================================
+//= kobra_k88
+//= fixed by Yoshimo
+//===== Current Version: =====================================
+//= 1.0a
+//===== Compatible With: =====================================
+//=
+//===== Description: =========================================
+//= Break easter eggs in towns an cities to find chocolates.
+//= Exchange the chocolates for prizes.
+//= Includes Easter egg and Easter bunny mobs.
+//===== Additional Comments: =================================
+//= Not sure about "Gold coin" as being one of the prizes.
+//= fixed infinite gifts [Yor] (thanks to Yoshimo from Freya's forum)
+//============================================================
+
+
+geffen,95,201,3	script	Shilo	50,{
+	mes "[Shilo]";
+	if(easter_Q == 1) goto L_Check;
+	mes "*Suspiro*... ¿¡Donde esta mi hermana!?";
+	next;
+	mes "[Shilo]";
+	mes "Oh... ¡Hola! ¡Estoy muy emocionado! ¿Sabes por qué?";
+	next;
+	mes "[Shilo]";
+	mes "Mi día festivo favorito está aquí... ¡¡^D2A200Pascua^000000!!";
+	next;
+	mes "[Shilo]";
+	mes "No puedo esperar para ir a buscar algunos huevos de pascua ...";
+	next;
+	if(@talked == 1) menu "Quiero buscar estos huevos.",sM_0, "... ¿Huevos? ¿Por qué?",M_0, "De verdad me aburren... *bostezo*...",M_End;
+	menu "... ¿Huevos? ¿Por qué?",M_0, "De verdad me aburren... *bostezo*...",M_End;
+
+	M_0:
+		mes "[Shilo]";
+		mes "¿Quieres decir que nunca has estado en una ^5533FFBúsqueda de Huevos de Pascua^000000 antes?";
+		next;
+		mes "[Shilo]";
+		mes "¡Son las mejores! Ver todos los años, personas escondiendo ^5533FFHuevos de pascua^000000 a través de Rune Midgard.";
+		mes "Y nuestro trabajo es ir a buscar el mayor número posible y recoger todos los regalos dentro de ellos.";
+		next;
+		mes "[Shilo]";
+		mes "Mira, hace mucho tiempo, los Peco Peco vagaban por la tierra libres de hostilidades..";
+		mes "Por todo el Rune Midgard, hacían lo que le que querían, y se reproducían sin temores.";
+		next;
+		mes "[Shilo]";
+		mes "La población de Peco Peco population properó y seguió creciendo... Eventualmente sus números se fueron dela manosl.";
+		mes "La gente de Rune Midgard decidió que tenían que hacer algo con respecto a l asobrepoblación de Peco Pecos.";
+		next;
+		mes "[Shilo]";
+		mes "Asi que se ordenó destruir tantos Peco Peco eggs como se encontraran!!";
+		next;
+		mes "[Shilo]";
+		mes "Muchos niños hallaron la destrucción de los indefensos Peco Peco eggs insoportable.";
+		mes "Estaban muy tristes por esto y les rogaron a sus padres que se detuviesen.";
+		next;
+		mes "[Shilo]";
+		mes "Desafortunadamente no podían parar.";
+		mes "Si no hacían nada, las fertiles tierras de Rune Midard serían destruídas por los Peco Pecos.";
+		next;
+		mes "[Shilo]";
+		mes "Asi es que decidieron intentar convencer a los niños de que destruir los huevos era algo bueno.";
+		mes "Los padres comenzaron a fabricar huevos falsos de peco peco que contenían regalos.";
+		next;
+		mes "[Shilo]";
+		mes "Los escondieron por toda la ciudad y enviaron a los niños a buscarlos.";
+		mes "Una vez encontrados, los niños romperían le huevos falsos y hallarían los regalos. Entonces se sentirían felices de romper los huevos de los Peco Pecos.";
+		next;
+		mes "[Shilo]";
+		mes "Ahora el Peco Peco tiene enemigos naturales, como los desert wolves, que mantienen un balance en la poblacion de Peco Peco.";
+		mes "Por lo tanto, la gente de Rune Midgard no tuvo que seguir destruyendo los indefensos Peco Peco eggs.";
+		next;
+		mes "[Shilo]";
+		mes "Pero aún conservan la tradición de esconder huevos falsos por todo Rune Midgard todos los años.";
+		mes "Y esa es la historia detras de la Pascua en Rune Midgard.";
+		next;
+		mes "[Shilo]";
+		mes "You know... it looks like I'm going to be here for alonge while. I'll tell you what...";
+		next;
+		mes "[Shilo]";
+		mes "If you go out and find some ^5533FFEaster eggs^000000 and bring me back their special 'treats', I will give you something for them...";
+		mes "¿Qué dices?";
+		set @talked, 1;
+		next;
+		menu "¿Qué tengo que hacer?",sM_0, "Nah, estoy muy ocupado.",sM_End;
+
+		sM_0:
+			mes "[Shilo]";
+			mes "Todo lo que tienes que hacer es buscar algunos huevos de Pascua que podrás encontrar en los pueblos y ciudades de todo el Rune Midgard.";
+			next;
+			mes "[Shilo]";
+			mes "Cuando los encuentres, rompelos. Si tienes suerte habrá deliciosos^D2A200'Chocolates'^000000 en su interior.";
+			mes "Encuentra al menos ^00950010^000000, y traemelos y te dare un ^FF5533premio^000000.";
+			next;
+			mes "[Shilo]";
+			mes "Cuanto más traigas, mejor sera el regalo que te haré.";
+			next;
+			mes "[Shilo]";
+			mes "Te daré algo por:";
+			mes "^00950010 ^D2A200Chocolates";	// 1 gold coin ?
+			mes "^5533FF50 ^D2A200Chocolates^000000";	// 1 old blue box
+			mes "y ^FF3355150 ^D2A200Chocolates^000000";	// 1 old purple box
+			next;
+			mes "[Shilo]";
+			mes "Y bien, que dices?";
+			next;
+			menu "Suena divertido, lo haré!",ssM_0, "Tengo mejores cosas que hacer",ssM_End;
+	
+			ssM_0:
+				mes "[Shilo]";
+				mes "Genial! Pero debo advertirte...";
+				next;
+				mes "[Shilo]";
+				mes "During your hunt, you may come across the protectors of these eggs...";
+				next;
+				mes "[Shilo]";
+				mes "They have a bright, light blue color and are very 'fluffy'...";
+				mes "Though I have never seen one, I've heard many stories about them.";
+				next;
+				mes "[Shilo]";
+				mes "The have come to be know as... '^FF3355Easter Bunnies^000000'!!";
+				mes "Be safe and good luck. I'll be waiting here.";
+				set easter_Q, 1;
+				close;
+
+			ssM_End:
+				mes "[Shilo]";
+				mes "Well it's your loss...";
+				emotion 9;
+				close;
+		sM_End:
+			mes "[Shilo]";
+			mes "Ahh, I understand. Farewell.";
+			close;
+	M_End:
+		mes "[Shilo]";
+		mes "... Well, you're not all that exciting to talk with either...";
+		emotion 9;
+		close;
+
+
+//---------------------
+L_Check:
+//----------
+	mes "Ya has encontrado algún ^D2A200Chocolate^000000?";
+	next;
+	mes "[Shilo]";
+	if (countitem(558) < 10) goto L_NotEnuf;
+	mes "Estupendo. Tienes " + countitem(558) + " ^D2A200Chocolates^000000. Aqui esta tu premio...";
+	if (countitem(558) >= 150) goto L_150;
+	if (countitem(558) >= 50) goto L_50;
+
+	delitem 558,10;
+	getitem 671,1;
+	goto L_Cont;
+
+	L_50:
+		delitem 558,50;
+		getitem 603,1;
+		goto L_Cont;
+
+	L_150:
+		delitem 558,150;
+		getitem 617,1;
+		goto L_Cont;
+
+	L_Cont:
+	mes "Diviertete y felices Pascuas!";
+	close;
+
+	L_NotEnuf:
+		mes "No tienes suficiente ^D2A200Chocolate^000000 como para un premio.";
+		close;
+}
+
+
+// Easter Eggs
+//=====================================================
+alberta,0,0,0,0	monster	Easter Egg	1920,100,0,0,0
+aldebaran,0,0,0,0	monster	Easter Egg	1920,150,0,0,0
+amatsu,0,0,0,0	monster	Easter Egg	1920,100,0,0,0
+comodo,0,0,0,0	monster	Easter Egg	1920,100,0,0,0
+geffen,0,0,0,0	monster	Easter Egg	1920,120,0,0,0
+gonryun,0,0,0,0	monster	Easter Egg	1920,100,0,0,0
+izlude,0,0,0,0	monster	Easter Egg	1920,80,0,0,0
+louyang,0,0,0,0	monster	Easter Egg	1920,200,0,0,0
+morocc,0,0,0,0	monster	Easter Egg	1920,250,0,0,0
+payon,0,0,0,0	monster	Easter Egg	1920,150,0,0,0
+prontera,0,0,0,0	monster	Easter Egg	1920,250,0,0,0
+umbala,0,0,0,0	monster	Easter Egg	1920,100,0,0,0
+yuno,0,0,0,0	monster	Easter Egg	1920,150,0,0,0
+
+// Easter Bunny
+//======================================================
+alberta,0,0,0,0	monster	Easter Bunny	1921,1,1200000,900000,0
+geffen,0,0,0,0	monster	Easter Bunny	1921,1,1200000,900000,0
+morocc,0,0,0,0	monster	Easter Bunny	1921,2,1200000,900000,0
+payon,0,0,0,0	monster	Easter Bunny	1921,1,1200000,900000,0
+prontera,0,0,0,0	monster	Easter Bunny	1921,2,840000,420000,0

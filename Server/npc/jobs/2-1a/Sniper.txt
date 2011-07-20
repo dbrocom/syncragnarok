@@ -1,0 +1,83 @@
+//===== eAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,44,55,5	script	Sniper#Valkyrie	727,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Sniper]";
+			mes "¡Felicidades!";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		mes "[Sniper]";
+		mes "Un disparo.";
+		mes "Una muerte.";
+		mes "No es tan difícil";
+		mes "una vez hayas perfeccionado";
+		mes "tu visión para este tipo";
+		mes "de batallas.";
+		close;
+	}
+	else if (ADVJOB == Job_Sniper && Class == Job_Archer_High && JobLevel > 39) {
+		mes "[Sniper]";
+		mes "El mundo necesita";
+		mes "poderosos arqueros como tú.";
+		mes "¿Estás preparado para";
+		mes "asumir la maravillosa responsabilidad?";
+		next;
+		mes "[Sniper]";
+		mes "¿Estás preparado para";
+		mes "dar el siguiente paso,";
+		mes "y convertirte en Sniper?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[Sniper]";
+			mes "Cuando estés preparado,";
+			mes "podrás volver.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Sniper]";
+			mes "Aun te es posible aprender skills. Por favor,";
+			mes "usa todos tus Skill Points restantes antes de volver conmigo.";
+			close;
+		}
+		jobchange Job_Sniper;
+		set ADVJOB,0;
+		mes "[Sniper]";
+		mes "¡Felicidades!";
+		mes "¡Como Sniper, espero";
+		mes "que las hordas demoníacas";
+		mes "nunca estén seguras";
+		mes "mientras estén al alcance";
+		mes "de tu visión!";
+		close;
+	}
+	mes "[Sniper]";
+	mes "Bienvenido";
+	mes "al Valhalla,";
+	mes "el Salón del Honor.";
+	next;
+	mes "[Sniper]";
+	mes "Por favor,";
+	mes "que tu estancia aquí";
+	mes "sea cómoda.";
+	mes "¡Gloria a los guerreros!";
+	close;
+}

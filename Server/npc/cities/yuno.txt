@@ -1,0 +1,391 @@
+//===== eAthena Script ======================================= 
+//= Juno City
+//===== By: ================================================== 
+//= KitsuneStarwind, kobra_k88, L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.4a
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= NPCs for the City of Juno
+//===== Additional Comments: ================================= 
+//= Added additional npcs.  Added Metto quest. [kobra_k88]
+//= Moved item quest to quest folder. Re-edited a majority of the npcs. [kobra_k88]
+//=a Removed duplicate npcs already found in the sage quest.
+//= Fixed & Spellchecked [massdriller]
+//= 1.3 Started updating Juno NPCs based on iRO. 10% complete.
+//= 1.3.2 Started updating Juno NPCs based on iRO. 30% complete.
+//= 1.3.3 Removed Noyee	NPC (it's implemented in sleipnir_seal.txt)
+//= 1.4 Updated to Aegis 10.3 standards. [L0ne_W0lf]
+//=	Added Juno Airship Representative.
+//= 1.4a Corrected a Typo error (bugreport:716) [Samuray22]
+//============================================================ 
+
+// Juno
+//============================================================ 
+yuno,184,173,4	script	Freidrich#juno	729,{
+	if (rand(1,5) == 1) {
+		mes "[Freidrich]";
+		mes "^3355FFJuno^000000 se mantiene flotando en el aire por una fuerza antigua y misteriosa.";
+		next;
+		mes "[Freidrich]";
+		mes "Se dice que este poder proviene de una reliquia de una antigua civilización llamada ^3355FFJuperos^000000 que existió aquí mucho antes que Juno.";
+		next;
+		mes "[Freidrich]";
+		mes "Las investigaciones revelarón que el origen del poder de Juno son ^3355FFPiezas del Ymir`s Heart^000000. Escuché que esta fuente de poder se encuentra donde Juperos existió.";
+		next;
+		mes "[Freidrich]";
+		mes "Ya que muchos eruditos han estado viniendo a Juno para estudiar e investigar esta fuente de poder, nuestra ciudad básicamente es una conocida meca para eruditos.";
+		close;
+	}
+	else {
+		mes "[Freidrich]";
+		mes "La ciudad de los Sages,";
+		mes "^3355FFJuno,^000000 está constituida por";
+		mes "tres islas.";
+		next;
+		mes "[Freidrich]";
+		mes "Estas son Solomon, la isla del honor, Mineta la isla de la prosperidad y Snotora, la isla de la sabiduría.";
+		next;
+		mes "[Freidrich]";
+		mes "La ubicación de cada isla es";
+		mes "Noroeste : Solomon";
+		mes "Noreste : Snotora";
+		mes "Sur : Mineta.";
+		close;
+	}
+}
+	
+yuno,337,227,4	script	Juno Granny#juno	103,{
+	mes "[Granny]";
+	if (rand(1,50) == 1) {
+		if (Zeny > 999) {
+			mes "Dime, ¿te gustan los dulces?";
+			next;
+			mes "^3355FFGranny te da unos cuantos dulces^000000.";
+			next;
+			mes "[Granny]";
+			mes "Tú ya has escogido. No tiene importancia si aceptas o no estos dulces. No importa después de todo. Debes entender porqué sucedió esto.";
+			next;
+			mes "[Granny]";
+			mes "Aquí tienes ^3355FF1,000 zeny^000000.";
+			mes "¿Los aceptas?";
+			next;
+			if (select("Accept:Do not accept") == 1) {
+				mes "[Granny]";
+				mes "*Giggle*";
+				mes "Aquí tienes~";
+				set zeny,zeny-1000;
+				getitem 529,1; //Candy
+				next;
+				mes "[Granny]";
+				mes "*Giggle*";
+				mes "Bien, entonces....";
+				mes "Nos vemos~";
+				close;
+			}
+			mes "[Granny]";
+			mes "Sí, es correcto. Ahora debes preguntarte a ti mismo porqué no aceptaste los dulces que te ofrecí.";
+			close;
+		}
+		else {
+			mes "*Giggle giggle*";
+			mes "El tiempo ha llegado.";
+			mes "Bueno, entonces...";
+			close;
+		}
+	}
+	else {
+		mes "Soy una vieja abuela Sage que puede predecirlo todo...";
+		next;
+		mes "[Granny]";
+		mes "¿Has escuchado acerca de un poderoso monstruo que ha estado en los alrededores de Juno por mucho tiempo? Se le conoce sólo como el ^FF3355Lord of the Dead^000000.";
+		next;
+		mes "[Granny]";
+		mes "Se rumora que es del reino de los muertos. Lo acompañan varios monstruos undead, intentando llevarse a los seres vivos a su frío y congelado reino.";
+		next;
+		mes "[Granny]";
+		mes "Ya has decidido si desafías o no al Lord of the Dead. Lo único que tienes que hacer ahora es entender por qué tomaste esa decisión.";
+		close;
+	}
+}
+
+yuno,328,239,4	script	Juno Fighter#juno	732,{
+	mes "[Sergiof]";
+	mes "Mi nombre es Sergiof,";
+	mes "el peleador que";
+	mes "sirve a Granny,";
+	next;
+	mes "[Sergiof]";
+	mes "Te hablaré acerca de ^3355FFGrand Peco^000000 que es un Peco Peco de alto nivel. Grand Peco es más rápido que Peco Peco y es muy agresivo.";
+	next;
+	mes "[Sergiof]";
+	mes "Ataca usando su fuerte pico y varios Peco Pecos lo siguen. Hay una gran diferencia de poder entre un Peco Peco y el Grand Peco.";
+	close;
+}
+
+yuno,343,68,4	script	Juno Despot#juno	730,{
+	mes "[Ninno]";
+	if (rand(1,1000) == 1) {
+		mes "Eres bastante afortunado por haberme oído relatar esta historia. Esto sólo sucede ^FF33551 vez entre 1,000^000000.";
+		next;
+		mes "[Ninno]";
+		mes "¡Este mundo que vivimos en realidad es fabricado! ¡Es hora de que veas la realidad tal cual es!";
+		next;
+		mes "[Ninno]";
+		mes "¡Abre tus ojos! ¡Deja de ser manipulado por la realidad virtual!";
+		close2;
+		warp "prontera",182,206;
+		end;
+	}
+	mes "¿Has escuchado alguna vez hablar de un rey Egipcio del cual se creía que era el hijo de un dios? Su nombre es ^3355FFPharoah^000000.";
+	next;
+	mes "[Ninno]";
+	mes "Se rumoraba que era un gran hechicero que usaba su poder para maldecir inocentes. Se dice que aún existe, lanzando sus maldiciones a la gente.";
+	next;
+	mes "[Ninno]";
+	mes "Como un aventurero, es posible que puedas velor en tus viajes. Ten cuidado...";
+	close;
+}
+
+yuno,165,111,4	script	Juno Sage#juno	123,,{
+	mes "[Le Morpheus]";
+	if (rand(1,50) == 25) {
+		if (Zeny > 4999) {
+			mes "Mira mi mano. Estoy sosteniendo 2 tipos diferentes de hierbas.";
+			next;
+			mes "[Le Morpheus]";
+			mes "Una es una ^3355FFBlue Herb^000000 que hará que te olvides de la realidad y te mantendrá en esta realidad virtual^000000.";
+			next;
+			mes "[Le Morpheus]";
+			mes "La otra es una ^FF3355Red Herb^000000 que te revelará lo que es real y verdadero.";
+			next;
+			mes "[Le Morpheus]";
+			mes "Cualquiera que elijas, deberás gastar ^3355FF5,000 zeny^000000. Ahora, por favor elige una.";
+			next;
+			if (select("Choose ^FF3355Red Herb^000000:Choose ^3355FFBlue Herb^000000.") == 1) {
+				mes "[Le Morpheus]";
+				mes "Como lo has elegido, olvidarás todo y permanecerás en esta realidad virtual.";
+				set zeny,zeny-5000;
+				getitem 507,1; //Red_Herb
+				close2;
+				warp "prontera",182,206;
+				end;
+			}
+			mes "[Le Morpheus]";
+			mes "Verás la verdad.";
+			set zeny,zeny-5000;
+			getitem 510,1; //Blue_Herb
+			close2;
+			warp "pay_dun03",200,222;
+			end;
+		}
+		else {
+			mes "Hmm. Lamento decir que has perdido una gran oportunidad. Sin embargo, puedo ver que no posees la riqueza suficiente para llevar a término esta fortuna.";
+			close;
+		}
+	}
+	else {
+		mes "^3355FFApocalypse^000000... ";
+		mes "Es el nombre de un androide que solía proteger Juno hace mucho tiempo.";
+		next;
+		mes "[Le Morpheus]";
+		mes "Debido a que su inteligencia artificial se ha deteriorado con los años, ya no puede distinguir entre aliados y enemigos. Por desgracia, ese androide ahora no es nada más que un monstruo demente.";
+		close;
+	}
+}
+	
+yuno,157,205,4	script	Juno Artisan#juno	54,{
+	mes "[Artisan]";
+	mes "*Mumble mumble...*";
+	next;
+	mes "[Artisan]";
+	mes "Oh, hola. Permíteme presentarme. Soy un artesano que trata de mantener los derechos y obligaciones de los fabricantes de items en Juno.";
+	next;
+	switch(select("About Powerful Equipment:About Unique Items:About Authentic Food:End Conversation")) {
+	case 1:
+		mes "[Artisan]";
+		mes "Permíteme sugerirte el ^3355FFHoly Guard^000000 y ^3355FFHoly Avenger^000000 que son items especiales para Crusaders.";
+		next;
+		mes "[Artisan]";
+		mes "Esas piezas de equipo son muy ligeras y tienen varias habilidades. Además, poseen poder sagrado.";
+		next;
+		mes "[Artisan]";
+		mes "Debido a eso, este equipo es más poderoso contra algunos tipos de monstruos, como Ghosts o los Undead.";
+		next;
+		mes "[Artisan]";
+		mes "Sin embargo se rumora que sólo unos cuantos Crusaders elegidos son capaces de obtener esos items debido a su rareza.";
+		close;
+	case 2:
+		mes "[Artisan]";
+		mes "Parece sólo un simple pergamino marcado con círculos concéntricos y una estrella. Aunque el ^FF3355Worn-Out Magic Scroll^000000 es muy antiguo, es muy buscado por muchos Sages para sus investigaciones.";
+		next;
+		mes "[Artisan]";
+		mes "Parece que puedes usar ese item cuando recitas un hechizo mágico de alto nivel.";
+		close;
+	case 3:
+		mes "[Artisan]";
+		mes "^3355FFRice Cake^000000! Sí, es una comida tradicional apreciada por mucha gente. Muchos recuerdos nostálgicos de anticuados mercados que están relacionados con Rice Cake.";
+		next;
+		mes "[Artisan]";
+		mes "Ahhh~ ";
+		mes "Ojalá pudiera comer un poco de Rice Cake justo ahora.";
+		close;
+	case 4:
+		mes "[Artisan]";
+		mes "Aunque Juno es conocida como una ciudad de Sages, espero que entiendas que gente común vive y prospera aquí también. Por favor disfruta el ambiente único que Juno ofrece.";
+		close;
+	}
+}
+
+yuno,150,283,4	script	Juno Soldier#juno	105,{
+	mes "[Juno Soldier]";
+	mes "Bienvenido a Juno, la ciudad del noble pensamiento.";
+	next;
+	mes "[Juno Soldier]";
+	mes "Hay un monstruo cerca de aquí conocido como Lava Golem. Este golem está hecho a partir de un corazón de piedra cuyo poder se amplificó con magia cuando fue envuelto por roca fundida.";
+	next;
+	mes "[Juno Soldier]";
+	mes "La lava que escurre de su cuerpo es tan caliente que puede derretir armas y armaduras hechas de acero de alta calidad.";
+	next;
+	mes "[Juno Soldier]";
+	mes "Es mejor que seas cuidadoso cuando te encuentres con este monstruo. Dañará armas y armaduras en un parpadeo.";
+	close;
+}
+	
+yuno,165,283,4	script	Juno Soldier#2juno	105,{
+	mes "[Juno Soldier]";
+	mes "Bienvenido a Juno, la ciudad del noble pensamiento.";
+	next;
+	mes "[Juno Soldier]";
+	mes "Geographer... ";
+	mes "Ese monstruo parece una flor brotando de la tierra.";
+	next;
+	mes "[Juno Soldier]";
+	mes "Extrañamente, puede extender su cuerpo a una gran distancia. Aunque estés alejado, puede seguir siendo una amenaza.";
+	next;
+	mes "[Juno Soldier]";
+	mes "El nombre de este monstruo se originó a partir de una historia acerca de un pobre geógrafo quien, por desgracia, fue devorado por este monstruo mientras se encontraba concentrado en sus estudios.";
+	close;
+}
+	
+yuno,227,292,4	script	Juno Soldier#3juno	105,{
+	mes "[Juno Soldier]";
+	mes "Bienvenido a Juno, la ciudad del noble pensamiento.";
+	next;
+	mes "[Juno Soldier]";
+	mes "Cerca de Juno, existe un ángel caído llamado 'False Angel'. Finge inocencia, pretendiendo bendecir aventureros para después apuñalarlos por la espalda sin previo aviso.";
+	next;
+	mes "[Juno Soldier]";
+	mes "No te dejes engañar por su apariencia o te encontrarás en problemas.";
+	close;
+}
+	
+yuno,165,228,4	script	Juno Soldier#4juno	105,{
+	mes "[Juno Soldier]";
+	mes "Bienvenido a Juno, la ciudad del noble pensamiento.";
+	next;
+	mes "[Juno Soldier]";
+	mes "'Goat' es un monstruo que era un antílope viviendo en lo alto de las montañas que de alguna manera se volvió un monstruo.";
+	next;
+	mes "[Juno Soldier]";
+	mes "Incluso si consigues esquivar sus cuernos, debes estar alerta de sus poderosas patas.";
+	next;
+	mes "[Juno Soldier]";
+	mes "Las patas de Goat son tan fuertes porque siempre está trepando por los precipicios cuando no está ocupado matando inocentes.";
+	close;
+}
+	
+yuno,150,228,4	script	Juno Soldier#5juno	105,{
+	mes "[Juno Soldier]";
+	mes "Bienvenido a Juno, la ciudad del noble pensamiento.";
+	next;
+	mes "[Juno Soldier]";
+	mes "¿Alguna vez has";
+	mes "visto un Large Jellopy?";
+	mes "¡Esas cosas son enoooormes!";
+	next;
+	mes "[Juno Soldier]";
+	mes "¡Es difícil de creer";
+	mes "que un jellopy tan grande";
+	mes "y tan brillante exista!";
+	close;
+}
+	
+yuno,334,182,4	script	Juno Soldier#6juno	105,{
+	mes "[Juno Soldier]";
+	mes "Bienvenido a Juno, la ciudad del noble pensamiento.";
+	next;
+	mes "[Juno Soldier]";
+	mes "Entre las armas de los Sages, existe la 'Dagger of Counter.'";
+	next;
+	mes "[Juno Soldier]";
+	mes "Su uso es exlusivo de la clase Sage y eleva la probabilidad de hacer ataques críticos. Así que, para los Sages, esa daga puede ser muy útil, además de hacerlos ver con estilo en batalla.";
+	close;
+}	
+	
+yuno,263,320,4	script	Juno Soldier#7juno	105,{
+	mes "[Juno Soldier]";
+	mes "Bienvenido a Juno, la ciudad del noble pensamiento.";
+	next;
+	mes "[Juno Soldier]";
+	mes "Existe un escudo sagrado conocido como 'Sacred Misssion' que sólo puede ser utilizado por Crusaders.";
+	next;
+	mes "[Juno Soldier]";
+	mes "Es un escudo largo y estrecho con el ala de un ángel grabada en el centro. Es excepcionalmente poderoso contra monstruos tipo Devil y Undead.";
+	close;
+}
+
+yuno,142,183,5	script	Airship Representative	100,{
+	mes "[Airship Representative]";
+	mes "Buenos días, estoy aquí para informarte";
+	mes "acerca del Juno Airship el cual";
+	mes "planeamos operar en un futuro cercano.";
+	next;
+	mes "[Air ship Representative]";
+	mes "Desafortunadamente, aún está en";
+	mes "desarrollo, y todavía no";
+	mes "hemos acabado las pruebas. Sin embargo,";
+	mes "sentimos la necesidad de dejar que";
+	mes "nuestros entusiasmados clientes sepan de nuestro";
+	mes "progreso.";
+	next;
+	mes "[Airship Representative]";
+	mes "El Airship que estamos desarrollando te proveerá de un práctico viaje a cualquier ciudad. También podrás disfrutar la vista mientras estés en el aire. También proporcionaremos productos únicos de varias áreas.";
+	next;
+	mes "[Airship Representative]";
+	mes "Prometemos a nuestros clientes una";
+	mes "maravillosa experiencia de viaje";
+	mes "una vez que el Airship esté en";
+	mes "operación. Mientras tanto,";
+	mes "proveemos un servicio";
+	mes "especial de teletransportación.";
+	next;
+	mes "[Airship Representative]";
+	mes "El costo de la teletransportación es de 1,800 zeny, sea cual sea tu destino. Por favor infórmame a dónde quieres ir.";
+	next;
+	switch(select("Prontera:Izlude:Geffen:Morroc:Payon:Alberta:Comodo:Cancel")) {
+	case 1: callsub S_Warp,"prontera",116,72;
+	case 2: callsub S_Warp,"izlude",94,103;
+	case 3: callsub S_Warp,"geffen",120,39;
+	case 4: callsub S_Warp,"morocc",156,46;
+	case 5: callsub S_Warp,"payon",69,100;
+	case 6: callsub S_Warp,"alberta",117,56;
+	case 7: callsub S_Warp,"comodo",209,143;
+	case 8: close;
+	}
+
+S_Warp:
+	if (Zeny >= 1800) {
+		set zeny,zeny-1800;
+		warp getarg(0),getarg(1),getarg(2);
+		end;
+	}
+	else {
+		mes "[Airship Representative]";
+		mes "Lamento informarte que no tienes suficiente zeny contigo.";
+		mes "Por favor revisa la cantidad de zeny que tienes.";
+		close;
+	}
+}

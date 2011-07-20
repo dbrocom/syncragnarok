@@ -1,0 +1,77 @@
+//===== eAthena Script ======================================= 
+//= Feast Day Of Ramadan Idul Fitri Event
+//===== By: ================================================== 
+//= $ephiroth
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= eAthena Version
+//===== Description: ========================================= 
+//= Info : Official idRO
+//= 2006/10/16: 1.0 Release and fully working. [$ephiroth]
+//= 1.1 Replaced effect numerics with constants. [Samuray22]
+//============================================================
+
+
+prontera,146,92,3	script	Cellerb	58,{
+	set @npcname$,"[Staff Idul Fitri]";
+	mes @npcname$;
+	if((gettime(6)==10 && (gettime(5)==24 || gettime(5)==25))==0) {
+		mes "Felicidades! Celebremos el dia de ramadan idul fitri 1427 H.";
+		specialeffect EF_SANDMAN;
+		close;	
+	}
+	mes "Hola.....^FF8800"+strcharinfo(0)+"^000000!!";
+	mes "EL primer dia de idultfitri ha llegado";
+	mes "Felicidades Celebremoslo";
+	mes "Este es el evento especial de hoy";
+	next;
+	mes @npcname$;
+	mes "Evento de Hoy .....^009500I quest de dul Fitri!^000000";
+	next;
+	mes @npcname$;
+	mes "Si estas interesado en este evento te lo mostrare.";
+	next;
+
+	switch(select("Allright. I like that!!","Next time.... Thanks.")){
+	case 1:
+		mes @npcname$;
+		mes "Tengo algo que quizas te interese";
+		mes "Necesito todo los items siguientes:";
+		mes "^D5A500Ketupat Sayur Ingrediente :^000000";
+		mes "^00B6FF~5 Ketupat, 5 Zanahorias~,^000000";
+		mes "^CC6633~5  Papas dulces, 10 Trozos de carne~,^000000";
+		mes "^000088~2 Hierbas verdes, 5 Stem~.^000000";
+		next;
+		mes @npcname$;
+		if ( (countitem(552)<5 || countitem(515)<5 ||countitem(516)<5 || countitem(517)<10 || countitem(511)<2 || countitem(905)<5) ) { 
+			mes "Tu no tienes suficientes items";
+			mes "Vuelve cuando los tengas todos";
+			close;
+		}
+		delitem 552,5;
+		delitem 515,5;
+		delitem 516,2;
+		delitem 517,10;
+		delitem 511,2;
+		delitem 905,5;
+		mes "Veo que tienes todos los items que necesitas";
+		mes "Solo un momenton, porfavor!";
+		next;
+		mes "^009500-Plupping snapping bubbling~^000000";
+		mes "^009500-Clinking clingking~^000000";
+		mes "^009500-Clang clang~^000000";
+		getitem 583,1;
+		next;
+		mes @npcname$;
+		mes "Apreciamos tu participacion en este evento especial";
+		emotion e_thx;
+		close;
+
+	case 2:	
+		mes @npcname$;
+		mes "Oh bien, talvez participes en la quest de mañana";
+		emotion e_hmm;
+		close;
+	}
+}

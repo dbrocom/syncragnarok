@@ -1,0 +1,93 @@
+//===== eAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,58,3	script	Stalker#Valkyrie	747,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Stalker]";
+			mes "¡Felicidades!";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		mes "[Stalker]";
+		mes "Heh..";
+		mes "Es difícil";
+		mes "ser un héroe";
+		mes "y ser sospechoso,";
+		mes "incorrecto, mentiroso,";
+		mes "astuto...";
+		next;
+		mes "[Stalker]";
+		mes "Pero cuando";
+		mes "se acercan";
+		mes "mis amigos, saben";
+		mes "que pueden contar conmigo.";
+		mes "Yo los necesito";
+		mes "y ellos me necesitan.";
+		close;
+	}
+	else if (ADVJOB == Job_Stalker && Class == Job_Thief_High && JobLevel > 39) {
+		mes "[Stalker]";
+		mes "Este mundo necesita";
+		mes "más héroes";
+		mes "que quieran caminar";
+		mes "entre la línea del orden y el caos.";
+		next;
+		mes "[Stalker]";
+		mes "¿Estás listo";
+		mes "para unirte al rango";
+		mes "de los furtivos";
+		mes "guerreros? ¿Estás listo";
+		mes "para ser un Stalker?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[Stalker]";
+			mes "Cuando estés listo";
+			mes "siéntete libre de regresar.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Stalker]";
+			mes "Aún puedes aprender más habilidades. Por favor usa";
+			mes "usa todos los Skill Points antes de regresar conmigo.";
+			close;
+		}
+		jobchange Job_Stalker;
+		set ADVJOB,0;
+		mes "[Stalker]";
+		mes "¡Felicidades!";
+		mes "Como Stalker, espero";
+		mes "que apuñales gente correcta";
+		mes "por la espalda. Desaparezcas la";
+		mes "maldad usando sus propios";
+		mes "métodos cobardes!";
+		close;
+	}
+	mes "[Stalker]";
+	mes "Bienvenido";
+	mes "al Valhalla,";
+	mes "a la Sala del Honor";
+	next;
+	mes "[Stalker]";
+	mes "Por favor, que";
+	mes "tu estancia aquí";
+	mes "sea confortable.";
+	mes "¡Gloria a los guerreros!";
+	close;
+}

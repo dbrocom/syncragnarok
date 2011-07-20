@@ -1,0 +1,127 @@
+//===== eAthena Script ======================================= 
+//= Comodo Guides
+//===== By: ================================================== 
+//= kobra_k88; L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.5
+//===== Compatible With: ===================================== 
+//= eAthena  SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Guides for the City of Comodo
+//===== Additional Comments: ================================= 
+//= Fully working v1.1 Now using duplicate command.
+//= 1.2 Optimized, updated common guide names [Lupus]
+//= 1.3 Updated the guide according to how it is on iRO, thanks
+//=	to Muad_Dib [MasterOfMuppets]
+//= 1.4	Removed 3 guides, and converted to use functions.
+//= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//============================================================
+
+comodo,322,178,4	script	Comodo Guide#cmd::CmdGuide	700,{
+	callfunc "F_CmdGuide","Native Kokomo";
+}
+
+comodo,176,350,4	script	Comodo Guide#2cmd	700,{
+	callfunc "F_CmdGuide","Native Nutcoco";
+}
+
+comodo,37,219,4	script	Guide#2cmd	700,{
+	callfunc "F_CmdGuide","Native Papaya";
+}
+
+function	script	F_CmdGuide	{
+	mes "["+getarg(0)+"]";
+	mes "Bienvenido a Comodo, la";
+	mes "ciudad de los sueños y las fantasias,";
+	mes "¡donde la vida nocturna nunca acaba!";
+	mes "Conozco esta are muy bien,";
+	mes "asi que dejame decirte si necesitas";
+	mes "direciones sobre cualquier lado.";
+	next;
+	switch(select("Casino:Hula Dance Stage ^3355FF(Dancer Job Change)^000000:Weapon and Armor Shop:Tool Shop:Tourist Shop:Kafra Co. Western Branch:Chief's House:Pub:Campground:End Conversation")) {
+	case 1:
+		viewpoint 1,140,98,0,0xFF6633;
+		mes "Por favor fijate la marca de cruz,";
+		mes "^FF6633+^000000, en tu Mini-Mapa para encontrar el";
+		mes "Casino, un cielo para que descansen";
+		mes "los viajeros fatigados y el corazón";
+		mes "de la vida nocturna de Comodo.";
+		close;
+	case 2:
+		viewpoint 1,188,168,1,0x0000FF;
+		mes "Por favor fijate la marca de cruz,";
+		mes "^0000FF+^000000, en tu Mini-Mapa para encontrar el";
+		mes "Hula Dance Stage, este lugar";
+		mes "es donde las Archers mujeres pueden";
+		mes "cambiar su job a Dancer.";
+		close;
+	case 3:
+		viewpoint 1,266,70,2,0x00FFFF;
+		mes "Por favor fijate la marca de cruz,";
+		mes "^00FFFF+^000000, oen tu Mini-Mapa para encontrar la";
+		mes "Tienda de Armas y Armaduras. deberias";
+		mes "de revisar esa tienda en busca";
+		mes "de armamento especial que";
+		mes "son unicos en Comodo!";
+		close;
+	case 4:
+		viewpoint 1,86,128,3,0x515151;
+		mes "Por favor fijate la marca de cruz,";
+		mes "^515151+^000000, en tu Mini-Mapa para encontrar la";
+		mes "Tienda de Herramientas. Si nunca estubistes";
+		mes "alli antes, entonces te sugiero";
+		mes "que vallas a verla y que compres";
+		mes "herramientas que necesites mas adelante.";
+		close;
+	case 5:
+		viewpoint 1,298,124,4,0x3355FF;
+		mes "Por favor fijate la marca de cruz,";
+		mes "^3355FF+^000000, en tu Mini-Mapa para encontrar la";
+		mes "Tienda para Turistas donde puedes ";
+		mes "donde puedes comprar regalos que solo se ecuentran ^FFFFFF ^000000 in the Comodo region~";
+		close;
+	case 6:
+		viewpoint 1,136,202,5,0xFF5555;
+		mes "Por favor fijate la marca de cruz,";
+		mes "^FF5555+^000000, en tu Mini-Mapa para encontrar la";
+		mes "Rama oeste de la Corporacion";
+		mes "Kafra. Ellos ofrecen";
+		mes "algunos servicios importantes que^FFFFFF ^000000 you may want to check out later.";
+		close;
+	case 7:
+		viewpoint 1,114,294,5,0xFF5555;
+		mes "Por favor fijate la marca de cruz,";
+		mes "^FF5555+^000000, en tu Mini-Mapa para encontrar la";
+		mes "Casa del Jefe. Eres bienvenido";
+		mes "a visitarlo y el usualmente";
+		mes "esta feliz de tener visitantes.";
+		close;
+	case 8:
+		viewpoint 1,166,298,5,0xFF5555;
+		mes "Por favor fijate la marca de cruz,";
+		mes "^FF5555+^000000, en tu Mini-Mapa para encontrar la";
+		mes "Cantina. Alli, podras conocer a otros";
+		mes "turistas, relajjarte y socializar";
+		mes "en una atmosfera amigable~";
+		close;
+	case 9:
+		viewpoint 1,210,308,5,0xFF5555;
+		mes "Por favor fijate la marca de cruz,";
+		mes "^FF5555+^000000, en tu Mini-Mapa para encontrar el";
+		mes "Campground. ven con tu";
+		mes "familia y amigos, y disfruta";
+		mes "de el  barbeque especial de";
+		mes " el campamento de Comodo~";
+		close;
+	case 10:
+		mes "["+getarg(0)+"]";
+		mes "De hecho, parece como";
+		mes "si siempre fuera de noche en Comodo";
+		mes "porque esta construido en una";
+		mes "cueva. No llega la luz del sol";
+		mes "aquí, pero la obscuridad, en este lugar, es";
+		mes "más emocionante que escalofriante~";
+		close;
+	}
+}

@@ -1,0 +1,111 @@
+//===== eAthena Script ======================================= 
+//= Ayothaya Guides
+//===== By: ================================================== 
+//= MasterOfMuppets
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Guides for the City of Ayotaya
+//===== Additional Comments: ================================= 
+//= 1.0 First version [L0ne_W0lf]
+//============================================================
+
+ayothaya,203,169,3	script	Noi#ayo	839,{
+	mes "[Noi]";
+	mes "Bienvenido a Ayotaya.";
+	mes "Nuestra hermosa ciudad esta construida";
+	mes "sobre el agua y rodeada";
+	mes "por un denso bosque.";
+	next;
+	mes "[Noi]";
+	mes "Hay varias atracciones turisticas en esta ciudad que no encontraras en otras. Nuestras tiendas de pescaderia y la arquitectura unica de los edificios es la suficiente razon para visitar Ayothaya.";
+	next;
+	mes "[Noi]";
+	mes "Por favor sientete libre";
+	mes "de darte una mirada por los alrededores.";
+	next;
+	switch(select("Building Locations.:Remove marks from mini-map.:Cancel.")) {
+	case 1:
+		mes "[Noi]";
+		mes "¿Que le gustaria";
+		mes "visitar?";
+		next;
+		switch(select("Weapon Shop:Tool Shop:Tavern:Shrine:Fishing Spot:Cancel")) {
+		case 1:
+			mes "[Noi]";
+			mes "En nuestra tienda de armas,";
+			mes "encontraras grandiosas armas";
+			mes "preferidas por bravos peregrinos ayothayos.";
+			next;
+			mes "[Noi]";
+			mes "Nuestra tienda de armas";
+			mes "se encuentra en el lugar de la ^55FF33+^000000.";
+			viewpoint 1,165,90,2,0x55FF33;
+			close;
+		case 2:
+			mes "[Noi]";
+			mes "Nosotros ayothayos siempre  nos aseguramos que tenemos todo lo que necesitamos antes de salir de viaje, nunca duele estar preparado, verdad?";
+			next;
+			mes "[Noi]";
+			mes "Nuestra tienda de herramientas";
+			mes "se encuentra en el lugar de la ^3355FF+^000000.";
+			viewpoint 1,129,86,3,0x3355FF;
+			close;
+		case 3:
+			mes "[Noi]";
+			mes "Una de las cosas básicas de los aventureros es recolectar información, ó al menos eso es lo que dicen. Puedes conocer diferentes tipos de gente en la taberna. Estoy seguro que aprenderas algo importante ahí.";
+			next;
+			mes "[Noi]";
+			mes "Por supuesto, tu deberias";
+			mes "pasar por nuestra Taverna.";
+			mes "se encuentra en el lugar de la ^00FF00+^000000.";
+			viewpoint 1,232,76,4,0x00FF00;
+			close;
+		case 4:
+			mes "[Noi]";
+			mes "Si deseas orar a Dios, o adquirir un estado de paz en tu mente, ¿Por que no visitas nuestro Templo? Incluso si es solo para darle un vistazo, todos son";
+			mes "bienvenidos alli.";
+			next;
+			mes "[Noi]";
+			mes "Nuestro Templo";
+			mes "se encuentra en el lugar de la ^00FF00+^000000.";
+			viewpoint 1,208,283,5,0x00FF00;
+			close;
+		case 5:
+			mes "[Noi]";
+			mes "Desde que Ayothaya fue construida sobre la superficie del agua y cercano a las playas, ha sido un lugar favorito por pescadores. ¿Por que no atrapas algunos peces para la cena en el Lugar de Pesca?";
+			next;
+			mes "[Noi]";
+			mes "Nuestro famoso";
+			mes "Lugar de Pesca";
+			mes "se encuentra en el lugar de la ^00FF00+^000000";
+			viewpoint 1,253,99,6,0x00FF00;
+			close;
+		case 6:
+			mes "[Noi]";
+			mes "Si deseas remover las marcas de localizacion de tu Mini-Mapa, por favor seleciona la opcion 'Remove marks from mini-map' desde el menu.";
+			close;
+		}
+	case 2:
+		viewpoint 2,165,90,2,0x55FF33;
+		viewpoint 2,129,86,3,0x3355FF;
+		viewpoint 2,232,76,4,0x00FF00;
+		viewpoint 2,208,283,5,0x00FF00;
+		viewpoint 2,253,99,6,0x00FF00;
+		mes "[Noi]";
+		mes "Muy bien...";
+		mes "Voy a remover todas las";
+		mes "marcas de localizacion de";
+		mes "tu Mini-Mapa.";
+		mes "Gracias.";
+		close;
+	case 3:
+		mes "[Noi]";
+		mes "Por favor disfruta";
+		mes "tus viajes.";
+		close;
+	}
+}

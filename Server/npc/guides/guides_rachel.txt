@@ -1,0 +1,116 @@
+//===== eAthena Script ======================================= 
+//= Rachel Guide
+//===== By: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.2b
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Rachel City guide
+//===== Additional Comments: ================================= 
+//= 1.0 First version. [L0ne_W0lf]
+//= 1.1 Change the while loops a bit. [L0ne_W0lf]
+//= 1.2 Deleted an Unnecessary "next;" [Samuray22]
+//	-Thanks to $ephiroth.
+//= 1.2a Fixed some errors with the loop[Samuray22]
+//	-Thanks to $ephiroth.
+//= 1.2b Deleted a unnecessary "end". [Samuray22]
+//============================================================ 
+
+rachel,138,146,5	script	Rachel Guide	934,{
+	mes "[Rachel Guide]";
+	mes "Bienvenido a la capital de";
+	mes "Arunafeltz, Rachel donde un caluroso";
+	mes "suspiro de la diosa Freya nos llega";
+	mes "Si esta es la primera vez que tu";
+	mes "usas el servicio de guia, ¿porque";
+	mes "no miras la seccion ''Notice'' primero?";
+	set .@loop1,1;
+	while(.@loop1) {
+		next;
+		switch(select("Village Guide:Remove Marks from Mini-Map:Notice:Cancel")) {
+		case 1:
+			mes "[Rachel Guide]";
+			mes "puedo decirte donde esta cualquier edificio de Rachel.";
+			mes "Asi que ¿donde quieres ir?";
+			if (.@compass_check == 0) {
+				mes "¿Vas a querer";
+				mes "Que marque los lugares";
+				mes "en tu Mini-Mapa?";
+				next;
+				if (select("Yes:No") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+
+				switch(select("Cheshrumnir:Inn:Weapon Shop:Tool Shop:Airport:Cancel")) {
+				case 1:
+					mes "[Rachel Guide]";
+					mes "Cheshrumnir es un lugar santo donde el papa, reencarnacion de la diosa Freya descansa.";
+					mes "Toma el camino hacia el norte para encontrar el edificio.";
+					if (.@compass_check == 1) viewpoint 1,150,249,1,0xFF0000;
+					break;
+				case 2:
+					mes "[Rachel Guide]";
+					mes "Puedes descansar despues de tanta fatiga en la posada.";
+					mes "El edificio de mi izquierda es la posada de Rachel";
+					if (.@compass_check == 1) viewpoint 1,115,149,2,0xFF00FF;
+					break;
+				case 3:
+					mes "[Rachel Guide]";
+					mes "¿Quieres ver las armas que se venden en Rachel?";
+					mes "La tienda de armas esta cerca de la salida del oeste.";
+					if (.@compass_check == 1) viewpoint 1,42,87,3,0x99FFFF;
+					break;
+				case 4:
+					mes "[Rachel Guide]";
+					mes "La ''tool shop'' de Rachel vende la mejor calidad de pociones.";
+					mes "Esta cerca de la salida del oeste.";
+					if (.@compass_check == 1) viewpoint 1,83,78,4,0x0000FF;
+					break;
+				case 5:
+					mes "[Rachel Guide]";
+					mes "El Aeropuerto esta pasando la puerta del este.";
+					if (.@compass_check == 1) viewpoint 1,273,125,5,0x00FF00;
+					break;
+				case 6:
+					mes "[Rachel Guide]";
+					mes "Si quisieras deshacerte de todas las marcas en tu Mini-Mapa,";
+					mes "solo preguntame denuevo, y escoge ''Remove Marks from Mini-Map'' del menu.";
+					set .@loop2,0;
+					break;
+				}
+			}
+			break;
+
+		case 2:
+			viewpoint 2,150,249,1,0xFF0000;
+			viewpoint 2,115,149,2,0xFF00FF;
+			viewpoint 2,42,87,3,0x99FFFF;
+			viewpoint 2,83,78,4,0x0000FF;
+			viewpoint 2,273,125,5,0x00FF00;
+			mes "[Rachel Guide]";
+			mes "Listo, ya no estan. Si buscas mas lugares para conocer, solo hazmelo saber.";
+			break;
+		case 3:
+			mes "[Rachel Guide]";
+			mes "Cuando estes usando el menu ''Village Guide'',";
+			mes "asegurate de que la localidad de los edificios sean marcados en tu Mini-Mapa en la parte diagonal arriba derecha de tu pantalla.";
+			mes "Si no puedes ver tu Mini-Mapa, presiona ''ctrl+tab'' o presiona el boton ''Map'' en tu ventana de informacion basica, ¿de acuerdo?";
+			mes "Y tambien puedes alejar tu Mini-Mapa usando el boton ''-'' en caso de que no puedas ver el mapa entero del pueblo.";
+			break;
+		case 4:
+			mes "[Rachel Guide]";
+			mes "Espero que tengas un maravilloso viaje";
+			mes "en Arunafeltz.";
+			close2;
+			set .@loop1,0;
+			break;
+		}
+	}
+	close;
+}

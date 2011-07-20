@@ -1,0 +1,88 @@
+//===== eAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 +
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= v1.1 Made all into functions, additional checks, etc. [Lupus]
+//= v1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,44,50,5	script	MasterSmith#Valkyrie	731,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[MasterSmith]";
+			mes "Felicidades.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		mes "[MasterSmith]";
+		mes "Ah... ";
+		mes "El esfuerzo";
+		mes "de un artesano.";
+		mes "Ese es un trabajo de";
+		mes "un MasterSmith.";
+		next;
+		mes "[MasterSmith]";
+		mes "Ahora eres el";
+		mes "mejor de los mejores.";
+		mes "Empezaste forjando con";
+		mes "la meta de descubrir";
+		mes "nuevos y mejores caminos ";
+		mes "para forjar";
+		close;
+	}
+	else if (ADVJOB == Job_WhiteSmith && Class == Job_Merchant_High && JobLevel > 39) {
+		mes "[MasterSmith]";
+		mes "¡La hora ha llegado!";
+		mes "Nuestro mundo necesita valientes";
+		mes "aventureros que trabajen duro";
+		mes "como tu...";
+		next;
+		mes "[MasterSmith]";
+		mes "¿Te gustaría";
+		mes "convertirte en un MasterSmith?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[MasterSmith]";
+			mes "Cuando estés listo.";
+			mes "Siéntete libre de volver.";
+			mes "¡Gloria a los guerreros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[MasterSmith]";
+			mes "Aún es posible que aprendas más Skills. Por favor usa";
+			mes "todos tus Skill Points antes de volver conmigo.";
+			close;
+		}
+		jobchange Job_Whitesmith;
+		set ADVJOB,0;
+		mes "[MasterSmith]";
+		mes "¡Felicidades!";
+		mes "Como un MasterSmith,";
+		mes "Espero que forjes";
+		mes "Un camino más brillante";
+		mes "para el futuro de Rune-Midgard.";
+		close;
+	}
+	mes "[MasterSmith]";
+	mes "Bienvenido";
+	mes "a Valhalla,";
+	mes "el Salón del honor.";
+	next;
+	mes "[MasterSmith]";
+	mes "Por favor siéntase";
+	mes "usted cómodo";
+	mes "mientras este aquí.";
+	mes "¡Gloria a los guerreros!";
+	close;
+}

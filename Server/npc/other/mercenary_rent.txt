@@ -1,0 +1,786 @@
+//===== eAthena Script ======================================= 
+//= Mercenary related NPCs
+//===== By: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Sells Lancer, Sword, and Archer, mercenaries
+//= Sells related mercenary items.
+//===== Additional Comments: ================================= 
+//= 1.0 First version. [L0ne_W0lf]
+//= 1.1 Optimization. [Zephyrus]
+//= 1.2 Removed redundent input. [L0ne_W0lf]
+//= 1.3 Duplicates now spawned from floating NPCs. [L0ne_W0lf]
+//============================================================ 
+
+prontera,41,337,5	script	Mercenary Manager#Spear	105,{
+	set .@faith_lancer, mercenary_get_faith(SPEAR_MERC_GUILD);
+	mes "[Mercenary Manager]";
+	mes "Bienvenido a la";
+	mes "Spear Mercenary Guild.";
+	mes "¿Qué puedo hacer por ti?";
+	next;
+	switch( select("Alquilar un Mercenario:Información sobre los mercenarios:Nada:10 Grade Mercenaries") )
+	{
+	case 1:
+		mes "[Mercenary Manager]";
+		mes "¿Quieres contratar a un";
+		mes "Mercenario de Lanza?";
+		mes "¿Qué grado estas";
+		mes "interesado en contratar?";
+		next;
+		set .@Grade, select("1st Grade Spear Mercenary:2nd Grade Spear Mercenary:3rd Grade Spear Mercenary:4th Grade Spear Mercenary:5th Grade Spear Mercenary:6th Grade Spear Mercenary:7th Grade Spear Mercenary:8th Grade Spear Mercenary:9th Grade Spear Mercenary");
+		set .@BaseLevel, 5 + (.@Grade * 10);
+		if( .@BaseLevel > 90 )
+			set .@BaseLevel, 90;
+		
+		set .@ZenyCost, 7 * .@Grade;
+
+		if( .@Grade == 7 )
+			set .@FaithCost, 50;
+		else if( .@Grade == 8 )
+			set .@FaithCost, 100;
+		else if( .@Grade == 9 )
+			set .@FaithCost, 300;
+		else
+			set .@FaithCost, 0;
+
+		mes "[Mercenary Manager]";
+		if( .@Grade == 1 )
+			mes "Así que quieres contratar uno de 1er grado";
+		else if( .@Grade == 2 )
+			mes "Así que quieres contratar uno de 2do grado";
+		else if( .@Grade == 3 )
+			mes "Así que quieres contratar uno de 3er grado";
+		else
+			mes "Quieres contratar uno de " + .@Grade + "th";
+
+		mes "¿Grado de Mercenario de Lanza?";
+		mes "Necesitas alcanzar";
+		mes "Nivel Base " + .@BaseLevel + " o mayor, y";
+		mes "debes pagar " + .@ZenyCost + ",000 zeny de comisión.";
+		next;
+		if( select("Si:No") == 2 )
+		{
+			mes "[Mercenary Manager]";
+			mes "¿Oh, en serio? Bueno, ahora";
+			mes "podría no ser un buen momento";
+			mes "para que consideres contratar";
+			mes "un mercenario, pero por favor";
+			mes "siéntete libre para volver sí tus";
+			mes "necesidades cambian. Gracias ~";
+		}
+		else if( .@FaithCost && .@faith_lancer < .@FaithCost )
+		{
+			mes "[Mercenary Manager]";
+			mes "Oh ... Tu nivel de Lealtad";
+			mes "con la Spear Mercenary";
+			mes "Guild no es lo suficientemente alta";
+			mes "para contratar este Mercenario. Por favor";
+			mes "vuelve después o gana";
+			mes "" + .@FaithCost + " más Lealtad con nosotros.";
+		}
+		else if( BaseLevel < .@BaseLevel )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero tu Base";
+			mes "Level no es suficiente";
+			mes "para contratar a este Mercenario.";
+			mes "Por favor, vuelve";
+			mes "una vez que hayas alcanzado el Base Level " + .@BaseLevel + ".";
+		}
+		else if( Zeny < .@ZenyCost * 1000 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero no tienes";
+			mes "suficiente zeny";
+			mes "para contratar este Mercenario";
+			mes "El pago para contratar es de " + .@ZenyCost + ",000 zeny";
+		}
+		else
+		{
+			mes "[Mercenary Manager]";
+			mes "¡Excelente! Nuestros Mercenarios";
+			mes "son sinceros y dedicados";
+			mes "a proteger a sus clientes.";
+			mes "Los Mercenarios Convocados";
+			mes "te ofrecerán su apoyo por";
+			mes "30 minutos. Cuídate.";
+			set Zeny, Zeny - (.@ZenyCost * 1000);
+			getitem 12172 + .@Grade, 1;
+		}
+		close;
+	case 2:
+		mes "[Mercenary Manager]";
+		mes "Los mercenarios son soldados";
+		mes "que pelearán a tu lado";
+		mes "en el campo de batalla, pero";
+		mes "hay algunos términos y condiciones";
+		mes "que debes cumplir para contratarlos.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "Debes cumplir con un requisito de";
+		mes "nivel y pagar una comisión de zeny";
+		mes "para contratar a un Mercenario.";
+		mes "Los Mercenarios de grado Superior";
+		mes "también requerirán que";
+		mes "tengas un nivel de Lealtad con nosotros.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "Los contratos de Mercenarios no pueden";
+		mes "ser transferidos a otras personas,";
+		mes "sólo se permitimos 5 Base Level de diferencia entre el Mercenario";
+		mes "y el cliente por lo que no puedes contratar uno más fuerte que tú.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "Bueno, puedes entender";
+		mes "los detalles cuando haces";
+		mes "un contrato con uno de nuestros";
+		mes "Mercenarios, y recibir";
+		mes "el Summon Scroll que invocará";
+		mes "a un Mercenario a tu lado.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "No se puedes dar este pergamino";
+		mes "a nadie más, y los";
+		mes "Mercenarios sólo estarán";
+		mes "contigo por 30 minutos después de";
+		mes "convocarlo. No te olvides";
+		mes "del tiempo límite, ¿okay?";
+		close;
+	case 3:
+		mes "[Mercenary Manager]";
+		mes "¿No? ¿No necesitas ninguna";
+		mes "ayuda? Bueno, no dudes en";
+		mes "preguntarme si tienes alguna";
+		mes "duda sobre los Mercenarios.";
+		close;
+	case 4:
+		mes "[Mercenary Manager]";
+		mes "10th Grade Mercenaries son";
+		mes "lo mejor que tenemos para ofrecer,";
+		mes "y tenemos diferentes criterios";
+		mes "para que nuestros clientes los contraten.";
+		mes "No hay comisión de zeny, pero";
+		mes "debes tener 500 de Lealtad.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "Una vez que haces un contrato";
+		mes "con un 10th Grade Mercenary,";
+		mes "tu nivel de Lealtad disminuirá";
+		mes "en 400. En otras palabras,";
+		mes "pagas 400 de Lealtad";
+		mes "para contratar a un 10th Grade Mercenary.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "También debes ser";
+		mes "Base Level 90 o superior para";
+		mes "contratar a un 10th Grade Mercenary.";
+		mes "¿Sigue interesado en";
+		mes "hacer este contrato?";
+		next;
+		if( select("Si:No") == 2 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Yo entiendo... Toma";
+			mes "mucho trabajo y sacrificio para";
+			mes "incluso llegar al punto en que";
+			mes "puedes contratar un 10th Grade Mercenary.";
+			mes "¿Has considerado";
+			mes "contratar un Mercenario de grado inferior?";
+		}
+		else if( .@faith_lancer < 500 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero tu";
+			mes "nivel de Lealtad es demasiado";
+			mes "bajo para contratar a un 10th Grade Mercenary.";
+			mes "Debes tener";
+			mes "500 o más de Lealtad para";
+			mes "hacer un contrato.";
+		}
+		else if( BaseLevel < 90 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero debes";
+			mes "ser Base Level 90 ó";
+			mes "superior para hacer un contrato";
+			mes "con un 10th Grade Mercenary.";
+		}
+		else
+		{
+			mes "[Mercenary Manager]";
+			mes "¡Felicidades! Parece";
+			mes "como si estuvieras planeando tomar";
+			mes "algún trabajo muy peligroso.";
+			mes "ya que estás contratando 10th";
+			mes "Grade Mercenary, te deseo";
+			mes "la mejor de las suertes con él.";
+
+			mercenary_set_faith SPEAR_MERC_GUILD,-400;
+			getitem 12182,1;
+		}
+		close;
+	}
+}
+
+izlude,47,139,5	script	Mercenary Manager#Sword	734,{
+	set .@faith_sword, mercenary_get_faith(SWORD_MERC_GUILD);
+	mes "[Mercenary Manager]";
+	mes "Bienvenido a la";
+	mes "Guild Sword Mercenary.";
+	mes "¿Tienes alguna pregunta?";
+	next;
+	switch( select("Alquilar Mercenario:Información de los Mercenarios:Nada:10th Grade Mercenary") )
+	{
+	case 1:
+		mes "[Mercenary Manager]";
+		mes "¿Quieres contratar a un";
+		mes "¿Sword Mercenary?";
+		mes "¿Qué grado estas";
+		mes "interesado en contratar?";
+		next;
+		set .@Grade, select("1st Grade Sword Mercenary:2nd Grade Sword Mercenary:3rd Grade Sword Mercenary:4th Grade Sword Mercenary:5th Grade Sword Mercenary:6th Grade Sword Mercenary:7th Grade Sword Mercenary:8th Grade Sword Mercenary:9th Grade Sword Mercenary");
+		set .@BaseLevel, 5 + (.@Grade * 10);
+		if( .@BaseLevel > 90 )
+			set .@BaseLevel, 90;
+
+		set .@ZenyCost, 7 * .@Grade;
+
+		if( .@Grade == 7 )
+			set .@FaithCost, 50;
+		else if( .@Grade == 8 )
+			set .@FaithCost, 100;
+		else if( .@Grade == 9 )
+			set .@FaithCost, 300;
+		else
+			set .@FaithCost, 0;
+
+		mes "[Mercenary Manager]";
+		if( .@Grade == 1 )
+			mes "¿Quieres contratar a uno de 1er grado";
+		else if( .@Grade == 2 )
+			mes "¿Quieres contratar a uno de 2do grado";
+		else if( .@Grade == 3 )
+			mes "¿Quieres contratar a uno de 3er grado";
+		else
+			mes "¿Quieres contratar a uno de grado... " + .@Grade + "th";
+
+		mes "¿Grado de Sword Mercenary?";
+		mes "Necesitas haber alcanzado";
+		mes "Nivel Base " + .@BaseLevel + " o superior, y";
+		mes "debes pagar " + .@ZenyCost + ",000 zeny de comisión.";
+		next;
+		if( select("Si:No") == 2 )
+		{
+			mes "[Mercenary Manager]";
+			mes "¿Oh, en serio? Bueno, ahora";
+			mes "podría no ser un buen momento";
+			mes "para que consideres contratar";
+			mes "a un Mercenario, pero por favor";
+			mes "siéntete libre de regresar si tus";
+			mes "necesidades cambian. Gracias ~";
+		}
+		else if( .@FaithCost && .@faith_sword < .@FaithCost )
+		{
+			mes "[Mercenary Manager]";
+			mes "Oh ... Tu nivel de Lealtad";
+			mes "con la Sword Mercenary";
+			mes "Guild no es suficientemente alto para";
+			mes "contratar este Mercenario. Por favor";
+			mes "vuelve después de ganar";
+			mes "" + .@FaithCost + "  o más Lealtad con nosotros.";
+		}
+		else if( BaseLevel < .@BaseLevel )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero tu Base";
+			mes "Level no es suficientemente alto";
+			mes "para contratar a este Mercenario.";
+			mes "Por favor, vuelva a mí";
+			mes "una vez que hayas alcanzado Base Level " + .@BaseLevel + ".";
+		}
+		else if( Zeny < .@ZenyCost * 1000 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero no";
+			mes "tienes suficiente zeny";
+			mes "para contratar a este Mercenario.";
+			mes "El pago para contratar es " + .@ZenyCost + ",000 zeny.";
+		}
+		else
+		{
+			mes "[Mercenary Manager]";
+			mes "¡Excelente! Nuestros Mercenarios";
+			mes "son sinceros y dedicados";
+			mes "a la protección de sus clientes.";
+			mes "Los Mercenarios Convocados";
+			mes "te ofrecerán apoyo por";
+			mes "30 minutos. Cuídate.";
+			set Zeny, Zeny - (.@ZenyCost * 1000);
+			getitem 12162 + .@Grade, 1;
+		}
+		close;		
+	case 2:
+		mes "[Mercenary Manager]";
+		mes "Los Mercenarios son soldados";
+		mes "que pelearán a tu lado";
+		mes "en el campo de batalla, pero";
+		mes "hay algunos términos y condiciones";
+		mes "que debes cumplir para contratarlos.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "Debes cumplir con un requisito de";
+		mes "nivel y pagar una cantidad de zeny";
+		mes "para contratar a un Mercenario.";
+		mes "Mercenarios de grado Superior";
+		mes "también requerirán que";
+		mes "construyas un nivel de Lealtad con nosotros.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "Los Contratos de los Mercenarios no pueden";
+		mes "ser transferidos a otras personas,";
+		mes "y sólo permitimos 5 Base Level de diferencia entre el Mercenario";
+		mes "y el cliente así que no puedes contratar a uno mucho más fuerte que tú.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "Bueno, puedes entender los";
+		mes "detalles cuando hagas";
+		mes "un contrato con uno de nuestros";
+		mes "Mercenarios, y recibir";
+		mes "el Summon Scroll que";
+		mes "invocará a un Mercenario a tu lado.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "No puedes dar este pergamino";
+		mes "a nadie más, y el";
+		mes "Mercenario sólo permanecerá";
+		mes "contigo por 30 minutos después de";
+		mes "haberlo convocado.  No te olvides";
+		mes "del tiempo límite, ¿okay?";
+		close;
+	case 3:
+		mes "[Mercenary Manager]";
+		mes "¿No? ¿No necesitas ninguna";
+		mes "ayuda? Bueno, no dudes en";
+		mes "preguntarme si tiene alguna";
+		mes "duda acerca de Mercenarios.";
+		close;
+	case 4:
+		mes "[Mercenary Manager]";
+		mes "10th Grade Mercenaries son";
+		mes "lo mejor que tenemos para ofrecer,";
+		mes "y tenemos diferentes criterios";
+		mes "para que nuestros clientes los contraten.";
+		mes "No hay comisión de zeny, pero";
+		mes "debes tener 500 de lealtad.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "Una vez que haces un contrato";
+		mes "con un 10th Grade Mercenary,";
+		mes "tu nivel de Lealtad";
+		mes "disminuirá en 400. En otras";
+		mes "palabras pagas 400 de Lealtad";
+		mes "para contratar a un 10th Grade Mercenary.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "También debe ser";
+		mes "Base Level 90 o superior para";
+		mes "contratar un 10th Grade Mercenary.";
+		mes "¿Todavía sigues interesado en";
+		mes "hacer este contrato?";
+		next;
+		if( select("Si:No") == 2 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Entiendo ... Toma";
+			mes "mucho trabajo y sacrificio para";
+			mes "incluso llegar al punto en que";
+			mes "puedas contratar a un 10th Grade";
+			mes "Mercenary. ¿Has considerado";
+			mes "contratar a un Mercenario de grado inferior?";
+		}
+		else if( .@faith_sword < 500 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero tu";
+			mes "nivel de Lealtad es demasiado";
+			mes "bajo para contratar a un 10th Grade";
+			mes "Mercenary. Debes tener";
+			mes "500 o más Lealtad para";
+			mes "hacer un contrato.";
+		}
+		else if( BaseLevel < 90 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero debes ser";
+			mes "Base Level 90 o";
+			mes "superior para hacer un contrato";
+			mes "con un 10th Grade Mercenary.";
+		}
+		else
+		{
+			mes "[Mercenary Manager]";
+			mes "¡Felicidades! Parece";
+			mes "como si estuvieras planeando";
+			mes "tomar algún trabajo muy peligroso";
+			mes "ya que estas contratando a un 10th";
+			mes "Grade Mercenary. Te deseo";
+			mes "la mejor de la suertes con él.";
+
+			mercenary_set_faith SWORD_MERC_GUILD,-400;
+			getitem 12172,1;
+		}
+		close;		
+	}
+}
+
+pay_arche,99,167,4	script	Mercenary Manager#Bow	732,{
+	set .@faith_archer,  mercenary_get_faith(ARCH_MERC_GUILD);
+	mes "[Mercenary Manager]";
+	mes "Bienvenido a la";
+	mes "Guild Bow Mercenary.";
+	mes "¿Qué puedo ser de ayuda?";
+	next;
+	switch( select("Alquilar un Mercenario:Información de los Mercenarios:Nada:10th Grade Mercenaries") )
+	{
+	case 1:
+		mes "[Mercenary Manager]";
+		mes "¿Quieres contratar";
+		mes "a un Bow Mercenary?";
+		mes "¿Qué grado estas";
+		mes "interesado en contratar?";
+		next;
+
+		set .@Grade, select("1st Grade Bow Mercenary:2nd Grade Bow Mercenary:3rd Grade Bow Mercenary:4th Grade Bow Mercenary:5th Grade Bow Mercenary:6th Grade Bow Mercenary:7th Grade Bow Mercenary:8th Grade Bow Mercenary:9th Grade Bow Mercenary");
+		set .@BaseLevel, 5 + (.@Grade * 10);
+		if( .@BaseLevel > 90 )
+			set .@BaseLevel, 90;
+
+		set .@ZenyCost, 7 * .@Grade;
+
+		if( .@Grade == 7 )
+			set .@FaithCost, 50;
+		else if( .@Grade == 8 )
+			set .@FaithCost, 100;
+		else if( .@Grade == 9 )
+			set .@FaithCost, 300;
+		else
+			set .@FaithCost, 0;
+
+		mes "[Mercenary Manager]";
+		if( .@Grade == 1 )
+			mes "¿Así que quieres contratar a uno de 1er grado";
+		else if( .@Grade == 2 )
+			mes "¿Así que quieres contratar a uno de 2do grado";
+		else if( .@Grade == 3 )
+			mes "¿Así que quieres contratar a uno de 3er grado";
+		else
+			mes "¿Así que quieres contratar a uno de " + .@Grade + "th";
+
+		mes "Grado de Bow Mercenary?";
+
+		mes "Es necesario que hayas alcanzado";
+		mes "Nivel Base " + .@BaseLevel + " o superior, y";
+		mes "debes pagar " + .@ZenyCost + ",000 zeny";
+		next;
+		if( select("Si:No") == 2 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Oh, ¿en serio? Bueno, ahora";
+			mes "podría no ser un buen momento";
+			mes "para que consideres contratar a";
+			mes "un Mercenario, pero por favor";
+			mes "regresa si tus";
+			mes "necesidades cambian. Gracias~";
+		}
+		else if( .@FaithCost && .@faith_archer < .@FaithCost )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero tu";
+			mes "nivel de Lealtad es demasiado";
+			mes "bajo para contratar este Bow";
+			mes "Mercenary. Regresa";
+			mes "de nuevo cuando tengas";
+			mes "" + .@FaithCost + "  o más Lealtad.";
+		}
+		else if( BaseLevel < .@BaseLevel )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero tu Base";
+			mes "Level no es suficientemente alto";
+			mes "para contratar a este Mercenario.";
+			mes "Por favor, vuelve";
+			mes "una vez que hayas alcanzado Base Level " + .@BaseLevel + ".";
+		}
+		else if( Zeny < .@ZenyCost * 1000 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero no";
+			mes "tienes suficiente zeny";
+			mes "para contratar a este Mercenario.";
+			mes "El pago de la contratación es " + .@ZenyCost + ",000 zeny.";
+		}
+		else
+		{
+			mes "[Mercenary Manager]";
+			mes "¡¡Bien!! Nuestros mercenarios";
+			mes "son sinceros y dedicados";
+			mes "a proteger a sus clientes.";
+			mes "Mercenarios Convocados";
+			mes "te ofrecerán apoyo por";
+			mes "30 minutos. Cuídate.";
+			set Zeny, Zeny - (.@ZenyCost * 1000);
+			getitem 12152 + .@Grade, 1;
+		}
+		close;
+	case 2:
+		mes "[Mercenary Manager]";
+		mes "Los Mercenarios son soldados";
+		mes "que pelearán a tu lado";
+		mes "en el campo de batalla, pero";
+		mes "hay algunos términos y condiciones que";
+		mes "debes cumplir para contratarlos.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "Debes cumplir con un requisito";
+		mes "de nivel y pagar una cantidad de";
+		mes "zeny para contratar un Mercenario.";
+		mes "Mercenarios de grado superior";
+		mes "también requerirán que";
+		mes "construyas un nivel de Lealtad con nosotros.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "Los contratos con Mercenarios no pueden ser";
+		mes "transferidos a otras personas,";
+		mes "y sólo permitimos 5 Base Level de diferencia entre el Mercenario";
+		mes "y el cliente así que no puedes contratar uno mucho más fuerte que tú.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "Bueno, puedes averiguar los";
+		mes "detalles cuando en realidad hagas";
+		mes "un contrato con uno de nuestros";
+		mes "Mercenarios, y recibas";
+		mes "el Summon Scroll que";
+		mes "invocará al Mercenario a tu lado.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "No puedes dar el pergamino";
+		mes "a nadie más, y el";
+		mes "Mercenario sólo estará";
+		mes "contigo durante 30 minutos después de que";
+		mes "lo hayas convocado. No olvides";
+		mes "el tiempo límite, ¿okay?";
+		close;
+	case 3:
+		mes "[Mercenary Manager]";
+		mes "¿No? ¿No necesitas ninguna";
+		mes "ayuda? Bueno, siéntete libre";
+		mes "de preguntarme si tienes alguna";
+		mes "duda acerca de los Mercenarios.";
+		close;
+	case 4:
+		mes "[Mercenary Manager]";
+		mes "10 Grade Mercenaries son";
+		mes "lo mejor que tenemos para ofrecer,";
+		mes "y usamos diferentes criterios";
+		mes "para que nuestros clientes los contraten.";
+		mes "No tienen ningún costo, pero";
+		mes "debes tener 500 de lealtad.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "Una vez que haces un contrato";
+		mes "con un 10th Grade Mercenary,";
+		mes "tu nivel de Lealtad disminuirá";
+		mes "400. En otras";
+		mes "palabras, pagas 400 de Lealtad";
+		mes "para contratar a un 10th Grade Mercenary.";
+		next;
+		mes "[Mercenary Manager]";
+		mes "También debes ser";
+		mes "Base Level 90 o más alto";
+		mes "para contratar un 10th Grade Mercenary.";
+		mes "¿Todavía estas interesado en";
+		mes "hacer este contrato?";
+		next;
+		if( select("Si:No") == 2 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Entiendo... Toma";
+			mes "mucho trabajo y sacrificio para";
+			mes "siquiera alcanzar el punto en donde";
+			mes "puedas contratar un 10th Grade";
+			mes "Mercenary. ¿Has considerado";
+			mes "contratar un Mercenario de grado más bajo?";
+		}
+		else if( .@faith_archer < 500 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero tu";
+			mes "nivel de Lealtad es muy";
+			mes "bajo para contratar un 10th Grade";
+			mes "Mercenary. Debes tener";
+			mes "500 o más de Lealtad para";
+			mes "hacer un contrato.";
+		}
+		else if( BaseLevel < 90 )
+		{
+			mes "[Mercenary Manager]";
+			mes "Lo siento, pero debes";
+			mes "ser Base Level 90 o";
+			mes "más alto para adquirir un contrato";
+			mes "con un 10th Grade Mercenary.";
+		}
+		else
+		{
+			mes "[Mercenary Manager]";
+			mes "¡Felicidades! Parece";
+			mes "que estás planeando tomar";
+			mes "algunos trabajos muy peligrosos";
+			mes "ya que estas contratando a un 10th";
+			mes "Grade Mercenary. Te deseo";
+			mes "la mejor de las suertes con él.";
+
+			mercenary_set_faith ARCH_MERC_GUILD,-400;
+			getitem 12162,1;
+		}
+		close;
+	}
+}
+
+// Mercenary Merchant NPCs
+//============================================================
+-	script	Mercenary Merchant#dummy::MercMerchant	-1,{
+	mes "[Mercenary Goods Merchant]";
+	mes "Hola, vendo bienes";
+	mes "que los Mercenarios pueden";
+	mes "usar. ¿Hay algo";
+	mes "en particular que";
+	mes "estés buscando?";
+	next;
+	switch(select("Mercenary Red Potion:Mercenary Blue Potion:Mercenary Concentration Potion:Mercenary Awakening Potion:Mercenary Berserk Potion")) {
+	case 1: 
+		mes "[Mercenary Goods Merchant]";
+		mes "Mercenary Red Potions";
+		mes "cada una cuesta 1,750 zeny.";
+		mes "¿Cuantas te gustarían?";
+		next;
+		callfunc "F_PurchaseMercItem",12184,1750;
+	case 2:
+		mes "[Mercenary Goods Merchant]";
+		mes "Mercenary Blue Potions";
+		mes "cada una cuesta 3,500 zeny.";
+		mes "¿Cuantas te gustarían?";
+		next;
+		callfunc "F_PurchaseMercItem",12185,3000;
+	case 3:
+		mes "[Mercenary Goods Merchant]";
+		mes "Mercenary Concentration";
+		mes "Potions cada una cuesta 560 zeny.";
+		mes "¿Cuantas te gustarían?";
+		next;
+		callfunc "F_PurchaseMercItem",12241,560;
+	case 4:
+		mes "[Mercenary Goods Merchant]";
+		mes "Mercenary Awakening";
+		mes "Potions cada una cuesta 1,050 zeny.";
+		mes "¿Cuantas te gustarían?";
+		next;
+		callfunc "F_PurchaseMercItem",12242,1050;
+	case 5:
+		mes "[Mercenary Goods Merchant]";
+		mes "Mercenary Beserk Potions";
+		mes "cada una cuesta 2,100 zeny.";
+		mes "¿Cuantas te gustarían?";
+		next;
+		callfunc "F_PurchaseMercItem",12243,2100;
+	}
+	close;
+}
+
+prontera,30,337,4	duplicate(MercMerchant)	Mercenary Merchant#Spear	700
+izlude,56,139,4	duplicate(MercMerchant)	Mercenary Merchant#Sword	892
+pay_arche,102,167,5	duplicate(MercMerchant)	Mercenary Merchant#Bow	879
+
+// Function for selling items.
+//============================================================
+function	script	F_PurchaseMercItem	{
+	input .@input;
+	if( .@input == 0 )
+	{
+		mes "[Mercenary Goods Merchant]";
+		mes "¿Cambiaste de parecer?";
+		mes "Bien, siéntete libre de regresar";
+		mes "conmigo cuando quieras";
+		mes "comprar alguna Mercenary Potions.";
+	}
+	else if( .@input < 0 || .@input > 10000 )
+	{
+		mes "[Mercenary Goods Merchant]";
+		mes "Lo siento, pero";
+		mes "sólo puedes comprar";
+		mes "10,000 de estas pociones";
+		mes "a la vez. Por favor";
+		mes "pon un número de 1 a 10,000.";
+	}
+	else if( set(.@total_po, .@input * getarg(1)) > Zeny )
+	{
+		mes "[Mercenary Goods Merchant]";
+		mes "Lo siento, pero no tienes";
+		mes "suficiente zeny para";
+		mes "tantas pociones. Bueno, estaré";
+		mes "aquí cuando estés listo";
+		mes "para comprar algo";
+		mes "para tus Mercenarios.";
+	}
+	else if( checkweight(getarg(0), .@input) == 0 )
+	{
+		mes "[Mercenary Goods Merchant]";
+		mes "Si te doy tantas";
+		mes "pociones, no serás capaz";
+		mes "de llevarlas contigo.";
+		mes "Por favor regresa después";
+		mes "de hacer algo de espacio";
+		mes "en tu inventario.";
+	}
+	else
+	{
+		mes "[Mercenary Goods Merchant]";
+		if( .@input == 1 )
+		{
+			mes "Aquí está tu Mercenary";
+			switch( getarg(0) )
+			{
+			case 12148: mes "Red Potion. Gracias, y"; break;
+			case 12149: mes "Blue Potion. Gracias, y"; break;
+			case 12241: mes "Concentration Potion."; break;
+			case 12242: mes "Awakening Potion."; break;
+			case 12243: mes "Berserk Potion. Gracias"; break;
+			}
+			mes "por favor regresa";
+			mes "cuando necesites más pociones";
+			mes "para tu Mercenarios.";
+		}
+		else
+		{
+			mes "Aquí tienes, esto es exactamente";
+			switch( getarg(0) )
+			{
+			case 12148: mes "" + .@input + " Mercenary Red Potions."; mes "Gracias, por favor regresa"; break;
+			case 12149: mes "" + .@input + " Mercenary Blue Potions."; mes "Gracias, por favor regresa"; break;
+			case 12241: mes "" + .@input + " Mercenary Concentration"; mes "Potions. Gracias, y por favor"; break;
+			case 12242: mes "" + .@input + " Mercenary Awakening"; mes "Potions. Gracias, y por favor"; break;
+			case 12243: mes "" + .@input + " Mercenary Berserk Potions."; mes "Gracias, por favor regresa"; break;
+			}
+			mes "cuando necesites más";
+			mes "pociones para tus Mercenarios.";
+		}
+		set Zeny, Zeny - .@total_po;
+		getitem getarg(0), .@input;
+	}
+	close;
+}

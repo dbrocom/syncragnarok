@@ -1,0 +1,16 @@
+^000088Canciones SetList^000000
+ === Anime ===
+
+[01]  One Piece - We are!
+[02]  Bobobo - Shiawase
+[03]  Naruto - Haruka Kanata
+[04]  Inuyasha - Every Heart
+[05]  Lain - Duvet
+[06]  Ragnarok - We are the Stars
+[07]  Ragnarok - Alive
+[08]  BECK - Face
+[09]  BECK - Hit in the USA
+[10]  Genshiken - My Pace Daiou
+[11]  Bleach - Ichirin no Hana
+[12]  Evangelion - Zankoku na Tenshi no Teeze
+

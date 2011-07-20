@@ -1,0 +1,421 @@
+geffen,122,102,4	script	Message Man	774,{
+mes "[Robert]";
+mes "Hola, estoy aqui para servirle. Disfrute mi servicio. ^_-";
+next;
+mes "[Robert]";
+mes "Por favor recuerde que todos los mensajes son borrados cada dos días";
+mes "-Msj De Creator- ¡En la nueva versión esto estara disponible, esperala! -Fin de Msj De Creator-";
+next;
+L_Menu01:
+mes "[Robert]";
+mes "¿¿Qué te gustaría hacer??";
+next;
+if((getgmlevel() >= 90)) menu "Tablero público",L_pubgmmenu,"Tablero de Gm",L_gmmenu,"Cerrar Tablero Público",L_clospub,"Abrir Tablero Público",L_openpub;
+if(($messagepubclose == 1)) goto L_pubclosed;
+menu "¡Leer mensajes!",L_readmsg,"¡Poner un mensaje!",L_Postmsg,"Salir.",L_leave;
+L_pubgmmenu:
+if(($messagepubclose == 1)) goto L_pubclosed;
+menu "Resetear la rotación.",L_setrot,"Resetear Mensaje.",L_Clearmsgs,"¡Leer mensajes!",L_readmsg,"¡Poner un mensaje!",L_Postmsg,"Salir.",L_leave;
+L_gmmenu:
+menu "¡Leer mensajes!",L_gmboardread,"¡Poner un Mensaje!",L_gmboardpost,"Resetear Mensajes.",L_gmboardreset;
+
+L_openpub:
+mes "[Robert]";
+mes "¿Está seguro?";
+menu "Si.",-,"No.",L_openpubn;
+mes "[Robert]";
+mes "Esta hecho.";
+close2;
+set $messagepubclose,0;
+end;
+
+L_openpubn:
+mes "[Robert]";
+mes "Muy bien, permanecerá cerrado.";
+close;
+
+L_pubclosed:
+mes "[Robert]";
+mes "Lo siento. Los tablero públicos estan momentaneamente Cerrados.";
+close;
+
+L_clospub:
+mes "[Robert]";
+mes "¿Esta seguro?";
+next;
+menu "Si..",-,"No.",L_closepubn;
+mes "[Robert]";
+mes "Muy bien no permitiré a nadie en el tablero público.";
+close2;
+set $messagepubclose,1;
+end;
+
+L_closepubn:
+mes "[Robert]";
+mes "Tenga un buen día.";
+close;
+
+L_gmboardreset:
+mes "[Robert]";
+mes "Esto requerirá de al menos la aprovación de 2 GM's para resetear el tablero de gm.";
+mes "-Msj De Creator- Esta buggeado, el mismo gm puede votar dos veces. Planeado para revisar en la siguiente versión. -Fin Msj De Creator-";
+next;
+menu "Votar por reset.",L_gmboardresetvote,"Regresar al menú principal.",L_Menu01,"Salir.",L_leave;
+
+L_gmboardresetvote:
+callfunc "F_gmresetcheck";
+set @tempid,getcharid(0);
+set $gmboardresetvotenumb,$gmboardresetvotenumb+1;
+set $gmboardresetvoted[$gmboardresetvotenumb],1;
+set $gmboardresetvoteid[$gmboardresetvotenumb],@tempid;
+set @tempid,0;
+set $gmboardreset,$gmboardreset-1;
+mes "[Robert]";
+mes "Gracias.";
+next;
+if(($gmboardreset == 0)) goto L_gmresetdone;
+if(($gmboardreset >= 1)) goto L_gmresetnotdone;
+close;
+
+L_gmresetdone:
+deletearray $gmmessageboardpost$[1],$gmmessageboardpostnumber;
+deletearray $gmmessageboardpostdate$[1],$gmmessageboardpostnumber;
+deletearray $gmmessageboardpostname$[1],$gmmessageboardpostnumber;
+deletearray $gmmessageboardeditdate$[1],$gmmessageboardpostnumber;
+deletearray $gmboardresetvoted[1],$gmboardresetvotenumber;
+deletearray $gmboardresetvoted[1],$gmboardresetvotenumber;
+deletearray $gmboardresetvoteid[1],$gmboardresetvotenumber;
+set $gmboardresetvotenumber,0;
+set $gmboardreset,2;
+mes "[Robert]";
+mes "El reset ha sido hecho.";
+close;
+
+L_gmresetnotdone:
+mes "[Robert]";
+mes "Es necesario que haya "+$gmboardreset+" mas aprovación de gm's para hacer el reset.";
+close;
+
+L_gmboardread:
+if(($gmmessageboardpostnumber == 0)) goto L_msgno;
+callfunc "F_gmmessage";
+end;
+
+L_gmboardpost:
+if(($gmmessageboardpostnumber >= 127)) goto L_postmsgyestm;
+set @gmmessageboardpostername$,strcharinfo(0);
+set @gmmessageboarddate$,gettimestr("%Y-%m/%d %H:%M:%S",21);
+set $gmmessageboardpostnumber,$gmmessageboardpostnumber+1;
+input @gmmsgboardmsgt$;
+set $gmmessageboardpost$[$gmmessageboardpostnumber],@gmmsgboardmsgt$;
+set $gmmessageboardpostdate$[$gmmessageboardpostnumber],@gmmessageboarddate$;
+set $gmmessageboardpostname$[$gmmessageboardpostnumber],@gmmessageboardpostername$;
+mes "[Robert]";
+mes "Aquí está como luce tu mensaje.";
+next;
+mes "Posteado por: "+$gmmessageboardpostname$[$gmmessageboardpostnumber]+".";
+mes "En: "+$gmmessageboardpostdate$[$gmmessageboardpostnumber]+".";
+mes $gmmessageboardpost$[$gmmessageboardpostnumber];
+close;
+
+
+L_setrot:
+set $@determinedayrotation,gettime(4); //this determines the day rotation for clearing messages.
+if(($@determinedayrotation == 0)) set $rotation,0;
+if(($@determinedayrotation == 1)) set $rotation,1;
+if(($@determinedayrotation == 2)) set $rotation,0;
+if(($@determinedayrotation == 3)) set $rotation,1;
+if(($@determinedayrotation == 4)) set $rotation,0;
+if(($@determinedayrotation == 5)) set $rotation,1;
+if(($@determinedayrotation == 6)) set $rotation,0;
+mes "Esta hecho.";
+close;
+
+L_Clearmsgs:
+mes "[Robert]";
+mes "¿Está seguro?";
+next;
+menu "Si.",L_clearmsgsy,"No gracias.",L_Menu01;
+
+L_clearmsgsy:
+deletearray $messageboardpost$[1],$messageboardpostnumber;
+deletearray $messageboardpostdate$[1],$messageboardpostnumber;
+deletearray $messageboardpostname$[1],$messageboardpostnumber;
+deletearray $messageboardeditdate$[1],$messageboardpostnumber;
+deletearray $mymessage[1],$messageboardpostnumber;
+set $messageboardpostnumber,0;
+mes "[Robert]";
+mes "Esta hecho.";
+close;
+
+L_leave:
+close;
+
+L_Postmsg:
+mes "[Robert]";
+mes "¿Que desea decir en el mensaje?";
+next;
+set @msgboardmsgt$,0;
+input @msgboardmsgt$;
+mes "[Robert]";
+mes "¿esta seguro que este es el mensaje que quiere?";
+mes @msgboardmsgt$;
+next;
+menu "¡Sí!",L_postmsgyes,"¡No dejeme rehacerlo!",L_Postmsg,"He cambiado de parecer, debo irme.",lleave;
+
+L_postmsgyes:
+if(($messageboardpostnumber >= 127)) goto L_postmsgyestm;
+set @messageboardpostername$,strcharinfo(0);
+set @messageboarddate$,gettimestr("%Y-%m/%d %H:%M:%S",21);
+set $messageboardpostnumber,$messageboardpostnumber+1;
+set @mymessage2,$messageboardpostnumber;
+set $mymessage[$messageboardpostnumber],5;
+set $messageboardpost$[$messageboardpostnumber],@msgboardmsgt$;
+set $messageboardpostdate$[$messageboardpostnumber],@messageboarddate$;
+set $messageboardpostname$[$messageboardpostnumber],@messageboardpostername$;
+mes "[Robert]";
+mes "Así es como luce su mensaje.";
+next;
+mes "Puesto por: "+$messageboardpostname$[$messageboardpostnumber]+".";
+mes "En: "+$messageboardpostdate$[$messageboardpostnumber]+".";
+mes $messageboardpost$[$messageboardpostnumber];
+close;
+
+L_postmsgyestm:
+set @mesboardmsgt$,0;
+mes "[Robert]";
+mes "Lo siento, tendrás que esperar hasta que haya más espacios para mensajes, debe ser en 1 o 2 días =).";
+close;
+
+lleave:
+deletearray $messageboardpost$[@tempview],@tempview;
+deletearray $messageboardpostname$[@tempview],@tempview;
+deletearray $messageboardpostdate$[@tempview],@tempview;
+deletearray $mymessage[@tempview],@tempview;
+set $messageboardpostnumber,$messageboardpostnumber-1;
+set @msgboardmsgt$,0;
+close;
+
+L_readmsg:
+if(($messageboardpostnumber == 0)) goto L_msgno;
+callfunc "F_message";
+end;
+
+L_msgno:
+mes "[Robert]";
+mes "Actualmente no hay mensajes.";
+close;
+
+OnInit:
+set $gmboardreset,2;
+set $gmboardresetvotenumb,0;
+end;
+
+OnInterIfInitOnce:
+set $@determinedayrotation,gettime(4); //this determines the day rotation for clearing messages.
+if(($@determinedayrotation == 0)) set $rotation,0;
+if(($@determinedayrotation == 1)) set $rotation,1;
+if(($@determinedayrotation == 2)) set $rotation,0;
+if(($@determinedayrotation == 3)) set $rotation,1;
+if(($@determinedayrotation == 4)) set $rotation,0;
+if(($@determinedayrotation == 5)) set $rotation,1;
+if(($@determinedayrotation == 6)) set $rotation,0;
+end;
+
+
+OnSun1200:
+if(($rotation == 1)) end;
+deletearray $messageboardpost$[1],$messageboardpostnumber;
+deletearray $messageboardpostdate$[1],$messageboardpostnumber;
+deletearray $messageboardpostname$[1],$messageboardpostnumber;
+deletearray $mymessage[1],$messageboardpostnumber;
+set $messageboardpostnumber,0;
+end;
+
+OnSat1200:
+if(($rotation == 0)) end;
+deletearray $messageboardpost$[1],$messageboardpostnumber;
+deletearray $messageboardpostdate$[1],$messageboardpostnumber;
+deletearray $messageboardpostname$[1],$messageboardpostnumber;
+deletearray $mymessage[1],$messageboardpostnumber;
+set $messageboardpostnumber,0;
+end;
+
+OnMon1200:
+if(($rotation == 1)) end;
+deletearray $messageboardpost$[1],$messageboardpostnumber;
+deletearray $messageboardpostdate$[1],$messageboardpostnumber;
+deletearray $messageboardpostname$[1],$messageboardpostnumber;
+deletearray $mymessage[1],$messageboardpostnumber;
+set $messageboardpostnumber,0;
+end;
+
+OnTue1200:
+if(($rotation == 0)) end;
+deletearray $messageboardpost$[1],$messageboardpostnumber;
+deletearray $messageboardpostdate$[1],$messageboardpostnumber;
+deletearray $messageboardpostname$[1],$messageboardpostnumber;
+deletearray $mymessage[1],$messageboardpostnumber;
+set $messageboardpostnumber,0;
+end;
+
+OnWed1200:
+if(($rotation == 1)) end;
+deletearray $messageboardpost$[1],$messageboardpostnumber;
+deletearray $messageboardpostdate$[1],$messageboardpostnumber;
+deletearray $messageboardpostname$[1],$messageboardpostnumber;
+deletearray $mymessage[1],$messageboardpostnumber;
+set $messageboardpostnumber,0;
+end;
+
+OnThu1200:
+if(($rotation == 0)) end;
+deletearray $messageboardpost$[1],$messageboardpostnumber;
+deletearray $messageboardpostdate$[1],$messageboardpostnumber;
+deletearray $messageboardpostname$[1],$messageboardpostnumber;
+deletearray $mymessage[1],$messageboardpostnumber;
+set $messageboardpostnumber,0;
+end;
+
+OnFri1200:
+if(($rotation == 1)) end;
+deletearray $messageboardpost$[1],$messageboardpostnumber;
+deletearray $messageboardpostdate$[1],$messageboardpostnumber;
+deletearray $messageboardpostname$[1],$messageboardpostnumber;
+deletearray $mymessage[@tempview],@tempview;
+set $messageboardpostnumber,0;
+end;
+}
+
+function	script	F_gmresetcheck	{
+set @tempcheck,0;
+L_top:
+set @tempcheck,@tempcheck+1;
+if(($gmboardresetvoted[@tempview] == 1)) goto L_votecheck;
+if(($gmboardresetvoted[@tempview] == 0)) return;
+goto L_top;
+end;
+
+L_votecheck:
+set @tempcheckid,0;
+set @tempcheckid,getcharid(0);
+if(($gmboardresetvoteid[@tempview] != @tempcheckid)) goto L_top;
+if(($gmboardresetvoteid[@tempview] == @tempcheckid)) goto L_voted;
+end;
+}
+
+function	script	F_gmmessage	{
+set @tempview,0;
+L_top:
+set @tempview,@tempview+1;
+mes "Puesto por: "+$gmmessageboardpostname$[@tempview]+".";
+mes "En: "+$gmmessageboardpostdate$[@tempview]+".";
+mes $gmmessageboardpost$[@tempview]+".";
+menu "Siguiente Mensaje",L_top2;
+
+L_top2:
+if(($gmmessageboardpostnumber > @tempview)) goto L_top;
+close;
+}
+
+function	script	F_message	{
+set @tempview,0;
+L_top:
+set @tempview,@tempview+1;
+mes "Puesto Por: "+$messageboardpostname$[@tempview]+".";
+mes "En: "+$messageboardpostdate$[@tempview]+".";
+mes $messageboardpost$[@tempview]+".";
+next;
+if(($mymessage[@tempview] == 5) && (getgmlevel()>0)) menu "Siguiente Mensaje",L_top2,"Borrar Mi Mensaje.",L_delmy,"Editar mi mensaje.",L_editmy,"Borrar este Mensaje.",L_Del;
+if((getgmlevel()>0))  menu "Siguiente Mensaje",L_top2,"Borrar este Mensaje.",L_Del;
+if(($mymessage[@tempview] == 5)) menu "Siguiente Mensaje",L_top2,"Borrar Mi Mensaje",L_delmy,"Editar mi mensaje",L_editmy;
+menu "Siguiente mensaje",L_top2;
+close;
+
+L_editmy:
+mes "¿Esta seguro?";
+next;
+menu "Si.",L_editmyy,"No.",L_editmyn;
+
+L_editmyy:
+mes "¿Como quiere que sea su nuevo mensaje?";
+next;
+mes "¡Mensaje actual!";
+mes $messageboardpost$[@tempview];
+set @tempeditmsg$,0;
+input @tempeditmsg$;
+next;
+mes "¿Es esto lo que quiere?";
+mes @tempeditmsg$;
+next;
+menu "¡Si!",L_editmyyy,"No.",L_editmyyn;
+
+L_editmyyy:
+deletearray $messageboardpost$[@tempview],@tempview;
+set $messageboardpost$[@tempview],@tempeditmsg$;
+mes "Así se verá su mensaje.";
+next;
+mes "Puesto Por: "+$messageboardpostname$[@tempview]+".";
+mes "En: "+$messageboardpostdate$[@tempview]+".";
+mes $messageboardpost$[@tempview]+".";
+close2;
+set @tempview,0;
+end;
+
+L_editmyn:
+Mes "So be it.";
+set @tempview,0;
+close;
+
+L_editmyyn:
+mes "¡Que así sea!";
+set @tempeditmsg$,0;
+set @tempview,0;
+close;
+
+L_delmy:
+mes "¿Está deacuerdo...?";
+next;
+menu "Si.",L_delmyy,"No gracias.",L_delmyn;
+
+L_delmyy:
+deletearray $messageboardpost$[@tempview],@tempview;
+deletearray $messageboardpostname$[@tempview],@tempview;
+deletearray $messageboardpostdate$[@tempview],@tempview;
+deletearray $mymessage[@tempview],@tempview;
+deletearray $messageboardeditdate$[@tempview],@tempview;
+set $messageboardpostnumber,$messageboardpostnumber-1;
+set @tempview,0;
+mes "Listo.";
+close;
+
+L_delmyn:
+mes "Vuelva pronto.";
+set @tempview,0;
+close;
+
+L_top2:
+if(($messageboardpostnumber > @tempview)) goto L_top;
+close;
+
+L_Del:
+mes "¿Está seguro?";
+next;
+menu "Si.",L_Dely,"No.",L_Deln;
+
+L_Dely:
+deletearray $messageboardpost$[@tempview],@tempview;
+deletearray $messageboardpostname$[@tempview],@tempview;
+deletearray $messageboardpostdate$[@tempview],@tempview;
+deletearray $mymessage[@tempview],@tempview;
+deletearray $messageboardeditdate$[@tempview],@tempview; 
+set $messageboardpostnumber,$messageboardpostnumber-1;
+mes "Listo.";
+set @tempview,0;
+close;
+
+L_Deln:
+mes "¡Vuelva pronto!";
+set @tempview,0;
+close;
+}

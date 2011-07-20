@@ -1,0 +1,234 @@
+//===== eAthena Script =======================================
+//= Louyang Guides
+//===== By: ==================================================
+//= jAthena/Tsuyuki; L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: =========================================
+//= Guides for the City of Louyang
+//===== Additional Comments: =================================
+//= Fully working
+//= 0.5 Added first, Japanese version [Tsuyuki]
+//= 1.0 Translated to English from iRO NPC Dialogue (100% Official) [Tsuyuki]
+//= 1.1 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.2 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//============================================================
+
+louyang,213,213,3	script	Soldier#BA::LouGuide	825,{
+	mes "[Soldier]";
+	mes "Bienvenido a Louyang!,";
+	mes "la ciudad con una extensa";
+	mes "y colorida historia.";
+	next;
+	mes "[Soldier]";
+	mes "Recientemente creamos";
+	mes "una via maritima que proporciona";
+	mes "el Intercambio Positivo";
+	mes "entre las naciones mas lejanas";
+	next;
+	mes "[Soldier]";
+	mes "Lyoyang es bien conocido por sus varias especialidades en nuestra historia. Aqui en nuestra tierra puedes encontrar muchas cosas unicas.";
+	next;
+	mes "[Soldier]";
+	mes "Por favor tomate tu tiempo";
+	mes "y te invitamos a que disfrutes";
+	mes "tu viaje aqui en Louyang";
+	next;
+	switch(select("Ask Building Locations.:Remove all marks from mini-map.:Cancel.")) {
+	case 1:
+		mes "[Soldier]";
+		mes "A donde te gustaria ir?";
+		next;
+		switch(select("Dragon Castle:Doctor's Office:City Hall:Weapon Shop:Tool Shop:Tavern:Cancel")) {
+		case 1:
+			mes "[Soldier]";
+			mes "The Dragon Castle se encuentra ^FF3355+^000000. Es donde todos los nobles viven, incluyendo a nuestro señor.";
+			next;
+			mes "[Soldier]";
+			mes "Ya que eres un Forastero, supongo que seria apropiado para ti, ir a visitar a nuestro Señor primero.";
+			viewpoint 1,218,255,2,0xFF3355;
+			break;
+		case 2:
+			mes "[Soldier]";
+			mes "Tenemos un Doctor muy abilidoso.";
+			mes "Puedes encontrar su Oficina en ^CE6300+^000000.";
+			next;
+			mes "[Soldier]";
+			mes "Se dice que alli";
+			mes "no hay enfermedad que ella no pueda curar. Bueno, Yo no garantizo que eso sea verdad o no...";
+			viewpoint 1,263,94,3,0xCE6300;
+			break;
+		case 3:
+			mes "[Soldier]";
+			mes "Tenemos un City Hall Donde el Gobierno Federal Opera.";
+			mes "Se encuentra en ^A5BAAD+^000000.";
+			next;
+			mes "[Soldier]";
+			mes "Si tienes cualquier tipo de problema,";
+			mes "deberias hablar con";
+			mes "los empleados del City Hall.";
+			viewpoint 1,309,80,4,0xA5BAAD;
+			break;
+		case 4:
+			mes "[Soldier]";
+			mes "The Weapon Shop se encuentra en ^55FF33+^000000.";
+			next;
+			mes "[Soldier]";
+			mes "Ya veras";
+			mes "las maravillosas armas forjadas";
+			mes "por los experimentados";
+			mes "blacksmiths de Louyang.";
+			viewpoint 1,145,174,5,0x55FF33;
+			break;
+		case 5:
+			mes "[Soldier]";
+			mes "The Tool Shop se encuentra en ^3355FF+^000000.";
+			next;
+			mes "[Soldier]";
+			mes "Conocer a tu enemigo";
+			mes "es la mitad de la batalla!";
+			mes "es tambien seguro preparate a ti mismo que lamentarlo mas tarde. Porque no vas y revisas sus proviciones?";
+			viewpoint 1,135,98,6,0x3355FF;
+			break;
+		case 6:
+			mes "[Soldier]";
+			mes "Cuando te sientas cansado durante tu viaje, Te sugiero que visites la Taverna. que se encuentra en ^00FF00+^000000.";
+			next;
+			mes "[Soldier]";
+			mes "La Taverna es un buen lugar";
+			mes "Para conocer a otros turistas, tambien es bueno saber alguna nueva notica que te puede ser util.";
+			viewpoint 1,280,167,7,0x00FF00;
+			break;
+		case 7:
+			mes "[Soldier]";
+			mes "Si lo deseas removere todas las marcas";
+			mes "en tu mini-map, por favor escoge 'Remove all marks from mini-map.' del menu.";
+		}
+		break;
+	case 2:
+		viewpoint 2,218,255,2,0xFF00FF;
+		viewpoint 2,263,94,3,0xFF00FF;
+		viewpoint 2,309,80,4,0xFF00FF;
+		viewpoint 2,145,174,5,0xFF00FF;
+		viewpoint 2,135,98,6,0xFF00FF;
+		viewpoint 2,280,167,7,0xFF00FF;
+		mes "[Soldier]";
+		mes "Hecho! Todas las marcas en tu mini-map han sido borradas, se libre de preguntarme hacerca de las ubicaciones de los edificios cuando lo necesites.";
+		break;
+	case 3:
+		mes "[Soldier]";
+		mes "Yo creo que es por diversion";
+		mes "ir a explorar algunas veces";
+		mes "por ti mismo. Cuidate";
+	}
+	close;
+}
+
+louyang,160,175,3	duplicate(LouGuide)	Soldier#BB	825
+
+louyang,224,104,3	script	Representative#lou	818,{
+	mes "[Representative]";
+	mes "Benvenido a Louyang!,";
+	mes "una Tierra Antigua";
+	mes "que esta llena de historias";
+	mes "de valentia.";
+	next;
+	mes "[Representative]";
+	mes "Ahora Proporcionamos un via maritima para dar cabida a los viajeros extranjeros y el intermcabio cultural del cual seremos beneficiados todos.";
+	next;
+	mes "[Representative]";
+	mes "Louyang es famoso por";
+	mes "que es bien conocido por sus varias especialidades en nuestra historia. Aqui en nuestra tierra puedes encontrar muchas cosas unicas.";
+	next;
+	switch(select("Ask Building Locations.:Remove all marks from mini-map.:Cancel.")) {
+	case 1:
+		set .@compass_check,1;
+		mes "[Representative]";
+		mes "A donde te gustaria ir?";
+		next;
+		switch(select("Dragon Castle:Doctor's Office:City Hall:Weapon Shop:Tool Shop:Tavern:Cancel")) {
+		case 1:
+			mes "[Representative]";
+			mes "The Dragon Castle se encuentra ^FF3355+^000000. Es donde todos los nobles viven, incluyendo a nuestro Señor.";
+			next;
+			mes "[Representative]";
+			mes "Ya que eres un Forastero, supongo que seria apropiado para ti, ir a visitar a nuestro Señor primero.";
+			viewpoint 1,218,255,2,0xFFFF33;
+			break;
+		case 2:
+			mes "[Representative]";
+			mes "Tenemos un Doctor muy abilidoso.";
+			mes "Puedes encontrar su Oficina en ^CE6300+^000000.";
+			next;
+			mes "[Representative]";
+			mes "Se dice que alli";
+			mes "no hay enfermedad que ella no pueda curar. Bueno, Yo no garantizo que eso sea verdad o no...";
+			viewpoint 1,263,94,3,0xFFCE63;
+			break;
+		case 3:
+			mes "[Representative]";
+			mes "Tenemos un City Hall Donde el Gobierno Federal Opera.";
+			mes "Se encuentra en ^A5BAAD+^000000.";
+			next;
+			mes "[Representative]";
+			mes "Si tienes cualquier tipo de problema,";
+			mes "deberias hablar con";
+			mes "los empleados del City Hall.";
+			viewpoint 1,309,80,4,0xFF00FF;
+			break;
+		case 4:
+			mes "[Representative]";
+			mes "The Weapon Shop se encuentra en ^55FF33+^000000.";
+			next;
+			mes "[Representative]";
+			mes "Ya veras";
+			mes "las maravillosas armas forjadas";
+			mes "por los experimentados";
+			mes "blacksmiths de Louyang.";
+			viewpoint 1,145,174,5,0xFF55FF;
+			break;
+		case 5:
+			mes "[Representative]";
+			mes "The Tool Shop se encuentra en ^3355FF+^000000.";
+			next;
+			mes "[Representative]";
+			mes "Conocer a tu enemigo";
+			mes "es la mitad de la batalla!";
+			mes "es tambien seguro preparate a ti mismo que lamentarlo mas tarde. Porque no vas y revisas sus proviciones?";
+			viewpoint 1,135,98,6,0xFF3355;
+			break;
+		case 6:
+			mes "[Representative]";
+			mes "Cuando te sientas cansado durante tu viaje, Te sugiero que visites la Taverna. que se encuentra en ^00FF00+^000000.";
+			next;
+			mes "[Soldier]";
+			mes "La Taverna es un buen lugar";
+			mes "Para conocer a otros turistas, tambien es bueno saber alguna nueva notica que te puede ser util.";
+			viewpoint 1,280,167,7,0xFF00FF;
+			break;
+		case 7:
+			mes "[Representative]";
+			mes "Si lo deseas removere todas las marcas";
+			mes "en tu mini-map, por favor escoge 'Remove all marks from mini-map.' del menu.";
+		}
+		break;
+	case 2:
+		viewpoint 2,218,255,2,0xFF00FF;
+		viewpoint 2,263,94,3,0xFF00FF;
+		viewpoint 2,309,80,4,0xFF00FF;
+		viewpoint 2,145,174,5,0xFF00FF;
+		viewpoint 2,135,98,6,0xFF00FF;
+		viewpoint 2,280,167,7,0xFF00FF;
+		mes "[Representative]";
+		mes "Hecho! Todas las marcas en tu mini-map han sido borradas, se libre de preguntarme hacerca de las ubicaciones de los edificios cuando lo necesites.";
+		break;
+	case 3:
+		mes "[Representative]";
+		mes "Yo entiendo que tu quieras explorar Louyang y ver";
+		mes "las señales por ti mismo. Muy bien, cuidate!";
+		break;
+	}
+	close;
+}

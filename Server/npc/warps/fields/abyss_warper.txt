@@ -1,0 +1,168 @@
+//===== eAthena Script =======================================
+//= Abyss Cave Warper
+//===== By: ==================================================
+//= erKURITA
+//===== Current Version: =====================================
+//= 1.4
+//===== Compatible With: =====================================
+//= Any Athena Version
+//===== Description: =========================================
+//= Warper to Abyss Cave. and warper out
+//===== Additional Comments: =================================
+//= 1.0 Added by Nexon [Nexon]
+//= 1.1 Removed Duplicates [Silent]
+//= 1.2 Fixed tab - missing pillar's appeared [Lupus]
+//= 1.3 Updated Abyss Lake entrance based on official [SinSloth]
+//= 1.3a Removed .GATs [Lupus]
+//= 1.4 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//============================================================
+
+hu_fild05,168,304,0	script	Column#abyss1	111,{
+
+	mes "^3355FFHay 3 ranuras";
+	mes "de forma singular en";
+	mes "la superficie de esta";
+	mes "columna. Parece que";
+	mes "algunas partes del cuerpo de un dragón";
+	mes "podrían encajar perfectamente en las";
+	mes "ranuras de la columna.^000000";
+	if((countitem(1035)) && (countitem(1036)) && (countitem(1037)))
+	{
+		next;
+		switch( select( "Insertar Partes del Cuerpo del Dragón.","Comer Partes del Cuerpo del Dragón." ) )
+		{
+			case 1:
+				mes "^3355FFCuidadosamente colocas un";
+				mes "Dragon Canine en una de";
+				mes "las ranuras, y luego";
+				mes "escuchas un poderoso estruendo";
+				mes "del interior de la columna.^000000";
+				specialeffect EF_WINDHIT;
+				next;
+				mes "^3355FFLentamente insertas un";
+				mes "Dragon Scale en otra";
+				mes "de las ranuras de la columna,";
+				mes "disparando otro pequeño";
+				mes "temblor desde la columna.^000000";
+				specialeffect EF_WINDHIT;
+				next;
+				mes "^3355FFAtentamente insertas un";
+				mes "Dragon Tail dentro de la";
+				mes "ranura final. Brillan luces";
+				mes "desde las rajaduras en la";
+				mes "superficie de la columna...^000000";
+				specialeffect EF_WINDHIT;
+				next;
+				mes "^3355FFEl suelo debajo";
+				mes "de tus pies comienza a";
+				mes "sacudirse violentamente.^000000";
+				specialeffect EF_BOWLINGBASH;
+				donpcevent "AbyssWarp::OnWarp";
+				specialeffect2 EF_PORTAL;
+				delitem 1035,1;
+				delitem 1036,1;
+				delitem 1037,1;
+				close2;
+				warp "hu_fild05",184,204;
+				end;
+
+			case 2:
+				mes "^3355FFCon cuidado colocas un";
+				mes "Dragon Canine, un Dragon";
+				mes "Scale y un Dragon Tail dentro";
+				mes "de tu boca y lentamente comienzas";
+				mes "a masticar. Nada sucede";
+				mes "y el sabor de estos ítems";
+				mes "es asombrosamente asqueroso.^000000";
+				next;
+				emotion e_rice,1;
+				delitem 1035,1;
+				delitem 1036,1;
+				delitem 1037,1;
+				percentheal -10,0;
+				close;
+		}
+	}
+	close;
+}
+
+hu_fild05,171,211,0	script	Column#abyss2	111,1,1,{
+
+	mes "^3355FFEsta columna se ve";
+	mes "muy similar a la";
+	mes "que viste en";
+	mes "el lago. Hay una";
+	mes "ranura azul";
+	mes "clara en su superficie.^000000";
+	next;
+	switch( select( "Tocar la Ranura.","Remover Item de la Ranura" ) )
+	{
+		case 1:
+			mes "^3355FF*Martilleo Martilleo*^000000";
+			next;
+			mes "^3355FFLa luz que emanada desde";
+			mes "la ranura se distorsiona y";
+			mes "la columna comienza a sacudirse.";
+			mes "Escuchas un débil estruendo";
+			mes "desde el interior de la columna.^000000";
+			specialeffect EF_WINDHIT;
+			next;
+			mes "*¡Ggghhhhhzzzz!*";
+			mes "*¡BAM!*";
+			next;
+			mes "^3355FFLa luz que desprenden";
+			mes "las ranuras de la columna se hace";
+			mes "más fuerte mientras sientes que";
+			mes "el piso debajo de tus pies";
+			mes "empieza a hundirse lentamente...^000000";
+			next;
+			specialeffect EF_BOWLINGBASH;
+			specialeffect2 EF_PORTAL;
+			close2;
+			warp "hu_fild05",169,305;
+			end;
+
+		case 2:
+			mes "^3355FF*¡Ppppsssh!*";
+			mes "Accidentalmente";
+			mes "rompes el ítem.^000000";
+			specialeffect EF_WINDHIT;
+			next;
+			mes "^3355FF*¡Gggggggghhhhhhhhzzzzzzjjjjhh!*^000000";
+			next;
+			mes "^3355FFLa luz que emana desde";
+			mes "la ranura se distorsiona y";
+			mes "la columna comienza a sacudirse.";
+			mes "Los temblores en el suelo";
+			mes "te dificultan estar";
+			mes "en pie, pero de repente";
+			mes "eres enviado a otro lugar...^000000";
+			next;
+			specialeffect EF_BOWLINGBASH;
+			specialeffect2 EF_PORTAL;
+			close2;
+			warp "hu_fild05",157,284;
+			end;
+	}
+}
+
+hu_fild05,196,210,1	script	AbyssWarp	45,2,2,{
+
+OnInit:
+	disablenpc "AbyssWarp";
+	end;
+
+OnTouch:
+	warp "abyss_01",260,268;
+	end;
+
+OnWarp:
+	initnpctimer;
+	enablenpc "AbyssWarp";
+	end;
+
+OnTimer30000:
+	stopnpctimer;
+	disablenpc "AbyssWarp";
+	end;
+}

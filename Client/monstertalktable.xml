@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+
+<enemy_monster_talk_table>	
+
+	<alarm>			
+		<discovery>	Tic...toc...tic...toc...tic...toc...	</discovery>
+		<discovery>	¡¡Alarma!! ¡¡Alerta!! ¡¡enemigo, enemigo!!!!	</discovery>
+		<attack>	¡¡Toma esto!!	</attack>
+		<attack>	¡¿Qué hace una escoria como tu en la Torre del reloj?!	</attack>
+		<attack>	¡¡Hora de morír!!	</attack>
+		<hp50>	Tik...plump..thump...plump...	</hp50>
+		<hp25>	Tic...toc...plump...thump...	</hp25>
+		<kill>	Crack...dingdong...dingdong...	</kill>
+		<kill>	Se te ha acabado la cuerda amigo	</kill>
+		<dead>	¡¡Plump...crak...krash!!	</dead>
+		<dead>	Me faltaban unas vueltas en la manivela...	</dead>
+	</alarm>			
+	<alice>			
+		<attack>	Tú no eres el amo Ymir, eres solo un patético guerrero...	</attack>
+		<attack>	¡¡No eres el amo!!	</attack>
+		<attack>	¿Pretendías ser el amo?...¡¡Eres malo!!	</attack>
+		<attack>	¡¡Hora de sacar la basura!!	</attack>
+		<hp50>	¡No...no puedo morir ahora! No puedo permitir que llegues al amo...	</hp50>
+		<hp25>	A... Amo... Por favor, ven rápido... No puedo resistir más...	</hp25>
+		<kill>	Esté orgulloso de mí, amo. He elminado a sus enemigos 	</kill>
+		<dead>	Éste es el fin amo... Adiós...	</dead>
+		<dead>	Demasiado...tarde. Seré su sirviente despues de la muerte, amo...	</dead>
+		<dead>	No...demasiado tarde...es el fin...	</dead>
+	</alice>			
+	<alligator>			
+		<discovery>	Krrk...	</discovery>
+		<attack>	¡Grk! ¡Kwaaack!	</attack>
+		<hp50>	Krrkkrrk...	</hp50>
+		<hp25>	Kruk...kukkuk...cuk...	</hp25>
+		<kill>	Kkkk...	</kill>
+		<dead>	Kk...	</dead>
+	</alligator>			
+	<angeling>			
+		<discovery>	¡Escoria! ¡Huphm!	</discovery>
+		<discovery>	¡He encontrado a un humano! ¡Vamos mis subditos, a él!	</discovery>
+		<attack>	¡¡Muere, raza inútil!!	</attack>
+		<attack>	No vale la pena ni atacarte por la espalda	</attack>
+		<hp50>	No... No eres tan malo como pensaba....	</hp50>
+		<hp25>	Estoy muy débil...maldición...	</hp25>
+		<kill>	Inútil... ¡Ése es tu sitio, en el suelo!	</kill>
+		<dead>	¡¡Urrp!! ¡¡Boom!!	</dead>
+	</angeling>			
+	<anolian>			
+		<discovery>	¡¡Gwurk!!	</discovery>
+		<attack>	¡¡Gwurkrwaaaaaar!!	</attack>
+		<hp50>	Kkuk...	</hp50>
+		<hp25>	Hukhuk...	</hp25>
+		<kill>	¡¡Gwurk!! ¡¡Gwurkrwaaaaaar!!	</kill>
+		<dead>	Gwurk...	</dead>
+	</anolian>			
+	<archer_skeleton>			
+		<discovery>	Criaturas vivientes...¡¡Morid!!	</discovery>
+		<discovery>	Ya puedo oír la respiración de un ser vivo...	</discovery>
+		<attack>	¡¡Muere, criatura viviente!!	</attack>
+		<hp50>	Uurk...	</hp50>
+		<hp25>	Mis huesos...se debilitan...	</hp25>
+		<kill>	Muerto... Otra vez, he muerto...	</kill>
+		<dead>	¡¡No...no pienses que todo a terminado!! ¡¡Volveré!!	</dead>
+	</archer_skeleton>			
+	<bathory>			
+		<discovery>	Hihihihi~ ¿A dónde vas?  ¡¡Ven, ven con la abuelita!!	</discovery>
+		<attack>	¡¡Aquí, cógelo!! ¡¡Toma una galleta, con todo mi amor!!!	</attack>
+		<hp50>	Hihihihi~	</hp50>
+		<hp25>	Arrrgggg...	</hp25>
+		<kill>	¿Demasiado amor? Hihihihi~	</kill>
+		<dead>	¿Dónde está el respeto hacia los ancianos?	</dead>
+	</bathory>			
+	<bon_gun>			
+		<discovery>	Has venido aún sabiendo que morirías...	</discovery>
+		<attack>	No te causaré dolor, un golpe y se acabó...	</attack>
+		<hp50>	No esperaba que ofrecerías tanta resistencia	</hp50>
+		<hp50>	Eres bueno... Siento haberme equivocado contigo	</hp50>
+		<hp25>	Todavía...todavía puedo seguir peleando	</hp25>
+		<hp25>	Tu respiración...es intensa	</hp25>
+		<kill>	Espero que no hayas sentido mucho dolor	</kill>
+		<kill>	Por favor, no vuelvas... No quiero atacarte, insecto	</kill>
+		<kill>	Entrena 10 años más y luego ven a retarme de nuevo	</kill>
+		<dead>	He...he perdido...	</dead>
+		<dead>	S...supongo que necesito más entrenamiento... 	</dead>
+	</bon_gun>			
+	<deviruchi>			
+		<discovery>	¡¡Es un intruso, un intruso!!	</discovery>
+		<attack>	Muérete ¿vale?	</attack>
+		<attack>	Te morirás, y yo me encargaré de ello	</attack>
+		<hp50>	¡Ouch ouch! Maldito...¡me estás atacando por la espalda, cobarde! 	</hp50>
+		<hp25>	Eres muy fuerte...	</hp25>
+		<kill>	¿Ya has muerto?... No ha sido nada divertido	</kill>
+		<kill>	¡Liquidado, liquidado! ¡Has sido eliminado!	</kill>
+		<kill>	No te preocupes, yo guiaré tu alma hasta el infierno	</kill>
+		<dead>	¡Me has matado!	</dead>
+		<dead>	Soy el amo del infierno...¡regresaré y te liquidare!	</dead>
+	</deviruchi>			
+	<evil_druid>			
+		<discovery>	¡¡Quién osa adentrarse en mí mundo de oscuridad!!	</discovery>
+		<discovery>	¡Bienvenido! ¡Has llegado al lugar correcto para morir!	</discovery>
+		<attack>	¡Muere! ¡Únete al resto de almas errantes!	</attack>
+		<attack>	Destruir la vida es mi único propósito en éste mundo	</attack>
+		<hp50>	No está mal, para ser un inútil ente vivo 	</hp50>
+		<hp25>	Poco a poco se acerca el fin	</hp25>
+		<kill>	Bienvenido a un reinado eterno en la muerte	</kill>
+		<kill>	Ahora empieza el verdadero sufrimiento	</kill>
+		<dead>	¡¡Kkerrrrrk!!	</dead>
+		<dead>	Kuk..urlp...	</dead>
+	</evil_druid>			
+	<executioner>			
+		<discovery>	¿Qué ven mis ojos? Alguien a destripar	</discovery>
+		<discovery>	¡Prepárate para caer ante mi inquebrantable acero! 	</discovery>
+		<attack>	¡Prueba el sabor de mi acero!	</attack>
+		<attack>	Voy a acabar contigo cuál hoja de papel	</attack>
+		<hp50>	Arg...eres duro, pero no tanto como yo	</hp50>
+		<hp25>	¡Maldito! ¡No podrás quebrantar mi cuerpo de alma y acero!	</hp25>
+		<kill>	Te advertí, y no huiste cuándo tuviste tu oportunidad	</kill>
+		<kill>	Inútil, no has sido capaz ni de agrietar mis cadenas	</kill>
+		<dead>	No puede ser real...no puedo romperme...	</dead>
+		<dead>	¡No puede ser! ¡¡Aarrgh!!	</dead>
+	</executioner>			
+	<ghostring>			
+		<discovery>	Hora de jugar al escondite...	</discovery>
+		<discovery>	¿Piensas que estás seguro ahí? Dejame dudarlo...	</discovery>
+		<attack>	¿A caso no puedes golpearme? Una lástima, yo a ti sí...	</attack>
+		<attack>	¿Venías a por mí no? ¿Qué pasa que no me golpeas? 	</attack>
+		<hp50>	Me debilito por momentos. Debería desaparecer ahora...	</hp50>
+		<hp25>	HOOO... HOOOO...	</hp25>
+		<kill>	Tu cuerpo está frío, se acabó...	</kill>
+		<kill>	Ahora eres uno de los nuestros	</kill>
+		<dead>	Yo...yo sólo...	</dead>
+		<dead>	Pronto llegará tu turno, recuérdalo	</dead>
+	</ghostring>			
+	<goblin_1>			
+		<discovery>	¡Intruso detectado!	</discovery>
+		<attack>	¡Tu morir ahora!	</attack>
+		<hp50>	Tu golpear fuerte, yo ser duro	</hp50>
+		<hp25>	Necesitar comida, ahora	</hp25>
+		<kill>	¡¡Lolboooloaaaaaaaargh!!	</kill>
+		<dead>	Yo morir, tu fuerte...	</dead>
+	</goblin_1>			
+	<goblin_2>			
+		<discovery>	¡¡Intruso, intrusooooo!!	</discovery>
+		<attack>	¡Yo aplastar tu cabeza! ¡Yo matar, matar mucho!	</attack>
+		<hp50>	¡Yo aún aguantar!	</hp50>
+		<hp25>	¡¡¡Huaaaaaa!!!	</hp25>
+		<kill>	¡¡Hohoho!!	</kill>
+		<dead>	Morir con honor...	</dead>
+	</goblin_2>			
+	<goblin_3>			
+		<discovery>	¡ÑEEE! ¡Intrusos!	</discovery>
+		<attack>	¡Matar a los intrusos!	</attack>
+		<hp50>	¡Uhk! ¡Peligro!	</hp50>
+		<hp25>	¡Yo no perder aún!	</hp25>
+		<kill>	¡Tu morir, yo fuerte!  	</kill>
+		<dead>	¡Urk! ¡Dolor!	</dead>
+	</goblin_3>			
+	<goblin_4>			
+		<discovery>	¡Intruso, ver intruso!	</discovery>
+		<attack>	¡Acabar con insectos, ahora!	</attack>
+		<hp50>	¡Huk! Yo sentir débil ahora...	</hp50>
+		<hp25>	¡Luchar un poco más!	</hp25>
+		<kill>	Tu muerto, yo feliz	</kill>
+		<dead>	Yo muerto, amigos venganza	</dead>
+	</goblin_4>			
+	<goblin_5>			
+		<discovery>	¡Intruso aquí!	</discovery>
+		<attack>	¡¡¡Matar!!!	</attack>
+		<hp50>	Tu golpear fuerte...	</hp50>
+		<hp25>	Yo herido, deber matar al intruso	</hp25>
+		<kill>	Final de batalla, intruso eliminado	</kill>
+		<dead>	¡Aaaaarghbaaaaaaargh!	</dead>
+	</goblin_5>			
+	<goblin_archer>			
+		<discovery>	Intruso a las 12, apuntando...	</discovery>
+		<attack>	Yo acertar, tu morir pronto 	</attack>
+		<hp50>	Yo aguantar hasta que tu morir	</hp50>
+		<hp25>	¡¡Arg!! ¡¡Perforar cabeza con flecha!!	</hp25>
+		<kill>	¡¡Morir como insecto!!	</kill>
+		<dead>	Maldito...yo deber irme...	</dead>
+	</goblin_archer>			
+	<golem>			
+		<attack>	Proteger... Vete...	</attack>
+		<hp50>	Me estoy rompiendo...	</hp50>
+		<hp25>	Mi piel de piedra...se rompe...	</hp25>
+		<kill>	Amenaza eliminada...	</kill>
+		<dead>	Se acabó...	</dead>
+	</golem>			
+	<greatest_general>			
+		<discovery>	¡¡Ei!! ¡¡Acercate!!	</discovery>
+		<attack>	¡¡Siente mi ira!!	</attack>
+		<hp50>	Cobarde, pelea limpio	</hp50>
+		<hp25>	Te aprovechas de mi falta de movilidad...	</hp25>
+		<kill>	Has muerto...que pena	</kill>
+		<dead>	No...no me quiero morir...¡¡Aaaah!!	</dead>
+	</greatest_general>			
+	<high_orc>			
+		<discovery>	chweek!!! Ha entrado un humano al area!!	</discovery>
+		<attack>	chweek! Muere, humano!!	</attack>
+		<hp50>	chweek! herido, estoy herido!	</hp50>
+		<hp25>	chweek! No te soltare...Puedo permancer de pie mucho mas!!	</hp25>
+		<kill>	human..chweek!! Acabado!!!  chweek!!!	</kill>
+		<dead>	Muerte..chweek..un humano me ha matado...chweek!	</dead>
+	</high_orc>			
+	<injustice>			
+		<discovery>	Tomar tu cabeza no sera tan dificil!! 	</discovery>
+		<attack>	Muerde el polvo, humano insignificante!!	</attack>
+		<hp50>	huwoot!	</hp50>
+		<hp25>	muy bien, tonto!!	</hp25>
+		<kill>	tu cuerpo esta frio?  entonces necesitas un calentador,  khahaha!!	</kill>
+		<dead>	woowoo...humano...insignifcantes creaturas, no puedo creer que un humano me haya derrotado...como... 	</dead>
+	</injustice>			
+	<isis>			
+		<discovery>	TU! que estas  haciendo aqui!  este es el lugar del emperador!!	</discovery>
+		<attack>	CALLATE!  si vas a morir, muere callado!! eerrgrrr!!	</attack>
+		<hp50>	atacaste..me han atacado por la espalda...	</hp50>
+		<hp25>	Ahora..es cuando te tienes que  caer...	</hp25>
+		<kill>	El emperador ama el silencio..asi que  CALLATE!!	</kill>
+		<dead>	ohh..ohh no.. emperador por favor perdoneme...	</dead>
+	</isis>			
+	<joker>			
+		<discovery>	Hay alguien ahi?  he estado esperando esto por mucho tiempo...	</discovery>
+		<attack>	Te matare, y bailare encima de tu cuerpo apestoso!!!	</attack>
+		<hp50>	oh, atacas por la espalda...huhut...	</hp50>
+		<hp25>	eres simpatico...vamos hasta el final, querido.	</hp25>
+		<kill>	oh? eso fue todo? pero si acabamos de empezar...bueno.. bailare en ti!! 	</kill>
+		<dead>	eres...er....tambien ..muy....f...	</dead>
+	</joker>			
+	<khalitzburg>			
+		<discovery>	Vida...Humano...vivo...	</discovery>
+		<attack>	matar...matar...matar...matar...matar...matar...	</attack>
+		<hp50>	Vamos a ser aliados...vamos a ser aliados...aliados...	</hp50>
+		<hp25>	No quiero morir...no quiero morir...no quiero morir...no morir...	</hp25>
+		<kill>	Aliado...otro aliado...aliado...otro aliado...	</kill>
+		<dead>	krrk.....cuerpo...mi cuerpo despedazado...	</dead>
+	</khalitzburg>			
+	<knight_of_abyss>			
+		<discovery>	Puedes competir conmigo?	</discovery>
+		<attack>	Ten, Toma mi ataque!!	</attack>
+		<hp50>	Muy fuerte...eres bueno!!! Pero.. todavia no acabo!!  	</hp50>
+		<hp25>	Te acepto como mi rival!!	</hp25>
+		<kill>	no...estas  muerto...Olvida lo que  dije, no eres rival!!	</kill>
+		<dead>	Me has  vencido...muy fuerte! Espero que  no abuses de tu fuerza!!	</dead>
+	</knight_of_abyss>			
+	<kobold_1>			
+		<discovery>	Humano...bawwow!!	</discovery>
+		<attack>	bawbaw!	</attack>
+		<hp50>	ataquen, denles!	</hp50>
+		<hp25>	urk!!	</hp25>
+		<kill>	Muertos, Los matamos!!	</kill>
+		<dead>	kaeng!!	</dead>
+	</kobold_1>			
+	<kobold_2>			
+		<discovery>	grrr!!!	</discovery>
+		<attack>	bawwow~	</attack>
+		<hp50>	kng!!	</hp50>
+		<hp25>	hukhuk...	</hp25>
+		<kill>	bawwwww~	</kill>
+		<dead>	kaeng!!	</dead>
+	</kobold_2>			
+	<kobold_3>			
+		<discovery>	Grrrrrrr!!!	</discovery>
+		<attack>	bawbaw!!  muerdan las  partes del cuerpo!!	</attack>
+		<hp50>	kiking...	</hp50>
+		<hp25>	bawwow...	</hp25>
+		<kill>	uwaaaaa!!	</kill>
+		<dead>	kaeng!!	</dead>
+	</kobold_3>			
+	<kobold_archer>			
+		<discovery>	bawwow~ te encontre! ahi estas!	</discovery>
+		<attack>	chuchut!!  chuchut!!	</attack>
+		<hp50>	kkaeng..	</hp50>
+		<hp25>	kinggkingg~	</hp25>
+		<kill>	ukyalkyal~	</kill>
+		<dead>	kkaeng!!	</dead>
+	</kobold_archer>			
+	<marduk>			
+		<discovery>	Que tipo de poder estas buscando??!!	</discovery>
+		<attack>	Recibe, toda mi iraaa!!!	</attack>
+		<hp50>	No tienes mi fuerza!!	</hp50>
+		<hp25>	Si quieres huir, te lo permitire!	</hp25>
+		<kill>	Para otra vez, ten mas cuidado...y antes mejor revisa, que no este yo por aqui!!	</kill>
+		<dead>	uk...como pudiste...dios, guia mi alma...hacia a ti...	</dead>
+	</marduk>			
+	<marionette>			
+		<discovery>	wow! Juguemos, señor.humano!	</discovery>
+		<attack>	Seria mas  divertido, si ardieras en llamas!!  giggles~	</attack>
+		<hp50>	Esta herido!!	</hp50>
+		<hp25>	un poco...mas, y el fuego acabara contigo.	</hp25>
+		<kill>	ooh! estaba demasiado caliente? pero fue algo divertido, eres debil señor.humano! giggles~ 	</kill>
+		<dead>	oh si...Ya he estado colgada, por mucho tiempo...gracias...	</dead>
+	</marionette>			
+	<merman>			
+		<discovery>	bubble...es humano...bubblebubble...	</discovery>
+		<attack>	Tienes unos intestinos, que  violan las reglas del reino, humano...bubblebubble...	</attack>
+		<hp50>	Esto..es un humano fuerte!!	</hp50>
+		<hp25>	Te...subestime...humano	</hp25>
+		<kill>	por que...vienen todo el tiempo con eso prohibido??...bubblebubble...	</kill>
+		<dead>	ohhno...No quiero regresar..al fondo del mar bubble otra vez...bubblebubble...	</dead>
+	</merman>			
+	<metaller>			
+		<attack>	Atacando por atras?  Quieres pelear?  te han dado unas bofetadas con instrumentos de musica? 	</attack>
+		<hp50>	por que?  por que me pegaste?  por que me quieres romper mis cosas~??	</hp50>
+		<hp25>	divertido, es?  divertido, huh?  divertido, huh?  divertido, huh?  divertido, huh?	</hp25>
+		<kill>	Que?  eres un debilucho?  debes de estar avergonzado, cierto? 	</kill>
+		<dead>	que...mi violin era un estradivarius!! era muy carooo!!	</dead>
+	</metaller>			
+	<minorous>			
+		<discovery>	hacia mucho tiempo, que no encontraba a un oponente debil...MUUU~! 	</discovery>
+		<attack>	Te hare pure, con el poder de mi martillo!!!	</attack>
+		<hp50>	Uhh!  Has...has  bloqueado mis ataques?	</hp50>
+		<hp25>	Muy bien! pero preparate para la ultimo combate!!	</hp25>
+		<kill>	Es bueno para ti esto, para que  ya no invadas lugares prohibidos! UmMuuHuHuHu~	</kill>
+		<dead>	Muuuwuauugggg~!!	</dead>
+	</minorous>			
+	<mummy>			
+		<discovery>	El vivo recibe muerte, y el muerto recibe dolor!!	</discovery>
+		<attack>	Por el honor de osiris!!!	</attack>
+		<hp50>	Somos los olvidados...nuestro nombres no estan escritos en ningun lado...	</hp50>
+		<hp25>	tu...tu puedes venir conmigo...	</hp25>
+		<kill>	La muerte...te dara descanso eterno y paz.	</kill>
+		<dead>	ahora...finalmente...podre descansar...perdoname , gran faraoh...ohhh...	</dead>
+	</mummy>			
+	<munak>			
+		<discovery>	Te encontre...espera...	</discovery>
+		<attack>	No es bueno vivir sola...llevame.... 	</attack>
+		<hp50>	Por que...por que lo haces...	</hp50>
+		<hp25>	Qui...quiero estar contigo...por eso tienes que morir.	</hp25>
+		<kill>	si...ahora estaremos juntos...a menos que  revivas...	</kill>
+		<dead>	kyaa!!  N...no quiero acabar asi!!!	</dead>
+	</munak>			
+	<mutant_dragon>			
+		<discovery>	kuhhuhu...es tiempo para arder...espera!!!	</discovery>
+		<attack>	Te quemare con el polvo del  infierno!!	</attack>
+		<hp50>	kueh..kueh...eres duro! pero yo lo soy mas!!	</hp50>
+		<hp25>	ahora arde, arde!! arde y conviertete de nuevo en cenizas!!	</hp25>
+		<kill>	Como te sientes convertido en polvo? huh? kurarararar~	</kill>
+		<kill>	kurarrarrar~!!! Finalmente,todo se convertira en cenizas, bien!!	</kill>
+		<dead>	kuahahah~ No..No me gusto estooo!!	</dead>
+	</mutant_dragon>			
+	<mysteltainn>			
+		<discovery>	espera! No creo que puedas  pelear comigo.	</discovery>
+		<attack>	bien! asi es como peleas?! te mostrare como se usan las  espadas correctamente!!	</attack>
+		<attack>	La espada es una herramienta para matar! el filo es alma de la espada! No sabias esto antes de atacarme!	</attack>
+		<hp50>	Atacas bien! pero, por que tiemblas?	</hp50>
+		<hp25>	Bien Bien! Estas bloqueando bien los ataques, Toma esto!!	</hp25>
+		<kill>	huh! este humano no era el elegido...unicamente era uno mas?	</kill>
+		<dead>	B..bien..eres buen guerrero, ya no siento nada.... destruyeme...	</dead>
+	</mysteltainn>			
+	<obeaune>			
+		<discovery>	Te tengo, mi amor...	</discovery>
+		<attack>	ahora, recibe mi ataque!	</attack>
+		<hp50>	te...has vuelto fuerte?	</hp50>
+		<hp25>	an..antes no tenias esta fuerza!!	</hp25>
+		<kill>	humhp! te  falta mucho! si no resistes mis ataques, mejor ni regreses!!	</kill>
+		<dead>	ah..bie..bien..aho..ahora, ya puedes matarme...felic..idades...	</dead>
+	</obeaune>			
+	<orc_archer>			
+		<discovery>	Cheit! Maten al intruso!  	</discovery>
+		<attack>	Disparen muchas veces y denle muchas veces! todos fuegooo!! Cheit!!	</attack>
+		<hp50>	Cheit!! fuerte..humano fuerte...recalibren sus armas!!	</hp50>
+		<hp25>	Cheit!! recarguen sus flechas...la guerra debe de seguir...Cheit!!	</hp25>
+		<kill>	Cheeeeeiiiiit!!!!  Humano derrotado! vida eterna a los orcos!!!  Cheit!	</kill>
+		<dead>	keerk...Honor a los orcos...muerte a los humanos!! Cheeee....	</dead>
+	</orc_archer>			
+	<orc_lady>			
+		<discovery>	Te daré el honor de ver mi belleza de cerca!!    	</discovery>
+		<attack>	Que! tienes los ojos bizcos!! no me gustas!! toma, por andar viendo mi belleza!!	</attack>
+		<hp50>	Por...por que quieres dañar a una belleza como la mia?  sniff...	</hp50>
+		<hp25>	ah...por favor...ya no me sigas pegando...sniffsniff...	</hp25>
+		<kill>	ohhohot! Ya viste lo que conseguiste por mirar una  belleza como la mia?	</kill>
+		<dead>	kuruk!! cuida tu espalda, humano!  Cheeeiikk!!!	</dead>
+	</orc_lady>			
+	<orc_skeleton>			
+		<discovery>	vivo...vivo...es una creatura viviente...	</discovery>
+		<attack>	muere...muere...todo lo vivo debe morir...	</attack>
+		<hp50>	sin dolor..cuando mueres no hay mas dolor...	</hp50>
+		<hp25>	descanso...dame descanso...	</hp25>
+		<kill>	todavia...todavia estas...lejos para ganarme...	</kill>
+		<dead>	ahora...ahora podre des...	</dead>
+	</orc_skeleton>			
+	<orc_zombie>			
+		<discovery>	vida...muerte...cheeit!! vivo...cheeit..atacar...	</discovery>
+		<attack>	matar...matarl..muerte...sesos...cheeit...	</attack>
+		<hp50>	cuerpo..cheeit..partire en pedazos...	</hp50>
+		<hp25>	cuerpo...esta...debil...	</hp25>
+		<kill>	siguiente...siguiente...vida...cheeit...encontrar y matar......	</kill>
+		<dead>	polvo...sere polvo...cheeit!	</dead>
+	</orc_zombie>			
+	<ork_warrior>			
+		<discovery>	cheek! a nuestra tierra, entraste ilegalmente!  cheek! atrapen al ilegal!	</discovery>
+		<attack>	toma esto ilegal! cheek! muere!! cheek!!!	</attack>
+		<hp50>	fuerte! preparate para la guerra! cheek!	</hp50>
+		<hp25>	aliados! sostengan sus armas mas fuerte!  cheek!!	</hp25>
+		<kill>	Derrotado!! cheek!! somos victoriosos!!	</kill>
+		<dead>	Perdimos!! retiradaaaaa...cheeik....	</dead>
+	</ork_warrior>			
+	<pirate_skel>			
+		<discovery>	nada es mejor que saquear...eheladiya~	</discovery>
+		<attack>	ataquen!! hasta que consigamos todo...eheladiya~	</attack>
+		<hp50>	Diez personas y cinco! llegaron a la isla de la calavera~ pero habia solo un plato de comida...	</hp50>
+		<hp25>	los que sobrevivieron los mataron los demonios~ eheladiya~~	</hp25>
+		<kill>	Cazar, cazar...cazar el cuerpo y encontraras el botin..eheladiya~	</kill>
+		<dead>	aun cuando nos morimos, seguimos siendo los ladrones..fuerzas piratas..ehela...diya...	</dead>
+	</pirate_skel>			
+	<raggler>			
+		<discovery>	Enemigo descubierto! solicito refuerzos!! kiruk~	</discovery>
+		<attack>	Todos ataquen a la misma mancha! aniquilen al enemigo!! kiruk~	</attack>
+		<hp50>	chequen las municiones! preparense para el ataque sorpresa!! kiruk~	</hp50>
+		<hp25>	kiruk~ es mas fuerte de lo que parece! recalibrense!	</hp25>
+		<kill>	enemigo aniquilado! ahora regresemos a la base! kirururuk~	</kill>
+		<dead>	nos dieron..mayday...mayday...mayday...may...	</dead>
+	</raggler>			
+	<raydric>			
+		<discovery>	Hasta que caigas!!	</discovery>
+		<attack>	es tiempo para uno contra uno.	</attack>
+		<attack>	tu error te llevara a la muerte. mejor ten cuidado!!	</attack>
+		<attack>	mi nombre es  'Ayanami Raydric'... aunque no lo creas.	</attack>
+		<attack>	es tu dia de mala suerte.	</attack>
+		<attack>	Seras mi 398246 victima!!	</attack>
+		<attack>	la armadura salpicada de sangre es tan bonita..	</attack>
+		<attack>	si aceptas que perdiste, te dejare con vida.	</attack>
+		<attack>	iaaaaaaaaai no podras conmigo!!	</attack>
+		<hp50>	todavia no! puedo ir mas alla!	</hp50>
+		<hp25>	Los caballeros no damos marcha atras!	</hp25>
+		<hp25>	si corres, te dejare ir.	</hp25>
+		<hp25>	en 5 segundos caeras! 	</hp25>
+		<hp25>	No puedo creerlo..ataques como estos no...	</hp25>
+		<hp25>	no eres malo! que tal esto? guardalo para el futuro!	</hp25>
+		<hp25>	Nunca recibo heridas asi, como estas	</hp25>
+		<hp25>	la victoria es nuestra! veremos si sigues en tu misma posicion, en los cinco minutos restantes!!	</hp25>
+		<kill>	kukuku...victoria! el enemigo cayo y nosotros estamos vivos!!	</kill>
+		<dead>	regresare...	</dead>
+		<dead>	no pienses que aqui acabo todo!	</dead>
+		<dead>	eres un.... mosco....!	</dead>
+		<dead>	Te encontrare y recuperare mi honor.	</dead>
+		<dead>	....... fui facil para ti.	</dead>
+		<dead>	maldicion, quedo herida mi cintura..kuk!	</dead>
+		<dead>	Eres el primero que me derrota...!	</dead>
+		<dead>	el honor de los caballeros...es una cancion vieja...	</dead>
+	</raydric>			
+	<raydric_archer>			
+		<discovery>	enemigo militar descubierto! cargar flechas!	</discovery>
+		<attack>	te matare con un solo disparo!!	</attack>
+		<hp50>	nos atacan por la espalda! reagrupense todos!	</hp50>
+		<hp25>	recibimos daño critico! revisen el plan!	</hp25>
+		<kill>	el enemigo dejo de moverse! busquen mas enemigos cerca!	</kill>
+		<dead>	la guerra...no ha acabado...todavia...y..yo...	</dead>
+	</raydric_archer>			
+	<requiem>			
+		<discovery>	llevando un ataud clinkclink...encuentren al que vamos a enterrar...	</discovery>
+		<attack>	solo por el señor, TOMA!!	</attack>
+		<hp50>	el silencio es el ultimo sello!	</hp50>
+		<hp25>	ahora...no puede ser...	</hp25>
+		<kill>	silencio...ahora todos estan en silencio...	</kill>
+		<dead>	muerte...llevame...	</dead>
+	</requiem>			
+	<rocker>			
+		<attack>	oigame señor!!  yo a usted nada le puedo servir!! mejor gritaaaaa!!	</attack>
+		<hp50>	y no soy cantinero!!	</hp50>
+		<hp25>	soy el loquero de este hospital!!!	</hp25>
+		<kill>	ahah...la la lala  oigame señor lala la...kikic...	</kill>
+		<dead>	Que viva ...el rock and roll...	</dead>
+	</rocker>			
+	<skel_prisoner>			
+		<discovery>	fuerte...cansado...vivo...	</discovery>
+		<attack>	dame tu cuerpo..dame tu cuerpo...	</attack>
+		<hp50>	si no me lo das, hare que  me lo des...	</hp50>
+		<hp25>	quebrado..separado...que las partes vuelen lejos...	</hp25>
+		<kill>	piezas pequeñas...romperlas por separado...todas las piezas...kukuku...	</kill>
+		<dead>	regreso a la tierra...espero...que me acepte...	</dead>
+	</skel_prisoner>			
+	<skel_worker>			
+		<discovery>	Joyas, minerales tan hermosos!!  vengan conmigo y brillen!! 	</discovery>
+		<attack>	que has robado de nuestra mina, ladron!!	</attack>
+		<hp50>	tu...el infierno!! salte de aqui!!	</hp50>
+		<hp25>	huk...au...auxilio!! es muy fuerte, no lo puedo matar  yo solo!!	</hp25>
+		<kill>	Nunca sueñes con robar!!	</kill>
+		<dead>	ku...minerales...oro...joyas...tengo...necesito encontrar..algunas..	</dead>
+	</skel_worker>			
+	<soldier_skeleton>			
+		<discovery>	espera ahi, creatura viviente!!	</discovery>
+		<attack>	haap!! Te mostrare mi golpe mortal! 	</attack>
+		<hp50>	oh mis...huesos...	</hp50>
+		<hp25>	ouk...mis huesos, mañana seguro llovera...!	</hp25>
+		<kill>	hmm..no hay enemigo que le haga frente a mis navajas!	</kill>
+		<dead>	No estes tan seguro! estas a solo un tercio de poder de nuestro jefe!!	</dead>
+	</soldier_skeleton>			
+	<stalactic_golem>			
+		<attack>	Eh...enemigo...es enemigo...enemigo...enemigo...	</attack>
+		<hp50>	invadiendo...invadiendo  destruir...	</hp50>
+		<hp25>	sacudir, la tierra...sacudan...enemigo...destruir...enemigo...	</hp25>
+		<kill>	Aplastado...aplas...hhh...grukgruk...	</kill>
+		<dead>	otra vez..a la tierra..	</dead>
+	</stalactic_golem>			
+	<steam_goblin>			
+		<discovery>	el vapor es mi vida...vuelo con vapor~¢Ý kukekeke~	</discovery>
+		<attack>	doble ataque de puño vaporizado!!  kukekeke~	</attack>
+		<hp50>	hieeek!!  maquinaria sobrecalentada!! maquinaria sobrecalentada!!	</hp50>
+		<hp25>	kehek!!  la maquinaria...maquinaria esta...	</hp25>
+		<kill>	nada ni nadie puede contra el poder del vapor..kukekeke~	</kill>
+		<dead>	bl...blowing! todos escapen...kueeek!!!	</dead>
+	</steam_goblin>			
+	<strouf>			
+		<discovery>	que haces en el fondo del mar!!	</discovery>
+		<attack>	de verdad piensas que me vas a derrotar??!!	</attack>
+		<hp50>	maldita rata!! toma esto tambien!	</hp50>
+		<hp25>	como sabes, por donde te voy a atacar?!	</hp25>
+		<kill>	pensaste que tu escoria, me podias derrotar?	</kill>
+		<dead>	kuk...ya me tienes, pero no saldras  vivo de aqui!	</dead>
+	</strouf>			
+	<tirfing>			
+		<discovery>	encontre al oponente indicado ...hoy tambien barrere con alguien ~	</discovery>
+		<attack>	bueno veamos..que  cocinaremos hoy~	</attack>
+		<hp50>	la carne salpicada de sangre es un platillo delicado...lalala~	</hp50>
+		<hp25>	ya no podre cocinar...eso era mi felicidad~	</hp25>
+		<kill>	cortado en muchas piezas...podre hacer mas  piezas? eihithithit~	</kill>
+		<dead>	Y..yo soy indestructible....ahahahahak!!	</dead>
+	</tirfing>			
+	<vocal>			
+		<discovery>	Soy un cantante herrante~  soy el vocalista!!	</discovery>
+		<attack>	rock! rock! rock! rock! rock! rock! rock! rock!	rock! rock! rock! rock!</attack>
+		<hp50>	Para bailar la bamba, se necesita..n... unos golpes!! ~¢Ý	</hp50>
+		<hp25>	asi...es la vida de~¢Ý caprichosa~¢Ý¢Ü	</hp25>
+		<kill>	yo me voy por donde  vine~ ¢Ý se que no me perdere lalalala~abandonado alala	</kill>
+		<dead>	que...me toquen las  golondrinas...¢Ý	</dead>
+	</vocal>			
+	<wander_man>			
+		<discovery>	quien se esta escondiendo ahi, ahh eres tu!!	</discovery>
+		<discovery>	me estabas esperando!! 	</discovery>
+		<attack>	NAM-JIN ESPADA SOLITARIA, ataque secreto! EL DESTELLO DEL FILO(àì)!! 	</attack>
+		<hp50>	Me estoy estremeciendo... juar juar te falta mucho !	</hp50>
+		<hp50>	muy bien tonto.	</hp50>
+		<hp50>	Uht...No eres principiante!	</hp50>
+		<hp25>	Deja descanso... 	</hp25>
+		<hp25>	Eres buen oponente , muy bueno... 	</hp25>
+		<kill>	Nada es mejor que ver escurrir la sangre en el filo de la espada.	</kill>
+		<kill>	He derrotado al lider!!	</kill>
+		<dead>	Ahora...podre descansar.	</dead>
+		<dead>	La pelea..termino..pero la proxima vez no tendras tanta suerte.	</dead>
+	</wander_man>			
+	<wind_ghost>			
+		<discovery>	Los fantasmas pueden flotar~ pero por que no pueden atravesar muros?	</discovery>
+		<attack>	toma esto! luz...luz...eh...sin embargo es un ataque!	</attack>
+		<hp50>	mi capa...esta toda rasgada...	</hp50>
+		<hp25>	esta... vez que  pasara? ya estoy muerto?	</hp25>
+		<kill>	Quien puede competir con la luz del rayo?	</kill>
+		<dead>	ya veo ...la luz del cielo....ire hacia alla...si.. verdad...?	</dead>
+	</wind_ghost>			
+	<wraith>			
+		<discovery>	arrastrandome hacia contigo y dando una morida rapida! esa es mi especialidad...	</discovery>
+		<attack>	argh abrir mi mandibula "Ang!" dar la mordida!	</attack>
+		<hp50>	hoong...	</hp50>
+		<hp25>	te...te tengo...	</hp25>
+		<kill>	eras sabroso...tus carnes saben buenas..quiero mas!!.	</kill>
+		<dead>	........	</dead>
+	</wraith>			
+	<zerom>			
+		<discovery>	ehladiya~ el trabajo de hoy es para mañana, el trabajo de mañana es para el dia que sigue...	</discovery>
+		<attack>	mira la piedra, es muy dura y caera sobre ti!!	</attack>
+		<hp50>	huek...	</hp50>
+		<hp25>	por que  a mi...unicamente a mi...?	</hp25>
+		<kill>	si entendiste el peso de la vida, puedes empezar de nuevo! 	</kill>
+		<dead>	ma...mami...¤Ð_¤Ð	</dead>
+	</zerom>			
+	<zherlthsh>			
+		<discovery>	ohhohohohohohot!!!!	</discovery>
+		<attack>	ahora, llamame tu reina, ahora mismo!!!	</attack>
+		<hp50>	oh..si! mas! mas, dime mas!!	</hp50>
+		<hp25>	no!  todavia no!! mas...mas por favor!!!	</hp25>
+		<kill>	Apenas empezamos, y ya estoy cansada, huh esclavo?	</kill>
+		<dead>	ahah...ahah...muy buenooo!!  ven....ven otra vez despues...	</dead>
+	</zherlthsh>			
+	<zombie_prisoner>			
+		<discovery>	Grrr...	</discovery>
+		<attack>	Kwaaark!!	</attack>
+		<hp50>	Ma...mi piel...	</hp50>
+		<hp25>	fuerte...fuerte...no me mates...no quiero morir...	</hp25>
+		<kill>	krrrr..kilkilkilkil....	</kill>
+		<dead>	llevame...llevame fuera de la prision...luz...al fin te veo...	</dead>
+	</zombie_prisoner>			
+	<am_mut>			
+		<discovery>	Hoy lallala~ encontrare a un enemigo lallala~	</discovery>
+		<attack>	este palo es mas  duro de lo que pensaste!!	</attack>
+		<hp50>	ahat!	</hp50>
+		<hp25>	ahyayat!!	</hp25>
+		<kill>	muchos hoyos en tu cabeza...que ira a salir de ellos?	</kill>
+		<dead>	mi..no tomes mi palo...	</dead>
+	</am_mut>			
+	<ancient_mummy>			
+		<discovery>	gloria para el faraon...descanso para el faraon...	</discovery>
+		<attack>	dolor por la muerte...infierno por lo vivo...	</attack>
+		<hp50>	oh gran faraon! dame fuerzas para destruir a los intrusos!!	</hp50>
+		<hp25>	oh gran faraon! agranda mi fuerza! Muerte dolorosa para el enemigo!!	</hp25>
+		<kill>	Mi honor es suyo, oh gran faraon!	</kill>
+		<dead>	ahora...regresare con el dios sol...	</dead>
+	</ancient_mummy>			
+	<assulter>			
+		<discovery>	Blanco detectado, acercandose!	</discovery>
+		<attack>	Toma esto! tornado de fuego de la daga-SURI!!!	</attack>
+		<hp50>	Preparando para recibir el ataque el enemigo!	</hp50>
+		<hp25>	Rapidamente, en silencio, inteligencia...eso es el camino del ninja!	</hp25>
+		<kill>	la resistencia es inutil contra las tecnicas insuperalbes de los asesinos	</kill>
+		<dead>	mis...mis tecnicas asesinas...	</dead>
+	</assulter>			
+	<cat_o_nine_tail>			
+		<discovery>	Jingle~ jingle~ hey tu~	</discovery>
+		<attack>	hey!! en donde me estas pegando? por que me tocas? por que te pareces a mi?	</attack>
+		<hp50>	ahah...ah..duele...	</hp50>
+		<hp25>	ahora...te puedes morir? por favor? 	</hp25>
+		<kill>	ohhot~ como te sientes, besando el piso? huh?	</kill>
+		<dead>	ahah..N...no soy el vendedor de leche!!!	</dead>
+	</cat_o_nine_tail>			
+	<dark_illusion>			
+		<discovery>	encontre al tonto , que busca el poder...	</discovery>
+		<attack>	No me puedes pegar, soy como la niebla!	</attack>
+		<hp50>	El poder del infierno no puede localizarme...	</hp50>
+		<hp25>	Por el nombre del rey demonio, te arrodillaras ante mi!!	</hp25>
+		<kill>	entra a la oscuridad del infierno, dentro del sueño eterno!	</kill>
+		<dead>	Otra vez dentro del  caos...pero regresare!	</dead>
+	</dark_illusion>			
+	<g_assulter>			
+		<attack>	Toma esto! !!! tornado de fuego de la daga-SURI	</attack>
+		<hp50>	Preparando para recibir el ataque el enemigo!	</hp50>
+		<hp25>	Rapidamente, en silencio, inteligencia...eso es el camino del ninja!!	</hp25>
+		<kill>	la resistencia es inutil contra las tecnicas insuperalbes de los asesinos	</kill>
+		<dead>	Blam!	</dead>
+	</g_assulter>			
+	<goblin_leader>			
+		<discovery>	Seras la proxima victima de mi lanza?	</discovery>
+		<attack>	vamos! kaooh!!	</attack>
+		<hp50>	no te he podido matar! krrrk...	</hp50>
+		<hp25>	Es todo lo que tienes? vamos, trata de ser mas fuerte !!...krr~	</hp25>
+		<kill>	Supongo que ya conoces tu lugar...krrrk...	</kill>
+		<dead>	No estuvo mal...la proxima vez...no sere tan facil, como hoy...	</dead>
+	</goblin_leader>			
+	<kobold_leader>			
+		<discovery>	AHWOOOO~El Lider Kobold esta a tu servicio!  sniffsniff...	</discovery>
+		<attack>	No puedes escapar, ni esconderte, recuerdo tu olor! kungkung~	</attack>
+		<hp50>	que tipo de perro sere?	</hp50>
+		<hp25>	Ya veo...tu cuerpo se empieza a abrir!!  Grrrrrr~	</hp25>
+		<kill>	AHWOOOO~~ He desaparecido a otro humano!	</kill>
+		<dead>	KAEKAENG~	</dead>
+	</kobold_leader>			
+	<majoruros>			
+		<discovery>	piso...pushu...demolido...pushu...	</discovery>
+		<attack>	roca...rompiendose...martilleo...fuerte..tu..muere...pushu...	</attack>
+		<hp50>	huuk...huuk...	</hp50>
+		<hp25>	no..es el final...no...pronto..moriras...	</hp25>
+		<kill>	piso...golpeado...bueno..bien..hhh...pushu...	</kill>
+		<dead>	kuurrhg~	</dead>
+	</majoruros>			
+	<maya_puple>			
+		<discovery>	oi! Has visto a mi madre?	</discovery>
+		<attack>	eres tu! tu secuestraste a mi madre, verdad?	</attack>
+		<hp50>	regresamela! regresa a mi madre!	</hp50>
+		<hp25>	por que...porque la secuestraste? quieres dinero?	</hp25>
+		<kill>	crap..No puedo decir, cuando moriste..mejor  mirare por ahi.	</kill>
+		<dead>	sniff...madre...estas?...no la encontre, tendre que  recorrer 3 millones de km de nuevo...	</dead>
+	</maya_puple>			
+	<mobster>			
+		<discovery>	huh? hey! ven aqui!!	</discovery>
+		<attack>	preguntare amablemente..dame tu cartera!!	</attack>
+		<hp50>	hey! Piensas que eres habil con los puños?	</hp50>
+		<hp25>	ha, estas podrido! dejame ir	</hp25>
+		<kill>	Idiota~ eres tonto, ni llegas a idiota, solo salte de aqui...	</kill>
+		<dead>	por que...tu ...eres un maleante mas fuerte que yo?	</dead>
+	</mobster>			
+	<owl_baron>			
+		<discovery>	hey tu, el de alla...quieres algun negocio conmigo? booo~	</discovery>
+		<attack>	aun que  no quieras, tengo algo que ver contigo..booo~	</attack>
+		<hp50>	eres muy fuerte. quieres ser mi guardaespaldas?	</hp50>
+		<hp25>	Es buen trato. Suelta tu espada por unos segundos.	</hp25>
+		<kill>	Eres un tonto...trata de escuchar lo que dice la gente.	</kill>
+		<dead>	Estas..estas muy quieto ya desarrollaste una tactica nueva?	</dead>
+	</owl_baron>			
+	<owl_duke>			
+		<discovery>	crap...diario,diario, solo educacion.	</discovery>
+		<attack>	hey! veniste a jugar comigo?!	</attack>
+		<hp50>	la vida de los nobles es solo lujos y estudio...	</hp50>
+		<hp25>	si no gusta, no me gusta... gastadera...hukhuk...	</hp25>
+		<kill>	Que piensas de mi chaqueta cara, se ve bien?? 	</kill>
+		<dead>	huev...	</dead>
+	</owl_duke>			
+	<panzer_goblin>			
+		<discovery>	Sabias que el vapor fue inventado por Newton durante el desarrollo industrial?  kirrk~	</discovery>
+		<attack>	kirrk!! Ataque JET STREAM!!	</attack>
+		<hp50>	chieek! Maquinaria sobrecalentandose..Refrescar el piso de la maquinaria!! kirrk~	</hp50>
+		<hp25>	pushu...maquinaria sobrecalentada...refresando...kirrk~	</hp25>
+		<kill>	Enemigo derrotado! Yendo al siguiente blanco..kirrrr~	</kill>
+		<dead>	......craasssshh	</dead>
+	</panzer_goblin>			
+	<skeleton_general>			
+		<discovery>	Te tengo! Has matado a muchos de mis hombres, verdad?	</discovery>
+		<attack>	No puedes mentirme!	</attack>
+		<hp50>	recibe este golpe critico en todo tu cuerpo!	</hp50>
+		<hp25>	Cada parte que te toque con mi  hoja, se te podrira!	</hp25>
+		<kill>	La proxima vez que pases ante una calavera, te incaras!	</kill>
+		<dead>	No..no pueder ser...chicos!~ lo siento!!	</dead>
+	</skeleton_general>			
+	<wraith_dead>			
+		<discovery>	Abro mi fauces..."Ahng" y doy la mordida!	</discovery>
+		<attack>	Te tragare rapido y te digerire despacio? siiiii	</attack>
+		<hp50>	Despacio, y luego estaras pudriendote en mi brazo.	</hp50>
+		<hp25>	toma, con este ataque moriras!!	</hp25>
+		<kill>	Finalmente eres igual a mi...no puedes morir despues de muerto...	</kill>
+		<dead>	kkk..khat-hat-hat~	</dead>
+	</wraith_dead>			
+	<zombie_master>			
+		<discovery>	Slush..slush..Busco a mi oponente, siempre...	</discovery>
+		<attack>	oscuridad...cuando se oscurece, en realidad mi cuerpo se vuelve mas fuerte..	</attack>
+		<hp50>	el olor de los hongos deteriorandose es el placer de mi vida..	</hp50>
+		<hp25>	Los hongos mugrientos y el agua echada a perder, son en verdad deliciosos.	</hp25>
+		<kill>	Ahora nos vamos a deteriorar juntos? Khilhilhil~	</kill>
+		<dead>	V...vive siempre hasta el final..de la muerte! khilhilhil~	</dead>
+	</zombie_master>			
+	<baphomet>			
+		<discovery>	Que, quien eres tu?!	</discovery>
+		<attack>	Te partire por mitad con mi guadaña creciente!	</attack>
+		<hp50>	vamos, ataca! dame tu patetico ataque!	</hp50>
+		<hp25>	Tomaste mucho tiempo y no me pudiste matar! ahora es mi turno!!  </hp25>
+		<kill>	Pocos golpes y ya moriste....humano...eres patetico!	</kill>
+		<dead>	M...muy bien, humano! pero regresare!	</dead>
+	</baphomet>			
+	<dark_lord>			
+		<discovery>	ansio drenar tu alma.	</discovery>
+		<discovery>	Emperador del caos, le sacare los ojos!	</discovery>
+		<attack>	Vagabundos en mi tierra! Vayan al infierno!	</attack>
+		<hp50>	Te llevare a la oscuridad, para siempre!!! 	</hp50>
+		<hp50>	no me hagas enojar mas!!. 	</hp50>
+		<hp50>	lentamente, y ciertamente te llevare a la muerte!	</hp50>
+		<hp25>	Krk! Te hice menos.	</hp25>
+		<hp25>	bueno, deja tu alma en mi puño y descansa!	</hp25>
+		<kill>	Tu alma caera en la oscuridad!	</kill>
+		<kill>	Alguien mas se quiere ir al infierno?	</kill>
+		<dead>	no...no...no me gusta esto...de nuevo en la oscuridad...no, regresare...krk!	</dead>
+		<dead>	Maldicion me derroto un humano insignificante....... 	</dead>
+	</dark_lord>			
+	<doppelganger>			
+		<discovery>	estas ahi...	</discovery>
+		<attack>	vamos, que hablen nuestras espadas!	</attack>
+		<hp50>	Si! tienes una gran fuerza en el ataque!	</hp50>
+		<hp25>	Excelente ,movimiento! Pero no es suficiente	</hp25>
+		<kill>	Asi como lo pense...no hiciste nada. mejor esperare por el siguiente.	</kill>
+		<dead>	Ere...Eres un excelente oponente...ahora me podre ir con honor...krh...	</dead>
+	</doppelganger>			
+	<drake>			
+		<discovery>	Preparense e izen velas! muevan su trasero, cerdos perezosos!!	</discovery>
+		<attack>	Todavia estas  aqui! ve a izar la vela!!	</attack>
+		<hp50>	por que dejaste solo el timon, regresate!	</hp50>
+		<hp25>	basura de navegadores. toda la flota undan a los invasores!! 	</hp25>
+		<kill>	Quien diablos esta durmiendo, araganes! Vamos a la mar!	</kill>
+		<dead>	mi...mi viaje todavia...no..termina!!!!	</dead>
+	</drake>			
+	<eddga>			
+		<discovery>	Hace mucho tiempo era un tigre temeroso...Ahora soy el mas temido!	</discovery>
+		<attack>	Grr...Grrrwaang!!!	</attack>
+		<hp50>	Corre a donde puedas!	</hp50>
+		<hp25>	No estas corriendo? ahora que  todavia tienes tus tripas en su lugar!	</hp25>
+		<kill>	Estate fuera de mi dominio y del alcanze de mi garra..Grrr!!	</kill>
+		<dead>	H...humo...necesito un cigarro mas...nicotina...krrng...	</dead>
+	</eddga>			
+	<knight_of_windstorm>			
+		<discovery>	No soy Rodolfo, el reno de la nariz roja!! Piensas que soy Rodolfo!!	</discovery>
+		<attack>	Prueba el salvaje poder de la espada oscilante de Rodolfo!! 	</attack>
+		<hp50>	Soy solido como el diamante, y no me podras quebrar!	</hp50>
+		<hp25>	En mi escudo quedara marcado tu rostro!	</hp25>
+		<kill>	hh~ Quedaste helado como este invierno!	</kill>
+		<dead>	P...perdi...sniff...Sr..santa claus..¤Ð_¤Ð	</dead>
+	</knight_of_windstorm>			
+	<bloody_knight>			
+		<discovery>	Enemigo encontrado..preparate..	</discovery>
+		<attack>	En un segundo pereceras...	</attack>
+		<hp50>	Hasta que acabemos con todos ustedes...podremos descansar..	</hp50>
+		<hp25>	Esta...afrenta te la cobrare...caro... 	</hp25>
+		<kill>	otra vez...quiero mas sangre...Lo siento y espero lo comprendas...	</kill>
+		<dead>	gracias...ahora regresare con el maestro, en paz...	</dead>
+	</bloody_knight>			
+	<maya>			
+		<discovery>	que...quien eres?! que quieres de mis hijas?	</discovery>
+		<attack>	No les tocaras ni un pelo en mi presencia!	</attack>
+		<hp50>	ahat...no son suficientes estos ataques...	</hp50>
+		<hp25>	N..no puedo perder! No puedo perder, tengo que proteger a mis pequeñas ...	</hp25>
+		<kill>	Si vuelves a tocar a mis hijas, no te lo perdonare y ni en el infierno te dejare en paz!	</kill>
+		<dead>	ahh..L..lo siento..hijas, no pude..hacerlo...	</dead>
+	</maya>			
+	<mistress>			
+		<discovery>	Algo se mueve cerca de nuestro hogar! ataquen!!	</discovery>
+		<attack>	destruyan al invasor!!	</attack>
+		<hp50>	buena resistencia! Pero nosotras somos un ejercito!	</hp50>
+		<hp25>	Sin marha atras, vamos hasta el fin!!  	</hp25>
+		<kill>	Los eliminamos, pero podria haber mas cerca de nuestro hogar, busquen cuidadosamente!!	</kill>
+		<dead>	Mm...mis soldados! luchen...luchen hasta el final!! kaark!!	</dead>
+	</mistress>			
+	<moonlight>			
+		<discovery>	Jugar con las almas es muy divertido!!	</discovery>
+		<attack>	Jingle~ Jingle~ Siempre sueno la campanita, y ahora en tu cabezota!!	</attack>
+		<hp50>	ah...hukhuk...	</hp50>
+		<hp25>	Eres...eres muy malo...ahh!	</hp25>
+		<kill>	practica mas! O no podras derrotarme, ahora a seguir jugando!!	</kill>
+		<dead>	Noo..No! solo..queria..jugar...	</dead>
+	</moonlight>			
+	<orc_lord>			
+		<discovery>	Cheeik!! Por el honor de los orcos ganaremos!!	</discovery>
+		<attack>	Con mis patadas  voladoras te mandare al infierno! cheeik!!	</attack>
+		<hp50>	peleen, orcos! cheeik!!	</hp50>
+		<hp25>	cheeik!!  Siento que la sangre me hierve!!	</hp25>
+		<kill>	No creo que con esto regresen esos pateticos humanos! Cheeeeeik!!	</kill>
+		<dead>	Humano..cheeik..Humano me derrotaste...pero...esto no es el fin!!	</dead>
+	</orc_lord>			
+	<ork_hero>			
+		<discovery>	Cheeik! Humano! Orcos, Levántense!	</discovery>
+		<attack>	No nos subestimes, por que somos varios! Te demostraremos nuestra fuerza, de uno en uno!!	</attack>
+		<hp50>	Cheeik! No mas...No seremos derrotados por humanos, nunca mas!!	</hp50>
+		<hp25>	Cheeik! no me rendire hasta el ultimo momento!! cheeik!	</hp25>
+		<kill>	cheeik..esto fue el verdadero poder de los heroes y tu no lo eres!!	</kill>
+		<dead>	cheeik..esto..todavia no..termina..pronto..Cheeik!..otro heroe orco surgira y tomara mi lugar!!	</dead>
+	</ork_hero>			
+	<osiris>			
+		<discovery>	Quien esta perturbando mi sueño!	</discovery>
+		<attack>	Hare que tambien caigas en el sueño eterno!!	</attack>
+		<hp50>	No resistiras mucho tiempo!!	</hp50>
+		<hp25>	Tu resistencia es fuerte! vere que tan lejos puedes llegar!!	</hp25>
+		<kill>	Tu muerte me relaja.	</kill>
+		<dead>	Por ahora me retiro, solo espero que no me vuelvas a despertar!!	</dead>
+	</osiris>			
+	<phreeoni>			
+		<discovery>	hurup! licklick No escaparas de mi gran lengua ~	</discovery>
+		<attack>	hururup~ Te probare, espero estes ric@~	</attack>
+		<hp50>	huruphurup...hukhuk...no te resistas...quiero probar tu sabor~	</hp50>
+		<hp25>	hururup~ chapchapchap~ kukuk..tienes un sabor algo amargo!	</hp25>
+		<kill>	MMmm estuvo delicioso...cuando puedas ven de nuevo..hurup~	</kill>
+		<dead>	tu sabor es muy amargo...amargo...ese sabor no...me gusto...hururup~ chapchap~	</dead>
+	</phreeoni>			
+	<turtle_general>			
+		<discovery>	Que estas haciendo en el lugar sagrado de la tortuga?!	</discovery>
+		<attack>	Si solo nos quieres matar por  probar tu fuerza, has venido al lugar menos indicado!	</attack>
+		<hp50>	Si...eres muy fuerte pero estas en mi reino!	</hp50>
+		<hp25>	No dare marcha atras! Hasta ver tu cuerpo despedazado!	</hp25>
+		<kill>	huhuhu...este es un lugar sagrado, no puedes ganar!!	</kill>
+		<dead>	No...no les digas a mis tortugas que me derrotaste..!!	</dead>
+	</turtle_general>			
+</enemy_monster_talk_table>				

@@ -1,0 +1,826 @@
+//===== eAthena Script ======================================= 
+//= Crusader Skills Quests
+//===== By: ================================================== 
+//= Lupus, Reddozen
+//===== Current Version: ===================================== 
+//= 1.4
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Quests for skills: Shrink
+//===== Additional Comments: ================================= 
+//= 1.4 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//============================================================
+
+geffen,110,117,3	script	Ford#11	752,{
+	if (BaseJob == Job_Crusader) {
+		if (CRUS_SK == 8 && getskilllv("CR_SHRINK") == 0) {
+			mes "[Ford]";
+			mes "Hey, ha sido sólo un tiempo~";
+			mes "Y tu ya lograste";
+			mes "convertirte en un Paladin. Debes";
+			mes "haber olvidado como realizar";
+			mes "la habilidad Shrink, así que te la enseñaré";
+			mes "de manera rápida... ¡Ahí!";
+			set CRUS_SK,10;
+			skill "CR_SHRINK",1,0;
+			close;
+		}
+
+		else if (CRUS_SK == 0) {
+			mes "[Ford]";
+			mes "¡Maldición! ¿Por qué está";
+			mes "tomando tanto tiempo?";
+			mes "¡Ah, por fin, has";
+			mes "llegado! ¡Rápido, muéstrame";
+			mes "el ^FF0000reporte^000000 que has traído!";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "¿Perdón...?";
+			mes "Oh, debes haberme";
+			mes "confundido con alguien";
+			mes "más. De verdad no sé";
+			mes "de qué me estás hablando.";
+			next;
+			mes "[Ford]";
+			mes "¡¿Qué?! ¿No eres uno";
+			mes "de los guardias estacionados";
+			mes "en el sur de Geffen? Oh, esto";
+			mes "es horrible. Me disculpo,";
+			mes "Sólo asumí que como";
+			if (Upper == 1)
+				mes "estabas vestido como un Paladin...";
+			else
+				mes "estabas vestido como un Crusader...";				
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Lo siento...";
+			mes "¿Qué ha pasado?";
+			mes "¿Hay algo al respecto?";
+			mes "Soy un aventurero que";
+			mes "va en el nombre, "+ strcharinfo(0) +".";
+			next;
+			mes "[Ford]";
+			mes "Bien, Soy Leslie Ford,";
+			mes "comandante de los Guradianes Crusaders";
+			mes "de Prontera. Estamos";
+			mes "encargados de";
+			mes "proteger a los aventureros y";
+			mes "y a los ciudadanos de los monstruos malvados.";
+			next;
+			mes "[Ford]";
+			mes "Ha habido un reciente aumento";
+			mes "en la violencia sin media provocación en los";
+			mes "Goblins y están causándonos";
+			mes "pequeños problemas.";
+			mes "Se supone que nuestras patrullas";
+			mes "deben reportarme su actividad.";
+			next;
+			mes "[Ford]";
+			mes "Sin embargo, el reporte de hoy";
+			mes "aún no ha llegado, así que estoy";
+			mes "epezando a asustarme por lo que le pudo";
+			mes "haber pasado a la patrulla.";
+			mes "Desafortunadamente, mis obligaciones no";
+			mes "me permiten dejar mi puesto.";
+			next;
+			mes "[Ford]";
+			mes "Estoy desesperándome,";
+			mes "y no tengo elección";
+			mes "pero debo salir por ayuda.";
+			mes "Dado que eres un compañero Crusader,";
+			mes "quiero pedirte si podrías";
+			mes "por favor prestarme tu ayuda.";
+			next;
+			switch(select("Sure.:I'm sorry, but I'm busy...")) {
+			case 1:
+				mes "[Ford]";
+				mes "¡Genial, muchas gracias!";
+				mes "Ahora, por favor ve y busca";
+				mes "^0000FFSloutii^000000 quien debería estar";
+				mes "estacionado al sur de Geffen,";
+				mes "y entrégame su reporte.";
+				mes "Tu ayuda es un gran alivio...";
+				set CRUS_SK,1;
+				close;
+			case 2:
+				mes "[Ford]";
+				mes "Hm. Entiendo.";
+				mes "No sé que";
+				mes "obligaciones tendrás";
+				mes "en estos momentos, pero si";
+				mes "tu actual misión no es";
+				mes "urgente, por favor reconsidéralo...";
+				close;
+			}
+			close;
+		}
+		else if (CRUS_SK == 1) {
+			mes "[Ford]";
+			mes "Por favor busca a";
+			mes "^0000FFSloutii^000000 en el área sur";
+			mes "de Geffen, y él debería";
+			mes "darte su reporte sobre";
+			mes "su patrulla de los Goblins";
+			mes "para que me la entregues.";
+			close;
+		}
+		else if (CRUS_SK == 2) {
+			mes "[Ford]";
+			mes "Espera, has encontrado a";
+			mes "Sloutii, ¿pero no has";
+			mes "recibido su reporte?";
+			mes "Por favor regresa con él";
+			mes "y tráemelo, ¡es";
+			mes "es imperante que lo lea!";
+			close;
+		}
+		else if (CRUS_SK == 3) {
+			mes "[Ford]";
+			mes "Ah, ¡has regresado!";
+			mes "¿Así que como está Sloutii?";
+			mes "¿todo está bien?";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "¡Aquí, he traído";
+			mes "este reporte tan pronto como";
+			mes "pude! ¡Será mejor que lo leas";
+			mes "rápido! Las cosas se veían";
+			mes "cuando me vine...";
+			next;
+			mes "[Ford]";
+			mes "Dios, ¡hay sangre en todo";
+			mes "el papel! Veamos...";
+			mes "Oh no. ¡Esto es una sitación de";
+			mes "de emergencia! ¡Necesito reportar esto^FFFFFF ^000000 a Sir Arga y solicitar una";
+			mes "refuerzos inmediatamente!";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Espera, necesitamos hacer";
+			mes "algo respecto a Sloutii.";
+			mes "El fue herido por los";
+			mes "Goblins, y creo que está";
+			mes "en serios problemas.";
+			next;
+			mes "[Ford]";
+			mes "¿Los Goblins...?";
+			mes "Oh no, necesitarás el";
+			mes "antídoto especial que puedes";
+			mes "obtener de Father Arthur";
+			mes "para curar el veneno de los";
+			mes "cuchillos que usan los Goblins.";
+			next;
+			mes "[Ford]";
+			mes "Mientras solicito los refuerzos,";
+			mes "por favor ve a ^0000FFProntera Church^000000";
+			mes "y pídele a Father ^0000FFArthur^000000 su";
+			mes "antídoto para el Veneno Goblin.";
+			mes "¡Si no te apuras, podría";
+			mes "ser demasiado tarde para Sloutii--!";
+			set CRUS_SK,4;
+			close;
+		}
+		else if (CRUS_SK == 4) {
+			mes "[Ford]";
+			mes "Por favor apúrate y obtén";
+			mes "el antídoto para el veneno de los";
+			mes "Goblin de ^0000FFFather Arthur^000000";
+			mes "en ^0000FFProntera Church^000000. La vida";
+			mes "de Sloutii depende de ti ahora.";
+			close;
+		}
+		else if (CRUS_SK == 5) {
+			mes "[Ford]";
+			mes "¿Has ido ya con";
+			mes "Father Arthur? Bien,";
+			mes "ahora por favor apúrate y";
+			mes "dale el antídoto.";
+			mes "¡Sin él, Sloutii perecerá";
+			mes "lenta y atrozmente!";
+			close;
+		}
+		else if (CRUS_SK == 6) {
+			mes "[Ford]";
+			mes "¿Has ido ya con";
+			mes "Father Arthur? Bien,";
+			mes "ahora por favor apúrate y";
+			mes "dale el antídoto.";
+			mes "¡Sin él, Sloutii perecerá";
+			mes "lenta y atrozmente!";
+			close;
+		}
+		else if (CRUS_SK == 7) {
+			mes "[Ford]";
+			mes "¡Genial, has recibido";
+			mes "el antídoto de Father";
+			mes "Arthur! Ahora, date prisa";
+			mes "adminístraselo a Sloutii";
+			mes "que está estacionado al sur de Geffen.";
+			mes "Apúrate, ¡cada segundo cuenta!";
+			close;
+		}
+		else if (CRUS_SK == 8) {
+			mes "[Ford]";
+			mes "Escuche que";
+			mes "pudiste salvar a Sloutii.";
+			mes "Por eso, te estoy eternamente";
+			mes "agradecido. Podríamos usar más";
+			mes "gente como tu para servir en los";
+			mes "Guardianes Crusaders de Prontera...";
+			next;
+			mes "[Ford]";
+			mes "Sé que ustedes los aventureros";
+			mes "prfieren no comprometerse con este";
+			mes "tipo de organizaciones, pero";
+			mes "tu ayuda siempre será";
+			mes "bienvenida aquí. Espero";
+			mes "verte de nuevo algún día.";
+			next;
+			mes "[Ford]";
+			mes "Gracias una vez más,";
+			mes "y espero que";
+			mes "viajes seguro. Por ahora,";
+			mes "esta es la despedida, "+ strcharinfo(0) +".";
+			close;
+			}
+		else if (CRUS_SK == 10) {
+			mes "[Ford]";
+			mes "Hey, ha pasado un tiempo~";
+			mes "Deberías venir más";
+			mes "a menudo, y si de verdad estás";
+			mes "interesado, podrías enlistarte en";
+			mes "mis tropas. Nos sería de gran ayuda";
+			mes "alguien con tu experiencia.";
+			close;
+			}
+		else {
+			mes "[Ford]";
+			mes "¡Genial, has recibido";
+			mes "el antídoto de Father";
+			mes "Arthur! Ahora, date prisa";
+			mes "y adminístraselo a Sloutii";
+			mes "que está estacionado en el sur de Geffen.";
+			mes "Apúrate, ¡cada segundo cuenta!";
+			close;
+			}
+	}
+	else {
+		mes "[Ford]";
+		mes "Ah, saludos.";
+		mes "Siento no poder";
+		mes "asistirte, aventurero,";
+		mes "pero tengo algo";
+		mes "más urgente que atender";
+		mes ". Ahora si me disculpas...";
+		close;
+	}
+}
+
+gef_fild13,297,242,3	script	Soldier#277	751,{
+	if (BaseJob == Job_Crusader) {
+		if (Upper == 1 && getskilllv("CR_SHRINK")) {
+			if (CRUS_SK == 8) {
+				mes "[Sloutii]";
+				mes "Hey amigo, ha pasado";
+				mes "un tiempo sin verte. Aún necesito";
+				mes "recuperarme de mis";
+				mes "heridas, así que si quieres";
+				mes "aprender Shrink, habla";
+				mes "con Sir Ford, ¿bien?";
+				close;
+			}
+			else if (CRUS_SK == 10) {
+				mes "[Sloutii]";
+				mes "Entonces ¿Cómo está funcionándote";
+				mes "la habilidad Shrink?";
+				mes "Ojalá, que tu vida sea";
+				mes "sea salvada tantas veces como";
+				mes "ha sido salvada la mia. De cualquier manera,";
+				mes "te veré por aquí, "+ strcharinfo(0) +"~";
+				close;
+			}
+		}
+		if (CRUS_SK == 1) {
+			mes "[Soldier]";
+			mes "¡Arrrrrghhh!";
+			mes "¡Mi-mis piernas!";
+			mes "¡¿Qué demonios";
+			mes "le han hecho";
+			mes "a mis piernas?!";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "¿Q-qué pasó?";
+			mes "¿Fuiste atacado?";
+			next;
+			mes "[Soldier]";
+			mes "S-sí, iba camino a";
+			mes "reportar a Sir Ford sobre mi";
+			mes "patrulla regular cuando fui";
+			mes "¡tacado por esos Goblins!";
+			mes "¡Debo advertir a mis superiores!";
+			mes "¡Ellos están yendo a atacar a Geffen!";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "¡En realidad hablé con";
+			mes "Sir Ford! ¿Tu debes ser";
+			mes "Sloutii, cierto? ¡El me envió";
+			mes "a ver que te pasaba!";
+			next;
+			mes "[Sloutii]";
+			mes "¡Genial, el momento p-perfecto!";
+			mes "Escucha, tienes que enviarle";
+			mes "este reporte. Co-contiene";
+			mes "detalles de mi patrulla y un";
+			mes "pedido urgente de refuerzos.";
+			mes "¡U-ugh! ¡No tenemos tiempo!";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "¡Espera...!";
+			mes "¿Pero qué hay";
+			mes "de ti? Estás herido...";
+			next;
+			mes "[Sloutii]";
+			mes "¡Estaré condenado si la ayuda";
+			mes "se retrasa!";
+			mes "¡Sólo apúrate y dale ese";
+			mes "reporte a Sir Ford! ¡Ahora ve!";
+			mes "Ahora, si sólo puedes entregar ese";
+			mes "reporte y no puedes hacer nada por mi-- ¡OW! N-no...";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "^333333(El está retorciéndose de dolor";
+			mes "de manera tal que no puede ni siquiera";
+			mes "entregarme su reporte. Será mejor";
+			mes "que le traiga una Red Potion para";
+			mes "alivianar su sufrimiento...)^000000";
+			set CRUS_SK,2;
+			close;
+		}
+		else if (CRUS_SK == 2) {
+			if (countitem(501) > 0) {
+				mes "["+ strcharinfo(0) +"]";
+				mes "Por favor, toma";
+				mes "esta Red Potion.";
+				mes "Debería ayudar...";
+				next;
+				mes "[Sloutii]";
+				mes "¡Oh, gracias a Dios!";
+				mes "¡Arrrgh! ¡Sólo viértela";
+				mes "en la herida! E-eso...";
+				mes "¡Quema mucho! ¡Estos";
+				mes "Goblins deben haberme cortado con";
+				mes "algo bañado en veneno!";
+				next;
+				mes "[Sloutii]";
+				mes "Ah... Ahh...";
+				mes "El sangramiento no ha";
+				mes "parado, pero disminuye";
+				mes "un poco. Bien, toma";
+				mes "este reporte ahora y entrégaselo";
+				mes "a Sir Ford. ¡Apúrate y ve!";
+				next;
+				mes "^3355FFRecibiste el reporte de patrulla";
+				mes "de Sloutii. Algunas";
+				mes "páginas están manchadas con";
+				mes "la sangre de su herida.^000000";
+				delitem 501,1; //Red_Potion
+				set CRUS_SK,3;
+				close;
+			}
+			else {
+				mes "[Sloutii]";
+				mes "¡Apúrate y t-toma este";
+				mes "reporte! Dé-déjame";
+				mes "pasártelo y lue--";
+				mes "¡Arrrrgh! ¡N-no puedo moverme!";
+				mes "¡Me... me duele tanto!";
+				next;
+				mes "["+ strcharinfo(0) +"]";
+				mes "^333333(Será mejor traerle";
+				mes "una Red Potion, de lo contrario";
+				mes "¡no podré obtener";
+				mes "ese reporte sin hacerle daño!) ^FFFFFF ^000000";
+				close;
+			}
+		}
+		else if (CRUS_SK == 3) {
+			mes "[Sloutii]";
+			mes "¡Se nos acaba";
+			mes "el tiempo! ¡Apúrate y dale";
+			mes "mi reporte a Sir Ford tan";
+			mes "pornto como sea posible!";
+			close;
+		}
+		else if (CRUS_SK == 4) {
+			mes "[Sloutii]";
+			mes "¡Eeearrrgh--!";
+			mes "¡Mis pi-piernas! ¡Todo";
+			mes "está empezando a do-dolerme!";
+			next;
+			mes "^3355FFSloutii cayó inconsciente,";
+			mes "y parece que las heridas";
+			mes "en sus piernas están causándole";
+			mes "mucho más sufrimiento.^000000";
+			close;
+		}
+		else if (CRUS_SK == 5) {
+			mes "[Sloutii]";
+			if (upper == 1) {
+				mes "¡Eeearrrgh--!";
+				mes "¡Mis pi-piernas! ¡Todo";
+				mes "está empezando a do-dolerme!";
+				next;
+				mes "^3355FFSloutii cayó inconsciente,";
+				mes "y parece que las heridas";
+				mes "en sus piernas están causándole";
+				mes "mucho más sufrimiento.^000000";
+			}
+			else {
+				mes "........";
+				mes ".........";
+				next;
+				mes "^3355FFSloutii aún está";
+				mes "inconsciente.";
+				mes "Morirá si sus heridas no son";
+				mes "curadas inmediatamente.";
+				mes "Tendrás que ayudarlo";
+				mes "tan rápido como puedas.^000000";
+			}
+			close;
+		}
+		else if (CRUS_SK == 6) {
+			mes "[Sloutii]";
+			mes "........";
+			mes ".........";
+			next;
+			mes "^3355FFSloutii aún está";
+			mes "inconsciente.";
+			mes "Morirá si sus heridas no son";
+			mes "curadas inmediatamente.";
+			mes "Tendrás que ayudarlo";
+			mes "tan rápido como puedas.^000000";
+			close;
+		}
+		else if (CRUS_SK == 7) {
+			set .@rand,rand(1,5);
+			if (.@rand == 1 || .@rand == 5) {
+				mes "^3355FFViertes cuidadosamente el";
+				mes "antídoto del veneno Goblin";
+				mes "en la boca de Sloutii.";
+				mes "A su garganta le cuesta";
+				mes "tragar el antídoto, pero";
+				mes "logra ingeririlo.^000000";
+				next;
+				mes "^3355FFMilagrosamente, las heridas";
+				mes "inflingidas por los Goblins";
+				mes "comienzan rápidamente a curarse.^000000";
+				next;
+				mes "[Sloutii]";
+				mes "Oh, ¿Q-Qué pasó?";
+				mes "Estoy... ¿estoy aún con vida?";
+				mes "¡Hey, eres tu! ¡Debes haber";
+				mes "salvado mi vida! Pensé";
+				mes "que de seguro iba a morir!";
+				next;
+				mes "["+ strcharinfo(0) +"]";
+				mes "Bien, que bueno que";
+				mes "volví a tiempo. Sir Ford";
+				mes "me envió a visitar a Father Arthur para";
+				mes "hacer un antídoto para salvarte.";
+				mes "Ah, y también entregué";
+				mes "tu reporte a Sir Ford.";
+				next;
+				mes "[Sloutii]";
+				mes "¡Genial! Ahora, deja compensarte";
+				mes "enseñándote una habilidad especial";
+				mes "desarrollada por los Guardianes Crusader de Prontera. El uso de ésta habilidad me ayudó";
+				mes "a sobrevivir al ataque de esos";
+				mes "Goblins. ¿Estás listo para aprenderla?";
+				next;
+				mes "[Sloutii]";
+				mes "Esta habilidad se llama";
+				mes "''^0000FFShrink^000000,'' y";
+				mes "repele a los enemigos";
+				mes "cuando te protejes";
+				mes "con éxito de sus ataques.";
+				next;
+				mes "[Sloutii]";
+				mes "Ahora escucha atentamente...";
+				mes "Para ejecutarla, tienes que";
+				mes "ser capaz de concentrarte";
+				mes "y repeler a los enemigos usando";
+				mes "la postura y mentalidad adecuadas...";
+				next;
+				mes "[Sloutii]";
+				mes "¡Genial! ¡Has aprendido la";
+				mes "habilidad! Ahora, espero que uses";
+				mes "esta habilidad para combatir el mal";
+				mes "y proteger a los débiles. Ah, y";
+				mes "si aprendo alguna nueva habilidad, de seguro que te la enseño también.";
+				set CRUS_SK,8;
+				skill "CR_SHRINK",1,0;
+				close;
+			}
+			mes "^3355FFViertes cuidadosamente el";
+			mes "antídoto para el veneno Goblin";
+			mes "en la boca de Sloutii.";
+			mes "A su garganta le cuesta";
+			mes "tragar el antídoto, pero";
+			mes "logra ingerirlo.^000000";
+			next;
+			mes "^3355FFDesafortunadamente, no pasó";
+			mes "nada. El antídoto";
+			mes "pobablemente perdió su efecto";
+			mes "mientras venías viajando";
+			mes "de Father Arthur a Sloutii.";
+			mes "Tienes que volver con Father";
+			mes "Arthur y pedirle que te entregue otro.^000000";
+			set CRUS_SK,9;
+			close;
+		}
+		else if (CRUS_SK == 8 || CRUS_SK == 10) {
+			mes "[Sloutii]";
+			mes "Hey, eres tu~";
+			mes "¿Cómo has estado?";
+			mes "Si alguna vez tienes algo de tiempo";
+			mes "libre, ven y tal vez";
+			mes "podamos practicar con nuestra espada.";
+			close;
+		}
+		else if (CRUS_SK == 9) {
+			mes "^3355FFEl antídoto";
+			mes "previamente administrado";
+			mes "no tuvo efecto. Tendrás que";
+			mes "intentar de nuevo regresando con";
+			mes "Father Arthur y hacer";
+			mes "un nuevo antídoto para Sloutii.^000000";
+			close;
+		}
+		else {
+			mes "[Sloutii]";
+			mes "Por favor ten cuidado en";
+			mes "ésta área. Goblins son conocidos por";
+			mes "atacar a los humanos que";
+			mes "se encuentran. Y últimamente,";
+			mes "se han estado poniendo más violentos, así que mantente en observación.";
+			close;
+		}
+	}
+	else {
+		mes "[Sloutii]";
+		mes "Por favor ten cuidado en";
+		mes "ésta área. Goblins son conocidos por";
+		mes "atacar a los humanos que";
+		mes "se encuentran. Y últimamente,";
+		mes "se han estado poniendo más violentos, así que mantente en observación.";
+		close;
+	}
+}
+
+prt_church,87,127,3	script	Pastor#1011	755,{
+	if (BaseJob == Job_Crusader) {
+		if (Upper == 1 && getskilllv("CR_SHRINK")) {
+			if (CRUS_SK == 8) {
+				mes "[Father Arthur]";
+				mes "Oh, un Paladin,";
+				mes "¿lo eres? Ah, estoy muy";
+				mes "orgulloso de ti. Después de todo, te";
+				mes "conocí cuando";
+				mes "eras un valiente Crusader.";
+				next;
+				mes "[Father Arthur]";
+				mes "Espero que continúes";
+				mes "usando tu poder para combatir";
+				mes "las fuerzas del mal y";
+				mes "proteger a los débiles. Que tu";
+				mes "corazón guíe tus acciones.";
+				close;
+			}
+			else if (CRUS_SK == 10) {
+				mes "[Father Arthur]";
+				mes "Ah, ¿has estado bien?";
+				mes "Es bueno verte bajo";
+				mes "circunstancias más placenteras.";
+				mes "Sin embargo, si piensas que puedo";
+				mes "ser de tu servicio, entonces por favor házmelo saber de inmediato.";
+				close;
+			}
+		}
+		if (CRUS_SK == 4) {
+			mes "[Father Arthur]";
+			mes "Saludos.";
+			mes "¿Cómo podria ser de tu";
+			mes "servicio hoy?";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Alguien fue herido";
+			mes "por los Goblins, y me dijo";
+			mes "Sir Ford que tu eres el";
+			mes "único que puede hacer el";
+			mes "antídoto para el veneno de Goblin.";
+			next;
+			mes "[Father Arthur]";
+			mes "¡Que los santos nos preserven,";
+			mes "los Goblins realmente son";
+			mes "crueles y no tienen piedad!";
+			mes "Desafortunadamente, se me";
+			mes "agotaron los antídotos para el veneno Goblin";
+			mes "y debo hacerlos desde cero.";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "¡Dime que";
+			mes "necesitas para hacerlo, y";
+			mes "y te traigo todos los";
+			mes "materiales inmediatamente!";
+			next;
+			mes "[Father Arthur]";
+			mes "Ah, sí. Tráeme";
+			mes "^0000FF20 Sticky Mucus^000000,";
+			mes "^0000FF3 Empty Bottles^000000,";
+			mes "^0000FF5 Jellopies^000000...";
+			next;
+			mes "[Father Arthur]";
+			mes "...^0000FF1 Coal^000000,";
+			mes "^0000FF1 Grape^000000,";
+			mes "^0000FF3 Cyfar^000000 y";
+			mes "^0000FF1 Unripe Apple^000000.";
+			mes "¡Ahora apúrate, el no durará";
+			mes "mucho tiempo si está envenenado!";
+			set CRUS_SK,5;
+			close;
+		}
+		else if (CRUS_SK == 5) {
+			if (countitem(514) > 0 && countitem(619) > 0 && countitem(1003) > 0 && countitem(7053) > 2 && countitem(713) > 2 && countitem(909) > 4 && countitem(938) > 19) {
+				mes "[Father Arthur]";
+				mes "Ah, has regresado.";
+				mes "Ahora déjame comprobar";
+				mes "si has traído";
+				mes "todo lo necesario para";
+				mes "crear el antídoto.";
+				next;
+				mes "[Father Arthur]";
+				mes "Bien, bien. Parece";
+				mes "que todo está listo.";
+				mes "Ahora, antes de que empiece, debo";
+				mes "decirte que el antídoto tiene";
+				mes "un tiempo límite de efectividad.";
+				next;
+				mes "[Father Arthur]";
+				mes "Sin embargo, no hay manera";
+				mes "de predecir con exactitud cuando";
+				mes "el antídoto se volverá";
+				mes "inefectivo hasta que lo pruebes.";
+				mes "Por lo tanto, puede que tengas";
+				mes "regresar aquí para obtener una nueva muestra.";
+				next;
+				mes "[Father Arthur]";
+				mes "Estos materiales deberías";
+				mes "ser sufiicientes para varias";
+				mes "dósis, así que no tienes que";
+				mes "preocuparte por recolectar";
+				mes "los materiales de nuevo. Ahora, dame";
+				mes "un momento para destilar esto...";
+				delitem 938,20; //Sticky_Mucus
+				delitem 619,1; //Unripe_Apple
+				delitem 909,5; //Jellopy
+				delitem 514,1; //Grape
+				delitem 1003,1; //Coal
+				delitem 7053,3; //Cyfar
+				delitem 713,3; //Empty_Bottle
+				set CRUS_SK,6;
+				close;
+			}
+			else {
+				mes "[Father Arthur]";
+				mes "Lo siento, pero estos";
+				mes "no son los materiales suficientes";
+				mes "para destilar el";
+				mes "antídoto. Hmm, ¿Cuáles eran";
+				mes "los materiales requeridos?";
+				next;
+				mes "[Father Arthur]";
+				mes "Ah, sí. Tráeme";
+				mes "^0000FF20 Sticky Mucus^000000,";
+				mes "^0000FF3 Empty Bottles^000000,";
+				mes "^0000FF5 Jellopies^000000...";
+				next;
+				mes "[Father Arthur]";
+				mes "...^0000FF1 Coal^000000,";
+				mes "^0000FF1 Grape^000000,";
+				mes "^0000FF3 Cyfar^000000 y";
+				mes "^0000FF1 Unripe Apple^000000.";
+				mes "¡Ahora apúrate, no durará mucho";
+				mes "tiempo si está envenenado!";
+				close;
+			}
+		}
+		else if (CRUS_SK == 6) {
+			mes "[Father Arthur]";
+			mes "Tu misión debe estar";
+			mes "divinamente inspirada: He";
+			mes "terminado el antídoto para el";
+			mes "Veneno Goblin. Ahora por favor";
+			mes "esuchame muy cuidadosamente...";
+			next;
+			mes "[Father Arthur]";
+			mes "No puedo garantizar si este";
+			mes "antídoto funcionará. Si";
+			mes "pierde su efectividad antes";
+			mes "de que llegues, tendrás que regresar";
+			mes "y llevar una nueva dosis fresca.";
+			next;
+			mes "[Father Arthur]";
+			mes "Tendrás que llegar donde";
+			mes "el herido tan rápido";
+			mes "como sea posible. Ahora, tan pronto como";
+			mes "como te entregue esto, tendrás que";
+			mes "correr ahí lo más rápido que";
+			mes "puedas: ¡la vida de un hombre está en juego!";
+			next;
+			mes "[Father Arthur]";
+			mes "Bien, toma el";
+			mes "antídoto. ¡Ahora ve!";
+			mes "¡Suerte, aventurero!";
+			set CRUS_SK,7;
+			close;
+		}
+		else if (CRUS_SK == 7) {
+			mes "[Father Arthur]";
+			mes "¡¿No has ido aún?!";
+			mes "¡Anda de prisa donde el herido";
+			mes "y adminístrale el antídoto!";
+			mes "¡Tendrás que volver por";
+			mes "una dosis fresca de antídoto si";
+			mes "llegas demasiado tarde!";
+			close;
+		}
+		else if (CRUS_SK == 8) {
+			mes "[Father Arthur]";
+			mes "Ah, así que el antídoto";
+			mes "funcionó y ese hombre está";
+			mes "esperando recupearse plenamente?";
+			mes "Bien, bien. Mi corazón se";
+			mes "alegra de escuchar que él está mucho mejor.";
+			close;
+		}
+		else if (CRUS_SK == 9) {
+			mes "[Father Arthur]";
+			mes "¡¿El antídoto falló?!";
+			mes "No tenemos opción, pero";
+			mes "untentémoslo de nuevo. Aquí, déjame";
+			mes "destilar rápidamente una nueva";
+			mes "dosis para ti. Espera, espera...";
+			mes "¡Ah! ¡He terminado!";
+			next;
+			mes "[Father Arthur]";
+			mes "¡Ahora toma este antídoto";
+			mes "fresco y corre tan";
+			mes "rápido como puedas donde";
+			mes "el herido! ¡Ve!";
+			set CRUS_SK,7;
+			close;
+		}
+		else if (CRUS_SK == 10) {
+			mes "[Father Arthur]";
+			mes "Ah, ¿has estado bien?";
+			mes "Es bueno vrte bajo";
+			mes "circunstancias más placenteras.";
+			mes "Sin embargo, si piensas que";
+			mes "puedo ser de servicio tuyo, entonces hazmelo saber de inmediato.";
+			close;
+		}
+		else {
+			mes "[Father Arthur]";
+			mes "Ah, hola~";
+			mes "Bienvenido a Prontera";
+			mes "Church. Por favor reñájate aquí,";
+			mes "disfruta el silencio, e invita a";
+			mes "la calma espiritual a tu corazón.";
+			close;
+		}
+	}
+	else {
+		mes "[Father Arthur]";
+		mes "Ah, hola~";
+		mes "Bienvenido a la Iglesia";
+		mes "de Prontera. Por favor descansa aquí,";
+		mes "disfruta el silencio, e invita a";
+		mes "la calma espiritual a tu corazón.";
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.0 for fully working skills only [Lupus]
+//= 1.1 Added more new skill quests for more classes [Lupus]
+//= Somehow eA engine doesn't let you keep learn't skill V_V'
+//= 1.2 Added to correct locations, correct NPC's, fixed
+//= some of the items required and made them into real
+//= quests. [Reddozen] 
+//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
+//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
+//= 1.3b Splitted into different files [DracoRPG]
+//============================================================

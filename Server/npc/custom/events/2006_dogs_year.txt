@@ -1,0 +1,98 @@
+//===== eAthena Script =======================================
+//= Eastern New Year 2006 The Year Of The Fire Dog
+//===== By: ==================================================
+//= Lupus (1.0)
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= eAthena Version; 5xxx+ (with 'disguise' command)
+//===== Description: =========================================
+//= Custom event: For 28-29 January
+//===== Additional Comments: =================================
+//= 1.0 Tested, fully working.[Lupus]
+//=		Add some national info in English if you can.
+//=	(Mine was in Russian, and it's damn hard to translate 8)
+//= 1.1 Commented out monster spawn as it is a custom mob and [L0ne_W0lf]
+//	not in the mob database.
+//============================================================
+
+
+prontera,149,167,6	script	Maria	81,{
+	mes "[Maria]";
+	//month
+	if((gettime(6)==1 && (gettime(5)==28 || gettime(5)==29))==0) {
+		mes "Feliz Año Nuevo del Perro de Fuego! Wuau!";
+		close;
+	}
+
+	mes "Feliz Año Nuevo del Perro de Fuego!";
+	if(rand(2))mes "Por cierto, 'los Perros' se llevan mejor con los que, nacieron en años del Caballo, Tigre y Conejo";
+	next;
+	menu "Dime acerca de las Tradiciones Japonesas *o*",-,
+		"Cuentame acerca de El Año Nuevo Chino 0=",M_NGCH,
+		"Cuentame acerca de Año Nuevo Koreano =3",M_NGCO,
+		"Necesito un disfras de perrito x3!!",M_PRIZE,
+		"Te deseo Feliz Año Nuevo!.",LEnd;
+
+	mes "[Maria]";
+	mes "Japon....";
+	mes "Pon aqui algunas notas en ingles de su FAN.";
+	next;
+	mes "[Maria]";
+	mes "Pon aqui algunas notas en ingles de su FAN.";
+	close;
+
+M_NGCH:
+	mes "[Maria]";
+	mes "China...";
+	mes "Pon aqui algunas notas en ingles de su FAN.";
+	next;
+	mes "[Maria]";
+	mes "Pon aqui algunas notas en ingles de su FAN.";
+	close;
+
+M_NGCO:
+	mes "[Maria]";
+	mes "Korea...";
+	mes "Pon aqui algunas notas en ingles de su FAN.";
+	next;
+	mes "[Maria]";
+	mes "Pon aqui algunas notas en ingles de su FAN.";
+	close;
+
+M_PRIZE:
+	mes "[Maria]";
+	if(countitem(12132)>9) {
+		mes "Deberias usar primero todos tus disfraces viejos!!";
+		close;
+	}
+	mes "Algunos libros Budistas nos dicen leyendas acerca de humanos que reencarnan en perros...Compra ^FF0000este disfras magico de perrito^000000 por solo ^0000FF999 Zeny^000000!";
+	mes "Y prueba las viejas leyendas por ti mismo!";
+	next;
+	menu "Comprare uno *-*",-,"Naa, Gracias. o.O",LEnd;
+	
+		mes "[Maria]";
+		if(Zeny<999) goto NoZ;
+		set Zeny,Zeny-999;
+		getitem 12132,1;
+		mes "Aqui tienes. Su forma pronto mostrara el verdadero poder de tu espiritu.";
+		emotion 15;
+		close;
+		NoZ:
+			mes "Oh querido, andas bajo de zeny. Tengo 7 cachorros que alimentar, tu entiendes... =S";
+			emotion 17;
+			close;
+	LEnd:
+		mes "[Maria]";
+		mes "Feliz Año Nuevo de el Yo de Fuego!! Wau-wauuu!!";
+		emotion rand(19,20);
+		close;
+
+OnInit:
+	//Magic Doggie Costum
+	setitemscript 12132,"{ misceffect 215; if(BaseLevel>97){disguise 1022;end;}if(BaseLevel>90){disguise 1296;end;}if(BaseLevel>80){disguise 1106;end;}if(BaseLevel>50){disguise 1013;end;}if(BaseLevel>40){disguise 1135;end;}disguise 1107;}";
+	end;
+}
+
+// Requires custom monster.
+//prontera,0,0,0,0	monster	Fire Dog	1987,50,3600000,1800000,0

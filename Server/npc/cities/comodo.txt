@@ -1,0 +1,515 @@
+//===== eAthena Script ======================================= 
+//= Comodo Town
+//===== By: ================================================== 
+//= eAthena dev team
+//===== Current Version: ===================================== 
+//= 1.9
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Comodo Town NPCs
+//===== Additional Comments: ================================= 
+//= Not complete.
+//= 1.1 Rolled back from the wrong Kashy's fix
+//= Implemented the 'Cheese'/Stone of Awakening quest.  Re-organized stuff. [kobra_k88]
+//= 1.2b Added Baby Class support [Lupus]
+//= 1.3 Spell Checked and Fixed [massdriller]
+//= 1.4 Fixed typos [Nexon]
+//= 1.5 Removed Duplicates [Silent]
+//= 1.6 Split doomed sword quest to quests/quests_comodo.txt [Evera]
+//= 1.7 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.8 Fixed a small bug. (close -> close2) [L0ne_W0lf]
+//= 1.9 Added a missing Kafra NPC. [L0ne_W0lf]
+//============================================================
+
+// Inside Comodo
+//============================================================
+cmd_in02,73,81,4	script	Martine#cmd	48,{
+	mes "[Martine]";
+	mes "¿Apuestas...? Los juegos";
+	mes "provistos aquí en el Casino de";
+	mes "Comodo son una forma de entretenimiento";
+	mes "mejor que las apuestas.";
+	mes "¿Sabes lo que quiero decir?";
+	next;
+	mes "[Martine]";
+	mes "Así es, perdí";
+	mes "todo mi zeny jugando";
+	mes "en este Casino, pero no tengo";
+	mes "ninguna queja. Simplemente ganaré";
+	mes "más dinero y luego lo gastaré todo otra";
+	mes "vez. O tal vez ¡sólo gane a lo grande!";
+	next;
+	mes "[Martine]";
+	mes "¡Bwahahahahaahahah~!";
+	mes "Sí, sólo puedo perder unas";
+	mes "cuantas veces hasta que ¡le dé al";
+	mes "Jackpot! ¿Lo ves, lo ves?";
+	mes "Estoy jugando con las locas probabilidades.";
+	close;
+}
+
+cmd_in02,48,55,4	script	Scoursege#cmd	51,{
+	mes "[Scoursege]";
+	mes "¡Maldición! ¿A dónde se fue";
+	mes "ese sujeto? ¡Me prometió que";
+	mes "duplicaría mi dinero fácilmente!";
+	mes "Espera. Oh, espera. Oh... Oh no...";
+	next;
+	mes "[Scoursege]";
+	mes "¡No me digas que me acaban de";
+	mes "estafar y me he quedado sin dinero!";
+	mes "¡Oh no! Será mejor reportar";
+	mes "esto a las autoridades correspondientes,";
+	mes "no importa cuan avergonzado me sienta...";
+	close;
+}
+
+cmd_in02,64,43,4	script	Roberto#cmd	709,{
+	mes "[Roberto]";
+	mes "Heh heh heh... ";
+	mes "Queee sujeto más ingenuo.";
+	mes "¡Tome su dinero";
+	mes "tan fácilmente! Es decir, no";
+	mes "esperaba lograr tanto";
+	mes "de una mentira y ¡Él me lo dio!";
+	close;
+}
+
+cmd_in02,89,72,4	script	Deniroz#cmd	89,{
+	mes "[Deniroz]";
+	mes "Todo lo que necesito es que";
+	mes "esta pequeña bolilla de acero caiga";
+	mes "en el hoyo correcto. Así,";
+	mes "ganare el Jackpot. De acuerdo.";
+	mes "Aquí va. Una última oportunidad...";
+	next;
+	mes "[Deniroz]";
+	mes "¡No! ¡Si estuvo tan cerca!";
+	mes "De acuerdo, la próxima vez debería";
+	mes "estar más cerca, ¿verdad? Seh.";
+	mes "Está bien, esta vez será la";
+	mes "última. ¡No otra vez! De acuerdo,";
+	mes "s-sólo una vez m-más...";
+	close;
+}
+
+cmd_in02,178,92,4	script	Shalone#cmd	101,{
+	mes "[Shalone]";
+	mes "Oh, lo lamento, señor,";
+	mes "pero parece que";
+	mes "perdió otra vez. Quizás debería";
+	mes "retirarse por ahora...";
+	mes "Realmente ha estado teniendo";
+	mes "una racha de mala suerte...";
+	close;
+}
+
+cmd_in02,178,86,4	script	Stonae#cmd	98,{
+	mes "[Stonae]";
+	mes "N-no... ";
+	mes "¡¿Perdí otra vez?!";
+	mes "¡Pero no puedo irme de esta";
+	mes "manera! ¡Voy a seguir";
+	mes "intentándolo y dejaré este";
+	mes "lugar como un ganador!";
+	close;
+}
+
+cmd_in02,172,105,4	script	G . J#cmd	86,{
+	mes "[G . J]";
+	mes "Mientras más pienso en ello,";
+	mes "más fácil parece volverse";
+	mes "rico trabajando, ahorrando y";
+	mes "haciendo inversiones sabias, que";
+	mes "tú sabes... Confiar en alguna";
+	mes "especie de gran premio Jackpot.";
+	next;
+	mes "[G . J]";
+	mes "Apostar parece divertido, pero";
+	mes "es más inteligente hacer";
+	mes "dinero de otras maneras. Seguro,";
+	mes "trabajar duro no es divertido, pero";
+	mes "hay formas de usar tu^FFFFFF ^000000 dinero para hacer más, ¿verdad?";
+	next;
+	mes "[G . J]";
+	mes "También está el asunto de";
+	mes "ser inteligente y responsable";
+	mes "con tu dinero-- Es decir, parece que gastarías todo tu dinero";
+	mes "si lo ganaras, ¿no es así? Sí,";
+	mes "debes ser sabio sobre todo esto...";
+	close;
+}
+
+cmd_in02,174,126,4	script	Loyar#cmd	83,{
+	mes "[Loyar]";
+	mes "El diseño interior del Casino";
+	mes "de Comodo es tan placentero a los";
+	mes "ojos, tan limpio y simple.";
+	mes "La atmósfera aquí es perfecta,";
+	mes "y me hace querer jugar ";
+	mes "un poco más. De acuerdo, ¡Vamos!";
+	next;
+	switch(rand(1,3)) {	
+	case 1:
+		mes "[Loyar]";
+		mes "Hmm... Quizás debería ir";
+		mes "a casa pronto. No he";
+		mes "gastado todo el dinero que";
+		mes "guardé para apostar";
+		mes "todavía, pero no es buena";
+		mes "idea estar fuera demasiado tiempo.";
+		close;
+	case 2:
+		mes "[Loyar]";
+		mes "Tengo que admitirlo, la";
+		mes "atmósfera de este lugar";
+		mes "es excitante y adictiva.";
+		mes "Incluso cuando estás cansado, la";
+		mes "energía de este lugar se";
+		mes "introduce en tu interior, ¿Sabes?";
+		next;
+		mes "[Loyar]";
+		mes "Aunque este tipo de lugar";
+		mes "puede alentar a la gente con";
+		mes "serios problemas con el juego,";
+		mes "es mucho mejor apostar";
+		mes "aquí que en algún lugar que este";
+		mes "sucio y sea dudoso.";
+		close;
+	case 3:
+		mes "[Loyar]";
+		mes "Whoa whoa whoa... ";
+		mes "¿Por qué aquel sujeto hizo";
+		mes "esa apuesta? Que novato...";
+		mes "Er, supongo que tú no sabes";
+		mes "demasiado sobre este juego.";
+		mes "En cuanto a mí, soy sólo un fan~";
+		next;
+		mes "[Loyar]";
+		mes "Soy un gran fanático de muchos";
+		mes "de estos juegos, pero tengo";
+		mes "que admitir que soy más fanático";
+		mes "de ¡Ganar! Aun así, tengo";
+		mes "suficiente sentido para mantenerme alejado";
+		mes "de esos juegos de alto riesgo.";
+		close;
+	}
+}
+
+cmd_in02,57,62,4	script	Moo#cmd	109,{
+	set mooz,rand(1,10);
+	if (mooz == 1) {
+		mes "[Moo]";
+		mes "¡Esos vándalos tramposos!";
+		mes "Nunca mostraran sus";
+		mes "caras por aquí otra vez: ¡De otra forma";
+		mes "deberán conseguirse unas";
+		mes "nuevas! Oh, lo siento, No te";
+		mes "vi ahí~ Hahahaha~";
+		close;
+	}
+	else {
+		mes "[Moo]";
+		mes "Saludos, soy Moo,";
+		mes "administrador del Casino de";
+		mes "Comodo. Nos enorgullecemos de";
+		mes "servir a todas las necesidades de nuestros";
+		mes "clientes, haciendo todo lo que podemos, así^FFFFFF ^000000 tu visita aquí será inolvidable.";
+		next;
+		mes "[Moo]";
+		mes "Todos nuestros invitados pueden disfrutar";
+		mes "nuestra área de juego general y";
+		mes "también ofrecemos un área VIP";
+		mes "donde los grandes apostadores pueden jugar";
+		mes "excitantes juegos de altas apuestas.";
+		next;
+		mes "[Moo]";
+		mes "Todas tus sugerencias serán";
+		mes "bienvenidas y siempre";
+		mes "buscamos una manera de mejorar";
+		mes "tu experiencia aquí en el";
+		mes "Casino de Comodo.";
+		close;
+	}
+}
+
+// Comodo Field
+//============================================================
+cmd_fild04,188,74,4	script	Zyosegirl#cmd	93,{
+	mes "[Zyosegirl]";
+	mes "La gente me llama la";
+	mes "Dama del Mar porque siempre";
+	mes "estoy aquí trabajando,";
+	mes "recolectando almejas y otras";
+	mes "criaturas marinas para vender. Es una";
+	mes "linda manera de vivir.";
+	next;
+	mes "[Zyosegirl]";
+	mes "Es bueno ser capaz de trabajar";
+	mes "en el exterior, pero algún día, quiero";
+	mes "ahorrar suficiente dinero y mudarme";
+	mes "a la ciudad. Aun soy joven^FFFFFF ^000000, ¿Sabes?, y tengo sueños";
+	mes "que quiero cumplir~";
+	close;
+}
+
+cmd_fild04,248,86,4	script	Ziyaol#cmd	709,{
+	mes "[Ziyaol]";
+	mes "Ahhh, es bueno ser";
+	mes "un pescador. Sólo te";
+	mes "relajas y dejas que los peces";
+	mes "vengan hacia ti. Bueno, necesitas";
+	mes "algo de técnica para atrapar tantos";
+	mes "pescados como lo hago yo sin esfuerzo~";
+	next;
+	mes "[Ziyaol]";
+	mes "Me gusta el ocio involucrado";
+	mes "en mi trabajo, pero si no";
+	mes "es una cosa es otra. Sí, esa";
+	mes "hija mía por allá";
+	mes "no dejara de insistir sobre ";
+	mes "mudarse a la graaan ciudad.";
+	next;
+	mes "[Ziyaol]";
+	mes "¡¿Por qué quiere dejarme";
+	mes "con tanta ansia?! Pero si no la dejo";
+	mes "ir, escapará.";
+	mes "¿Qué es lo que voy a hacer con esa";
+	mes "chica? Bueno, la verdad no puedo";
+	mes "hacer para que deje de soñar...";
+	close;
+}
+
+cmd_fild04,267,137,4	script	Daeguro#cmd	703,{
+	mes "[Daeguro]";
+	mes "Amo jugar en";
+	mes "la arena-- ¡Es tan suave";
+	mes "y limpia y linda!";
+	mes "Pero cuando crezca,";
+	mes "quiero ir a Alberta";
+	mes "¡Y ver todo lo que lo pueda!";
+	close;
+}
+
+cmd_fild07,192,58,4	script	Rahasu#cmd	100,{
+	mes "[Rahasu]";
+	mes "Hey, yo soy Rahasu.";
+	mes "Quiero que aprendas";
+	mes "un poco más sobre";
+	mes "el faro Paros. Estaré";
+	mes "feliz de contarte.";
+	next;
+	if (select("Paros Lighthouse?:Cancel") == 1) {
+		mes "[Rahasu]";
+		mes "Por muchos años, este";
+		mes "faro guió a muchos";
+		mes "barcos a la costa. Eso fue";
+		mes "hace mucho tiempo: ahora este";
+		mes "faro permanece silencioso,";
+		mes "sin usarse, pero nunca ignorado.";
+		next;
+		mes "[Rahasu]";
+		mes "Aunque este lugar";
+		mes "ya no es el centro de";
+		mes "intercambios y comercio que";
+		mes "solía ser, muchas";
+		mes "personas aun rondan esta";
+		mes "área. Me imagino por qué exactamente...";
+		close;
+	}
+	mes "[Rahasu]";
+	mes "Hey, antes de que te vayas,";
+	mes "realmente deberías ver";
+	mes "la vista desde el faro.";
+	mes "Es.... Es impresionante...";
+	close;
+}
+
+cmd_fild07,52,280,4	script	Hallosu#cmd	100,{
+	mes "[Hallosu]";
+	mes "Hola, éste es uno de los";
+	mes "faros que conforman";
+	mes "el faro Paros. Sin embargo,";
+	mes "justo en este momento está siendo";
+	mes "renovado, así que no";
+	mes "está abierto al publico.";
+	close;
+}
+
+cmd_fild07,299,83,4	script	Zain#cmd	100,{
+	mes "[Zain]";
+	mes "¿Te gustaría subirte a";
+	mes "un barco en";
+	mes "la ruta Reudelus? Puedes";
+	mes "viajar en Reudelus";
+	mes "a Alberta o Izlude.";
+	next;
+	switch(select("Alberta - 600 Zeny:Izlude - 800 Zeny:Cancel")) {
+	case 1:
+		if (Zeny < 600) {
+			mes "[Zain]";
+			mes "Lo siento, pero";
+			mes "no tienes suficiente";
+			mes "zeny para la tarifa de abordaje.";
+			close;
+		}
+		set zeny,zeny-600;
+		warp "alberta",192,169;
+		end;
+	case 2:
+		if (Zeny < 800) {
+			mes "[Zain]";
+			mes "Lo siento, pero";
+			mes "no tienes suficiente";
+			mes "zeny para la tarifa de abordaje.";
+			close;
+		}
+		set zeny,zeny-800;
+		warp "izlude",176,182;
+		end;
+	case 3:
+		mes "[Zain]";
+		mes "Viajar en barco es";
+		mes "aún uno de los medios";
+		mes "de transporte más confiables";
+		mes "y seguros. Te invito a";
+		mes "probar el viaje Reudelus pronto~";
+		close;
+	}
+}
+
+cmd_fild07,94,134,4	script	Sarumane#cmd	100,{
+	mes "[Sarumane]";
+	mes "¿Te gustaría subirte a";
+	mes "un barco en";
+	mes "la ruta Reudelus? Puedes";
+	mes "viajar en Reudelus";
+	mes "a Alberta o Izlude.";
+	next;
+	switch(select("Alberta - 600 Zeny:Izlude - 800 Zeny:Cancel")) {
+	case 1:
+		if (Zeny < 600) {
+			mes "[Sarumane]";
+			mes "Lo siento, pero";
+			mes "no tienes suficiente";
+			mes "zeny para la tarifa de abordaje.";
+			close;
+		}
+		set zeny,zeny-600;
+		warp "alberta",192,169;
+		end;
+	case 2:
+		if (Zeny < 800) {
+			mes "[Sarumane]";
+			mes "Lo siento, pero";
+			mes "no tienes suficiente";
+			mes "zeny para la tarifa de abordaje.";
+			close;
+		}
+		set zeny,zeny-800;
+		warp "izlude",176,182;
+		end;
+	case 3:
+		mes "[Sarumane]";
+		mes "Viajar en barco es";
+		mes "aún uno de los medios";
+		mes "de transporte más confiables";
+		mes "y seguros. Te invito a";
+		mes "probar el viaje Reudelus pronto~";
+		close;
+	}
+}
+
+
+cmd_in02,146,180,4	script	Kafra Employee::kaf_comodo2	721,{
+	cutin "kafra_07",2;
+	mes "[Kafra Misty]";
+	mes "Bienvendo a la";
+	mes "Corporacion Kafra.";
+	mes "Tu sabes que nuestro";
+	mes "servicio esta siempre";
+	mes "a tu lado~";
+	next;
+	mes "[Kafra Misty]";
+	mes "La Corporacion Kafra";
+	mes "Divicion Occidental promete";
+	mes "la mejor calidad de servicio que";
+	mes "enfatize confiabiidad, y";
+	mes "satisfaccion total al consumidor.";
+	mes "Gracias por tu patrocinio~";
+	close2;
+	cutin "", 255;
+	end;
+}
+
+// Morroc Field
+//============================================================
+moc_fild12,35,303,4	script	Serutero#cmd	59,{
+	mes "[Serutero]";
+	mes "Hola, soy Serutero,";
+	mes "guardián de los caminos que";
+	mes "conducen a la fortaleza Sandaruman.";
+	mes "Si realmente quieres ir allí,";
+	mes "te permitiré continuar, pero^FFFFFF ^000000 debes tener cuidado con sus peligros...";
+	next;
+	switch(select("I'm going there!:Sandaruman Fortress?:Cancel")) {
+	case 1:
+		mes "[Serutero]";
+		mes "Entonces realmente irás";
+		mes "a la Fortaleza";
+		mes "Sandaruman. Está bien, entonces,";
+		mes "buena suerte y ¡Ten cuidado!";
+		close2;
+		warp "cmd_fild08",331,319;
+		end;
+	case 2:
+		mes "[Serutero]";
+		mes "Aunque la Fortaleza";
+		mes "Sandaruman está infestada de";
+		mes "monstruos ahora, solía ser";
+		mes "una provincia en la que la vivía gente.";
+		mes "Sin embargo, siempre era";
+		mes "invadida y saqueada...";
+		next;
+		mes "[Serutero]";
+		mes "Los habitantes de Sandaruman";
+		mes "con el tiempo se adaptaron a las";
+		mes "invasiones, desarrollando señales";
+		mes "de humo y fortalezas para";
+		mes "resistir las asolaciones de la guerra.";
+		mes "Entonces, Comodo fue construida...";
+		next;
+		mes "[Serutero]";
+		mes "Comodo creció en poder e influencia";
+		mes "y eventualmente se anexó Sandaruman. Más y más gente";
+		mes "se mudo desde la fortaleza hacia Comodo hasta que la fortaleza Sandaruman";
+		mes "fue básicamente abandonada.";
+		next;
+		mes "[Serutero]";
+		mes "Habían algunas pocas personas";
+		mes "que permanecían en Sandaruman,";
+		mes "pero se rebelaron y algún";
+		mes "gobierno al vuelo llegó al";
+		mes "poder. Los monstruos aprovecharon";
+		mes "la oportunidad y asumieron el control...";
+		next;
+		mes "[Serutero]";
+		mes "Ahora no hay nada en los alrededores";
+		mes "de Sandaruman. Bueno, nada";
+		mes "a excepción del faro Paros,";
+		mes "que está al suroeste de aquí. Ese lugar podría ser de interés para";
+		mes "los aspirantes a Rogues, eso escuché...";
+		close;
+	case 3:
+		mes "[Serutero]";
+		mes "¿Sabes?, si estás";
+		mes "cansado de viajar, puedes";
+		mes "descansar en ^3355FFComodo^000000. Ese";
+		mes "lugar es una muy popular";
+		mes "atracción turística, especialmente";
+		mes "para tu clase aventurera.";
+		close;
+	}
+}

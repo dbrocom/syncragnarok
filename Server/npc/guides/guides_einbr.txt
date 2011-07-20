@@ -1,0 +1,208 @@
+//===== eAthena Script ======================================= 
+//= Einbroch Guides
+//===== By: ================================================== 
+//= Muad_dib; L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.5
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Guides for the City of Einbroch
+//===== Additional Comments: ================================= 
+//= 1.0b missing tabs, fixed Guide coords [Lupus]
+//= 1.1 added 1 more Guide NPC, thanx to Justin84 [Lupus]
+//= 1.2 Optimized, updated common guide names [Lupus]
+//= 1.3 Fitted the many lines into 1 or 2, and corrected some typos [erKURITA]
+//= 1.4 Removed Duplicates [Silent]
+//= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//============================================================
+
+einbroch,72,202,4	script	Guide#ein::EinGuide	852,{
+	cutin "ein_soldier",2;
+	mes "[Einbroch Guide]";
+	mes "Bienvenido";
+	mes "a Einbroch,";
+	mes "la Ciudad de Acero.";
+	mes "Por favor preguntame si";
+	mes "Tienes alguna pregunta.";
+	set .@loop1,1;
+	while (.@loop1) {
+		next;
+		switch(select("City Guide.:Remove Marks from Mini-Map.:Notice.:Cancel.")) {
+		case 1:
+			mes "[Einbroch Guide]";
+			mes "Por favor seleccione";
+			mes "un lugar de";
+			mes "el siguiente menú.";
+			if (.@compass_check == 0) {
+				mes "¿Le gustaría";
+				mes "marcar los lugares";
+				mes "en el mini-mapa?";
+				next;
+				if (select("Yes.:No.") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				switch(select("^FF0000Airport^000000:Train Station:Factory:Plaza:Hotel:Weapon Shop:Laboratory:Blacksmith Guild:Einbroch Tower:Cancel")) {
+				case 1:
+					mes "[Einbroch Guide]";
+					mes "El ^FF0000Airport^000000 se encuentra";
+					mes "en la parte noroeste";
+					mes "de la ciudad. Allí puede";
+					mes "ver el orgullo y la alegría de nuestra ciudad, la Aeronave. Recuerde que debe pagar la admisión para abordar la Aeronave.";
+					if (.@compass_check)
+						viewpoint 1,63,228,2,0xFF0000;
+					break;
+				case 2:
+					mes "[Einbroch Guide]";
+					mes "La estación del tren está";
+					mes "localizada en la parte noreste";
+					mes "de Einbroch. Los trenes";
+					mes "corren entre aquí";
+					mes "y Einbech todo el día,";
+					mes "durante todos los días.";
+					if (.@compass_check)
+						viewpoint 1,236,279,3,0xFF00FF;
+					break;
+				case 3:
+					mes "[Einbroch Guide]";
+					mes "La fabrica, tal vez la";
+					mes "mas importante habilidad en";
+					mes "Einbroch, esta localizada en la";
+					mes "parte sur de la ciudad.";
+					if (.@compass_check)
+						viewpoint 1,158,78,4,0xFF00FF;
+					break;
+				case 4:
+					mes "[Einbroch Guide]";
+					mes "La plaza, nuestro mas grande";
+					mes "distrito de compras, puede ser";
+					mes "encontrado justo al este desde el";
+					mes "centro de Einbroch.";
+					if (.@compass_check)
+						viewpoint 1,232,190,5,0xFF00FF;
+					break;
+				case 5:
+					mes "[Einbroch Guide]";
+					mes "El hotel esta al este";
+					mes "de la plaza y ofrece las mas altas";
+					mes "comodidades de calidad.";
+					mes "Ahi, puedes disfrutar tu";
+					mes "estadia en Einbroch comodamente.";
+					if (.@compass_check)
+						viewpoint 1,260,201,6,0x00FF00;
+					break;
+				case 6:
+					mes "[Einbroch Guide]";
+					mes "La Weapon Shop esta";
+					mes "localizada al norte de la";
+					mes "Plaza. , Ahi puedes";
+					mes "comprar armas para";
+					mes "tu uso personal";
+					if (.@compass_check)
+						viewpoint 1,215,221,7,0x00FF00;
+					break;
+				case 7:
+					mes "[Einbroch Guide]";
+					mes "El laboratorio es un";
+					mes "anexo de la Fabrica y";
+					mes "esta localizado en el sector";
+					mes "suroeste de Einbroch.";
+					if (.@compass_check)
+						viewpoint 1,36,49,8,0x00FF;
+					break;
+				case 8:
+					mes "[Einbroch Guide]";
+					mes "La Asociacion de Blacksmiths esta";
+					mes "localizado en la parte";
+					mes "sureste de Einbroch. Puedes";
+					mes "mejorar tu equipamento";
+					mes "usando sus servicios.";
+					if (.@compass_check)
+						viewpoint 1,244,90,9,0x00FF00;
+					break;
+				case 9:
+					mes "[Einbroch Guide]";
+					mes "La torre de Einbroch esta";
+					mes "localizada en el centro";
+					mes "de la ciudad. Desde lo mas alto de";
+					mes "la torre ,tu puedes ver";
+					mes "todo Einbroch.";
+					if (.@compass_check)
+						viewpoint 1,174,195,10,0xFFFF00;
+					break;
+				case 10:
+					mes "[Einbroch Guide]";
+					mes "Por favor preguntame para remover";
+					mes "marcas desde tu mini-mapa, si tu";
+					mes "no deseas tener mas";
+					mes "las localizaciones visualizadas";
+					mes "en tu mini-mapa.";
+					set .@loop2,0;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,63,228,2,0xFF0000;
+			viewpoint 2,236,279,3,0xFF00FF;
+			viewpoint 2,158,78,4,0xFF00FF;
+			viewpoint 2,232,190,5,0xFF00FF;
+			viewpoint 2,260,201,6,0x00FF00;
+			viewpoint 2,215,221,7,0x00FF00;
+			viewpoint 2,36,49,8,0x00FF00;
+			viewpoint 2,244,90,9,0x00FF00;
+			viewpoint 2,174,195,10,0xFFFF00;
+			set .@compass_check,0;
+			mes "[Einbroch Guide]";
+			mes "Ok, las marcas de";
+			mes "tu mini-mapa han sido";
+			mes "removidas. Si necesitas cualquier";
+			mes "guia  en Einbroch.";
+			mes "por favor dejame a mi o a uno de";
+			mes "los otros guias de Einbroch saberlo.";
+			break;
+		case 3:
+			mes "[Einbroch Guide]";
+			mes "A traves de la tecnologia de";
+			mes "la republica Schwaltzvalt";
+			mes "hemos mejorado a un sistema";
+			mes "digital de informacion que nos permite";
+			mes "marcar localizaciones en tu";
+			mes "mini-mapa para una navegacion mas facil";
+			next;
+			mes "[Einbroch Guide]";
+			mes "Tu mini-mapa esa localizado";
+			mes "en la ezquina superior derecha";
+			mes "de la pantalla. si no puedes";
+			mes "verlo , presiona Ctrl + Tab";
+			mes "o presiona el boton \"Map\" en tu ventana de informacion basica";
+			next;
+			mes "[Einbroch Guide]";
+			mes "En tu mini-mapa";
+			mes "presiona en los simbolos \"+\" y \"-\" ,";
+			mes "para hacer un zoom de aumento";
+			mes "en tu mini-mapa. Nosotros";
+			mes "esperamos que disfrutes tus viajes";
+			mes "aqui en Einbroch, aventurero";
+			break;
+		case 4:
+			mes "[Einbroch Guide]";
+			mes "Esperamos que";
+			mes "disfrutes tus viajes";
+			mes "aqui en Einbroch";
+			mes "Oh, y por favor se";
+			mes "conciente de las alertas de smog.";
+			close2;
+			set .@loop1,0;
+		}
+	}
+	cutin "ein_soldier",255;
+	end;
+}
+
+einbroch,155,43,4	duplicate(EinGuide)	Guide#2ein	852
+
+einbroch,162,317,4	duplicate(EinGuide)	Guide#3ein	852

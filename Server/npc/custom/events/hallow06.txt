@@ -1,0 +1,125 @@
+//===== eAthena Script =======================================
+//= Custom Halloween Event 2006
+//===== By: ==================================================
+//= Stryker
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= Latest Svn
+//===== Description: =========================================
+//= Halloween Event Script
+//===== Additional Comments: =================================
+//= Version 1.1 - Added trick to script
+//= 1.2 fixed bugs, optimized. Now uses 1 var instead of 3 [Lupus]
+//============================================================
+
+
+prontera,151,190,5	script	Hallows' Eve Event	807,{
+	mes "[Hallows' Eve Event]";
+	if(Class == Job_Novice){
+		mes "Lo siento, pero debes tener un trabajo para completar el evento.";
+		emotion e_swt,1;
+		close;
+	}
+	if(EVENT_HALWN06&1 && EVENT_HALWN06&2){
+		mes "Lo siento, pero ya completaste el evento.";
+		emotion e_sry;
+		close;
+	}
+	mes "Saludos compañero humano.";
+	next;
+	mes "[Hallows' Eve Event]";
+	mes "Halloween esta sobre nosotros, y es la hora de la aventurarse a lugares que pocos se atreven a ir.";
+	next;
+	mes "[Hallows' Eve Event]";
+	mes "Dulce o travesura, ¿Que prefieres?";
+	next;
+	menu "Truco",-, "Trato",L_Treat;
+
+	mes "[Hallows' Eve Event]";
+	if(EVENT_HALWN06&2){
+		mes "Lo siento pero tu ya tuviste un truco. ¿Por qué no eliges ahora un trato?";
+		emotion e_sry;
+		close;
+	}
+	mes "Dame un minuto...";
+	next;
+	set BaseExp,BaseExp+BaseLevel*1000;
+	set EVENT_HALWN06,EVENT_HALWN06|2;
+
+	mes "[Hallows' Eve Event]";
+	mes "Aquí esta tu trato. Tu EXP Base incremento un poco.";
+	next;
+	mes "[Hallows' Eve Event]";
+	mes "Espero que disfrutes tu truco y ¡Feliz Halloween!";
+	close;
+
+L_Treat:
+	mes "[Hallows' Eve Event]";
+	if(EVENT_HALWN06&1){
+		mes "Lo siento pero tu ya tuviste un trato. ¿Por qué no eliges ahora un truco?";
+		emotion e_sry;
+		close;
+	}
+	if(!(EVENT_HALWN06&4)){
+		mes "Genial! Esto sera muy divertido.";
+		next;
+		mes "[Hallows' Eve Event]";
+		mes "Voy a enviarte en una busqueda de items.";
+		next;
+		mes "[Hallows' Eve Event]";
+		mes "Trae todos los items necesarios, y te haré un trato.";
+		next;
+		mes "[Hallows' Eve Event]";
+		mes "No es ni un trato normal ni del que puedas comer, sino que es algo que usar usar en tu cabeza.";
+		next;
+		mes "[Hallows' Eve Event]";
+		mes "Pero como para todas que se hacen, necesito algunos items primero.";
+		mes "La lista:";
+		mes "1 Hat,";
+		mes "30 Pumpkin, y";
+		mes "20 Black Piece of Cloth";
+		next;
+		mes "[Hallows' Eve Event]";
+		mes "Ahora apresurate!";
+		set EVENT_HALWN06,EVENT_HALWN06|4;
+		close;
+	}
+	mes "Trajiste los items que te pedi o necesitas ver la lista denuevo?";
+	next;
+	menu "Los tengo",-, "No los tengo",L_Dont_Have, "Ver lista",L_List;
+
+	mes "[Hallows' Eve Event]";
+	if((countitem(2220) < 1) || (countitem(535) < 30) || (countitem(7205) < 20)){
+		mes "No tienes los items suficientes. Vuelve cuando los tengas.";
+		emotion e_sry;
+		close;
+	}
+	delitem 2220,1;
+	delitem 535,30;
+	delitem 7205,20;
+	getitem 5134,1;
+	set EVENT_HALWN06,EVENT_HALWN06|1;
+	mes "Buen trabajo! Espero que te guste el item.";
+	emotion e_grat;
+	next;
+	mes "[Hallows' Eve Event]";
+	mes "Disfruta el resto de halloween.";
+	emotion e_scissors,1;
+	close;
+
+L_Dont_Have:
+	mes "[Hallows' Eve Event]";
+	mes "Ve alla afuera y buscalos. Quieres ver la lista?";
+	next;
+	menu "No",-, "Si",L_List;
+	close;
+
+L_List:
+	mes "[Hallows' Eve Event]";
+	mes "Necesito los siguientes item:";
+	mes "1 Hat,";
+	mes "30 Pumpkin, y";
+	mes "20 Black Piece of Cloth.";
+	close;
+}

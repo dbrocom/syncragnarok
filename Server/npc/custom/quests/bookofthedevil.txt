@@ -1,0 +1,93 @@
+//===== eAthena Script ======================================= 
+//= Baphomet Jr. taming item quest.
+//===== By: ================================================== 
+//= eAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= eAthena 1.0
+//===== Description: ========================================= 
+//= Book of Devil		(MISC_QUEST | 256)
+//===== Additional Comments: ================================= 
+//= 1.0 ????
+//= 1.1 Optimized Book of Devil quest. used bit-wise var. [Lupus]
+//= 1.2 Fixed name collision with 'Little Boy' in cities/lutie.txt [Ai4rei]
+//============================================================ 
+
+//=============================================================
+//Quest for Book of Devil
+//=============================================================
+niflheim,184,199,5	script	Little Girl#02	793,{
+	mes "[Sairin]";
+	if(MISC_QUEST & 256){
+		mes "¡Gracias de nuevo!";
+		close;
+	}
+	if(@niflheimlost == 2){
+		mes "¿Lo encontraste?";
+		mes "¡Oh gracias!";
+		mes "Por favor, llevate esto como muestra de mi agradecimiento.";
+		getitem 642,1;//Items: Book of Devil,
+		set MISC_QUEST,MISC_QUEST | 256;
+		set @niflheimlost,0;
+		close;
+	}
+	if(@niflheimlost == 1){
+M_YES:
+		set @niflheimlost,1;
+		mes "¡Por favor encuentralo y dile donde estoy! La última vez lo vi en Niflheim Field, el primero de ellos...";
+		close;
+	}
+	mes "¿Señor, me ayudarías?";
+	if(BaseJob==Job_Novice){
+		mes "Oh... tú también estás perdido...";
+		close;
+	}
+	next;
+	menu "Si",-, "No",M_NO;
+
+	mes "[Sairin]";
+	mes "Mi amigo y yo salimos a caminar y terminamos extraviados en un campo extraño.";
+	next;
+	mes "[Sairin]";
+	mes "De repente encontré un muñeco. ¡Lo levanté del suelo y se convirtió en un fantasma!";
+	next;
+	mes "[Sairin]";
+	mes "Grité y corrí tan rápido como pude. Cuando dejé de correr estaba en un pueblo extraño...";
+	next;
+	mes "[Sairin]";
+	mes "¡Nadie aquí me ayuda, y hay fantasmas por todo lado! ¿Me ayudarías a encontrar a mi amigo?";
+	next;
+	menu "Claro",M_YES, "No",M_NO;
+M_NO:
+	close;
+}
+
+nif_fild01,213,268,5	script	Little Boy#02	797,{
+	if(MISC_QUEST & 256){
+L_DONE:
+		set @niflheimlost,2;
+		mes "[Marius]";
+		mes "¡Gracias por ayudarnos!";
+		close;
+	}
+	if(@niflheimlost == 2) goto L_PART2;
+	if(@niflheimlost == 1){
+		mes "[Marius]";
+		mes "¿Adónde estás?";
+		mes "...";
+		mes "¿Encontraste a Sairin?";
+		mes "¿Se fue para Niflheim?";
+		next;
+L_PART2:
+		mes "[Marius]";
+		mes "¿Le podrías decir que voy en camino?";
+		mes "Soy un poco lento, y es importante que ella lo sepa.";
+		next;
+		menu "Si",L_DONE, "No",-;
+		close;	
+	}
+	mes "[Marius]";
+	mes "Sairin... ¿adónde estás?";
+	close;
+}

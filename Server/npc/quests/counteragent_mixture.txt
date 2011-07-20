@@ -1,0 +1,595 @@
+//===== eAthena Script ======================================= 
+//= Counteragent and Mixture Quest(Morgenstein)
+//===== By: ================================================== 
+//= kobra_k88
+//= added some dialogs for Morgenstein by Komurka
+//===== Current Version: ===================================== 
+//= 2.2b
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis COnversion]
+//= Counteragent and Mixtures for making dyes & Alchemist Job Quest
+//===== Additional Comments: ================================= 
+//= 2.2 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 2.2a A few minor fixes. (bugreport:1122) [L0ne_W0lf]
+//= 2.2b Follow up fixes to bugreport:1122 [L0ne_W0lf]
+//============================================================ 
+
+alberta_in,133,55,3	script	Louitz#cm	84,{
+	if (molgenstain == 2) {
+		mes "[Merchant Louitz]";
+		mes "Oh, eres tu de nuevo.";
+		mes "¿Asi que trataste de encontrar";
+		mes "a ese cientifico loco";
+		mes "que vive alla en Geffen?";
+		next;
+		if (select("Talk About Molgenstein:Cancel") == 1) {
+			mes "[Merchant Louitz]";
+			mes "¿Sabes donde vive";
+			mes "pero no fuiste a revisar?";
+			mes "Él puede estar fuera de si, pero";
+			mes "creo que la mayoria de los genios son";
+			mes "como él. Aun asi, pienso que sería^FFFFFFss^000000 una buena idea si lo vas a ver.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Me refiero...";
+			mes "Es solo cuestion";
+			mes "de tiempo hasta que un chico inteligente";
+			mes "como el crease algo";
+			mes "verdaderamente milagroso, verdad?";
+			close;
+		}
+		mes "[Merchant Louitz]";
+		mes "....¿Hola?";
+		mes "¿Hola? Oye.";
+		mes "¡Hola! ¡Te estoy hablando";
+		mes "Chico!, odio";
+		mes "cuando ustedes los aventureros";
+		mes "solo se callan y divagan en el espacio...";
+		close;
+	}
+	mes "[Merchant Louitz]";
+	mes "Oye tu.";
+	mes "¿Qué pasa?";
+	next;
+	if (countitem(971) > 0 && countitem(972) > 0) {
+		switch(select("Talk:Talk about the solutions.:Cancel")) {
+		case 1:
+			mes "[Merchant Louitz]";
+			mes "Cuando estaba en Geffen";
+			mes "buscando objetos magicos,";
+			mes "Oí rumores de este, verdaderamente,";
+			mes "cientifico loco. Así que fuí";
+			mes "curioso, pregunté alrededor, y";
+			mes "eventualmente encontré a ese tipo.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Chico, oh chico, ese tipo era";
+			mes "un desastre, Ni siquiera sabia";
+			mes "que yo estaba ahi todo el tiempo y";
+			mes "solo se mantenia murmurando este mumbo";
+			mes "jumbo mientras trabajaba en sus";
+			mes "experimentos. Palabras como, um...";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Si, se mantenia murmurando";
+			mes "palabras como\"Karvodailnirol\"";
+			mes "y \"Detrimindexta\". La";
+			mes "primera vez que lo oí, pensé";
+			mes "que era un lenguaje loco,";
+			next;
+			mes "[Merchant Louitz]";
+			mes "pero hizo";
+			mes "ese Karvodailnirol";
+			mes "y Detrimindexta en algo";
+			mes "que realmente existe. Creo que son líquidos";
+			mes "especiales que no trabajan";
+			mes "como otros líquidos a los que estamos acostumbrados.";
+			close;
+		case 2:
+			set molgenstain,1;
+			mes "[Merchant Louitz]";
+			mes "Oye, esta es una de";
+			mes "esas soluciones que";
+			mes "los cientificos tanto mencionan.";
+			mes "¿Tu serías capaz de conseguir una";
+			mes "de esas? Huh. Ahora no tengo";
+			mes "idea que hacer con ellas... ";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Ah, pero ese cientifico";
+			mes "loco podría saber.";
+			mes "No recuerdo exactamente";
+			mes "donde vive, pero se que";
+			mes "esta en Geffen y su nombre";
+			mes "es ^0000FFMolgenstein^000000.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Hmm... Mejor";
+			mes "ve a Geffen y busca";
+			mes "en la ciudad, primero. Se que preguntar";
+			mes "te ayudara muchisimo. Estoy seguro que";
+			mes "alguien sabe";
+			mes "donde puedes encontrar a Molgestein.";
+			close;
+		case 3:
+			mes "[Merchant Louitz]";
+			mes "Um...";
+			mes "que bueno";
+			mes "hablar contigo amigo. Uh,";
+			mes "te vere pronto. Cuidate";
+			mes "mucho, ¿ok?";
+			close;
+		}
+	}
+	if (countitem(972) > 0) {
+		switch(select("Talk:Talk about Karvodailnirol:Cancel")) {
+		case 1:
+			mes "[Merchant Louitz]";
+			mes "¿Cuando estaba en Geffen";
+			mes "buscando objetos magicos,";
+			mes "Oí rumores de este verdaderamente";
+			mes "cientifico loco. Asi que fuí";
+			mes "curioso, pregunte en los alrededores, y";
+			mes "eventualmente encontré a ese tipo.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Chico, oh chico, ese tipo era";
+			mes "un desastre, Ni siquiera sabia";
+			mes "que yo estaba ahi todo el tiempo y";
+			mes "solo se mantenia murmurando este mumbo";
+			mes "jumbo mientras trabajaba en sus";
+			mes "experimentos. Palabras como, um...";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Si, se mantenia murmurando";
+			mes "palabras como\"Karvodailnirol\"";
+			mes "y \"Detrimindexta\". La";
+			mes "primera vez que lo oí, pensé";
+			mes "que era un lenguaje loco,";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Pero hizo";
+			mes "ese Karvodailnirol";
+			mes "y Detrimindexta en algo que realmente";
+			mes "existe. Creo que son líquidos";
+			mes "especiales que no trabajan";
+			mes "como otros líquidos a los que estamos acostumbrados.";
+			close;
+		case 2:
+			set molgenstain,1;
+			mes "[Merchant Louitz]";
+			mes "Oh oye, esto es ese";
+			mes "Karvodailnirol que el";
+			mes "viejo cientifico estaba";
+			mes "hablando, ¿huh? Claro, solo";
+			mes "alguien como ese tipo sabría";
+			mes "que hacer con  él...";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Oye, ¿por qué no vas";
+			mes "y le preguntas acerca de eso?";
+			mes "No recuerdo exactamente";
+			mes "donde vive, pero se que";
+			mes "esta en Geffen y su";
+			mes "nombre es ^0000FFMolgenstein^000000.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Hmm...mejor";
+			mes "ve a Geffen y busca";
+			mes "en la ciudad, primero. Se que preguntar";
+			mes "te ayudara muchisimo. Estoy seguro que";
+			mes "que alguien sabe";
+			mes "donde puedes encontrar a Molgestein.";
+			close;
+		case 3:
+			mes "[Merchant Louitz]";
+			mes "Um...";
+			mes "Que bueno";
+			mes "hablar contigo amigo. Uh,";
+			mes "te vere pronto. Cuidate";
+			mes "mucho, ¿ok?";
+			close;
+		}
+	}
+	if (countitem(971) > 0) {
+		switch(select("Talk:Talk about Detrimindexta:Cancel")) {
+		case 1:
+			mes "[Merchant Louitz]";
+			mes "Cuando estaba en Geffen";
+			mes "buscando objetos magicos,";
+			mes "Oí rumores de este verdaderamente";
+			mes "cientifico loco. Asi que fui";
+			mes "curioso, pregunte alrededor, y";
+			mes "eventualmente encontré a ese tipo.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Chico, oh chico, ese tipo era";
+			mes "un desastre, Ni siquiera sabía";
+			mes "que yo estaba ahi todo el tiempo y";
+			mes "solo se mantenia murmurando este mumbo";
+			mes "jumbo mientras trabajaba en sus";
+			mes "experimentos. Palabras como, um...";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Si, se mantenia murmurando";
+			mes "palabras como\"Karvodailnirol\"";
+			mes "y \"Detrimindexta\". La";
+			mes "primera vez que lo oí, pensé";
+			mes "que era un lenguaje loco,";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Pero hizo";
+			mes "ese Karvodailnirol";
+			mes "y Detrimindexta en algo";
+			mes "que realmente existen. Creo que son líquidos";
+			mes "especiales que no trabajan";
+			mes "como otros líquidos a los que estamos acostumbrados.";
+			close;
+		case 2:
+			set molgenstain,1;
+			mes "[Merchant Louitz]";
+			mes "Oye, esta es una";
+			mes "Detrimindexta que el";
+			mes "viejo cientifico estaba";
+			mes "hablando, ¿huh? Claro, solo";
+			mes "alguien como ese tipo sabría";
+			mes "que hacer con esto...";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Oye, ¿por qué no vas";
+			mes "y le preguntas acerca de esto?";
+			mes "No recuerdo exactamente";
+			mes "donde vive, pero se que";
+			mes "esta en Geffen y su";
+			mes "nombre es ^0000FFMolgenstein^000000.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Hmm...mejor";
+			mes "ve a Geffen y busca";
+			mes "en la ciudad, primero. Se que preguntar,";
+			mes "te ayudara mucho. Estoy seguro";
+			mes "que alguien sabe";
+			mes "donde puedes encontrar a Molgestein.";
+			close;
+		case 3:
+			mes "[Merchant Louitz]";
+			mes "Um...";
+			mes "Que bueno";
+			mes "hablar contigo amigo. Uh,";
+			mes "te vere pronto. Cuidate";
+			mes "mucho, ¿ok?";
+			close;
+		}
+	}
+	if (select("Talk:Cancel") == 1) {
+		mes "[Merchant Louitz]";
+		mes "Cuando estaba en Geffen";
+		mes "buscando objetos magicos,";
+		mes "Oí rumores de este verdaderamente";
+		mes "cientifico loco. Asi que fuí";
+		mes "curioso, pregunte alrededor, y";
+		mes "eventualmente encontré a ese tipo.";
+		next;
+		mes "[Merchant Louitz]";
+		mes "Chico, oh chico, ese tipo era";
+		mes "un desastre, Nisiquiera sabia";
+		mes "que yo estaba ahi todo el tiempo y";
+		mes "solo se mantenia murmurando este mumbo";
+		mes "jumbo mientras trabajaba en sus";
+		mes "experimentos. Palabras como, um...";
+		next;
+		mes "[Merchant Louitz]";
+		mes "Si, se mantenia murmurando";
+		mes "palabras como\"Karvodailnirol\"";
+		mes "y \"Detrimindexta\". La";
+		mes "primera vez que lo oí, pensé";
+		mes "que era un lenguaje loco, sabes?";
+		next;
+		mes "[Merchant Louitz]";
+		mes "Pero hizo";
+		mes "ese Karvodailnirol";
+		mes "y Detrimindexta en algo que realmente";
+		mes "existe. Creo que son líquidos";
+		mes "especiales que no trabajan";
+		mes "como otros líquidos a los que estamos acostumbrados.";
+		close;
+	}
+	mes "[Merchant Louitz]";
+	mes "Um...";
+	mes "Que bueno";
+	mes "hablar contigo amigo. Uh,";
+	mes "te vere pronto. Cuidate";
+	mes "mucho, ¿ok?";
+	close;
+}
+
+geffen,181,114,3	script	Aure Dupon#cm	82,{
+	if (molgenstain == 2) {
+		mes "[Aure Dupon]";
+		mes "Parece que nuestros";
+		mes "caminos se cruzan de nuevo.";
+		mes "¿Coincidencia? Es mas";
+		mes "que eso. Es el ^0000FFfate^000000.";
+		next;
+		if (select("Talk About Molgenstein:Cancel") == 1) {
+			mes "[Aure Dupon]";
+			mes "¿No has conocido";
+			mes "a Molgenstein aún? Él";
+			mes "vive en el segundo piso";
+			mes "de la herreria. Además nos acabamos";
+			mes "de ver, debo advertirte no";
+			mes "te le acerques mucho...";
+			close;
+		}
+		mes "[Aure Dupon]";
+		mes "Entonces ve, y";
+		mes "que las olas del";
+		mes "destino te lleven";
+		mes "a donde debes ir.";
+		close;
+	}
+	mes "[Aure Dupon]";
+	mes "El tiempo fluye gentil";
+	mes "y suavemente, pero ninguna";
+	mes "fuerza en este mundo";
+	mes "podría pararlo.";
+	mes "La humanidad no es ni siquiera";
+	mes "un trazo en la gran pintura.";
+	next;
+	if (molgenstain > 0) {
+		switch(select("Talk:Ask About Molgenstein:Cancel")) {
+		case 1:
+			mes "[Aure Dupon]";
+			mes "Tener metas y enfocarte";
+			mes "es bueno, pero ser obsesivo";
+			mes "acerca de una sola cosa puede ser";
+			mes "bastante destructivo. Relajate, vacia";
+			mes "tu mente, y dejate llevar";
+			mes "por las olas del destino.";
+			close;
+		case 2:
+			set molgenstain,2;
+			mes "[Aure Dupon]";
+			mes "¿Molgenstein...?";
+			mes "El hombre es obsesivo";
+			mes "en conquistar las fuezas";
+			mes "que controlan nuestro mundo. Pero";
+			mes "parece que estas curioso";
+			mes "de él, por alguna razon. Hmmm...";
+			next;
+			mes "[Aure Dupon]";
+			mes "Seria mejor si tu";
+			mes "fueras a ver a Molgenstein";
+			mes "y juzgar su caracter por tí";
+			mes "mismo. Puedes encontrarlo en";
+			mes "el segundo piso de la Herreria de Geffen.";
+			mes "Ve: Es tu destino.";
+			close;
+		case 3:
+			mes "[Aure Dupon]";
+			mes "Entonces ve, y";
+			mes "que las olas del destino";
+			mes "te lleven";
+			mes "donde debes ir.";
+			close;
+		}
+	}
+	if (select("Talk:Cancel") == 1) {
+		mes "[Aure Dupon]";
+		mes "Tener metas y enfocarte";
+		mes "es bueno, pero ser obsesivo";
+		mes "acerca de una sola cosa puede ser";
+		mes "bastante destructivo. Relajate, vacia";
+		mes "tu mente, y dejate llevar";
+		mes "por las olas del destino.";
+		close;
+	}
+	mes "[Aure Dupon]";
+	mes "Entonces ve, y";
+	mes "que las olas del destino";
+	mes "te lleven";
+	mes "donde debes ir.";
+	close;
+}
+
+geffen_in,141,140,3	script	Molgenstein#cm	121,{
+	if (checkweight(1201,1) == 0) {
+		mes "- ¡¡Espera un minuto !! -";
+		mes "- Actualmente vas cargando -";
+		mes "- demasiados objetos. -";
+		mes "- Por favor trata de nuevo -";
+		mes "- despues de haber perdido algo de peso. -";
+		close;
+	}
+	if (MISC_QUEST & 4) {
+		mes "[Chemist Molgenstein]";
+		mes ".....";
+		mes "Bienvenido.";
+		mes "Hehehehehe....";
+		mes "Heeheeheeheehee....";
+		next;
+		switch(select("Ask about his research:Ask him to make a new solution.:Cancel")) {
+		case 1:
+			mes "[Chemist Molgenstein]";
+			mes "Heeheeheeheee...";
+			mes "Debes haber oido los rumores de mi investigacion. ¡Si! entonces probablemente ya lo sabes, te lo dire sin esconder nada, quiero decir, no hay nada que esconder.";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "En verdad, ¡puedes decir que mi investigacion esta completa! ¡Nada es imposible para mi ingenio! Bwahaha, ¡es solo cuestion de tiempo!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "¿Estas aún aquí? Correcto, querias saber acerca de mi investigacion. Es muy simple. ¡Solo estaba tratando de inventar un super líquido que derretiria todo!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "¿No es interesante? No importa cuan fuerte eres, no puedes quebrar una piedra o acero, pero con mi nuevo líquido, puedes derretir esas cosas, ¡haciendolas suaves como un pudin!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "No puede derretir todo aun, pero encontre que puedes combinar cosas que nunca podrías mezclar antes de mi invención. Heeheeheeeheee!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "¡Puedes hacer muchas cosas que nunca podrias haber imaginado posible! Puede hacerte muchos nuevas cosas que nunca hubieras imaginado con este metodo...¡¡mientras lo quieras!!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "¡¡Las endolfinas estan recorriendo mi cara al menos 2.1 veces más rapido de lo normal! ¡Ah! ¡Estoy tan emocionado! Yo... ¡Yo no lo puedo ocultar!";
+			close;
+		case 2:
+			mes "[Chemist Molgenstein]";
+			mes "Asi que...";
+			mes "¿quieres que haga algo totalmente nuevo, huh? ¡Hehhehheh! ¡Adoro tu sentido de cientifico aventurero!";
+			next;
+			switch(select("Counteragent:Mixture")) {
+			case 1:
+				mes "[Chemist Molgenstein]";
+				mes "¡Ooh...!";
+				mes "¿Quieres que haga un contraagente? Hohohohoho, dejame ver lo que necesitamos...";
+				next;
+				mes "[Chemist Molgenstein]";
+				mes "Oh, ya recuerdo, si, Alcohol, y um, er, Detrimindexta y una Empty Bottle para poner todo adentro. Solo esos 3 objetos y 3000 zeny.";
+				next;
+				mes "[Chemist Molgenstein]";
+				mes "Bwahahahah!";
+				mes "Oh, ¡no puedo esperar para hacer esto! ¿Estas listo para comenzar?";
+				next;
+				if (select("Make:Cancel") == 1) {
+					if (countitem(970) == 0 || countitem(971) == 0 || countitem(713) == 0 || Zeny < 3000) {
+						mes "[Chemist Molgenstein]";
+						mes "Hohohoho.... no es suficiente... no es suficiente... haah...haah... ve ..... ¡¡ve a conseguir el resto de los materiales!!";
+						mes "Pospondremos la diversión hasta entonces... Heuheuheuheuheuh.";
+						close;
+					}
+					mes "[Chemist Molgenstein]";
+					mes "Ooooooooh... heehee...... si... asi es...... si... mas... mas........ heeheeheehee";
+					mes ".... Aaah.... ahah... ha....ahahooooooooohoh!";
+					next;
+					if (countitem(970) < 1 || countitem(971) < 1 || countitem(713) < 1) {
+						mes "[Chemist Molgenstein]";
+						mes "Hohohoho.... no es suficiente... no es suficiente... haah...haah... ve ..... ¡¡ve a conseguir el resto de los materiales!!";
+						close;
+					}
+					delitem 970,1; //Alchol
+					delitem 971,1; //Detrimindexta
+					delitem 713,1; //Empty_Bottle
+					set zeny,zeny-3000;
+					getitem 973,1; //Counteragent
+					mes "[Chemist Molgenstein]";
+					mes "Hee hee hee...";
+					mes "Haaaaah......";
+					mes "¿Oh? ¡¿Ya terminamos?!";
+					close;
+				}
+				mes "[Chemist Molgenstein]";
+				mes "¡Hee hee hee...!";
+				mes "Regresa cuando";
+				mes "estes listo~";
+				close;
+			case 2:
+				mes "[Chemist Molgenstein]";
+				mes "¡Ooh...!";
+				mes "¿quieres hacer una Mezcla? Hohohohohoho, dejame ver que necesitamos...";
+				next;
+				mes "[Chemist Molgenstein]";
+				mes "Ooh, ya recuerdo,si, Alcohol, y um, er, Karvodailnirol y una empty bottle para ponerlo. Solo esos 3 objetos y 4000 zeny.";
+				next;
+				mes "[Chemist Molgenstein]";
+				mes "¡Bwahahahah!";
+				mes "Oh, ¡no puedo esperar para hacer esto! ¿Estas listo para comenzar?";
+				next;
+				if (select("Make:Cancel") == 1) {
+					if (countitem(970) == 0 || countitem(972) == 0 || countitem(713) == 0 || Zeny < 4000) {
+						mes "[Chemist Molgenstein]";
+						mes "Hohohoho.... no es suficiente... no es suficiente... haah...haah... ve ..... ¡¡ve a conseguir el resto de los materiales!!";
+						mes "Pospondremos la diversión hasta mas tarde... Heheheheh";
+						close;
+					}
+					mes "[Chemist Molgenstein]";
+					mes "Ooooooooh... heehee...... si... asi es...... si... mas... mas........ heeheeheehee";
+					mes ".... Aaah.... ahah... ha....ahah...oooooooooooooooooh!!!...!!!!!!";
+					next;
+					if (countitem(970) < 1 || countitem(972) < 1 || countitem(713) < 1) {
+						mes "[Chemist Molgenstein]";
+						mes "Hohohoho.... no es suficiente... no es suficiente... haah...haah... ve ..... ¡¡ve a conseguir el resto de los materiales!!";
+						close;
+					}
+					delitem 970,1; //Alchol
+					delitem 972,1; //Karvodailnirol
+					delitem 713,1; //Empty_Bottle
+					set zeny,zeny-4000;
+					getitem 974,1; //Mixture
+					mes "[Chemist Molgenstein]";
+					mes "Hee hee hee...";
+					mes "Haaaaah......";
+					mes "¿Oh? ¿Ya terminamos?!";
+					close;
+				}
+				mes "[Chemist Molgenstein]";
+				mes "[Chemist Molgenstein]";
+				mes "¡Hee hee hee...!";
+				mes "Regresa cuando";
+				mes "estes listo~";
+				mes "Heh... heuheuheuheh....";
+				close;
+			}
+		case 3:
+			mes "[Chemist Molgenstein]";
+			mes "Heehee....heheheheh....";
+			close;
+		}
+	}
+	if (molgenstain == 2) {
+		set MISC_QUEST,MISC_QUEST | 4;
+		set molgenstain,0;
+		mes "[Chemist Molgenstein]";
+		mes "Heeheeheehee.... welcome. Hehehehe.... heeheeheeheehee....";
+		next;
+		mes "[Chemist Molgenstein]";
+		mes "¡¿Ah...?!";
+		mes "Lo siento mucho si te asuste. Es solo... que no he visto una persona  en tanto tiempo. Asi que, er, ¿qué puedo hacer por ti??";
+		next;
+		if (select("Ask about his research.:Cancel.") == 1) {
+			mes "[Chemist Molgenstein]";
+			mes "Heeheeheeheee...";
+			mes "Debes haber oido los rumores de mi investigación. ¡Si! entonces probablemente ya lo sabes, te lo dire sin esconder nada, quiero decir, no hay nada que esconder.";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "¡En verdad, puedes decir que mi investigación esta completa! ¡Nada es imposible para mi ingenio! Bwahaha, ¡es solo cuestion de tiempo!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "¿Estas aún aqui? Correcto, querias saber acerca de mi investigacion. Es muy simple. ¡Solo estaba tratando de inventar un super líquido que derretiria todo!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "¿No es interesante? No importa cuan fuerte eres, no puede quebrar una piedra o acero, pero con mi nuevo líquido, puedes derretir esas cosas, ¡haciendolas suaves como un pudin!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "No puede derretir todo aun, pero encontre que puedes combinar cosas que nunca podrias mezclar antes de mi invención.";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "Puedes hacer muchas cosas que nunca podrias haber imaginado posible! Puede hacerte muchos nuevas cosas que nunca hubieras imaginado con este metodo...¡¡mientras lo quieras!!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "¡Las endolfinas estan recorriendo mi cara al menos 2.1 veces más rapido de lo normal! ¡Ah! ¡Estoy tan emocionado! Yo... ¡Yo no lo puedo ocultar!";
+			close;
+		}
+		close;
+	}
+	mes "[Chemist Molgenstein]";
+	mes "Heeheeheehee...";
+	mes "No estas aquí para ser un sujeto de prueba, o ¿lo eres? Probablemente no. No despues de mi pequeño 'accidente.' ¡Heeheeheee!";
+	close;
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.0 Fully working
+//= 1.1 Update for Alchemist Quest.
+//= 1.2 added check for Empty Bottle [Lupus]
+//= 1.3 Fixed some lil thingys [Darkchild]
+//= 1.4 More li'l thing, added comments for items IDs [Lupus]
+//= 1.5 Fixed Spelling mistakes. [Nexon]
+//= 1.6 Fixed some bugs, also related to Alch Job quest [Lupus]
+//= 1,7 Fixed exploit
+//= 1.8 Got rid of 'al_morgen' var [Lupus]
+//= 2.1 now uses (MISC_QUEST & 4) bit instead of al_morgen [Lupus]
+//============================================================ 

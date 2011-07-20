@@ -1,0 +1,250 @@
+//=====================================
+// Vending Machine Script
+// v2.4
+//=====================================
+// by Celestria
+//=====================================
+// Changelog:
+// 2.4 - Made optimizations according to suggestions made by erKURITA. Script is now significantly shorter.
+//
+// 2.3 - Added in "Slam" feature, as well as admin ability to turn machine on and off.
+// - Added admin menu. Allows GMs to put machines in/out of service, and to clear
+// all jammed items.
+//
+// 2.2 - Added in/Renamed some variables to allow a single machine to block on several
+// items simultaneously. This fix also allows the two-item drop to work with every
+// item the machine is jammed on.
+//
+// 2.1 - Fixed an error where if one machine jammed on a menu item (say 3 for example),
+// if another machine also jammed on the same menu item (3 in this case), the original
+// machine to jam would be unjammed.
+// - This fix only allows a machine to jam one item at a time. Will fix in the future.
+//
+// 2.0 - Completely redid the script using a call-function.
+// Now all replica scripts can simply be a copy of Vending Machine,
+// but with variables modified to suit it''s intended use.
+//
+// 1.1 - Fixed $jamplayer1 not being a string, thanks to Terces.
+// - Changed random number that intiates jam to 1, to allow for faster modification of jam rates.
+//
+// 1.0 - Creted a script for selling numerous items that would occasionally jam on players.
+// - Used numbered variables to allow for multiplacation of the script.
+//=====================================
+
+p_track01,45,58,4	script	Vending Machine#1	910,{
+
+	set @machine,1; //sets the unique number of this machine
+	//DO NOT have two machines with the same number
+
+	set @jamrate,1000; //Odds of machine jamming will be 1 in @jamrate
+
+	set @slam,0; //set this to 0 to turn on the slam feature, any other setting disables it.
+	set @fallrate,10; //Odds of machine falling on someone who hits it are 1 in @fallrate
+	set @freerate,10000; //Odds of machine giving an item to someone who hits it are 1 in @freerate
+
+	set @admin,99; //sets GM level needed to access Admin menu
+
+	// the following sets the items for sale. Script currently only handles 10 items.
+	setarray @item[0], 12143, 519, 565;
+	setarray @price[0], 100, 50, 200;
+
+	for (set @i,0; @i < 10; set @i,@i+1)
+	set @itemn$[@i],getitemname(@item[@i]);
+
+	set @menu$[0], @itemn$[0]+" - "+@price[0];
+	set @menu$[1], @itemn$[1]+" - "+@price[1];
+	set @menu$[2], @itemn$[2]+" - "+@price[2];
+	set @menu$[3], "Cancel";
+	set @menu$[4], "";
+	set @menu$[5], "";
+	set @menu$[6], "";
+	set @menu$[7], "";
+	set @menu$[8], "";
+	set @menu$[9], "";
+	set @menu$[10], ""; // "Cancel" only. Used if vending ten items.
+
+	callfunc "F_Vend1";
+}
+
+
+
+
+
+
+
+
+
+//===============================================================================================
+// Functions
+//
+// !!!DO NOT EDIT BELOW THIS LINE!!!
+//
+//===============================================================================================
+
+function	script	F_Vend1	{
+
+	if(getgmlevel() >= @admin) goto M_Admin;
+
+M_Player:
+	if($outorder[@machine]) goto M_Ooo;
+	if(@slam) callfunc "F_Vend2";
+	mes "Ves una máquina expendedora, Que te gustaría hacer?";
+	next;
+	menu "Comprar un item",M_Vend,"Golpearla",M_Hit;
+
+M_Vend:
+	callfunc "F_Vend2";
+	end;
+
+M_Hit:
+	callfunc "F_Slam";
+	end;
+
+M_Admin:
+	mes "[Admin Mode]";
+	mes "Que te gustaría hacer?";
+	next;
+	menu "Modo Jugador",M_Player,"Poner 'Fuera de servicio'",M_Ooo2,"Sacar 'Fuera de servicio'",M_Ooo3,"Arreglar los items atascados",M_Fix;
+
+M_Ooo:
+	mes "Fuera de servicio";
+	close;
+
+M_Ooo2:
+	set $outorder[@machine],1;
+	mes "La máquina esta ahora Fuera de Servicio";
+	close;
+
+M_Ooo3:
+	set $outorder[@machine],0;
+	mes "La máquina esta ahora en servicio";
+	close;
+
+M_Fix:
+	for (set @i,0; @i < 10; set @i,@i+1)
+	setd "$itemjam"+@i+"$[@machine]","";
+	mes "Todos los items atascados han sido arreglados";
+	close;
+}
+
+function	script	F_Vend2	{
+
+	for (set @i,0; @i < 10; set @i,@i+1)
+	if(strcharinfo(0)==getd("$itemjam"+@i+"$[@machine]")) goto B_StillJammed;
+	set @jammed,rand(1,@jamrate);
+	mes "Das una ojeada dentro de la máquina expendedora para ver que esta disponible.";
+	next;
+	menu 	@menu$[0],M_Ite0, @menu$[1],M_Ite1, @menu$[2],M_Ite2, @menu$[3],M_Ite3, 
+		@menu$[4],M_Ite4, @menu$[5],M_Ite5, @menu$[6],M_Ite6, @menu$[7],M_Ite7,
+		@menu$[8],M_Ite8, @menu$[9],M_Ite9, @menu$[10],M_Ite10;
+
+	M_Ite0:
+		set @num, 0;
+		goto B_Buy;
+	M_Ite1:
+		set @num, 1;
+		goto B_Buy;
+	M_Ite2:
+		set @num, 2;
+		goto B_Buy;
+	M_Ite3:
+		set @num, 3;
+		goto B_Buy;
+	M_Ite4:
+		set @num, 4;
+		goto B_Buy;
+	M_Ite5:
+		set @num, 5;
+		goto B_Buy;
+	M_Ite6:
+		set @num, 6;
+		goto B_Buy;
+	M_Ite7:
+		set @num, 7;
+		goto B_Buy;
+	M_Ite8:
+		set @num, 8;
+		goto B_Buy;
+	M_Ite9:
+		set @num, 9;
+		goto B_Buy;
+	M_Ite10:
+		set @num, 10;
+		goto B_Buy;
+
+
+
+B_Cancel:
+	mes "Pensándolo bien, decides no comprar nada.";
+	close;
+
+B_StillJammed:
+	mes "Samarreas y golpeas la máquina expendedora, pero parece que sin importar la energía que ejerces, el maldito item no se va a soltar.";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "MALDITAS MÁQUINAS EXPENDEDORAS!";
+	close;
+
+B_Broke:
+	mes "Mientras introduces tu ultimo zeny adentro, te das cuenta que no tienes suficiente para pagar el producto.";
+	mes "Tristemente apretas el boton de reembolso y agarras el poco zenny que tienes.";
+	close;
+
+B_Buy:
+	if (@menu$[@num] == "Cancel") goto B_Cancel;
+		for (set @i,0; @i < 10; set @i,@i+1) 
+		if(@num==@i) if(getd("$itemjam"+@i+"$[@machine]")) set @jammed,0;
+	if(Zeny < @price[@num]) goto B_Broke;
+	set Zeny,Zeny-@price[@num];
+	if(@jammed == 1) goto B_Jamitem;
+	mes "Vrrrrrrrr~";
+	mes "*clunk*";
+	next;
+	if(@jammed == 0) goto B_Get2;
+	getitem @item[@num],1;
+	mes "A "+@itemn$[@num]+" aparece.";
+	close;
+B_Get2:
+	getitem @item[@num],2;
+	mes "Pero que ...!?";
+	mes "Dos "+@itemn$[@num]+"s aparecen!";
+	mes "Debe ser tu día de suerte.";
+		for (set @i,0; @i < 10; set @i,@i+1)
+		if(@num==@i) setd "$itemjam"+@i+"$[@machine]","";
+	close;
+B_Jamitem:
+	mes "Vrrrrrrrr~";
+	mes "*click*";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Maldición!";
+	mes "Odio cuando estas malditas cosas se atascan!";
+		for (set @i,0; @i < 10; set @i,@i+1)
+		if(@num==@i) setd "$itemjam"+@i+"$[@machine]",strcharinfo(0);
+	close;
+}
+
+function	script	F_Slam	{
+
+	set @fall,rand(1,@fallrate);
+	set @free,rand(1,@freerate);
+R_Item:
+	set @num,rand(9);
+	if(@item[@num]==0) goto R_Item;
+
+	mes "Le das a la máquina un buen y sólido golpe.";
+	next;
+	mes "...";
+	next;
+	if(@fall==1){
+		mes "La máquina se tambalea, y despues se cae directamente frente a tí.";
+		close2;
+		percentheal -100,-100;
+		end;}
+	if(@free==1){
+		getitem @item[@num],1;
+		mes "La máquina se tambalea, y luego tira un item.";
+		close;}
+	mes "La máquina se tambalea, pero nada sucede.";
+	close;
+}

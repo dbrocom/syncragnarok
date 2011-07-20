@@ -1,0 +1,58 @@
+//===== eAthena Script =======================================
+//= Wizard Hat Custom Quest
+//===== By: ==================================================
+//= Who
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= eAthena
+//===== Description: =========================================
+//= Wizard Hat quest. Harmless, doesn't screw game balance.
+//===== Additional Comments: =================================
+//= 1.1 Reversed ingreadients and the quest result due to
+//= 	treasue boxes drops fix [Lupus] 
+//============================================================
+
+geffen,126,107,5	script	Wizard Hat Dude	51,{
+	mes "[Wizard Hat Dude]";
+	mes "Eh? ¿Que quieres?";
+	mes "Ah, ya veo, quieres que te fabrique algo.";
+	emotion e_what;
+	next;
+	mes "[Wizard Hat Dude]";
+	mes "Bien, si quieres este Wizard Hat aqui tienes una lista de los items que necesito que vayas a buscarme:";
+	mes "1 Magican Hat";
+	mes "1 Bathory Card";
+	mes "y 200,000z por mis esfuerzos"; 
+	next;
+	mes "[Wizard Hat Dude]";
+	mes "Estas listo para que haga este item mágico?";
+	next;
+	menu "¡Seguro!",-,"¡Estos requisitos son inalcansables!",M_RIPOFF;
+
+	mes "[Wizard Hat Dude]";
+	if(countitem(5045) < 1 || countitem(4119) < 1 || Zeny < 200000) goto L_NotEnough;
+	delitem 5045,1;
+	delitem 4119,1;
+	set Zeny,Zeny-200000;
+	mes "Wow!  En verdad eres espléndido!";
+	emotion e_no1;
+	next;
+	mes "[Wizard Hat Dude]";
+	mes "Disfruta tu Wizard Hat!";
+	getitem 2252,1;
+	close;
+
+L_NotEnough:
+	mes ". . .Lo siento... No tienes suficiente dinero e items...";
+	mes "No puedo darme el lujo de hacer esto si no me traes los materiales necesarios. Por favor entiende que esto es tanto en beneficio de los heroes como de ti";
+	emotion e_sry;
+	close;
+
+M_RIPOFF:
+	mes "[Wizard Hat Dude]";
+	mes "Lo que tuve que pasar fue  mas insondable...";
+	mes "Si tienes éxito al obtener estos items, poseeras un fuerza increible.";
+	emotion e_hmm;
+	close;
+}
