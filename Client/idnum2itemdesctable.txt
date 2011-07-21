@@ -57283,7 +57283,7 @@ Un Tiburón.
 Peso :^777777 60^000000
 #
 30205#
-Un Atún.
+Una Caballa.
 ^ffffff_^000000
 Peso :^777777 30^000000
 #
@@ -60200,14 +60200,16 @@ Peso : ^7777772^000000
 #
 31810#
 Crystalización: ^777777Orgánica^000000
-Efecto: ^777777+ 1 LUK^000000
+Efecto:
+ ^777777+ 1 LUK^000000
  ^777777+ 1 AGI^000000
 Se introduce en :^777777 Accessory^000000
 Peso : ^7777772^000000
 #
 31811#
 Crystalización: ^777777Orgánica^000000
-Efecto: ^777777+ 1 LUK^000000
+Efecto:
+ ^777777+ 1 LUK^000000
  ^777777+ 1 AGI^000000
  ^777777+ 1 VIT^000000
 Se introduce en :^777777 Accessory^000000
@@ -60215,7 +60217,8 @@ Peso : ^7777772^000000
 #
 31812#
 Crystalización: ^777777Orgánica^000000
-Efecto: ^777777+ 1 LUK^000000
+Efecto:
+ ^777777+ 1 LUK^000000
  ^777777+ 1 AGI^000000
  ^777777+ 1 VIT^000000
  ^777777+ 1 INT^000000
@@ -60224,7 +60227,8 @@ Peso : ^7777772^000000
 #
 31813#
 Crystalización: ^777777Orgánica^000000
-Efecto: ^777777+ 1 LUK^000000
+Efecto: 
+ ^777777+ 1 LUK^000000
  ^777777+ 1 AGI^000000
  ^777777+ 1 VIT^000000
  ^777777+ 1 INT^000000
@@ -60271,7 +60275,7 @@ Peso : ^7777772^000000
 #
 31820#
 Crystalización: ^777777Orgánica^000000
-Efecto: ^777777+ 3 LUK^000000
+Efecto: ^777777+ 3 FLEE^000000
 Se introduce en :^777777 Accessory^000000
 Peso : ^7777772^000000
 #
@@ -60436,7 +60440,6 @@ Crystalización: ^777777Orgánica^000000
 Efecto: ^777777Aumenta el ASPD en 3^000000
 Se introduce en :^777777 Accessory^000000
 Peso : ^7777772^000000
-#
 #
 31853#
 Crystalización: ^777777Orgánica^000000

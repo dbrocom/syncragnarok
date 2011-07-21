@@ -3061,9 +3061,9 @@
 5603,RTC_Winner_Only,RTC First Place,5,0,,2500,,1,,1,0xFFFFFFFF,7,2,256,,1,1,577,{ bonus bAllStats,3; },{},{}
 5604,RTC_Second_Best,RTC Second Place,5,0,,2500,,1,,1,0xFFFFFFFF,7,2,256,,1,1,578,{ bonus bAllStats,2; },{},{}
 5605,RTC_Third_Best,RTC Third Place,5,0,,2500,,1,,1,0xFFFFFFFF,7,2,256,,1,1,579,{ bonus bAllStats,1; },{},{}
-5606,Campume_Hat,Champune Hat,5,500,,1200,,4,,1,0xFFFFFFFF,7,2,256,,3,1,580,{ bonus bAllStats,1; },{},{}
-5607,Lyria_Doll_Hat,Lyria Doll Hat,5,0,,500,,0,,1,0xFFFFFFFF,7,2,256,,60,0,581,{},{},{}
-5608,Dorothy_Doll_Hat,Dorothy Doll Hat,5,0,,500,,0,,1,0xFFFFFFFF,7,2,256,,60,0,582,{},{},{}
+//5606,Campume_Hat,Champune Hat,5,500,,1200,,4,,1,0xFFFFFFFF,7,2,256,,3,1,580,{ bonus bAllStats,1; },{},{}
+5607,Lyria_Doll_Hat,Lyria Doll Hat,5,0,,500,,0,,1,0xFFFFFFFF,7,2,256,,60,0,581,{ bonus bMaxHP,500; bonus2 bSubRace,RC_DemiHuman,5; },{},{}
+5608,Dorothy_Doll_Hat,Dorothy Doll Hat,5,0,,500,,0,,1,0xFFFFFFFF,7,2,256,,60,0,582,{ bonus bMaxSP,80; bonus2 bSubRace,RC_DemiHuman,5; },{},{}
 5609,Chung_Hairband,Chung Hairband,5,0,,500,,5,,1,0xFFFFFFFF,7,2,256,,60,0,583,{ bonus bLuk,3; bonus bMdef,4; },{},{}
 5610,Ice_Wing_Ear,Ice Wing Ear,5,0,,100,,0,,0,0xFFFFFFFF,7,2,512,,10,0,584,{ bonus bLuk,1; },{},{}
 5611,Turtle_Hat,Turtle_Hat,5,0,,300,,0,,0,0xFFFFFFFF,7,2,256,,10,1,585,{ bonus bAgi,1; },{},{}
