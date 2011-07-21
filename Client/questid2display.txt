@@ -7112,7 +7112,7 @@ Para conseguir tu primer Pico como Miembro del Gremio de Minería necesitas encon
 
 25002#Minería LVL 2#SG_FEEL#1_m_smit#
 ¡Se han acabado los suministros del Gremio! Necesitas encontrar un Moledor que consiga:#
-100 Arena de Cuarzo, 25 Polvo de Elunium y 25 Polvo de Oridecon#
+100 Arena de Cuarzo, 20 Polvo de Elunium y 20 Polvo de Oridecon#
 
 25003#Minería LVL 3#SG_FEEL#1_m_smit#
 Te han encargado encontrar 5 menas de Cobre, Plata, Oro, Platino y Mithril.#

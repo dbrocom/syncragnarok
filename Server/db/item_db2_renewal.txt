@@ -624,14 +624,14 @@
 
 // ===== SISTEMA PROFESIONES (30200-30300)
 // ---------- Pesca: Peces       (30201-30250)
-30201,Esturión,Esturión,0,4000,2000,300,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(195,315),0; },{},{}
-30202,Mero,Mero,0,3200,1800,500,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(200,300),0; },{},{}
-30203,Siluro,Siluro,0,3640,1870,200,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(185,305),0; },{},{}
-30204,Tiburón,Tiburón,0,9000,4600,600,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(195,285),rand(7,12); },{},{}
-30205,Caballa,Caballa,0,3000,1500,300,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(230,390),0; },{},{}
-30206,Gamba,Gamba,0,700,300,20,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(145,265),0; },{},{}
-30207,Calamar,Calamar,0,600,130,20,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(95,165),rand(2,19); },{},{}
-30208,Bonito,Bonito,0,9000,5000,400,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal 0,rand(230,390); },{},{}
+30201,Esturión,Esturión,0,4000,2000,300,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30202,Mero,Mero,0,3200,1800,500,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30203,Siluro,Siluro,0,3640,1870,200,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30204,Tiburón,Tiburón,0,9000,4600,600,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30205,Caballa,Caballa,0,3000,1500,300,,,,,0xFFFFFFFF,7,2,,,,,,{,{},{}
+30206,Gamba,Gamba,0,700,300,20,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30207,Calamar,Calamar,0,600,130,20,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30208,Bonito,Bonito,0,9000,5000,400,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30209,Pez_Podrido,Pez Podrido,0,120,3,20,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal -85,-15; },{},{}
 30210,Carpa_Negra,Carpa Negra,0,20000,5000,230,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30211,Carpa_Morada,Carpa Morada,0,20000,5000,230,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
@@ -650,9 +650,9 @@
 30224,Lubina_Azul,Lubina Azul,0,3000,1500,160,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30225,Lubina_Gris,Lubina Gris,0,3200,1600,160,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30226,Lubina_Verde,Lubina Verde,0,3300,1700,160,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30227,Pez_Escorpión_Argénteo,Pez Escorpión Argénteo,0,4000,2000,70,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30228,Pez_Escorpión_Verdoso,Pez Escorpión Verdoso,0,4100,2050,70,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30229,Pez_Escorpión_Escarlata,Pez Escorpión Escarlata,0,4200,2100,70,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30227,Pez_Escorpión_Argénteo,Pez Escorpión Argénteo,0,4000,2000,70,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 0,-100; },{},{}
+30228,Pez_Escorpión_Verdoso,Pez Escorpión Verdoso,0,4100,2050,70,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 0,-100; },{},{}
+30229,Pez_Escorpión_Escarlata,Pez Escorpión Escarlata,0,4200,2100,70,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 0,-100; },{},{}
 30230,Piraña_Negra,Piraña Negra,0,1300,600,110,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30231,Piraña_Azulada,Piraña Azulada,0,1350,610,110,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30232,Piraña_Pirita,Piraña Pirita,0,1400,660,110,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
