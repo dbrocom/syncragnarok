@@ -404,6 +404,7 @@ int battle_calc_damage(struct block_list *src,struct block_list *bl,struct Damag
 	{
 	case PA_PRESSURE:
 	case HW_GRAVITATION:
+	case PA_SACRIFICE:
 		return damage; // Fixed Damage
 	case NJ_BAKUENRYU:
 	case WL_COMET:
@@ -953,6 +954,7 @@ int battle_calc_gvg_damage(struct block_list *src,struct block_list *bl,int dama
 	switch (skill_num) {
 	//Skills with no damage reduction.
 	case PA_PRESSURE:
+	case PA_SACRIFICE: // Sacrifice ?
 	case HW_GRAVITATION:
 	case NJ_ZENYNAGE:
 	case RK_DRAGONBREATH:
@@ -1447,7 +1449,7 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 				flag.arrow = 1;
 				break;
 
-			//case CR_SHIELDBOOMERANG:
+			case CR_SHIELDBOOMERANG:
 			//case PA_SHIELDCHAIN:
 			case LG_SHIELDPRESS:
 			case LG_EARTHDRIVE:
@@ -1797,11 +1799,11 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 						break;
 				}
 				break;
-			//case CR_SHIELDBOOMERANG:
-			//case PA_SHIELDCHAIN:
 			case LG_SHIELDPRESS:
 			case LG_EARTHDRIVE:
+			case CR_SHIELDBOOMERANG:
 				wd.damage = sstatus->batk;
+			case PA_SHIELDCHAIN:
 				if (sd) {
 					short index = sd->equip_index[EQI_HAND_L];
 
@@ -2632,10 +2634,10 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 			flag.arrow = 1;
 			break;
 
-		//case CR_SHIELDBOOMERANG:
+		case CR_SHIELDBOOMERANG:
 		//case PA_SHIELDCHAIN:
-		//	flag.weapon = 0;
-		//	break;
+			flag.weapon = 0;
+			break;
 
 		case KN_PIERCE:
 		case ML_PIERCE:
@@ -2959,11 +2961,11 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 			wd.damage = sstatus->max_hp * 9/100;
 			wd.damage2 = 0;
 			break;
-		//case CR_SHIELDBOOMERANG:
-		//case PA_SHIELDCHAIN:
 		case LG_SHIELDPRESS:
 		case LG_EARTHDRIVE:
+		case CR_SHIELDBOOMERANG:
 			wd.damage = sstatus->batk;
+		case PA_SHIELDCHAIN:
 			if( sd )
 			{
 				short index = sd->equip_index[EQI_HAND_L];

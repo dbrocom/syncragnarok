@@ -1,0 +1,168 @@
+spl_in02,60,231,5	script	Warlock	465,{
+
+	mes "[Warlock]";
+	if ( (((Class == Job_Wizard || Class == Job_Baby_Wizard) && JobLevel == 50) || (Class == Job_High_Wizard && JobLevel == 70)) && BaseLevel == 99 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		next;
+		mes "[Warlock]";
+		mes "Estás preparado, sin duda alguna.";
+		mes "¿Deseas convertirte en Warlock?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Warlock]";
+		mes "Tu destino es hacer grandes cosas. Estoy segura.";
+		switch (Upper){
+			case 0:
+				jobchange 4055;
+				break;
+			case 1:
+				jobchange 4061;
+				break;
+			case 2:
+				jobchange 4097;
+				break;
+		}
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5753,1;
+	}
+	else if ( Class == 4055 || Class == 4061 || Class == 4097 ){
+		mes "Tu destino es hacer grandes cosas.";
+		mes "Tu magia logrará superar cualquier dificultad que se presente en tu camino.";
+	}
+	else{
+		mes "¿Qué haces en esta habitación? ¡Fuera!";
+		close2;
+		warp "splendide",122,318;
+		end;
+	}
+	close;
+}
+
+
+geffen_in,175,112,3	script	Lea#warlockbook	71,{
+
+	mes "[Lea]";
+	if ( Class != 4055 && Class != 4061 && Class != 4097 ){
+		mes "Los libros... ¡mi pasión!";
+		close;
+	}
+	mes "¿Has venido buscando algún libro de conjuros?";
+	next;
+	switch(select("Mage Books:Wizard Books:Warlock Books:En este momento no necesito nada")){
+		mes "[Lea]";
+		mes "¿Algun tomo en especial?";
+		next;
+		case 1:
+			switch(select("Cold Bolt:Fire Bolt:Lightning Bolt:Thunderstorm:Salir")){
+				case 1:
+					set .@book, 6189;
+					break;
+				case 2:
+					set .@book, 6190;
+					break;
+				case 3:
+					set .@book, 6191;
+					break;
+				case 4:
+					set .@book, 6197;
+					break;
+				case 5:
+					close;
+			}
+			set .@zeny, 10000;
+			set .@item1, 1006;
+			set .@Aitem1,   2;
+			set .@item2, 1097;
+			set .@Aitem2,  50;
+			break;
+		case 2:
+			switch(select("Earth Spike:Heaven's Drive:Jupitel Thunder:Lord of Vermillion:Meteor Storm:Storm Gust:Water Ball:Salir")){
+				case 1:
+					set .@book, 6201;
+					break;
+				case 2:
+					set .@book, 6200;
+					break;
+				case 3:
+					set .@book, 6198;
+					break;
+				case 4:
+					set .@book, 6193;
+					break;
+				case 5:
+					set .@book, 6194;
+					break;
+				case 6:
+					set .@book, 6192;
+					break;
+				case 7:
+					set .@book, 6199;
+					break;
+				case 8:
+					close;
+			}
+			set .@zeny, 50000;
+			set .@item1,  603;
+			set .@Aitem1,   2;
+			set .@item2,  985;
+			set .@Aitem2,   9;
+			break;
+		case 3:
+			switch(select("Chain Lightning:Crimson Rock:Drain Life:Earth Strain:Salir")){
+				case 1:
+					set .@book, 6203;
+					break;
+				case 2:
+					set .@book, 6204;
+					break;
+				case 3:
+					set .@book, 6205;
+					break;
+				case 4:
+					set .@book, 6202;
+					break;
+				case 5:
+					close;
+			}
+			set .@zeny,100000;
+			set .@item1,  617;
+			set .@Aitem1,   1;
+			set .@item2,  984;
+			set .@Aitem2,   7;
+			break;
+		case 4:
+			mes "Ya sabes donde estoy ^^";
+			close;
+	}
+	mes "[Lea]";
+	mes "El coste es de "+.@zeny+"z, y";
+	mes .@Aitem1+" "+getitemname(.@item1)+", o "+.@Aitem2+" "+getitemname(.@item2);
+	mes "¿Estás seguro de la compra?";
+	next;
+	if (select("Sí:No")==2){ close; }
+	mes "[Lea]";
+	if(!callfunc ("DelCoin",.@zeny,0)){
+		mes "No tienes suficiente dinero, lo siento.";
+		close;
+	}
+	if ( (countitem(.@item1) >= .@Aitem1) ){
+		delitem .@item1, .@Aitem1;
+	}
+	else if ( (countitem(.@item2) >= .@Aitem2) ){
+		delitem .@item2, .@Aitem2;
+	}else{
+		mes "Revisa tu inventario, te faltan materiales.";
+		close;
+	}
+	callfunc ("DelCoin",.@zeny,1);
+	mes "Aquí tienes tu "+getitemname(.@book)+".";
+	getitem .@book,1;
+	next;
+	mes "[Lea]";
+	mes "Si vuelves a necesitar un libro de conjuros, ya sabes donde encontrarme.";
+	close;
+}

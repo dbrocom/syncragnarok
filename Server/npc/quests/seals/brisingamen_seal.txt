@@ -891,7 +891,7 @@ yuno_in04,47,113,1	script	Studying Scholar#1	749,{
 				mes "Toma esto";
 				set god_brising,50;
 				getitem 616,1; // Old_Card_Album
-				getexp 600000,0;
+				getexp 60000,0;
 				next;
 				mes "[Enrico Kaili]";
 				mes "Por favor acepta esto como mi forma de darte las gracias por asistirme en mi";

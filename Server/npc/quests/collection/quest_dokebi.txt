@@ -50,7 +50,7 @@ pay_fild10,108,357,5	script	Li#Dokebi_Hunt	90,{
 		else {
 			mes "[Li]";
 			mes "Amazing, you did that with speed.";
-			getexp 21000,18000;
+			getexp 4200,3600;
 			erasequest 60128;
 			close;
 		}
@@ -90,8 +90,8 @@ pay_fild10,108,357,5	script	Li#Dokebi_Hunt	90,{
 		else {
 			mes "[Li]";
 			mes "Amazing, you did that with speed.";
-			getexp 21000,18000;
-			getexp 21000,18000;
+			getexp 4200,3600;
+			getexp 4200,3600;
 			erasequest 60129;
 			close;
 		}
@@ -131,9 +131,9 @@ pay_fild10,108,357,5	script	Li#Dokebi_Hunt	90,{
 		else {
 			mes "[Li]";
 			mes "Amazing, you did that with speed.";
-			getexp 21000,18000;
-			getexp 21000,18000;
-			getexp 21000,18000;
+			getexp 4200,3600;
+			getexp 4200,3600;
+			getexp 4200,3600;
 			erasequest 60130;
 			close;
 		}
@@ -163,7 +163,7 @@ pay_fild10,108,357,5	script	Li#Dokebi_Hunt	90,{
 							mes "Oh, great!";
 							mes "Thank you for the horns.";
 							delitem 1021,50; //Dokkaebi_Horn
-							getexp 26250,22500;
+							getexp 5250,4500;
 							close;
 						}
 						else {

@@ -1,0 +1,67 @@
+tha_t01,155,234,3	script	Dumk	481,{
+
+	mes "[Shadow Chaser]";
+	if ( Class == Job_Rogue && BaseLevel == 99 && JobLevel == 50 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Shadow Chaser?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Shadow Chaser]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4072;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5750,1;
+		getitem 6121,1;
+		getitem 6122,1;
+
+	}
+	else if ( Class == Job_Stalker  && BaseLevel == 99  && JobLevel == 70 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Shadow Chaser?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Shadow Chaser]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4079;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5750,1;
+		getitem 6121,1;
+		getitem 6122,1;
+	}
+	else if ( Class == Job_Baby_Rogue  && BaseLevel == 99  && JobLevel == 50 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Shadow Chaser?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Shadow Chaser]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4108;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5750,1;
+		getitem 6121,1;
+		getitem 6122,1;
+	}
+	else if ( Class == 4072 || Class == 4079 || Class == 4108 ){
+		mes "Tu destino es hacer grandes cosas.";
+		mes "Recuerda que las sombras siempre te acompañarán en tu viaje.";
+	}
+	else{
+		mes "Esta torre oculta grandes secretos.";
+	}
+	close;
+}

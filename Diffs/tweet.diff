@@ -1,0 +1,56 @@
+Index: src-base/map/atcommand.c
+===================================================================
+--- src-base/map/atcommand.c	(revision 226)
++++ src-base/map/atcommand.c	(working copy)
+@@ -43,6 +43,7 @@
+ #include "mail.h"
+ #endif
+ 
++#include <curl/curl.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+@@ -10709,6 +10710,33 @@
+ }
+ 
+ /*==========================================
++ * Tweets
++ *------------------------------------------*/
++int atcommand_tweet(const int fd, struct map_session_data *sd, const char *command, const char *message)
++{
++	char tweet[140];
++	char msg[256];
++	nullpo_retr(-1,sd);
++
++	safesnprintf(msg, sizeof(msg), "tweet=%s: %s", sd->status.name, message);
++
++	CURL *curl;
++	CURLcode res;
++	curl = curl_easy_init();
++
++	if(curl) {
++		curl_easy_setopt(curl, CURLOPT_URL, "http://syncro.ws/app/twitter/tweet.php");
++		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, msg);
++		res = curl_easy_perform(curl);
++		curl_easy_cleanup(curl);
++		clif_displaymessage(fd, "El tweet ha sido publicado en la cuenta de Twitter de SyncRO");
++	}
++	
++
++	return 0;
++}
++
++/*==========================================
+  * Char Data Backup Generation.
+  *------------------------------------------*/
+ ACMD_FUNC(char2dump)
+@@ -11605,6 +11633,7 @@
+ 	{ "mission",            1,1,    0,     atcommand_mission },
+ 	{ "char2dump",         60,60,   0,     atcommand_char2dump },
+ 	{ "security",           1,1,    0,     atcommand_security },
++	{ "tweet",              0,0,    0,     atcommand_tweet },
+ 	{ "font",               1,1,    1,     atcommand_font },
+ 	{ "packetfilter",       0,1,    0,     atcommand_packetfilter },
+ 	{ "guildskill",         0,60,   0,     atcommand_guildskill },
+
+// Buscar el Makefile en /src/map y en las 2 lineas de #executable, añadir -lcurl al final

@@ -628,7 +628,7 @@
 30202,Mero,Mero,0,3200,1800,500,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30203,Siluro,Siluro,0,3640,1870,200,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30204,Tiburón,Tiburón,0,9000,4600,600,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30205,Caballa,Caballa,0,3000,1500,300,,,,,0xFFFFFFFF,7,2,,,,,,{,{},{}
+30205,Caballa,Caballa,0,3000,1500,300,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30206,Gamba,Gamba,0,700,300,20,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30207,Calamar,Calamar,0,600,130,20,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30208,Bonito,Bonito,0,9000,5000,400,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}

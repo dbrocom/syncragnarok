@@ -6798,7 +6798,7 @@
 //
 15000,Bone_Plate,Bone Plate,5,20,,1000,,60,,1,0x00021040,2,2,16,,85,1,0,{ bonus bStr,1; bonus bMDef,3; bonus2 bIgnoreDefRate,RC_DemiHuman,10; bonus2 bIgnoreDefRate,RC_Brute,10; bonus3 bAutoSpellWhenHit,"NPC_WIDEBLEEDING",1,10; },{},{}
 15001,Odin's_Blessing_I,Odins Blessing,2,0,,0,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-15002,Rune_Plate,Rune Plate,2,0,,0,,,,1,0xFFFFFFFF,7,2,,,,,,{},{},{}
+15002,Rune_Plate,Rune Plate,5,0,,0,,95,,1,0x00004000,7,2,16,,100,1,0,{},{},{}
 15003,Freya_Soul_Robe1,Freya Soul Robe,5,0,,300,,7,,0,0xFFFFFFFE,7,2,16,,20,1,0,{ bonus bMaxHP,700; },{},{}
 15004,Freya_Soul_Robe2,Freya Soul Robe,5,0,,300,,7,,0,0xFFFFFFFE,7,2,16,,20,1,0,{ bonus bMaxHP,700; },{},{}
 15005,Freya_Soul_Robe3,Freya Soul Robe,5,0,,300,,7,,0,0xFFFFFFFE,7,2,16,,20,1,0,{ bonus bMaxHP,700; },{},{}

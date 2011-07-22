@@ -1,0 +1,76 @@
+job3_guil01,148,53,3	script	Bercasell	467,{
+
+	mes "[Guillotine Cross]";
+	if ( Class == Job_Assassin && BaseLevel == 99 && JobLevel == 50 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Guillotine Cross?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Guillotine Cross]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4059;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5755,1;
+
+	}
+	else if ( Class == Job_Assassin_Cross  && BaseLevel == 99  && JobLevel == 70 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Guillotine Cross?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Guillotine Cross]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4065;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5755,1;
+	}
+	else if ( Class == Job_Baby_Assassin  && BaseLevel == 99  && JobLevel == 50 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Guillotine Cross?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Guillotine Cross]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4101;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5755,1;
+	}
+	else if ( Class == 4059 || Class == 4065 || Class == 4101 ){
+		mes "Tu destino es hacer grandes cosas.";
+		mes "Pero recuerda, siempre por la espalda.";
+	}
+	else{
+		mes "¿Cómo has llegado hasta aquí?";
+	}
+	close;
+}
+
+
+-	shop	guilloshop	-1,7931:1600
+
+job3_guil01,144,42,7	script	Suministros#guil	512,{
+
+	if ( Class != 4059 && Class != 4065 && Class != 4101 ){
+		mes "[Suministros]";
+		mes "No deberías estar aquí.";
+		mes "Yo sólo puede venderle cosas a los Guillotine Cross.";
+		close;
+	}
+	callshop( "guilloshop", 1 );
+	end;
+}

@@ -1,0 +1,42 @@
+odin_tem03,282,241,4	script	Valkyrie Anguhilde	403,{
+
+	mes "[Valkyrie Anguhilde]";
+	if ( (((Class == Job_Priest || Class == Job_Baby_Priest) && JobLevel == 50) || (Class == Job_High_Priest && JobLevel == 70)) && BaseLevel == 99 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		next;
+		mes "[Valkyrie Anguhilde]";
+		mes "Estás preparado, no hay duda.";
+		mes "¿Deseas convertirte en Arch Bishop?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Valkyrie Anguhilde]";
+		mes "Tu destino es hacer grandes cosas.";
+		mes "Las Valkyrias lo saben, los Dioses lo saben.";
+		switch (Upper){
+			case 0:
+				jobchange 4057;
+				break;
+			case 1:
+				jobchange 4063;
+				break;
+			case 2:
+				jobchange 4099;
+				break;
+		}
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5747,1;
+	}
+	else if ( Class == 4057 || Class == 4063 || Class == 4099 ){
+		mes "Tu destino es hacer grandes cosas.";
+		mes "Con el poder de los Dioses lograrás cualquier cosa.";
+	}
+	else{
+		mes "Tú no deberías estar aquí.";
+		mes "Esta no es tierra de profanos.";
+	}
+	close;
+}

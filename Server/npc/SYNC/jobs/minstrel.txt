@@ -1,0 +1,61 @@
+airplane,222,67,7	script	Karian	480,{
+
+	mes "[Minstrel Song]";
+	if ( Class == Job_Bard && BaseLevel == 99 && JobLevel == 50 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Minstrel?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Minstrel Song]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4068;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5751,1;
+
+	}
+	else if ( Class == Job_Clown  && BaseLevel == 99  && JobLevel == 70 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Minstrel?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Minstrel Song]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4075;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5751,1;
+	}
+	else if ( Class == Job_Baby_Bard  && BaseLevel == 99  && JobLevel == 50 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Minstrel?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Minstrel Song]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4104;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5751,1;
+	}
+	else if ( Class == 4068 || Class == 4075 || Class == 4104 ){
+		mes "Tu destino es hacer grandes cosas.";
+		mes "Agarra tu harpa, y muéstrale al mundo tu talento.";
+	}
+	else{
+		mes "¡Aquí es muy fácil marearse!";
+	}
+	close;
+}

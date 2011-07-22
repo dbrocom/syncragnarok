@@ -50,7 +50,7 @@ ein_fild01,43,249,0	script	Local Villager#hunt	898,{
 		else {
 			mes "[Local Villager]";
 			mes "Amazing, you did that with speed.";
-			getexp 65133,42226;
+			getexp 25027,14445;
 			erasequest 60125;
 			close;
 		}
@@ -90,8 +90,8 @@ ein_fild01,43,249,0	script	Local Villager#hunt	898,{
 		else {
 			mes "[Local Villager]";
 			mes "Amazing, you did that with speed.";
-			getexp 65133,42226;
-			getexp 65133,42226;
+			getexp 25027,14445;
+			getexp 25027,14445;
 			erasequest 60126;
 			close;
 		}
@@ -131,9 +131,9 @@ ein_fild01,43,249,0	script	Local Villager#hunt	898,{
 		else {
 			mes "[Local Villager]";
 			mes "Amazing, you did that with speed.";
-			getexp 65133,42226;
-			getexp 65133,42226;
-			getexp 65133,42226;
+			getexp 25027,14445;
+			getexp 25027,14445;
+			getexp 25027,14445;
 			erasequest 60127;
 			close;
 		}
@@ -173,7 +173,7 @@ ein_fild01,43,249,0	script	Local Villager#hunt	898,{
 							mes "[Local Villager]";
 							mes "I had my doubts, but you have proven me wrong.";
 							delitem 7001,50; //Spawns
-							getexp 63416,40282;
+							getexp 31283,18057;
 							//getitem 504,10; //White_Potion
 							close;
 						}

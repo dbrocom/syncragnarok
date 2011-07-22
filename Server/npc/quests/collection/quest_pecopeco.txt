@@ -51,7 +51,7 @@ moc_fild02,74,329,3	script	Gregor#PecoPeco_Hunt	97,{
 			mes "[Gregor]";
 			mes "Oh thank you so much!";
 			mes "I think that I can rest easily now.";
-			getexp 4000,2000;
+			getexp 800,400;
 			erasequest 60101;
 			close;
 		}
@@ -92,8 +92,8 @@ moc_fild02,74,329,3	script	Gregor#PecoPeco_Hunt	97,{
 			mes "[Gregor]";
 			mes "Oh thank you so much!";
 			mes "I think that I can rest easily now.";
-			getexp 4000,2000;
-			getexp 4000,2000;
+			getexp 800,400;
+			getexp 800,400;
 			erasequest 60102;
 			close;
 		}
@@ -134,9 +134,9 @@ moc_fild02,74,329,3	script	Gregor#PecoPeco_Hunt	97,{
 			mes "[Gregor]";
 			mes "Oh thank you so much!";
 			mes "I think that I can rest easily now.";
-			getexp 4000,2000;
-			getexp 4000,2000;
-			getexp 4000,2000;
+			getexp 800,400;
+			getexp 800,400;
+			getexp 800,400;
 			erasequest 60103;
 			close;
 		}
@@ -181,7 +181,7 @@ moc_fild02,74,329,3	script	Gregor#PecoPeco_Hunt	97,{
 							mes "[Gregor]";
 							mes "Thank you so much.";
 							delitem 925,25; //Bill_Of_Birds
-							getexp 2000,1000;
+							getexp 400,200;
 							next;
 							mes "[Gregor]";
 							mes "This is gonna be delicious!";

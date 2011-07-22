@@ -50,7 +50,7 @@ moc_fild11,57,138,0	script	Private Jeremy#hunt	707,{
 		else {
 			mes "[Private Jeremy]";
 			mes "Amazing, you did that with speed.";
-			getexp 14000,9000;
+			getexp 2800,1800;
 			erasequest 60140;
 			close;
 		}
@@ -90,8 +90,8 @@ moc_fild11,57,138,0	script	Private Jeremy#hunt	707,{
 		else {
 			mes "[Private Jeremy]";
 			mes "Amazing, you did that with speed.";
-			getexp 14000,9000;
-			getexp 14000,9000;
+			getexp 2800,1800;
+			getexp 2800,1800;
 			erasequest 60141;
 			close;
 		}
@@ -131,9 +131,9 @@ moc_fild11,57,138,0	script	Private Jeremy#hunt	707,{
 		else {
 			mes "[Private Jeremy]";
 			mes "Amazing, you did that with speed.";
-			getexp 14000,9000;
-			getexp 14000,9000;
-			getexp 14000,9000;
+			getexp 2800,1800;
+			getexp 2800,1800;
+			getexp 2800,1800;
 			erasequest 60142;
 			close;
 		}
@@ -163,7 +163,7 @@ moc_fild11,57,138,0	script	Private Jeremy#hunt	707,{
 							mes "[Private Jeremy]";
 							mes "The Morroc Guard thanks you, citizen.";
 							delitem 953,25; //Stone_Heart
-							getexp 8750,5625;
+							getexp 1750,1125;
 							close;
 						}
 						else {

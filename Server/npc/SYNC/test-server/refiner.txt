@@ -1,0 +1,37 @@
+prontera,165,165,2	script	Refiner	63,{
+
+	mes "[Refiner]";
+	mes "¿Qué quieres refinar?";
+	next;
+	setarray .@position$[1], "Cabeza","Cuerpo","Mano Izquierda","Mano derecha","Túnica","Calzado","Accesorio 1","Accesorio 2","Cabeza 2","Cabeza 3";
+	set .@menu$,"";
+	for( set .@i,1; .@i <= 10; set .@i,.@i+1 )
+	{
+		if( getequipisequiped(.@i) )
+			set .@menu$, .@menu$ + .@position$[.@i] + "-" + "[" + getequipname(.@i) + "]";
+		set .@menu$, .@menu$ + ":";
+	}
+	set .@part,select(.@menu$);
+	if(!getequipisequiped(.@part)) {
+		mes "[Refiner]";
+		mes "¡No llevas nada equipado!";
+		close;
+	}
+	do{
+		mes "[Refiner]";
+		mes "¿A cuánto quieres refinar? (0-20)";
+		input .@refine;
+		close2;
+	}while(.@refine > 20);
+
+	set .@lim, getequiprefinerycnt(.@part);
+	if( .@refine > .@lim ){
+		for ( set .@i,0; .@i < (.@refine-.@lim); set .@i, .@i+1 ){
+			successrefitem(.@part);
+		}
+	}
+	else if( .@refine < .@lim ){
+		failedrefitemr .@part,(.@lim-.@refine);
+	}
+	end;
+}

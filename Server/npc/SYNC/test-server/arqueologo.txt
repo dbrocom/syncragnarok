@@ -1,0 +1,111 @@
+//============== NPC Selector Razas (GMs) ================
+
+prontera,165,200,5	script	Antropólogo#test	832,{
+
+	query_sql "SELECT race FROM razas WHERE char_id = "+getcharid(0),.@raza$[0];
+	sc_end SC_Walkspeed;
+	sc_end SC_ITEMSCRIPT;
+		mes "[Antropólogo]";
+		mes "Puedes convertirte en la raza que quieras.";
+		mes "Elige sabiamente:";
+		next;
+		switch(select("Humano:Dvergr:Ljósálfar:Døkkálfar:Svartálfar:Hrímþursar:Eldjötnar:Bergrisar:Orco:CAMBIAR REPUTACIÓN")) {
+					case 1:
+							if ( .@raza$[0]=="" ){
+								query_sql "INSERT INTO `razas` (`char_id`,`account_id`,`name`,`race`) VALUES ('"+getcharid(0)+"','"+getcharid(3)+"','"+strcharinfo(0)+"','Humano');";
+							}else{
+								query_sql "UPDATE razas SET race = 'Humano' WHERE char_id = " +getcharid(0);
+							}
+							setlook 6,0;
+							setlook 7,0;
+							break;
+					case 2:
+							if ( .@raza$[0]=="" ){
+								query_sql "INSERT INTO `razas` (`char_id`,`account_id`,`name`,`race`) VALUES ('"+getcharid(0)+"','"+getcharid(3)+"','"+strcharinfo(0)+"','Dvergr');";
+							}else{
+								query_sql "UPDATE razas SET race = 'Dvergr' WHERE char_id = " +getcharid(0);
+							}
+							setlook 6,100;
+							setlook 7,100;
+							break;
+					case 3:
+							if ( .@raza$[0]=="" ){
+								query_sql "INSERT INTO `razas` (`char_id`,`account_id`,`name`,`race`) VALUES ('"+getcharid(0)+"','"+getcharid(3)+"','"+strcharinfo(0)+"','Ljósálfar');";
+							}else{
+								query_sql "UPDATE razas SET race = 'Ljósálfar' WHERE char_id = " +getcharid(0);
+							}
+							setlook 6,200;
+							setlook 7,200;
+							break;
+					case 4:
+							if ( .@raza$[0]=="" ){
+								query_sql "INSERT INTO `razas` (`char_id`,`account_id`,`name`,`race`) VALUES ('"+getcharid(0)+"','"+getcharid(3)+"','"+strcharinfo(0)+"','Døkkálfar');";
+							}else{
+								query_sql "UPDATE razas SET race = 'Døkkálfar' WHERE char_id = " +getcharid(0);
+							}
+							setlook 6,300;
+							setlook 7,300;
+							break;
+					case 5:
+							if ( .@raza$[0]=="" ){
+								query_sql "INSERT INTO `razas` (`char_id`,`account_id`,`name`,`race`) VALUES ('"+getcharid(0)+"','"+getcharid(3)+"','"+strcharinfo(0)+"','Svartálfar');";
+							}else{
+								query_sql "UPDATE razas SET race = 'Svartálfar' WHERE char_id = " +getcharid(0);
+							}
+							setlook 6,400;
+							setlook 7,400;
+							break;
+					case 6:
+							if ( .@raza$[0]=="" ){
+								query_sql "INSERT INTO `razas` (`char_id`,`account_id`,`name`,`race`) VALUES ('"+getcharid(0)+"','"+getcharid(3)+"','"+strcharinfo(0)+"','Hrímþursar');";
+							}else{
+								query_sql "UPDATE razas SET race = 'Hrímþursar' WHERE char_id = " +getcharid(0);
+							}
+							setlook 6,500;
+							setlook 7,500;
+							break;
+					case 7:
+							if ( .@raza$[0]=="" ){
+								query_sql "INSERT INTO `razas` (`char_id`,`account_id`,`name`,`race`) VALUES ('"+getcharid(0)+"','"+getcharid(3)+"','"+strcharinfo(0)+"','Eldjötnar');";
+							}else{
+								query_sql "UPDATE razas SET race = 'Eldjötnar' WHERE char_id = " +getcharid(0);
+							}
+							setlook 6,600;
+							setlook 7,600;
+							break;
+					case 8:
+							if ( .@raza$[0]=="" ){
+								query_sql "INSERT INTO `razas` (`char_id`,`account_id`,`name`,`race`) VALUES ('"+getcharid(0)+"','"+getcharid(3)+"','"+strcharinfo(0)+"','Bergrisar');";
+							}else{
+								query_sql "UPDATE razas SET race = 'Bergrisar' WHERE char_id = " +getcharid(0);
+							}
+							setlook 6,700;
+							setlook 7,700;
+							break;
+					case 9:
+							if ( .@raza$[0]=="" ){
+								query_sql "INSERT INTO `razas` (`char_id`,`account_id`,`name`,`race`) VALUES ('"+getcharid(0)+"','"+getcharid(3)+"','"+strcharinfo(0)+"','Orco');";
+							}else{
+								query_sql "UPDATE razas SET race = 'Orco' WHERE char_id = " +getcharid(0);
+							}
+							setlook 6,800;
+							setlook 7,800;
+							break;
+					case 10:
+							mes "[Antropólogo]";
+							mes "Introduce la reputación que quieras tener:";
+							input .@input;
+							if ( .@raza$[0]=="" ){
+								mes "Deberías escojer primero una Raza.";
+								close;
+							}else{
+								query_sql "UPDATE razas SET reputation = '"+.@input+"' WHERE char_id = " +getcharid(0);
+							}
+							callfunc "Alignment",0,.@input;
+							close;
+							break;
+				}
+				callfunc "RaceSysStats";
+				deletearray .@razas$[0],1;
+				close;
+}

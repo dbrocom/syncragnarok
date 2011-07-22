@@ -1,0 +1,61 @@
+hu_fild05,342,130,6	script	Dancer Kim	485,{
+
+	mes "[Wanderer]";
+	if ( Class == Job_Dancer && BaseLevel == 99 && JobLevel == 50 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Wanderer?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Wanderer]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4069;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5758,1;
+
+	}
+	else if ( Class == Job_Gypsy  && BaseLevel == 99  && JobLevel == 70 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Wanderer?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Wanderer]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4076;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5758,1;
+	}
+	else if ( Class == Job_Baby_Dancer  && BaseLevel == 99  && JobLevel == 50 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Wanderer?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Wanderer]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4105;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5758,1;
+	}
+	else if ( Class == 4069 || Class == 4076 || Class == 4105 ){
+		mes "Tu destino es hacer grandes cosas.";
+		mes "Mueve tu cintura al ritmo de la música~.";
+	}
+	else{
+		mes "¡Ni se te ocurra acercarte al centro del lago!";
+	}
+	close;
+}

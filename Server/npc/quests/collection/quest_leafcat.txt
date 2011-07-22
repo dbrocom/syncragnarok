@@ -50,7 +50,7 @@ ayo_fild01,44,241,5	script	Lella#LeafCat_Hunt	877,{
 		else {
 			mes "[Lella]";
 			mes "Amazing, you did that with speed.";
-			getexp 12870,15756;
+			getexp 2574,3151;
 			erasequest 60143;
 			close;
 		}
@@ -90,8 +90,8 @@ ayo_fild01,44,241,5	script	Lella#LeafCat_Hunt	877,{
 		else {
 			mes "[Lella]";
 			mes "Amazing, you did that with speed.";
-			getexp 12870,15756;
-			getexp 12870,15756;
+			getexp 2574,3151;
+			getexp 2574,3151;
 			erasequest 60144;
 			close;
 		}
@@ -131,9 +131,9 @@ ayo_fild01,44,241,5	script	Lella#LeafCat_Hunt	877,{
 		else {
 			mes "[Lella]";
 			mes "Amazing, you did that with speed.";
-			getexp 12870,15756;
-			getexp 12870,15756;
-			getexp 12870,15756;
+			getexp 2574,3151;
+			getexp 2574,3151;
+			getexp 2574,3151;
 			erasequest 60145;
 			close;
 		}
@@ -176,7 +176,7 @@ ayo_fild01,44,241,5	script	Lella#LeafCat_Hunt	877,{
 							mes "[Lella]";
 							mes "The more leafs I collect the quieter it seems around here.";
 							delitem 7198,50; //Great_Leaf
-							getexp 12087,15695;
+							getexp 3218,3939;
 							//getitem 503,10; //Yellow_Potion
 							close;
 						}

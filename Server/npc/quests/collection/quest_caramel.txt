@@ -50,7 +50,7 @@ mjolnir_01,296,29,6	script	Yullo#Caramel_Hunt	95,{
 		else {
 			mes "[Yullo]";
 			mes "Amazing, you did that with speed.";
-			getexp 10425,6272;
+			getexp 2085,1254;
 			erasequest 60116;
 			close;
 		}
@@ -90,8 +90,8 @@ mjolnir_01,296,29,6	script	Yullo#Caramel_Hunt	95,{
 		else {
 			mes "[Yullo]";
 			mes "Amazing, you did that with speed.";
-			getexp 10425,6272;
-			getexp 10425,6272;
+			getexp 2085,1254;
+			getexp 2085,1254;
 			erasequest 60117;
 			close;
 		}
@@ -131,9 +131,9 @@ mjolnir_01,296,29,6	script	Yullo#Caramel_Hunt	95,{
 		else {
 			mes "[Yullo]";
 			mes "Amazing, you did that with speed.";
-			getexp 10425,6272;
-			getexp 10425,6272;
-			getexp 10425,6272;
+			getexp 2085,1254;
+			getexp 2085,1254;
+			getexp 2085,1254;
 			erasequest 60118;
 			close;
 		}
@@ -177,7 +177,7 @@ mjolnir_01,296,29,6	script	Yullo#Caramel_Hunt	95,{
 							mes "Great, you have enough!";
 							mes "Just like I promised a little reward.";
 							delitem 1027,25; //Porcupine_Spike
-							getexp 6515,3920;
+							getexp 1303,784;
 							//getitem 501,10; //Red_Potion
 							close;
 						}

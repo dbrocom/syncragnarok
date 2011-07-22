@@ -1,0 +1,59 @@
+yuno_fild07,254,176,6	script	Fighter	483,{
+
+	mes "[Fighter]";
+	if ( Class == Job_Monk && BaseLevel == 99 && JobLevel == 50 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Sura?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Fighter]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4070;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5754,1;
+
+	}
+	else if ( Class == Job_Champion  && BaseLevel == 99  && JobLevel == 70 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Sura?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Fighter]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4077;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5754,1;
+	}
+	else if ( Class == Job_Baby_Monk  && BaseLevel == 99  && JobLevel == 50 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}		mes "Estás preparado.";
+		mes "¿Deseas convertirte en Sura?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Fighter]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4106;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5754,1;
+	}
+	else if ( Class == 4070 || Class == 4077 || Class == 4106 ){
+		mes "Tu destino es hacer grandes cosas.";
+		mes "Aprieta los dientes, y sin contemplaciones.";
+	}
+	else{
+		mes "Ten cuidado, no te vayas a perder en estos páramos.";
+	}
+	close;
+}

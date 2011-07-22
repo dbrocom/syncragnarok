@@ -51,7 +51,7 @@ gef_fild04,191,54,3	script	Halgus#Pupa_Hunt	123,{
 			mes "[Halgus]";
 			mes "Oh thank you so much.";
 			mes "I know that I could've probably done this myself but it's not easy to be standing here all of the time.";
-			getexp 385,30;
+			getexp 77,6;
 			erasequest 60110;
 			close;
 		}
@@ -92,8 +92,8 @@ gef_fild04,191,54,3	script	Halgus#Pupa_Hunt	123,{
 			mes "[Halgus]";
 			mes "Oh thank you so much.";
 			mes "I know that I could've probably done this myself but it's not easy to be standing here all of the time.";
-			getexp 385,30;
-			getexp 385,30;
+			getexp 77,6;
+			getexp 77,6;
 			erasequest 60111;
 			close;
 		}
@@ -134,9 +134,9 @@ gef_fild04,191,54,3	script	Halgus#Pupa_Hunt	123,{
 			mes "[Halgus]";
 			mes "Oh thank you so much.";
 			mes "I know that I could've probably done this myself but it's not easy to be standing here all of the time.";
-			getexp 385,30;
-			getexp 385,30;
-			getexp 385,30;
+			getexp 77,6;
+			getexp 77,6;
+			getexp 77,6;
 			erasequest 60112;
 			close;
 		}
@@ -172,7 +172,7 @@ gef_fild04,191,54,3	script	Halgus#Pupa_Hunt	123,{
 							mes "Amazing you found so many that fast.";
 							mes "Like I promised, give me the Chrysalis and I will reward you with my wisdom.";
 							delitem 915,25; //Chrysalis
-							getexp 385,30;
+							getexp 48,4;
 							close;
 						}
 						else {

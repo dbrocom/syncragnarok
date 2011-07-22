@@ -1,0 +1,53 @@
+gef_tower,113,161,4	script	Karacas	754,{
+
+	mes "[Sorcerer]";
+	if ( (((Class == Job_Sage || Class == Job_Baby_Sage) && JobLevel == 50) || (Class == Job_Professor && JobLevel == 70)) && BaseLevel == 99 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		next;
+		mes "[Sorcerer]";
+		mes "Estás preparado, no hay duda.";
+		if ( (countitem(990) >= 3) && (countitem(991) >= 3) && (countitem(992) >= 3) && (countitem(993) >= 3) ){
+			mes "¿Deseas convertirte en Sorcerer?";
+			next;
+			if (select("No:Sí")==1){ close; }
+			mes "[Sorcerer]";
+			delitem 990, 3;
+			delitem 991, 3;
+			delitem 992, 3;
+			delitem 993, 3;
+			mes "Tu destino es hacer grandes cosas. Estoy seguro.";
+			switch (Upper){
+				case 0:
+					jobchange 4067;
+					break;
+				case 1:
+					jobchange 4074;
+					break;
+				case 2:
+					jobchange 4103;
+					break;
+			}
+			getitem 2795,1; //Green_Apple_Ring
+			getitem 5756,1;
+		}else{
+			mes "Pero necesito que me lo demuestres consiguiendo 3 de cada uno de los siguientes:";
+			mes " - "+getitemname(990);
+			mes " - "+getitemname(991);
+			mes " - "+getitemname(992);
+			mes " - "+getitemname(993);
+			close;
+		}
+	}
+	else if ( Class == 4067 || Class == 4074 || Class == 4103 ){
+		mes "Tu destino es hacer grandes cosas.";
+		mes "Tú lo sabes; yo lo sé. Demuéstraselo al mundo.";
+	}
+	else{
+		mes "Menos mal que ya acabamos con la plaga de la torre...";
+	}
+	close;
+}
