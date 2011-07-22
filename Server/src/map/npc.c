@@ -1269,7 +1269,8 @@ int npc_cashshop_buy(struct map_session_data *sd, int nameid, int amount, int po
 		else
 		{
 			i = pc_search_inventory(sd,nd->cashitem);
-			if( i < 0 ) return 6;
+			if( i < 0 || sd->status.inventory[i].amount < price )
+				return 6;
 			pc_delitem(sd,i,price,0,0);
 		}
 	}

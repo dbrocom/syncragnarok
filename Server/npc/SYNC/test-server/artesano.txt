@@ -1,0 +1,32 @@
+prontera,146,168,5	script	Artesano	904,{
+
+	setarray .@banid[0],1599,2199,1161,5013;
+
+	mes "[Artesano]";
+	mes "Introduzca la ID del Item:";
+	input .@id;
+	next;
+	mes "[Artesano]";
+	mes "Introduzca la cantidad de Items:";
+	input .@ammo;
+	next;
+	mes "[Artesano]";
+	if ( .@ammo <= 0 || getitemname(.@id) == "null" ){
+		mes "No me hagas perder el tiempo...";
+		close;
+	}
+	for (set .@i,0; .@i < getarraysize(.@banid); set .@i, .@i+1){
+		if (.@id == .@banid[.@i]){
+			mes "No se me permite entregarte ese objeto.";
+			close;
+		}
+	}	
+	if ( .@ammo == 1){
+		mes "Aquí tiene su "+getitemname(.@id);
+	}
+	else{
+		mes "Aquí tiene sus "+.@ammo+" "+getitemname(.@id);
+	}
+	getitem .@id,.@ammo;
+	close;
+}

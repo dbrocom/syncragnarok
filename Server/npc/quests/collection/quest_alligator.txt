@@ -50,7 +50,7 @@ cmd_fild01,362,256,3	script	Cuir#Gator_Hunt	106,{
 		else {
 			mes "[Cuir]";
 			mes "Amazing, you did that with speed.";
-			getexp 38950,19300;
+			getexp 17236,10825;
 			erasequest 60119;
 			close;
 		}
@@ -90,8 +90,8 @@ cmd_fild01,362,256,3	script	Cuir#Gator_Hunt	106,{
 		else {
 			mes "[Cuir]";
 			mes "Amazing, you did that with speed.";
-			getexp 38950,19300;
-			getexp 38950,19300;
+			getexp 17236,10825;
+			getexp 17236,10825;
 			erasequest 60120;
 			close;
 		}
@@ -131,9 +131,9 @@ cmd_fild01,362,256,3	script	Cuir#Gator_Hunt	106,{
 		else {
 			mes "[Cuir]";
 			mes "Amazing, you did that with speed.";
-			getexp 38950,19300;
-			getexp 38950,19300;
-			getexp 38950,19300;
+			getexp 17236,10825;
+			getexp 17236,10825;
+			getexp 17236,10825;
 			erasequest 60121;
 			close;
 		}
@@ -178,7 +178,7 @@ cmd_fild01,362,256,3	script	Cuir#Gator_Hunt	106,{
 							mes "I hope you can continue to help me collect these skins.";
 							mes "The armor creators around the world are clamoring for them.";
 							delitem 7003,20; //Anolian_Skin
-							getexp 23094,17062;
+							getexp 8619,5413;
 							//getitem 503,10; //Yellow_Potion
 							close;
 						}

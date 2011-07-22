@@ -50,7 +50,7 @@ moc_fild17,66,273,5	script	Lemly#Frilldora_Hunt	725,{
 		else {
 			mes "[Lemly]";
 			mes "Amazing, you did that with speed.";
-			getexp 30000,23000;
+			getexp 6000,4600;
 			erasequest 60134;
 			close;
 		}
@@ -90,8 +90,8 @@ moc_fild17,66,273,5	script	Lemly#Frilldora_Hunt	725,{
 		else {
 			mes "[Lemly]";
 			mes "Amazing, you did that with speed.";
-			getexp 30000,23000;
-			getexp 30000,23000;
+			getexp 6000,4600;
+			getexp 6000,4600;
 			erasequest 60135;
 			close;
 		}
@@ -131,9 +131,9 @@ moc_fild17,66,273,5	script	Lemly#Frilldora_Hunt	725,{
 		else {
 			mes "[Lemly]";
 			mes "Amazing, you did that with speed.";
-			getexp 30000,23000;
-			getexp 30000,23000;
-			getexp 30000,23000;
+			getexp 6000,4600;
+			getexp 6000,4600;
+			getexp 6000,4600;
 			erasequest 60136;
 			close;
 		}
@@ -166,7 +166,7 @@ moc_fild17,66,273,5	script	Lemly#Frilldora_Hunt	725,{
 							mes "Hey, thank you.";
 							mes "These are pretty icky though.";
 							delitem 1012,25; //Lizard_Scruff
-							getexp 18750,14375;
+							getexp 3750,2875;
 							close;
 						}
 						else {

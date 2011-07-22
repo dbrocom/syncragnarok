@@ -9,7 +9,7 @@
 //===== Description: =========================================
 //= Warp Points for Veins Field
 //===== Additional Comments: =================================
-//= 1.4 Rescripted to Aegis 11.2 Standards. [L0ne_W0lf
+//= 1.4 Rescripted to Aegis 11.2 Standards. [L0ne_W0lf]
 //= 1.5 Renewal warp adjustments.
 //============================================================
 
@@ -43,7 +43,7 @@ ve_fild06,81,177,0	script	ve_fild6-2	45,1,1,{
 ve_fild07,147,371,0	warp	ve_fild7-1	1,1,veins,146,28
 
 // Renewal Addon
-ve_fild06,81,177,0	warp	VeF06S_VeF04S	1,1,ve_fild04,115,55
+//ve_fild06,81,177,0	warp	VeF06S_VeF04S	1,1,ve_fild04,115,55
 
 //============================================================ 
 // Old changelog

@@ -1,0 +1,114 @@
+Index: src-base/map/battle.c
+===================================================================
+--- src-base/map/battle.c	(revision 238)
++++ src-base/map/battle.c	(working copy)
+@@ -404,6 +404,7 @@
+ 	{
+ 	case PA_PRESSURE:
+ 	case HW_GRAVITATION:
++	case PA_SACRIFICE:
+ 		return damage; // Fixed Damage
+ 	case NJ_BAKUENRYU:
+ 	case WL_COMET:
+@@ -953,6 +954,7 @@
+ 	switch (skill_num) {
+ 	//Skills with no damage reduction.
+ 	case PA_PRESSURE:
++	case PA_SACRIFICE: // Sacrifice ?
+ 	case HW_GRAVITATION:
+ 	case NJ_ZENYNAGE:
+ 	case RK_DRAGONBREATH:
+@@ -1448,7 +1450,7 @@
+ 				break;
+ 
+ 			case CR_SHIELDBOOMERANG:
+-			case PA_SHIELDCHAIN:
++			//case PA_SHIELDCHAIN:
+ 			case LG_SHIELDPRESS:
+ 			case LG_EARTHDRIVE:
+ 				flag.weapon = 0;
+@@ -1797,11 +1799,11 @@
+ 						break;
+ 				}
+ 				break;
+-			case CR_SHIELDBOOMERANG:
+-			case PA_SHIELDCHAIN:
+ 			case LG_SHIELDPRESS:
+ 			case LG_EARTHDRIVE:
++			case CR_SHIELDBOOMERANG:
+ 				wd.damage = sstatus->batk;
++			case PA_SHIELDCHAIN:
+ 				if (sd) {
+ 					short index = sd->equip_index[EQI_HAND_L];
+ 
+@@ -2633,7 +2635,7 @@
+ 			break;
+ 
+ 		case CR_SHIELDBOOMERANG:
+-		case PA_SHIELDCHAIN:
++		//case PA_SHIELDCHAIN:
+ 			flag.weapon = 0;
+ 			break;
+ 
+@@ -2959,11 +2961,11 @@
+ 			wd.damage = sstatus->max_hp * 9/100;
+ 			wd.damage2 = 0;
+ 			break;
+-		case CR_SHIELDBOOMERANG:
+-		case PA_SHIELDCHAIN:
+ 		case LG_SHIELDPRESS:
+ 		case LG_EARTHDRIVE:
++		case CR_SHIELDBOOMERANG:
+ 			wd.damage = sstatus->batk;
++		case PA_SHIELDCHAIN:
+ 			if( sd )
+ 			{
+ 				short index = sd->equip_index[EQI_HAND_L];
+Index: src-base/map/skill.c
+===================================================================
+--- src-base/map/skill.c	(revision 238)
++++ src-base/map/skill.c	(working copy)
+@@ -6937,6 +6937,8 @@
+ 			status_change_end(bl, SC_STONE, INVALID_TIMER);
+ 			status_change_end(bl, SC_SLEEP, INVALID_TIMER);
+ 			status_change_end(bl, SC_STUN, INVALID_TIMER);
++			status_change_end(bl, SC_WHITEIMPRISON, INVALID_TIMER);
++			status_change_end(bl, SI_NETHERWORLD, INVALID_TIMER);
+ 		}
+ 		//Is this equation really right? It looks so... special.
+ 		if(battle_check_undead(tstatus->race,tstatus->def_ele))
+Index: src-base/map/status.c
+===================================================================
+--- src-base/map/status.c	(revision 238)
++++ src-base/map/status.c	(working copy)
+@@ -7071,23 +7071,17 @@
+ 			val2 = 75 + 25*val1; //Cri bonus
+ 			break;
+ 		case SC_ASPDPOTION0:
++			val2 = 40;
++			break;
+ 		case SC_ASPDPOTION1:
++			val2 = 60;
++			break;
+ 		case SC_ASPDPOTION2:
++			val2 = 90;
++			break;
+ 		case SC_ASPDPOTION3:
+-			if( battle_config.renewal_system_enable )
+-			{
+-				switch( type )
+-				{
+-				case SC_ASPDPOTION0: val2 = 40; break;
+-				case SC_ASPDPOTION1: val2 = 60; break;
+-				case SC_ASPDPOTION2: val2 = 90; break;
+-				case SC_ASPDPOTION3: val2 = 120; break; // Where is this used?
+-				}
+-			}
+-			else
+-				val2 = 50*(2+type-SC_ASPDPOTION0);
++			val2 = 120;
+ 			break;
+-
+ 		case SC_WEDDING:
+ 		case SC_XMAS:
+ 		case SC_SUMMER:

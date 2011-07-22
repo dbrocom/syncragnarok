@@ -1,0 +1,60 @@
+beach_dun2,119,92,3	script	Super Novice#Extended	729,{
+	if ( Class == 4190 || Class == 4191){
+		mes "[Super Novice]";
+		mes "¡Te quejarás!";
+		mes "Mírate, podrías competir contra cualquier job";
+		mes "¿No es una buena noticia?";
+		close;
+	}
+	if (checkquest(30000) != -1) {
+		mes "[Super Novice]";
+		if (checkquest(30000,HUNTING) != 2 ) {
+			mes "¿Has terminado lo que te mandé?";
+			next;
+			if(select("Sí:Todavía no")==2){
+				mes "[Super Novice]";
+				mes "Paciencia paciencia. ¡Tómate tu tiempo!";
+				close;
+			}
+			mes "[Super Novice]";
+			mes "Creo que no has mirado bien el contador. He dicho 1000.";
+			close;
+		} else {
+			mes "¡Increíble! Eres el orgullo de la profesión.";
+			if ( JobLevel != 99 ){
+				mes "Pero no te puedo contar el secreto hasta que no tengas 99 de Nivel de Job.";
+				close;
+			}
+			if(SkillPoint) {
+				mes "Pero no puedo contarte el secreto si no te has gastado todos tus puntos de habilidad.";
+				close;
+			}
+			mes "Bien, pues el secreto es...";
+			next;
+			if (Upper==0) jobchange 4190;
+			if (Upper==2) jobchange 4191;
+			erasequest 30000;
+			close;
+		}
+	}
+	mes "[Super Novice]";
+	if ( BaseLevel == 99 && ( Class == 23 ||  Class == 4045 ) ) {
+		mes "Tengo un secreto muy chulo, ¿quieres que te lo enseñe?";
+		next;
+		if (select("Sí:No")==2){ close; }
+		mes "[Super Novice]";
+		mes "Jejej, no me importa compartir mis secretos con un Super Novice como yo.";
+		next;
+		mes "[Super Novice]";
+		mes "Pero antes de nada, necesito que me demuestres que puedo confiar en tí.";
+		mes "¿Matarías 1000 porings por mi?";
+		setquest 30000;
+		next;
+		mes "[Super Novice]";
+		mes "Vuelve a verme cuando hayas matado 1000 porings, "+strcharinfo(0);
+	}else{
+		mes "Creo que me he adentrado demasiado en la cueva.";
+		mes "Bueno, mientras los monstruos me dejen descansar para reponer fuerzas... ¡estará todo bien!";
+	}
+	close;
+}

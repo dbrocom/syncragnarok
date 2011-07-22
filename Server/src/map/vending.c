@@ -205,11 +205,6 @@ void vending_purchasereq(struct map_session_data* sd, int aid, int uid, const ui
 			log_pick_pc(vsd, "V", vsd->status.cart[idx].nameid, -amount, &vsd->status.cart[idx], vsd->status.cart[idx].serial );
 			log_pick_pc( sd, "V", vsd->status.cart[idx].nameid,  amount, &vsd->status.cart[idx], vsd->status.cart[idx].serial );
 		}
-		if( battle_config.lootevent & 1 ) {
-			pc_setglobalreg( sd, "LastLootID", vsd->status.cart[idx].nameid ); //Last lootet Item ID
-			pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
-			npc_event_doall_id( "OnLoot", sd->bl.id );
-		}
 
 		// vending item
 		pc_additem(sd, &vsd->status.cart[idx], amount);

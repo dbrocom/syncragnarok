@@ -1,0 +1,23 @@
+//===== eAthena Script ========================================
+//= Bio Lab Dungeon F4
+//===== By: ==================================================
+//= Yuasa
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= Any Athena Version
+//============================================================
+lhz_dun04,0,0,0,0	monster	Paladin Randel	2221,20,0,0,0
+lhz_dun04,0,0,0,0	monster	Biochemist Flamel	2222,20,0,0,0
+lhz_dun04,0,0,0,0	monster	Scholar Celia	2223,20,0,0,0
+lhz_dun04,0,0,0,0	monster	Gypsy Trentini	2227,20,0,0,0
+lhz_dun04,0,0,0,0	monster	Minstrel Alphochio	2226,20,0,0,0
+lhz_dun04,0,0,0,0	monster	Champion Chen	2224,30,0,0,0
+lhz_dun04,0,0,0,0	monster	Stalker Gertie	2225,50,0,0,0
+
+//==================================================
+//= WARPS
+//==================================================
+lhz_dun03,240,77,0	warp	bio4-0	1,1,lhz_dun04,240,47
+lhz_dun04,246,47,0	warp	bio4-1	1,1,lhz_dun03,241,71
+

@@ -1,0 +1,51 @@
+tur_dun01,91,171,3	script	Ranger Instructor	832,{
+
+	mes "[Ranger Instructor]";
+	if ( (((Class == Job_Hunter || Class == Job_Baby_Hunter) && JobLevel == 50) || (Class == Job_Sniper && JobLevel == 70)) && BaseLevel == 99 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		if ( Weight > 10 || checkfalcon() != 0 ){
+			mes "Pero no pareces estar preparado.";
+			mes "Demuéstrame que eres capaz de sobrevivir.";
+			mes "Sin flechas, sin arco, sin halcón, sin nada... salvo un Wing of Dragonfly en tu inventario.";
+			close;
+		}
+		mes "Estás preparado, no hay duda.";
+		if ( countitem(7064) == 0 ){
+			mes "Pero no has conseguido el Wing of Dragonfly que te pedí.";
+			close;
+		}
+		mes "¿Deseas convertirte en Ranger?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Ranger Instructor]";
+		delitem 7064,1;
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		switch (Upper){
+			case 0:
+				jobchange 4056;
+				break;
+			case 1:
+				jobchange 4062;
+				break;
+			case 2:
+				jobchange 4098;
+				break;
+		}
+		getitem 6124,1;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5748,1;
+
+	}
+	else if ( Class == 4056 || Class == 4062 || Class == 4098 ){
+		mes "Tu destino es hacer grandes cosas.";
+		mes "Prepara tu carcaj y no mires atrás.";
+	}
+	else{
+		mes "¿Qué haces tú aquí? ¿Necesitas algo?";
+	}
+	close;
+}

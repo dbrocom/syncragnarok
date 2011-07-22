@@ -1,0 +1,27 @@
+prontera,146,164,5	script	Reset Girl	124,{
+	mes "[Reset Girl]";
+	mes "Soy la chica reseteadora";
+	mes "Por favor seleccione el servicio que desee:";
+	next;
+	switch(select("^FF3355Reset Skills:Reset Stats:Resetear Ambos^000000:Salir")) {
+		case 1:
+			mes "[Reset Girl]";
+			mes "¡Hecho! Skills Reseteadas.";
+			ResetSkill;
+			break;
+		case 2:
+			mes "[Reset Girl]";
+			mes "¡Hecho! Stats Reseteados";
+			ResetStatus;
+			break;
+		case 3:
+			mes "[Reset Girl]";
+			mes "¡Hecho! Skills y Stats Reseteados";
+			ResetSkill;
+			ResetStatus;
+			break;
+		case 4:
+			break;
+	}
+	close;
+}

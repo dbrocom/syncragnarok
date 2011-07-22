@@ -1,0 +1,59 @@
+job3_gen01,25,58,4	script	Genetist	865,{
+
+	mes "[Genetic]";
+	if ( (((Class == Job_Alchemist || Class == Job_Baby_Alchemist) && JobLevel == 50) || (Class == Job_Creator && JobLevel == 70)) && BaseLevel == 99 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		next;
+		mes "[Genetic]";
+		mes "Estás preparado, no hay duda.";
+		if ( checkcart() != 0 ){
+			mes "Pero por favor, deshazte de ese carro.";
+			mes "No quiero que el laboratorio se ensucie.";
+			close;
+		}
+		mes "¿Deseas convertirte en Genetist?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Genetic]";
+		mes "Tu destino es hacer grandes cosas. Estoy seguro.";
+		switch (Upper){
+			case 0:
+				jobchange 4071;
+				break;
+			case 1:
+				jobchange 4078;
+				break;
+			case 2:
+				jobchange 4107;
+				break;
+		}
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5752,1;
+	}
+	else if ( Class == 4071 || Class == 4078 || Class == 4107 ){
+		mes "Tu destino es hacer grandes cosas.";
+		mes "Aunque sea creándolas artificialmente, jeje.";
+	}
+	else{
+		mes "*Mucho trabajo, mucho trabajo*";
+	}
+	close;
+}
+
+
+-	shop	GeneticBookShop	-1,6297:-1,6279:150000,6280:150000,6281:150000,6282:150000,6283:150000,6284:150000,6285:150000
+
+alde_alche,31,186,5	script	Craft Book Salesman	805,{
+
+	if ( Class != 4071 && Class != 4078 && Class != 4107 ){
+		mes "[Craft Book Salesman]";
+		mes "Lo siento, pero si no eres un Genetic no entenderás ninguno de estos libros.";
+		close;
+	}
+	callshop( "GeneticBookShop", 1 );
+	end;
+}

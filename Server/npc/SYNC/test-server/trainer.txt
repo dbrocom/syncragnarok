@@ -1,0 +1,38 @@
+prontera,146,160,5	script	Entrenador	953,{
+	mes "[Entrenador]";
+	mes "¿Qué deseas perfeccionar?";
+	next;
+	switch(select("^FF3355Nivel Base:Nivel Job^000000:Volver a ser 1/1:Salir")) {
+		case 1:
+			mes "[Entrenador]";
+			mes "¿Cuántos niveles quieres profundizar en tu entrenamiento?";
+			next;
+			input .@level;
+			mes "[Entrenador]";
+			mes "¡Marchando "+.@level+" Niveles de Base!";
+			atcommand "@blvl "+.@level;
+			break;
+		case 2:
+			mes "[Entrenador]";
+			mes "¿Cuántos niveles quieres profundizar en tu entrenamiento?";
+			next;
+			input .@level;
+			mes "[Entrenador]";
+			mes "¡Marchando "+.@level+" Niveles de Job!";
+			atcommand "@jlvl "+.@level;
+			break;
+		case 3:
+			mes "[Entrenador]";
+			mes "¿Estás seguro de querer volver a ser 1/1?";
+			mes "(Conservarás tu profesión actual)";
+			next;
+			if(select("No:Sí")==1){ close; }
+			mes "[Entrenador]";
+			mes "¡Listo! Ya eres 1/1 otra vez.";
+			atcommand "@blvl -150";
+			atcommand "@jlvl -100";
+		case 4:
+			close;
+	}
+	close;
+}

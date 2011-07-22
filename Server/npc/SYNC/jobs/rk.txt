@@ -1,0 +1,79 @@
+gl_knt02,144,53,7	script	Rune Knight Staff	470,{
+
+	mes "[Rune Knight]";
+	if ( Class == Job_Knight && BaseLevel == 99 && JobLevel == 50 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		if ( checkriding() != 0 ){
+			mes "Pero por favor, deja libre a ese Peco.";
+			mes "A partir de ahora no volverás a necesitar de su ayuda.";
+			close;
+		}
+		mes "¿Deseas convertirte en Rune Knight?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Rune Knight]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4054;
+		getitem 15002,1;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5746,1;
+
+	}
+	else if ( Class == Job_Lord_Knight  && BaseLevel == 99  && JobLevel == 70 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		if ( checkriding() != 0 ){
+			mes "Pero por favor, deja libre a ese Peco.";
+			mes "A partir de ahora no volverás a necesitar de su ayuda.";
+			close;
+		}
+		mes "¿Deseas convertirte en Rune Knight?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Rune Knight]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4060;
+		getitem 15002,1;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5746,1;
+	}
+	else if ( Class == Job_Baby_Knight  && BaseLevel == 99  && JobLevel == 50 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		mes "Estás preparado.";
+		if ( checkriding() != 0 ){
+			mes "Pero por favor, deja libre a ese Peco.";
+			mes "A partir de ahora no volverás a necesitar de su ayuda.";
+			close;
+		}
+		mes "¿Deseas convertirte en Rune Knight?";
+		next;
+		if (select("No:Sí")==1){ close; }
+		mes "[Rune Knight]";
+		mes "Tu destino es hacer grandes cosas. Lo sé.";
+		jobchange 4096;
+		getitem 15002,1;
+		getitem 2795,1; //Green_Apple_Ring
+		getitem 5746,1;
+	}
+	else if ( Class == 4054 || Class == 4060 || Class == 4096 ){
+		mes "Tu destino es hacer grandes cosas.";
+		mes "No pierdas el tiempo hablando conmigo.";
+	}
+	else{
+		mes "Ten cuidado, este sitio es muy peligroso.";
+	}
+	close;
+}

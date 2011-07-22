@@ -50,7 +50,7 @@ moc_fild17,208,346,5	script	Shone#Hode_Hunt	707,{
 		else {
 			mes "[Shone]";
 			mes "Amazing, you did that with speed.";
-			getexp 15775,1125;
+			getexp 3155,2250;
 			erasequest 60104;
 			close;
 		}
@@ -90,8 +90,8 @@ moc_fild17,208,346,5	script	Shone#Hode_Hunt	707,{
 		else {
 			mes "[Shone]";
 			mes "Amazing, you did that with speed.";
-			getexp 15775,1125;
-			getexp 15775,1125;
+			getexp 3155,2250;
+			getexp 3155,2250;
 			erasequest 60105;
 			close;
 		}
@@ -131,9 +131,9 @@ moc_fild17,208,346,5	script	Shone#Hode_Hunt	707,{
 		else {
 			mes "[Shone]";
 			mes "Amazing, you did that with speed.";
-			getexp 15775,1125;
-			getexp 15775,1125;
-			getexp 15775,1125;
+			getexp 3155,2250;
+			getexp 3155,2250;
+			getexp 3155,2250;
 			erasequest 60106;
 			close;
 		}
@@ -177,7 +177,7 @@ moc_fild17,208,346,5	script	Shone#Hode_Hunt	707,{
 							mes "Peelings!";
 							mes "Here is that reward I promised you, I hope take this wisdom I have passed on to you and share it with others.";
 							delitem 1055,25; //Earthworm_Peeling
-							getexp 9859,7030;
+							getexp 1972,1125;
 							//getitem 502,10; //Orange_Potion
 							close;
 						}

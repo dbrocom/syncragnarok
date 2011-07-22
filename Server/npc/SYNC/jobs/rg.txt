@@ -1,0 +1,51 @@
+glast_01,240,366,5	script	King Schmidtz	468,{
+
+	mes "[Royal Guard]";
+	if ( (((Class == Job_Crusader || Class == Job_Baby_Crusader) && JobLevel == 50) || (Class == Job_Paladin && JobLevel == 70)) && BaseLevel == 99 ){
+		mes "Parece que tienes el valor suficiente para conseguir lo que te propongas.";
+		if(SkillPoint) {
+			mes "Pero todavía no estás preparado...";
+			close;
+		}
+		next;
+		mes "[Royal Guard]";
+		mes "Estás preparado, no hay duda.";
+		if ( countitem(7097) >= 100 ){
+			if ( checkriding() != 0 ){
+				mes "Pero por favor, deja libre a ese GrandPeco.";
+				mes "A partir de ahora no volverás a necesitar de su compañía.";
+				close;
+			}
+			mes "¿Deseas convertirte en Royal Guard?";
+			next;
+			if (select("No:Sí")==1){ close; }
+			mes "[Royal Guard]";
+			delitem 7097, 100;
+			mes "Tu destino es hacer grandes cosas. Estoy seguro.";
+			switch (Upper){
+				case 0:
+					jobchange 4066;
+					break;
+				case 1:
+					jobchange 4073;
+					break;
+				case 2:
+					jobchange 4102;
+					break;
+			}
+			getitem 2795,1; //Green_Apple_Ring
+			getitem 5757,1;
+		}else{
+			mes "Pero necesito que me demuestres la templanza de tu corazón consiguiendo 100 Burning Hearts.";
+			close;
+		}
+	}
+	else if ( Class == 4066 || Class == 4073 || Class == 4102 ){
+		mes "Tu destino es hacer grandes cosas.";
+		mes "Un corazón puro no tiene rival. ¿A qué esperas?";
+	}
+	else{
+		mes "¿Estás intentando escapar de los monstruos?";
+	}
+	close;
+}

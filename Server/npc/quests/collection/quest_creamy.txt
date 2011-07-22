@@ -50,7 +50,7 @@ prt_fild04,356,148,3	script	Laertes#Creamy_Hunt	798,{
 		else {
 			mes "[Laertes]";
 			mes "Amazing, you did that with speed.";
-			getexp 2950,1125;
+			getexp 590,225;
 			erasequest 60122;
 			close;
 		}
@@ -90,8 +90,8 @@ prt_fild04,356,148,3	script	Laertes#Creamy_Hunt	798,{
 		else {
 			mes "[Laertes]";
 			mes "Amazing, you did that with speed.";
-			getexp 2950,1125;
-			getexp 2950,1125;
+			getexp 590,225;
+			getexp 590,225;
 			erasequest 60123;
 			close;
 		}
@@ -131,9 +131,9 @@ prt_fild04,356,148,3	script	Laertes#Creamy_Hunt	798,{
 		else {
 			mes "[Laertes]";
 			mes "Amazing, you did that with speed.";
-			getexp 2950,1125;
-			getexp 2950,1125;
-			getexp 2950,1125;
+			getexp 590,225;
+			getexp 590,225;
+			getexp 590,225;
 			erasequest 60124;
 			close;
 		}
@@ -174,7 +174,7 @@ prt_fild04,356,148,3	script	Laertes#Creamy_Hunt	798,{
 							mes "Hey, thank you again.";
 							mes "Here you go, as promised.";
 							delitem 924,25; //Powder_Of_Butterfly
-							getexp 1844,703;
+							getexp 369,141;
 							//getitem 502,5; //Orange_Potion
 							close;
 						}

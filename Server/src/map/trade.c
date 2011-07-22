@@ -22,7 +22,7 @@
 
 
 //Max distance from traders to enable a trade to take place.
-#define TRADE_DISTANCE 13
+#define TRADE_DISTANCE 2
 
 /*==========================================
  * Initiates a trade request.
@@ -579,11 +579,6 @@ void trade_tradecommit(struct map_session_data *sd)
 					log_pick_pc(sd, "T", sd->status.inventory[n].nameid, -(sd->deal.item[trade_i].amount), &sd->status.inventory[n], sd->status.inventory[n].serial );
 					log_pick_pc(tsd, "T", sd->status.inventory[n].nameid, sd->deal.item[trade_i].amount, &sd->status.inventory[n], sd->status.inventory[n].serial );
 				}
-				if( battle_config.lootevent & 1 ) {
-					pc_setglobalreg( tsd, "LastLootID", sd->status.inventory[n].nameid ); //Last lootet Item ID
-					pc_setglobalreg( tsd, "LastLootAmount", sd->deal.item[trade_i].amount ); //Last looted Item Amount
-					npc_event_doall_id( "OnLoot", tsd->bl.id );
-				} 
 				pc_delitem(sd, n, sd->deal.item[trade_i].amount, 1, 6);
 			} else
 				clif_additem(sd, n, sd->deal.item[trade_i].amount, 0);
@@ -602,11 +597,6 @@ void trade_tradecommit(struct map_session_data *sd)
 				{
 					log_pick_pc(tsd, "T", tsd->status.inventory[n].nameid, -(tsd->deal.item[trade_i].amount), &tsd->status.inventory[n], tsd->status.inventory[n].serial );
 					log_pick_pc(sd, "T", tsd->status.inventory[n].nameid, tsd->deal.item[trade_i].amount, &tsd->status.inventory[n], tsd->status.inventory[n].serial );
-				}
-				if( battle_config.lootevent & 1 ) {
-					pc_setglobalreg( sd, "LastLootID", tsd->status.inventory[n].nameid ); //Last lootet Item ID
-					pc_setglobalreg( sd, "LastLootAmount", tsd->deal.item[trade_i].amount ); //Last looted Item Amount
-					npc_event_doall_id( "OnLoot", sd->bl.id );
 				}
 				pc_delitem(tsd, n, tsd->deal.item[trade_i].amount, 1, 6);
 			} else

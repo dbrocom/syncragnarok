@@ -50,7 +50,7 @@ um_fild01,34,281,5	script	Lilla#Dryad_Hunt	724,{
 		else {
 			mes "[Lilla]";
 			mes "Amazing, you did that with speed.";
-			getexp 60427,43452;
+			getexp 23486,12691;
 			erasequest 60131;
 			close;
 		}
@@ -90,8 +90,8 @@ um_fild01,34,281,5	script	Lilla#Dryad_Hunt	724,{
 		else {
 			mes "[Lilla]";
 			mes "Amazing, you did that with speed.";
-			getexp 60427,43452;
-			getexp 60427,43452;
+			getexp 23486,12691;
+			getexp 23486,12691;
 			erasequest 60132;
 			close;
 		}
@@ -131,9 +131,9 @@ um_fild01,34,281,5	script	Lilla#Dryad_Hunt	724,{
 		else {
 			mes "[Lilla]";
 			mes "Amazing, you did that with speed.";
-			getexp 60427,43452;
-			getexp 60427,43452;
-			getexp 60427,43452;
+			getexp 23486,12691;
+			getexp 23486,12691;
+			getexp 23486,12691;
 			erasequest 60133;
 			close;
 		}
@@ -179,7 +179,7 @@ um_fild01,34,281,5	script	Lilla#Dryad_Hunt	724,{
 							mes "Oh, I almost forgot. I have something for you ^_^";
 							mes "Thank you so much again for your help.";
 							delitem 7197,50; //Sharp_Leaf
-							getexp 57416,38282;
+							getexp 29357,15863;
 							//getitem 504,10; //White_Potion
 							close;
 						}

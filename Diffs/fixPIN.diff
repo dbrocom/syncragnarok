@@ -1,0 +1,36 @@
+Index: src-base/char/char.c
+===================================================================
+--- src-base/char/char.c	(revision 232)
++++ src-base/char/char.c	(working copy)
+@@ -2087,6 +2087,13 @@
+ 				{
+ 					// send characters to player
+ 					mmo_char_send006b(i, sd);
++					WFIFOHEAD(i, 12);
++					WFIFOW(i, 0) = 0x08B9;
++					WFIFOW(i, 2) = 0;
++					WFIFOW(i, 4) = 0;
++					WFIFOL(i, 6) = sd->account_id;
++					WFIFOW(i, 10) = 0;
++					WFIFOSET(i, 12);
+ 				}
+ 			}
+ 			RFIFOSKIP(fd,51);
+Index: src-base/char_sql/char.c
+===================================================================
+--- src-base/char_sql/char.c	(revision 232)
++++ src-base/char_sql/char.c	(working copy)
+@@ -2455,6 +2455,13 @@
+ 				{
+ 					// send characters to player
+ 					mmo_char_send006b(i, sd);
++					WFIFOHEAD(i, 12);
++					WFIFOW(i, 0) = 0x08B9;
++					WFIFOW(i, 2) = 0;
++					WFIFOW(i, 4) = 0;
++					WFIFOL(i, 6) = sd->account_id;
++					WFIFOW(i, 10) = 0;
++					WFIFOSET(i, 12);
+ 				}
+ 			}
+ 			RFIFOSKIP(fd,62);

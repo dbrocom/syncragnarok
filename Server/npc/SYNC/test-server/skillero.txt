@@ -1,0 +1,13 @@
+prontera,143,167,5	script	Skillero	784,{
+
+	mes "[Skillero]";
+	mes "Introduzca la ID de la Skill:";
+	input .@id;
+	next;
+	mes "[Skillero]";
+	mes "Introduzca el nivel de la Skill:";
+	input .@lvl;
+	close2;
+	atcommand "@useskill "+.@id+" "+.@lvl+" "+strcharinfo(0);
+	end;
+}

@@ -50,7 +50,7 @@ ein_fild06,82,171,0	script	Vegetable Farmer#Goat	919,{
 		else {
 			mes "[Vegetable Farmer]";
 			mes "Amazing, you did that with speed.";
-			getexp 71133, 53577;
+			getexp 25849, 15516;
 			erasequest 60137;
 			close;
 		}
@@ -90,8 +90,8 @@ ein_fild06,82,171,0	script	Vegetable Farmer#Goat	919,{
 		else {
 			mes "[Vegetable Farmer]";
 			mes "Amazing, you did that with speed.";
-			getexp 71133, 53577;
-			getexp 71133, 53577;
+			getexp 25849, 15516;
+			getexp 25849, 15516;
 			erasequest 60138;
 			close;
 		}
@@ -131,9 +131,9 @@ ein_fild06,82,171,0	script	Vegetable Farmer#Goat	919,{
 		else {
 			mes "[Vegetable Farmer]";
 			mes "Amazing, you did that with speed.";
-			getexp 71133, 53577;
-			getexp 71133, 53577;
-			getexp 71133, 53577;
+			getexp 25849, 15516;
+			getexp 25849, 15516;
+			getexp 25849, 15516;
 			erasequest 60139;
 			close;
 		}
@@ -175,7 +175,7 @@ ein_fild06,82,171,0	script	Vegetable Farmer#Goat	919,{
 							mes "Amazing, you did that with speed.";
 							mes "I am truly grateful.";
 							delitem 7106,50; //Goat's_Horn
-							getexp 66555,50972;
+							getexp 32311,19394;
 							//getitem 504,10; //White_Potion
 							close;
 						}

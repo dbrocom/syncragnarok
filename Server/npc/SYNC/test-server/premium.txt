@@ -1,0 +1,105 @@
+prontera,139,182,7	script	Cuenta Premium	864,{
+
+	set .@n$,"^ff0000[Vendedora Cuentas Premium]^000000";
+
+	setarray .cash[0],700,1300,3800,7200;				// CashPoints
+	setarray .time[0],  1,   2,   6,  12;				// Meses
+
+	query_sql "SELECT premium_expiration FROM login WHERE account_id = "+getcharid(3),.@vip$[0];
+	
+	mes .@n$;
+	mes "¡¡ Hola "+strcharinfo(0)+" !!";
+	if ( .@vip$[0] != "" ){
+		mes "Tienes hasta la siguiente fecha para disfrutar de tu cuenta premium: "+.@vip$[0];
+		close;
+	}
+	if ( getgmlevel() >= 1 ){
+		mes "Lo siento, pero a ti no te puedo vender una Cuenta Premium.";
+		close;
+	}
+	if ( getgmlevel() == 1 ){
+		mes "¿Quieres dejar de ser Premium?";
+		next;
+		if(select("Sí:No")==2){ close; }
+		mes .@n$;
+		mes "¡De acuerdo!. Finalizando Premium...";
+		close2;
+		query_sql "UPDATE login SET level = 0 WHERE account_id = " +getcharid(3);
+		query_sql "UPDATE login SET premium_expiration = null WHERE account_id = " +getcharid(3);
+		dispbottom " ";
+		dispbottom "======================";
+		dispbottom "= PREMIUM FINALIZADO =";
+		dispbottom "======================";
+		dispbottom " ";
+		dispbottom " === La cuenta se autodesconectará en 7 segundos.  === ";
+		dispbottom " === Vuelva a logear. Sentimos los inconvenientes. ===";
+		dispbottom " ";
+		sleep2 7000;
+		atcommand "@kick "+strcharinfo(0);
+		end;
+	}
+	mes "¿Estás interesado en adquirir una cuenta Premium?";
+	next;
+	if (select("No:Sí")==1){ close; }
+	mes .@n$;
+	mes "En ese caso mira las tarifas y elige la duración que prefieras.";
+	mes " ";
+	for (set .@i, 0; .@i < getarraysize(.cash); set .@i, .@i + 1) {
+		mes ""+.cash[.@i]+" Puntos Syncro. == "+.time[.@i]+" Meses";
+		set .@menu$,.@menu$ + .time[.@i]+" Meses:";
+	}
+	set .@menu$,.@menu$ + "Me lo pensaré";
+	next;
+	set .@e,select (.@menu$)-1;
+	mes .@n$;
+	mes "Esto te hubiera costado "+.cash[.@e]+" Puntos de Syncronización.";
+	next;
+	if( select ( "Sí:No")==2) { close; }
+	mes .@n$;
+	query_sql "UPDATE login SET premium_expiration = ADDDATE('"+gettimestr("%Y-%m-%d",12)+"',INTERVAL "+.time[.@e]+" MONTH) WHERE account_id = "+getcharid(3);
+	query_sql "UPDATE login SET level = 1 WHERE account_id = " +getcharid(3);
+
+	mes "Muy bien, he aplicado el estado Premium a tu cuenta.";
+	mes "¡Ahora deberás relogear para poder empezar a disfrutar de todas las ventajas!";
+	set #CASHPOINTS, #CASHPOINTS - .cash[.@e];
+	close2;
+	atcommand "@kick "+strcharinfo(0);
+	end;
+}
+
+/*
+-	script	PremiumFinish	-1,{
+
+OnPCLoginEvent:
+
+	query_sql "SELECT (premium_expiration > curdate()) FROM login WHERE account_id = "+getcharid(3),.@date[0];
+	query_sql "SELECT level FROM login WHERE account_id = "+getcharid(3),.@lvl[0];
+
+	if ( .@lvl[0] == 1 ){
+		if ( .@date[0] == 0 ) {
+			query_sql "UPDATE login SET level = 0 WHERE account_id = " +getcharid(3);
+			query_sql "UPDATE login SET premium_expiration = null WHERE account_id = " +getcharid(3);
+			dispbottom " ";
+			dispbottom "======================";
+			dispbottom "= PREMIUM FINALIZADO =";
+			dispbottom "======================";
+			dispbottom " ";
+			dispbottom " === La cuenta se autodesconectará en 7 segundos.  === ";
+			dispbottom " === Vuelva a logear. Sentimos los inconvenientes. ===";
+			dispbottom " ";
+			sleep2 7000;
+			atcommand "@kick "+strcharinfo(0);
+		}
+		else{ 
+			query_sql "SELECT premium_expiration FROM login WHERE account_id = "+getcharid(3),.@vip$[0];
+			dispbottom "=== Cuenta Premium activa hasta: "+.@vip$[0]+" ===";
+		}
+	}
+	else if ( .@lvl[0] > 1 ) {
+		if ( .@date[0] == 0 || .@date[0] == 1 ) {
+			query_sql "UPDATE login SET premium_expiration = null WHERE account_id = " +getcharid(3);
+		}
+	}
+	end;
+}
+*/

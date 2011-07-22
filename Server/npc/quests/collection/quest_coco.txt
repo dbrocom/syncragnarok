@@ -50,7 +50,7 @@ mjolnir_01,293,20,3	script	Nutters#Coco_Hunt	779,{
 		else {
 			mes "[Nutters]";
 			mes "Amazing, you did that with speed.";
-			getexp 3600,3905;
+			getexp 720,781;
 			erasequest 60113;
 			close;
 		}
@@ -90,8 +90,8 @@ mjolnir_01,293,20,3	script	Nutters#Coco_Hunt	779,{
 		else {
 			mes "[Nutters]";
 			mes "Amazing, you did that with speed.";
-			getexp 3600,3905;
-			getexp 3600,3905;
+			getexp 720,781;
+			getexp 720,781;
 			erasequest 60114;
 			close;
 		}
@@ -131,9 +131,9 @@ mjolnir_01,293,20,3	script	Nutters#Coco_Hunt	779,{
 		else {
 			mes "[Nutters]";
 			mes "Amazing, you did that with speed.";
-			getexp 3600,3905;
-			getexp 3600,3905;
-			getexp 3600,3905;
+			getexp 720,781;
+			getexp 720,781;
+			getexp 720,781;
 			erasequest 60115;
 			close;
 		}
@@ -179,7 +179,7 @@ mjolnir_01,293,20,3	script	Nutters#Coco_Hunt	779,{
 							mes "Oh that's right, sorry I just love roasting Acorns. Mmm.";
 							mes "Here is what I promised you.";
 							delitem 1026,25; //Acorn
-							getexp 1800,1952;
+							getexp 360,390;
 							//getitem 502,5; //Orange_Potion
 							close;
 						}

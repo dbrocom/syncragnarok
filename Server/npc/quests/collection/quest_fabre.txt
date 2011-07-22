@@ -50,7 +50,7 @@ gef_fild07,321,193,4	script	Langry#Fabre_Hunt	754,{
 		else {
 			mes "[Langry]";
 			mes "Amazing, you did that with speed.";
-			getexp 385,30;
+			getexp 77,6;
 			erasequest 60107;
 			close;
 		}
@@ -90,8 +90,8 @@ gef_fild07,321,193,4	script	Langry#Fabre_Hunt	754,{
 		else {
 			mes "[Langry]";
 			mes "Amazing, you did that with speed.";
-			getexp 385,30;
-			getexp 385,30;
+			getexp 77,6;
+			getexp 77,6;
 			erasequest 60108;
 			close;
 		}
@@ -131,9 +131,9 @@ gef_fild07,321,193,4	script	Langry#Fabre_Hunt	754,{
 		else {
 			mes "[Langry]";
 			mes "Amazing, you did that with speed.";
-			getexp 385,30;
-			getexp 385,30;
-			getexp 385,30;
+			getexp 77,6;
+			getexp 77,6;
+			getexp 77,6;
 			erasequest 60109;
 			close;
 		}
@@ -166,7 +166,7 @@ gef_fild07,321,193,4	script	Langry#Fabre_Hunt	754,{
 							mes "[Langry]";
 							mes "Thank you for the Fluff. This helps me out greatly.";
 							mes "Oh and here you go, this should help you get stronger, faster!";
-							delitem 914,25; //Fluff
+							delitem 48,4; //Fluff
 							getexp 385,30;
 							close;
 						}

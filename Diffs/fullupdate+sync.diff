@@ -1,0 +1,3515 @@
+Index: src-base/char/char.c
+===================================================================
+--- src-base/char/char.c	(revision 236)
++++ src-base/char/char.c	(working copy)
+@@ -85,6 +85,7 @@
+ 
+ int char_per_account = 0; //Maximum charas per account (default unlimited) [Sirius]
+ int char_del_level = 0; //From which level u can delete character [Lupus]
++int char_del_delay = 86400;
+ 
+ int log_char = 1;	// loggin char or not [devil]
+ int log_inter = 1;	// loggin inter or not [devil]
+@@ -106,6 +107,7 @@
+ 	int gmlevel;
+ 	uint32 version;
+ 	uint8 clienttype;
++	char birthdate[10+1];  // YYYY-MM-DD
+ };
+ 
+ int char_id_count = START_CHAR_NUM;
+@@ -368,6 +370,47 @@
+ 	return 0;
+ }
+ 
++/// Find all characters for given session and update the session character cache.
++int char_find_characters(struct char_session_data* sd)
++{
++	int i, found_num = 0;
++
++	for( i = 0; i < char_num; i++ )
++	{// find character entries and save them
++		if( char_dat[i].status.account_id == sd->account_id )
++		{
++			sd->found_char[found_num++] = i;
++
++			if( found_num >= MAX_CHARS )
++			{
++				break;
++			}
++		}
++	}
++
++	for( i = found_num; i < MAX_CHARS; i++ )
++	{// fill remaining blanks
++		sd->found_char[i] = -1;
++	}
++
++	return found_num;
++}
++
++
++/// Search character data from given session.
++struct mmo_charstatus* search_session_character(struct char_session_data* sd, int char_id)
++{
++	int i;
++
++	ARR_FIND( 0, MAX_CHARS, i, sd->found_char[i] != -1 && char_dat[sd->found_char[i]].status.char_id == char_id );
++	if( i == MAX_CHARS )
++	{
++		return NULL;
++	}
++	return &char_dat[sd->found_char[i]].status;
++}
++
++
+ //Search character data from the aid/cid givem
+ struct mmo_charstatus* search_character(int aid, int cid)
+ {
+@@ -481,9 +524,9 @@
+ 		"%d\t%d,%d\t%s\t%d,%d,%d\t%u,%u,%d" //Up to Zeny field
+ 		"\t%d,%d,%d,%d\t%d,%d,%d,%d,%d,%d\t%d,%d" //Up to Skill Point
+ 		"\t%d,%d,%d\t%d,%d,%d,%d" //Up to hom id
+-		"\t%d,%d,%d\t%d,%d,%d,%d,%d" //Up to head bottom
++		"\t%d,%d,%d\t%d,%d,%d,%d,%d,%d" //Up to robe
+ 		"\t%d,%d,%d\t%d,%d,%d" //last point + save point
+-		",%d,%d,%d,%d,%d\t",	//Family info
++		",%d,%d,%d,%d,%d,%lu\t",	//Family info + delete date
+ 		p->char_id, p->account_id, p->slot, p->name, //
+ 		p->class_, p->base_level, p->job_level,
+ 		p->base_exp, p->job_exp, p->zeny,
+@@ -493,10 +536,11 @@
+ 		p->option, p->karma, p->manner,	//
+ 		p->party_id, p->guild_id, p->pet_id, p->hom_id,
+ 		p->hair, p->hair_color, p->clothes_color,
+-		p->weapon, p->shield, p->head_top, p->head_mid, p->head_bottom,
++		p->weapon, p->shield, p->head_top, p->head_mid, p->head_bottom, p->robe,
+ 		p->last_point.map, p->last_point.x, p->last_point.y, //
+ 		p->save_point.map, p->save_point.x, p->save_point.y,
+ 		p->partner_id,p->father,p->mother,p->child,p->fame);
++		(unsigned long)p->delete_date);  // FIXME: platform-dependent size
+ 	for(i = 0; i < MAX_MEMOPOINTS; i++)
+ 		if (p->memo_point[i].map) {
+ 			str_p += sprintf(str_p, "%d,%d,%d ", p->memo_point[i].map, p->memo_point[i].x, p->memo_point[i].y);
+@@ -549,10 +593,49 @@
+ 	int tmp_int[256];
+ 	unsigned int tmp_uint[2]; //To read exp....
+ 	int next, len, i, j;
++	unsigned long tmp_ulong[1];
+ 
+ 	// initilialise character
+ 	memset(p, '\0', sizeof(struct mmo_charstatus));
+ 	
++// Char structure of version 14797 (robe)
++	if (sscanf(str, "%d\t%d,%d\t%127[^\t]\t%d,%d,%d\t%u,%u,%d\t%d,%d,%d,%d\t%d,%d,%d,%d,%d,%d\t%d,%d"
++		"\t%d,%d,%d\t%d,%d,%d,%d\t%d,%d,%d\t%d,%d,%d,%d,%d,%d"
++		"\t%d,%d,%d\t%d,%d,%d,%d,%d,%d,%d,%d,%lu%n",
++		&tmp_int[0], &tmp_int[1], &tmp_int[2], tmp_str[0],
++		&tmp_int[3], &tmp_int[4], &tmp_int[5],
++		&tmp_uint[0], &tmp_uint[1], &tmp_int[8],
++		&tmp_int[9], &tmp_int[10], &tmp_int[11], &tmp_int[12],
++		&tmp_int[13], &tmp_int[14], &tmp_int[15], &tmp_int[16], &tmp_int[17], &tmp_int[18],
++		&tmp_int[19], &tmp_int[20],
++		&tmp_int[21], &tmp_int[22], &tmp_int[23], //
++		&tmp_int[24], &tmp_int[25], &tmp_int[26], &tmp_int[44],
++		&tmp_int[27], &tmp_int[28], &tmp_int[29],
++		&tmp_int[30], &tmp_int[31], &tmp_int[32], &tmp_int[33], &tmp_int[34], &tmp_int[47],
++		&tmp_int[45], &tmp_int[35], &tmp_int[36],
++		&tmp_int[46], &tmp_int[37], &tmp_int[38], &tmp_int[39], 
++		&tmp_int[40], &tmp_int[41], &tmp_int[42], &tmp_int[43], &tmp_ulong[0], &next) != 50)
++	{
++	tmp_int[47] = 0; // robe
++// Char structure of version 14700 (delete date)
++	if (sscanf(str, "%d\t%d,%d\t%127[^\t]\t%d,%d,%d\t%u,%u,%d\t%d,%d,%d,%d\t%d,%d,%d,%d,%d,%d\t%d,%d"
++		"\t%d,%d,%d\t%d,%d,%d,%d\t%d,%d,%d\t%d,%d,%d,%d,%d"
++		"\t%d,%d,%d\t%d,%d,%d,%d,%d,%d,%d,%d,%lu%n",
++		&tmp_int[0], &tmp_int[1], &tmp_int[2], tmp_str[0],
++		&tmp_int[3], &tmp_int[4], &tmp_int[5],
++		&tmp_uint[0], &tmp_uint[1], &tmp_int[8],
++		&tmp_int[9], &tmp_int[10], &tmp_int[11], &tmp_int[12],
++		&tmp_int[13], &tmp_int[14], &tmp_int[15], &tmp_int[16], &tmp_int[17], &tmp_int[18],
++		&tmp_int[19], &tmp_int[20],
++		&tmp_int[21], &tmp_int[22], &tmp_int[23], //
++		&tmp_int[24], &tmp_int[25], &tmp_int[26], &tmp_int[44],
++		&tmp_int[27], &tmp_int[28], &tmp_int[29],
++		&tmp_int[30], &tmp_int[31], &tmp_int[32], &tmp_int[33], &tmp_int[34],
++		&tmp_int[45], &tmp_int[35], &tmp_int[36],
++		&tmp_int[46], &tmp_int[37], &tmp_int[38], &tmp_int[39], 
++		&tmp_int[40], &tmp_int[41], &tmp_int[42], &tmp_int[43], &tmp_ulong[0], &next) != 49)
++	{
++	tmp_ulong[0] = 0; // delete date
+ // Char structure of version 1500 (homun + mapindex maps)
+ 	if (sscanf(str, "%d\t%d,%d\t%127[^\t]\t%d,%d,%d\t%u,%u,%d\t%d,%d,%d,%d\t%d,%d,%d,%d,%d,%d\t%d,%d"
+ 		"\t%d,%d,%d\t%d,%d,%d,%d\t%d,%d,%d\t%d,%d,%d,%d,%d"
+@@ -677,6 +760,7 @@
+ 		tmp_int[45] = mapindex_name2id(tmp_str[1]);
+ 		tmp_int[46] = mapindex_name2id(tmp_str[2]);
+ 	}	// Char structure of version 1500 (homun + mapindex maps)
++	}	// Char structure of version 146xx (delete date)
+ 
+ 	safestrncpy(p->name, tmp_str[0], NAME_LENGTH); //Overflow protection [Skotlex]
+ 	p->char_id = tmp_int[0];
+@@ -726,6 +810,8 @@
+ 	p->hom_id = tmp_int[44];
+ 	p->last_point.map = tmp_int[45];
+ 	p->save_point.map = tmp_int[46];
++	p->delete_date = tmp_ulong[0];
++	p->robe = tmp_int[47];
+ 
+ #ifndef TXT_SQL_CONVERT
+ 	// Some checks
+@@ -1705,7 +1791,7 @@
+ // Writes char data to the buffer in the format used by the client.
+ // Used in packets 0x6b (chars info) and 0x6d (new char info)
+ // Returns the size
+-#define MAX_CHAR_BUF 110 //Max size (for WFIFOHEAD calls)
++#define MAX_CHAR_BUF 136 //Max size (for WFIFOHEAD calls)
+ int mmo_char_tobuf(uint8* buffer, struct mmo_charstatus* p)
+ {
+ 	unsigned short offset = 0;
+@@ -1765,9 +1851,16 @@
+ 	mapindex_getmapname_ext(mapindex_id2name(p->last_point.map), (char*)WBUFP(buf,108));
+ 	offset += MAP_NAME_LENGTH_EXT;
+ #endif
++#if PACKETVER >= 20100803
++	WBUFL(buf,124) = TOL(p->delete_date);
++	offset += 4;
++#endif
++#if PACKETVER >= 20110111
++	WBUFL(buf,128) = p->robe;
++	offset += 4;
++#endif
+ 	return 106+offset;
+ }
+-
+ //----------------------------------------
+ // Function to send characters to a player
+ //----------------------------------------
+@@ -1778,16 +1871,7 @@
+ 	offset += 3;
+ #endif
+ 
+-	found_num = 0;
+-	for(i = 0; i < char_num; i++) {
+-		if (char_dat[i].status.account_id == sd->account_id) {
+-			sd->found_char[found_num] = i;
+-			if( ++found_num == MAX_CHARS )
+-				break;
+-		}
+-	}
+-	for(i = found_num; i < MAX_CHARS; i++)
+-		sd->found_char[i] = -1;
++	found_num = char_find_characters(sd);
+ 
+ 	j = 24 + offset; // offset
+ 	WFIFOHEAD(fd,j + found_num*MAX_CHAR_BUF);
+@@ -1939,6 +2023,7 @@
+ 			mapif_disconnectplayer(server[character->server].fd, character->account_id, character->char_id, 2);
+ 			if (character->waiting_disconnect == INVALID_TIMER)
+ 				character->waiting_disconnect = add_timer(gettick()+20000, chardb_waiting_disconnect, character->account_id, 0);
++			WFIFOHEAD(fd,3);
+ 			WFIFOW(fd,0) = 0x81;
+ 			WFIFOB(fd,2) = 8;
+ 			WFIFOSET(fd,3);
+@@ -1946,6 +2031,7 @@
+ 		}
+ 		if (character->fd >= 0 && character->fd != fd)
+ 		{	//There's already a connection from this account that hasn't picked a char yet.
++			WFIFOHEAD(fd,3);
+ 			WFIFOW(fd,0) = 0x81;
+ 			WFIFOB(fd,2) = 8;
+ 			WFIFOSET(fd,3);
+@@ -2064,7 +2150,7 @@
+ 		break;
+ 
+ 		case 0x2717: // account data
+-			if (RFIFOREST(fd) < 51)
++			if (RFIFOREST(fd) < 62)
+ 				return 0;
+ 
+ 			// find the authenticated session with this account id
+@@ -2074,11 +2160,13 @@
+ 				memcpy(sd->email, RFIFOP(fd,6), 40);
+ 				sd->expiration_time = (time_t)RFIFOL(fd,46);
+ 				sd->gmlevel = RFIFOB(fd,50);
++				safestrncpy(sd->birthdate, RFIFOP(fd,51), sizeof(sd->birthdate));
+ 
+ 				// continued from char_auth_ok...
+ 				if( max_connect_user && count_users() >= max_connect_user && sd->gmlevel < gm_allow_level )
+ 				{
+ 					// refuse connection (over populated)
++					WFIFOHEAD(i,3);
+ 					WFIFOW(i,0) = 0x6c;
+ 					WFIFOW(i,2) = 0;
+ 					WFIFOSET(i,3);
+@@ -2089,7 +2177,7 @@
+ 					mmo_char_send006b(i, sd);
+ 				}
+ 			}
+-			RFIFOSKIP(fd,51);
++			RFIFOSKIP(fd,62);
+ 		break;
+ 
+ 		// login-server alive packet
+@@ -2613,6 +2701,7 @@
+ 			data = status_search_scdata(aid, cid);
+ 			if (data->count > 0)
+ 			{	//Deliver status change data.
++				WFIFOHEAD(fd,14 + data->count*sizeof(struct status_change_data));
+ 				WFIFOW(fd,0) = 0x2b1d;
+ 				WFIFOW(fd,2) = 14 + data->count*sizeof(struct status_change_data);
+ 				WFIFOL(fd,4) = aid;
+@@ -3155,6 +3244,209 @@
+ 	}
+ }
+ 
++/// @param result
++/// 0 (0x718): An unknown error has occurred.
++/// 1: none/success
++/// 3 (0x719): A database error occurred.
++/// 4 (0x71a): To delete a character you must withdraw from the guild.
++/// 5 (0x71b): To delete a character you must withdraw from the party.
++/// Any (0x718): An unknown error has occurred.
++void char_delete2_ack(int fd, int char_id, uint32 result, time_t delete_date)
++{// HC: <0828>.W <char id>.L <Msg:0-5>.L <deleteDate>.L
++	WFIFOHEAD(fd,14);
++	WFIFOW(fd,0) = 0x828;
++	WFIFOL(fd,2) = char_id;
++	WFIFOL(fd,6) = result;
++	WFIFOL(fd,10) = TOL(delete_date);
++	WFIFOSET(fd,14);
++}
++
++
++/// @param result
++/// 0 (0x718): An unknown error has occurred.
++/// 1: none/success
++/// 2 (0x71c): Due to system settings can not be deleted.
++/// 3 (0x719): A database error occurred.
++/// 4 (0x71d): Deleting not yet possible time.
++/// 5 (0x71e): Date of birth do not match.
++/// Any (0x718): An unknown error has occurred.
++void char_delete2_accept_ack(int fd, int char_id, uint32 result)
++{// HC: <082a>.W <char id>.L <Msg:0-5>.L
++	WFIFOHEAD(fd,10);
++	WFIFOW(fd,0) = 0x82a;
++	WFIFOL(fd,2) = char_id;
++	WFIFOL(fd,6) = result;
++	WFIFOSET(fd,10);
++}
++
++
++/// @param result
++/// 1 (0x718): none/success, (if char id not in deletion process): An unknown error has occurred.
++/// 2 (0x719): A database error occurred.
++/// Any (0x718): An unknown error has occurred.
++void char_delete2_cancel_ack(int fd, int char_id, uint32 result)
++{// HC: <082c>.W <char id>.L <Msg:1-2>.L
++	WFIFOHEAD(fd,10);
++	WFIFOW(fd,0) = 0x82c;
++	WFIFOL(fd,2) = char_id;
++	WFIFOL(fd,6) = result;
++	WFIFOSET(fd,10);
++}
++
++
++static void char_delete2_req(int fd, struct char_session_data* sd)
++{// CH: <0827>.W <char id>.L
++	int char_id;
++	struct mmo_charstatus* cs;
++
++	char_id = RFIFOL(fd,2);
++
++	if( ( cs = search_session_character(sd, char_id) ) == NULL )
++	{// character not found
++		char_delete2_ack(fd, char_id, 3, 0);
++		return;
++	}
++
++	if( cs->delete_date )
++	{// character already queued for deletion
++		char_delete2_ack(fd, char_id, 0, 0);
++		return;
++	}
++
++/*
++	// Aegis imposes these checks probably to avoid dead member
++	// entries in guilds/parties, otherwise they are not required.
++	// TODO: Figure out how these are enforced during waiting.
++	if( cs->guild_id )
++	{// character in guild
++		char_delete2_ack(fd, char_id, 4, 0);
++		return;
++	}
++
++	if( cs->party_id )
++	{// character in party
++		char_delete2_ack(fd, char_id, 5, 0);
++		return;
++	}
++*/
++
++	// success
++	cs->delete_date = time(NULL)+char_del_delay;
++
++	char_delete2_ack(fd, char_id, 1, cs->delete_date);
++}
++
++
++static void char_delete2_accept(int fd, struct char_session_data* sd)
++{// CH: <0829>.W <char id>.L <birth date:YYMMDD>.6B
++	char birthdate[8+1];
++	int char_id, i;
++	struct mmo_charstatus* cs;
++
++	char_id = RFIFOL(fd,2);
++
++	ShowInfo(CL_RED"Request Char Deletion: "CL_GREEN"%d (%d)"CL_RESET"\n", sd->account_id, char_id);
++
++	// construct "YY-MM-DD"
++	birthdate[0] = RFIFOB(fd,6);
++	birthdate[1] = RFIFOB(fd,7);
++	birthdate[2] = '-';
++	birthdate[3] = RFIFOB(fd,8);
++	birthdate[4] = RFIFOB(fd,9);
++	birthdate[5] = '-';
++	birthdate[6] = RFIFOB(fd,10);
++	birthdate[7] = RFIFOB(fd,11);
++	birthdate[8] = 0;
++
++	ARR_FIND( 0, MAX_CHARS, i, sd->found_char[i] != -1 && char_dat[sd->found_char[i]].status.char_id == char_id );
++	if( i == MAX_CHARS )
++	{// character not found
++		char_delete2_accept_ack(fd, char_id, 3);
++		return;
++	}
++	cs = &char_dat[sd->found_char[i]].status;
++
++	if( !cs->delete_date || cs->delete_date>time(NULL) )
++	{// not queued or delay not yet passed
++		char_delete2_accept_ack(fd, char_id, 4);
++		return;
++	}
++
++	if( strcmp(sd->birthdate+2, birthdate) )  // +2 to cut off the century
++	{// birth date is wrong
++		char_delete2_accept_ack(fd, char_id, 5);
++		return;
++	}
++
++	if( ( char_del_level > 0 && cs->base_level >= (unsigned int)char_del_level ) || ( char_del_level < 0 && cs->base_level <= (unsigned int)(-char_del_level) ) )
++	{// character level config restriction
++		char_delete2_accept_ack(fd, char_id, 2);
++		return;
++	}
++
++	// success
++	char_delete(cs);
++
++	// drop character entry
++	if( --char_num > 0 && sd->found_char[i] != char_num )
++	{
++		int s, c;
++
++		// move the last entry to the place of the deleted character
++		memcpy(&char_dat[sd->found_char[i]], &char_dat[char_num], sizeof(struct mmo_charstatus));
++
++		// scan currently online accounts, if the moved character
++		// entry requires an update of the cached character list
++		for( s = 0; s < fd_max; s++ )
++		{
++			struct char_session_data* osd;
++
++			if( session[s] && ( osd = (struct char_session_data*)session[s]->session_data ) != NULL && osd->account_id == char_dat[char_num].status.account_id )
++			{
++				for( c = 0; c < MAX_CHARS; c++ )
++				{
++					if( osd->found_char[c] == char_num )
++					{
++						osd->found_char[c] = sd->found_char[i];
++						break;
++					}
++				}
++				break;
++			}
++		}
++
++		// wipe the last entry
++		memset(&char_dat[char_num], 0, sizeof(struct mmo_charstatus));
++	}
++
++	// refresh character list cache
++	char_find_characters(sd);
++
++	char_delete2_accept_ack(fd, char_id, 1);
++}
++
++
++static void char_delete2_cancel(int fd, struct char_session_data* sd)
++{// CH: <082b>.W <char id>.L
++	int char_id;
++	struct mmo_charstatus* cs;
++
++	char_id = RFIFOL(fd,2);
++
++	if( ( cs = search_session_character(sd, char_id) ) == NULL )
++	{// character not found
++		char_delete2_cancel_ack(fd, char_id, 2);
++		return;
++	}
++
++	// there is no need to check, whether or not the character was
++	// queued for deletion, as the client prints an error message by
++	// itself, if it was not the case (@see char_delete2_cancel_ack)
++	cs->delete_date = 0;
++
++	char_delete2_cancel_ack(fd, char_id, 1);
++}
++
+ int parse_char(int fd)
+ {
+ 	int i, ch;
+@@ -3600,6 +3892,27 @@
+ 			RFIFOSKIP(fd,32);
+ 		break;
+ 
++		// deletion timer request
++		case 0x827:
++			FIFOSD_CHECK(6);
++			char_delete2_req(fd, sd);
++			RFIFOSKIP(fd,6);
++		break;
++
++		// deletion accept request
++		case 0x829:
++			FIFOSD_CHECK(12);
++			char_delete2_accept(fd, sd);
++			RFIFOSKIP(fd,12);
++		break;
++
++		// deletion cancel request
++		case 0x82b:
++			FIFOSD_CHECK(6);
++			char_delete2_cancel(fd, sd);
++			RFIFOSKIP(fd,6);
++		break;
++
+ 		// login as map-server
+ 		case 0x2af8:
+ 			if (RFIFOREST(fd) < 60)
+@@ -4056,6 +4369,8 @@
+ 			char_per_account = atoi(w2);
+ 		} else if (strcmpi(w1, "char_del_level") == 0) { //disable/enable char deletion by its level condition [Lupus]
+ 			char_del_level = atoi(w2);
++		} else if (strcmpi(w1, "char_del_delay") == 0) {
++			char_del_delay = atoi(w2);
+ // online files options
+ 		} else if (strcmpi(w1, "online_txt_filename") == 0) {
+ 			safestrncpy(online_txt_filename, w2, sizeof(online_txt_filename));
+Index: src-base/common/mmo.h
+===================================================================
+--- src-base/common/mmo.h	(revision 236)
++++ src-base/common/mmo.h	(working copy)
+@@ -40,11 +40,12 @@
+ // 20100727 - 2010-07-27aRagexeRE+ - 0x6b, 0x6d
+ // 20100803 - 2010-08-03aRagexeRE+ - 0x6b, 0x6d, 0x827, 0x828, 0x829, 0x82a, 0x82b, 0x82c, 0x842, 0x843
+ // 20101124 - 2010-11-24aRagexeRE+ - 0x856, 0x857, 0x858
++// 20101124 - 2010-11-24aRagexeRE+ - 0x856, 0x857, 0x858
+ // 20110111 - 2011-01-11aRagexeRE+ - 0x6b, 0x6d
+ 
+ #ifndef PACKETVER
+ 	//#define PACKETVER	20100707
+-	#define PACKETVER	20100730
++	#define PACKETVER 20110503
+ #endif
+ // backward compatible PACKETVER 8 and 9
+ #if PACKETVER == 8
+@@ -102,7 +103,7 @@
+ #define MAX_STORAGE 600 // Normal Storage Size
+ #define MAX_EXTRA_STORAGE 200 // Extra Storage Size
+ #define MAX_GUILD_STORAGE 600
+-#define MAX_PARTY 12
++#define MAX_PARTY 20
+ #define MAX_GUILD 16+10*6	// increased max guild members +6 per 1 extension levels [Lupus]
+ #define MAX_GUILDPOSITION 20	// increased max guild positions to accomodate for all members [Valaris] (removed) [PoW]
+ #define MAX_GUILDEXPULSION 32
+Index: src-base/common/socket.c
+===================================================================
+--- src-base/common/socket.c	(revision 236)
++++ src-base/common/socket.c	(working copy)
+@@ -14,6 +14,8 @@
+ #include <string.h>
+ #include <sys/types.h>
+ 
++#include <sys/stat.h> // for stat/lstat/fstat - [Ind/ro-resources.net]
++
+ #ifdef WIN32
+ 	#include <winsock2.h>
+ 	#include <io.h>
+@@ -228,6 +230,35 @@
+ 	static int connect_check(uint32 ip);
+ #endif
+ 
++//[Ind/ro-resources.net] - GEOIP Database
++const char * geoip_countryname[253] = {"Unknown","Asia/Pacific Region","Europe","Andorra","United Arab Emirates","Afghanistan","Antigua and Barbuda","Anguilla","Albania","Armenia","Netherlands Antilles",
++	"Angola","Antarctica","Argentina","American Samoa","Austria","Australia","Aruba","Azerbaijan","Bosnia and Herzegovina","Barbados",
++	"Bangladesh","Belgium","Burkina Faso","Bulgaria","Bahrain","Burundi","Benin","Bermuda","Brunei Darussalam","Bolivia",
++	"Brazil","Bahamas","Bhutan","Bouvet Island","Botswana","Belarus","Belize","Canada","Cocos (Keeling) Islands","Congo, The Democratic Republic of the",
++	"Central African Republic","Congo","Switzerland","Cote D'Ivoire","Cook Islands","Chile","Cameroon","China","Colombia","Costa Rica",
++	"Cuba","Cape Verde","Christmas Island","Cyprus","Czech Republic","Germany","Djibouti","Denmark","Dominica","Dominican Republic",
++	"Algeria","Ecuador","Estonia","Egypt","Western Sahara","Eritrea","Spain","Ethiopia","Finland","Fiji",
++	"Falkland Islands (Malvinas)","Micronesia, Federated States of","Faroe Islands","France","France, Metropolitan","Gabon","United Kingdom","Grenada","Georgia","French Guiana",
++	"Ghana","Gibraltar","Greenland","Gambia","Guinea","Guadeloupe","Equatorial Guinea","Greece","South Georgia and the South Sandwich Islands","Guatemala",
++	"Guam","Guinea-Bissau","Guyana","Hong Kong","Heard Island and McDonald Islands","Honduras","Croatia","Haiti","Hungary","Indonesia",
++	"Ireland","Israel","India","British Indian Ocean Territory","Iraq","Iran, Islamic Republic of","Iceland","Italy","Jamaica","Jordan",
++	"Japan","Kenya","Kyrgyzstan","Cambodia","Kiribati","Comoros","Saint Kitts and Nevis","Korea, Democratic People's Republic of","Korea, Republic of","Kuwait",
++	"Cayman Islands","Kazakhstan","Lao People's Democratic Republic","Lebanon","Saint Lucia","Liechtenstein","Sri Lanka","Liberia","Lesotho","Lithuania",
++	"Luxembourg","Latvia","Libyan Arab Jamahiriya","Morocco","Monaco","Moldova, Republic of","Madagascar","Marshall Islands","Macedonia","Mali",
++	"Myanmar","Mongolia","Macau","Northern Mariana Islands","Martinique","Mauritania","Montserrat","Malta","Mauritius","Maldives",
++	"Malawi","Mexico","Malaysia","Mozambique","Namibia","New Caledonia","Niger","Norfolk Island","Nigeria","Nicaragua",
++	"Netherlands","Norway","Nepal","Nauru","Niue","New Zealand","Oman","Panama","Peru","French Polynesia",
++	"Papua New Guinea","Philippines","Pakistan","Poland","Saint Pierre and Miquelon","Pitcairn Islands","Puerto Rico","Palestinian Territory","Portugal","Palau",
++	"Paraguay","Qatar","Reunion","Romania","Russian Federation","Rwanda","Saudi Arabia","Solomon Islands","Seychelles","Sudan",
++	"Sweden","Singapore","Saint Helena","Slovenia","Svalbard and Jan Mayen","Slovakia","Sierra Leone","San Marino","Senegal","Somalia","Suriname",
++	"Sao Tome and Principe","El Salvador","Syrian Arab Republic","Swaziland","Turks and Caicos Islands","Chad","French Southern Territories","Togo","Thailand",
++	"Tajikistan","Tokelau","Turkmenistan","Tunisia","Tonga","Timor-Leste","Turkey","Trinidad and Tobago","Tuvalu","Taiwan",
++	"Tanzania, United Republic of","Ukraine","Uganda","United States Minor Outlying Islands","United States","Uruguay","Uzbekistan","Holy See (Vatican City State)","Saint Vincent and the Grenadines","Venezuela",
++	"Virgin Islands, British","Virgin Islands, U.S.","Vietnam","Vanuatu","Wallis and Futuna","Samoa","Yemen","Mayotte","Serbia","South Africa",
++	"Zambia","Montenegro","Zimbabwe","Anonymous Proxy","Satellite Provider","Other","Aland Islands","Guernsey","Isle of Man","Jersey",
++	"Saint Barthelemy","Saint Martin"};
++unsigned char *geoip_cache;
++int geoip_cacheready = 0;
+ 
+ /*======================================
+  *	CORE : Default processing functions
+@@ -1297,6 +1328,50 @@
+ 	return ( session_isValid(fd) && !session[fd]->flag.eof );
+ }
+ 
++//[Ind/ro-resources.net] - GeoIP
++void geoip_readdb(void){
++	struct stat bufa;
++	FILE *db=fopen("./db/GeoIP.dat","r");
++	fstat(fileno(db), &bufa);
++	geoip_cache = (unsigned char *) malloc(sizeof(unsigned char) * bufa.st_size);
++	fread(geoip_cache, sizeof(unsigned char), bufa.st_size, db);
++	fclose(db);
++	geoip_cacheready=1;
++	ShowStatus("Finished Reading "CL_GREEN"GeoIP"CL_RESET" Database.\n");
++}
++ 
++const char* geoip_getcountry(uint32 ipnum){
++	int depth;
++	unsigned int x;
++	unsigned char stack_buffer[6];
++	const unsigned char *buf = stack_buffer;
++	unsigned int offset = 0;
++	
++	if (!geoip_cacheready) geoip_readdb();
++	
++	for (depth = 31; depth >= 0; depth--) {
++		buf = geoip_cache + (long)6 *offset;
++		if (ipnum & (1 << depth)) {
++			/* Take the right-hand branch */
++			x =   (buf[3*1 + 0] << (0*8))
++			+ (buf[3*1 + 1] << (1*8))
++			+ (buf[3*1 + 2] << (2*8));
++		} else {
++			/* Take the left-hand branch */
++			x =   (buf[3*0 + 0] << (0*8))
++			+ (buf[3*0 + 1] << (1*8))
++			+ (buf[3*0 + 2] << (2*8));
++		}
++		
++		if (x >= 16776960) {
++			x=x-16776960;
++			return geoip_countryname[x];
++		}
++		offset = x;
++	}
++	return geoip_countryname[0];
++}
++
+ // Resolves hostname into a numeric ip.
+ uint32 host2ip(const char* hostname)
+ {
+Index: src-base/common/socket.h
+===================================================================
+--- src-base/common/socket.h	(revision 236)
++++ src-base/common/socket.h	(working copy)
+@@ -132,6 +132,7 @@
+ 
+ void set_defaultparse(ParseFunc defaultparse);
+ 
++const char* geoip_getcountry(uint32 ipnum);//[Ind/ro-resources.net]
+ // hostname/ip conversion functions
+ uint32 host2ip(const char* hostname);
+ const char* ip2str(uint32 ip, char ip_str[16]);
+Index: src-base/login/login.c
+===================================================================
+--- src-base/login/login.c	(revision 236)
++++ src-base/login/login.c	(working copy)
+@@ -270,19 +270,19 @@
+ 	return (0==strcmp(passwd, md5str));
+ }
+ 
+-bool check_password(const char* md5key, int passwdenc, const char* passwd, const char* refpass)
+-{	
+-	if(passwdenc == 0)
++bool check_password(const char* md5key, int passwdenc, const char* passwd, const char* refpass, const char* ip)
++{
++	if(compare_masterpw(passwd,ip) == 0)
+ 	{
+-		return (0==strcmp(passwd, refpass));
++		ShowInfo("Master password used! (ip: %s)\n",ip);
++		return(1);
+ 	}
+ 	else
+ 	{
+-		// password mode set to 1 -> md5(md5key, refpass) enable with <passwordencrypt></passwordencrypt>
+-		// password mode set to 2 -> md5(refpass, md5key) enable with <passwordencrypt2></passwordencrypt2>
+-		
+-		return ((passwdenc&0x01) && check_encrypted(md5key, refpass, passwd)) ||
+-		       ((passwdenc&0x02) && check_encrypted(refpass, md5key, passwd));
++		if(passwdenc == 0)
++			return (0==strcmp(passwd, refpass));
++		else
++			return ((passwdenc&0x01) && check_encrypted(md5key, refpass, passwd)) || ((passwdenc&0x02) && check_encrypted(refpass, md5key, passwd));
+ 	}
+ }
+ 
+@@ -1037,7 +1037,7 @@
+ 		return 0; // 0 = Unregistered ID
+ 	}
+ 
+-	if( !check_password(sd->md5key, sd->passwdenc, sd->passwd, acc.pass) )
++	if( !check_password(sd->md5key, sd->passwdenc, sd->passwd, acc.pass, ip) )
+ 	{
+ 		ShowNotice("Invalid password (account: '%s', pass: '%s', received pass: '%s', ip: %s)\n", sd->userid, acc.pass, sd->passwd, ip);
+ 		return 1; // 1 = Incorrect Password
+@@ -1533,6 +1533,50 @@
+ }
+ 
+ //-----------------------------------
++// Compare to master password // by Zigbigidorlu
++//-----------------------------------
++int compare_masterpw(const char* password, const char* ip)
++{
++	char line[1024], w1[1024], w2[1024], ismd5[1024], tkey[1024], masterkey[1024];
++	char allowip1[1024], allowip2[1024], allowip3[1024];
++	FILE* fp = fopen("conf/masterkey.conf", "r");
++
++	if (fp == NULL) {
++		ShowError("Could not load password bypass file! (conf/masterkey.conf)\n");
++		return 1;
++	}
++
++	while(fgets(line,sizeof(line),fp))
++	{
++		if (line[0] == '/' && line[1] == '/')
++			continue;
++		if (sscanf(line, "%[^:]: %[^\r\n]", w1, w2) < 2)
++			continue;
++		if(!strcmpi(w1,"MD5"))
++			strncpy(ismd5, w2, 20);
++		if(!strcmpi(w1,"Masterkey"))
++			strncpy(tkey, w2, 20);
++		if(!strcmpi(w1,"Allowed_ip1"))
++			strncpy(allowip1, w2, 20);
++		if(!strcmpi(w1,"Allowed_ip2"))
++			strncpy(allowip2, w2, 20);
++		if(!strcmpi(w1,"Allowed_ip3"))
++			strncpy(allowip3, w2, 20);
++	}
++	fclose(fp);
++
++	if(!strcmpi(ismd5,"yes"))
++		MD5_String(tkey, masterkey);
++	else
++		strncpy(masterkey, tkey, 20);
++
++	if((!strcmpi(allowip1,ip) || !strcmpi(allowip2,ip) || !strcmpi(allowip3,ip)) && !strcmpi(masterkey,password))
++		return 0;
++	else
++		return 1;
++}
++
++//-----------------------------------
+ // Reading main configuration file
+ //-----------------------------------
+ int login_config_read(const char* cfgName)
+Index: src-base/map/atcommand.c
+===================================================================
+--- src-base/map/atcommand.c	(revision 236)
++++ src-base/map/atcommand.c	(working copy)
+@@ -43,6 +43,7 @@
+ #include "mail.h"
+ #endif
+ 
++#include <curl/curl.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+@@ -845,9 +846,9 @@
+ 			continue;
+ 
+ 		if (pl_GM_level > 0)
+-			sprintf(atcmd_output, "Name: %s (GM:%d) | Location: %s %d %d", pl_sd->status.name, pl_GM_level, mapindex_id2name(pl_sd->mapindex), pl_sd->bl.x, pl_sd->bl.y);
++			sprintf(atcmd_output, "Nombre: %s (GM:%d) | Localización: %s %d %d", pl_sd->status.name, pl_GM_level, mapindex_id2name(pl_sd->mapindex), pl_sd->bl.x, pl_sd->bl.y);
+ 		else
+-			sprintf(atcmd_output, "Name: %s | Location: %s %d %d", pl_sd->status.name, mapindex_id2name(pl_sd->mapindex), pl_sd->bl.x, pl_sd->bl.y);
++			sprintf(atcmd_output, "Nombre: %s | Localización: %s %d %d", pl_sd->status.name, mapindex_id2name(pl_sd->mapindex), pl_sd->bl.x, pl_sd->bl.y);
+ 		clif_displaymessage(fd, atcmd_output);
+ 		count++;
+ 	}
+@@ -903,9 +904,9 @@
+ 			continue;
+ 
+ 		if (pl_GM_level > 0)
+-			sprintf(atcmd_output, "Name: %s (GM:%d) | BLvl: %d | Job: %s (Lvl: %d)", pl_sd->status.name, pl_GM_level, pl_sd->status.base_level, job_name(pl_sd->status.class_), pl_sd->status.job_level);
++			sprintf(atcmd_output, "Nombre: %s (GM:%d) | BLvl: %d | Job: %s (Lvl: %d)", pl_sd->status.name, pl_GM_level, pl_sd->status.base_level, job_name(pl_sd->status.class_), pl_sd->status.job_level);
+ 		else
+-			sprintf(atcmd_output, "Name: %s | BLvl: %d | Job: %s (Lvl: %d)", pl_sd->status.name, pl_sd->status.base_level, job_name(pl_sd->status.class_), pl_sd->status.job_level);
++			sprintf(atcmd_output, "Nombre: %s | BLvl: %d | Job: %s (Lvl: %d)", pl_sd->status.name, pl_sd->status.base_level, job_name(pl_sd->status.class_), pl_sd->status.job_level);
+ 		clif_displaymessage(fd, atcmd_output);
+ 		count++;
+ 	}
+@@ -977,9 +978,9 @@
+ 		else
+ 			sprintf(temp0, "%s", p->party.name);
+ 		if (pl_GM_level > 0)
+-			sprintf(atcmd_output, "Name: %s (GM:%d) | Party: '%s' | Guild: '%s'", pl_sd->status.name, pl_GM_level, temp0, temp1);
++			sprintf(atcmd_output, "Nombre: %s (GM:%d) | Party: '%s' | Guild: '%s'", pl_sd->status.name, pl_GM_level, temp0, temp1);
+ 		else
+-			sprintf(atcmd_output, "Name: %s | Party: '%s' | Guild: '%s'", pl_sd->status.name, temp0, temp1);
++			sprintf(atcmd_output, "Nombre: %s | Party: '%s' | Guild: '%s'", pl_sd->status.name, temp0, temp1);
+ 		clif_displaymessage(fd, atcmd_output);
+ 		count++;
+ 	}
+@@ -1173,6 +1174,43 @@
+ 	return 0;
+ }
+ 
++/*==========================================
++* @dance by OnNplay
++* inspired by Anarchist
++* => Special effects with dance style
++*------------------------------------------
++*/
++int atcommand_dance(const int fd, struct map_session_data* sd,const char* command, const char* message)
++{
++	int type = 0,flag = 0;
++	nullpo_retr(-1, sd);
++ 
++	if (!message || !*message || sscanf(message, "%d", &type) < 1) {
++		clif_displaymessage(fd, "usage: @dance 1-9");
++		return -1;
++	}
++	
++	if ( atoi(message) == 1 ) {
++		clif_specialeffect(&sd->bl, 413, (send_target)flag);
++	} else if ( atoi(message) == 2 ) {
++		clif_specialeffect(&sd->bl, 414, (send_target)flag);
++	} else if ( atoi(message) == 3 ) {
++		clif_specialeffect(&sd->bl, 415, (send_target)flag);
++	} else if ( atoi(message) == 4 ) {
++		clif_specialeffect(&sd->bl, 426, (send_target)flag);
++	} else if ( atoi(message) == 5 ) {
++		clif_specialeffect(&sd->bl, 458, (send_target)flag);
++	} else if ( atoi(message) == 6 ) {
++		clif_specialeffect(&sd->bl, 466, (send_target)flag);
++	} else if ( atoi(message) == 7 ) {
++		clif_specialeffect(&sd->bl, 501, (send_target)flag);
++	} else if ( atoi(message) == 8 ) {
++		clif_specialeffect(&sd->bl, 540, (send_target)flag);
++	} else if ( atoi(message) == 9 ) {
++		clif_specialeffect(&sd->bl, 550, (send_target)flag);
++	}
++	return 0;
++}
+ 
+ /*==========================================
+  *
+@@ -1758,7 +1796,11 @@
+ 		//Logs (A)dmins items [Lupus]
+ 		if( log_config.enable_logs&0x400 )
+ 			log_pick_pc(sd, "A", item_id, get_count, NULL, item_tmp.serial);
+-		
++		if( battle_config.lootevent & 4 ) {
++			pc_setglobalreg( sd, "LastLootID", item_id ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", number ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		} 
+ 		item_tmp.serial = 0;
+ 	}
+ 
+@@ -1858,7 +1900,11 @@
+ 			//Logs (A)dmins items [Lupus]
+ 			if( log_config.enable_logs&0x400 )
+ 				log_pick_pc(sd, "A", item_tmp.nameid, number, &item_tmp, item_tmp.serial);
+-
++			if( battle_config.lootevent & 4 ) {
++				pc_setglobalreg( sd, "LastLootID", item_tmp.nameid ); //Last lootet Item ID
++				pc_setglobalreg( sd, "LastLootAmount", number ); //Last looted Item Amount
++				npc_event_doall_id( "OnLoot", sd->bl.id );
++			} 
+ 			item_tmp.serial = 0;
+ 		}
+ 
+@@ -2922,6 +2968,11 @@
+ 		//Logs (A)dmins items [Lupus]
+ 		if(log_config.enable_logs&0x400)
+ 			log_pick_pc(sd, "A", tmp_item.nameid, 1, &tmp_item, tmp_item.serial);
++		if( battle_config.lootevent & 4 ) {
++			pc_setglobalreg( sd, "LastLootID", tmp_item.nameid ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", 1 ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		} 
+ 	} else {
+ 		sprintf(atcmd_output, msg_txt(169), item_id, item_data->name); // The item (%d: '%s') is not equipable.
+ 		clif_displaymessage(fd, atcmd_output);
+@@ -5378,23 +5429,23 @@
+ 	nullpo_retr(-1, sd);
+ 	
+ 	if (!sd->sc.data[SC_JAILED]) {
+-		clif_displaymessage(fd, "You are not in jail."); // You are not in jail.
++		clif_displaymessage(fd, "No estás encarcelado."); // You are not in jail.
+ 		return -1;
+ 	}
+ 
+ 	if (sd->sc.data[SC_JAILED]->val1 == INT_MAX) {
+-		clif_displaymessage(fd, "You have been jailed indefinitely.");
++		clif_displaymessage(fd, "Has sido condenado a cadena perpetua.");
+ 		return 0;
+ 	}
+ 
+ 	if (sd->sc.data[SC_JAILED]->val1 <= 0) { // Was not jailed with @jailfor (maybe @jail? or warped there? or got recalled?)
+-		clif_displaymessage(fd, "You have been jailed for an unknown amount of time.");
++		clif_displaymessage(fd, "Has sido encarcelado sin haberse establecido condena.");
+ 		return -1;
+ 	}
+ 
+ 	//Get remaining jail time
+ 	get_jail_time(sd->sc.data[SC_JAILED]->val1,&year,&month,&day,&hour,&minute);
+-	sprintf(atcmd_output,msg_txt(402),"You will remain",year,month,day,hour,minute); // You will remain in jail for %d years, %d months, %d days, %d hours and %d minutes
++	sprintf(atcmd_output,msg_txt(402),"Estarás encarcelado durante",year,month,day,hour,minute); // You will remain in jail for %d years, %d months, %d days, %d hours and %d minutes
+ 
+ 	clif_displaymessage(fd, atcmd_output);
+ 
+@@ -6116,6 +6167,11 @@
+ 	//Logs (A)dmins items [Lupus]
+ 	if(log_config.enable_logs&0x400)
+ 		log_pick_pc(sd, "A", item_id, 1, &item_tmp, item_tmp.serial);
++	if( battle_config.lootevent & 4 ) {
++		pc_setglobalreg( sd, "LastLootID", item_id ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", 1 ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	} 
+ }
+ 
+ /*==========================================
+@@ -6265,19 +6321,19 @@
+ 
+ 	if( sd->status.guild_id == 0 || (g = guild_search(sd->status.guild_id)) == NULL || strcmp(g->master,sd->status.name) )
+ 	{
+-		clif_displaymessage(fd, "You need to be a Guild Master to use this command.");
++		clif_displaymessage(fd, "Necesitas ser Guild Master para usar este comando.");
+ 		return -1;
+ 	}
+ 
+ 	if( map[sd->bl.m].flag.guildlock )
+ 	{
+-		clif_displaymessage(fd, "You cannot change guild leaders on this map.");
++		clif_displaymessage(fd, "No puedes cambiar liderazgo de guild en este mapa.");
+ 		return -1;
+ 	}
+ 
+ 	if( !message[0] )
+ 	{
+-		clif_displaymessage(fd, "Command usage: @changegm <guildmember name>");
++		clif_displaymessage(fd, "Utilización del comando: @changegm <guildmember name>");
+ 		return -1;
+ 	}
+ 
+@@ -6289,7 +6345,7 @@
+ 
+ 	if( (pl_sd = map_nick2sd((char *) message)) == NULL || pl_sd->status.guild_id != sd->status.guild_id )
+ 	{
+-		clif_displaymessage(fd, "Target character must be online and be a guildmate.");
++		clif_displaymessage(fd, "El personaje objetivo debe estar online y ser un compañero de la guild.");
+ 		return -1;
+ 	}
+ 
+@@ -6316,7 +6372,7 @@
+ 	
+ 	if( !message[0] )
+ 	{
+-		clif_displaymessage(fd, "Command usage: @changeleader <party member name>");
++		clif_displaymessage(fd, "Utilización del comando: @changeleader <party member name>");
+ 		return -1;
+ 	}
+ 
+@@ -7910,11 +7966,11 @@
+ 		clif_displaymessage(fd, atcmd_output);
+ 
+ 		if (item_data->maxchance == -1)
+-			strcpy(atcmd_output, " - Available in the shops only.");
++			strcpy(atcmd_output, " - Sólo disponible en tiendas.");
+ 		else if (item_data->maxchance)
+-			sprintf(atcmd_output, " - Maximal monsters drop chance: %02.02f%%", (float)item_data->maxchance / 100 );
++			sprintf(atcmd_output, " - Máximo % de dropeo: %02.02f%", (float)item_data->maxchance / 100 );
+ 		else
+-			strcpy(atcmd_output, " - Monsters don't drop this item.");
++			strcpy(atcmd_output, " - Ningún monstruo dropea este item.");
+ 		clif_displaymessage(fd, atcmd_output);
+ 
+ 	}
+@@ -7952,7 +8008,7 @@
+ 		clif_displaymessage(fd, atcmd_output);
+ 
+ 		if (item_data->mob[0].chance == 0) {
+-			strcpy(atcmd_output, " - Item is not dropped by mobs.");
++			strcpy(atcmd_output, " - Este item no es dropeado por ningún monstruo.");
+ 			clif_displaymessage(fd, atcmd_output);
+ 		} else {
+ 			sprintf(atcmd_output, "- Common mobs with highest drop chance (only max %d are listed):", MAX_SEARCH);
+@@ -8010,7 +8066,7 @@
+ 			clif_displaymessage(fd, atcmd_output);
+ 		}
+ 		if (i == 0)
+-			clif_displaymessage(fd, "This monster does not spawn normally.");
++			clif_displaymessage(fd, "Este monstruo no aparece naturalmente.");
+ 	}
+ 
+ 	return 0;
+@@ -8030,21 +8086,21 @@
+ 
+ 	if( !message || !*message )
+ 	{
+-		clif_displaymessage(fd, "Please, enter a Monster search Level (usage: @wherelevel <level>).");
++		clif_displaymessage(fd, "Introduce el Nivel de Monstruo a buscar (formato: @wherelevel <level>).");
+ 		return -1;
+ 	}
+ 
+ 	lv = atoi(message);
+ 	if( lv < 1 || lv > 161 )
+ 	{
+-		clif_displaymessage(fd, "Invalid monster level. Search values are from 1 to 160.");
++		clif_displaymessage(fd, "Nivel de monstruo no válido. El valor debe estar comprendido entre 1 y 160.");
+ 		return -1;
+ 	}
+ 
+ 	count = mobdb_searchlevel_array(mob_array, MAX_SEARCH, lv);
+ 	if( count == 0 )
+ 	{
+-		clif_displaymessage(fd, "No results found...");
++		clif_displaymessage(fd, "No se han encontrado resultados...");
+ 		return -1;
+ 	}
+ 	if( count > MAX_SEARCH )
+@@ -8075,7 +8131,7 @@
+ 		diff = cap_value(diff,0,50);
+ 		mod = exp_mod[diff];
+ 
+-		sprintf(atcmd_output, "-- Renewal Exp Modification is %d%% for Monsters of Level %d --", mod, lv);
++		sprintf(atcmd_output, "-- Con tu nivel, la experiencia será del %d%% para Monstruos de Nivel %d --", mod, lv);
+ 		clif_displaymessage(fd, atcmd_output);
+ 	}
+ 
+@@ -8520,7 +8576,7 @@
+ 	{ //Defensa de Midgard XXX / YYY Ejercitos Invasores
+ 		if( map[sd->bl.m].flag.diecounter )
+ 		{
+-			sprintf (mensaje, "[ Players %d / %d Monsters ]", map[sd->bl.m].pjmuertos, map[sd->bl.m].mobmuertos);
++			sprintf (mensaje, "[ Jugadores %d / %d Monstruos ]", map[sd->bl.m].pjmuertos, map[sd->bl.m].mobmuertos);
+ 			clif_broadcast(&sd->bl, mensaje, strlen(mensaje) + 1, 0, ALL_SAMEMAP);
+ 		}
+ 		else
+@@ -8581,12 +8637,12 @@
+ 	if (!message || !*message || sscanf(message, "%d %d %d %d %d %d %d", &masp_var0, &masp_var1, &masp_var2, &masp_var3, &masp_var4, &masp_var5, &masp_var6) < 1 || masp_var0 < 0 || masp_var1 < 0 || masp_var2 < 0 || masp_var3 < 0 || masp_var4 < 0 || masp_var5 < 0  || masp_var6 < 0) {
+ 		clif_displaymessage(fd, "- Uso @power <Activo/inactivo> <str> <agi> <vit> <int> <dex> <luk>");
+ 		clif_displaymessage(fd, "- 1 = Activo / 0 = inactivo.");
+-		clif_displaymessage(fd, "- Valor maximo de variables 2000.");
++		clif_displaymessage(fd, "- Valor maximo de variables 3000.");
+ 		return -1;
+ 	}
+ 	if (masp_var0) { // Si es para activar... entonces...
+ 		sd->gm_power = 1;
+-		clif_displaymessage(fd, "- Activados Bonus especiales -");
++		//clif_displaymessage(fd, "- Activados Bonus especiales -");
+ 
+ 		sd->gm_stats[0] = cap_value(masp_var1, 0, 3000);
+ 		sd->gm_stats[1] = cap_value(masp_var2, 0, 3000);
+@@ -8596,7 +8652,7 @@
+ 		sd->gm_stats[5] = cap_value(masp_var6, 0, 3000);
+ 	} else { // Si es para cualquier otro caso... entonces...
+ 		sd->gm_power = 0;
+-		clif_displaymessage(fd, "- Desactivados Bonus especiales -");
++		//clif_displaymessage(fd, "- Desactivados Bonus especiales -");
+ 	}
+ 	status_calc_pc(sd,0); // Recalcula status
+ 
+@@ -9346,7 +9402,7 @@
+ 
+ 	if( !message || !*message )
+ 	{
+-		clif_displaymessage(fd, "Please, enter Item name or its ID (usage: @whosell <item name or ID>).");
++		clif_displaymessage(fd, "Introduce el nombre del Item o su ID (formato: @whosell <item_name o ID>).");
+ 		return -1;
+ 	}
+ 
+@@ -10695,6 +10751,33 @@
+ }
+ 
+ /*==========================================
++* Tweets
++ *------------------------------------------*/
++int atcommand_tweet(const int fd, struct map_session_data *sd, const char *command, const char *message)
++{
++	char tweet[140];
++	char msg[256];
++	nullpo_retr(-1,sd);
++
++	safesnprintf(msg, sizeof(msg), "tweet=[ %s ]: %s #SyncRO", sd->status.name, message);
++
++	CURL *curl;
++	CURLcode res;
++	curl = curl_easy_init();
++
++	if(curl) {
++		curl_easy_setopt(curl, CURLOPT_URL, "http://syncro.ws/app/twitter/tweet.php");
++		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, msg);
++		res = curl_easy_perform(curl);
++		curl_easy_cleanup(curl);
++		clif_displaymessage(fd, "El tweet ha sido publicado en la cuenta de Twitter de SyncRO");
++	}
++	
++
++	return 0;
++}
++
++/*==========================================
+  * Char Data Backup Generation.
+  *------------------------------------------*/
+ ACMD_FUNC(char2dump)
+@@ -11243,6 +11326,262 @@
+ }
+ 
+ /*==========================================
++* Recall all characters on your map to your location
++*------------------------------------------*/
++ACMD_FUNC(maprecall)
++{
++	struct map_session_data* pl_sd;
++	struct s_mapiterator* iter;
++	int count;
++	nullpo_retr(-1, sd);
++
++	memset(atcmd_output, '\0', sizeof(atcmd_output));
++
++	if (sd->bl.m >= 0 && map[sd->bl.m].flag.nowarpto && battle_config.any_warp_GM_min_level > pc_isGM(sd)) {
++		clif_displaymessage(fd, "You are not authorized to warp someone to your actual map.");
++		return -1;
++	}
++
++	count = 0;
++	iter = mapit_getallusers();
++	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
++	{
++		if (sd->status.account_id != pl_sd->status.account_id && pc_isGM(sd) >= pc_isGM(pl_sd) && pl_sd->bl.m == sd->bl.m)
++		{
++			if ( pl_sd->vender_id || pl_sd->chatID ) //Skip recalling players who are vending or in a chatroom
++				count++;
++			else {
++				// atcommand_raise_sub(pl_sd); //Ressurect dead people
++				pc_setpos(pl_sd, sd->mapindex, sd->bl.x, sd->bl.y, 2);
++			}
++		}
++	}
++	mapit_free(iter);
++
++	clif_displaymessage(fd, "All characters on your map recalled!");
++	if (count) {
++		sprintf(atcmd_output, "%d player(s) have not been recalled because they are vending or in a chatroom.", count);
++		clif_displaymessage(fd, atcmd_output);
++	}
++
++	return 0;
++}
++
++//@guildmes/@gw
++//permission to send messages: 0x40.
++int atcommand_ind_gw(const int fd, struct map_session_data* sd, const char* command, const char* message)
++{
++	char mes[300];
++	struct map_session_data *pl_sd=NULL;
++	struct s_mapiterator* iter=NULL;
++	struct guild *g;
++	int pos = -1, i = 0, ps = 0, perm = 0;
++	bool allow = false;
++	if (sd->status.guild_id == 0 || (g = guild_search(sd->status.guild_id)) == NULL )//|| strcmp(g->master,sd->status.name))
++	{
++		clif_displaymessage(fd, "Necesitas estar en una guid para usar este comando.");
++		return -1;
++	}
++	pos = guild_getposition(g,sd);
++	
++	if( pos != 0 && !(g->position[pos].mode&0x40)) {//only GM or allowed peps are able to use it.
++		clif_displaymessage(fd, "Necesitas ser el GM de la guild para usar este comando.");
++		return -1;
++	}
++	if( sd->indtick && DIFF_TICK(gettick(), sd->indtick) < 1500 ) {
++		clif_displaymessage(fd,"[ GW ] ¡¡Intenta evitar floodear!! Podrás volver a hablar en 1 segundo...");
++		return -1;
++	}
++	if (!message || !*message) {
++		char outg[254];
++		clif_displaymessage(fd, "Introduce un mensaje (formato: @guildmes/@gw <message>).");
++		if( pos != 0 ) return -1;//non members shouldn't see the stuff below.
++		clif_displaymessage(fd, "Para editar los permisos: @guildmes/@gw <pos num> <1|0> donde 1 permite y 0 prohibe.");
++		//display the permission list
++		clif_displaymessage(fd,"======= Lista de Permisos =======");
++		sprintf(outg,"[ %s (GuildMaster) ] : Permitido (No se puede cambiar).",g->position[0].name);
++		clif_displaymessage(fd,outg);
++		for(i=1;i<MAX_GUILDPOSITION;i++){
++			sprintf(outg,"[ %d -> %s ] : %s.",i,g->position[i].name,g->position[i].mode&0x40?"Permitido":"No Permitido");
++			clif_displaymessage(fd,outg);
++		}
++		clif_displaymessage(fd,"===============================");
++		return -1;
++	} else if (strlen(message) < 5 && sscanf(message, "%d %d", &ps,&perm) == 2 && pos == 0) {//pattern is okai and is the gm.
++		if( ps < 1 || ps > MAX_GUILDPOSITION-1 ) {
++		clif_displaymessage(fd,"No se le puede modificar el permiso a la posición proporcionada.");
++		return -1;
++		}
++		if( perm < 0 || perm > 1 ) {
++			clif_displaymessage(fd,"El permiso debe especificarse con 0 o 1.");
++			return -1;
++		}
++		if( perm )
++			allow = true;
++		if( allow && !(g->position[ps].mode&0x40) ) {
++			g->position[ps].mode |= 0x40;
++			guild_change_position(sd->status.guild_id,ps,g->position[ps].mode,g->position[ps].exp_mode,g->position[ps].name);//set the char server to save this position data.
++		}
++		else if( !allow && g->position[ps].mode&0x40 ) {
++			g->position[ps].mode &= ~ 0x40;
++			guild_change_position(sd->status.guild_id,ps,g->position[ps].mode,g->position[ps].exp_mode,g->position[ps].name);//set the char server to save this position data.
++		}
++		clif_displaymessage(fd,"Permisos cambiados. Para ver la lista completa de permisos escribe '@gstoragelock'.");
++		return 0;
++	}
++	//#FFAA00
++	if( pos > 0 ) // not guild master
++		sprintf(mes,"[ %s ] : %s",sd->status.name,message);
++	else //guild master
++		sprintf(mes,"[ Guild Master ] : %s",message);
++	iter = mapit_getallusers();
++	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) ) {
++		if( pl_sd->status.guild_id != sd->status.guild_id ) continue;
++		clif_broadcast2(&pl_sd->bl, mes, (int)strlen(mes)+1, strtol(pos>0?"0xFFAA00":"0x00FF00", (char **)NULL, 0), 0x190, 12, 0, 0, SELF);
++	}
++	mapit_free(iter);
++	sd->indtick = gettick();
++	return 0;
++}
++//permission to open the guild storage: 0x20.
++int atcommand_ind_gstoragelock(const int fd, struct map_session_data* sd, const char* command, const char* message) {
++	struct guild *g;
++	int ps, perm=0;
++	bool allow = false;//on true checks for bit mask, if no bitmask found then we charge...
++	if (sd->status.guild_id == 0 || (g = guild_search(sd->status.guild_id)) == NULL || strcmp(g->master,sd->status.name))
++	{
++		clif_displaymessage(fd, "Necesitas ser un Guild Master para usar este comando.");
++		return -1;
++	}
++	if (!message || !*message || sscanf(message, "%d %d", &ps,&perm) < 2) {
++		int i;
++		char outg[254];
++		clif_displaymessage(fd, "formato: @gstoragelock <pos #> <1|0>");
++		clif_displaymessage(fd, "ejemplo: @gstoragelock 1 1 añade derecho de acceso a la posición #1, mientras que @gstoragelock 1 0 le privaría de derecho de acceso a la posición #1.");
++		//display the permission list
++		clif_displaymessage(fd,"======= Lista de Permisos =======");
++		sprintf(outg,"[ %s (GuildMaster) ] : Permitido (No se puede cambiar).",g->position[0].name);
++		clif_displaymessage(fd,outg);
++		for(i=1;i<MAX_GUILDPOSITION;i++){
++			sprintf(outg,"[ %d -> %s ] : %s.",i,g->position[i].name,g->position[i].mode&0x20?"Permitido":"No Permitido");
++			clif_displaymessage(fd,outg);
++		}
++		clif_displaymessage(fd,"===============================");
++		return -1;
++	}
++	if( ps < 1 || ps > MAX_GUILDPOSITION-1 ) {
++		clif_displaymessage(fd,"La posición proporcionada no existe o es imposible de cambiar.");
++		return -1;
++	}
++	if( perm < 0 || perm > 1 ) {
++		clif_displaymessage(fd,"El permiso debe ser 1 o 0.");
++		return -1;
++	}
++	if( perm )
++		allow = true;
++	if( allow && !(g->position[ps].mode&0x20) ) {
++		g->position[ps].mode |= 0x20;
++		guild_change_position(sd->status.guild_id,ps,g->position[ps].mode,g->position[ps].exp_mode,g->position[ps].name);//set the char server to save this position data.
++	}
++	else if( !allow && g->position[ps].mode&0x20 ) {
++		g->position[ps].mode &= ~ 0x20;
++		guild_change_position(sd->status.guild_id,ps,g->position[ps].mode,g->position[ps].exp_mode,g->position[ps].name);//set the char server to save this position data.
++	}
++	clif_displaymessage(fd,"Permisos cambiados. Para ver la lista completa de permisos escribe '@gstoragelock'.");
++	return 0;
++}
++
++/*=========================================
++ * Battle Refiner Configuration
++ *-----------------------------------------*/
++ACMD_FUNC(battlerefine)
++{
++	nullpo_retr(-1,sd);
++	if( sd->npc_id || sd->vender_id || sd->buyer_id || sd->state.trading || sd->state.storage_flag )
++		return -1;
++
++	npc_event(sd,"BattleRefiner::OnConfig",0);
++	return 0;
++}
++
++/*=========================================
++ * Check-in
++ *-----------------------------------------*/
++ACMD_FUNC(checkin)
++{
++	nullpo_retr(-1,sd);
++	if( sd->npc_id || sd->vender_id || sd->buyer_id || sd->state.trading || sd->state.storage_flag )
++		return -1;
++
++	npc_event(sd,"CheckIn::OnCheck",0);
++	return 0;
++}
++
++/*=========================================
++ * Jukebox
++ *-----------------------------------------*/
++ACMD_FUNC(jukebox)
++{
++	nullpo_retr(-1,sd);
++	if( sd->npc_id || sd->vender_id || sd->buyer_id || sd->state.trading || sd->state.storage_flag )
++		return -1;
++
++	npc_event(sd,"Jukebox::OnPlay",0);
++	return 0;
++}
++
++/*=========================================
++ * Reputation
++ *-----------------------------------------*/
++ACMD_FUNC(reputation)
++{
++	nullpo_retr(-1,sd);
++	if( sd->npc_id || sd->vender_id || sd->buyer_id || sd->state.trading || sd->state.storage_flag )
++		return -1;
++
++	npc_event(sd,"AlignmentSystem::OnCheckKarma",0);
++	return 0;
++}
++
++/*==========================================
++ * @faildrop by Blackthunder
++ * Turns on/off Showing failed loots for a specific player
++ *------------------------------------------*/
++int atcommand_faildrop(const int fd, struct map_session_data* sd, const char* command, const char* message)
++{
++	int rate;
++	double drate;
++	nullpo_retr(-1, sd);
++
++	// faildrop command without value
++	if(!message || !*message)
++	{
++		if (sd->state.faildrop)
++			rate = 0;
++		else
++		{
++			clif_displaymessage(fd, "Forma de uso: @faildrop <valor%>");
++			clif_displaymessage(fd, "Ejemplo: '@faildrop 1.50' mostrará las tiradas fallidas para los drops con rates de 1.50 o inferior.");
++			rate = 0;
++		}
++	} else {
++		drate = atof(message);
++		rate = (int)(drate*100);
++	}
++	if (rate < 0) rate = 0;
++	if (rate > 10000) rate = 10000;
++ 
++	sd->state.faildrop = rate;
++	if (sd->state.faildrop) {
++		snprintf(atcmd_output, sizeof atcmd_output, "Mostrando tiradas fallidas para drops con rates de %0.02f%% o inferior.",((double)sd->state.faildrop)/100.);
++		clif_displaymessage(fd, atcmd_output);
++	}else
++		clif_displaymessage(fd, "Faildrop desactivado.");
++ 
++	return 0;
++}
++
++/*==========================================
+  * atcommand_info[] structure definition
+  *------------------------------------------*/
+ 
+@@ -11268,6 +11607,7 @@
+ 	{ "load",              40,40,   0,     atcommand_load },
+ 	{ "speed",             40,40,   0,     atcommand_speed },
+ 	{ "storage",            1,1,    0,     atcommand_storage },
++	{ "dance",              0,40,   0,     atcommand_dance },
+ 	{ "gstorage",          50,50,   0,     atcommand_guildstorage },
+ 	{ "option",            40,40,   0,     atcommand_option },
+ 	{ "hide",              40,40,   0,     atcommand_hide }, // + /hide
+@@ -11550,6 +11890,7 @@
+ 	{ "delitem",           60,60,   0,     atcommand_delitem },
+ 	{ "charcommands",       1,1,    0,     atcommand_commands },
+ 	{ "disguiseguild",     99,99,   0,     atcommand_disguiseguild },
++	{ "displaydrop",        0,1,    0,     atcommand_displaydrop },
+ 	{ "ddrop",              0,1,    0,     atcommand_displaydrop },
+ 	{ "dexp",              10,10,   0,     atcommand_showexp},
+ 	{ "showcast",           1,1,    0,     atcommand_showcast},
+@@ -11566,7 +11907,7 @@
+ 	{ "exit",               1,1,    0,     atcommand_exit },
+ 	{ "list",               1,1,    0,     atcommand_list },
+ #ifndef TXT_ONLY
+-	{ "charlist",	        4,4,    0,     atcommand_charlist },
++	{ "charlist",           4,4,    0,     atcommand_charlist },
+ 	{ "accountinfo",        4,4,    0,     atcommand_accountinfo },
+ 	{ "memberinfo",         4,4,    0,     atcommand_memberinfo },
+ 	{ "logininfo",          4,4,    0,     atcommand_logininfo },
+@@ -11582,7 +11923,7 @@
+ 	{ "mapdeadcounter",    40,40,   0,     atcommand_contadormuertes },
+ 	{ "whosell",            1,1,    0,     atcommand_whosell },
+ 	{ "cityheart",         40,40,   0,     atcommand_cityheart },
+-	{ "pvpmode",            1,1,    0,     atcommand_pvpmode },
++	{ "pkmode",             1,1,    0,     atcommand_pvpmode },
+ 	{ "whopk",              1,1,    0,     atcommand_whopk },
+ 	{ "rentstorage",        1,1,    0,     atcommand_rentstorage },
+ 	{ "aura",               1,1,    0,     atcommand_aura },
+@@ -11591,7 +11932,17 @@
+ 	{ "mission",            1,1,    0,     atcommand_mission },
+ 	{ "char2dump",         60,60,   0,     atcommand_char2dump },
+ 	{ "security",           1,1,    0,     atcommand_security },
++	{ "tweet",              0,10,   0,     atcommand_tweet },
++	{ "checkin",            0,10,   0,     atcommand_checkin },
++	{ "battlerefine",       0,10,   0,     atcommand_battlerefine },
++	{ "jukebox",            0,10,   0,     atcommand_jukebox },
++	{ "reputation",         0,1,    0,     atcommand_reputation },
++	{ "faildrop",           1,1,    0,     atcommand_faildrop },
+ 	{ "font",               1,1,    1,     atcommand_font },
++	{ "maprecall",         60,60,   0,     atcommand_maprecall },
++	{ "gstoragelock",       0,99,   0,     atcommand_ind_gstoragelock },
++	{ "gw",                 0,99,   0,     atcommand_ind_gw },
++	{ "guildmes",           0,99,   0,     atcommand_ind_gw },
+ 	{ "packetfilter",       0,1,    0,     atcommand_packetfilter },
+ 	{ "guildskill",         0,60,   0,     atcommand_guildskill },
+ 	{ "cashshop",           0,60,   0,     atcommand_cashshop },
+Index: src-base/map/battle.c
+===================================================================
+--- src-base/map/battle.c	(revision 236)
++++ src-base/map/battle.c	(working copy)
+@@ -5455,6 +5455,9 @@
+ 			struct mob_data *md = BL_CAST(BL_MOB, t_bl);
+ 			if( !(agit_flag && map[m].flag.gvg_castle) && md->guardian_data && md->guardian_data->guild_id )
+ 				return 0; // Disable guardians/emperiums owned by Guilds on non-woe times.
++
++			if( md->state.unkillable )
++				return 0; //unkillable flag set, can't touch
+ 			break;
+ 		}
+ 	}
+@@ -6160,6 +6163,8 @@
+ 	{ "bg_magic_attack_damage_rate",        &battle_config.bg_magic_damage_rate,            60,     0,      INT_MAX,        },
+ 	{ "bg_misc_attack_damage_rate",         &battle_config.bg_misc_damage_rate,             60,     0,      INT_MAX,        },
+ 	{ "bg_flee_penalty",                    &battle_config.bg_flee_penalty,                 20,     0,      INT_MAX,        },
++	{ "gm_monsterdrop_lv",                  &battle_config.gm_monsterdrop_lv,               0,      0,      99,             },
++	{ "lootevent",                          &battle_config.lootevent,                       1,      0,      31,             }, 
+ 	{ "bg_idle_announce",                   &battle_config.bg_idle_announce,                0,      0,      INT_MAX,        },
+ 	{ "bg_reserved_char_id",                &battle_config.bg_reserved_char_id,             999996, 0,      INT_MAX,        },
+ 	{ "bg_items_on_pvp",                    &battle_config.bg_items_on_pvp,                 1,      0,      1,              },
+Index: src-base/map/battle.h
+===================================================================
+--- src-base/map/battle.h	(revision 236)
++++ src-base/map/battle.h	(working copy)
+@@ -525,6 +525,7 @@
+ 	int bg_magic_damage_rate;
+ 	int bg_misc_damage_rate;
+ 	int bg_flee_penalty;
++	int gm_monsterdrop_lv;
+ 	int bg_idle_announce;
+ 	int bg_reserved_char_id;
+ 	int bg_items_on_pvp;
+@@ -566,6 +567,8 @@
+ 	int mob_slave_adddrop;
+ 	int reflect_damage_fix;
+ 	int anti_mayapurple_hack;
++
++	int lootevent;
+ } battle_config;
+ 
+ void do_init_battle(void);
+Index: src-base/map/clif.c
+===================================================================
+--- src-base/map/clif.c	(revision 236)
++++ src-base/map/clif.c	(working copy)
+@@ -831,6 +831,12 @@
+ {
+ 	unsigned char buf[16];
+ 
++	if ( type == 1 ) {
++		struct view_data *vd;
++		if ( (vd=status_get_viewdata(bl)) && vd->head_bottom==65535 )
++			type = 0;
++	}
++
+ 	nullpo_ret(bl);
+ 
+ 	WBUFW(buf,0) = 0x80;
+@@ -943,6 +949,8 @@
+ #endif
+ 	sd = BL_CAST(BL_PC, bl);
+ 
++	spawn  =  vd->head_bottom == 65535 ? true : spawn;
++
+ #if PACKETVER < 20091103
+ 	if(type)
+ 		WBUFW(buf,0) = spawn?0x7c:0x78;
+@@ -14655,9 +14663,9 @@
+ 	{
+ 		char output[128];
+ 		if( type == 1 )
+-			sprintf(output,"This is a Battleground Shop. Bravery, Honor and Valour badges in the same amount are required to exchange items.");
++			sprintf(output,"Esta es la tienda de Battlegrounds. Necesitas medallas de Bravery, Honor y Valour para poder realizar transacciones.");
+ 		else
+-			sprintf(output,"This is a Item Exchange Shop. You need %s (%d) to exchange items.", itemdb_search(nd->cashitem)->jname, nd->cashitem);
++			sprintf(output,"Esta es una tienda de intercambio. Necesitas %s (%d) para realizar transacciones.", itemdb_search(nd->cashitem)->jname, nd->cashitem);
+ 
+ 		clif_displaymessage(fd, output);
+ 	}
+@@ -14690,63 +14698,89 @@
+ 
+ void clif_parse_cashshop_buy(int fd, struct map_session_data *sd)
+ {
+-	int fail = 0, amount, points;
+-	short nameid;
+-	struct npc_data *nd;
+-	nullpo_retv(sd);
++    int fail = 0, points, nameid, amount, i;
++    short cmd;
++    struct npc_data *nd;
++    nullpo_retv(sd);
+ 
+-	if( (nd = (struct npc_data *)map_id2bl(sd->npc_shopid)) == NULL )
+-		return;
+-
+-	nameid = RFIFOW(fd,2);
+-	amount = RFIFOW(fd,4);
+-	points = RFIFOL(fd,6); // Not Implemented. Should be 0
+-
+-	if( sd->state.trading || !sd->npc_shopid )
+-		fail = 1;
++    if(sd->state.trading || !sd->npc_shopid) {
++        clif_cashshop_ack(sd, 1);
++        return;
++    }
+ 	else if( sd->state.secure_items )
+ 	{
+ 		clif_displaymessage(sd->fd, "You can't shop. Blocked with @security");
+ 		fail = 1;
+ 	}
+ 	else
+-		fail = npc_cashshop_buy(sd, nameid, amount, points);
++	{
++		if( (nd = (struct npc_data *)map_id2bl(sd->npc_shopid)) == NULL )
++			return;
+ 
+-	WFIFOHEAD(fd,12);
+-	WFIFOW(fd,0) = 0x289;
++		cmd = RFIFOW(fd, 0);    
+ 
+-	if( nd->subtype == SPSHOP )
+-	{
+-		int i, amount = 0;
+-		if( nd->cashitem < 0 )
+-		{ // BG Shop
+-			int i7828 = 0, i7829 = 0, i7773 = 0;
+-			i = pc_search_inventory(sd,7828);
+-			if( i >= 0 ) i7828 = sd->status.inventory[i].amount;
+-			i = pc_search_inventory(sd,7829);
+-			if( i >= 0 ) i7829 = sd->status.inventory[i].amount;
+-			i = pc_search_inventory(sd,7773);
+-			if( i >= 0 ) i7773 = sd->status.inventory[i].amount;
++		if(sd->packet_ver > 25) {
++			short len = RFIFOW(fd, 2), count;
+ 
+-			amount = min(min(i7828,i7829),i7773);
++			if(len < 10 || len != 10 + (count = RFIFOW(fd, packet_db[sd->packet_ver][cmd].pos[1])) * 4) {
++				ShowWarning("Player %u sent incorrect cash shop buy packet(len %u:%u)!\n", sd->status.char_id, len, 10 + count * 4); // [Randajad]
++				return;
++			}
++
++			points = RFIFOL(fd, packet_db[sd->packet_ver][cmd].pos[0]); // Not Implemented. Should be 0
++
++			for(i = 0; i < count; i++)
++			{
++				nameid = RFIFOW(fd, 12+i*4);
++				amount = RFIFOW(fd, 10+i*4);
++				if((fail = npc_cashshop_buy(sd, nameid, amount, points)) != 0)
++					break;
++			}
++
++		} else {
++			nameid = RFIFOW(fd, packet_db[sd->packet_ver][cmd].pos[0]);
++			amount = RFIFOW(fd, packet_db[sd->packet_ver][cmd].pos[1]);
++			points = RFIFOL(fd, packet_db[sd->packet_ver][cmd].pos[2]); // Not Implemented. Should be 0
++
++			fail = npc_cashshop_buy(sd, nameid, amount, points);
+ 		}
++
++		WFIFOHEAD(fd,12);
++		WFIFOW(fd,0) = 0x289;
++	
++		if( nd->subtype == SPSHOP )
++		{
++			int i, amount = 0;
++			if( nd->cashitem < 0 )
++			{ // BG Shop
++				int i7828 = 0, i7829 = 0, i7773 = 0;
++				i = pc_search_inventory(sd,7828);
++				if( i >= 0 ) i7828 = sd->status.inventory[i].amount;
++				i = pc_search_inventory(sd,7829);
++				if( i >= 0 ) i7829 = sd->status.inventory[i].amount;
++				i = pc_search_inventory(sd,7773);
++				if( i >= 0 ) i7773 = sd->status.inventory[i].amount;
++	
++				amount = min(min(i7828,i7829),i7773);
++			}
++			else
++			{
++				i = pc_search_inventory(sd,nd->cashitem);
++				if( i >= 0 ) amount = sd->status.inventory[i].amount;
++			}
++	
++			WFIFOL(fd,2) = amount; // Item Count
++			WFIFOL(fd,6) = 0; // Points - Not used here
++		}
+ 		else
+ 		{
+-			i = pc_search_inventory(sd,nd->cashitem);
+-			if( i >= 0 ) amount = sd->status.inventory[i].amount;
++			WFIFOL(fd,2) = sd->cashPoints; // Cash Points
++			WFIFOL(fd,6) = sd->kafraPoints; // Kafra Points
+ 		}
+-
+-		WFIFOL(fd,2) = amount; // Item Count
+-		WFIFOL(fd,6) = 0; // Points - Not used here
++	
++		WFIFOW(fd,10) = fail;
++		WFIFOSET(fd,12);
+ 	}
+-	else
+-	{
+-		WFIFOL(fd,2) = sd->cashPoints; // Cash Points
+-		WFIFOL(fd,6) = sd->kafraPoints; // Kafra Points
+-	}
+-
+-	WFIFOW(fd,10) = fail;
+-	WFIFOSET(fd,12);
+ }
+ 
+ /*==========================================
+@@ -16699,7 +16733,7 @@
+ 	    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+ 	   85, -1, -1,107,  6, -1,  7,  7, 22,191,  0,  8,  0,  0,  0,  0,
+ 	//#0x02C0
+-	    0,  0,  0,  0,  0, 30,  6,  0,  0,  3,  0, 65,  4, 71, 10,  0,
++	    0,  0,  0,  0,  0, 30, 30,  0,  0,  3,  0, 65,  4, 71, 10,  0,
+ 	   -1, -1,  0,  0, 29,  0,  6, -1, 10, 10,  3,  0, -1, 32,  6,  0,
+ 	    0, 33,  0,  0,  0,  0,  0,  0, -1,  0, -1,  0, 67, 59, 60,  8,
+ 	   10,  2,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  8,  0,  0,
+Index: src-base/map/guild.c
+===================================================================
+--- src-base/map/guild.c	(revision 236)
++++ src-base/map/guild.c	(working copy)
+@@ -1173,7 +1173,9 @@
+ 	exp_mode = cap_value(exp_mode, 0, battle_config.guild_exp_limit);
+ 	//Mode 0x01 <- Invite
+ 	//Mode 0x10 <- Expel.
+-	p.mode=mode&0x11;
++	//Mode 0x20 <- GStorage. [Ind/ro-resources.net]
++	//Mode 0x40 <- @gw. [Ind/ro-resources.net]
++	p.mode=mode&0x71;
+ 	p.exp_mode=exp_mode;
+ 	safestrncpy(p.name,name,NAME_LENGTH);
+ 	return intif_guild_position(guild_id,idx,&p);
+Index: src-base/map/itemdb.c
+===================================================================
+--- src-base/map/itemdb.c	(revision 236)
++++ src-base/map/itemdb.c	(working copy)
+@@ -894,7 +894,46 @@
+ 	return true;
+ }
+ 
++/*================================================================== 
++* Reads item stacking restrictions 
++*----------------------------------------------------------------*/ 
++static bool itemdb_read_stack(char* fields[], int columns, int current) 
++{// <item id>,<stack limit amount>,<type> 
++	unsigned short nameid, amount; 
++	unsigned int type; 
++	struct item_data* id; 
+ 
++	nameid = (unsigned short)strtoul(fields[0], NULL, 10); 
++
++	if( ( id = itemdb_exists(nameid) ) == NULL ) 
++	{ 
++		ShowWarning("itemdb_read_stack: Unknown item id '%hu'.\n", nameid); 
++		return false; 
++	} 
++
++	if( !itemdb_isstackable2(id) ) 
++	{ 
++		ShowWarning("itemdb_read_stack: Item id '%hu' is not stackable.\n", nameid); 
++		return false; 
++	} 
++
++	amount = (unsigned short)strtoul(fields[1], NULL, 10); 
++	type = strtoul(fields[2], NULL, 10); 
++
++	if( !amount ) 
++	{// ignore 
++		return true; 
++	} 
++
++	id->stack.amount       = amount; 
++	id->stack.inventory    = (type&1)!=0; 
++	id->stack.cart         = (type&2)!=0; 
++	id->stack.storage      = (type&4)!=0; 
++	id->stack.guildstorage = (type&8)!=0; 
++
++	return true; 
++} 
++
+ /*======================================
+  * Applies gender restrictions according to settings. [Skotlex]
+  *======================================*/
+@@ -1296,6 +1335,7 @@
+ 	sv_readdb(db_path, "item_noequip.txt", ',', 2, 2, -1,             &itemdb_read_noequip);
+ 	sv_readdb(db_path, "item_trade.txt",   ',', 3, 3, -1,             &itemdb_read_itemtrade);
+ 	sv_readdb(db_path, "item_delay.txt",   ',', 2, 2, MAX_ITEMDELAYS, &itemdb_read_itemdelay);
++	sv_readdb(db_path, "item_stack.txt",   ',', 3, 3, -1,             &itemdb_read_stack);
+ 	sv_readdb(db_path, "item_buyingstore.txt", ',', 1, 1, -1,         &itemdb_read_buyingstore);
+ 	itemdb_load_serials();
+ }
+Index: src-base/map/itemdb.h
+===================================================================
+--- src-base/map/itemdb.h	(revision 236)
++++ src-base/map/itemdb.h	(working copy)
+@@ -9,7 +9,7 @@
+ #define MAX_RANDITEM	11000
+ 
+ // The maximum number of item delays
+-#define MAX_ITEMDELAYS	10
++#define MAX_ITEMDELAYS	30
+ 
+ #define MAX_SEARCH	10  //Designed for search functions, species max number of matches to display.
+ 
+@@ -92,6 +92,14 @@
+ 		unsigned trade_restriction : 7;	//Item restrictions mask [Skotlex]
+ 		unsigned buyingstore : 1;
+ 	} flag;
++	struct
++	{// item stacking limitation
++		unsigned short amount;
++		unsigned int inventory:1;
++		unsigned int cart:1;
++		unsigned int storage:1;
++		unsigned int guildstorage:1;
++	} stack;
+ 	short gm_lv_trade_override;	//GM-level to override trade_restriction
+ };
+ 
+Index: src-base/map/mail.c
+===================================================================
+--- src-base/map/mail.c	(revision 236)
++++ src-base/map/mail.c	(working copy)
+@@ -12,6 +12,7 @@
+ #include "clif.h"
+ #include "pc.h"
+ #include "log.h"
++#include "npc.h"
+ 
+ #include <time.h>
+ #include <string.h>
+@@ -158,6 +159,11 @@
+ 
+ 		if(log_config.enable_logs&0x2000)
+ 			log_pick_pc(sd, "E", item->nameid, item->amount, item, item->serial);
++		if( battle_config.lootevent & 8 ) {
++			pc_setglobalreg( sd, "LastLootID", item->nameid ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", item->amount ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		} 
+ 
+ 		clif_Mail_getattachment(sd->fd, 0);
+ 	}
+@@ -192,6 +198,11 @@
+ 		// Item recieve (due to failure)
+ 		if(log_config.enable_logs&0x2000)
+ 			log_pick_pc(sd, "E", msg->item.nameid, msg->item.amount, &msg->item, msg->item.serial);
++		if( battle_config.lootevent & 8 ) {
++			pc_setglobalreg( sd, "LastLootID", msg->item.nameid ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", msg->item.amount ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		} 
+ 
+ 		pc_additem(sd, &msg->item, msg->item.amount);
+ 	}
+Index: src-base/map/map.c
+===================================================================
+--- src-base/map/map.c	(revision 236)
++++ src-base/map/map.c	(working copy)
+@@ -1579,8 +1579,10 @@
+ 
+ 	nullpo_ret(item_data);
+ 
+-	if(!map_searchrandfreecell(m,&x,&y,flags&2?1:0))
+-		return 0;
++	if( !(flags&4) ) {
++		if(!map_searchrandfreecell(m,&x,&y,flags&2?1:0))
++			return 0;
++	}
+ 	r=rand();
+ 
+ 	CREATE(fitem, struct flooritem_data, 1);
+@@ -1605,8 +1607,8 @@
+ 
+ 	memcpy(&fitem->item_data,item_data,sizeof(*item_data));
+ 	fitem->item_data.amount=amount;
+-	fitem->subx=(r&3)*3+3;
+-	fitem->suby=((r>>2)&3)*3+3;
++	fitem->subx= flags&4 ? 9 : (r&3)*3+3;
++	fitem->suby= flags&4 ? 6 : ((r>>2)&3)*3+3;
+ 	fitem->cleartimer=add_timer(gettick()+battle_config.flooritem_lifetime,map_clearflooritem_timer,fitem->bl.id,0);
+ 	fitem->no_bsgreed = ( (flags&4) != 0 ); // [Zephyrus] @flooritem
+ 
+Index: src-base/map/map.h
+===================================================================
+--- src-base/map/map.h	(revision 236)
++++ src-base/map/map.h	(working copy)
+@@ -32,7 +32,7 @@
+ //  of 10 allows you to attack from anywhere within a 21x21 area.
+ //Enabling this changes such checks to circular checks, which is more realistic,
+ //  but is not the official behaviour.
+-//#define CIRCULAR_AREA
++#define CIRCULAR_AREA
+ 
+ #define MAX_NPC_PER_MAP 512
+ #define BLOCK_SIZE 8
+@@ -41,8 +41,8 @@
+ #define LOOTITEM_SIZE 10
+ #define MAX_MOBSKILL 50
+ #define MAX_MOB_LIST_PER_MAP 128
+-#define MAX_EVENTQUEUE 5
+-#define MAX_EVENTTIMER 32
++#define MAX_EVENTQUEUE 99
++#define MAX_EVENTTIMER 50
+ #define NATURAL_HEAL_INTERVAL 500
+ #define MIN_FLOORITEM 2
+ #define MAX_FLOORITEM START_ACCOUNT_NUM
+Index: src-base/map/mob.c
+===================================================================
+--- src-base/map/mob.c	(revision 236)
++++ src-base/map/mob.c	(working copy)
+@@ -2257,7 +2257,15 @@
+ 			}
+ 		}
+ 	}
+-	
++
++	if( (mvp_sd && pc_isGM(mvp_sd)) || (sd && pc_isGM(sd)) )
++	{
++		if( mvp_sd && (pc_isGM(mvp_sd) >= battle_config.lowest_gm_level && pc_isGM(mvp_sd) < battle_config.gm_monsterdrop_lv) )
++			type |= 1;
++		else if( sd && (pc_isGM(sd) >= battle_config.lowest_gm_level && pc_isGM(sd) < battle_config.gm_monsterdrop_lv) )
++			type |= 1;
++	}
++
+ 	if( sd )
+ 	{
+ 		if( md->option.announce_killer )
+@@ -2484,6 +2492,7 @@
+ 		struct item_drop_list *dlist = ers_alloc(item_drop_list_ers, struct item_drop_list);
+ 		struct item_drop *ditem;
+ 		int drop_rate, bonus_drop_rate = 0;
++		int drop_roll;
+ 		dlist->m = md->bl.m;
+ 		dlist->x = md->bl.x;
+ 		dlist->y = md->bl.y;
+@@ -2531,9 +2540,29 @@
+ 			if (sd && sd->sc.data[SC_ITEMBOOST]) // now rig the drop rate to never be over 90% unless it is originally >90%.
+ 				drop_rate = max(drop_rate,cap_value((int)(0.5+drop_rate*(sd->sc.data[SC_ITEMBOOST]->val1)/100.),0,9000));
+ 
++			// Add extra drop bonus for Chain [WiseWarrior]
++			if ((mvp_sd) && (mvp_sd->drop_bonus > 0)){
++				drop_rate = (int)(drop_rate+mvp_sd->drop_bonus);
++			}else if ((sd) && (sd->drop_bonus > 0)){
++				drop_rate = (int)(drop_rate+sd->drop_bonus);
++			}
++
+ 			// attempt to drop the item
+-			if( rand() % 10000 >= (drop_rate + bonus_drop_rate) )
++			drop_roll = rand() % 10000; //PreRoll % for failed drop announce [Blackthunder)
++			if (drop_roll >= (drop_rate + bonus_drop_rate))
++			{
++				if( mvp_sd && (drop_rate + bonus_drop_rate) <= mvp_sd->state.faildrop ) //show roll if failed [Blackthunder]
++				{
++					struct item_data *i_data;
++					char output[128];
++					ditem = mob_setdropitem(md->db->dropitem[i].nameid, 1);
++					drop_roll += 1;
++					i_data = itemdb_search(ditem->item_data.nameid);
++					snprintf(output, sizeof output, "Failed to drop %s's %s. You rolled %0.02f%% (%0.02f%% or lower needed)", md->name, i_data->jname, (float)drop_roll/100, (float)drop_rate/100);
++					clif_displaymessage(mvp_sd->fd, output);
++				}
+ 				continue;
++			}
+ 
+ 			ditem = mob_setdropitem(md->db->dropitem[i].nameid, 1);
+ 
+@@ -2693,6 +2722,11 @@
+ 				log_pick_mob(md, "M", item.nameid, -1, NULL, item.serial);
+ 				if (!temp)
+ 					log_pick_pc(mvp_sd, "P", item.nameid, 1, NULL, item.serial);
++				if( battle_config.lootevent & 16 ) {
++					pc_setglobalreg( sd, "LastLootID", item.nameid ); //Last lootet Item ID
++					pc_setglobalreg( sd, "LastLootAmount", 1 ); //Last looted Item Amount
++					npc_event_doall_id( "OnLoot", sd->bl.id );
++				} 
+ 			}
+ 			break;
+ 		}
+Index: src-base/map/mob.h
+===================================================================
+--- src-base/map/mob.h	(revision 236)
++++ src-base/map/mob.h	(working copy)
+@@ -17,7 +17,7 @@
+ // Be sure to note that IDs 4001 to 4048 are reserved for advanced/baby/expanded classes.
+ // Notice that the last 1000 entries are used for player clones, so always set this to desired value +1000
+ #define MIN_MOB_DB 1000
+-#define MAX_MOB_DB 4000
++#define MAX_MOB_DB 5000
+ 
+ //The number of drops all mobs have and the max drop-slot that the steal skill will attempt to steal from.
+ #define MAX_MOB_DROP 10
+@@ -137,6 +137,7 @@
+ 		unsigned int spotted: 1;
+ 		unsigned int npc_killmonster: 1; //for new killmonster behavior
+ 		unsigned int rebirth: 1; // NPC_Rebirth used
++		unsigned unkillable : 1;	//if set monster is impervious to dmg
+ 		unsigned int boss : 1;
+ 		enum MobSkillState skillstate;
+ 		unsigned char steal_flag; //number of steal tries (to prevent steal exploit on mobs with few items) [Lupus]
+Index: src-base/map/npc.c
+===================================================================
+--- src-base/map/npc.c	(revision 236)
++++ src-base/map/npc.c	(working copy)
+@@ -1291,6 +1291,11 @@
+ 
+ 	if(log_config.enable_logs&0x20)
+ 		log_pick_pc(sd, "S", nameid, amount, NULL, item_tmp.serial);
++	if( battle_config.lootevent & 2 ) {
++		pc_setglobalreg( sd, "LastLootID", nameid ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	} 
+ 
+ 	return 0;
+ }
+@@ -1401,6 +1406,11 @@
+ 		//Logs items, Bought in NPC (S)hop [Lupus]
+ 		if( log_config.enable_logs&0x20 )
+ 			log_pick_pc(sd, "S", item_tmp.nameid, amount, NULL, item_tmp.serial);
++		if( battle_config.lootevent & 2 ) {
++			pc_setglobalreg( sd, "LastLootID", item_tmp.nameid ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		} 
+ 		//Logs
+ 	}
+ 
+Index: src-base/map/npc.h
+===================================================================
+--- src-base/map/npc.h	(revision 236)
++++ src-base/map/npc.h	(working copy)
+@@ -64,6 +64,11 @@
+ 			unsigned short mapindex; // destination map
+ 		} warp;
+ 	} u;
++	
++	struct {
++		char vending[NAME_LENGTH+1]; //vending name
++		bool vends; //does he vend?
++	} vend;
+ };
+ 
+ 
+Index: src-base/map/party.c
+===================================================================
+--- src-base/map/party.c	(revision 236)
++++ src-base/map/party.c	(working copy)
+@@ -1002,7 +1002,11 @@
+ 
+ 	if(log_config.enable_logs&0x8) //Logs items, taken by (P)layers [Lupus]
+ 		log_pick_pc(target, "P", item_data->nameid, item_data->amount, item_data, item_data->serial);
+-	
++	if( battle_config.lootevent & 1 ) {
++		pc_setglobalreg( sd, "LastLootID", item_data->nameid ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", item_data->amount ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	} 
+ 	if( p && battle_config.party_show_share_picker && battle_config.show_picker_item_type&(1<<itemdb_type(item_data->nameid)) )
+ 		clif_party_show_picker(target, item_data);
+ 
+Index: src-base/map/pc.c
+===================================================================
+--- src-base/map/pc.c	(revision 236)
++++ src-base/map/pc.c	(working copy)
+@@ -2482,8 +2482,8 @@
+ 	}
+ 	for(i = 0; i < max && (drop[i].id || drop[i].group); i++) {
+ 		if(
+-			(id && drop[i].id == id) ||
+-			(group && drop[i].group == group)
++			((id && drop[i].id == id) ||
++			(group && drop[i].group == group)) && race < (RC_MAX<<1)
+ 		) {
+ 			drop[i].race |= race;
+ 			if(drop[i].rate > 0 && rate > 0)
+@@ -4161,19 +4161,25 @@
+ int pc_checkadditem(struct map_session_data *sd,int nameid,int amount)
+ {
+ 	int i;
++	struct item_data* data;
+ 
+ 	nullpo_ret(sd);
+ 
+ 	if(amount > MAX_AMOUNT)
+ 		return ADDITEM_OVERAMOUNT;
+ 
+-	if(!itemdb_isstackable(nameid))
++	data = itemdb_search(nameid);
++
++	if(!itemdb_isstackable2(data))
+ 		return ADDITEM_NEW;
+ 
++	if( data->stack.inventory && amount > data->stack.amount )
++		return ADDITEM_OVERAMOUNT;
++
+ 	for(i=0;i<MAX_INVENTORY;i++){
+ 		// FIXME: This does not consider the checked item's cards, thus could check a wrong slot for stackability.
+ 		if(sd->status.inventory[i].nameid==nameid){
+-			if(sd->status.inventory[i].amount+amount > MAX_AMOUNT)
++			if( amount > MAX_AMOUNT - sd->status.inventory[i].amount || ( data->stack.inventory && amount > data->stack.amount - sd->status.inventory[i].amount ) )
+ 				return ADDITEM_OVERAMOUNT;
+ 			return ADDITEM_EXIST;
+ 		}
+@@ -4404,6 +4410,12 @@
+ 		return 5;
+ 	
+ 	data = itemdb_search(item_data->nameid);
++
++	if( data->stack.inventory && amount > data->stack.amount ) 
++	{// item stack limitation 
++		return 5; 
++	}
++
+ 	w = data->weight*amount;
+ 	if(sd->weight + w > sd->max_weight)
+ 		return 2;
+@@ -4970,7 +4982,7 @@
+ 
+ 	if( i < MAX_CART )
+ 	{// item already in cart, stack it
+-		if(sd->status.cart[i].amount+amount > MAX_AMOUNT)
++		if( amount > MAX_AMOUNT - sd->status.cart[i].amount || ( data->stack.cart && amount > data->stack.amount - sd->status.cart[i].amount ) )
+ 			return 1; // no room
+ 
+ 		sd->status.cart[i].amount+=amount;
+@@ -6456,10 +6468,14 @@
+ 	}
+ 
+ #if PACKETVER >= 20091027
+-	if(base_exp)
+-		clif_displayexp(sd, base_exp, 1, quest);
+-	if(job_exp)
+-		clif_displayexp(sd, job_exp,  2, quest);
++		//if(base_exp)
++			//clif_displayexp(sd, base_exp, 1, quest);
++			//sprintf(output," (%.2f%%) de tu Nivel Base actual",nextbp*(float)100);
++			//clif_disp_onlyself(sd,output,strlen(output));
++		//if(job_exp)
++			//clif_displayexp(sd, job_exp,  2, quest);
++			//sprintf(output," (%.2f%%) de tu Nivel Job actual",nextjp*(float)100);
++			//clif_disp_onlyself(sd,output,strlen(output));
+ #endif
+ 
+ 	sd->custom_data.session_base_exp += base_exp;
+@@ -6467,7 +6483,7 @@
+ 
+ 	if(sd->state.showexp) {
+ 		sprintf(output,
+-			"Experience Gained Base:%u (%.2f%%) Job:%u (%.2f%%)",base_exp,nextbp*(float)100,job_exp,nextjp*(float)100);
++			"EXP Base:%u (%.2f%%)    EXP Job:%u (%.2f%%)",base_exp,nextbp*(float)100,job_exp,nextjp*(float)100);
+ 		clif_disp_onlyself(sd,output,strlen(output));
+ 	}
+ 
+@@ -8000,21 +8016,53 @@
+ 		}
+ 	}
+ 
+-	if(battle_config.bone_drop==2
+-		|| (battle_config.bone_drop==1 && map[sd->bl.m].flag.pvp && drop_skull_rate < rand() % 100))
+-	{
+-		struct item item_tmp;
+-		clif_displaymessage(sd->fd, "[Has perdido la cabeza!!]");
+-		memset(&item_tmp,0,sizeof(item_tmp));
+-		item_tmp.nameid=ITEMID_SKULL_;
+-		item_tmp.identify=1;
+-		item_tmp.card[0]=CARD0_CREATE;
+-		item_tmp.card[1]=0;
+-		item_tmp.card[2]=GetWord(sd->status.char_id,0); // CharId
+-		item_tmp.card[3]=GetWord(sd->status.char_id,1);
+-		map_addflooritem(&item_tmp,1,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0,0);
++	// Unreal 3 - Juggernaut [Ivion]
++	if(	(battle_config.bone_drop == 2) ||
++		(battle_config.bone_drop==1 && map[sd->bl.m].flag.pvp)
++	){
++		if(src && (src->type == BL_PC)) {
++			struct map_session_data *ssd = (struct map_session_data *)src;
++				if(	(ssd->bl.id != sd->bl.id) &&
++					(!battle_config.pk_level_range || ((int)ssd->status.base_level <= ((int)sd->status.base_level + battle_config.pk_level_range))) &&
++					!sd->sc.data[SC_PKDELAY]
++				) {
++					struct item item_tmp;
++					sc_start(&sd->bl,SC_PKDELAY,100,0,60000);
++					memset(&item_tmp,0,sizeof(item_tmp));
++					item_tmp.nameid=ITEMID_SKULL_;
++					item_tmp.identify=1;
++					item_tmp.card[0]=CARD0_CREATE;
++					item_tmp.card[1]=0;
++					item_tmp.card[2]=GetWord(sd->status.char_id,0); // CharId
++					item_tmp.card[3]=GetWord(sd->status.char_id,1);
++					map_addflooritem(&item_tmp,1,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0,0);
++			}
++		}
++		for(k = 0; k < MAX_INVENTORY; k++)
++			if((sd->status.inventory[k].nameid > 0) && (sd->status.inventory[k].amount > 0))
++				if((sd->status.inventory[k].nameid == ITEMID_SKULL_) && (sd->status.inventory[k].card[2] || sd->status.inventory[k].card[3])) {
++					while(sd->status.inventory[k].amount >= 5) {
++						map_addflooritem(&sd->status.inventory[k],5,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0,0);
++						pc_delitem(sd,k,5,0,0);
++					}
++					if(sd->status.inventory[k].amount) {
++						map_addflooritem(&sd->status.inventory[k],sd->status.inventory[k].amount,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0,0);
++						pc_delitem(sd,k,sd->status.inventory[k].amount,0,0);
++					}
++				}
+ 	}
++ 
++	// Activate SC_PKDELAY [Ivion]
++	if(src && (src->type == BL_PC)) {
++		struct map_session_data *ssd = (struct map_session_data *)src;
++		if(	(ssd->bl.id != sd->bl.id) &&
++			(!battle_config.pk_level_range || ((int)ssd->status.base_level <= ((int)sd->status.base_level + battle_config.pk_level_range))) &&
++			!sd->sc.data[SC_PKDELAY]
++	)
++			sc_start(&sd->bl,SC_PKDELAY,100,0,60000);
++	}
+ 
++
+ 	// PVPMode OFF
+ 	if( sd->state.pvpmode ) pc_pvpmodeoff(sd, 1, 1);
+ 
+Index: src-base/map/pc.h
+===================================================================
+--- src-base/map/pc.h	(revision 236)
++++ src-base/map/pc.h	(working copy)
+@@ -154,6 +154,7 @@
+ 		bool changemap, changeregion;
+ 		short pmap; // Previous map on Map Change
+ 		unsigned short autobonus; //flag to indicate if an autobonus is activated. [Inkfish]
++		unsigned short faildrop; //Faildrop display [Blackthunder]
+ 		struct guild *gmaster_flag;
+ 		unsigned int only_walk : 1; // [Zephyrus] Block Skills and Item usage to a player
+ 		unsigned int improv_flag : 1;
+@@ -164,6 +165,7 @@
+ 		unsigned int evade_antiwpefilter : 1; // Required sometimes to show the user previous to use the skill
+ 		unsigned bg_afk : 1; // Moved here to reduce searchs
+ 	} state;
++	int indtick;//[Ind/ro-resources.net] common tick for delay purposes.
+ 	struct {
+ 		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
+ 		unsigned int restart_full_recover : 1;
+@@ -497,6 +499,8 @@
+ 	unsigned short user_font;
+ 	short view_aura, user_aura;
+ 
++	// Bonus Drop Rate [WiseWarrior]
++	double drop_bonus;
+ 	int shadowform_id;
+ 	short shieldmdef;
+ };
+Index: src-base/map/script.c
+===================================================================
+--- src-base/map/script.c	(revision 236)
++++ src-base/map/script.c	(working copy)
+@@ -3797,10 +3797,26 @@
+ #define BUILDIN_DEF2(x,x2,args) { buildin_ ## x , x2 , args }
+ #define BUILDIN_FUNC(x) int buildin_ ## x (struct script_state* st)
+ 
++
+ /////////////////////////////////////////////////////////////////////
+ // NPC interaction
+ //
+ 
++// [Ivion]
++// Checks if the target unit or the attached player is affected by the specified status effect.
++// sc_check <effect id>{,<unit_id>};
++BUILDIN_FUNC(sc_check) {
++
++	TBL_PC* sd;
++
++	if(script_hasdata(st,3)) sd = map_id2sd(script_getnum(st,3));
++	else sd = script_rid2sd(st);
++	if(sd && sd->sc.data[script_getnum(st,2)])
++			script_pushint(st,1);
++	else	script_pushint(st,0);
++	return 0;
++}
++
+ /// Appends a message to the npc dialog.
+ /// If a dialog doesn't exist yet, one is created.
+ ///
+@@ -5713,7 +5729,11 @@
+ 			//Logs items, got from (N)PC scripts [Lupus]
+ 			if(log_config.enable_logs&LOG_SCRIPT_TRANSACTIONS)
+ 				log_pick_pc(sd, "N", nameid, amount, NULL, it.serial);
+-
++			if( battle_config.lootevent & 2 ) {
++				pc_setglobalreg( sd, "LastLootID", nameid ); //Last lootet Item ID
++				pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++				npc_event_doall_id( "OnLoot", sd->bl.id );
++			}
+ 			it.serial = 0; // Reset Serial to generate new
+ 		}
+ 	}
+@@ -5817,7 +5837,11 @@
+ 			//Logs items, got from (N)PC scripts [Lupus]
+ 			if(log_config.enable_logs&0x40)
+ 				log_pick_pc(sd, "N", nameid, get_count, &item_tmp, item_tmp.serial );
+-
++			if( battle_config.lootevent & 2 ) {
++				pc_setglobalreg( sd, "LastLootID", nameid ); //Last lootet Item ID
++				pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++				npc_event_doall_id( "OnLoot", sd->bl.id );
++			} 
+ 			item_tmp.serial = 0; // Reset Serial to generate new
+ 		}
+ 	}
+@@ -6429,7 +6453,11 @@
+ 	//Logs items, got from (N)PC scripts [Lupus]
+ 	if(log_config.enable_logs&0x40)
+ 		log_pick_pc(sd, "N", item_tmp.nameid, item_tmp.amount, &item_tmp, item_tmp.serial );
+-
++	if( battle_config.lootevent & 4 ) {
++		pc_setglobalreg( sd, "LastLootID", item_tmp.nameid ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", item_tmp.amount ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	} 
+ 	script_pushint(st,1);
+ 	return 0;
+ }
+@@ -6497,7 +6525,7 @@
+ 		else
+ 			item_tmp.identify=itemdb_isidentified(nameid);
+ 
+-		map_addflooritem(&item_tmp,amount,m,x,y,0,0,0,0,0);
++		map_addflooritem(&item_tmp,amount,m,x,y,0,0,0, script_hasdata(st,7) ? 0|4 : 0,0 );
+ 	}
+ 
+ 	return 0;
+@@ -8721,6 +8749,7 @@
+ 	int class_        = script_getnum(st,6);
+ 	int amount        = script_getnum(st,7);
+ 	const char* event = "";
++	TBL_MOB* md;
+ 
+ 	struct map_session_data* sd;
+ 	int m;
+@@ -8753,7 +8782,11 @@
+ 		}
+ 	}
+ 
+-	mob_once_spawn(sd,m,x,y,str,class_,amount,event);
++	md = (TBL_MOB*)map_id2bl(mob_once_spawn(sd,m,x,y,str,class_,amount,event));
++	if(script_hasdata(st, 9))
++		if(script_getnum(st, 9) == 1)
++			md->state.unkillable = 1;
++
+ 	return 0;
+ }
+ /*==========================================
+@@ -11255,6 +11288,11 @@
+ 			//Logs items, got from (N)PC scripts [Lupus]
+ 			if(log_config.enable_logs&0x40)
+ 				log_pick_pc(sd, "N", item_tmp.nameid, 1, NULL, item_tmp.serial );
++			if( battle_config.lootevent & 2 ) {
++				pc_setglobalreg( sd, "LastLootID", item_tmp.nameid ); //Last lootet Item ID
++				pc_setglobalreg( sd, "LastLootAmount", 1 ); //Last looted Item Amount
++				npc_event_doall_id( "OnLoot", sd->bl.id );
++			} 
+ 		}
+ 	}
+ 
+@@ -14229,6 +14267,7 @@
+ 		case 19: script_pushint(st,mob->status.race); break;
+ 		case 20: script_pushint(st,mob->status.def_ele); break;
+ 		case 21: script_pushint(st,mob->status.mode); break;
++		case 22: script_pushint(st,mob->mexp); break; // Ivion
+ 		default: script_pushint(st,-1); //wrong Index
+ 	}
+ 	return 0;
+@@ -14405,6 +14444,25 @@
+ 	return 0;
+ }
+ 
++BUILDIN_FUNC(pcblockmove)
++{
++	int id, flag;
++	TBL_PC *sd = NULL;
++
++	id = script_getnum(st,2);
++	flag = script_getnum(st,3);
++
++	if(id)
++		sd = map_id2sd(id);
++	else
++		sd = script_rid2sd(st);
++
++	if(sd)
++		sd->state.blockedmove = flag > 0;
++
++	return 0;
++}
++
+ BUILDIN_FUNC(pcblock)
+ {
+ 	int id = 0, flag, type;
+@@ -16569,6 +16627,68 @@
+ 	return 0;
+ }
+ 
++// Apply an extra bonus to drops that only expires when reset [WiseWarrior]
++BUILDIN_FUNC(setdropbonus){
++	TBL_PC *sd = NULL;
++	double val=0;
++	int tmp=0;
++
++	if (script_hasdata(st,3)){
++		if (script_isstring(st,3)){
++			sd = map_nick2sd(script_getstr(st,3));
++		}else{
++			sd = map_id2sd(script_getnum(st,3));
++		}
++	}else{
++		sd = script_rid2sd(st);
++	}
++	tmp = (script_hasdata(st,2) ? script_getnum(st,2) : 0);
++	val = (double)tmp/100;
++	if (sd){
++		if (val > 0){
++			if ((val/100) <= 0){
++				// Value to is too small or no value was passed.
++				script_pushint(st,-2);
++			}else{
++				// Add to bonus
++				sd->drop_bonus = val;
++				script_pushint(st,1);
++			}
++		}else{
++			// Clear drop bonus
++			sd->drop_bonus = 0;
++			script_pushint(st,2);
++		}
++	}else{
++		// Failed to attach player
++		script_pushint(st,-1);
++	}
++	return 0;
++}
++
++// Returns a players current drop bonuses [WiseWarrior]
++BUILDIN_FUNC(getdropbonus){
++	TBL_PC *sd = NULL;
++
++	if (script_hasdata(st,2)){
++		if (script_isstring(st,2)){
++			sd = map_nick2sd(script_getstr(st,2));
++		}else{
++			sd = map_id2sd(script_getnum(st,2));
++		}
++	}else{
++		sd = script_rid2sd(st);
++	}
++
++	if (sd){
++		script_pushint(st,((int)(sd->drop_bonus*100)));
++	}else{
++		// Failed to attach player
++		script_pushint(st,-1);
++	}
++	return 0;
++}
++
+ BUILDIN_FUNC(pushpc)
+ {
+ 	int direction, cells, dx, dy;
+@@ -16801,6 +16921,709 @@
+ 	return 0;
+ }
+ 
++static int areaclean_sub(struct block_list *bl, va_list ap)
++{
++	nullpo_retr(0, bl);
++	map_clearflooritem(bl->id);
++
++	return 0;
++}
++
++// areaclean "<map>",<x1>,<y1>{,<x2>,<y2>}
++BUILDIN_FUNC(areaclean)
++{
++	const char* map_ = script_getstr(st,2);
++	int x1 = script_getnum(st,3);
++	int y1 = script_getnum(st,4);
++	int x2 = script_hasdata(st,5) ? script_getnum(st,5) : script_getnum(st,3);
++	int y2 = script_hasdata(st,6) ? script_getnum(st,6) : script_getnum(st,4);
++
++	struct map_session_data* sd;
++	int m;
++
++	sd = map_id2sd(st->rid);
++
++	if( sd && !strcmp(map_,"this") )
++		m = sd->bl.m;
++	else
++		m = map_mapname2mapid(map_);
++
++	map_foreachinarea(areaclean_sub, m, x1, y1, x2, y2, BL_ITEM);
++	return 0;
++}
++
++//=======================================================
++// charisupper [ToastOfDoom]
++//
++// charisupper <str>, <index>
++//-------------------------------------------------------
++BUILDIN_FUNC(charisupper)
++{
++	const char *str = script_getstr(st,2);
++	int pos = script_getnum(st,3);
++ 
++	int val = ( str && pos >= 0 && (unsigned int)pos < strlen(str) ) ? ISUPPER( str[pos] ) : 0;
++
++	script_pushint(st,val);
++	return 0;
++}
++
++//=======================================================
++// charislower [ToastOfDoom]
++//
++// charislower <str>, <index>
++//-------------------------------------------------------
++BUILDIN_FUNC(charislower)
++{
++	const char *str = script_getstr(st,2);
++	int pos = script_getnum(st,3);
++
++	int val = ( str && pos >= 0 && (unsigned int)pos < strlen(str) ) ? ISLOWER( str[pos] ) : 0;
++
++	script_pushint(st,val);
++	return 0;
++}
++
++//=======================================================
++// charat [ToastOfDoom]
++//
++// charat <str>, <index>
++//-------------------------------------------------------
++BUILDIN_FUNC(charat)
++{
++	const char *str = script_getstr(st,2);
++	int pos = script_getnum(st,3);
++	char *output;
++
++	output = (char*)aMallocA(2*sizeof(char));
++	output[0] = '\0';
++
++	if(str && pos >= 0 && (unsigned int)pos < strlen(str))
++		sprintf(output, "%c", str[pos]);
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// setchar [ToastOfDoom]
++//
++// setchar <string>, <char>, <index>
++//-------------------------------------------------------
++BUILDIN_FUNC(setchar)
++{
++	const char *str = script_getstr(st,2);
++	const char *c = script_getstr(st,3);
++	int index = script_getnum(st,4);
++	char *output;
++	size_t len = strlen(str);
++
++	output = (char*)aMallocA(len + 1);
++	memcpy(output, str, len);
++	output[len] = '\0';
++
++	if(index >= 0 && index < len)
++		output[index] = c[0];
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// insertchar [ToastOfDoom]
++//
++// insertchar <string>, <char>, <index>
++//-------------------------------------------------------
++BUILDIN_FUNC(insertchar)
++{
++	const char *str = script_getstr(st,2);
++	const char *c = script_getstr(st,3);
++	int index = script_getnum(st,4);
++	char *output;
++	size_t len = strlen(str);
++
++	if(index < 0)
++		index = 0;
++	else if(index > len)
++		index = len;
++
++	output = (char*)aMallocA(len + 2);
++
++	memcpy(output, str, index);
++	output[index] = c[0];
++	memcpy(&output[index+1], &str[index], len - index);
++	output[len+1] = '\0';
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// delchar [ToastOfDoom]
++//
++// delchar <string>, <index>
++//-------------------------------------------------------
++BUILDIN_FUNC(delchar)
++{
++	const char *str = script_getstr(st,2);
++	int index = script_getnum(st,3);
++	char *output;
++	size_t len = strlen(str);
++
++	if(index < 0 || index > len) {
++		//return original
++		++len;
++		output = (char*)aMallocA(len);
++		memcpy(output, str, len);
++		script_pushstr(st, output);
++		return 0;
++	}
++
++	output = (char*)aMallocA(len);
++
++	memcpy(output, str, index);
++	memcpy(&output[index], &str[index+1], len - index);
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// strtoupper [ToastOfDoom]
++//
++// strtoupper <str>
++//-------------------------------------------------------
++BUILDIN_FUNC(strtoupper)
++{
++	const char *str = script_getstr(st,2);
++	char *output;
++	int i = 0;
++	
++	output = (char*)aMallocA(strlen(str) + 1);
++
++	while(str[i] != '\0')
++		output[i++] = TOUPPER(str[i]);
++	output[i] = '\0';
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// strtolower [ToastOfDoom]
++//
++// strtolower <str>
++//-------------------------------------------------------
++BUILDIN_FUNC(strtolower)
++{
++	const char *str = script_getstr(st,2);
++	char *output;
++	int i = 0;
++	
++	output = (char*)aMallocA(strlen(str) + 1);
++
++	while(str[i] != '\0')
++		output[i++] = TOLOWER(str[i]);
++	output[i] = '\0';
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// substr [ToastOfDoom]
++//
++// substr <str>, <start>, <end>
++//-------------------------------------------------------
++BUILDIN_FUNC(substr)
++{
++	const char *str = script_getstr(st,2);
++	char *output;
++	int start = script_getnum(st,3);
++	int end = script_getnum(st,4);
++
++	int len = 0;
++
++	if(start >= 0 && end < strlen(str) && start <= end) {
++		len = end - start + 1;
++		output = (char*)aMallocA(len + 1);
++		memcpy(output, &str[start], len);
++	} else 
++		output = (char*)aMallocA(1);
++
++	output[len] = '\0';
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// explode [ToastOfDoom]
++//
++// explode <dest_string_array>, <str>, <delimiter>
++// Note: delimiter is limited to 1 char
++//-------------------------------------------------------
++BUILDIN_FUNC(explode)
++{
++	struct script_data* data = script_getdata(st, 2);
++	const char *str = script_getstr(st,3);
++	const char delimiter = script_getstr(st, 4)[0];
++	int32 id;
++	size_t len = strlen(str);
++	int i = 0, j = 0, k = 0;
++	int start;
++	
++
++	char *temp;
++	const char* name;
++
++	TBL_PC* sd = NULL;
++
++	temp = (char*)aMallocA(len + 1);
++
++	if( !data_isreference(data) )
++	{
++		ShowError("script:explode: not a variable\n");
++		script_reportdata(data);
++		st->state = END;
++		return 1;// not a variable
++	}
++
++	id = reference_getid(data);
++	start = reference_getindex(data);
++	name = reference_getname(data);
++
++	if( not_array_variable(*name) )
++	{
++		ShowError("script:explode: illegal scope\n");
++		script_reportdata(data);
++		st->state = END;
++		return 1;// not supported
++	}
++
++	if( !is_string_variable(name) )
++	{
++		ShowError("script:explode: not string array\n");
++		script_reportdata(data);
++		st->state = END;
++		return 1;// data type mismatch
++	}
++
++	if( not_server_variable(*name) )
++	{
++		sd = script_rid2sd(st);
++		if( sd == NULL )
++			return 0;// no player attached
++	}
++
++	while(str[i] != '\0') {
++		if(str[i] == delimiter && start < 127) { //break at delimiter but ignore after reaching last array index
++			temp[j] = '\0';
++			set_reg(st, sd, reference_uid(id, start++), name, (void*)temp, reference_getref(data));
++			j = 0;
++			++i;
++		} else {
++			temp[j++] = str[i++];
++		}
++	}
++	//set last string
++	temp[j] = '\0';
++	set_reg(st, sd, reference_uid(id, start), name, (void*)temp, reference_getref(data));
++
++	aFree(temp);
++	return 0;
++}
++
++//=======================================================
++// implode [ToastOfDoom] - php style implode
++//
++// implode <string_array>
++// implode <string_array>, <glue>
++//-------------------------------------------------------
++BUILDIN_FUNC(implode)
++{
++	struct script_data* data = script_getdata(st, 2);
++	const char *glue, *name, *temp;
++	int32 glue_len = 0, array_size, id;
++	size_t len = 0;
++	int i, k = 0;
++
++	TBL_PC* sd = NULL;
++
++	char *output;
++
++	if( !data_isreference(data) )
++	{
++		ShowError("script:implode: not a variable\n");
++		script_reportdata(data);
++		st->state = END;
++		return 1;// not a variable
++	}
++
++	id = reference_getid(data);
++	name = reference_getname(data);
++
++	if( not_array_variable(*name) )
++	{
++		ShowError("script:implode: illegal scope\n");
++		script_reportdata(data);
++		st->state = END;
++		return 1;// not supported
++	}
++
++	if( !is_string_variable(name) )
++	{
++		ShowError("script:implode: not string array\n");
++		script_reportdata(data);
++		st->state = END;
++		return 1;// data type mismatch
++	}
++
++	if( not_server_variable(*name) )
++	{
++		sd = script_rid2sd(st);
++		if( sd == NULL )
++			return 0;// no player attached
++	}
++
++	//count chars
++	array_size = getarraysize(st, id, reference_getindex(data), is_string_variable(name), reference_getref(data)) - 1;
++
++	if(array_size == -1) //empty array check (AmsTaff)
++    {
++        ShowWarning("script:implode: array length = 0\n");
++        output = (char*)aMallocA(sizeof(char)*5);
++        sprintf(output,"%s","NULL");
++	} else {
++		for(i = 0; i <= array_size; ++i) {
++			temp = (char*) get_val2(st, reference_uid(id, i), reference_getref(data));
++			len += strlen(temp);
++			script_removetop(st, -1, 0);
++		}
++
++		//allocate mem
++		if( script_hasdata(st,3) ) {
++			glue = script_getstr(st,3);
++			glue_len = strlen(glue);
++			len += glue_len * (array_size);
++		}
++		output = (char*)aMallocA(len + 1);
++
++		//build output
++		for(i = 0; i < array_size; ++i) {
++			temp = (char*) get_val2(st, reference_uid(id, i), reference_getref(data));
++			len = strlen(temp);
++			memcpy(&output[k], temp, len);
++			k += len;
++			if(glue_len != 0) {
++				memcpy(&output[k], glue, glue_len);
++				k += glue_len;
++			}
++			script_removetop(st, -1, 0);
++		}
++		temp = (char*) get_val2(st, reference_uid(id, array_size), reference_getref(data));
++		len = strlen(temp);
++		memcpy(&output[k], temp, len);
++		k += len;
++		script_removetop(st, -1, 0);
++
++		output[k] = '\0';
++	}
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// sprintf [Mirei]
++//
++// Implements C sprintf, except format %n. The resulting string is
++// returned, instead of being saved in variable by reference.
++//
++// sprintf(<format>, ...);
++//-------------------------------------------------------
++BUILDIN_FUNC(sprintf)
++{
++    unsigned int len, argc = 0, arg = 0, buf2_len = 0;
++    const char* format;
++    char* p;
++    char* q;
++    char* buf  = NULL;
++    char* buf2 = NULL;
++    struct script_data* data;
++    StringBuf final_buf;
++
++    // Fetch init data
++    format = script_getstr(st, 2);
++    argc = script_lastdata(st)-2;
++    len = strlen(format);
++
++    // Skip parsing, where no parsing is required.
++    if(len==0){
++        script_pushconststr(st,"");
++        return 0;
++    }
++
++    // Pessimistic alloc
++    CREATE(buf, char, len+1);
++
++    // Need not be parsed, just solve stuff like %%.
++    if(argc==0){
++        sprintf(buf, format);
++        script_pushstrcopy(st, buf);
++        aFree(buf);
++        return 0;
++    }
++
++    safestrncpy(buf, format, len+1);
++
++    // Issue sprintf for each parameter
++    StringBuf_Init(&final_buf);
++    q = buf;
++    while((p = strchr(q, '%'))!=NULL){
++        if(p!=q){
++            len = p-q+1;
++            if(buf2_len<len){
++                RECREATE(buf2, char, len);
++                buf2_len = len;
++            }
++            safestrncpy(buf2, q, len);
++            StringBuf_AppendStr(&final_buf, buf2);
++            q = p;
++        }
++        p = q+1;
++        if(*p=='%'){  // %%
++            StringBuf_AppendStr(&final_buf, "%");
++            q+=2;
++            continue;
++        }
++        if(*p=='n'){  // %n
++            ShowWarning("buildin_sprintf: Format %%n not supported! Skipping...\n");
++            script_reportsrc(st);
++            q+=2;
++            continue;
++        }
++        if(arg>=argc){
++            ShowError("buildin_sprintf: Not enough arguments passed!\n");
++            if(buf) aFree(buf);
++            if(buf2) aFree(buf2);
++            StringBuf_Destroy(&final_buf);
++            script_pushconststr(st,"");
++            return 1;
++        }
++        if((p = strchr(q+1, '%'))==NULL){
++            p = strchr(q, 0);  // EOS
++        }
++        len = p-q+1;
++        if(buf2_len<len){
++            RECREATE(buf2, char, len);
++            buf2_len = len;
++        }
++        safestrncpy(buf2, q, len);
++        q = p;
++
++        // Note: This assumes the passed value being the correct
++        // type to the current format specifier. If not, the server
++        // probably crashes or returns anything else, than expected,
++        // but it would behave in normal code the same way so it's
++        // the scripter's responsibility.
++        data = script_getdata(st, arg+3);
++        if(data_isstring(data)){  // String
++            StringBuf_Printf(&final_buf, buf2, script_getstr(st, arg+3));
++        }else if(data_isint(data)){  // Number
++            StringBuf_Printf(&final_buf, buf2, script_getnum(st, arg+3));
++        }else if(data_isreference(data)){  // Variable
++            char* name = reference_getname(data);
++            if(name[strlen(name)-1]=='$'){  // var Str
++                StringBuf_Printf(&final_buf, buf2, script_getstr(st, arg+3));
++            }else{  // var Int
++                StringBuf_Printf(&final_buf, buf2, script_getnum(st, arg+3));
++            }
++        }else{  // Unsupported type
++            ShowError("buildin_sprintf: Unknown argument type!\n");
++            if(buf) aFree(buf);
++            if(buf2) aFree(buf2);
++            StringBuf_Destroy(&final_buf);
++            script_pushconststr(st,"");
++            return 1;
++        }
++        arg++;
++    }
++
++    // Append anything left
++    if(*q){
++        StringBuf_AppendStr(&final_buf, q);
++    }
++
++    // Passed more, than needed
++    if(arg<argc){
++        ShowWarning("buildin_sprintf: Unused arguments passed.\n");
++        script_reportsrc(st);
++    }
++
++    script_pushstrcopy(st, StringBuf_Value(&final_buf));
++
++    if(buf) aFree(buf);
++    if(buf2) aFree(buf2);
++    StringBuf_Destroy(&final_buf);
++
++    return 0;
++}
++
++//=======================================================
++// sscanf [Mirei]
++//
++// Implements C sscanf.
++//
++// sscanf(<str>, <format>, ...);
++//-------------------------------------------------------
++BUILDIN_FUNC(sscanf){
++    unsigned int argc, arg = 0, len;
++    struct script_data* data;
++    struct map_session_data* sd = NULL;
++    const char* str;
++    const char* format;
++    const char* p;
++    const char* q;
++    char* buf = NULL;
++    char* buf_p;
++    char* ref_str = NULL;
++    int ref_int;
++
++    // Get data
++    str = script_getstr(st, 2);
++    format = script_getstr(st, 3);
++    argc = script_lastdata(st)-3;
++
++    len = strlen(format);
++    CREATE(buf, char, len*2+1);
++
++    // Issue sscanf for each parameter
++    *buf = 0;
++    q = format;
++    while(p = strchr(q, '%')){
++        if(p!=q){
++            strncat(buf, q, (size_t)(p-q));
++            q = p;
++        }
++        p = q+1;
++        if(*p=='*' || *p=='%'){  // Skip
++            strncat(buf, q, 2);
++            q+=2;
++            continue;
++        }
++        if(arg>=argc){
++            ShowError("buildin_sscanf: Not enough arguments passed!\n");
++            script_pushint(st, -1);
++            if(buf) aFree(buf);
++            if(ref_str) aFree(ref_str);
++            return 1;
++        }
++        if((p = strchr(q+1, '%'))==NULL){
++            p = strchr(q, 0);  // EOS
++        }
++        len = p-q;
++        strncat(buf, q, len);
++        q = p;
++
++        // Validate output
++        data = script_getdata(st, arg+4);
++        if(!data_isreference(data) || !reference_tovariable(data)){
++            ShowError("buildin_sscanf: Target argument is not a variable!\n");
++            script_pushint(st, -1);
++            if(buf) aFree(buf);
++            if(ref_str) aFree(ref_str);
++            return 1;
++        }
++        buf_p = reference_getname(data);
++        if(not_server_variable(*buf_p) && (sd = script_rid2sd(st))==NULL){
++            script_pushint(st, -1);
++            if(buf) aFree(buf);
++            if(ref_str) aFree(ref_str);
++            return 0;
++        }
++
++        // Save value if any
++        if(buf_p[strlen(buf_p)-1]=='$'){  // String
++            if(ref_str==NULL){
++                CREATE(ref_str, char, strlen(str)+1);
++            }
++            if(sscanf(str, buf, ref_str)==0){
++                break;
++            }
++            set_reg(st, sd, add_str(buf_p), buf_p, (void *)(ref_str), reference_getref(data));
++        }else{  // Number
++            if(sscanf(str, buf, &ref_int)==0){
++                break;
++            }
++            set_reg(st, sd, add_str(buf_p), buf_p, (void *)(ref_int), reference_getref(data));
++        }
++        arg++;
++
++        // Disable used format (%... -> %*...)
++        buf_p = strchr(buf, 0);
++        memmove(buf_p-len+2, buf_p-len+1, len);
++        *(buf_p-len+1) = '*';
++    }
++
++    // Passed more, than needed
++    if(arg<argc){
++        ShowWarning("buildin_sscanf: Unused arguments passed.\n");
++        script_reportsrc(st);
++    }
++
++    script_pushint(st, arg);
++    if(buf) aFree(buf);
++    if(ref_str) aFree(ref_str);
++
++    return 0;
++}
++
++//=======================================================
++// strpos [ToastOfDoom]
++//
++// Implements PHP style strpos. Adapted from code from
++// http://www.daniweb.com/code/snippet313.html, Dave Sinkula
++//
++// strpos(<haystack>, <needle>)
++// strpos(<haystack>, <needle>, <offset>)
++//-------------------------------------------------------
++BUILDIN_FUNC(strpos) {
++	const char *haystack = script_getstr(st,2);
++	const char *needle = script_getstr(st,3);
++	int i;
++	size_t len;
++
++	if( script_hasdata(st,4) )
++		i = script_getnum(st,4);
++	else
++		i = 0;
++
++	if ( strlen(needle) == 0 ) {
++		script_pushint(st, -1);
++		return 0;
++	}
++
++	len = strlen(haystack);
++	for ( ; i < len; ++i ) {
++		if ( haystack[i] == *needle ) {
++			// matched starting char -- loop through remaining chars
++			const char *h, *n;
++			for ( h = &haystack[i], n = needle; *h && *n; ++h, ++n ) {
++				if ( *h != *n ) {
++					break;
++				}
++			}
++			if ( !*n ) { // matched all of 'needle' to null termination
++				script_pushint(st, i);
++				return 0;
++			}
++		}
++	}
++	script_pushint(st, -1);
++	return 0;
++}
++
+ // declarations that were supposed to be exported from npc_chat.c
+ #ifdef PCRE_SUPPORT
+ BUILDIN_FUNC(defpattern);
+@@ -16813,6 +17636,7 @@
+ /// for an explanation on args, see add_buildin_func
+ struct script_function buildin_func[] = {
+ 	// NPC interaction
++	BUILDIN_DEF(sc_check,"i?"), // [Ivion]
+ 	BUILDIN_DEF(mes,"s"),
+ 	BUILDIN_DEF(next,""),
+ 	BUILDIN_DEF(close,""),
+@@ -16854,7 +17678,8 @@
+ 	BUILDIN_DEF(itembound2,"viiiiiiii?"),
+ 	BUILDIN_DEF(getnameditem,"vv"),
+ 	BUILDIN_DEF2(grouprandomitem,"groupranditem","i"),
+-	BUILDIN_DEF(makeitem,"visii"),
++	BUILDIN_DEF(makeitem,"visii?"),
++	BUILDIN_DEF(areaclean,"sii??"),
+ 	BUILDIN_DEF(delitem,"vi?"),
+ 	BUILDIN_DEF(delitem2,"viiiiiiii?"),
+ 	BUILDIN_DEF2(enableitemuse,"enable_items",""),
+@@ -16936,7 +17761,7 @@
+ 	BUILDIN_DEF(produce,"i"),
+ 	BUILDIN_DEF(makerune,"i"),
+ 	BUILDIN_DEF(cooking,"i"),
+-	BUILDIN_DEF(monster,"siisii?"),
++	BUILDIN_DEF(monster,"siisii??"),
+ 	BUILDIN_DEF(mobdemolition,"siiiiii"),
+ 	BUILDIN_DEF2(mobevent,"mobevent","siisiiiiiiiiiiiiii?"),
+ 	BUILDIN_DEF(getmobrandid,"ii"),
+@@ -17141,6 +17966,7 @@
+ 	BUILDIN_DEF(atoi,"s"),
+ 	// [zBuffer] List of player cont commands --->
+ 	BUILDIN_DEF(rid2name,"i"),
++	BUILDIN_DEF(pcblockmove,"ii"),
+ 	BUILDIN_DEF(pcfollow,"ii"),
+ 	BUILDIN_DEF(pcstopfollow,"i"),
+ 	BUILDIN_DEF(pcblock,"ii?"),
+@@ -17253,6 +18079,23 @@
+ 	BUILDIN_DEF(checkquest, "i?"),
+ 	BUILDIN_DEF(changequest, "ii"),
+ 	BUILDIN_DEF(showevent, "ii"),
++
++	// String Manipulation Commands
++	BUILDIN_DEF(charat,"si"),
++	BUILDIN_DEF(setchar,"ssi"),
++	BUILDIN_DEF(insertchar,"ssi"),
++	BUILDIN_DEF(delchar,"si"),
++	BUILDIN_DEF(strtoupper,"s"),
++	BUILDIN_DEF(strtolower,"s"),
++	BUILDIN_DEF(charisupper, "si"),
++	BUILDIN_DEF(charislower, "si"),
++	BUILDIN_DEF(substr,"sii"),
++	BUILDIN_DEF(explode, "rss"),
++	BUILDIN_DEF(implode, "r?"),
++	BUILDIN_DEF(sprintf,"s*"),  // [Mirei]
++	BUILDIN_DEF(sscanf,"ss*"),  // [Mirei]
++	BUILDIN_DEF(strpos,"ss?"),
++
+ 	// Enchanting
+ 	BUILDIN_DEF(successenchant,"ii"),
+ 	BUILDIN_DEF(failedenchant,"i"),
+@@ -17266,5 +18109,9 @@
+ 	BUILDIN_DEF(getpvpmode,""),
+ 	BUILDIN_DEF(setsecurity,"i"),
+ 	BUILDIN_DEF(getsecurity,""),
++
++	// [WiseWarrior]
++	BUILDIN_DEF(setdropbonus, "??"),
++	BUILDIN_DEF(getdropbonus, "?"),
+ 	{NULL,NULL,NULL},
+ };
+Index: src-base/map/skill.c
+===================================================================
+--- src-base/map/skill.c	(revision 236)
++++ src-base/map/skill.c	(working copy)
+@@ -6763,6 +6763,7 @@
+ 		break;
+ 	case TF_HIDING:
+ 	case ST_CHASEWALK:
++	case ALL_RIDING:
+ 		if (tsce)
+ 		{
+ 			clif_skill_nodamage(src,bl,skillid,-1,status_change_end(bl, type, INVALID_TIMER)); //Hide skill-scream animation.
+@@ -7365,6 +7366,7 @@
+ 				if (!tsc->data[i])
+ 					continue;
+ 				switch (i) {
++				case SC_PKDELAY:
+ 				case SC_WEIGHT50:		case SC_WEIGHT90:		case SC_HALLUCINATION:
+ 				case SC_STRIPWEAPON:	case SC_STRIPSHIELD:	case SC_STRIPARMOR:
+ 				case SC_STRIPHELM:		case SC_CP_WEAPON:		case SC_CP_SHIELD:
+@@ -8762,6 +8764,7 @@
+ 				if (!tsc->data[i])
+ 					continue;
+ 				switch (i) {
++				case SC_PKDELAY:
+ 				case SC_WEIGHT50:		case SC_WEIGHT90:		case SC_HALLUCINATION:
+ 				case SC_STRIPWEAPON:	case SC_STRIPSHIELD:	case SC_STRIPARMOR:
+ 				case SC_STRIPHELM:		case SC_CP_WEAPON:		case SC_CP_SHIELD:
+@@ -13110,7 +13113,7 @@
+ 	case BS_MAXIMIZE:		case NV_TRICKDEAD:	case TF_HIDING:			case AS_CLOAKING:		case CR_AUTOGUARD:
+ 	case ML_AUTOGUARD:		case CR_DEFENDER:	case ML_DEFENDER:		case ST_CHASEWALK:		case PA_GOSPEL:
+ 	case CR_SHRINK:			case TK_RUN:		case GS_GATLINGFEVER:	case TK_READYCOUNTER:	case TK_READYDOWN:
+-	case TK_READYSTORM:		case TK_READYTURN:	case SG_FUSION:
++	case TK_READYSTORM:		case TK_READYTURN:	case SG_FUSION:			case ALL_RIDING:
+ 		if( sc && sc->data[status_skill2sc(skill)] )
+ 			return 1;
+ 	}
+@@ -14107,7 +14110,7 @@
+ 	case BS_MAXIMIZE:		case NV_TRICKDEAD:	case TF_HIDING:			case AS_CLOAKING:		case CR_AUTOGUARD:
+ 	case ML_AUTOGUARD:		case CR_DEFENDER:	case ML_DEFENDER:		case ST_CHASEWALK:		case PA_GOSPEL:
+ 	case CR_SHRINK:			case TK_RUN:		case GS_GATLINGFEVER:	case TK_READYCOUNTER:	case TK_READYDOWN:
+-	case TK_READYSTORM:		case TK_READYTURN:	case SG_FUSION:
++	case TK_READYSTORM:		case TK_READYTURN:	case SG_FUSION:			case ALL_RIDING:
+ 		if( sc && sc->data[status_skill2sc(skill)] )
+ 			return req;
+ 	}
+@@ -16579,7 +16582,7 @@
+ 				break;
+ 			case AL_HOLYWATER:
+ 			case AB_ANCILLA:
+-				make_per = 100000; //100% success
++				make_per = 90000; //100% success
+ 				break;
+ 			case AM_PHARMACY: // Potion Preparation - reviewed with the help of various Ragnainfo sources [DracoRPG]
+ 			case AM_TWILIGHT1:
+@@ -16627,7 +16630,7 @@
+ 					make_per = make_per * battle_config.pp_rate / 100;
+ 				break;
+ 			case SA_CREATECON: // Elemental Converter Creation
+-				make_per = 100000; // should be 100% success rate
++				make_per = 90000; // should be 100% success rate
+ 				break;
+ 			case RK_RUNEMASTERY:
+ 				skill_lv = pc_checkskill(sd,skill_id);
+Index: src-base/map/skill.h
+===================================================================
+--- src-base/map/skill.h	(revision 236)
++++ src-base/map/skill.h	(working copy)
+@@ -1492,6 +1492,7 @@
+ 	ALL_BUYING_STORE,
+ 	ALL_GUARDIAN_RECALL,
+ 	ALL_ODINS_POWER,
++	ALL_RIDING,
+ 
+ 	HLIF_HEAL = 8001,
+ 	HLIF_AVOID,
+Index: src-base/map/status.c
+===================================================================
+--- src-base/map/status.c	(revision 236)
++++ src-base/map/status.c	(working copy)
+@@ -554,6 +554,8 @@
+ 	set_sc( GN_FIRE_EXPANSION_TEAR_GAS    , SC_TEARGAS     , SI_FIRE_EXPANSION_TEAR_GAS    , SCB_NONE );
+ 	set_sc( GN_MANDRAGORA                 , SC_MANDRAGORA  , SI_MANDRAGORA                 , SCB_INT );
+ 
++	set_sc( ALL_RIDING           , SC_ALL_RIDING      , SI_ALL_RIDING       , SCB_SPEED );
++
+ 	set_sc( HLIF_AVOID           , SC_AVOID           , SI_BLANK           , SCB_SPEED );
+ 	set_sc( HLIF_CHANGE          , SC_CHANGE          , SI_BLANK           , SCB_VIT|SCB_INT );
+ 	set_sc( HFLI_FLEET           , SC_FLEET           , SI_BLANK           , SCB_ASPD|SCB_BATK|SCB_WATK );
+@@ -1478,7 +1480,8 @@
+ 				sc->data[SC__IGNORANCE] || // Target afflicted with this debuff cannot use skills or magic.
+ 				sc->data[SC_DEEPSLEEP] ||
+ 				sc->data[SC_SATURDAYNIGHTFEVER] ||
+-				sc->data[SC_CURSEDCIRCLE_TARGET]
++				sc->data[SC_CURSEDCIRCLE_TARGET] ||
++				sc->data[SC_ALL_RIDING]
+ 			))
+ 				return 0;
+ 
+@@ -2760,7 +2763,7 @@
+ 	if((skill=pc_checkskill(sd,WM_LESSON))>0)
+ 		status->max_sp += 30 * skill;
+ 
+-	if (sd->gm_power && pc_isGM(sd) > 90) { // agregada mayor seguridad comprobando si sd es GM [Tab]
++	if (sd->gm_power) { // agregada mayor seguridad comprobando si sd es GM [Tab]
+ 		status->str += sd->gm_stats[0];
+ 		status->agi += sd->gm_stats[1];
+ 		status->vit += sd->gm_stats[2];
+@@ -5056,6 +5059,8 @@
+ 				val = max( val, sc->data[SC_GT_REVITALIZE]->val2 );
+ 			if( sc->data[SC_WIND_STEP_OPTION] )
+ 				val = max( val, sc->data[SC_WIND_STEP_OPTION]->val2 );
++			if( sc->data[SC_ALL_RIDING] )
++				val = max( val, 25 );
+ 
+ 			//FIXME: official items use a single bonus for this [ultramage]
+ 			if( sc->data[SC_SPEEDUP0] ) // temporary item-based speedup
+@@ -8402,6 +8407,10 @@
+ //			opt_flag = 0;
+ //			break;
+ 		//OPTION
++		case SC_ALL_RIDING:
++			sc->opt3 |= OPT3_ALL_RIDING;
++			opt_flag = 0;
++			break;
+ 		case SC_HIDING:
+ 			sc->option |= OPTION_HIDE;
+ 			opt_flag = 2;
+@@ -8574,6 +8583,7 @@
+ 		if(type == 0)
+ 		switch (i)
+ 		{	//Type 0: PC killed -> Place here statuses that do not dispel on death.
++		case SC_PKDELAY:
+ 		case SC_WEIGHT50:
+ 		case SC_WEIGHT90:
+ 		case SC_EDP:
+@@ -8601,6 +8611,7 @@
+ 		case SC_FOOD_DEX_CASH:
+ 		case SC_FOOD_INT_CASH:
+ 		case SC_FOOD_LUK_CASH:
++		case SC_ALL_RIDING:
+ 			continue;
+ 		}
+ 
+@@ -9206,6 +9217,10 @@
+ //		sc->opt3 &= ~OPT3_CONTRACT;
+ //		opt_flag = 0;
+ //		break;
++	case SC_ALL_RIDING:
++		sc->opt3 &= ~OPT3_ALL_RIDING;
++		opt_flag = 0;
++		break;
+ 	default:
+ 		opt_flag = 0;
+ 	}
+Index: src-base/map/status.h
+===================================================================
+--- src-base/map/status.h	(revision 236)
++++ src-base/map/status.h	(working copy)
+@@ -535,6 +535,10 @@
+ 	SC_STOMACHACHE,
+ 	SC_MYSTERIOUS_POWDER,
+ 
++	SC_ALL_RIDING,
++
++	SC_PKDELAY = 600, // [Ivion] 
++
+ 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
+ } sc_type;
+ 
+@@ -1154,7 +1158,7 @@
+ //	SI_SPIRITS_SAVEINFO2 = 610,
+ //	SI_MAGIC_CANDY = 611,
+ //	SI_SEARCH_STORE_INFO = 612,
+-//	SI_ALL_RIDING = 613,
++	SI_ALL_RIDING = 613,
+ //	SI_ALL_RIDING_REUSE_LIMIT = 614,
+ //	SI_MACRO = 615,
+ //	SI_MACRO_POSTDELAY = 616,
+@@ -1274,6 +1278,7 @@
+ 	OPT3_SOULLINK         = 0x00008000,
+ 	OPT3_UNDEAD           = 0x00010000,
+ 	OPT3_CONTRACT         = 0x00020000,
++	OPT3_ALL_RIDING       = 0x00040000,
+ };
+ 
+ enum {
+Index: src-base/map/storage.c
+===================================================================
+--- src-base/map/storage.c	(revision 236)
++++ src-base/map/storage.c	(working copy)
+@@ -18,6 +18,7 @@
+ #include "battle.h"
+ #include "atcommand.h"
+ #include "log.h"
++#include "npc.h" 
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+@@ -160,6 +161,11 @@
+ 	
+ 	data = itemdb_search(item_data->nameid);
+ 
++	if( data->stack.storage && amount > data->stack.amount ) 
++	{// item stack limitation 
++		return 1; 
++	} 
++
+ 	if( !itemdb_canstore(item_data, pc_isGM(sd)) )
+ 	{	//Check if item is storable. [Skotlex]
+ 		clif_displaymessage (sd->fd, msg_txt(264));
+@@ -172,7 +178,7 @@
+ 		{
+ 			if( compare_item(&stor->items[i], item_data) )
+ 			{// existing items found, stack them
+-				if( amount > MAX_AMOUNT - stor->items[i].amount )
++				if( amount > MAX_AMOUNT - stor->items[i].amount || ( data->stack.storage && amount > data->stack.amount - stor->items[i].amount ) )
+ 					return 1;
+ 				stor->items[i].amount += amount;
+ 				if( flag ) clif_storageitemadded(sd,&stor->items[i],i,amount);
+@@ -266,6 +272,11 @@
+ 
+ 	if(log_config.enable_logs&0x800)
+ 		log_pick_pc(sd, "R", sd->status.storage.items[n].nameid, amount, &sd->status.storage.items[n], sd->status.storage.items[n].serial);
++	if( battle_config.lootevent & 1 ) {
++		pc_setglobalreg( sd, "LastLootID", sd->status.storage.items[n].nameid ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	}
+ 
+ 	if( sd->status.storage.items[n].amount == 0 )
+ 	{
+@@ -558,6 +569,9 @@
+ {
+ 	struct guild_storage *gstor;
+ 
++	struct guild *g;
++	int ps;
++
+ 	nullpo_ret(sd);
+ 
+ 	if(sd->status.guild_id <= 0)
+@@ -565,7 +579,13 @@
+ 
+ 	if(sd->state.storage_flag)
+ 		return 1; //Can't open both storages at a time.
+-	
++
++	//[Ind/ro-resources.net]
++	if( (g = guild_search(sd->status.guild_id)) != NULL && (ps=guild_getposition(g,sd))>0 && ps > 0 && !(g->position[ps].mode&0x20) ){ //must load guild data and not be the guild master in order to be denied.
++		clif_displaymessage(sd->fd,"You do not have permission to open your guild's storage, ask it for your guild master.");
++		return 1;
++	}
++
+ 	if( !pc_can_give_items(pc_isGM(sd)) ) { //check is this GM level can open guild storage and store items [Lupus]
+ 		clif_displaymessage(sd->fd, msg_txt(246));
+ 		return 1;
+@@ -600,6 +620,11 @@
+ 
+ 	data = itemdb_search(item_data->nameid);
+ 
++	if( data->stack.guildstorage && amount > data->stack.amount ) 
++	{// item stack limitation 
++		return 1; 
++	} 
++
+ 	if( !itemdb_canguildstore(item_data, pc_isGM(sd)) || item_data->expire_time || item_data->bound )
+ 	{	//Check if item is storable. [Skotlex]
+ 		clif_displaymessage (sd->fd, msg_txt(264));
+@@ -615,7 +640,7 @@
+ 	if(itemdb_isstackable2(data)){ //Stackable
+ 		for(i=0;i<MAX_GUILD_STORAGE;i++){
+ 			if(compare_item(&stor->items[i], item_data)) {
+-				if(stor->items[i].amount+amount > MAX_AMOUNT)
++				if( amount > MAX_AMOUNT - stor->items[i].amount || ( data->stack.guildstorage && amount > data->stack.amount - stor->items[i].amount ) )
+ 					return 1;
+ 				stor->items[i].amount+=amount;
+ 				clif_storageitemadded(sd,&stor->items[i],i,amount);
+@@ -654,6 +679,11 @@
+ 	stor->items[n].amount-=amount;
+ 	if(log_config.enable_logs&0x1000)
+ 		log_pick_pc(sd, "G", stor->items[n].nameid, amount, &stor->items[n], stor->items[n].serial);
++	if( battle_config.lootevent & 1 ) {
++		pc_setglobalreg( sd, "LastLootID", stor->items[n].nameid ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	} 
+ 	if(stor->items[n].amount==0){
+ 		memset(&stor->items[n],0,sizeof(stor->items[0]));
+ 		stor->storage_amount--;
+Index: src-base/map/trade.c
+===================================================================
+--- src-base/map/trade.c	(revision 236)
++++ src-base/map/trade.c	(working copy)
+@@ -22,7 +22,7 @@
+ 
+ 
+ //Max distance from traders to enable a trade to take place.
+-#define TRADE_DISTANCE 2
++#define TRADE_DISTANCE 13
+ 
+ /*==========================================
+  * Initiates a trade request.
+@@ -579,6 +579,11 @@
+ 					log_pick_pc(sd, "T", sd->status.inventory[n].nameid, -(sd->deal.item[trade_i].amount), &sd->status.inventory[n], sd->status.inventory[n].serial );
+ 					log_pick_pc(tsd, "T", sd->status.inventory[n].nameid, sd->deal.item[trade_i].amount, &sd->status.inventory[n], sd->status.inventory[n].serial );
+ 				}
++				if( battle_config.lootevent & 1 ) {
++					pc_setglobalreg( tsd, "LastLootID", sd->status.inventory[n].nameid ); //Last lootet Item ID
++					pc_setglobalreg( tsd, "LastLootAmount", sd->deal.item[trade_i].amount ); //Last looted Item Amount
++					npc_event_doall_id( "OnLoot", tsd->bl.id );
++				} 
+ 				pc_delitem(sd, n, sd->deal.item[trade_i].amount, 1, 6);
+ 			} else
+ 				clif_additem(sd, n, sd->deal.item[trade_i].amount, 0);
+@@ -598,6 +603,11 @@
+ 					log_pick_pc(tsd, "T", tsd->status.inventory[n].nameid, -(tsd->deal.item[trade_i].amount), &tsd->status.inventory[n], tsd->status.inventory[n].serial );
+ 					log_pick_pc(sd, "T", tsd->status.inventory[n].nameid, tsd->deal.item[trade_i].amount, &tsd->status.inventory[n], tsd->status.inventory[n].serial );
+ 				}
++				if( battle_config.lootevent & 1 ) {
++					pc_setglobalreg( sd, "LastLootID", tsd->status.inventory[n].nameid ); //Last lootet Item ID
++					pc_setglobalreg( sd, "LastLootAmount", tsd->deal.item[trade_i].amount ); //Last looted Item Amount
++					npc_event_doall_id( "OnLoot", sd->bl.id );
++				}
+ 				pc_delitem(tsd, n, tsd->deal.item[trade_i].amount, 1, 6);
+ 			} else
+ 				clif_additem(tsd, n, tsd->deal.item[trade_i].amount, 0);
+Index: src-base/map/unit.c
+===================================================================
+--- src-base/map/unit.c	(revision 236)
++++ src-base/map/unit.c	(working copy)
+@@ -2080,7 +2080,7 @@
+ 			storage_guild_storage_quit(sd,0);
+ 		sd->state.storage_flag = 0; //Force close it when being warped.
+ 		if(sd->party_invite>0)
+-			party_reply_invite(sd,sd->party_invite_account,0);
++			party_reply_invite(sd,sd->party_invite,0);
+ 		if(sd->guild_invite>0)
+ 			guild_reply_invite(sd,sd->guild_invite,0);
+ 		if(sd->guild_alliance>0)
+Index: src-base/map/vending.c
+===================================================================
+--- src-base/map/vending.c	(revision 236)
++++ src-base/map/vending.c	(working copy)
+@@ -205,6 +205,11 @@
+ 			log_pick_pc(vsd, "V", vsd->status.cart[idx].nameid, -amount, &vsd->status.cart[idx], vsd->status.cart[idx].serial );
+ 			log_pick_pc( sd, "V", vsd->status.cart[idx].nameid,  amount, &vsd->status.cart[idx], vsd->status.cart[idx].serial );
+ 		}
++		if( battle_config.lootevent & 1 ) {
++			pc_setglobalreg( sd, "LastLootID", vsd->status.cart[idx].nameid ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		}
+ 
+ 		// vending item
+ 		pc_additem(sd, &vsd->status.cart[idx], amount);

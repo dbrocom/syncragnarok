@@ -852,7 +852,7 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		skillratio += 10 * skill_lv - 10;
 		break;
 	case PA_SHIELDCHAIN:
-		skillratio += 100 + 30 * skill_lv;
+		skillratio += 30 * skill_lv;
 		break;
 	case WS_CARTTERMINATION:
 		i = 10 * (16 - skill_lv);
@@ -6938,6 +6938,8 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 			status_change_end(bl, SC_STONE, INVALID_TIMER);
 			status_change_end(bl, SC_SLEEP, INVALID_TIMER);
 			status_change_end(bl, SC_STUN, INVALID_TIMER);
+			status_change_end(bl, SC_WHITEIMPRISON, INVALID_TIMER);
+			status_change_end(bl, SI_NETHERWORLD, INVALID_TIMER);
 		}
 		//Is this equation really right? It looks so... special.
 		if(battle_check_undead(tstatus->race,tstatus->def_ele))
