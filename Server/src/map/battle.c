@@ -404,7 +404,6 @@ int battle_calc_damage(struct block_list *src,struct block_list *bl,struct Damag
 	{
 	case PA_PRESSURE:
 	case HW_GRAVITATION:
-	case PA_SACRIFICE:
 		return damage; // Fixed Damage
 	case NJ_BAKUENRYU:
 	case WL_COMET:
@@ -954,7 +953,6 @@ int battle_calc_gvg_damage(struct block_list *src,struct block_list *bl,int dama
 	switch (skill_num) {
 	//Skills with no damage reduction.
 	case PA_PRESSURE:
-	case PA_SACRIFICE: // Sacrifice ?
 	case HW_GRAVITATION:
 	case NJ_ZENYNAGE:
 	case RK_DRAGONBREATH:
@@ -1799,11 +1797,11 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 						break;
 				}
 				break;
+			case CR_SHIELDBOOMERANG:
+			//case PA_SHIELDCHAIN:
 			case LG_SHIELDPRESS:
 			case LG_EARTHDRIVE:
-			case CR_SHIELDBOOMERANG:
 				wd.damage = sstatus->batk;
-			case PA_SHIELDCHAIN:
 				if (sd) {
 					short index = sd->equip_index[EQI_HAND_L];
 
@@ -2325,9 +2323,21 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 		if( skill_num == CR_SHIELDBOOMERANG || skill_num == PA_SHIELDCHAIN )
 		{ //Refine bonus applies after cards and elements.
 			short index= sd->equip_index[EQI_HAND_L];
-			if( index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR )
+			if( index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR ) {
 				ATK_ADD(10*sd->status.inventory[index].refine);
+			}
 		}
+		if ( skill_num == PA_SHIELDCHAIN ) {
+			short index = sd->equip_index[EQI_HAND_L];
+			if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
+				ATK_ADD(sd->inventory_data[index]->weight/10);
+				break;
+			}
+			if( sc && sc->data[SC_GLOOMYDAY_SK] )
+				ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
+			break;
+		}
+		
 	} //if (sd)
 
 	//Card Fix, tsd sid
@@ -2961,11 +2971,11 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 			wd.damage = sstatus->max_hp * 9/100;
 			wd.damage2 = 0;
 			break;
+		case CR_SHIELDBOOMERANG:
+		//case PA_SHIELDCHAIN:
 		case LG_SHIELDPRESS:
 		case LG_EARTHDRIVE:
-		case CR_SHIELDBOOMERANG:
 			wd.damage = sstatus->batk;
-		case PA_SHIELDCHAIN:
 			if( sd )
 			{
 				short index = sd->equip_index[EQI_HAND_L];
@@ -3480,13 +3490,25 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 	ATK_RATE2(c_bossmod[0],c_bossmod[1]); // Add Boss Modifications
 	ATK_RATE(c_atkmod[0]);
 	ATK_ADD(base_damage); // Adding Status Damage to Formula.
-
+	
 	// This cannot be added until def/def2 reductions are done
 	BON_RATE2(c_racemod[0],c_racemod[1]);
 	BON_RATE2(c_bossmod[0],c_bossmod[1]);
 	BON_RATE(c_atkmod[0]);
-	if( sd && (skill_id == CR_SHIELDBOOMERANG || skill_id == PA_SHIELDCHAIN) && (i = sd->equip_index[EQI_HAND_L]) >= 0 && sd->inventory_data[i] && sd->inventory_data[i]->type == IT_ARMOR )
+	if( sd && (skill_id == CR_SHIELDBOOMERANG || skill_id == PA_SHIELDCHAIN) && (i = sd->equip_index[EQI_HAND_L]) >= 0 && sd->inventory_data[i] && sd->inventory_data[i]->type == IT_ARMOR ) {
 		BON_ADD(10 * sd->status.inventory[i].refine);
+	}
+
+	if ( skill_num == PA_SHIELDCHAIN ) {
+		short index = sd->equip_index[EQI_HAND_L];
+		if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
+			ATK_ADD(sd->inventory_data[index]->weight/10);
+			break;
+		}
+		if( sc && sc->data[SC_GLOOMYDAY_SK] )
+			ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
+		break;
+	}
 
 	if( flag.hit && !flag.infdef )
 	{
@@ -6036,6 +6058,7 @@ static const struct _battle_data {
 	{ "max_cloth_color",                    &battle_config.max_cloth_color,                 4,      0,      INT_MAX,        },
 	{ "pet_hair_style",                     &battle_config.pet_hair_style,                  100,    0,      INT_MAX,        },
 	{ "castrate_dex_scale",                 &battle_config.castrate_dex_scale,              150,    1,      INT_MAX,        },
+	{ "castrate_dex_scale2",                &battle_config.castrate_dex_scale2,             150,    1,      INT_MAX,        },
 	{ "area_size",                          &battle_config.area_size,                       14,     0,      INT_MAX,        },
 	{ "zeny_from_mobs",                     &battle_config.zeny_from_mobs,                  0,      0,      1,              },
 	{ "mobs_level_up",                      &battle_config.mobs_level_up,                   0,      0,      1,              },

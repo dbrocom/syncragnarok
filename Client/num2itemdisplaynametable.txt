@@ -8194,3 +8194,5 @@
 31846#Soltura_Hechizos+#
 31847#Soltura_Hechizos++#
 31848#Soltura_Hechizos+++#
+
+30961#Headgear#

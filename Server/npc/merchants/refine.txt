@@ -1077,6 +1077,7 @@ function	script	orimain	{
 			mes "[" + getarg(0) + "]";
 			mes "Puedo refinarte un total de "+.@ori+" Oridecon.";
 			mes "¿Qué prefieres que haga?";
+			next;
 			switch(select("Dame tantos como puedas.:Prefiero indicarte la cantidad.")) {
 			case 1:
 				delitem 756,.@ori * 5;
@@ -1127,6 +1128,7 @@ function	script	orimain	{
 			mes "[" + getarg(0) + "]";
 			mes "Puedo refinarte un total de "+.@elu+" Elunium.";
 			mes "¿Qué prefieres que haga?";
+			next;
 			switch(select("Dame tántos como puedas.:Prefiero fijar la cantidad.")) {
 			case 1:
 				delitem 757,.@elu * 5;

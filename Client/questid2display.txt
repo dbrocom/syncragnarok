@@ -2605,94 +2605,82 @@ Return to Paradise Group Headquarters#
 À�½Ãµ¿¾È »ç¿ëÇÒ ¼ö ÀÖ´Â Ä«¶�Ä«½ºÀÇ ¹ÝÁö¸¦ ¹Þ¾Ò½À´Ï´Ù.#
 #
 
-/-- ¿¡ÇÇ¼Òµå 13.3 »çÆÄÀÇ ÃÊÃ», º�¹ÐÀÓ¹«
-7182#»çÆÄÀÇ ¹æ¹®#SG_FEEL#QUE_NOIMAGE#
-¸¶´©Å©¿¡¼­ »çÆÄÀÇ »çÀý´ÜÀÌ ¿Í ÀÖ´Ù°� ÇÑ´Ù. ¾Æ¿¤·Î´Â ¹ÏÀ» ¸¸ÇÑ »�´ë·Î ³ª¸¦ Áö¸�ÇßÀ¸¸ç, ÇöÀç »çÆÄÀÇ »çÀý´ÜÀº 2Ãþ ¿À¸¥ÂÊ ¹æ¿¡ ÀÖ´Ù.#
-»çÆÄ »çÀý ¸¸³ª±â#
+// El Dicastes Quests (13.3)
+7182#Sapha's Visit#SG_FEEL#QUE_NOIMAGE#
+The Sapha tribe has decided that we are reliable, the wife of the ambassador from the Sapha tribe is waiting to on the 2nd floor to speak with you.#
+Meet with the Sapha#
 
-7183#»çÆÄÀÇ ÃÊÃ»#SG_FEEL#QUE_NOIMAGE#
-º�ÇÏ´©½º´Â ³î¶ø°Ôµµ »çÆÄÀÇ ¼öµµ ¿¤ µðÄ«½ºÅ×½º¿¡¼­ ¿Â »çÆÄ¿´´Ù. »çÆÄÀÇ ¶�¹ÙÀÏÀº ¼öµµ¸¦ ÀÎ°£¿¡°Ô °³¹æÇßÀ¸¸ç Á¤½ÄÀ¸·Î ÃÊÃ»Çß´Ù. ¿ì¼± ¸¶´©Å©¿¡¼­ °æº�´ëÀå ¾Æ¹Ù¶õÃ¼·ÎºÎÅÍ ÅÍ³ÎÀÌ¿ë¿¡ ´ëÇÑ Çã°¡¸¦ ¹Þ¾Æ¾ß ÇÏ´Â °Í °°´Ù.#
-¸¶´©Å©¿¡¼­ ¾Æ¹Ù¶õÃ¼ ¸¸³ª±â#
+7183#At the invitation of Sapha#SG_FEEL#QUE_NOIMAGE#
+Surprisingly, you have been invited to visit the capital city of the Sapha tribe.  Find Captain Avalanche and he will show you the path to the capital city called El Dicastes.#
+Find Captain Avalanche in Manuk#
 
-7184#¿¤ µðÄ«½ºÅ×½º·Î!#SG_FEEL#QUE_NOIMAGE#
-¾Æ¹Ù¶õÃ¼¸¦ ÅëÇØ ¸¶´©Å©¿Í ¼öµµ ¿¤ µðÄ«½ºÅ×½º¸¦ ÀÕ´Â ÅÍ³Î ÁøÀÔÀ» Çã°¡ ¹Þ¾Ò´Ù. µåµð¾î »çÆÄÀÇ ¼öµµ·Î °¥ ¼ö ÀÖ°Ô µÇ¾ú´Ù!#
+7184#Path to El Dicastes!#SG_FEEL#QUE_NOIMAGE#
+According to Captain Avalanche, if you follow this tunnel to the end you will be in El Dicastes!#
 #
 
-7185#°¨Âû°ü µµÇÏ#SG_FEEL#QUE_NOIMAGE#
-¼öµµ·Î ¶°³ª±â Àü »ç·É°ü È÷¹Ù ¾ÆÁöÇÁ´Â °¨Âû°ü µµÇÏ¸¦ ¸¸³ª°� °¥ °ÍÀ» ¸�Çß´Ù. ¹«½¼ ÀÏÀÎÁö ¸ð¸£°ÚÁö¸¸ ¸¶´©Å©·Î ¶°³ª±âÀü¿¡ °¨Âû°ü µµÇÏ¶�´Â »ç¶÷À» ¸¸³ª¾ß ÇÑ´Ù. µµÇÏ´Â º�ÇÏ´©½ºÀÇ ¿·¹æ¿¡ ÀÖ´Ù.#
-°¨Âû°ü µµÇÏ ¸¸³ª±â#
+7185#Inspector Doha#SG_FEEL#QUE_NOIMAGE#
+Commander Agip ordered you to meet with Inspector Doha before leaving.  He is in the next room and wants to discuss the things Manu mentioned to you.#
+Meet with Inspector Doha#
 
-7186#µµÇÏÀÇ º�¹ÐÁö·É - Á¶»ç #SG_FEEL#QUE_NOIMAGE#
-µµÇÏ´Â ÇöÀç º¸°�¼­ Å»Ãë»ç°ÇÀÇ ¹üÀÎÀ» ÂÑ°�ÀÖ´Ù°� ÇÑ´Ù. ¹üÀÎÀÇ ÀÎ»�ÂøÀÇ¸¦ °¡¸£ÃÄÁÖ¸ç ¿¤ µðÄ«½ºÅ×½º¸¦ °æÀ¯ÇÏ´Â µ¿¾È °ü·Ã Á¤º¸¸¦ ¼öÁý ÇØ ¿Ã°ÍÀ» Àº¹ÐÈ÷ Áö½ÃÇß´Ù. ¹üÀÎÀº Áü½ÂÀÇ ±Í¸¦ °¡Áø ³²ÀÚ¶�°� ÇÑ´Ù.#
+7186#Doha's Secret Order - Survey#SG_FEEL#QUE_NOIMAGE#
+Doha is currently looking through information about the suspect who robbed you of the reports from Commander Agip.  It is believed that the suspect is somewhere in El Dicastes, but keep this info a secret for now.#
 #
 
-7187#µµÇÏÀÇ º�¹ÐÁö·É - »þÀÌ#SG_FEEL#QUE_NOIMAGE#
-¿¤ µðÄ«½ºÅ×½ºÀÇ ÁÖÁ¡ '¹ö¸Õ ÇÃ·Î³×'ÀÇ °ü¸®ÀÚÀÎ »þÀÌ´Â ¼öµµ³»¿¡ °ÅÁÖÇÏ´Â »çÆÄµé¿¡°Ô 'Áü½ÂÀÇ ±Í¸¦ °¡Áø ³²ÀÚ'¿¡ ´ëÇÑ Á¤º¸¸¦ ¼öÁýÇØ º¸¶�°� ±ÇÇß´Ù.#
-»çÆÄµé°ú ´ëÈ­ÇÏ¿© Á¤º¸¸¦ ¼öÁýÇÏÀÚ#
+7187#Doha's Secret Order - Shire#SG_FEEL#QUE_NOIMAGE#
+In the Pub you talked to Shire. He told you to find a 'man with the animal's ears' by asking the residents of El Dicastes.#
+Let's collect information by talking to the Sapha in town#
 
-7188#Á¤º¸¼öÁý - ±¤Àå¿¡¼­#SG_FEEL#QUE_NOIMAGE#
-°�¾çÀÌ±Í¿ä? °�¾çÀÌ »�´Ü ¸»°�¿ä? ¸ð¸£°Ú´Â°É¿ä. ±×º¸´Ù ¾ÆÇÏÆ®´ÔÀ» ¸¸³ªº¸¼Ì³ª¿ä? ±× ºÐÀº Á¤¸» ¾Æ¸§´ä°� °�±ÍÇÑ ºÐÀÌ¼¼¿ä.#
+7188#Information Collection - Square#SG_FEEL#QUE_NOIMAGE#
+Man with animal's ears? Do you mean the man with cat ears? I don't understand why you are looking for him, but he is usually with Daesinah Hart. She is so beautiful, so precious to me.#
 #
 
-7189#Á¤º¸¼öÁý - °øÀå¿¡¼­#SG_FEEL#QUE_NOIMAGE#
-°�¾çÀÌ±Í ÀÎ°£ÀÌ¶�´Ï. ±Ý½ÃÃÊ¹®ÀÌ¿¡¿ä. ±×·± ÀÖÁöµµ ¾Ê´Â ÀÌ»�ÇÑ °Í ÂÑ¾Æ ´Ù´ÏÁö ¸»°� ¾ÆÇÏÆ®´ÔÀ» ¸¸³ª°� °¡¼¼¿ä. Á¤¸» ¸ÚÁø ºÐÀÌ¿¡¿ä! ±× ºÐÀÌ¾ß¸»·Î »çÆÄÀÇ Ç¥º»ÀÌ½ÃÁÒ!#
+7189#Information Collection - From the Factory#SG_FEEL#QUE_NOIMAGE#
+A human with cat ears? Thats news to me. If you are looking for something strange it is best to meet with Daesinah Hart. She is a great woman, all the Sapha love her!#
 #
 
-7190#Á¤º¸ ¼öÁý - ±ÙÀ§´ë¿¡¼­#SG_FEEL#QUE_NOIMAGE#
-°�¾çÀÌ ±Í? ±×·± »ç¶÷ÀÌ ÀÖ¼Ò? ´ç½Åµé Á¾Á·Àº ±×·¡? ±×·¯Áö¸»°� ¿©±â±îÁö ¿ÔÀ¸¸é ¾ÆÇÏÆ®´ÔÀÌ³ª ¸¸³ª°� °¡½Ã±¸·Á. ±×´Â ¾ÆÁÖ °­ÇÑ »çÆÄ¿ä. Áö±ÝÀº ¼­·ù´õ¹Ì³ª Ã³¸®ÇÏ°� ÀÖ´Â ´ë½ÅÀÌÁö¸¸ ºÐ¸� ¾öÃ»³­ ¹«·ÂÀ» °¨Ãß°� ÀÖ´Â°Ô Æ²¸²¾ø¼Ò!#
+7190#Information Collection - From the Guard#SG_FEEL#QUE_NOIMAGE#
+Cat ears? On a human?  You must mean the boy who works with Daesinah Hart. You can find them in the crystal building north of here. I know they are hiding something with great force in there!#
 #
 
-7191#»þÀÌÀÇ Áö¸� - º�ÄÉÀÌ#SG_FEEL#QUE_NOIMAGE#
-¿øÈ°ÇÑ Á¤º¸¼öÁýÀ» À§ÇØ »þÀÌ´Â °�¾çÀÌ¼Õ »�´ÜÀÇ º�ÄÉÀÌ¸¦ ¼Ò°³½ÃÄÑ ÁÖ¾ú´Ù. º�ÄÉÀÌ°¡ ÇùÁ¶ÇÏÁö ¾ÊÀ» °æ¿ì ^4d4dff'»þÀÌ Æ¯Á¦ Ä¬Å×ÀÏÀÌ ¹è´ÞµÈ´Ù.'^000000¶�°� Àü¾ðÇÏ¶�´Âµ¥...#
-º�ÄÉÀÌ¸¦ ¸¸³ªÀÚ#
+7191#Shire's Nomination - Bikeyi#SG_FEEL#QUE_NOIMAGE#
+Head off to collect information from Bikeyi the cat. He will only resond if you tell him you have ^4d4dff'Shire's special cocktail delivery.'^000000 because he is an alcoholic...#
+Find Bikeyi#
 
-7192#º�ÄÉÀÌÀÇ Á¤º¸#SG_FEEL#QUE_NOIMAGE#
-º�ÄÉÀÌÀÇ Á¤º¸¿¡ µû¸£ÀÚ¸é °�¾çÀÌ±Í ³²ÀÚ´Â ÇöÀç »çÆÄ ¼öµµÀÇ ÀÎ±âÀÎ ¾ÆÇÏÆ®¿Í ¹ÐÁ¢ÇÑ °ü°è°¡ ÀÖ´Ù°� ÇÑ´Ù. ±×·±µ¥ ¾ÆÇÏÆ®´Â ±Õ¿­ ±ÙÃ³¿¡¼­ ¹ß°ßµÇ¾úÀ¸¸ç »çÆÄ°¡ ¾Æ´Ï¶�°�±îÁö ÇÑ´Ù. ±Õ¿­°ú ¹«½¼ °ü°è°¡ ÀÖÀ»±î?#
-»þÀÌ¿Í ÀÇ³�ÇÏÀÚ#
+7192#Bikeyi's Information#SG_FEEL#QUE_NOIMAGE#
+Bikeyi said the information i seek is closely related to Daesinah Hart and her assisstant. The assisstant was spotted near a dimentional crack in El Dicastes.#
+Let's discuss this with Shire#
 
-7193#±Õ¿­ÀÇ Á¶»ç#SG_FEEL#QUE_NOIMAGE#
-»þÀÌ¿Í ÀÇ³� ÈÄ ÁøÀ§ÆÇ´ÜÀ» À§ÇØ ³²ÂÊ ±Õ¿­ ±ÙÃ³¸¦ Á¶»çÇÏ±â·Î Çß´Ù. ¹º°¡ Áõ°Å¹°·Î ¾µ¸¸ÇÑ °ÍÀÌ ³ª¿À¸é ÁÁ°Ú´Âµ¥..#
-±Õ¿­ ±ÙÃ³ Á¶»ç#
+7193#Dimentional Crack Investigation#SG_FEEL#QUE_NOIMAGE#
+Shire said the dimentional crack is south of El Dicastes. Maybe you will find evidence for your case there..#
+Examine the spots near the dimentional crack#
 
-7194#ÀÌ Ç÷ÈçÀÇ Á¤Ã¼´Â?#SG_FEEL#QUE_NOIMAGE#
-±Õ¿­ ±ÙÃ³¿¡¼­ Èë¿¡ ÇÇ°¡ ½º¸çµé¾î ´Ü´ÜÇÏ°Ô ±»Àº µ¢¾î¸®¸¦ ¹ß°ßÇß´Ù. ´ë½Å ¾ÆÇÏÆ®¿Í ¹«½¼ °ü°èÀÏ±î.#
+7194#The Identity of the Blood?#SG_FEEL#QUE_NOIMAGE#
+The soil is firmly covering the blood in these cracks. What is Daesinah Hart's assisstant hiding in here? Let's show this to Shire.#
 #
 
-7195#ÀÌ ÇÇºÎÁ¶°¢ÀÇ Á¤Ã¼´Â?#SG_FEEL#QUE_NOIMAGE#
-±Õ¿­ ±ÙÃ³¿¡¼­ ¾î¶² »ý¸�Ã¼ÀÇ Âõ¾îÁø ÇÇºÎÁ¶Á÷°ú À¯»çÇÑ °ÍÀ» ¹ß°ßÇß´Ù. ¾ÆÇÏÆ®¿Í ¹«½¼ °ü°èÀÏ±î.#
+7197#Fumigation? Fumigation!#SG_FEEL#QUE_NOIMAGE#
+Finally we have an idea who the mystery man is, but now we need to meet him. Lets talk to the Adventurer Receptionist and try to get an audience with Daesinah Hart.#
+Talk to the Adventurer Receptionist#
+
+7198#Audience with Daesinah Hart#SG_FEEL#QUE_NOIMAGE#
+Take the elevator to the Top Secret area. The guards know you have permission to enter now.#
 #
 
-7196#ÀÌ ¼ö»�ÇÑ ¸¶·ÂÀº?#SG_FEEL#QUE_NOIMAGE#
-¼ö»�ÇÑ ¸¶·ÂÀÌ ½º¸çµç µ¹Á¶°¢À» ¹ß°ßÇß´Ù. ±Õ¿­¿¡¼­ ´À²¸Áö´Â ¸¶·Â°úµµ º�½ÁÇÏ´Ù. ¾ÆÇÏÆ®¿Í ¹«½¼°ü°èÀÏ±î.#
+7199#The secret directive Daesinah Hart#SG_FEEL#QUE_NOIMAGE#
+I have orders to cover the trail of evidence. Collect 10 Hard Bloodstains, 10 Frozen Piece Of Skins, and 10 Cursed Magical Stones.#
 #
 
-7197#°øÈÆÁõ? °øÈÆÁõ!#SG_FEEL#QUE_NOIMAGE#
-°�±¹ ÀÇ¹®Á¡À» Ç®±â À§ÇØ Á÷Á¢ ¾ÆÇÏÆ®¶�´Â ÀÚ¸¦ ¸¸³ªº¸±â·Î Çß´Ù. ±×·±µ¥ ¾ÆÇÏÆ®¸¦ ¾ËÇöÇÏ±â À§ÇØ¼­´Â »çÆÄ°øÈÆÁõÀÌ ÇÊ¿äÇÏ´Ù°� ÇÑ´Ù. ¼öµµ °÷°÷¿¡¼­ ¹ÞÀ» ¼ö ÀÖ´Â ÀÇ·Ú¸¦ ¼öÇàÇÏ°� »çÆÄ°øÈÆÁõÀ» ¼öÁýÇÏÀÚ.#
-»çÆÄ °øÈÆÁõ 3Àå ¼öÁý#
-
-7198#´ë½Å ¾ÆÇÏÆ® ¾ËÇö#SG_FEEL#QUE_NOIMAGE#
-»çÆÄ °øÈÆÁõÀ» ³»°� ¾ÆÇÏÆ®¸¦ ¾ËÇöÇÒ ¼ö ÀÖ°Ô µÇ¾ú´Ù. ¾ÆÇÏÆ®´Â µð¿¤ ³»ºÎÀÇ ½Â°­±â¸¦ ÀÌ¿ëÇØ ÇàÁ¤½Ç±îÁö ¿Ã¶�°£ ´ÙÀ½ µû·Î ¾È³»¸¦ ¹Þ¾Æ¾ß ¸¸³¯ ¼ö ÀÖ´Ù°� ÇÑ´Ù.#
+7200#Department of Bodies#SG_FEEL#QUE_NOIMAGE#
+Signs of the cracks will go away a little bit each day. Come back tomorrow to examine them again.#
 #
 
-7199#¾ÆÇÏÆ®ÀÇ Àº¹ÐÇÑ Áö·É#SG_FEEL#QUE_NOIMAGE#
-¾ÆÇÏÆ®´Â ±Õ¿­ ±ÙÃ³¿¡¼­ ¹ß°ßµÇ´Â ¿©·¯°¡Áö ÈçÀûÀ» Áö¿ì¶�´Â ¸�·ÉÀ» ³»·È´Ù. ´Ü´ÜÇÏ°Ô ±»Àº Ç÷Èç, ¾�¾îºÙÀº ÇÇºÎÁ¶°¢, ¼ö»�ÇÑ ¸¶·ÂÀÌ ±êµç µ¹À» °¢°¢ 10°³¾¿ ¼ö°ÅÇØ¾ß ÇÑ´Ù.#
+7202#Doha's Secret Order - Evidence Gathering#SG_FEEL#QUE_NOIMAGE#
+You have now collected all the evidence needed for Cheshire and Daesinah Hart.#
 #
 
-7200#Ã¼¼ÅÀÇ È£Ãâ#SG_FEEL#QUE_NOIMAGE#
-±Õ¿­ÀÇ ÈçÀûÀ» Á¤¸®ÇÏ´Â ÀÛ¾÷Àº ´«¿¡ ¶ßÁö ¾Ê°Ô Á¶±Ý¾¿ ¸ÅÀÏ ¸ÅÀÏ. Ã¼¼Å¿ÍÀÇ ¾à¼Ó½Ã°£ÀÌ µÇ¸é Ã£¾Æ°¡ º¸ÀÚ.#
-#
-
-7201#±Õ¿­ Á¤¸®#SG_FEEL#QUE_NOIMAGE#
-¾ÆÇÏÆ®¿Í Ã¼¼ÅÀÇ Áö½Ã¸¦  µû¶� ¸ÅÀÏ Ã³¸®ÇÏ´Â ±Õ¿­ÀÇ ÈçÀû Áö¿ì±â. ¿©´À¶§¿Í ¸¶Âù°¡Áö·Î ÈçÀû¹°À» 10°³¾¿ ¼ö°ÅÇÏÀÚ.#
-#
-
-7202#µµÇÏÀÇ º�¹ÐÁö·É - Áõ°Å¹° ¼öÁý#SG_FEEL#QUE_NOIMAGE#
-µµÇÏ¿¡°Ô º¸°�ÇÒ Áõ°Å¹°·Î ¾ÆÇÏÆ®¿Í Ã¼¼Å°¡ ´«Ä¡Ã¤Áö ¸øÇÏµµ·Ï ±Õ¿­ÀÇ ÈçÀû¹°À» °¢°¢ 1°³¾¿ »©µ¹·Á º¸°�¼­¿¡ Ã·ºÎÇÏÀÚ. ´Ü´ÜÇÏ°Ô ±»Àº Ç÷Èç, ¾�¾îºÙÀº ÇÇºÎÁ¶°¢, ¼ö»�ÇÑ ¸¶·ÂÀÌ ±êµç µ¹ 1°³¾¿ ¼öÁý#
-#
-
-7203#µµÇÏÀÇ º�¹ÐÁö·É - ÃÖÁ¾º¸°�#SG_FEEL#QUE_NOIMAGE#
-¶Ç ´Ù¸¥ Á¦·çÆ® Çì½º¶õÅ¸¿Í ¿©·¯°¡Áö ´ëÈ­¸¦ ³ª´©¾ú´Ù. Çì½º¶õÅ¸¿ÍÀÇ ´ëÈ­¸¦ ÅëÇØ ¾òÀº °�·ÐÀ» Á¤¸®ÇÏ¿© µµÇÏ¿¡°Ô º¸°�ÇÒ º¸°�¼­¸¦ ÀÛ¼ºÇß´Ù.#
-µµÇÏ¿¡°Ô ÃÖÁ¾º¸°�#
+7203#Doha's Secret Order - Final Report#SG_FEEL#QUE_NOIMAGE#
+After talking to Hess Lanta you come to a conclusion about the missing reports, now you can head back to Inspector Doha with your report.#
+Final Report to Inspector Doha#
 
 7204#º½À» °¡Á®´Ù ÁÖ´Â ²É#SG_FEEL#QUE_NOIMAGE#
 ·çÆ¼¿¡¿¡¼­ ¸¸³­ ¼Ò³à 'º¸¹Ì'´Â º½À» °¡Á®´Ù ÁÖ´Â ²ÉÀÌ ±Ã±ÝÇÑ ¸ð¾çÀÌ´Ù. º¸¹Ì¸¦ À§ÇØ º½²ÉÀÌ °¡µæ ÇÉ ²É°¡Áö¸¦ ÇÑ¾Æ¸§ °¡Á®´Ù ÁÖ±â·Î Çß´Ù. Ä¿´Ù¶õ ²É°¡Áö 5°³¸é ÃæºÐÇÏÁö ¾ÊÀ»±î..#
@@ -5151,78 +5139,78 @@ Wait one day before handing in more items.#
 Àúµµ ¼öÇàÁßÀÎ ¸öÀÌ¶� ´ç½ÅÀÇ Áú¹®¿¡ ´ëÇÑ ´ë´äÀ» ÇØµå¸± ¼ö ¾øÀ¸´Ï ÀúÈ� ½º½Â´Ô²² ¾È³»ÇØ µå¸®°Ú½À´Ï´Ù. ½º½Â´ÔÀº ½Ã²ô·¯¿î °É ½È¾îÇÏ½Ã´Ï ^f57d7dÀÀÁ¢½Ç¿¡¼­ Á¶¿ëÈ÷ ±â´Ù·ÁÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.^000000#
 ÀÀÁ¢½Ç¿¡¼­ ½º½Â´ÔÀ» ±â´Ù¸®ÀÚ.#
 
-//-------------ep13.3 ¿¡ÇÇ¼Òµå 13.3
-11159#ºê¶�ÀÌ¾ðÀÇ ÀÌ¾ß±â#SG_FEEL#QUE_NOIMAGE#
-¾Æ...... ±×·¯°� º¸´Ï ÀÌ°÷¿¡ ¿ÂÁö ¸çÄ¥ÀÌ Áö³µ´õ¶�...... È¤½Ã ¿À´ÃÀÌ ¸çÄ¥ÀÎÁö ¾Æ½Ê´Ï±î?#
-ºê¶�ÀÌ¾ðÀÇ ÀÌ¾ß±â¸¦ µé¾ú´Ù.#
+// Bradium Earring Quest
+11159#Brian's Story#SG_FEEL#QUE_NOIMAGE#
+Oh ...... A couple of days have passed since i've been to town ...... Do you know what day it is?#
+I met Brian.#
 
-11160#ÁÔÀÇ ÀÌ¾ß±â#SG_FEEL#QUE_NOIMAGE#
-±×³É ¹¹... ¾Æ¹«... ¹®Á¦ ¾ø´Ù°�.... °ÆÁ¤ ¸»¶�°�....#
-ÁÔÀ» ¸¸³µ´Ù.#
+11160#John's Story#SG_FEEL#QUE_NOIMAGE#
+Just what ... No ... No problem .... Do not worry ....#
+I met John.#
 
-11161#Å×ÀÏ·¯ÀÇ ÀÌ¾ß±â#SG_FEEL#QUE_NOIMAGE#
-±×·±µ¥ ¹Ù»ÚÁö ¾ÊÀ¸¸é ³» µî Á» ±Ü¾îÁÖÁö ¾Ê°Ú¾î? ¹ú·¹¶�µµ ¹°¸° °ÇÁö ¿äÁò µé¾î ±ÙÁú±ÙÁúÇÏ°Åµç. ³» µîÀ» ¹°¾î¶âÀ» ¸¸Å­ ±²ÀåÇÑ ¹ú·¹³à¼®ÀÌ ÀÖ´ÂÁø ¸ð¸£°ÚÁö¸¸ ¸»¾ß.#
-Å×ÀÏ·¯¸¦ ¸¸³µ´Ù.#
+11161#Taylor's Story#SG_FEEL#QUE_NOIMAGE#
+Hey, will you scratch my back?  These insects can bite, and when they do it itches really bad.#
+I met Taylor.#
 
-11162#·ÎÁîÀÇ ÀÌ¾ß±â#SG_FEEL#QUE_NOIMAGE#
-³»°¡ ³Ê¹« ¸ÚÀÖ¾î¼­ °ï¶õÇÑ °Í »©°�´Â ¾Æ¹« ¹®Á¦ ¾ø´Ù°� ÀüÇØÁà. ³­ ¿Ïº®ÇÏ´Ï±î ¸»¾ß.#
-·ÎÁî¸¦ ¸¸³µ´Ù.#
+11162#Rose's Story#SG_FEEL#QUE_NOIMAGE#
+I'm too nice to him, its difficult to tell him that there is nothing between us.  I'm just too perfect for him.#
+#
 
-11163#º£ÀÎÀÇ ÀÌ¾ß±â#SG_FEEL#QUE_NOIMAGE#
-Àü º°ÀÏ ¾øÀÌ Àß Áö³»°� ÀÖ´Ù°� ÀüÇØÁÖ½Ã¸é µË´Ï´Ù. Âü ½±ÁÒ?#
-º£ÀÎÀ» ¸¸³µ´Ù.#
+11163#Vane's Story#SG_FEEL#QUE_NOIMAGE#
+If I tell her everything, she will have to like me.  Simple, right?#
+I met Vane.#
 
-11164#·¡½¬ÀÇ ÀÌ¾ß±â#SG_FEEL#QUE_NOIMAGE#
-¹¹ ¾ÈºÎ¶�¸é ³» ÀÔÀ¸·Î ¸»ÇÒ °Íµµ ¾øÀÌ ÀÌ ÆÈ¶ÒÀ» º¸¸é '°Ç°­ÇÔ'ÀÌ¶�°� ½�ÀÖ´Â °Í °°Áö ¾Ê³ª? ÀÚ³×°¡ º» ±×´ë·Î¸¦ ¿©°ú ¾øÀÌ ÀüÇØÁÖ¸é µÈ´Ù³×! À½ÇÖÇÖÇÖÇÖÇÖ!#
-·¡½¬¸¦ ¸¸³µ´Ù.#
+11164#Lassie's Story#SG_FEEL#QUE_NOIMAGE#
+Hello and nice to meet you, this is what you say in your language for 'wellness' sake correct?  We do not use such filters in our words, but we do need filters for our Bradium becuase its not purified! Hahahahaha!#
+I met Lassie.#
 
-11165#ºê¶�ÀÌ¾ð¿¡°Ô Àü´Þ#SG_FEEL#QUE_NOIMAGE#
-ÇÁ·¹µå¿¡°Ô ±×·¸°Ô ÀÜ¼Ò¸± ÇØ´ò´Âµ¥ ³²ÀÇ ¸»À» ÇÒ ¶§°¡ ¾Æ´Ï¾ú½À´Ï´Ù. ÇÏÇÏ. ÇÁ·¹µå¿¡°Ôµµ ¸öÀÌ È¸º¹µÇ¸é °ð ¸¶À»·Î µ¹¾Æ°¡°Ú´Ù°� ÀüÇØÁÖ½Ê½Ã¿À.#
-ºê¶�ÀÌ¾ð¿¡°Ô Àü´Þ ¿Ï·�.#
+11165#Delivered to Brian#SG_FEEL#QUE_NOIMAGE#
+So you are the one who helped Fred, haha.  Please tell him that I will be back to see him again soon.#
+Completed the pass to Brian.#
 
-11166#ÁÔ¿¡°Ô Àü´Þ#SG_FEEL#QUE_NOIMAGE#
-...... °�¸¿½´....#
-ÁÔ¿¡°Ô Àü´Þ ¿Ï·�.#
+11166#Delivered to John#SG_FEEL#QUE_NOIMAGE#
+...... Thank you....#
+Completed the pass to John.#
 
-11167#Å×ÀÏ·¯¿¡°Ô Àü´Þ#SG_FEEL#QUE_NOIMAGE#
-¾Ñ!!! ¸¶Ä§ ºê¶�µð¿òÀÌ ¶³¾îÁ³´Âµ¥ ÀßµÆ´Ù! °�¸¶¿ö!#
-Å×ÀÏ·¯¿¡°Ô Àü´Þ ¿Ï·�.#
+11167#Delivered to Taylor#SG_FEEL#QUE_NOIMAGE#
+Oops!  A good piece of Bradium is finally here!  Thanks!#
+Completed the pass to Taylor.#
 
-11168#·ÎÁî¿¡°Ô Àü´Þ#SG_FEEL#QUE_NOIMAGE#
-Á¶¸¸°£ ¸¶À»·Î µ¹¾Æ°¥ Å×´Ï±î ¸»¾ß. ±×¶§ ´À±ßÇÏ°Ô ¸¸³ªÀÚ±¸~#
-·ÎÁî¿¡°Ô Àü´Þ ¿Ï·�.#
+11168#Delivered to Rose#SG_FEEL#QUE_NOIMAGE#
+Sooner or later i want to go back into town.  Then i can finally relax~#
+Completed the pass to Rose.#
 
-11169#º£ÀÎ¿¡°Ô Àü´Þ#SG_FEEL#QUE_NOIMAGE#
-Á¤¸» °�¸¶¿ö¿ä~ ´ÙÀ½¿¡ ¶Ç ¸¸³ª¿ä~#
-º£ÀÎ¿¡°Ô Àü´Þ ¿Ï·�.#
+11169#Delivered to Vane#SG_FEEL#QUE_NOIMAGE#
+Thank you very much~ Hope to see you again soon~#
+Completed the pass to Vane.#
 
-11170#·¡½¬¿¡°Ô Àü´Þ#SG_FEEL#QUE_NOIMAGE#
-¿À¿À!!!! ÀÚ³×¿¡°Ô Å« ÀºÇý¸¦ ÀÔ¾ú±º! ÀÚ³×°¡ ¾Æ´Ï¾ú´Ù¸é ÀÌ·± °÷¿¡¼­ ³ªÀÇ ºÒ²É°°Àº »îÀ» ¸¶°¨ÇÒ »· Çß´Ù³×!#
-·¡½¬¿¡°Ô Àü´Þ ¿Ï·�.#
+11170#Delivered to Lassie#SG_FEEL#QUE_NOIMAGE#
+Woh!  You did me a big favor!  Without this I wouldn't meet the deadline for my work!#
+Completed the pass to Lassie.#
 
-11171#ÇÁ·¹µåÀÇ ºÎÅ¹#SG_FEEL#QUE_NOIMAGE#
-¿©±â ¾É¾Æ¼­ ÀÌ°Å¶�µµ ¸ÔÀ¸¸é¼­ ½¬¾î¿ä.#
-´Ù½Ã ÀÌ¾ß±â¸¦ ³ª´©¾î º¸ÀÚ.#
+11171#Fred's Favor#SG_FEEL#QUE_NOIMAGE#
+Take it easy, sit next to me and eat.#
+Listen to Fred's story.#
 
-11172#ÇÁ·¹µåÀÇ ºÎÅ¹#SG_FEEL#QUE_NOIMAGE#
-¸çÄ¥ Àü ºê¶�µð¿òÀ» º¸ÃæÇÏ·¯ ¿Â Ä£±¸µéÀÌ ´Ù½Ã µ¿±¼·Î µ¹¾Æ°¡´Â °É º¸¾ÒÀ¸´Ï ¸ðµÎ ±×°÷¿¡ ÀÖ°ÚÁÒ. ºÎµð °Ç°­ÇÏ°Ô Àß ÀÖ¾î¾ß ÇÒ ÅÙµ¥. ³» Ä£±¸µéÀÌ ¹«»çÇÑÁö º¸·¯ °¡ÁÖÁö ¾Ê°Ú¾î¿ä?#
-ÇÁ·¹µåÀÇ Ä£±¸ ºê¶�ÀÌ¾ð, ÁÔ, Å×ÀÏ·¯, ·ÎÁî, º£ÀÎ, ·¡½¬¸¦ ¸¸³ª°� µ¹¾Æ¿ÀÀÚ.#
+11172#Fred's Favor#SG_FEEL#QUE_NOIMAGE#
+A few days ago a friend of mine came out of the tunnel and said the Bradium supply is getting low.  Can you please go meet some of my freinds in the tunnel between Manuk and El Dicastes?#
+Meet Fred's friends, Brian, John, Taylor, Rose, Vane, and Lassie.#
 
-11173#ÇÁ·¹µåÀÇ ºÎÅ¹#SG_FEEL#QUE_NOIMAGE#
-°è¼Ó ÀÌ·± ºÎÅ¹ÇØ¼­ ¹Ì¾ÈÇÏÁö¸¸ ³» Ä£±¸µé¿¡°Ô ºê¶�µð¿òÀ» Á» ÀüÇØÁÖÁö ¾Ê°Ú¾î¿ä? ¸¶À» ºÏ¼­ÂÊ °Ç¹°¿¡ ÀÖ´Â º¸À§¾¾¿¡°Ô ºÎÅ¹ÇÏ¸é Á¤Á¦µÈ ºê¶�µð¿òÀ» ³ª´² ÁÖ½Ç °Å¿¹¿ä. ²À ºÎÅ¹ µå·Á¿ä.#
-º¸À§¸¦ ¸¸³ª Á¤Á¦µÈ ºê¶�µð¿òÀ» ¹ÞÀÚ.#
+11173#Fred's Favor#SG_FEEL#QUE_NOIMAGE#
+So the rumors are true about the low supply of Bradium?  Alright, can you find Bowie and ask him for some Purified Bradium please.#
+Meet Bowie and pick up some Purified Bradium from him.#
 
-11174#¹°·® ºÎÁ·#SG_FEEL#QUE_NOIMAGE#
-Ä¿´Ù¶õ ºê¶�µð¿ò±¤¼®Àº Á¤Á¦ÇÏ´Âµ¥ ¸¹Àº ½Ã°£ÀÌ °É¸®Áö¸¸ Á¶±×¸¸ ºê¶�µð¿ò Á¶°¢µéÀÌ¶�¸é ±Ý¹æ »ç¿ëÇÒ ¼ö ÀÖÀ» °Ì´Ï´Ù. Á¶±×¸¸ ºê¶�µð¿ò Á¶°¢ Á¤µµ´Â ÁÖº¯¿¡ µ¹¾Æ´Ù´Ï´Â ¸�½ºÅÍ¸¸ Àâ¾Æµµ ½±°Ô ±¸ÇÒ ¼ö ÀÖ½À´Ï´Ù. ÇÑ 30°³ÂëÀÌ¸é 6¸�¿¡°Ô ³ª´²ÁÙ ¸¸Å­ÀÇ ºÐ·®Àº ¸¸µé ¼ö ÀÖ°ÚÁÒ.#
-ºê¶�µð¿òÀÇ ¹°·®ÀÌ ºÎÁ·ÇØ ¿©ºÐÀÌ ¾ø´Ù°� ÇÑ´Ù. Á¶±×¸¸ ºê¶�µð¿òÀ» 30°³ ±¸ÇØ¼­ µ¹¾Æ¿ÀÀÚ.#
+11174#Shortage#SG_FEEL#QUE_NOIMAGE#
+To make Purified Bradium I'll need some tiny bradium ores to forge together into one big piece.  Look around the fields for monsters that drop Tiny Bradium and bring me 30 pieces of it, then I can make enough Purified Bradium for six people.#
+Collect 30 Tiny Bradium and bring them to Bowie.#
 
-11175#¹°·® ºÎÁ·#SG_FEEL#QUE_NOIMAGE#
-Áö±ÝÃ³·³ ¼Ò·®À» Á¤Á¦ ÇÒ ¶§´Â ±â°è¸¦ »ç¿ëÇÏ´Â °Í º¸´Ù ¼öÀÛ¾÷À» ÇÏ´Â ÂÊÀÌ ´õ ºü¸£±â ¶§¹®¿¡ 1½Ã°£Á¤µµ¸é ¿Ï¼º ÇÒ ¼ö ÀÖ´ä´Ï´Ù. ±×·³ Á¦°¡ ÀÛ¾÷À» ÇÏ´Â µ¿¾È ½¬°� °è¼¼¿ä.#
-ÀÛ¾÷À» ÇÏ´Âµ¥ 2½Ã°£ Á¤µµ °É¸± °Í °°´Ù.#
+11175#Shortage#SG_FEEL#QUE_NOIMAGE#
+My machine will take 2 hours to purify these Tiny Bradium into a whole Purified Bradium.  Please return later, I will be resting while the machine works.#
+Return to Bowie in 2 hours.#
 
-11176#Ä£±¸µéÀ» À§ÇØ#SG_FEEL#QUE_NOIMAGE#
-¿Ï¼ºÇß½À´Ï´Ù! ¼öÀÛ¾÷Àº ¿À·£¸¸ÀÌ¶� Á¶±Ý ±äÀåÇÏ±ä ÇßÁö¸¸ Àß µÈ °Í °°¾Æ¿ä. ¾î¼­ ±×µé¿¡°Ô ³ª´² ÁÖ¼¼¿ä.#
-Á¤Á¦µÈ ºê¶�µð¿òÀ» Ä£±¸µé¿¡°Ô ³ª´²ÁÖ°� ÇÁ·¹µå¿¡°Ô µ¹¾Æ°¡ ¼Ò½ÄÀ» ÀüÇÏÀÚ.#
+11176#For Friends#SG_FEEL#QUE_NOIMAGE#
+Its completed!  Please share them with the people in the tunnel.#
+Share the Purified Bradium with Fred's friends.#
 
 //--- 2009 Å©¸®½º¸¶½º ÀÌº¥Æ®
 11177#»�ÀÚ¼ÓÀÇ ¿äÁ¤#SG_FEEL#QUE_NOIMAGE#
@@ -5719,250 +5707,310 @@ Kill 15 Mummy#
 ¾�À½µ¿±¼. Åä¸£È­»ê´øÀü. ¹¦¸£´ÒÆ�±¤. Äï·é´øÀüÀÇ 4°÷¿¡ °¢°¢ ¼³Ä¡µÇ¾îÀÖ´Â Á¤·ÉÅ½ÁöºÀÀ» Ã£¾Æ ÁØº�ÇÑ ¼Ó¼º¼®À» ±×°÷¿¡ »ç¿ëÇØ º¾½Ã´Ù. ¸ðÀÚ¶ö °æ¿ì ´Ù½Ã ±¸ÇØ¿Í¾ßÇÒÅ×´Ï ¼Ó¼º¼®Àº ³Ë³ËÈ÷ ÁØº�ÇØµÎ´Â°Ô ÁÁÀ» °Í °°½À´Ï´Ù.#
 4°÷ÀÇ ´øÀü#
 
-//-------¿¡ÇÇ¼Òµå 13.3 --- ÀÏÀÏÄù½ºÆ®
+// Proof of Sapha's Honor Daily Quests
 12099#Draco Egg Hunting#SG_FEEL#QUE_NOIMAGE#
-ÀÌ°Ç ¾ÆÁÖ ¼Ò¼ÒÇÑ ÀÇ·ÚÀÔ´Ï´Ù. ÀÌ±×µå¶�½Ç »Ñ¸® ±ÙÃ³ÀÇ »õ³¢¿ëµéÀº ÁÖº¯ÀÇ ¾Ë¿¡¼­ ÅÂ¾î³ª´Â °ÍÀ¸·Î ÃßÁ¤µÈ´Ù´Â º¸°�°¡ Á¢¼öµÇ¾ú½À´Ï´Ù. »õ³¢¿ëÀ» Ã³´ÜÇÏ´Â°Íµµ Áß¿äÇÏÁö¸¸ ±Ù¿øÀ» ¾ÖÃÊ¿¡ ¾ø¾Ø´Ù´Â Á¡¿¡¼­ ÀÌ ÀÇ·Úµµ Àý´ë ¹«½ÃÇÒ ¼ö´Â ¾ø´Â ÀÏÀÌ´Ï ½Å°æ ½� ÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.#
+�̰� ���� �Ҽ��� �Ƿ��Դϴ�. �̱׵��� �Ѹ� ��ó�� ��������� �ֺ��� �˿��� �¾�� ������ �����ȴٴ� ������ �����Ǿ����ϴ�. �������� ó���ϴ°͵� �߿������� �ٿ��� ���ʿ� ���شٴ� ������ �� �Ƿڵ� ���� ������ ���� ���� ���̴� �Ű� �� �ֽñ� �ٶ��ϴ�.#
 Kill 10 Draco Eggs and return to El Dicastes#
 
+
 12100#Luciola Vespa Hunting#SG_FEEL#QUE_NOIMAGE#
-¶�ÇÇ³× ±âÁö ÀÎ±Ù¿¡¼­ ÃÖ±Ù ÀÌÀü±îÁö ÀüÇô ¹ß°ßµÇÁö ¾Ê¾Ò´ø ´ëÇü ³¯¹ú·¹¿¡ ´ëÇÑ ¼Ò½ÄÀÌ ÀÚÁÖ º¸°�µÇ°� ÀÖ½À´Ï´Ù. ³»¹ö·Á µÎ¸é ±× ¼­½Ä¹üÀ§°¡ ¾îµð±îÁö È®ÀåµÉÁö ¸ð¸£´Ï °¡¼­ ±× ³à¼®µéÀ» º¸ÀÌ´Â´ë·Î ¹Ú¸êÇØÁÖ½Ê½Ã¿À.#
+���ǳ� ���� �αٿ��� �ֱ� �������� ���� �߰ߵ��� �ʾҴ� ���� �������� ���� �ҽ��� ���� �����ǰ� �ֽ��ϴ�. ������ �θ� �� ���Ĺ����� ������ Ȯ����� �𸣴� ���� �� �༮���� ���̴´�� �ڸ����ֽʽÿ�.#
 Kill 12 Luciola Vespas and return to El Dicastes#
 
+
 12101#Draco Hunting#SG_FEEL#QUE_NOIMAGE#
-ºê¶�µð¿ò ±¤»ê¿¡¼­ ÀÏÇÏ´Â µ¿·�µé¿¡°Ô¼­ ÃÖ±Ù ÀÚÁÖ º¸°�µÇ´Â ³»¿ëÀÔ´Ï´Ù. ÀÌ±×µå¶�½Ç »Ñ¸® ±ÙÃ³¿¡¼­ ¼­½ÄÇÏ´Â ÀÛÀº »õ³¢¿ëµéÀÌ ÀÚ²Ù¸¸ ±¤»êÁÖº¯ÀÇ Áö¹ÝÀ» ¸ÁÄ¡°� ÀÖ´Ù°� ÇÏ´Âµ¥ ÀÌ´ë·Î ³»¹ö·Á µÑ ¼ö´Â ¾øÀ»°Í °°½À´Ï´Ù. °¡¼­ ÀÌ±×µå¶�½Ç ÁÖº¯ÀÇ ÀÛÀº »õ³¢¿ëµéÀ» Ã³Ä¡ÇØÁÖ½Ê½Ã¿À.#
+����� ���꿡�� ���ϴ� ����鿡�Լ� �ֱ� ���� �����Ǵ� �����Դϴ�. �̱׵��� �Ѹ� ��ó���� �����ϴ� ���� ��������� �ڲٸ� �����ֺ��� ������ ��ġ�� �ִٰ� �ϴµ� �̴�� ������ �� ���� ������ �����ϴ�. ���� �̱׵��� �ֺ��� ���� ��������� óġ���ֽʽÿ�.#
 Kill 5 Dracos and return to El Dicastes#
 
+
 12102#Naga Hunting#SG_FEEL#QUE_NOIMAGE#
-¶�ÇÇ³× ±âÁö ±ÙÃ³ÀÇ ´ËÁö¿¡¼­ ³ª°¡¶�´Â »õ·Î¿î Á¾Á·ÀÌ ¹ß°ßµÇ¾ú´Ù°� ÇÕ´Ï´Ù. ¹®Á¦´Â ÀÌµéÀÌ ¿ø½ÃÀûÀÎ Áö´ÉÀ» °¡Áö°� ÀÖÀ¸¸ç Æ÷¾ÇÇÏ´Ù´Â »ç½ÇÀÔ´Ï´Ù. ÀÌµéÀÌ ±º¶ôÀ» È®´ëÇÒ °æ¿ì ¿©·¯¸ð·Î ¹®Á¦°¡ Ä¿Áú ¼ö ÀÖÀ¸´Ï °¡¼­ ¼ºÃ¼·Î ÀÚ¶õ ³ª°¡µéÀ» Ã³Ä¡ÇØÁÖ½Ê½Ã¿À. #
+���ǳ� ���� ��ó�� �������� ������� ���ο� ������ �߰ߵǾ��ٰ� �մϴ�. ������ �̵��� �������� ������ ������ ������ �����ϴٴ� ����Դϴ�. �̵��� ������ Ȯ���� ��� ������� ������ Ŀ�� �� ������ ���� ��ü�� �ڶ� �������� óġ���ֽʽÿ�. #
 Kill 10 Nagas and return to El Dicastes#
 
+
 12103#Cornus Hunting#SG_FEEL#QUE_NOIMAGE#
-Àú ¸Ö¸® ¶�ÇÇ³×Á·ÀÇ ±Ù°ÅÁö ÁÖº¯¿¡´Â Àü¼³·Î ¹¦»çµÇ°� ÀÖ´Â ³¯°³´Þ¸° ÇÏ¾� ¸»¿¡ ´ëÇÑ ¹ß°ßº¸°�°¡ ²÷ÀÌÁö ¾Ê°� ÀÖ½À´Ï´Ù. °¡¼­ Á÷Á¢ ´«À¸·Î º¸°� È®ÀÎÁ» ÇØ ÁÖ½Ã°Ú½À´Ï±î? ¡¦ ¹°·Ð È¯°¢ÀÏ ¼ö ÀÖÀ¸´Ï ÁøÂ¥ »ì¾ÆÀÖ´Â »ý¹°Ã¼ÀÎÁö ±× ¼ÕÀ¸·Î È®ÀÎÇØ º¸½Ã´Â°Ô ÇÊ¼öÀÏ °Í °°±º¿ä.#
+�� �ָ� ���ǳ����� �ٰ��� �ֺ����� ������ ����ǰ� �ִ� �����޸� �Ͼ� ���� ���� �߰ߺ����� ������ �ʰ� �ֽ��ϴ�. ���� ���� ������ ���� Ȯ���� �� �ֽðڽ��ϱ�? �� ���� ȯ���� �� ������ ��¥ ����ִ� ����ü���� �� ������ Ȯ���� ���ô°� �ʼ��� �� ������.#
 Kill 1 Cornus and return to El Dicastes#
 
+
 12104#Centipede Hunting#SG_FEEL#QUE_NOIMAGE#
-¼¾Æ¼Æäµ¥ ¶�´Â »ý¹°Àº  ¹ø½Ä·ÂÀº ±×·¸´Ù Ä¡°�, ¾öÃ»³­ ½Ä¿åÀ¸·Î ¿ì¸®ÀÇ »ýÁ¸±îÁö À§ÇùÇÏ´Â ¼öÁØÀÔ´Ï´Ù. ³à¼®Àº ºê¶�µð¿ò ±¤¹°À» È�¼öÇÏ¸ç ÀúÈ� ±¤»êÁö´ë¿¡ ¸·´ëÇÑ ÇÇÇØ¸¦ ÀÔÈ÷°� ÀÖ½À´Ï´Ù. ÀÌ¹Ì ¼ö½Ê¸�ÀÇ »çÆÄµ¿ÁöµéÀÌ ³à¼®¿¡°Ô ´çÇß½À´Ï´Ù. ºÎµð ¼¾Æ¼Æäµ¥¸¦ ¹Ú¸êÇØÁÖ½Ê½Ã¿À#
+��Ƽ�䵥 ��� ������  ���ķ��� �׷��� ġ��, ��û�� �Ŀ����� �츮�� �������� �����ϴ� �����Դϴ�. �༮�� ����� ������ �����ϸ� ���� �������뿡 ������ ���ظ� ������ �ֽ��ϴ�. �̹� ���ʸ��� ���ĵ������� �༮���� ���߽��ϴ�. �ε� ��Ƽ�䵥�� �ڸ����ֽʽÿ�#
 Kill 15 Centipedes and return to El Dicastes#
 
+
 12105#Bradium Golem Hunting#SG_FEEL#QUE_NOIMAGE#
-±¤»êÀÇ ºê¶�µð¿ò ¿ø¼®µéÀÌ »ì¾Æ ¿òÁ÷ÀÎ´Ù´Â ¿¬¶ôÀÌ ¿Ô½À´Ï´Ù. ¾Æ¸¶µµ ºê¶�µð¿ò ¿ø¼®ÀÌ °�´ë ÁÖ¼ú·Î °�·½È­ ÇÑ°Í °°Àºµ¥, Áö±Ý ±¤»êÀ» Æ�¼âÇÒ Áö°æ±îÁö ÀÌ¸£·¶½À´Ï´Ù. °¡¼­ ³à¼®µéÀ» Ã³Ä¡ÇØ ÁÖ½Ã°Ú½À´Ï±î? #
+������ ����� �������� ��� �����δٴ� ������ �Խ��ϴ�. �Ƹ��� ����� ������ ���� �ּ��� ����ȭ �Ѱ� ������, ���� ������ ����� ������� �̸������ϴ�. ���� �༮���� óġ�� �ֽðڽ��ϱ�? #
 Kill 10 Bradium Golems and return to El Dicastes#
 
+
 12106#Pinguicula Hunting#SG_FEEL#QUE_NOIMAGE#
-¶�ÇÇ³× Áø¿µÀ¸·Î Á¤ÂûÀ» °¬´ø ¿ì¸® Á¤Âûº´µéÀÌ ±Í¿©¿î ²¿¸¶¾ÆÀÌÀÇ ¸ð½ÀÀ» ÇÑ »ý¹°Ã¼¿¡°Ô °ø°ÝÀ» ´çÇÏ°� ÀÖ´Ù°� ÇÕ´Ï´Ù. ±×·¡¼­ ºÒ°¡ÇÇÇÏ°Ô ±×ÂÊ Áö¿ª¿¡¼­ ³ðµéÀ» Ã³¸®ÇÒ ÀÎ¿øÀÌ ÇÊ¿äÇÑµ¥ ±×°÷Àº ¶�ÇÇ³×ÀÇ ¿µ¿ªÀÌ¶� Á¦ 3ÀÚÀÎ ´ç½ÅÀÌ °¡Àå ÀûÇÕÇØ º¸ÀÔ´Ï´Ù.#
+���ǳ� �������� ������ ���� �츮 ���������� �Ϳ��� ���������� ����� �� ����ü���� ������ ���ϰ� �ִٰ� �մϴ�. �׷��� �Ұ����ϰ� ���� �������� ����� ó���� �ο��� �ʿ��ѵ� �װ��� ���ǳ��� �����̶� �� 3���� ����� ���� ������ ���Դϴ�.#
 Kill 15 Pinguiculas and return to El Dicastes#
 
+
 12107#Dark Pinguicula Hunting#SG_FEEL#QUE_NOIMAGE#
-ÇÉÄûÅ§¶� ¶�´Â ²¿¸¶¾ÆÀÌ ¸ð¾çÀÇ ²ÉÀ» ¾Æ½Ê´Ï±î? ±× ²ÉÀÇ º¯Á¾ÀÌ ÃâÇöÇß´Ù´Â ¼Ò½ÄÀÔ´Ï´Ù. Á¤¸» ³­ÆøÇÏ°� °ø°ÝÀûÀÌ¶� ¶�ÇÇ³× Á¾Á· ÂÊ¿¡¼­µµ Åä¹úÀ» À§ÇØ ÀÎ¿øÀÌ ÆÄº´µÈ ¸ð¾çÀÔ´Ï´Ù. °¡¼Å¼­ ÀÌµéÀÇ ¼­½ÄÁö°¡ È®ÀåµÇ±âÀü¿¡ ´«¿¡ º¸ÀÌ´Â´ë·Î ³ðµéÀ» Ã³Ä¡ÇØ ÁÖ½Ê½Ã¿À.#
+����ŧ�� ��� �������� ����� ���� �ƽʴϱ�? �� ���� ������ �����ߴٴ� �ҽ��Դϴ�. ���� �����ϰ� �������̶� ���ǳ� ���� �ʿ����� ����� ���� �ο��� �ĺ��� ����Դϴ�. ���ż� �̵��� �������� Ȯ��Ǳ����� ���� ���̴´�� ����� óġ�� �ֽʽÿ�.#
 Kill 10 Dark Pinguiculas and return to El Dicastes#
 
+
 12108#Nepenthes Hunting#SG_FEEL#QUE_NOIMAGE#
-±¤¹°À» ¼öÁýÇØ¿À´ø µ¿·�µéÀÌ ½ÇÁ¾µÇ´Â »ç°ÇÀÌ ¹ß»ýÇÏ°� ÀÖ´Âµ¥ ¾Æ¹«¸® ºÁµµ ³×Ææµ¥½ºÀÇ ¼ÒÇà °°½À´Ï´Ù. ´ç½Å³× ÀÎ°£µéÀÌ ¸¸µå¶�°�¶� ¶�°� ºÎ¸£´Â ½Ä¹°°ú º�½ÁÇÑ ³à¼®ÀÎµ¥, ÀÌ´ë·Î ³öµÎ¸é ¿©·¯ »ç¶÷ÀÌ ´ÙÄ¥ °Í °°À¸´Ï ¼ÕÀ» Á» ½�¾ß ÇÒ °Í °°½À´Ï´Ù.#
+������ �����ؿ��� ������� �����Ǵ� ����� �߻��ϰ� �ִµ� �ƹ��� ���� ���浥���� ���� �����ϴ�. ��ų� �ΰ����� �������� ��� �θ��� �Ĺ��� ����� �༮�ε�, �̴�� ���θ� ���� ����� ��ĥ �� ������ ���� �� ��� �� �� �����ϴ�.#
 Kill 12 Nepenthes and return to El Dicastes#
 
+
 12109#Centipede Larva Hunting#SG_FEEL#QUE_NOIMAGE#
-¼¾Æ¼Æäµ¥ À¯ÃæÀÌ ¸ð¿©ÀÖ´Â ¼­½ÄÁö¸¦ ¹ß°ßÇÑ ¸ð¾çÀÔ´Ï´Ù. ¼ºÃ¼·Î ÀÚ¶�³ª±âÀü¿¡ ±¸Á¦¸¦ ½Ç½ÃÇÏ¸é ¾Æ¸¶ ¸¹Àº °³Ã¼¼ö°¡ ÁÙ¾îµé°ÚÁö¿ä. ³à¼®µéÀ» Ã£¾Æ ´«¿¡ º¸ÀÌ´Â´ë·Î Ã³¸®ÇØ ÁÖ½Ã°Ú½À´Ï±î? ¹°·Ð ÁÖº¯¿¡ ¾î¹Ì ¼¾Æ¼Æäµ¥°¡ ÀÖ´ÂÁö Á¶½ÉÇÏ¼Å¾ß ÇÒ °Ì´Ï´Ù.#
+��Ƽ�䵥 ������ ���ִ� �������� �߰��� ����Դϴ�. ��ü�� �ڶ󳪱����� ������ �ǽ��ϸ� �Ƹ� ���� ��ü���� �پ�������. �༮���� ã�� ���� ���̴´�� ó���� �ֽðڽ��ϱ�? ���� �ֺ��� ��� ��Ƽ�䵥�� �ִ��� �����ϼž� �� �̴ϴ�.#
 Kill 14 Centipede Larvas and return to El Dicastes#
 
+
 12110#Aqua Elemental Hunting#SG_FEEL#QUE_NOIMAGE#
-´ÏµåÈ£±× µÕÁö·Î ÅëÇÏ´Â ±¤¸ÆÀ» ÆÄ´øÁß ±â±«ÇÑ »ý¹°Ã¼¿¡°Ô ½À°ÝÀ» ´çÇß´Ù´Â º¸°�°¡ µé¾î¿Ô½À´Ï´Ù. ³ðÀº »ç¶÷ÀÇ ÇüÃ¼¸¦ ´àÀº ¹°ÀÌ¾ú´Ù°� ÇÏ´Âµ¥ ¹°ÀÇ Á¤·É°ú´Â ´Ù¸¥ »ç¾ÇÇÑ Á¸ÀçÀÎ°¡º¾´Ï´Ù. ¾Æ¸¶ ´ÏµåÈ£±× ´øÀüÀÌ ¹ß¿øÁöÀÎµ� ÇÏ´Ï °¡¼­ È®ÀÎÀ» ºÎÅ¹µå¸³´Ï´Ù. #
+�ϵ�ȣ�� ������ ���ϴ� ������ �Ĵ��� �Ⱬ�� ����ü���� ������ ���ߴٴ� ������ ���Խ��ϴ�. ���� ����� ��ü�� ���� ���̾��ٰ� �ϴµ� ���� ���ɰ��� �ٸ� ����� �����ΰ����ϴ�. �Ƹ� �ϵ�ȣ�� ������ �߿����ε� �ϴ� ���� Ȯ���� ��Ź�帳�ϴ�. #
 Kill 7 Aqua Elementals and return to El Dicastes#
 
+
 12111#Tatacho Hunting#SG_FEEL#QUE_NOIMAGE#
-µûµûÃÊ ¶�´Â »õ´Â ¿ø·¡ ÇÏ´ÃÀ» ³¯´ø ¾Æ¸§´ä°� ³¯¾ÀÇÑ »õ¿´½À´Ï´Ù. ±×·±µ¥ ÃµÀûÀÌ ¾ø´Â ÀÌ °÷¿¡¼­ Á¤ÂøÇÏ¸é¼­ºÎÅÍ ¶×¶×ÇØÁö°� °ÔÀ¸¸¥ ¸ð½ÀÀ» º¸ÀÌ´õ´Ï Áö±Ý°°Àº ÈäÄ¢ÇÑ ¸ô°�ÀÌ µÇ¾î¹ö·È½À´Ï´Ù. ´ç½ÅÀÌ¶�¸é µûµûÃÊÀÇ ÈÇ¸¢ÇÑ ÃµÀûÀÌ µÉ ¼ö ÀÖÀ» °Í °°±º¿ä#
+������ ��� ���� ���� �ϴ��� ���� �Ƹ���� ������ �������ϴ�. �׷��� õ���� ���� �� ������ �����ϸ鼭���� �׶������� ������ ����� ���̴��� ���ݰ��� ��Ģ�� ������ �Ǿ���Ƚ��ϴ�. ����̶�� �������� �Ǹ��� õ���� �� �� ���� �� ������#
 Kill 10 Tatachos and return to El Dicastes#
 
+
 12117#Withered Flower Collecting#SG_FEEL#QUE_NOIMAGE#
-¾ÆÁÖ ¿À·£ °�´ë¿¡´Â ÀÌ°÷µµ ½ÀÁö´ë¿´´Ù°� ÇÏ´Âµ¥, ¾î¶²ÀÏ·Î ÀÎÇØ¼­ÀÎÁö È¯°æÀÌ Á¡Â÷ º¯ÇÏ±â ½ÃÀÛÇß´Ù°� ÇÏ´Â±º¿ä. ¶�ÇÇ³×ÀÇ ±âÁö ±ÙÃ³¿¡´Â º¯ÇÏÁö ¾ÊÀº ½ÀÁö´ë°¡ ÀÖÀ¸´Ï ±×°÷¿¡¼­ ½Ãµé¾î°¡´Â ²ÉÀ» Ç¥º»À¸·Î ±¸ÇØ ¿À½Ã°Ú½À´Ï±î? È¯°æ º¯È­¸¦ ¿¬±¸ÇÏ´Â ÁÁÀº ÀÚ·�°¡ µÉ °ÍÀÔ´Ï´Ù.#
+���� ���� ���뿡�� �̰��� �����뿴�ٰ� �ϴµ�, ��Ϸ� ���ؼ����� ȯ���� ���� ���ϱ� �����ߴٰ� �ϴ±���. ���ǳ��� ���� ��ó���� ������ ���� �����밡 ������ �װ����� �õ��� ���� ǥ������ ���� ���ðڽ��ϱ�? ȯ�� ��ȭ�� �����ϴ� ���� �ڷᰡ �� ���Դϴ�.#
 Collect 6 Withered Flowers and return to El Dicastes#
 
+
 12118#Pure Bradium Collecting#SG_FEEL#QUE_NOIMAGE#
-ºê¶�µð¿ò Á¤Á¦±â°¡ °�Àå³ª´Â ¹Ù¶÷¿¡ ±¤»êÀÇ µ¿Áöµé¿¡°Ô °ø±ÞµÉ Á¤Á¦µÈ ºê¶�µð¿òÀÇ »ý»ê¿¡ Â÷ÁúÀÌ ¹ú¾îÁ³½À´Ï´Ù. ±×·¡¼­ ¸ðµç ¸ðÇè°¡¸¦ µ¿¿øÇØ¼­ Á¤Á¦µÈ ºê¶�µð¿òÀ» ¼öÁýÇÏ°� ÀÖ´Â ÁßÀÔ´Ï´Ù. ±ÙÃ³ÀÇ ºê¶�µð¿ò °�·½¿¡°Ô¼­ Á¤Á¦µÈ ºê¶�µð¿òÀ» ¾òÀ»¼ö ÀÖÀ»Å×´Ï 3°³¸¸ ºÎÅ¹µå¸³´Ï´Ù.#
+����� �����Ⱑ ���峪�� �ٶ��� ������ �����鿡�� ���޵� ������ ������� ���꿡 ������ ���������ϴ�. �׷��� ��� ���谡�� �����ؼ� ������ ������� �����ϰ� �ִ� ���Դϴ�. ��ó�� ����� �񷽿��Լ� ������ ������� ������ �����״� 3���� ��Ź�帳�ϴ�.#
 Collect 3 Pure Bradiums and return to El Dicastes#
 
+
 12119#Dragon Mane Collecting#SG_FEEL#QUE_NOIMAGE#
-º¸±Þ´ã´ç¿¡°Ô¼­ ¿ëÀÇ°¥±â 16°³¸¦ ±¸ÇØ´Þ¶�´Â ¿äÃ»ÀÌ µé¾î ¿Ô½À´Ï´Ù. µå¶�ÄÚ¿¡°Ô¼­ ¼Ò·®À¸·Î ¾òÀ» ¼ö ÀÖ´Â ¿ëÀÇ °¥±â´Â ¸Å¿ì ±ÍÇÑ ¹°°ÇÀÔ´Ï´Ù. ÀúÈ�ÀÇ °�À¯ÇÑ ¹®¾çÀÌ µé¾î°£ ±ê¹ßÀÌ³ª ÀÇº¹, ¾ßÀü ¹°Ç°µé¿¡ »ç¿ëµÇ°� ÀÖÁö¿ä. #
+���޴�翡�Լ� ���ǰ��� 16���� ���ش޶�� ��û�� ��� �Խ��ϴ�. ����ڿ��Լ� �ҷ����� ���� �� �ִ� ���� ����� �ſ� ���� �����Դϴ�. ������ ������ ������ �� ����̳� �Ǻ�, ���� ��ǰ�鿡 ���ǰ� ������. #
 Collect 16 Dragon Manes and return to El Dicastes#
 
+
 12120#Dragon Tail Collecting#SG_FEEL#QUE_NOIMAGE#
-ÀÌ°èÀÇ ÁÖ¹ÎµéÀ» À§ÇØ ¿î¿µµÇ´Â ÁÖÁ¡¿¡¼­ ¿äÃ»ÀÔ´Ï´Ù. Àå±â°£ º¸°ü °¡´ÉÇÑ ¾ßÀü ¿ä¸®ÀÇ Àç·�·Î µå·¡°ïÀÇ²¿¸®¸¦ ±¸ÇØ´Þ¶�´Â ¿äÃ»ÀÔ´Ï´Ù. ÀÎ°£µéÀº ÀÌ·±°É ÁÁ¾ÆÇÏ³ª º¸±º¿ä. 6°³ Á¤µµ¸¦ ¸ð¾Æ¿À½Ã¸é µÇ°Ú½À´Ï´Ù.#
+�̰��� �ֹε��� ���� ��Ǵ� �������� ��û�Դϴ�. ��Ⱓ ���� ������ ���� �丮�� ���� �巡���ǲ����� ���ش޶�� ��û�Դϴ�. �ΰ����� �̷��� �����ϳ� ������. 6�� ������ ��ƿ��ø� �ǰڽ��ϴ�.#
 Collect 6 Dragon Tails and return to El Dicastes#
 
+
 12121#Piece of Egg Shell Collecting#SG_FEEL#QUE_NOIMAGE#
-´«ÀÌ ³Ê¹« ¸¹ÀÌ ³»¸®´Â ¹Ù¶÷¿¡ µµ½Ã ¿ÜºÎ·Î ÅëÇÏ´Â ±æÀÌ ºùÆÇÀÌ µÇ¾î¹ö·È½À´Ï´Ù. ´Þ°¿ ²®Áú Á¶°¢À» °¥¾Æ »Ñ¸®¸é Á¶±ÝÀº µµ¿òÀÌ µÉ °Í °°Àºµ¥ µÇµµ·Ï ¸¹Àº ¾çÀ» ±¸ÇØ¿À½Ã¸é ÁÁ°Ú½À´Ï´Ù. ¾à 26°³ Á¤µµ¡¦#
+���� �ʹ� ���� ������ �ٶ��� ���� �ܺη� ���ϴ� ���� ������ �Ǿ���Ƚ��ϴ�. �ް� ���� ������ ���� �Ѹ��� ������ ������ �� �� ������ �ǵ��� ���� ���� ���ؿ��ø� ���ڽ��ϴ�. �� 26�� ������#
 Collect 26 Piece of Egg Shells and return to El Dicastes#
 
+
 12122#Crystal Tear Collecting#SG_FEEL#QUE_NOIMAGE#
-ºê¶�µð¿ò ¿ø¼® Á¤Á¦±â´Â °¡µ¿Áß¿¡ ¾öÃ»³­ ¿­À» ¹ß»ý½ÃÅ°´ÂÁö¶� º¸ÅëÀÇ ¹°·Î´Â °¨´çÇÏ±â ¾î·ÆÁÒ.±×·¡¼­ ´«À» ³ìÀÎ ¹°¿¡ ¾ÆÄ�¾Æ ¿¤¸®¸àÅ»¿¡°Ô¼­ ¾òÀ» ¼ö ÀÖ´Â ´«¹°°�Á¤À» Àû´çÈ÷ ¼¯¾î »ç¿ëÁßÀÔ´Ï´Ù. ¸ÅÀÏ¸ÅÀÏ ÇÊ¿äÇÑ ¹°Ç°ÀÌ´Ï °¡¼­ 6°³ Á¤µµ¸¸ ±¸ÇØÁÖ½Ã¸é ÁÁ°Ú±º¿ä.#
+����� ���� ������� �����߿� ��û�� ���� �߻���Ű������ ������ ���δ� �����ϱ� �����.�׷��� ���� ���� ���� ������ ������Ż���Լ� ���� �� �ִ� ���������� ������ ���� ������Դϴ�. ���ϸ��� �ʿ��� ��ǰ�̴� ���� 6�� ������ �����ֽø� ���ڱ���.#
 Collect 6 Crystal Tears and return to El Dicastes#
 
+
 12123#Fluorescent Liquid Collecting#SG_FEEL#QUE_NOIMAGE#
-ÀÌ ¼öµµ °÷°÷ÀÇ °Ç¹° º¸¼öÀÛ¾÷¿¡ ¾²ÀÏ µµ·�¸¦ º¸±Þ´ã´çÀÌ ±ä±ÞÈ÷ ±¸ÇÏ°� ÀÖ½À´Ï´Ù. ¾ÆÄ�¾Æ ¿¤¸®¸àÅ»¿¡°Ô¼­ ¾òÀ» ¼ö ÀÖ´Â Çü±¤¾×Ã¼°¡ ÀÖ´Ù¸é ±×°¡ ¿øÇÏ´Â ¸¸Å­ÀÇ µµ·�¸¦ ¸¸µé ¼ö ÀÖ°ÚÁö¿ä. 26°³ Á¤µµ¸¸ ±¸ÇØÁÖ½Ã¸é ÁÁ°Ú½À´Ï´Ù.#
+�� ���� ������ �ǹ� �����۾��� ���� ���Ḧ ���޴���� ����� ���ϰ� �ֽ��ϴ�. ������ ������Ż���Լ� ���� �� �ִ� ������ü�� �ִٸ� �װ� ���ϴ� ��ŭ�� ���Ḧ ���� �� �ְ�����. 26�� ������ �����ֽø� ���ڽ��ϴ�.#
 Collect 26 Fluorescent Liquids and return to El Dicastes#
 
+
 12124#Small Jug Collecting#SG_FEEL#QUE_NOIMAGE#
-´ë½ÅÀÇ ¹æ¿¡ ÀÖ´ø ±ÍÇÑ Àå½Ä¿ë ¹°º´ÀÌ ÆÄ¼ÕµÈ ¸ð¾çÀÔ´Ï´Ù. ¿ÜºÎ ¼Õ´ÔµéÀÌ µå³ªµå´Â °÷ÀÌ¶� ¹üÀÎÀ» Àâ´Â°Ç »ç½Ç»� ¹«¸®ÀÏ °Í °°°�¡¦ ¾ÆÄ�¾Æ ¿¤¸®¸àÅ»¿¡°Ô¼­ ±¸ÇÒ ¼ö ÀÖ´Â ±ÍÇÑ ¹°°ÇÀÎµ¥ Á» ±¸ÇØÁÖ½Ç ¼ö ÀÖ°Ú½À´Ï±î? 1°³¸¸ ±¸ÇØ¿À½Ã¸é µË´Ï´Ù.#
+����� �濡 �ִ� ���� ��Ŀ� ������ �ļյ� ����Դϴ�. �ܺ� �մԵ��� �峪��� ���̶� ������ ��°� ��ǻ� ������ �� ������ ������ ������Ż���Լ� ���� �� �ִ� ���� �����ε� �� �����ֽ� �� �ְڽ��ϱ�? 1���� ���ؿ��ø� �˴ϴ�.#
 Collect 1 Small Jug and return to El Dicastes#
 
+
 12125#Scale Shell Collecting#SG_FEEL#QUE_NOIMAGE#
-±ÙÀ§´ë¿¡ º¸±ÞµÇ¾î¾ß ÇÒ º¸È£±¸ÀÇ ¾È°¨Àç·�°¡ ´Ù ¶³¾îÁ³´Ù´Â ÀÇ·Ú°¡ Á¢¼öµÇ¾î ÀÖ½À´Ï´Ù. ³ª°¡¿¡°Ô¼­ ±¸ÇÒ ¼ö ÀÖ´Â º�´Ã ÇÇºÎ´Â º¸È£±¸¿¡ µü ¸Â´Â ÁÁÀº ¾È°¨ÀÌÁÒ. °¡¼­ 18°³¸¸ ±¸ÇØÁÖ½Å´Ù¸é ÁÁ°Ú±º¿ä#
+�����뿡 ���޵Ǿ�� �� ��ȣ���� �Ȱ���ᰡ �� �������ٴ� �Ƿڰ� �����Ǿ� �ֽ��ϴ�. �������Լ� ���� �� �ִ� ��� �Ǻδ� ��ȣ���� �� �´� ���� �Ȱ�����. ���� 18���� �����ֽŴٸ� ���ڱ���#
 Collect 18 Scale Shells and return to El Dicastes#
 
+
 12126#Shining Scale Collecting#SG_FEEL#QUE_NOIMAGE#
-±ÙÀ§´ëÀÇ ÁöÈÖ°üµé¿¡°Ô º¸±ÞµÉ º¸È£±¸ÀÇ ¾È°¨Àç·�¿¡ ´ëÇÑ ÀÇ·ÚÀÔ´Ï´Ù. ÀÌ°Ç ÀÏ¹Ý ¾È°¨°ú Àç·�°¡ ´Ù¸£´Ï Âü°�ÇÏ½Ê½Ã¿À. ³ª°¡ÀÇ ºû³ª´Â º�´Ã 11°³ Á¤µµ¸é ÀûÀýÇÒ °Í °°½À´Ï´Ù. ¹¹ ´ç½Å Á¤µµ¶�¸é Å©°Ô ¾î·Á¿î ÀÏÀº ¾Æ´Ò °Í °°½À´Ï´Ù¸¸#
+�������� ���ְ��鿡�� ���޵� ��ȣ���� �Ȱ���ῡ ���� �Ƿ��Դϴ�. �̰� �Ϲ� �Ȱ��� ��ᰡ �ٸ��� �����Ͻʽÿ�. ������ ������ ��� 11�� ������ ������ �� �����ϴ�. �� ��� ������� ũ�� ����� ���� �ƴ� �� �����ϴٸ�#
 Collect 11 Shining Shells and return to El Dicastes#
 
+
 12127#Mystic Horn Collecting#SG_FEEL#QUE_NOIMAGE#
-±¤»ê °¨µ¶°üµéÀÌ ½�¾ßÇÒ ³ªÆÈÀÌ ³°¾Æ¼­ ÇÑ¹ø º¸¼öÇØÁà¾ß ÇÒ ¶§°¡ µÇ¾ú½À´Ï´Ù. ³ªÆÈÀÌ ¾øÀ¸¸é »ç½Ç»� ÀÎºÎµéÀÇ ÅëÁ¦°¡ °ï¶õÇØÁö°Åµç¿ä. ÄÚ¸£´©½ºÀÇ ¸Ó¸®¿¡ ´Þ¸° »ÔÀº ÈÇ¸¢ÇÑ ³ªÆÈ Àç·�·Î ¾²ÀÌ´Âµ¥ 5°³¸¸ ±¸ÇØ¿À½Ã¸é °�¸¿°Ú±º¿ä#
+���� ���������� ����� ������ ���Ƽ� �ѹ� ��������� �� ���� �Ǿ����ϴ�. ������ ������ ��ǻ� �κε��� ������ ��������ŵ��. �ڸ������� �Ӹ��� �޸� ���� �Ǹ��� ���� ���� ���̴µ� 5���� ���ؿ��ø� �����ڱ���#
 Collect 5 Mystic Horns and return to El Dicastes#
 
+
 12128#Fur Collecting#SG_FEEL#QUE_NOIMAGE#
-¸ðÇè°¡ ºÐµéÀ» À§ÇÑ ÁÖÁ¡¿¡ ³­¹æ¿ëÀ¸·Î ¼³Ä¡ÇØ³õÀº ¸ðÇÇ°¡ ºÎÁ·ÇÑ ¸ð¾çÀÔ´Ï´Ù. µûµûÃÊÀÇ µû²öÇÑ ¸ðÇÇ°¡ ÀÖ´Ù¸é ÁÁ°Ú´Âµ¥ Á» ±¸ÇØÁÖ¼Å¾ß°Ú±º¿ä. 21µ¢ÀÌ Á¤µµ¸é ÃæºÐÇÒ °Í °°½À´Ï´Ù#
+���谡 �е��� ���� ������ ��������� ��ġ�س��� ���ǰ� ������ ����Դϴ�. �������� ������ ���ǰ� �ִٸ� ���ڴµ� �� �����ּž߰ڱ���. 21���� ������ ����� �� �����ϴ�#
 Collect 21 Furs and return to El Dicastes#
 
+
 12129#Bug Leg Collecting#SG_FEEL#QUE_NOIMAGE#
-ÁÖÁ¡¿¡¼­ ÂªÀº ´Ù¸®¸¦ 27°³ ±¸ÇØ´Þ¶�´Â ¿äÃ»ÀÌ ÀÖ¾ú½À´Ï´Ù. ¾îµð¿¡ ¾²·Á°� ±×·¸°Ô³ª ¸ðÀ¸´ÂÁö´Â ¾Ë ¼ö ¾ø½À´Ï´Ù¸¸ µüÈ÷ ¾Ë·ÁÁÖ·Á°� ÇÏÁø ¾Ê´õ±º¿ä. ¾îÂ·µç ÀÌ¹ø¿¡µµ Àß ºÎÅ¹µå¸³´Ï´Ù.#
+�������� ª�� �ٸ��� 27�� ���ش޶�� ��û�� �־����ϴ�. ��� ������ �׷��Գ� ���������� �� �� �����ϴٸ� ���� �˷��ַ��� ���� �ʴ�����. ��·�� �̹����� �� ��Ź�帳�ϴ�.#
 Collect 27 Bug Legs and return to El Dicastes#
 
+
 12130#Zargon Collecting#SG_FEEL#QUE_NOIMAGE#
-ÀÚ¸£°ï ÀÌ¶�´Â ¹°ÁúÀº ÀÌ°÷ ÁÖ¹ÎµéÀÌ ¾ÆÁÖ ÁÁ¾ÆÇÏ´Â ¹°°ÇÀÔ´Ï´Ù µ¿±×¶þ°� ¾Æ¸§´ä°Å´Ï¿Í ºÐ¸»À» ¹°¿¡ °³¸é Á¢ÂøÁ¦·Îµµ ¾²ÀÌ´Ï±î¿ä. µèÀÚÇÏ´Ï ÀÌ°÷À» µå³ªµå´Â ¸ðÇè°¡µéÀÇ ¶¥¿¡¼± ÈçÇÏµð ÈçÇÑ ¹°°ÇÀÌ¶�°� ÇÏ´øµ¥ Á» ±¸ÇØÁÖ½Ç ¼ö ÀÖ°Ú½À´Ï±î? 26°³ Á¤µµ¸é ÃæºÐÇÒ °Í °°½À´Ï´Ù.#
+�ڸ��� �̶�� ������ �̰� �ֹε��� ���� �����ϴ� �����Դϴ� ���׶��� �Ƹ���ŴϿ� �и��� ���� ���� �������ε� ���̴ϱ��. �����ϴ� �̰��� �峪��� ���谡���� ������ ���ϵ� ���� �����̶�� �ϴ��� �� �����ֽ� �� �ְڽ��ϱ�? 26�� ������ ����� �� �����ϴ�.#
 Collect 26 Zargons and return to El Dicastes#
 
+
 12131#Solid Shell Collecting#SG_FEEL#QUE_NOIMAGE#
-¸Å ºÐ±â¸¶´Ù Ä¡·ç´Â °Ç¹° º¸¼ö°ø»ç¿¡ »ç¿ëµÉ Àç·�¸¦ ±¸ÇÏ´Â ÀÇ·Ú°¡ ÀÖ½À´Ï´Ù. ¼¾Æ¼Æäµ¥³ª ¼¾Æ¼Æäµ¥ À¯Ãæ¿¡°Ô¼­ ¹ß°ß °¡´ÉÇÑ ¸Å¿ì ´Ü´ÜÇÑ ²®ÁúÀ» 13°³ Á¤µµ ±¸ÇØ¿À½Ê½Ã¿À. º¸¼ö°ø»ç¿¡ ¿ä±äÇÏ°Ô ¾²ÀÏ°Ì´Ï´Ù.#
+�� �б⸶�� ġ��� �ǹ� �������翡 ���� ��Ḧ ���ϴ� �Ƿڰ� �ֽ��ϴ�. ��Ƽ�䵥�� ��Ƽ�䵥 ���濡�Լ� �߰� ������ �ſ� �ܴ��� ������ 13�� ���� ���ؿ��ʽÿ�. �������翡 ����ϰ� ���ϰ̴ϴ�.#
 Collect 13 Solid Shells and return to El Dicastes#
 
+
 12132#Strong Vine Collecting#SG_FEEL#QUE_NOIMAGE#
-¸Å ºÐ±â¸¶´Ù Ä¡·ç´Â °Ç¹° º¸¼ö°ø»ç¿¡ »ç¿ëµÉ Àç·�¸¦ ±¸ÇÏ´Â ÀÇ·Ú°¡ ÀÖ½À´Ï´Ù. ³×Ææµ¥½º¿¡°Ô¼­ ¾òÀ» ¼ö ÀÖ´Â Æ°Æ°ÇÑ³ÕÄð 16°³¸¦ ¸ð¾Æ ¿À½Ê½Ã¿À. º¸¼ö°ø»ç¿¡´Â ºüÁú ¼ö ¾ø´Â À¯¿ëÇÑ µµ±¸ÀÔ´Ï´Ù.#
+�� �б⸶�� ġ��� �ǹ� �������翡 ���� ��Ḧ ���ϴ� �Ƿڰ� �ֽ��ϴ�. ���浥�����Լ� ���� �� �ִ� ưư�ѳ��� 16���� ��� ���ʽÿ�. �������翡�� ���� �� ���� ������ �����Դϴ�.#
 Collect 16 Strong Vines and return to El Dicastes#
 
+
 12133#Sharp Leaf Collecting#SG_FEEL#QUE_NOIMAGE#
-±ÙÀ§´ëÀÇ °³ÀÎ Àå½Ä¹°·Î »ç¿ëµÉ ³¯Ä«·Î¿î ÀÙ»ç±Í°¡ ¸¹ÀÌ ÇÊ¿äÇÏ´Ù´Â ÀÇ·Ú°¡ µé¾î¿Í¼­ ÀÌ¹Ì ´Ù¸¥ ¸ðÇè°¡ºÐµé¿¡°Ôµµ ÀÇ·Ú¸¦ ÇØ ³õÀº »�ÅÂÀÔ´Ï´Ù. ¿ä±¸·®µµ ²Ï ¸¹¾Æ¼­ 26Àå Á¤µµ°¡ ÇÊ¿ä ÇÏ´Ù´Â±º¿ä. °�»ýÀÌ ¸¹°ÚÁö¸¸ ºÎÅ¹µå¸³´Ï´Ù.#
+�������� ���� ��Ĺ��� ���� ��ī�ο� �ٻ�Ͱ� ���� �ʿ��ϴٴ� �Ƿڰ� ���ͼ� �̹� �ٸ� ���谡�е鿡�Ե� �Ƿڸ� �� ���� �����Դϴ�. �䱸���� �� ���Ƽ� 26�� ������ �ʿ� �ϴٴ±���. ������ �������� ��Ź�帳�ϴ�.#
 Collect 26 Sharp Leafs and return to El Dicastes#
 
+
 12134#Huge Leaf Collecting#SG_FEEL#QUE_NOIMAGE#
-¿äÁò ¿ÜºÎ ¸ðÇè°¡µéÀÌ ºÎÂ½ ´Ã¾î¼­ ÁÖÁ¡ÁÖÀÎÀÌ °�Ä¡ÀÎ ¸ð¾çÀÌ¿¹¿ä. ÀÏÈ¸¿ëÀ¸·Î °£Æ�ÇÏ°Ô À½½ÄÀ» ´ã¾Æ³¾ ¹°°ÇÀÌ ÀÖ´Ù¸é ÁÁ°Ú´Âµ¥¡¦ Ä¿´Ù¶õ ÀÙ»ç±Í °°Àº°Í ¸»ÀÔ´Ï´Ù.#
+���� �ܺ� ���谡���� ��½ �þ ���������� ��ġ�� ����̿���. ��ȸ������ �����ϰ� ������ ��Ƴ� ������ �ִٸ� ���ڴµ��� Ŀ�ٶ� �ٻ�� ������ ���Դϴ�.#
 Collect 11 Huge Leafs and return to El Dicastes#
 
+
 12135#Brown Root Collecting#SG_FEEL#QUE_NOIMAGE#
-±¤»ê¿¡¼­ ÃÖ±Ù ºÎ»�ÀÚµéÀÌ ¸¹ÀÌ ¹ß»ýÇÏ°� ÀÖ½À´Ï´Ù. ¾Æ¸¶µµ ¸Å¹ø ÀÛ¾÷ÀÚµéÀ» ³ë¸®´ø ³×Ææµ¥½ºµéÀÇ ¼ÒÇàÀÌ°ÚÁö¿ä. ¾îÂ·°Å³ª »�Ã³¿¡ µ¡´î Ä¡·�¾àÀÇ Àç·�°¡ ÇÊ¿äÇÏ´Ï °¥»ö»Ñ¸® 16°³¸¦ ±¸ÇØÁÖ½Ê½Ã¿À. #
+���꿡�� �ֱ� �λ��ڵ��� ���� �߻��ϰ� �ֽ��ϴ�. �Ƹ��� �Ź� �۾��ڵ��� �븮�� ���浥������ �����̰�����. ��·�ų� ��ó�� ���� ġ����� ��ᰡ �ʿ��ϴ� �����Ѹ� 16���� �����ֽʽÿ�. #
 Collect 16 Brown Roots and return to El Dicastes#
 
+
 12136#Honey Collecting#SG_FEEL#QUE_NOIMAGE#
-ÁÖÁ¡ ÁÖÀÎÀÌ ¿Í¼­ ´ç½Å Á¾Á·µéÀÇ ¸Ô¼º¿¡ ´ëÇØ ±æ°� ±ä ÀÜ¼Ò¸®¸¦ ´Ã¾î³õ°� °¡´õ±º¿ä. ²Ü°ú ¿­¸ÅÀÇ º�ÃàºÐÀÌ ÀÌ¹Ì ´Ù ¶³¾îÁø »�ÅÂ¶�°� ÇÏ´øµ¥ ¼ºÀÇ¸¦ Á» º¸ÀÌ¼Å¾ß°Ú½À´Ï´Ù. ²Ü 2°³ Á¤µµ¸é Åä¶�Áø ÁÖÁ¡ÁÖÀÎÀ» ´Þ·¡´Âµ¥¿£ ÃæºÐÇÒ°Ì´Ï´Ù.#
+���� ������ �ͼ� ��� �������� �Լ��� ���� ��� �� �ܼҸ��� �þ���� ��������. �ܰ� ������ ������� �̹� �� ������ ���¶�� �ϴ��� ���Ǹ� �� ���̼ž߰ڽ��ϴ�. �� 2�� ������ ����� ���������� �޷��µ��� ����Ұ̴ϴ�.#
 Collect 2 Honeys and return to El Dicastes#
 
+
 12137#Glass Tube Collecting#SG_FEEL#QUE_NOIMAGE#
-ºê¶�µð¿ò Á¤Á¦¸¦ È¿À²ÀûÀ¸·Î ÇÏ±âÀ§ÇÑ ¿¬±¸¸¦ ¿ì¸® »ê¾÷ ¿¬±¸¼Ò¿¡¼­ ÁøÇàÇÏ°� ÀÖ´Âµ¥ ´Ã»� ½ÇÇèÀÚÀç°¡ ºÎÁ·ÇÕ´Ï´Ù. µèÀÚÇÏ´Ï ´ç½Å³× ¸ðÇè°¡µéÀÇ µµ½Ã¿£ À¯¸®°ü ÀÌ¶�´Â°ÍÀ» ÆÄ´Â »�ÀÎÀÌ ÀÖ´Ù´õ±º¿ä. 4°³Á¤µµ ±¸ÇØÁÖ½Ã¸é ÁÁ°Ú½À´Ï´Ù.#
+����� ������ ȿ�������� �ϱ����� ������ �츮 ��� �����ҿ��� �����ϰ� �ִµ� �û� �������簡 �����մϴ�. �����ϴ� ��ų� ���谡���� ���ÿ� ������ �̶�°��� �Ĵ� ������ �ִٴ�����. 4������ �����ֽø� ���ڽ��ϴ�.#
 Collect 4 Glass Tubes and return to El Dicastes#
 
+
 12138#Bouquet Collecting#SG_FEEL#QUE_NOIMAGE#
-ÁÖÁ¡ ÁÖÀÎÀÌ ÀÚÁÖ ÀÌ¿ëÇØÁÖ´Â »çÆÄÀÇ ¼Õ´Ôµé¿¡°Ô °¨»çÀÇ ÀÇ¹Ì·Î ¼±¹°À» ÇÏ°� ½Í¾î ÇÏ´õ±º¿ä. ÇÏÁö¸¸ ¹«¾ùÀÌ ÁÁÀ»Áö ¸Á¼³ÀÌ´Â ¸ð¾çÀÔ´Ï´Ù. È¤½Ã¶�µµ ÁÁÀº ¼±¹°°Å¸®¸¦ ¹Ìµå°¡¸£µå¿¡¼­ Ã£°Ô µÇ½Å´Ù¸é 5°³ Á¤µµ¸¸ ±¸ÇØ ÁÖ½Ã°Ú½À´Ï±î?#
+���� ������ ���� �̿����ִ� ������ �մԵ鿡�� ������ �ǹ̷� ������ �ϰ� �;� �ϴ�����. ������ ������ ������ �����̴� ����Դϴ�. Ȥ�ö� ���� �����Ÿ��� �̵尡���忡�� ã�� �ǽŴٸ� 5�� ������ ���� �ֽðڽ��ϱ�?#
 Collect 5 Bouquets and return to El Dicastes#
 
+
 12139#Witherless Rose Collecting#SG_FEEL#QUE_NOIMAGE#
-¿äÁò ÃÖ°�´ë½Å´ÔÀÌ ¹Ìµå°¡¸£µåÀÇ »ê¹°ÀÎ ½ÃµéÁö¾Ê´Â Àå¹Ì¸¦ ÀÚÁÖ Ã£À¸½Ã´Â±º¿ä. ¸Ó¸®¿¡ Àå½ÄÇÏ½Ã¸ç Á�°Å¿öÇÏ´Â ¸ð½ÀÀÌ °¡²û ¸�°ÝµÇ°� ÀÖ´Âµ¥ ±¦ÂúÀº °ÇÁö ¸ð¸£°Ú½À´Ï´Ù. ±×·± °ü°è·Î¡¦ ¾î·Á¿î ºÎÅ¹ÀÌÁö¸¸ ½ÃµéÁö ¾Ê´Â Àå¹Ì¸¦ 1¼ÛÀÌ ¹è¼ÛÇØ ÁÖ½Ê½Ã¿À. ¹°·Ð ´Ù¸¥°÷¿£ º�¹ÐÀÔ´Ï´Ù.#
+���� �ְ���Ŵ��� �̵尡������ �깰�� �õ����ʴ� ��̸� ���� ã���ô±���. �Ӹ��� ����Ͻø� ��ſ��ϴ� ����� ���� ��ݵǰ� �ִµ� ������ ���� �𸣰ڽ��ϴ�. �׷� ����Ρ� ����� ��Ź������ �õ��� �ʴ� ��̸� 1���� ����� �ֽʽÿ�. ���� �ٸ����� ����Դϴ�.#
 Collect 1 Witherless Rose and return to El Dicastes#
 
+
 12140#China Collecting#SG_FEEL#QUE_NOIMAGE#
-ÁÖÁ¡ÁÖÀÎÀÇ ÀÇ·ÚÀÔ´Ï´Ù. ³ª¹µÀÙÀ¸·Î ¸¸µç ÀÏÈ¸¿ëÁ¢½Ã´Â ´Ü°� ¼Õ´Ôµé¿¡°Ô ³» ³õÀ» ¼ö ¾ø´Ù°� ÇÏ´Â±º¿ä. ¹Ìµå°¡¸£µå¿£ ÇÏ¾é°� ´Ü´ÜÇÑ ±×¸©ÀÌ ÀÖ´Ù°� ÇÏ´øµ¥ ±¸ÇØ ¿À½Ç¼ö ÀÖ´Ù¸é 15°³ Á¤µµ¸¦ ºÎÅ¹µå¸®°� ½Í½À´Ï´Ù.#
+���������� �Ƿ��Դϴ�. ���������� ���� ��ȸ�����ô� �ܰ� �մԵ鿡�� �� ���� �� ���ٰ� �ϴ±���. �̵尡���忣 �Ͼ�� �ܴ��� �׸��� �ִٰ� �ϴ��� ���� ���Ǽ� �ִٸ� 15�� ������ ��Ź�帮�� �ͽ��ϴ�.#
 Collect 15 Chinas and return to El Dicastes#
 
+
 12141#Glass Bead Collecting#SG_FEEL#QUE_NOIMAGE#
-ÀÌ°Ç Á¦°¡ °³ÀÎÀûÀ¸·Î ºÎÅ¹µå¸®´Â °Ì´Ï´Ù. ¹Ìµå°¡¸£µå ´ë·ú¿£ Åõ¸�ÇÏ°� µÕ±Ù °ø¿¹Ç°ÀÌ ÀÖ´Ù°� µé¾ú½À´Ï´Ù. À¯¸®±¸½½¡¦ ÀÌ¶�°� Çß´ø°¡. ÀÌ°÷¿¡µµ º�½ÁÇÑ °¡°ø¹°Àº ¸¹½À´Ï´Ù¸¸ ±×Á¤µµ·Î Á¤±³ÇÑ ±¸¸éÃ¼´Â Ã£À»¼ö°¡ ¾ø¾î¼­ ¸»ÀÌÁö¿ä. 10°³Á¤µµ ºÎÅ¹ µå¸®°Ú½À´Ï´Ù.#
+�̰� ���� ���������� ��Ź�帮�� �̴ϴ�. �̵尡���� ����� �����ϰ� �ձ� ����ǰ�� �ִٰ� ������ϴ�. ���������� �̶�� �ߴ���. �̰����� ����� �������� �����ϴٸ� �������� ������ ����ü�� ã������ ��� ��������. 10������ ��Ź �帮�ڽ��ϴ�.#
 Collect 10 Glass Beads and return to El Dicastes#
 
+
 12142#Puppet Collecting#SG_FEEL#QUE_NOIMAGE#
-À½¡¦ ÀÌ°É ¹¹¶� ¸»¾¸µå·Á¾ß ÇÒÁö. ÃÖ°� ´ë½Å´Ô²²¼­ ¹Ìµå°¡¸£µåÀÇ ºÀÁ¦ÀÎÇü ÀÌ¶õ°ÍÀ» ±¸ÇØ´Þ¶�´Â ¿äÃ»À» ÇÏ¼Ì½À´Ï´Ù. Àú´Â ±×°Ô ¾î¶² ¹°°ÇÀÎÁö ¸ð¸¨´Ï´Ù¸¸ ÃÖ°�´ë½Å´ÔÀÌ ¿ä±¸ÇÏ´Â °ÍÀÌ´Ï ºÐ¸� Áß¿äÇÑ ÀÏ¿¡ ¾²ÀÏÅ×Áö¿ä. 15°³ Á¤µµ ºÎÅ¹µå¸³´Ï´Ù.#
+���� �̰� ���� ��������� ����. �ְ� ��ŴԲ��� �̵尡������ �������� �̶����� ���ش޶�� ��û�� �ϼ̽��ϴ�. ���� �װ� � �������� �𸨴ϴٸ� �ְ���Ŵ��� �䱸�ϴ� ���̴� �и� �߿��� �Ͽ� ����������. 15�� ���� ��Ź�帳�ϴ�.#
 Collect 15 Puppets and return to El Dicastes#
 
+
 12143#Bill of Bird Collecting#SG_FEEL#QUE_NOIMAGE#
-ÃÖ±Ù¿¡ ¹Ìµå°¡¸£µåÀÇ »õÀÇºÎ¸®·Î ¸¸µç ¼Ò¸®³ª´Â Àå½Å±¸°¡ ¿©·¯ µ¿·�µé »çÀÌ¿¡¼­ À¯ÇàÇÏ°� ÀÖ´õ±º¿ä. ÀÌ ±âÈ¸¿¡ ¿î¿µÃ» ³»ºÎ¿¡µµ ÇÑ¹ø ¹èÆ÷ÇØ º¼±î ÇÕ´Ï´Ù. ¹Ìµå°¡¸£µå µµ½Ã¿¡¼± »�ÀÎÀÌ ÆÇ¸ÅÇÏ°� ÀÖ´Ù°� ÇÏ´øµ¥ 50°³ Á¤µµ ±¸¸Å¸¦ ÇØ ¿À½Ã°Ú½À´Ï±î?#
+�ֱٿ� �̵尡������ ���Ǻθ��� ���� �Ҹ����� ��ű��� ���� ����� ���̿��� �����ϰ� �ִ�����. �� ��ȸ�� �û ���ο��� �ѹ� ������ ���� �մϴ�. �̵尡���� ���ÿ��� ������ �Ǹ��ϰ� �ִٰ� �ϴ��� 50�� ���� ���Ÿ� �� ���ðڽ��ϱ�?#
 Collect 50 Bill of Birds and return to El Dicastes#
 
+
 12144#Clam Shell Collecting#SG_FEEL#QUE_NOIMAGE#
-ÁÖÁ¡ÀÇ ÁÖÀÎÀÌ Á¶°³²®Áú ÀÌ¶�´Â ¹°°ÇÀ¸·Î ÁÖÁ¡ ³»ºÎ¸¦ Àå½ÄÇØº¸°� ½Í´Ù¸ç ÀÇ·Ú¸¦ Çß½À´Ï´Ù. 50°³ Á¤µµ ±¸ÇØ¿À½Ã¸é µÉ°Í °°½À´Ï´Ù. ¹Ù´Ù ¼Ó¿¡ »ç´Â »ý¹°ÀÇ ÁýÀÌ¶�°� ÇÏ´øµ¥ ÀÌ·±°É·Î ¹«¾� ¾î¶»°Ô ²Ù¹Î´Ù´Â°ÇÁö ¸ð¸£°Ú±º¿ä ¸ðÇè°¡µé°ú Ä£ÇÏ°Ô Áö³»´Ùº¸´Ï ÃëÇâÀÌ µ¶Æ¯ÇØÁö³ª º¾´Ï´Ù. #
+������ ������ �������� �̶�� �������� ���� ���θ� ����غ��� �ʹٸ� �Ƿڸ� �߽��ϴ�. 50�� ���� ���ؿ��ø� �ɰ� �����ϴ�. �ٴ� �ӿ� ��� ������ ���̶�� �ϴ��� �̷��ɷ� ���� ��� �ٹδٴ°��� �𸣰ڱ��� ���谡��� ģ�ϰ� �����ٺ��� ������ ��Ư������ ���ϴ�. #
 Collect 50 Clam Shells and return to El Dicastes#
 
+
 12145#Crab Shell Collecting#SG_FEEL#QUE_NOIMAGE#
-¿ì¸° ¿ä¸®¸¦ Àß ¸ÔÁö ¾ÊÁö¸¸ ¸ðÇè°¡ ºÐµéÀº Á�°Å¿òÀ» À§ÇØ ¹º°¡¸¦ ¸Ô´Â ÇàÀ§¸¦ Á�±â´õ±º¿ä. ÁÖÁ¡ÀÇ ÁÖÀÎÀÌ »õ·Î¿î ¿ä¸®¸¦ ´ãÀ» ±×¸©À¸·Î °ÔÀÇ µî²®ÁúÀ» 20°³ ±¸ÇØ ´Þ¶�°� Çß½À´Ï´Ù. ¾îµð¿¡¼­ ÆÇ¸ÅµÇ´Â ¹°°ÇÀÎÁö Àú´Â Àß ¸ð¸£°ÚÁö¸¸ ¾îÂ·µç Àß ºÎÅ¹µå¸³´Ï´Ù.#
+�츰 �丮�� �� ���� ������ ���谡 �е��� ��ſ��� ���� ������ �Դ� ������ ��������. ������ ������ ���ο� �丮�� ���� �׸����� ���� ����� 20�� ���� �޶�� �߽��ϴ�. ��𿡼� �ǸŵǴ� �������� ���� �� �𸣰����� ��·�� �� ��Ź�帳�ϴ�.#
 Collect 20 Crab Shells and return to El Dicastes#
 
+
 12146#Scell Collecting#SG_FEEL#QUE_NOIMAGE#
-¹Ìµå°¡¸£µåÀÇ ¹°Ç°Áß¿¡ °¡Àå ¾µ¸¸ÇÑ°Ç ¿ª½Ã ¼¿ÀÔ´Ï´Ù. ¾Æ¹«¸® °¥¶�Áö°� ±¸¸Û³­ °Ç¹°ÀÌ¶�µµ ¼¿À» Ã¤¿ö³Ö°� Àß°Ô ºÐ¼âÇÑ °¡·¿À» °³¾î ¹Ù¸£¸é ½±°� ºü¸£°Ô º¸¼ö°¡ °¡´ÉÇÏ´Ï ¸»ÀÔ´Ï´Ù. 30°³ Á¤µµÀÇ ºÐ·®À» ±¸ÇØ ÁÖ½Ã°Ú½À´Ï±î?#
+�̵尡������ ��ǰ�߿� ���� �����Ѱ� ���� ���Դϴ�. �ƹ��� �������� ���۳� �ǹ��̶� ���� ä���ְ� �߰� �м��� ������ ���� �ٸ��� ���� ������ ������ �����ϴ� ���Դϴ�. 30�� ������ �з��� ���� �ֽðڽ��ϱ�?#
 Collect 30 Scells and return to El Dicastes#
 
+
 12147#Garlet Collecting#SG_FEEL#QUE_NOIMAGE#
-°Ç¹° º¸¼ö¿¡´Â ¿ª½Ã °¡·¿ÀÌ ºüÁú ¼ö ¾øÁÒ. ¼¿°ú ÇÔ²² ºüÁú ¼ö ¾ø´Â ÁÁÀº °Ç¹° º¸¼ö¿ë Àç·�ÀÔ´Ï´Ù. °¡·¿ÀÌ ³ªÅ¸³ª±â Àü¿¡´Â ÀÚ¸£°ïÀ» ºÐ¼âÇØ¼­ »ç¿ëÇß½À´Ï´Ù¸¸ ±¸ÇÏ±âµµ ±î´Ù·Ó°� ¼ö·®µµ ¸¹Áö¾Ê¾Æ Èûµé¾ú¾úÁö¿ä. °¡·¿À» 40°³ Á¤µµ ±¸ÇØÁÖ½Ê½Ã¿À#
+�ǹ� �������� ���� ������ ���� �� ����. ���� �Բ� ���� �� ���� ���� �ǹ� ������ ����Դϴ�. ������ ��Ÿ���� ������ �ڸ����� �м��ؼ� ����߽��ϴٸ� ���ϱ⵵ ��ٷӰ� ������ �����ʾ� �����������. ������ 40�� ���� �����ֽʽÿ�#
 Collect 40 Garlets and return to El Dicastes#
 
+
 12148#Monster's Feed Collecting#SG_FEEL#QUE_NOIMAGE#
-µûµûÃÊ ³à¼®µéÀº »ç³É¸¸ ÇÏ·Á°�ÇÏ¸é ±Í½Å°°Àº ¼Óµµ·Î µµ¸ÁÀ» Ä¡´Â°ÍÀÌ ¿©°£ ±î´Ù·Î¿î°Ô ¾Æ´ÏÁö¿ä. ±×·¡¼­ ÀÌ°÷ÀÇ °¥Æ°µéÀº ±«¹°ÀÇ¸ÔÀÌ¸¦ ÀÌ¿ëÇØ¼­ ³à¼®À» À¯ÀÎÇÕ´Ï´Ù. ¹Ìµå°¡¸£µå¿£ ´ë·®À¸·Î ±×°ÍÀ» ¸¸µå´Â ÀåÀÎÀÌ ÀÖ´Ù°� ÇÏ´øµ¥ 100°³Á¤µµ ºÎÅ¹µå¸®°Ú½À´Ï´Ù.#
+������ �༮���� ��ɸ� �Ϸ����ϸ� �ͽŰ��� �ӵ��� ������ ġ�°��� ���� ��ٷο�� �ƴ�����. �׷��� �̰��� ��ư���� �����Ǹ��̸� �̿��ؼ� �༮�� �����մϴ�. �̵尡���忣 �뷮���� �װ��� ����� ������ �ִٰ� �ϴ��� 100������ ��Ź�帮�ڽ��ϴ�.#
 Collect 100 Monster's Feeds and return to El Dicastes#
 
+
 12149#Apple Collecting#SG_FEEL#QUE_NOIMAGE#
-ÁÖÁ¡ÀÇ ÁÖÀÎÀÌ Á¦´ë·Î µÈ ¿ä¸®¸¦ ¹è¿öº¸°�½Í´Ù¸ç »ç°ú¸¦ ±¸ÇØ´Þ¶�´Â±º¿ä. ±×·±µ¥ ÀÌ°÷ ÁÖÁ¡ÁÖÀÎÀÌ ¸¸µç ¿ä¸®¸¦ ¹Ìµå°¡¸£µå Ãâ½Å ¸ðÇè°¡µéÀÌ ÁÁ¾ÆÇÑ´Ù´Â ÀÌ¾ß±â´Â Á¦°¡ ÇÑ¹øµµ µé¾îº» ÀûÀÌ ¾ø½À´Ï´Ù . ÀÏ´Ü ÇØº»´Ù°� ÇÏ´Ï 100 °³Á¤µµÀÇ »ç°ú¸¦ ±¸ÇØÁÖ½Ê½Ã¿À#
+������ ������ ����� �� �丮�� ��������ʹٸ� ����� ���ش޶�±���. �׷��� �̰� ���������� ���� �丮�� �̵尡���� ��� ���谡���� �����Ѵٴ� �̾߱�� ���� �ѹ��� �� ���� �����ϴ� . �ϴ� �غ��ٰ� �ϴ� 100 �������� ����� �����ֽʽÿ�#
 Collect 100 Apples and return to El Dicastes#
 
+
 12150#Carrot Collecting#SG_FEEL#QUE_NOIMAGE#
-ÁÖÁ¡ ÁÖÀÎ¿¡°Ô¼­ÀÇ ÀÇ·ÚÀÔ´Ï´Ù. ¿ä¸®¿¡ »ö±òÀ» ¿¹»Ú°Ô ³»°� ½Í´Ù¸ç ºÓÀº ¾ßÃ¤¸¦ ±¸ÇØ´Þ¶�´Â ÀÇ·Ú¸¦ ÇØ ¿Ô½À´Ï´Ù. ÀÌ¸§ÀÌ¡¦ ´ç±Ù?. ¾îÂ·°Ç ´ç½Å³× ¶¥¿¡¼­ Åë¿ëµÇ´Â ÀÌ¸§Àº ±×·¸´Ù°� ÇÕ´Ï´Ù¡¦ ¹¹ º°·Î ±â´ë´Â ÇÏÁö ¾ÊÁö¸¸. ¾Æ..¾Æ´Ï ¹æ±ÝÀº È¥Àã¸»ÀÔ´Ï´Ù. 100°³¸¸ ÁØº�ÇØÁÖ½Ê½Ã¿À#
+���� ���ο��Լ��� �Ƿ��Դϴ�. �丮�� ������ ���ڰ� ���� �ʹٸ� ���� ��ä�� ���ش޶�� �Ƿڸ� �� �Խ��ϴ�. �̸��̡� ���?. ��·�� ��ų� ������ ���Ǵ� �̸��� �׷��ٰ� �մϴ١� �� ���� ���� ���� ������. ��..�ƴ� ����� ȥ�㸻�Դϴ�. 100���� �غ����ֽʽÿ�#
 Collect 100 Carrots and return to El Dicastes#
 
+
 12151#Pumpkin Collecting#SG_FEEL#QUE_NOIMAGE#
-¾�¸¶Àü¿¡ ÁÖÁ¡¿¡¼­ ´ë Æø¹ßÀÌ ÀÖ¾ú´Ù°� ÇÏ´õ±º¿ä. µèÀÚÇÏ´Ï È£¹ÚÀÌ¶�´ø°¡ ÇÏ´Â ¹Ìµå°¡¸£µåÀÇ ¾ßÃ¤¸¦ ÅëÂ°·Î ºÒÀ§¿¡ ¿Ã·Á³õ°� ±¸¿ü´Ù°� ÇÕ´Ï´Ù. ´öºÐ¿¡ ´Ù¸¥ È£¹Úµé±îÁö ´Ù ¸ø¾²°Ô µÇ¾ú´Ù°� ÇÏ´Ï 15°³ Á¤µµ ±¸ÇØÁÖ½Ã¸é °�¸¿°Ú½À´Ï´Ù.#
+������ �������� �� ������ �־��ٰ� �ϴ�����. �����ϴ� ȣ���̶���� �ϴ� �̵尡������ ��ä�� ��°�� ������ �÷����� �����ٰ� �մϴ�. ���п� �ٸ� ȣ�ڵ���� �� ������ �Ǿ��ٰ� �ϴ� 15�� ���� �����ֽø� �����ڽ��ϴ�.#
 Collect 100 Pumpkins and return to El Dicastes#
 
+
 12152#Potato Collecting#SG_FEEL#QUE_NOIMAGE#
-ÁÖÁ¡ÁÖÀÎÀÌ ÀÇ·Ú¸¦ ÇØ¿Ô½À´Ï´Ù. °�Çâ¿¡¼­ ¸Ô´ø °�±¸¸¶¶�´Â »Ñ¸®½Ä¹°ÀÌ ±×¸³´Ù¸ç 50°³ Á¤µµ¸¦ ¿ä±¸ÇØ¿Ô½À´Ï´Ù. ¿À·£ ¼¼¿ùµ¿¾È °�ÇâÀ» ¶°³ª ÀÌ°÷¿¡¼­ ¸Ó¹°·¯ ÀÖ¾úÀ¸´Ï ±×·²¸¸µµ ÇÏ´Ù ½Í½À´Ï´Ù. È¤½Ã¶�µµ ¹Ìµå°¡¸£µå¿¡ °¡½Ç ÀÏÀÌ ÀÖÀ¸½Ã´Ù¸é ²À ºÎÅ¹µå¸³´Ï´Ù.#
+���������� �Ƿڸ� �ؿԽ��ϴ�. ���⿡�� �Դ� ��������� �Ѹ��Ĺ��� �׸��ٸ� 50�� ������ �䱸�ؿԽ��ϴ�. ���� �������� ������ ���� �̰����� �ӹ��� �־����� �׷����� �ϴ� �ͽ��ϴ�. Ȥ�ö� �̵尡���忡 ���� ���� �����ôٸ� �� ��Ź�帳�ϴ�.#
 Collect 50 Potatos and return to El Dicastes#
 
+
 12153#Banana Collecting#SG_FEEL#QUE_NOIMAGE#
-ÁÖÁ¡ÁÖÀÎÀÌ ½Å±âÇÑ ¿ä¸®¸¦ ¸¸µé·Á°� ÇÑ´Ù´Â±º¿ä ¹Ù³ª³ª ±¸ÀÌ¶�°� ÇÏ´Âµ¥ Áö³­¹ø¿¡µµ ¿ØÁö º�½ÁÇÑ ¿ä¸®¸¦ ¸¸µé¾ú´ø ±â¾ïÀÌ ÀÖ½À´Ï´Ù¸¸¡¦ À¸À½ ÀÌ»�ÇÏ°Ô ÀÚ¼¼ÇÑ ±â¾ïÀÌ ¶°¿À¸£Áú ¾Ê´Â±º¿ä. ¹¹ ±âºÐÅ¿ÀÌ°ÚÁö¿ä. 100°³ Á¤µµ ±¸ÇØ¿À¸é µÇ´Â°Í °°½À´Ï´Ù. #
+���������� �ű��� �丮�� ������� �Ѵٴ±��� �ٳ��� ���̶�� �ϴµ� ���������� ���� ����� �丮�� ������� ����� �ֽ��ϴٸ��� ���� �̻��ϰ� �ڼ��� ����� �������� �ʴ±���. �� ���ſ�̰�����. 100�� ���� ���ؿ��� �Ǵ°� �����ϴ�. #
 Collect 100 Bananas and return to El Dicastes#
 
+
 12154#Meat Collecting#SG_FEEL#QUE_NOIMAGE#
-ÀÌ¹ø ÀÇ·Ú´Â ¡¦. ÁÖÁ¡ÁÖÀÎ¿¡°Ô¼­ µµÂøÇß½À´Ï´Ù. °�±â¸¦ ±¸ÇØ´Þ¶�°� ÇÕ´Ï´Ù. À½¡¦ ±× ÀÌ¿Ü¿¡ ´Ù¸¥ ¿ä±¸»çÇ×Àº ¾ø±º¿ä. 50°³ Á¤µµ ±¸ÇØÁÖ½Ã¸é ÁÁ°Ú½À´Ï´Ù. Á¤¸» Àå»ç¸¦ ÇÏ·Á°� ±×·¯´Â°Ç°¡¡¦#
+�̹� �Ƿڴ� ��. �������ο��Լ� �����߽��ϴ�. ���⸦ ���ش޶�� �մϴ�. ���� �� �̿ܿ� �ٸ� �䱸������ ������. 50�� ���� �����ֽø� ���ڽ��ϴ�. ���� ��縦 �Ϸ��� �׷��°ǰ���#
 Collect 50 Meats and return to El Dicastes#
 
+
 12155#Black Ladle Collecting#SG_FEEL#QUE_NOIMAGE#
-ÁÖÁ¡ÁÖÀÎ¿¡°Ô ¼±¹°À» ÇÒ±îÇÕ´Ï´Ù. ÀÌ°Ç °³ÀÎÀûÀÎ ÀÇ·Ú´Ï °¡º±°Ô ¹Þ¾ÆÁÖ½Ê½Ã¿À. ¾�¸¶Àü¿¡ ÁÖÁ¡ÁÖÀÎÀÌ ¿ä¸®¿ë ±¹ÀÚ¸¦ ´Ù ±ú¹ö·È´Ù¸ç ÁÂÀýÇØ ÀÖ´ø ¸ð½ÀÀ» ºÃ½À´Ï´Ù. ÀÚ¾÷ÀÚµæ°°Áö¸¸ ¿ØÁö º¸±â ¾È½º·¯¿ì´Ï ¹Ìµå°¡¸£µå¿¡¼­ ÆÇ¸Å ÇÏ°�ÀÖ´Â °ËÀº ±¹ÀÚ¸¦ 20°³ Á¤µµ ±¸ÇØÁÖ½Ê½Ã¿À.#
+�������ο��� ������ �ұ��մϴ�. �̰� �������� �Ƿڴ� ������ �޾��ֽʽÿ�. ������ ���������� �丮�� ���ڸ� �� �����ȴٸ� ������ �ִ� ����� �ý��ϴ�. �ھ��ڵ氰���� ���� ���� �Ƚ������ �̵尡���忡�� �Ǹ� �ϰ��ִ� ���� ���ڸ� 20�� ���� �����ֽʽÿ�.#
 Collect 20 Black Ladles and return to El Dicastes#
 
+
 12156#Crystal Mirror Collecting#SG_FEEL#QUE_NOIMAGE#
-ÃÖ°�´ë½Å´Ô²²¼­ ¹Ìµå°¡¸£µåÀÇ ¼öÁ¤À¸·Î ¸¸µç °Å¿ïÀ» ±¸ÇØ´Þ¶�°� ÇÏ¼Ì½À´Ï´Ù. °Å¿ïÀº ÀÌ°÷ ¸¶´©Å© ¼öµµ¿¡µµ ¸¹Áö¸¸ ¿ØÁö ¹Ìµå°¡¸£µå¿¡¼­ »ý»êµÈ Á¦Ç°À» ÁÁ¾ÆÇÏ½Ã´Â µ� ÇÏ±º¿ä. ÇÑÆ�À¸·Î Á¶±Ý °ÆÁ¤ÀÌ µÇ±ä ÇÕ´Ï´Ù¸¸ Çö¸�ÇÑ ÃÖ°�´ë½Å´ÔÀÌ ÇÏ½Ã´Â ÀÏÀÌ´Ï ¹º°¡ ÀÌÀ¯°¡ ÀÖ°ÚÁö¿ä.#
+�ְ���ŴԲ��� �̵尡������ �������� ���� �ſ��� ���ش޶�� �ϼ̽��ϴ�. �ſ��� �̰� ����ũ �������� ������ ���� �̵尡���忡�� ����� ��ǰ�� �����Ͻô� �� �ϱ���. �������� ���� ������ �Ǳ� �մϴٸ� ������ �ְ���Ŵ��� �Ͻô� ���̴� ���� ������ �ְ�����.#
 Collect 5 Crystal Mirrors and return to El Dicastes#
 
+
 12157#Pineapple Collecting#SG_FEEL#QUE_NOIMAGE#
-ÀÌ¹ø¿£, ¡¦ ÁÖÁ¡ÁÖÀÎÀÔ´Ï´Ù. ÆÄÀÎ¾ÖÇÃÀ» 2°³ ±¸ÇØ´Þ¶�¸ç ÀÌ ¸»À» ÀüÇØ ÁÖ¶�°� ÇÏ´õ±º¿ä. [ Æ¯Á¦ Ä¬Å×ÀÏ¿¡ µµÀüÀ» ÇØº¼±î ÇÑ´Ù. µ¶Á¦Á¶´Â ÀßÇßÀ¸´Ï È¥ÇÕÀÌ¶�¸é ÀÚ½Å ÀÖ¾î. ] ¡¦ ÀÇ·Ú Àü´ÞÀÚÀÇ ÀÔÀå¿¡¼­ °¨Á¤À» °¡Áö¸é ¾ÈµË´Ï´Ù¸¸. À½¡¦ ¾Æ´Õ´Ï´Ù. Á¦ ¸»Àº ¸øµéÀº°É·Î ÇØ ÁÖ½Ê½Ã¿À.#
+�̹���, �� ���������Դϴ�. ���ξ����� 2�� ���ش޶�� �� ���� ���� �ֶ�� �ϴ�����. [ Ư�� Ĭ���Ͽ� ������ �غ��� �Ѵ�. �������� �������� ȥ���̶�� �ڽ� �־�. ] �� �Ƿ� �������� ���忡�� ������ ������ �ȵ˴ϴٸ�. ���� �ƴմϴ�. �� ���� �������ɷ� �� �ֽʽÿ�.#
 Collect 2 Pineapples and return to El Dicastes#
 
+
 12158#Melon Collecting#SG_FEEL#QUE_NOIMAGE#
-ÀÌ¹ø¿¡µµ¡¦ ÁÖÁ¡ÁÖÀÎÀÔ´Ï´Ù. ¸�·ÐÀ» 2°³ ±¸ÇØ´Þ¶�¸ç ÀÌ ¸»À» ÀüÇØ ÁÖ¶�°� ÇÏ´õ±º¿ä. [ Æ¯Á¦ Ä¬Å×ÀÏ¿¡ µµÀüÀ» ÇØº¼±î ÇÑ´Ù. µ¶Á¦Á¶´Â ÀßÇßÀ¸´Ï È¥ÇÕÀÌ¶�¸é ÀÚ½Å ÀÖ¾î. ] ÀÌ ¸», Áö³­¹ø¿¡µµ µéÀº°Í °°½À´Ï´Ù¸¸. #
+�̹������� ���������Դϴ�. ����� 2�� ���ش޶�� �� ���� ���� �ֶ�� �ϴ�����. [ Ư�� Ĭ���Ͽ� ������ �غ��� �Ѵ�. �������� �������� ȥ���̶�� �ڽ� �־�. ] �� ��, ���������� ������ �����ϴٸ�. #
 Collect 2 Melons and return to El Dicastes#
 
+
 12159#El Dicastes Monster Hunt 1#SG_FEEL#QUE_NOIMAGE#
-¶�ÆùÅ×¿¡°Ô¼­ ÀÌ¹Ì ÀÇ·Ú¸¦ ¹Þ¾Ò´ø ±â·ÏÀÌ ÀÖ½À´Ï´Ù. ÀÇ·Ú¸¦ ¹Þ¾Ò´ø ½ÃÁ¡À¸·ÎºÎÅÍ 23½Ã°£ÀÌ Áö³ªÁö ¾ÊÀ¸¸é »õ·Î¿î ÀÇ·Ú¸¦ ¹ÞÀ» ¼ö ¾ø½À´Ï´Ù.#
-Wait one day before hunting more monsters#
+�����׿��Լ� �̹� �Ƿڸ� �޾Ҵ� ����� �ֽ��ϴ�. �Ƿڸ� �޾Ҵ� �������κ��� 23�ð��� ������ ������ ���ο� �Ƿڸ� ���� �� �����ϴ�.#
+Wait 23 hours before hunting more monsters#
+
 
 12160#El Dicastes Monster Hunt 2#SG_FEEL#QUE_NOIMAGE#
-Ä®¸®Æ÷¿¡°Ô¼­ ÀÌ¹Ì ÀÇ·Ú¸¦ ¹Þ¾Ò´ø ±â·ÏÀÌ ÀÖ½À´Ï´Ù. ÀÇ·Ú¸¦ ¹Þ¾Ò´ø ½ÃÁ¡À¸·ÎºÎÅÍ 23½Ã°£ÀÌ Áö³ªÁö ¾ÊÀ¸¸é »õ·Î¿î ÀÇ·Ú¸¦ ¹ÞÀ» ¼ö ¾ø½À´Ï´Ù.#
-Wait one day before hunting more monsters#
+Į�������Լ� �̹� �Ƿڸ� �޾Ҵ� ����� �ֽ��ϴ�. �Ƿڸ� �޾Ҵ� �������κ��� 23�ð��� ������ ������ ���ο� �Ƿڸ� ���� �� �����ϴ�.#
+Wait 23 hours before hunting more monsters#
+
 
 12161#El Dicastes Item Request 1#SG_FEEL#QUE_NOIMAGE#
-Ç¶¶�¿¡°Ô¼­ ÀÌ¹Ì ÀÇ·Ú¸¦ ¹Þ¾Ò´ø ±â·ÏÀÌ ÀÖ½À´Ï´Ù. ÀÇ·Ú¸¦ ¹Þ¾Ò´ø ½ÃÁ¡À¸·ÎºÎÅÍ 23½Ã°£ÀÌ Áö³ªÁö ¾ÊÀ¸¸é »õ·Î¿î ÀÇ·Ú¸¦ ¹ÞÀ» ¼ö ¾ø½À´Ï´Ù.#
-Wait one day before turning in more items#
+Ƕ�󿡰Լ� �̹� �Ƿڸ� �޾Ҵ� ����� �ֽ��ϴ�. �Ƿڸ� �޾Ҵ� �������κ��� 23�ð��� ������ ������ ���ο� �Ƿڸ� ���� �� �����ϴ�.#
+Wait 23 hours before turning in more items#
+
 
 12162#El Dicastes Item Request 2#SG_FEEL#QUE_NOIMAGE#
-Æ®¶�±â½º¿¡°Ô¼­ ÀÌ¹Ì ÀÇ·Ú¸¦ ¹Þ¾Ò´ø ±â·ÏÀÌ ÀÖ½À´Ï´Ù. ÀÇ·Ú¸¦ ¹Þ¾Ò´ø ½ÃÁ¡À¸·ÎºÎÅÍ 23½Ã°£ÀÌ Áö³ªÁö ¾ÊÀ¸¸é »õ·Î¿î ÀÇ·Ú¸¦ ¹ÞÀ» ¼ö ¾ø½À´Ï´Ù.#
-Wait one day before turning in more items#
+Ʈ��⽺���Լ� �̹� �Ƿڸ� �޾Ҵ� ����� �ֽ��ϴ�. �Ƿڸ� �޾Ҵ� �������κ��� 23�ð��� ������ ������ ���ο� �Ƿڸ� ���� �� �����ϴ�.#
+Wait 23 hours before turning in more items#
+
 
 12163#El Dicastes Item Request 3#SG_FEEL#QUE_NOIMAGE#
-Ä®¸®¿Â¿¡°Ô¼­ ÀÌ¹Ì ÀÇ·Ú¸¦ ¹Þ¾Ò´ø ±â·ÏÀÌ ÀÖ½À´Ï´Ù. ÀÇ·Ú¸¦ ¹Þ¾Ò´ø ½ÃÁ¡À¸·ÎºÎÅÍ 23½Ã°£ÀÌ Áö³ªÁö ¾ÊÀ¸¸é »õ·Î¿î ÀÇ·Ú¸¦ ¹ÞÀ» ¼ö ¾ø½À´Ï´Ù.#
-Wait one day before turning in more items#
+Į���¿��Լ� �̹� �Ƿڸ� �޾Ҵ� ����� �ֽ��ϴ�. �Ƿڸ� �޾Ҵ� �������κ��� 23�ð��� ������ ������ ���ο� �Ƿڸ� ���� �� �����ϴ�.#
+Wait 23 hours before turning in more items#
+
 
 12164#El Dicastes Item Request 4#SG_FEEL#QUE_NOIMAGE#
-¸ôÅõÄ«¿¡°Ô¼­ ÀÌ¹Ì ÀÇ·Ú¸¦ ¹Þ¾Ò´ø ±â·ÏÀÌ ÀÖ½À´Ï´Ù. ÀÇ·Ú¸¦ ¹Þ¾Ò´ø ½ÃÁ¡À¸·ÎºÎÅÍ 23½Ã°£ÀÌ Áö³ªÁö ¾ÊÀ¸¸é »õ·Î¿î ÀÇ·Ú¸¦ ¹ÞÀ» ¼ö ¾ø½À´Ï´Ù.#
-Wait one day before turning in more items#
+����ī���Լ� �̹� �Ƿڸ� �޾Ҵ� ����� �ֽ��ϴ�. �Ƿڸ� �޾Ҵ� �������κ��� 23�ð��� ������ ������ ���ο� �Ƿڸ� ���� �� �����ϴ�.#
+Wait 23 hours before turning in more items#
 
 12165#Çö±âÁõ#SG_FEEL#QUE_NOIMAGE#
 Á¾ÀÌ ³¿»õ¸¦ °è¼Ó ¸Ã¾Ò´õ´Ï ¹è°¡ °�ÆÄ Çö±âÁõÀÌ ³³´Ï´Ù. 6½Ã°£ Á¤µµ´Â ±ÛÀÚ¸¦ °¡±îÀÌ ÇÏ¸é ¾ÈµÉ °Í °°±º¿ä#
