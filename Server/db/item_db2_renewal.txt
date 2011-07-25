@@ -66,8 +66,6 @@
 
 // ================ 3rd Job Related Item database =========================
 
-2795,Green_Apple_Ring,Immature Apple Ring,5,0,,0,,0,,0,0xFFFFFFFE,7,2,136,,100,0,0,{ bonus bAllStats,6; if(JobLevel <30) { bonus bAllStats,(JobLevel/5); } },{},{}
-
 // 3rd Class Weapons
 1191,Alcabringer,Alcabringer,4,20,,3400,280,,1,0,0x00004080,8,2,34,3,100,1,3,{ bonus bAspd,getrefine()/2; },{},{}
 1287,Dulga,Dulga,4,20,,1200,190,,1,1,0x00001000,8,2,34,3,100,1,16,{},{},{}
@@ -325,9 +323,6 @@
 13289,Petti_Noodle_To_Throw,Throwing Petite Tail Soup,10,100,,50,0,,,,0x00040000,8,2,32768,,99,,9,{ sc_start SC_PUTTI_TAILS_NOODLES,300000,20; },{},{}
 13290,Black_Thing_To_Throw,Throwing Black Mass,10,100,,50,0,,,,0x00040000,8,2,32768,,99,,9,{ sc_start SC_STOMACHACHE,60000,rand(5,10); },{},{}
 
-// Unknown Item. Rune Knight Armor???
-15002,Rune_Plate,Rune Plate,5,0,,0,,10,,1,0x00000002,8,2,16,,99,1,0,{},{},{}
-
 // Mechanic Mado Gear Cannonball Ammo
 18000,Cannon_Ball,Cannon Ball,10,100,,10,100,,,,0x00040400,8,2,32768,,99,,8,{},{},{}
 18001,Holy_Cannon_Ball,Holy Cannon Ball,10,200,,10,120,,,,0x00040400,8,2,32768,,99,,8,{ bonus bAtkEle,Ele_Holy; },{},{}
@@ -549,7 +544,7 @@
 30105,Retribution_Wings,Retribution Wings,5,15000,,50,,0,,0,0xFFFFFFFF,7,2,1,,20,0,1105,{},{},{}
 30106,Bloody_Butterfly_Wings,Bloody Butterfly Wings,5,15000,,50,,0,,0,0xFFFFFFFF,7,2,1,,20,0,1106,{},{},{}
 30107,Garden_Watcher_Wings,Garden Watcher Wings,5,15000,,50,,0,,0,0xFFFFFFFF,7,2,1,,20,0,1107,{},{},{}
-30108,Kasa_Wings,Kasa Wings,5,15000,,50,,0,,0,0xFFFFFFFF,7,2,1,,20,0,1108,{},{},{}
+//30108,Kasa_Wings,Kasa Wings,5,15000,,50,,0,,0,0xFFFFFFFF,7,2,1,,20,0,1108,{},{},{}
 30109,Valkyrie_Wings,Valkyrie Wings,5,15000,,50,,0,,0,0xFFFFFFFF,7,2,1,,20,0,1109,{},{},{}
 
 // ===== DISGUISE HATS (30130-30199)

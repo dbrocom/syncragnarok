@@ -91,6 +91,7 @@ rachel,91,273,8	script	?	930,{
 	close;
 }
 
+/*
 //======================== Feather Beret ================================================
 rachel,152,131,3	script	Sakjul	928,{
 	if (countitem(5172) > 0 && countitem(7063) > 99 && countitem(982) > 0) {
@@ -205,6 +206,7 @@ rachel,152,131,3	script	Sakjul	928,{
 	mes "Comportate, ¡ahora mismo!";
 	close;
 }
+*/
 
 //============================ Valkyrie Helm =====================================================
 hugel,147,130,3	script	Ghenirhemin	897,{

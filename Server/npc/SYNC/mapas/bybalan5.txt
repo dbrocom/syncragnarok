@@ -1,0 +1,2 @@
+iz_dun04,130,234,0	warp	izdun05-0	1,1,iz_dun05,141,183
+iz_dun05,141,190,0	warp	izdun05-1	1,1,iz_dun04,130,226

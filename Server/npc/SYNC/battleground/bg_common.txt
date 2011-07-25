@@ -48,8 +48,8 @@ payon,189,104,3	script	Maroll Battle Recruiter::BatRecruit	728,{
 prontera,123,83,5	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit2	728
 rachel,149,138,5	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit3	728
 moc_ruins,75,162,5	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit4	728
-aldebaran,146,109,5	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit5	728
-lighthalzen,153,86,5	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit6	728
+aldebaran,151,109,5	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit5	728
+lighthalzen,146,90,7	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit6	728
 
 // Info Board
 // *********************************************************************
@@ -94,26 +94,26 @@ OnFri0600:
 
 // BattleGround Happy Hour
 OnInit:
-OnClock1600:
 OnClock1800:
 OnClock2000:
-OnClock2200:
+OnClock2100:
+OnClock2300:
 	switch( gettime(4) )
 	{
 	case 1:
 	case 3:
 	case 5:
-		if( gettime(3) >= 20 && gettime(3) < 22 )
+		if( gettime(3) >= 21 && gettime(3) < 23 )
 		{
-			announce "-- Battleground Happy Hour has begun | Ranked Arena Mode --",0,0x00FF00;
+			announce "-- La Happy Hour de Battleground ha comenzado | Ranked Arena Mode --",0,0x00FF00;
 			setbattleflag "bg_reward_rates",120; // +20% Reward Rates
 			setbattleflag "bg_ranked_mode",1;
 			end;
 		}
 		
-		if( gettime(3) == 22 )
+		if( gettime(3) == 23 )
 		{
-			announce "-- Battleground Happy Hour is over | Regular Arena Mode --",0,0x00BFFF;
+			announce "-- La Happy Hour de Battleground ha terminado | Regular Arena Mode --",0,0x00BFFF;
 			setbattleflag "bg_reward_rates",100; // Normal Rates
 			setbattleflag "bg_ranked_mode",0;
 			end;
@@ -122,17 +122,17 @@ OnClock2200:
 	case 2:
 	case 4:
 	case 6:
-		if( gettime(3) >= 16 && gettime(3) < 18 )
+		if( gettime(3) >= 18 && gettime(3) < 20 )
 		{
-			announce "-- Battleground Happy Hour has begun | Ranked Arena Mode --",0,0x00FF00;
+			announce "-- La Happy Hour de Battleground ha comenzado | Ranked Arena Mode --",0,0x00FF00;
 			setbattleflag "bg_reward_rates",120; // +20% Reward Rates
 			setbattleflag "bg_ranked_mode",1;
 			end;
 		}
 		
-		if( gettime(3) == 18 )
+		if( gettime(3) == 20 )
 		{
-			announce "-- Battleground Happy Hour is over | Regular Arena Mode --",0,0x00BFFF;
+			announce "-- La Happy Hour de Battleground ha terminado | Regular Arena Mode --",0,0x00BFFF;
 			setbattleflag "bg_reward_rates",100; // Normal Rates
 			setbattleflag "bg_ranked_mode",0;
 			end;
@@ -140,8 +140,10 @@ OnClock2200:
 		break;
 	}
 	end;
+
 }
 
+/*
 // BattleGround Warper - Exit
 // *********************************************************************
 
@@ -210,6 +212,7 @@ bat_room,148,147,4	script	Kafra Staff::kaf_bat	861,{
 	cutin "kafra_09",2;
 	callfunc "F_Kafra",0,2,1,150,0;
 }
+*/
 
 // General Guillaume
 // *********************************************************************
@@ -2164,6 +2167,7 @@ bat_room,138,144,5	script	Repairman#bg	99,{
 	end;
 }
 
+/*
 // Badges Exchange
 // *********************************************************************
 
@@ -2474,6 +2478,7 @@ bat_room,163,146,2	script	Telma	701,{
 	mes "Here it is... Now take care and fight for the honor and glory of your prince.";
 	close;
 }
+*/
 
 bat_room,1,1,3,7828	sshop	BraveryExchanger	111,13036:100,13411:100,1425:100,1632:100,1634:100,1543:100,1924:100,1978:100,1574:100,1824:100,1183:100,1380:100,13305:100,1279:100,1739:100,13108:100,13172:100,2538:50,2539:50,2540:50,2435:50,2436:50,2437:50,2376:80,2377:80,2378:80,2379:80,2380:80,2381:80,2382:80,2720:500,2721:500,2722:500,2723:500,2724:500,2725:500,2733:500
 bat_room,1,1,3,7829	sshop	ValorExchanger	111,13037:100,13410:100,1633:100,1635:100,1542:100,1923:100,1977:100,1575:100,1823:100,1184:100,1482:100,1379:100,13306:100,1280:100,1738:100,13171:100,13173:100,13174:100,2538:50,2539:50,2540:50,2435:50,2436:50,2437:50,2376:80,2377:80,2378:80,2379:80,2380:80,2381:80,2382:80,2720:500,2721:500,2722:500,2723:500,2724:500,2725:500,2733:500

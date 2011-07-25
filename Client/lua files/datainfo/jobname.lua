@@ -1977,4 +1977,5 @@ JobNameTable = {
 	[jobtbl.JT_HIGH_ORC_LORD] = "HIGH_ORC_LORD",
 	[jobtbl.JT_HIGH_ORC_ARCHER] = "HIGH_ORC_ARCHER",
 	[jobtbl.JT_SELENE] = "SELENE",
+	[jobtbl.JT_SOBACO] = "SOBACO",
 }

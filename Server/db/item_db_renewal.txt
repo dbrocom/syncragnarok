@@ -1736,7 +1736,7 @@
 //2792,Ring_Of_Flame_Lord_I,Ring of Flame Lord,5,0,,0,,0,,0,0x00CFFF80,2,2,136,,0,0,0,{ bonus bStr,2; bonus bVit,1; bonus bBaseAtk,15; bonus2 bSubEle,Ele_Fire,10; bonus3 bAutoSpell,"CH_SOULCOLLECT",1,30; bonus3 bAutoSpell,"MO_EXPLOSIONSPIRITS",1,10; bonus3 bAutoSpell,"PA_PRESSURE",2,30; bonus3 bAutoSpell,"MG_FIREBALL",1,150; bonus3 bAutoSpell,"KN_BOWLINGBASH",5,20; if(isequipped(2679)) { bonus4 bAutoSpell,"MO_EXTREMITYFIST",1,3,1; bonus3 bAutoSpell,"PR_LEXAETERNA",1,20; bonus3 bAutoSpell,"AS_SONICBLOW",5,50; bonus3 bAutoSpell,"MO_INVESTIGATE",5,20; bonus3 bAutoSpell,"ASC_METEORASSAULT",2,50; } },{},{}
 //2793,Ring_Of_Resonance_I,Ring of Resonance,5,0,,0,,2,,0,0x00CFFF80,2,2,136,,0,0,0,{ bonus bAgi,2; bonus bVit,1; bonus bMdef,2; bonus4 bAutoSpellWhenHit,"WZ_QUAGMIRE",1,50,0; bonus3 bAutoSpellWhenHit,"AS_SPLASHER",10,20; bonus3 bAutoSpellWhenHit,"AL_HEAL",10,30; bonus3 bAutoSpellWhenHit,"HP_ASSUMPTIO",3,20; bonus3 bAutoSpellWhenHit,"CG_TAROTCARD",5,20; },{},{}
 2794,Magic_Stone_Ring,Magic Stone Ring,5,0,,0,,0,,1,0x00000000,7,2,136,,99,0,0,{ bonus bStr,2; },{},{}
-2795,Green_Apple_Ring,Immature Apple Ring,5,0,,0,,0,,0,0x00000000,7,2,136,,99,0,0,{ bonus bAllStats,6; if(JobLevel <30) { bonus bAllStats,(JobLevel/5); } },{},{}
+2795,Green_Apple_Ring,Immature Apple Ring,5,0,,0,,0,,0,0xFFFFFFFE,7,2,136,,99,0,0,{ if(JobLevel < 30) { bonus bAllStats,(6-(JobLevel/5)); }; },{},{}
 2796,Magical_Stone,Rocks,5,0,,200,,0,,0,0x00810204,7,2,136,,99,0,0,{ bonus2 bAddDamageClass,2047,10; bonus2 bAddDefClass,2048,-10; bonus3 bAddMonsterDropItem,6152,2047,70; },{},{}
 2797,Magical_Stone_,Rocks,5,0,,200,,0,,0,0x00810204,7,2,136,,99,0,0,{ bonus2 bAddDamageClass,2049,10; bonus2 bAddDefClass,2050,-10; bonus3 bAddMonsterDropItem,6151,2049,70; },{},{}
 2798,Will_Of_Exhausted_Angel,Will Of Exhausted Angel,5,0,,200,,0,,0,0x00008100,7,2,136,,99,0,0,{ getmapxy .@map$,.@x,.@y,0; if(.@map$ == "job3_arch02") { bonus2 bAddDefClass,1761,50; bonus2 bAddDefClass,1762,50; } },{},{}
@@ -2119,7 +2119,7 @@
 4299,Clock_Card,Clock Card,6,20,,10,,,,,,,,16,,,,,{ bonus3 bAutoSpellWhenHit,"CR_AUTOGUARD",3+7*(getskilllv("CR_AUTOGUARD")==10),30; },{},{ sc_end SC_AUTOGUARD; }
 4300,Chimera_Card,Chimera Card,6,20,,10,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Poison,300+600*(BaseJob==Job_Assassin); },{},{}
 4301,Killer_Mantis_Card,Killer Mantis Card,6,20,,10,,,,,,,,16,,,,,{ bonus2 bAddEffWhenHit,Eff_Bleeding,600; },{},{}
-4302,Tao_Gunka_Card,Tao Gunka Card,6,20,,10,,,,,,,,16,,,,,{ bonus bMaxHPrate,100; bonus bDef,-bDef/2; bonus bMdef,-bMdef/2; },{},{}
+4302,Tao_Gunka_Card,Tao Gunka Card,6,20,,10,,,,,,,,16,,,,,{ bonus bMaxHPrate,100; bonus bDef,-(bDef/2); bonus bMdef,-(bMdef/2); },{},{}
 4303,Whisper_Boss_Card,Giant Whisper Card,6,20,,10,,,,,,,,4,,,,,{ bonus bFlee,10; if(readparam(bStr)>=80) bonus bBaseAtk,20; if(readparam(bVit)>=80) bonus bMaxHPrate,3; if(readparam(bLuk)>=80) bonus bCritical,3; },{},{}
 4304,Tamruan_Card,Tamruan Card,6,20,,10,,,,,,,,32,,,,,{ bonus bDef,2; bonus2 bSkillAtk,"CR_SHIELDCHARGE",10; bonus2 bSkillAtk,"CR_SHIELDBOOMERANG",10; },{},{}
 4305,Turtle_General_Card,Turtle General Card,6,20,,10,,,,,,,,2,,,,,{ bonus2 bAddRace,RC_NonBoss,20; bonus2 bAddRace,RC_Boss,20; bonus2 bAddRace2,5,20; bonus3 bAutoSpell,"SM_MAGNUM",10,30; },{},{}
@@ -2960,7 +2960,7 @@
 5502,Necromencer's_Hood,Necromancer's Hood,5,0,,500,,2,,0,0xFFFFFFFF,7,2,768,,1,1,491,{ bonus5 bAutoSpellWhenHit,"NPC_DARKSTRIKE",5,5,BF_WEAPON|BF_MAGIC,1; },{},{} 
 5503,Rabbit_Magic_Hat,Magic Rabit Hat,5,0,,800,,2,,0,0xFFFFFFFF,7,2,256,,0,1,497,{ bonus bDex,2; bonus bAgi,2; bonus bMdef,1; bonus bMaxSP,50; bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",1,10; bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",1,10; bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",1,10; },{},{} 
 5504,RO_5th_Wedding_Anniversary,RO 5th Wedding Anniversary,5,,,500,,5,,0,0xFFFFFFFF,7,2,768,,70,0,489,{ bonus bMdef,10; },{},{}
-5505,Asara_Fairy_Hat,Asara Fairy Hat,5,0,,500,,2,,0,0xFFFFFFFF,7,2,768,,50,1,492,{ skill "DC_DONTFORGETME",1; bonus bDex,2; bonus bLuk,2; },{},{} 
+5505,Asara_Fairy_Hat,Asara Fairy Hat,5,0,,500,,2,,0,0xFFFFFFFF,7,2,256,,50,1,492,{ skill "DC_DONTFORGETME",1; bonus bDex,2; bonus bLuk,2; },{},{} 
 5506,Blue_Pajamas_Hat,Blue Pajamas Hat,5,,,100,,2,,0,0xFFFFFFFF,7,2,256,,0,1,501,{ bonus bAtkRate,5; bonus bMatkRate,5; },{},{}
 5507,Pink_Pajamas_Hat,Pink Pajamas Hat,5,,,100,,2,,0,0xFFFFFFFF,7,2,256,,0,1,502,{ bonus bAtkRate,5; bonus bMatkRate,5; },{},{}
 5508,Shark_Hat,Shark Hat,5,20,,500,,6,,0,0xFFFFFFFF,7,2,256,,0,0,503,{ bonus bStr,1; bonus bAgi,2; bonus bMdef,1; bonus2 bSubEle,Ele_Water,10; bonus2 bAddEle,Ele_Water,5; },{},{}
@@ -3247,7 +3247,7 @@
 5790,Holy_Mom_Love,TM,5,20,,500,,0,,1,0xFFFFFFFF,7,2,768,,45,1,610,{},{},{}
 5791,Tenkaippin_Ramen,Tenkaippin Ramen,5,20,,500,,1,,0,0xFFFFFFFF,7,2,256,,30,0,668,{ bonus bInt,-1; bonus bDex,4; },{},{}
 5792,Fish_Pin,Fish Pin,5,20,,100,,3,,0,0xFFFFFFFF,7,2,256,,1,1,669,{},{},{}
-5793,Ribbon_Of_Life,Ribbon Of Life,5,20,,0,,2,,0,0xFFFFFFFF,7,2,512,,1,0,575,{ bonus bInt,1; bonus bMdef,2; },{},{}
+5793,Life_Ribbon,Life Ribbon,5,20,,0,,2,,0,0xFFFFFFFF,7,2,256,,1,0,575,{ bonus bMdef,2; bonus3 bAutoSpellWhenHit,"AL_HEAL",3,10; },{},{}
 5794,3D_Glasses_,3D Glasses,5,20,,0,,1,,0,0xFFFFFFFF,7,2,512,,1,0,661,{},{},{}
 5795,Red_Dress_Hat,Red Dress Hat,5,20,,0,,0,,0,0xFFFFFFFF,7,2,256,,1,1,670,{ bonus bMdef,7; },{},{}
 5796,Cheer_Scarf,Cheer Scarf,5,0,,0,,0,,0,0xFFFFFFFF,7,2,1,,1,0,369,{},{},{}
@@ -6796,9 +6796,11 @@
 14608,Luxurious_Dinner_E,Manchu-Han Imperial Feast,2,20000,,1200,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_start SC_INCALLSTATUS,3600000,6; },{},{}
 14609,Spoiled_Cuisine,Spoiled Cuisine,2,0,,0,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 10,10; },{},{}
 //
-15000,Bone_Plate,Bone Plate,5,20,,1000,,60,,1,0x00021040,2,2,16,,85,1,0,{ bonus bStr,1; bonus bMDef,3; bonus2 bIgnoreDefRate,RC_DemiHuman,10; bonus2 bIgnoreDefRate,RC_Brute,10; bonus3 bAutoSpellWhenHit,"NPC_WIDEBLEEDING",1,10; },{},{}
+//15000,Bone_Plate,Bone Plate,5,20,,1000,,60,,1,0x00021040,2,2,16,,85,1,0,{ bonus bStr,1; bonus bMDef,3; bonus2 bIgnoreDefRate,RC_DemiHuman,10; bonus2 bIgnoreDefRate,RC_Brute,10; bonus3 bAutoSpellWhenHit,"NPC_WIDEBLEEDING",1,10; },{},{}
+15000,Bone_Plate,Bone Plate,5,20,,1000,,60,,1,0x000654E2,2,2,16,,85,1,0,{ bonus bStr,1; bonus bMDef,3; bonus2 bIgnoreDefRate,RC_DemiHuman,10; bonus2 bIgnoreDefRate,RC_Brute,10; bonus3 bAutoSpellWhenHit,"NPC_WIDEBLEEDING",1,10; },{},{}
 15001,Odin's_Blessing_I,Odins Blessing,2,0,,0,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-15002,Rune_Plate,Rune Plate,5,0,,0,,95,,1,0x00004000,7,2,16,,100,1,0,{},{},{}
+//15002,Rune_Plate,Rune Plate,5,0,,0,,95,,1,0xFFFFFFFE,7,2,16,,100,1,0,{},{},{}
+15002,Rune_Plate,Rune Plate,5,0,,0,,95,,1,0x00004082,2,2,16,,99,1,0,{},{},{}
 15003,Freya_Soul_Robe1,Freya Soul Robe,5,0,,300,,7,,0,0xFFFFFFFE,7,2,16,,20,1,0,{ bonus bMaxHP,700; },{},{}
 15004,Freya_Soul_Robe2,Freya Soul Robe,5,0,,300,,7,,0,0xFFFFFFFE,7,2,16,,20,1,0,{ bonus bMaxHP,700; },{},{}
 15005,Freya_Soul_Robe3,Freya Soul Robe,5,0,,300,,7,,0,0xFFFFFFFE,7,2,16,,20,1,0,{ bonus bMaxHP,700; },{},{}
