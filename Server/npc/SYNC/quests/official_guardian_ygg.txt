@@ -1,0 +1,1016 @@
+//===== eAthena Script =======================================
+//= Guardian of Yggdrasil
+//===== By: ==================================================
+//= Ziu
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= eAthena TRUNK 14190+ (client up time 2009) data Ver. Renewal 61+ data Rev 129z
+//===== Additional Comments: =================================
+//= 1.0 First Versión eA Test Server.[Ziu]
+//= 1.1 Fix Various Errors [Ziu]
+//============================================================
+mid_camp,271,299,4	script	Historiador	755,{
+	if (guarygg < 2) {
+		mes "[Historian Magnifier]";
+		mes "Soy uno de los mejores historiadores de la alianza";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Mi trabajo consiste en conocer toda la historia referente a las tribus nativas sapha y laphine";
+		close;
+	}
+	if (guarygg == 2) {
+		mes "[Historian Magnifier]";
+		mes "Te manda el comandante Agip para una misión";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Veo que encontraste una cueva al noreste del campamento";
+		next;
+		mes "[Historian Magnifier]";
+		mes "En las raices de un arbol gigantesco";
+		next;
+		mes "[Historian Magnifier]";
+		mes "No estoy seguro pero ese arbol puede ser el arbol sagrado de Yggdrasil";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Las extrañas descripciones que me dices, no me suenan ahora mismo";
+		next;
+		mes "[Historian Magnifier]";
+		mes "..";
+		next;
+		mes "[Historian Magnifier]";
+		mes ".. ..";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Ves a la biblioteca de prontera y busca a mi ayudante Naomi";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Dile que te muestre todos los informes que tenemos sobre las tribus laphine y sapha";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Ves, no pierdas el tiempo";
+		set guarygg,3;
+		close;
+	}
+	if (guarygg == 3) {
+		mes "[Historian Magnifier]";
+		mes "Ahora mismo no se reconocer estos simbolos, ves a la biblioteca de prontera y pregunta a mi asistente Naomi";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Ella te entregará todos los informes que tenemos sobre las tribus laphine y sapha";
+		close;
+	}
+	if (guarygg == 4) {
+		mes "[Historian Magnifier]";
+		mes "Ya conoces toda la verdad sobre nuestra expedición";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Tal vez encuentres en lo más profundo de esas ruinas lo que estabas buscando..";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Defenitivamente, yo encontrado un camino para poder entrar directamente a ese mundo subterraneo perdido";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Creeme yo se como hacerlo";
+		next;
+		mes "[Historian Magnifier]";
+		mes "A lo largo del tiempo, cuando no existian el sol, la luna o las estrellas, cuando estaba la tierra completamente vacia";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Ymir nacio. Entonces un sonido rompio el silencio de ese vacio y Ymir crecio";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Del sudor de Ymir nacierón los gigantes, posiblemente la raza de los sapha sean descendentes directos de ellos";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Cuando Ymir murio, usarón su cuerpo, con su carne se hizo la tierra. Con su sangre se formaron los mares y los lagos. Con sus huesos se erigieron las montañas. Con sus dientes y fragmentos de huesos se hicieron las piedras";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Una gran guerra se produjo en la muerte de Ymir, Odin, Ve And Vili tres hermanos dioses, que atacarón desde tres lados distintos en la guerra de los Vanir contra Æsir";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Disculpa me emocione demasiado contandote la historia...";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Abrá otro momento para continuarla...ahora necesito que vayas a cualquiera de las dos tribus que existen en el nuevo mundo";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Encuentra a quién tiene el poder sobre el ejercito de las laphines";
+		next;
+		mes "[Historian Magnifier]";
+		mes "o bien a quién controla al ejercito de los saphas";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Intenta conocer más sobre las ruinas que se encontrarón al oeste del campamento";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Ellos conocen la forma de poder romper el sello que protege a esa puerta que nos esconde la verdad sobre estas dos tribus";
+		next;
+		mes "[Historian Magnifier]";
+		mes "mucha suerte";
+		set guarygg,5;
+		close;
+	}
+	if (guarygg == 5) {
+		mes "[Historian Magnifier]";
+		mes "Busca información de alguna de las dos tribus del nuevo mundo y pídele ayuda sobre el sello que protege la puerta";
+		close;
+	}
+	if (guarygg == 6) {
+		mes "[Historian Magnifier]";
+		mes "Busca información de alguna de las dos tribus del nuevo mundo y pídele ayuda sobre el sello que protege la puerta";
+		close;
+	}
+	if (guarygg == 7) {
+		mes "[Historian Magnifier]";
+		mes "Bien, veo que se niegan a colaborar con nosotros";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Pero ahora nosotros sabemos que las ruinas están esperando debajo de las raices del arbol Yggdrasil";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Esas raices conectan directamente con las ruinas";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Tiene que haber una forma, unas palabras, o algun artefacto que agan reaccionar esas raices y estas afecten al sello";
+		next;
+		mes "[Historian Magnifier]";
+		mes "De todas formas nosotros podemos esperar a una confrontación entre los saphas y las laphines";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Para usarlo en su contra y que nos ayuden uno de los dos";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Podemos amenazarles con prestar ayuda al contrario y ellos no prestan su ayuda a nosotros";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Comentale esta idea a Hibba Agip y dile que te de su opinión al respecto";
+		set guarygg,8;
+		close;
+	}
+	if (guarygg == 8) {
+		mes "[Historian Magnifier]";
+		mes "Comentale esta idea a Hibba Agip y dile que te de su opinión al respecto";
+		close;
+	}
+	if (guarygg > 8) {
+		mes "[Historian Magnifier]";
+		mes "Soy uno de los mejores historiadores de la alianza";
+		next;
+		mes "[Historian Magnifier]";
+		mes "Mi trabajo consiste en conocer toda la historia referente a las tribus nativas sapha y laphine";
+		close;
+	}
+}
+prt_in,171,94,3	script	Assistant#guardian	893,{
+	if (guarygg < 3) {
+		mes "[Naomi]";
+		mes "Buenas soy la encargada de guardar todos los informes que están llegando del nuevo mundo";
+		next;
+		mes "[Naomi]";
+		mes "Actualmente mi superior se encuentra en el campamento del nuevo mundo";
+		next;
+		mes "[Naomi]";
+		mes "Si necesitas algo habla primero con él, ahora no puedo atenderte";
+		close;
+	}
+	if (guarygg == 3) {
+		mes "[Naomi]";
+		mes "Buenas, te manda mi superior para que te entrege toda la información sobre las tribus del nuevo mundo";
+		next;
+		mes "[Naomi]";
+		mes "Toda la información está recopilada en estos textos";
+		next;
+		mes "[Naomi]";
+		mes "¿que deseas leer?";
+		next;
+		switch( Select("Descubrimientos","Informes sobre las tribus" ) )
+		{
+			case 1:
+				mes "Desde hace años los científicos de Schwarzvalt pudierón crear un dispositivo capaz de permitir a las personas";
+				next;
+				mes "Traspasar las grietas dimensionales, que el paso de satan morroc dejo tras él";
+				next;
+				mes "A través cientificos de Schwarzvalt, ellos hicieron la primera combinación de metal 'nuclear rip' que fue completada usando piezas de dimensional george";
+				next;
+				mes "La república Schwarzvalt aprobó la petición para probar los 'nuclear rip' y desde Rune-Migdarts no pudieron completar el test por ellos mismos, y ellos al final aceptarón";
+				next;
+				mes "La última cosa que fue provada...consistia en probar los nuclear rip en los aventureros, que hiban a investigar los alrededores de los campos";
+				next;
+				mes "Selecionarón a voluntarios para empezar a explorar más aya de el otro mundo";
+				next;
+				mes "*^¨^¨ Ç¿? ¨@|~#@ €¬~..";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "No puedo seguir leyendo más información...";
+				next;
+				mes "[Naomi]";
+				mes "No hay más información que pueda darte, debido a que mi nivel de seguridad no permite tener acceso a más archivos";
+				next;
+				switch( Select("Informes sobre las tribus" ) )
+				{
+					case 1:
+						mes "Existen dos tribus conocidas en el nuevo mundo, los saphas y las laphine";
+						next;
+						mes "la raza laphines se encuentran al oeste del campamento situado en el nuevo mundo";
+						next;
+						mes "Son como adas sacas de un mágico cuento";
+						next;
+						mes "Mientras que la tribu de los saphas son una tribu orgullosa de las criaturas que viven en la madera en los terrenos áridos de nieve al este del campamento de la Expedición.";
+						next;
+						mes "Cada raza ha jurado proteger el Árbol del Mundo Yggdrasil y han estado luchando una guerra durante cientos de años.";
+						next;
+						mes "Comandante Hibba Agip, líder de la expedición, ha ordenado una investigación oficial de estas ruinas";
+						next;
+						mes " Algunos aventureros ya han intentado explorar las ruinas, pero que carecen de la capacidad de comunicarse con el Laphine y la tribu Sapha que debe tener información acerca de las ruinas";
+						next;
+						mes "Hay incluso rumores de que un dragón se ha visto en la cueva pero no puede confirmar o negar su existencia";
+						next;
+						mes "["+strcharinfo(0)+"]";
+						mes "Guau...un dragon rojo...";
+						mes "Tengo interés en conocer toda la verdad sobre las ruinas";
+						next;
+						mes "[Naomi]";
+						mes "Vuelve con mi superior al campamento, el podrá ayudarte, ya que no dispongo de más información";
+						set guarygg,4;
+						close;
+				}
+			case 2:
+				
+				mes "Existen dos tribus conocidas en el nuevo mundo, los saphas y las laphine";
+				next;
+				mes "la raza laphines se encuentran al oeste del campamento situado en el nuevo mundo";
+				next;
+				mes "Son como adas sacas de un mágico cuento";
+				next;
+				mes "Mientras que la tribu de los saphas son una tribu orgullosa de las criaturas que viven en la madera en los terrenos áridos de nieve al este del campamento de la Expedición.";
+				next;
+				mes "Cada raza ha jurado proteger el Árbol del Mundo Yggdrasil y han estado luchando una guerra durante cientos de años.";
+				next;
+				mes "Comandante Hibba Agip, líder de la expedición, ha ordenado una investigación oficial de estas ruinas";
+				next;
+				mes " Algunos aventureros ya han intentado explorar las ruinas, pero que carecen de la capacidad de comunicarse con el Laphine y la tribu Sapha que debe tener información acerca de las ruinas";
+				next;
+				mes "Hay incluso rumores de que un dragón se ha visto en la cueva pero no puede confirmar o negar su existencia";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Guau...un dragon rojo...";
+				mes "Tengo interés en conocer toda la verdad sobre las ruinas";
+				next;
+				switch( Select("Descubrimientos" ) )
+				{
+					case 1:
+						mes "Desde hace años los científicos de Schwarzvalt crearón un dispositivo capaz de permitir a las personas";
+						next;
+						mes "Traspasar las grietas dimensionales, que el paso de satan morroc dejo tras él";
+						next;
+						mes "A través cientificos de Schwarzvalt, ellos hicieron la primera combinación de metal 'nuclear rip' que fue completada usando piezas de dimensional george";
+						next;
+						mes "La república Schwarzvalt aprobó la petición para probar los 'nuclear rip' y desde Rune-Migdarts no pudieron completar el test por ellos mismos, y ellos al final aceptarón";
+						next;
+						mes "La última cosa que fue provada...consistia en probar los nuclear rip en los aventureros, que hiban a investigar los alrededores de los campos";
+						next;
+						mes "Selecionarón a voluntarios para empezar a explorar más aya de el otro mundo";
+						next;
+						mes "*^¨^¨ Ç¿? ¨@|~#@ €¬~..";
+						next;
+						mes "["+strcharinfo(0)+"]";
+						mes "No puedo seguir leyendo más información...";
+						next;
+						mes "[Naomi]";
+						mes "No hay más información que pueda darte, debido a que mi nivel de seguridad no permite tener acceso a más archivos";
+						next;	
+						mes "[Naomi]";
+						mes "Vuelve con mi superior al campamento, el podrá ayudarte, ya que no dispongo de más información";
+						set guarygg,4;
+						close;
+				}
+		}
+	}
+	if (guarygg == 4) {
+		mes "[Naomi]";
+		mes "Ya no puedo ayudarte en nada más, ves y habla con mi superior";
+		next;
+		mes "[Naomi]";
+		mes "Se encuentra en el campamento de la expedición al nuevo mundo suerte";
+		close;
+	}
+	if (guarygg > 4) {
+		mes "[Naomi]";
+		mes "Buenas soy la encargada de guardar todos los informes que están llegando del nuevo mundo";
+		next;
+		mes "[Naomi]";
+		mes "Actualmente mi superior se encuentra en el campamento del nuevo mundo";
+		next;
+		mes "[Naomi]";
+		mes "Si necesitas algo habla primero con él, ahora no puedo atenderte";
+		close;
+	}
+}
+
+//rama laphine
+splendide,198,178,3	script	Grumbling Soldier	447,{
+	if (guarygg < 5) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Grumbling Soldier]";
+			mes "Buenas extranjero,";
+			next;
+			mes "[Grumbling Soldier]";
+			mes "Soy el general de todas las tropas de la ciudad de laphine";
+			close;
+		} else {
+			mes "[Grumbling Soldier]";
+			mes "SeLarsmar Di marThusVil U SeMushVohl";
+			close;
+		}
+	}
+
+	if (guarygg == 5) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Grumbling Soldier]";
+			mes "¿Que deseas?";
+			next;
+			switch( Select("Sobre las ruinas.","¿Quién es tu comandante?.","No quiero nada." ) )
+			{
+				case 1:
+					mes "[Grumbling Soldier]";
+					mes "Sobre las ruinas....";
+					mes "Que ruinas hablas extranjero";
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "Sobre las ruinas que se encuentran al noreste de esta ciudad";
+					next;
+					mes "[Grumbling Soldier]";
+					mes "Esas ruinas son un lugar sagrado y prohibido para todos los de esta ciudad";
+					next;
+					mes "[Grumbling Soldier]";
+					mes "Incluido para los soldados";
+					mes "Es un lugar sagrado";
+					mes "Protegido de todo mal";
+					next;
+					mes "[Grumbling Soldier]";
+					mes "Nunca oi hablar de este lugar a nadie de la ciudad";
+					next;
+					mes "[Grumbling Soldier]";
+					mes "No tengo nada más que decirte ahora vete";
+					close;
+				case 2:
+					mes "[Grumbling Soldier]";
+					mes "¿Buscas a mi comandante?";
+					mes "Puedes encontrarla en la casa de arriba";
+					next;
+					mes "[Grumbling Soldier]";
+					mes "Dile que vas de mi parte sino ella no te escuchará";
+					next;
+					mes "[Grumbling Soldier]";
+					mes "El aire está errarecido, ahora no puedo desplegar mis alas para volar con libertad";
+					next;
+					mes "[Grumbling Soldier]";
+					mes "Espero que pronto llege la paz, y que esos saphas se retiren por fin";
+					next;
+					mes "[Grumbling Soldier]";
+					mes "Ahora ves y busca a mi comandante";
+					set guarygg,6;
+					close;
+				case 3:
+					mes "[Grumbling Soldier]";
+					mes "Entonces porque me molestas...";
+					close;
+			}	
+		} else {
+			mes "[Grumbling Soldier]";
+			mes "SeLarsmar Di marThusVil U SeMushVohl";
+			close;
+		}
+	}
+	if (guarygg == 6) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Grumbling Soldier]";
+			mes "Busca a mi comandante, ella decidirá si quiere ayudarte o no";
+			close;
+		} else {
+			mes "[Grumbling Soldier]";
+			mes "SeLarsmar Di marThusVil U SeMushVohl";
+			close;
+		}
+	}
+	if (guarygg > 6) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Grumbling Soldier]";
+			mes "Buenas extranjero,";
+			next;
+			mes "[Grumbling Soldier]";
+			mes "Soy el general de todas las tropas de la ciudad de laphine";
+			close;
+		} else {
+			mes "[Grumbling Soldier]";
+			mes "SeLarsmar Di marThusVil U SeMushVohl";
+			close;
+		}
+	}
+}
+spl_in01,110,60,5	script	Comandante Laphine	435,{
+	if (guarygg < 6) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Comandante Lebiordirr]";
+			mes "Soy la comandante de todo el ejercito de laphines de la ciudad de splendide";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Ahora no tengo tiempo, de conversar con un extranjero";
+			close;
+		} else {
+			mes "[Comandante Lebiordirr]";
+			mes "ThusDurnah Ra SharVeldlyaz U";
+			mes "UorAmanDur Yee neaOsa Ador Yee";
+			close;
+		}
+	}
+	if (guarygg == 6) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Comandante Lebiordirr]";
+			mes "Te manda  grumbling";
+			mes "¿Que quieres extranjero";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Quieres conocer como acceder a las runias";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Es un lugar prohibido para cualquier ser";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Es demasiado peligroso, aparte de que no puedo darte mi ayuda para acceder al lugar";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Las puertas están selladas para que nadie aparte de nuestra raza los laphines puedan acceder";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "No puedo ayudarte en lo que pides, lo siento chico";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Ahora disculpame, tengo tareas que realizar";
+			set guarygg,7;
+			close;
+		} else {
+			mes "[Comandante Lebiordirr]";
+			mes "ThusDurnah Ra SharVeldlyaz U";
+			mes "UorAmanDur Yee neaOsa Ador Yee";
+			close;
+		}
+	}
+	if (guarygg == 7) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Comandante Lebiordirr]";
+			mes "Ahora disculpame, tengo tareas que realizar";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Vuelve con tu capitan...";
+			close;
+		} else {
+			mes "[Comandante Lebiordirr]";
+			mes "ThusDurnah Ra SharVeldlyaz U";
+			mes "UorAmanDur Yee neaOsa Ador Yee";
+			close;
+		}
+	}
+	if (guarygg == 8) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Comandante Lebiordirr]";
+			mes "Ahora disculpame, tengo tareas que realizar";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Vuelve con tu capitan...";
+			close;
+		} else {
+			mes "[Comandante Lebiordirr]";
+			mes "ThusDurnah Ra SharVeldlyaz U";
+			mes "UorAmanDur Yee neaOsa Ador Yee";
+			close;
+		}
+	}
+	if (guarygg == 9) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Comandante Lebiordirr]";
+			mes "De nuevo tú aquí...";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Dime extranjero que deseas...";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Me ofreces colaboración con nuestra tribu, a cambio de ayuda para acceder a las ruinas...";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Que pasa si no quiero aceptar vuesta propuesta...";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Entonces le diremos la hubicación exacta de donde se encuentran las ruinas a la tribu sapha";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Aparte daremos nuestro apoyo a la tribu sapha, ya que ellos nos ofrecerian la suya";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Incluyendo apoyo logístico aunque lo usarán en contra de tu pueblo..";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Bueno...puedo aceptar que ellos conozcan la situación de las ruinas";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "pero ellos no saben como acceder a las ruinas...";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Pero tienen a laphines reenes y nos ofreceremos como traductores hasta sacar la información...";
+			next;
+			switch( Select("De acuerdo acepto" ) )
+			{
+				case 1:
+					mes "[Comandante Lebiordirr]";
+					mes "Acepto tus condiciones, y os daremos ayuda en el acceso a las ruinas";
+					next;
+					mes "[Comandante Lebiordirr]";
+					mes "Yo no me hago cargo de lo que pueda sudecer dentro de las ruinas..";
+					next;
+					mes "[Comandante Lebiordirr]";
+					mes "Habla con Aide Arioss ella te dirá como puedes acceder...";
+					set guarygg,10;
+					close;
+			}
+		} else {
+			mes "[Comandante Lebiordirr]";
+			mes "ThusDurnah Ra SharVeldlyaz U";
+			mes "UorAmanDur Yee neaOsa Ador Yee";
+			close;
+		}
+	}
+	if (guarygg == 10) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Comandante Lebiordirr]";
+			mes "Habla con Aide Arioss ella te dirá como puedes acceder...";
+			close;
+		} else {
+			mes "[Comandante Lebiordirr]";
+			mes "ThusDurnah Ra SharVeldlyaz U";
+			mes "UorAmanDur Yee neaOsa Ador Yee";
+			close;
+		}
+	}
+	if (guarygg > 10) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Comandante Lebiordirr]";
+			mes "Soy la comandante de todo el ejercito de laphines de la ciudad de splendide";
+			next;
+			mes "[Comandante Lebiordirr]";
+			mes "Ahora no tengo tiempo, de conversar con un extranjero";
+			close;
+		} else {
+			mes "[Comandante Lebiordirr]";
+			mes "ThusDurnah Ra SharVeldlyaz U";
+			mes "UorAmanDur Yee neaOsa Ador Yee";
+			close;
+		}
+	}
+}
+	
+spl_in01,104,56,5	script	Aide Arioss	437,{
+	if (guarygg < 10) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Aide Arioss]";
+			mes "Soy la asesora de la comandante, ahora no puedo ayudarte..";
+			close;
+		} else {
+			mes "[Aide Arioss]";
+			mes "AmanVilShar le DorLuShar Mu Re";
+			close;
+		}
+	}
+	if (guarygg == 10) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Aide Arioss]";
+			mes "Bueno veo que quieres acceder a las ruinas de nuestros antepasados";
+			next;
+			mes "[Aide Arioss]";
+			mes "Se conocen como Nidhoggur's Nest, se encuentran en las profundidades de las raices del arbol Yggdrasil";
+			next;
+			mes "[Aide Arioss]";
+			mes "Es un lugar muy peligroso para gente como tu";
+			next;
+			mes "[Aide Arioss]";
+			mes "Está protegido, y no permitirá intrusos en sus dominios";
+			next;
+			mes "[Aide Arioss]";
+			mes "Si quieres acceder cuando te acerques a la puerta, busca una marca";
+			next;
+			mes "[Aide Arioss]";
+			mes "Cuando la toques, el guardian de Nidhoggur's Nest, te pedirá una contraseña, que es la siguiente";
+			next;
+			mes "[Aide Arioss]";
+			mes "UorAmanDur ThusDurnah Yee AmanVilShar le DorLuShar Mu Re";
+			next;
+			mes "[Aide Arioss]";
+			mes "ah..RuffThus NeAsh, man nesAsh OdesAlh";
+			next;
+			mes "[Aide Arioss]";
+			mes "Solo cuando digas estas palabras, te permitirán el paso..mucha suerte porque al entrar tu vida correrá peligro";
+			set guarygg,11;
+			close;	
+		} else {
+			mes "[Aide Arioss]";
+			mes "AmanVilShar le DorLuShar Mu Re";
+			close;
+		}
+	}
+	if (guarygg > 10) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			if (nesten == 0) {
+				mes "[Aide Arioss]";
+				mes "mucha suerte porque al entrar tu vida correrá peligro";
+				close;
+			}
+			if (nesten == 1) {
+				mes "[Aide Arioss]";
+				mes "Esta guerra que teniamos con los saphas por la protección del arbol era solo por culpa de Nidhoggur's Shadow";
+				next;
+				mes "[Aide Arioss]";
+				mes "Tengo que informar inmediantamente a todo el mundo para que conozcan la realidad";
+				next;
+				mes "[Aide Arioss]";
+				mes "Nadie era el culpable de la debilitación del arbol....";
+				next;
+				mes "[Aide Arioss]";
+				mes "Muchas gracias coje esta recompensa por tu ayuda.";
+				getitem 6081,10; //Splendide coin
+				getexp 1500000,35000;
+				set nesten,2;
+				close;
+			}
+			if (nesten == 2) {
+				mes "[Aide Arioss]";
+				mes "Gracias por tu ayuda, ahora solo tenemos que llegar a un acuerdo con la raza sapha..";
+				next;
+				mes "[Aide Arioss]";
+				mes "Para intentar detener esta guerra";
+				close;
+			}
+		} else {
+			mes "[Aide Arioss]";
+			mes "AmanVilShar le DorLuShar Mu Re";
+			close;
+		}
+	}
+}
+
+
+spl_in01,118,52,5	script	Soldado#com	447,{
+	if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+		mes "[Soldado]";
+		mes "El ambiente está muy enrrarecido";
+		next;
+		mes "[Soldado]";
+		mes "Nuestro deber es proteger a la comandante";
+		close;
+	} else {
+		mes "[Soldado]";
+		mes "ThusDurnah Ra SharVeldlyaz U";
+		mes "UorAmanDur Yee neaOsa Ador Yee";
+		close;
+		}
+}
+spl_in01,101,52,5	script	Soldado#coml	447,{
+	if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+		mes "[Soldado]";
+		mes "El ambiente está muy enrrarecido";
+		next;
+		mes "[Soldado]";
+		mes "Nuestro deber es proteger a la comandante";
+		close;
+	} else {
+		mes "[Soldado]";
+		mes "ThusDurnah Ra SharVeldlyaz U";
+		mes "UorAmanDur Yee neaOsa Ador Yee";
+		close;
+	}
+}
+
+//rama sapha
+man_in01,291,62,4	script	Laphine Prisionera	437,{
+	if (guarygg < 5) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Laphine Prisionera]";
+			mes "Me capturaron cuando intentaba llegar a la ciudad de splendide";
+			next;
+			mes "[Manuk Guard]";
+			mes "Silencio...";
+			close;
+		} else {
+			mes "[Laphine Prisionera]";
+			mes "AmanVilShar le DorLuShar Mu Re";
+			close;
+		}
+	}
+	if (guarygg == 5) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Laphine Prisionera]";
+			mes "Quieres saber como acceder a las ruinas";
+			next;
+			mes "[Laphine Prisionera]";
+			mes "Lo siento esa información no puedo dartela, debido a que solo las laphines podemos acceder a ella";
+			next;
+			mes "[Laphine Prisionera]";
+			mes "de todas formas puede que.....";
+			next;
+			mes "[Manuk Guard]";
+			mes "Silencio, sino nos dices que le estás contando, deja de hablar con ella";
+			next;
+			mes "[Manuk Guard]";
+			mes "Si quieres continuar hablando con ella consultalo con Neat Etorr";
+			next;
+			mes "[Manuk Guard]";
+			mes "Ahora deja de molestar...fuera";
+			set guarygg,6;
+			close;
+		} else {
+			mes "[Laphine Prisionera]";
+			mes "AmanVilShar le DorLuShar Mu Re";
+			close;
+		}
+	}
+	if ((guarygg > 5) && (guarygg < 10)) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Manuk Guard]";
+			mes "he dicho que silencio...";
+			next;
+			mes "[Manuk Guard]";
+			mes "Habla con Neat Etorr si quieres seguir hablando con esta laphine";
+			close;
+		} else {
+			mes "[Laphine Prisionera]";
+			mes "AmanVilShar le DorLuShar Mu Re";
+			close;
+		}
+	}
+	if (guarygg == 10) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "["+strcharinfo(0)+"]";
+			mes "Ayudame con lo que te pido, e intentaré liberarte";
+			next;
+			mes "[Laphine Prisionera]";
+			mes "Bueno veo que quieres acceder a las ruinas de nuestros antepasados";
+			next;
+			mes "[Laphine Prisionera]";
+			mes "Se conocen como Nidhoggur's Nest, se encuentran en las profundidades de las raices del arbol Yggdrasil";
+			next;
+			mes "[Laphine Prisionera]";
+			mes "Es un lugar muy peligroso para gente como tu";
+			next;
+			mes "[Laphine Prisionera]";
+			mes "Está protegido, y no permitirá intrusos en sus dominios";
+			next;
+			mes "[Laphine Prisionera]";
+			mes "Si quieres acceder cuando te acerques a la puerta, busca una marca";
+			next;
+			mes "[Laphine Prisionera]";
+			mes "Cuando la toques, el guardian de Nidhoggur's Nest, te pedirá una contraseña, que es la siguiente";
+			next;
+			mes "[Laphine Prisionera]";
+			mes "UorAmanDur ThusDurnah Yee AmanVilShar le DorLuShar Mu Re";
+			next;
+			mes "[Laphine Prisionera]";
+			mes "ah..RuffThus NeAsh, man nesAsh OdesAlh";
+			next;
+			mes "[Laphine Prisionera]";
+			mes "Solo cuando digas estas palabras, te permitirán el paso..mucha suerte porque al entrar tu vida correrá peligro";
+			set guarygg,11;
+			close;	
+		} else {
+			mes "[Laphine Prisionera]";
+			mes "AmanVilShar le DorLuShar Mu Re";
+			close;
+		}
+	}
+	if (guarygg > 10) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			if (nesten == 0) {
+				if (nesten1 == 0) {
+					mes "[Laphine Prisionera]";
+					mes "mucha suerte porque al entrar tu vida correrá peligro";
+					close;
+				}
+			}
+			if (nesten == 1) {
+				if (nesten1 == 0) {
+					mes "[Manuk Guard]";
+					mes "No puedes hablar con ella, marchate";
+					close;
+				}
+			}
+			if (nesten == 2) {
+				if (nesten1 == 1) {
+					mes "[Laphine Prisionera]";
+					mes "Veo que Yggdrasiliad no ha podido regresar contigo";
+					next;
+					mes "[Laphine Prisionera]";
+					mes "Ahora que se que la culpa no es de los saphas en la debilitación del arbol";
+					next;
+					mes "[Laphine Prisionera]";
+					mes "Tengo que intentar que todos sepan la verdadera razón";
+					next;
+					mes "[Laphine Prisionera]";
+					mes "Para, parar esta guerra que dura tanto tiempo";
+					next;
+					mes "[Laphine Prisionera]";
+					mes "y unir nuestras fuerzas para recuperar nuestro arbol";
+					next;
+					mes "[Laphine Prisionera]";
+					mes "muchas gracias por tu trabajo y por liberarlo de Nidhoggur's Shadow";
+					next;
+					mes "[Laphine Prisionera]";
+					mes "gracias por tu ayuda coje esta recompensa";
+					getexp 1500000,35000;
+					set nesten1,2;
+				}
+				if (nesten1 == 2) {
+					mes "[Laphine Prisionera]";
+					mes "Intentaré que todos los de la ciudad de sapha conozcan la verdad....";
+					close;
+				}
+			}
+		} else {
+			mes "[Laphine Prisionera]";
+			mes "AmanVilShar le DorLuShar Mu Re";
+			close;
+		}
+	}
+}
+man_in01,286,61,5	script	Manuk Guard#pri	450,{
+	if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+		mes "[Manuk Guard]";
+		mes "Mi trabajo es bien sencillo a la par que aburrido, vigilar a esta laphine";
+		close;
+	} else {
+		mes "[Manuk Guard]";
+		mes "as bx wq kl ut fb";
+		close;
+	}
+}
+
+man_in01,295,61,3	script	Manuk Guard#pri2	450,{
+	if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+		mes "[Manuk Guard]";
+		mes "Aquí se hacen todas las operaciones administrativas de manuk, no armes escandalo";
+		close;
+	} else {
+		mes "[Manuk Guard]";
+		mes "bg hj tv cq uk yh za";
+		close;
+	}
+}
+
+man_in01,311,57,4	script	Neat Etorr	453,{
+	if (guarygg < 6) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Neat Etorr]";
+			mes "Ahora estoy demasiada liada, vuelve cuando tenga menos trabajo...";
+			close;
+		} else {
+			mes "[Neat Etorr]";
+			mes "as df gh jk we qa ws ec ec th bu";
+			close;
+		}
+	}
+	if (guarygg == 6) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Neat Etorr]";
+			mes "Necesitas hablar urgentemente con la laphine capturada";
+			next;
+			mes "[Neat Etorr]";
+			mes "Que razón tienes para venir aquí exgiendo tal acontecimiento";
+			next;
+			mes "[Neat Etorr]";
+			mes "Siento no poder ayudarte, pero está prohibido hablar con nuestra prisionera";
+			next;
+			mes "[Neat Etorr]";
+			mes "Aparte no puedo darte información sobre esas ruinas ya que forma parte de las laphines";
+			next;
+			mes "[Neat Etorr]";
+			mes "Nadie de nuestra tribu a tenido acceso a ellas";
+			next;
+			mes "[Neat Etorr]";
+			mes "ahora marchate...";
+			set guarygg,7;
+			close;
+		} else {
+			mes "[Neat Etorr]";
+			mes "as th qz ws ed rf tg yh uj ik ol";
+			close;
+		}
+	}
+	if ((guarygg > 6) && (guarygg < 9)) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Neat Etorr]";
+			mes "Lo siento no puedo ayudarte,ahora marcha con tu comandante..";
+			close;
+		} else {
+			mes "[Neat Etorr]";
+			mes "as th qz ws ed rf tg yh uj ik ol";
+			close;
+		}
+	}
+	if (guarygg == 9) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Neat Etorr]";
+			mes "Tu de nuevo aquí...";
+			next;
+			mes "[Neat Etorr]";
+			mes "Ya te dije que no podías hablar con la laphine capturada";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Déjame hablar con la laphine, y seré capaz de saber como entrar en las antiguas ruinas de la tribu laphine";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Si te niegas a ofrecernos tu ayuda, daremos todo nuestro apoyo a la tribu laphine";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Piensa bien que ellos pueden darnos la información que buscamos aparte recivirian nuestro apoyo";
+			next;
+			mes "[Neat Etorr]";
+			mes "Esta bien, te dejaré que hables con la laphine, pero quiero conocer todos los detalles de como acceder a las ruinas";
+			next;
+			mes "[Neat Etorr]";
+			mes "Y quiero conocer toda la información que puedas encontrar dentro de esas ruinas...";
+			next;
+			mes "[Neat Etorr]";
+			mes "Ahora daré la orden para que te dejen hablar con la laphine";
+			next;
+			mes "[Neat Etorr]";
+			mes "No me defraudes extranjero....";
+			set guarygg,10;
+			close;
+		} else {
+			mes "[Neat Etorr]";
+			mes "as th qz ws ed rf tg yh uj ik ol";
+			close;
+		}
+	 }
+	if (guarygg == 10) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Neat Etorr]";
+			mes "Ahora daré la orden para que te dejen hablar con la laphine";
+			next;
+			mes "[Neat Etorr]";
+			mes "No me defraudes extranjero....";
+			close;
+		} else {
+			mes "[Neat Etorr]";
+			mes "as th qz ws ed rf tg yh uj ik ol";
+			close;
+		}
+	}
+	if (guarygg > 10) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			if (nesten == 0) {
+				mes "[Neat Etorr]";
+				mes "Ahora ves a investigar esas ruinas e informanos de todos tus descubrimentos..";
+				next;
+				mes "[Neat Etorr]";
+				mes "No me defraudes extranjero....";
+				close;
+			}
+			if (nesten == 1) {
+				mes "[Neat Etorr]";
+				mes "Cuentame todo lo que viste...";
+				next;
+				mes "[Neat Etorr]";
+				mes "Asique un poder maligno habia corrompido todo el arbol y se estaba alimentando de él";
+				next;
+				mes "[Neat Etorr]";
+				mes "Por eso el arbol estaba debilitado, y no es culpa de la tribu de las Laphines";
+				next;
+				mes "[Neat Etorr]";
+				mes "Nihoggur's Shadow fue derrotado y ahora el arbol podrá de nuevo recuperarse";
+				next;
+				mes "[Neat Etorr]";
+				mes "Gracias por tú esfuerzo esta información es muy importante para intentar acabar con esta guerra";
+				next;
+				mes "[Neat Etorr]";
+				mes "Tienes permiso para hablar de nuevo con la laphine..";
+				next;
+				mes "[Neat Etorr]";
+				mes "Como recompensa coje este premio...";
+				getitem 6080,10; //manuk coin
+				set nesten,2;
+				set nesten1,1;
+				close;
+			}
+			if (nesten == 2) {
+				mes "[Neat Etorr]";
+				mes "Estudiaré toda la información que me diste sobre esas ruinas";
+				next;
+				mes "[Neat Etorr]";
+				mes "Espero que ayude para terminar con esta guerra";
+				close;
+			}
+		} else {
+			mes "[Neat Etorr]";
+			mes "as th qz ws ed rf tg yh uj ik ol";
+			close;
+		}
+	}
+}

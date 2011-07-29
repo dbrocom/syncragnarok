@@ -4142,10 +4142,7 @@ static void mob_readdb(void)
 			}
 		}
 
-		if( !fi && battle_config.renewal_system_enable )
-			sv_readdb(db_path, "mob_db_renewal.txt", ',', 38+2*MAX_MOB_DROP, 38+2*MAX_MOB_DROP, -1, &mob_readdb_sub);
-		else
-			sv_readdb(db_path, filename[fi], ',', 38+2*MAX_MOB_DROP, 38+2*MAX_MOB_DROP, -1, &mob_readdb_sub);
+		sv_readdb(db_path, filename[fi], ',', 38+2*MAX_MOB_DROP, 38+2*MAX_MOB_DROP, -1, &mob_readdb_sub);
 	}
 }
 
@@ -4713,10 +4710,7 @@ static void mob_readskilldb(void)
 			}
 		}
 
-		if( battle_config.renewal_system_enable && fi == 0 )
-			sv_readdb(db_path, "mob_skill_db_renewal.txt", ',', 19, 19, -1, &mob_parse_row_mobskilldb);
-		else
-			sv_readdb(db_path, filename[fi], ',', 19, 19, -1, &mob_parse_row_mobskilldb);
+		sv_readdb(db_path, filename[fi], ',', 19, 19, -1, &mob_parse_row_mobskilldb);
 	}
 }
 /*==========================================

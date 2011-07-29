@@ -535,6 +535,7 @@ extern struct Battle_Config
 
 	int bg_ranked_mode;
 	int bg_ranked_max_games;
+	int bg_reportafk_leaderonly;
 
 	// Renewal System Configurations
 	int warg_can_falcon;
@@ -567,6 +568,7 @@ extern struct Battle_Config
 
 	int mob_slave_adddrop;
 	int reflect_damage_fix;
+	int dancing_weaponchange_fix;
 	int anti_mayapurple_hack;
 
 	int lootevent;

@@ -1,0 +1,65 @@
+//===== Custom eAthena Script =======================================
+//= Rabbit Earplugs Custom Quest
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Version =====================================================
+//= 1.1
+//===== Changelog ===================================================
+//= 1.0 - Primera versión
+//= 1.1 - Arreglado el problema con la ID del NPC
+//===================================================================
+
+lighthalzen,221,223,4	script	Amelia	72,{
+
+	mes "[Amelia]";
+	mes "¡Hola aventurero! Mi trabajo consiste en crear clips para el pelo.";
+	mes "Y hoy justamente termine mi nuevo modelo llamado 'Rabbit Earplugs'";
+	mes "¿Quieres que te fabrique uno?";
+	next;
+	mes "[Amelia]";
+	mes "Para crear unos Bunny Hairpins necesito que me traigas:";
+	mes "^6633FFEar Muffs^000000 x1";
+	mes "^6633FFClip^000000 x2";
+	mes "^6633FFCyfar^000000 x100";
+	mes "^6633FFPuppet^000000 x300";
+	next;
+	mes "[Amelia]";
+	mes "Entonces... ¿Quieres que te lo fabrique?";
+	mes "(Ten cuidado si tienes más ^E33135Clip^000000 de la cuenta, no vaya a ser que utilice el que no toque...)";
+	next;
+	if(select("Oki Doki!","¡No me interesa! -.-'") == 2){
+		mes "[Amelia]";
+		mes "Bien, ¡adiós! -o-'";
+		close;
+	}
+	mes "[Amelia]";
+	if((countitem(7053) >= 100) && (countitem(2283) >= 1) && (countitem(740) >= 300) && (countitem(2607) >= 2)) { 
+		delitem 7053,100;
+		delitem 740,300;
+		delitem 2607,2;
+		delitem 2283,1;
+		mes "¡Muy bien! Ha quedado perfecto.";
+		next;
+		mes "[Amelia]";
+		mes "¡Aquí tienes!";
+		getitem 5520,1;
+	}else{
+		mes "¿Intentas engañarme?"; 
+		mes "¡Vuelve cuando tengas lo que te pedí!";
+	}	
+	close;
+}

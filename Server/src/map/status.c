@@ -10702,17 +10702,8 @@ int status_readdb(void)
 
 	// read databases
 	//
-
-	if( !battle_config.renewal_system_enable )
-	{
-		sv_readdb(db_path, "job_db1.txt",   ',', 5+MAX_WEAPON_TYPE, 5+MAX_WEAPON_TYPE, -1, &status_readdb_job1);
-		sv_readdb(db_path, "refine_db.txt", ',', 3+MAX_REFINE+1,    3+MAX_REFINE+1, ARRAYLENGTH(percentrefinery), &status_readdb_refine);
-	}
-	else
-	{
-		sv_readdb(db_path, "job_db1_renewal.txt",   ',', 6+MAX_WEAPON_TYPE, 6+MAX_WEAPON_TYPE, -1, &status_readdb_job1); // Shield Penalty Added
-		sv_readdb(db_path, "refine_db_renewal.txt", ',', 3+MAX_REFINE+1,    3+MAX_REFINE+1, ARRAYLENGTH(percentrefinery), &status_readdb_refine);
-	}
+	sv_readdb(db_path, "job_db1.txt",   ',', 6+MAX_WEAPON_TYPE, 6+MAX_WEAPON_TYPE, -1, &status_readdb_job1); // Shield Penalty Added
+	sv_readdb(db_path, "refine_db.txt", ',', 3+MAX_REFINE+1,    3+MAX_REFINE+1, ARRAYLENGTH(percentrefinery), &status_readdb_refine);
 	sv_readdb(db_path, "job_db2.txt",   ',', 1,                 1+99,        -1,                            &status_readdb_job2); // 99 - Max Job Level (Super novice)
 	sv_readdb(db_path, "size_fix.txt",  ',', MAX_WEAPON_TYPE,   MAX_WEAPON_TYPE,    ARRAYLENGTH(atkmods),         &status_readdb_sizefix);
 

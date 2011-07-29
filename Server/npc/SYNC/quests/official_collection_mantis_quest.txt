@@ -1,0 +1,242 @@
+//===== Custom eAthena Script =======================================
+//= Mantis Researcher
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Description =================================================
+//= Quest de EXP Repetible.
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+lou_fild01,240,354,4	script	Mantis Researcher#Hunt	883,{
+	if (checkquest(60179) != -1) {
+		if (checkquest(60179,HUNTING) != 2 ) {
+			mes "[Mantis Researcher]";
+			mes "¿Has derrotado a los Mantis ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Mantis Researcher]";
+				mes "Hmm, no creo que hayas derrotado a los 50 Mantis todavía...";
+				close;
+			case 2:
+				mes "[Mantis Researcher]";
+				mes "Recuerda, debes acabar con 50 Mantis del mapa.";
+				close;
+			case 3:
+				mes "[Mantis Researcher]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Mantis Researcher]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60179;
+					close;
+				case 2:
+					mes "[Mantis Researcher]";
+					mes "Recuerda, deshazte de esos 50 Mantis.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Mantis Researcher]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 1882,1000;
+			erasequest 60179;
+			close;
+		}
+	}
+	if (checkquest(60180) != -1) {
+		if (checkquest(60180,HUNTING) != 2 ) {
+			mes "[Mantis Researcher]";
+			mes "¿Has derrotado a los Mantis ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Mantis Researcher]";
+				mes "Hmm, no creo que hayas derrotado a los 100 Mantis todavía...";
+				close;
+			case 2:
+				mes "[Mantis Researcher]";
+				mes "Recuerda, debes acabar con 100 Mantis del mapa.";
+				close;
+			case 3:
+				mes "[Mantis Researcher]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Mantis Researcher]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60180;
+					close;
+				case 2:
+					mes "[Mantis Researcher]";
+					mes "Recuerda, deshazte de esos 100 Mantis.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Mantis Researcher]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 1882,1000;
+			getexp 1882,1000;
+			erasequest 60180;
+			close;
+		}
+	}
+	if (checkquest(60181) != -1) {
+		if (checkquest(60181,HUNTING) != 2 ) {
+			mes "[Mantis Researcher]";
+			mes "¿Has derrotado a los Mantis ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Mantis Researcher]";
+				mes "Hmm, no creo que hayas derrotado a los 150 Mantis todavía...";
+				close;
+			case 2:
+				mes "[Mantis Researcher]";
+				mes "Recuerda, debes acabar con 150 Mantis del mapa.";
+				close;
+			case 3:
+				mes "[Mantis Researcher]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Mantis Researcher]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60181;
+					close;
+				case 2:
+					mes "[Mantis Researcher]";
+					mes "Recuerda, deshazte de esos 150 Mantis.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Mantis Researcher]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 1882,1000;
+			getexp 1882,1000;
+			getexp 1882,1000;
+			erasequest 60181;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel >= 35) {
+		//for maximum level
+		if (BaseLevel <= 70) {
+			mes "[Mantis Researcher]";
+			mes "Estoy investigando la forma aerodinámica de las garras de las Mantis.";
+			mes "Pero a la gente de esta localidad no le hace mucha gracia mi presencia.";
+			next;
+			mes "[Mantis Researcher]";
+			mes "Me han prohibido la caza de Mantis. ¡Por mi culpa! Si no les hubiera dicho nada no se hubiera opuesto ninguno...";
+			mes "¿Te gustaría ayudarme? No quiero que me metan en la cárcel.";
+			next;
+			switch(select("Ehmm... claro, te ayudo:No")) {
+			case 1:
+				mes "[Mantis Researcher]";
+				mes "¿De verdad? ¿Qué te gustaría hacer?";
+				next;
+				switch(select("Recolectar Items:Acabar con Mantis:Cancelar")) {
+				case 1:
+					// Item turn in
+					mes "[Mantis Researcher]";
+					mes "¿Podrás encontrar ^00CE0020 Mantis Scythe^000000 y traérmelos aquí como prueba?";
+					next;
+					switch(select("Tengo los Mantis Scythe:¿Qué necesitas?")) {
+					case 1:
+						if (countitem(1031) > 19) {
+							mes "[Mantis Researcher]";
+							mes "¡No me creo que hayas sido capaz!";
+							mes "A cambio te recompensaré con mi sabiduría.";
+							delitem 1031,20;
+							getexp 2000,1000;
+							close;
+						}
+						else {
+							mes "[Mantis Researcher]";
+							mes "Deben ser ^00CE0020 Mantis Scythe^000000 y no menos, por favor.";
+							close;
+						}
+					case 2:
+						mes "[Mantis Researcher]";
+						mes "Necesito ^00CE0020 Mantis Scythe^000000.";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[Mantis Researcher]";
+					mes "¡Muchas gracias!";
+					mes "¿De cuántos deseas encargarte?";
+					next;
+					switch(select("50 Mantis:100 Mantis:150 Mantis")) {
+					case 1:
+						mes "[Mantis Researcher]";
+						mes "Si acabas con 50 Mantis de esta mazmorra de estaré agradecido.";
+						setquest 60179;
+						close;
+					case 2:
+						mes "[Mantis Researcher]";
+						mes "Si acabas con 100 Mantis de esta mazmorra de estaré agradecido.";
+						setquest 60190;
+						close;
+					case 3:
+						mes "[Mantis Researcher]";
+						mes "Si acabas con 150 Mantis de esta mazmorra de estaré agradecido.";
+						setquest 60191;
+						close;
+					}
+				case 3:
+					mes "[Mantis Researcher]";
+					mes "Si cambias de idea, por favor, vuelve.";
+					close;
+				}
+			case 2:
+				mes "[Mantis Researcher]";
+				mes "Si cambias de idea, por favor, vuelve.";
+				close;
+			}
+		}
+		else {
+			mes "[Mantis Researcher]";
+			mes "Estoy seguro de que podrías ayudarme fácilmente, pero me gustaría poder agradecérselo a otros que no sean tan fuertes como tú.";
+			close;
+		}
+	}
+	else {
+		mes "[Mantis Researcher]";
+		mes "Ven a verme cuando seas un poquito más fuerte.";
+		close;
+	}
+}

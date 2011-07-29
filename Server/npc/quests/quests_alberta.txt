@@ -678,7 +678,7 @@ alberta,136,79,1	script	Hat store girl#new30	71,{
 			mes "¡¡¡Hyaaaaaa~~!!!";
 			mes "¡¡Está tan fría!! Gracias~~~";
 			next;
-			switch(select("It's really hot, isn't it~?:You should wear your hat...")) {
+			switch(select("Hace calor, ¿verdad~?:Deberías ponerte el sombrero...")) {
 			case 1:
 				mes "[Tempestra]";
 				mes "Sí~ hace mucho calor...";
@@ -752,7 +752,7 @@ alberta,136,79,1	script	Hat store girl#new30	71,{
 					}
 					else {
 						mes "[Tempestra]";
-						mes "Te diré un secreto, ya que me trajiste una Yellow Potion~";
+						mes "Ya que me trajiste una Yellow Potion, te estaré esperando hasta que tengas los items~";
 						next;
 						mes "[Tempestra]";
 						mes "Espero verte pronto~~";
@@ -769,16 +769,46 @@ alberta,136,79,1	script	Hat store girl#new30	71,{
 					mes "^0000FF1 Wizard Hat^000000";
 					mes "^0000FF400 Dragon Scale^000000";
 					mes "^0000FF50 Mould Powder^000000";
+					mes "^0000FF1 Dyestuff^000000";
 					mes "^0000FF1 Elder Wilow Card^000000";
 					next;
-					if ((countitem(2252) > 0) && (countitem(1036) > 399) && (countitem(4052) > 0) && (countitem(7001) > 49)) {
+					mes "[Tempestra]";
+					mes "¿Te gustaría escojer un color?";
+					next;
+					switch(select("^0000FFAzul^000000:^BDBDBDBlanco^000000:^04B404Verde^000000:^AEB404Amarillo^000000:^DF0101Rojo^000000:^BDBDBDGris^000000")){
+						case 1:
+							set .@dye, 978;			//Blue_Dyestuffs
+							set .@magehat, 5241;	//Mage_Hat
+							break;
+						case 2:
+							set .@dye, 982;			//White_Dyestuffs
+							set .@magehat, 5239;	//Mage_Hat 
+							break;
+						case 3:
+							set .@dye, 979;			//Green_Dyestuffs
+							set .@magehat, 5027;	//Mage_Hat 
+							break;
+						case 4:
+							set .@dye, 976;			//Yellow_Dyestuffs
+							set .@magehat, 5242;	//Mage_Hat 
+							break;
+						case 5:
+							set .@dye, 975;			//Red_Dyestuffs
+							set .@magehat, 5238;	//Mage_Hat 
+							break;
+						case 6:
+							set .@dye, 30701;		//Grey_Dyestuffs
+							set .@magehat, 5240;	//Mage_Hat 
+							break;
+					}
+					if ( (countitem(2252) > 0) && (countitem(1036) > 399) && (countitem(4052) > 0) && (countitem(7001) > 49) && (countitem(.@dye) > 0) ) {
 						mes "[Tempestra]";
 						mes "¡¿Qué?! ";
 						mes "¿Ya tienes todos los items? Si tienes cosas forjadas o con cards, mejor ponlas primero en tu storage.";
 						next;
 						mes "[Tempestra]";
 						mes "Quiero compensarte por la Yellow Potion, así que no te cobraré nada por mis servicios.";
-						switch(select("Oh, please do.:No thanks.")) {
+						switch(select("Oh, muchas gracias.:No me interesa.")) {
 						case 1:
 							next;
 							mes "[Tempestra]";
@@ -793,11 +823,12 @@ alberta,136,79,1	script	Hat store girl#new30	71,{
 							delitem 1036,400;  //Dragon_Scale
 							delitem 4052,1;  //Elder_Wilow_Card
 							delitem 7001,50;  //Mould_Powder
+							delitem .@dye,1; //Dyestuff
 							mes "[Tempestra]";
 							mes "Aquí está, jeeee jeeee~";
 							mes "¿Qué tal?";
 							mes "¿Te gusta?";
-							getitem 5027,1; // Wizardry_Hat
+							getitem .@magehat,1; // Wizardry_Hat
 							next;
 							mes "[Tempestra]";
 							mes "Una vez más, gracias por tu favor. Nos vemos~";
@@ -817,7 +848,7 @@ alberta,136,79,1	script	Hat store girl#new30	71,{
 					}
 					else {
 						mes "[Tempestra]";
-						mes "Te diré un secreto, ya que me trajiste una Yellow Potion~";
+						mes "Ya que me trajiste una Yellow Potion, te estaré esperando hasta que tengas los items~";
 						next;
 						mes "[Tempestra]";
 						mes "Espero verte pronto~~";
@@ -881,7 +912,7 @@ alberta,136,79,1	script	Hat store girl#new30	71,{
 					}
 					else {
 						mes "[Tempestra]";
-						mes "Te diré un secreto, ya que me trajiste una Yellow Potion~";
+						mes "Ya que me trajiste una Yellow Potion, te estaré esperando hasta que tengas los items~";
 						next;
 						mes "[Tempestra]";
 						mes "Espero verte pronto~~";

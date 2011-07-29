@@ -1,0 +1,362 @@
+//===== Custom eAthena Script =======================================
+//= Quest Mouth Food (Happy Sprites)
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Description =================================================
+//= Conseguir un item para boca que da STAT + 1
+//===== Version =====================================================
+//= 1.3
+//===== Changelog ===================================================
+//= 1.0 - Primera versión
+//= 1.1 - Typos Fixed
+//= 1.2 - Añadido Soporte Quest Log y eliminado 'goto' innecesario
+//= 1.3 - Adaptada a Low Rates
+//===================================================================
+
+-	script	cosecha	-1,{
+
+OnInit:	
+OnClock0030:
+	switch(gettime(4)) {
+		case 0:// Sunday
+			set $@cos,1;
+			break;
+		case 1:// Monday
+			set $@cos,2;
+			break;
+		case 2:// Tuesday
+			set $@cos,3;
+			break;
+		case 3:// Wed
+			set $@cos,4;
+			break;
+		case 4:// Thursday
+			set $@cos,0;
+			break;
+		case 5://Friday
+			set $@cos,6;
+			break;
+		case 6://Saturday
+			set $@cos,5;
+			break;
+	}
+	end;
+}
+
+moscovia,223,90,3	script	Gretel	961,{
+
+	setarray $@cosecha$[0],		"Esta noche podré hacer un tarta con las ^B40404manzanas^000000 que hemos recogido.",
+					"Hoy, por suerte, la cosecha de ^B45F04zanahorias^000000 ha sido muy productiva.",
+					"Para colmo hoy ha sido un día tan poco productivo que mis hijos están ^088A4Brecolectando^000000 por el bosque.",
+					"Mi marido ha salido de ^736D0Fcaza^000000 esta mañana. Espero que podamos disfrutar de una suntuosa cena.",
+					"Mis hijos han ido a recojer unas pocas ^B4045Ffresas^000000 esta mañana. ¡Están muy ricas!",
+					"Hoy ha venido a visitarnos la familia. Han sido muy amables trayéndonos un poco de ^6C3300cacao^000000.",
+					"¡Por desgracia mis hijos se han comido todas las provisiones! Hoy tocará trabajar más duro de lo normal.";
+
+	set .hansel$, "[^048A35 Gretel ^000000]";
+	mes .hansel$;
+	mes "Uff, vaya día de trabajo más duro.";
+	mes "Parece que nunca va a terminar.";
+	next;
+	mes .hansel$;
+	mes "Mi familia y yo disfrutamos cada día de una comida diferente.";
+	mes $@cosecha$[$@cos];
+	if ($@cos == 6) { close; }
+	next;
+	mes .hansel$;
+	mes "Disculpa, no quería aburrirte con mis lamentos.";
+	mes "Por cierto, ¿Qué haces aquí?";
+	next;
+	mes .hansel$;
+	mes "Sólo soy una humilde campesina que cultiva un huerto para sobrevivir.";
+	mes "¿Te apetece probar algunos de mis frutos?";
+	next;
+	if (select("No:Sí") == 1) { mes .hansel$; mes "Entonces no me molestes. ¡Tengo que seguir trabajando duro para poder sacar a mi familia adelante!"; close; }
+	mes .hansel$;
+	showevent 2, 2;
+	mes "¡Estupendo! A cambio me gustaría pedirte un favor.";
+	mes "Algunos aperos de labranza se construyen o mejoran gracias a determinados objetos.";
+	mes "Si me consigues algunos de ellos te daré parte de la cosecha del hoy.";
+	next;
+	mes .hansel$;
+	switch($@cos) {
+		case 0: 
+		        mes "Para fabricar una azada necesito:";
+			setquest 25053;
+		        mes "25 ^FF0000Blue Tinted Feather^000000";
+		        mes "10 ^FF0000Tiger Skin^000000";
+		        mes "1 ^FF0000Stiff Horn^000000";
+		        mes "y 1 ^FF0000Fire Dragon Scale^000000";
+		        next;
+		        switch(select("Aquí tienes","Iré a ayudarte")){
+			        case 1:
+			            mes .hansel$;
+			            if((countitem(7441) > 24) && (countitem(1029) > 9) && (countitem(7451) > 0) && (countitem(7008) > 0)){
+			                delitem 7441,25;
+			                delitem 1029,10;
+			                delitem 7451,1;
+			                delitem 7008,1;
+			                mes "Esto por aquí.";
+			                next;
+			                mes .hansel$;
+			                mes "Esto por allí.";
+			                next;
+			                mes .hansel$;
+			                mes "¡Una azada muy chula!";
+			                mes "Muchas gracias por tu ayuda";
+			                mes "Aquí tienes lo que te prometí.";
+					if(checkquest(25053) != -1) {
+						completequest 25053;
+					}
+					showevent 0, 2;
+			                getitem 30052,1;
+			                getitem 512,25;	                
+			                close;
+			            }else{
+			          	mes "No puedo construir la azada sin los útiles necesarios.";
+			               	close;
+				    }
+				    break;
+			        case 2:
+				    mes .hansel$;
+			            mes "Ten cuidado, algunas cosas son difíciles de conseguir.";
+			            break;
+			}
+			break;
+		case 1:
+		        mes "Para fabricar un trillo necesito:";
+			setquest 25054;
+		      	mes "15 ^FF0000Eye of Hellion^000000";
+		        mes "3 ^FF0000Fragment of Rossata Stone^000000";
+		        mes "1 ^FF0000Piece of Shield^000000";
+		        mes "y 1 ^FF0000Ice Scale^000000";
+		        next;
+		        switch(select("Aquí tienes","Iré a ayudarte")){
+			        case 1:
+			            mes .hansel$;
+			            if((countitem(7337) > 14) && (countitem(7211) > 2) && (countitem(7108) > 0) && (countitem(7562) > 0)){
+			                delitem 7337,10;
+			                delitem 7211,5;
+			                delitem 7108,5;
+			                delitem 7562,1;
+			                mes "Esto por aquí.";
+			                next;
+			                mes .hansel$;
+			                mes "Esto por allí.";
+			                next;
+			                mes .hansel$;
+			                mes "¡Un trillo muy chulo!";
+			                mes "Muchas gracias por tu ayuda";
+			                mes "Aquí tienes lo que te prometí.";
+					if(checkquest(25054) != -1) {
+						completequest 25054;
+					}
+					showevent 0, 2;
+			                getitem 30055,1;	     
+			                getitem 515,25;          
+			                close;
+			            }else{
+			          	mes "No puedo construir el trillo sin los útiles necesarios.";
+			               	close;
+				    }
+				    break;
+			        case 2:
+				      	mes .hansel$;
+			            mes "Ten cuidado, algunas cosas son difíciles de conseguir.";
+			            break;
+			}
+			break;
+		case 2:
+		        mes "Para fabricar una hoz necesito:";
+			setquest 25055;
+		        mes "100 ^FF0000Stone Fragment^000000";
+		        mes "3 ^FF0000Ba Gua^000000";
+		        mes "3 ^FF0000Broken Pharaoh Emblem^000000";
+		        mes "y 1 ^FF0000Platinum Shotel^000000";
+		        next;
+		        switch(select("Aquí tienes","Iré a ayudarte")){
+			        case 1:
+			            mes .hansel$;
+			            if((countitem(7067) > 99) && (countitem(7169) > 2) && (countitem(7113) > 2) && (countitem(13404) > 0)){
+			                delitem 7067,100;
+			                delitem 7169,5;
+			                delitem 7113,5;
+			                delitem 13404,1;
+			                mes "Esto por aquí.";
+			                next;
+			                mes .hansel$;
+			                mes "Esto por allí.";
+			                next;
+			                mes .hansel$;
+			                mes "¡Una hoz muy chula!";
+			                mes "Muchas gracias por tu ayuda";
+			                mes "Aquí tienes lo que te prometí.";
+					if(checkquest(25055) != -1) {
+						completequest 25055;
+					}
+					showevent 0, 2;
+			                getitem 30050,1;	     
+			                getitem 528,25;          
+			                close;
+			            }else{
+			          	mes "No puedo construir la hoz sin los útiles necesarios.";
+			               	close;
+				    }
+				    break;
+			        case 2:
+				    mes .hansel$;
+			            mes "Ten cuidado, algunas cosas son difíciles de conseguir.";
+			            break;
+			}
+			break;
+		case 3:
+		        mes "Para fabricar una horca necesito:";
+			setquest 25056;
+		        mes "25 ^FF0000Red Tinted Feather^000000";
+		        mes "1 ^FF0000Broken Pharaoh Emblem^000000";
+		        mes "1 ^FF0000Tendrillion Horn^000000";
+		        mes "y 1 ^FF0000Broken Crown^000000";
+		        next;
+		        switch(select("Aquí tienes","Iré a ayudarte")){
+			        case 1:
+			            mes .hansel$;
+			            if((countitem(7440) > 24) && (countitem(7113) > 0) && (countitem(6033) > 0) && (countitem(7754) > 0)){
+			                delitem 7440,25;
+			                delitem 7113,5;
+			                delitem 6033,1;
+			                delitem 7754,1;
+			                mes "Esto por aquí.";
+			                next;
+			                mes .hansel$;
+			                mes "Esto por allí.";
+			                next;
+			                mes .hansel$;
+			                mes "¡Una horca muy chula!";
+			                mes "Muchas gracias por tu ayuda";
+			                mes "Aquí tienes lo que te prometí.";
+					if(checkquest(25056) != -1) {
+						completequest 25056;
+					}
+					showevent 0, 2;
+			                getitem 30051,1;	     
+			                getitem 517,25;          
+			                close;
+			            }else{
+			          	mes "No puedo construir una horca sin los útiles necesarios.";
+			               	close;
+				    }
+				    break;
+			        case 2:
+				    mes .hansel$;
+			            mes "Ten cuidado, algunas cosas son difíciles de conseguir.";
+			            break;
+			}
+			break;
+		case 4:
+		        mes "Para fabricar una guadaña necesito:";
+			setquest 25057;
+		      	mes "35 ^FF0000Handcuffs^000000";
+		        mes "5 ^FF0000Three-Headed Dragon's Head^000000";
+		        mes "1 ^FF0000Hard Skin^000000";
+		        mes "y 1 ^FF0000Crescent Scythe^000000";
+		        next;
+		        switch(select("Aquí tienes","Iré a ayudarte")){
+			        case 1:
+			            mes .hansel$;
+			            if((countitem(7345) > 34) && (countitem(7443) > 4) && (countitem(6022) > 0) && (countitem(1466) > 0)){
+			                delitem 7345,35;
+			                delitem 7443,6;
+			                delitem 6022,2;
+			                delitem 1466,1;
+			                mes "Esto por aquí.";
+			                next;
+			                mes .hansel$;
+			                mes "Esto por allí.";
+			                next;
+			                mes .hansel$;
+			                mes "¡Una guadaña muy chula!";
+			                mes "Muchas gracias por tu ayuda";
+			                mes "Aquí tienes lo que te prometí.";
+					if(checkquest(25057) != -1) {
+						completequest 25057;
+					}
+					showevent 0, 2;
+			                getitem 30054,1;	     
+			                getitem 578,20;          
+			                close;
+			            }else{
+			          	mes "No puedo construir una guadaña sin los útiles necesarios.";
+			               	close;
+				    }
+				    break;
+			        case 2:
+				    mes .hansel$;
+			            mes "Ten cuidado, algunas cosas son difíciles de conseguir.";
+			            break;
+			}
+			break;
+		case 5:
+		        mes "Para fabricar una zoqueta necesito:";
+			setquest 25058;
+		      	mes "35 ^FF0000Eye of Hellion^000000";
+		        mes "10 ^FF0000Unicorn Horn^000000";
+		        mes "1 ^FF0000Masque of Tutankhamen^000000";
+		        mes "y 1 ^FF0000Will of Red Darkness^000000";
+		        next;
+		        switch(select("Aquí tienes","Iré a ayudarte")){
+			        case 1:
+			            mes .hansel$;
+			            if((countitem(7337) > 34) && (countitem(2257) > 9) && (countitem(7114) > 0) && (countitem(7566) > 0)){
+			                delitem 7337,35;
+			                delitem 2257,10;
+			                delitem 7114,1;
+			                delitem 7566,1;
+			                mes "Esto por aquí.";
+			                next;
+			                mes .hansel$;
+			                mes "Esto por allí.";
+			                next;
+			                mes .hansel$;
+			                mes "¡Una zoqueta muy chula!";
+			                mes "Muchas gracias por tu ayuda";
+			                mes "Aquí tienes lo que te prometí.";
+					if(checkquest(25058) != -1) {
+						completequest 25058;
+					}
+					showevent 0, 2;
+			                getitem 30053,1;     
+			                getitem 558,10;          
+			                close;
+			            }else{
+			          	mes "No puedo construir una zoqueta sin los útiles necesarios.";
+			               	close;
+				    }
+				    break;
+			        case 2:
+				    mes .hansel$;
+			            mes "Ten cuidado, algunas cosas son difíciles de conseguir.";
+			            break;
+			}
+			break;
+		case 6:
+			mes .hansel$;
+			mes "Si has llegado hasta aquí significa que algo está mal";
+			mes "Por favor, avisa a algún GM de esto";
+			break;
+	}
+	close;
+}

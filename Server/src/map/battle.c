@@ -2330,12 +2330,10 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 		if ( skill_num == PA_SHIELDCHAIN ) {
 			short index = sd->equip_index[EQI_HAND_L];
 			if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
-				ATK_ADD(sd->inventory_data[index]->weight/10);
-				break;
+				ATK_ADD(10*sd->inventory_data[index]->weight);
 			}
 			if( sc && sc->data[SC_GLOOMYDAY_SK] )
 				ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
-			break;
 		}
 		
 	} //if (sd)
@@ -3490,24 +3488,21 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 	ATK_RATE2(c_bossmod[0],c_bossmod[1]); // Add Boss Modifications
 	ATK_RATE(c_atkmod[0]);
 	ATK_ADD(base_damage); // Adding Status Damage to Formula.
-	
+
 	// This cannot be added until def/def2 reductions are done
 	BON_RATE2(c_racemod[0],c_racemod[1]);
 	BON_RATE2(c_bossmod[0],c_bossmod[1]);
 	BON_RATE(c_atkmod[0]);
-	if( sd && (skill_id == CR_SHIELDBOOMERANG || skill_id == PA_SHIELDCHAIN) && (i = sd->equip_index[EQI_HAND_L]) >= 0 && sd->inventory_data[i] && sd->inventory_data[i]->type == IT_ARMOR ) {
+	if( sd && (skill_id == CR_SHIELDBOOMERANG || skill_id == PA_SHIELDCHAIN) && (i = sd->equip_index[EQI_HAND_L]) >= 0 && sd->inventory_data[i] && sd->inventory_data[i]->type == IT_ARMOR )
 		BON_ADD(10 * sd->status.inventory[i].refine);
-	}
 
-	if ( skill_num == PA_SHIELDCHAIN ) {
+	if ( skill_id == PA_SHIELDCHAIN ) {
 		short index = sd->equip_index[EQI_HAND_L];
 		if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
-			ATK_ADD(sd->inventory_data[index]->weight/10);
-			break;
+			ATK_ADD(10*sd->inventory_data[index]->weight);
 		}
 		if( sc && sc->data[SC_GLOOMYDAY_SK] )
 			ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
-		break;
 	}
 
 	if( flag.hit && !flag.infdef )
@@ -6197,6 +6192,7 @@ static const struct _battle_data {
 	{ "bg_ranking_bonus",                   &battle_config.bg_ranking_bonus,                0,      0,      100,            },
 	{ "bg_ranked_mode",                     &battle_config.bg_ranked_mode,                  0,      0,      1,              },
 	{ "bg_ranked_max_games",                &battle_config.bg_ranked_max_games,             50,     10,     100,            },
+	{ "bg_reportafk_leaderonly",            &battle_config.bg_reportafk_leaderonly,         1,      0,      1,              },
 // Renewal System
 	{ "renewal_system_enable",              &battle_config.renewal_system_enable,           0,      0,      1,              },
 	{ "warg_can_falcon",                    &battle_config.warg_can_falcon,                 0,      0,      1,              },
@@ -6230,6 +6226,7 @@ static const struct _battle_data {
 
 	{ "mob_slave_adddrop",                  &battle_config.mob_slave_adddrop,               0,      0,      1,              },
 	{ "reflect_damage_fix",                 &battle_config.reflect_damage_fix,              1,      0,      1,              },
+	{ "dancing_weaponchange_fix",           &battle_config.dancing_weaponchange_fix,        1,      0,      1,              },
 
 	{ "anti_mayapurple_hack",               &battle_config.anti_mayapurple_hack,            0,      0,      1,              },
 };

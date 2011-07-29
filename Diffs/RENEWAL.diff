@@ -1,6 +1,6 @@
 Index: src-base/map/battle.c
 ===================================================================
---- src-base/map/battle.c	(revision 238)
+--- src-base/map/battle.c	(revision 241)
 +++ src-base/map/battle.c	(working copy)
 @@ -1448,7 +1448,7 @@
  				break;
@@ -11,6 +11,15 @@ Index: src-base/map/battle.c
  			case LG_SHIELDPRESS:
  			case LG_EARTHDRIVE:
  				flag.weapon = 0;
+@@ -1786,7 +1786,7 @@
+ 				i*=i;
+ 				ATK_ADD(i); //Add str bonus.
+ 				if( sc && sc->data[SC_GLOOMYDAY_SK] && skill_num == LK_SPIRALPIERCE )
+-					ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
++					ATK_ADD(50 + 20 * sc->data[SC_GLOOMYDAY_SK]->val1);
+ 				switch (tstatus->size) { //Size-fix. Is this modified by weapon perfection?
+ 					case 0: //Small: 125%
+ 						ATK_RATE(125);
 @@ -1798,7 +1798,7 @@
  				}
  				break;
@@ -20,22 +29,30 @@ Index: src-base/map/battle.c
  			case LG_SHIELDPRESS:
  			case LG_EARTHDRIVE:
  				wd.damage = sstatus->batk;
-@@ -2323,9 +2323,19 @@
- 		if( skill_num == CR_SHIELDBOOMERANG || skill_num == PA_SHIELDCHAIN )
+@@ -1813,7 +1813,7 @@
+ 				} else
+ 					ATK_ADD(sstatus->rhw.atk2); //Else use Atk2
+ 				if( sc && sc->data[SC_GLOOMYDAY_SK] )
+-					ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
++					ATK_ADD(50 + 20 * sc->data[SC_GLOOMYDAY_SK]->val1);
+ 				break;
+ 			case NC_AXEBOOMERANG:
+ 				//TODO: Need to get official value of weight % as addition to skill damage. [Jobbie]
+@@ -2324,8 +2324,18 @@
  		{ //Refine bonus applies after cards and elements.
  			short index= sd->equip_index[EQI_HAND_L];
--			if( index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR )
-+			if( index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR ) {
- 				ATK_ADD(10*sd->status.inventory[index].refine);
-+			}
+ 			if( index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR )
+-				ATK_ADD(10*sd->status.inventory[index].refine);
++				ATK_ADD(30*sd->status.inventory[index].refine);
++
  		}
 +		if ( skill_num == PA_SHIELDCHAIN ) {
 +			short index = sd->equip_index[EQI_HAND_L];
 +			if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
-+				ATK_ADD(sd->inventory_data[index]->weight/10);
++				ATK_ADD(sd->inventory_data[index]->weight*3);
 +			}
 +			if( sc && sc->data[SC_GLOOMYDAY_SK] )
-+				ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
++				ATK_ADD(50 + 20 * sc->data[SC_GLOOMYDAY_SK]->val1);
 +		}
 +		
  	} //if (sd)
@@ -59,28 +76,38 @@ Index: src-base/map/battle.c
  		case LG_SHIELDPRESS:
  		case LG_EARTHDRIVE:
  			wd.damage = sstatus->batk;
-@@ -3478,14 +3488,24 @@
- 	ATK_RATE2(c_bossmod[0],c_bossmod[1]); // Add Boss Modifications
- 	ATK_RATE(c_atkmod[0]);
- 	ATK_ADD(base_damage); // Adding Status Damage to Formula.
--
-+	
- 	// This cannot be added until def/def2 reductions are done
- 	BON_RATE2(c_racemod[0],c_racemod[1]);
+@@ -2973,7 +2983,7 @@
+ 			else
+ 				ATK_ADD(sstatus->rhw.atk2); //Else use Atk2
+ 			if( sc && sc->data[SC_GLOOMYDAY_SK] )
+-				ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
++				ATK_ADD(50 + 20 * sc->data[SC_GLOOMYDAY_SK]->val1);
+ 			break;
+ 
+ 		case HFLI_SBR44:	//[orn]
+@@ -3024,7 +3034,7 @@
+ 					wd.damage += sstatus->rhw.atk2 * 8 / 10; // Monsters, mercenaries
+ 
+ 				if( sc && sc->data[SC_GLOOMYDAY_SK] && skill_id == LK_SPIRALPIERCE )
+-					ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
++					ATK_ADD(50 + 20 * sc->data[SC_GLOOMYDAY_SK]->val1);
+ 
+ 				switch( tstatus->size )
+ 				{
+@@ -3484,8 +3494,17 @@
  	BON_RATE2(c_bossmod[0],c_bossmod[1]);
  	BON_RATE(c_atkmod[0]);
--	if( sd && (skill_id == CR_SHIELDBOOMERANG || skill_id == PA_SHIELDCHAIN) && (i = sd->equip_index[EQI_HAND_L]) >= 0 && sd->inventory_data[i] && sd->inventory_data[i]->type == IT_ARMOR )
-+	if( sd && (skill_id == CR_SHIELDBOOMERANG || skill_id == PA_SHIELDCHAIN) && (i = sd->equip_index[EQI_HAND_L]) >= 0 && sd->inventory_data[i] && sd->inventory_data[i]->type == IT_ARMOR ) {
- 		BON_ADD(10 * sd->status.inventory[i].refine);
-+	}
+ 	if( sd && (skill_id == CR_SHIELDBOOMERANG || skill_id == PA_SHIELDCHAIN) && (i = sd->equip_index[EQI_HAND_L]) >= 0 && sd->inventory_data[i] && sd->inventory_data[i]->type == IT_ARMOR )
+-		BON_ADD(10 * sd->status.inventory[i].refine);
++		BON_ADD(30*sd->status.inventory[i].refine);
  
 +	if ( skill_id == PA_SHIELDCHAIN ) {
 +		short index = sd->equip_index[EQI_HAND_L];
 +		if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
-+			ATK_ADD(sd->inventory_data[index]->weight/10);
++			ATK_ADD(sd->inventory_data[index]->weight*3);
 +		}
 +		if( sc && sc->data[SC_GLOOMYDAY_SK] )
-+			ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
++			ATK_ADD(50 + 20 * sc->data[SC_GLOOMYDAY_SK]->val1);
 +	}
 +
  	if( flag.hit && !flag.infdef )
@@ -88,7 +115,7 @@ Index: src-base/map/battle.c
  		// -------------------------------------------------
 Index: src-base/map/skill.c
 ===================================================================
---- src-base/map/skill.c	(revision 238)
+--- src-base/map/skill.c	(revision 241)
 +++ src-base/map/skill.c	(working copy)
 @@ -852,7 +852,7 @@
  		skillratio += 10 * skill_lv - 10;
@@ -109,7 +136,7 @@ Index: src-base/map/skill.c
  		if(battle_check_undead(tstatus->race,tstatus->def_ele))
 Index: src-base/map/status.c
 ===================================================================
---- src-base/map/status.c	(revision 238)
+--- src-base/map/status.c	(revision 241)
 +++ src-base/map/status.c	(working copy)
 @@ -7071,23 +7071,17 @@
  			val2 = 75 + 25*val1; //Cri bonus

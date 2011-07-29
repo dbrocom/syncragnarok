@@ -1097,10 +1097,7 @@ void read_homunculus_expdb(void)
 
 	memset(hexptbl,0,sizeof(hexptbl));
 	for(i=0; i<2; i++){
-		if( !battle_config.renewal_system_enable )
-			sprintf(line, "%s/%s", db_path, filename[i]);
-		else
-			sprintf(line, "%s/%s", db_path, !i ? "exp_homun_renewal.txt" : "exp_homun2_renewal.txt");
+		sprintf(line, "%s/%s", db_path, filename[i]);
 
 		fp=fopen(line,"r");
 		if(fp == NULL){

@@ -1676,7 +1676,28 @@ xmas_in,35,30,3	script	Hat Merchant#zero	797,{
 			close;
 		}
 	case 5:
-		if (countitem(2226) > 0 && countitem(7038) > 499) {
+		mes "[Mad Hatter]";
+		mes "¿Te interesa algún color en particular?";
+		next;
+		switch(select("^0000FFAzul^000000:^BDBDBDBlanco^000000:^BDBDBDGris^000000:^FA58F4Rosa^000000")){
+				case 1:
+					set .@dye, 978;		//Blue_Dyestuffs
+					set .@beanie, 5236;
+					break;
+				case 2:
+					set .@dye, 982;		//White_Dyestuffs
+					set .@beanie, 5076;
+					break;
+				case 3:
+					set .@dye, 30701;	//Grey_Dyestuffs
+					set .@beanie, 5235;
+					break;
+				case 4:
+					set .@dye, 30702;	//Pink_Dyestuffs
+					set .@beanie, 5232;
+					break;
+			}
+		if (countitem(2226) > 0 && countitem(7038) > 499 && countitem(.@dye) > 0) {
 			mes "[Mad Hatter]";
 			mes "A Beanie...!";
 			mes "Whaddup, broham. This hat keeps your head toasty, but let's you play things cool with your homeys. And, um, fly girls.";
@@ -1702,6 +1723,7 @@ xmas_in,35,30,3	script	Hat Merchant#zero	797,{
 			mes "^3355FF*Crunch Crunch Tap Tap*^000000";
 			next;
 			delitem 2226,1; //Cap
+			delitem .@dye,1; //Dyestuff
 			delitem 7038,500; //Yarn
 			mes "[Mad Hatter]";
 			mes "There you go! Your very own Beanie! Cute, but still 'dope!'";
@@ -1709,7 +1731,7 @@ xmas_in,35,30,3	script	Hat Merchant#zero	797,{
 			mes "[Mad Hatter]";
 			mes "Uh! Uh!";
 			mes "I'm in da house!";
-			getitem 5076,1; //Fur_Hat
+			getitem .@beanie,1; //Fur_Hat
 			close;
 		}
 		else {
@@ -1723,7 +1745,8 @@ xmas_in,35,30,3	script	Hat Merchant#zero	797,{
 			next;
 			mes "[Mad Hatter]";
 			mes "Anyway, this is what I need to make a Beanie...";
-			mes "1 ^3355FFCap^000000 and";
+			mes "1 ^3355FFCap^000000,";
+			mes "1 ^3355FFDyestuff^000000 and";
 			mes "500 ^3355FFYarn^000000.";
 			next;
 			mes "[Mad Hatter]";
@@ -2104,11 +2127,40 @@ morocc,273,79,4	script	Educated Traveller	99,{
 		next;
 		switch(select("Drooping Cat:Smokie Leaf:Lazy Smokie:Blue Fish:That's... okay.")) {
 		case 1:
-			if (countitem(2233) > 0 && countitem(983) > 0 && countitem(7206) > 299) {
+			mes "[Lee Hester]";
+			mes "¿Te gustaría elegir un color en particular?";
+			next;
+			switch(select("^0000FFAzul^000000:Negro:^AEB404Amarillo^000000:^61380BMarrón^000000:^BDBDBDGris^000000:^FA58F4Rosa^000000")){
+				case 1:
+					set .@dye, 978;		//Blue_Dyestuffs
+					set .@droopcat, 5233;
+					break;
+				case 2:
+					set .@dye, 983;		//Black_Dyestuffs
+					set .@droopcat, 5058;
+					break;
+				case 3:
+					set .@dye, 976;		//Yellow_Dyestuffs
+					set .@droopcat, 5234;
+					break;
+				case 4:
+					set .@dye, 30700;	//Brown_Dyestuffs
+					set .@droopcat, 5231;
+					break;
+				case 5:
+					set .@dye, 30701;	//Grey_Dyestuffs
+					set .@droopcat, 5230;
+					break;
+				case 6:
+					set .@dye, 30702;	//Pink_Dyestuffs
+					set .@droopcat, 5232;
+					break;
+			}
+			if (countitem(2233) > 0 && countitem(.@dye) > 0 && countitem(7206) > 299) {
 				mes "[Lee Hester]";
 				mes "Ah...";
-				mes "You brought everything.";
-				mes "Excellent! Okay, give me some time to create the 'Drooping Cat.'";
+				mes "Has traído todo.";
+				mes "¡Excelente! De acuerdo, vale, dame algo de tiempo para crearte el 'Drooping Cat.'";
 				next;
 				mes "*Scratch scratch...*";
 				next;
@@ -2120,10 +2172,10 @@ morocc,273,79,4	script	Educated Traveller	99,{
 				mes "*Scratch scratch...*";
 				next;
 				mes "^3355FFHmm...";
-				mes "Those don't sound like hat-making noises...^000000";
+				mes "No parece que esté haciendo un peluche...^000000";
 				next;
 				mes "[Lee Hester]";
-				mes "Oh, don't worry. It's almost done.";
+				mes "Oh, no te preocupes, ya está casi terminado.";
 				next;
 				mes "*Swish swish...*";
 				next;
@@ -2135,13 +2187,13 @@ morocc,273,79,4	script	Educated Traveller	99,{
 				mes "*Chikachikachoom*";
 				next;
 				mes "[Lee Hester]";
-				mes "There you go. *Phew~*";
-				mes "Your own 'Drooping Cat' hat, powered by a scientific principle! Also, would you mind if I keep that Desert Wolf Claw? Heh heh, thanks~";
+				mes "Aquí tienes. *Phew~*";
+				mes "Tu propio sombrero de 'Drooping Cat', ¡siguiendo un principio científico! ¿Te importa si me quedo con ese Desert Wolf Claw? Je je je, gracias~";
 				delitem 2233,1; //Circlet_
-				delitem 983,1; //Black_Dyestuffs
+				delitem .@dye,1; //Dyestuffs
 				delitem 7206,300; //Black_Kitty_Doll
 				delitem 7030,1; //Claw_Of_Desert_Wolf
-				getitem 5058,1; //Drooping_Kitty
+				getitem .@droopcat,1; //Drooping_Kitty
 				emotion e_ho;
 				close;
 			}
@@ -2166,7 +2218,7 @@ morocc,273,79,4	script	Educated Traveller	99,{
 				mes "[Lee Hester]";
 				mes "The items I need are...";
 				mes "1 ^ff0000slotted Circlet^000000,";
-				mes "1 ^ff0000Black Dyestuffs^000000";
+				mes "1 ^ff0000Dyestuff^000000";
 				mes "and 300 ^ff0000Black Cat Doll^000000.";
 				next;
 				mes "[Lee Hester]";

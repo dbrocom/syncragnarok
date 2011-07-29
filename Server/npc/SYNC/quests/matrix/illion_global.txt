@@ -1,0 +1,48 @@
+function	script	il_range	{
+
+	getmapxy .@m$,.@x0,.@y0,0;
+	getmapxy .@m$,.@x1,.@y1,1,getarg(0);
+	set .@a,getarg(1,3);
+	if(	(.@x0 >= (.@x1 - .@a)) &&
+		(.@x0 <= (.@x1 + .@a)) &&
+		(.@y0 >= (.@y1 - .@a)) &&
+		(.@y0 <= (.@y1 + .@a))
+	) return;
+	else {
+		set .@rx,.@x1 - .@x0;
+		set .@ry,.@y1 - .@y0;
+		if(pow(.@rx,2) < pow(.@ry,2)) set .@a,.@ry;
+		else set .@a,.@rx;
+		if(.@a < 0) set .@a,-.@a;
+		set .@b,.@a;
+		while(.@a && !checkcell(.@m$,.@x1,.@y1,cell_chkpass)) {
+			set .@a,.@a - 1;
+			set .@x1,.@x0 + .@rx * .@a / .@b;
+			set .@y1,.@y0 + .@ry * .@a / .@b;
+		}
+		unitwalk getcharid(3),.@x1,.@y1;
+	}
+	end;
+}
+
+-	script	#il_mapflag	-1,{
+
+OnInit:
+	setmapflag "prontera",mf_loadevent;
+	setmapflag "il_fild01",mf_nobranch;
+	setmapflag "il_fild01",mf_noteleport;
+	setmapflag "il_fild01",mf_nomemo;
+	setmapflag "il_fild01",mf_nightenabled;
+	setmapflag "il_q01",mf_nobranch;
+	setmapflag "il_q01",mf_noteleport;
+	setmapflag "il_q01",mf_nomemo;
+	setmapflag "il_q02",mf_nobranch;
+	setmapflag "il_q02",mf_nomemo;
+	setmapflag "il_q02",mf_noreturn;
+	setmapflagnosave "il_q02","il_q01",16,53;
+	setmapflag "il_q03",mf_nobranch;
+	setmapflag "il_q03",mf_noteleport;
+	setmapflag "il_q03",mf_nomemo;
+	setmapflag "il_q03",mf_loadevent;
+	end;
+}

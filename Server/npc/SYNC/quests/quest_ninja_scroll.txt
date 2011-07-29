@@ -1,0 +1,87 @@
+//===== Custom eAthena Script =======================================
+//= Ninja Scroll Custom Quest
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Descripción =================================================
+//= ¡Sólo realizable por Ninjas!
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Primera versión
+//===================================================================
+
+amatsu,296,134,3	script	Yoichiro	764,{
+
+	mes "[^0000FFYoichiro^000000]";
+	mes "Estoy aquí, en el bosque, entrenando...";
+	if ( Class != Job_Ninja ){
+		mes "... pero tú no has visto nada...";
+		close;
+	}
+	mes "...¡Al fin un compañero de profesión!";
+	next;
+	mes "[^0000FFYoichiro^000000]";
+	mes "He descubierto una forma de fomentar nuestros poderes mágicos. ¿Te interesaría aprenderlo?";
+	next;
+	if(select("Por supuesto","No, gracias, no soy de magias") == 2){
+		mes "Disculpa entonces";
+		mes "No quería molestarte";
+		mes "Nin nin nin";
+		close;
+	}
+	mes "[^0000FFYoichiro^000000]";
+	mes "En ese caso tráeme lo siguiente:";
+	mes "250 ^FF0000Slick Paper^000000";
+	mes "50 ^FF0000Piece of Bamboo^000000";
+	mes "40 ^FF0000Elastic Band^000000";
+	next;
+	mes "[^0000FFYoichiro^000000]";
+	mes "Y no te olvides de conseguir también:";
+	mes "1 ^FF0000Squid Ink^000000";
+	mes "1 ^FF0000Blue tinted Feather^000000";
+	mes "1 ^FF0000Red tinted Feather^000000";
+	next;
+	switch(select("Ya lo tengo todo","Volveré en cuanto tenga todo")){
+		case 1:
+			mes "[^0000FFYoichiro^000000]";
+			if((countitem(1024) > 0) && (countitem(7441) > 0) && (countitem(7440) > 0) && (countitem(7111) > 249)  && (countitem(7150) > 49)  && (countitem(7200) > 39)){
+				delitem 1024,1;
+				delitem 7441,1;
+				delitem 7440,1;
+				delitem 7111,250;
+				delitem 7150,50;
+				delitem 7200,40;
+				mes "Nin nin nin nin...";
+				next;
+				misceffect 154;
+				getitem 5362,1;
+				mes "¡Aquí tienes!";
+				mes "Y recuerda que este es tu camino del Ninja.";
+				mes "Nadie debe interponerse en él.";
+				close;
+			}else{
+				mes "Todavía te faltan cosas.";
+				close;
+			}
+			break;
+		case 2:
+			mes "[^0000FFYoichiro^000000]";
+			mes "Vete tranquilo, pero se constante.";
+			break;
+	}
+	close;
+}

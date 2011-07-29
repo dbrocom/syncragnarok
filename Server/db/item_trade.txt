@@ -49,7 +49,7 @@
 7418,91,99	// Mission_ScrollB
 
 // PVP Item
-//7420,115,99	// Skull_
+7420,91,99	// Skull_
 
 // 10.3 Quest items
 // * "Gaebolg family Curse" items
@@ -723,8 +723,8 @@
 7914,123,99	// Ancient_Document_TW
 11503,91,99	// Siege_White_Potion
 11504,91,99	// Siege_Blue_Potion
-12274,123,99	// Gold_Pill_1
-12275,123,99	// Gold_Pill_2
+12274,95,99	// Gold_Pill_1
+12275,95,99	// Gold_Pill_2
 12287,123,99	// Love_Angel
 12288,123,99	// Squirrel
 12289,123,99	// Gogo
@@ -1556,8 +1556,6 @@
 6122,73,99	// Paint_Brush
 12333,127,99	// Ancilla (need confirm this)
 
-// Unreal 3 - Juggernaut [Ivion]
-7420,123,99
 
 // Salón de Gladiadores
 31030,123,99

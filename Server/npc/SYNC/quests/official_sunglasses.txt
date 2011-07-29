@@ -1,0 +1,282 @@
+//===== eAthena Script =======================================
+//= Quest For Slotted Sunglasses
+//===== By: ==================================================
+//= Aegis - amichan
+//===== Current Version: =====================================
+//= 1.7
+//===== Compatible With: =====================================
+//= Any eAthena Version;
+//===== Description: =========================================
+//= Quest to get Slotted Sunglasses
+//===== Additional Comments: =================================
+//= 1.0 by Aegis 1.1 by aichan 1.2 by x[tsk] 1.3 by Darkchild
+//= 1.5 Fixed Exploit [Lupus]
+//= 1.6 Fixed Exploit [KarLaeda]
+//= 1.7 Relocated 'Maseph' to moc_fild07. [Kisuka]
+//============================================================
+
+// quest will reset it self after 1 pair of Slotted Sunglasses is made. 
+// 1st part of the quest
+
+alberta,88,193,5	script	Sunglasses Trader	73,{
+	if(SG_QUEST1 == 1) goto L_SG_Q1_Done;
+	mes "[Sunglasses Trader]";
+	mes "Hola. ¿Qué puedo hacer por ti?";
+	next;
+	menu "He oído que puedes hacer ^0000FFSlotted Sunglasses^000000.",-,"Nada, no quería molestarte.",L_SG_No;
+
+	mes "[Sunglasses Trader]";
+	mes "Yo no las fabrico, pero te puedo decir quién lo hace... por una pequeña tarifa...";
+	next;
+	menu "¿Cuánto?",L_SG_1,"Paso, lo buscaré por mi mismo!",-;
+
+	mes "[Sunglasses Trader]";
+	mes "Tu verás, pero la constructora no te dará ningún ^0000FFSlotted Sunglasses^000000 a menos yo le avise de que vas a ir a verle.";
+	mes "Y sólo yo sé cómo contactar con ella.";
+	next;
+	mes "[Sunglasses Trader]";
+	mes "Acabarás volviendo, hahaha.";
+	close;
+L_SG_1:
+	mes "[Sunglasses Trader]";
+	mes "Si quieres que te diga cómo conseguir las ^0000FFSlotted Sunglasses^000000 tendrás que traerme: ";
+	mes "^0000881 Carat Diamond^000000, ";
+	mes "^00008850 Feathers^000000, ";
+	mes "and ^000088100000z^000000.";
+	next;
+	menu "Está bien, aquí tienes.",L_SG_1_Check,"¡Eso es mucho!",-;
+
+	mes "[Sunglasses Trader]";
+	mes "Es tu problema, no el mío.";
+	close;
+L_SG_1_Check:
+	if (countitem(730) < 1) goto L_SG_Diamond;
+	if (countitem(949) < 50) goto L_SG_Feathers;
+	if (zeny<100000) goto L_SG_Funds;
+	delitem 730,1;
+	delitem 949,50;
+	set zeny,zeny-100000;
+	set SG_QUEST1,1;
+	mes "[Sunglasses Trader]";
+	mes "Magnífico. AHora, escucha atentamente.";
+	next;
+	mes "[Sunglasses Trader]";
+	mes "Deberás buscar a una señorita llamada Maseph.";
+	mes "La encontrarás al Norte de Morocc.";
+	mes "Le avisaré de que vas para que esté preparada.";
+	close;
+L_SG_Diamond:
+	mes "[Sunglasses Trader]";
+	mes "No traes el ^000088Carat Diamond^000000. Vuelve cuando lo hayas conseguido.";
+	close;
+L_SG_Feathers:
+	mes "[Sunglasses Trader]";
+	mes "No traes los ^00008850 Feathers^000000. Vuelve cuando lo hayas conseguido..";
+	close;
+L_SG_Funds:
+	mes "[Sunglasses Trader]";
+	mes "No traes los ^000088100000z^000000. Vuelve cuando lo hayas conseguido.";
+	close;
+L_SG_Q1_Done:
+	mes "[Sunglasses Trader]";
+	mes "No te puedo ayudar en nada más.";
+	next;
+	mes "[Sunglasses Trader]";
+	mes "Ve a hablar con Maseph al Norte de Morocc. Ella te dirá lo que tienes que hacer.";
+	close;
+L_SG_No:
+	mes "[Sunglasses Trader]";
+	mes "Vuelve cuando estés listo.";
+	close;
+}
+ 
+// 2nd part of the quest
+
+moc_fild07,334,186,5	script	Maseph	702,{
+	if(SG_QUEST1 == 1) goto L_SG_2;
+	mes "[Maseph]";
+	mes "Un día precioso, ¿a que sí?";
+	close;
+L_SG_2:
+	mes "[Maseph]";
+	mes "Hola. Sabía que vendrías.";
+	next;
+	mes "[Maseph]";
+	mes "Buscas unos ^000088Slotted Sunglasses^000000, ¿verdad?";
+	next;
+	menu "Sí",L_SG_2_Start,"No, lamento molestarte.",-;
+
+	mes "[Maseph]";
+	mes "Entonces no perdamos más el tiempo.";
+	close;
+L_SG_2_Start:
+	mes "[Maseph]";
+	mes "Para fabricar unas, necesitar unas ^000088Sunglasses^000000 y 400000z.";
+	mes "Además, el tinte del color del que quieras que sean las gafas.";
+	if ( (countitem(2201) < 1) || (zeny<400000) ) { close; }
+	mes "¿Qué color querías?";
+	next;
+	switch(select("Negro:^0000FFAzul^000000:^04B4AECyan^000000:^04B404Verde^000000:^D7DF01Amarillo^000000:^FF8000Naranja^000000:^DF0101Rojo^000000:^8000FFMorado^000000:^A4A4A4Blanco^000000:^3B240BMarrón^000000:^B404AERosa^000000")){
+		case 1: // Negro
+			if (countitem(983) < 1) {
+				mes "[Maseph]";
+				mes "Lo siento, pero si quieres unas gafas negras necesitaré el "+getitemname(983);
+				close;
+			}
+			delitem 983,1;
+			mes "[Maseph]";
+			mes "Gracias. ¡Manos a la obra!";
+			next;
+			mes "[Maseph]";
+			mes "Aquí tienes mi amigo.";
+			getitem 2202,1;
+			break;		
+		case 2: // Azul
+			if (countitem(978) < 1) {
+				mes "[Maseph]";
+				mes "Lo siento, pero si quieres unas gafas azules necesitaré el "+getitemname(978);
+				close;
+			}
+			delitem 978,1;
+			mes "[Maseph]";
+			mes "Gracias. ¡Manos a la obra!";
+			next;
+			mes "[Maseph]";
+			mes "Aquí tienes mi amigo.";
+			getitem 30000,1;
+			break;
+		case 3: // Cyan
+			if (countitem(30503) < 1) {
+				mes "[Maseph]";
+				mes "Lo siento, pero si quieres unas gafas color cyan necesitaré el "+getitemname(30503);
+				close;
+			}
+			delitem 30503,1;
+			mes "[Maseph]";
+			mes "Gracias. ¡Manos a la obra!";
+			next;
+			mes "[Maseph]";
+			mes "Aquí tienes mi amigo.";
+			getitem 30001,1;
+			break;
+		case 4: // Verde
+			if (countitem(979) < 1) {
+				mes "[Maseph]";
+				mes "Lo siento, pero si quieres unas gafas verdes necesitaré el "+getitemname(979);
+				close;
+			}
+			delitem 979,1;
+			mes "[Maseph]";
+			mes "Gracias. ¡Manos a la obra!";
+			next;
+			mes "[Maseph]";
+			mes "Aquí tienes mi amigo.";
+			getitem 30002,1;
+			break;
+		case 5: // Amarillo
+			if (countitem(976) < 1) {
+				mes "[Maseph]";
+				mes "Lo siento, pero si quieres unas gafas amarillas necesitaré el "+getitemname(976);
+				close;
+			}
+			delitem 976,1;
+			mes "[Maseph]";
+			mes "Gracias. ¡Manos a la obra!";
+			next;
+			mes "[Maseph]";
+			mes "Aquí tienes mi amigo.";
+			getitem 30003,1;
+			break;
+		case 6: // Naranja
+			if (countitem(980) < 1) {
+				mes "[Maseph]";
+				mes "Lo siento, pero si quieres unas gafas naranjas necesitaré el "+getitemname(980);
+				close;
+			}
+			delitem 980,1;
+			mes "[Maseph]";
+			mes "Gracias. ¡Manos a la obra!";
+			next;
+			mes "[Maseph]";
+			mes "Aquí tienes mi amigo.";
+			getitem 30004,1;
+			break;
+		case 7: // Rojo
+			if (countitem(975) < 1) {
+				mes "[Maseph]";
+				mes "Lo siento, pero si quieres unas gafas rojas necesitaré el "+getitemname(975);
+				close;
+			}
+			delitem 975,1;
+			mes "[Maseph]";
+			mes "Gracias. ¡Manos a la obra!";
+			next;
+			mes "[Maseph]";
+			mes "Aquí tienes mi amigo.";
+			getitem 30005,1;
+			break;
+		case 8: // Morado
+			if (countitem(981) < 1) {
+				mes "[Maseph]";
+				mes "Lo siento, pero si quieres unas gafas moradas necesitaré el "+getitemname(981);
+				close;
+			}
+			delitem 981,1;
+			mes "[Maseph]";
+			mes "Gracias. ¡Manos a la obra!";
+			next;
+			mes "[Maseph]";
+			mes "Aquí tienes mi amigo.";
+			getitem 30006,1;
+			break;
+		case 9: // Blanco
+			if (countitem(982) < 1) {
+				mes "[Maseph]";
+				mes "Lo siento, pero si quieres unas gafas blancas necesitaré el "+getitemname(982);
+				close;
+			}
+			delitem 982,1;
+			mes "[Maseph]";
+			mes "Gracias. ¡Manos a la obra!";
+			next;
+			mes "[Maseph]";
+			mes "Aquí tienes mi amigo.";
+			getitem 30007,1;
+			break;
+		case 10: // Marrón
+			if (countitem(30500) < 1) {
+				mes "[Maseph]";
+				mes "Lo siento, pero si quieres unas gafas marrones necesitaré el "+getitemname(30500);
+				close;
+			}
+			delitem 30500,1;
+			mes "[Maseph]";
+			mes "Gracias. ¡Manos a la obra!";
+			next;
+			mes "[Maseph]";
+			mes "Aquí tienes mi amigo.";
+			getitem 30008,1;
+			break;
+		case 11: // Rosa
+			if (countitem(30502) < 1) {
+				mes "[Maseph]";
+				mes "Lo siento, pero si quieres unas gafas rosas necesitaré el "+getitemname(30502);
+				close;
+			}
+			delitem 30502,1;
+			mes "[Maseph]";
+			mes "Gracias. ¡Manos a la obra!";
+			next;
+			mes "[Maseph]";
+			mes "Aquí tienes mi amigo.";
+			getitem 30009,1;
+			break;
+	}
+	delitem 2201,1;
+	set zeny,zeny-400000;
+	set SG_QUEST1,0;
+	next;
+	mes "[Maseph]";
+	mes "Disfruta de tus ^000088Slotted Sunglasses^000000.";
+	close;
+}

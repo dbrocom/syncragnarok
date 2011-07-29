@@ -227,12 +227,12 @@ payon_in01,56,12,7	script	Young man#12	89,{
 	mes "[Young man]";
 	mes "...¿Que es esto?";
 	next;
-	switch(select("Can you make me a special item?:Hey.")) {
+	switch(select("¿Me puedes hacer un gorro?:Nada.")) {
 	case 1:
 		mes "[Young man]";
-		mes "¿Huh? ¿Asi que ya sabes en que me especializo realmente, eh? Supongo que no es necesaria la descrecion usual. Dime que es lo que quieres.";
+		mes "¿Huh? ¿Asi que ya sabes en que me especializo realmente, eh? Supongo que no es necesaria la discreción habitual. Dime que es lo que quieres.";
 		next;
-		switch(select("Helm of Angel.:Deviruchi cap.:I will come next time.")) {
+		switch(select("Helm of Angel.:Deviruchi cap.:Ya vendré otro día.")) {
 		case 1:
 			mes "[Young man]";
 			mes "1 Helm (con slot).";
@@ -244,17 +244,17 @@ payon_in01,56,12,7	script	Young man#12	89,{
 			mes "Espera! solo para que lo sepas, no me importa si los objetos en tu inventario han sido mejorados o llevan cartas anexadas";
 			next;
 			mes "[Young man]";
-			mes "Quiero decir, que cualquier carta o mejora en los objetos que usare para crear algo se perdera una vez que realize el nuevo objeto. Asi que ten cuidado cuando me entregues las cosas";
+			mes "Quiero decir, que cualquier carta o mejora en los objetos que usare para crear algo se perderá una vez que realize el nuevo objeto; asi que ten cuidado cuando me entregues las cosas";
 			next;
 			mes "[Young man]";
-			mes "¿Consegusite los objetos? Bueno damelos.";
+			mes "¿Conseguiste los objetos? Entrégamelos.";
 			next;
-			switch(select("Give him the items.:Don't give him the items.")) {
+			switch(select("Darle los items.:No darle los items.")) {
 			case 1:
 				if ((countitem(2229) > 0) && (countitem(2254) > 0) && (countitem(7036) > 4)) {
 					mes "[Young man]";
-					mes ".....Hm.";
-					mes "Bien, Aqui esta tu Helm of Angel. Tomalo.";
+					mes "... Hmmm.";
+					mes "Bien, Aquí está tu Helm of Angel. Todo tuyo.";
 					delitem 2229,1;  //Helm_
 					delitem 2254,1;  //Angelic_Chain
 					delitem 7036,5;  //Fang_Of_Garm
@@ -264,7 +264,7 @@ payon_in01,56,12,7	script	Young man#12	89,{
 				}
 				else {
 					mes "[Young man]";
-					mes "...El numero de objetos no es el correcto. Sera mejor que revises de nuevo.";
+					mes "...El número de objetos no es el correcto. Será mejor que revises de nuevo tu inventario.";
 					close;
 				}
 			case 2:
@@ -276,31 +276,48 @@ payon_in01,56,12,7	script	Young man#12	89,{
 			mes "[Young man]";
 			mes "600 Little Evil Horn.";
 			mes "40 Talon of Griffon.";
+			mes "1 Dyestuff";
 			mes "Eso es todo lo que necesito.";
 			next;
 			mes "[Young man]";
-			mes "Espera! solo para que lo sepas, no me importa si los objetos en tu inventario han sido mejorados o llevan cartas anexadas";
+			mes "¿Buscabas algún color en particular?";
+			switch(select("^BDBDBDBlanco^000000:Negro:^DF0101Rojo^000000:^BDBDBDGris^000000")){
+				case 1:
+					set .@dye, 982;			//White_Dyestuffs
+					set .@devicap, 5228;	//Deviruchi_Cap
+					break;
+				case 2:
+					set .@dye, 983;			//Black_Dyestuffs
+					set .@devicap, 5038;	//Deviruchi_Cap
+					break;
+				case 3:
+					set .@dye, 975;			//Red_Dyestuffs
+					set .@devicap, 5227;	//Deviruchi_Cap
+					break;
+				case 4:
+					set .@dye, 30701;		//Grey_Dyestuffs
+					set .@devicap, 5229;	//Deviruchi_Cap
+					break;
+			}
 			next;
 			mes "[Young man]";
-			mes "Quiero decir, que cualquier carta o mejora en los objetos que usare para crear algo se perdera una vez que realize el nuevo objeto. Asi que ten cuidado cuando me entregues las cosas";
+			mes "¿Conseguiste los objetos? Entrégamelos.";
 			next;
-			mes "[Young man]";
-			mes "¿Consegusite los objetos? Bueno damelos.";
-			next;
-			switch(select("Give him the items.:Don't give him the items.")) {
+			switch(select("Darle los items.:No darle los items.")) {
 			case 1:
-				if ((countitem(1038) > 599) && (countitem(7048) > 39)) {
+				if ( (countitem(1038) > 599) && (countitem(7048) > 39) && (countitem(.@dye) > 0) ) {
 					mes "[Young man]";
-					mes ".....Hm. Aqui esta tu Deviruchi Hat. Porfavor tomalo.";
-					delitem 1038,600;  //Petite_DiablOfs_Horn
-					delitem 7048,40;  //Talon_Of_Griffin
+					mes "... Hmmm. Aquí está tu Deviruchi Hat. Todo tuyo.";
+					delitem 1038,600;  //Petite_Demon_Horn
+					delitem 7048,40;  //Talon_of_Griphon
+					delitem .@dye,1;
 					close2;
-					getitem 5038,1; // Deviruchi_Cap
+					getitem .@devicap,1; // Deviruchi_Cap
 					end;
 				}
 				else {
 					mes "[Young man]";
-					mes "...El numero de objetos no es el correcto. Sera mejor que revises de nuevo.";
+					mes "...El número de objetos no es el correcto. Será mejor que revises de nuevo tu inventario.";
 					close;
 				}
 			case 2:
@@ -310,14 +327,13 @@ payon_in01,56,12,7	script	Young man#12	89,{
 			}
 		case 3:
 			mes "[Young man]";
-			mes "Hm. Muy bien.";
-			mes "Entonces talvez nos veamos despues.";
+			mes "Hmm Muy bien.";
+			mes "Entonces tal vez nos veamos después.";
 			close;
 		}
 	case 2:
 		mes "[Young man]";
-		mes "mmm.";
-		mes "Cuidate";
+		mes "Hmmm... Cuídate";
 		close;
 	}
 }

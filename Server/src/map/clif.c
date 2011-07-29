@@ -831,13 +831,14 @@ int clif_clearunit_area(struct block_list* bl, clr_type type)
 {
 	unsigned char buf[16];
 
+	nullpo_ret(bl);
+
 	if ( type == 1 ) {
 		struct view_data *vd;
 		if ( (vd=status_get_viewdata(bl)) && vd->head_bottom==65535 )
 			type = 0;
 	}
 
-	nullpo_ret(bl);
 
 	WBUFW(buf,0) = 0x80;
 	WBUFL(buf,2) = bl->id;
@@ -14698,89 +14699,63 @@ void clif_cashshop_ack(struct map_session_data* sd, int error)
 
 void clif_parse_cashshop_buy(int fd, struct map_session_data *sd)
 {
-    int fail = 0, points, nameid, amount, i;
-    short cmd;
-    struct npc_data *nd;
-    nullpo_retv(sd);
+	int fail = 0, amount, points;
+	short nameid;
+	struct npc_data *nd;
+	nullpo_retv(sd);
 
-    if(sd->state.trading || !sd->npc_shopid) {
-        clif_cashshop_ack(sd, 1);
-        return;
-    }
+	if( (nd = (struct npc_data *)map_id2bl(sd->npc_shopid)) == NULL )
+		return;
+
+	nameid = RFIFOW(fd,2);
+	amount = RFIFOW(fd,4);
+	points = RFIFOL(fd,6); // Not Implemented. Should be 0
+
+	if( sd->state.trading || !sd->npc_shopid )
+		fail = 1;
 	else if( sd->state.secure_items )
 	{
 		clif_displaymessage(sd->fd, "You can't shop. Blocked with @security");
 		fail = 1;
 	}
 	else
+		fail = npc_cashshop_buy(sd, nameid, amount, points);
+
+	WFIFOHEAD(fd,12);
+	WFIFOW(fd,0) = 0x289;
+
+	if( nd->subtype == SPSHOP )
 	{
-		if( (nd = (struct npc_data *)map_id2bl(sd->npc_shopid)) == NULL )
-			return;
+		int i, amount = 0;
+		if( nd->cashitem < 0 )
+		{ // BG Shop
+			int i7828 = 0, i7829 = 0, i7773 = 0;
+			i = pc_search_inventory(sd,7828);
+			if( i >= 0 ) i7828 = sd->status.inventory[i].amount;
+			i = pc_search_inventory(sd,7829);
+			if( i >= 0 ) i7829 = sd->status.inventory[i].amount;
+			i = pc_search_inventory(sd,7773);
+			if( i >= 0 ) i7773 = sd->status.inventory[i].amount;
 
-		cmd = RFIFOW(fd, 0);    
-
-		if(sd->packet_ver > 25) {
-			short len = RFIFOW(fd, 2), count;
-
-			if(len < 10 || len != 10 + (count = RFIFOW(fd, packet_db[sd->packet_ver][cmd].pos[1])) * 4) {
-				ShowWarning("Player %u sent incorrect cash shop buy packet(len %u:%u)!\n", sd->status.char_id, len, 10 + count * 4); // [Randajad]
-				return;
-			}
-
-			points = RFIFOL(fd, packet_db[sd->packet_ver][cmd].pos[0]); // Not Implemented. Should be 0
-
-			for(i = 0; i < count; i++)
-			{
-				nameid = RFIFOW(fd, 12+i*4);
-				amount = RFIFOW(fd, 10+i*4);
-				if((fail = npc_cashshop_buy(sd, nameid, amount, points)) != 0)
-					break;
-			}
-
-		} else {
-			nameid = RFIFOW(fd, packet_db[sd->packet_ver][cmd].pos[0]);
-			amount = RFIFOW(fd, packet_db[sd->packet_ver][cmd].pos[1]);
-			points = RFIFOL(fd, packet_db[sd->packet_ver][cmd].pos[2]); // Not Implemented. Should be 0
-
-			fail = npc_cashshop_buy(sd, nameid, amount, points);
-		}
-
-		WFIFOHEAD(fd,12);
-		WFIFOW(fd,0) = 0x289;
-	
-		if( nd->subtype == SPSHOP )
-		{
-			int i, amount = 0;
-			if( nd->cashitem < 0 )
-			{ // BG Shop
-				int i7828 = 0, i7829 = 0, i7773 = 0;
-				i = pc_search_inventory(sd,7828);
-				if( i >= 0 ) i7828 = sd->status.inventory[i].amount;
-				i = pc_search_inventory(sd,7829);
-				if( i >= 0 ) i7829 = sd->status.inventory[i].amount;
-				i = pc_search_inventory(sd,7773);
-				if( i >= 0 ) i7773 = sd->status.inventory[i].amount;
-	
-				amount = min(min(i7828,i7829),i7773);
-			}
-			else
-			{
-				i = pc_search_inventory(sd,nd->cashitem);
-				if( i >= 0 ) amount = sd->status.inventory[i].amount;
-			}
-	
-			WFIFOL(fd,2) = amount; // Item Count
-			WFIFOL(fd,6) = 0; // Points - Not used here
+			amount = min(min(i7828,i7829),i7773);
 		}
 		else
 		{
-			WFIFOL(fd,2) = sd->cashPoints; // Cash Points
-			WFIFOL(fd,6) = sd->kafraPoints; // Kafra Points
+			i = pc_search_inventory(sd,nd->cashitem);
+			if( i >= 0 ) amount = sd->status.inventory[i].amount;
 		}
-	
-		WFIFOW(fd,10) = fail;
-		WFIFOSET(fd,12);
+
+		WFIFOL(fd,2) = amount; // Item Count
+		WFIFOL(fd,6) = 0; // Points - Not used here
 	}
+	else
+	{
+		WFIFOL(fd,2) = sd->cashPoints; // Cash Points
+		WFIFOL(fd,6) = sd->kafraPoints; // Kafra Points
+	}
+
+	WFIFOW(fd,10) = fail;
+	WFIFOSET(fd,12);
 }
 
 /*==========================================

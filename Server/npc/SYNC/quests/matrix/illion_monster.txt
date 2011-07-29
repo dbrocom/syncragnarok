@@ -1,0 +1,25 @@
+// Illion field 01:
+il_fild01,274,27,23,14	monster	--ja--	1063,10,300000,300000,0	// Lunatic
+il_fild01,150,181,146,114	monster	--ja--	2493,40,0,0,0	// Heavy Metaling (special)
+il_fild01,150,181,146,114	monster	--ja--	2495,80,0,0,2	// Venatu (small) (special)
+il_fild01,150,181,146,114	monster	--ja--	2496,80,0,0,0	// Constant (special)
+il_fild01,150,181,146,114	monster	--ja--	2497,80,0,0,4	// Constant (big) (special)
+il_fild01,150,181,146,114	monster	--ja--	2494,3,900000,900000,0	// Smith
+
+// Lafayette Hotel:
+il_q01,60,51,20,44	monster	--ja--	1175,10,0,0,2		// Tarou (small)
+il_q01,60,51,20,44	monster	--ja--	1209,2,200000,200000,2	// Cramp (small)
+
+// Inside your mind:
+il_q02,0,0,0,0	monster	--ja--	2485,1,0,0,0	// Astrocyte
+il_q02,0,0,0,0	monster	--ja--	2486,1,0,0,0	// Oligodendrocyte
+il_q02,0,0,0,0	monster	--ja--	2487,1,0,0,0	// Microglia
+il_q02,0,0,0,0	monster	--ja--	2488,1,0,0,0	// Ependyma
+il_q02,0,0,0,0	monster	--ja--	2489,10,0,0,0	// Astrocyte (special)
+il_q02,0,0,0,0	monster	--ja--	2490,10,0,0,0	// Oligodendrocyte (special)
+il_q02,0,0,0,0	monster	--ja--	2491,10,0,0,0	// Microglia (special)
+il_q02,0,0,0,0	monster	--ja--	2492,10,0,0,0	// Ependyma (special)
+
+// The Nebuchadnezzar:
+il_q03,0,0,0,0	monster	--ja--	1613,3,200000,200000,2		// Metaling (small)
+

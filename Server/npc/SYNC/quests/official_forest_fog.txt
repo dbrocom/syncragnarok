@@ -1,0 +1,2254 @@
+//===== eAthena Script ======================================= 
+//= The Labyrinth Forest Fog Instance
+//===== By: ================================================== 
+//= Ziu
+//===== Current Version: ===================================== 
+//= 1.3 (Spanish Scene)
+//===== Compatible With: ===================================== 
+//= eAthena TRUNK SQL 14358+ (client up time 2010) data Rev z150.
+//= Endless Tower (3.12a By Saithis)
+//= Orc Dungeon N.I (2.6 By Ziu)
+//= Orc's Memory (1.4 By L0ne_W0lf)
+//= Sealed Shrine (1.3 By L0ne_W0lf)
+//= Nidhoggur's Nest (1.7.1 By Ziu)
+//===== Additional Comments: ================================= 
+// Version 1.3 Fix Bugs, New Position MINI-BOSS [Ziu]
+//============================================================= 
+
+bif_fild01,158,340,5	script	Laphine Soldier#inst	447,{
+	if (lffins == 0) {
+		if (baseLevel > 69) {
+			set .@party_id,getcharid(1);
+			if (.@party_id > 0) {
+				if(getcharid(0)==getpartyleader(getcharid(1),2)) {
+					mes "[Laphine Soldier]";
+					mes "¿Vas a ir al bosque?"; 
+					next;
+					mes "[Laphine Soldier]";
+					mes "Son Aventureros muy valientes";
+					mes "Nadie quiere dirigirse al bosque. es un desafio constante.";
+					next;
+					mes "[Laphine Soldier]";
+					mes "Si seguis interesados, tendreis acceso a el en la parte superior de la selva";
+					next;
+					mes "[Laphine Soldier]";
+					mes "Después de un simple procedimiento de registro para permitir el acceso al bosque de la niebla,¿para explorar?.";
+					next;
+					mes "[Laphine Soldier]";
+					mes "Nombre Party: "+strcharinfo(1)+" ";
+					mes "Lider Party: "+strcharinfo(0)+" ";
+					mes "Ahora lo escribo en el informe.";
+					next;
+					mes "[Laphine Soldier]";
+					mes "En la parte superior encontrareis las raices del arbol y un pequeño tunel por donde podreis acceder al bosque de la niebla";
+					next;
+					mes "[Laphine Soldier]";
+					mes "Respeta los bosques, no podemos oponernos a ellos, pero vosotros soys diferentes. ¡Buena Suerte!";
+					set lffins,1;
+					close;
+				} else {
+					mes "[Laphine Soldier]";
+					mes "¿Vas a ir al bosque?"; 
+					next;
+					mes "[Laphine Soldier]";
+					mes "Son Aventureros muy valientes";
+					mes "Nadie quiere dirigirse al bosque. es un desafio constante.";
+					next;
+					mes "[Laphine Soldier]";
+					mes "Si seguis interesados, tendreis acceso a el en la parte superior de la selva";
+					next;
+					mes "[Laphine Soldier]";
+					mes "En la parte superior encontrareis las raices del arbol y un pequeño tunel por donde podreis acceder al bosque de la niebla";
+					next;
+					mes "[Laphine Soldier]";
+					mes "Respeta los bosques, no podemos oponernos a ellos, pero vosotros soys diferentes. ¡Buena Suerte!";
+					set lffins,1;
+					close;
+				}
+			} else {
+				mes "[Laphine Soldier]";
+				mes "Crea una party para poder acceder al bosque de la niebla";
+				close;
+			}
+		} else {
+			mes "[Laphine Soldier]";
+			mes "Lo siento necesitas tener más nivel para acceder al bosque de la niebla";
+			close;
+		}
+	}
+	if (lffins == 1) {
+		if (baseLevel > 69) {
+			set .@party_id,getcharid(1);
+			if (.@party_id > 0) {
+				if(getcharid(0)==getpartyleader(getcharid(1),2)) {
+					mes "[Laphine Soldier]";
+					mes "¿Vas a ir al bosque?"; 
+					next;
+					mes "[Laphine Soldier]";
+					mes "Son Aventureros muy valientes";
+					mes "Nadie quiere dirigirse al bosque. es un desafio constante.";
+					next;
+					mes "[Laphine Soldier]";
+					mes "Si seguis interesados, tendreis acceso a el en la parte superior de la selva";
+					next;
+					mes "[Laphine Soldier]";
+					mes "Después de un simple procedimiento de registro para permitir el acceso al bosque de la niebla,¿para explorar?.";
+					next;
+					mes "[Laphine Soldier]";
+					mes "Nombre Party: "+strcharinfo(1)+" ";
+					mes "Lider Party: "+strcharinfo(0)+" ";
+					mes "Ahora lo escribo en el informe.";
+					next;
+					mes "[Laphine Soldier]";
+					mes "En la parte superior encontrareis las raices del arbol y un pequeño tunel por donde podreis acceder al bosque de la niebla";
+					next;
+					mes "[Laphine Soldier]";
+					mes "Respeta los bosques, no podemos oponernos a ellos, pero vosotros soys diferentes. ¡Buena Suerte!";
+					
+					close;
+				} else {
+					mes "[Laphine Soldier]";
+					mes "¿Vas a ir al bosque?"; 
+					next;
+					mes "[Laphine Soldier]";
+					mes "Son Aventureros muy valientes";
+					mes "Nadie quiere dirigirse al bosque. es un desafio constante.";
+					next;
+					mes "[Laphine Soldier]";
+					mes "Si seguis interesados, tendreis acceso a el en la parte superior de la selva";
+					next;
+					mes "[Laphine Soldier]";
+					mes "En la parte superior encontrareis las raices del arbol y un pequeño tunel por donde podreis acceder al bosque de la niebla";
+					next;
+					mes "[Laphine Soldier]";
+					mes "Respeta los bosques, no podemos oponernos a ellos, pero vosotros soys diferentes. ¡Buena Suerte!";
+					close;
+				}
+			} else {
+				mes "[Laphine Soldier]";
+				mes "Crea una party para poder acceder al bosque de la niebla";
+				close;
+			}
+		} else {
+			mes "[Laphine Soldier]";
+			mes "Lo siento necesitas tener más nivel para acceder al bosque de la niebla";
+			close;
+		}
+	}
+}
+
+bif_fild01,161,355,0	script	Tunnel logs	844,{
+	if (lffins == 1) {
+		set .@party_id,getcharid(1);
+		set .@ins_mas,getpartyleader(.@party_id,2);
+		set .@p_name$,getpartyname(.@party_id);
+		set .@p_reader$,strcharinfo(0);
+		set .@md_name$,"Fog Labyrinth Forest";
+
+		getpartymember(.@party_id);
+		set .@partymembercount,$@partymembercount;
+		copyarray .@partymembername$[0],$@partymembername$[0],.@partymembercount;
+
+		set .@fogstime,checkquest(7211,PLAYTIME);
+		if ((.@party_id > 0) && ((.@partymembercount > 1))) {
+			if (.@fogstime == -1) {
+				if (.@ins_mas == getcharid(0)) {
+					mes "La Generación de la party se a confirmado. ¿Te gustaría reservar la entrada a " + .@md_name$ + "?";
+					next;
+					switch(select("Reservar la " + .@md_name$ + ":Entrar a la dungeon:Cancelar")) {
+					case 1:
+						set .@instance, instance_create(.@md_name$, .@party_id);
+						if (.@instance < 0) {
+							mes "Party Name: "+.@p_name$+"";
+							mes "Party Leader: "+.@p_reader$+"";
+							mes "^0000ff"+.@md_name$+" ^000000 - Fallo La Reserva.";
+							close;
+						}
+						else {
+							mes "^0000ff"+.@md_name$+"^000000- Confirmada la reserva.";
+							mes "Despues de hacer la reserva, tu tienes que selecionar en el menu ^0000FFEntrar a la dungeon^000000, si tu deseas entrar a " + .@md_name$ + ".";
+
+							for( set .@i, 1; .@i <= 1; set .@i, .@i + 1 ) {
+								if( instance_attachmap(.@i + "@mist", .@instance) == "" )
+									break;
+							}
+							if( .@i < 1 ) {
+								instance_destroy(.@instance);
+								close;
+							}
+							instance_attach(.@instance);
+							instance_set_timeout 7200,300,.@instance;
+							instance_init(.@instance);
+
+							//Control Eventos Inicio
+							donpcevent instance_npcname("#raisemobfog1", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#raisemobfog2", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#raisemobfog3", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#raisemobfog4", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#raisemobfog5", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#raisemobfog6", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins1", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins2", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins3", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins4", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins5", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins6", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins8", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins9", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins10", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins11", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins12", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins13", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins14", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#mobfogins15", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins1", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins2", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins3", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins4", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins5", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins6", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins8", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins9", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins10", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins11", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins12", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins13", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins14", instance_id())+"::OnInstanceInit";
+							donpcevent instance_npcname("#warpfogins15", instance_id())+"::OnInstanceInit";
+							disablenpc instance_npcname("Creeper#npcfoginsa", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa1", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa2", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa3", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa4", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa5", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa6", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa8", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa9", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa10", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa11", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa12", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa13", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa14", instance_id());
+							disablenpc instance_npcname("Creeper#npcfoginsa15", instance_id());
+							disablenpc instance_npcname("Loki#npc1", instance_id());
+							close;
+						}
+					case 2:
+						if (has_instance("1@mist") == "") {
+							mes "Memorial Dungeon " + .@md_name$ + " no existe.";
+							mes "El lider de la party, no a reservado aun la entrada a la dungeon.";
+							next;
+							mes "Cuando la reserva este echa, la dungeon será creada.";
+							mes "Si tu dungeon es destruida, tendrás que esperar siete días para entrar.";
+							close;
+						}
+						
+						else if ((has_instance("1@mist") != "") && (.@partymembercount < 2)) {
+							mes "Only los miembros de la party pueden entrar.";
+							close;
+						}
+						else {
+							mapannounce "bif_fild01", .@p_reader$ + " de la party, " + .@p_name$ + " está entrando " + .@md_name$ + ".",bc_map,"0x00ff99";
+							setquest 7211;
+							setquest 7214;
+							warp "1@mist",86,27;
+							close;
+						}
+					case 3:
+						close;
+					}
+				} else {
+					switch(select(.@md_name$ + " Entrar a la dungeon:Cancelar")) {
+					case 1:
+						if (has_instance("1@mist") == "") {
+							mes "Memorial Dungeon " + .@md_name$ + " no existe.";
+							mes "Memorial Dungeon ha sido destruida por el líder de la party, o por el límite de tiempo. Por favor, inténtelo de nuevo después de 2 horas.";
+							close;
+						}
+						else if ((has_instance("1@mist") != "") && (.@partymembercount < 2)) {
+							mes "Solo los miembros de la party pueden entrar a la dungeon.";
+							close;
+						}
+						else {
+							mapannounce "bif_fild01", .@p_reader$ + " miembro de la party " + .@p_name$ + " está entrando a " + .@md_name$ + ".",bc_map,"0x00ff99";
+							setquest 7211;
+							setquest 7214;
+							warp "1@mist",86,27;
+							close;
+						}
+					case 2:
+						close;
+					}
+				}
+			}
+			else if ((.@fogstime == 0) || (.@fogstime == 1)) {
+				mes "Tu puedes entrar a la dungeon, si esta fue creada.";
+				next;
+				switch(select("Entrar a la dungeon " + .@md_name$ + ":Cancelar")) {
+				case 1:
+					if (has_instance("1@mist") == "") {
+						mes "Memorial Dungeon " + .@md_name$ + " no existe.";
+						mes "Memorial Dungeon ha sido destruida por el líder de la party, o por el límite de tiempo. Por favor, inténtelo de nuevo más tarde.";
+						close;
+					}
+					else if ((has_instance("1@mist") != "") && (.@partymembercount < 2)) {
+						mes "Solo los miembros de la party pueden entrar a la dungeon.";
+						close;
+					}
+					else {
+						mapannounce "bif_fild01", .@p_reader$ + " miembro de la party " + .@p_name$ + " está entrando a " + .@md_name$ + ".",bc_map,"0x00ff99";
+						setquest 7211;
+						setquest 7214;
+						warp "1@mist",86,27;
+						close;
+					}
+				case 2:
+					close;
+				}
+			}
+			else if (.@fogstime == 2) {
+				set .@delfogs_time,checkquest(7214,PLAYTIME);
+				if (.@delfogs_time == 2) {
+					if (lffins == 0) {
+						mes "^0000ffTodos los registros y después de los efectos relacionados con nidhoggur's nest se eliminan. Ahora se puede regenerar o entrar a Labyrinth Forest Fog.^000000";
+						erasequest 7211;
+						erasequest 7214;
+						close;
+					} else {
+						mes "^0000ffTodos los registros y después de los efectos relacionados con nidhoggur's nest se eliminan. Ahora se puede regenerar o entrar a Labyrinth Forest Fog.^000000";
+						erasequest 7211;
+						erasequest 7214;
+						set lffins,0;
+						close;
+					}
+				} else {
+					mes "No puedes crear otra instance hasta que no transcurran 24 horas desde tú última creación.";
+					close;
+				}
+			}
+		} else {
+			mes "Con el fin de generar una dungeon debe ser el líder de la party y tener al menos 2 miembros en la party.";
+			close;
+		}
+	} else {
+		mes "¿Deseas entrar por el tunel de madera?";
+		next;
+		switch(select("Entrar Por El","No Entrar" ) )
+		{
+			case 1:
+				mes "En estos momentos no puedes acceder a la instance, creea una";
+				close;
+			case 2:
+				close;
+		}
+	}
+}
+1@mist,97,31,3	script	Loki#npc	512,{
+	if (loki == 0) {
+		mes "[Hombre Joven]";
+		mes "Tu... Vienes del campamento situado al este de la ciudad, formas parte del grupo de reconocimiento.";
+		next;
+		mes "[Hombre Joven]";
+		mes "¿Pero que pasa en este lugar por amor de dios?";
+		mes "Bifrost fue atravesado pero no sabemos que beneficio tiene";
+		next;
+		mes "[Hombre Joven]";
+		mes "No menosprecies este lugar, deberias buscar cooperación";
+		next;
+		switch(select("¿Quién eres tú?" ) )
+		{
+			case 1:
+				mes "[Loki]";
+				mes "Assassin's Guild..Loki";
+				mes "Ese es mi nombre, ¿Cual es el tuyo?";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "....";
+				mes "...."+strcharinfo(0)+" es el mio";
+				next;
+				mes "[Loki]";
+				mes "Si."+strcharinfo(0)+"";
+				mes "¿Estás listo para atravesar el bosque?";
+				next;
+				switch(select("Si.","No." ) )
+				{
+					case 1:
+						mes "[Loki]";
+						mes "Veo que estas decidido, tu podrías darle proteccion..¿Viste el pelo purpura.?";
+						next;
+						switch(select("Nunca antes habíamos visto.","¿La habia visto antes...?" ) )
+						{
+							case 1:
+								mes "[Loki]";
+								mes "Ok";
+								mes "No consigo detectar el aura de esta persona";
+								next;
+								mes "[Loki]";
+								mes "Entonces.¿Me ayudarás?";
+								mes "Si tienes suerte podrás reunirte conmigo de nuevo en la ciudad de mora, pero por supuesto antes tendrás que ser capaz de atravesar todo el bosque";
+								setquest 7212;
+								set loki,1;
+								close2;
+								instance_announce 0, "Whisper: Who? Who is it? Tom opened up the forest boy, kid, tomba, tired, wake up everyone!.",bc_map,"0x008000";
+								end;
+							case 2:
+								close;
+						}
+					case 2:
+						close;
+				}
+		}
+	}
+	if (loki == 1) {
+		mes "[Loki]";
+		mes "Me gustaría ser tú compañero de viaje";
+		mes "Nos veremos en la ciudad de mora";
+		close;
+	}
+}
+1@mist,182,303,3	script	Mujer#fog	511,{
+	mes "Mysterious hair, a woman was lying. moved closer to a dizzying, intense flowers to the port. ";
+	close;
+}
+1@mist,184,304,3	script	Loki#npc2	512,{
+	mes "[Loki]";
+	mes "Debes de terminar con Nidhoggur, antes de continuar tu aventura";
+	close;
+}
+1@mist,184,304,3	script	Loki#npc1	512,{
+	if (loki == 1) {
+		if(getcharid(0)==getpartyleader(getcharid(1),2)) {
+			mes "[Loki]";
+			mes "exhilaration was going to bother you?";
+			mes "Thanks to couples.";
+			mes "??? ??? ??????.";
+			next;
+			switch(select("¿Qué es esto?","¿La mujer..?" ) )
+			{
+				case 1:
+					mes "[Loki]";
+					mes "Cambio su aspecto, pero la luz sigue alimentandolo, y su agradable aroma invade la nariz";
+					next;
+					mes "[Loki]";
+					mes "Ha estado buscando a los guardianes de nihgg, y eso puede provocar un gran peligro debido a la inestabilidad que provocaria.";
+					next;
+					switch(select("¿y Ahora Qué?" ) )
+					{
+						case 1:
+							mes "[Loki]";
+							mes "Ahora estoy a la espera de ser despertado por el, podría salir de los bosques y esto es suficiente para mi";
+							next;
+							mes "[Loki]";
+							mes "Nos volveremos a reunir en la ciudad de mora, si pasas por alli";
+							completequest 7212;
+							setquest 7213;
+							set loki,2;
+							close;
+					}
+				case 2:
+					close;
+			}
+		} else {
+			mes "[Loki]";
+			mes "exhilaration was going to bother you?";
+			mes "Thanks to couples.";
+			mes "??? ??? ??????.";
+			next;
+			switch(select("¿Qué es esto?","¿La mujer..?" ) )
+			{
+				case 1:
+					mes "[Loki]";
+					mes "Cambio su aspecto, pero la luz sigue alimentandolo, y su agradable aroma invade la nariz";
+					next;
+					mes "[Loki]";
+					mes "Ha estado buscando a los guardianes de nihgg, y eso puede provocar un gran peligro debido a la inestabilidad que provocaria.";
+					next;
+					switch(select("¿y Ahora Qué?" ) )
+					{
+						case 1:
+							mes "[Loki]";
+							mes "Ahora estoy a la espera de ser despertado por el, podría salir de los bosques y esto es suficiente para mi";
+							next;
+							mes "[Loki]";
+							mes "Nos volveremos a reunir en la ciudad de mora, si pasas por alli";
+							completequest 7212;
+							setquest 7213;
+							set loki,2;
+							close;
+					}
+				case 2:
+					close;
+			}
+		}
+	}
+		if (loki == 2) {
+			mes "[Loki]";
+			mes "Nos volveremos a reunir en la ciudad de mora, si pasas por alli";
+			close;
+		}
+}
+//Control De MVP
+1@mist,0,0,0	script	#mvpfog	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mvpfog", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mvpfog", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mvpfog", instance_id());
+	set .@mob_ran,rand(1,30);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",133,155,144,151,"Lost Dragon",2131,1,instance_npcname("#mvpfog", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",256,180,268,173,"Lost Dragon",2131,1,instance_npcname("#mvpfog", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",54,290,68,278,"Lost Dragon",2131,1,instance_npcname("#mvpfog", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",244,227,258,216,"Lost Dragon",2131,1,instance_npcname("#mvpfog", instance_id())+"::OnMyMobDead";
+	}
+	if ((.@mob_ran > 20) && (.@mob_ran < 26))  {
+	areamonster "1@mist",183,267,196,260,"Lost Dragon",2131,1,instance_npcname("#mvpfog", instance_id())+"::OnMyMobDead";
+	}
+	if (.@mob_ran > 26) {
+	areamonster "1@mist",176,311,189,304,"Lost Dragon",2131,1,instance_npcname("#mvpfog", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,1;
+	set .@v_mob_num,mobcount("1@mist",instance_npcname("#mvpfog", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@v_mob_num;
+	if (.@mob_dead_num > 0) {
+	disablenpc instance_npcname("Loki#npc2", instance_id());
+	enablenpc instance_npcname("Loki#npc1", instance_id());
+	instance_announce 0, "Lost Dragon: Esto...Me vencierón.. ahora seguir vuestro camino... maldito resultado.. ",bc_map,"0xFFFF00";
+	disablenpc instance_npcname("mvpfog", instance_id());
+	}
+	end;
+}
+//858
+1@mist,0,0,0	script	#raisemobfog1	-1,{
+	end;
+	
+OnInstanceInit:
+	donpcevent instance_npcname("#raisemobfog1", instance_id())+"::OnEnable";
+	end;
+	
+OnDisable:
+	killmonster "1@mist",instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#raisemobfog1", instance_id());
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Pom Spider",2132,1,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+	
+OnMyMobDead:
+	set .@callnum,25;
+	set .@a_mob_num,mobcount("1@mist",instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@a_mob_num;
+	if (.@mob_dead_num > 0) {
+		set .@mob_ran,rand(1,25);
+		if (.@mob_ran > 20) {
+			monster "1@mist",0,0,"Pom Spider",2132,.@mob_dead_num,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+		}
+		else if (.@mob_ran < 21) {
+			monster "1@mist",0,0,"Angra Mantis",2133,.@mob_dead_num,instance_npcname("#raisemobfog1", instance_id())+"::OnMyMobDead";
+		}
+	}
+	end;
+}
+1@mist,0,0,0	script	#raisemobfog2	-1,{
+	end;
+	
+OnInstanceInit:
+	donpcevent instance_npcname("#raisemobfog2", instance_id())+"::OnEnable";
+	end;
+	
+OnDisable:
+	killmonster "1@mist",instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#raisemobfog2", instance_id());
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Angra Mantis",2133,1,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+	
+OnMyMobDead:
+	set .@callnum,25;
+	set .@b_mob_num,mobcount("1@mist",instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@b_mob_num;
+	if (.@mob_dead_num > 0) {
+		set .@mob_ran,rand(1,25);
+		if (.@mob_ran > 20) {
+			monster "1@mist",0,0,"Angra Mantis",2133,.@mob_dead_num,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+		}
+		else if (.@mob_ran < 21) {
+			monster "1@mist",0,0,"Pom Spider",2132,.@mob_dead_num,instance_npcname("#raisemobfog2", instance_id())+"::OnMyMobDead";
+		}
+	}
+	end;
+}
+1@mist,0,0,0	script	#raisemobfog3	-1,{
+	end;
+	
+OnInstanceInit:
+	donpcevent instance_npcname("#raisemobfog3", instance_id())+"::OnEnable";
+	end;
+	
+OnDisable:
+	killmonster "1@mist",instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#raisemobfog3", instance_id());
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Parus",2134,1,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+	
+OnMyMobDead:
+	set .@callnum,25;
+	set .@c_mob_num,mobcount("1@mist",instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@c_mob_num;
+	if (.@mob_dead_num > 0) {
+		set .@mob_ran,rand(1,25);
+		if (.@mob_ran > 20) {
+			monster "1@mist",0,0,"Parus",2134,.@mob_dead_num,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+		}
+		else if (.@mob_ran < 21) {
+			monster "1@mist",0,0,"Little Fatum",2136,.@mob_dead_num,instance_npcname("#raisemobfog3", instance_id())+"::OnMyMobDead";
+		}
+	}
+	end;
+}
+1@mist,0,0,0	script	#raisemobfog4	-1,{
+	end;
+	
+OnInstanceInit:
+	donpcevent instance_npcname("#raisemobfog4", instance_id())+"::OnEnable";
+	end;
+	
+OnDisable:
+	killmonster "1@mist",instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#raisemobfog4", instance_id());
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Little Fatum",2136,1,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+	
+OnMyMobDead:
+	set .@callnum,25;
+	set .@c_mob_num,mobcount("1@mist",instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@c_mob_num;
+	if (.@mob_dead_num > 0) {
+		set .@mob_ran,rand(1,25);
+		if (.@mob_ran > 20) {
+			monster "1@mist",0,0,"Little Fatum",2136,.@mob_dead_num,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+		}
+		else if (.@mob_ran < 21) {
+			monster "1@mist",0,0,"Parus",2134,.@mob_dead_num,instance_npcname("#raisemobfog4", instance_id())+"::OnMyMobDead";
+		}
+	}
+	end;
+}
+1@mist,0,0,0	script	#raisemobfog5	-1,{
+	end;
+	
+OnInstanceInit:
+	donpcevent instance_npcname("#raisemobfog5", instance_id())+"::OnEnable";
+	end;
+	
+OnDisable:
+	killmonster "1@mist",instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#raisemobfog5", instance_id());
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Miming",2137,1,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+	
+OnMyMobDead:
+	set .@callnum,25;
+	set .@d_mob_num,mobcount("1@mist",instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 0) {
+		set .@mob_ran,rand(1,25);
+		if (.@mob_ran > 20) {
+			monster "1@mist",0,0,"Miming",2137,.@mob_dead_num,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+		}
+		else if (.@mob_ran < 21) {
+			monster "1@mist",0,0,"Parus",2134,.@mob_dead_num,instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead";
+		}
+	}
+	end;
+}
+1@mist,0,0,0	script	#raisemobfog6	-1,{
+	end;
+	
+OnInstanceInit:
+	donpcevent instance_npcname("#raisemobfog6", instance_id())+"::OnEnable";
+	end;
+	
+OnDisable:
+	killmonster "1@mist",instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#raisemobfog6", instance_id());
+	monster "1@mist",0,0,"Nydhoggur Memory",2138,1,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Nydhoggur Memory",2138,1,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Nydhoggur Memory",2138,1,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Nydhoggur Memory",2138,1,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Nydhoggur Memory",2138,1,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Nydhoggur Memory",2138,1,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Nydhoggur Memory",2138,1,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Nydhoggur Memory",2138,1,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Nydhoggur Memory",2138,1,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Nydhoggur Memory",2138,1,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Nydhoggur Memory",2138,1,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+	monster "1@mist",0,0,"Nydhoggur Memory",2138,1,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+OnMyMobDead:
+	set .@callnum,12;
+	set .@x_mob_num,mobcount("1@mist",instance_npcname("#raisemobfog5", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@x_mob_num;
+	if (.@mob_dead_num > 10) {
+		set .@mob_ran,rand(1,25);
+		if (.@mob_ran > 20) {
+			monster "1@mist",0,0,"Miming",2137,.@mob_dead_num,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+		}
+		else if (.@mob_ran < 21) {
+			monster "1@mist",0,0,"Parus",2134,.@mob_dead_num,instance_npcname("#raisemobfog6", instance_id())+"::OnMyMobDead";
+		}
+	}
+	end;
+}
+//Disable Creeper NPC
+1@mist,0,0,0	script	#mobfogins1	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins1", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins1", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins1", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",201,65,222,54,"Pom Spider",2132,2,instance_npcname("#mobfogins1", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",201,65,222,54,"Angra Mantis",2133,2,instance_npcname("#mobfogins1", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",201,65,222,54,"Angra Mantis",2133,2,instance_npcname("#mobfogins1", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",201,65,222,54,"Parus",2134,2,instance_npcname("#mobfogins1", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",201,65,222,54,"Parus",2134,2,instance_npcname("#mobfogins1", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",201,65,222,54,"Little Fatum",2136,2,instance_npcname("#mobfogins1", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",201,65,222,54,"Little Fatum",2136,2,instance_npcname("#mobfogins1", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",201,65,222,54,"Miming",2137,2,instance_npcname("#mobfogins1", instance_id())+"::OnMyMobDead";
+	}
+	if (.@mob_ran > 20) {
+	areamonster "1@mist",201,65,222,54,"Miming",2137,2,instance_npcname("#mobfogins1", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",201,65,222,54,"Pom Spider",2132,2,instance_npcname("#mobfogins1", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,4;
+	set .@f_mob_num,mobcount("1@mist",instance_npcname("#mobfogins1", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@f_mob_num;
+	if (.@mob_dead_num > 3) {
+	disablenpc instance_npcname("Creeper#npcfogins1", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa1", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins2	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins2", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins2", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins2", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",129,152,151,144,"Pom Spider",2132,2,instance_npcname("#mobfogins2", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",129,152,151,144,"Angra Mantis",2133,2,instance_npcname("#mobfogins2", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",129,152,151,144,"Angra Mantis",2133,2,instance_npcname("#mobfogins2", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",129,152,151,144,"Parus",2134,2,instance_npcname("#mobfogins2", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",129,152,151,144,"Parus",2134,2,instance_npcname("#mobfogins2", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",129,152,151,144,"Little Fatum",2136,2,instance_npcname("#mobfogins2", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",129,152,151,144,"Little Fatum",2136,2,instance_npcname("#mobfogins2", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",129,152,151,144,"Miming",2137,2,instance_npcname("#mobfogins2", instance_id())+"::OnMyMobDead";
+	}
+	if (.@mob_ran > 20) {
+	areamonster "1@mist",129,152,151,144,"Miming",2137,2,instance_npcname("#mobfogins2", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",129,152,151,144,"Pom Spider",2132,2,instance_npcname("#mobfogins2", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,4;
+	set .@g_mob_num,mobcount("1@mist",instance_npcname("#mobfogins2", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@g_mob_num;
+	if (.@mob_dead_num > 3) {
+	disablenpc instance_npcname("Creeper#npcfogins2", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa2", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins3	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins3", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins3", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins3", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",48,41,57,35,"Pom Spider",2132,2,instance_npcname("#mobfogins3", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",48,41,57,35,"Angra Mantis",2133,2,instance_npcname("#mobfogins3", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",48,41,57,35,"Parus",2134,2,instance_npcname("#mobfogins3", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",48,41,57,35,"Little Fatum",2136,2,instance_npcname("#mobfogins3", instance_id())+"::OnMyMobDead";
+	}
+	if (.@mob_ran > 20) {
+	areamonster "1@mist",48,41,57,35,"Miming",2137,2,instance_npcname("#mobfogins3", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,2;
+	set .@h_mob_num,mobcount("1@mist",instance_npcname("#mobfogins3", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@h_mob_num;
+	if (.@mob_dead_num > 1) {
+	disablenpc instance_npcname("Creeper#npcfogins3", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa3", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins4	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins4", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins4", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins4", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",252,179,272,170,"Pom Spider",2132,1,instance_npcname("#mobfogins4", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",252,179,272,170,"Angra Mantis",2133,2,instance_npcname("#mobfogins4", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",252,179,272,170,"Angra Mantis",2133,1,instance_npcname("#mobfogins4", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",252,179,272,170,"Parus",2134,2,instance_npcname("#mobfogins4", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",252,179,272,170,"Parus",2134,1,instance_npcname("#mobfogins4", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",252,179,272,170,"Little Fatum",2136,2,instance_npcname("#mobfogins4", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",252,179,272,170,"Little Fatum",2136,1,instance_npcname("#mobfogins4", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",252,179,272,170,"Miming",2137,2,instance_npcname("#mobfogins4", instance_id())+"::OnMyMobDead";
+	}
+	else if (.@mob_ran > 20) {
+	areamonster "1@mist",252,179,272,170,"Miming",2137,1,instance_npcname("#mobfogins4", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",252,179,272,170,"Pom Spider",2132,2,instance_npcname("#mobfogins4", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,3;
+	set .@i_mob_num,mobcount("1@mist",instance_npcname("#mobfogins4", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@i_mob_num;
+	if (.@mob_dead_num > 2) {
+	disablenpc instance_npcname("Creeper#npcfogins4", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa4", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins5	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins5", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins5", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins5", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",217,179,226,174,"Pom Spider",2132,2,instance_npcname("#mobfogins5", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",217,179,226,174,"Angra Mantis",2133,2,instance_npcname("#mobfogins5", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",217,179,226,174,"Parus",2134,2,instance_npcname("#mobfogins5", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",217,179,226,174,"Little Fatum",2136,2,instance_npcname("#mobfogins5", instance_id())+"::OnMyMobDead";
+	}
+	else if (.@mob_ran > 20) {
+	areamonster "1@mist",217,179,226,174,"Miming",2137,2,instance_npcname("#mobfogins5", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,2;
+	set .@j_mob_num,mobcount("1@mist",instance_npcname("#mobfogins5", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@j_mob_num;
+	if (.@mob_dead_num > 1) {
+	disablenpc instance_npcname("Creeper#npcfogins5", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa5", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins6	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins6", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins6", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins6", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",305,237,310,233,"Pom Spider",2132,2,instance_npcname("#mobfogins6", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",305,237,310,233,"Angra Mantis",2133,2,instance_npcname("#mobfogins6", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",305,237,310,233,"Parus",2134,2,instance_npcname("#mobfogins6", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",305,237,310,233,"Little Fatum",2136,2,instance_npcname("#mobfogins6", instance_id())+"::OnMyMobDead";
+	}
+	else if (.@mob_ran > 20) {
+	areamonster "1@mist",305,237,310,233,"Miming",2137,2,instance_npcname("#mobfogins6", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,2;
+	set .@k_mob_num,mobcount("1@mist",instance_npcname("#mobfogins6", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@k_mob_num;
+	if (.@mob_dead_num > 1) {
+	disablenpc instance_npcname("Creeper#npcfogins6", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa6", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins10	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins10", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins10", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	monster "1@mist",290,197,"Pom Spider",2132,1,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",241,257,245,253,"Angra Mantis",2133,2,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",140,241,146,236,"Parus",2134,1,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	monster "1@mist",291,197,"Angra Mantis",2133,1,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",241,257,245,253,"Parus",2134,2,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",140,241,146,236,"Little Fatum",2136,1,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	monster "1@mist",291,197,"Parus",2134,1,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",241,257,245,253,"Little Fatum",2136,2,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",140,241,146,236,"Miming",2137,1,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	monster "1@mist",291,197,"Little Fatum",2136,1,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",241,257,245,253,"Miming",2137,2,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",140,241,146,236,"Pom Spider",2132,1,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	}
+	else if (.@mob_ran > 20) {
+	monster "1@mist",291,197,"Miming",2137,1,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",241,257,245,253,"Pom Spider",2132,2,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",140,241,146,236,"Angra Mantis",2133,1,instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,4;
+	set .@l_mob_num,mobcount("1@mist",instance_npcname("#mobfogins10", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@l_mob_num;
+	if (.@mob_dead_num > 3) {
+	disablenpc instance_npcname("Creeper#npcfogins10", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa10", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins9	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins9", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins9", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins9", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",210,203,214,198,"Pom Spider",2132,3,instance_npcname("#mobfogins9", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",215,232,219,229,"Angra Mantis",2133,3,instance_npcname("#mobfogins9", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",210,203,214,198,"Parus",2134,3,instance_npcname("#mobfogins9", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",215,232,219,229,"Little Fatum",2136,3,instance_npcname("#mobfogins9", instance_id())+"::OnMyMobDead";
+	}
+	else if (.@mob_ran > 20) {
+	areamonster "1@mist",210,203,214,198,"Miming",2137,3,instance_npcname("#mobfogins9", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,3;
+	set .@m_mob_num,mobcount("1@mist",instance_npcname("#mobfogins9", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@m_mob_num;
+	if (.@mob_dead_num > 2) {
+	disablenpc instance_npcname("Creeper#npcfogins9", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa9", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins8	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins8", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins8", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",262,267,266,263,"Pom Spider",2132,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",272,248,276,243,"Angra Mantis",2133,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",144,268,154,264,"Parus",2134,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",262,267,266,263,"Angra Mantis",2133,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",272,248,276,243,"Parus",2134,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",144,268,154,264,"Little Fatum",2136,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",262,267,266,263,"Parus",2134,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",272,248,276,243,"Little Fatum",2136,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",144,268,154,264,"Miming",2137,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",262,267,266,263,"Little Fatum",2136,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",272,248,276,243,"Miming",2137,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",144,268,154,264,"Pom Spider",2132,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	}
+	else if (.@mob_ran > 20) {
+	areamonster "1@mist",262,267,266,263,"Miming",2137,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",272,248,276,243,"Pom Spider",2132,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",144,268,154,264,"Angra Mantis",2133,1,instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,3;
+	set .@n_mob_num,mobcount("1@mist",instance_npcname("#mobfogins8", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@n_mob_num;
+	if (.@mob_dead_num > 2) {
+	disablenpc instance_npcname("Creeper#npcfogins8", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa8", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins11	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins11", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins11", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",214,268,219,262,"Pom Spider",2132,1,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",181,267,200,260,"Angra Mantis",2133,2,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",181,267,200,260,"Parus",2134,2,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",214,268,219,262,"Angra Mantis",2133,1,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",181,267,200,260,"Parus",2134,2,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",181,267,200,260,"Little Fatum",2136,2,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",214,268,219,262,"Parus",2134,1,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",181,267,200,260,"Little Fatum",2136,2,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",181,267,200,260,"Miming",2137,2,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",214,268,219,262,"Little Fatum",2136,1,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",181,267,200,260,"Miming",2137,2,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",181,267,200,260,"Pom Spider",2132,2,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	}
+	else if (.@mob_ran > 20) {
+	areamonster "1@mist",214,268,219,262,"Miming",2137,1,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",181,267,200,260,"Pom Spider",2132,2,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",181,267,200,260,"Angra Mantis",2133,2,instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,5;
+	set .@p_mob_num,mobcount("1@mist",instance_npcname("#mobfogins11", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@p_mob_num;
+	if (.@mob_dead_num > 4) {
+	disablenpc instance_npcname("Creeper#npcfogins11", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa11", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins12	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins12", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins12", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",82,311,90,306,"Pom Spider",2132,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",286,92,295,88,"Angra Mantis",2133,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",286,92,295,88,"Parus",2134,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",82,311,90,306,"Angra Mantis",2133,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",286,92,295,88,"Parus",2134,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",286,92,295,88,"Little Fatum",2136,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",82,311,90,306,"Parus",2134,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",286,92,295,88,"Little Fatum",2136,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",286,92,295,88,"Miming",2137,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",82,311,90,306,"Little Fatum",2136,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",286,92,295,88,"Miming",2137,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",286,92,295,88,"Pom Spider",2132,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	}
+	else if (.@mob_ran > 20) {
+	areamonster "1@mist",82,311,90,306,"Miming",2137,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",286,92,295,88,"Pom Spider",2132,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",286,92,295,88,"Angra Mantis",2133,1,instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,3;
+	set .@q_mob_num,mobcount("1@mist",instance_npcname("#mobfogins12", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@q_mob_num;
+	if (.@mob_dead_num > 2) {
+	disablenpc instance_npcname("Creeper#npcfogins12", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa12", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins13	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins13", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins13", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	monster "1@mist",290,197,"Pom Spider",2132,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",70,329,76,323,"Pom Spider",2132,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",304,334,309,331,"Angra Mantis",2133,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",313,168,321,164,"Parus",2134,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	monster "1@mist",159,267,"Angra Mantis",2133,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",70,329,76,323,"Angra Mantis",2133,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",304,334,309,331,"Parus",2134,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",313,168,321,164,"Little Fatum",2136,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	monster "1@mist",159,267,"Parus",2134,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",70,329,76,323,"Parus",2134,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",304,334,309,331,"Little Fatum",2136,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",313,168,321,164,"Miming",2137,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	monster "1@mist",159,267,"Little Fatum",2136,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",70,329,76,323,"Little Fatum",2136,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",304,334,309,331,"Miming",2137,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",313,168,321,164,"Pom Spider",2132,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	}
+	else if (.@mob_ran > 20) {
+	monster "1@mist",159,267,"Miming",2137,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",70,329,76,323,"Miming",2137,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",304,334,309,331,"Pom Spider",2132,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",313,168,321,164,"Angra Mantis",2133,1,instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,4;
+	set .@r_mob_num,mobcount("1@mist",instance_npcname("#mobfogins13", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@r_mob_num;
+	if (.@mob_dead_num > 3) {
+	disablenpc instance_npcname("Creeper#npcfogins13", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa13", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins14	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins14", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins14", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",266,347,272,343,"Pom Spider",2132,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",259,316,264,311,"Angra Mantis",2133,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",259,316,264,311,"Parus",2134,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",266,347,272,343,"Angra Mantis",2133,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",259,316,264,311,"Parus",2134,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",259,316,264,311,"Little Fatum",2136,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",266,347,272,343,"Parus",2134,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",259,316,264,311,"Little Fatum",2136,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",259,316,264,311,"Miming",2137,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",266,347,272,343,"Little Fatum",2136,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",259,316,264,311,"Miming",2137,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",259,316,264,311,"Pom Spider",2132,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	}
+	else if (.@mob_ran > 20) {
+	areamonster "1@mist",266,347,272,343,"Miming",2137,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",259,316,264,311,"Pom Spider",2132,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",259,316,264,311,"Angra Mantis",2133,1,instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,3;
+	set .@s_mob_num,mobcount("1@mist",instance_npcname("#mobfogins14", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@s_mob_num;
+	if (.@mob_dead_num > 2) {
+	disablenpc instance_npcname("Creeper#npcfogins14", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa14", instance_id());
+	}
+	end;
+}
+1@mist,0,0,0	script	#mobfogins15	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins15", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins15", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins15", instance_id());
+	areamonster "1@mist",312,139,330,124,"Pom Spider",2132,2,instance_npcname("#mobfogins15", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",312,139,330,124,"Angra Mantis",2133,2,instance_npcname("#mobfogins15", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",312,139,330,124,"Parus",2134,2,instance_npcname("#mobfogins15", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",312,139,330,124,"Little Fatum",2136,2,instance_npcname("#mobfogins15", instance_id())+"::OnMyMobDead";
+	areamonster "1@mist",312,139,330,124,"Miming",2137,2,instance_npcname("#mobfogins15", instance_id())+"::OnMyMobDead";
+OnMyMobDead:
+	set .@callnum,10;
+	set .@o_mob_num,mobcount("1@mist",instance_npcname("#mobfogins15", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@o_mob_num;
+	if (.@mob_dead_num > 9) {
+	disablenpc instance_npcname("Creeper#npcfogins15", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa15", instance_id());
+	}
+	end;
+}
+
+//NPC Creeper
+1@mist,247,123,0	script	Creeper#npcfogins	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+
+1@mist,225,98,0	script	Creeper#npcfogins1	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,159,184,0	script	Creeper#npcfogins2	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,60,39,0	script	Creeper#npcfogins3	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,279,210,0	script	Creeper#npcfogins4	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,230,179,0	script	Creeper#npcfogins5	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,285,226,0	script	Creeper#npcfogins6	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,221,236,0	script	Creeper#npcfogins8	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,206,201,0	script	Creeper#npcfogins9	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,161,317,0	script	Creeper#npcfogins10	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,204,300,0	script	Creeper#npcfogins11	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,95,288,0	script	Creeper#npcfogins12	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,325,327,0	script	Creeper#npcfogins13	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,280,344,0	script	Creeper#npcfogins14	527,{
+	instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+1@mist,346,187,0	script	Creeper#npcfogins15	527,{
+	//instance_announce 0, "Creeper: Well? Hyundai to me, crossed the guy that you want to?.",bc_map,"0x008000";
+	end;
+}
+// Guia Warps
+1@mist,251,123,3	script	Post#fog	858,{
+}
+1@mist,226,94,3	script	Post#fog1	858,{
+}
+1@mist,156,185,3	script	Post#fog2	858,{
+}
+1@mist,57,39,3	script	Post#fog3	858,{
+}
+1@mist,275,210,3	script	Post#fog4	858,{
+}
+1@mist,226,179,3	script	Post#fog5	858,{
+}
+1@mist,288,226,3	script	Post#fog6	858,{
+}
+1@mist,221,233,3	script	Post#fog8	858,{
+}
+1@mist,209,201,3	script	Post#fog9	858,{
+}
+1@mist,157,319,3	script	Post#fog10	858,{
+}
+1@mist,207,298,3	script	Post#fog11	858,{
+}
+1@mist,98,285,3	script	Post#fog12	858,{
+}
+1@mist,323,324,3	script	Post#fog13	858,{
+}
+1@mist,277,346,3	script	Post#fog14	858,{
+}
+1@mist,343,185,3	script	Post#fog15	858,{
+}
+
+//Warps Creeper
+1@mist,247,123,0	script	#warpfogins	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",164,66;
+	end;
+}
+1@mist,225,98,0	script	#warpfogins1	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins1", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",144,194;
+	end;
+}
+1@mist,159,184,0	script	#warpfogins2	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins2", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",49,37;
+	end;
+}
+
+1@mist,60,39,0	script	#warpfogins3	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins3", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",68,113;
+	end;
+}
+1@mist,279,210,0	script	#warpfogins4	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins4", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",277,112;
+	end;
+}
+1@mist,230,179,0	script	#warpfogins5	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins5", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",121,224;
+	end;
+}
+1@mist,285,226,0	script	#warpfogins6	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins6", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",72,274;
+	end;
+}
+1@mist,221,236,0	script	#warpfogins8	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins8", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",214,268;
+	end;
+}
+1@mist,206,201,0	script	#warpfogins9	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins9", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",298,142;
+	end;
+}
+1@mist,161,317,0	script	#warpfogins10	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins10", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",108,203;
+	end;
+}
+1@mist,204,300,0	script	#warpfogins11	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins11", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",169,314;
+	end;
+}
+1@mist,95,288,0	script	#warpfogins12	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins12", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",323,276;
+	end;
+}
+1@mist,325,327,0	script	#warpfogins13	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins13", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",49,316;
+	end;
+}
+1@mist,280,344,0	script	#warpfogins14	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins14", instance_id());
+	end;
+OnTouch:
+	warp "1@mist",49,316;
+	end;
+}
+1@mist,346,187,0	script	#warpfogins15	45,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warpfogins15", instance_id());
+	end;
+OnTouch:
+	warp "bif_fild01",0,0;
+	end;
+}
+
+//Disable Creeper NPC
+1@mist,0,0,0	script	#mobfogins	-1,{
+	end;
+OnInstanceInit:
+	donpcevent instance_npcname("#mobfogins", instance_id())+"::OnEnable";
+	end;
+OnDisable:
+	killmonster "1@mist",instance_npcname("#mobfogins", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#mobfogins", instance_id());
+	set .@mob_ran,rand(1,25);
+	if (.@mob_ran < 6) {
+	areamonster "1@mist",254,123,259,118,"Pom Spider",2132,2,instance_npcname("#mobfogins", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 5) && (.@mob_ran < 11))  {
+	areamonster "1@mist",254,123,259,118,"Angra Mantis",2133,2,instance_npcname("#mobfogins", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 10) && (.@mob_ran < 16))  {
+	areamonster "1@mist",254,123,259,118,"Parus",2134,2,instance_npcname("#mobfogins", instance_id())+"::OnMyMobDead";
+	}
+	else if ((.@mob_ran > 15) && (.@mob_ran < 21))  {
+	areamonster "1@mist",254,123,259,118,"Little Fatum",2136,2,instance_npcname("#mobfogins", instance_id())+"::OnMyMobDead";
+	}
+	if (.@mob_ran > 20) {
+	areamonster "1@mist",254,123,259,118,"Miming",2137,2,instance_npcname("#mobfogins", instance_id())+"::OnMyMobDead";
+	}
+OnMyMobDead:
+	set .@callnum,2;
+	set .@e_mob_num,mobcount("1@mist",instance_npcname("#mobfogins", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@e_mob_num;
+	if (.@mob_dead_num > 1) {
+	disablenpc instance_npcname("Creeper#npcfogins", instance_id());
+	enablenpc instance_npcname("Creeper#npcfoginsa", instance_id());
+	}
+	end;
+}
+//NPC Creeper WARP
+1@mist,247,123,0	script	Creeper#npcfoginsa	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa", instance_id());
+			enablenpc instance_npcname("#warpfogins", instance_id());
+			close2;
+			instance_announce 0, "noisy, that each in luck: forest, but what? Jung-hwon are doing?.",bc_map,"0x008000";
+			end;
+		case 2:
+			close;
+	}
+}
+1@mist,225,98,0	script	Creeper#npcfoginsa1	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa1", instance_id());
+			enablenpc instance_npcname("#warpfogins1", instance_id());
+			close2;
+			instance_announce 0, "commotion shouts: little Tom unlatched opened! Tom tension, Tom nervous!.",bc_map,"0x008000";
+			end;
+		case 2:
+			close;
+	}
+}
+1@mist,159,184,0	script	Creeper#npcfoginsa2	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa2", instance_id());
+			enablenpc instance_npcname("#warpfogins2", instance_id());
+			close2;
+			instance_announce 0, "commotion shouts: Tom, the tall with Tom disappeared, Rémy now rice cakes Hak-Rae,?.",bc_map,"0x008000";
+			end;
+		case 2:
+			close;
+	}
+}
+1@mist,60,39,0	script	Creeper#npcfoginsa3	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa3", instance_id());
+			enablenpc instance_npcname("#warpfogins3", instance_id());
+			close2;
+			instance_announce 0, "commotion shouts: Rémy, Rémy's fluttering garden to write that was lost; The following a four-should collect. Jeremiah, the way, people talk about Jeremiah!.",bc_map,"0x008000";
+			end;
+		case 2:
+			close;
+	}
+}
+1@mist,279,210,0	script	Creeper#npcfoginsa4	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa4", instance_id());
+			enablenpc instance_npcname("#warpfogins4", instance_id());
+			close2;
+			instance_announce 0, "A desperate cries Willem II: Oh, no. Jeremiah is well. Well now. Young ~ won ~, well!.",bc_map,"0x008000";
+			end;
+			
+		case 2:
+			close;
+	}
+}
+1@mist,230,179,0	script	Creeper#npcfoginsa5	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa5", instance_id());
+			enablenpc instance_npcname("#warpfogins5", instance_id());
+			close2;
+			instance_announce 0, "Gardener, Ron's shouts: Going Home! The second gardener, no longer don't find!.",bc_map,"0x008000";
+			end;
+		case 2:
+			close;
+	}
+}
+1@mist,285,226,0	script	Creeper#npcfoginsa6	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa6", instance_id());
+			enablenpc instance_npcname("#warpfogins6", instance_id());
+			close;
+		case 2:
+			close;
+	}
+}
+1@mist,221,236,0	script	Creeper#npcfoginsa8	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa8", instance_id());
+			enablenpc instance_npcname("#warpfogins8", instance_id());
+			close;
+		case 2:
+			close;
+	}
+}
+1@mist,206,201,0	script	Creeper#npcfoginsa9	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa9", instance_id());
+			enablenpc instance_npcname("#warpfogins9", instance_id());
+			close;
+		case 2:
+			close;
+	}
+}
+1@mist,161,317,0	script	Creeper#npcfoginsa10	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa10", instance_id());
+			enablenpc instance_npcname("#warpfogins10", instance_id());
+			close;
+		case 2:
+			close;
+	}
+}
+1@mist,204,300,0	script	Creeper#npcfoginsa11	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa11", instance_id());
+			enablenpc instance_npcname("#warpfogins11", instance_id());
+			close;
+		case 2:
+			close;
+	}
+}
+1@mist,95,288,0	script	Creeper#npcfoginsa12	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa12", instance_id());
+			enablenpc instance_npcname("#warpfogins12", instance_id());
+			close;
+		case 2:
+			close;
+	}
+}
+1@mist,325,327,0	script	Creeper#npcfoginsa13	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa13", instance_id());
+			enablenpc instance_npcname("#warpfogins13", instance_id());
+			close;
+		case 2:
+			close;
+	}
+}
+1@mist,280,344,0	script	Creeper#npcfoginsa14	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa14", instance_id());
+			enablenpc instance_npcname("#warpfogins14", instance_id());
+			close;
+		case 2:
+			close;
+	}
+}
+1@mist,346,187,0	script	Creeper#npcfoginsa15	527,{
+	mes "No longer the gardener. Hyundai to destroy it..";
+	next;
+	switch( Select("Destruye Arbol Para Continuar","Darse Por Vencido" ) )
+	{
+		case 1:
+			mes "A crossroad labyrinth to block on which to destroy you can pass when a channel.";
+			misceffect 16;
+			disablenpc instance_npcname("Creeper#npcfoginsa15", instance_id());
+			enablenpc instance_npcname("#warpfogins15", instance_id());
+			close;
+		case 2:
+			close;
+	}
+}
+//Seed mora
+
+1@mist,132,179,0	script	???#morainstanc	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc", instance_id());
+	end;
+}
+1@mist,142,181,0	script	???#morainstanc1	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc1", instance_id());
+	end;
+}
+1@mist,145,186,0	script	???#morainstanc2	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc2", instance_id());
+	end;
+}
+1@mist,144,203,0	script	???#morainstanc3	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc3", instance_id());
+	end;
+}
+1@mist,137,209,0	script	???#morainstanc4	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc4", instance_id());
+	end;
+}
+1@mist,122,204,0	script	???#morainstanc5	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc5", instance_id());
+	end;
+}
+1@mist,118,194,0	script	???#morainstanc6	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc6", instance_id());
+	end;
+}
+1@mist,123,183,0	script	???#morainstanc7	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc7", instance_id());
+	end;
+}
+1@mist,205,92,0	script	???#morainstanc8	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc8", instance_id());
+	end;
+}
+1@mist,213,95,0	script	???#morainstanc9	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc9", instance_id());
+	end;
+}
+1@mist,216,102,0	script	???#morainstanc10	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc10", instance_id());
+	end;
+}
+1@mist,212,116,0	script	???#morainstanc11	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc11", instance_id());
+	end;
+}
+1@mist,207,120,0	script	???#morainstanc12	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc12", instance_id());
+	end;
+}
+1@mist,194,118,0	script	???#morainstanc13	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc13", instance_id());
+	end;
+}
+1@mist,188,109,0	script	???#morainstanc14	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc14", instance_id());
+	end;
+}
+1@mist,193,94,0	script	???#morainstanc16	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc16", instance_id());
+	end;
+}
+1@mist,61,268,0	script	???#morainstanc17	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc17", instance_id());
+	end;
+}
+1@mist,72,271,0	script	???#morainstanc18	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc18", instance_id());
+	end;
+}
+1@mist,72,276,0	script	???#morainstanc19	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc19", instance_id());
+	end;
+}
+1@mist,73,290,0	script	???#morainstanc20	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc20", instance_id());
+	end;
+}
+1@mist,69,295,0	script	???#morainstanc21	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc21", instance_id());
+	end;
+}
+1@mist,62,291,0	script	???#morainstanc22	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc22", instance_id());
+	end;
+}
+1@mist,54,293,0	script	???#morainstanc23	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc23", instance_id());
+	end;
+}
+1@mist,53,284,0	script	???#morainstanc24	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc24", instance_id());
+	end;
+}
+1@mist,48,286,0	script	???#morainstanc25	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc25", instance_id());
+	end;
+}
+1@mist,52,270,0	script	???#morainstanc26	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc26", instance_id());
+	end;
+}
+1@mist,252,206,0	script	???#morainstanc27	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc27", instance_id());
+	end;
+}
+1@mist,260,214,0	script	???#morainstanc28	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc28", instance_id());
+	end;
+}
+1@mist,265,216,0	script	???#morainstanc29	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc29", instance_id());
+	end;
+}
+1@mist,262,229,0	script	???#morainstanc30	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc30", instance_id());
+	end;
+}
+1@mist,257,232,0	script	???#morainstanc31	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc31", instance_id());
+	end;
+}
+1@mist,244,232,0	script	???#morainstanc32	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc32", instance_id());
+	end;
+}
+1@mist,238,224,0	script	???#morainstanc33	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc33", instance_id());
+	end;
+}
+1@mist,244,211,0	script	???#morainstanc34	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc34", instance_id());
+	end;
+}
+1@mist,181,294,0	script	???#morainstanc15	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc15", instance_id());
+	end;
+}
+1@mist,195,301,0	script	???#morainstanc35	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc35", instance_id());
+	end;
+}
+1@mist,191,301,0	script	???#morainstanc36	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc36", instance_id());
+	end;
+}
+1@mist,193,316,0	script	???#morainstanc37	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc37", instance_id());
+	end;
+}
+1@mist,187,320,0	script	???#morainstanc38	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc38", instance_id());
+	end;
+}
+1@mist,175,318,0	script	???#morainstanc39	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc39", instance_id());
+	end;
+}
+1@mist,173,309,0	script	???#morainstanc40	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc40", instance_id());
+	end;
+}
+1@mist,169,310,0	script	???#morainstanc41	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc41", instance_id());
+	end;
+}
+1@mist,172,296,0	script	???#morainstanc42	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc42", instance_id());
+	end;
+}
+1@mist,321,118,0	script	???#morainstanc43	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc43", instance_id());
+	end;
+}
+1@mist,331,123,0	script	???#morainstanc44	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc44", instance_id());
+	end;
+}
+1@mist,335,126,0	script	???#morainstanc45	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc45", instance_id());
+	end;
+}
+1@mist,332,141,0	script	???#morainstanc46	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc46", instance_id());
+	end;
+}
+1@mist,328,144,0	script	???#morainstanc47	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc47", instance_id());
+	end;
+}
+1@mist,314,144,0	script	???#morainstanc48	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc48", instance_id());
+	end;
+}
+1@mist,308,136,0	script	???#morainstanc49	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc49", instance_id());
+	end;
+}
+1@mist,314,122,0	script	???#morainstanc50	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc50", instance_id());
+	end;
+}
+1@mist,328,137,0	script	???#morainstanc51	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc51", instance_id());
+	end;
+}
+1@mist,314,134,0	script	???#morainstanc52	844,{
+	getitem 12561,1;
+	misceffect 16;
+	disablenpc instance_npcname("???#morainstanc52", instance_id());
+	end;
+}
+
+//mapflags
+
+1@mist	mapflag	nosave	SavePoint
+1@mist	mapflag	nomemo
+1@mist	mapflag	noteleport

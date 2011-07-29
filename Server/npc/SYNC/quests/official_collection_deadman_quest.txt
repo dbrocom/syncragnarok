@@ -1,0 +1,376 @@
+//===== Custom eAthena Script =======================================
+//= Deadman
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Description =================================================
+//= Quest de EXP Repetible de Disguise y Loli Ruri.
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+nif_fild01,332,327,4	script	Deadman#Deadman_Hunt	796,{
+	if (checkquest(60176) != -1) {
+		if (checkquest(60176,HUNTING) != 2 ) {
+			mes "[Deadman]";
+			mes "¿Has derrotado a los Loli Ruri ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Deadman]";
+				mes "Hmm, no creo que hayas derrotado a los 50 Loli Ruri todavía...";
+				close;
+			case 2:
+				mes "[Deadman]";
+				mes "Recuerda, debes acabar con 50 Loli Ruri del mapa.";
+				close;
+			case 3:
+				mes "[Deadman]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Deadman]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60176;
+					close;
+				case 2:
+					mes "[Deadman]";
+					mes "Recuerda, deshazte de esos 50 Loli Ruri.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Deadman]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 33200,19580;
+			erasequest 60176;
+			close;
+		}
+	}
+	if (checkquest(60177) != -1) {
+		if (checkquest(60177,HUNTING) != 2 ) {
+			mes "[Deadman]";
+			mes "¿Has derrotado a los Loli Ruri ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Deadman]";
+				mes "Hmm, no creo que hayas derrotado a los 100 Loli Ruri todavía...";
+				close;
+			case 2:
+				mes "[Deadman]";
+				mes "Recuerda, debes acabar con 100 Loli Ruri del mapa.";
+				close;
+			case 3:
+				mes "[Deadman]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Deadman]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60177;
+					close;
+				case 2:
+					mes "[Deadman]";
+					mes "Recuerda, deshazte de esos 100 Loli Ruri.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Deadman]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 33200,19580;
+			getexp 33200,19580;
+			erasequest 60177;
+			close;
+		}
+	}
+	if (checkquest(60178) != -1) {
+		if (checkquest(60178,HUNTING) != 2 ) {
+			mes "[Deadman]";
+			mes "¿Has derrotado a los Loli Ruri ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Deadman]";
+				mes "Hmm, no creo que hayas derrotado a los 150 Loli Ruri todavía...";
+				close;
+			case 2:
+				mes "[Deadman]";
+				mes "Recuerda, debes acabar con 150 Loli Ruri del mapa.";
+				close;
+			case 3:
+				mes "[Deadman]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Deadman]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60178;
+					close;
+				case 2:
+					mes "[Deadman]";
+					mes "Recuerda, deshazte de esos 150 Loli Ruri.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Deadman]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 33200,19580;
+			getexp 33200,19580;
+			getexp 33200,19580;
+			erasequest 60178;
+			close;
+		}
+	}
+	if (checkquest(60173) != -1) {
+		if (checkquest(60173,HUNTING) != 2 ) {
+			mes "[Deadman]";
+			mes "¿Has derrotado a los Disguise ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Deadman]";
+				mes "Hmm, no creo que hayas derrotado a los 50 Disguise todavía...";
+				close;
+			case 2:
+				mes "[Deadman]";
+				mes "Recuerda, debes acabar con 50 Disguise del mapa.";
+				close;
+			case 3:
+				mes "[Deadman]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Deadman]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60173;
+					close;
+				case 2:
+					mes "[Deadman]";
+					mes "Recuerda, deshazte de esos 50 Disguise.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Deadman]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 14060,9580;
+			erasequest 60173;
+			close;
+		}
+	}
+	if (checkquest(60174) != -1) {
+		if (checkquest(60174,HUNTING) != 2 ) {
+			mes "[Deadman]";
+			mes "¿Has derrotado a los Disguise ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Deadman]";
+				mes "Hmm, no creo que hayas derrotado a los 100 Disguise todavía...";
+				close;
+			case 2:
+				mes "[Deadman]";
+				mes "Recuerda, debes acabar con 100 Disguise del mapa.";
+				close;
+			case 3:
+				mes "[Deadman]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Deadman]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60174;
+					close;
+				case 2:
+					mes "[Deadman]";
+					mes "Recuerda, deshazte de esos 100 Disguise.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Deadman]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 14060,9580;
+			getexp 14060,9580;
+			erasequest 60174;
+			close;
+		}
+	}
+	if (checkquest(60175) != -1) {
+		if (checkquest(60175,HUNTING) != 2 ) {
+			mes "[Deadman]";
+			mes "¿Has derrotado a los Disguise ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Deadman]";
+				mes "Hmm, no creo que hayas derrotado a los 150 Disguise todavía...";
+				close;
+			case 2:
+				mes "[Deadman]";
+				mes "Recuerda, debes acabar con 150 Disguise del mapa.";
+				close;
+			case 3:
+				mes "[Deadman]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Deadman]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60175;
+					close;
+				case 2:
+					mes "[Deadman]";
+					mes "Recuerda, deshazte de esos 150 Disguise.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Deadman]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 14060,9580;
+			getexp 14060,9580;
+			getexp 14060,9580;
+			erasequest 60175;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel >= 60) {
+		//for maximum level
+		if (BaseLevel <= 98) {
+			mes "[Deadman]";
+			mes "No me dejan tranquilo. Odio a esas malditas Loli Ruri con todo mi ser...";
+			mes "... bueno, lo que queda de él.";
+			next;
+			mes "[Deadman]";
+			mes "Y para colmo esos estúpidos Disguise me la tienen jurada. ¡No me dejan tranquilo!";
+			next;
+			mes "[Deadman]";
+			mes "¿Te gustaría ayudarme? No soporto su forma de mirarme.";
+			next;
+			switch(select("Ehmm... claro, te ayudo:No")) {
+			case 1:
+				mes "[Deadman]";
+				mes "¿De verdad? ¿Qué te gustaría hacer?";
+				next;
+				switch(select("Acabar con Disguise:Acabar con Loli Ruri:Cancelar")) {
+				case 1:
+					mes "[Deadman]";
+					if (BaseLevel > 90) {
+						mes "Creo que los Disguise no suponen ningun problema para ti...  ¿Qué tal si pruebas con las Loli Ruri?.";
+						close;
+					}
+					mes "¡Muchas gracias!";
+					mes "¿De cuántos deseas encargarte?";
+					next;
+					switch(select("50 Disguise:100 Disguise:150 Disguise")) {
+					case 1:
+						mes "[Deadman]";
+						mes "Si acabas con 50 Disguise te estaré agradecido.";
+						setquest 60173;
+						close;
+					case 2:
+						mes "[Deadman]";
+						mes "Si acabas con 100 Disguise te estaré agradecido.";
+						setquest 60174;
+						close;
+					case 3:
+						mes "[Deadman]";
+						mes "Si acabas con 150 Disguise te estaré agradecido.";
+						setquest 60175;
+						close;
+					}
+					break;
+				case 2:
+					mes "[Deadman]";
+					if (BaseLevel < 75) {
+						mes "No creo que puedas ayudarme con eso todavía... no eres lo suficientemente fuerte.";
+						close;
+					}
+					mes "¡Muchas gracias!";
+					mes "¿De cuántos deseas encargarte?";
+					next;
+					switch(select("50 Loli Ruri:100 Loli Ruri:150 Loli Ruri")) {
+					case 1:
+						mes "[Deadman]";
+						mes "Si acabas con 50 Loli Ruri te estaré agradecido.";
+						setquest 60176;
+						close;
+					case 2:
+						mes "[Deadman]";
+						mes "Si acabas con 100 Loli Ruri te estaré agradecido.";
+						setquest 60177;
+						close;
+					case 3:
+						mes "[Deadman]";
+						mes "Si acabas con 150 Loli Ruri te estaré agradecido.";
+						setquest 60178;
+						close;
+					}
+					break;
+				case 3:
+					mes "[Deadman]";
+					mes "Si cambias de idea, por favor, vuelve.";
+					close;
+				}
+			case 2:
+				mes "[Deadman]";
+				mes "Si cambias de idea, por favor, vuelve.";
+				close;
+			}
+		}
+		else {
+			mes "[Deadman]";
+			mes "Estoy seguro de que podrías ayudarme fácilmente, pero me gustaría poder agradecérselo a otros que no sean tan fuertes como tú.";
+			close;
+		}
+	}
+	else {
+		mes "[Deadman]";
+		mes "Ven a verme cuando seas un poquito más fuerte.";
+		close;
+	}
+}

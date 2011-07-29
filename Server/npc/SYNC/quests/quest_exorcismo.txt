@@ -1,0 +1,517 @@
+//===== Custom eAthena Script =======================================
+//= Triangle Rune Cap Hat Custom Quest
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+gon_in,165,25,6	script	Cliente#exo1	882,3,3,{
+	end;
+	
+OnTouch:
+	switch (QuestExorcismo) {
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+			mes "[Cliente]";
+			mes "Cuchicheo... Cuchicheo..."; 
+			mes "¡Sí, sí! ¡Yo también lo he escuchado!";
+			next;
+			mes "[Cliente]";
+			mes "Pero muchos han ido a enterarse y les han echado";
+			mes "sin darles oportunidad a ayudar..."; 
+			next;
+			mes "[Cliente]";
+			mes "Cuchicheo... Cuchicheo...";
+			mes "Pobre Shen... Si es verdad... Él..."; 
+			mes "Cuchicheo...";
+			if (!QuestExorcismo) { set QuestExorcismo,1; }
+			break;
+		case 8:
+		case 9:
+			mes "[Cliente]";
+			mes "Cuchicheo... Cuchicheo..."; 
+			mes "¡Sí, sí! ¡Yo también lo he escuchado!";
+			next;
+			mes "[Cliente]";
+			mes "¡Parece que Shen se ha recuperado...!";
+			mes "Dicen que ha sido gracias a un tal "+strcharinfo(0)+"... ¿quién será?";
+			break;
+		default:
+			break;
+	}
+	close;
+}
+
+gon_in,170,24,2	script	Cliente#exo2	881,3,3,{
+	end;
+
+OnTouch:
+	switch (QuestExorcismo) {
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+			mes "[Cliente]";
+			mes ". . .";
+			mes "Pobre Shen...";
+			break;
+		case 8:
+		case 9:
+			mes "[Cliente]";
+			mes "¡Me alegro mucho por Shen!";
+			mes "Ya está mucho mejor n.n";
+			set QuestExorcismo,7;							// Re-iniciador (debug)
+			break;
+		default:
+			break;
+	}
+	close;
+}
+
+gonryun,221,162,3	script	gon_house1-1#exq	45,2,2,{
+
+	switch (QuestExorcismo) {
+		case 0:
+			mes "[Cheng-Gong]";
+			mes "¡Largo de aquí!";
+			mes "¡Es propiedad privada!";
+			break;
+		case 1:
+		case 2:
+		case 3:
+			mes "[Cheng-Gong]";
+			mes "¡Largo de aquí!";
+			mes "¡No necesitamos a ningún guerrero de pacotilla como tú!";
+			break;
+		case 4:
+		case 5:
+		case 6:
+			mes "[Cheng-Gong]";
+			mes "Lo siento, no te puedo dejar pasar.";
+			mes "Todavía está muy débil...";
+			break;
+		case 7:
+		case 8:
+		case 9:
+			warp "gon_in",112,98;
+			end;
+			break;
+	}
+	close;
+	
+OnInit:
+	disablenpc "gon_house1-1";
+	end;
+}
+
+gonryun,219,162,3	script	Cheng-Gong	776,{
+
+	switch (QuestExorcismo) {
+		case 0:
+			mes "[Cheng-Gong]";
+			mes "¡Largo de aquí!";
+			mes "¡Es propiedad privada!";
+			break;
+		case 1:
+		case 2:
+		case 3:
+			mes "[Cheng-Gong]";
+			mes "¡Largo de aquí!";
+			mes "¡No necesitamos a ningún guerrero de pacotilla como tú!";
+			close2;
+			sleep2 1000;
+			npctalk "Estos crios...";
+			npctalk "Espero que Kumiko haya llegado bien...";
+			npctalk "Ir sola a Prontera... ¡Qué locura!";
+			end;
+			break;
+		case 4:
+			mes "[Cheng-Gong]";
+			mes "¿Tu eres el valiente que esta ayudando a mi hijo?";
+			next;
+			sleep2 500;
+			mes ". . . . .";
+			sleep2 500;
+			mes ". . . . . ";
+			next;
+			mes "[Cheng-Gong]";
+			mes "Ya veo... Así que necesitas dinero para que Kenay haga la pocima...";
+			mes "Esta bien, hare lo que haga falta para salvar la vida de mi hijo.";
+			next;
+			mes "[Cheng-Gong]";
+			mes "Pero sólo tenemos 120.000z... Espero que sea suficiente.";
+			mes "Lamento los problemas que te podamos ocasionar.";
+			set zeny, zeny+120000;
+			next;
+			mes "[Cheng-Gong]";
+			mes "¡Date prisa por favor!";
+			set QuestExorcismo,5;
+			break;
+		case 5:
+		case 6:
+			mes "[Cheng-Gong]";
+			mes "Muchas gracias por ayudarnos...";
+			mes "Lo siento, no te puedo dejar pasar.";
+			mes "Todavía está muy débil...";
+			break;
+		case 7:
+			mes "[Cheng-Gong]";
+			mes "¡Gracias al cielo! ¡Rápido! ¡Entra!";
+			close2;
+			npcwalkto 219,168;
+			sleep2 100;
+			npcwalkto 219,163;
+			mes "[Cheng-Gong]";
+			mes "Mi hijo esta en la cama.";
+			mes "¡Dáte prisa!";
+			break;
+		case 8:
+			mes "[Cheng-Gong]";
+			mes "¡Gracias, Gracias!";
+			mes "¡Qué todo el mundo se entere de las Buenas Nuevas!";
+			break;
+		default:
+			break;
+	}
+	close;
+}
+
+prt_in,238,102,2	script	Kumiko	770,{
+	mes "[Kumiko]";
+	switch (QuestExorcismo) {
+		case 1:
+			mes "¡Ahhh! ¡¿Quién eres tú?! ¡¿Qué quieres de mi?!";
+			next;
+			sleep2 500;
+			mes ". . .";
+			sleep2 500;
+			mes ". . . . . ";
+			next;
+			mes "[Kumiko]";
+			mes "Ah...Así que has escuchado sobre mi hermano Shen...";
+			mes "Han sido muchos los curiosos que se han acercado a verle,";
+			mes "pero ninguno de ellos nos a auxiliado...";
+			next;
+			mes "[Kumiko]";
+			mes "He venido a Prontera a buscar a un guerrero de buen corazón";
+			mes "que quiera ayudarnos a salvarle la vida.";
+			next;
+			mes "[Kumiko]";
+			mes ". . .";
+			mes ". . .";
+			next;
+			mes "[Kumiko]";
+			mes "Jaja! Asi que tu crees poder hacerlo, eh?";
+			mes "¡Bien! ¡Comprobemos si eres adecuado!";
+			mes "Si de verdad eres tan valiente seras capaz de traerme:";
+			next;
+			mes "[Kumiko]";
+			mes "20 ^088A4B"+getitemname(1035)+"^000000";
+			mes "20 ^088A4B"+getitemname(7123)+"^000000";
+			mes "1 ^088A4B"+getitemname(7296)+"^000000";
+			next;
+			mes "[Kumiko]";
+			mes "Si eres capaz de traerlos, confiare en ti.";
+			set QuestExorcismo, 2;
+			break;
+
+		case 2:
+			mes "¿Ya me has traido los objetos?";
+			next;
+			mes "[Kumiko]";
+			if (select("Sí:No...")==2) { 
+				mes "Aún no tienes lo que te pedi?"; 
+				mes "Quizá me equivoqué confiando en ti...";
+				close;
+			}
+			if ( (countitem(1035) >= 20) && (countitem(7123) >= 20) && (countitem(7296) >= 1) ) {
+				mes "Increible! Lo conseguiste!";
+				set QuestExorcismo, 3;
+				delitem 1035,20;
+				delitem 7123,20;
+				delitem 7296,1;
+			} else {
+				mes "No tienes aún todos los items... ¡Por favor vuelve cuando los tengas!";
+				mes "20 Dragon canine";
+				mes "20 Dragon skin";
+				mes "1 Pyroxene";
+				close;
+			}
+			next;
+			
+		case 3:
+			mes "Ahora puede explicarte lo sucedido...";
+			next;
+			mes "[Kumiko]";
+			mes "Mi hermano Shen cayó enfermo hace 3 dias";
+			mes "Y desde entonces ningún remedio a conseguido mejorar su salud";
+			mes "¡Ni siquiera los ancianos saben que es lo que le ocurre!";
+			next;
+			mes "[Kumiko]";
+			mes "Sin embargo, ayer, un conocido nos habló de";
+			mes "un viejo boticario capaz de curar cualquier enfermedad.";
+			next;
+			mes "[Kumiko]";
+			mes "Pero por mucho que he preguntado";
+			mes "nadie me ha sabido decir donde se encuentra el viejo Kenay...";
+			next;
+			mes "[Kumiko]";
+			mes "La única información que he conseguido";
+			mes "es que hace algunos años se trasladó a una pequeña ciudad";
+			mes "ammurallada y rodeada por un río.";
+			mes "Y se que tiene un jardin de plantas cerca de la casa de un tal Moonho Ahn...";
+			next;
+			mes "[Kumiko]";
+			mes "Se que no es mucha información, pero por favor, ¡date prisa!";
+			mes "A mi hermano no le queda mucho tiempo...";
+			break;
+		case 8:
+			mes "¿Shen se ha recuperado? ¡¡Fantástico!!";
+			next;
+			mes "[Kumiko]";
+			mes "Algo me dice que tu has tenido algo que ver en su recuperación...";
+			mes "¿Me equivoco?";
+			next;
+			mes "[Kumiko]";
+			mes "Pues toma este sombrero que le compré a un mercader.";
+			mes "Me dijo que serviría para curar a mi hermano, pero al final no ha hecho falta.";
+			mes "Entre tú y yo, dudo que sirviera de mucho~~.";
+			getitem 5682,1;
+			next;
+			mes "[Kumiko]";
+			mes "¡Qué mal educada soy!";
+			mes "¡Se me ha olvidado darte las gracias!";
+			mes "¡ ¡ MUCHAS GRACIAS ! !";
+			mes "n.n";
+			set QuestExorcismo, 9;
+			next;
+			mes " -Dentro del sombrero que te ha regalado Kumiko encuentras un 'Token of Siegfried'- ";
+			getitem 7621,1;
+			break;
+		default:
+			mes "Debería pensar en volver a casa...";
+			mes "Pero se está tan bien en esta ciudad. ¡Aunque es muy grande!";
+			break;
+	}
+	close;
+}
+
+payon,264,254,3	script	Kenay	901,{
+	mes "[Kenay]";
+	switch (QuestExorcismo) {
+	case 0:
+	case 1:
+	case 2:
+		mes "Estoy ocupado, ¿es que no lo ves?";
+		next;
+		mes "¡Déjame en paz!";
+		break;
+	case 3:
+		mes "Estoy ocupado, ¿es que no lo ves?";
+		next;
+		mes "¡Déjame en paz!";
+		next;
+		if( select("Insistir:Dejar en paz")==2){ close; }
+		mes "[Kenay]";
+		mes "¡Por dios! ¡Qué pesadilla! Estoy retirado, ¡déjame tranquilo!";
+		next;
+		select("Insistir");
+		mes "[Kenay]";
+		mes "¡Venga va!";
+		mes "Si te escucho, prométeme que me dejarás en paz.";
+		next;
+		mes "[Kenay]";
+		sleep2 500;
+		mes ". . .";
+		sleep2 500;
+		mes ". . . . . ";
+		next;
+		mes "[Kenay]";
+		mes "Mmmm... Ya veo...";
+		mes "Ya sé lo que le ocurre al chico";
+		mes "No te asombres, soy un experto.";
+		mes "Pero sintiéndolo mucho, no puedo hacer nada por él.";
+		next;
+		mes "[Kenay]";
+		mes "Lo que necesita es excesivamente dificil de recolectar";
+		mes "Y la preparación... Uff...";
+		mes "No creo que ni tú consiguieras encontrarlo.";
+		next;
+		mes "[Kenay]";
+		mes "Además, ¡esta pócima es cara!";
+		mes "¡Mejor ve y dile a su padre que pague por adelantado si es que quiere que lo intente!";
+		mes "¡Serán 220.000z!";
+		set QuestExorcismo, 4;
+		break;
+	case 4:
+		mes "¿No tenías tanta prisa?";
+		mes "Fús fús";
+		break;
+	case 5:
+		if ( zeny < 220000 ) {
+			mes "¿No te dije que deberías traerme 220.000z?";
+			close;
+		}
+		mes "Vaya, vaya... No sólo me hiciste caso, si no que además, ¡eres honrado!";
+		set zeny,zeny-220000;
+		mes "¡Has puesto dinero de tu bolsillo para salvar a alquien que ni conoces!";
+		next;
+		mes "[Kenay]";
+		mes "No me importa trabajar con gente como tú";
+		mes "¡Pero ahora te toca dar lo mejor de ti!";
+		mes "Si quieres que ese joven tenga alguna posibilidad deberás traerme lo siguiente:";
+		next;
+		mes "[Kenay]";
+		mes "20 ^088A4B"+getitemname(511)+"^000000";
+		mes "10 ^088A4B"+getitemname(526)+"^000000";
+		mes "10 ^088A4B"+getitemname(924)+"^000000";
+		mes "10 ^088A4B"+getitemname(1004)+"^000000";
+		mes "5 ^088A4B"+getitemname(704)+"^000000";
+		mes "3 ^088A4B"+getitemname(610)+"^000000";
+		mes "1 ^088A4B"+getitemname(970)+"^000000";
+		mes "1 ^088A4B"+getitemname(523)+"^000000";
+		mes "1 ^088A4B"+getitemname(13201)+"^000000";
+		mes "1 ^088A4B"+getitemname(7295)+"^000000";
+		next;
+		mes "[Kenay]";
+		mes "¿Que esperas?";
+		mes " Yo se que necesito, no donde encontrarlo.";
+		mes "¡Espabílate!";
+		set QuestExorcismo,6;
+		close;
+	case 6:
+		mes "¿Ya me has traido los objetos?";
+		next;
+		mes "[Kenay]";
+		if (select("Sí:No...")==2) { 
+			mes "Aún no tienes lo que te pedi?"; 
+			mes "Y a que esperas...";
+			close;
+		}
+		if (	(countitem(511) >= 20) && (countitem(526) >= 10) && (countitem(924) >= 10) && 
+				(countitem(1004) >= 10) && (countitem(704) >= 5) && (countitem(610) >= 3) && 
+				(countitem(970) >= 1) && (countitem(523) >= 1) && (countitem(13201) >= 1) && (countitem(7295) >= 1) ) {
+			mes "Muy bien joven, ahora me toca a mi";
+			mes "¡Ahora veras como trabaja un maestro!";
+			delitem 511,20;
+			delitem 526,10;
+			delitem 924,10;
+			delitem 1004,10;
+			delitem 704,5;
+			delitem 610,3;
+			delitem 970,1;
+			delitem 523,1;
+			delitem 13201,1;
+			delitem 7295,1;
+			next;
+			mes "[Kenay]";
+			mes "Glu...Glu...";
+			sleep2 600;
+			mes "Crash...Crash...";
+			sleep2 1600;
+			mes ". . . . . ";
+			sleep2 2000;
+			mes "¡Ale! ¡Aquí tienes! ¡Ve a salvar a ese joven!";
+			getitem 7917,1;
+			mes "¡Y no vuelvas a molestarme!";
+			set QuestExorcismo, 7;
+			close;
+		} else {
+			mes "[Kenay]";
+			mes "Aún no tienes todos los items...";
+			mes "20 ^088A4B"+getitemname(511)+"^000000";
+			mes "10 ^088A4B"+getitemname(526)+"^000000";
+			mes "10 ^088A4B"+getitemname(924)+"^000000";
+			mes "10 ^088A4B"+getitemname(1004)+"^000000";
+			mes "5 ^088A4B"+getitemname(704)+"^000000";
+			mes "3 ^088A4B"+getitemname(610)+"^000000";
+			mes "1 ^088A4B"+getitemname(970)+"^000000";
+			mes "1 ^088A4B"+getitemname(523)+"^000000";
+			mes "1 ^088A4B"+getitemname(13201)+"^000000";
+			mes "1 ^088A4B"+getitemname(7295)+"^000000";
+			close;
+		}
+		break;
+	case 7:
+	case 8:
+		mes "¿Funcionó mi medicina?";
+		break;
+	case 9:
+		mes "¿Se recuperó? Me alegro de que la medicina funcionara.";
+		break;
+	}
+	close;
+}
+
+gon_in,126,105,4	script	Shen#q_exor	887,{
+
+	switch(QuestExorcismo){
+		default:
+			mes ". . .";
+			break;
+		case 7:
+			mes "["+strcharinfo(0)+"]";
+			mes "Parece que esta profundamente dormido...";
+			if (@medicina == 1) { close; }
+			next;
+			if( select("Darle la medicina:Largarse")==2){ close; }
+			set @medicina,1;
+			sleep2 300;
+			mes ". . Glup . . ";
+			sleep2 900;
+			mes ". . Glup . . Glup . . ";
+			sleep2 1500;
+			mes ". . Glup . . . Glup . .";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "¡Parece que le esta saliendo algo del cuerpo!";
+			close2;
+			sleep2 1000;
+			monster "gon_in",123,100,"Espíritu Maligno",1867,1,"Shen#q_exor::OnDead";
+			end;
+			break;
+		case 8:
+			mes "[Shen]";
+			mes "¿Dónde estoy?";
+			mes "¿Qué ha pasado?";
+			mes " . . . ";
+			next;
+			mes "Tras contarle la historia se ha desmayado y se ha vuelto a dormir.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Será mejor dejarle descansar.";
+			break;
+		case 9:
+			mes "["+strcharinfo(0)+"]";
+			mes "Shen está profundamente dormido.";
+			mes "Será mejor dejarle descansar.";
+			break;
+	}
+	close;
+
+OnDead:
+	if (QuestExorcismo == 7 && @medicina == 1) { set QuestExorcismo,8; }
+	set @medicina,0;
+	specialeffect2 6;
+	delitem 7917,1;
+	end;
+}

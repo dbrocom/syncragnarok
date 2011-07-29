@@ -58960,7 +58960,7 @@ Nivel Requerido :^777777 10^000000
 Equipable por :^777777 Cualquier Clase excepto Novice^000000
 #
 30830#
-Un hat como el de Remover.
+Un hat que parece un Ghostring de peluche.
 Tipo :^777777 Headgear^000000
 Defensa :^777777 1^000000
 Se equipa en :^777777 Upper^000000

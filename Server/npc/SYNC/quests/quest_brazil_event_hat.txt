@@ -1,0 +1,105 @@
+//===== Custom eAthena Script =======================================
+//= Brazil Joker Jester Custom Quest
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Descripción =================================================
+//= 25% de posibilidades de que la quest falle
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+brasilis,162,295,5	script	Adilson	715,{
+
+	set qbrazil_chance,75;
+
+	mes "[^0000FFAdilson^000000]";
+	mes "¡Muy buenas cabezinha!";
+	next;
+	switch(select("¿Quién eres?","Lo siento, no quería molestarle")){
+		case 1:
+			mes "[^0000FFAdilson^000000]";
+			mes "Soy Adilso, un orgulhoso Brasilenho al que le encanta el marmelo.";
+			 if (countitem(7549) == 0){ 
+				mes " ";
+				mes "Espero que disfrutes de esta maravillosa ciudad.";
+				close;
+			}
+			mes "¿Tú también estás orgulhoso de Brasilia, cabezinha?";
+			next;
+			mes "[^0000FFAdilson^000000]";
+			mes "Sí es así, no pierdas la oportunidade de conseguir un ^00FF00Brazil Event Hat^000000.";
+			mes "Aunque existe una leve possibilidade de falha, cabezinha.";
+			next;
+			mes "[^0000FFAdilson^000000]";
+			mes "Si quieres que trate de hacerte uno debes traerme:";
+			mes "15 ^FF0000Star Crumb^000000";
+			mes "10 ^FF0000Oridecon^000000";
+			mes "50 ^FF0000Soft Silk^000000";
+			mes "y 1 ^FF0000Joker Jester^000000";
+			next;
+			switch(select("Tengo los items","Iré a conseguirlos")){
+			case 1:
+				mes "[^0000FFAdilson^000000]";
+				if((countitem(1000) > 14) && (countitem(984) > 9) && (countitem(7166) > 49) && (countitem(5003) > 0)){
+					delitem 1000,15;
+					delitem 984,10;
+					delitem 7166,50;
+					mes "A ver a ver...";
+					next;
+					mes "[^0000FFAdilson^000000]";
+					mes "...";
+					next;
+					mes "[^0000FFAdilson^000000]";
+					mes "¡No te impacientes cabezinha!";
+					next;
+					mes "[^0000FFAdilson^000000]";
+					mes "...!";
+					next;
+					mes "[^0000FFAdilson^000000]";
+					set @cuea,rand(100);
+					if(@cuea > qbrazil_chance){
+						misceffect 155;
+						mes "¡¡Lo siento cabezinha!! Parece que hoy no es mi día.";
+						close;
+					}
+					delitem 5003,1;
+					misceffect 154;
+					getitem 5150,1;
+					mes "¡Genial! Lo conseguí..";
+					mes "Aquí tienes tu orgulho de Brazilenho.";
+					mes "No te olvides de lucirlo, cabezinha.";
+					close;
+				}else{
+					mes "Eres un desastre cabezinha. Te faltan items.";
+					close;
+				}
+			 break;
+			case 2:
+				mes "[^0000FFAdilson^000000]";
+				mes "No te entretengas, cabezinha.";
+				break;
+		}
+		break;
+		case 2:
+			mes "[^0000FFAdilson^000000]";
+			mes "No molestas, cabezinha. Estamos de celebração.";
+			break;
+	}
+	close;
+}

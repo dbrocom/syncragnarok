@@ -1,0 +1,449 @@
+//===== eAthena Script ======================================= 
+//= Quest NPCs related to Into the Unknown (ep 13.2)
+//===== By: ================================================== 
+//= Ziu
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena TRUNK SQL 14085+ (client up time 2010) data Ver. Renewal 61+ Special data Ziu Rev 134.
+//===== Description: ========================================= 
+//= The Script Contains Quests:
+//Other World Allied Camp
+//    * Ring of the Wise King
+//    * Rin's Request
+//    * Collecting Draco Eggs
+//    * Tribe Investigation 
+//Splendide
+//    * Two Tribes
+//    * Guardian of Yggdrasil (Instance Script @ \npc\instances\)
+//    * Alfheim Perfume
+//    * Laphine Craftsman 
+//Manuk
+//    * Midgard Ore
+//    * Bradium Collection
+//    * Manuk's Monster Suppression 
+//= Mapflags and warps
+//===== Additional Comments: ================================= 
+//= 1.0 Final Version [Ziu]
+//============================================================
+
+//Tribe Investigation
+//=======================
+mid_camp,283,198,5	script	Bazett Teablack	883,{
+	if (tinves == 0) {
+		if (BaseLevel > 69) {
+			if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+				mes "[Bazett Teablack]";
+				mes "TalDathMush Di nahDeh";
+				mes "ReAnduDu So sehr";
+				next;
+				mes "[Bazett Teablack]";
+				emotion e_ic;
+				mes "mmmm...Vaya veo que entendiste lo que te dije, también observo que llevas el anillo wise king";
+				next;
+				mes "[Bazett Teablack]";
+				mes "Scribble scribble";
+				mes "Crunchy";
+				next;
+				mes "- Estando aquí en el puente -";
+				mes "- Tengo menos noticias -";
+				mes "- Es algo duro de soportar -";
+				next;
+				mes "[Bazett Teablack]";
+				mes "Scribble scribble";
+				mes "Crunchy";
+				mes "...";
+				next;
+				mes "[Bazett Teablack]";
+				emotion e_omg;
+				mes "Woowat!!!";
+				mes "Espera...¿Quien eres tú?";
+				mes "¿Que quieres?!!";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "Yo simplemente estaba paseando por aquí, cuando te escuche hablar";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				emotion e_bo,1;
+				mes "No te preocupes, si tu quieres y yo me marcho";
+				next;
+				mes "[Bazett Teablack]";
+				mes "Oops! Espera un minuto, ¿conoces a los gigantes de madera?";
+				next;
+				mes "- Esta sacando algo -";
+				mes "- Lo agita con fuerza -";
+				mes "- Parece como si lo limpiara -";
+				mes "- Cambio su gesto de la cara - ";
+				next;
+				mes "[Bazett Teablack]";
+				mes "Necesito ayuda para ^FF0000investigar^000000 las tribus locales";
+				next;
+				mes "[Bazett Teablack]";
+				emotion e_no1;
+				mes "Te agradeceria mucho que hicieras este trabajo por mi, ya que yo no puedo salir del campamento";
+				setquest 11101;
+				set tinves,1;
+				close;
+			} else {
+				mes "[Bazett Teablack]";
+				mes "TalDathMush Di nahDeh";
+				mes "ReAnduDu So sehr";
+				next;
+				mes "no entiendes nada de lo que esta diciendo";
+				next;
+				mes "[Bazett Teablack]";
+				mes "Lo siento no has pasado la prueba, vuelve cuando estes preparado";
+				close;
+			}
+		} else {
+			mes "[Bazett Teablack]";
+			mes "TalDathMush Di nahDeh";
+			mes "ReAnduDu So sehr";
+			mes "[Bazett Teablack]";
+			mes "No molestes ahora, vuelve cuando seas más fuerte";
+			close;
+		}
+	}
+	if (tinves == 1) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			emotion e_omg,1;
+			mes ".............en?";
+			next;
+			mes "[Bazett Teablack]";
+			mes "Necesito que vayas a los campos de manuk, y alli busques a los gigantes que habitan";
+			next;
+			switch( Select("¿Que tipo de investigación?." ) )
+			{
+				case 1:
+					mes "[Bazett Teablack]";
+					mes "Coje estas notas, y llevatelas contigo a la ciudad de manuk";
+					getitem 6074,1;
+					next;
+					mes "[Bazett Teablack]";
+					mes "Busca a un trabajor que te estará esperando alli, el te pedira un favor a cambio de información";
+					next;
+					mes "[Bazett Teablack]";
+					mes "Muestrale este documento y sabra que es lo que le pides";
+					next;
+					mes "[Bazett Teablack]";
+					mes "Si lo consigues podré conocer mucho más sobre esa tribu tan desconocida para nosotros";
+					next;
+					mes "[Bazett Teablack]";
+					mes "Y avanzar en mis investigaciones";
+					next;
+					mes "[Bazett Teablack]";
+					mes "Mucha suerte";
+					erasequest 11101;
+					setquest 11102;
+					set tinves,2;
+					close;
+			}
+		} else {
+			mes "[Bazett Teablack]";
+			mes "gu ast";
+			mes "zua ao gn uq!";
+			mes "po gr bn iun";
+			next;
+			mes "te vuelve hablar en un idioma que no entiendes";
+			close;
+		}
+	}
+	if (tinves == 2) {
+		mes "[Bazett Teablack]";
+		mes "................";
+		mes ".................";
+		mes "...un trabajador en la ciudad de manuk";
+		next;
+			mes "parece inmersa en algo que no te presta atención";
+			close;
+		}
+		if (tinves == 3) {
+			mes "[Bazett Teablack]";
+			mes "................";
+			mes ".................";
+			mes "...un trabajador en la ciudad de manuk";
+			next;
+			mes "parece inmersa en algo que no te presta atención";
+			close;
+		}
+		if (tinves == 4) {
+			mes "[Bazett Teablack]";
+			mes "................";
+			mes ".................";
+			mes "¿Cuantas encuestas traes?";
+			next;
+			switch( Select("Traigo 55.","....." ) )
+			{
+				case 1:
+					mes "[Bazett Teablack]";
+					mes "Muchisimas gracias, ahora me facilitarás mucho el estudio de estos habitantes";
+					next;
+					mes "[Bazett Teablack]";
+					mes "necesito que me devuelvas el informe original";
+					delitem 6074,1;
+					next;
+					mes "[Bazett Teablack]";
+					mes "ahora toma y coje esto es una moneda local de manuk con ella podrás comprarle cosas a los habitantes de esa ciudad";
+					getitem 6080,1;
+					erasequest 11103;
+					setquest 11104;
+					set tinves,5;
+					close;
+				
+				case 2:
+					mes "[Bazett Teablack]";
+					mes "¡¡mmm ninguna!!";
+					mes "....no puedo creerlo";
+					next;
+					mes "[Bazett Teablack]";
+					mes "veo que llevas un bulto en tu camisa, dejame miarlo";
+					next;
+					mes "[Bazett Teablack]";
+					mes "Uoooo cuantas traes....¿por qué no querías darmelas...?";
+					next;
+					mes "[Bazett Teablack]";
+					mes "en fin....Muchisimas gracias, ahora me facilitarás mucho el estudio de estos habitantes";
+					next;
+					mes "[Bazett Teablack]";
+					mes "necesito que me devuelvas el informe original";
+					delitem 6074,1;
+					next;
+					mes "[Bazett Teablack]";
+					mes "ahora toma y coje esto es una moneda local de manuk con ella podrás comprarle cosas a los habitantes de esa ciudad";
+					getitem 6080,1;
+					completequest 11103;
+					setquest 11104;
+					set tinves,5;
+					close;
+			}
+		}
+	if (tinves == 5) {
+		if (BaseLevel > 69) {
+			set .@tin_time01,checkquest(11104,PLAYTIME);
+			if (.@tin_time01 == 2) {
+				if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+					mes "[Bazett Teablack]";
+					mes "TalDathMush Di nahDeh";
+					mes "ReAnduDu So sehr";
+					next;
+					mes "[Bazett Teablack]";
+					emotion e_ic;
+					mes "mmmm...Vaya veo que entendiste lo que te dije, también observo que llevas el anillo wise king";
+					next;
+					mes "[Bazett Teablack]";
+					mes "Scribble scribble";
+					mes "Crunchy";
+					next;
+					mes "- Estando aquí en el puente -";
+					mes "- Tengo menos noticias -";
+					mes "- Es algo duro de soportar -";
+					next;
+					mes "[Bazett Teablack]";
+					mes "Scribble scribble";
+					mes "Crunchy";
+					mes "...";
+					next;
+					mes "[Bazett Teablack]";
+					emotion e_omg;
+					mes "Woowat!!!";
+					mes "Espera...¿Quien eres tú?";
+					mes "¿Que quieres?!!";
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "Yo simplemente estaba paseando por aquí, cuando te escuche hablar";
+					next;
+					mes "["+strcharinfo(0)+"]";
+					emotion e_bo,1;
+					mes "No te preocupes, si tu quieres y yo me marcho";
+					next;
+					mes "[Bazett Teablack]";
+					mes "Oops! Espera un minuto, ¿conoces a los gigantes de madera?";
+					next;
+					mes "- Esta sacando algo -";
+					mes "- Lo agita con fuerza -";
+					mes "- Parece como si lo limpiara -";
+					mes "- Cambio su gesto de la cara - ";
+					next;
+					mes "[Bazett Teablack]";
+					mes "Necesito ayuda para ^FF0000investigar^000000 las tribus locales";
+					next;
+					mes "[Bazett Teablack]";
+					emotion e_no1;
+					mes "Te agradeceria mucho que hicieras este trabajo por mi, ya que yo no puedo salir del campamento";
+					set tinves,1;
+					erasequest 11104;
+					setquest 11101;
+					close;
+				} else {
+					mes "[Bazett Teablack]";
+					mes "TalDathMush Di nahDeh";
+					mes "ReAnduDu So sehr";
+					next;
+					mes "no entiendes nada de lo que esta diciendo";
+					next;
+					mes "[Bazett Teablack]";
+					mes "Lo siento no has pasado la prueba, vuelve cuando estes preparado";
+					close;
+				}
+			} else {
+				mes "[Bazett Teablack]";
+				mes "Ahora no necesito más ayuda, vuelve cuando termine de investigar los informes que me has traido..";
+				close;
+			}
+		} else {
+			mes "[Bazett Teablack]";
+			mes "TalDathMush Di nahDeh";
+			mes "ReAnduDu So sehr";
+			mes "[Bazett Teablack]";
+			mes "No molestes ahora, vuelve cuando seas más fuerte";
+			close;
+		}
+	}
+}
+
+manuk,194,135,6	script	Trabajador#tinves	454,{
+	if (tinves < 2) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Trabajador]";
+			mes "Perdido una pieza muy importante para realizar mi trabajo";
+			next;
+			mes "[Trabajador]";
+			mes "Necesito encontrar como remplazarla....";
+			close;
+		} else {
+			mes "[Trabajador]";
+			mes "Oh ts nhk";
+			mes "qw xc TR pu";
+			mes "Jh tf ugc!!";
+			next;
+			mes "no entiendes nada de lo que te dice";
+			close;
+		}
+	}
+	if (tinves == 2) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "Parece preocupado por algo";
+			mes "Pero piensas que puede ser la persona que Bazett te mando encontrar";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "¿Tienes lo que te pasó?";
+			next;
+			mes "[Trabajador]";
+			emotion e_omg;
+			mes "Ah.. Aquí está...";
+			mes ".....";
+			mes "........";
+			mes "No es nada";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "¿por qué?";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			emotion e_heh,1;
+			mes "Estoy en un viaje en el que usted necesita pensar";
+			next;
+			mes "[Trabajador]";
+			mes "No es nada";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Nunca nada como esto se pretende encontrar el dinero ~";
+			mes "Cuéntame";
+			next;
+			mes "[Trabajador]";
+			mes "............ en realidad....";
+			next;
+			mes "[Trabajador]";
+			mes "Para terminar el trabajo del edificio, necesito ayuda";
+			next;
+			mes "[Trabajador]";
+			mes "Sino no podré cobrar ningún dinero";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Vaya...lo siento mucho, pero voy a ayudarte en tu problema";
+			next;
+			mes "[Trabajador]";
+			mes "¡¡muchas gracias!!";
+			emotion e_cry;
+			emotion e_cry,1;
+			next;
+			mes "[Trabajador]";
+			mes "Perdi una serie de tornillos que son muy especiales y caros de conseguir";
+			next;
+			mes "[Trabajador]";
+			mes "Si pudieras traerme unos ^0000FF 30 Horn of Hillslion^000000 yo mismo podré fabricar los tornillos";
+			next;
+			mes "[Trabajador]";
+			mes "Mientras tu buscas los objetos yo pasaré esta encuesta que me enseñaste a todos mis compañeros de trabajo";
+			next;
+			mes "[Trabajador]";
+			mes "cuando me traigas los objetos yo te daré las encuestas...mucha suerte";
+			erasequest 11102;
+			setquest 11105;
+			set tinves,3;
+			delitem 6074,1;
+			close;
+		} else {
+			mes "[Trabajador]";
+			mes "Oh ts nhk";
+			mes "qw xc TR pu";
+			mes "Jh tf ugc!!";
+			next;
+			mes "no entiendes nada de lo que te dice";
+			close;
+		}
+	}
+	if (tinves == 3) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			if (countitem(6032) > 29) {
+				mes "[Trabajador]";
+				mes "¿Traes todo lo que te pedi?";
+				next;
+				mes "[Trabajador]";
+				mes "Perfecto ahora podre reparar los tornillos y conservar mi trabajo";
+				delitem 6032,30;
+				next;
+				mes "[Trabajador]";
+				mes "Alguno de mis compañeros se enfado por la encuesta.";
+				mes "^0000FF Otras personas llaman a esto un mal carácter elfo^000000";
+				mes "jaja es una comparación un tanto extraña para ti";
+				next;
+				mes "[Trabajador]";
+				mes "Muchas gracias por todo, aquí tienes 55 encuestas no está nada mal";
+				erasequest 11105;
+				setquest 11103;
+				set tinves,4;
+				getitem 6074,1;
+				close;
+			} else {
+				mes "[Trabajador]";
+				mes "No has traido la cantidad que te pedi vuelve cuando la tengas toda, yo sigo haciendo encuestas";
+				next;
+				mes "[Trabajador]";
+				mes "Recuerda necesito ^0000FF 30 Horn of Hillslion^000000";
+				close;
+				close;
+			}
+		} else {
+			mes "[Trabajador]";
+			mes "¡¡¡AH GF TUY!!!";
+			mes "LO BTG gf we xa";
+			next;
+			mes "[Trabajador]";
+			mes "py ta qx gz me tf";
+			mes "ñh op gfd mt aq ";
+			close;
+		}
+	}
+	if (tinves > 3) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Trabajador]";
+			mes "Ya no puedo ayudarte en nada más";
+			close;
+		} else {
+			mes "[Trabajador]";
+			mes "Oh ts nhk";
+			mes "qw xc TR pu";
+			mes "Jh tf ugc!!";
+		}
+	}
+}

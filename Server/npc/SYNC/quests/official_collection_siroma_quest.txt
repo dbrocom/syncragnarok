@@ -1,0 +1,217 @@
+//===== Custom eAthena Script =======================================
+//= Siroma Snowman
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Description =================================================
+//= Quest de EXP Repetible.
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+ice_dun01,156,25,5	script	Siroma Snowman#Hunt	710,{
+	if (checkquest(60167) != -1) {
+		if (checkquest(60167,HUNTING) != 2 ) {
+			mes "[Siroma Snowman]";
+			mes "¿Has derrotado a los Siroma ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Siroma Snowman]";
+				mes "Hmm, no creo que hayas derrotado a los 50 Siroma todavía...";
+				close;
+			case 2:
+				mes "[Siroma Snowman]";
+				mes "Recuerda, debes acabar con 50 Siroma del mapa.";
+				close;
+			case 3:
+				mes "[Siroma Snowman]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Siroma Snowman]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60167;
+					close;
+				case 2:
+					mes "[Siroma Snowman]";
+					mes "Recuerda, deshazte de esos 50 Siroma.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Siroma Snowman]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 11150,5025;
+			erasequest 60167;
+			close;
+		}
+	}
+	if (checkquest(60168) != -1) {
+		if (checkquest(60168,HUNTING) != 2 ) {
+			mes "[Siroma Snowman]";
+			mes "¿Has derrotado a los Siroma ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Siroma Snowman]";
+				mes "Hmm, no creo que hayas derrotado a los 100 Siroma todavía...";
+				close;
+			case 2:
+				mes "[Siroma Snowman]";
+				mes "Recuerda, debes acabar con 100 Siroma del mapa.";
+				close;
+			case 3:
+				mes "[Siroma Snowman]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Siroma Snowman]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60168;
+					close;
+				case 2:
+					mes "[Siroma Snowman]";
+					mes "Recuerda, deshazte de esos 100 Siroma.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Siroma Snowman]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 11150,5025;
+			getexp 11150,5025;
+			erasequest 60168;
+			close;
+		}
+	}
+	if (checkquest(60169) != -1) {
+		if (checkquest(60169,HUNTING) != 2 ) {
+			mes "[Siroma Snowman]";
+			mes "¿Has derrotado a los Siroma ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Siroma Snowman]";
+				mes "Hmm, no creo que hayas derrotado a los 150 Siroma todavía...";
+				close;
+			case 2:
+				mes "[Siroma Snowman]";
+				mes "Recuerda, debes acabar con 150 Siroma del mapa.";
+				close;
+			case 3:
+				mes "[Siroma Snowman]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Siroma Snowman]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60169;
+					close;
+				case 2:
+					mes "[Siroma Snowman]";
+					mes "Recuerda, deshazte de esos 150 Siroma.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Siroma Snowman]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 11150,5025;
+			getexp 11150,5025;
+			getexp 11150,5025;
+			erasequest 60169;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel >= 50) {
+		//for maximum level
+		if (BaseLevel <= 80) {
+			mes "[Siroma Snowman]";
+			mes "Me encantan los Siroma, ¡son tan gráciles y simpáticos!";
+			mes "Pero siempre están gastándome bromas pesadas, y me tienen un poco hartito.";
+			next;
+			mes "[Siroma Snowman]";
+			mes "Así que he pensado en darles un merecido...";
+			mes "¿Te gustaría echarme una mano?";
+			next;
+			switch(select("Claro, sin problema:Ahora no")) {
+			case 1:
+				mes "[Siroma Snowman]";
+				mes "¿De verdad? ¿Qué te gustaría hacer?";
+				next;
+				switch(select("Acabar con Siroma:Cancelar")) {
+				case 1:
+					// Kill Count Quest
+					mes "[Siroma Snowman]";
+					mes "¡Muchas gracias!";
+					mes "¿De cuántos deseas encargarte?";
+					next;
+					switch(select("50 Siroma:100 Siroma:150 Siroma")) {
+					case 1:
+						mes "[Siroma Snowman]";
+						mes "Si acabas con 50 Siroma de esta mazmorra de estaré agradecido.";
+						setquest 60167;
+						close;
+					case 2:
+						mes "[Siroma Snowman]";
+						mes "Si acabas con 100 Siroma de esta mazmorra de estaré agradecido.";
+						setquest 60168;
+						close;
+					case 3:
+						mes "[Siroma Snowman]";
+						mes "Si acabas con 150 Siroma de esta mazmorra de estaré agradecido.";
+						setquest 60169;
+						close;
+					}
+				case 2:
+					mes "[Siroma Snowman]";
+					mes "Si cambias de idea, por favor, vuelve.";
+					close;
+				}
+			case 2:
+				mes "[Siroma Snowman]";
+				mes "Si cambias de idea, por favor, vuelve.";
+				close;
+			}
+		}
+		else {
+			mes "[Siroma Snowman]";
+			mes "Estoy seguro de que podrías ayudarme fácilmente, pero me gustaría poder agradecérselo a otros que no sean tan fuertes como tú.";
+			close;
+		}
+	}
+	else {
+		mes "[Siroma Snowman]";
+		mes "Ven a verme cuando seas un poquito más fuerte.";
+		close;
+	}
+}

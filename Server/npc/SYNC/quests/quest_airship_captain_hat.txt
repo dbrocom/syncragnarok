@@ -1,0 +1,184 @@
+//===== Custom eAthena Script =======================================
+//= Airship Captain Hat Custom Quest
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Descripción ==================================================
+//= Quest no repetible para conseguir un Captain Hat.
+//= Necesita de un Captain Hat
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+airplane_01,67,220,1	script	Airship Captain Retirado	873,{
+
+set .aircap$, "[^8A4B08Merlock^000000]";
+cutin "fly_trock.bmp",2;
+switch(AIRCAPT){
+	case 0:
+			mes "...";
+			mes ".....";
+			next;
+			mes .aircap$;
+			mes "...";
+			mes ".....?";
+			next;
+			mes .aircap$;
+			mes "Oh, lo siento. Me he vuelto a distraer mirando por la ventana.";
+			switch(select("No pasa nada:Debería prestar más atención...")){
+				case 1:
+					mes .aircap$;
+					mes "Estoy seguro de que a tí también te ha pasado alguna vez.";
+					mes "¿Me equivoco?";
+					cutin "",255;
+					break;
+				case 2:
+					mes .aircap$;
+					mes "Tiene razón. Lo siento, joven";
+					next;
+				mes .aircap$;
+					mes "A mis años las cosas más importantes son las más sencillas.";
+					next;
+				mes .aircap$;
+					mes "Aquí donde me ves, yo era el anterior Capitán de este Dirigible";
+					mes "Pero ya estoy demasiado mayor...";
+					next;
+				mes .aircap$;
+					mes "Me hice Capitán porque me encanta volar, y por eso sigo todavía aquí";
+					mes "Me siento incapaz de abandonar el que ha sido durante tantos años mi dirigible";
+					next;
+				mes .aircap$;
+					mes "Por ello aun vivo aquí... para poder disfrutar de esta vista todo el día...";
+					mes "Y nunca me canso de ella.";
+					next;
+				mes .aircap$;
+					mes "...";
+					next;
+				mes .aircap$;
+					mes "Pareces un joven muy simpático. ¿Te gusta volar?¿Te gustan las aventuras?";
+				next;
+					switch(select("Por supuesto:Soy más de tierra ^^u")){
+						case 1:
+						mes .aircap$;
+							mes "Sabía que no me equivocaba contigo";
+							next;
+						mes .aircap$;
+							mes "Si quisieras, podrías ser un buen ^4B088Acapitán^000000";
+						next;
+							switch(select("Preferiría dedicarme a otra cosa:¡Eso está hecho!")){
+								case 1:
+								mes .aircap$;
+									mes "Es una lástima...";
+									mes "Pareces prometedor.";
+									cutin "",255;
+									break;
+								case 2:
+								mes .aircap$;
+									mes "Jajaja, ¡tienes madera!";
+									next;
+								mes .aircap$;
+									mes "Demuéstrame lo valeroso que eres, y te entregaré ^FE2E2Emi viejo sombrero^000000";
+									next;
+								mes .aircap$;
+									mes "Siento que tenga ^38610Btantos agujeros^000000, pero es el primer ^FE2E2Sombrero de Capitán de Dirigible de la historia^000000";
+									mes "Perteneció a mi padre";
+									next;
+								mes .aircap$;
+									mes "Tráeme los siguientes Items, y será tuyo";
+									next;
+									mes .aircap$;
+									mes "^0174DF1 Captain's Hat^000000.";
+									mes "^0174DF1 Antlers^000000.";
+									mes "^0174DF1 Scarlet Dyestuff^000000.";
+									mes "^0174DF55 Fluff^000000.";
+									mes "^0174DF100 Antelope Skin^000000.";
+									mes "y ^0174DF5 Yellow Spice^000000.";
+								set AIRCAPT,1;
+									cutin "",255;
+									break;
+							}
+							break;
+						case 2:
+						mes .aircap$;
+							mes "Qué lástima, hubieras sido un buen ^4B088Acapitán^000000";
+							cutin "",255;
+							break;
+					}
+					cutin "",255;
+					break;
+      		}
+		break;
+	case 1:
+			mes .aircap$;
+			mes "...";
+			next;
+			mes .aircap$;
+			mes "Perdóname de nuevo. ¿Ya tienes lo que te pedí?";
+			next;
+			switch(select("Sí:No")){
+						case 1:
+							mes .aircap$;
+						 	if ((countitem(5184) >= 1) && (countitem(2284) >= 1) && (countitem(975) >= 1) && (countitem(914) >= 55) && (countitem(7107) >= 100) && (countitem(7452) >= 5)){						 
+								mes "Fantástico";
+								mes "Eres un joven muy intrépido";
+								delitem 5184,1;
+								delitem 2284,1;
+								delitem 975,1;
+								delitem 914,55;
+								delitem 7107,100;
+								delitem 7452,5;
+								next;
+								mes .aircap$;
+								mes "Aquí tienes ^FE2E2la recompensa^000000 a tanto esfuerzo";
+								getitem 5359,1;
+								set JobExp,JobExp+9000;
+								set AIRCAPT,2;
+							}else{
+								mes "No eres lo suficientemente valeroso todavía.";
+								next;
+								mes .aircap$;
+								mes "Recuerda:";
+									mes "1 Captain's Hat.";
+									mes "1 Antlers.";
+									mes "1 Scarlet Dyestuff .";
+									mes "55 Fluff.";
+									mes "100 Antelope Skin.";
+									mes "y 5 Yellow Spice.";
+								next;
+								mes .aircap$;
+								mes "Vuelve cuando puedas demostrarme tu valor.";
+							}
+							cutin "",255;
+							break;
+						case 2:
+							mes .aircap$;
+							mes "Tómate tu tiempo.";
+							cutin "",255;
+							break;
+			}
+			break;
+	case 2:
+			mes .aircap$;
+			mes "¡Ahora sí que tienes el arrojo necesario para ser un ^4B088Acapitán^000000!";
+			mes "Jajajajaja";
+			cutin "",255;
+			break;
+}
+close;
+}   
+		

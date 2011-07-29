@@ -14329,8 +14329,7 @@ struct skill_condition skill_get_requirement(struct map_session_data* sd, short 
  *----------------------------------------------*/
 int skill_castfix(struct block_list *bl, int skill_id, int skill_lv)
 {
-	int base_time, variable_time, fixed_time = 0, max_fixedReduction = 0, final_time;
-	double scale = 0;
+	int base_time, variable_time, fixed_time = 0, max_fixedReduction = 0, scale = 0, final_time;
 	struct map_session_data *sd;
 	struct status_change *sc;
 
@@ -14340,7 +14339,7 @@ int skill_castfix(struct block_list *bl, int skill_id, int skill_lv)
 
 	base_time = skill_get_cast(skill_id, skill_lv);
 
-	if( !battle_config.renewal_system_enable 
+	if( !battle_config.renewal_system_enable
 		|| ( bl->type == BL_PC && pc_mapid2jobid(((TBL_PC*)bl)->class_, ((TBL_PC*)bl)->status.sex) < JOB_RUNE_KNIGHT )
 		|| skill_id < RK_ENCHANTBLADE)
 	{ // config to disable renewal cast settings.
@@ -18457,19 +18456,9 @@ static void skill_readdb(void)
 	// load skill databases
 	safestrncpy(skill_db[0].name, "UNKNOWN_SKILL", sizeof(skill_db[0].name));
 	safestrncpy(skill_db[0].desc, "Unknown Skill", sizeof(skill_db[0].desc));
-	if( battle_config.renewal_system_enable )
-	{
-		sv_readdb(db_path, "skill_db_renewal.txt"          , ',',  17, 17, MAX_SKILL_DB, skill_parse_row_skilldb);
-		sv_readdb(db_path, "skill_require_db_renewal.txt"  , ',',  32, 32, MAX_SKILL_DB, skill_parse_row_requiredb);
-		sv_readdb(db_path, "skill_cast_db_renewal.txt"     , ',',   7,  8, MAX_SKILL_DB, skill_parse_row_castdb);
-	}
-	else
-	{
-		sv_readdb(db_path, "skill_db.txt"          , ',',  17, 17, MAX_SKILL_DB, skill_parse_row_skilldb);
-		sv_readdb(db_path, "skill_require_db.txt"  , ',',  32, 32, MAX_SKILL_DB, skill_parse_row_requiredb);
-		sv_readdb(db_path, "skill_cast_db.txt"     , ',',   7,  8, MAX_SKILL_DB, skill_parse_row_castdb);
-	}
-
+	sv_readdb(db_path, "skill_db.txt"          , ',',  17, 17, MAX_SKILL_DB, skill_parse_row_skilldb);
+	sv_readdb(db_path, "skill_require_db.txt"  , ',',  32, 32, MAX_SKILL_DB, skill_parse_row_requiredb);
+	sv_readdb(db_path, "skill_cast_db.txt"     , ',',   7,  8, MAX_SKILL_DB, skill_parse_row_castdb);
 	sv_readdb(db_path, "skill_castnodex_db.txt", ',',   2,  3, MAX_SKILL_DB, skill_parse_row_castnodexdb);
 	sv_readdb(db_path, "skill_nocast_db.txt"   , ',',   2,  2, MAX_SKILL_DB, skill_parse_row_nocastdb);
 	sv_readdb(db_path, "skill_unit_db.txt"     , ',',   8,  8, MAX_SKILL_DB, skill_parse_row_unitdb);

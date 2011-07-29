@@ -5643,6 +5643,8 @@ int pc_checkallowskill(struct map_session_data *sd)
 	
 	for (i = 0; i < ARRAYLENGTH(scw_list); i++)
 	{	// Skills requiring specific weapon types
+		if( scw_list[i] == SC_DANCING && !battle_config.dancing_weaponchange_fix )
+			continue;
 		if(sd->sc.data[scw_list[i]] &&
 			!pc_check_weapontype(sd,skill_get_weapontype(status_sc2skill(scw_list[i]))))
 			status_change_end(&sd->bl, scw_list[i], INVALID_TIMER);
@@ -7476,6 +7478,8 @@ void pc_record_damage(struct block_list *src, struct block_list *dst, int damage
 void pc_calc_ranking(struct map_session_data *tsd, struct map_session_data *ssd, int skill)
 {
 	int m, i, Elo;
+	char output[256];
+
 	if( !tsd || !ssd || tsd == ssd )
 		return;
 
@@ -7487,7 +7491,6 @@ void pc_calc_ranking(struct map_session_data *tsd, struct map_session_data *ssd,
 		 *------------------------------------------*/
 		struct guild *tg, *sg;
 		struct guild_castle *gc = guild_mapindex2gc(map[m].index);
-		char output[256];
 
 		if( gc == NULL || gc->guild_id <= 0 )
 			return;
@@ -7508,16 +7511,6 @@ void pc_calc_ranking(struct map_session_data *tsd, struct map_session_data *ssd,
 		add2limit(tsd->status.wstats.death_count, 1, USHRT_MAX);
 
 		log_woe_kill(ssd,tsd,skill);
-		if( ssd->state.battleinfo )
-		{
-			sprintf(output,"( You Kill the %s [%s] using <%s> )", job_name(tsd->status.class_), tsd->status.name, ( skill ? skill_get_desc(skill) : "Melee/Reflect/Effect" ));
-			clif_disp_onlyself(ssd,output,strlen(output));
-		}
-		if( tsd->state.battleinfo )
-		{
-			sprintf(output,"( The %s [%s] kill you using <%s> )", job_name(ssd->status.class_), ssd->status.name, ( skill ? skill_get_desc(skill) : "Melee/Reflect/Effect" ));
-			clif_disp_onlyself(tsd,output,strlen(output));
-		}
 
 		if( tsd->status.guild_id == gc->guild_id )
 		{ // Offensive Ranking - Killing Castle Owners
@@ -7556,7 +7549,6 @@ void pc_calc_ranking(struct map_session_data *tsd, struct map_session_data *ssd,
 		struct party_data *p;
 		struct map_session_data *s_pl[MAX_PARTY], *t_pl[MAX_PARTY], *p_sd;
 		struct fame_list b_fame_list[MAX_FAME_LIST];
-		char output[256];
 		int j;
 
 		unsigned int s_rate = 0, t_rate = 0;
@@ -7706,7 +7698,6 @@ void pc_calc_ranking(struct map_session_data *tsd, struct map_session_data *ssd,
 		struct map_session_data *s_pl[MAX_BG_MEMBERS], *t_pl[MAX_BG_MEMBERS];
 		unsigned int s_rate = 0, t_rate = 0;
 		int sc, tc, s_Elo, t_Elo;
-		char output[256];
 
 		if( (s_bg = bg_team_search(ssd->bg_id)) == NULL || (t_bg = bg_team_search(tsd->bg_id)) == NULL )
 			return;
@@ -7743,16 +7734,6 @@ void pc_calc_ranking(struct map_session_data *tsd, struct map_session_data *ssd,
 			sub2limit(t_pl[i]->status.bgstats.score, t_Elo, 0);
 
 		log_bg_kill(ssd,tsd,skill);
-		if( ssd->state.battleinfo )
-		{
-			sprintf(output,"( You Kill the %s [%s] using <%s> )", job_name(tsd->status.class_), tsd->status.name, ( skill ? skill_get_desc(skill) : "Melee/Reflect/Effect" ));
-			clif_disp_onlyself(ssd,output,strlen(output));
-		}
-		if( tsd->state.battleinfo )
-		{
-			sprintf(output,"( The %s [%s] kill you using <%s> )", job_name(ssd->status.class_), ssd->status.name, ( skill ? skill_get_desc(skill) : "Melee/Reflect/Effect" ));
-			clif_disp_onlyself(tsd,output,strlen(output));
-		}
 
 		add2limit(ssd->status.bgstats.kill_count, 1, USHRT_MAX);
 		add2limit(tsd->status.bgstats.death_count, 1, USHRT_MAX);
@@ -7818,6 +7799,17 @@ void pc_calc_ranking(struct map_session_data *tsd, struct map_session_data *ssd,
 
 		add2limit(ssd->status.pk.kill_count, 1, USHRT_MAX);
 		add2limit(tsd->status.pk.death_count, 1, USHRT_MAX);
+	}
+
+	if( ssd->state.battleinfo )
+	{
+		sprintf(output,"( You Kill the %s [%s] using <%s> )", job_name(tsd->status.class_), tsd->status.name, ( skill ? skill_get_desc(skill) : "Melee/Reflect/Effect" ));
+		clif_disp_onlyself(ssd,output,strlen(output));
+	}
+	if( tsd->state.battleinfo )
+	{
+		sprintf(output,"( The %s [%s] kill you using <%s> )", job_name(ssd->status.class_), ssd->status.name, ( skill ? skill_get_desc(skill) : "Melee/Reflect/Effect" ));
+		clif_disp_onlyself(tsd,output,strlen(output));
 	}
 }
 
@@ -9745,6 +9737,8 @@ int pc_unequipitem(struct map_session_data *sd,int n,int flag)
 		sd->status.weapon = sd->weapontype2;
 		pc_calcweapontype(sd);
 		clif_changelook(&sd->bl,LOOK_WEAPON,sd->status.weapon);
+		if( !battle_config.dancing_weaponchange_fix )
+			status_change_end(&sd->bl, SC_DANCING, INVALID_TIMER); //When unequipping, stop dancing. [Skotlex]
 	}
 	if(sd->status.inventory[n].equip & EQP_HAND_L) {
 		sd->status.shield = sd->weapontype2 = sd->special_state.checkshieldmdef = 0;
@@ -10447,10 +10441,7 @@ int pc_readdb(void)
 	// 必要??値?み?み
 	memset(exp_table,0,sizeof(exp_table));
 	memset(max_level,0,sizeof(max_level));
-	if( !battle_config.renewal_system_enable )
-		sprintf(line, "%s/exp.txt", db_path);
-	else
-		sprintf(line, "%s/exp_renewal.txt", db_path);
+	sprintf(line, "%s/exp.txt", db_path);
 	fp=fopen(line, "r");
 	if(fp==NULL){
 		ShowError("can't read %s\n", line);
@@ -10540,10 +10531,7 @@ int pc_readdb(void)
 			for(k=0;k<ELE_MAX;k++)
 				attr_fix_table[i][j][k]=100;
 
-	if( !battle_config.renewal_system_enable )
-		sprintf(line, "%s/attr_fix.txt", db_path);
-	else
-		sprintf(line, "%s/attr_fix_renewal.txt", db_path);
+	sprintf(line, "%s/attr_fix.txt", db_path);
 
 	fp=fopen(line,"r");
 	if(fp==NULL){
@@ -10592,10 +10580,7 @@ int pc_readdb(void)
 	// スキルツリ?
 	memset(stats_point_table,0,sizeof(stats_point_table));
 	i=1;
-	if( !battle_config.renewal_system_enable )
-		sprintf(line, "%s/statpoint.txt", db_path);
-	else
-		sprintf(line, "%s/statpoint_renewal.txt", db_path);
+	sprintf(line, "%s/statpoint.txt", db_path);
 	fp=fopen(line,"r");
 	if(fp == NULL){
 		ShowWarning("Can't read '"CL_WHITE"%s"CL_RESET"'... Generating DB.\n",line);

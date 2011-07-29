@@ -1,0 +1,217 @@
+//===== Custom eAthena Script =======================================
+//= Ice Titan Snowman
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Description =================================================
+//= Quest de EXP Repetible.
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+ice_dun03,154,27,3	script	Ice Titan Snowman#Hunt	710,{
+	if (checkquest(60170) != -1) {
+		if (checkquest(60170,HUNTING) != 2 ) {
+			mes "[Ice Titan Snowman]";
+			mes "¿Has derrotado a los Ice Titan ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Ice Titan Snowman]";
+				mes "Hmm, no creo que hayas derrotado a los 50 Ice Titan todavía...";
+				close;
+			case 2:
+				mes "[Ice Titan Snowman]";
+				mes "Recuerda, debes acabar con 50 Ice Titan del mapa.";
+				close;
+			case 3:
+				mes "[Ice Titan Snowman]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Ice Titan Snowman]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60170;
+					close;
+				case 2:
+					mes "[Ice Titan Snowman]";
+					mes "Recuerda, deshazte de esos 50 Ice Titan.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Ice Titan Snowman]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 69360,39640;
+			erasequest 60170;
+			close;
+		}
+	}
+	if (checkquest(60171) != -1) {
+		if (checkquest(60171,HUNTING) != 2 ) {
+			mes "[Ice Titan Snowman]";
+			mes "¿Has derrotado a los Ice Titan ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Ice Titan Snowman]";
+				mes "Hmm, no creo que hayas derrotado a los 100 Ice Titan todavía...";
+				close;
+			case 2:
+				mes "[Ice Titan Snowman]";
+				mes "Recuerda, debes acabar con 100 Ice Titan del mapa.";
+				close;
+			case 3:
+				mes "[Ice Titan Snowman]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Ice Titan Snowman]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60171;
+					close;
+				case 2:
+					mes "[Ice Titan Snowman]";
+					mes "Recuerda, deshazte de esos 100 Ice Titan.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Ice Titan Snowman]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 69360,39640;
+			getexp 69360,39640;
+			erasequest 60171;
+			close;
+		}
+	}
+	if (checkquest(60172) != -1) {
+		if (checkquest(60172,HUNTING) != 2 ) {
+			mes "[Ice Titan Snowman]";
+			mes "¿Has derrotado a los Ice Titan ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Ice Titan Snowman]";
+				mes "Hmm, no creo que hayas derrotado a los 150 Ice Titan todavía...";
+				close;
+			case 2:
+				mes "[Ice Titan Snowman]";
+				mes "Recuerda, debes acabar con 150 Ice Titan del mapa.";
+				close;
+			case 3:
+				mes "[Ice Titan Snowman]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Ice Titan Snowman]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60172;
+					close;
+				case 2:
+					mes "[Ice Titan Snowman]";
+					mes "Recuerda, deshazte de esos 150 Ice Titan.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Ice Titan Snowman]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 69360,39640;
+			getexp 69360,39640;
+			getexp 69360,39640;
+			erasequest 60172;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel >= 70) {
+		//for maximum level
+		if (BaseLevel <= 98) {
+			mes "[Ice Titan Snowman]";
+			mes "Algún gracioso decidió crearme aquí, ¡pero estoy pasando mucho miedo!";
+			mes "Esos Titanes de Hielo hacen retumbar la caverna con sus pasos.";
+			mes "¡Van a conseguir que me desplome!";
+			next;
+			mes "[Ice Titan Snowman]";
+			mes "¿Me ayudarías? Estoy seguro de que si no hubiera tantos yo no tendría tantos problemas...";
+			next;
+			switch(select("Claro, sin problema:Ahora no")) {
+			case 1:
+				mes "[Ice Titan Snowman]";
+				mes "¿De verdad? ¿Qué te gustaría hacer?";
+				next;
+				switch(select("Acabar con Ice Titan:Cancelar")) {
+				case 1:
+					// Kill Count Quest
+					mes "[Ice Titan Snowman]";
+					mes "¡Muchas gracias!";
+					mes "¿De cuántos deseas encargarte?";
+					next;
+					switch(select("50 Ice Titan:100 Ice Titan:150 Ice Titan")) {
+					case 1:
+						mes "[Ice Titan Snowman]";
+						mes "Si acabas con 50 Ice Titan de esta mazmorra de estaré agradecido.";
+						setquest 60170;
+						close;
+					case 2:
+						mes "[Ice Titan Snowman]";
+						mes "Si acabas con 100 Ice Titan de esta mazmorra de estaré agradecido.";
+						setquest 60171;
+						close;
+					case 3:
+						mes "[Ice Titan Snowman]";
+						mes "Si acabas con 150 Ice Titan de esta mazmorra de estaré agradecido.";
+						setquest 60172;
+						close;
+					}
+				case 2:
+					mes "[Ice Titan Snowman]";
+					mes "Si cambias de idea, por favor, vuelve.";
+					close;
+				}
+			case 2:
+				mes "[Ice Titan Snowman]";
+				mes "Si cambias de idea, por favor, vuelve.";
+				close;
+			}
+		}
+		else {
+			mes "[Ice Titan Snowman]";
+			mes "Estoy seguro de que podrías ayudarme fácilmente, pero me gustaría poder agradecérselo a otros que no sean tan fuertes como tú.";
+			close;
+		}
+	}
+	else {
+		mes "[Ice Titan Snowman]";
+		mes "Ven a verme cuando seas un poquito más fuerte.";
+		close;
+	}
+}

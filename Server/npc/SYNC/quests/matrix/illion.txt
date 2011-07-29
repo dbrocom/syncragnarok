@@ -1,0 +1,1226 @@
+//
+// [========================================================]
+// [===========              Illion              ===========]
+// [========================================================]
+// [ Version 2.6                                            ]
+// [========================================================]
+// [ Original Script: Ivion                                 ]
+// [========================================================]
+// [ Description:                                           ]
+// [--------------------------------------------------------]
+// [                                                        ]
+// [ + Maps:                                                ]
+// [  - Illion field 1. [il_fild01]                         ]
+// [  - Lafayette Hotel. [il_q01]                           ]
+// [  - Inside your mind. [il_q02]                          ]
+// [  - The Nebuchadnezzar. [il_q03]                        ]
+// [                                                        ]
+// [ + The Matrix Quest:                                    ]
+// [  - 1. Follow the white Rabbit.                         ]
+// [  - 2. Lafayette Hotel.                                 ]
+// [  - 3. The Room of the Four Keys.                       ]
+// [  - 4. The Rabbit hole.                                 ]
+// [  - 5. Open your mind.                                  ]
+// [  - 6. The Nebuchadnezzar.                              ]
+// [========================================================]
+// [ 5 last updates:                                        ]
+// [--------------------------------------------------------]
+// [                                                        ]
+// [ v2.2: [Ivion]                                          ]
+// [ - The conversations are now displayed correctly to the ]
+// [   female players.                                      ]
+// [                                                        ]
+// [ v2.3: [Ivion]                                          ]
+// [ - Some updates to the monsters skills and stats.       ]
+// [                                                        ]
+// [ v2.4: [Ivion]                                          ]
+// [ - Bugfix: In some situations you was resurrected with  ]
+// [   0 life in the Open your mind quest.                  ]
+// [ - Decreased the time to complete the Open your mind    ]
+// [   quest.                                               ]
+// [ - Improved the Ambient Lighting of the maps.           ]
+// [                                                        ]
+// [ v2.5: [Ivion]                                          ]
+// [ - Split the script into diferent txt files.            ]
+// [ - Some script optimization.                            ]
+// [ - Improved the clicking on the npcs.                   ]
+// [ - Added the Nebuchadnezzar airship.                    ]
+// [ - Rewriten the final part of the Matrix Quest.         ]
+// [                                                        ]
+// [ v2.6: [Ivion]                                          ]
+// [ - Support for the new mob_skill_db format. (chat       ]
+// [   implementation)                                      ]
+// [========================================================]
+// [ http://www.eathena.ws/board/index.php?showtopic=173834 ]
+// [========================================================]
+
+// 1. Follow the white Rabbit:
+prontera,0,0,0	script	Morpheus#il1_0	-1,{
+
+
+OnPCLoadMapEvent:
+	getmapxy .@m0$,.@x,.@y,0;
+	if((.@m0$ == "prontera") && !(il & 1) && (BaseLevel >= 85)) {
+		sleep2 3000;
+		announce strnpcinfo(1)+" : Despierta "+strcharinfo(0)+"...",bc_self,0x00ff66;
+		sleep2 3000;
+		announce strnpcinfo(1)+" : Matrix te posee...",bc_self,0x00ff66;
+		sleep2 3000;
+		announce strnpcinfo(1)+" : Sigue al conejo blanco.",bc_self,0x00ff66;
+		set il,il | 1;
+	}
+	end;
+}
+
+prontera,0,0,0	script	Lunatic#il1_1	1063,1,1,{
+
+	callfunc "il_range",strnpcinfo(0),1;
+
+OnTouch:
+	if(il & 1) {
+		if(.a >= 0) {
+			set .@a,rand(3,8);
+			while(.@a > 0) {
+				specialeffect 45;
+				set .@a,.@a - 1;
+			}
+			soundeffect "caramel_attack.wav",0;
+			sc_start2 2,rand(1000,10000),0,2000;
+			set .a,.a + 10;
+			if(.a > 240) set .a,240;
+		}
+		else {
+			warp "il_q01",63,35;
+			if(!(il & 2)) set il2,rand(9);
+			set il,il | 2;
+		}
+	}
+	end;
+
+OnInit:
+	while(1) {
+		set .a,0;
+		movenpc strnpcinfo(0),0,0;
+		disablenpc strnpcinfo(0);
+		getmapxy .@m$,.@x0,.@y0,1;
+		set .@a,0;
+		do {
+			set .@x0,rand(500);
+			set .@y0,rand(500);
+			set .@a,.@a + 1;
+			if(.@a == 100) {
+				sleep 1;
+				set .@a,0;
+			}
+		} while(!checkcell(.@m$,.@x0,.@y0,cell_chkpass));
+		enablenpc strnpcinfo(0);
+		movenpc strnpcinfo(0),.@x0,.@y0;
+		sleep 1000;
+		while(rand(pow(250 - .a,2) / 10)) {
+			if(.a) set .a,.a - 1;
+			npcstop;
+			getmapxy .@m$,.@x0,.@y0,1;
+			set .@a,0;
+			set .@x1,.@x0 + rand(-15,15);
+			set .@y1,.@y0 + rand(-15,15);
+			do {
+				set .@x1,.@x0 + rand(-15,15);
+				set .@y1,.@y0 + rand(-15,15);
+				set .@a,.@a + 1;
+				if(.@a == 100) {
+					sleep 1;
+					set .@a,0;
+				}
+			} while(!checkcell(.@m$,.@x1,.@y1,cell_chkpass));
+			npcspeed 96;
+			npcwalkto .@x1,.@y1;
+			sleep sqrt((pow(.@x1 - .@x0,2) + pow(.@y1 - .@y0,2)) * 90 * 90) + 1000;
+		}
+		sleep 1000;
+		emotion 30;
+		set .@a,50;
+		while(.@a > 0) {
+			specialeffect 45;
+			set .@a,.@a - 1;
+			sleep 50;
+		}
+		specialeffect 316;
+		sleep 2000;
+		specialeffect 317;
+		set .a,-1;
+		sleep 22000;
+	}
+	end;
+}
+
+// 2. Lafayette Hotel:
+
+function	script	il2_1	{
+
+	set .@a,getarg(0);
+	mes .@n$;
+	sleep2 1000;
+	soundeffect "se_equip_item_0"+rand(1,7)+".wav",0;
+	mes "...";
+	sleep2 1000;
+	soundeffect "se_equip_item_0"+rand(1,7)+".wav",0;
+	mes "...";
+	sleep2 1000;
+	if(il2 == .@a) {
+		mes "Guay, lo tengo.";
+		mes "Es una pequeña llave.";
+		mes "Me gustaría saber dónde está la puerta que abre esta llave.";
+		set il,il | 4;
+		set il2,0;
+	}
+	else mes "Parece que aquí no hay nada.";
+	return;
+}
+
+il_q01,67,41,0	script	#il2_2	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	warp "prontera",122,145;
+	end;
+}
+
+prontera,122,144,0	script	#il2_3	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	if(il & 2) {
+		warp "il_q01",67,40;
+	}
+	else {
+		mes "^aa6600"+strcharinfo(0)+"^000000";
+		mes "La puerta está cerrada.";
+		close;
+	}
+	end;
+}
+
+il_q01,56,35,0	script	Plant#il2_4	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	set .@n$,"^aa6600"+strcharinfo(0)+"^000000";
+	mes .@n$;
+	mes "Nadie se ha preocupado de esta planta durante mucho tiempo.";
+	if(!(il & 4)) {
+		next;
+		set .@a,select("^880000Salir^000000","Mirar entre las hojas.","Mirar debajo del tiesto.") - 1;
+		if(.@a) callfunc "il2_1",.@a - 1;
+	}
+	close;
+}
+
+il_q01,71,23,0	script	Plant#il2_5	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	set .@n$,"^aa6600"+strcharinfo(0)+"^000000";
+	mes .@n$;
+	mes "Nadie se ha preocupado de esta planta durante mucho tiempo.";
+	if(!(il & 4)) {
+		next;
+		set .@a,select("^880000Salir^000000","Mirar entre las hojas.","Mirar debajo del tiesto.") - 1;
+		if(.@a) callfunc "il2_1",.@a + 1;
+	}
+	close;
+}
+
+il_q01,56,17,0	script	Barrel#il2_6	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	set .@n$,"^aa6600"+strcharinfo(0)+"^000000";
+	mes .@n$;
+	mes "Mmm...";
+	mes "¿Quién ha puesto esta barrica aquí?";
+	if(!(il & 4)) {
+		next;
+		set .@a,select("^880000Salir^000000","Mirar dentro de la barrica.") - 1;
+		if(.@a) callfunc "il2_1",4;
+	}
+	close;
+}
+
+il_q01,56,32,0	script	Sofa#il2_7	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	set .@n$,"^aa6600"+strcharinfo(0)+"^000000";
+	mes .@n$;
+	mes "Nunca antes había visto un sofá tan viejo.";
+	if(!(il & 4)) {
+		next;
+		set .@a,select("^880000Salir^000000","Mirar entre los cojines del sofá.","Mirar bajo el sofá.") - 1;
+		if(.@a) callfunc "il2_1",.@a + 4;
+	}
+	close;
+}
+
+il_q01,58,57,0	script	Spears#il2_8	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	set .@n$,"^aa6600"+strcharinfo(0)+"^000000";
+	mes .@n$;
+	mes "No son lanzas reales. Parecen más bien algún tipo de adorno.";
+	if(!(il & 4)) {
+		next;
+		set .@a,select("^880000Salir^000000","Mirar entre las lanzas.") - 1;
+		if(.@a) callfunc "il2_1",7;
+	}
+	close;
+}
+
+il_q01,79,29,0	script	Picture#il2_9	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	set .@n$,"^aa6600"+strcharinfo(0)+"^000000";
+	mes .@n$;
+	mes "Una bonita pintura.";
+	if(!(il & 4)) {
+		next;
+		set .@a,select("^880000Salir^000000","Mirar detrás del cuadro.") - 1;
+		if(.@a) callfunc "il2_1",8;
+	}
+	close;
+}
+
+function	script	il2_10	{
+
+	set .@n$,"^aa6600"+strcharinfo(0)+"^000000";
+	mes .@n$;
+	mes "La puerta está cerrada.";
+	if((il & 4) && !(il & 8)) {
+		next;
+		set .@a,select("^880000Salir^000000","Usar la llave para abrir la puerta.") - 1;
+		if(.@a) {
+			mes .@n$;
+			mes "Intentemos abrir la puerta con esta llave.";
+			sleep2 700;
+			soundeffect "se_equip_item_0"+rand(1,7)+".wav",0;
+			mes "...";
+			sleep2 700;
+			soundeffect "se_equip_item_0"+rand(1,7)+".wav",0;
+			mes "...";
+			sleep2 1000;
+			if(getarg(0)) {
+				mes "Fantástico, ¡¡funciona!!";
+				close2;
+				set il,il | 8;
+				soundeffect "se_door01.wav",0;
+				warp "il_q01",67,69;
+			}
+			else mes "Hmmm... Esta llave no abre esta puerta.";
+		}
+	}
+	return;
+}
+
+il_q01,40,51,0	script	#il2_11	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	callfunc "il2_10",0;
+	close;
+}
+
+il_q01,49,57,0	script	#il2_12	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	callfunc "il2_10",0;
+	close;
+}
+
+il_q01,65,57,0	script	#il2_13	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	if(il & 8) {
+		soundeffect "se_door01.wav",0;
+		warp "il_q01",67,69;
+	}
+	else {
+		callfunc "il2_10",1;
+		close;
+	}
+	end;
+}
+
+il_q01,67,68,0	script	#il2_14	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	soundeffect "se_door01.wav",0;
+	warp "il_q01",65,56;
+	end;
+}
+
+// 3. The Room of the Four Keys:
+il_q01,67,95,0	script	#il3_0	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	if((il & 16) || ($@il & 2)) {
+		set il,il | 16;
+		soundeffect "se_door01.wav",0;
+		warp "il_q01",69,107;
+	}
+	else {
+		mes "^aa6600"+strcharinfo(0)+"^000000";
+		mes "La puerta está cerrada.";
+		mes "Tiene unas palabras escritas en la madera:";
+		mes "^008833Las Cuatro Llaves abren esta puerta.^000000";
+		close;
+	}
+	end;
+
+OnInit:
+	set .@a,4;
+	while(.@a) {
+		set .@a,.@a - 1;
+		donpcevent "Key#il3_"+(5 - .@a)+"::On0";
+	}
+	end;
+
+On0:
+	setarray .@b[0],60,72,60,72;
+	setarray .@c[0],86,86,74,74;
+	set .@a,4;
+	while(.@a) {
+		set .@a,.@a - 1;
+		set .@d,4;
+		while(.@d) {
+			set .@d,.@d - 1;
+			if(!getd("$@il3_"+(5 - .@d)+"a")) {
+				getmapxy .@m$,.@x0,.@y0,1,"Key#il3_"+(5 - .@d);
+				if(	(.@x0 >= .@b[.@a]) &&
+					(.@x0 <= (.@b[.@a] + 3)) &&
+					(.@y0 >= .@c[.@a]) &&
+					(.@y0 <= (.@c[.@a] + 3))
+				) {
+					set .@e,.@e + 1;
+					break;
+				}
+			}
+		}
+	}
+	if(.@e == 4) {
+		set $@il,$@il | 1;
+		sleep 1000;
+		if(($@il & 1) && !($@il & 2)) {
+			set .@a,4;
+			while(.@a) {
+				set .@a,.@a - 1;
+				donpcevent "Key#il3_"+(5 - .@a)+"::On1";
+			}
+			sleep 1500;
+			if(($@il & 1) && !($@il & 2)) {
+				specialeffect 111;
+				specialeffect 215;
+				set $@il,$@il | 2;
+			}
+		}
+	}
+	else {
+		if($@il & 1) set $@il,$@il - 1;
+		if($@il & 2) set $@il,$@il - 2;
+	}
+	end;
+}
+
+-	script	#il3_1::il_key	-1,{
+
+	callfunc "il_range",strnpcinfo(0),1;
+
+OnTouch:
+	specialeffect 44;
+	soundeffect "_hit_fist"+rand(1,4)+".wav",0;
+	getmapxy .@m$,.@x0,.@y0,0;
+	getmapxy .@m$,.@x1,.@y1,1;
+	set .@x0,.@x1 - .@x0;
+	set .@y0,.@y1 - .@y0;
+	if(.@x0 || .@y0) {
+		if(.@x0 > 0) set .@x1,1;
+		if(.@x0 == 0) set .@x1,0;
+		if(.@x0 < 0) set .@x1,-1;
+		setd "$@"+strnpcinfo(2)+"x",.@x1;
+		if(.@y0 > 0) set .@y1,1;
+		if(.@y0 == 0) set .@y1,0;
+		if(.@y0 < 0) set .@y1,-1;
+		setd "$@"+strnpcinfo(2)+"y",.@y1;
+		set .@a,getd("$@"+strnpcinfo(2)+"a");
+		setd "$@"+strnpcinfo(2)+"a",sqrt(pow(rand(5,10),2) / 2);
+		if(.@a <= 0) awake strnpcinfo(0);
+	}
+	end;
+
+On0:
+	while(1) {
+		if($@il & 1) set $@il,$@il - 1;
+		if($@il & 2) set $@il,$@il - 2;
+		if(getd("$@"+strnpcinfo(2)+"a")) {
+			while(getd("$@"+strnpcinfo(2)+"a")) {
+				getmapxy .@m$,.@x0,.@y0,1;
+				set .@x1,getd("$@"+strnpcinfo(2)+"x");
+				set .@y1,getd("$@"+strnpcinfo(2)+"y");
+				set .@b1,checkcell(.@m$,.@x0 + .@x1,.@y0 + .@y1,cell_chkpass);
+				set .@b2,checkcell(.@m$,.@x0 + .@x1,.@y0,cell_chkpass);
+				set .@b3,checkcell(.@m$,.@x0,.@y0 + .@y1,cell_chkpass);
+				if(!.@b1) {
+					if(.@b2 && .@b3) {
+						set .@x1,-.@x1;
+						set .@y1,-.@y1;
+					}
+					if(!.@b2) set .@x1,-.@x1;
+					if(!.@b3) set .@y1,-.@y1;
+				}
+				if(.@b1 && !.@b2 && !.@b3) {
+					set .@x1,-.@x1;
+					set .@y1,-.@y1;
+				}
+				setd "$@"+strnpcinfo(2)+"x",.@x1;
+				setd "$@"+strnpcinfo(2)+"y",.@y1;
+				npcspeed 400;
+				npcwalkto .@x0 + .@x1,.@y0 + .@y1;
+				sleep sqrt((pow(.@x1,2) + pow(.@y1,2)) * 400 * 400) + 50;
+				setd "$@"+strnpcinfo(2)+"a",getd("$@"+strnpcinfo(2)+"a") - 1;
+			}
+			npcstop;
+			donpcevent "#il3_0::On0";
+		}
+		else {
+			setd "$@"+strnpcinfo(2)+"a",-1;
+			getmapxy .@m$,.@x0,.@y0,1;
+			set .@x1,0;
+			set .@y1,0;
+			while(!checkcell(.@m$,.@x1,.@y1,cell_chkpass)) {
+				set .@x1,.@x0 + rand(-10,10);
+				set .@y1,.@y0 + rand(-10,10);
+				set .@a,.@a + 1;
+				if(.@a == 100) {
+					sleep 1;
+					set .@a,0;
+				}
+			}
+			if(getd("$@"+strnpcinfo(2)+"a") == -1) {
+				set .@a,0;
+				npcspeed 400;
+				npcwalkto .@x1,.@y1;
+				sleep 4000;
+				npcstop;
+				if(getd("$@"+strnpcinfo(2)+"a") == -1) {
+					setd "$@"+strnpcinfo(2)+"a",0;
+					donpcevent "#il3_0::On0";
+				}
+			}
+		}
+		if(!getd("$@"+strnpcinfo(2)+"a")) sleep rand(20 * 1000,60 * 1000);
+	}
+	end;
+
+On1:
+	specialeffect 55;
+	end;
+}
+
+il_q01,57,94,0	duplicate(il_key)	Key#il3_2	1613,1,1
+il_q01,78,94,0	duplicate(il_key)	Key#il3_3	1613,1,1
+il_q01,57,69,0	duplicate(il_key)	Key#il3_4	1613,1,1
+il_q01,78,69,0	duplicate(il_key)	Key#il3_5	1613,1,1
+
+// 4. The Rabbit hole:
+il_q01,76,119,4	script	Morpheus#il4_0	997,{
+
+	set .@n1$,"^008888"+strnpcinfo(1)+"^000000";
+	set .@n2$,"^aa6600"+strcharinfo(0)+"^000000";
+	mes .@n1$;
+	if(il & 128) {
+		mes "Hola, "+strcharinfo(0)+".";
+		mes "¿Estás cansado de este mundo irreal?";
+		next;
+		set .@a,select("^880000Salir^000000","Ir a Illion.") - 1;
+		mes .@n1$;
+		if(.@a) {
+			mes "OK.";
+			mes "Permíteme unos segundos mientras busco una ruta de escape...";
+			close2;
+			emotion 9;
+			sleep2 1000;
+			specialeffect2 120;
+			sleep2 1000;
+			warp "il_fild01",285,35;
+		}
+		else {
+			mes "...";
+			close;
+		}
+	}
+	else if(il & 32) {
+		mes "Hola, "+strcharinfo(0)+".";
+		mes "¿Estás preparado para volverlo a intentar?";
+		mes "La última vez tuvimos muy mala suerte.";
+		mes "Pero estoy seguro de que podrás hacerlo.";
+		next;
+		set .@a,select("^880000Salir^000000","No rendirse.","Espera un momento.") - 1;
+		mes .@n1$;
+		if(.@a == 1) {
+			mes "Bien.";
+			mes "Estoy segudo de que esta vez lo conseguiremos.";
+			close2;
+			warp "il_q02",98,77;
+			set @il5,0;
+			set @il5x,0;
+			set @il5y,0;
+			deltimer "il5_0::On0";
+			addtimer rand(10 * 60 * 1000,20 * 60 * 1000),"il5_0::On0";
+		}
+		else {
+			mes "Tómate tu tiempo.";
+			close;
+		}
+	}
+	else if(@il4) {
+		mes "...";
+		close;
+	}
+	else {
+		mes "Ya era hora.";
+		mes "Bienvenido, "+strcharinfo(0)+".";
+		mes "Como habrás imaginado, yo soy Morpheus.";
+		next;
+		mes .@n1$;
+		mes "Supongo... que ahora te sentirás un poco... como Alicia...";
+		mes "cayendo por la madrigera del conejo...";
+		mes "¿Hmm?";
+		next;
+		mes .@n1$;
+		mes "Puedo verlo en tus ojos.";
+		if(sex) mes "Tienes la mirada de un hombre que acepta lo que ve, porque espera despertarse.";
+		else mes "Tienes la mirada de una mujer que acepta lo que ve, porque espera despertarse.";
+		mes "Ironicamente, no dista tanto de la realidad.";
+		next;
+		mes .@n1$;
+		mes "Te explicaré por qué estás aquí.";
+		next;
+		mes .@n1$;
+		mes "Estás porque sabes algo...";
+		mes "Aunque lo que sabes no lo puedes explicar.";
+		mes "Pero lo percibes.";
+		mes "Ha sido así durante toda tu vida.";
+		next;
+		mes .@n1$;
+		mes "Algo no funciona en el mundo.";
+		mes "No sabes lo que es, pero ahí está.";
+		mes "Como una... astilla clavada en tu mente... y te está enloqueciendo.";
+		next;
+		mes .@n1$;
+		mes "Esa sensación te ha traído hasta mí.";
+		mes "¿Sabes de lo que te estoy hablando?";
+		next;
+		mes .@n2$;
+		mes "¿De Matrix?";
+		next;
+		mes .@n1$;
+		mes "¿Te gustaría realmente... saber lo que es?";
+		next;
+		mes .@n1$;
+		mes "Matrix nos rodea, está en todas partes.";
+		mes "Incluso ahora, en esta misma habitación.";
+		next;
+		mes .@n1$;
+		mes "Puedes verla si miras por la ventana, o al encender la televisión.";
+		mes "Puedes sentirla cuando vas a trabajar... cuando vas a la iglesia... cuando pagas tus impuestos.";
+		next;
+		mes .@n1$;
+		mes "Es el mundo... que ha sido puesto ante tus ojos para ocultarte la verdad.";
+		next;
+		mes .@n2$;
+		mes "¿Qué verdad?";
+		next;
+		mes .@n1$;
+		mes "Que eres un esclavo, "+strcharinfo(0)+".";
+		mes "Igual que los demás, naciste en cautiverio, naciste en una prisión que no puedes ni saborear, ni oler ni tocar.";
+		mes "Una prisión... para tu mente.";
+		next;
+		mes .@n1$;
+		mes "Por desgracia, no se puede explicar lo que es Matrix.";
+		mes "Has de verla con tus propios ojos.";
+		next;
+		mes .@n1$;
+		mes "Esta es tu última oportunidad.";
+		mes "Después ya no podrás echarte atrás.";
+		next;
+		while(!.@a) {
+			mes .@n1$;
+			mes "Si tomas la ^004488pastilla azul^000000... fin de la historia.";
+			mes "Despertarás en tu cama y creerás lo que quieras creerte.";
+			next;
+			mes .@n1$;
+			mes "Si tomas la ^880000pastilla roja^000000 te quedarás en el país de las maravillas, y yo te enseñaré hasta dónde llega la madrigera de conejos.";
+			next;
+			mes .@n1$;
+			mes "Recuerda, lo único que te ofrezco es la verdad, nada más.";
+			next;
+			set .@a,select("^888888...^000000","^004488Tomar la pastilla azul.^000000","^880000Tomar la pastilla roja.^000000") - 1;
+		}
+		mes .@n1$;
+		if(.@a == 1) {
+			specialeffect2 208;
+			mes "...";
+			close2;
+			warp "prt_in",69,173;
+			set il,1;
+		}
+		else {
+			set il,il | 32;
+			specialeffect2 204;
+			mes "Esa pastilla forma parte de un programa de rastreo.";
+			mes "Está diseñado para interrumpir tu señal de entrada y salida y asi poder localizar tu ubicación.";
+			next;
+			mes .@n2$;
+			mes "¿Eso qué significa?";
+			next;
+			mes .@n1$;
+			mes "Significa que verás cosas extrañas.";
+			mes "Confía en mi.";
+			mes "Pase lo que pase, no hagas ninguna estupidez.";
+			close2;
+			callfunc "il4_2","il_q02",98,77,"¿Alguna vez has tenido un sueño, "+strcharinfo(0)+", que pareciese muy real?","¿Qué ocurriría si no pudieras despertar de ese sueño?","¿Cómo diferenciarías el mundo de los sueños de la realidad?";
+			set il,il | 32;
+			set @il5,0;
+			set @il5x,0;
+			set @il5y,0;
+			deltimer "il5_0::On0";
+			addtimer rand(10 * 60 * 1000,20 * 60 * 1000),"il5_0::On0";
+		}
+	}
+	end;
+}
+
+il_q01,69,106,0	script	#il4_1	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	soundeffect "se_door01.wav",0;
+	warp "il_q01",67,94;
+	end;
+}
+
+function	script	il4_2	{
+
+	set @il4,1;
+	soundeffect "se_mutter01.wav",0;
+	setarray .@a[0],120,358,359,360,368,375,376,379,385,387,396,403,124,129,196,419,420,422,424,426,449,458,493,500,505,521,538,542,543,544,548,549,550,563,578,602,617,625,626,655,656,674;
+	setarray .@m$[0],getarg(3,""),getarg(4,""),getarg(5,"");
+	set .@b,40;
+	while(.@b && @il4 && Hp) {
+		set .@b,.@b - 1;
+		specialeffect2 .@a[rand(getarraysize(.@a))];
+		if(!(.@b % 8)) {
+			if(.@m$[0] != "") {
+				soundeffect "se_mutter01.wav",0;
+				announce "Morpheus : "+.@m$[0],bc_self,0x00ff66;
+			}
+			deletearray .@m$[0],1;
+		}
+		if(.@b == 10) soundeffect "se_top2.wav",0;
+		heal (Hp * (.@b - 45) / 100),(Sp * (.@b - 45) / 100);
+		if(Hp) sleep2 (.@b * 30);
+	}
+	if(@il4 && Hp) {
+		heal (1 - Hp),(1 - Sp);
+		soundeffect "se_scream_w01.wav",0;
+		sleep2 200;
+		warp getarg(0),getarg(1,0),getarg(2,0);
+		if(Hp) percentheal 100,100;
+	}
+	set @il4,0;
+	return;
+}
+
+// 5. Open your mind:
+il_q02,0,0,0	script	il5_0	-1,{
+
+On0:
+	callfunc "il4_2","prt_in",69,173,"Estoy teniendo problemas con la transmisión.","","Creo que ellos ten han encontrado...";
+	set @il5,0;
+	set @il5x,0;
+	set @il5y,0;
+	end;
+
+OnPCDieEvent:
+	getmapxy .@m$,.@x,.@y,0;
+	if(.@m$ == "il_q02") {
+		set @il5,0;
+		set @il5x,0;
+		set @il5y,0;
+		deltimer "il5_0::On0";
+		sleep2 1000;
+		warp "il_q01",16,53;
+	}
+	end;
+
+On1:
+	while(@il5x || @il5y) {
+		getmapxy .@m$,.@x,.@y,0;
+		if((.@x == @il5x) && (.@y == @il5y)) {
+			set @il5x,0;
+			set @il5y,0;
+			set @il5,@il5 + 1;
+			specialeffect2 rand(54,57);
+			announce "Cerradura "+@il5+" desbloqueada.",bc_self,0x88bbff;
+		}
+		sleep2 3000;
+	}
+	end;
+}
+
+il_q01,29,51,0	script	#il5_1	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	soundeffect "se_door01.wav",0;
+	warp "il_q01",41,51;
+	end;
+}
+
+il_q02,96,87,6	script	Morpheus#il5_2	964,{
+
+	set .@n1$,"^008888Morpheus^000000";
+	if(!(il & 64)) {
+		set .@n2$,"^aa6600"+strcharinfo(0)+"^000000";
+		mes .@n1$;
+		mes "¿Cómo te sientes, "+strcharinfo(0)+"?";
+		next;
+		mes .@n2$;
+		mes "¿Estoy muerto?";
+		next;
+		mes .@n1$;
+		mes "No, en absoluto.";
+		next;
+		mes .@n2$;
+		mes "Morpheus, ¿qué me ha pasado?";
+		mes "¿Qué es este sitio?";
+		next;
+		mes .@n1$;
+		mes "Ahora mismo estamos dentro de tu mente.";
+		mes "No puedes ver nada por culpa de la pastilla que tomaste hace unos minutos.";
+		mes "Ahora has sido desconectado de matrix, durante unos minutos.";
+		next;
+		mes .@n1$;
+		mes "¿Ves esa puerta enfrente tuyo?";
+		mes "Esa es la puerta que te mantiene atrapado aquí.";
+		mes "La puerta que te impide llegar al mundo real.";
+		next;
+		set il,il | 64;
+	}
+	mes strcharinfo(0)+", tienes que encontrar una manera de abrir la puerta.";
+	mes "Date prisa.";
+	mes "Tenemos pocos minutos antes de que reconecten tu señal.";
+	close;
+	end;
+}
+
+il_q02,98,93,0	script	Door Mechanism#il5_3	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	set .@n$,"^aa6600"+strcharinfo(0)+"^000000";
+	mes .@n$;
+	if(@il5 >= 3) {
+		mes "El mecanismo parece estar desconectado, y la puerta ha dejado de estar bloqueada.";
+		next;
+		set .@a,select("^880000Salir^000000","Empujar la puerta.") - 1;
+		if(.@a) {
+			set @il,0;
+			set @il4,0;
+			deltimer "il5_0::On0";
+			set il,il | 128;
+			specialeffect 111;
+			specialeffect 215;
+			sleep2 1000;
+			warp "il_q03",155,45;
+		}
+	}
+	else {
+		mes "Parece que existe algún extraño mecanismo bloqueando la puerta.";
+		mes "Un pequeño monitor muestra un par de coordenadas:";
+		if(!(@il5x || @il5y)) {
+			set .@a,0;
+			do {
+				set .@x,rand(200);
+				set .@y,rand(200);
+				set .@a,.@a + 1;
+				if(.@a == 100) {
+					sleep2 1;
+					set .@a,0;
+				}
+			} while(!checkcell("il_q02",.@x,.@y,cell_chkpass));
+			set @il5x,.@x;
+			set @il5y,.@y;
+			doevent "il5_0::On1";
+		}
+		mes "^ff8800"+@il5x+"^000000 - ^66dd00"+@il5y+"^000000";
+	}
+	close;
+}
+
+// 6. The Nebuchadnezzar:
+il_q03,148,91,0	script	#il6_0	111,{
+
+	callfunc "il_range",strnpcinfo(0),2;
+	warp "il_fild01",279,62;
+	end;
+}
+
+il_fild01,278,62,0	script	#il6_1	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	warp "il_q03",148,90;
+	end;
+}
+
+il_q03,151,43,8	script	Trinity#il6_2	952,{
+
+	set .@n1$,"^008888Trinity^000000";
+	if(!(il & 256)) {
+		emotion 0;
+		sleep2 500;
+		pcblockmove getcharid(3),0;
+	}
+	mes .@n1$;
+	mes "Hola "+strcharinfo(0)+".";
+	if(il & 512) {
+		mes "Ahora que has sido desconectado de Matrix te has convertido en el objetivo de los agentes.";
+		mes "Deberías tener cuidado.";
+		close;
+	}
+	else if(!(il & 256)) {
+		next;
+		set .@n2$,"^aa6600"+strcharinfo(0)+"^000000";
+		mes .@n2$;
+		mes "¿Cómo sabes mi nombre?";
+		next;
+		mes .@n1$;
+		mes "Sé mucho sobre ti.";
+		next;
+		mes .@n2$;
+		mes "¿Quién eres?";
+		next;
+		mes .@n1$;
+		mes "Mi nombre es Trinity.";
+		next;
+		mes .@n1$;
+		mes "Tenías los músculos atrofiados.";
+		mes "Te los hemos rehabilitado.";
+		next;
+		mes .@n2$;
+		mes "¿Por qué me duelen los ojos?";
+		next;
+		mes .@n1$;
+		mes "Jamás los habías usado.";
+		next;
+		mes .@n2$;
+		mes "Trinity, ¿qué me ha pasado?";
+		next;
+		mes .@n1$;
+		mes "Sé porqué estás aquí, "+strcharinfo(0)+".";
+		mes "Sé lo que estás haciendo.";
+		mes "Estás buscando una respuesta.";
+		mes "Lo sé, porque una vez yo estuve buscando lo mismo.";
+		next;
+		mes .@n1$;
+		mes "Es la pregunta la que nos impulsa, "+strcharinfo(0)+".";
+		mes "Es la pregunta la que te ha traído aquí.";
+		mes "Conoces la pregunta, igual que yo... ";
+		next;
+		mes .@n2$;
+		mes "¿Qué es Matrix?";
+		next;
+		mes .@n1$;
+		mes "La respuesta la encontrarás por ahí, "+strcharinfo(0)+". Te está buscando.";
+		set il,il | 256;
+	}
+	mes "Morpheus te espera fuera de la nave.";
+	mes "Te responderá a todas tus preguntas.";
+	close;
+
+OnPCLoadMapEvent:
+	getmapxy .@m0$,.@x,.@y,0;
+	if((.@m0$ == "il_q03") && !(il & 256))
+		pcblockmove getcharid(3),1;
+	end;
+}
+
+il_q03,157,84,4	script	Tank#il6_3	828,{
+
+	set .@n1$,"^008888Tank^000000";
+	mes .@n1$;
+	mes "Bienvenido a la Nebuchadnezzar.";
+	mes "Soy Tank. Seré tu operador.";
+	next;
+	mes .@n1$;
+	if(il & 512) {
+		mes "Este es el núcleo. Desde él emitimos nuestra señal pirata y asaltamos Matrix.";
+		mes "Puedo ayudar a conectarte a Matrix usando uno de esos routers.";
+		set il,il | 1024;
+	}
+	else {
+		mes "Morpheus está esperando fuera de la nave.";
+		mes "Quiere hablar contigo.";
+	}
+	close;
+}
+
+il_q03,168,66,4	script	Mouse#il6_4	851,{
+
+	set .@n1$,"^008888Mouse^000000";
+	mes .@n1$;
+	mes "Hola "+strcharinfo(0)+".";
+	mes "Me llaman Ratón.";
+	next;
+	mes .@n1$;
+	mes "Pareces hambriento.";
+	mes "Encontrarás algo de comida al final de la nave.";
+	next;
+	mes .@n1$;
+	mes "Si no miras, parece que comes unos huevos muy líquidos.";
+	mes "¿Sabes a lo que realmente me recuerda? Al Trigo Rico.";
+	mes "¿Alguna vez lo probaste?";
+	close;
+}
+
+il_q03,156,34,0	script	Food#il6_5	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	mes "^aa6600"+strcharinfo(0)+"^000000";
+	mes "Parece un bol de mocos.";
+	mes "...";
+	mes "No voy a tomar ni una sola cucharada.";
+	close;
+	end;
+}
+
+il_fild01,254,20,8	script	Morpheus#il6_6	964,{
+
+	set .@n1$,"^008888Morpheus^000000";
+	set .@n2$,"^aa6600"+strcharinfo(0)+"^000000";
+	mes .@n1$;
+	if(il & 512) {
+		mes "Hola, "+strcharinfo(0)+".";
+		mes "¿Qué quieres hacer?";
+		next;
+		set .@a,select("^880000Cancelar^000000","Explorar el desierto.","Volver a Prontera.") - 1;
+		mes .@n1$;
+		if(!.@a) {
+			mes "...";
+			close;
+		}
+		else if(.@a == 1) {
+			mes "Ok.";
+			mes "El conejo blanco te transportará hasta el desierto de Illion.";
+			mes "Ten cuidado.";
+			close2;
+			donpcevent "Lunatic#il6_7::On0";
+		}
+		else {
+			mes "Deberías hablar con Tank.";
+			mes "Te ayudará en caso de que quieras conectarte a Matrix.";
+			mes "Le encontrarás dentro de la nave.";
+			close;
+		}
+	}
+	else {
+		mes "Bienvenido al mundo real.";
+		mes "Este es el mundo como es hoy en día...";
+		mes "Bienvenido al Desierto de lo Real.";
+		next;
+		mes .@n1$;
+		mes "¿Querías saber qué es Matrix, "+strcharinfo(0)+"?";
+		mes "Prepárate para descubrir las respuestas a todas tus preguntas...";
+		next;
+		mes .@n1$;
+		cutin "il_q1",4;
+		mes "Sólo tenemos algunos fragmentos de información, pero lo que sabemos seguro es que en un momento determinado a principios del siglo "+(gettime(7)/100 + 3)+" toda la humanidad estaba unida en su entusiasmo.";
+		mes "Nos maravillábamos en nuestro atrevimiento al dar origen a la IA.";
+		next;
+		mes .@n2$;
+		mes "¿IA?";
+		mes "Osea, ¿la Inteligencia Artificial?";
+		next;
+		mes .@n1$;
+		cutin "il_q2",4;
+		mes "Una singular conciencia que generó toda una raza de máquinas.";
+		next;
+		mes .@n1$;
+		mes "No sabemos quién atacó primero, si nosotros o ellas.";
+		mes "Pero sí sabemos que nosotros arrasamos el cielo.";
+		next;
+		mes .@n1$;
+		cutin "il_q3",4;
+		mes "En aquella época dependían de la energía solar y se creía que no podrían sobrevivir sin una fuente de energía tan abundante como el sol.";
+		next;
+		mes .@n1$;
+		mes "A lo largo de nuestra historia hemos dependido de las máquinas para sobrevivir.";
+		mes "El destino al parecer, no está carente de cierta ironía.";
+		next;
+		mes .@n1$;
+		cutin "il_q4",4;
+		mes "El cuerpo humano genera más bio-electricidad que una pila de 120 voltios y más de 25000 Julios de calor corporal.";
+		mes "Combinado con una forma de fusión, las máquinas habían encontrado toda la energía que podían necesitar.";
+		next;
+		mes .@n1$;
+		mes "Existen campos, interminables campos, donde los seres humanos ya no nacemos. Se nos cultiva.";
+		next;
+		mes .@n1$;
+		cutin "il_q5",4;
+		mes "Durante mucho tiempo me negué a creerlo, y entonces ví los campos con mis propios ojos.";
+		mes "Ví como licuaban a los muertos para administrárselos por vía intravenosa a los vivos.";
+		next;
+		mes .@n1$;
+		mes "Y estando allí, contemplando su pura y horripilante precisión, me di cuenta de lo obvia que era la verdad.";
+		next;
+		mes .@n1$;
+		cutin "il_q6",4;
+		mes "¿Qué es Matrix?";
+		mes "Control.";
+		mes "Matrix es un mundo imaginario generado por ordenador, construído para mantenernos bajo control y convertir al ser humano en una batería.";
+		next;
+		mes .@n2$;
+		cutin "",255;
+		mes "No.";
+		mes "No me lo creo.";
+		mes "No es posible.";
+		mes "No... no puede ser real.";
+		next;
+		mes .@n1$;
+		cutin "il_q8",4;
+		mes "¿Qué es real? ¿De que modo definirías real?";
+		mes "Si te refieres a lo que puedes sentir, a lo que puedes oler, a lo que puedes saborear y ver, lo real podría ser señales eléctricas interpretadas por tu cerebro.";
+		next;
+		mes .@n1$;
+		mes "El mundo tal y como era a finales del siglo "+(gettime(7)/100 + 1)+"...";
+		mes "ahora sólo existe como parte de una simulación interactiva-neural que llamamos Matrix.";
+		next;
+		mes .@n1$;
+		cutin "il_q7",4;
+		mes "Pero ahora, escúchame.";
+		mes "Existen programas capaces de sentir protegiendo este lugar.";
+		mes "Hemos sobrevivido ocultándonos y huyendo de ellos.";
+		next;
+		mes .@n1$;
+		mes "Pueden entrar y salir de cualquier software que esté intregado en su sistema, pudiendo viajar entre Matrix y el mundo real a voluntad.";
+		mes "Y eso es precisamente por lo que son tan peligrosos.";
+		next;
+		mes .@n1$;
+		cutin "il_q9",4;
+		mes "No quiero engañarte, "+strcharinfo(0)+".";
+		mes "Todos los hombres y mujeres que han tenido valor, todos los que han luchado contra un agente han muerto.";
+		next;
+		mes .@n1$;
+		mes "Ellos son los guardianes.";
+		mes "Vigilan todas las puertas.";
+		mes "Tienen todas las llaves, lo que significa que tarde o temprano alguien tendrá que luchar contra ellos.";
+		next;
+		mes .@n1$;
+		cutin "",255;
+		mes "Como puedes ver, "+strcharinfo(0)+", el mundo real no es tan pacífico como te pensabas.";
+		mes "Seguimos luchando contra las máquinas.";
+		next;
+		mes .@n1$;
+		mes "Ahora tienes la posibilidad de escapar de su prisión.";
+		mes "Es hora de destruír esas diabólicas máquinas y rescatar a toda la humanidad.";
+		close2;
+		getexp 99000,49500;
+		set .@a,getbattleflag("quest_exp_rate");
+		announce "Has recivido "+(99000 * .@a / 100)+" Exp Base y "+(49500 * .@a / 100)+" Exp Job por completar la Quest de Enter the Matrix.",bc_self,0xff8800;
+		set il,il | 512;
+	}
+	end;
+}
+
+il_fild01,259,28,0	script	Lunatic#il6_7	1063,1,1,{
+
+	callfunc "il_range",strnpcinfo(0),1;
+
+OnTouch:
+	if((.a == 2) && (il & 512))
+		warp "il_fild01",rand(232,237),rand(68,73);
+	end;
+
+OnInit:
+	while(1) {
+		set .a,0;
+		getmapxy .@m$,.@x0,.@y0,1;
+		while(!.a) {
+			do {
+				set .@x1,259 + rand(-15,15);
+				set .@y1,28 + rand(-15,15);
+				set .@a,.@a + 1;
+				if(.@a == 100) {
+					sleep 1;
+					set .@a,0;
+				}
+			} while(!checkcell(.@m$,.@x1,.@y1,cell_chkpass));
+			set .@a,0;
+			npcspeed 200;
+			npcwalkto .@x1,.@y1;
+			if(!.a) sleep 10000;
+		}
+		do {
+			sleep 1000;
+			getmapxy .@m$,.@x0,.@y0,1;
+			npcspeed 200;
+			npcwalkto 259,28;
+		} while((.@x0 != 259) || (.@y0 != 28));
+		emotion 30;
+		sleep 1000;
+		specialeffect 316;
+		sleep 2000;
+		specialeffect 317;
+		set .a,2;
+		sleep 22000;
+	}
+	end;
+
+On0:
+	if(!.a) {
+		set .a,1;
+		awake strnpcinfo(0);
+	}
+	end;
+}
+
+il_fild01,230,75,0	script	Device#il6_8	111,{
+
+	callfunc "il_range",strnpcinfo(0);
+	set .@a,select("^880000Cancelar^000000","Volver a la Nebuchadnezzar.") - 1;
+	if(.@a) {
+		specialeffect2 120;
+		sleep2 1000;
+		warp "il_fild01",263,26;
+	}
+	close;
+}
+
+-	script	#il6_9::il_router	-1,{
+
+	callfunc "il_range",strnpcinfo(0);
+	if(il & 1024) {
+		set .@a,select("^880000Cancelar^000000","Conectarse a Matrix.") - 1;
+		if(.@a) {
+			mes "^008888Tank^000000";
+			mes "Espera un segundo.";
+			mes "Voy a hackear una entrada a Matrix para ti...";
+			close2;
+			emotion 9;
+			sleep2 1000;
+			specialeffect2 120;
+			sleep2 1000;
+			warp "il_q01",16,52;
+			end;
+		}
+	}
+	else {
+		mes "^aa6600"+strcharinfo(0)+"^000000";
+		mes "Es un dispositivo extraño.";
+		mes "¿Para qué servirá?.";
+	}
+	close;
+}
+il_q03,150,75,0	duplicate(il_router)	Router#il6_10	111
+il_q03,161,75,0	duplicate(il_router)	Router#il6_11	111
+il_q03,160,67,0	duplicate(il_router)	Router#il6_12	111
+il_q03,150,67,0	duplicate(il_router)	Router#il6_13	111
+il_q03,155,65,0	duplicate(il_router)	Router#il6_14	111

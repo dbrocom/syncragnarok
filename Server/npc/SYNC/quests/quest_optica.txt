@@ -1,0 +1,213 @@
+//===== Custom eAthena Script =======================================
+//= Design Sunglasses Custom Quest (custom item)
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Version =====================================================
+//= 1.1
+//===== Changelog ===================================================
+//= 1.0 - Primera versión.
+//= 1.1 - Aumentado coste.
+//===================================================================
+
+lhz_in02,91,155,5	script	Óptico	805,{
+
+	mes "[^5F04B4Óptico^000000]";
+	mes "Muy buenas, ¿Deseaba algo?";
+	next;
+	mes "[^5F04B4Óptico^000000]";
+	mes "Seguro que estaba interesado en unas gafas nuevas, ¿me equivoco?";
+	next;
+	if(getequipid(9) == 2276) {
+		mes "[^5F04B4Óptico^000000]";
+		mes "Deberías guardar primero las gafas que llevas puestas.";
+		mes "No querrás que se mezclen con las mías, ¿verdad?";
+		close;
+	}
+	switch(select("No por el momento:Buscaba algo resistente")){
+		case 1:
+			mes "[^5F04B4Óptico^000000]";
+			mes "¿A no? Pues tengo unos nuevos diseños que son la última moda por toda Schwarzald.";
+			close;
+		case 2:
+			mes "[^5F04B4Óptico^000000]";
+			mes "Son unas gafas de diseño espectaculares. ¡Y ^8A4B08muy resistentes^000000!";
+			mes "Aunque tienen que realizarse por encargo...";
+			next;
+			mes "[^5F04B4Óptico^000000]";
+			mes "¿Te interesaría realmente? Permítime que note una nueva reserva...";
+			next;
+			if(select("No te molestes:Sí por favor")== 1){
+				mes "[^5F04B4Óptico^000000]";
+				mes "¡Es una oferta! Tu sabrás si quieres estar a la moda o no...";
+				close;
+			}
+			mes "[^5F04B4Óptico^000000]";
+			mes "Son unas gafas de diseño espectaculares. ¡Y muy resistentes!";
+			mes "Y además están disponibles en varios colores. ¡No te arrepentirás!";
+			next;
+			mes "[^5F04B4Óptico^000000]";
+			mes "Necesito que me traigas unas ^084B8AAngled Glasses^000000, ^8A084B30 Crystal Fragment^000000 y el ^8A084Btinte^000000 correspondiente a cada color.";
+			mes "Además de ^868A08550.000z^000000 (tasas de aduana incluídas)";
+			mes "¿Qué color te interesa?";
+			next;
+			
+			switch(select("^0000FFAzul^000000:^04B404Verde^000000:^D7DF01Amarillo^000000:^FF8000Naranja^000000:^DF0101Rojo^000000:^8000FFMorado^000000:^A4A4A4Blanco^000000:^3B240BMarrón^000000:^585858Ennegrecidas^000000:^B404AERosa^000000")){
+				case 1:
+					mes "[^5F04B4Óptico^000000]";
+					mes "Permíteme comprobar el stock de ^0000FFgafas azules^000000...";
+					next;
+					set .@dye, 978;
+					set .@desglass, 30020;
+					break;
+				case 2:
+					mes "[^5F04B4Óptico^000000]";
+					mes "Permíteme comprobar el stock de ^04B404gafas verdes^000000...";
+					next;
+					set .@dye, 979;
+					set .@desglass, 30021;
+					break;
+				case 3:
+					mes "[^5F04B4Óptico^000000]";
+					mes "Permíteme comprobar el stock de ^D7DF01gafas amarillas^000000...";
+					next;
+					set .@dye, 976;
+					set .@desglass, 30022;
+					break;
+				case 4:
+					mes "[^5F04B4Óptico^000000]";
+					mes "Permíteme comprobar el stock de ^FF8000gafas naranjas^000000...";
+					next;
+					set .@dye, 980;
+					set .@desglass, 30023;
+					break;
+				case 5:
+					mes "[^5F04B4Óptico^000000]";
+					mes "Permíteme comprobar el stock de ^DF0101gafas rojas^000000...";
+					next;
+					set .@dye, 975;
+					set .@desglass, 30024;
+					break;
+				case 6:
+					mes "[^5F04B4Óptico^000000]";
+					mes "Permíteme comprobar el stock de ^8000FFgafas moradas^000000...";
+					next;
+					set .@dye, 981;
+					set .@desglass, 30025;
+					break;
+				case 7:
+					mes "[^5F04B4Óptico^000000]";
+					mes "Permíteme comprobar el stock de ^A4A4A4gafas blancas^000000...";
+					next;
+					set .@dye, 982;
+					set .@desglass, 30026;
+					break;
+				case 8:
+					mes "[^5F04B4Óptico^000000]";
+					mes "Permíteme comprobar el stock de ^3B240Bgafas marrones^000000...";
+					next;
+					set .@dye, 30700;
+					set .@desglass, 30027;
+					break;
+				case 9:
+					mes "[^5F04B4Óptico^000000]";
+					mes "Permíteme comprobar el stock de ^585858gafas ennegrecidas^000000...";
+					next;
+					set .@dye, 30701;
+					set .@desglass, 30028;
+					break;
+				case 10:
+					mes "[^5F04B4Óptico^000000]";
+					mes "Permíteme comprobar el stock de ^B404AEgafas rosas^000000...";
+					next;
+					set .@dye, 30702;
+					set .@desglass, 30029;
+					break;
+			}
+			if ( (countitem(.@dye) >= 1) && (countitem(2276) >= 1) && (countitem(7321) >= 30) && (callfunc ("DelCoin",550000,0) == 1) ){
+				mes "[^5F04B4Óptico^000000]";
+				mes "Has tenido suerte, ha llegado un pedido hace poco.";
+				next;
+				mes "[^5F04B4Óptico^000000]";
+				mes "Aquí tienes";
+				delitem .@dye,1;
+				delitem 2276,1;
+				delitem 7321,30;
+				callfunc ("DelCoin",550000,1);
+				getitem .@desglass,1;
+			}else{
+				mes "[^5F04B4Óptico^000000]";
+				mes "Lo siento, pero el almacén está vacío.";
+				close;
+			}
+			next;
+			mes "[^5F04B4Óptico^000000]";
+			mes "¡Gracias por su compra! ¡Vuelva cuando quiera!";
+			close;
+	}
+}
+	
+lhz_in02,99,150,4	script	Mostrador de Gafas	610,{
+	mes "[^B4045F"+ strcharinfo(0) +"^000000]";
+	mes "¡Qué gafas tan chulas!";
+	next;
+	mes "[^B4045F"+ strcharinfo(0) +"^000000]";
+	mes "A ver... ¿Qué módelo me pruebo?";
+	next;
+	switch(select("^0000FFAzul^000000:^04B404Verde^000000:^D7DF01Amarillo^000000:^FF8000Naranja^000000:^DF0101Rojo^000000:^8000FFMorado^000000:^A4A4A4Blanco^000000:^3B240BMarrón^000000:^585858Ennegrecidas^000000:^B404AERosa^000000")){
+		case 1:
+				setlook 5,1020;
+				break;
+		case 2:
+				setlook 5,1021;
+				break;
+		case 3:
+				setlook 5,1022;
+				break;
+		case 4:
+				setlook 5,1023;
+				break;
+		case 5:
+				setlook 5,1024;
+				break;
+		case 6:
+				setlook 5,1025;
+				break;
+		case 7:
+				setlook 5,1026;
+				break;
+		case 8:
+				setlook 5,1027;
+				break;
+		case 9:
+				setlook 5,1028;
+				break;
+		case 10:
+				setlook 5,1029;
+				break;
+	}
+	mes "[^B4045F"+ strcharinfo(0) +"^000000]";
+	mes "¡Qué bien me sientan!";
+	close2;
+	sleep2 900;
+	mes ". . .";
+	next;
+	mes "[^B4045F"+ strcharinfo(0) +"^000000]";
+	mes "Creo que va siendo hora de dejarlas en su sitio...";
+	close2;
+	setlook 5,0;
+	end;
+}

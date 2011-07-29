@@ -7590,7 +7590,7 @@ ACMD_FUNC(showmobs)
 	if((mob_id = atoi(mob_name)) == 0)
 		mob_id = mobdb_searchname(mob_name);
 	if(mob_id > 0 && mobdb_checkid(mob_id) == 0){
-		snprintf(atcmd_output, sizeof atcmd_output, "Invalid mob id %s!",mob_name);
+		snprintf(atcmd_output, sizeof atcmd_output, "Mob ID no válido %s!",mob_name);
 		clif_displaymessage(fd, atcmd_output);
 		return 0;
 	}
@@ -7598,7 +7598,7 @@ ACMD_FUNC(showmobs)
 //#define SHOW_MVP
 #ifndef SHOW_MVP
 	if(mob_db(mob_id)->status.mode&MD_BOSS){
-		snprintf(atcmd_output, sizeof atcmd_output, "Can't show Boss mobs!");
+		snprintf(atcmd_output, sizeof atcmd_output, "¡No se pueden mostrar Bosses!");
 		clif_displaymessage(fd, atcmd_output);
 		return 0;
 	}
@@ -7607,7 +7607,7 @@ ACMD_FUNC(showmobs)
 		strcpy(mob_name,mob_db(mob_id)->jname);    // --ja--
 		//strcpy(mob_name,mob_db(mob_id)->name);    // --en--
 
-	snprintf(atcmd_output, sizeof atcmd_output, "Mob Search... %s %s",
+	snprintf(atcmd_output, sizeof atcmd_output, "Buscando... %s %s",
 		mob_name, mapindex_id2name(sd->mapindex));
 	clif_displaymessage(fd, atcmd_output);
 
@@ -9041,7 +9041,7 @@ ACMD_FUNC(charlist)
 /*==========================================
  * Información de una cuenta [Account ID]
  *------------------------------------------*/
-void account_info(const int fd, struct map_session_data *sd, int account_id)
+/*void account_info(const int fd, struct map_session_data *sd, int account_id)
 {
 	int member_id = 0;
 	char userid[NAME_LENGTH], user_pass[NAME_LENGTH], email[40], last_ip[20];
@@ -9161,6 +9161,151 @@ ACMD_FUNC(accountinfo)
 
 	account_info(fd, sd, account_id);
 
+	return 0;
+}
+*/
+
+//Child of int atcommand_accountinfo
+void account_info(const int fd, struct map_session_data *sd, int account_id)
+{
+	char userid[NAME_LENGTH], user_pass[NAME_LENGTH], email[40], last_ip[20], lastlogin[30];
+	short level = -1;
+	char *data;
+	int logincount = 0,state = 0;
+	
+	if ( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `userid`, `user_pass`, `email`, `last_ip`, `level`, `lastlogin`, `logincount`, `state` FROM `login` WHERE `account_id` = '%d'", account_id) )
+		clif_displaymessage(fd, "[Driver Error] : Query Error. (connection seems crappy :/) Tell the admin.");
+	else if ( Sql_NumRows(mmysql_handle) == 0 )
+		clif_displaymessage(fd, "Account Not Found");
+	else
+	{
+		Sql_NextRow(mmysql_handle);
+		Sql_GetData(mmysql_handle, 0, &data, NULL); safestrncpy(userid, data, sizeof(userid));
+		Sql_GetData(mmysql_handle, 1, &data, NULL); safestrncpy(user_pass, data, sizeof(user_pass));
+		Sql_GetData(mmysql_handle, 2, &data, NULL); safestrncpy(email, data, sizeof(email));
+		Sql_GetData(mmysql_handle, 3, &data, NULL); safestrncpy(last_ip, data, sizeof(last_ip));
+		Sql_GetData(mmysql_handle, 4, &data, NULL); level = atoi(data);
+		Sql_GetData(mmysql_handle, 5, &data, NULL); safestrncpy(lastlogin, data, sizeof(lastlogin));
+		Sql_GetData(mmysql_handle, 6, &data, NULL); logincount = atoi(data);
+		Sql_GetData(mmysql_handle, 7, &data, NULL); state = atoi(data);
+	}
+	
+	Sql_FreeResult(mmysql_handle);
+	
+	if (level == -1)
+		return;
+	
+	sprintf(atcmd_output, "-- Account %d --", account_id);
+	clif_displaymessage(fd, atcmd_output);
+	sprintf(atcmd_output, "User: %s | GM Level: %d | State: %d", userid, level, state);
+	clif_displaymessage(fd, atcmd_output);
+	if (level < pc_isGM(sd))
+	{
+		sprintf(atcmd_output, "Password: %s.", user_pass);
+		clif_displaymessage(fd, atcmd_output);
+	}
+	
+	sprintf(atcmd_output, "Account e-mail: %s.", email);
+	clif_displaymessage(fd, atcmd_output);
+	sprintf(atcmd_output, "Last IP: %s (%s)", last_ip, geoip_getcountry(str2ip(last_ip)));
+	clif_displaymessage(fd, atcmd_output);
+	sprintf(atcmd_output, "This user has logged %d times, the last time were at %s.", logincount, lastlogin);
+	clif_displaymessage(fd, atcmd_output);
+	
+	clif_displaymessage(fd, "-- Character Details --");
+	
+	if ( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `char_id`, `name`, `char_num`, `class`, `base_level`, `job_level`, `online` FROM `char` WHERE `account_id` = '%d' ORDER BY `char_num`", account_id) )
+		clif_displaymessage(fd, "Character Query Error. Show it to the Admin.");
+	else if ( Sql_NumRows(mmysql_handle) == 0 )
+		clif_displaymessage(fd, "This account doesnt have characters.");
+	else
+	{
+		while ( SQL_SUCCESS == Sql_NextRow(mmysql_handle) )
+		{
+			int char_id, class_;
+			short char_num, base_level, job_level, online;
+			char name[NAME_LENGTH];
+			
+			Sql_GetData(mmysql_handle, 0, &data, NULL); char_id = atoi(data);
+			Sql_GetData(mmysql_handle, 1, &data, NULL); safestrncpy(name, data, sizeof(name));
+			Sql_GetData(mmysql_handle, 2, &data, NULL); char_num = atoi(data);
+			Sql_GetData(mmysql_handle, 3, &data, NULL); class_ = atoi(data);
+			Sql_GetData(mmysql_handle, 4, &data, NULL); base_level = atoi(data);
+			Sql_GetData(mmysql_handle, 5, &data, NULL); job_level = atoi(data);
+			Sql_GetData(mmysql_handle, 6, &data, NULL); online = atoi(data);
+			
+			sprintf(atcmd_output, "[Slot/CID: %d/%d] %s | %s | Level: %d/%d | %s", char_num, char_id, name, job_name(class_), base_level, job_level, online?"On":"Off");
+			clif_displaymessage(fd, atcmd_output);
+		}
+	}
+	
+	Sql_FreeResult(mmysql_handle);
+	
+	return;
+}
+//Syntax: <account_id>/<char_name>
+//Result: If using account id and id exists return information about user account, if using char name and more than one result found lists all found results.
+int atcommand_accountinfo(const int fd, struct map_session_data* sd, const char* command, const char* message)
+{
+	int account_id = 0;
+	char *data;
+	
+	nullpo_retr(-1, sd);
+	
+	if (!message || !*message || strlen(message)>NAME_LENGTH ) {
+		clif_displaymessage(fd, "(usage: @accinfo/@accountinfo <account_id/char name>).");
+		return -1;
+	}
+	
+	account_id = atoi(message);
+	
+	if (account_id < START_ACCOUNT_NUM)
+	{
+		if ( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `account_id`,`name`,`class`,`base_level`,`job_level`,`online` FROM `char` WHERE `name` like '%s' limit 10", message) )
+		{
+			clif_displaymessage(fd, "Query Error on accountinfo function.");
+			Sql_FreeResult(mmysql_handle);
+			return -1;
+		}
+		else if ( Sql_NumRows(mmysql_handle) == 0 )
+		{
+			clif_displaymessage(fd, "Invalid Account ID/Char Name");
+			Sql_FreeResult(mmysql_handle);
+			return -1;
+		}
+		else
+		{
+			if (Sql_NumRows(mmysql_handle) == 1) {
+				Sql_NextRow(mmysql_handle);
+				Sql_GetData(mmysql_handle, 0, &data, NULL); account_id = atoi(data);
+				Sql_FreeResult(mmysql_handle);
+			}
+			else
+			{
+				sprintf(atcmd_output, "Your Query Returned the following %d results, please be more specific...", (int)Sql_NumRows(mmysql_handle));
+				clif_displaymessage(fd, atcmd_output);
+				while ( SQL_SUCCESS == Sql_NextRow(mmysql_handle) )
+				{
+					int class_;
+					short base_level, job_level, online;
+					char name[NAME_LENGTH];
+					
+					Sql_GetData(mmysql_handle, 0, &data, NULL); account_id = atoi(data);
+					Sql_GetData(mmysql_handle, 1, &data, NULL); safestrncpy(name, data, sizeof(name));
+					Sql_GetData(mmysql_handle, 2, &data, NULL); class_ = atoi(data);
+					Sql_GetData(mmysql_handle, 3, &data, NULL); base_level = atoi(data);
+					Sql_GetData(mmysql_handle, 4, &data, NULL); job_level = atoi(data);
+					Sql_GetData(mmysql_handle, 5, &data, NULL); online = atoi(data);
+					
+					sprintf(atcmd_output, "[ACID: %d] %s | %s | Level: %d/%d | %s", account_id, name, job_name(class_), base_level, job_level, online?"Online":"Offline");
+					clif_displaymessage(fd, atcmd_output);
+				}
+				Sql_FreeResult(mmysql_handle);
+				return -1;
+			}
+		}
+	}
+	account_info(fd, sd, account_id);
 	return 0;
 }
 
@@ -10074,14 +10219,14 @@ ACMD_FUNC(pvpmode)
 /*==========================================
  * Comando buscador de Personas en Modo PK
  *------------------------------------------*/
-int atwhopk_timer(int tid, unsigned int tick, int id, int data)
+int atwhopk_timer(int tid, unsigned int tick, int id, intptr_t data)
 {
 	struct map_session_data *sd;
 
 	if (!session[id] || (sd = session[id]->session_data) == NULL)
 		return 0;
 
-	clif_viewpoint(sd, 1, 2, 0, 0, data, 0xFF0000);
+	clif_viewpoint(sd, 1, 2, 0, 0, (int)data, 0xFF0000);
 	return 1;
 }
 
@@ -11002,7 +11147,9 @@ ACMD_FUNC(reportafk)
 {
 	struct map_session_data *pl_sd;
 	nullpo_retr(-1,sd);
-	if( !sd->bmaster_flag )
+	if( !sd->bg_id )
+		clif_displaymessage(fd, "This command is reserved for Battleground Only.");
+	else if( !sd->bmaster_flag && battle_config.bg_reportafk_leaderonly )
 		clif_displaymessage(fd, "This command is reserved for Team Leaders Only.");
 	else if( !message || !*message )
 		clif_displaymessage(fd, "Please, enter the character name (usage: @reportafk <name>).");
@@ -11016,12 +11163,16 @@ ACMD_FUNC(reportafk)
 		clif_displaymessage(fd, "The player is not AFK on this Battleground.");
 	else
 	{ // Everytest OK!
+		struct battleground_data *bg;
+		if( (bg = bg_team_search(sd->bg_id)) == NULL )
+			return -1;
+
 		bg_team_leave(pl_sd,2);
 		clif_displaymessage(pl_sd->fd, "You have been kicked from Battleground because of your AFK status.");
 		pc_setpos(pl_sd,pl_sd->status.save_point.map,pl_sd->status.save_point.x,pl_sd->status.save_point.y,3);
 
 		sprintf(atcmd_output, "- AFK [%s] Kicked -", pl_sd->status.name);
-		clif_broadcast2(&sd->bl, atcmd_output, (int)strlen(atcmd_output)+1, sd->bmaster_flag->color, 0x190, 20, 0, 0, BG);
+		clif_broadcast2(&sd->bl, atcmd_output, (int)strlen(atcmd_output)+1, bg->color, 0x190, 20, 0, 0, BG);
 		return 0;
 	}
 	return -1;
