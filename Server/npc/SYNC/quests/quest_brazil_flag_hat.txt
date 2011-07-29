@@ -1,0 +1,99 @@
+//===== Custom eAthena Script =======================================
+//= Brazil Flag Hat Custom Quest
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Descripción =================================================
+//= Necesita de un Brazilian Flag (Drop añadido a Boitata)
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+brasilis,102,158,4	script	Marayza	478,{
+
+	mes "[^0000FFMarayza^000000]";
+	mes "¡Muy buenas simpática persona!";
+	mes "¿Qué te trae a Brasilis?";
+	next;
+	switch(select("Negocios","Turismo")){
+		case 1:
+			mes "[^0000FFMarayza^000000]";
+			mes "En ese caso, espero que todo vaya bien.";
+			break;
+		case 2:
+			mes "[^0000FFMarayza^000000]";
+			mes "¿Con que un Turista, eh?";
+			mes "Y qué te parece Brasilis, ¿te gusta?";
+			next;
+			if (select ("Sí","No mucho") == 2 ) {
+				mes "[^0000FFMarayza^000000]";
+				mes "¿Cómo? ¡¿No te gusta Brasilis?!";
+				mes "Eso es que todavía no lo conoces lo suficiente, jeje";
+				mes "Vea dar una vuelta, y divíertete";	
+			}
+			mes "[^0000FFMarayza^000000]";
+			mes "¡Por supuesto! ¿Cómo no iba a gustarte?";
+			next;
+			mes "[^0000FFMarayza^000000]";	
+			mes "Pues en ese caso, te puedo fabricar un souvenir de esta tierra. ¿Qué te parece?";
+			next;
+			mes "[^0000FFMarayza^000000]";
+			mes "Para crearte un ^0B610BBrazil National Flag Hat^000000 necesito que me traigas lo siguiente:";
+			next;
+			mes "[^0000FFMarayza^000000]";
+			mes "5 ^FF0000Matchstick^000000";
+			mes "30 ^FF0000Resin^000000";
+			mes "1 ^FF0000Baseball Cap^000000";
+			mes "y 1 ^FF0000Brazilian Flag^000000";
+			next;
+			switch(select("Tengo todo lo necesario","Iré a conseguirlos")){
+				case 1:
+					mes "[^0000FFMarayza^000000]";
+					if((countitem(5147) > 0) && (countitem(7549) > 0) && (countitem(907) > 29) && (countitem(7035) > 4)){
+						delitem 5147,1;
+						delitem 7549,1;
+						delitem 907,30;
+						delitem 7035,5;
+						mes "A ver, un momento...";
+						next;
+						mes "[^0000FFMarayza^000000]";
+						mes "Esto por aquí...";
+						next;
+						mes "[^0000FFMarayza^000000]";
+						mes "... y esto por allá...";
+						next;
+						mes "[^0000FFMarayza^000000]";
+						getitem 5308,1;
+						mes "¡Aquí tienes!";
+						mes "Ten cuidado con el viento, no vaya a ser que te lo rompa.";
+						mes "Disfruta de Brasilis ^^.";
+						close;
+					}else{
+						mes "Lo siento, pero si no me traes lo que te pedí no podré fabricarte el hat.";
+						close;
+					}
+					break;
+				case 2:
+					mes "[^0000FFMarayza^000000]";
+					mes "Te estaré esperando ^^.";
+					break;
+				}
+				break;  
+	}
+	close;
+}

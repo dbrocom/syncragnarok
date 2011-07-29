@@ -1,6 +1,6 @@
 Index: src-base/char/char.c
 ===================================================================
---- src-base/char/char.c	(revision 236)
+--- src-base/char/char.c	(revision 241)
 +++ src-base/char/char.c	(working copy)
 @@ -85,6 +85,7 @@
  
@@ -508,7 +508,7 @@ Index: src-base/char/char.c
  			safestrncpy(online_txt_filename, w2, sizeof(online_txt_filename));
 Index: src-base/common/mmo.h
 ===================================================================
---- src-base/common/mmo.h	(revision 236)
+--- src-base/common/mmo.h	(revision 241)
 +++ src-base/common/mmo.h	(working copy)
 @@ -40,11 +40,12 @@
  // 20100727 - 2010-07-27aRagexeRE+ - 0x6b, 0x6d
@@ -535,7 +535,7 @@ Index: src-base/common/mmo.h
  #define MAX_GUILDEXPULSION 32
 Index: src-base/common/socket.c
 ===================================================================
---- src-base/common/socket.c	(revision 236)
+--- src-base/common/socket.c	(revision 241)
 +++ src-base/common/socket.c	(working copy)
 @@ -14,6 +14,8 @@
  #include <string.h>
@@ -635,7 +635,7 @@ Index: src-base/common/socket.c
  {
 Index: src-base/common/socket.h
 ===================================================================
---- src-base/common/socket.h	(revision 236)
+--- src-base/common/socket.h	(revision 241)
 +++ src-base/common/socket.h	(working copy)
 @@ -132,6 +132,7 @@
  
@@ -647,7 +647,7 @@ Index: src-base/common/socket.h
  const char* ip2str(uint32 ip, char ip_str[16]);
 Index: src-base/login/login.c
 ===================================================================
---- src-base/login/login.c	(revision 236)
+--- src-base/login/login.c	(revision 241)
 +++ src-base/login/login.c	(working copy)
 @@ -270,19 +270,19 @@
  	return (0==strcmp(passwd, md5str));
@@ -740,7 +740,7 @@ Index: src-base/login/login.c
  int login_config_read(const char* cfgName)
 Index: src-base/map/atcommand.c
 ===================================================================
---- src-base/map/atcommand.c	(revision 236)
+--- src-base/map/atcommand.c	(revision 241)
 +++ src-base/map/atcommand.c	(working copy)
 @@ -43,6 +43,7 @@
  #include "mail.h"
@@ -949,6 +949,33 @@ Index: src-base/map/atcommand.c
  		return -1;
  	}
  
+@@ -7534,7 +7590,7 @@
+ 	if((mob_id = atoi(mob_name)) == 0)
+ 		mob_id = mobdb_searchname(mob_name);
+ 	if(mob_id > 0 && mobdb_checkid(mob_id) == 0){
+-		snprintf(atcmd_output, sizeof atcmd_output, "Invalid mob id %s!",mob_name);
++		snprintf(atcmd_output, sizeof atcmd_output, "Mob ID no válido %s!",mob_name);
+ 		clif_displaymessage(fd, atcmd_output);
+ 		return 0;
+ 	}
+@@ -7542,7 +7598,7 @@
+ //#define SHOW_MVP
+ #ifndef SHOW_MVP
+ 	if(mob_db(mob_id)->status.mode&MD_BOSS){
+-		snprintf(atcmd_output, sizeof atcmd_output, "Can't show Boss mobs!");
++		snprintf(atcmd_output, sizeof atcmd_output, "¡No se pueden mostrar Bosses!");
+ 		clif_displaymessage(fd, atcmd_output);
+ 		return 0;
+ 	}
+@@ -7551,7 +7607,7 @@
+ 		strcpy(mob_name,mob_db(mob_id)->jname);    // --ja--
+ 		//strcpy(mob_name,mob_db(mob_id)->name);    // --en--
+ 
+-	snprintf(atcmd_output, sizeof atcmd_output, "Mob Search... %s %s",
++	snprintf(atcmd_output, sizeof atcmd_output, "Buscando... %s %s",
+ 		mob_name, mapindex_id2name(sd->mapindex));
+ 	clif_displaymessage(fd, atcmd_output);
+ 
 @@ -7910,11 +7966,11 @@
  		clif_displaymessage(fd, atcmd_output);
  
@@ -1049,7 +1076,169 @@ Index: src-base/map/atcommand.c
  	}
  	status_calc_pc(sd,0); // Recalcula status
  
-@@ -9346,7 +9402,7 @@
+@@ -8985,7 +9041,7 @@
+ /*==========================================
+  * Información de una cuenta [Account ID]
+  *------------------------------------------*/
+-void account_info(const int fd, struct map_session_data *sd, int account_id)
++/*void account_info(const int fd, struct map_session_data *sd, int account_id)
+ {
+ 	int member_id = 0;
+ 	char userid[NAME_LENGTH], user_pass[NAME_LENGTH], email[40], last_ip[20];
+@@ -9107,7 +9163,152 @@
+ 
+ 	return 0;
+ }
++*/
+ 
++//Child of int atcommand_accountinfo
++void account_info(const int fd, struct map_session_data *sd, int account_id)
++{
++	char userid[NAME_LENGTH], user_pass[NAME_LENGTH], email[40], last_ip[20], lastlogin[30];
++	short level = -1;
++	char *data;
++	int logincount = 0,state = 0;
++	
++	if ( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `userid`, `user_pass`, `email`, `last_ip`, `level`, `lastlogin`, `logincount`, `state` FROM `login` WHERE `account_id` = '%d'", account_id) )
++		clif_displaymessage(fd, "[Driver Error] : Query Error. (connection seems crappy :/) Tell the admin.");
++	else if ( Sql_NumRows(mmysql_handle) == 0 )
++		clif_displaymessage(fd, "Account Not Found");
++	else
++	{
++		Sql_NextRow(mmysql_handle);
++		Sql_GetData(mmysql_handle, 0, &data, NULL); safestrncpy(userid, data, sizeof(userid));
++		Sql_GetData(mmysql_handle, 1, &data, NULL); safestrncpy(user_pass, data, sizeof(user_pass));
++		Sql_GetData(mmysql_handle, 2, &data, NULL); safestrncpy(email, data, sizeof(email));
++		Sql_GetData(mmysql_handle, 3, &data, NULL); safestrncpy(last_ip, data, sizeof(last_ip));
++		Sql_GetData(mmysql_handle, 4, &data, NULL); level = atoi(data);
++		Sql_GetData(mmysql_handle, 5, &data, NULL); safestrncpy(lastlogin, data, sizeof(lastlogin));
++		Sql_GetData(mmysql_handle, 6, &data, NULL); logincount = atoi(data);
++		Sql_GetData(mmysql_handle, 7, &data, NULL); state = atoi(data);
++	}
++	
++	Sql_FreeResult(mmysql_handle);
++	
++	if (level == -1)
++		return;
++	
++	sprintf(atcmd_output, "-- Account %d --", account_id);
++	clif_displaymessage(fd, atcmd_output);
++	sprintf(atcmd_output, "User: %s | GM Level: %d | State: %d", userid, level, state);
++	clif_displaymessage(fd, atcmd_output);
++	if (level < pc_isGM(sd))
++	{
++		sprintf(atcmd_output, "Password: %s.", user_pass);
++		clif_displaymessage(fd, atcmd_output);
++	}
++	
++	sprintf(atcmd_output, "Account e-mail: %s.", email);
++	clif_displaymessage(fd, atcmd_output);
++	sprintf(atcmd_output, "Last IP: %s (%s)", last_ip, geoip_getcountry(str2ip(last_ip)));
++	clif_displaymessage(fd, atcmd_output);
++	sprintf(atcmd_output, "This user has logged %d times, the last time were at %s.", logincount, lastlogin);
++	clif_displaymessage(fd, atcmd_output);
++	
++	clif_displaymessage(fd, "-- Character Details --");
++	
++	if ( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `char_id`, `name`, `char_num`, `class`, `base_level`, `job_level`, `online` FROM `char` WHERE `account_id` = '%d' ORDER BY `char_num`", account_id) )
++		clif_displaymessage(fd, "Character Query Error. Show it to the Admin.");
++	else if ( Sql_NumRows(mmysql_handle) == 0 )
++		clif_displaymessage(fd, "This account doesnt have characters.");
++	else
++	{
++		while ( SQL_SUCCESS == Sql_NextRow(mmysql_handle) )
++		{
++			int char_id, class_;
++			short char_num, base_level, job_level, online;
++			char name[NAME_LENGTH];
++			
++			Sql_GetData(mmysql_handle, 0, &data, NULL); char_id = atoi(data);
++			Sql_GetData(mmysql_handle, 1, &data, NULL); safestrncpy(name, data, sizeof(name));
++			Sql_GetData(mmysql_handle, 2, &data, NULL); char_num = atoi(data);
++			Sql_GetData(mmysql_handle, 3, &data, NULL); class_ = atoi(data);
++			Sql_GetData(mmysql_handle, 4, &data, NULL); base_level = atoi(data);
++			Sql_GetData(mmysql_handle, 5, &data, NULL); job_level = atoi(data);
++			Sql_GetData(mmysql_handle, 6, &data, NULL); online = atoi(data);
++			
++			sprintf(atcmd_output, "[Slot/CID: %d/%d] %s | %s | Level: %d/%d | %s", char_num, char_id, name, job_name(class_), base_level, job_level, online?"On":"Off");
++			clif_displaymessage(fd, atcmd_output);
++		}
++	}
++	
++	Sql_FreeResult(mmysql_handle);
++	
++	return;
++}
++//Syntax: <account_id>/<char_name>
++//Result: If using account id and id exists return information about user account, if using char name and more than one result found lists all found results.
++int atcommand_accountinfo(const int fd, struct map_session_data* sd, const char* command, const char* message)
++{
++	int account_id = 0;
++	char *data;
++	
++	nullpo_retr(-1, sd);
++	
++	if (!message || !*message || strlen(message)>NAME_LENGTH ) {
++		clif_displaymessage(fd, "(usage: @accinfo/@accountinfo <account_id/char name>).");
++		return -1;
++	}
++	
++	account_id = atoi(message);
++	
++	if (account_id < START_ACCOUNT_NUM)
++	{
++		if ( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `account_id`,`name`,`class`,`base_level`,`job_level`,`online` FROM `char` WHERE `name` like '%s' limit 10", message) )
++		{
++			clif_displaymessage(fd, "Query Error on accountinfo function.");
++			Sql_FreeResult(mmysql_handle);
++			return -1;
++		}
++		else if ( Sql_NumRows(mmysql_handle) == 0 )
++		{
++			clif_displaymessage(fd, "Invalid Account ID/Char Name");
++			Sql_FreeResult(mmysql_handle);
++			return -1;
++		}
++		else
++		{
++			if (Sql_NumRows(mmysql_handle) == 1) {
++				Sql_NextRow(mmysql_handle);
++				Sql_GetData(mmysql_handle, 0, &data, NULL); account_id = atoi(data);
++				Sql_FreeResult(mmysql_handle);
++			}
++			else
++			{
++				sprintf(atcmd_output, "Your Query Returned the following %d results, please be more specific...", (int)Sql_NumRows(mmysql_handle));
++				clif_displaymessage(fd, atcmd_output);
++				while ( SQL_SUCCESS == Sql_NextRow(mmysql_handle) )
++				{
++					int class_;
++					short base_level, job_level, online;
++					char name[NAME_LENGTH];
++					
++					Sql_GetData(mmysql_handle, 0, &data, NULL); account_id = atoi(data);
++					Sql_GetData(mmysql_handle, 1, &data, NULL); safestrncpy(name, data, sizeof(name));
++					Sql_GetData(mmysql_handle, 2, &data, NULL); class_ = atoi(data);
++					Sql_GetData(mmysql_handle, 3, &data, NULL); base_level = atoi(data);
++					Sql_GetData(mmysql_handle, 4, &data, NULL); job_level = atoi(data);
++					Sql_GetData(mmysql_handle, 5, &data, NULL); online = atoi(data);
++					
++					sprintf(atcmd_output, "[ACID: %d] %s | %s | Level: %d/%d | %s", account_id, name, job_name(class_), base_level, job_level, online?"Online":"Offline");
++					clif_displaymessage(fd, atcmd_output);
++				}
++				Sql_FreeResult(mmysql_handle);
++				return -1;
++			}
++		}
++	}
++	account_info(fd, sd, account_id);
++	return 0;
++}
++
+ ACMD_FUNC(logininfo)
+ {
+ 	char userid[NAME_LENGTH], esc_userid[NAME_LENGTH*2+1];
+@@ -9346,7 +9547,7 @@
  
  	if( !message || !*message )
  	{
@@ -1058,7 +1247,7 @@ Index: src-base/map/atcommand.c
  		return -1;
  	}
  
-@@ -10695,6 +10751,33 @@
+@@ -10695,6 +10896,33 @@
  }
  
  /*==========================================
@@ -1077,7 +1266,7 @@ Index: src-base/map/atcommand.c
 +	curl = curl_easy_init();
 +
 +	if(curl) {
-+		curl_easy_setopt(curl, CURLOPT_URL, "http://syncro.ws/app/twitter/tweet.php");
++		curl_easy_setopt(curl, CURLOPT_URL, "http://app.syncro.ws/twitter/tweet.php");
 +		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, msg);
 +		res = curl_easy_perform(curl);
 +		curl_easy_cleanup(curl);
@@ -1092,7 +1281,7 @@ Index: src-base/map/atcommand.c
   * Char Data Backup Generation.
   *------------------------------------------*/
  ACMD_FUNC(char2dump)
-@@ -11243,6 +11326,262 @@
+@@ -11249,6 +11477,262 @@
  }
  
  /*==========================================
@@ -1355,7 +1544,7 @@ Index: src-base/map/atcommand.c
   * atcommand_info[] structure definition
   *------------------------------------------*/
  
-@@ -11268,6 +11607,7 @@
+@@ -11274,6 +11758,7 @@
  	{ "load",              40,40,   0,     atcommand_load },
  	{ "speed",             40,40,   0,     atcommand_speed },
  	{ "storage",            1,1,    0,     atcommand_storage },
@@ -1363,7 +1552,7 @@ Index: src-base/map/atcommand.c
  	{ "gstorage",          50,50,   0,     atcommand_guildstorage },
  	{ "option",            40,40,   0,     atcommand_option },
  	{ "hide",              40,40,   0,     atcommand_hide }, // + /hide
-@@ -11550,6 +11890,7 @@
+@@ -11556,6 +12041,7 @@
  	{ "delitem",           60,60,   0,     atcommand_delitem },
  	{ "charcommands",       1,1,    0,     atcommand_commands },
  	{ "disguiseguild",     99,99,   0,     atcommand_disguiseguild },
@@ -1371,7 +1560,7 @@ Index: src-base/map/atcommand.c
  	{ "ddrop",              0,1,    0,     atcommand_displaydrop },
  	{ "dexp",              10,10,   0,     atcommand_showexp},
  	{ "showcast",           1,1,    0,     atcommand_showcast},
-@@ -11566,7 +11907,7 @@
+@@ -11572,7 +12058,7 @@
  	{ "exit",               1,1,    0,     atcommand_exit },
  	{ "list",               1,1,    0,     atcommand_list },
  #ifndef TXT_ONLY
@@ -1380,7 +1569,7 @@ Index: src-base/map/atcommand.c
  	{ "accountinfo",        4,4,    0,     atcommand_accountinfo },
  	{ "memberinfo",         4,4,    0,     atcommand_memberinfo },
  	{ "logininfo",          4,4,    0,     atcommand_logininfo },
-@@ -11582,7 +11923,7 @@
+@@ -11588,7 +12074,7 @@
  	{ "mapdeadcounter",    40,40,   0,     atcommand_contadormuertes },
  	{ "whosell",            1,1,    0,     atcommand_whosell },
  	{ "cityheart",         40,40,   0,     atcommand_cityheart },
@@ -1389,7 +1578,7 @@ Index: src-base/map/atcommand.c
  	{ "whopk",              1,1,    0,     atcommand_whopk },
  	{ "rentstorage",        1,1,    0,     atcommand_rentstorage },
  	{ "aura",               1,1,    0,     atcommand_aura },
-@@ -11591,7 +11932,17 @@
+@@ -11597,7 +12083,17 @@
  	{ "mission",            1,1,    0,     atcommand_mission },
  	{ "char2dump",         60,60,   0,     atcommand_char2dump },
  	{ "security",           1,1,    0,     atcommand_security },
@@ -1409,7 +1598,7 @@ Index: src-base/map/atcommand.c
  	{ "cashshop",           0,60,   0,     atcommand_cashshop },
 Index: src-base/map/battle.c
 ===================================================================
---- src-base/map/battle.c	(revision 236)
+--- src-base/map/battle.c	(revision 241)
 +++ src-base/map/battle.c	(working copy)
 @@ -5455,6 +5455,9 @@
  			struct mob_data *md = BL_CAST(BL_MOB, t_bl);
@@ -1432,7 +1621,7 @@ Index: src-base/map/battle.c
  	{ "bg_items_on_pvp",                    &battle_config.bg_items_on_pvp,                 1,      0,      1,              },
 Index: src-base/map/battle.h
 ===================================================================
---- src-base/map/battle.h	(revision 236)
+--- src-base/map/battle.h	(revision 241)
 +++ src-base/map/battle.h	(working copy)
 @@ -525,6 +525,7 @@
  	int bg_magic_damage_rate;
@@ -1442,9 +1631,9 @@ Index: src-base/map/battle.h
  	int bg_idle_announce;
  	int bg_reserved_char_id;
  	int bg_items_on_pvp;
-@@ -566,6 +567,8 @@
- 	int mob_slave_adddrop;
+@@ -568,6 +569,8 @@
  	int reflect_damage_fix;
+ 	int dancing_weaponchange_fix;
  	int anti_mayapurple_hack;
 +
 +	int lootevent;
@@ -1453,11 +1642,11 @@ Index: src-base/map/battle.h
  void do_init_battle(void);
 Index: src-base/map/clif.c
 ===================================================================
---- src-base/map/clif.c	(revision 236)
+--- src-base/map/clif.c	(revision 241)
 +++ src-base/map/clif.c	(working copy)
-@@ -831,6 +831,12 @@
- {
- 	unsigned char buf[16];
+@@ -833,6 +833,13 @@
+ 
+ 	nullpo_ret(bl);
  
 +	if ( type == 1 ) {
 +		struct view_data *vd;
@@ -1465,10 +1654,11 @@ Index: src-base/map/clif.c
 +			type = 0;
 +	}
 +
- 	nullpo_ret(bl);
- 
++
  	WBUFW(buf,0) = 0x80;
-@@ -943,6 +949,8 @@
+ 	WBUFL(buf,2) = bl->id;
+ 	WBUFB(buf,6) = type;
+@@ -943,6 +950,8 @@
  #endif
  	sd = BL_CAST(BL_PC, bl);
  
@@ -1477,7 +1667,7 @@ Index: src-base/map/clif.c
  #if PACKETVER < 20091103
  	if(type)
  		WBUFW(buf,0) = spawn?0x7c:0x78;
-@@ -14655,9 +14663,9 @@
+@@ -14655,9 +14664,9 @@
  	{
  		char output[128];
  		if( type == 1 )
@@ -1489,139 +1679,7 @@ Index: src-base/map/clif.c
  
  		clif_displaymessage(fd, output);
  	}
-@@ -14690,63 +14698,89 @@
- 
- void clif_parse_cashshop_buy(int fd, struct map_session_data *sd)
- {
--	int fail = 0, amount, points;
--	short nameid;
--	struct npc_data *nd;
--	nullpo_retv(sd);
-+    int fail = 0, points, nameid, amount, i;
-+    short cmd;
-+    struct npc_data *nd;
-+    nullpo_retv(sd);
- 
--	if( (nd = (struct npc_data *)map_id2bl(sd->npc_shopid)) == NULL )
--		return;
--
--	nameid = RFIFOW(fd,2);
--	amount = RFIFOW(fd,4);
--	points = RFIFOL(fd,6); // Not Implemented. Should be 0
--
--	if( sd->state.trading || !sd->npc_shopid )
--		fail = 1;
-+    if(sd->state.trading || !sd->npc_shopid) {
-+        clif_cashshop_ack(sd, 1);
-+        return;
-+    }
- 	else if( sd->state.secure_items )
- 	{
- 		clif_displaymessage(sd->fd, "You can't shop. Blocked with @security");
- 		fail = 1;
- 	}
- 	else
--		fail = npc_cashshop_buy(sd, nameid, amount, points);
-+	{
-+		if( (nd = (struct npc_data *)map_id2bl(sd->npc_shopid)) == NULL )
-+			return;
- 
--	WFIFOHEAD(fd,12);
--	WFIFOW(fd,0) = 0x289;
-+		cmd = RFIFOW(fd, 0);    
- 
--	if( nd->subtype == SPSHOP )
--	{
--		int i, amount = 0;
--		if( nd->cashitem < 0 )
--		{ // BG Shop
--			int i7828 = 0, i7829 = 0, i7773 = 0;
--			i = pc_search_inventory(sd,7828);
--			if( i >= 0 ) i7828 = sd->status.inventory[i].amount;
--			i = pc_search_inventory(sd,7829);
--			if( i >= 0 ) i7829 = sd->status.inventory[i].amount;
--			i = pc_search_inventory(sd,7773);
--			if( i >= 0 ) i7773 = sd->status.inventory[i].amount;
-+		if(sd->packet_ver > 25) {
-+			short len = RFIFOW(fd, 2), count;
- 
--			amount = min(min(i7828,i7829),i7773);
-+			if(len < 10 || len != 10 + (count = RFIFOW(fd, packet_db[sd->packet_ver][cmd].pos[1])) * 4) {
-+				ShowWarning("Player %u sent incorrect cash shop buy packet(len %u:%u)!\n", sd->status.char_id, len, 10 + count * 4); // [Randajad]
-+				return;
-+			}
-+
-+			points = RFIFOL(fd, packet_db[sd->packet_ver][cmd].pos[0]); // Not Implemented. Should be 0
-+
-+			for(i = 0; i < count; i++)
-+			{
-+				nameid = RFIFOW(fd, 12+i*4);
-+				amount = RFIFOW(fd, 10+i*4);
-+				if((fail = npc_cashshop_buy(sd, nameid, amount, points)) != 0)
-+					break;
-+			}
-+
-+		} else {
-+			nameid = RFIFOW(fd, packet_db[sd->packet_ver][cmd].pos[0]);
-+			amount = RFIFOW(fd, packet_db[sd->packet_ver][cmd].pos[1]);
-+			points = RFIFOL(fd, packet_db[sd->packet_ver][cmd].pos[2]); // Not Implemented. Should be 0
-+
-+			fail = npc_cashshop_buy(sd, nameid, amount, points);
- 		}
-+
-+		WFIFOHEAD(fd,12);
-+		WFIFOW(fd,0) = 0x289;
-+	
-+		if( nd->subtype == SPSHOP )
-+		{
-+			int i, amount = 0;
-+			if( nd->cashitem < 0 )
-+			{ // BG Shop
-+				int i7828 = 0, i7829 = 0, i7773 = 0;
-+				i = pc_search_inventory(sd,7828);
-+				if( i >= 0 ) i7828 = sd->status.inventory[i].amount;
-+				i = pc_search_inventory(sd,7829);
-+				if( i >= 0 ) i7829 = sd->status.inventory[i].amount;
-+				i = pc_search_inventory(sd,7773);
-+				if( i >= 0 ) i7773 = sd->status.inventory[i].amount;
-+	
-+				amount = min(min(i7828,i7829),i7773);
-+			}
-+			else
-+			{
-+				i = pc_search_inventory(sd,nd->cashitem);
-+				if( i >= 0 ) amount = sd->status.inventory[i].amount;
-+			}
-+	
-+			WFIFOL(fd,2) = amount; // Item Count
-+			WFIFOL(fd,6) = 0; // Points - Not used here
-+		}
- 		else
- 		{
--			i = pc_search_inventory(sd,nd->cashitem);
--			if( i >= 0 ) amount = sd->status.inventory[i].amount;
-+			WFIFOL(fd,2) = sd->cashPoints; // Cash Points
-+			WFIFOL(fd,6) = sd->kafraPoints; // Kafra Points
- 		}
--
--		WFIFOL(fd,2) = amount; // Item Count
--		WFIFOL(fd,6) = 0; // Points - Not used here
-+	
-+		WFIFOW(fd,10) = fail;
-+		WFIFOSET(fd,12);
- 	}
--	else
--	{
--		WFIFOL(fd,2) = sd->cashPoints; // Cash Points
--		WFIFOL(fd,6) = sd->kafraPoints; // Kafra Points
--	}
--
--	WFIFOW(fd,10) = fail;
--	WFIFOSET(fd,12);
- }
- 
- /*==========================================
-@@ -16699,7 +16733,7 @@
+@@ -16699,7 +16708,7 @@
  	    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
  	   85, -1, -1,107,  6, -1,  7,  7, 22,191,  0,  8,  0,  0,  0,  0,
  	//#0x02C0
@@ -1632,7 +1690,7 @@ Index: src-base/map/clif.c
  	   10,  2,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  8,  0,  0,
 Index: src-base/map/guild.c
 ===================================================================
---- src-base/map/guild.c	(revision 236)
+--- src-base/map/guild.c	(revision 241)
 +++ src-base/map/guild.c	(working copy)
 @@ -1173,7 +1173,9 @@
  	exp_mode = cap_value(exp_mode, 0, battle_config.guild_exp_limit);
@@ -1647,7 +1705,7 @@ Index: src-base/map/guild.c
  	return intif_guild_position(guild_id,idx,&p);
 Index: src-base/map/itemdb.c
 ===================================================================
---- src-base/map/itemdb.c	(revision 236)
+--- src-base/map/itemdb.c	(revision 241)
 +++ src-base/map/itemdb.c	(working copy)
 @@ -894,7 +894,46 @@
  	return true;
@@ -1706,7 +1764,7 @@ Index: src-base/map/itemdb.c
  }
 Index: src-base/map/itemdb.h
 ===================================================================
---- src-base/map/itemdb.h	(revision 236)
+--- src-base/map/itemdb.h	(revision 241)
 +++ src-base/map/itemdb.h	(working copy)
 @@ -9,7 +9,7 @@
  #define MAX_RANDITEM	11000
@@ -1734,7 +1792,7 @@ Index: src-base/map/itemdb.h
  
 Index: src-base/map/mail.c
 ===================================================================
---- src-base/map/mail.c	(revision 236)
+--- src-base/map/mail.c	(revision 241)
 +++ src-base/map/mail.c	(working copy)
 @@ -12,6 +12,7 @@
  #include "clif.h"
@@ -1770,7 +1828,7 @@ Index: src-base/map/mail.c
  	}
 Index: src-base/map/map.c
 ===================================================================
---- src-base/map/map.c	(revision 236)
+--- src-base/map/map.c	(revision 241)
 +++ src-base/map/map.c	(working copy)
 @@ -1579,8 +1579,10 @@
  
@@ -1798,7 +1856,7 @@ Index: src-base/map/map.c
  
 Index: src-base/map/map.h
 ===================================================================
---- src-base/map/map.h	(revision 236)
+--- src-base/map/map.h	(revision 241)
 +++ src-base/map/map.h	(working copy)
 @@ -32,7 +32,7 @@
  //  of 10 allows you to attack from anywhere within a 21x21 area.
@@ -1816,13 +1874,13 @@ Index: src-base/map/map.h
 -#define MAX_EVENTQUEUE 5
 -#define MAX_EVENTTIMER 32
 +#define MAX_EVENTQUEUE 99
-+#define MAX_EVENTTIMER 50
++#define MAX_EVENTTIMER 60
  #define NATURAL_HEAL_INTERVAL 500
  #define MIN_FLOORITEM 2
  #define MAX_FLOORITEM START_ACCOUNT_NUM
 Index: src-base/map/mob.c
 ===================================================================
---- src-base/map/mob.c	(revision 236)
+--- src-base/map/mob.c	(revision 241)
 +++ src-base/map/mob.c	(working copy)
 @@ -2257,7 +2257,15 @@
  			}
@@ -1894,7 +1952,7 @@ Index: src-base/map/mob.c
  		}
 Index: src-base/map/mob.h
 ===================================================================
---- src-base/map/mob.h	(revision 236)
+--- src-base/map/mob.h	(revision 241)
 +++ src-base/map/mob.h	(working copy)
 @@ -17,7 +17,7 @@
  // Be sure to note that IDs 4001 to 4048 are reserved for advanced/baby/expanded classes.
@@ -1915,9 +1973,9 @@ Index: src-base/map/mob.h
  		unsigned char steal_flag; //number of steal tries (to prevent steal exploit on mobs with few items) [Lupus]
 Index: src-base/map/npc.c
 ===================================================================
---- src-base/map/npc.c	(revision 236)
+--- src-base/map/npc.c	(revision 241)
 +++ src-base/map/npc.c	(working copy)
-@@ -1291,6 +1291,11 @@
+@@ -1292,6 +1292,11 @@
  
  	if(log_config.enable_logs&0x20)
  		log_pick_pc(sd, "S", nameid, amount, NULL, item_tmp.serial);
@@ -1929,7 +1987,7 @@ Index: src-base/map/npc.c
  
  	return 0;
  }
-@@ -1401,6 +1406,11 @@
+@@ -1402,6 +1407,11 @@
  		//Logs items, Bought in NPC (S)hop [Lupus]
  		if( log_config.enable_logs&0x20 )
  			log_pick_pc(sd, "S", item_tmp.nameid, amount, NULL, item_tmp.serial);
@@ -1943,7 +2001,7 @@ Index: src-base/map/npc.c
  
 Index: src-base/map/npc.h
 ===================================================================
---- src-base/map/npc.h	(revision 236)
+--- src-base/map/npc.h	(revision 241)
 +++ src-base/map/npc.h	(working copy)
 @@ -64,6 +64,11 @@
  			unsigned short mapindex; // destination map
@@ -1959,7 +2017,7 @@ Index: src-base/map/npc.h
  
 Index: src-base/map/party.c
 ===================================================================
---- src-base/map/party.c	(revision 236)
+--- src-base/map/party.c	(revision 241)
 +++ src-base/map/party.c	(working copy)
 @@ -1002,7 +1002,11 @@
  
@@ -1976,7 +2034,7 @@ Index: src-base/map/party.c
  
 Index: src-base/map/pc.c
 ===================================================================
---- src-base/map/pc.c	(revision 236)
+--- src-base/map/pc.c	(revision 241)
 +++ src-base/map/pc.c	(working copy)
 @@ -2482,8 +2482,8 @@
  	}
@@ -2039,7 +2097,7 @@ Index: src-base/map/pc.c
  			return 1; // no room
  
  		sd->status.cart[i].amount+=amount;
-@@ -6456,10 +6468,14 @@
+@@ -6458,10 +6470,14 @@
  	}
  
  #if PACKETVER >= 20091027
@@ -2058,7 +2116,7 @@ Index: src-base/map/pc.c
  #endif
  
  	sd->custom_data.session_base_exp += base_exp;
-@@ -6467,7 +6483,7 @@
+@@ -6469,7 +6485,7 @@
  
  	if(sd->state.showexp) {
  		sprintf(output,
@@ -2067,7 +2125,7 @@ Index: src-base/map/pc.c
  		clif_disp_onlyself(sd,output,strlen(output));
  	}
  
-@@ -8000,21 +8016,53 @@
+@@ -7992,21 +8008,53 @@
  		}
  	}
  
@@ -2136,7 +2194,7 @@ Index: src-base/map/pc.c
  
 Index: src-base/map/pc.h
 ===================================================================
---- src-base/map/pc.h	(revision 236)
+--- src-base/map/pc.h	(revision 241)
 +++ src-base/map/pc.h	(working copy)
 @@ -154,6 +154,7 @@
  		bool changemap, changeregion;
@@ -2165,7 +2223,7 @@ Index: src-base/map/pc.h
  };
 Index: src-base/map/script.c
 ===================================================================
---- src-base/map/script.c	(revision 236)
+--- src-base/map/script.c	(revision 241)
 +++ src-base/map/script.c	(working copy)
 @@ -3797,10 +3797,26 @@
  #define BUILDIN_DEF2(x,x2,args) { buildin_ ## x , x2 , args }
@@ -3159,7 +3217,7 @@ Index: src-base/map/script.c
  };
 Index: src-base/map/skill.c
 ===================================================================
---- src-base/map/skill.c	(revision 236)
+--- src-base/map/skill.c	(revision 241)
 +++ src-base/map/skill.c	(working copy)
 @@ -6763,6 +6763,7 @@
  		break;
@@ -3223,7 +3281,7 @@ Index: src-base/map/skill.c
  				skill_lv = pc_checkskill(sd,skill_id);
 Index: src-base/map/skill.h
 ===================================================================
---- src-base/map/skill.h	(revision 236)
+--- src-base/map/skill.h	(revision 241)
 +++ src-base/map/skill.h	(working copy)
 @@ -1492,6 +1492,7 @@
  	ALL_BUYING_STORE,
@@ -3235,7 +3293,7 @@ Index: src-base/map/skill.h
  	HLIF_AVOID,
 Index: src-base/map/status.c
 ===================================================================
---- src-base/map/status.c	(revision 236)
+--- src-base/map/status.c	(revision 241)
 +++ src-base/map/status.c	(working copy)
 @@ -554,6 +554,8 @@
  	set_sc( GN_FIRE_EXPANSION_TEAR_GAS    , SC_TEARGAS     , SI_FIRE_EXPANSION_TEAR_GAS    , SCB_NONE );
@@ -3314,7 +3372,7 @@ Index: src-base/map/status.c
  	}
 Index: src-base/map/status.h
 ===================================================================
---- src-base/map/status.h	(revision 236)
+--- src-base/map/status.h	(revision 241)
 +++ src-base/map/status.h	(working copy)
 @@ -535,6 +535,10 @@
  	SC_STOMACHACHE,
@@ -3346,7 +3404,7 @@ Index: src-base/map/status.h
  enum {
 Index: src-base/map/storage.c
 ===================================================================
---- src-base/map/storage.c	(revision 236)
+--- src-base/map/storage.c	(revision 241)
 +++ src-base/map/storage.c	(working copy)
 @@ -18,6 +18,7 @@
  #include "battle.h"
@@ -3449,7 +3507,7 @@ Index: src-base/map/storage.c
  		stor->storage_amount--;
 Index: src-base/map/trade.c
 ===================================================================
---- src-base/map/trade.c	(revision 236)
+--- src-base/map/trade.c	(revision 241)
 +++ src-base/map/trade.c	(working copy)
 @@ -22,7 +22,7 @@
  
@@ -3486,7 +3544,7 @@ Index: src-base/map/trade.c
  				clif_additem(tsd, n, tsd->deal.item[trade_i].amount, 0);
 Index: src-base/map/unit.c
 ===================================================================
---- src-base/map/unit.c	(revision 236)
+--- src-base/map/unit.c	(revision 241)
 +++ src-base/map/unit.c	(working copy)
 @@ -2080,7 +2080,7 @@
  			storage_guild_storage_quit(sd,0);
@@ -3499,7 +3557,7 @@ Index: src-base/map/unit.c
  		if(sd->guild_alliance>0)
 Index: src-base/map/vending.c
 ===================================================================
---- src-base/map/vending.c	(revision 236)
+--- src-base/map/vending.c	(revision 241)
 +++ src-base/map/vending.c	(working copy)
 @@ -205,6 +205,11 @@
  			log_pick_pc(vsd, "V", vsd->status.cart[idx].nameid, -amount, &vsd->status.cart[idx], vsd->status.cart[idx].serial );

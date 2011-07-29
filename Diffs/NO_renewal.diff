@@ -1,0 +1,151 @@
+Index: src-base/map/homunculus.c
+===================================================================
+--- src-base/map/homunculus.c	(revision 240)
++++ src-base/map/homunculus.c	(working copy)
+@@ -1097,10 +1097,7 @@
+ 
+ 	memset(hexptbl,0,sizeof(hexptbl));
+ 	for(i=0; i<2; i++){
+-		if( !battle_config.renewal_system_enable )
+-			sprintf(line, "%s/%s", db_path, filename[i]);
+-		else
+-			sprintf(line, "%s/%s", db_path, !i ? "exp_homun_renewal.txt" : "exp_homun2_renewal.txt");
++		sprintf(line, "%s/%s", db_path, filename[i]);
+ 
+ 		fp=fopen(line,"r");
+ 		if(fp == NULL){
+Index: src-base/map/itemdb.c
+===================================================================
+--- src-base/map/itemdb.c	(revision 240)
++++ src-base/map/itemdb.c	(working copy)
+@@ -1056,10 +1056,7 @@
+ 		char path[256];
+ 		FILE* fp;
+ 
+-		if( !battle_config.renewal_system_enable )
+-			sprintf(path, "%s/%s", db_path, filename[fi]);
+-		else
+-			sprintf(path, "%s/%s", db_path, !fi ? "item_db_renewal.txt" : "item_db2_renewal.txt");
++		sprintf(path, "%s/%s", db_path, filename[fi]);
+ 
+ 		fp = fopen(path, "r");
+ 		if( fp == NULL )
+Index: src-base/map/mob.c
+===================================================================
+--- src-base/map/mob.c	(revision 240)
++++ src-base/map/mob.c	(working copy)
+@@ -4107,10 +4107,7 @@
+ 			}
+ 		}
+ 
+-		if( !fi && battle_config.renewal_system_enable )
+-			sv_readdb(db_path, "mob_db_renewal.txt", ',', 38+2*MAX_MOB_DROP, 38+2*MAX_MOB_DROP, -1, &mob_readdb_sub);
+-		else
+-			sv_readdb(db_path, filename[fi], ',', 38+2*MAX_MOB_DROP, 38+2*MAX_MOB_DROP, -1, &mob_readdb_sub);
++		sv_readdb(db_path, filename[fi], ',', 38+2*MAX_MOB_DROP, 38+2*MAX_MOB_DROP, -1, &mob_readdb_sub);
+ 	}
+ }
+ 
+@@ -4678,10 +4675,7 @@
+ 			}
+ 		}
+ 
+-		if( battle_config.renewal_system_enable && fi == 0 )
+-			sv_readdb(db_path, "mob_skill_db_renewal.txt", ',', 19, 19, -1, &mob_parse_row_mobskilldb);
+-		else
+-			sv_readdb(db_path, filename[fi], ',', 19, 19, -1, &mob_parse_row_mobskilldb);
++		sv_readdb(db_path, filename[fi], ',', 19, 19, -1, &mob_parse_row_mobskilldb);
+ 	}
+ }
+ /*==========================================
+Index: src-base/map/pc.c
+===================================================================
+--- src-base/map/pc.c	(revision 240)
++++ src-base/map/pc.c	(working copy)
+@@ -10395,10 +10395,7 @@
+ 	// 必要??値?み?み
+ 	memset(exp_table,0,sizeof(exp_table));
+ 	memset(max_level,0,sizeof(max_level));
+-	if( !battle_config.renewal_system_enable )
+-		sprintf(line, "%s/exp.txt", db_path);
+-	else
+-		sprintf(line, "%s/exp_renewal.txt", db_path);
++	sprintf(line, "%s/exp.txt", db_path);
+ 	fp=fopen(line, "r");
+ 	if(fp==NULL){
+ 		ShowError("can't read %s\n", line);
+@@ -10488,10 +10485,7 @@
+ 			for(k=0;k<ELE_MAX;k++)
+ 				attr_fix_table[i][j][k]=100;
+ 
+-	if( !battle_config.renewal_system_enable )
+-		sprintf(line, "%s/attr_fix.txt", db_path);
+-	else
+-		sprintf(line, "%s/attr_fix_renewal.txt", db_path);
++	sprintf(line, "%s/attr_fix.txt", db_path);
+ 
+ 	fp=fopen(line,"r");
+ 	if(fp==NULL){
+@@ -10540,10 +10534,7 @@
+ 	// スキルツリ?
+ 	memset(stats_point_table,0,sizeof(stats_point_table));
+ 	i=1;
+-	if( !battle_config.renewal_system_enable )
+-		sprintf(line, "%s/statpoint.txt", db_path);
+-	else
+-		sprintf(line, "%s/statpoint_renewal.txt", db_path);
++	sprintf(line, "%s/statpoint.txt", db_path);
+ 	fp=fopen(line,"r");
+ 	if(fp == NULL){
+ 		ShowWarning("Can't read '"CL_WHITE"%s"CL_RESET"'... Generating DB.\n",line);
+Index: src-base/map/skill.c
+===================================================================
+--- src-base/map/skill.c	(revision 240)
++++ src-base/map/skill.c	(working copy)
+@@ -18454,19 +18454,9 @@
+ 	// load skill databases
+ 	safestrncpy(skill_db[0].name, "UNKNOWN_SKILL", sizeof(skill_db[0].name));
+ 	safestrncpy(skill_db[0].desc, "Unknown Skill", sizeof(skill_db[0].desc));
+-	if( battle_config.renewal_system_enable )
+-	{
+-		sv_readdb(db_path, "skill_db_renewal.txt"          , ',',  17, 17, MAX_SKILL_DB, skill_parse_row_skilldb);
+-		sv_readdb(db_path, "skill_require_db_renewal.txt"  , ',',  32, 32, MAX_SKILL_DB, skill_parse_row_requiredb);
+-		sv_readdb(db_path, "skill_cast_db_renewal.txt"     , ',',   7,  8, MAX_SKILL_DB, skill_parse_row_castdb);
+-	}
+-	else
+-	{
+-		sv_readdb(db_path, "skill_db.txt"          , ',',  17, 17, MAX_SKILL_DB, skill_parse_row_skilldb);
+-		sv_readdb(db_path, "skill_require_db.txt"  , ',',  32, 32, MAX_SKILL_DB, skill_parse_row_requiredb);
+-		sv_readdb(db_path, "skill_cast_db.txt"     , ',',   7,  8, MAX_SKILL_DB, skill_parse_row_castdb);
+-	}
+-
++	sv_readdb(db_path, "skill_db.txt"          , ',',  17, 17, MAX_SKILL_DB, skill_parse_row_skilldb);
++	sv_readdb(db_path, "skill_require_db.txt"  , ',',  32, 32, MAX_SKILL_DB, skill_parse_row_requiredb);
++	sv_readdb(db_path, "skill_cast_db.txt"     , ',',   7,  8, MAX_SKILL_DB, skill_parse_row_castdb);
+ 	sv_readdb(db_path, "skill_castnodex_db.txt", ',',   2,  3, MAX_SKILL_DB, skill_parse_row_castnodexdb);
+ 	sv_readdb(db_path, "skill_nocast_db.txt"   , ',',   2,  2, MAX_SKILL_DB, skill_parse_row_nocastdb);
+ 	sv_readdb(db_path, "skill_unit_db.txt"     , ',',   8,  8, MAX_SKILL_DB, skill_parse_row_unitdb);
+Index: src-base/map/status.c
+===================================================================
+--- src-base/map/status.c	(revision 240)
++++ src-base/map/status.c	(working copy)
+@@ -10693,17 +10693,8 @@
+ 
+ 	// read databases
+ 	//
+-
+-	if( !battle_config.renewal_system_enable )
+-	{
+-		sv_readdb(db_path, "job_db1.txt",   ',', 5+MAX_WEAPON_TYPE, 5+MAX_WEAPON_TYPE, -1, &status_readdb_job1);
+-		sv_readdb(db_path, "refine_db.txt", ',', 3+MAX_REFINE+1,    3+MAX_REFINE+1, ARRAYLENGTH(percentrefinery), &status_readdb_refine);
+-	}
+-	else
+-	{
+-		sv_readdb(db_path, "job_db1_renewal.txt",   ',', 6+MAX_WEAPON_TYPE, 6+MAX_WEAPON_TYPE, -1, &status_readdb_job1); // Shield Penalty Added
+-		sv_readdb(db_path, "refine_db_renewal.txt", ',', 3+MAX_REFINE+1,    3+MAX_REFINE+1, ARRAYLENGTH(percentrefinery), &status_readdb_refine);
+-	}
++	sv_readdb(db_path, "job_db1.txt",   ',', 6+MAX_WEAPON_TYPE, 6+MAX_WEAPON_TYPE, -1, &status_readdb_job1); // Shield Penalty Added
++	sv_readdb(db_path, "refine_db.txt", ',', 3+MAX_REFINE+1,    3+MAX_REFINE+1, ARRAYLENGTH(percentrefinery), &status_readdb_refine);
+ 	sv_readdb(db_path, "job_db2.txt",   ',', 1,                 1+99,        -1,                            &status_readdb_job2); // 99 - Max Job Level (Super novice)
+ 	sv_readdb(db_path, "size_fix.txt",  ',', MAX_WEAPON_TYPE,   MAX_WEAPON_TYPE,    ARRAYLENGTH(atkmods),         &status_readdb_sizefix);
+ 

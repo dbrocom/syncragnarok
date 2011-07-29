@@ -1,0 +1,145 @@
+//===== Custom eAthena Script =======================================
+//= Captain Hat Custom Quest
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Version =====================================================
+//= 2.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//= 2.0 - Script reescrito evitando menu ÿ goto
+//===================================================================
+
+alberta_in,22,184,5	script	Pelayo	100,{
+
+	mes "[Pelayo]";
+	mes "¿Te interesa el mar?";
+	next;
+	if(select("Sí:No mucho...")==2){
+		mes "[Pelayo]";
+		mes "Entonces creo que no te gustará mi historia...";
+		close;
+	}
+	mes "[Pelayo]";
+	mes "Hehehe, entonces se puede confiar en ti.";
+	next;
+	mes "[Pelayo]";
+	mes "He hecho muchos viajes por los mares y he pasado la mayor parte de mi vida a bordo de un barco y solo viendo mar en el horizonte cada mañana, cada tarde, cada noche...";
+	next;
+	mes "[Pelayo]";
+	mes "Y cada momento en que contemplo el mar me hace sentir una más de sus criaturas.";
+	next;
+	mes "[Pelayo]";
+	mes "A veces pienso que me gustaria formar parte del océano y poder vivir en él, pero eso nunca pasará...";
+	next;
+	mes "[Pelayo]";
+	mes "Tanto tiempo deseando el mar y no poder alcanzarlo me ha frustrado muchisimo, pero hace poco tiempo, ante la maravillosa vista del mar al atardecer, mientras el sol se ponía, se me ocurrió una manera de poder estar mas cerca del mar.";
+	next;
+	mes "[Pelayo]";
+	mes "Me puse manos a la obra y durante 2 meses trabajé duro en ello, hasta que al final, conseguí completarlo.";
+	next;
+	if(select("¿De qué se trata?:Mejor le dejo solo...")==2){
+		close;
+	}
+	mes "[Pelayo]";
+	mes "En mis largas horas de noches de invierno encerrado en mi camarote, consegui fabricar un sombrero digno del mayor lobo de mar, pero sabía que le faltaba algo y no daba con ello.";
+	next;
+	mes "[Pelayo]";
+	mes "Estuve varios días sin poder conciliar el sueño hasta que una noche, escuché un dulce canto de mujer a lo lejos de las olas.";
+	mes "Una sirena estaba cantando una dulce melodia y me quede hechizado al escucharla.";
+	next;
+	mes "Cuando recobré el conocimiento, me sentía extraño, como si mi cuerpo estuviera sumido en un inmenso paraiso tras haber escuchado ese fabuloso canto.";
+	mes "Al mirar mis manos, me encontre con el sombrero en el que habia estado trabajando distinto a como lo recordaba.";
+	next;
+	mes "[Pelayo]";
+	mes "Lo miré fijamente y parecía pedirme que me lo pusiera.";
+	mes "Y cuando me lo puse sentí cómo la esencia del océano se apoderaba de mí.";
+	next;
+	mes "[Pelayo]";
+	mes "El sombrero en el que tanto había estado trabajando al fin estaba completo.";
+	mes "La esencia del océano lo inbuía en una perfecta armonía de paz y sosiego.";
+	next;
+	mes "[Pelayo]";
+	mes "Lo mas curioso es que mientras lo llevaba puesto, empezó a llover y el sombrero no se mojó en absoluto. Permanecía completamente seco.";
+	next;
+	mes "[Pelayo]";
+	mes "Fue una alegría enorme que el canto de esa sirena hubiese podido conseguir que éstas manos fabricasen aquel hermoso sombrero.";
+	next;
+	mes "[Pelayo]";
+	mes "Desde aquel día lo llevo conmigo a todas partes como agradecimiento a aquella sirena que tanto me ayudo esa noche.";
+	next;
+	if(select("¡Increíble!:No me creo nada...")==2){
+		close;
+	}
+	mes "[Pelayo]";
+	mes "Gracias por escuchar mi historia hasta el final.";
+	next;
+	mes "[Pelayo]";
+	mes "Si lo deseas puedo hacerte para ti el sombrero del que tan orgulloso estoy.";
+	next;
+	if(select("¡Me encantaría tenerlo!:No me interesa... adiós.")==2){
+		close;
+	}
+	mes "[Pelayo]";
+	mes "Entonces necesitare que me traigas unos objetos para poder fabricar de nuevo el ^cc0000Captain's Hat^000000.";
+	next;
+	if(select("De acuerdo:Demasiado esfuerzo.")==2){
+		close;
+	}
+	mes "[Pelayo]";
+	mes "Sólo necesito que me consigas ciertos objetos.";
+	next;
+	mes "[Pelayo]";
+	mes "Esa es la lista:";
+	mes "10 Aquamarine.";
+	mes "10 Shapphire.";
+	mes "30 Heart Of Mermaid.";
+	mes "50 Glass bead.";
+	mes "70 Mementos.";
+	mes "y 1 Magnis Cap.";
+	next;
+	if(select("Seguiré buscando:¡Ya tengo los items!")==1){
+		mes "[Pelayo]";
+		mes "Suerte en tu búsqueda.";
+		close;
+	}
+	if( (countitem(720) >= 10) && (countitem(726) >= 10) && (countitem(746) >= 50) && (countitem(934) >= 70) && (countitem(950) >= 30) && (countitem(5122) >= 1) ){
+		delitem 720,10;
+		delitem 726,10;
+		delitem 746,50;
+		delitem 934,70;
+		delitem 950,30;
+		delitem 5122,1;
+		set BaseExp,BaseExp+4000;
+		set JobExp,JobExp+4000;
+		mes "[Pelayo]";
+		mes "Aquí tienes tu ^CC0000Captain's Hat^000000.";
+		getitem 5184,1;
+		next;
+		mes "[Pelayo]";
+		if(Sex){
+			mes "Disfruta de él, Capitán ^00cc00"+strcharinfo(0)+"^000000, jeje";
+		}else{
+			mes "Disfruta de él, Capitana ^00cc00"+strcharinfo(0)+"^000000, jeje";
+		}
+		emotion 18;
+	}else{
+		mes "[Pelayo]";
+		mes "Aún no tienes todos los objetos que te encargé.";
+		mes "Vuelve pronto con ellos.";
+	}
+	close;
+}

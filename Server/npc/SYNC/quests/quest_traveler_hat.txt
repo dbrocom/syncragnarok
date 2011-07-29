@@ -1,0 +1,85 @@
+//===== Custom eAthena Script =======================================
+//= Traveler Hat Custom Quest (Custom Hat)
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+cmd_fild07,230,180,3	script	Bibi	704,{
+
+	mes "[^0000FFBibi^000000]";
+	mes "¡Hola! ¿Qué te trae por aquí?";
+	next;
+	mes "[^0000FFBibi^000000]";
+	mes "¿Acaso eres un viajero como yo?";
+	next;
+	switch(select("Sí:Te equivocas")){
+		case 1:
+			mes "[^0000FFBibi^000000]";
+			mes "Ser un viajero es una experiencia única y maravillosa, ¿verdad?.";
+			next;
+			mes "[^0000FFBibi^000000]";
+			mes "Yo he recorrido muchos mundos y lugares, y ahora he llegado aquí.";
+			mes "Me ha gustado esta tierra que llaman Comodo, asi que estoy investigando un poco más sus tierras.";
+			next;
+			mes "[^0000FFBibi^000000]";
+			mes "¿A tí qué te ha traído a Pharos?.";
+			mes "¿Acaso el espíritu viajero-aventurero? Jejeje.";
+			next;
+			mes "[^0000FFBibi^000000]";
+			mes "En ese caso tengo un presente para tí. Si estás interesado, traeme lo siguiente:";
+			mes "25 ^FF0000Oil Paper^000000";
+			mes "100 ^FF0000Straw Basket^000000";
+			mes "1 ^FF0000Red Bandana^000000";
+			mes "y 1 ^FF0000Sakkat^000000";
+			next;
+			switch(select("Tengo los items","Primero tengo que explorar nuevas tierras")){
+			case 1:
+				mes "[^0000FFBibi^000000]";
+				if((countitem(2280) >= 1) && (countitem(2275) >= 1) && (countitem(7299) >= 100) && (countitem(7151) >= 25)){
+					delitem 7151,25;
+					delitem 7299,100;
+					delitem 2275,1;
+					delitem 2280,1;
+					mes "Te ha debido resultar dificil conseguir todos los items...";
+					next;             
+					getitem 30950,1;
+					mes "[^0000FFBibi^000000]";
+					mes "¡Aquí tienes tu recompensa!";
+					mes "Ahora eres un auténtico viajero, jeje.";
+				}else{
+					mes "Necesitas viajar todavía más.";
+				}
+				close;
+				break;
+			case 2:
+				mes "[^0000FFBibi^000000]";
+				mes "No te preocupes, y tómate tu tiempo.";
+				break;
+			}
+			break;
+		case 2:
+			mes "[^0000FFBibi^000000]";
+			mes "Viajar es uno de los mayores placeres de esta vida.";
+			mes "No dudes nunca en conocer nuevas culturas. No te arrepentirás.";
+			break;
+	}
+	close;
+}

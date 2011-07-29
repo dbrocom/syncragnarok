@@ -1,0 +1,70 @@
+//===== Custom eAthena Script =======================================
+//= Baseball Cap Custom Quest
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+aldebaran,35,217,5	script	Ron Guidry	54,{
+
+	mes "[Ron Guidry]";
+	mes "¡Hola jovencito! ¿Qué te trae por aquí?.";
+	next;
+	mes "[Ron Guidry]";
+	mes "Aunque ya estoy mayor, ¿sabías que yo antes era una estrella del Baseball?";
+	mes "¡Qué tiempos aquellos...!";
+	next;
+	mes "[Ron Guidry]";
+	mes "Aunque ya todo son sólo recuerdos.";
+	mes "De hecho, todavía conservo algunas de mis ^0B6138Gorra de Baseball^000000.";
+	next;
+	mes "[Ron Guidry]";
+	mes "Si me traes lo siguiente te regalaré una:";
+	mes "^6633FF"+getitemname(5016)+"^000000 x 1";
+	mes "^6633FF"+getitemname(978)+"^000000 x 1";
+	mes "^6633FF"+getitemname(7038)+"^000000 x 100";
+	next;
+	mes "[Ron Guidry]";
+	mes "Entonces...¿Quieres que te regale una ^0B6138Gorra de Baseball^000000?";
+	next;
+	if(select("No me gusta el Baseball","¡Sí, por favor!") == 1){
+		mes "[Ron Guidry]";
+		mes "¿Entonces para qué querrías una ^0B6138Gorra de Baseball^000000?";
+		close;
+	}
+	mes "[Ron Guidry]";
+	if((countitem(5016) >= 1) && (countitem(978) >= 1) && (countitem(7038) >= 100)) { 
+		delitem 2227,1;
+		delitem 978,1;
+		delitem 7038,100;
+		mes "¡Muy bien jovencito! Espera un momento que coja una de mis preciadas ^0B6138gorras^000000...";
+		next;
+		mes ". . .";
+		next;
+		mes "[Ron Guidry]";
+		mes "¡Ya puedes presumir de ^0B6138gorra^000000 ante tus amigos!";
+		getitem 5147,1;
+	}else{
+		mes "No tienes lo que te pedí."; 
+		mes "¿Acaso no quieres una de estas fabulosas ^0B6138gorras^000000?";
+	}
+	close;
+}
+

@@ -1089,10 +1089,7 @@ static int itemdb_readdb(void)
 		char path[256];
 		FILE* fp;
 
-		if( !battle_config.renewal_system_enable )
-			sprintf(path, "%s/%s", db_path, filename[fi]);
-		else
-			sprintf(path, "%s/%s", db_path, !fi ? "item_db_renewal.txt" : "item_db2_renewal.txt");
+		sprintf(path, "%s/%s", db_path, filename[fi]);
 
 		fp = fopen(path, "r");
 		if( fp == NULL )

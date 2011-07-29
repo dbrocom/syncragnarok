@@ -1,0 +1,242 @@
+//===== Custom eAthena Script =======================================
+//= Dragon Hunter
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Description =================================================
+//= Quest de EXP Repetible.
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+lou_dun02,161,264,5	script	Dragon Hunter#Hunt	810,{
+	if (checkquest(60182) != -1) {
+		if (checkquest(60182,HUNTING) != 2 ) {
+			mes "[Dragon Hunter]";
+			mes "¿Has derrotado a los Dancing Dragon ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Dragon Hunter]";
+				mes "Hmm, no creo que hayas derrotado a los 50 Dancing Dragon todavía...";
+				close;
+			case 2:
+				mes "[Dragon Hunter]";
+				mes "Recuerda, debes acabar con 50 Dancing Dragon del mapa.";
+				close;
+			case 3:
+				mes "[Dragon Hunter]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Dragon Hunter]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60182;
+					close;
+				case 2:
+					mes "[Dragon Hunter]";
+					mes "Recuerda, deshazte de esos 50 Dancing Dragon.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Dragon Hunter]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 15130,10000;
+			erasequest 60182;
+			close;
+		}
+	}
+	if (checkquest(60183) != -1) {
+		if (checkquest(60183,HUNTING) != 2 ) {
+			mes "[Dragon Hunter]";
+			mes "¿Has derrotado a los Dancing Dragon ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Dragon Hunter]";
+				mes "Hmm, no creo que hayas derrotado a los 100 Dancing Dragon todavía...";
+				close;
+			case 2:
+				mes "[Dragon Hunter]";
+				mes "Recuerda, debes acabar con 100 Dancing Dragon del mapa.";
+				close;
+			case 3:
+				mes "[Dragon Hunter]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Dragon Hunter]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60183;
+					close;
+				case 2:
+					mes "[Dragon Hunter]";
+					mes "Recuerda, deshazte de esos 100 Dancing Dragon.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Dragon Hunter]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 15130,10000;
+			getexp 15130,10000;
+			erasequest 60183;
+			close;
+		}
+	}
+	if (checkquest(60184) != -1) {
+		if (checkquest(60184,HUNTING) != 2 ) {
+			mes "[Dragon Hunter]";
+			mes "¿Has derrotado a los Dancing Dragon ya?";
+			next;
+			switch(select("Sí:No:Quiero dejarlo...")) {
+			case 1:
+				mes "[Dragon Hunter]";
+				mes "Hmm, no creo que hayas derrotado a los 150 Dancing Dragon todavía...";
+				close;
+			case 2:
+				mes "[Dragon Hunter]";
+				mes "Recuerda, debes acabar con 150 Dancing Dragon del mapa.";
+				close;
+			case 3:
+				mes "[Dragon Hunter]";
+				mes "¿Estás seguro de querer abandonar?";
+				mes "Cualquier progreso que lleves será olvidado";
+				next;
+				switch(select("Sí:No")) {
+				case 1:
+					mes "[Dragon Hunter]";
+					mes "De acuerdo. Vuelve si cambias de idea.";
+					erasequest 60184;
+					close;
+				case 2:
+					mes "[Dragon Hunter]";
+					mes "Recuerda, deshazte de esos 150 Dancing Dragon.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Dragon Hunter]";
+			mes "Oh muchas gracias.";
+			mes "Estoy seguro de que sin tu ayuda no lo hubiera logrado.";
+			getexp 15130,10000;
+			getexp 15130,10000;
+			getexp 15130,10000;
+			erasequest 60184;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel >= 50) {
+		//for maximum level
+		if (BaseLevel <= 90) {
+			mes "[Dragon Hunter]";
+			mes "¿Cómo has llegado hasta aquí?";
+			mes "Está bien, está bien... si me ayudas no diré nada.";
+			next;
+			mes "[Dragon Hunter]";
+			mes "Los Dancing Dragon están molestando las almas de los guerreros que aquí yacen.";
+			mes "¿Te gustaría ayudarme? No puedo soportar esos chillidos.";
+			next;
+			switch(select("Claro, no me importa:No")) {
+			case 1:
+				mes "[Dragon Hunter]";
+				mes "¿De verdad? ¿Qué te gustaría hacer?";
+				next;
+				switch(select("Recolectar Items:Acabar con Dancing Dragon:Cancelar")) {
+				case 1:
+					// Item turn in
+					mes "[Dragon Hunter]";
+					mes "¿Podrás encontrar ^00CE0040 Dragon Horn^000000 y traérmelos aquí como prueba?";
+					next;
+					switch(select("Tengo los Dragon Horn:¿Qué necesitas?")) {
+					case 1:
+						if (countitem(7265) > 39) {
+							mes "[Dragon Hunter]";
+							mes "¡No me creo que hayas sido capaz!";
+							mes "A cambio te recompensaré con mi sabiduría.";
+							delitem 7265,40;
+							getexp 15000,8200;
+							close;
+						}
+						else {
+							mes "[Dragon Hunter]";
+							mes "Deben ser ^00CE0040 Dragon Horn^000000 y no menos, por favor.";
+							close;
+						}
+					case 2:
+						mes "[Dragon Hunter]";
+						mes "Necesito ^00CE0040 Dragon Horn^000000.";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[Dragon Hunter]";
+					mes "¡Muchas gracias!";
+					mes "¿De cuántos deseas encargarte?";
+					next;
+					switch(select("50 Dancing Dragon:100 Dancing Dragon:150 Dancing Dragon")) {
+					case 1:
+						mes "[Dragon Hunter]";
+						mes "Si acabas con 50 Dancing Dragon de esta mazmorra de estaré agradecido.";
+						setquest 60182;
+						close;
+					case 2:
+						mes "[Dragon Hunter]";
+						mes "Si acabas con 100 Dancing Dragon de esta mazmorra de estaré agradecido.";
+						setquest 60183;
+						close;
+					case 3:
+						mes "[Dragon Hunter]";
+						mes "Si acabas con 150 Dancing Dragon de esta mazmorra de estaré agradecido.";
+						setquest 60184;
+						close;
+					}
+				case 3:
+					mes "[Dragon Hunter]";
+					mes "Si cambias de idea, por favor, vuelve.";
+					close;
+				}
+			case 2:
+				mes "[Dragon Hunter]";
+				mes "Si cambias de idea, por favor, vuelve.";
+				close;
+			}
+		}
+		else {
+			mes "[Dragon Hunter]";
+			mes "Estoy seguro de que podrías ayudarme fácilmente, pero me gustaría poder agradecérselo a otros que no sean tan fuertes como tú.";
+			close;
+		}
+	}
+	else {
+		mes "[Dragon Hunter]";
+		mes "Ven a verme cuando seas un poquito más fuerte.";
+		close;
+	}
+}

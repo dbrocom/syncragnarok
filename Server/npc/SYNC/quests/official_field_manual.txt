@@ -1,0 +1,82 @@
+//===== eAthena Script =======================================
+//= Field Manual Quest Script
+//===== By: ==================================================
+//= Chilly
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= Any Athena Version
+//===== Description: =========================================
+//= Official quest for obtaining 5 Field Manuals one time.
+//===== Additional Comments: =================================
+//= 1.0 First Release
+//============================================================
+
+prontera,204,53,4	script	Messenger Locke	855,{
+	if (fieldmanual < 1) {
+		mes "[Messenger Locke]";
+		mes "¡Maldición! Se me ha hecho tarde. El jefe me va a matar.";
+		next;
+		mes "[Messenger Locke]";
+		mes "Oye, ¿te importaría echarme una mano? Necesito deshacerme de este encargo lo antes posible.";
+		next;
+		switch(select("Sin problema, ¿qué necesitas?:Estoy ocupado.")) {
+		case 1:
+			mes "[Messenger Locke]";
+			mes "La Arena de Izlude me había solicitado entregar 100 Jellopys en el Castillo de Prontera.";
+			next;
+			mes "[Messenger Locke]";
+			mes "Cuando llegué a Prontera, comprobé mi mochila, ¡pero los ^0000FF100 Jellopys^000000 habían desaparecido! ¡Necesito hacer la entrega YA!";
+			next;
+			mes "[Messenger Locke]";
+			mes "¿Me ayudarías? Confía en mi, te compensaré por meterte en este lío.";
+			next;
+			switch(select("De acuerdo, yo me encargo.:No tengo tiempo para estas tonterías...")) {
+			case 1:
+				set fieldmanual,1;
+				setquest 9024;
+				mes "[Messenger Locke]";
+				mes "¡Eres mi salvador! ¡Date prisa con esos ^0000FF100 Jellopys^000000!";
+				close;
+			case 2:
+				mes "[Messenger Locke]";
+				mes "Maldición, me van a despedir, estoy seguro.";
+				close;
+			}
+		case 2:
+			mes "[Messenger Locke]";
+			mes "Maldición, de esta me despiden.";
+			close;
+		}
+	}
+	else if (fieldmanual == 1) && (countitem(909) >= 100) {
+		mes "[Messenger Locke]";
+		mes "¡Muchas gracias! No podemos perder tiempo, ¡dame esos jellopies!";
+		next;
+		set fieldmanual,2;
+		completequest 9024;
+		delitem 909,100; //Jellopy
+		getitem 12263,5; //Field_Manual
+		mes "[Messenger Locke]";
+		mes "Ten, te lo has ganado. ¡Ahora puedo terminar el reparto!";
+		close;
+	}
+	else if (fieldmanual == 1) && (countitem(909) < 100) {
+		mes "[Messenger Locke]";
+		mes "¿Todavía no has encontrado los ^0000FF100 Jellopys^000000? ¡Ay! se nos acaba el tiempo.";
+		close;
+	}
+	else if (fieldmanual > 1) {
+		mes "[Messenger Locke]";
+		mes "Espero no meterme en mucho lío por llegar tarde...";
+		close;
+	}
+
+OnPCLoadMapEvent:
+	if ((fieldmanual < 1) && (strcharinfo(3)=="prontera")) {
+		showevent 1,2;
+	}
+	end;
+}
+
+prontera	mapflag	loadevent

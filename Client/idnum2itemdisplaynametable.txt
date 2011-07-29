@@ -8019,7 +8019,7 @@
 30827#Phreeoni_Hat#
 30828#Piamette_Hairband#
 30829#Plankton_Hat#
-30830#Removal_Hat#
+30830#Ghostring_Hat#
 30831#Skeggiold_Hat#
 30832#Goat_Horn#
 30833#Usakoring_Hat#

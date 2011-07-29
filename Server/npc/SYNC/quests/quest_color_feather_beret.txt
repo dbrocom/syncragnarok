@@ -1,0 +1,176 @@
+//===== Custom eAthena Script =======================================
+//= Feather Beret MultiColor NPC
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Description =================================================
+//= Sustituye al NPC oficial
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Primera versión
+//===================================================================
+
+//======================== Feather Beret ================================================
+rachel,152,131,3	script	Sakjul	928,{
+
+	mes "[Sakjul]";
+	mes "¡Rectitud, y contén tus nervios!";
+	mes "¡Mantente bajo control, y muévete con integridad!";
+	mes "¡Así es como un hombre respetable debe encaminar su vida!";
+	mes "Los jóvenes de hoy en día son muy débiles y sensibles.";
+	mes "¿No crees, joven aventurero?";
+	next;
+	if (select("Claro, señor!:No") == 2) {
+		mes "[Sakjul]";
+		mes "¡No puedo oirte! ¡No me creo nada de lo que dices!";
+		mes "¿Cómo puedes vivir en este mundo con esa débil actitud?";
+		close;
+	}
+	mes "[Sakjul]";
+	mes "¡Ha! ¡Me gusta tu respuesta!";
+	mes "Es dificil encontrar un joven disciplinado como tú.";
+	mes "Desafortunadamente, ni tú tienes tanta disciplina como se podría esperar.";
+	mes "Hmm.... sí, probablemente un ^FF0000Feather Beret^000000 te ayudaría a parecer más disciplinado.";
+	next;
+	mes "[Sakjul]";
+	mes "Quiero felicitar tu actitud.";
+	mes "Por ello, voy a crear un Feather Beret para ti.";
+	mes "Pero sólo si me traes los materiales necesarios, ¿entendido?";
+	next;
+	mes "[Sakjul]";
+	mes "Tendrás que traerme ^FF00001 Beret^000000, ^FF0000100 Soft Feather^000000,";
+	mes "y el ^FF0000tinte^000000 del color correspondiente.";
+	next;
+	mes "[Sakjul]";
+	mes "Agradéceme el ofrecimiento, porque este sombrero te hará parecer más majestuoso y elegante.";
+	mes "Incluso te permitiré elegir el color.";
+	mes "¿Cuál te interesaría?";
+	next;
+	switch(select("^0000FFAzul^000000:^BDBDBDBlanco^000000:Negro:^04B404Verde^000000:^AEB404Amarillo^000000:^DF0101Rojo^000000:^FF8000Naranja^000000:^B404AEMorado^000000:^61380BMarrón^000000:^BDBDBDGris^000000:^FA58F4Rosa^000000")){
+		case 1:
+			set .@dye, 978;		//Blue_Dyestuffs
+			set .@cfb, 5170;	//Feather_Beret
+			break;
+		case 2:
+			set .@dye, 982;		//White_Dyestuffs
+			set .@cfb, 30016;	//Feather_Beret 
+			break;
+		case 3:
+			set .@dye, 983;		//Black_Dyestuffs
+			set .@cfb, 30010;	//Feather_Beret 
+			break;
+		case 4:
+			set .@dye, 979;		//Green_Dyestuffs
+			set .@cfb, 30011;	//Feather_Beret 
+			break;
+		case 5:
+			set .@dye, 976;		//Yellow_Dyestuffs
+			set .@cfb, 30012;	//Feather_Beret 
+			break;
+		case 6:
+			set .@dye, 975;		//Red_Dyestuffs
+			set .@cfb, 30014;	//Feather_Beret 
+			break;
+		case 7:
+			set .@dye, 980;		//Orange_Dyestuffs
+			set .@cfb, 30013;	//Feather_Beret 
+			break;
+		case 8:
+			set .@dye, 981;		//Violet_Dyestuffs
+			set .@cfb, 30015;	//Feather_Beret 
+			break;
+		case 9:
+			set .@dye, 30700;	//Brown_Dyestuffs
+			set .@cfb, 30017;	//Feather_Beret 
+			break;
+		case 10:
+			set .@dye, 30701;	//Grey_Dyestuffs
+			set .@cfb, 30018;	//Feather_Beret 
+			break;
+		case 11:
+			set .@dye, 30702;	//Pink_Dyestuffs
+			set .@cfb, 30019;	//Feather_Beret 
+			break;
+	}
+	mes "[Sakjul]";
+	mes "Espero que hayas traído todo lo necesario...";
+	next;
+	if ((countitem(5172) >= 1) && (countitem(7063) >= 100) && (countitem(.@dye) >= 1)){
+		mes "[Sakjul]";
+		mes "Genial, has traído todo.";
+		mes "Para recompensar tu labor, voy a proceder a crearte el sombrero personalmente.";
+		next;
+		mes "[Sakjul]";
+		mes "Permanece cerca de mí, y contempla la creación con solemnidad.";
+		mes "Mantén tu integridad permaneciendo derecho.";
+		next;
+		mes "[Sakjul]";
+		mes "Si no haces lo que te digo,";
+		mes "^FF0000¡el proceso puede acabar fallando!";
+		mes "Y perderás todos los materiales.";
+		mes "¡Y yo no voy a ser responsable de tus errores!^000000";
+		next;
+		mes "- THUD THUD -";
+		mes "- THUD THUD -";
+		mes "- THUD THUD -";
+		mes "- BOOM -";
+		next;
+		mes "- THUD THUD -";
+		mes "- THUD THUD -";
+		mes "- THUD THUD -";
+		mes "- BOOM -";
+		next;
+		delitem 5172,  1;				//Beret 
+		delitem 7063,  100;			//Soft_Feather 
+		delitem .@dye, 1;			//Dyestuffs
+		set .@result,rand(1,10);
+		if (.@result == 4) {
+			mes "[Sakjul]";
+			mes "He tenido éxito haciendo el sombrero,";
+			mes "¡pero no puedo permitir que caiga en las manos de cualquiera!";
+			mes "Un Feather Beret perfecto necesita";
+			mes "un ángulo preciso entre el beret y las feather,";
+			mes "pero el ángulo de este sombrero está ligeramente truncado,";
+			mes "por tanto su calidad es demasiado pobre para reconocerlo como mi obra de arte!";
+			next;
+			mes "[Sakjul]";
+			mes "Entiendo que te sientas desafortunado con el resultado.";
+			mes "Sin embargo, no te desanimes e inténtalo otra vez.";
+			mes "¡No hay nada imposible en el mundo!";
+			next;
+			mes "[Sakjul]";
+			mes "No te lamentes. Lo hecho, hecho está.";
+			mes "Pero fácilmente puedes volverlo a hacer.";
+		}else{
+			getitem .@cfb, 1;		//Feather_Beret 
+			mes "[Sakjul]";
+			mes "¡Perfecto! ¡Ha quedado perfecto!";
+			mes "Comprueba que bien combinan el feather y el beret,";
+			mes "y podrás sentir la moderación en la coordinación.";
+			mes "Debo decir que este sombrero debe ser uno de las cosas imprescindibles para un joven hoy día.";
+			next;
+			mes "[Sakjul]";
+			mes "Ya que creé este sombrero con tus materiales, te pertenece.";
+			mes "Trátalo con cuidado, y conviértete en una magnífica persona.";
+		}
+	}else{
+		mes "[Sakjul]";
+		mes "Creo que te sobreestimé.";
+		mes "Necesitas más disciplina.";
+	}
+	close;
+}

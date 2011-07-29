@@ -139,7 +139,7 @@ dew_fild01,127,240,4	script	Blacksmith#dew01	813,{
 dewata,234,64,4	script	Sailor#dew01	540,{
 	if (dewdungeon < 2) {
 		mes "[Sailor]";
-		mes "You no can go to island, need chief permission.";
+		mes "You can't go to island, need chief permission.";
 		close;
 	}
 	else if (dewdungeon >= 2) {

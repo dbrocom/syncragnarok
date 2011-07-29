@@ -1,0 +1,1717 @@
+//===== eAthena Script ======================================= 
+//= Nidhoggur's Nest Instance
+//===== By: ================================================== 
+//= Ziu
+//===== Current Version: ===================================== 
+//= 1.7 (Spanish Scene)
+//===== Compatible With: ===================================== 
+//= eAthena TRUNK SQL 14206+ (client up time 2010) data Ver. Renewal 61+ Special data Ziu Rev 134.
+//= Endless Tower (3.12 By Saithis)
+//= Orc Dungeon N.I (2.6 By Ziu)
+//= Orc's Memory (1.4 By L0ne_W0lf)
+//= Sealed Shrine (1.3 By L0ne_W0lf)
+//===== Additional Comments: ================================= 
+//Need Quest Log Enable (Only Works Fine eAthena SQL)[Ziu]
+//Time Limit 2.5 Hours, Respawn (72 Hours) change in quest_db.txt
+//Need Guardian of Yggdrasil Quest 1.1 (Public Script).
+//Change Variables, Please and adjust your Server.
+//============================================================= 
+
+nyd_dun02,101,200,0	script	Yggdrasil Gatekeeper	111,{
+	if (BaseLevel < 70) {
+		mes "Una extraña luz sale de la puerta, pero no ves absolutamente nada extraño";
+		specialeffect	231;
+		specialeffect2	231;
+		close;
+	}
+	if (BaseLevel > 69) {
+		if (guarygg == 0) {
+			mes "Un extraño portal, con simbolos raros, cuando intentas acercarte a el, sientes una fuerza que te empuja hacia atras.";
+			SPECIALEFFECT2	EF_HOLYHIT;
+			atcommand "@useskill 150 1  "+strcharinfo(0);
+			next;
+			mes "decides consultar a Hibba Agip, puede que el sepa porque pasa esto...";
+			set guarygg,1;
+			close;
+		}
+		if ((guarygg > 0 ) && (guarygg < 11)) {
+			mes "..no sabes como romper este sello que no te deja cruzar el portal y dedices preguntarle a Hibba Agip";
+			specialeffect	231;
+			specialeffect2	231;
+			close;
+		}
+		if (guarygg == 11) {
+				mes "Cerca de la puerta, una extraña sensación recorre tod tu cuerpo, mientras que va desapareciendo, sientes que un fuerte poder te invade";
+				next;
+				mes "[Yggdrasil Gatekeeper]";
+				mes "Yo digo que soy Yggdrasiliad's, asi me llaman, yo acepte ser la sirviente del guardian";
+				next;
+				mes "[Yggdrasil Gatekeeper]";
+				mes "Si tu aceptas entrar a través de la protección de la puerta,hoy apruebo que eres fiel sierviente de Nidhoggur";
+				next;
+	set .@party_id,getcharid(1);
+	set .@ins_mas,getpartyleader(.@party_id,2);
+	set .@p_name$,getpartyname(.@party_id);
+	set .@p_reader$,strcharinfo(0);
+	set .@md_name$,"Nidhoggur's Nest";
+
+	getpartymember(.@party_id);
+	set .@partymembercount,$@partymembercount;
+	copyarray .@partymembername$[0],$@partymembername$[0],.@partymembercount;
+
+	set .@nesttime,checkquest(3136,PLAYTIME);
+	if ((.@party_id > 0) && ((.@partymembercount > 1))) {
+		if (.@nesttime == -1) {
+			if (.@ins_mas == getcharid(0)) {
+				mes "La Generación de la party se a confirmado. ¿Te gustaría reservar la entrada a " + .@md_name$ + "?";
+				next;
+				switch(select("Reservar la " + .@md_name$ + ":Entrar a la dungeon:Cancelar")) {
+				case 1:
+					set .@instance, instance_create(.@md_name$, .@party_id);
+					if (.@instance < 0) {
+						mes "Party Name: "+.@p_name$+"";
+						mes "Party Leader: "+.@p_reader$+"";
+						mes "^0000ff"+.@md_name$+" ^000000 - Reservation Failed.";
+						close;
+					}
+					else {
+						mes "^0000ff"+.@md_name$+"^000000- Attempting to book an entrance";
+						mes "Despues de hacer la reserva, tu tienes que selecionar en el menu ^0000FFEntrar a la dungeon^000000, si tu deseas entrar a " + .@md_name$ + ".";
+
+						for( set .@i, 1; .@i <= 2; set .@i, .@i + 1 ) {
+							if( instance_attachmap(.@i + "@nyd", .@instance) == "" )
+								break;
+						}
+						if( .@i < 2 ) {
+							instance_destroy(.@instance);
+							close;
+						}
+						instance_attach(.@instance);
+						instance_set_timeout 9000,300,.@instance;
+						instance_init(.@instance);
+
+						// Primera Parte!
+						donpcevent instance_npcname("#Resucitando Monster1", instance_id())+"::OnEnable";
+						donpcevent instance_npcname("#Resucitando Monster2", instance_id())+"::OnEnable";
+						donpcevent instance_npcname("#Resucitando Monster3", instance_id())+"::OnEnable";
+						donpcevent instance_npcname("#Resucitando Monster4", instance_id())+"::OnEnable";
+						donpcevent instance_npcname("#Resucitando Monster5", instance_id())+"::OnEnable";
+						donpcevent instance_npcname("#warperarea1", instance_id())+"::OnInstanceInit";
+						disablenpc instance_npcname("Murdered Yggdrasilid#a1", instance_id());
+						
+						//segunda parte!
+						donpcevent instance_npcname("#Resucitando Monster11", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#Resucitando Monster21", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#Resucitando Monster41", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#Resucitando Monster51", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#trampasnigg", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#trampasnigg1", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#trampasnigg2", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#trampasnigg3", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#trampasnigg4", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#controlnidh", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#sleep", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#ice", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#ice2", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#ice3", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#ice4", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#blood", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#blood2", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#blood3", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#blood4", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#sleep2", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#sleep3", instance_id())+"::OnInstanceInit";
+						donpcevent instance_npcname("#sleep4", instance_id())+"::OnInstanceInit";
+						disablenpc instance_npcname("Yggdrasilid", instance_id());
+						donpcevent instance_npcname("#nighoggurboss", instance_id())+"::OnInstanceInit";
+						close;
+					}
+				case 2:
+					if (has_instance("1@nyd") == "") {
+						mes "Memorial Dungeon " + .@md_name$ + " no existe.";
+						mes "El lider de la party, no a reservado aun la entrada a la dungeon.";
+						next;
+						mes "Cuando la reserva este echa, la dungeon será creada.";
+						mes "Si tu dungeon es destruida, tendrás que esperar siete días para entrar.";
+						close;
+					}
+					
+					else if ((has_instance("1@nyd") != "") && (.@partymembercount < 2)) {
+						mes "Only los miembros de la party pueden entrar.";
+						close;
+					}
+					else {
+						mapannounce "nyd_dun02", .@p_reader$ + " de la party, " + .@p_name$ + " está entrando " + .@md_name$ + ".",bc_map,"0x00ff99";
+						setquest 3135;
+						setquest 3136;
+						warp "1@nyd",32,40;
+						close;
+					}
+				case 3:
+					close;
+				}
+			} else {
+				switch(select(.@md_name$ + " Entrar a la dungeon:Cancelar")) {
+				case 1:
+					if (has_instance("1@nyd") == "") {
+						mes "Memorial Dungeon " + .@md_name$ + " no existe.";
+						mes "Memorial Dungeon ha sido destruida por el líder de la party, o por el límite de tiempo. Por favor, inténtelo de nuevo después de 2 horas.";
+						close;
+					}
+					else if ((has_instance("1@nyd") != "") && (.@partymembercount < 2)) {
+						mes "Solo los miembros de la party pueden entrar a la dungeon.";
+						close;
+					}
+					else {
+						mapannounce "nyd_dun02", .@p_reader$ + " miembro de la party " + .@p_name$ + " está entrado a " + .@md_name$ + ".",bc_map,"0x00ff99";
+						setquest 3135;
+						setquest 3136;
+						warp "1@nyd",32,40;
+						close;
+					}
+				case 2:
+					close;
+				}
+			}
+		}
+		else if ((.@nesttime == 0) || (.@nesttime == 1)) {
+			mes "Tu puedes entrar a la dungeon, si esta fue creada.";
+			next;
+			switch(select("Entrar a la dungeon " + .@md_name$ + ":Cancelar")) {
+			case 1:
+				if (has_instance("1@nyd") == "") {
+					mes "Memorial Dungeon " + .@md_name$ + " no existe.";
+					mes "Memorial Dungeon ha sido destruida por el líder de la party, o por el límite de tiempo. Por favor, inténtelo de nuevo más tarde.";
+					close;
+				}
+				else if ((has_instance("1@nyd") != "") && (.@partymembercount < 2)) {
+					mes "Solo los miembros de la party pueden entrar a la dungeon.";
+					close;
+				}
+				else {
+					mapannounce "nyd_dun02", .@p_reader$ + " miembro de la party " + .@p_name$ + " está entrado a " + .@md_name$ + ".",bc_map,"0x00ff99";
+					setquest 3135;
+					setquest 3136;
+					warp "1@nyd",32,40;
+					close;
+				}
+			case 2:
+				close;
+			}
+		}
+		else if (.@nesttime == 2) {
+			set .@delnest_time,checkquest(3135,PLAYTIME);
+			if (.@delnest_time == 2) {
+				mes "^0000ffTodos los registros y después de los efectos relacionados con nidhoggur's nest se eliminan. Ahora se puede regenerar o entrar a nidhoggur's nest.^000000";
+				erasequest 3135;
+				erasequest 3136;
+				close;
+			} else {
+				mes "No puedes crear otra instance hasta que no transcurran 72 horas desde tú última creación.";
+				close;
+			}
+		}
+	} else {
+		mes "Con el fin de generar una dungeon debe ser el líder de la party y tener al menos 2 miembros en la party.";
+		close;
+	}
+		}
+	}
+}
+
+
+1@nyd,0,0,0	script	#Resucitando Monster1	-1,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("#Resucitando Monster1", instance_id());
+	end;
+	
+OnDisable:
+	killmonster "1@nyd",instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#Resucitando Monster1", instance_id());
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+	
+OnMyMobDead:
+	set .@callnum,25;
+	set .@d_mob_num,mobcount("1@nyd",instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 0) {
+		set .@mob_ran,rand(1,25);
+		if (.@mob_ran > 20) {
+			monster "1@nyd",0,0,"Dark Pinguicula",2015,.@mob_dead_num,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+		}
+		else if (.@mob_ran < 21) {
+			monster "1@nyd",0,0,"Ancient Tree",2019,.@mob_dead_num,instance_npcname("#Resucitando Monster1", instance_id())+"::OnMyMobDead";
+		}
+	}
+	end;
+}
+1@nyd,0,0,0	script	#Resucitando Monster2	-1,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("#Resucitando Monster2", instance_id());
+	end;
+	
+OnDisable:
+	killmonster "1@nyd",instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#Resucitando Monster2", instance_id());
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Ancient Tree",2019,1,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+	
+OnMyMobDead:
+	set .@callnum,20;
+	set .@d_mob_num,mobcount("1@nyd",instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 0) {
+		set .@mob_ran,rand(1,25);
+		if (.@mob_ran > 20) {
+			monster "1@nyd",0,0,"Dark Pinguicula",2015,.@mob_dead_num,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+		}
+		else if (.@mob_ran < 21) {
+			monster "1@nyd",0,0,"Ancient Tree",2019,.@mob_dead_num,instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead";
+		}
+	}
+	end;
+}
+1@nyd,0,0,0	script	#Resucitando Monster3	-1,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("#Resucitando Monster3", instance_id());
+	end;
+	
+OnDisable:
+	killmonster "1@nyd",instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#Resucitando Monster3", instance_id());
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Undine",2016,1,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+	
+OnMyMobDead:
+	set .@callnum,15;
+	set .@d_mob_num,mobcount("1@nyd",instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 0) {
+		set .@mob_ran,rand(1,25);
+		if (.@mob_ran > 20) {
+			monster "1@nyd",0,0,"Undine",2016,.@mob_dead_num,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+		}
+		else if (.@mob_ran < 21) {
+			monster "1@nyd",0,0,"Phylla",2021,.@mob_dead_num,instance_npcname("#Resucitando Monster3", instance_id())+"::OnMyMobDead";
+		}
+	}
+	end;
+}
+1@nyd,0,0,0	script	#Resucitando Monster4	-1,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("#Resucitando Monster4", instance_id());
+	end;
+	
+OnDisable:
+	killmonster "1@nyd",instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#Resucitando Monster4", instance_id());
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Phylla",2021,1,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+	
+OnMyMobDead:
+	set .@callnum,20;
+	set .@d_mob_num,mobcount("1@nyd",instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 0) {
+		monster "1@nyd",0,0,"Phylla",2021,.@mob_dead_num,instance_npcname("#Resucitando Monster4", instance_id())+"::OnMyMobDead";
+		}
+	end;
+}
+1@nyd,0,0,0	script	#Resucitando Monster5	-1,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("#Resucitando Monster5", instance_id());
+	end;
+	
+OnDisable:
+	killmonster "1@nyd",instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#Resucitando Monster5", instance_id());
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	monster "1@nyd",0,0,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+	
+OnMyMobDead:
+	set .@callnum,15;
+	set .@d_mob_num,mobcount("1@nyd",instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 0) {
+		set .@mob_ran,rand(1,25);
+		if (.@mob_ran > 20) {
+			monster "1@nyd",0,0,"Rhyncho",2020,.@mob_dead_num,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+		}
+		else if (.@mob_ran < 21) {
+			monster "1@nyd",0,0,"Undine",2016,.@mob_dead_num,instance_npcname("#Resucitando Monster5", instance_id())+"::OnMyMobDead";
+		}
+	}
+	end;
+}
+
+1@nyd,213,277,5	script	Murdered Yggdrasilid#a2	437,{
+	if(getcharid(0)==getpartyleader(getcharid(1),2)) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "A small light beats inside your heart and strange voice transfers into your mind.";
+			next;
+			mes "[Yggdrasiliad]";
+			mes "It's over... The servants of the Guardian...should leave here... before it's too late.";
+			next;
+			switch( Select("Who are you?","What's that mean?" ) )
+			{
+				case 1:
+					mes "[Yggdrasiliad]";
+					mes "I... am Yggdrasiliad, a servant of the Guardian Nidhoggur. I was a great priest that led the priesthood of the Laphine tribe.";
+					next;
+					mes "[Yggdrasiliad]";
+					mes "You aren't priest of Laphine...";
+					mes "How have you come to be here?";
+					next;
+					mes "[Yggdrasiliad]";
+					mes "You should all get out here...";
+					mes "If you delay... you can't go back anymore...";
+					next;
+					switch( Select("Who are you?","What's that mean?" ) )
+					{
+						case 1:
+							mes "[Yggdrasiliad]";
+							mes "I... am Yggdrasiliad, a servant of the Guardian Nidhoggur. I was a great priest that led the priesthood of the Laphine tribe.";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "You aren't priest of Laphine...";
+							mes "How have you come to be here?";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "You should all get out here...";
+							mes "If you delay... you can't go back anymore...";
+							close;
+						case 2:
+							mes "[Yggdrasiliad]";
+							mes "Smotehing has happened to the guardian. I don't know what's wrong...";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "The Guardian Nidhoggur is no longer helping the Yggdrasil... The sekos protection spell is broken...";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "It has fallen into darkness and has destroyed all of the organims here and now this areia is full of malignant spirits... this place is cursed...";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "The holy place is now stained with the guardian's Shadow...";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "You must escape before it's too late... inform my tribe immediately";
+							next;
+							mes "[Yggdrasiliad]";
+							mes " I cannot leave this place, my soul is tied here forever...now i must trust you.";
+							next;
+							switch( Select("Guardian's Shadow?" ) )
+							{
+								case 1:
+									mes "[Yggdrasiliad]";
+									mes "The guardian nidhoggur... was meant to remain in its nest and protect the yggdrasil";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "I don-t know why... but the true Guardian...just left...";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "Now all that remains are the dark shadows of the Guardian";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "Nidhoggur-s Shadow has embodie the Guardian-s energy and is trying to escape";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "If this abominable shadow escapes, it will destroy everything by inhaling their energy as well.";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "We should inform this news to magistrate of alfheim and prevent it... without them...";
+									next;
+									switch( Select("What can we do?" ) )
+									{
+										case 1:
+											mes "[Yggdrasiliad]";
+											mes "It might be impossible to prevent the powerful energy of the Guardian's Shadow by ourselves";
+											next;
+											mes "[Yggdrasiliad]";
+											mes "But if may still be possible because it is just a shadow and not the true Guardian... we might be able to stop it...";
+											next;
+											mes "[Yggdrasiliad]";
+											mes "Are you willing to put your life on the line to help me?";
+											next;
+											switch( Select("Por supuesto.","No in this lifetime" ) )
+											{
+												case 1:
+													mes "[Yggdrasiliad]";
+													mes "I'd love to honor your will.So, i will show the way to go the Guardian's nest.";
+													next;
+													mes "[Yggdrasiliad]";
+													mes "Go through the great Yggdrasil's waterfall up North. Here the Seko's protection device will be operational.";
+													next;
+													mes "[Yggdrasiliad]";
+													mes "Go to the nest through the waterfall by killin all of dark creatures first... Then you can move on to stop Nidhoggur's Shadow";
+													next;
+													mes "[Yggdrasiliad]";
+													mes "I will now open the Guardian's gate after you kill all of the guardians before the gate collapses.";
+													next;
+													mes "[Yggdrasiliad]";
+													mes "30 minutes...that's as long as i can keep the gate open so you should hurry.";
+													next;
+													mes "[Yggdrasiliad]";
+													mes "Beware of the shadow's power...";
+													close2;
+													donpcevent instance_npcname("Murdered Yggdrasilid#a1", instance_id())+"::OnEnable";
+													end;
+												case 2:
+													close;
+											}
+									}
+							}
+					}
+				case 2:
+					mes "[Yggdrasiliad]";
+					mes "Smotehing has happened to the guardian. I don't know what's wrong...";
+					next;
+					mes "[Yggdrasiliad]";
+					mes "The Guardian Nidhoggur is no longer helping the Yggdrasil... The sekos protection spell is broken...";
+					next;
+					mes "[Yggdrasiliad]";
+					mes "It has fallen into darkness and has destroyed all of the organims here and now this areia is full of malignant spirits... this place is cursed...";
+					next;
+					mes "[Yggdrasiliad]";
+					mes "The holy place is now stained with the guardian's Shadow...";
+					next;
+					mes "[Yggdrasiliad]";
+					mes "You must escape before it's too late... inform my tribe immediately";
+					next;
+					mes "[Yggdrasiliad]";
+					mes " I cannot leave this place, my soul is tied here forever...now i must trust you.";
+					next;
+					switch( Select("Guardian's Shadow?" ) )
+					{
+						case 1:
+							mes "[Yggdrasiliad]";
+							mes "The guardian nidhoggur... was meant to remain in its nest and protect the yggdrasil";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "I don-t know why... but the true Guardian...just left...";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "Now all that remains are the dark shadows of the Guardian";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "Nidhoggur-s Shadow has embodie the Guardian-s energy and is trying to escape";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "If this abominable shadow escapes, it will destroy everything by inhaling their energy as well.";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "We should inform this news to magistrate of alfheim and prevent it... without them...";
+							next;
+							switch( Select("What can we do?" ) )
+							{
+								case 1:
+									mes "[Yggdrasiliad]";
+									mes "It might be impossible to prevent the powerful energy of the Guardian's Shadow by ourselves";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "But if may still be possible because it is just a shadow and not the true Guardian... we might be able to stop it...";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "Are you willing to put your life on the line to help me?";
+									next;
+									switch( Select("Por supuesto.","No in this lifetime" ) )
+									{
+										case 1:
+											mes "[Yggdrasiliad]";
+											mes "I'd love to honor your will.So, i will show the way to go the Guardian's nest.";
+											next;
+											mes "[Yggdrasiliad]";
+											mes "Go through the great Yggdrasil's waterfall up North. Here the Seko's protection device will be operational.";
+											next;
+											mes "[Yggdrasiliad]";
+											mes "Go to the nest through the waterfall by killin all of dark creatures first... Then you can move on to stop Nidhoggur's Shadow";
+											next;
+											mes "[Yggdrasiliad]";
+											mes "I will now open the Guardian's gate after you kill all of the guardians before the gate collapses.";
+											next;
+											mes "[Yggdrasiliad]";
+											mes "30 minutes...that's as long as i can keep the gate open so you should hurry.";
+											next;
+											mes "[Yggdrasiliad]";
+											mes "Beware of the shadow's power...";
+											close2;
+											donpcevent instance_npcname("Murdered Yggdrasilid#a1", instance_id())+"::OnEnable";
+											end;
+										case 2:
+											close;
+									}
+							}
+					}
+			}						
+		} else {
+			mes "[Yggdrasiliad]";
+			mes "as hn dx dj wi xk wi rh dx bd fj si dp xd sd!!";
+			close;
+		}
+	} else {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			mes "[Yggdrasiliad]";
+			mes "Que hace una laphine en un lugar como este";
+			next;
+			mes "[Yggdrasiliad]";
+			mes "It's over... The servants of the Guardian...should leave here... before it's too late.";
+			next;
+			switch( Select("Who are you?","What's that mean?" ) )
+			{
+				case 1:
+					mes "[Yggdrasiliad]";
+					mes "I... am Yggdrasiliad, a servant of the Guardian Nidhoggur. I was a great priest that led the priesthood of the Laphine tribe.";
+					next;
+					mes "[Yggdrasiliad]";
+					mes "You aren't priest of Laphine...";
+					mes "How have you come to be here?";
+					next;
+					mes "[Yggdrasiliad]";
+					mes "You should all get out here...";
+					mes "If you delay... you can't go back anymore...";
+					next;
+					switch( Select("Who are you?","What's that mean?" ) )
+					{
+						case 1:
+							mes "[Yggdrasiliad]";
+							mes "I... am Yggdrasiliad, a servant of the Guardian Nidhoggur. I was a great priest that led the priesthood of the Laphine tribe.";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "You aren't priest of Laphine...";
+							mes "How have you come to be here?";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "You should all get out here...";
+							mes "If you delay... you can't go back anymore...";
+							close;
+						case 2:
+							mes "[Yggdrasiliad]";
+							mes "Smotehing has happened to the guardian. I don't know what's wrong...";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "The Guardian Nidhoggur is no longer helping the Yggdrasil... The sekos protection spell is broken...";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "It has fallen into darkness and has destroyed all of the organims here and now this areia is full of malignant spirits... this place is cursed...";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "The holy place is now stained with the guardian's Shadow...";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "You must escape before it's too late... inform my tribe immediately";
+							next;
+							mes "[Yggdrasiliad]";
+							mes " I cannot leave this place, my soul is tied here forever...now i must trust you.";
+							next;
+							switch( Select("Guardian's Shadow?" ) )
+							{
+								case 1:
+									mes "[Yggdrasiliad]";
+									mes "The guardian nidhoggur... was meant to remain in its nest and protect the yggdrasil";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "I don-t know why... but the true Guardian...just left...";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "Now all that remains are the dark shadows of the Guardian";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "Nidhoggur-s Shadow has embodie the Guardian-s energy and is trying to escape";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "If this abominable shadow escapes, it will destroy everything by inhaling their energy as well.";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "We should inform this news to magistrate of alfheim and prevent it... without them...";
+									next;
+									switch( Select("What can we do?" ) )
+									{
+										case 1:
+											mes "[Yggdrasiliad]";
+											mes "It might be impossible to prevent the powerful energy of the Guardian's Shadow by ourselves";
+											next;
+											mes "[Yggdrasiliad]";
+											mes "But if may still be possible because it is just a shadow and not the true Guardian... we might be able to stop it...";
+											next;
+											mes "[Yggdrasiliad]";
+											mes "Are you willing to put your life on the line to help me?";
+											next;
+											switch( Select("Por supuesto.","No in this lifetime" ) )
+											{
+												case 1:
+													mes "[Yggdrasiliad]";
+													mes "I'd love to honor your will.So, i will show the way to go the Guardian's nest.";
+													next;
+													mes "[Yggdrasiliad]";
+													mes "Go through the great Yggdrasil's waterfall up North. Here the Seko's protection device will be operational.";
+													next;
+													mes "[Yggdrasiliad]";
+													mes "Go to the nest through the waterfall by killin all of dark creatures first... Then you can move on to stop Nidhoggur's Shadow";
+													next;
+													mes "[Yggdrasiliad]";
+													mes "I will now open the Guardian's gate after you kill all of the guardians before the gate collapses.";
+													next;
+													mes "[Yggdrasiliad]";
+													mes "30 minutes...that's as long as i can keep the gate open so you should hurry.";
+													next;
+													mes "[Yggdrasiliad]";
+													mes "Beware of the shadow's power...";
+													close2;
+													end;
+												case 2:
+													close;
+											}
+									}
+							}
+					}
+				case 2:
+					mes "[Yggdrasiliad]";
+					mes "Smotehing has happened to the guardian. I don't know what's wrong...";
+					next;
+					mes "[Yggdrasiliad]";
+					mes "The Guardian Nidhoggur is no longer helping the Yggdrasil... The sekos protection spell is broken...";
+					next;
+					mes "[Yggdrasiliad]";
+					mes "It has fallen into darkness and has destroyed all of the organims here and now this areia is full of malignant spirits... this place is cursed...";
+					next;
+					mes "[Yggdrasiliad]";
+					mes "The holy place is now stained with the guardian's Shadow...";
+					next;
+					mes "[Yggdrasiliad]";
+					mes "You must escape before it's too late... inform my tribe immediately";
+					next;
+					mes "[Yggdrasiliad]";
+					mes " I cannot leave this place, my soul is tied here forever...now i must trust you.";
+					next;
+					switch( Select("Guardian's Shadow?" ) )
+					{
+						case 1:
+							mes "[Yggdrasiliad]";
+							mes "The guardian nidhoggur... was meant to remain in its nest and protect the yggdrasil";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "I don-t know why... but the true Guardian...just left...";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "Now all that remains are the dark shadows of the Guardian";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "Nidhoggur-s Shadow has embodie the Guardian-s energy and is trying to escape";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "If this abominable shadow escapes, it will destroy everything by inhaling their energy as well.";
+							next;
+							mes "[Yggdrasiliad]";
+							mes "We should inform this news to magistrate of alfheim and prevent it... without them...";
+							next;
+							switch( Select("What can we do?" ) )
+							{
+								case 1:
+									mes "[Yggdrasiliad]";
+									mes "It might be impossible to prevent the powerful energy of the Guardian's Shadow by ourselves";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "But if may still be possible because it is just a shadow and not the true Guardian... we might be able to stop it...";
+									next;
+									mes "[Yggdrasiliad]";
+									mes "Are you willing to put your life on the line to help me?";
+									close;
+							}
+					}
+			}
+	
+		} else {
+			mes "[Yggdrasiliad]";
+			mes "as hn dx dj wi xk wi rh dx bd fj si dp xd sd!!";
+			close;
+		}
+	}
+}
+
+1@nyd,213,277,5	script	Murdered Yggdrasilid#a1	437,{
+	end;
+OnEnable:
+	disablenpc instance_npcname("Murdered Yggdrasilid#a2", instance_id());
+	enablenpc instance_npcname("Murdered Yggdrasilid#a1", instance_id());
+	initnpctimer;
+	end;
+	
+OnTimer10:
+	instance_announce 0, "Nidhoggur's Guardian: Destruye a los intrusos.",bc_map,"0x00FF00";
+	end;
+
+OnTimer5710:
+	enablenpc instance_npcname("Murdered Yggdrasilid#a1", instance_id());
+	donpcevent instance_npcname("Murdered Yggdrasilid#a1", instance_id())+"::OnSpam";
+	end;
+OnTimer1795000:
+	instance_announce 0, "Yggdrasilid: Se terminó el tiempo teneis que salir de aquí.",bc_map,"0x00FF00";
+	end;
+OnTimer1800000:
+	stopnpctimer;
+	donpcevent instance_npcname("Murdered Yggdrasilid#a1", instance_id())+"::OnDisable";
+	end;
+OnDisable:
+	instance_warpall "nyd_dun02",97,196;
+	end;
+OnSpam:
+	enablenpc instance_npcname("Murdered Yggdrasilid#a1", instance_id());
+	areamonster "1@nyd",56,283,319,198,"Nighoggur's Guardian",2015,2,instance_npcname("Murdered Yggdrasilid#a1", instance_id())+"::OnMyMobDead";
+	areamonster "1@nyd",56,283,319,198,"Nighoggur's Guardian",2019,2,instance_npcname("Murdered Yggdrasilid#a1", instance_id())+"::OnMyMobDead";
+	areamonster "1@nyd",56,283,319,198,"Nighoggur's Guardian",2016,2,instance_npcname("Murdered Yggdrasilid#a1", instance_id())+"::OnMyMobDead";
+	areamonster "1@nyd",56,283,319,198,"Nighoggur's Guardian",2021,3,instance_npcname("Murdered Yggdrasilid#a1", instance_id())+"::OnMyMobDead";
+	areamonster "1@nyd",56,283,319,198,"Nighoggur's Guardian",2020,3,instance_npcname("Murdered Yggdrasilid#a1", instance_id())+"::OnMyMobDead";
+
+OnMyMobDead:
+	set .@callnum,12;
+	set .@d_mob_num,mobcount("1@nyd",instance_npcname("Murdered Yggdrasilid#a1", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 11) {
+	instance_announce 0, "¡¡ Todos los Nidhoggur's Guardians están muertos!!",bc_map,"0x00FF00";
+	stopnpctimer;
+	enablenpc instance_npcname("#warperarea1", instance_id());
+	}
+	end;
+}
+1@nyd,200,329,0	script	#warperarea1	45,2,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#warperarea1", instance_id());
+	end;
+OnTouch:
+	warp "2@nyd",200,17;
+	end;
+}
+
+2@nyd,200,18,0	script	#Resucitando Monster11a	-1,2,2,{
+OnTouch:
+	donpcevent instance_npcname("#Resucitando Monster11", instance_id())+"::OnEnable";
+	donpcevent instance_npcname("#Resucitando Monster21", instance_id())+"::OnEnable";
+	donpcevent instance_npcname("#Resucitando Monster41", instance_id())+"::OnEnable";
+	donpcevent instance_npcname("#Resucitando Monster51", instance_id())+"::OnEnable";
+	initnpctimer;
+	end;
+OnTimer5000:
+	instance_announce 0, "Nighoggur's Shadow: Mas...No puedo quedarme más",bc_map;
+	end;
+OnTimer10000:
+	instance_announce 0, "Nighoggur's Shadow: Energia...Yo necesito más energía de Yggdrasil...",bc_map;
+	end;
+OnTimer15000:
+	stopnpctimer;
+	instance_announce 0, "Nighoggur's Shadow: Destruye....Todo...",bc_map;
+	end;
+
+}
+2@nyd,200,18,0	script	#Resucitando Monster11	-1,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("#Resucitando Monster11", instance_id());
+	end;
+	
+OnDisable:
+	killmonster "2@nyd",instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	disablenpc instance_npcname("#Resucitando Monster11a", instance_id());
+	enablenpc instance_npcname("#Resucitando Monster11", instance_id());
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+OnMyMobDead:
+	set .@callnum,30;
+	set .@d_mob_num,mobcount("2@nyd",instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 0) {
+		areamonster "2@nyd",14,181,385,16,"Dark Pinguicula",2015,1,instance_npcname("#Resucitando Monster11", instance_id())+"::OnMyMobDead";
+	}
+	end;
+}
+2@nyd,200,18,0	script	#Resucitando Monster21	-1,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("#Resucitando Monster21", instance_id());
+	end;
+	
+OnDisable:
+	killmonster "2@nyd",instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#Resucitando Monster21", instance_id());
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	
+OnMyMobDead:
+	set .@callnum,25;
+	set .@d_mob_num,mobcount("2@nyd",instance_npcname("#Resucitando Monster2", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 0) {
+	areamonster "2@nyd",14,181,385,16,"Dark Shadow",2023,1,instance_npcname("#Resucitando Monster21", instance_id())+"::OnMyMobDead";
+	}
+
+	end;
+}
+2@nyd,200,18,0	script	#Resucitando Monster41	-1,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("#Resucitando Monster41", instance_id());
+	end;
+	
+OnDisable:
+	killmonster "2@nyd",instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#Resucitando Monster41", instance_id());
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	
+OnMyMobDead:
+	set .@callnum,20;
+	set .@d_mob_num,mobcount("2@nyd",instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 0) {
+	areamonster "2@nyd",14,181,385,16,"Phylla",2021,1,instance_npcname("#Resucitando Monster41", instance_id())+"::OnMyMobDead";
+	}
+	end;
+}
+2@nyd,200,18,0	script	#Resucitando Monster51	-1,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("#Resucitando Monster51", instance_id());
+	end;
+	
+OnDisable:
+	killmonster "2@nyd",instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname("#Resucitando Monster51", instance_id());
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+
+OnMyMobDead:
+	set .@callnum,20;
+	set .@d_mob_num,mobcount("2@nyd",instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 0) {
+		areamonster "2@nyd",14,181,385,16,"Rhyncho",2020,1,instance_npcname("#Resucitando Monster51", instance_id())+"::OnMyMobDead";
+	}
+	end;
+}
+2@nyd,199,178,0	script	#cuadrocolor	111,{
+	mes "Un misterioso poder atraviesa tu cuerpo, te sientes ligero";
+	close2;
+	warp "2@nyd",199,255;
+	end;
+}
+2@nyd,199,327,0	script	#nighoggurboss	-1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#nighoggurboss", instance_id());
+	end;
+OnEnable:
+	enablenpc instance_npcname("#nighoggurboss", instance_id());
+	monster "2@nyd",199,327,"Nidhoggr's Shadow",2022,1,instance_npcname("#nighoggurboss", instance_id())+"::OnMyMobDead";
+	end;
+OnMyMobDead:
+	set .@callnum,1;
+	set .@d_mob_num,mobcount("2@nyd",instance_npcname("#nighoggurboss", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 0) {
+		enablenpc instance_npcname("Yggdrasilid", instance_id());
+		donpcevent instance_npcname("#trampasnigg", instance_id())+"::OnDisable";
+		initnpctimer;
+		end;
+	}
+OnTimer2000:
+	instance_announce 0, "Nidhoggr's Shadow:Mi Poder...esta desapareciendo",bc_map,"0x00FF00";
+	end;
+OnTimer10000:
+	set .@nest_ran,rand(1,4);
+	if (.@nest_ran == 1) {
+		donpcevent instance_npcname("#trampasnigg1", instance_id())+"::OnEnable";
+	}
+	else if (.@nest_ran == 2) {
+		donpcevent instance_npcname("#trampasnigg2", instance_id())+"::OnEnable";
+	}
+	else if (.@nest_ran == 3) {
+		donpcevent instance_npcname("#trampasnigg3", instance_id())+"::OnEnable";
+	}
+	else if (.@nest_ran == 4) {
+		donpcevent instance_npcname("#trampasnigg4", instance_id())+"::OnEnable";
+	}
+	end;
+OnTimer12000:
+	instance_announce 0, "Yggdrasilid:Buen trabajo, Que todo el mundo venga al centro de nest",bc_map,"0x00FF00";
+	end;
+OnTimer15000:
+	instance_announce 0, "Nidhoggr's Shadow: mmm no esta mal...Ahora le voy a dar un poco de tregua",bc_map,"0x00FF00";
+	donpcevent instance_npcname("#trampasnigg", instance_id())+"::OnDisable";
+	stopnpctimer;
+	disablenpc instance_npcname("#nighoggurboss", instance_id());
+	end;
+}
+
+2@nyd,199,327,5	script	Yggdrasilid	437,{
+	if (guarygg > 10) {
+		if ((getequipid(EQI_ACC_L) == 2782) || (getequipid(EQI_ACC_R) == 2782)) {
+			if (nesten == 0) {
+				mes "[Yggdrasiliad]";
+				mes "Thank's. the Laphine tribe owes you for your help.";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Gracias a ti, Nidhoggur's Shadow ha sido derrotado. Todo su poder se ha ido completamente.... Pero su poder será enterrado aquí...";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Nosotros no debemos perder más tiempo para preparar su vuelta";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Tu...vuelve y informa a la gente al cargo en Splendide y Manuk";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Los laphines y saphas no son los responsable de debilitar el arbol Yggdrasil...Fue el Guardian Shadow que chupaba hasta dejarlo seco";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "La inundación del Guardian's Nest...ocurrio antes.Pero no tengo la menor idea de cómo o por qué .... debes informar a los demás";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Si tú quieres, yo puedo enviarte a ti fuera de este nido maldito";
+				next;
+				switch( Select("Enviame fuera.","Me quedaré un rato por aquí." ) )
+				{
+					case 1:
+						set nesten,1;
+						warp "nyd_dun02",97,196;
+						end;
+						
+					case 2:
+						mes "[Yggdrasiliad]";
+						mes "Como quieras....";
+						close;
+				}
+			}
+			if (nesten == 1) {
+				mes "[Yggdrasiliad]";
+				mes "Thank's. the Laphine tribe owes you for your help.";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Gracias a ti, Nidhoggur's Shadow ha sido derrotado. Todo su poder se ha ido completamente.... Pero su poder será enterrado aquí...";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Nosotros no debemos perder más tiempo para preparar su vuelta";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Tu...vuelve y informa a la gente al cargo en Splendide y Manuk";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Los laphines y saphas no son los responsable de debilitar el arbol Yggdrasil...Fue el Guardian Shadow que chupaba hasta dejarlo seco";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "La inundación del Guardian's Nest...ocurrio antes.Pero no tengo la menor idea de cómo o por qué .... debes informar a los demás";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Si tú quieres, yo puedo enviarte a ti fuera de este nido maldito";
+				next;
+				switch( Select("Enviame fuera.","Me quedaré un rato por aquí." ) )
+				{
+					case 1:
+						warp "nyd_dun02",97,196;
+						end;
+						
+					case 2:
+						mes "[Yggdrasiliad]";
+						mes "Como quieras....";
+						close;
+				}
+			}
+			if (nesten == 2) {
+				mes "[Yggdrasiliad]";
+				mes "Thank's. the Laphine tribe owes you for your help.";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Gracias a ti, Nidhoggur's Shadow ha sido derrotado. Todo su poder se ha ido completamente.... Pero su poder será enterrado aquí...";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Nosotros no debemos perder más tiempo para preparar su vuelta";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Tu...vuelve y informa a la gente al cargo en Splendide y Manuk";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Los laphines y saphas no son los responsable de debilitar el arbol Yggdrasil...Fue el Guardian Shadow que chupaba hasta dejarlo seco";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "La inundación del Guardian's Nest...ocurrio antes.Pero no tengo la menor idea de cómo o por qué .... debes informar a los demás";
+				next;
+				mes "[Yggdrasiliad]";
+				mes "Si tú quieres, yo puedo enviarte a ti fuera de este nido maldito";
+				next;
+				switch( Select("Enviame fuera.","Me quedaré un rato por aquí." ) )
+				{
+					case 1:
+						warp "nyd_dun02",97,196;
+						end;
+						
+					case 2:
+						mes "[Yggdrasiliad]";
+						mes "Como quieras....";
+						close;
+				}
+			}
+		} else {
+			mes "[Yggdrasiliad]";
+			mes "ak dh nx dj dk ah dn xd qd qs df dc df dc df cd ds az";
+			close;
+		}
+	}
+}
+			
+
+2@nyd,200,261,0	script	#indracoboss	-1,3,0,{
+OnTouch:
+	donpcevent instance_npcname("#Resucitando Monster11", instance_id())+"::OnDisable";
+	donpcevent instance_npcname("#Resucitando Monster21", instance_id())+"::OnDisable";
+	donpcevent instance_npcname("#Resucitando Monster41", instance_id())+"::OnDisable";
+	donpcevent instance_npcname("#Resucitando Monster51", instance_id())+"::OnDisable";
+	donpcevent instance_npcname("#controlnidh", instance_id())+"::OnEnable";
+	donpcevent instance_npcname("#nighoggurboss", instance_id())+"::OnEnable";
+	disablenpc instance_npcname("#indracoboss", instance_id());
+	
+	end;
+}
+2@nyd,199,263,0	script	#controlnidh	-1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#controlnidh", instance_id());
+	end;
+OnEnable:
+	enablenpc instance_npcname("#controlnidh", instance_id());
+	initnpctimer;
+	end;
+OnTimer3000:
+	instance_announce 0, "Nighoggur's Shadow: Os Voy aniquilar a todos vosotros",bc_map,"0x00FF00";
+	end;
+OnTimer6000:
+	donpcevent instance_npcname("#trampasnigg", instance_id())+"::OnEnable";
+	stopnpctimer;
+	disablenpc instance_npcname("#controlnidh", instance_id());
+	end;
+}
+	
+2@nyd,0,0,0	script	#trampasnigg	-1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#trampasnigg", instance_id());
+	end;
+OnDisable:
+	stopnpctimer;
+	disablenpc instance_npcname("#trampasnigg", instance_id());
+	end;
+OnEnable:
+	enablenpc instance_npcname("#trampasnigg", instance_id());
+	initnpctimer;
+	end;
+OnReplay:
+	initnpctimer;
+	end;
+OnTimer240000:
+	donpcevent instance_npcname("#trampasnigg1", instance_id())+"::OnEnable";
+	end;
+OnTimer480000:
+	donpcevent instance_npcname("#trampasnigg2", instance_id())+"::OnEnable";
+	end;
+OnTimer720000:
+	donpcevent instance_npcname("#trampasnigg3", instance_id())+"::OnEnable";
+	end;
+OnTimer960000:
+	donpcevent instance_npcname("#trampasnigg4", instance_id())+"::OnEnable";
+	stopnpctimer;
+	donpcevent instance_npcname("#trampasnigg", instance_id())+"::OnReplay";
+	end;
+}
+2@nyd,284,280,0	script	#trampasnigg1	-1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#trampasnigg1", instance_id());
+	end;
+OnEnable:
+	enablenpc instance_npcname("#trampasnigg1", instance_id());
+	instance_warpall "2@nyd",284,280;
+	areamonster "2@nyd",276,287,291,273,"Rhyncho",2020,4,instance_npcname("#trampasnigg1", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",276,287,291,273,"Phylla",2021,4,instance_npcname("#trampasnigg1", instance_id())+"::OnMyMobDead";
+	set .@nest_ran,rand(1,3);
+	if (.@nest_ran == 1) {
+		donpcevent instance_npcname("#sleep", instance_id())+"::OnEnable";
+	}
+	else if (.@nest_ran == 2) {
+		donpcevent instance_npcname("#ice", instance_id())+"::OnEnable";
+	}
+	else if (.@nest_ran == 3) {
+		donpcevent instance_npcname("#blood", instance_id())+"::OnEnable";
+	}
+	end;
+OnMyMobDead:
+	set .@callnum,8;
+	set .@d_mob_num,mobcount("2@nyd",instance_npcname("#trampasnigg1", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 7) {
+	instance_announce 0, "Nighoggur's Shadow: No esta nada mal... se acabó el descanso",bc_map,"0x00FF00";
+	disablenpc instance_npcname("#trampasnigg1", instance_id());
+	}
+	end;
+}
+2@nyd,284,280,0	script	#sleep	-1,3,3,{
+OnInstanceInit:
+	disablenpc instance_npcname("#sleep", instance_id());
+	end;
+OnTouch:
+	sc_start SC_SLEEP,30000,5;
+	end;
+OnEnable:
+	enablenpc instance_npcname("#sleep", instance_id());
+	initnpctimer;
+	end;
+OnDisable:
+	disablenpc instance_npcname("#sleep", instance_id());
+	end;
+OnTimer1000:
+	instance_announce 0, "Nighoggur's Shadow:Yo voy a perseguir vuestros sueños para siempre",bc_map;
+	end;
+OnTimer3000:
+	donpcevent instance_npcname("#sleep", instance_id())+"::OnDisable";
+	stopnpctimer;
+	end;
+}
+2@nyd,284,280,0	script	#ice	-1,3,3,{
+OnInstanceInit:
+	disablenpc instance_npcname("#ice", instance_id());
+	end;
+OnTouch:
+	sc_start SC_FREEZE,30000,5;
+	end;
+OnEnable:
+	enablenpc instance_npcname("#ice", instance_id());
+	initnpctimer;
+	end;
+OnDisable:
+	disablenpc instance_npcname("#ice", instance_id());
+	end;
+OnTimer1000:
+	instance_announce 0, "Nighoggur's Shadow:Yo voy a transformar tu sangre en hielo",bc_map;
+	end;
+OnTimer3000:
+	donpcevent instance_npcname("#ice", instance_id())+"::OnDisable";
+	stopnpctimer;
+	end;
+}
+2@nyd,284,280,0	script	#blood	-1,3,3,{
+OnInstanceInit:
+	disablenpc instance_npcname("#blood", instance_id());
+	end;
+OnEnable:
+	enablenpc instance_npcname("#blood", instance_id());
+	initnpctimer;
+	end;
+OnDisable:
+	disablenpc instance_npcname("#blood", instance_id());
+	end;
+OnTouch:
+	sc_start SC_BLEEDING,30000,5;
+	end;
+OnTimer1000:
+	instance_announce 0, "Nighoggur's Shadow:Yo voy a traer dolor a todos vosotros",bc_map;
+	end;
+OnTimer3000:
+	donpcevent instance_npcname("#blood", instance_id())+"::OnDisable";
+	stopnpctimer;
+	end;
+}
+2@nyd,115,272,0	script	#trampasnigg2	-1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#trampasnigg2", instance_id());
+	end;
+OnEnable:
+	enablenpc instance_npcname("#trampasnigg2", instance_id());
+	instance_warpall "2@nyd",115,272;
+	areamonster "2@nyd",109,266,119,279,"Rhyncho",2020,4,instance_npcname("#trampasnigg2", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",109,266,119,279,"Phylla",2021,4,instance_npcname("#trampasnigg2", instance_id())+"::OnMyMobDead";
+	set .@nest_ran,rand(1,3);
+	if (.@nest_ran == 1) {
+		donpcevent instance_npcname("#sleep2", instance_id())+"::OnEnable";
+	}
+	else if (.@nest_ran == 2) {
+		donpcevent instance_npcname("#ice2", instance_id())+"::OnEnable";
+	}
+	else if (.@nest_ran == 3) {
+		donpcevent instance_npcname("#blood2", instance_id())+"::OnEnable";
+	}
+	end;
+OnMyMobDead:
+	set .@callnum,8;
+	set .@d_mob_num,mobcount("2@nyd",instance_npcname("#trampasnigg2", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 7) {
+	instance_announce 0, "Nighoggur's Shadow: No esta nada mal... se acabó el descanso",bc_map,"0x00FF00";
+	disablenpc instance_npcname("#trampasnigg2", instance_id());
+	}
+	end;
+}
+2@nyd,115,272,0	script	#sleep2	-1,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#sleep2", instance_id());
+	end;
+OnTouch:
+	sc_start SC_SLEEP,30000,5;
+	end;
+OnEnable:
+	enablenpc instance_npcname("#sleep2", instance_id());
+	initnpctimer;
+	end;
+OnDisable:
+	disablenpc instance_npcname("#sleep2", instance_id());
+	end;
+OnTimer1000:
+	instance_announce 0, "Nighoggur's Shadow:Yo voy a perseguir sus sueños para siempre",bc_map;
+	end;
+OnTimer3000:
+	donpcevent instance_npcname("#sleep2", instance_id())+"::OnDisable";
+	stopnpctimer;
+	end;
+}
+2@nyd,115,272,0	script	#ice2	-1,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#ice2", instance_id());
+	end;
+OnTouch:
+	sc_start SC_FREEZE,30000,5;
+	end;
+OnEnable:
+	enablenpc instance_npcname("#ice2", instance_id());
+	initnpctimer;
+	end;
+OnDisable:
+	disablenpc instance_npcname("#ice2", instance_id());
+	end;
+OnTimer1000:
+	instance_announce 0, "Nighoggur's Shadow:Yo voy a transformar tu sangre en hielo",bc_map;
+	end;
+OnTimer3000:
+	donpcevent instance_npcname("#ice2", instance_id())+"::OnDisable";
+	stopnpctimer;
+	end;
+}
+2@nyd,115,272,0	script	#blood2	-1,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#blood2", instance_id());
+	end;
+OnTouch:
+	sc_start SC_BLEEDING,30000,5;
+	end;
+OnEnable:
+	enablenpc instance_npcname("#blood2", instance_id());
+	initnpctimer;
+	end;
+OnDisable:
+	disablenpc instance_npcname("#blood2", instance_id());
+	end;
+OnTimer1000:
+	instance_announce 0, "Nighoggur's Shadow:Yo voy a traer dolor a todos vosotros",bc_map;
+	end;
+OnTimer3000:
+	donpcevent instance_npcname("#blood2", instance_id())+"::OnDisable";
+	stopnpctimer;
+	end;
+}
+
+2@nyd,116,372,0	script	#trampasnigg3	-1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#trampasnigg3", instance_id());
+	end;
+OnEnable:
+	enablenpc instance_npcname("#trampasnigg3", instance_id());
+	instance_warpall "2@nyd",116,372;
+	areamonster "2@nyd",109,379,125,362,"Rhyncho",2020,4,instance_npcname("#trampasnigg3", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",109,379,125,362,"Phylla",2021,4,instance_npcname("#trampasnigg3", instance_id())+"::OnMyMobDead";
+	set .@nest_ran,rand(1,3);
+	if (.@nest_ran == 1) {
+		donpcevent instance_npcname("#sleep3", instance_id())+"::OnEnable";
+	}
+	else if (.@nest_ran == 2) {
+		donpcevent instance_npcname("#ice3", instance_id())+"::OnEnable";
+	}
+	else if (.@nest_ran == 3) {
+		donpcevent instance_npcname("#blood3", instance_id())+"::OnEnable";
+	}
+	end;
+OnMyMobDead:
+	set .@callnum,8;
+	set .@d_mob_num,mobcount("2@nyd",instance_npcname("#trampasnigg3", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 7) {
+	instance_announce 0, "Nighoggur's Shadow: No esta nada mal... se acabó el descanso",bc_map,"0x00FF00";
+	disablenpc instance_npcname("#trampasnigg3", instance_id());
+	}
+	end;
+}
+
+2@nyd,115,272,0	script	#sleep3	-1,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#sleep3", instance_id());
+	end;
+OnTouch:
+	sc_start SC_SLEEP,30000,5;
+	end;
+OnEnable:
+	enablenpc instance_npcname("#sleep3", instance_id());
+	initnpctimer;
+	end;
+OnDisable:
+	disablenpc instance_npcname("#sleep3", instance_id());
+	end;
+OnTimer1000:
+	instance_announce 0, "Nighoggur's Shadow:Yo voy a perseguir sus sueños para siempre",bc_map;
+	end;
+OnTimer3000:
+	donpcevent instance_npcname("#sleep3", instance_id())+"::OnDisable";
+	stopnpctimer;
+	end;
+}
+2@nyd,115,272,0	script	#ice3	-1,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#ice3", instance_id());
+	end;
+OnTouch:
+	sc_start SC_FREEZE,30000,5;
+	end;
+OnEnable:
+	enablenpc instance_npcname("#ice3", instance_id());
+	initnpctimer;
+	end;
+OnDisable:
+	disablenpc instance_npcname("#ice3", instance_id());
+	end;
+OnTimer1000:
+	instance_announce 0, "Nighoggur's Shadow:Yo voy a transformar tu sangre en hielo",bc_map;
+	end;
+OnTimer3000:
+	donpcevent instance_npcname("#ice3", instance_id())+"::OnDisable";
+	stopnpctimer;
+	end;
+}
+2@nyd,115,272,0	script	#blood3	-1,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#blood3", instance_id());
+	end;
+OnTouch:
+	sc_start SC_BLEEDING,30000,5;
+	end;
+OnEnable:
+	enablenpc instance_npcname("#blood3", instance_id());
+	initnpctimer;
+	end;
+OnDisable:
+	disablenpc instance_npcname("#blood3", instance_id());
+	end;
+OnTimer1000:
+	instance_announce 0, "Nighoggur's Shadow:Yo voy a traer dolor a todos vosotros",bc_map;
+	end;
+OnTimer3000:
+	donpcevent instance_npcname("#blood3", instance_id())+"::OnDisable";
+	stopnpctimer;
+	end;
+}
+2@nyd,286,376,0	script	#trampasnigg4	-1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#trampasnigg4", instance_id());
+	end;
+OnEnable:
+	enablenpc instance_npcname("#trampasnigg4", instance_id());
+	instance_warpall "2@nyd",286,376;
+	areamonster "2@nyd",293,368,278,383,"Rhyncho",2020,4,instance_npcname("#trampasnigg4", instance_id())+"::OnMyMobDead";
+	areamonster "2@nyd",293,368,278,383,"Phylla",2021,4,instance_npcname("#trampasnigg4", instance_id())+"::OnMyMobDead";
+	set .@nest_ran,rand(1,3);
+	if (.@nest_ran == 1) {
+		donpcevent instance_npcname("#sleep4", instance_id())+"::OnEnable";
+	}
+	else if (.@nest_ran == 2) {
+		donpcevent instance_npcname("#ice4", instance_id())+"::OnEnable";
+	}
+	else if (.@nest_ran == 3) {
+		donpcevent instance_npcname("#blood4", instance_id())+"::OnEnable";
+	}
+	end;
+OnMyMobDead:
+	set .@callnum,8;
+	set .@d_mob_num,mobcount("2@nyd",instance_npcname("#trampasnigg4", instance_id())+"::OnMyMobDead");
+	set .@mob_dead_num,.@callnum - .@d_mob_num;
+	if (.@mob_dead_num > 7) {
+	instance_announce 0, "Nighoggur's Shadow: No esta nada mal... se acabó el descanso",bc_map,"0x00FF00";
+	disablenpc instance_npcname("#trampasnigg4", instance_id());
+	}
+	end;
+}
+
+2@nyd,115,272,0	script	#sleep4	-1,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#sleep4", instance_id());
+	end;
+OnTouch:
+	sc_start SC_SLEEP,30000,5;
+	end;
+OnEnable:
+	enablenpc instance_npcname("#sleep4", instance_id());
+	initnpctimer;
+	end;
+OnDisable:
+	disablenpc instance_npcname("#sleep4", instance_id());
+	end;
+OnTimer1000:
+	instance_announce 0, "Nighoggur's Shadow:Yo voy a perseguir sus sueños para siempre",bc_map;
+	end;
+OnTimer3000:
+	donpcevent instance_npcname("#sleep4", instance_id())+"::OnDisable";
+	stopnpctimer;
+	end;
+}
+2@nyd,115,272,0	script	#ice4	-1,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#ice4", instance_id());
+	end;
+OnTouch:
+	sc_start SC_FREEZE,30000,5;
+	end;
+OnEnable:
+	enablenpc instance_npcname("#ice4", instance_id());
+	initnpctimer;
+	end;
+OnDisable:
+	disablenpc instance_npcname("#ice4", instance_id());
+	end;
+OnTimer1000:
+	instance_announce 0, "Nighoggur's Shadow:Yo voy a transformar tu sangre en hielo",bc_map;
+	end;
+OnTimer3000:
+	donpcevent instance_npcname("#ice4", instance_id())+"::OnDisable";
+	stopnpctimer;
+	end;
+}
+2@nyd,115,272,0	script	#blood4	-1,1,1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#blood4", instance_id());
+	end;
+OnTouch:
+	sc_start SC_BLEEDING,30000,5;
+	end;
+OnEnable:
+	enablenpc instance_npcname("#blood4", instance_id());
+	initnpctimer;
+	end;
+OnDisable:
+	disablenpc instance_npcname("#blood4", instance_id());
+	end;
+OnTimer1000:
+	instance_announce 0, "Nighoggur's Shadow:Yo voy a traer dolor a todos vosotros",bc_map;
+	end;
+OnTimer3000:
+	donpcevent instance_npcname("#blood4", instance_id())+"::OnDisable";
+	stopnpctimer;
+	end;
+}

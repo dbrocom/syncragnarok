@@ -351,8 +351,8 @@ morocc,35,174,5	script	Meidi#para	729,{
 	mes "That place is dangerous.";
 	mes "Somebody should go in there and make it safe for everyone.";
 	mes "Hopefully, soon!";
-	next;
 	if (slv_quest == 1) {
+		next;
 		mes "[Meidi]";
 		mes "Oh! Are you from Eden Group?";
 		mes "Are you here for my request?";
@@ -391,7 +391,7 @@ morocc,35,174,5	script	Meidi#para	729,{
 			close;
 		case 2:
 			set slv_quest,0;
-			erasequest 10102;
+			completequest 10102;
 			mes "[Meidi]";
 			mes "I see. There isn't another way.";
 			mes "I will send a message to Eden Group.";
@@ -572,7 +572,7 @@ geffen,146,132,3	script	Ancellia#para	906,{
 			close;
 		case 2:
 			set slv_quest,0;
-			erasequest 10103;
+			completequest 10103;
 			mes "[Ancellia]";
 			mes "Was the mission too hard?";
 			mes "I guess I'll just have to wait for someone else from the Eden Group to help me.";
@@ -746,7 +746,7 @@ aldebaran,144,230,3	script	Jeanbai#para	900,{
 			close;
 		case 2:
 			set slv_quest,0;
-			erasequest 10104;
+			completequest 10104;
 			mes "[Jeanbai]";
 			mes "Too bad. I'm disappointed.";
 			mes "I should inform the Eden Group again.";
@@ -899,7 +899,7 @@ aldebaran,105,116,3	script	Lizingshetter#para	869,{
 			close;
 		case 2:
 			set slv_quest,0;
-			erasequest 10105;
+			completequest 10105;
 			mes "[Lizingshetter]";
 			mes "You can't understand my heart.";
 			mes "I will find another brave adventurer.";
@@ -1040,7 +1040,7 @@ alberta,215,111,5	script	Funfi#para	828,{
 			close;
 		case 2:
 			set slv_quest,0;
-			erasequest 10106;
+			completequest 10106;
 			mes "[Funfi]";
 			mes "What? Don't you want to work?! Gosh!";
 			mes "I will tell everything to the Eden Group!";
