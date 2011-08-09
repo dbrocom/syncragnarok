@@ -16,18 +16,18 @@
 
 alberta,247,115,3	script	Brute Sailor#bra2	100,{
 	mes "[Brute Sailor]";
-	mes "Hey, have you heard of the place called Brasilis?";
-	mes "It's a place that's as hot as the Morroc desert, and as dense as the forests of Payon.";
+	mes "Eh, ¿has escuchado algo sobre un sitio llamado Brasilis?";
+	mes "Es un lugar tan cálido como el desierto de Morroc, y tan denso como los bosques de Payon.";
 	next;
 	mes "[Brute Sailor]";
-	mes "I have a map to get there, if you want I can take you to Brasilis.";
-	mes "It will only cost you 10,000 zeny. What do you say?";
+	mes "Tengo un mapa para llegar allí, si quieres puedo llevarte.";
+	mes "Solo te costará 10,000 zeny. ¿Qué dices?";
 	next;
 	switch(select("Let's go to Brasilis!:Cancel.")) {
 	case 1:
 		if (Zeny > 9999	) {
 			mes "[Brute Sailor]";
-			mes "Great! Let's Go!";
+			mes "¡Bien! ¡Vamos!";
 			close2;
 			set Zeny,Zeny-10000;
 			warp "brasilis",314,60;
@@ -35,34 +35,32 @@ alberta,247,115,3	script	Brute Sailor#bra2	100,{
 		}
 		else {
 			mes "[Brute Sailor]";
-			mes "I'm sorry but you don't have";
-			mes "enough zeny now";
-			mes "You need 10,000 zeny";
-			mes "to go to Brasilis";
-			mes "Thank you.";
+			mes "Lo siento pero no tienes suficiente dinero.";
+			mes "Necesitas 10,000 zeny para ir a Brasilis.";
+			mes "Gracias.";
 			close;
 		}
 	case 2:
 		mes "[Brute Sailor]";
-		mes "Let me know if you change your mind.";
+		mes "Habla conmigo si cambias de opinión.";
 		close;
 	}
 }
 
 brasilis,316,57,3	script	Brute Sailor#bra1	100,{
 	mes "[Brute Sailor]";
-	mes "My ship will be heading back to Alberta soon, would you like to go back?";
+	mes "Mi barco volverá a Alberta pronto, ¿te gustaría subir?";
 	next;
 	switch(select("Return to Alberta.:Cancel.")) {
 	case 1:
 		mes "[Brute Sailor]";
-		mes "Alright, lets get going!";
+		mes "Muy bien, ¡vamos!";
 		close2;
 		warp "alberta",244,115;
 		end;
 	case 2:
 		mes "[Brute Sailor]";
-		mes "Let me know if you change your mind.";
+		mes "Habla conmigo si cambias de opinión.";
 		close;
 	}
 }
@@ -85,6 +83,6 @@ brasilis,155,165,3	script	Bulletin Board#bra3	858,{
 brasilis,303,309,3	script	Bulletin Board#bra4	858,{
 	mes ":: Jungle Cable ::";
 	mes " ";
-	mes "- Not recommended for the faint hearted! -";
+	mes "- ¡No recomendado para corazones débiles! -";
 	close;
 }
