@@ -4,7 +4,7 @@
 //= Darkchild (1.1)
 //= Playtester (1.2)
 //===== Current Version: ===================================== 
-//= 3.0
+//= 3.0a
 //===== Compatible With: ===================================== 
 //= eAthena 1.0+
 //===== Description: ========================================= 
@@ -45,6 +45,7 @@
 //= 2.8 Removed Moscovia Inn; Its in quests/quest_moscovia.txt [Kisuka]
 //= 2.9 Added switch menus, updated to match AEGIS scripts. [Kisuka]
 //= 3.0 Added Brasilis inn receptionist. [L0ne_W0lf]
+//= 3.0a Updated dialog for Brasilis inn. [L0ne_W0lf] 
 //============================================================ 
 
 
@@ -197,43 +198,39 @@ ve_in,157,219,5	script	Inn Master#Receptionist	709,{
 }
 
 //======================== Brasilis =================================
-bra_in01,27,24,3	script	Receptionist#bra	478,{
-	mes "[Receptionist]";
-	mes "Welcome to the 'Happy Toucan' Inn,";
-	mes "we have everything to make you feel at home.";
+bra_in01,27,24,3	script	Hotel Keeper#bra1	478,{ 
+	mes "[Hotel Keeper]";
+	mes "Welcome to the beautiful Brasilis Hotel.";
 	next;
-	switch(select("Guardar:Descansar - 3,500 zeny:Salir")) {
+	switch(select("Guardar:Descansar - 3,500 zeny")) {
 	case 1:
-		mes "[Receptionist]";
-		mes "Would you like me to Guardar your respawn point here?";
+		mes "[Hotel Keeper]"; 
+		mes "Do you want to save here at the Brasilis Hotel?";
 		next;
-		switch(select("No, thanks.:Sure!")) {
+		switch(select("No thank you.:Absolutely.")) {
 		case 1:
-			mes "[Receptionist]";
-			mes "Alright, please come back if you change your mind.";
+			mes "[Hotel Keeper]"; 
+			mes "Ok then, enjoy your stay.";
 			close;
 		case 2:
-			savepoint "bra_in01",143,68;
-			mes "[Receptionist]";
-			mes "Your respawn point has been Guardard.";
-			mes "Enjoy your stay in Brasilius and don't forget to check our natural beauties.";
+			mes "[Hotel Keeper]";
+			mes "Your respawn has been saved here at the hotel. I hope that you enjoy your stay here in Brasilis.";
+			savepoint "bra_in01",144,69;
 			close;
 		}
 	case 2:
 		if (!callfunc ("DelCoin",3500,1)) {
-			mes "Lo siento, pero necesitas 3,500 zeny para poder reposar aquí.";
+			mes "Lo siento, pero necesitas 3,500 zeny para poder descansar aquí una noche.";
 			close;
 		}
 		else {
-			mes "[Receptionist]";
-			mes "I'll take you to your room.";
+			mes "[Hotel Keeper]";
+			mes "I will show you a great room."; 
 			close2;
 			percentheal 100,100;
 			warp "bra_in01",144,69;
 			end;
 		}
-	case 3:
-		close;
 	}
 }
 

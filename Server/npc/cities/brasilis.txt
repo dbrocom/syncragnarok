@@ -3,7 +3,7 @@
 //===== By: ================================================== 
 //= L0ne_W0lf
 //===== Current Version: =====================================
-//= 1.1
+//= 1.2
 //===== Compatible With: ===================================== 
 //= eAthena SVN
 //===== Description: ========================================= 
@@ -12,77 +12,150 @@
 //===== Additional Comments: ================================= 
 //= 1.0 First version. Transportation and Basic NPCs.
 //= 1.1 Fixed Zeny not being removed for payment. [Kisuka]
+//= 1.2 Updated dialog, added Ice Cream Maker. [L0ne_W0lf] 
 //============================================================ 
 
-alberta,247,115,3	script	Brute Sailor#bra2	100,{
-	mes "[Brute Sailor]";
+alberta,247,115,3	script	Crewman#bra2	100,{
+	mes "[Crewman]";
 	mes "Eh, ¿has escuchado algo sobre un sitio llamado Brasilis?";
-	mes "Es un lugar tan cálido como el desierto de Morroc, y tan denso como los bosques de Payon.";
+	mes "Es una ciudad tropical caliente como el desierto pero también muy lluviosa. Es un lugar muy misterioso.";
 	next;
-	mes "[Brute Sailor]";
-	mes "Tengo un mapa para llegar allí, si quieres puedo llevarte.";
+	mes "[Crewman]";
+	mes "Hace poco descubrimos una nueva ruta oceánica para llegar allí fácilmente.";
 	mes "Solo te costará 10,000 zeny. ¿Qué dices?";
 	next;
-	switch(select("Let's go to Brasilis!:Cancel.")) {
+	switch(select("¡Llévame a Brasilis!:Prefiero permanecer aquí.")) {
 	case 1:
 		if (Zeny > 9999	) {
-			mes "[Brute Sailor]";
-			mes "¡Bien! ¡Vamos!";
+			mes "[Crewman]";
+			mes "¡¡Guay~!! ¡Vamos!";
+			set zeny,zeny-10000;
 			close2;
-			set Zeny,Zeny-10000;
 			warp "brasilis",314,60;
 			end;
 		}
 		else {
-			mes "[Brute Sailor]";
+			mes "[Crewman]";
 			mes "Lo siento pero no tienes suficiente dinero.";
 			mes "Necesitas 10,000 zeny para ir a Brasilis.";
 			mes "Gracias.";
 			close;
 		}
 	case 2:
-		mes "[Brute Sailor]";
-		mes "Habla conmigo si cambias de opinión.";
+		mes "[Crewman]";
+		mes "Si alguna vez sientes interés, házmelo saber y te llevaré.";
 		close;
 	}
 }
 
-brasilis,316,57,3	script	Brute Sailor#bra1	100,{
-	mes "[Brute Sailor]";
-	mes "Mi barco volverá a Alberta pronto, ¿te gustaría subir?";
+brasilis,316,57,3	script	Crewman#bra1	100,{
+	mes "[Crewman]";
+	mes "Mi barco volverá a Alberta pronto, ¿te gustaría acompañarnos?";
 	next;
-	switch(select("Return to Alberta.:Cancel.")) {
+	switch(select("Volver a Alberta.:Todavía no~.")) {
 	case 1:
-		mes "[Brute Sailor]";
-		mes "Muy bien, ¡vamos!";
+		mes "[Crewman]";
+		mes "Sabía que echarías de menos tu hogar.";
 		close2;
 		warp "alberta",244,115;
 		end;
 	case 2:
-		mes "[Brute Sailor]";
-		mes "Habla conmigo si cambias de opinión.";
+		mes "[Crewman]";
+		mes "Está bien, apáñatelas por ti mismo. Nos vemos cuando volvamos.";
 		close;
 	}
 }
 
-brasilis,278,137,3	script	Bulletin Board#bra1	858,{
-	mes ":: Happy Toucan Inn ::";
+brasilis,155,165,3	script	Signpost#bra1	858,{ 
+	mes ":: Museo de Arte ::";
 	close;
 }
 
-brasilis,244,248,1	script	Bulletin Board#bra2	858,{
-	mes ":: Brasilis Market ::";
+brasilis,195,231,3	script	Signpost#bra2	858,{ 
+	mes ":: Monumento de Verass ::";
 	close;
 }
 
-brasilis,155,165,3	script	Bulletin Board#bra3	858,{
-	mes ":: Brasilis Art Museum ::";
-	close;
-}
-
-brasilis,303,309,3	script	Bulletin Board#bra4	858,{
-	mes ":: Jungle Cable ::";
+brasilis,240,247,3	script	Signpost#bra3	858,{
+	mes ":: Mercado ::";
 	mes " ";
+	mes "- Pociones y Armamento -";
+	close;
+}
+
+brasilis,303,309,3	script	Signpost#bra4	858,{ 
+	mes ":: Jungle Cable ::";
+	mes "";
 	mes "- ¡No recomendado para corazones débiles! -";
 	close;
+}
+
+brasilis,278,137,3	script	Signpost#bra5	858,{
+	mes ":: Hotel de Brasilis ::";
+	close;
+}
+
+brasilis,137,77,5	script	Ice-Cream Maker	85,{
+	mes "[Ice Cream Maker]";
+	mes "Acércate~acércate~";
+	mes "El helado es el aperitivo perfecto para los días de calor~";
+	mes "Son sólo ^3355FF100 Zeny^000000~";
+	mes "Helado~";
+	mes "¡Aquí tienes!";
+	next;
+	switch(select("¡Dame Uno!:¿Helado?:Cancelar.")) {
+	case 1:
+		mes "[Ice Cream Maker]";
+		mes "Debido a que hay mucha gente deseosa de conseguir un helado, sólo puedo venderte un máximo de 5 a la vez.";
+		mes "Así que... ¿cuántos quieres?";
+		next;
+		while(1) {
+			input .@input; //,1,5;
+			if (.@input == 0) {
+				mes "[Ice Cream Maker]";
+				mes "¿Ninguno?";
+				mes "Pues deja de molestar, que tengo clientes a los que atender.";
+				close;
+			}
+			else if ((.@input < 0) || (.@input > 5)) {
+				mes "[Ice Cream Maker]";
+				mes "Wow.";
+				mes "Has hecho un pedido muy grande.";
+				mes "Si te tomas más de 5 estoy seguro de que tendrás un dolor de tripa insoportable. Tómatelo con calma muchacho.";
+				next;
+			}
+			else
+				break;
+		}
+		set .@icecream_hap,.@input*100;
+		if (!callfunc ("DelCoin",.@icecream_hap,0)) {
+			mes "[Ice Cream Maker]";
+			mes "Dood~! No tienes suficiente dinero.";
+			mes "Son sólo ^3355FF100 Zeny^000000~ ¡De verdad!";
+			close;
+		}
+		if (!checkweight(536,.@input)) {
+			mes "[Ice Cream Maker]";
+			mes "Parece que llevas muchas cosas encima.";
+			mes "Aligera tu carga antes de comprar esto.";
+			close;
+		}
+		callfunc ("DelCoin",.@icecream_hap,1);
+		getitem 536,.@input; //Ice_Cream
+		close;
+	case 2:
+		mes "[Ice Cream Maker]";
+		mes "'El helado es... Espera, ¿me lo estás diciendo en serio?";
+		mes "¿No sabes lo que es un Helado?";
+		mes "¿Debajo de qué roca has estado viviendo?";
+		next;
+		mes "[Ice Cream Maker]";
+		mes "Paso de intentar explicártelo~.";
+		mes "Tú asegúrate de comprar un Helado aquí, mientras todavía están fríos.";
+		close;
+	case 3:
+		mes "[Ice Cream Maker]";
+		mes "¡No dejes pasar la oportunidad de probar el mejor Helado de toda la comarca~!";
+		close;
+	}
 }
