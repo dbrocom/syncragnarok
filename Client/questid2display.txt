@@ -8114,7 +8114,7 @@ Para conseguir tu primer Pico como Miembro del Gremio de Minería necesitas encon
 
 25002#Minería LVL 2#SG_FEEL#1_m_smit#
 ¡Se han acabado los suministros del Gremio! Necesitas encontrar un Moledor que consiga:#
-100 Arena de Cuarzo, 20 Polvo de Elunium y 20 Polvo de Oridecon#
+50 Arena de Cuarzo, 10 Polvo de Elunium y 10 Polvo de Oridecon#
 
 25003#Minería LVL 3#SG_FEEL#1_m_smit#
 Te han encargado encontrar 5 menas de Cobre, Plata, Oro, Platino y Mithril.#
@@ -8142,7 +8142,7 @@ Encuéntrale y ayúdale.#
 
 25014#Pesca LVL 4#SG_FEEL#4_f_0400#
 ¡El Almacén del Gremio se está quedando sin Pescados!#
-¿Qué tal si consigues: 1 Esturión, 3 Lubina Azul, 3 Perca Verde, 3 Trucha Asalmonada, 5 Mero, 5 Bonito y 10 Guppy Naranja para llenarlo un poco?#
+¿Qué tal si consigues: 1 Esturión, 3 Lubina Azul, 3 Perca Verde, 3 Trucha Asalmonada, 5 Mero, 5 Bonito y 5 Guppy Naranja para llenarlo un poco?#
 
 25015#Pesca LVL 5#SG_FEEL#4_f_0400#
 Parece que en Ayothaya han impuesto la prohibición de no poder usar cebos tradicionales.#

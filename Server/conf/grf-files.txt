@@ -1,0 +1,16 @@
+/-----------------------------------------
+// GRF List
+//-----------------------------------------
+// grf: C:\path\to\RO\data.grf
+// You may add more in this format
+// grf: <data file path>
+grf: C:\Users\sirius\Desktop\Cliente SyncRO\syncro.grf
+grf: C:\Users\sirius\Desktop\Cliente SyncRO\syncro-mod.grf
+grf: C:\Users\sirius\Desktop\Cliente SyncRO\data.grf
+grf: C:\Users\sirius\Desktop\Cliente SyncRO\rdata.grf
+
+//------ Others ---------------------------
+
+// Data Directory (without the actual data\ though)
+// the below example would use C:\path\to\RO\data\
+//data_dir: C:\Users\sirius\ROdata\

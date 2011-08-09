@@ -166,8 +166,8 @@ gef_fild07,321,193,4	script	Langry#Fabre_Hunt	754,{
 							mes "[Langry]";
 							mes "Thank you for the Fluff. This helps me out greatly.";
 							mes "Oh and here you go, this should help you get stronger, faster!";
-							delitem 48,4; //Fluff
-							getexp 385,30;
+							delitem 914,25; //Fluff
+							getexp 48,4;
 							close;
 						}
 						else {

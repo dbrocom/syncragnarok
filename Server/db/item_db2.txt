@@ -490,7 +490,7 @@
 30056,Orange,Orange,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,40,0,1056,{},{},{}
 30057,Icecream,Icecream,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,40,0,1057,{},{},{}
 // ----------- Cebalrais Ring Headgears
-30058,Candy_Ring,Candy Ring,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,50,0,1059,{},{},{}
+30058,Candy_Ring,Candy Ring,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,50,0,1058,{},{},{}
 30059,Cookie_Ring,Cookie Ring,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,50,0,1059,{},{},{}
 30060,Day_Ring,Day Ring,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,50,0,1060,{},{},{}
 30061,Heart_Ring,Heart Ring,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,50,0,1061,{},{},{}
@@ -619,10 +619,10 @@
 
 // ===== SISTEMA PROFESIONES (30200-30300)
 // ---------- Pesca: Peces       (30201-30250)
-30201,EsturiÃ³n,EsturiÃ³n,0,4000,2000,300,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30201,Esturión,Esturión,0,4000,2000,300,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30202,Mero,Mero,0,3200,1800,500,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30203,Siluro,Siluro,0,3640,1870,200,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30204,TiburÃ³n,TiburÃ³n,0,9000,4600,600,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30204,Tiburón,Tiburón,0,9000,4600,600,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30205,Caballa,Caballa,0,3000,1500,300,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30206,Gamba,Gamba,0,700,300,20,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30207,Calamar,Calamar,0,600,130,20,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
@@ -640,26 +640,26 @@
 30219,Guppy_Amarillo,Guppy Amarillo,0,1200,600,30,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30220,Guppy_Rojo,Guppy Rojo,0,1600,800,30,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30221,Perca_Verde,Perca Verde,0,2900,1400,160,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30222,Perca_MarrÃ³n,Perca MarrÃ³n,0,3000,1500,160,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30222,Perca_Marrón,Perca Marrón,0,3000,1500,160,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30223,Perca_Azul,Perca Azul,0,3200,1600,160,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30224,Lubina_Azul,Lubina Azul,0,3000,1500,160,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30225,Lubina_Gris,Lubina Gris,0,3200,1600,160,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30226,Lubina_Verde,Lubina Verde,0,3300,1700,160,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30227,Pez_EscorpiÃ³n_ArgÃ©nteo,Pez EscorpiÃ³n ArgÃ©nteo,0,4000,2000,70,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 0,-100; },{},{}
-30228,Pez_EscorpiÃ³n_Verdoso,Pez EscorpiÃ³n Verdoso,0,4100,2050,70,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 0,-100; },{},{}
-30229,Pez_EscorpiÃ³n_Escarlata,Pez EscorpiÃ³n Escarlata,0,4200,2100,70,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 0,-100; },{},{}
-30230,PiraÃ±a_Negra,PiraÃ±a Negra,0,1300,600,110,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30231,PiraÃ±a_Azulada,PiraÃ±a Azulada,0,1350,610,110,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30232,PiraÃ±a_Pirita,PiraÃ±a Pirita,0,1400,660,110,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30227,Pez_Escorpión_Argénteo,Pez Escorpión Argénteo,0,4000,2000,70,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 0,-100; },{},{}
+30228,Pez_Escorpión_Verdoso,Pez Escorpión Verdoso,0,4100,2050,70,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 0,-100; },{},{}
+30229,Pez_Escorpión_Escarlata,Pez Escorpión Escarlata,0,4200,2100,70,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 0,-100; },{},{}
+30230,Piraña_Negra,Piraña Negra,0,1300,600,110,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30231,Piraña_Azulada,Piraña Azulada,0,1350,610,110,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30232,Piraña_Pirita,Piraña Pirita,0,1400,660,110,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30233,Trucha,Trucha,0,1800,900,140,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30234,Trucha_Asalmonada,Trucha Asalmonada,0,1850,910,140,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30235,SalmÃ³n,SalmÃ³n,0,2500,1200,160,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30235,Salmón,Salmón,0,2500,1200,160,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30236,Sargo_Blanquecino,Sargo Blanquecino,0,1600,800,80,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30237,Sargo_Parduzco,Sargo Parduzco,0,1700,800,80,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30238,Sargo_Cenizo,Sargo Cenizo,0,1800,800,80,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30239,AtÃºn_Claro,AtÃºn Claro,0,1900,1000,280,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30240,AtÃºn_Rojo,AtÃºn Rojo,0,2500,1200,280,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30241,AtÃºn_Azul,AtÃºn Azul,0,2200,1100,280,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30239,Atún_Claro,Atún Claro,0,1900,1000,280,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30240,Atún_Rojo,Atún Rojo,0,2500,1200,280,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30241,Atún_Azul,Atún Azul,0,2200,1100,280,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 
 // ---------- Pesca: Algas		(30260-30265)
 30260,Alga_Nori,Alga Nori,3,1200,600,1,,,,,,,,,,,,,{},{},{}
@@ -674,33 +674,33 @@
 // ---------- Pesca: Basuras       (30270-30274)
 30270,Lata_Vieja,Lata Vieja,3,,,10,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 30271,Bota_Vieja,Bota Vieja,3,,,20,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-30272,NeumÃ¡tico_Viejo,NeumÃ¡tico Viejo,3,,,60,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+30272,Neumático_Viejo,Neumático Viejo,3,,,60,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 
-// ---------- RecolecciÃ³n: Carne	(30275-30279)
+// ---------- Recolección: Carne	(30275-30279)
 30275,Carne_Roja_Cruda,Carne Roja,3,2300,1100,1,,,,,,,,,,,,,{},{},{}
 30276,Carne_Blanca_Cruda,Carne Blanca,3,2500,1500,1,,,,,,,,,,,,,{},{},{}
 30277,Manteca,Manteca,3,1000,500,1,,,,,,,,,,,,,{},{},{}
 30278,Sebo,Sebo,3,1100,550,1,,,,,,,,,,,,,{},{},{}
 
-// ---------- RecolecciÃ³n: Plantas	(30280-30299)
+// ---------- Recolección: Plantas	(30280-30299)
 30280,Ginseng,Ginseng,3,25000,3000,10,,,,,,,,,,,,,{},{},{}
-//30281,MandrÃ¡gora,MandrÃ¡gora,3,25000,3000,10,,,,,,,,,,,,,{},{},{}
+//30281,Mandrágora,Mandrágora,3,25000,3000,10,,,,,,,,,,,,,{},{},{}
 30282,Girasol,Girasol,3,25000,3000,10,,,,,,,,,,,,,{},{},{}
 30283,Amapola,Amapola,3,25000,3000,10,,,,,,,,,,,,,{},{},{}
 
 // ---------- Pesca: Armas       (30301-30320)
-// CaÃ±as de pesca
-30301,CaÃ±a_Artesana,CaÃ±a Artesana,4,0,0,150,45,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
-30302,CaÃ±a_Vieja,CaÃ±a Vieja,4,0,0,180,45,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
-30303,CaÃ±a_de_Tienda,CaÃ±a de Tienda,4,0,0,200,45,,3,0,0xFFFFFFFF,7,2,2,2,0,0,1,{},{},{}
-30304,CaÃ±a_Buena,CaÃ±a Buena,4,0,0,240,45,,3,0,0xFFFFFFFF,7,2,2,3,0,0,1,{},{},{}
-30305,CaÃ±a_Profesional,CaÃ±a Profesional,4,0,0,260,45,,3,0,0xFFFFFFFF,7,2,2,4,0,0,1,{},{},{}
-// CaÃ±as de pesca [broken]
-30311,CaÃ±a_Artesana_Rota,CaÃ±a Artesana Rota,3,0,,150,,,,,,,,,,,,,{},{},{}
-30312,CaÃ±a_Vieja_Rota,CaÃ±a Vieja Rota,3,0,,180,,,,,,,,,,,,,{},{},{}
-30313,CaÃ±a_de_Tienda_Rota,CaÃ±a de Tienda Rota,3,0,,200,,,,,,,,,,,,,{},{},{}
-30314,CaÃ±a_Buena_Rota,CaÃ±a Buena Rota,3,0,,240,,,,,,,,,,,,,{},{},{}
-30315,CaÃ±a_Profesional_Rota,CaÃ±a Profesional Rota,3,0,,260,,,,,,,,,,,,,{},{},{}
+// Cañas de pesca
+30301,Caña_Artesana,Caña Artesana,4,0,0,150,45,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
+30302,Caña_Vieja,Caña Vieja,4,0,0,180,45,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
+30303,Caña_de_Tienda,Caña de Tienda,4,0,0,200,45,,3,0,0xFFFFFFFF,7,2,2,2,0,0,1,{},{},{}
+30304,Caña_Buena,Caña Buena,4,0,0,240,45,,3,0,0xFFFFFFFF,7,2,2,3,0,0,1,{},{},{}
+30305,Caña_Profesional,Caña Profesional,4,0,0,260,45,,3,0,0xFFFFFFFF,7,2,2,4,0,0,1,{},{},{}
+// Cañas de pesca [broken]
+30311,Caña_Artesana_Rota,Caña Artesana Rota,3,0,,150,,,,,,,,,,,,,{},{},{}
+30312,Caña_Vieja_Rota,Caña Vieja Rota,3,0,,180,,,,,,,,,,,,,{},{},{}
+30313,Caña_de_Tienda_Rota,Caña de Tienda Rota,3,0,,200,,,,,,,,,,,,,{},{},{}
+30314,Caña_Buena_Rota,Caña Buena Rota,3,0,,240,,,,,,,,,,,,,{},{},{}
+30315,Caña_Profesional_Rota,Caña Profesional Rota,3,0,,260,,,,,,,,,,,,,{},{},{}
 // ---------- Mineria     (30321-30340)
 // Picos
 30321,Piqueta,Piqueta,4,0,0,180,65,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
@@ -714,7 +714,7 @@
 30333,Pico_Viejo_Roto,Pico Viejo Roto,3,0,,260,,,,,,,,,,,,,{},{},{}
 30334,Pico_de_Tienda_Roto,Pico de Tienda Roto,3,0,,260,,,,,,,,,,,,,{},{},{}
 30335,Pico_Profesional_Roto,Pico Profesional Roto,3,0,,270,,,,,,,,,,,,,{},{},{}
-// ---------- RecolecciÃ³n (30341-30360)
+// ---------- Recolección (30341-30360)
 // Hoces
 30341,Hoz_Artesana,Hoz Artesana,4,0,0,120,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
 30342,Hoz_Vieja,Hoz Vieja,4,0,0,140,60,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
@@ -732,16 +732,16 @@
 30361,Piedra_de_Moler,Piedra de Moler,3,0,,10,,,,,,,,,,,,,{},{},{}
 30362,Mortero,Mortero,3,0,,10,,,,,,,,,,,,,{},{},{}
 30363,Molinillo,Molinillo,3,0,,10,,,,,,,,,,,,,{},{},{}
-30364,Molinillo_MecÃ¡nico,Molinillo MecÃ¡nico,3,0,,10,,,,,,,,,,,,,{},{},{}
+30364,Molinillo_Mecánico,Molinillo Mecánico,3,0,,10,,,,,,,,,,,,,{},{},{}
 30365,Llaves_del_Molino,Llaves del Molino,3,0,,10,,,,,,,,,,,,,{},{},{}
 // Morteros [broken]
 30371,Piedra_de_Moler_Rota,Piedra de Moler Rota,3,0,,220,,,,,,,,,,,,,{},{},{}
 30372,Mortero_Roto,Mortero Roto,3,0,,40,,,,,,,,,,,,,{},{},{}
 30373,Molinillo_Atascado,Molinillo Atascado,3,0,,20,,,,,,,,,,,,,{},{},{}
-30374,Molinillo_MecÃ¡nico_Estropeado,Molinillo MecÃ¡nico Estropeado,3,0,,30,,,,,,,,,,,,,{},{},{}
+30374,Molinillo_Mecánico_Estropeado,Molinillo Mecánico Estropeado,3,0,,30,,,,,,,,,,,,,{},{},{}
 30375,Llaves_Rotas_del_Molino,Llaves Rotas del Molino,3,0,,10,,,,,,,,,,,,,{},{},{}
 
-// ---------- MinerÃ­a: Elementos       (30381-30389)
+// ---------- Minería: Elementos       (30381-30389)
 30381,Copper_Ore,Copper Ore,3,10,,10,,,,,,,,,,,,,{},{},{}
 7232,Silver_Ore,Silver Ore,3,50,,10,,,,,,,,,,,,,{},{},{}
 7231,Gold_Ore,Gold Ore,3,100,,10,,,,,,,,,,,,,{},{},{}
@@ -766,7 +766,7 @@
 677,White_Gold_Coin,Platinum Coin,3,2000,,0,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 674,Mithril_Coin,Mithril Coin,3,5000,,0,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 
-// ---------- RecolecciÃ³n: Equipo       (30296-30299)
+// ---------- Recolección: Equipo       (30296-30299)
 30396,Straw_Basket,Straw Basket,5,20,,250,,1,,0,0xFFFFFFFF,7,2,32,,0,0,0,{},{},{}
 
 // ---------- Molienda: Polvos		(30400-30499)
@@ -779,7 +779,7 @@
 30406,Pigmento_Negro,Pigmento Negro,3,18000,8000,10,,,,,,,,,,,,,{},{},{}
 30407,Pigmento_Blanco,Pigmento Blanco,3,18000,8000,10,,,,,,,,,,,,,{},{},{}
 30408,Pigmento_Gris,Pigmento Gris,3,23000,10000,10,,,,,,,,,,,,,{},{},{}
-30409,Pigmento_MarrÃ³n,Pigmento MarrÃ³n,3,23000,10000,10,,,,,,,,,,,,,{},{},{}
+30409,Pigmento_Marrón,Pigmento Marrón,3,23000,10000,10,,,,,,,,,,,,,{},{},{}
 30410,Pigmento_Naranja,Pigmento Naranja,3,23000,10000,10,,,,,,,,,,,,,{},{},{}
 30411,Pigmento_Rosa,Pigmento Rosa,3,23000,10000,10,,,,,,,,,,,,,{},{},{}
 30412,Pigmento_Cyan,Pigmento Cyan,3,23000,10000,10,,,,,,,,,,,,,{},{},{}
@@ -792,13 +792,13 @@
 30418,Harina_Concha,Quitina,3,950,475,10,,,,,,,,,,,,,{},{},{}
 30419,Harina_HuesoSangre,Harina HuesoSangre,3,900,450,10,,,,,,,,,,,,,{},{},{}
 30420,Harina_PeloPluma,Queratina,3,700,350,10,,,,,,,,,,,,,{},{},{}
-30421,Harina_PezuÃ±aCuerno,Harina PezuÃ±aCuerno,3,700,350,10,,,,,,,,,,,,,{},{},{}
+30421,Harina_PezuñaCuerno,Harina PezuñaCuerno,3,700,350,10,,,,,,,,,,,,,{},{},{}
 30422,Compostaje,Compostaje,3,1000,500,10,,,,,,,,,,,,,{},{},{}
 30423,Arena_Caliza,Arena Caliza,3,1000,500,10,,,,,,,,,,,,,{},{},{}
 30424,Arena_Cuarzo,Arena Cuarzo,3,900,450,10,,,,,,,,,,,,,{},{},{}
-30425,Arena_VolcÃ¡nica,Arena VolcÃ¡nica,3,1500,750,10,,,,,,,,,,,,,{},{},{}
-30426,Polvo_MÃ¡gico,Polvo MÃ¡gico,3,2000,1000,10,,,,,,,,,,,,,{},{},{}
-30427,Polvo_TÃ³xico,Polvo TÃ³xico,3,2200,1100,10,,,,,,,,,,,,,{},{},{}
+30425,Arena_Volcánica,Arena Volcánica,3,1500,750,10,,,,,,,,,,,,,{},{},{}
+30426,Polvo_Mágico,Polvo Mágico,3,2000,1000,10,,,,,,,,,,,,,{},{},{}
+30427,Polvo_Tóxico,Polvo Tóxico,3,2200,1100,10,,,,,,,,,,,,,{},{},{}
 30428,Polvo_Especias,Polvo Especias,3,1800,900,10,,,,,,,,,,,,,{},{},{}
 // 1 Free
 30430,Polvo_Elunium,Polvo Elunium,3,3000,1500,10,,,,,,,,,,,,,{},{},{}
@@ -811,7 +811,7 @@
 30437,Polvo_Hierro,Polvo Hierro,3,2600,1300,10,,,,,,,,,,,,,{},{},{}
 30438,Polvo_Diamante,Polvo Diamante,3,4800,2400,10,,,,,,,,,,,,,{},{},{}
 30439,Polvo_Cristal,Polvo Cristal,3,2500,1250,10,,,,,,,,,,,,,{},{},{}
-30440,Polvo_RaÃ­z,Polvo RaÃ­z,3,3000,1500,10,,,,,,,,,,,,,{},{},{}
+30440,Polvo_Raíz,Polvo Raíz,3,3000,1500,10,,,,,,,,,,,,,{},{},{}
 30441,Polvo_Cacao,Polvo Cacao,3,2500,1250,10,,,,,,,,,,,,,{},{},{}
 30442,Polvo_Cera,Polvo Cera,3,2500,1250,10,,,,,,,,,,,,,{},{},{}
 
@@ -824,7 +824,7 @@
 30450,Esencia_Animal,Esencia Animal,3,1100,550,10,,,,,,,,,,,,,{},{},{}
 30451,Esencia_Venenosa,Esencia Venenosa,3,3300,1600,10,,,,,,,,,,,,,{},{},{}
 30452,Esencia_Medicinal,Esencia Medicinal,3,3300,1600,10,,,,,,,,,,,,,{},{},{}
-30453,Esencia_AromÃ¡tica,Esencia AromÃ¡tica,3,1100,550,10,,,,,,,,,,,,,{},{},{}
+30453,Esencia_Aromática,Esencia Aromática,3,1100,550,10,,,,,,,,,,,,,{},{},{}
 
 // ---------- Flora: Frutas			(30456-30459)
 30456,Tomate,Tomate,3,300,150,10,,,,,,,,,,,,,{},{},{}
@@ -839,7 +839,7 @@
 30465,Pimiento_Rojo,Pimiento Rojo,3,350,175,10,,,,,,,,,,,,,{},{},{}
 30466,Pimiento_Verde,Pimiento Verde,3,350,175,10,,,,,,,,,,,,,{},{},{}
 30467,Berenjena,Berenjena,3,550,275,10,,,,,,,,,,,,,{},{},{}
-30468,MaÃ­z,MaÃ­z,3,200,100,1,,,,,,,,,,,,,{},{},{}
+30468,Maíz,Maíz,3,200,100,1,,,,,,,,,,,,,{},{},{}
 30469,Arroz,Arroz,3,200,100,1,,,,,,,,,,,,,{},{},{}
 // ---------- Flora: Setas			(30470-30475)
 30470,Lentinula_edodes,Shiitake,3,5000,2500,10,,,,,,,,,,,,,{},{},{}
@@ -874,7 +874,7 @@
 30626,Martini,Martini,0,600,300,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(120,280),rand(30,40); if(rand(1000)<250) sc_start SC_PROVOKE,10000,0; },{},{}
 30627,Mojito,Mojito,0,600,300,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); if(rand(1000)<250) sc_start SC_HALLUCINATION,10000,0; },{},{}
 // ---------- Sushi
-30630,Masu_Nigiri,Masu Nigiri,0,1000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ misceffect(426); set @hp,rand(5,10) * -1; percentheal @hp,5; set @tmp,rand(1,100); if (@tmp >= 30) end; sc_start 34,1800000,10; dispbottom "Â¡EstÃ¡s borracho!"; },{},{}
+30630,Masu_Nigiri,Masu Nigiri,0,1000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ misceffect(426); set @hp,rand(5,10) * -1; percentheal @hp,5; set @tmp,rand(1,100); if (@tmp >= 30) end; sc_start 34,1800000,10; dispbottom "¡Estás borracho!"; },{},{}
 30631,Amaebi_Nigiri,Amaebi Nigiri,0,1000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 3,3; },{},{}
 30632,Hirame_Nigiri,Hirame Nigiri,0,1000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 3,3; },{},{}
 30633,Ika_Nigiri,Ika Nigiri,0,1100,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 3,3; },{},{}
@@ -892,16 +892,16 @@
 30651,Zumo_Calabaza,Zumo Calabaza,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
 30652,Zumo_Higo_Chumbo,Zumo Higo Chumbo,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
 30653,Zumo_Naranja,Zumo Naranja,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
-30654,Zumo_LimÃ³n,Zumo LimÃ³n,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
+30654,Zumo_Limón,Zumo Limón,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
 30655,Zumo_Fresa,Zumo Fresa,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
 30656,Zumo_Pera,Zumo Pera,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
 30657,Zumo_Kiwi,Zumo Kiwi,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
-30658,Zumo_PiÃ±a,Zumo PiÃ±a,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
+30658,Zumo_Piña,Zumo Piña,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
 30659,Zumo_Coco,Zumo Coco,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
-30660,Zumo_MelÃ³n,Zumo MelÃ³n,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
-30661,Zumo_SandÃ­a,Zumo SandÃ­a,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
+30660,Zumo_Melón,Zumo Melón,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
+30661,Zumo_Sandía,Zumo Sandía,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
 30662,Zumo_Acai,Zumo Acai,0,500,250,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(220,380),rand(15,20); },{},{}
-// ---------- UngÃ¼entos
+// ---------- Ungüentos
 30665,Pomada_Anticongelante,Pomada Anticongelante,0,10000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_end SC_FREEZING; sc_start4 SC_ARMOR_ELEMENT,300000,10,0,0,0; },{},{}
 30666,Pomada_Antiquemaduras,Pomada Antiquemaduras,0,10000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_end SC_BURNING; sc_start4 SC_ARMOR_ELEMENT,300000,0,0,10,0; },{},{}
 30667,Pomada_Medicinal,Pomada Medicinal,0,8000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_end SC_Poison; sc_end SC_Silence; sc_end SC_Blind; sc_end SC_Confusion; sc_end SC_Curse; sc_end SC_Hallucination; sc_end SC_STUN; sc_end SC_BLEEDING; sc_end SC_CHANGEUNDEAD; sc_end SC_ORCISH; sc_end SC_DECREASEAGI; sc_end SC_SLOWDOWN; },{},{}
@@ -913,16 +913,16 @@
 30673,Pomada_Psicoactiva,Pomada Psicoactiva,0,10000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_start SC_SpeedUp1,30000,0; sc_start SC_HALLUCINATION,30000,1; sc_start4 SC_L_LIFEPOTION,60000,3,3,0,0; },{},{}
 30674,Pomada_Endurecedora,Pomada Endurecedora,0,12000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ if(select("Aplicar en Arma:Aplicar en Armadura")==1){sc_start SC_ITEMSCRIPT,260000,4072;}else{sc_start SC_ITEMSCRIPT,260000,4061;}; },{},{}
 30675,Pomada_Inhibidora,Pomada Inhibidora,0,13000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ specialeffect2 EF_GUARD; sc_start SC_DEF_RATE,30000,25; },{},{}
-30676,Pomada_Inhibidora_MÃ¡gica,Pomada Inhibidora MÃ¡gica,0,13000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ specialeffect2 EF_SPELLBREAKER; sc_start SC_MDEF_RATE,30000,25; },{},{}
+30676,Pomada_Inhibidora_Mágica,Pomada Inhibidora Mágica,0,13000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ specialeffect2 EF_SPELLBREAKER; sc_start SC_MDEF_RATE,30000,25; },{},{}
 30677,Pomada_Reparadora,Pomada Reparadora,0,7000,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "BS_REPAIRWEAPON",1; heal -400,-50; },{},{}
 // ---------- Pastillas Raciales
 30691,Humano_Pill,Humano Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Neutral,15; bonus2 bSubEle,Ele_Ghost,-15; },{},{}
 30692,Dvergr_Pill,Dvergr Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Earth,15; bonus2 bSubEle,Ele_Undead,-15; },{},{}
-30693,LjÃ³sÃ¡lfar_Pill,LjÃ³sÃ¡lfar Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Holy,15; bonus2 bSubEle,Ele_Dark,-15; },{},{}
-30694,DÃ¸kkÃ¡lfar_Pill,DÃ¸kkÃ¡lfar Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Dark,15; bonus2 bSubEle,Ele_Holy,-15; },{},{}
-30695,SvartÃ¡lfar_Pill,SvartÃ¡lfar Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Ghost,15; bonus2 bSubEle,Ele_Wind,-15; },{},{}
-30696,HrÃ­mÃ¾ursar_Pill,HrÃ­mÃ¾ursar Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Water,15; bonus2 bSubEle,Ele_Fire,-15; },{},{}
-30697,EldjÃ¶tnar_Pill,EldjÃ¶tnar Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Fire,15; bonus2 bSubEle,Ele_Earth,-15; },{},{}
+30693,Ljósálfar_Pill,Ljósálfar Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Holy,15; bonus2 bSubEle,Ele_Dark,-15; },{},{}
+30694,Døkkálfar_Pill,Døkkálfar Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Dark,15; bonus2 bSubEle,Ele_Holy,-15; },{},{}
+30695,Svartálfar_Pill,Svartálfar Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Ghost,15; bonus2 bSubEle,Ele_Wind,-15; },{},{}
+30696,Hrímþursar_Pill,Hrímþursar Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Water,15; bonus2 bSubEle,Ele_Fire,-15; },{},{}
+30697,Eldjötnar_Pill,Eldjötnar Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Fire,15; bonus2 bSubEle,Ele_Earth,-15; },{},{}
 30698,Bergrisar_Pill,Bergrisar Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Wind,15; bonus2 bSubEle,Ele_Water,-15; },{},{}
 30699,Orco_Pill,Orco Pill,0,0,,1,,,,,0xFFFFFFFF,7,2,,,,,,{ bonus2 bSubEle,Ele_Undead,15; bonus2 bSubEle,Ele_Neutral,-15; },{},{}
 
@@ -969,16 +969,16 @@
 // ---------- FRIKADAS (30780-30799)
 30780,Exprimidor,Exprimidor,11,8000,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc "Exprimir"; },{},{}
 30781,Saquillo_de_Dados,Saquillo de Dados,11,8000,,80,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc "SaqDa2"; },{},{}
-30782,Caja_de_MÃºsica,Caja de MÃºsica,11,18000,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc "music_box"; },{},{}
+30782,Caja_de_Música,Caja de Música,11,18000,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc "music_box"; },{},{}
 30783,Monedero,Monedero,11,18000,,20,,,,,0xFFFFFFFF,7,2,,,,,,{ dispbottom "Fichas de Casino en el Monedero: "+tokens; },{},{}
 30784,SetList_BGM,SetList BGM,3,0,,10,,,,,,,,,,,,,{},{},{}
 30785,SetList_Rock,SetList Rock,3,0,,10,,,,,,,,,,,,,{},{},{}
 30786,SetList_Anime,SetList Anime,3,0,,10,,,,,,,,,,,,,{},{},{}
 30787,The_One_Ring,The One Ring,5,0,,30,,1,,0,0xFFFFFFFF,7,2,136,,1,0,0,{ bonus bMaxHPrate,100; skill "AS_CLOAKING",5; },{},{ sc_end SC_CLOAKING; }
-30788,Caja_de_ContenciÃ³n,Caja de ContenciÃ³n,11,14000,,20,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc "Backpack",1,10,5000;end; },{},{}
-30789,Bolsa_de_ContenciÃ³n,Bolsa de ContenciÃ³n,11,17400,,30,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc "Backpack",2,20,10000;end; },{},{}
-30790,Saco_de_ContenciÃ³n,Saco de ContenciÃ³n,11,21000,,40,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc "Backpack",3,30,15000;end; },{},{}
-30791,Carcaj_de_ContenciÃ³n,Carcaj de ContenciÃ³n,11,12000,,20,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc "Backpack",0,25,2000;end; },{},{}
+30788,Caja_de_Contención,Caja de Contención,11,14000,,20,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc "Backpack",1,10,5000;end; },{},{}
+30789,Bolsa_de_Contención,Bolsa de Contención,11,17400,,30,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc "Backpack",2,20,10000;end; },{},{}
+30790,Saco_de_Contención,Saco de Contención,11,21000,,40,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc "Backpack",3,30,15000;end; },{},{}
+30791,Carcaj_de_Contención,Carcaj de Contención,11,12000,,20,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc "Backpack",0,25,2000;end; },{},{}
 30792,Cartas_Numeradas,Cartas Numeradas,11,,,20,,,,,0xFFFFFFFF,7,2,,,,,,{ dispbottom "Escoje Carta"; input .@num; callfunc "NumbersHead",.@num; },{},{}
 //30793,Summer_Suit,Summer Suit,5,1200,,30,,0,,0,0xFFFFFFFE,31,2,16,,0,1,0,{ sc_start 256,3600000,0; },{},{ sc_end 256; }
 //30794,Santa_Suit,Santa Suit,5,1200,,120,,0,,0,0xFFFFFFFE,31,2,16,,0,1,0,{ sc_start 215,3600000,0; },{},{ sc_end 215; }
@@ -1127,30 +1127,55 @@
 31306,Crystal***,Crystal***,3,20,,20,,,,,,,,,,,,,{},{},{}
 
 // -------------------- Crystalizaciones OFENSIVAS (31310-31499)
-31310,Ignis,Ignis,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 2,25; } else { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 2,25; } else { bonus3 bAutoSpell,"MG_FIREBOLT",2,25; }; }; },{},{}
-31311,Ignis+,Ignis+,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 3,25; } else { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",3,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 3,25; } else { bonus3 bAutoSpell,"MG_FIREBOLT",3,25; }; }; },{},{}
-31312,Ignis++,Ignis++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 4,25; } else { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 4,25; } else { bonus3 bAutoSpell,"MG_FIREBOLT",4,25; }; }; },{},{}
-31313,Ignis+++,Ignis+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 5,25; } else { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",5,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 5,25; } else { bonus3 bAutoSpell,"MG_FIREBOLT",5,25; }; }; },{},{}
+31310,Ignis,Ignis,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 2,25; } else { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 2,25; } else { bonus3 bAutoSpell,"MG_FIREBOLT",2,25; }; }; sc_start SC_ITEMSCRIPT,60000,31310; },{},{}
+31311,Ignis+,Ignis+,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 3,25; } else { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",3,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 3,25; } else { bonus3 bAutoSpell,"MG_FIREBOLT",3,25; }; }; sc_start SC_ITEMSCRIPT,60000,31311; },{},{}
+31312,Ignis++,Ignis++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 4,25; } else { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 4,25; } else { bonus3 bAutoSpell,"MG_FIREBOLT",4,25; }; }; sc_start SC_ITEMSCRIPT,60000,31312; },{},{}
+31313,Ignis+++,Ignis+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 5,25; } else { bonus3 bAutoSpellWhenHit,"MG_FIREBOLT",5,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_FIREBOLT",getskilllv("MG_FIREBOLT") ? getskilllv("MG_FIREBOLT") : 5,25; } else { bonus3 bAutoSpell,"MG_FIREBOLT",5,25; }; }; sc_start SC_ITEMSCRIPT,60000,31313; },{},{}
 
-31315,Ventus,Ventus,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 2,25; } else { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 2,25; } else { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",2,25; }; }; },{},{}
-31316,Ventus+,Ventus+,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 3,25; } else { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",3,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 3,25; } else { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",3,25; }; }; },{},{}
-31317,Ventus++,Ventus++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 4,25; } else { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 4,25; } else { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",4,25; }; }; },{},{}
-31318,Ventus+++,Ventus+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 5,25; } else { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",5,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 5,25; } else { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",5,25; }; }; },{},{}
+31315,Ventus,Ventus,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 2,25; } else { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 2,25; } else { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",2,25; }; }; sc_start SC_ITEMSCRIPT,60000,31315; },{},{}
+31316,Ventus+,Ventus+,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 3,25; } else { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",3,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 3,25; } else { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",3,25; }; }; sc_start SC_ITEMSCRIPT,60000,31316; },{},{}
+31317,Ventus++,Ventus++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 4,25; } else { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 4,25; } else { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",4,25; }; }; sc_start SC_ITEMSCRIPT,60000,31317; },{},{}
+31318,Ventus+++,Ventus+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 5,25; } else { bonus3 bAutoSpellWhenHit,"MG_LIGHTNINGBOLT",5,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",getskilllv("MG_LIGHTNINGBOLT") ? getskilllv("MG_LIGHTNINGBOLT") : 5,25; } else { bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",5,25; }; }; sc_start SC_ITEMSCRIPT,60000,31318; },{},{}
 
-31320,Aqua,Aqua,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 2,25; } else { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 2,25; } else { bonus3 bAutoSpell,"MG_COLDBOLT",2,25; }; }; },{},{}
-31321,Aqua+,Aqua+,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 3,25; } else { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",3,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 3,25; } else { bonus3 bAutoSpell,"MG_COLDBOLT",3,25; }; }; },{},{}
-31322,Aqua++,Aqua++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 4,25; } else { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 4,25; } else { bonus3 bAutoSpell,"MG_COLDBOLT",4,25; }; }; },{},{}
-31323,Aqua+++,Aqua+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 5,25; } else { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",5,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 5,25; } else { bonus3 bAutoSpell,"MG_COLDBOLT",5,25; }; }; },{},{}
+31320,Aqua,Aqua,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 2,25; } else { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 2,25; } else { bonus3 bAutoSpell,"MG_COLDBOLT",2,25; }; }; sc_start SC_ITEMSCRIPT,60000,31320; },{},{}
+31321,Aqua+,Aqua+,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 3,25; } else { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",3,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 3,25; } else { bonus3 bAutoSpell,"MG_COLDBOLT",3,25; }; }; sc_start SC_ITEMSCRIPT,60000,31321; },{},{}
+31322,Aqua++,Aqua++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 4,25; } else { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 4,25; } else { bonus3 bAutoSpell,"MG_COLDBOLT",4,25; }; }; sc_start SC_ITEMSCRIPT,60000,31322; },{},{}
+31323,Aqua+++,Aqua+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 5,25; } else { bonus3 bAutoSpellWhenHit,"MG_COLDBOLT",5,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_COLDBOLT",getskilllv("MG_COLDBOLT") ? getskilllv("MG_COLDBOLT") : 5,25; } else { bonus3 bAutoSpell,"MG_COLDBOLT",5,25; }; }; sc_start SC_ITEMSCRIPT,60000,31323; },{},{}
 
-31325,Terra,Terra,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 2,25; } else { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 2,25; } else { bonus3 bAutoSpell,"WZ_EARTHSPIKE",2,25; }; }; },{},{}
-31326,Terra+,Terra+,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 3,25; } else { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",3,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 3,25; } else { bonus3 bAutoSpell,"WZ_EARTHSPIKE",3,25; }; }; },{},{}
-31327,Terra++,Terra++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 4,25; } else { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 4,25; } else { bonus3 bAutoSpell,"WZ_EARTHSPIKE",4,25; }; }; },{},{}
-31328,Terra+++,Terra+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 5,25; } else { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",5,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 5,25; } else { bonus3 bAutoSpell,"WZ_EARTHSPIKE",5,25; }; }; },{},{}
+31325,Terra,Terra,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 2,25; } else { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 2,25; } else { bonus3 bAutoSpell,"WZ_EARTHSPIKE",2,25; }; }; sc_start SC_ITEMSCRIPT,60000,31325; },{},{}
+31326,Terra+,Terra+,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 3,25; } else { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",3,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 3,25; } else { bonus3 bAutoSpell,"WZ_EARTHSPIKE",3,25; }; }; sc_start SC_ITEMSCRIPT,60000,31326; },{},{}
+31327,Terra++,Terra++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 4,25; } else { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 4,25; } else { bonus3 bAutoSpell,"WZ_EARTHSPIKE",4,25; }; }; sc_start SC_ITEMSCRIPT,60000,31327; },{},{}
+31328,Terra+++,Terra+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 5,25; } else { bonus3 bAutoSpellWhenHit,"WZ_EARTHSPIKE",5,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_EARTHSPIKE",getskilllv("WZ_EARTHSPIKE") ? getskilllv("WZ_EARTHSPIKE") : 5,25; } else { bonus3 bAutoSpell,"WZ_EARTHSPIKE",5,25; }; }; sc_start SC_ITEMSCRIPT,60000,31328; },{},{}
 
-31330,Anima,Anima,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 2,25; } else { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 2,25; } else { bonus3 bAutoSpell,"MG_SOULSTRIKE",2,25; }; }; },{},{}
-31331,Anima+,Anima+,6,20,,20,,,,,,,,2,,,,,{ If(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 4,25; } else { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 4,25; } else { bonus3 bAutoSpell,"MG_SOULSTRIKE",4,25; }; }; },{},{}
-31332,Anima++,Anima++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 6,25; } else { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",6,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 6,25; } else { bonus3 bAutoSpell,"MG_SOULSTRIKE",6,25; }; }; },{},{}
-31333,Anima+++,Anima+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 8,25; } else { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",8,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 8,25; } else { bonus3 bAutoSpell,"MG_SOULSTRIKE",8,25; }; }; },{},{}
+31330,Anima,Anima,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 2,25; } else { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 2,25; } else { bonus3 bAutoSpell,"MG_SOULSTRIKE",2,25; }; }; sc_start SC_ITEMSCRIPT,60000,31330; },{},{}
+31331,Anima+,Anima+,6,20,,20,,,,,,,,2,,,,,{ If(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 4,25; } else { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 4,25; } else { bonus3 bAutoSpell,"MG_SOULSTRIKE",4,25; }; }; sc_start SC_ITEMSCRIPT,60000,31331; },{},{}
+31332,Anima++,Anima++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 6,25; } else { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",6,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 6,25; } else { bonus3 bAutoSpell,"MG_SOULSTRIKE",6,25; }; }; sc_start SC_ITEMSCRIPT,60000,31332; },{},{}
+31333,Anima+++,Anima+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 8,25; } else { bonus3 bAutoSpellWhenHit,"MG_SOULSTRIKE",8,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SOULSTRIKE",getskilllv("MG_SOULSTRIKE") ? getskilllv("MG_SOULSTRIKE") : 8,25; } else { bonus3 bAutoSpell,"MG_SOULSTRIKE",8,25; }; }; sc_start SC_ITEMSCRIPT,60000,31333; },{},{}
+
+31335,FireExhale,FireExhale,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_SIGHTRASHER",getskilllv("WZ_SIGHTRASHER") ? getskilllv("WZ_SIGHTRASHER") : 1,15; } else { bonus3 bAutoSpellWhenHit,"WZ_SIGHTRASHER",1,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_SIGHTRASHER",getskilllv("WZ_SIGHTRASHER") ? getskilllv("WZ_SIGHTRASHER") : 1,15; } else { bonus3 bAutoSpell,"WZ_SIGHTRASHER",1,15; }; }; sc_start SC_ITEMSCRIPT,60000,31335; },{},{}
+31336,FireExhale+,FireExhale+,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_SIGHTRASHER",getskilllv("WZ_SIGHTRASHER") ? getskilllv("WZ_SIGHTRASHER") : 2,15; } else { bonus3 bAutoSpellWhenHit,"WZ_SIGHTRASHER",2,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_SIGHTRASHER",getskilllv("WZ_SIGHTRASHER") ? getskilllv("WZ_SIGHTRASHER") : 2,15; } else { bonus3 bAutoSpell,"WZ_SIGHTRASHER",2,15; }; }; sc_start SC_ITEMSCRIPT,60000,31336; },{},{}
+31337,FireExhale++,FireExhale++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_SIGHTRASHER",getskilllv("WZ_SIGHTRASHER") ? getskilllv("WZ_SIGHTRASHER") : 3,15; } else { bonus3 bAutoSpellWhenHit,"WZ_SIGHTRASHER",3,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_SIGHTRASHER",getskilllv("WZ_SIGHTRASHER") ? getskilllv("WZ_SIGHTRASHER") : 3,15; } else { bonus3 bAutoSpell,"WZ_SIGHTRASHER",3,15; }; }; sc_start SC_ITEMSCRIPT,60000,31337; },{},{}
+31338,FireExhale+++,FireExhale+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_SIGHTRASHER",getskilllv("WZ_SIGHTRASHER") ? getskilllv("WZ_SIGHTRASHER") : 4,15; } else { bonus3 bAutoSpellWhenHit,"WZ_SIGHTRASHER",4,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_SIGHTRASHER",getskilllv("WZ_SIGHTRASHER") ? getskilllv("WZ_SIGHTRASHER") : 4,15; } else { bonus3 bAutoSpell,"WZ_SIGHTRASHER",4,15; }; }; sc_start SC_ITEMSCRIPT,60000,31338; },{},{}
+
+31340,HolyCross,HolyCross,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"CR_HOLYCROSS",getskilllv("CR_HOLYCROSS") ? getskilllv("CR_HOLYCROSS") : 2,15; } else { bonus3 bAutoSpellWhenHit,"CR_HOLYCROSS",2,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"CR_HOLYCROSS",getskilllv("CR_HOLYCROSS") ? getskilllv("CR_HOLYCROSS") : 2,15; } else { bonus3 bAutoSpell,"CR_HOLYCROSS",2,15; }; }; sc_start SC_ITEMSCRIPT,60000,31340; },{},{}
+31341,HolyCross+,HolyCross+,6,20,,20,,,,,,,,2,,,,,{ If(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"CR_HOLYCROSS",getskilllv("CR_HOLYCROSS") ? getskilllv("CR_HOLYCROSS") : 3,15; } else { bonus3 bAutoSpellWhenHit,"CR_HOLYCROSS",3,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"CR_HOLYCROSS",getskilllv("CR_HOLYCROSS") ? getskilllv("CR_HOLYCROSS") : 3,15; } else { bonus3 bAutoSpell,"CR_HOLYCROSS",3,15; }; }; sc_start SC_ITEMSCRIPT,60000,31341; },{},{}
+31342,HolyCross++,HolyCross++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"CR_HOLYCROSS",getskilllv("CR_HOLYCROSS") ? getskilllv("CR_HOLYCROSS") : 4,15; } else { bonus3 bAutoSpellWhenHit,"CR_HOLYCROSS",4,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"CR_HOLYCROSS",getskilllv("CR_HOLYCROSS") ? getskilllv("CR_HOLYCROSS") : 4,15; } else { bonus3 bAutoSpell,"CR_HOLYCROSS",4,15; }; }; sc_start SC_ITEMSCRIPT,60000,31342; },{},{}
+31343,HolyCross+++,HolyCross+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"CR_HOLYCROSS",getskilllv("CR_HOLYCROSS") ? getskilllv("CR_HOLYCROSS") : 5,15; } else { bonus3 bAutoSpellWhenHit,"CR_HOLYCROSS",5,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"CR_HOLYCROSS",getskilllv("CR_HOLYCROSS") ? getskilllv("CR_HOLYCROSS") : 5,15; } else { bonus3 bAutoSpell,"CR_HOLYCROSS",5,15; }; }; sc_start SC_ITEMSCRIPT,60000,31343; },{},{}
+
+31345,Venom,Venom,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"TF_POISON",getskilllv("TF_POISON") ? getskilllv("TF_POISON") : 2,25; } else { bonus3 bAutoSpellWhenHit,"TF_POISON",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"TF_POISON",getskilllv("TF_POISON") ? getskilllv("TF_POISON") : 2,25; } else { bonus3 bAutoSpell,"TF_POISON",2,25; }; }; sc_start SC_ITEMSCRIPT,60000,31345; },{},{}
+31346,Venom+,Venom+,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"TF_POISON",getskilllv("TF_POISON") ? getskilllv("TF_POISON") : 4,25; } else { bonus3 bAutoSpellWhenHit,"TF_POISON",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"TF_POISON",getskilllv("TF_POISON") ? getskilllv("TF_POISON") : 4,25; } else { bonus3 bAutoSpell,"TF_POISON",4,25; }; }; sc_start SC_ITEMSCRIPT,60000,31346; },{},{}
+31347,Venom++,Venom++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"TF_POISON",getskilllv("TF_POISON") ? getskilllv("TF_POISON") : 6,25; } else { bonus3 bAutoSpellWhenHit,"TF_POISON",6,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"TF_POISON",getskilllv("TF_POISON") ? getskilllv("TF_POISON") : 6,25; } else { bonus3 bAutoSpell,"TF_POISON",6,25; }; }; sc_start SC_ITEMSCRIPT,60000,31347; },{},{}
+31348,Venom+++,Venom+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"TF_POISON",getskilllv("TF_POISON") ? getskilllv("TF_POISON") : 8,25; } else { bonus3 bAutoSpellWhenHit,"TF_POISON",8,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"TF_POISON",getskilllv("TF_POISON") ? getskilllv("TF_POISON") : 8,25; } else { bonus3 bAutoSpell,"TF_POISON",8,25; }; }; sc_start SC_ITEMSCRIPT,60000,31348; },{},{}
+
+31350,Deceleris,Deceleris,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_DECAGI",getskilllv("AL_DECAGI") ? getskilllv("AL_DECAGI") : 2,25; } else { bonus3 bAutoSpellWhenHit,"AL_DECAGI",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_DECAGI",getskilllv("AL_DECAGI") ? getskilllv("AL_DECAGI") : 2,25; } else { bonus3 bAutoSpell,"AL_DECAGI",2,25; }; }; sc_start SC_ITEMSCRIPT,60000,31350; },{},{}
+31351,Deceleris+,Deceleris+,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_DECAGI",getskilllv("AL_DECAGI") ? getskilllv("AL_DECAGI") : 4,25; } else { bonus3 bAutoSpellWhenHit,"AL_DECAGI",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_DECAGI",getskilllv("AL_DECAGI") ? getskilllv("AL_DECAGI") : 4,25; } else { bonus3 bAutoSpell,"AL_DECAGI",4,25; }; }; sc_start SC_ITEMSCRIPT,60000,31350; },{},{}
+31352,Deceleris++,Deceleris++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_DECAGI",getskilllv("AL_DECAGI") ? getskilllv("AL_DECAGI") : 6,25; } else { bonus3 bAutoSpellWhenHit,"AL_DECAGI",6,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_DECAGI",getskilllv("AL_DECAGI") ? getskilllv("AL_DECAGI") : 6,25; } else { bonus3 bAutoSpell,"AL_DECAGI",6,25; }; }; sc_start SC_ITEMSCRIPT,60000,31350; },{},{}
+31353,Deceleris+++,Deceleris+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_DECAGI",getskilllv("AL_DECAGI") ? getskilllv("AL_DECAGI") : 8,25; } else { bonus3 bAutoSpellWhenHit,"AL_DECAGI",8,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_DECAGI",getskilllv("AL_DECAGI") ? getskilllv("AL_DECAGI") : 8,25; } else { bonus3 bAutoSpell,"AL_DECAGI",8,25; }; }; sc_start SC_ITEMSCRIPT,60000,31350; },{},{}
+
+31355,Bash,Bash,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"SM_BASH",getskilllv("SM_BASH") ? getskilllv("SM_BASH") : 2,25; } else { bonus3 bAutoSpellWhenHit,"SM_BASH",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"SM_BASH",getskilllv("SM_BASH") ? getskilllv("SM_BASH") : 2,25; } else { bonus3 bAutoSpell,"SM_BASH",2,25; }; }; sc_start SC_ITEMSCRIPT,60000,31355; },{},{}
+31356,Bash+,Bash+,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"SM_BASH",getskilllv("SM_BASH") ? getskilllv("SM_BASH") : 3,25; } else { bonus3 bAutoSpellWhenHit,"SM_BASH",3,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"SM_BASH",getskilllv("SM_BASH") ? getskilllv("SM_BASH") : 3,25; } else { bonus3 bAutoSpell,"SM_BASH",3,25; }; }; sc_start SC_ITEMSCRIPT,60000,31356; },{},{}
+31357,Bash++,Bash++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"SM_BASH",getskilllv("SM_BASH") ? getskilllv("SM_BASH") : 4,25; } else { bonus3 bAutoSpellWhenHit,"SM_BASH",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"SM_BASH",getskilllv("SM_BASH") ? getskilllv("SM_BASH") : 4,25; } else { bonus3 bAutoSpell,"SM_BASH",4,25; }; }; sc_start SC_ITEMSCRIPT,60000,31357; },{},{}
+31358,Bash+++,Bash+++,6,20,,20,,,,,,,,2,,,,,{ if(isequipped(31651)) { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"SM_BASH",getskilllv("SM_BASH") ? getskilllv("SM_BASH") : 5,25; } else { bonus3 bAutoSpellWhenHit,"SM_BASH",5,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpell,"SM_BASH",getskilllv("SM_BASH") ? getskilllv("SM_BASH") : 5,25; } else { bonus3 bAutoSpell,"SM_BASH",5,25; }; }; sc_start SC_ITEMSCRIPT,60000,31358; },{},{}
 
 // -------------------- Crystalizaciones DEFENSIVAS (31500-31649)
 31500,Benedictum,Benedictum,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_BLESSING",getskilllv("AL_BLESSING") ? getskilllv("AL_BLESSING") : 3,25; } else { bonus3 bAutoSpell,"AL_BLESSING",3,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_BLESSING",getskilllv("AL_BLESSING") ? getskilllv("AL_BLESSING") : 3,25; } else { bonus3 bAutoSpellWhenHit,"AL_BLESSING",3,25; }; }; },{},{}
@@ -1168,124 +1193,204 @@
 31512,Kyrie++,Kyrie++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"PR_KYRIE",getskilllv("PR_KYRIE") ? getskilllv("PR_KYRIE") : 7,25; } else { bonus3 bAutoSpell,"PR_KYRIE",7,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"PR_KYRIE",getskilllv("PR_KYRIE") ? getskilllv("PR_KYRIE") : 7,25; } else { bonus3 bAutoSpellWhenHit,"PR_KYRIE",7,25; }; }; },{},{}
 31513,Kyrie+++,Kyrie+++,6,20,,20,,,,,,,,16,,,,,{ if(getskilllv("PR_KYRIE")==0) { end; } else { if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AB_PRAEFATIO",getskilllv("AB_PRAEFATIO") ? getskilllv("AB_PRAEFATIO") : 2,25; } else { bonus3 bAutoSpell,"AB_PRAEFATIO",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AB_PRAEFATIO",getskilllv("AB_PRAEFATIO") ? getskilllv("AB_PRAEFATIO") : 2,25; } else { bonus3 bAutoSpellWhenHit,"AB_PRAEFATIO",2,25; }; }; }; },{},{}
 
-31515,SÃ¢nÃ¢tum,SÃ¢nÃ¢tum,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_HEAL",getskilllv("AL_HEAL") ? getskilllv("AL_HEAL") : 3,25; } else { bonus3 bAutoSpell,"AL_HEAL",3,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_HEAL",getskilllv("AL_HEAL") ? getskilllv("AL_HEAL") : 3,25; } else { bonus3 bAutoSpellWhenHit,"AL_HEAL",3,25; }; }; },{},{}
-31516,SÃ¢nÃ¢tum+,SÃ¢nÃ¢tum+,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_HEAL",getskilllv("AL_HEAL") ? getskilllv("AL_HEAL") : 5,25; } else { bonus3 bAutoSpell,"AL_HEAL",5,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_HEAL",getskilllv("AL_HEAL") ? getskilllv("AL_HEAL") : 5,25; } else { bonus3 bAutoSpellWhenHit,"AL_HEAL",5,25; }; }; },{},{}
-31517,SÃ¢nÃ¢tum++,SÃ¢nÃ¢tum++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_HEAL",getskilllv("AL_HEAL") ? getskilllv("AL_HEAL") : 7,25; } else { bonus3 bAutoSpell,"AL_HEAL",7,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_HEAL",getskilllv("AL_HEAL") ? getskilllv("AL_HEAL") : 7,25; } else { bonus3 bAutoSpellWhenHit,"AL_HEAL",7,25; }; }; },{},{}
-31518,SÃ¢nÃ¢tum+++,SÃ¢nÃ¢tum+++,6,20,,20,,,,,,,,16,,,,,{ if(getskilllv("AL_HEAL")==0) { end; } else { if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AB_CHEAL",getskilllv("AB_CHEAL") ? getskilllv("AB_CHEAL") : 2,25; } else { bonus3 bAutoSpell,"AB_CHEAL",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AB_CHEAL",getskilllv("AB_CHEAL") ? getskilllv("AB_CHEAL") : 2,25; } else { bonus3 bAutoSpellWhenHit,"AB_CHEAL",2,25; }; }; }; },{},{}
+31515,Sânâtum,Sânâtum,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_HEAL",getskilllv("AL_HEAL") ? getskilllv("AL_HEAL") : 3,25; } else { bonus3 bAutoSpell,"AL_HEAL",3,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_HEAL",getskilllv("AL_HEAL") ? getskilllv("AL_HEAL") : 3,25; } else { bonus3 bAutoSpellWhenHit,"AL_HEAL",3,25; }; }; },{},{}
+31516,Sânâtum+,Sânâtum+,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_HEAL",getskilllv("AL_HEAL") ? getskilllv("AL_HEAL") : 5,25; } else { bonus3 bAutoSpell,"AL_HEAL",5,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_HEAL",getskilllv("AL_HEAL") ? getskilllv("AL_HEAL") : 5,25; } else { bonus3 bAutoSpellWhenHit,"AL_HEAL",5,25; }; }; },{},{}
+31517,Sânâtum++,Sânâtum++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_HEAL",getskilllv("AL_HEAL") ? getskilllv("AL_HEAL") : 7,25; } else { bonus3 bAutoSpell,"AL_HEAL",7,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_HEAL",getskilllv("AL_HEAL") ? getskilllv("AL_HEAL") : 7,25; } else { bonus3 bAutoSpellWhenHit,"AL_HEAL",7,25; }; }; },{},{}
+31518,Sânâtum+++,Sânâtum+++,6,20,,20,,,,,,,,16,,,,,{ if(getskilllv("AL_HEAL")==0) { end; } else { if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AB_CHEAL",getskilllv("AB_CHEAL") ? getskilllv("AB_CHEAL") : 2,25; } else { bonus3 bAutoSpell,"AB_CHEAL",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AB_CHEAL",getskilllv("AB_CHEAL") ? getskilllv("AB_CHEAL") : 2,25; } else { bonus3 bAutoSpellWhenHit,"AB_CHEAL",2,25; }; }; }; },{},{}
 
 31520,Recuperatio,Recuperatio,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"TF_DETOXIFY",getskilllv("TF_DETOXIFY") ? getskilllv("TF_DETOXIFY") : 1,25; } else { bonus3 bAutoSpell,"TF_DETOXIFY",1,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"TF_DETOXIFY",getskilllv("TF_DETOXIFY") ? getskilllv("TF_DETOXIFY") : 1,25; } else { bonus3 bAutoSpellWhenHit,"TF_DETOXIFY",1,25; }; }; },{},{}
 31521,Recuperatio+,Recuperatio+,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_CURE",getskilllv("AL_CURE") ? getskilllv("AL_CURE") : 1,25; } else { bonus3 bAutoSpell,"AL_CURE",1,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_CURE",getskilllv("AL_CURE") ? getskilllv("AL_CURE") : 1,25; } else { bonus3 bAutoSpellWhenHit,"AL_CURE",1,25; }; }; },{},{}
 31522,Recuperatio++,Recuperatio++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"PR_STRECOVERY",getskilllv("PR_STRECOVERY") ? getskilllv("PR_STRECOVERY") : 1,25; } else { bonus3 bAutoSpell,"PR_STRECOVERY",1,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"PR_STRECOVERY",getskilllv("PR_STRECOVERY") ? getskilllv("PR_STRECOVERY") : 1,25; } else { bonus3 bAutoSpellWhenHit,"PR_STRECOVERY",1,25; }; }; },{},{}
 31523,Recuperatio+++,Recuperatio+++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"TF_DETOXIFY",getskilllv("TF_DETOXIFY") ? getskilllv("TF_DETOXIFY") : 1,25; bonus3 bAutoSpell,"AL_CURE",getskilllv("AL_CURE") ? getskilllv("AL_CURE") : 1,25; bonus3 bAutoSpell,"PR_STRECOVERY",getskilllv("PR_STRECOVERY") ? getskilllv("PR_STRECOVERY") : 1,25; } else { bonus3 bAutoSpell,"TF_DETOXIFY",1,25; bonus3 bAutoSpell,"AL_CURE",1,25; bonus3 bAutoSpell,"PR_STRECOVERY",1,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_CURE",getskilllv("AL_CURE") ? getskilllv("AL_CURE") : 1,25; bonus3 bAutoSpellWhenHit,"AL_CURE",getskilllv("AL_CURE") ? getskilllv("AL_CURE") : 1,25; bonus3 bAutoSpellWhenHit,"PR_STRECOVERY",getskilllv("PR_STRECOVERY") ? getskilllv("PR_STRECOVERY") : 1,25; } else { bonus3 bAutoSpellWhenHit,"TF_DETOXIFY",1,25; bonus3 bAutoSpellWhenHit,"AL_CURE",1,25; bonus3 bAutoSpellWhenHit,"PR_STRECOVERY",1,25; }; }; },{},{}
 
+31525,Endurance,Endurance,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"SM_ENDURE",getskilllv("SM_ENDURE") ? getskilllv("SM_ENDURE") : 2,25; } else { bonus3 bAutoSpell,"SM_ENDURE",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"SM_ENDURE",getskilllv("SM_ENDURE") ? getskilllv("SM_ENDURE") : 2,25; } else { bonus3 bAutoSpellWhenHit,"SM_ENDURE",2,25; }; }; },{},{}
+31526,Endurance+,Endurance+,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"SM_ENDURE",getskilllv("SM_ENDURE") ? getskilllv("SM_ENDURE") : 4,25; } else { bonus3 bAutoSpell,"SM_ENDURE",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"SM_ENDURE",getskilllv("SM_ENDURE") ? getskilllv("SM_ENDURE") : 4,25; } else { bonus3 bAutoSpellWhenHit,"SM_ENDURE",4,25; }; }; },{},{}
+31527,Endurance++,Endurance++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"SM_ENDURE",getskilllv("SM_ENDURE") ? getskilllv("SM_ENDURE") : 6,25; } else { bonus3 bAutoSpell,"SM_ENDURE",6,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"SM_ENDURE",getskilllv("SM_ENDURE") ? getskilllv("SM_ENDURE") : 6,25; } else { bonus3 bAutoSpellWhenHit,"SM_ENDURE",6,25; }; }; },{},{}
+31528,Endurance+++,Endurance+++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"SM_ENDURE",getskilllv("SM_ENDURE") ? getskilllv("SM_ENDURE") : 8,25; } else { bonus3 bAutoSpell,"SM_ENDURE",8,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"SM_ENDURE",getskilllv("SM_ENDURE") ? getskilllv("SM_ENDURE") : 8,25; } else { bonus3 bAutoSpellWhenHit,"SM_ENDURE",8,25; }; }; },{},{}
+
+31530,Safety,Safety,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SAFETYWALL",getskilllv("MG_SAFETYWALL") ? getskilllv("MG_SAFETYWALL") : 2,10; } else { bonus3 bAutoSpell,"MG_SAFETYWALL",2,10; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SAFETYWALL",getskilllv("MG_SAFETYWALL") ? getskilllv("MG_SAFETYWALL") : 2,10; } else { bonus3 bAutoSpellWhenHit,"MG_SAFETYWALL",2,10; }; }; },{},{}
+31531,Safety+,Safety+,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SAFETYWALL",getskilllv("MG_SAFETYWALL") ? getskilllv("MG_SAFETYWALL") : 3,10; } else { bonus3 bAutoSpell,"MG_SAFETYWALL",3,10; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SAFETYWALL",getskilllv("MG_SAFETYWALL") ? getskilllv("MG_SAFETYWALL") : 3,10; } else { bonus3 bAutoSpellWhenHit,"MG_SAFETYWALL",3,10; }; }; },{},{}
+31532,Safety++,Safety++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SAFETYWALL",getskilllv("MG_SAFETYWALL") ? getskilllv("MG_SAFETYWALL") : 4,10; } else { bonus3 bAutoSpell,"MG_SAFETYWALL",4,10; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SAFETYWALL",getskilllv("MG_SAFETYWALL") ? getskilllv("MG_SAFETYWALL") : 4,10; } else { bonus3 bAutoSpellWhenHit,"MG_SAFETYWALL",4,10; }; }; },{},{}
+31533,Safety+++,Safety+++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SAFETYWALL",getskilllv("MG_SAFETYWALL") ? getskilllv("MG_SAFETYWALL") : 5,10; } else { bonus3 bAutoSpell,"MG_SAFETYWALL",5,10; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SAFETYWALL",getskilllv("MG_SAFETYWALL") ? getskilllv("MG_SAFETYWALL") : 5,10; } else { bonus3 bAutoSpellWhenHit,"MG_SAFETYWALL",5,10; }; }; },{},{}
+
+31535,Frosty,Frosty,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_FROSTNOVA",getskilllv("WZ_FROSTNOVA") ? getskilllv("WZ_FROSTNOVA") : 2,15; } else { bonus3 bAutoSpell,"WZ_FROSTNOVA",2,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_FROSTNOVA",getskilllv("WZ_FROSTNOVA") ? getskilllv("WZ_FROSTNOVA") : 2,15; } else { bonus3 bAutoSpellWhenHit,"WZ_FROSTNOVA",2,15; }; }; },{},{}
+31536,Frosty+,Frosty+,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_FROSTNOVA",getskilllv("WZ_FROSTNOVA") ? getskilllv("WZ_FROSTNOVA") : 3,15; } else { bonus3 bAutoSpell,"WZ_FROSTNOVA",3,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_FROSTNOVA",getskilllv("WZ_FROSTNOVA") ? getskilllv("WZ_FROSTNOVA") : 3,15; } else { bonus3 bAutoSpellWhenHit,"WZ_FROSTNOVA",3,15; }; }; },{},{}
+31537,Frosty++,Frosty++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"WZ_FROSTNOVA",getskilllv("WZ_FROSTNOVA") ? getskilllv("WZ_FROSTNOVA") : 4,15; } else { bonus3 bAutoSpell,"WZ_FROSTNOVA",4,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"WZ_FROSTNOVA",getskilllv("WZ_FROSTNOVA") ? getskilllv("WZ_FROSTNOVA") : 4,15; } else { bonus3 bAutoSpellWhenHit,"WZ_FROSTNOVA",4,15; }; }; },{},{}
+31538,Frosty+++,Frosty+++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"MG_SAFETYWALL",getskilllv("MG_SAFETYWALL") ? getskilllv("MG_SAFETYWALL") : 5,15; } else { bonus3 bAutoSpell,"MG_SAFETYWALL",5,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"MG_SAFETYWALL",getskilllv("MG_SAFETYWALL") ? getskilllv("MG_SAFETYWALL") : 5,15; } else { bonus3 bAutoSpellWhenHit,"MG_SAFETYWALL",5,15; }; }; },{},{}
+
+31540,Angelus,Angelus,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_ANGELUS",getskilllv("AL_ANGELUS") ? getskilllv("AL_ANGELUS") : 2,15; } else { bonus3 bAutoSpell,"AL_ANGELUS",2,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_ANGELUS",getskilllv("AL_ANGELUS") ? getskilllv("AL_ANGELUS") : 2,15; } else { bonus3 bAutoSpellWhenHit,"AL_ANGELUS",2,15; }; }; },{},{}
+31541,Angelus+,Angelus+,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_ANGELUS",getskilllv("AL_ANGELUS") ? getskilllv("AL_ANGELUS") : 3,15; } else { bonus3 bAutoSpell,"AL_ANGELUS",3,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_ANGELUS",getskilllv("AL_ANGELUS") ? getskilllv("AL_ANGELUS") : 3,15; } else { bonus3 bAutoSpellWhenHit,"AL_ANGELUS",3,15; }; }; },{},{}
+31542,Angelus++,Angelus++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_ANGELUS",getskilllv("AL_ANGELUS") ? getskilllv("AL_ANGELUS") : 4,15; } else { bonus3 bAutoSpell,"AL_ANGELUS",4,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_ANGELUS",getskilllv("AL_ANGELUS") ? getskilllv("AL_ANGELUS") : 4,15; } else { bonus3 bAutoSpellWhenHit,"AL_ANGELUS",4,15; }; }; },{},{}
+31543,Angelus+++,Angelus+++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"AL_ANGELUS",getskilllv("AL_ANGELUS") ? getskilllv("AL_ANGELUS") : 5,15; } else { bonus3 bAutoSpell,"AL_ANGELUS",5,15; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"AL_ANGELUS",getskilllv("AL_ANGELUS") ? getskilllv("AL_ANGELUS") : 5,15; } else { bonus3 bAutoSpellWhenHit,"AL_ANGELUS",5,15; }; }; },{},{}
+
+31545,Provocative,Provocative,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"SM_PROVOKE",getskilllv("SM_PROVOKE") ? getskilllv("SM_PROVOKE") : 2,25; } else { bonus3 bAutoSpell,"SM_PROVOKE",2,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"SM_PROVOKE",getskilllv("SM_PROVOKE") ? getskilllv("SM_PROVOKE") : 2,25; } else { bonus3 bAutoSpellWhenHit,"SM_PROVOKE",2,25; }; }; },{},{}
+31546,Provocative+,Provocative+,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"SM_PROVOKE",getskilllv("SM_PROVOKE") ? getskilllv("SM_PROVOKE") : 4,25; } else { bonus3 bAutoSpell,"SM_PROVOKE",4,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"SM_PROVOKE",getskilllv("SM_PROVOKE") ? getskilllv("SM_PROVOKE") : 4,25; } else { bonus3 bAutoSpellWhenHit,"SM_PROVOKE",4,25; }; }; },{},{}
+31547,Provocative++,Provocative++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"SM_PROVOKE",getskilllv("SM_PROVOKE") ? getskilllv("SM_PROVOKE") : 6,25; } else { bonus3 bAutoSpell,"SM_PROVOKE",6,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"SM_PROVOKE",getskilllv("SM_PROVOKE") ? getskilllv("SM_PROVOKE") : 6,25; } else { bonus3 bAutoSpellWhenHit,"SM_PROVOKE",6,25; }; }; },{},{}
+31548,Provocative+++,Provocative+++,6,20,,20,,,,,,,,16,,,,,{ if(isequipped(31652)) { if(isequipped(31653)) { bonus3 bAutoSpell,"SM_PROVOKE",getskilllv("SM_PROVOKE") ? getskilllv("SM_PROVOKE") : 8,25; } else { bonus3 bAutoSpell,"SM_PROVOKE",8,25; }; } else { if(isequipped(31653)) { bonus3 bAutoSpellWhenHit,"SM_PROVOKE",getskilllv("SM_PROVOKE") ? getskilllv("SM_PROVOKE") : 8,25; } else { bonus3 bAutoSpellWhenHit,"SM_PROVOKE",8,25; }; }; },{},{}
+
 // -------------------- Crystalizaciones FLUJO (31650-31699)
 31650,Capacitativa,Capacitativa,6,20,,20,,,,,,,,769,,,,,{ callfunc "CrystalCapacitativo"; },{},{}
 31651,Distendir,Distendir (ATK),6,20,,20,,,,,,,,32,,,,,{},{},{}
 31652,Tensar,Tensar (DEF),6,20,,20,,,,,,,,2,,,,,{},{},{}
 31653,Maximizar,Maximizar,6,20,,20,,,,,,,,64,,,,,{},{},{}
-31654,Amplificar,Amplificar,6,20,,20,,,,,,,,64,,,,,{},{},{}
+31654,Amplificar,Amplificar,6,20,,20,,,,,,,,136,,,,,{},{},{}
 31655,Intensificar,Intensificar,6,20,,20,,,,,,,,64,,,,,{},{},{}
 31656,Potenciar,Potenciar,6,20,,20,,,,,,,,64,,,,,{},{},{}
 
-// -------------------- Crystalizaciones INVOCACIÃ“N (31700-31799)
-31700,Poring_Advocare,Poring Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Poring\",1725,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31701,Poring_Advocare+,Poring Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Poporing\",1031,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31701) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31702,Poring_Advocare++,Poring Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Marin\",1525,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31702) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31703,Poring_Advocare+++,Poring Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Bombporing\",1904,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31703) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+// -------------------- Crystalizaciones INVOCACIÓN (31700-31799)
+31700,Poring_Advocare,Poring Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Poring\",1725,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31701,Poring_Advocare+,Poring Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Poporing\",3503,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31701) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31702,Poring_Advocare++,Poring Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Marin\",1595,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31702) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31703,Poring_Advocare+++,Poring Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Bombporing\",3505,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31703) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-31705,Skeleton_Advocare,Skeleton Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Skeleton\",1076,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31705) ) end; getmapxy .@map$, .@x, .@y, 0;	killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31706,Skeleton_Advocare+,Skeleton Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Soldier Skeleton\",1562,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31706) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31707,Skeleton_Advocare++,Skeleton Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Archer Skeleton\",1420,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31707) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31708,Skeleton_Advocare+++,Skeleton Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Skeleton Prisoner\",1479,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31708) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31705,Skeleton_Advocare,Skeleton Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Skeleton\",3506,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31705) ) end; getmapxy .@map$, .@x, .@y, 0;	killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31706,Skeleton_Advocare+,Skeleton Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Soldier Skeleton\",1562,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31706) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31707,Skeleton_Advocare++,Skeleton Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Archer Skeleton\",1420,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31707) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31708,Skeleton_Advocare+++,Skeleton Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Skeleton Prisoner\",1479,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31708) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-31710,Zombie_Advocare,Zombie Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Zombie\",1394,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31709) ) end; getmapxy .@map$, .@x, .@y, 0;	killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31711,Zombie_Advocare+,Zombie Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Ghoul\",1423,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31710) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31712,Zombie_Advocare++,Zombie Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Zombie Prisoner\",1480,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31711) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31713,Zombie_Advocare+++,Zombie Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Zombie Master\",1298,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31712) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31710,Zombie_Advocare,Zombie Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Zombie\",1394,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31709) ) end; getmapxy .@map$, .@x, .@y, 0;	killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31711,Zombie_Advocare+,Zombie Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Ghoul\",1423,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31710) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31712,Zombie_Advocare++,Zombie Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Zombie Prisoner\",1480,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31711) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31713,Zombie_Advocare+++,Zombie Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Zombie Master\",3508,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31712) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-31715,Orc_Advocare,Orc Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Orc Baby\",1686,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31716,Orc_Advocare+,Orc Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Orc Warrior\",1023,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31717,Orc_Advocare++,Orc Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Orc Lady\",1452,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31718,Orc_Advocare+++,Orc Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"High Orc\",1439,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31715,Orc_Advocare,Orc Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Orc Baby\",3509,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31716,Orc_Advocare+,Orc Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Orc Warrior\",3510,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31717,Orc_Advocare++,Orc Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Orc Lady\",1452,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31718,Orc_Advocare+++,Orc Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"High Orc\",1439,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-31720,Golem_Advocare,Golem Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Golem\",1540,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31721,Golem_Advocare+,Golem Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Wooden Golem\",1497,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31722,Golem_Advocare++,Golem Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Stalactic Golem\",1278,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31723,Golem_Advocare+++,Golem Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Lava Golem\",1549,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31720,Golem_Advocare,Golem Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Golem\",1540,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31721,Golem_Advocare+,Golem Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Wooden Golem\",3511,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31722,Golem_Advocare++,Golem Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Stalactic Golem\",3512,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31723,Golem_Advocare+++,Golem Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Lava Golem\",1549,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-31725,Peco_Advocare,Peco Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Shell Picky\",1050,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31726,Peco_Advocare+,Peco Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Picky\",1049,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31727,Peco_Advocare++,Peco Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"PecoPeco\",1019,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31728,Peco_Advocare+++,Peco Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Grand PecoPeco\",1369,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31725,Peco_Advocare,Peco Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Shell Picky\",3513,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31726,Peco_Advocare+,Peco Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Picky\",3514,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31727,Peco_Advocare++,Peco Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"PecoPeco\",3515,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31728,Peco_Advocare+++,Peco Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Grand PecoPeco\",3516,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-31730,Bear_Advocare,Bear Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Bigfoot\",1603,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31731,Bear_Advocare+,Bear Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Sasquach\",1827,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31732,Bear_Advocare++,Bear Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Leib Olmai\",1306,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31733,Bear_Advocare+++,Bear Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; summon \"Grizzly\",1381,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31730,Bear_Advocare,Bear Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Bigfoot\",1603,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31731,Bear_Advocare+,Bear Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Sasquach\",1442,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31732,Bear_Advocare++,Bear Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Leib Olmai\",3517,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31733,Bear_Advocare+++,Bear Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Grizzly\",3518,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-31735,Plant_Advocare,Plant Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 5 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; }; summon \"Flora\",1575,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31736,Plant_Advocare+,Plant Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 5 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; }; summon \"Parasite\",1555,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31737,Plant_Advocare++,Plant Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 5 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; }; summon \"Geographer\",1590,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
-31738,Plant_Advocare+++,Plant Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 5 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; }; summon \"Dryad\",1493,100,\"SummonCheck::On\"+getcharid(0); }",50,60000; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31735,Plant_Advocare,Plant Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 5 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Flora\",1575,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31736,Plant_Advocare+,Plant Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 5 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Parasite\",1555,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31737,Plant_Advocare++,Plant Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 5 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Geographer\",1590,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31738,Plant_Advocare+++,Plant Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 5 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Dryad\",3519,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-// -------------------- Crystalizaciones ORGÃNICAS (31800-31999)
-31800,Vita,Vita,6,20,,20,,,,,,,,136,,,,,{ bonus bMaxHP,100; },{},{}
-31801,Vita+,Vita+,6,20,,20,,,,,,,,136,,,,,{ bonus bMaxHP,300; },{},{}
-31802,Vita++,Vita++,6,20,,20,,,,,,,,136,,,,,{ bonus bMaxHP,500; },{},{}
-31803,Vita+++,Vita+++,6,20,,20,,,,,,,,136,,,,,{ bonus bMaxHP,900; },{},{}
+31740,Draco_Advocare,Draco Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Petite\",1465,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31741,Draco_Advocare+,Draco Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Novus\",3520,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31742,Draco_Advocare++,Draco Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Deleter\",3521,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31743,Draco_Advocare+++,Draco Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Ferus\",1760,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-31805,ManÃ¡,ManÃ¡,6,20,,20,,,,,,,,136,,,,,{ bonus bMaxSP,10; },{},{}
-31806,ManÃ¡+,ManÃ¡+,6,20,,20,,,,,,,,136,,,,,{ bonus bMaxSP,30; },{},{}
-31807,ManÃ¡++,ManÃ¡++,6,20,,20,,,,,,,,136,,,,,{ bonus bMaxSP,50; },{},{}
-31808,ManÃ¡+++,ManÃ¡+++,6,20,,20,,,,,,,,136,,,,,{ bonus bMaxSP,90; },{},{}
+31745,Serpent_Advocare,Serpent Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Snake\",1747,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31746,Serpent_Advocare+,Serpent Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Anacondaq\",1748,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31747,Serpent_Advocare++,Serpent Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Sidewinder\",1424,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31748,Serpent_Advocare+++,Serpent Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Isis\",1421,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-31810,Stat,Stat,6,20,,20,,,,,,,,136,,,,,{ bonus bLuk,1; bonus bAgi,1; },{},{}
-31811,Stat+,Stat+,6,20,,20,,,,,,,,136,,,,,{ bonus bAgi,1; bonus bLuk,1; bonus bVit,1; },{},{}
-31812,Stat++,Stat++,6,20,,20,,,,,,,,136,,,,,{ bonus bAgi,1; bonus bLuk,1; bonus bVit,1; bonus bInt,1; },{},{}
-31813,Stat+++,Stat+++,6,20,,20,,,,,,,,136,,,,,{ bonus bAgi,1; bonus bLuk,1; bonus bVit,1; bonus bInt,1; bonus bStr,1; bonus bDex,1; },{},{}
-31814,Strength,Strength,6,20,,20,,,,,,,,136,,,,,{ bonus bStr,1; },{},{}
-31815,Agility,Agility,6,20,,20,,,,,,,,136,,,,,{ bonus bAgi,1; },{},{}
-31816,Vitality,Vitality,6,20,,20,,,,,,,,136,,,,,{ bonus bVit,1; },{},{}
-31817,Intelligence,Intelligence,6,20,,20,,,,,,,,136,,,,,{ bonus bInt,1; },{},{}
-31818,Dexerity,Dexerity,6,20,,20,,,,,,,,136,,,,,{ bonus bDex,1; },{},{}
-31819,Luck,Luck,6,20,,20,,,,,,,,136,,,,,{ bonus bLuk,1; },{},{}
+31750,Chonchon_Advocare,Chonchon Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Chonchon\",3522,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31751,Chonchon_Advocare+,Chonchon Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Steel Chonchon\",3523,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31752,Chonchon_Advocare++,Chonchon Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Dragon Fly\",3524,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31753,Chonchon_Advocare+++,Chonchon Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Hunter Fly\",1422,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-31820,Reflejos,Reflejos,6,20,,20,,,,,,,,136,,,,,{ bonus bFlee,3; },{},{}
-31821,Reflejos+,Reflejos+,6,20,,20,,,,,,,,136,,,,,{ bonus bFlee,7; },{},{}
-31822,Reflejos++,Reflejos++,6,20,,20,,,,,,,,136,,,,,{ bonus bFlee,11; },{},{}
-31823,Reflejos+++,Reflejos+++,6,20,,20,,,,,,,,136,,,,,{ bonus bFlee,15; },{},{}
+31755,Bat_Advocare,Bat Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Familiar\",1419,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31756,Bat_Advocare+,Bat Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Drainiliar\",1434,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31757,Bat_Advocare++,Bat Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Exlposion\",1532,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31758,Bat_Advocare+++,Bat Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Gargoyle\",1597,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-31825,Esquiva_Asombrosa,Esquiva Asombrosa,6,20,,20,,,,,,,,136,,,,,{ bonus bFlee2,2; },{},{}
-31826,Esquiva_Asombrosa+,Esquiva Asombrosa+,6,20,,20,,,,,,,,136,,,,,{ bonus bFlee2,3; },{},{}
-31827,Esquiva_Asombrosa++,Esquiva Asombrosa++,6,20,,20,,,,,,,,136,,,,,{ bonus bFlee2,4; },{},{}
-31828,Esquiva_Asombrosa+++,Esquiva Asombrosa+++,6,20,,20,,,,,,,,136,,,,,{ bonus bFlee2,5; },{},{}
+31760,Lizard_Advocare,Lizard Advocare,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Raptice\",1027,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31761,Lizard_Advocare+,Lizard Advocare+,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Green Iguana\",3525,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31762,Lizard_Advocare++,Lizard Advocare++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Alligator\",3526,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
+31763,Lizard_Advocare+++,Lizard Advocare+++,6,20,,20,,,,,,,,4,,,,,{ autobonus2 "{ getmapxy .@map$, .@x, .@y, 0; if ( isequipped(31656) ){ if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 3 ) end; } else { if ( mobcount(.@map$, \"SummonCheck::On\"+ getcharid(0)) >= 1 ) end; }; if ( isequipped(31654) ){ set .@time, 80000; } else { set .@time, 40000; }; summon \"Anolian\",1488,100,\"SummonCheck::On\"+getcharid(0); }",50,.@time; },{},{ if ( !playerattached() ) end; if ( isequipped(31700) ) end; getmapxy .@map$, .@x, .@y, 0; killmonster .@map$, "SummonCheck::On"+getcharid(0); }
 
-31830,Dureza,Dureza,6,20,,20,,,,,,,,136,,,,,{ bonus bDef,2; },{},{}
-31831,Dureza+,Dureza+,6,20,,20,,,,,,,,136,,,,,{ bonus bDef,5; },{},{}
-31832,Dureza++,Dureza++,6,20,,20,,,,,,,,136,,,,,{ bonus bDef,8; },{},{}
-31833,Dureza+++,Dureza+++,6,20,,20,,,,,,,,136,,,,,{ bonus bDef,10; },{},{}
+// -------------------- Crystalizaciones ORGÁNICAS (31800-31999)
+31800,Vita,Vita,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bMaxHP,300; } else { bonus bMaxHP,100; }; },{},{}
+31801,Vita+,Vita+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bMaxHP,700; } else { bonus bMaxHP,300; }; },{},{}
+31802,Vita++,Vita++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bMaxHP,1100; } else { bonus bMaxHP,500; }; },{},{}
+31803,Vita+++,Vita+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bMaxHP,1900; } else { bonus bMaxHP,900; }; },{},{}
 
-31835,Gravitas,Gravitas,6,20,,20,,,,,,,,136,,,,,{ set maxweight,maxweight + 20; },{},{}
-31836,Gravitas+,Gravitas+,6,20,,20,,,,,,,,136,,,,,{ set maxweight,maxweight + 40; },{},{}
-31837,Gravitas++,Gravitas++,6,20,,20,,,,,,,,136,,,,,{ set maxweight,maxweight + 80; },{},{}
-31838,Gravitas+++,Gravitas+++,6,20,,20,,,,,,,,136,,,,,{ set maxweight,maxweight + 150; },{},{}
+31805,Maná,Maná,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bMaxSP,30; } else { bonus bMaxSP,10; }; },{},{}
+31806,Maná+,Maná+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bMaxSP,70; } else { bonus bMaxSP,30; }; },{},{}
+31807,Maná++,Maná++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bMaxSP,110; } else { bonus bMaxSP,50; }; },{},{}
+31808,Maná+++,Maná+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bMaxSP,190; } else { bonus bMaxSP,90; }; },{},{}
 
-31840,Soltura_Armas,Soltura Armas,6,20,,20,,,,,,,,136,,,,,{ bonus bBaseAtk,5; },{},{}
-31841,Soltura_Armas+,Soltura Armas+,6,20,,20,,,,,,,,136,,,,,{ bonus bBaseAtk,10; },{},{}
-31842,Soltura_Armas++,Soltura Armas++,6,20,,20,,,,,,,,136,,,,,{ bonus bBaseAtk,15; },{},{}
-31843,Soltura_Armas+++,Soltura Armas+++,6,20,,20,,,,,,,,136,,,,,{ bonus bBaseAtk,20; },{},{}
+31810,Stat,Stat,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bLuk,2; bonus bAgi,2; } else { bonus bLuk,1; bonus bAgi,1; }; },{},{}
+31811,Stat+,Stat+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bAgi,2; bonus bLuk,2; bonus bVit,2; } else { bonus bAgi,1; bonus bLuk,1; bonus bVit,1; }; },{},{}
+31812,Stat++,Stat++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bAgi,2; bonus bLuk,2; bonus bVit,2; bonus bInt,2; } else { bonus bAgi,1; bonus bLuk,1; bonus bVit,1; bonus bInt,1; }; },{},{}
+31813,Stat+++,Stat+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bAgi,2; bonus bLuk,2; bonus bVit,2; bonus bInt,2; bonus bStr,2; bonus bDex,2; } else { bonus bAgi,1; bonus bLuk,1; bonus bVit,1; bonus bInt,1; bonus bStr,1; bonus bDex,1; }; },{},{}
+31814,Strength,Strength,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bStr,3; } else { bonus bStr,1; }; },{},{}
+31815,Agility,Agility,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bAgi,3; } else { bonus bAgi,1; }; },{},{}
+31816,Vitality,Vitality,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bVit,3; } else { bonus bVit,1; }; },{},{}
+31817,Intelligence,Intelligence,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bInt,3; } else { bonus bInt,1; }; },{},{}
+31818,Dexerity,Dexerity,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bDex,3; } else { bonus bDex,1; }; },{},{}
+31819,Luck,Luck,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bLuk,3; } else { bonus bLuk,1; }; },{},{}
 
-31845,Soltura_Hechizos,Soltura Hechizos,6,20,,20,,,,,,,,136,,,,,{ bonus bBaseMatk,5; },{},{}
-31846,Soltura_Hechizos+,Soltura Hechizos+,6,20,,20,,,,,,,,136,,,,,{ bonus bBaseMatk,10; },{},{}
-31847,Soltura_Hechizos++,Soltura Hechizos++,6,20,,20,,,,,,,,136,,,,,{ bonus bBaseMatk,15; },{},{}
-31848,Soltura_Hechizos+++,Soltura Hechizos+++,6,20,,20,,,,,,,,136,,,,,{ bonus bBaseMatk,20; },{},{}
+31820,Reflejos,Reflejos,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bFlee,7; } else { bonus bFlee,3; }; },{},{}
+31821,Reflejos+,Reflejos+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bFlee,15; } else { bonus bFlee,7; }; },{},{}
+31822,Reflejos++,Reflejos++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bFlee,23; } else { bonus bFlee,11; }; },{},{}
+31823,Reflejos+++,Reflejos+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bFlee,31; } else { bonus bFlee,15; }; },{},{}
 
-31849,Celeridad,Celeridad,6,20,,20,,,,,,,,136,,,,,{ bonus bAspdRate,3; },{},{}
-31850,Celeridad+,Celeridad+,6,20,,20,,,,,,,,136,,,,,{ bonus bAspd,1; },{},{}
-31851,Celeridad++,Celeridad++,6,20,,20,,,,,,,,136,,,,,{ bonus bAspd,2; },{},{}
-31852,Celeridad+++,Celeridad+++,6,20,,20,,,,,,,,136,,,,,{ bonus bAspd,3; },{},{}
+31825,Esquiva_Asombrosa,Esquiva Asombrosa,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bFlee2,4; } else { bonus bFlee2,2; }; },{},{}
+31826,Esquiva_Asombrosa+,Esquiva Asombrosa+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bFlee2,6; } else { bonus bFlee2,3; }; },{},{}
+31827,Esquiva_Asombrosa++,Esquiva Asombrosa++, 6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bFlee2,8; } else { bonus bFlee2,4; }; },{},{}
+31828,Esquiva_Asombrosa+++,Esquiva Asombrosa+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bFlee2,10; } else { bonus bFlee2,5; }; },{},{}
 
-31853,Velocidad,Velocidad,6,20,,20,,,,,,,,136,,,,,{ bonus bSpeedRate,5; },{},{}
-31854,Velocidad+,Velocidad+,6,20,,20,,,,,,,,136,,,,,{ bonus bSpeedRate,10; },{},{}
-31855,Velocidad++,Velocidad++,6,20,,20,,,,,,,,136,,,,,{ bonus bSpeedRate,15; },{},{}
-31856,Velocidad+++,Velocidad+++,6,20,,20,,,,,,,,136,,,,,{ bonus bSpeedRate,20; },{},{}
+31830,Dureza,Dureza,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bDef,5; } else { bonus bDef,2; }; },{},{}
+31831,Dureza+,Dureza+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bDef,11; } else { bonus bDef,5; }; },{},{}
+31832,Dureza++,Dureza++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bDef,17; } else { bonus bDef,8; }; },{},{}
+31833,Dureza+++,Dureza+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bDef,21; } else { bonus bDef,10; }; },{},{}
+
+31835,Gravitas,Gravitas,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ set maxweight,maxweight + 50; } else { set maxweight,maxweight + 20; }; },{},{}
+31836,Gravitas+,Gravitas+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ set maxweight,maxweight + 90; } else { set maxweight,maxweight + 40; }; },{},{}
+31837,Gravitas++,Gravitas++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ set maxweight,maxweight + 170; } else { set maxweight,maxweight + 80; }; },{},{}
+31838,Gravitas+++,Gravitas+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ set maxweight,maxweight + 210; } else { set maxweight,maxweight + 100; }; },{},{}
+
+31840,Soltura_Armas,Soltura Armas,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bBaseAtk,12; } else { bonus bBaseAtk,5; }; },{},{}
+31841,Soltura_Armas+,Soltura Armas+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bBaseAtk,22; } else { bonus bBaseAtk,10; }; },{},{}
+31842,Soltura_Armas++,Soltura Armas++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bBaseAtk,32; } else { bonus bBaseAtk,15; }; },{},{}
+31843,Soltura_Armas+++,Soltura Armas+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bBaseAtk,42; } else { bonus bBaseAtk,20; }; },{},{}
+
+31845,Soltura_Hechizos,Soltura Hechizos,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bBaseMatk,12; } else { bonus bBaseMatk,5; }; },{},{}
+31846,Soltura_Hechizos+,Soltura Hechizos+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bBaseMatk,22; } else { bonus bBaseMatk,10; }; },{},{}
+31847,Soltura_Hechizos++,Soltura Hechizos++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bBaseMatk,32; } else { bonus bBaseMatk,15; }; },{},{}
+31848,Soltura_Hechizos+++,Soltura Hechizos+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bBaseMatk,42; } else { bonus bBaseMatk,20; }; },{},{}
+
+31850,Celeridad,Celeridad,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bAspdRate,7; } else { bonus bAspdRate,3; }; },{},{}
+31851,Celeridad+,Celeridad+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bAspd,2; } else { bonus bAspd,1; }; },{},{}
+31852,Celeridad++,Celeridad++,6,20,,20,,,,,,,,1  36,,,,,{ if ( isequipped(31655) ){ bonus bAspd,4; } else { bonus bAspd,2; }; },{},{}
+31853,Celeridad+++,Celeridad+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bAspd,6; } else { bonus bAspd,3; }; },{},{}
+
+31855,Velocidad,Velocidad,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bSpeedRate,8; } else { bonus bSpeedRate,4; }; },{},{}
+31856,Velocidad+,Velocidad+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bSpeedRate,16; } else { bonus bSpeedRate,8; }; },{},{}
+31857,Velocidad++,Velocidad++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bSpeedRate,24; } else { bonus bSpeedRate,12; }; },{},{}
+31858,Velocidad+++,Velocidad+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bSpeedRate,32; } else { bonus bSpeedRate,16; }; },{},{}
+
+31860,Crítico,Crítico,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bCritical,4; } else { bonus bCritical,2; }; },{},{}
+31861,Crítico+,Crítico+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bCritical,6; } else { bonus bCritical,3; }; },{},{}
+31862,Crítico++,Crítico++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bCritical,8; } else { bonus bCritical,4; }; },{},{}
+31863,Crítico+++,Crítico+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bCritical,10; } else { bonus bCritical,5; }; },{},{}
+
+31865,Vorpalina,Vorpalina,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bCritAtkRate,7; } else { bonus bCritAtkRate,3; }; },{},{}
+31866,Vorpalina+,Vorpalina+,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bCritAtkRate,15; } else { bonus bCritAtkRate,7; }; },{},{}
+31867,Vorpalina++,Vorpalina++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bCritAtkRate,23; } else { bonus bCritAtkRate,11; }; },{},{}
+31868,Vorpalina+++,Vorpalina+++,6,20,,20,,,,,,,,136,,,,,{ if ( isequipped(31655) ){ bonus bCritAtkRate,31; } else { bonus bCritAtkRate,15; }; },{},{}
+
+31870,Buscadora,Buscadora,6,20,,20,,,,,,,,136,,,,,{},{},{}
+31871,Buscadora+,Buscadora+,6,20,,20,,,,,,,,136,,,,,{},{},{}
+31872,Buscadora++,Buscadora++,6,20,,20,,,,,,,,136,,,,,{},{},{}
+31873,Buscadora+++,Buscadora+++,6,20,,20,,,,,,,,136,,,,,{},{},{}
+
+31875,Ofensiva,Ofensiva,6,20,,20,,,,,,,,136,,,,,{ bonus2 bAddRace,RC_NonBoss,1; bonus2 bAddRace,RC_Boss,1; },{},{}
+31876,Ofensiva+,Ofensiva+,6,20,,20,,,,,,,,136,,,,,{ bonus2 bAddRace,RC_NonBoss,2; bonus2 bAddRace,RC_Boss,2; },{},{}
+31877,Ofensiva++,Ofensiva++,6,20,,20,,,,,,,,136,,,,,{ bonus2 bAddRace,RC_NonBoss,3; bonus2 bAddRace,RC_Boss,3; },{},{}
+31878,Ofensiva+++,Ofensiva+++,6,20,,20,,,,,,,,136,,,,,{ bonus2 bAddRace,RC_NonBoss,4; bonus2 bAddRace,RC_Boss,4; },{},{}
+
+31880,Defensiva,Defensiva,6,20,,20,,,,,,,,136,,,,,{ bonus2 bSubRace,RC_NonBoss,1; bonus2 bSubRace,RC_Boss,1; },{},{}
+31881,Defensiva+,Defensiva+,6,20,,20,,,,,,,,136,,,,,{ bonus2 bSubRace,RC_NonBoss,2; bonus2 bSubRace,RC_Boss,2; },{},{}
+31882,Defensiva++,Defensiva++,6,20,,20,,,,,,,,136,,,,,{ bonus2 bSubRace,RC_NonBoss,3; bonus2 bSubRace,RC_Boss,3; },{},{}
+31883,Defensiva+++,Defensiva+++,6,20,,20,,,,,,,,136,,,,,{ bonus2 bSubRace,RC_NonBoss,4; bonus2 bSubRace,RC_Boss,4; },{},{}
+
+31885,Sapiencia,Sapiencia,6,20,,20,,,,,,,,136,,,,,{ bonus2 bExpAddRace,RC_NonBoss,1; },{},{}
+31886,Sapiencia+,Sapiencia+,6,20,,20,,,,,,,,136,,,,,{ bonus2 bExpAddRace,RC_NonBoss,2; },{},{}
+31887,Sapiencia++,Sapiencia++,6,20,,20,,,,,,,,136,,,,,{ bonus2 bExpAddRace,RC_NonBoss,3; },{},{}
+31888,Sapiencia+++,Sapiencia+++,6,20,,20,,,,,,,,136,,,,,{ bonus2 bExpAddRace,RC_NonBoss,4; },{},{}

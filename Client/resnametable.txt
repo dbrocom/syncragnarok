@@ -1146,7 +1146,10 @@ vip_ayo.gnd#ayo_fild02.gnd#
 vip_ayo.gat#ayo_fild02.gat#
 vip_ayo.rsw#ayo_fild02.rsw#
 유저인터페이스\map\vip_ayo.bmp#유저인터페이스\map\ayo_fild02.bmp#
-
+vip_bybalan.gnd#iz_dun05.gnd#
+vip_bybalan.gat#iz_dun05.gat#
+vip_bybalan.rsw#iz_dun05.rsw#
+유저인터페이스\map\vip_bybalan.bmp#유저인터페이스\map\iz_dun05.bmp#
 
 region_1.gnd#guild_vs1.gnd#
 region_1.gat#guild_vs1.gat#

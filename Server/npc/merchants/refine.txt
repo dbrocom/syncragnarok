@@ -657,8 +657,8 @@ function	script	refinemain	{
 		mes "¡Está todo lo refinado que puede!";
 		close;
 	}
-	set .@refineitemid, getequipid(.@part); // save id of the item
-	set .@refinerycnt, getequiprefinerycnt(.@part); //save refinery count
+	set .@refineitemid, getequipid(.@part);			// save id of the item
+	set .@refinerycnt, getequiprefinerycnt(.@part);	//save refinery count
 	switch(getequipweaponlv(.@part)){
 	case 0: 	//Refine Armor
 		if( .@refinerycnt < 10 )

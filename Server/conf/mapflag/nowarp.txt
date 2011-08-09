@@ -71,3 +71,13 @@ poring_w01	mapflag	nowarp
 poring_w02	mapflag	nowarp
 
 guild_vs5	mapflag	nowarp
+pvp_n_1-5	mapflag	nowarp
+2009rwc_02	mapflag	nowarp
+rwc01	mapflag	nowarp
+2009rwc_03	mapflag	nowarp
+2009rwc_01	mapflag	nowarp
+pvp_n_1-3	mapflag	nowarp
+guild_vs4	mapflag	nowarp
+guild_vs2	mapflag	nowarp
+guild_vs3	mapflag	nowarp
+2009rwc_04	mapflag	nowarp

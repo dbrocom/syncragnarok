@@ -1,0 +1,97 @@
+//===== Custom eAthena Script =======================================
+//= Fish in Mouth Custom Quest
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+prt_fild00,250,243,3	script	Barkham#fishmouth	753,{
+
+	query_sql "SELECT hobby FROM `gremios` WHERE char_id = "+getcharid(0),.@hobby$[0];
+	query_sql "SELECT hobby_level FROM `gremios` WHERE char_id = "+getcharid(0),.@hobby_level[0];
+
+	mes "[^0000FFBarkham^000000]";
+	mes "Para los aventureros avezados como yo, pescar es un auténtico placer.";
+	mes "Te relaja y te permite descansar los músculos.";
+	next;
+	mes "[^0000FFBarkham^000000]";
+	if (.@hobby$[0] != "Pescador") {
+		mes "Pero tú no debes saber de lo que estoy hablando...";
+		close;
+	}
+	mes "¿Y a ti qué te trae por aquí?";
+	mes "Jaja, qué preguntas. ¡Seguro que vienes a pescar!";
+	next;
+	if ( .@hobby_level[0] < 3 ){
+		mes "[^0000FFBarkham^000000]";
+		mes "Me enorgullece ver a un novato como tú por estos lares.";
+		mes "Pero te recomendaría que volvieras cuando hubieras aprendido algo más sobre pesca.";
+		close;
+	}
+	mes "[^0000FFBarkham^000000]";
+	mes "La pesca es un placer divino. Relajante, y a la vez efusivo.";
+	mes "¡Y el pescado está para chuparse los dedos!";
+	next;
+	mes "[^0000FFBarkham^000000]";
+	mes "Aunque si te soy sincero, yo prefiero el pescado fresco... crudo.";
+	mes "Y tú, ¿cómo lo prefieres?";
+	next;
+	if (select("A la brasa:Crudo")==1){
+		mes "[^0000FFBarkham^000000]";
+		mes "¡Eso es porque no has probado un bocado de pescado crudo!";
+		close;
+	}
+	mes "[^0000FFBarkham^000000]";
+	mes "¡Sabía que no te había prejuzgado mal!";
+	mes "¡Tú eres de los míos!";
+	next;
+	mes "[^0000FFBarkham^000000]";
+	mes "Hagamos un trato. Si me traes una serie de items permitiré que te deleites con el más rico pescado que hayas probado.";
+	mes "¡No podrás dejar de comerlo!";
+	next;
+	mes "[^0000FFBarkham^000000]";
+	mes "Los items son los siguientes:";
+	mes "500 ^FF0000Fish Tail^000000";
+	mes "5 ^FF0000Siluros^000000";
+	next;
+	switch(select("Ya tengo los items:Tendré que mejorar mi técnica...")){
+		case 1:
+			mes "[^0000FFBarkham^000000]";
+			if( (countitem(30203) >= 5) && (countitem(1023) >= 500) ){
+				delitem 30203,5;
+				delitem 1023,500;
+				mes "Pescadito pescadito~~";
+				next;             
+				getitem 5403,1;
+				mes "[^0000FFBarkham^000000]";
+				mes "¡Aquí tienes tu premio!";
+				mes "¡Demuestra tu pasión por el pescado allá donde vayas!";
+				mes "JAJAJAJA";
+			}else{
+				mes "Necesitas mejorar tu técnica un poco más.";
+			}
+			break;
+		case 2:
+			mes "[^0000FFBarkham^000000]";
+			mes "Recuerda que la clave del éxito está en la paciencia.";
+			break;
+	}
+	close;
+}

@@ -1089,57 +1089,57 @@
 14594,91,99	// Quagmire_Scroll
 
 // Battleground Rewards (Tierra Gorge/Flavius)
-13036,115,99	// BF_Dagger1
-13037,115,99	// BF_Dagger2
-13410,115,99	// BF_Sword1
-13411,115,99	// BF_Sword2
-1425,115,99	// BF_Spear1
-1632,115,99	// BF_Staff1
-1633,115,99	// BF_Staff2
-1634,115,99	// BF_Staff3
-1635,115,99	// BF_Staff4
-1542,115,99	// BF_Morning_Star1
-1543,115,99	// BF_Morning_Star2
-1923,115,99	// BF_Instrument1
-1924,115,99	// BF_Instrument2
-1977,115,99	// BF_Whip1
-1978,115,99	// BF_Whip2
-1574,115,99	// BF_Book1
-1575,115,99	// BF_Book2
-1823,115,99	// BF_Knuckle1
-1824,115,99	// BF_Knuckle2
-1183,115,99	// BF_Two_Handed_Sword1
-1184,115,99	// BF_Two_Handed_Sword2
-1482,115,99	// BF_Lance1
-1379,115,99	// BF_Two_Handed_Axe1
-1380,115,99	// BF_Two_Handed_Axe2
-13305,115,99	// BF_Huuma_Shuriken1
-13306,115,99	// BF_Huuma_Shuriken2
-1279,115,99	// BF_Katar1
-1280,115,99	// BF_Katar2
-1738,115,99	// BF_Bow1
-1739,115,99	// BF_Bow2
-13108,115,99	// BF_Pistol1
-13171,115,99	// BF_Rifle1
-13172,115,99	// BF_Gatling_Gun1
-13173,115,99	// BF_Shotgun1
-13174,115,99	// BF_Launcher1
-2538,115,99	// Commander_Manteau
-2539,115,99	// Commander_Manteau_
-2540,115,99	// Sheriff_Manteau
-2435,115,99	// Battle_Greave
-2436,115,99	// Combat_Boots
-2437,115,99	// Battle_Boots
-2376,115,99	// Assaulter_Plate
-2377,115,99	// Elite_Engineer_Armor
-2378,115,99	// Assassin_Robe
-2379,115,99	// Warlock_Battle_Robe
-2380,115,99	// Medic_Robe
-2381,115,99	// Elite_Archer_Suit
-2382,115,99	// Elite_Shooter_Suit
-2733,115,99	// Medal_Gunner
-7828,115,99	// BF_Badge1
-7829,115,99	// BF_Badge2
+13036,83,99	// BF_Dagger1
+13037,83,99	// BF_Dagger2
+13410,83,99	// BF_Sword1
+13411,83,99	// BF_Sword2
+1425,83,99	// BF_Spear1
+1632,83,99	// BF_Staff1
+1633,83,99	// BF_Staff2
+1634,83,99	// BF_Staff3
+1635,83,99	// BF_Staff4
+1542,83,99	// BF_Morning_Star1
+1543,83,99	// BF_Morning_Star2
+1923,83,99	// BF_Instrument1
+1924,83,99	// BF_Instrument2
+1977,83,99	// BF_Whip1
+1978,83,99	// BF_Whip2
+1574,83,99	// BF_Book1
+1575,83,99	// BF_Book2
+1823,83,99	// BF_Knuckle1
+1824,83,99	// BF_Knuckle2
+1183,83,99	// BF_Two_Handed_Sword1
+1184,83,99	// BF_Two_Handed_Sword2
+1482,83,99	// BF_Lance1
+1379,83,99	// BF_Two_Handed_Axe1
+1380,83,99	// BF_Two_Handed_Axe2
+13305,83,99	// BF_Huuma_Shuriken1
+13306,83,99	// BF_Huuma_Shuriken2
+1279,83,99	// BF_Katar1
+1280,83,99	// BF_Katar2
+1738,83,99	// BF_Bow1
+1739,83,99	// BF_Bow2
+13108,83,99	// BF_Pistol1
+13171,83,99	// BF_Rifle1
+13172,83,99	// BF_Gatling_Gun1
+13173,83,99	// BF_Shotgun1
+13174,83,99	// BF_Launcher1
+2538,83,99	// Commander_Manteau
+2539,83,99	// Commander_Manteau_
+2540,83,99	// Sheriff_Manteau
+2435,83,99	// Battle_Greave
+2436,83,99	// Combat_Boots
+2437,83,99	// Battle_Boots
+2376,83,99	// Assaulter_Plate
+2377,83,99	// Elite_Engineer_Armor
+2378,83,99	// Assassin_Robe
+2379,83,99	// Warlock_Battle_Robe
+2380,83,99	// Medic_Robe
+2381,83,99	// Elite_Archer_Suit
+2382,83,99	// Elite_Shooter_Suit
+2733,83,99	// Medal_Gunner
+7828,83,99	// BF_Badge1
+7829,83,99	// BF_Badge2
 
 7801,123,99	// Girl_Fan_Letter
 7802,123,99	// Autograph_Book
@@ -1285,7 +1285,7 @@
 6037,123,99	// Rough_File
 6038,123,99	// Neat_Report
 6039,91,99	// Piece_Of_Fish
-6040,123,99	// Some_Of_Report
+6040,115,99	// Some_Of_Report
 //6041,91,99	// Strong_Bine
 6042,91,99	// Ordinary_Branch
 6043,123,99	// Letter_From_Lugen
@@ -1295,44 +1295,44 @@
 6051,115,99	// Gray_Hollow
 
 // Battleground Rewards (Krieger Von Midgard)
-13416,115,99	// Krieger_Onehand_Sword1
-13417,115,99	// Krieger_Onehand_Sword2
-13418,115,99	// Krieger_Onehand_Sword3
-13042,115,99	// Krieger_Dagger1
-1310,115,99	// Krieger_Onehand_Axe1
-1426,115,99	// Krieger_Onehand_Spear1
-1546,115,99	// Krieger_Onehand_Mace1
-1576,115,99	// Krieger_Book1
-1577,115,99	// Krieger_Book2
-1640,115,99	// Krieger_Onehand_Staff1
-1641,115,99	// Krieger_Onehand_Staff2
-1826,115,99	// Krieger_Knuckle1
-1827,115,99	// Krieger_Knuckle2
-1927,115,99	// Krieger_Instrument1
-1981,115,99	// Krieger_Whip1
-1187,115,99	// Krieger_Twohand_Sword1
-1281,115,99	// Krieger_Katar1
-1282,115,99	// Krieger_Katar2
-1382,115,99	// Krieger_Twohand_Axe1
-1486,115,99	// Krieger_Twohand_Spear1
-2002,115,99	// Krieger_Twohand_Staff1
-13307,115,99	// Krieger_Huuma_Shuriken1
-1743,115,99	// Krieger_Bow1
-13110,115,99	// Krieger_Pistol1
-13176,115,99	// Krieger_Rifle1
-13177,115,99	// Krieger_Gatling1
-13178,115,99	// Krieger_Shotgun1
-13179,115,99	// Krieger_Launcher1
-2394,115,99	// Krieger_Suit1
-2444,115,99	// Krieger_Shoes1
-2549,115,99	// Krieger_Muffler1
-2772,115,99	// Krieger_Ring1
-2445,115,99	// Krieger_Shoes2
-2446,115,99	// Krieger_Shoes3
-2395,115,99	// Krieger_Suit2
-2396,115,99	// Krieger_Suit3
-2773,115,99	// Krieger_Ring2
-2774,115,99	// Krieger_Ring3
+13416,83,99	// Krieger_Onehand_Sword1
+13417,83,99	// Krieger_Onehand_Sword2
+13418,83,99	// Krieger_Onehand_Sword3
+13042,83,99	// Krieger_Dagger1
+1310,83,99	// Krieger_Onehand_Axe1
+1426,83,99	// Krieger_Onehand_Spear1
+1546,83,99	// Krieger_Onehand_Mace1
+1576,83,99	// Krieger_Book1
+1577,83,99	// Krieger_Book2
+1640,83,99	// Krieger_Onehand_Staff1
+1641,83,99	// Krieger_Onehand_Staff2
+1826,83,99	// Krieger_Knuckle1
+1827,83,99	// Krieger_Knuckle2
+1927,83,99	// Krieger_Instrument1
+1981,83,99	// Krieger_Whip1
+1187,83,99	// Krieger_Twohand_Sword1
+1281,83,99	// Krieger_Katar1
+1282,83,99	// Krieger_Katar2
+1382,83,99	// Krieger_Twohand_Axe1
+1486,83,99	// Krieger_Twohand_Spear1
+2002,83,99	// Krieger_Twohand_Staff1
+13307,83,99	// Krieger_Huuma_Shuriken1
+1743,83,99	// Krieger_Bow1
+13110,83,99	// Krieger_Pistol1
+13176,83,99	// Krieger_Rifle1
+13177,83,99	// Krieger_Gatling1
+13178,83,99	// Krieger_Shotgun1
+13179,83,99	// Krieger_Launcher1
+2394,83,99	// Krieger_Suit1
+2444,83,99	// Krieger_Shoes1
+2549,83,99	// Krieger_Muffler1
+2772,83,99	// Krieger_Ring1
+2445,83,99	// Krieger_Shoes2
+2446,83,99	// Krieger_Shoes3
+2395,83,99	// Krieger_Suit2
+2396,83,99	// Krieger_Suit3
+2773,83,99	// Krieger_Ring2
+2774,83,99	// Krieger_Ring3
 
 // Misc. Items
 7923,115,99	// KRATHONG_
@@ -1343,7 +1343,7 @@
 5318,83,99	// Poring_Party_Hat
 12331,123,99	// Ginseng
 12332,123,99	// Fruit_Juice
-7928,123,99	// Brazilian_Flag_
+//7928,123,99	// Brazilian_Flag_
 7929,123,99	// Golden_Coin_
 5450,91,99	// Sun_Cap
 5451,91,99	// Dragonhelm_Gold
@@ -1356,16 +1356,6 @@
 5460,115,99	// Adv_Dragon_Skull
 5461,115,99	// Adv_Whisper_Mask
 5464,123,99	// Zaha_Doll_Hat
-12333,123,99	// Ansila
-12725,91,99	// Runstone_Nosiege
-12726,91,99	// Runstone_Rhydo
-12727,91,99	// Runstone_Verkana
-12728,91,99	// Runstone_Isia
-12729,91,99	// Runstone_Asir
-12730,91,99	// Runstone_Urj
-12731,91,99	// Runstone_Turisus
-12732,91,99	// Runstone_Pertz
-12733,91,99	// Runstone_Hagalas
 5254,73,99	// Deviling_Hat
 14296,91,99	// Angel_Scroll
 14297,91,99	// Devil_Scroll
@@ -1454,10 +1444,6 @@
 //14361,91,99	// ???
 //14362,91,99	// ???
 //14363,91,99	// ???
-12323,115,99	// N_Fly_Wing
-12324,115,99	// N_Butterfly_Wing
-12325,115,99	// N_Magnifier
-2393,115,99	// N_Adventurer's_Suit
 //12400,83,99	// ???
 //2815,91,99	// ???
 5346,73,99	// Gf_Recruiter_Hat
@@ -1518,43 +1504,110 @@
 12348,91,99	// Manuk's_Faith
 12349,91,99	// Cornus'_Tears
 
+// New Novice Training Grounds
+1381,115,99	// N_Battle_Axe
+1545,115,99	// N_Mace
+1639,115,99	// N_Rod
+1742,115,99	// N_Composite_Bow
+2393,115,99	// N_Adventurer's_Suit
+12323,123,99	// N_Fly_Wing
+12324,123,99	// N_Butterfly_Wing
+12325,123,99	// N_Magnifier
+13040,115,99	// N_Cutter
+13041,115,99	// N_Main_Gauche
+13415,115,99	// N_Falchion
+
 // Epidode 13.3
-1192,115,99	// P_Slayer1
-1193,115,99	// P_Slayer2
-1650,115,99	// P_Staff1
-1651,115,99	// P_Staff2
-1747,115,99	// P_Bow1
-1748,115,99	// P_Bow2
-2456,115,99	// Para_Team_Boots1
-2457,115,99	// Para_Team_Boots2
-2458,115,99	// Para_Team_Boots3
-2560,115,99	// Para_Team_Manteau
-5583,115,99	// Para_Team_Hat
-6219,115,99	// Para_Team_Mark
-13050,115,99	// P_Dagger1
-13051,115,99	// P_Dagger2
-13112,115,99	// P_Revolver1
-13113,115,99	// P_Revolver2
-13423,115,99	// P_Sabre1
-13424,115,99	// P_Sabre2
-15009,115,99	// Para_Team_Uniform1
-15010,115,99	// Para_Team_Uniform2
-15011,115,99	// Para_Team_Uniform3
-16004,115,99	// P_Mace1
-16005,115,99	// P_Mace2
+// * Eden Group
+1192,123,99	// P_Slayer1
+1193,123,99	// P_Slayer2
+1650,123,99	// P_Staff1
+1651,123,99	// P_Staff2
+1747,123,99	// P_Bow1
+1748,123,99	// P_Bow2
+2456,123,99	// Para_Team_Boots1
+2457,123,99	// Para_Team_Boots2
+2458,123,99	// Para_Team_Boots3
+2560,123,99	// Para_Team_Manteau
+5583,83,99	// Para_Team_Hat
+6219,123,99	// Para_Team_Mark
+13050,123,99	// P_Dagger1
+13051,123,99	// P_Dagger2
+13112,123,99	// P_Revolver1
+13113,123,99	// P_Revolver2
+13423,123,99	// P_Sabre1
+13424,123,99	// P_Sabre2
+15009,123,99	// Para_Team_Uniform1
+15010,123,99	// Para_Team_Uniform2
+15011,123,99	// Para_Team_Uniform3
+16004,123,99	// P_Mace1
+16005,123,99	// P_Mace2
 
-// Novice Training Grounds
-2819,123,99
-2820,123,99
-2821,123,99
-2822,123,99
-2823,123,99
-2824,123,99
-
-// 3rd jobs items
+// * Third Job-related
+1703,123,99	// Bow__
+2794,123,99	// Magic_Stone_Ring
+2795,115,99	// Green_Apple_Ring
+2796,123,99	// Magical_Stone
+2797,123,99	// Magical_Stone_
+5746,91,99	// Rune_Circlet
+5747,91,99	// Mitra
+5748,91,99	// Sniper_Goggle
+5749,91,99	// Driver_Band
+5750,91,99	// Shadow_Handicraft
+5751,91,99	// Minstrel_Song_Hat
+5752,91,99	// Midas_Whisper
+5753,91,99	// Magic_Stone_Hat
+5754,91,99	// Blazing_Soul
+5755,91,99	// Silent_Executer
+5756,91,99	// Wind_Whisper
+5757,91,99	// Schmidt_Helm
+5758,91,99	// Dying_Swan
+5760,91,99	// Driver_Band_
 6121,73,99	// Makeup_Brush
 6122,73,99	// Paint_Brush
-12333,127,99	// Ancilla (need confirm this)
+6151,115,99	// Peice_Of_Great_Bradium
+6152,115,99	// Glittering_Crystal
+6153,123,99	// Special_Exchange_Coupon
+6154,115,99	// Broken_Horn_Pipe
+6156,115,99	// Approval_Report
+6266,123,99	// Cheat_Key
+6267,123,99	// Virtual_Key
+6268,123,99	// Mirth_Key
+6269,123,99	// Master_Brush
+6270,115,99	// Mins_Picture
+6271,115,99	// Mins_Receipt
+6274,123,99	// Saint_Cloth_Piece
+6275,123,99	// King_Shield
+6276,123,99	// Clear_Reagent
+6277,123,99	// Red_Reagent
+6278,123,99	// Black_Reagent
+12384,115,99	// Rainbow_Ruby_Water
+12385,115,99	// Rainbow_Ruby_Fire
+12386,115,99	// Rainbow_Ruby_Wind
+12387,115,99	// Rainbow_Ruby_Earth
+12388,123,99	// Runstone_Crush
+12389,123,99	// Runstone_Storm
+12390,123,99	// Runstone_Millennium
+2798,115,99	// Will_Of_Exhausted_Angel
+12258,115,99	// Bombring_Box
+12333,123,99	// Ansila
+12725,91,99	// Runstone_Nosiege
+12726,91,99	// Runstone_Rhydo
+12727,91,99	// Runstone_Verkana
+12728,91,99	// Runstone_Isia
+12729,91,99	// Runstone_Asir
+12730,91,99	// Runstone_Urj
+12731,91,99	// Runstone_Turisus
+12732,91,99	// Runstone_Pertz
+12733,91,99	// Runstone_Hagalas
+
+// * New Novice Training Grounds
+2819,115,99	// Swordman_Manual
+2820,115,99	// Thief_Manual
+2821,115,99	// Acolyte_Manual
+2822,115,99	// Archer_Manual
+2823,115,99	// Merchant_Manual
+2824,115,99	// Mage_Manual
 
 
 // Salón de Gladiadores
@@ -1668,6 +1721,9 @@
 30790,95,99
 30791,95,99
 30782,95,99
+
+7055,115,99
+7608,91,99
 
 //Melody Tune
 31001,127,99

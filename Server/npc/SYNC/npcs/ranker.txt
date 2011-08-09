@@ -1,0 +1,722 @@
+//
+// [========================================================]
+// [===========            Ranker SQL            ===========]
+// [========================================================]
+// [ Version 17.1                                           ]
+// [========================================================]
+// [ Original script by: Ivion                              ]
+// [========================================================]
+// [ Description:                                           ]
+// [--------------------------------------------------------]
+// [                                                        ]
+// [ - Level Ranking.                                       ]
+// [ - PK Ranking.                                          ]
+// [ - MvP Ranking.                                         ]
+// [ - Emperium Ranking.                                    ]
+// [ - [Guild] Level Ranking.                               ]
+// [ - [Guild] WoE Ranking.                                 ]
+// [ - Reward system for TOP 1 characters.                  ]
+// [ - GMs Control Panel whispering to NPC:ranker .         ]
+// [ - Auto-Purge of inactive guilds and players.           ]
+// [========================================================]
+// [ 5 last updates:                                        ]
+// [--------------------------------------------------------]
+// [                                                        ]
+// [ v13: [Ivion]                                           ]
+// [ - All your characters in the same account will be      ]
+// [   displayed in a blue color.                           ]
+// [                                                        ]
+// [ v14: [Ivion]                                           ]
+// [ - Added a PK delay so that players won't get PK points ]
+// [   when killing the same player multiple times.         ]
+// [ - Added new [Guild] Level Ranking.                     ]
+// [                                                        ]
+// [ v15: [Ivion]                                           ]
+// [ - Changed the way SC_PKDELAY gets activated so that you]
+// [   can use it by other scripts without instaling the    ]
+// [   Ranker.                                              ]
+// [                                                        ]
+// [ v16: [Ivion]                                           ]
+// [ - First SQL version. Should fix the lag that the TXT   ]
+// [   version used to cause in the SQL servers.            ]
+// [ - Bugfix: Players who has been playing during 7 days   ]
+// [   without login off won't be purged from the rankings. ]
+// [ - Bugfix: The Emperium and the [Guild] WoE rankings    ]
+// [   didn't work in the WoE 1 castles.                    ]
+// [ - Added a reward system for TOP 1 characters.          ]
+// [ - New settings to configure the colors when displaying ]
+// [   the rankings.                                        ]
+// [ - Online and offline players will be displayed in a    ]
+// [   different color.                                     ]
+// [ - When a guild reaches a new position in a guild based ]
+// [   ranking, the script will announce it to all the      ]
+// [   connected guild members.                             ]
+// [                                                        ]
+// [ v16.1: [Ivion]                                         ]
+// [ - BugFix: CPCount didn't count positions over  128.    ]
+// [                                                        ]
+// [ v17: [Ivion]                                           ]
+// [ - Updated the MAX_MOB_DB value to 4000.                ]
+// [                                                        ]
+// [ v17.1: [Ivion]                                         ]
+// [ - Bugfix: Search by class.                             ]
+// [========================================================]
+// [ http://www.eathena.ws/board/index.php?showtopic=193726 ]
+// [========================================================]
+
+-	script	ranker	-1,{
+
+OnInit:
+
+// [========================================================]
+// [ Configuration:                                         ]
+// [--------------------------------------------------------]
+
+	set $@CPn$,"Ranker";	// NPC name.
+
+	// Ranking Activation: (boolean)
+	set .@r0,1;		// Level Ranking.
+	set .@r1,1;		// PK Ranking.
+	set .@r2,1;		// MvP Ranking.
+	set .@r3,1;		// Emperium Ranking.
+	set .@r4,1;		// [Guild] Level Ranking.
+	set .@r5,1;		// [Guild] WoE Ranking.
+
+	set .pk,10;			// Level range to get points in the PK Ranking. (Range | 0 = off)
+	set $@CPit,7;		// Inactivity time to be considered an inactive player: (Days | 0 = off)
+	set $@CPrs,50;		// Number of entries that will be shown by the npc.
+
+	set $@CPgm0,20;		// Gm level required to avoid the Ranking.
+	set .gm1,80;		// Gm level required to use the Control Panel whispering to NPC:ranker .
+
+	// Colors:
+	set $@CPco$[0],"ff2200";	// Your character/guild.
+	set $@CPco$[1],"993333";	// Account characters.
+	set $@CPco$[2],"66bbaa";	// Online Guild members.
+	set $@CPco$[3],"449988";	// Offline Guild members.
+	set $@CPco$[4],"888888";	// Online characters/guilds.
+	set $@CPco$[5],"777777";	// Offline characters.
+
+	// Ranking rewards:
+	// Each Sunday, TOP 1 characters in each ranking will receive some item rewards. (Amount | 0 = off)
+	set $@CPp,7539;		// Reward item id.
+	set .@p0,0;			// Level Ranking.
+	set .@p1,3;			// PK Ranking.
+	set .@p2,3;			// MvP Ranking.
+	set .@p3,3;			// Emperium Ranking.
+
+	set .db,4000;		// MAX_MOB_DB value in ./src/map/mob.h .
+
+// [--------------------------------------------------------]
+// [ End of configuration.                                  ]
+// [========================================================]
+
+	//setBattleFlag "pk_level_range",.pk;
+
+	// Create database tables:
+	query_sql "CREATE TABLE IF NOT EXISTS `ranker_char` (`char_id` int(11) unsigned NOT NULL default '0', `offline` tinyint unsigned NOT NULL default '0')";
+	query_sql "CREATE TABLE IF NOT EXISTS `ranker_guild` (`guild_id` int(11) unsigned)";
+
+	// Add Rankings:
+	if(.@r0) callfunc "CPAddRanking","a","Ranking Nivel","Base","base_level","Job","job_level",1,.@p0;
+	if(.@r1) callfunc "CPAddRanking","b","Ranking PK","Asesinatos","kills","Muertes","deaths",1,.@p1;
+	else callfunc "CPDropRanking","kills","deaths",1;
+	if(.@r2) callfunc "CPAddRanking","c","Ranking MvP","MVPs","mvps","Bosses","bosses",1,.@p2;
+	else callfunc "CPDropRanking","mvps","bosses",1;
+	if(.@r3) callfunc "CPAddRanking","d","Ranking Emperium","Emperiums","emperiums","Guardian Stones","stones",1,.@p3;
+	else callfunc "CPDropRanking","emperiums","stones",1;
+	if(.@r4) callfunc "CPAddRanking","f","Ranking Nivel","Nivel","guild_lv","Experiencia","exp",2;
+	if(.@r5) callfunc "CPAddRanking","e","Ranking WoE","Castillos","castles","Conquistas","captures",2;
+	else callfunc "CPDropRanking","castles","captures",2;
+
+	// Modify NPC names:
+	set .@a,1;
+	while(!setnpcdisplay("CP#"+.@a,$@CPn$+"#"+.@a)) set .@a,.@a + 1;
+	callfunc "CPPurge";
+	end;
+
+OnClock0001:
+	callfunc "CPPurge";
+	if(!gettime(4)) {
+		set .@a,getarraysize($@CP0$);
+		while(.@a) {
+			set .@a,.@a - 1;
+			if($@CP6[.@a]) {
+				query_sql "SELECT `"+$@CP2$[.@a]+"`,`"+$@CP4$[.@a]+"` FROM `ranker_char` LEFT JOIN `char` ON `char`.`char_id` = `ranker_char`.`char_id` ORDER BY `"+$@CP2$[.@a]+"` DESC,`"+$@CP4$[.@a]+"` DESC LIMIT 1",.@b,.@c;
+				if((.@b > 0) || (.@c > 0)) {
+					set .@f,0;
+					do {
+						while(.@d) {
+							set .@d,.@d - 1;
+							query_sql "INSERT `mail` (`send_name`,`send_id`,`dest_name`,`dest_id`,`title`,`message`,`time`,`nameid`,`amount`,`identify`) VALUES ('"+$@CPn$+"','1','"+.@a$[.@d]+"','"+.@e[.@d]+"','"+$@CP0$[.@a]+"','¡Felicidades! Aquí tienes tu recompensa por mantenerte en Primera Posición del Ranking "+$@CP0$[.@a]+"!',UNIX_TIMESTAMP(),'"+$@CPp+"','"+$@CP6[.@a]+"','1')";
+						}
+						set .@d,query_sql("SELECT `char`.`char_id`,`name` FROM `ranker_char` LEFT JOIN `char` ON `char`.`char_id` = `ranker_char`.`char_id` WHERE `"+$@CP2$[.@a]+"` = '"+.@b+"' AND `"+$@CP4$[.@a]+"` = '"+.@c+"' LIMIT "+.@f+",128",.@e,.@a$);
+						set .@f,.@f + .@d;
+					} while(.@d);
+				}
+			}
+		}
+	}
+	end;
+
+OnPCLoginEvent:
+	if(getgmlevel() < $@CPgm0) {
+		callfunc "CPAddChar";
+		query_sql "UPDATE `ranker_char` SET `offline` = '0' WHERE `char_id` = '"+getcharid(0)+"'";
+	}
+	end;
+
+OnPCLogoutEvent:
+	callfunc "CPAddChar";
+	end;
+
+OnPCBaseLvUpEvent:
+OnPCJobLvUpEvent:
+	if($@CPa && (getgmlevel() < $@CPgm0)) {
+		callfunc "CPAddChar";
+		set .@a,getcharid(0);
+		query_sql "SELECT `base_level`,`job_level` FROM `char` WHERE `char_id` = '"+.@a+"'",.@b,.@c;
+		set .@d,callfunc("CPCount",$@CPa - 1,.@b,.@c);
+		set .@b,BaseLevel;
+		set .@c,JobLevel;
+		query_sql "UPDATE `char` SET `base_level` = '"+.@b+"',`job_level` = '"+.@c+"' WHERE `char_id` = '"+.@a+"'";
+		set .@e,callfunc("CPCount",$@CPa - 1,.@b,.@c);
+		if(.@e < .@d)
+			announce "Has escalado hasta el puesto ["+.@e+"] en el Ranking de Niveles.",bc_self,0xff6622;
+	}
+	end;
+
+// PK Ranking:
+OnPCKillEvent:
+	if($@CPb && (getgmlevel() < $@CPgm0)) {
+		set .@a,getcharid(3);
+		set .@b,killedrid;
+		if(.@a != .@b) {
+			set .@c,BaseLevel;
+			if(attachrid(.@b)) // Killed:
+				if((getgmlevel() < $@CPgm0) && (!.pk || (.@c <= (BaseLevel + .pk)))) {
+					callfunc "CPRankChar",$@CPb - 1,0,-1;
+					if(!sc_check(SC_PKDELAY))
+						if(attachrid(.@a)) // Killer:
+							callfunc "CPRankChar",$@CPb - 1,1,0;
+				}
+		}
+	}
+	end;
+
+// MVP Ranking:
+OnNPCKillEvent:
+	if($@CPc && (getgmlevel() < $@CPgm0)) {
+		set .@a,killedrid;
+		if(.@a && (.@a <= (.db - 1000))) {
+			if(getmonsterinfo(.@a,21) & 0x0020) {
+				if(getmonsterinfo(.@a,22))
+					callfunc "CPRankChar",$@CPc - 1,1,0; // MVP.
+				else	callfunc "CPRankChar",$@CPc - 1,0,1; // Boss.
+			}
+		}
+	}
+	end;
+
+// WoE Ranking:
+OnAgitEnd:
+	if($@CPe) callsub OnWoE,0,19;
+	end;
+
+OnAgitEnd2:
+	if($@CPe) callsub OnWoE,24,33;
+	end;
+
+OnWoE:
+	set .@a,query_sql("SELECT `guild_id`,COUNT(`guild_id`) FROM `guild_castle` WHERE `castle_id` BETWEEN '"+getarg(0)+"' AND '"+getarg(1)+"' GROUP by `guild_id`",.@b,.@c);
+	while(.@a) {
+		set .@a,.@a - 1;
+		callfunc "CPRankGuild",$@CPe - 1,.@b[.@a],.@c[.@a],0;
+	}
+	return;
+
+// GMs Control Panel:
+OnWhisperGlobal:
+	if(getgmlevel() >= .gm1) {
+		set .@n$,"^008888"+$@CPn$+"^000000";
+		mes .@n$;
+		mes "Hola "+strcharinfo(0)+".";
+		mes "Este es el CP del Ranking del servidor.";
+		mes "¿Cómo puedo ayudarte?";
+		next;
+		set .@a,getarraysize($@CP0$);
+		while(.@a) {
+			set .@a,.@a - 1;
+			set .@a$,$@CP5$[.@a];
+			if(.@a$ != "") {
+				if(query_sql("SHOW COLUMNS FROM `ranker_"+.@a$+"` WHERE `Field` IN ('"+$@CP2$[.@a]+"','"+$@CP4$[.@a]+"')",.@c,.@c,.@c,.@c,.@c,.@c) == 2)
+					set .@r$[.@a],"Reset "+$@CP0$[.@a];
+			}
+		}
+		set .@a,select("^880000Salir^000000","Resetear todos los Rankings.",.@r$[0],.@r$[1],.@r$[2],.@r$[3],.@r$[4],.@r$[5],.@r$[6],.@r$[7],.@r$[8],.@r$[9]) - 1;
+		mes .@n$;
+		if(.@a) {
+			if(.@a == 1) {
+				callfunc "CPReset0";
+				mes "Todos los Rankings han sido reseteados.";
+			}
+			else {
+				set .@a,.@a - 2;
+				callfunc "CPReset1",.@a;
+				mes "El "+$@CP0$[.@a]+" ha sido reseteado.";
+			}
+		}
+		mes "Que tengas un buen día.";
+		close;
+	}
+	end;
+}
+
+// Add a new Ranking:
+// getarg(0): Ranking Id. (char)
+// getarg(1): Name.
+// getarg(2): 1st header.
+// getarg(3): 1st column name.
+// getarg(4): 2nd header.
+// getarg(5): 2nd column name.
+// getarg(6): Ranking type. (1 = char | 2 = guild)
+// getarg(7): Amount of reward items. (optional)
+function	script	CPAddRanking	{
+
+	set .@a,getarg(6);
+	if(.@a == 1) set .@a$,"char";
+	else if(.@a == 2) set .@a$,"guild";
+	if(.@a$ != "") {
+		set .@b,getarraysize($@CP0$);
+		setd "$@CP"+getarg(0),.@b + 1;
+		set $@CP0$[.@b],getarg(1);
+		if(.@a == 2) set $@CP0$[.@b],"[Guild] "+$@CP0$[.@b];
+		set $@CP1$[.@b],getarg(2);
+		set $@CP2$[.@b],getarg(3);
+		set $@CP3$[.@b],getarg(4);
+		set $@CP4$[.@b],getarg(5);
+		set $@CP5$[.@b],.@a$;
+		if(.@a == 1) set $@CP6[.@b],getarg(7,0);
+		callfunc "CPAddColumn",.@a$,getarg(3);
+		callfunc "CPAddColumn",.@a$,getarg(5);
+	}
+	return;
+}
+
+// Add a new column to the database:
+// getarg(0): Database name. ("char" | "guild")
+// getarg(1): Column name.
+function	script	CPAddColumn	{
+
+	if(	!query_sql("SHOW COLUMNS FROM `"+getarg(0)+"` WHERE `Field` = '"+getarg(1)+"'",.@a,.@a,.@a,.@a,.@a,.@a) &&
+		!query_sql("SHOW COLUMNS FROM `ranker_"+getarg(0)+"` WHERE `Field` = '"+getarg(1)+"'",.@a,.@a,.@a,.@a,.@a,.@a)
+	)
+		query_sql "ALTER TABLE `ranker_"+getarg(0)+"` ADD `"+getarg(1)+"` mediumint NOT NULL default '0'";
+	return;
+}
+
+// Drop a ranking:
+// getarg(0): 1st column.
+// getarg(1): 2nd column.
+// getarg(2): Ranking type. (1 = char | 2 = guild)
+function	script	CPDropRanking	{
+
+	set .@a,getarg(2);
+	if(.@a == 1) set .@a$,"char";
+	else if(.@a == 2) set .@a$,"guild";
+	if(.@a$ != "") {
+		callfunc "CPDropColumn",.@a$,getarg(0);
+		callfunc "CPDropColumn",.@a$,getarg(1);
+	}
+	return;
+}
+
+// Drop a column of the database:
+// getarg(0): Table name. ("char" | "guild")
+// getarg(1): Column name.
+function	script	CPDropColumn	{
+
+	if(query_sql("SHOW COLUMNS FROM `ranker_"+getarg(0)+"` WHERE `Field` = '"+getarg(1)+"'",.@a,.@a,.@a,.@a,.@a,.@a))
+		query_sql "ALTER TABLE `ranker_"+getarg(0)+"` DROP COLUMN `"+getarg(1)+"`";
+	return;
+}
+
+// Purge inactive Guilds and Players:
+function	script	CPPurge	{
+
+	if($@CPit) {
+		set .@a,gettimetick(2) / (60 * 60 * 24);
+		if(.@a > $d) {
+			set $d,.@a; // Last purged.
+			query_sql "DELETE FROM `ranker_char` WHERE `offline` >= '"+$@CPit+"'";
+			query_sql "DELETE FROM `ranker_char` WHERE `char_id` NOT IN (SELECT `char_id` FROM `char`)";
+			query_sql "UPDATE `ranker_char` LEFT JOIN `char` ON `char`.`char_id` = `ranker_char`.`char_id` SET `offline` = `offline` + 1 WHERE `online` = '0'";
+			query_sql "DELETE FROM `ranker_guild` WHERE `guild_id` NOT IN (SELECT `guild_id` FROM `guild`)";
+			query_sql "DELETE FROM `ranker_guild` WHERE `guild_id` NOT IN (SELECT `guild_id` FROM `ranker_char` LEFT JOIN `char` ON `char`.`char_id` = `ranker_char`.`char_id`)";
+		}
+	}
+	return;
+}
+
+// Add a new player to the ranking:
+function	script	CPAddChar	{
+
+	if(playerattached()) {
+		if(getgmlevel() < $@CPgm0) {
+			set .@a,getcharid(0);
+			if(!query_sql("SELECT `char_id` FROM `ranker_char` WHERE `char_id` = '"+.@a+"'",.@b))
+				query_sql "INSERT `ranker_char` (`char_id`) VALUES ('"+.@a+"')";
+			set .@a,getcharid(2);
+			if(.@a) callfunc "CPAddGuild",.@a;
+		}
+	}
+	return;
+}
+
+// Add a new guild to the ranking:
+// getarg(0): Guild Id.
+function	script	CPAddGuild	{
+
+	if(!query_sql("SELECT `guild_id` FROM `ranker_guild` WHERE `guild_id` = '"+getarg(0)+"'",.@b))
+		query_sql "INSERT `ranker_guild` (`guild_id`) VALUES ('"+getarg(0)+"')";
+	return;
+}
+
+// Modify the values in the ranker_char table:
+// getarg(0): Ranking Index.
+// getarg(1): 1st value increment.
+// getarg(2): 2nd value increment.
+function	script	CPRankChar	{
+
+	set .@a,getarg(0);
+	if(playerattached() && ($@CP5$[.@a] == "char")) {
+		if(getgmlevel() < $@CPgm0) {
+			callfunc "CPAddChar";
+			set .@b,getcharid(0);
+			query_sql "SELECT `"+$@CP2$[.@a]+"`,`"+$@CP4$[.@a]+"` FROM `ranker_char` WHERE `char_id` = '"+.@b+"'",.@c,.@d;
+			set .@e,callfunc("CPCount",.@a,.@c,.@d);
+			set .@c,.@c + getarg(1);
+			set .@d,.@d + getarg(2);
+			query_sql "UPDATE `ranker_char` SET `"+$@CP2$[.@a]+"` = '"+.@c+"',`"+$@CP4$[.@a]+"` = '"+.@d+"' WHERE `char_id` = '"+.@b+"'";
+			set .@f,callfunc("CPCount",.@a,.@c,.@d);
+			if(.@f < .@e)
+				announce "Has alcanzado la posición ["+.@f+"] en el "+$@CP0$[.@a]+".",bc_self,0xff6622;
+		}
+	}
+	return;
+}
+
+// Modify the value in the ranker_guild table:
+// getarg(0): Ranking Index.
+// getarg(1): Guild Id.
+// getarg(2): 1st value increment.
+// getarg(3): 2nd value increment.
+function	script	CPRankGuild	{
+
+	set .@a,getarg(0);
+	set .@b,getarg(1);
+	if(.@b && $@CP5$[.@a] == "guild") {
+		callfunc "CPAddGuild",.@b;
+		query_sql "SELECT `"+$@CP2$[.@a]+"`,`"+$@CP4$[.@a]+"` FROM `ranker_guild` WHERE `guild_id` = '"+.@b+"'",.@c,.@d;
+		set .@e,callfunc("CPCount",.@a,.@c,.@d);
+		set .@c,.@c + getarg(2);
+		set .@d,.@d + getarg(3);
+		query_sql "UPDATE `ranker_guild` SET `"+$@CP2$[.@a]+"` = '"+.@c+"',`"+$@CP4$[.@a]+"` = '"+.@d+"' WHERE `guild_id` = '"+.@b+"'";
+		set .@f,callfunc("CPCount",.@a,.@c,.@d);
+		if(.@f < .@e) {
+			if(playerattached()) set .@g,getcharid(3);
+			set .@d,query_sql("SELECT `account_id` FROM `char` WHERE `guild_id` = '"+.@b+"' AND `online` = '1'",.@e);
+			while(.@d) {
+				set .@d,.@d - 1;
+				if(attachrid(.@e[.@d])) announce "La Guild ["+getguildname(.@b)+"] ha escalado hasta el puesto ["+.@f+"] en el "+$@CP0$[.@a]+".",bc_self,0xff6622;
+			}
+			if(.@g) attachrid .@g;
+		}
+	}
+	return;
+}
+
+// Returns the ranking position for the given values:
+// getarg(0): Ranking Index.
+// getarg(1): 1st value.
+// getarg(2): 2nd value.
+// getarg(3): Additional condition. (optional)
+function	script	CPCount	{
+
+	set .@a,getarg(0);
+	set .@a$,$@CP5$[.@a];
+	if(.@a$ != "") {
+		set .@b$,getarg(3,"");
+		if(.@b$ != "") set .@b$,"AND "+.@b$;
+		query_sql "SELECT COUNT(*) FROM `ranker_"+.@a$+"` LEFT JOIN `"+.@a$+"` ON `"+.@a$+"`.`"+.@a$+"_id` = `ranker_"+.@a$+"`.`"+.@a$+"_id` WHERE (`"+$@CP2$[.@a]+"` > '"+getarg(1)+"' OR (`"+$@CP2$[.@a]+"` = '"+getarg(1)+"' AND `"+$@CP4$[.@a]+"` > '"+getarg(2)+"')) "+.@b$,.@b;
+		set .@b,.@b + 1;
+	}
+	return .@b;
+}
+
+// Reset all the rankings:
+function	script	CPReset0	{
+
+	query_sql "TRUNCATE `ranker_char`";
+	query_sql "TRUNCATE `ranker_guild`";
+	return;
+}
+
+// Reset a single ranking:
+// getarg(0): Ranking Index.
+function	script	CPReset1	{
+
+	set .@a,getarg(0);
+	set .@a$,$@CP5$[.@a];
+	if(.@a$ != "") query_sql "UPDATE `ranker_"+.@a$+"` SET `"+$@CP2$[.@a]+"` = '0', `"+$@CP4$[.@a]+"` = '0'";
+	return;
+}
+
+// Activates when breaking an Emperium:
+function	script	CPEmp0	{
+
+	if(getgmlevel() < $@CPgm0) {
+		set .@b,getcharid(2);
+		if($@CPd)		callfunc "CPRankChar",$@CPd - 1,1,0;
+		if($@CPe && .@b)	callfunc "CPRankGuild",$@CPe - 1,.@b,0,1;
+	}
+	return;
+}
+
+// Activates when breaking a Guardian Stone:
+function	script	CPEmp1	{
+
+	if($@CPd) callfunc "CPRankChar",$@CPd - 1,0,1;
+	return;
+}
+
+// Npcs:
+-	script	CP#0::CP	-1,{
+
+	set .@n$,"^008888"+$@CPn$+"^000000";
+	mes .@n$;
+	mes "Hola "+strcharinfo(0)+".";
+	mes "¿Quieres echar un vistazo a los Rankings del Servidor?";
+	next;
+	set .@a,getarraysize($@CP0$);
+	while(.@a) {
+		set .@a,.@a - 1;
+		set .@r$[.@a],$@CP0$[.@a];
+	}
+	set .@a,select("^880000Salir^000000",.@r$[0],.@r$[1],.@r$[2],.@r$[3],.@r$[4],.@r$[5],.@r$[6],.@r$[7],.@r$[8],.@r$[9]) - 2;
+	mes .@n$;
+	if(.@a >= 0) {
+		if($@CP5$[.@a] == "char") {
+			mes "¿Qué jugadores quieres que se muestren?";
+			next;
+			set .@b,select("^880000Todos los Jugadores^000000","Jugadores Online","Personajes Transcendent","3rd Jobs","Babies","3rd Babies","Seleccionar una Clase") - 1;
+			if(.@b == 5)
+				set .@c,select("Novice","Swordman","Mage","Archer","Acolyte","Merchant","Thief","Taekwon","Gunslinger","Ninja","Super Novice","Knight","Crussader","Wizard","Sage","Hunter","Bard/Dancer","Priest","Monk","Blacksmith","Alchemist","Assassin","Rogue","Star Gladiator","Soul Linker","Rune Knight","Royal Guard","Warlock","Sorcerer","Ranger","Minstrel/Wanderer","Arch Bishop","Sura","Mechanic","Genetist","Guillotine Cross","Shadow Chaser") - 1;
+			mes .@n$;
+		}
+		mes "Ok.";
+		mes "Te mostraré los resultados en tu ventana de chat.";
+	}
+	mes "Que tengas un buen día.";
+	close2;
+	emotion 12;
+	if(.@a >= 0) {
+		callfunc "CPAddChar";
+		if($@CP5$[.@a] == "char") { // Show Player based Ranking:
+			switch(.@b) {
+				case 1: set .@a$,"`online` = '1'";	break;
+				case 2: set .@a$,"`class` BETWEEN '4001' AND '4022'";	break;
+				case 3: set .@a$,"`class` BETWEEN '4054' AND '4087'";	break;
+				case 4: set .@a$,"`class` BETWEEN '4023' AND '4045'";	break;
+				case 5: set .@a$,"`class` BETWEEN '4096' AND '4108'";	break;
+				case 6: 
+					switch(.@c) {
+						case 0: set .@a$,"IN ('0','4001','4023')"; break;
+						case 1: set .@a$,"IN ('1','4002','4024')"; break;
+						case 2: set .@a$,"IN ('2','4003','4025')"; break;
+						case 3: set .@a$,"IN ('3','4004','4026')"; break;
+						case 4: set .@a$,"IN ('4','4005','4027')"; break;
+						case 5: set .@a$,"IN ('5','4006','4028')"; break;
+						case 6: set .@a$,"IN ('6','4007','4029')"; break;
+						case 7: set .@a$,"= '4046'"; break;
+						case 8: set .@a$,"= '24'"; break;
+						case 9: set .@a$,"= '25'"; break;
+						case 10: set .@a$,"IN ('23','4045','4190','4191')"; break;
+						case 11: set .@a$,"IN ('7','13','4008','4014','4030','4036')"; break;
+						case 12: set .@a$,"IN ('14','21','4015','4022','4037','4044')"; break;
+						case 13: set .@a$,"IN ('9','4010','4032')"; break;
+						case 14: set .@a$,"IN ('16','4017','4039')"; break;
+						case 15: set .@a$,"IN ('11','4012','4034')"; break;
+						case 16: set .@a$,"IN ('19','20','4020','4021','4042','4043')"; break;
+						case 17: set .@a$,"IN ('8','4009','4031')"; break;
+						case 18: set .@a$,"IN ('15','4016','4038')"; break;
+						case 19: set .@a$,"IN ('10','4011','4033')"; break;
+						case 20: set .@a$,"IN ('18','4019','4041')"; break;
+						case 21: set .@a$,"IN ('12','4013','4035')"; break;
+						case 22: set .@a$,"IN ('17','4018','4040')"; break;
+						case 23: set .@a$,"IN ('4047','4048')"; break;
+						case 24: set .@a$,"= '4049'"; break;
+						case 25: set .@a$,"IN ('7','13','4008','4014','4030','4036','4054','4060','4080','4081','4096','4109')"; break;
+						case 26: set .@a$,"IN ('14','21','4015','4022','4037','4044','4066','4073','4082','4083','4102','4110')"; break;
+						case 27: set .@a$,"IN ('9','4010','4032','4055','4061','4097')"; break;
+						case 28: set .@a$,"IN ('16','4017','4039','4067','4074','4103')"; break;
+						case 29: set .@a$,"IN ('11','4012','4034','4056','4062','4084','4085','4098','4111')"; break;
+						case 30: set .@a$,"IN ('19','20','4020','4021','4042','4043','4068','4069','4075','4076','4103','4104')"; break;
+						case 31: set .@a$,"IN ('8','4009','4031','4057','4063','4099')"; break;
+						case 32: set .@a$,"IN ('15','4016','4038','4070','4077','4106')"; break;
+						case 33: set .@a$,"IN ('10','4011','4033','4058','4064','4086','4087','4100','4112')"; break;
+						case 34: set .@a$,"IN ('18','4019','4041','4071','4078','4107')"; break;
+						case 35: set .@a$,"IN ('12','4013','4035','4059','4065','4101')"; break;
+						case 36: set .@a$,"IN ('17','4018','4040','4072','4079','4108')"; break;
+					}
+					set .@a$,"`class` "+.@a$;
+					break;
+			}
+			if(.@b) set .@b$," WHERE "+.@a$;
+			set .@c,getcharid(0);
+			set .@d,getcharid(2);
+			set .@e,getcharid(3);
+			set .@f,query_sql("SELECT `char`.`char_id`,`account_id`,`name`,`class`,`guild_id`,`online`,abs(`"+$@CP2$[.@a]+"`),abs(`"+$@CP4$[.@a]+"`) FROM `ranker_char` LEFT JOIN `char` ON `char`.`char_id` = `ranker_char`.`char_id`"+.@b$+" ORDER BY `"+$@CP2$[.@a]+"` DESC,`"+$@CP4$[.@a]+"` DESC LIMIT "+$@CPrs,.@g,.@h,.@c$,.@i,.@j,.@k,.@l,.@m);
+			announce "[ "+$@CP0$[.@a]+" ] [ "+$@CP1$[.@a]+" / "+$@CP3$[.@a]+" ]  -  Nombre  -  Job  -  Guild",bc_self,0xff7700;
+			set .@n,0;
+			while(.@n < .@f) {
+				if(.@g[.@n] == .@c) { // You.
+					set .@c,0;
+					set .@p,0;
+				}
+				else if(.@h[.@n] == .@e) // Account.
+					set .@p,1;
+				else if(.@d && (.@j[.@n] == .@d)) { // Guild.
+					if(.@k[.@n]) set .@p,2;
+					else set .@p,3;
+				}
+				else {
+					if(.@k[.@n]) set .@p,4;
+					else set .@p,5;
+				}
+				if(!.@n) set .@o,1;
+				else if((.@l[.@n] != .@l[.@n - 1]) || (.@m[.@n] != .@m[.@n - 1]))
+					set .@o,.@n + 1;
+				if(.@j[.@n]) set .@e$,getguildname(.@j[.@n]);
+				else set .@e$,"";
+				announce "[ "+.@o+" ] [ "+.@l[.@n]+" / "+.@m[.@n]+" ]  -  "+.@c$[.@n]+"  -  "+jobname(.@i[.@n])+"  -  "+.@e$,bc_self,"0x"+$@CPco$[.@p];
+				set .@n,.@n + 1;
+			}
+			if(.@c && (.@f >= $@CPrs)) {
+				if(.@b) set .@b$," AND "+.@a$;
+				if(query_sql("SELECT abs(`"+$@CP2$[.@a]+"`),abs(`"+$@CP4$[.@a]+"`) FROM `ranker_char` LEFT JOIN `char` ON `char`.`char_id` = `ranker_char`.`char_id` WHERE `char`.`char_id` = '"+.@c+"'"+.@b$,.@l,.@m)) {
+					set .@o,callfunc("CPCount",.@a,.@l,.@m,.@a$);
+					if(.@d) set .@e$,getguildname(.@d);
+					else set .@e$,"";
+					announce "[ "+.@o+" ] [ "+.@l+" / "+.@m+" ]  -  "+strcharinfo(0)+"  -  "+jobname(class)+"  -  "+.@e$,bc_self,"0x"+$@CPco$[0];
+				}
+			}
+		}
+		else if($@CP5$[.@a] == "guild") { // Show Guild based Ranking:
+			set .@d,getcharid(2);
+			set .@f,query_sql("SELECT `guild`.`guild_id`,`name`,abs(`"+$@CP2$[.@a]+"`),abs(`"+$@CP4$[.@a]+"`) FROM `ranker_guild` LEFT JOIN `guild` ON `guild`.`guild_id` = `ranker_guild`.`guild_id` ORDER BY `"+$@CP2$[.@a]+"` DESC,`"+$@CP4$[.@a]+"` DESC LIMIT "+$@CPrs,.@g,.@c$,.@l,.@m);
+			announce "[ "+$@CP0$[.@a]+" ] [ "+$@CP1$[.@a]+" / "+$@CP3$[.@a]+" ]  -  Nombre",bc_self,0xff7700;
+			set .@n,0;
+			while(.@n < .@f) {
+				if(.@g[.@n] == .@d) { // Your Guild.
+					set .@d,0;
+					set .@p,0;
+				}
+				else set .@p,4;
+				if(!.@n) set .@o,1;
+				else if((.@l[.@n] != .@l[.@n - 1]) || (.@m[.@n] != .@m[.@n - 1]))
+					set .@o,.@n + 1;
+				announce "[ "+.@o+" ] [ "+.@l[.@n]+" / "+.@m[.@n]+" ]  -  "+.@c$[.@n],bc_self,"0x"+$@CPco$[.@p];
+				set .@n,.@n + 1;
+			}
+			if(.@d && (.@f >= $@CPrs)) {
+				query_sql "SELECT `"+$@CP2$[.@a]+"`,`"+$@CP4$[.@a]+"` FROM `ranker_guild` LEFT JOIN `guild` ON `guild`.`guild_id` = `ranker_guild`.`guild_id` WHERE `guild`.`guild_id` = '"+.@d+"'",.@l,.@m;
+				set .@o,callfunc("CPCount",.@a,.@l,.@m);
+				set .@e$,getguildname(.@d);
+				announce "[ "+.@o+" ] [ "+.@l+" / "+.@m+" ]  -  "+.@e$,bc_self,"0x"+$@CPco$[0];
+			}
+		}
+		if(!.@n) announce "--- No se han encontrado resultados ---",bc_self,0x777777;
+		announce "----------",bc_self,0xff7700;
+	}
+	end;
+}
+alberta,195,138,4	duplicate(CP)	CP#1	893
+alberta,51,250,5	duplicate(CP)	CP#2	893
+aldebaran,133,116,6	duplicate(CP)	CP#3	893
+aldebaran,133,236,6	duplicate(CP)	CP#4	893
+alde_gld,234,150,4	duplicate(CP)	CP#5	893
+amatsu,242,279,6	duplicate(CP)	CP#6	893
+amatsu,99,260,4	duplicate(CP)	CP#7	893
+amatsu,207,100,4	duplicate(CP)	CP#8	893
+ayothaya,212,204,4	duplicate(CP)	CP#9	893
+ayothaya,157,78,4	duplicate(CP)	CP#10	893
+comodo,180,329,4	duplicate(CP)	CP#11	893
+comodo,205,112,4	duplicate(CP)	CP#12	893
+comodo,316,181,4	duplicate(CP)	CP#13	893
+comodo,36,221,6	duplicate(CP)	CP#14	893
+einbech,66,92,6	duplicate(CP)	CP#15	893
+einbech,131,245,6	duplicate(CP)	CP#16	893
+einbech,42,201,8	duplicate(CP)	CP#17	893
+einbroch,74,187,2	duplicate(CP)	CP#18	893
+einbroch,149,315,6	duplicate(CP)	CP#19	893
+einbroch,152,49,4	duplicate(CP)	CP#20	893
+einbroch,249,239,2	duplicate(CP)	CP#21	893
+geffen,123,69,4	duplicate(CP)	CP#22	893
+geffen,41,107,6	duplicate(CP)	CP#23	893
+geffen,124,177,4	duplicate(CP)	CP#24	893
+geffen,171,123,6	duplicate(CP)	CP#25	893
+gef_fild13,193,244,4	duplicate(CP)	CP#26	893
+gonryun,152,110,6	duplicate(CP)	CP#27	893
+gonryun,168,180,2	duplicate(CP)	CP#28	893
+gonryun,153,16,6	duplicate(CP)	CP#29	893
+hugel,100,116,0	duplicate(CP)	CP#30	893
+hugel,178,170,4	duplicate(CP)	CP#31	893
+izlude,121,94,6	duplicate(CP)	CP#32	893
+jawaii,136,255,4	duplicate(CP)	CP#33	893
+yuno,175,89,4	duplicate(CP)	CP#34	893
+yuno,68,203,4	duplicate(CP)	CP#35	893
+sch_gld,291,123,4	duplicate(CP)	CP#36	893
+lighthalzen,209,95,6	duplicate(CP)	CP#37	893
+lighthalzen,218,322,4	duplicate(CP)	CP#38	893
+lighthalzen,311,299,4	duplicate(CP)	CP#39	893
+louyang,203,104,6	duplicate(CP)	CP#40	893
+louyang,57,246,4	duplicate(CP)	CP#41	893
+xmas,139,306,6	duplicate(CP)	CP#42	893
+xmas,161,108,4	duplicate(CP)	CP#43	893
+morocc,166,76,4	duplicate(CP)	CP#44	893
+morocc,47,174,4	duplicate(CP)	CP#45	893
+morocc,166,289,4	duplicate(CP)	CP#46	893
+morocc,279,197,8	duplicate(CP)	CP#47	893
+morocc,35,290,4	duplicate(CP)	CP#48	893
+moscovia,238,198,4	duplicate(CP)	CP#49	893
+moscovia,159,62,4	duplicate(CP)	CP#50	893
+niflheim,29,158,6	duplicate(CP)	CP#51	893
+niflheim,199,188,4	duplicate(CP)	CP#52	893
+payon,213,72,6	duplicate(CP)	CP#53	893
+payon,160,49,2	duplicate(CP)	CP#54	893
+payon,232,316,4	duplicate(CP)	CP#55	893
+payon,63,120,6	duplicate(CP)	CP#56	893
+pay_gld,201,157,4	duplicate(CP)	CP#57	893
+prontera,165,71,4	duplicate(CP)	CP#58	893
+prontera,40,212,6	duplicate(CP)	CP#59	893
+prontera,154,188,5	duplicate(CP)	CP#60	893
+prontera,259,213,4	duplicate(CP)	CP#61	893
+prontera,161,312,4	duplicate(CP)	CP#62	893
+prt_gld,166,75,4	duplicate(CP)	CP#63	893
+rachel,264,136,4	duplicate(CP)	CP#64	893
+rachel,150,144,4	duplicate(CP)	CP#65	893
+rachel,135,45,4	duplicate(CP)	CP#66	893
+rachel,39,131,6	duplicate(CP)	CP#67	893
+aru_gld,179,326,6	duplicate(CP)	CP#68	893
+umbala,121,128,8	duplicate(CP)	CP#69	893
+umbala,163,249,4	duplicate(CP)	CP#70	893
+veins,209,234,4	duplicate(CP)	CP#71	893
+veins,222,352,4	duplicate(CP)	CP#72	893
+veins,157,62,6	duplicate(CP)	CP#73	893
+mid_camp,219,287,4	duplicate(CP)	CP#74	893
+mid_camp,138,235,6	duplicate(CP)	CP#75	893
+mid_camp,252,232,8	duplicate(CP)	CP#76	893
+manuk,281,126,2	duplicate(CP)	CP#77	893
+manuk,181,177,6	duplicate(CP)	CP#78	893
+splendide,181,137,6	duplicate(CP)	CP#79	893

@@ -145,3 +145,13 @@ poring_w01	mapflag	nowarpto
 poring_w02	mapflag	nowarpto
 
 guild_vs5	mapflag	nowarpto
+pvp_n_1-5	mapflag	nowarpto
+2009rwc_02	mapflag	nowarpto
+rwc01	mapflag	nowarpto
+2009rwc_03	mapflag	nowarpto
+2009rwc_01	mapflag	nowarpto
+pvp_n_1-3	mapflag	nowarpto
+guild_vs4	mapflag	nowarpto
+guild_vs2	mapflag	nowarpto
+guild_vs3	mapflag	nowarpto
+2009rwc_04	mapflag	nowarpto

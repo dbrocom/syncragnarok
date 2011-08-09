@@ -1010,6 +1010,7 @@ vip_ice.rsw#Mapa Premium - Siromas#
 vip_orc.rsw#Mapa Premium - Orcos#
 vip_lou.rsw#Mapa Premium - Bolas#
 vip_pryd.rsw#Mapa Premium - Isis#
+vip_bybalan.rsw#Mapa Premium - Srophos#
 
 // Illion [Ivion]
 il_fild01.rsw#Illion Field#

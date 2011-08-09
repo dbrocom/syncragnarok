@@ -812,6 +812,7 @@ vip_ice#bgm\\96.mp3#
 vip_lou#bgm\\79.mp3#
 vip_orc#bgm\\48.mp3#
 vip_ayo#bgm\\81.mp3#
+vip_bybalan#bgm\\49.mp3#
 // Battlegrounds
 rush_cas01#bgm\\07.mp3#
 rush_cas02#bgm\\07.mp3#

@@ -1,0 +1,518 @@
+//===== eAthena Script ================================================================================================================
+//= Super Broadcaster
+//===== Created By: ===================================================================================================================
+//= GorthexTiger (eAthenaForums) or on MSN @ dangerously_chemical@hotmail.com
+//= If you're going to use my script, you can make modifications
+//= But credits and the fact that I created it must remain intact.
+//===== Special Thanks To: ============================================================================================================
+//= no123 for Assisting With Any New Changes
+//===== Current Version: ==============================================================================================================
+//= 1.5
+//===== Compatible With: ==============================================================================================================
+//= TXT & SQL
+//===== Script Tested On: =============================================================================================================
+//= 3CeAM Rev 200+
+//===== Script Explaination: ==========================================================================================================
+//= The best damn broadcaster you ever had.
+//===== Features: =====================================================================================================================
+//= Broadcaster That Accepts 3 Different Ways Of Payment: Zeny, Cash Points, And A Set Amount Of A Specified Item By Item ID #
+//= Broadcasts Can Be Logged (If Enabled Or Activated In Game.)
+//= Automatically Disables Itself During WoE  (For Players)
+//= Has A 3 Minute Cooldown In Between Broadcasts
+//= Players Must Meet A Level Requirement To Use Broadcaster (In Configuration Settings Below)
+//= Collects The Last Name Of The Player Who Used It Last To Allow For Easy Punishment For Misuse Via PM
+//= (Punishment Is Automatic When Dictated By a GM: Bans for 15 Minutes, With Public Announcement W/ Their Name To Discourage Abuse)
+//= GM's Can Enable & Disable: Broadcasting & Logs, 
+//===== Always Check For Updates! =====================================================================================================
+//= http://www.eathena.ws/board/index.php?showtopic=231474
+//===== Comments: =====================================================================================================================
+//= If You Don't Like It, Don't Use It
+//= I Will Only Assist With Support Of Non-Modified Scripts
+//= If You Have Ways Of Simplifying This Script, Send Me a PM Via eAthena, Do Not Make A Post On The Release Page: I'm Always Learning
+//= I Reserve The Right To Remove, Assign, Modify, Or In Anyway Change Permissions On This Script:
+//= If You Really Want To Get Into Details: Your ISP Will Be Contacted, And You Will Be Civily Sued:
+//= (Aka, If I Say Stop Using This. S.T.O.P.)
+//= Otherwise, Comment, Say Thanks, Tell Me Off, Just Let Me Know If You Like My Scripts Or Not :D
+//=====================================================================================================================================
+
+-	script	Broadcaster	-1,{
+
+	if (getgmlevel() >= .gmlevel){
+	OnWhisperGlobal:
+		if (getgmlevel() < .gmlevel){
+			end;
+		}
+		L_GMMenu:
+		mes .npc$;
+		mes "Hola "+strcharinfo(0)+", ¿en qué puedo ayudarte?";
+		next;
+		switch(select("Activar/Desactivar Broadcasting:Activar/Desactivar Logging:Banear al último Usuario:Reload Configuración de 'OnInit':Menú de Jugador")){
+	
+		case 1:
+			mes .npc$;
+			mes "El Broadcasting está "+( (!.enable)?"^FF0000Desactivado^000000":"^00FF00Activado^000000");
+			mes "¿Deseas "+( (!.enable)?"^00FF00activarlo^000000":"^FF0000desactivarlo^000000")+"?";
+			if (select("Sí­:No")==2){
+				next;
+				goto L_GMMenu;
+			}
+			if(!.enable){
+				set .enable,1;
+			}
+			else {
+				set .enable,0;
+			}
+			next;
+			mes .npc$;
+			mes "El Broadcasting está "+( (!.enable)?"^FF0000Desactivado^000000":"^00FF00Activado^000000")+".";
+			next;
+			goto L_GMMenu;
+
+		case 2:
+			mes .npc$;
+			mes "Los Logs del Broadcasting están "+( (!.log)?"^FF0000Desactivados^000000":"^00FF00Activados^000000");
+			mes "¿Deseas "+( (!.log)?"^00FF00activarlos^000000":"^FF0000desactivarlos^000000")+"?";
+			if (select("Sí:No")==2){
+				next;
+				goto L_GMMenu;
+			}
+			if(!.log){
+				set .log,1;
+			}
+			else {
+				set .log,0;
+			}
+			next;
+			mes .npc$;
+			mes "Los logs del Broadcast han sido "+( (!.log)?"^FF0000desactivados^000000":"^00FF00activados^000000")+".";
+			next;
+			goto L_GMMenu;
+	
+		case 3:
+			mes .npc$;
+			mes "Últimos usuario del Broadcast: ^FF0000"+.lastname$+"^000000.";
+			next;
+			mes .npc$;
+			mes "¿Encarcelar a este jugador?";
+			next;
+			if(select("Sí:No")==2){
+				next;
+				goto L_GMMenu;
+			}
+			if( .lastname$ == "" ){
+				mes .npc$;
+				mes "No es un Jugador válido.";
+				close;
+			}			
+			atcommand "@jailfor 15n " + .lastname$;
+			announce .lastname$+" ha sido encarcelado durante 15 minutos por abusar del Broadcasting NPC",0;
+			next;
+			mes .npc$;
+			mes "El jugador ha sido encarcelado.";
+			next;
+			goto L_GMMenu;
+
+		case 4:
+			donpcevent "Broadcaster::OnInit";
+			mes .npc$;
+			mes "Las configuraciones han sido recargadas exitosamente.";
+			next;
+			goto L_GMMenu;
+
+		case 5:
+			goto L_Empezo;
+		}
+	}
+
+	if (.enable == 0){
+		mes .npc$;
+		mes "Lo siento, pero los GMs me han desactivado provisionalmente.";
+		close;
+	}
+
+	if ( agitcheck() == 1 ){
+		mes .@name$;
+		mes "Lo siento, pero durante las ^0000FFWar of Emperium^000000 no puedo lanzar ningún broadcast.";
+		close;
+	}
+
+	if (.timedelay == 1){
+		mes .npc$;
+		mes "Lo siento, pero necesito descansar antes de poder lanzar otro broadcast.";
+		close;
+	}
+
+	if (Baselevel < .checklevel){
+		mes .npc$;
+		mes "Lo siento, debes ser al menos nivel ^0000FF"+.checklevel+"^000000, antes de poder usar el Broadcaster.";
+		close;
+	}
+
+L_Empezo:
+	mes .npc$;
+	mes "¡Hola "+strcharinfo(0)+" ! Puedo lanzar un broadcast que se escuchará en todo el servidor.";
+	next;
+	if (.warning){
+		mes .npc$;
+		mes "Pero, antes de empezar...";
+		next;
+		mes .npc$;
+		mes "Recuerda que cualquier conducta que vaya en contra de las reglas, normas o cualquier otro tipo de normas de comportamientos establecidos en el servidor podrán ser sancionados.";
+		next;
+		if (.log == 1){
+			mes .npc$;
+			mes "Recuerda, que los mensajes que enví­es van a ser ^FF0000REGISTRADOS^000000.";
+			next;
+		}
+		mes .npc$;
+		mes "¿Aceptas los términos anteriores?";
+		if(select("Sí:No")==2) close;
+		next;
+	}
+	mes .npc$;
+	mes "Lanzar un broadcast tiene un coste.";
+	mes "¿Cómo deseas pagar mis servicios?";
+	next;
+	switch(select("Con Zeny:Con "+getitemname(.costi)+":Con mis encantos ^_^")){
+		
+	case 1:
+		mes .npc$;
+		if ( getgmlevel() > 0 ) { set .costz,35000; }
+		mes "Ok, pagar con ^0000FFzeny^000000 tiene un coste de ^0000FF"+.costz+"^000000 zeny.";
+		mes "¿Aceptas el importe?";
+		next;
+		if(select("Sí:No")==2) close;
+		if (!callfunc ("DelCoin",.costz,1)){
+			mes .npc$;
+			mes "Parece que no tienes suficiente dinero para lanzar un Broadcast.";
+			mes "Vuelve más tarde.";
+			close;
+		}
+		break;
+		
+	case 2:
+		mes .npc$;
+		if ( getgmlevel() > 0 ) { set .costiamount,2; }
+		mes "Ok, lanzar un Broadcast con ^0000FFitems^000000...";
+		mes "Va a necesitar:";
+		mes "^0000FF"+.costiamount+"^000000 ^FF0000"+getitemname(.costi)+".";
+		next;
+		mes .npc$;
+		mes "¿Aceptas el importe?";
+		next;
+		if(select("Sí:No")==2) close;
+		if (countitem(.costi) < .costiamount){
+			mes .npc$;
+			mes "Hmm, parece que necesitas conseguir unos cuantos "+getitemname(.costi)+" más.";
+			mes "Vuelve cuando consigas más.";
+			close;
+		}
+		delitem .costi,.costiamount;
+		break;
+	
+	case 3:
+		emotion 4;
+		mes .npc$;
+		mes "Uhmm, no aceptamos 'ESO' como moneda de cambio....";
+		close;
+	}	
+	next;
+
+L_awesome:
+	mes .npc$;
+	mes "¿Qué quieres hacer?";
+	next;
+	switch(select("Vender:Comprar:Intercambiar:Buscar a un Amigo:Buscar un GM:Organizar")){
+
+	case 1: 
+		callsub L_merch,0;
+			
+	case 2: 
+		callsub L_merch,1;
+		
+	case 3: 
+		callsub L_merch,2;
+		
+	
+	case 4:	
+		L_Label4:
+		mes .npc$;
+		mes "¿A qué amigo estás buscando?";
+		input @name$;
+		next;
+		callsub L_color;
+		mes .npc$;
+		mes "Ok, Así se verá el mensaje:";
+		mes "^"+.colorarray$[@colorindex]+"Broadcaster: "+@name$+", contacta con "+strcharinfo(0)+" si te encuentras disponible.";
+		next;
+		mes .npc$;
+		mes "¿Aceptar?";
+		next;
+		if(select("Volver:Sí")==1) {
+			goto L_Label4;
+		}
+		set .addon$,"0x" + .colorarray$[@colorindex];
+		announce  "Broadcaster: ¿Estás disponible ["+@name$+"]? ["+strcharinfo(0)+"] te está buscando.",bc_all,.addon$;
+		set .timedelay, 1;
+		if (.log == 1){
+			logmes gettimestr("%m/%d/%Y %H:%M:%S",21)+": "+strcharinfo(0)+": "+@name$+" contáctame si te encuentras disponible.";
+		}
+		next;
+		set .lastname$,strcharinfo(0);
+		mes .npc$;
+		mes "El broadcast se ha lanzado.";
+		close2;
+		initnpctimer;
+		npctalk "El servicio volverá a estar disponible en 3 minutos.";     
+		end;
+
+	case 5:
+		callsub L_color;
+		mes .npc$;
+		mes "Así se verá el broadcast.";
+		next;
+		mes "^"+.colorarray$[@colorindex]+"Broadcaster: ¿Se encuentra algún GM conectado? "+strcharinfo(0)+" necesita ayuda.";
+		next;
+		mes .npc$;
+		mes "¿Aceptar?";
+		next;
+		if(select("Volver:Sí")==1) {
+			goto L_awesome;
+		}
+		set .addon$,"0x" + .colorarray$[@colorindex];
+		announce  "Broadcaster: ¿Se encuentra algún GM conectado? ["+strcharinfo(0)+"] necesita ayuda.",bc_all,.addon$;
+		set .timedelay, 1;
+		if (.log == 1){
+			logmes gettimestr("%m/%d/%Y %H:%M:%S",21)+": "+strcharinfo(0)+": Si hay algún GM online, que me contacte.";
+		}
+		next;
+		set .lastname$,strcharinfo(0);
+		mes .npc$;
+		mes "El broadcast ha sido lanzado.";
+		close2;
+		initnpctimer;
+		npctalk "El servicio volverá a estar disponible en 3 minutos.";     
+		end;
+
+	case 6:
+		L_Label6:
+		mes .npc$;
+		mes "¿Qué estás buscando?";
+		setarray .@partyselection$[0],"Guild","miembros para su Guild","una Party para matar MVP","una Party de Leveleo","una Party para hacer Quest","una Party para PVP";
+		set .@selection,select("Una Guild:Miembros para Guild:Party MVP:Party de Leveleo:Party para Quest:Party para PVP")-1;
+		next;
+		mes .npc$;
+		mes "Vale, así que estás buscando "+.@partyselection$[.@selection]+". Entendido.";
+		next;
+		callsub L_color;
+		if(.@selection == 0 || .@selection == 1){
+			mes .npc$;
+			mes "Así se verá tu broadcast.";
+			next;
+			if(.@selection == 0 && getcharid(2) == 0 ){
+				mes .@npc$;
+				mes "¡No eres miembro de ninguna Guild! Crea una guild antes de buscar miembros para ella.";
+				emotion 4;
+				next;
+				goto L_Label6;
+			}
+			if(.@selection == 1 && getcharid(2) == 1 ){
+				mes .@npc$;
+				mes "¡Ya tienes una Guild! ¿Acaso quieres traicionar a tus compañeros ¬¬ ?.";
+				emotion 4;
+				next;
+				goto L_Label6;
+			}
+			if(.@selection == 0 ){
+				mes "^"+.colorarray$[@colorindex]+"Broadcaster: ¡ ["+strcharinfo(0)+"] busca "+.@partyselection$[.@selection]+" !";
+				next;
+				mes .npc$;
+				mes "¿Aceptar?";
+				if(select("Volver:Sí")==1) {
+					next;
+					goto L_Label6;
+				}
+				set .addon$,"0x" + .colorarray$[@colorindex];
+				announce "Broadcaster: ¡ ["+strcharinfo(0)+"] busca "+.@partyselection$[.@selection]+" !",bc_all,.addon$;
+				set .timedelay, 1;
+				if (.log == 1){
+					logmes gettimestr("%m/%d/%Y %H:%M:%S",21)+": "+strcharinfo(0)+" busca "+.@partyselection$[.@selection];
+				}
+			}
+			if(.@selection == 1 ){
+				mes "^"+.colorarray$[@colorindex]+"Broadcaster: ¡ ["+strcharinfo(0)+"] busca "+.@partyselection$[.@selection]+": ["+(getguildname(getcharid(2,strcharinfo(0))))+"] !";
+				next;
+				mes .npc$;
+				mes "¿Aceptar?";
+				if(select("Volver:Sí")==1) {
+					next;
+					goto L_Label6;
+				}
+				set .addon$,"0x" + .colorarray$[@colorindex];
+				announce "Broadcaster: ¡ ["+strcharinfo(0)+"] busca "+.@partyselection$[.@selection]+": ["+(getguildname(getcharid(2,strcharinfo(0))))+"] !",bc_all,.addon$;
+				set .timedelay, 1;
+				if (.log == 1){
+					logmes gettimestr("%m/%d/%Y %H:%M:%S",21)+": "+strcharinfo(0)+" busca "+.@partyselection$[.@selection]+": "+(getguildname(getcharid(2,strcharinfo(0))))+"";
+				}
+			}
+			next;
+			set .lastname$,strcharinfo(0);
+			mes .npc$;
+			mes "Tu broadcast ha sido lanzado.";
+			close2;
+			initnpctimer;
+			npctalk "El servicio volverá a estar disponible en 3 minutos.";
+			end;
+		}
+		mes .npc$;
+		mes "Así se verá tu broadcast:";
+		next;
+		mes "^"+.colorarray$[@colorindex]+"Broadcaster: ¡Se busca ["+.@partyselection$[.@selection]+"]! ¡Contactad con ["+strcharinfo(0)+"] para más detalles!";
+		next;
+		mes .npc$;
+		mes "Proceed?";
+		if(select("Volver:Sí")==1) {
+			next;
+			goto L_Label6;
+		}
+		set .addon$,"0x" + .colorarray$[@colorindex];
+		announce "¡Se busca ["+.@partyselection$[.@selection]+"]! ¡Contactad con ["+strcharinfo(0)+"] para más detalles!",bc_all,.addon$;
+		set .timedelay, 1;
+		if (.log == 1){
+			logmes gettimestr("%m/%d/%Y %H:%M:%S",21)+": "+strcharinfo(0)+" busca "+.@partyselection$[.@selection]+"!";
+		}
+		next;
+		set .lastname$,strcharinfo(0);
+		mes .npc$;
+		mes "Tu broadcast ha sido lanzado.";
+		close2;
+		initnpctimer;
+		npctalk "El servicio volverá a estar disponible en 3 minutos.";     
+		end;
+		}
+
+OnTimer60000:
+	npctalk "El servicio volverá a estar disponible en 2 minutos.";    
+	end;
+
+OnTimer120000:
+	npctalk "El servicio volverá a estar disponible en 1 minutos.";    
+	end;
+
+OnTimer180000:
+	npctalk "El servicio de Broadcasting vuelve a estar Disponible.";  
+	set .timedelay,0;
+	stopnpctimer; 
+	end;
+
+L_color:
+	mes .npc$;
+	mes "Selecciona el color que usará tu broadcast.";
+	set @colorindex, select(.color$)-1;
+	next;
+	return;
+
+L_merch:
+		mes .npc$;
+		mes "¿Qué item quieres "+.typearray$[getarg(0)]+"?";
+		input @item1$;
+		next;
+		mes .npc$;
+		mes .typearray$[getarg(0)+6];
+		input @item2$;
+		next;
+		callsub L_color;
+		mes .npc$;
+		mes "Así se verá tu broadcast:";
+		next;
+		if (Sex){
+			mes "^"+.colorarray$[@colorindex]+"Broadcaster: ["+strcharinfo(0)+"] quiere "+.typearray$[getarg(0)+3]+" ["+@item1$+"] por ["+@item2$+"] ¡Interesados contactad con él!";
+		}else{
+			mes "^"+.colorarray$[@colorindex]+"Broadcaster: ["+strcharinfo(0)+"] quiere "+.typearray$[getarg(0)+3]+" ["+@item1$+"] por ["+@item2$+"] ¡Interesados contactad con ella!";
+		}
+		next;
+		mes .npc$;
+		mes "¿Lanzar Broadcast?";
+		next;
+		if(select("Volver:Sí")==1) {
+			goto L_merch;
+		}
+		set .addon$,"0x" + .colorarray$[@colorindex];
+		if (Sex){
+			announce "Broadcaster: ["+strcharinfo(0)+"] quiere "+.typearray$[getarg(0)+3]+" ["+@item1$+"] por ["+@item2$+"] ¡Interesados contactad con él!",bc_all,.addon$;
+		}else{
+			mes "^"+.colorarray$[@colorindex]+"Broadcaster: ["+strcharinfo(0)+"] quiere "+.typearray$[getarg(0)+3]+" ["+@item1$+"] por ["+@item2$+"] ¡Interesados contactad con ella!";
+		}
+		set .timedelay, 1;
+		if (.log == 1){
+			logmes gettimestr("%m/%d/%Y %H:%M:%S",21)+": "+strcharinfo(0)+" quiere "+.typearray$[getarg(0)]+" "+@item1$+" por "+@item2$+".";
+		}
+		next;
+		set .lastname$,strcharinfo(0);
+		mes .npc$;
+		mes "¡El Broadcast ha sido lanzado!.";
+		close2;
+		initnpctimer;
+		npctalk "El servicio volverá a estar disponible en 3 minutos.";     
+		end;
+
+	
+OnInit:
+//===== Configuration Settings ========================================================================================================
+//
+	set .npc$, "[Broadcaster]";         // Sets Name Of The NPC: Change The Name In Brackets For A Custom Name
+	set .checklevel,50;                 // Players Must Be This Level or Higher In Order To Broadcast
+	set .costz,40000;                   // Set's Cost To Use Broadcaster (In Zeny)
+	set .costi, 7539;		    // Set's The Item To Be Used In Payment For Broadcaster (Item ID # Here)
+	set .costiamount,3;		    // Amount of Items Specified By .costi In Order To Use The Broadcaster
+	set .gmlevel,40;                    // Minimum GM Level To Reach GM Menu & Use OnWhisperGlobal: Label
+	set .timedelay,0;  		    // Creates The 3 Minute Delay Between Broadcasts. When set to '0', players are able to broadcast
+					    // If set to '1', the broadcaster thinks it has a delay to go through
+	set .enable,1;     		    // Check To See If Broadcasting is Enabled. 1 == Enabled || 0 == Disabled (Enabled By Default)		
+	set .log, 1;	   		    // Enables Logs of Broadcasts, 0 == Disabled, 1 == Enabled (Off By Default)
+	set .warning,1;			    // if set to '1', displays a General Abuse Message before broasting (Disabled by Default)
+	set .color$,"";			    // Clears the color menu (DO NOT MESS WITH THIS)
+	setarray .typearray$[0],
+		"vender",
+		"comprar",
+		"intercambiar",
+		"VENDER",
+		"COMPRAR",
+		"INTERCAMBIAR",
+		"¿Cuánto pides por él?",
+		"¿Qué ofreces por él?",
+		"¿Por qué item deseas intercambiarlo?";
+	setarray .colorarray$[0],	    // Array That Store's Colors That Can Be Used For Broadcasts
+		"FF3333",	//Red
+		"37FDFC",	//Sky Blue
+		"4DBD33",	//Green
+		"BAB9B9",	//Grey
+		"FFFF00",	//Yellow
+		"FF7F50";	//Orange
+	for(set .i,0; .i < getarraysize(.colorarray$); set .i, .i + 1){
+		set .color$, .color$ + "^" + ""+.colorarray$[.i]+"" + "Este Color" + "^000000:";
+	}		     
+}
+
+prontera,157,188,4	duplicate(Broadcaster)	Broadcaster#0	952
+hugel.gat,105,150,7	duplicate(Broadcaster)	Broadcaster#1	952
+morocc.gat,144,101,5	duplicate(Broadcaster)	Broadcaster#2	952
+geffen.gat,112,65,5	duplicate(Broadcaster)	Broadcaster#3	952
+payon.gat,193,109,5	duplicate(Broadcaster)	Broadcaster#4	952
+alberta.gat,49,227,7	duplicate(Broadcaster)	Broadcaster#5	952
+izlude.gat,137,158,3	duplicate(Broadcaster)	Broadcaster#6	952
+aldebaran.gat,133,124,5	duplicate(Broadcaster)	Broadcaster#7	952
+xmas.gat,141,138,4	duplicate(Broadcaster)	Broadcaster#8	952
+comodo.gat,196,162,4	duplicate(Broadcaster)	Broadcaster#9	952
+amatsu.gat,191,145,5	duplicate(Broadcaster)	Broadcaster#10	952
+gonryun.gat,154,128,4	duplicate(Broadcaster)	Broadcaster#11	952
+umbala.gat,73,169,5	duplicate(Broadcaster)	Broadcaster#12	952
+louyang.gat,231,100,5	duplicate(Broadcaster)	Broadcaster#13	952
+ayothaya.gat,156,110,3	duplicate(Broadcaster)	Broadcaster#14	952
+einbroch.gat,56,203,5	duplicate(Broadcaster)	Broadcaster#15	952
+lighthalzen,167,79,3	duplicate(Broadcaster)	Broadcaster#16	952
+einbech.gat,80,130,3	duplicate(Broadcaster)	Broadcaster#17	952
+rachel.gat,124,123,4	duplicate(Broadcaster)	Broadcaster#18	952
+yuno.gat,178,177,2	duplicate(Broadcaster)	Broadcaster#19	952
+moscovia.gat,215,184,3	duplicate(Broadcaster)	Broadcaster#20	952
+brasilis.gat,191,206,6	duplicate(Broadcaster)	Broadcaster#21	952
