@@ -52,3 +52,7 @@ vip_ice,0,0,0,0	monster	Muscipular	1780,30,0,0,0
 vip_pryd,0,0,0,0	monster	Mummy	1041,25,0,0,0
 vip_pryd,0,0,0,0	monster	Isis	1029,50,0,0,0
 
+//==================================================
+// VIP Bybalan05
+//==================================================
+vip_bybalan,0,0,0,0	monster	Sropho	2201,60,0,0,0

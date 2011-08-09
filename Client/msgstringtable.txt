@@ -1825,7 +1825,7 @@ You lack of familiarity.#
 This is only available on style change for fighting classes.# 
 This is only available on style change for novice.# 
 Registering party has failed.# 
-resultados han sido encontrados.# 
+No se han encontrado resultados.# 
 Failed to remove result.# 
 No se han encontrado resultados.# 
 No payment information has been found.# 
@@ -1857,7 +1857,7 @@ Cantidad#
 Zeny# 
 Free cache: %s C# 
 Used cache: %s C# 
-No puedes invocar un monstruo en este area.# 
+No puedes invocar monstruos en este area.# 
 The cache usage has exceeded the total amount of # 
 Contenido guardado en [SaveData_ExMacro%d]# 
 faltan %d segundos para poder volver a usar #

@@ -1,0 +1,103 @@
+//===== Custom eAthena Script =======================================
+//= Cute Ribbon Recolor Custom Quest
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+prontera,248,257,6	script	Jessica	533,{
+
+	query_sql "SELECT race FROM razas WHERE char_id = "+getcharid(0),.@raza$[0];
+
+	if (.@raza$[0] == "Hrímþursar" || .@raza$[0] == "Eldjötnar" || .@raza$[0] == "Bergrisar" || .@raza$[0] == "Orco"){
+		mes "["+strcharinfo(0)+"]";
+		mes "La niña me está mirando aterrorizada...";
+		mes " ";
+		mes "No parece poder articular palabra.";
+		close;
+	}
+
+	mes "[Jessica]";
+	mes "¡Buenos días ^0^! ¿Sabes quién dropea el Cute Ribbon?";
+	next;
+	input .@resp$;
+	mes "[Jessica]";
+	if (.@resp$ != "Eclipse" || .@resp$ != "ECLIPSE" || .@resp$ != "eclipse"){
+		mes "¡NO! >_<";
+		mes "Ese monstruo no lo dropea...";
+		close;
+	}
+	mes "¡Sí, exacto! Eclipse lo dropea.";
+	mes "¿No te parece una monada? Con esas orejitas, y esa piel tan suave... ¡me encanta!";
+	next;
+	mes "[Jessica]";
+	mes "A tí qué te parece, ¿te gusta Eclipse?";
+	next;
+	if(select("No me gusta nada","¡Me parece una monada!") == 1){
+		mes "[Jessica]";
+		mes "¿NO? Entonces no te gustará lo que iba a proponerte...";
+		close;
+	}
+	mes "[Jessica]";
+	mes "^0^ Sabía que tu también serías un enamorado de Eclipse.";
+	mes "Así que voy a ofrecerte la posibilidad de que consigas un Cute Ribbon de un color muy especial.";
+	mes "¿Cuál te gusta más?";
+	next;
+	switch(select("^0000FFAzul^000000:^BDBDBDBlanco^000000:^04B404Verde^000000:^DF0101Rojo^000000")){
+		case 1:
+			set .@dye, 978;		//Blue_Dyestuffs
+			set .@cr, 5440;		//Cute Ribbon
+			break;
+		case 2:
+			set .@dye, 982;		//White_Dyestuffs
+			set .@cr, 5441;		//Cute Ribbon
+			break;
+		case 3:
+			set .@dye, 979;		//Green_Dyestuffs
+			set .@cr, 5438;		//Cute Ribbon
+			break;
+		case 4:
+			set .@dye, 975;		//Red_Dyestuffs
+			set .@cr, 5439;		//Cute Ribbon
+			break;
+	}
+	mes "[Jessica]";
+	if((countitem(2250) >= 1) && (countitem(.@dye) >= 1)) {
+		if (!callfunc ("DelCoin",75000,1)) { 
+			mes "¡Parece que no tienes suficiente dinero!"; 
+			close;
+		}
+		delitem 2250,1;
+		delitem .@dye,1;
+		mes "A ver... déjame aplicarle el tinte...";
+		next;
+		mes "[Jessica]";
+		mes "¡Aquí tienes!";
+		mes "¡Ha quedado perfecto!";
+		getitem .@cr,1;
+	}else{
+		mes "En ese caso para conseguir un "+getitemname(.@cr)+", necesito que me traigas:";
+		mes " 1 - "+getitemname(2250);
+		mes " 1 - "+getitemname(.@dye);
+		mes " 75.000z";
+		mes "¡Vuelve cuando tengas lo que te pedí!";
+	}
+	close;
+}

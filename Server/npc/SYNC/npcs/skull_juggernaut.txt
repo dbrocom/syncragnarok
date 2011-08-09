@@ -1,0 +1,593 @@
+//
+// [========================================================]
+// [===========    Unreal 3 - Juggernaut SQL     ===========]
+// [========================================================]
+// [ Version 9                                              ]
+// [========================================================]
+// [ Original script by: Ivion                              ]
+// [========================================================]
+// [ Description:                                           ]
+// [--------------------------------------------------------]
+// [                                                        ]
+// [ - Unreal 3 based Killing Sprees.                       ]
+// [ - Unreal 3 based Multikills.                           ]
+// [ - Dota based Guild Ownage.                             ]
+// [ - Unreal 3 based Greed gamemode.                       ]
+// [ - Unreal 3 based Titan Mutator.                        ]
+// [ - Skull Collector Npc.                                 ]
+// [ - Juggernaut Mission Quest.                            ]
+// [========================================================]
+// [ Changelog: (5 last updates)                            ]
+// [--------------------------------------------------------]
+// [                                                        ]
+// [ v5: [Ivion]                                            ]
+// [ - Killed players won't drop skulls when being killed by]
+// [   a high level player.                                 ]
+// [                                                        ]
+// [ v6: [Ivion]                                            ]
+// [ - Bugfix: The Juggernaut Mission now supports more than]
+// [   125 players of your level range.                     ]
+// [                                                        ]
+// [ v7: [Ivion]                                            ]
+// [ - Removed the Rankings. They weren't so important.     ]
+// [ - You will only receive the name of players who has    ]
+// [   ever made a kill in the Juggernaut Mission.          ]
+// [ - You won't receive skulls when killing the same player]
+// [   multiple times.                                      ]
+// [                                                        ]
+// [ v8: [Ivion]                                            ]
+// [ - Players in PKDELAY status won't drop skulls.         ]
+// [                                                        ]
+// [ v9: [Ivion]                                            ]
+// [ - Split into TXT and SQL versions.                     ]
+// [ - Now it works with the latest ranker script.          ]
+// [========================================================]
+// [ http://www.eathena.ws/board/index.php?showtopic=223273 ]
+// [========================================================]
+
+-	script	Unreal	-1,{
+
+OnInit:
+
+// [========================================================]
+// [ Configuration:                                         ]
+// [--------------------------------------------------------]
+
+	set $@utlv,15;		// Level range between the killer and the killed player to activate the script. (0 = off | level range)
+	set .str,5;			// Number of kills required to get a new Killing Spree. (0 = off | kills)
+	set .ownn,5;		// Number of guild users in a map needed to start counting ownage kills. (0 = off | users)
+	set .ownk,20;		// Number of kills required to own. (0 = off | kills)
+	set .ownt,60;		// Time before ownage reset. (0 = off | seconds)
+	set .mkill,10;		// Time between two kills to activate a multikill. (0 = off | seconds)
+
+	// getarg(0): Make kill announce to: (0 = off | 1 = area | 2 = map | 3 = global)
+	// getarg(1): Announce.
+	// getarg(2): Color.
+	// getarg(3): Wav file name. (optional)
+
+	// Killing Spree:
+	callsub OnConf0,2,"no deja de cargarse enemigos!","ff4400","killingspree";		// Killing Spree.
+	callsub OnConf0,2,"está ANIQUILANDO!","ff5500","rampage";						// Rampage.
+	callsub OnConf0,2,"está DOMINANDO!","ff6600","dominating";						// Dominating.
+	callsub OnConf0,2,"es IMPARABLE!","ff7700","unstoppable";						// Unstoppable.
+	callsub OnConf0,2,"es una MÁQUINA ASESINA!","ff8800","godlike";					// Godlike.
+	callsub OnConf0,3,"ha causado una MASACRE!","ff9900","massacre";			// Massacre.
+
+	// Multikill:
+	callsub OnConf1,1,": ¡DOS MENOS!","ff0011","doublekill";							// Double Kill.
+	callsub OnConf1,1,": ¡¡MULTIDESTRUCCIÓN!!","ff0033","multikill";					// Multi Kill.
+	callsub OnConf1,1,": ¡¡HIPERDESTRUCCIÓN!!","ff0055","megakill";						// Mega Kill.
+	callsub OnConf1,1,": ¡¡S.U.P.E.R.D.E.S.T.R.U.C.C.I.Ó.N.!!","ff0077","ultrakill";	// Ultra Kill.
+	callsub OnConf1,2,": ¡¡¡MASACRE INFERNAL!!!","ff0099","monsterkill";				// Monster Kill.
+
+	// Make kill announce to: (0 = off | 1 = area | 2 = map | 3 = global)
+	set .ann[0],3;		// First Blood. (WoE)
+	set .ann[1],3;		// Guild Ownage.
+
+	// Skull Collector:
+	set .@n$,"Señor Calavera";	// NPC name.
+	set $@utski,521;			// Item reward for getting a Skull. (Default = Poring Coin)
+	set $@utska,1;				// Amount of item rewards recived per Skull.
+
+	// Juggernaut Mission:
+	// Ranker script is required to activate the Juggernaut Mission. See: http://www.eathena.ws/board/index.php?showtopic=193726
+	set $@utjmt,5;			// Time to complete the Juggernaut Mission. (0 = off | days)
+	set $@utjmp,5;			// Minimum amount of active players of your level range needed to get a Juggernaut Mission.
+	set $@utjmi,7539;		// Item reward for completing the Juggernaut Mission. (Default = Poring Coin)
+	set $@utjma,1;			// Amount of item rewards recived when completing the Juggernaut Mission.
+	set $@utjmann,3;		// Make Juggernaut announce to: (0 = off | 1 = area | 2 = map | 3 = global)
+
+// [--------------------------------------------------------]
+// [ End of configuration.                                  ]
+// [========================================================]
+
+	// NPC names:
+	set .@a,1;
+	while(!setnpcdisplay("UT#"+.@a,.@n$+"#"+.@a)) set .@a,.@a + 1;
+	set $@UTn$,"[^008888"+.@n$+"^000000]";
+
+	if(setnpcdisplay("ranker",-1)) set $@utjmt,0;
+	setBattleFlag "bone_drop",2;
+	setBattleFlag "pk_level_range",$@utlv;
+end;
+
+OnConf0:
+	if(.str) {
+		set .@a,getarraysize(.ann0b$);
+		set .ann0a[.@a],getarg(0);
+		set .ann0b$[.@a],getarg(1);
+		set .ann0c$[.@a],getarg(2);
+		set .ann0d$[.@a],getarg(3);
+	}
+	return;
+
+OnConf1:
+	if(.mkill) {
+		set .@a,getarraysize(.ann1b$);
+		set .ann1a[.@a],getarg(0);
+		set .ann1b$[.@a],getarg(1);
+		set .ann1c$[.@a],getarg(2);
+		set .ann1d$[.@a],getarg(3);
+	}
+	return;
+
+OnAgitStart:
+OnAgitStart2:
+	set .woe,1;
+	end;
+
+OnAgitEnd:
+OnAgitEnd2:
+	set .woe,0;
+	end;
+
+OnPCDieEvent:
+
+	// Killed:
+	set .@id1,killerrid;
+	set .@id2,getcharid(3);
+	set .@id3,getcharid(2);
+	set .@n2$,strcharinfo(0);
+	set .@l,Baselevel;
+	getmapxy .@m$,.@x,.@y,0;
+	if(.str) {
+		set .@a,@ut1;
+		set .@b,.@a / .str;
+		set .@c,getarraysize(.ann0b$);
+		if(.@b > .@c) set .@b,.@c;
+	}
+	set @ut1,0;
+	set @ut2,0;
+	set @utm,0;
+	setd ".a"+(.@id3)+""+.@m$,0;
+	setd ".b"+(.@id3)+""+.@m$,0;
+	if((.@id1 == .@id2) && .@b) // Suicide:
+		callfunc "UTAnn",.ann0a[.@b - 1],.@n2$+" tenía buen aspecto hasta que se suicidó.",.ann0c$[.@b - 1],.@m$,.@x,.@y;
+	else if(isloggedin(.@id1)) {
+		set .@n1$,rid2name(.@id1);
+		if(.@n1$ != "") announce "Te ha matado "+.@n1$+".",bc_self,0x999999;
+
+		// Killer:
+		if(attachrid(.@id1)) {
+			announce "Mataste a "+.@n2$+".",bc_self,0x999999;
+
+			// End of Killing Spree:
+			if(.@b) {
+				callfunc "UTAnn",.ann0a[.@b - 1],"La Furia Asesina de "+.@n2$+" ha sido controlada por "+.@n1$+". ("+.@a+")",.ann0c$[.@b - 1],.@m$,.@x,.@y;
+				if(.@b == .@c) callsub OnWav1,"assasin";
+				else callsub OnWav1,"denied";
+			}
+
+			// First Blood:
+			if(.woe && compare(.@m$,"g_cas")) {
+				set .woe,0;
+				callfunc "UTAnn",.ann[0],.@n1$+" ha conseguido su Primer Baño de Sangre!","bb00bb",.@m$,.@x,.@y;
+				callsub OnWav1,"firstblood";
+			}
+
+			// Killer Bonuses:
+			if(!$@utlv || (BaseLevel <= (.@l + $@utlv))) {
+				specialeffect2 626;
+
+				// Multikill:
+				if(.mkill) {
+					set .@a,@ut2 + 1;
+					set @ut2,.@a;
+					set .@b,.@a - 1;
+					set .@c,getarraysize(.ann1b$);
+					if(.@b > .@c) set .@b,.@c;
+					deltimer "Unreal::OnMKillReset";
+					addtimer (.mkill * 1000),"Unreal::OnMKillReset";
+					if(.@b) {
+						callfunc "UTAnn",.ann1a[.@b - 1],.@n1$+" "+.ann1b$[.@b - 1]+" ("+.@a+")",.ann1c$[.@b - 1],.@m$,.@x,.@y;
+						callsub OnWav1,.ann1d$[.@b - 1];
+					}
+				}
+
+				// Killing Spree:
+				if(.str) {
+					set .@a,@ut1 + 1;
+					set @ut1,.@a;
+					if(!(.@a % .str)) set .@b,.@a / .str;
+					else set .@b,0;
+					set .@c,getarraysize(.ann0b$);
+					if(.@b > .@c) set .@b,.@c;
+					if(.@b) {
+						if(.@b == .@c) {
+							if(sex) set .@i$,"ÉL";
+							else set .@i$,"ELLA";
+							set .@i$,"Alguien acabó con "+.@i$+"!!!";
+							if(!@utm) doevent "Unreal::OnTitan";
+						}
+						callfunc "UTAnn",.ann0a[.@b - 1],.@n1$+" "+.ann0b$[.@b - 1]+" "+.@i$+" ("+.@a+")",.ann0c$[.@b - 1],.@m$,.@x,.@y;
+						callsub OnWav1,.ann0d$[.@b - 1];
+					}
+				}
+
+				// Guild Ownage:
+				if(.ownk) {
+					set .@id1,getcharid(2);
+					if(.ann[1] && .@id1 && (.@id1 != .@id3) && (getmapguildusers(.@m$,.@id1) >= .ownn)) {
+						set .@id2,.@id1;
+						set .@a,getd(".a"+.@id2+""+.@m$) + 1;
+						setd ".a"+.@id2+""+.@m$,.@a;
+						if(.ownt) {
+							set .@t,getd(".b"+.@id2+""+.@m$);
+							setd ".b"+.@id2+""+.@m$,gettimetick(2) + .ownt;
+							if(!.@t) doevent "Unreal::OnOwnReset1";
+						}
+						if(!(.@a % .ownk))
+							callfunc "UTAnn",.ann[1],"¡La guild "+getguildname(.@id1)+" está ARRASANDO! ("+.@a+")","00dd77",.@m$,.@x,.@y,"impressive";
+					}
+				}
+			}
+		}
+	}
+	end;
+
+// getarg(0): Wav file.
+OnWav1:
+	set .@a,getarraysize(@utwav$);
+	if(.@a >= 10) {
+		deletearray @utwav$[0],.@a - 9;
+		set .@a,9;
+	}
+	set @utwav$[.@a],getarg(0);
+	if(!.@a) doevent "Unreal::OnWav2";
+	return;
+
+OnWav2:
+	set .@a,getarraysize(@utwav$);
+	while(.@a) {
+		soundeffect @utwav$[0]+".wav",0;
+		sleep2 1500;
+		deletearray @utwav$[0],1;
+		set .@a,getarraysize(@utwav$);
+	}
+	end;
+
+OnMKillReset:
+	set @ut2,0;
+	end;
+
+OnOwnReset1:
+	getmapxy .@m$,.@x,.@y,0;
+	set .@id,getcharid(2);
+	while((getd(".b"+.@id+""+.@m$) - 1) > gettimetick(2))
+		sleep ((getd(".b"+.@id+""+.@m$) - gettimetick(2)) * 1000);
+	setd ".a"+.@id+""+.@m$,0;
+	setd ".b"+.@id+""+.@m$,0;
+	end;
+
+OnTitan:
+	set @utm,1;
+	while(@utm)  {
+		specialeffect2 422;
+		specialeffect2 544;
+		sleep2 3000;
+	}
+	end;
+}
+
+// Make an announcement:
+// getarg(0): Make kill announce to: (0 = off | 1 = area | 2 = map | 3 = global)
+// getarg(1): Announce.
+// getarg(2): Color.
+// getarg(3): Map.
+// getarg(4): x.
+// getarg(5): y.
+// getarg(6): Wav file. (optional)
+function	script	UTAnn	{
+
+	set .@f,getarg(0);
+	set .@i$,getarg(1);
+	set .@j$,"0x"+getarg(2);
+	set .@m$,getarg(3);
+	set .@x,getarg(4);
+	set .@y,getarg(5);
+	set .@w$,getarg(6,"");
+	switch(.@f) {
+		case 1: areaannounce .@m$,.@x - 25,.@y - 25,.@x + 25,.@y + 25,.@i$,bc_npc,.@j$; break;
+		case 2: mapannounce .@m$,.@i$,bc_npc,.@j$;					break;
+		//case 3: announce "["+.@m$+"] "+.@i$,bc_all,.@j$;				break;
+		case 3: announce .@i$,bc_all,.@j$;				break;
+	}
+	if(.@f && (.@w$ != "")){
+		set .@w$,.@w$+".wav";
+		if(.@f == 1) soundeffectall .@w$,0,.@m$,.@x - 25,.@y - 25,.@x + 25,.@y + 25;
+		else soundeffectall .@w$,0,.@m$;
+	}
+	return;
+}
+
+// Npcs:
+-	script	UT#0::UT	-1,{
+
+	query_sql "SELECT race FROM razas WHERE char_id = "+getcharid(0),.@raza$[0];
+	emotion 79;
+	mes $@UTn$;
+	mes .@raza$[0]+"...";
+	mes "¿alguna vez has sentido escapar la vida de tu enemigo a través de tus dedos?";
+	next;
+	if($@utjmt && $@CPa && $@CPb) set .@i$,"-[Misiones Calavera]-";
+	set .@a,select("^880000Salir^000000","Intercambiar cráneos",.@i$);
+	mes $@UTn$;
+	switch(.@a) {
+		case 1:
+			mes "Nos veremos en el otro lado.";
+			break;
+		case 2:
+			getinventorylist;
+			set .@a,@inventorylist_count;
+			copyarray .@b[0],@inventorylist_id[0],.@a;
+			copyarray .@c[0],@inventorylist_amount[0],.@a;
+			copyarray .@d[0],@inventorylist_card3[0],.@a;
+			copyarray .@e[0],@inventorylist_card4[0],.@a;
+			callsub ClearInventoryList;
+			set .@f,0;
+			set .@h,getcharid(0);
+			while(.@a) {
+				set .@a,.@a - 1;
+				if((.@b[.@a] == 7420) && (.@d[.@a] || .@e[.@a]) && (.@d[.@a] != (.@h & 65535)) && (.@d[.@a] != (.@h >> 16)))
+					set .@f,.@f + .@c[.@a];
+				else {
+					deletearray .@b[.@a],1;
+					deletearray .@c[.@a],1;
+					deletearray .@d[.@a],1;
+					deletearray .@e[.@a],1;
+				}
+			}
+			set .@r$,"^bb3300"+getitemname($@utski)+"s^000000";
+			if(.@f) {
+				mes "Parece que has traído ^bb3300"+.@f+"^000000 cráneos humanos.";
+				mes "Permíteme que te los cambie por "+.@r$+".";
+				next;
+				set .@a,select("^880000Salir^000000","Intercambiar");
+				mes $@UTn$;
+				switch(.@a) {
+					case 1:
+						mes "Mmmm...";
+						break;
+					case 2:
+						set .@a,getarraysize(.@c);
+						while(.@a) {
+							set .@a,.@a - 1;
+							delitem2 7420,.@c[.@a],1,0,0,0x00fe,0,.@d[.@a],.@e[.@a];
+						}
+						getitem $@utski,.@f * $@utska;
+						mes "Gracias.";
+						mes "Has hecho un buen trabajo.";
+				}
+			}
+			else {
+				mes "Tráeme todos los cráneos humanos que encuentres.";
+				mes "Te daré "+.@r$+" a cambio.";
+			}
+			break;
+		case 3:
+			if(utjmt > (gettimetick(2) / (60 * 60 * 24))) {
+				getinventorylist;
+				set .@a,@inventorylist_count;
+				copyarray .@b[0],@inventorylist_id[0],.@a;
+				copyarray .@d[0],@inventorylist_card3[0],.@a;
+				copyarray .@e[0],@inventorylist_card4[0],.@a;
+				callsub ClearInventoryList;
+				set .@c,utjmi + 149999;
+				set .@f,0;
+				while(.@a) {
+					set .@a,.@a - 1;
+					if((.@b[.@a] == 7420) && (.@d[.@a] == (.@c & 65535)) && (.@e[.@a] == (.@c >> 16))) {
+						set .@f,1;
+						break;
+					}
+				}
+				if(.@f) {
+					set utjmi,0;
+					set utjmn$,"";
+					set utjmt,0;
+					mes "¡¡¡Excelente!!!";
+					mes "Me has traído el cráneo de ^bb3300"+utjmn$+"^000000.";
+					mes "¡¡¡Has completado tu ^bb3300Misión Calavera^000000!!!";
+					next;
+					mes $@UTn$;
+					mes "Aquí tienes la recompensa por completar tu misión.";
+					delitem2 7420,1,1,0,0,0x00fe,0,(.@c & 65535),(.@c >> 16);
+					getitem $@utjmi,.@f * $@utjma;
+					close2;
+					if(!@utm) doevent "Unreal::OnTitan";
+					getmapxy .@m$,.@x,.@y,0;
+					callfunc "UTAnn",$@utjmann,"¡¡ "+strcharinfo(0)+" ha completado su Misión Calavera !!","ff5555",.@m$,.@x,.@y,"juggernaut";
+					end;
+				}
+				else {
+					mes "¿Cómo va tu Misión Calavera? Hahaha.";
+					mes "Te quedan "+(utjmt - (gettimetick(2) / (60 * 60 * 24)))+" días para traerme el cráneo de ^bb3300"+utjmn$+"^000000.";
+					mes "Buena Suerte.";
+				}
+			}
+			else {
+				mes "¿Conoces el juego de las Calaveras?";
+				mes "Aquí tengo una bolsa con algunos papeles escritos en ella. Cada papel tiene el nombre de personaje activo escrito en él.";
+				next;
+				mes $@UTn$;
+				mes "Sólo tienes que agarrar uno de los papeles.";
+				mes "Tu misión es traerme el cráneo del jugador en un periodo de "+$@utjmt+" días.";
+				next;
+				mes $@UTn$;
+				mes "Dime...";
+				mes "¿Te apetece jugar a este sádico juego? Hahaha.";
+				next;
+				set .@a,select("^880000No^000000","No tengo nada que perder");
+				mes $@UTn$;
+				switch(.@a) {
+					case 1:
+						mes "Qué cobardía...";
+						break;
+					case 2:
+						set .@a,0;
+						set .@b,getcharid(3);
+						set .@c,BaseLevel;
+						set .@d,0;
+						set .@f,0;
+						do {
+							while(.@d) {
+								set .@d,.@d - 1;
+								set .@f,.@f + 1;
+								setd ".@g"+.@f,.@e[.@d] - 149999;
+								setd ".@h"+.@f+"$",.@a$[.@d];
+							}
+							set .@d,query_sql("SELECT `char`.`char_id`,`name` FROM `ranker_char` LEFT JOIN `char` ON `char`.`char_id` = `ranker_char`.`char_id` WHERE `account_id` != '"+.@b+"' AND abs(`base_level` - '"+.@c+"') <= '"+$@utlv+"' AND `kills` LIMIT "+.@f+",128",.@e,.@a$);
+						} while(.@d);
+						if(.@f < $@utjmp) {
+							mes "Desafortunadamente, no hay suficientes personajes activos en el servidor en este momento.";
+							mes "...";
+						}
+						else {
+							mes "Great!";
+							mes "Venga, agarra uno de los papeles.";
+							mes "...";
+							next;
+							mes $@UTn$;
+							mes "...";
+							mes "Tu Misión Calavera consistirá en traerme...";
+							soundeffect "se_equip_item_0"+rand(1,7)+".wav",0;
+							sleep2 rand(500,2000);
+							mes "...";
+							soundeffect "se_equip_item_0"+rand(1,7)+".wav",0;
+							sleep2 rand(500,2000);
+							mes "...";
+							soundeffect "se_equip_item_0"+rand(1,7)+".wav",0;
+							sleep2 rand(500,2000);
+							set .@f,rand(1,.@f);
+							set utjmi,getd(".@g"+.@f);
+							set utjmn$,getd(".@h"+.@f+"$");
+							set utjmt,(gettimetick(2) / (60 * 60 * 24)) + $@utjmt;
+							mes "¡¡La cráneo de ^bb3300"+utjmn$+"^000000!!";
+							next;
+							mes $@UTn$;
+							mes "¡Buena Suerte!";
+						}
+						break;
+				}
+			}
+			break;
+	}
+	close2;
+	emotion 36;
+	end;
+
+ClearInventoryList:
+	set .@a,@inventorylist_count;
+	set @inventorylist_count,0;
+	cleararray @inventorylist_id[0],0,.@a;
+	cleararray @inventorylist_amount[0],0,.@a;
+	cleararray @inventorylist_equip[0],0,.@a;
+	cleararray @inventorylist_refine[0],0,.@a;
+	cleararray @inventorylist_identify[0],0,.@a;
+	cleararray @inventorylist_attribute[0],0,.@a;
+	cleararray @inventorylist_card1[0],0,.@a;
+	cleararray @inventorylist_card2[0],0,.@a;
+	cleararray @inventorylist_card3[0],0,.@a;
+	cleararray @inventorylist_card4[0],0,.@a;
+	return;
+}
+
+alberta,195,136,4	duplicate(UT)	UT#1	810
+alberta,53,250,5	duplicate(UT)	UT#2	810
+aldebaran,133,113,6	duplicate(UT)	UT#3	810
+aldebaran,133,234,6	duplicate(UT)	UT#4	810
+alde_gld,234,148,4	duplicate(UT)	UT#5	810
+amatsu,241,277,6	duplicate(UT)	UT#6	810
+amatsu,97,261,4	duplicate(UT)	UT#7	810
+amatsu,212,99,1	duplicate(UT)	UT#8	810
+ayothaya,213,194,4	duplicate(UT)	UT#9	810
+ayothaya,157,76,4	duplicate(UT)	UT#10	810
+comodo,180,327,4	duplicate(UT)	UT#11	810
+comodo,205,110,4	duplicate(UT)	UT#12	810
+comodo,314,182,4	duplicate(UT)	UT#13	810
+comodo,38,222,6	duplicate(UT)	UT#14	810
+einbech,85,98,1	duplicate(UT)	UT#15	810
+einbech,131,243,6	duplicate(UT)	UT#16	810
+einbech,44,201,8	duplicate(UT)	UT#17	810
+einbroch,70,187,2	duplicate(UT)	UT#18	810
+einbroch,147,314,6	duplicate(UT)	UT#19	810
+einbroch,152,47,4	duplicate(UT)	UT#20	810
+einbroch,251,239,2	duplicate(UT)	UT#21	810
+geffen,150,40,4	duplicate(UT)	UT#22	810
+geffen,41,105,6	duplicate(UT)	UT#23	810
+geffen,124,175,4	duplicate(UT)	UT#24	810
+geffen,173,123,6	duplicate(UT)	UT#25	810
+gef_fild13,194,242,4	duplicate(UT)	UT#26	810
+gonryun,152,105,6	duplicate(UT)	UT#27	810
+gonryun,166,179,2	duplicate(UT)	UT#28	810
+gonryun,151,15,6	duplicate(UT)	UT#29	810
+hugel,106,128,3	duplicate(UT)	UT#30	810
+hugel,179,168,4	duplicate(UT)	UT#31	810
+izlude,136,87,2	duplicate(UT)	UT#32	810
+jawaii,137,249,3	duplicate(UT)	UT#33	810
+yuno,175,87,4	duplicate(UT)	UT#34	810
+yuno,70,201,4	duplicate(UT)	UT#35	810
+sch_gld,291,121,4	duplicate(UT)	UT#36	810
+lighthalzen,209,93,6	duplicate(UT)	UT#37	810
+lighthalzen,218,320,4	duplicate(UT)	UT#38	810
+lighthalzen,311,297,4	duplicate(UT)	UT#39	810
+louyang,200,104,6	duplicate(UT)	UT#40	810
+louyang,57,244,4	duplicate(UT)	UT#41	810
+xmas,139,304,6	duplicate(UT)	UT#42	810
+xmas,163,107,4	duplicate(UT)	UT#43	810
+morocc,166,74,4	duplicate(UT)	UT#44	810
+morocc,49,174,4	duplicate(UT)	UT#45	810
+morocc,166,285,4	duplicate(UT)	UT#46	810
+morocc,281,197,8	duplicate(UT)	UT#47	810
+morocc,36,288,4	duplicate(UT)	UT#48	810
+moscovia,238,207,3	duplicate(UT)	UT#49	810
+moscovia,160,61,4	duplicate(UT)	UT#50	810
+niflheim,46,164,6	duplicate(UT)	UT#51	810
+niflheim,201,182,4	duplicate(UT)	UT#52	810
+payon,213,70,6	duplicate(UT)	UT#53	810
+payon,158,49,2	duplicate(UT)	UT#54	810
+payon,232,314,4	duplicate(UT)	UT#55	810
+payon,63,118,6	duplicate(UT)	UT#56	810
+pay_gld,201,155,4	duplicate(UT)	UT#57	810
+prontera,165,69,4	duplicate(UT)	UT#58	810
+prontera,42,212,6	duplicate(UT)	UT#59	810
+prontera,127,194,6	duplicate(UT)	UT#60	810
+prontera,257,213,4	duplicate(UT)	UT#61	810
+prontera,161,310,4	duplicate(UT)	UT#62	810
+prt_gld,166,73,4	duplicate(UT)	UT#63	810
+rachel,266,136,4	duplicate(UT)	UT#64	810
+rachel,157,150,4	duplicate(UT)	UT#65	810
+rachel,135,43,4	duplicate(UT)	UT#66	810
+rachel,41,131,6	duplicate(UT)	UT#67	810
+aru_gld,179,324,6	duplicate(UT)	UT#68	810
+umbala,124,126,8	duplicate(UT)	UT#69	810
+umbala,163,247,4	duplicate(UT)	UT#70	810
+veins,211,233,4	duplicate(UT)	UT#71	810
+veins,222,350,4	duplicate(UT)	UT#72	810
+veins,159,62,6	duplicate(UT)	UT#73	810
+mid_camp,221,287,4	duplicate(UT)	UT#74	810
+mid_camp,140,236,6	duplicate(UT)	UT#75	810
+mid_camp,250,233,8	duplicate(UT)	UT#76	810
+manuk,279,125,2	duplicate(UT)	UT#77	810
+manuk,180,175,6	duplicate(UT)	UT#78	810
+splendide,181,135,6	duplicate(UT)	UT#79	810

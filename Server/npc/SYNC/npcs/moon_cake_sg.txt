@@ -1,0 +1,94 @@
+//===== Custom eAthena Script =======================================
+//= Feel Reset Item Custom Quest
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Descripción =================================================
+// NPC accesible mensualmente (Evento Luna Llena)
+// Entrega item que le permite a los Star Gladiator realizar un Reset
+// de sus mapas de el Sol, la Luna y las Estrellas
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Original
+//===================================================================
+
+moonfild,239,157,3	script	Moon Gladiator	823,{
+
+	mes "[^7401DFMoon Gladiator^000000]";
+	mes "Bienvenido a la Luna.";
+	next;
+	mes "[^7401DFMoon Gladiator^000000]";
+	if (Class != 4047) {
+		mes "¿Te sorprende verme aquí?";
+		mes "No te asustes, este es mi lugar de entrenamiento.";
+		close;
+	}else{
+		switch (MoonCake){
+			case 0:
+					mes "Veo que has descubierto mi lugar de entrenamiento, jeje.";
+					mes "Al igual que yo, eres un ^0B3861Star Gladiator^000000.";
+					next;
+					mes "[^7401DFMoon Gladiator^000000]";
+					mes "Este lugar es perfecto para relajar los músculos y concentrarse en tus técnicas.";
+					mes "Seguro que sabes a lo que me refiero.";
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "¿De qué estás hablando?";
+					next;
+					mes "[^7401DFMoon Gladiator^000000]";
+					mes "Lo sabes muy bien. ¿Nunca has tenido la impresión de que tus poderes son muy limitados?";
+					mes "Me refiero a la armonía con la naturaleza... ^8A0808el Sol, la Luna y las Estrellas^000000.";
+					mes "No siempre puedes contar con uno de ellos, ¿verdad?";
+					next;
+					mes "[^7401DFMoon Gladiator^000000]";
+					mes "Ese es el motivo por el que estoy aquí.";
+					next;
+					mes "[^7401DFMoon Gladiator^000000]";
+					mes "No puedes encontrar ninguno de estos allá abajo, en la tierra.";
+					mes "Tómate uno y lo entenderás todo.";
+					getitem 12191,1;
+					set MoonCake,1;
+					break;
+			case 1:
+					mes "Estoy seguro de que no te han dejado indiferente.";
+					mes "Quieres más, ¿verdad?";
+					next;
+					mes "[^7401DFMoon Gladiator^000000]";
+					mes "Te daré uno más a cambio de:";
+					mes "^868A08100 Star Dust^000000.";
+					mes "Es lo único que necesito que no puedo encontrar por aquí...";
+					set MoonCake,2;
+					break;
+			case 2:
+					mes "¿Has traído los ^868A08100 Star Dust^000000?";
+					next;
+					mes "[^7401DFMoon Gladiator^000000]";
+					if(countitem(1001) >= 100){
+						mes "Aquí tienes lo que te prometí.";
+						delitem 1001,100;
+						getitem 12191,1;
+						mes "No dudes en volver.";
+						set MoonCake,1;
+					}else{
+						mes "Sin ^868A08Star Dust^000000, no hay más ^B45F04Special Moon Cake^000000.";
+						close;
+					}
+					break;
+		}
+	}
+	close;
+}

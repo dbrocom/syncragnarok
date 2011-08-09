@@ -1,0 +1,113 @@
+//===== Custom eAthena Script =======================================
+//= Ribbon Recolor Custom Quest
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+pay_arche,146,82,2	script	Marisa	958,{
+
+	query_sql "SELECT race FROM razas WHERE char_id = "+getcharid(0),.@raza$[0];
+
+	if (.@raza$[0] == "Døkkálfar" || .@raza$[0] == "Eldjötnar" || .@raza$[0] == "Orco"){
+		mes "["+strcharinfo(0)+"]";
+		mes "La niña me está mirando con miedo...";
+		mes " ";
+		mes "Ha bajado la mirada y ha dado un paso atrás.";
+		close;
+	}
+
+	mes "[Marisa]";
+	mes "Mi madre me ha enseñado a hacer ribbons de colores.";
+	mes "¿Te gustan los ribbon?";
+	next;
+	if(select("No me gustan nada","Es el complemento ideal de toda chica") == 1){
+		mes "[Marisa]";
+		mes "¿No? u.u Entonces no te gustará lo que iba a proponerte...";
+		close;
+	}
+	mes "[Marisa]";
+	mes "Jejeje, ¡es cierto!";
+	mes "Entonces seguro que te gusta lo que iba a proponerte.";
+	if (Sex) { mes "Y aunque tu seas un chico puedes estar tranquilo, no se lo diré a nadie."; }
+	next;
+	mes "[Marisa]";
+	mes "Resulta que el único color que no tengo es el Morado.";
+	mes "Lo dropea ese asqueroso Familiar, y me da miedo acercarme.";
+	next;
+	mes "[Marisa]";
+	mes "Si me regalas uno, te teñiré uno de tus ribbon del color que más te guste.";
+	mes "¿Tienes algún color preferido?";
+	next;
+	switch(select("^BDBDBDBlanco^000000:Negro:^04B404Verde^000000:^AEB404Amarillo^000000:^DF0101Rojo^000000:^FF8000Naranja^000000:^FA58F4Rosa^000000")){
+		case 1:
+			set .@dye, 982;		//White_Dyestuffs
+			set .@ribb, 5197;	//Ribbon 
+			break;
+		case 2:
+			set .@dye, 983;		//Black_Dyestuffs
+			set .@ribb, 5191;	//Ribbon 
+			break;
+		case 3:
+			set .@dye, 979;		//Green_Dyestuffs
+			set .@ribb, 5193;	//Ribbon 
+			break;
+		case 4:
+			set .@dye, 976;		//Yellow_Dyestuffs
+			set .@ribb, 5192;	//Ribbon 
+			break;
+		case 5:
+			set .@dye, 975;		//Red_Dyestuffs
+			set .@ribb, 5195;	//Ribbon 
+			break;
+		case 6:
+			set .@dye, 980;		//Orange_Dyestuffs
+			set .@ribb, 5196;	//Ribbon 
+			break;
+		case 7:
+			set .@dye, 30702;	//Pink_Dyestuffs
+			set .@ribb, 5194;	//Ribbon 
+			break;
+	}
+	mes "[Marisa]";
+	if((countitem(2209) >= 2) && (countitem(.@dye) >= 1)) {
+		delitem 2209,1;
+		delitem .@dye,1;
+		mes "A ver... déjame aplicarle el tinte a tu lazo...";
+		next;
+		mes "[Marisa]";
+		mes "¡Aquí tienes!";
+		mes "¡Ha quedado perfecto!";
+		getitem .@ribb,1;
+		next;
+		mes "[Marisa]";
+		delitem 2209,1;
+		mes "¡Muchas gracias por tu regalo!";
+		mes "Vuelve si quieres otro ribbon de un nuevo color ^^u";
+	}else{
+		mes "En ese caso para que te dé un "+getitemname(.@ribb)+", necesitas conseguir:";
+		mes "1 "+getitemname(2209)+" para que te lo tiña,";
+		mes "1 "+getitemname(.@dye)+" como base de color,";
+		mes "¡y 1 "+getitemname(2209)+" de regalo para mi!";
+		mes "jejeje";
+		mes "¡Vuelve cuando lo tengas todo!";
+	}
+	close;
+}

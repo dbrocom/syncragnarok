@@ -14807,7 +14807,7 @@ All Stats +6, but you lose 1 to All Stats every 5 Job Levels until it gives 0 to
 Tipo :^777777 Accessory^000000
 Defense :^777777 0^000000
 Peso :^777777 0^000000
-Nivel Necesario :^777777 100^000000
+Nivel Necesario :^777777 99^000000
 Usable por :^777777 Every 3rd Job^000000
 #
 2796#
@@ -36790,7 +36790,7 @@ Peso :^777777 30^000000
 #
 12191#
 A special moon cake. It is fragrant and the silver one grade taste is born. When it eats and the body comes to be light and the impression which comes to be nimble holds.
-^000088Temporarily Increase Attack Speed, Increase Movement Speed^000000.
+^000088Realiza un Feel Reset para que los Star Gladiators puedan aprender nuevos mapas del Sol, la Luna y las Estrellas.^000000.
 ^ffffff_^000000
 Peso :^777777 30^000000
 #
@@ -48716,7 +48716,7 @@ Love Scroll. If you are waiting for love, you definitely need this scroll.
 Peso :^777777 1^000000
 #
 14317#
-Taiwan Bacsojin scroll. If you are lucky, you will be suprised once you open it.		
+Taiwan Bacsojin scroll. If you are lucky, you will be suprised once you open it.
 ^ffffff_^000000
 Peso :^777777 1^000000
 #
@@ -59776,7 +59776,6 @@ Peso : ^7777772^000000
 31331#
 Crystalización: ^777777Ofensiva^000000
 Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar SoulStrike lvl 4.^000000
-
 Se introduce en :^777777 Arma^000000
 Peso : ^7777772^000000
 #
@@ -59789,6 +59788,126 @@ Peso : ^7777772^000000
 31333#
 Crystalización: ^777777Ofensiva^000000
 Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar SoulStrike lvl 8.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31335#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Sightrasher lvl 1.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31336#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Sightrasher lvl 2.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31337#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Sightrasher lvl 3.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31338#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Sightrasher lvl 4.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31340#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Holy Cross lvl 2.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31341#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Holy Cross lvl 3.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31342#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Holy Cross lvl 4.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31343#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Holy Cross lvl 5.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31345#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Envenom lvl 2.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31346#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Envenom lvl 4.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31347#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Envenom lvl 6.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31348#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Envenom lvl 8.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31350#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Decrease Agi. lvl 2.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31351#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Decrease Agi. lvl 4.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31352#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Decrease Agi. lvl 6.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31353#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Decrease Agi. lvl 8.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31355#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Bash lvl 2.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31356#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Bash lvl 3.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31357#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Bash lvl 4.^000000
+Se introduce en :^777777 Arma^000000
+Peso : ^7777772^000000
+#
+31358#
+Crystalización: ^777777Ofensiva^000000
+Efecto: ^777777Cuando atacas, existe una pequeña posibilidad de lanzar Bash lvl 5.^000000
 Se introduce en :^777777 Arma^000000
 Peso : ^7777772^000000
 #
@@ -59916,6 +60035,126 @@ Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Det
 Se introduce en :^777777 Armadura^000000
 Peso : ^7777772^000000
 #
+31525#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Endure lvl 2.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31526#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Endure lvl 4.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31527#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Endure lvl 6.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31528#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Endure lvl 8.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31530#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Safety Wall lvl 2.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31531#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Safety Wall lvl 3.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31532#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Safety Wall lvl 4.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31533#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Safety Wall lvl 5.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31535#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Frost Nova lvl 2.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31536#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Frost Nova lvl 3.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31537#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Frost Nova lvl 4.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31538#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Frost Nova lvl 5.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31540#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Angelus lvl 2.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31541#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Angelus lvl 3.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31542#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Angelus lvl 4.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31543#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Angelus lvl 5.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31545#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Provoke lvl 2.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31546#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Provoke lvl 4.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31547#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Provoke lvl 6.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
+31548#
+Crystalización: ^777777Defensiva^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de lanzar Provoke lvl 8.^000000
+Se introduce en :^777777 Armadura^000000
+Peso : ^7777772^000000
+#
 31650#
 Crystalización: ^777777Flujo^000000
 Efecto: ^777777Permite aprender las skills de las Crystalizaciones Ofensivas y Defensivas que estés usando.^000000
@@ -59942,19 +60181,19 @@ Peso : ^7777772^000000
 #
 31654#
 Crystalización: ^777777Flujo^000000
-Efecto: ^777777 ^000000
+Efecto: ^777777El tiempo de duración de algunas Crystalizaciones se ve aumentado^000000
 Se introduce en :^777777 Calzado^000000
 Peso : ^7777772^000000
 #
 31655#
 Crystalización: ^777777Flujo^000000
-Efecto: ^777777 ^000000
-Se introduce en :^777777 Calzado^000000
+Efecto: ^777777Los efectos de otras Crystalizaciones pueden llegar a duplicarse^000000
+Se introduce en :^777777 Accesorio^000000
 Peso : ^7777772^000000
 #
 31656#
 Crystalización: ^777777Flujo^000000
-Efecto: ^777777 ^000000
+Efecto: ^777777Los conjuros de las Crystalizaciones pueden ver aumentada su fuerza.^000000
 Se introduce en :^777777 Calzado^000000
 Peso : ^7777772^000000
 #
@@ -60147,6 +60386,126 @@ Peso : ^7777772^000000
 31738#
 Crystalización: ^777777Invocación^000000
 Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Dryad.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31740#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Petite.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31741#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Novus.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31742#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Deleter.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31743#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Ferus.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31745#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Snake.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31746#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Anacondaq.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31747#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Sidewinder.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31748#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Isis.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31750#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Chonchon.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31751#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Steel Chonchon.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31752#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Dragon Fly.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31753#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Hunter Fly.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31755#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Familiar.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31756#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Drainiliar.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31757#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Explosion.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31758#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Gargoyle.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31760#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Raptice.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31761#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Green Iguana.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31762#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Alligator.^000000
+Se introduce en :^777777 Garment^000000
+Peso : ^7777772^000000
+#
+31763#
+Crystalización: ^777777Invocación^000000
+Efecto: ^777777Cuando eres atacado, existe una pequeña posibilidad de invocar un Anolian.^000000
 Se introduce en :^777777 Garment^000000
 Peso : ^7777772^000000
 #
@@ -60417,55 +60776,198 @@ Efecto: ^777777MATK +20^000000
 Se introduce en :^777777 Accessory^000000
 Peso : ^7777772^000000
 #
-31849#
+31850#
 Crystalización: ^777777Orgánica^000000
 Efecto: ^777777Aumenta ligeramente el ASPD^000000
 Se introduce en :^777777 Accessory^000000
 Peso : ^7777772^000000
 #
-31850#
+31851#
 Crystalización: ^777777Orgánica^000000
 Efecto: ^777777Aumenta el ASPD en 1^000000
 Se introduce en :^777777 Accessory^000000
 Peso : ^7777772^000000
 #
-31851#
+31852#
 Crystalización: ^777777Orgánica^000000
 Efecto: ^777777Aumenta el ASPD en 2^000000
 Se introduce en :^777777 Accessory^000000
 Peso : ^7777772^000000
 #
-31852#
+31853#
 Crystalización: ^777777Orgánica^000000
 Efecto: ^777777Aumenta el ASPD en 3^000000
 Se introduce en :^777777 Accessory^000000
 Peso : ^7777772^000000
 #
-31853#
-Crystalización: ^777777Orgánica^000000
-Efecto: ^777777Aumenta la velocidad de movimiento en un 5%^000000
-Se introduce en :^777777 Accessory^000000
-Peso : ^7777772^000000
-#
-31854#
-Crystalización: ^777777Orgánica^000000
-Efecto: ^777777Aumenta la velocidad de movimiento en un 10%^000000
-Se introduce en :^777777 Accessory^000000
-Peso : ^7777772^000000
-#
 31855#
 Crystalización: ^777777Orgánica^000000
-Efecto: ^777777Aumenta la velocidad de movimiento en un 15%^000000
+Efecto: ^777777Aumenta la velocidad de movimiento en un 4%^000000
 Se introduce en :^777777 Accessory^000000
 Peso : ^7777772^000000
 #
 31856#
 Crystalización: ^777777Orgánica^000000
-Efecto: ^777777Aumenta la velocidad de movimiento en un 20%^000000
+Efecto: ^777777Aumenta la velocidad de movimiento en un 8%^000000
 Se introduce en :^777777 Accessory^000000
 Peso : ^7777772^000000
 #
-
+31857#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Aumenta la velocidad de movimiento en un 12%^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31858#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Aumenta la velocidad de movimiento en un 16%^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31860#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777CRÍTICO + 2^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31861#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777CRÍTICO + 3^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31862#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777CRÍTICO + 4^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31863#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777CRÍTICO + 5^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31865#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777El daño de los ataques críticos aumenta un 3%^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31866#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777El daño de los ataques críticos aumenta un 7%^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31867#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777El daño de los ataques críticos aumenta un 11%^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31868#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777El daño de los ataques críticos aumenta un 15%^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31870#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Mayor Posibilidad de conseguir otras Crystalizaciones^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31871#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Mayor Posibilidad de conseguir otras Crystalizaciones^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31872#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Mayor Posibilidad de conseguir otras Crystalizaciones^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31873#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Mayor Posibilidad de conseguir otras Crystalizaciones^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31875#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Haces 1% más de daño al atacar^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31876#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Haces 2% más de daño al atacar^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31877#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Haces 3% más de daño al atacar^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31878#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Haces 4% más de daño al atacar^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31880#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Recibes 1% menos de daño al ser golpeado^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31881#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Recibes 2% menos de daño al ser golpeado^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31882#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Recibes 3% menos de daño al ser golpeado^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31883#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Recibes 4% menos de daño al ser golpeado^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31885#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Recibes 1% más puntos de EXP de los monstruos.^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31886#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Recibes 2% más puntos de EXP de los monstruos.^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31887#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Recibes 3% más puntos de EXP de los monstruos.^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
+31888#
+Crystalización: ^777777Orgánica^000000
+Efecto: ^777777Recibes 4% más puntos de EXP de los monstruos.^000000
+Se introduce en :^777777 Accessory^000000
+Peso : ^7777772^000000
+#
 12625#
 ^uu0000Å· ¿èÁ¤¿ú ¿Å¸¡¿¡ µÒ¿¡»ÉÇÑ ±ÆÀÌÅÛ ÀÔ»Ï»Ù.^000000
 ´çÆÄ ¿øÈÆÁõÀÌ ¿¡ºæ ºé±îÀÖ»Â ÁÖ·Ó»Ï.

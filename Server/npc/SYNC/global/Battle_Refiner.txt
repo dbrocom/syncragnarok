@@ -1,0 +1,91 @@
+//
+// [==================================================]
+// [                 Battle Refiner                   ]
+// [==================================================]
+// [ Version 5                                        ]
+// [==================================================]
+// [ Description:                                     ]
+// [--------------------------------------------------]
+// [                                                  ]
+// [ - Everytime when you kill a monster, it adds a   ]
+// [ very little chance to successfully refine an     ]
+// [ equiped item.                                    ]
+// [ - Control Panel whispering to NPC:Battle Refiner.]
+// [                                                  ]
+// [==================================================]
+// [ Changelog:                                       ]
+// [--------------------------------------------------]
+// [                                                  ]
+// [ v1: [Ivion]                                      ]
+// [                                                  ]
+// [ v2: [Ivion]                                      ]
+// [ - Bugfix: Non monster enemies causes errors.     ]
+// [ - It won't check non refinable slots (7 -> 10).  ]
+// [ - Decreased the default chance by 50%.           ]
+// [                                                  ]
+// [ v3: [Ivion]                                      ]
+// [ - Added Max refine setting.                      ]
+// [                                                  ]
+// [ v4: [Ivion]                                      ]
+// [ - Bugfix: Overflows when killing low level mobs. ]
+// [                                                  ]
+// [ v5: [Ivion]                                      ]
+// [ - Control Panel whispering to NPC:Battle Refiner.]
+// [==================================================]
+
+-	script	BattleRefiner	-1,{
+OnInit:
+
+// [==================================================]
+// [ Configuration:                                   ]
+// [--------------------------------------------------]
+
+	set .r1,90;	// Rate. (%)
+	set .r2,6;	// Max refine.
+
+// [--------------------------------------------------]
+// [ End of configuration.                            ]
+// [==================================================]
+
+end;
+
+OnNPCKillEvent:
+	set .@a,rand(1,6);
+	if(getequipisequiped(.@a) && getequipisenableref(.@a) && !(br & pow(2,.@a - 1))) {
+		set .@c,getequiprefinerycnt(.@a);
+		if(.@c < .r2) {
+			if((.@a == 3) || (.@a == 4)) set .@b,getequipweaponlv(.@a);
+			else set .@b,3;
+			if(!rand(pow(2,.@b + .@c))) {
+				set .@d,strmobinfo(3,killedrid);
+				if(.@d) if(!rand(pow(BaseLevel,2) * 400 / (pow(.@d,2) * .r1))) successrefitem .@a;
+			}
+		}
+	}
+	end;
+
+OnConfig:
+	set .@n$,"^008888Battle Refiner^000000";
+	mes .@n$;
+	mes "Este es el Panel de Control del Sistema del Battle Refiner";
+	mes "Puedes activar o desactivar el Battle Refiner para cada uno de tus equipos.";
+	next;
+	do {
+		setarray .@a$[0],"Cabeza","Armadura","Escudo","Arma","Capa","Calzado";
+		set .@a,getarraysize(.@a$);
+		while(.@a) {
+			set .@a,.@a - 1;
+			if(br & pow(2,.@a))	set .@a$[.@a],"^bbbbbb"+.@a$[.@a]+" ^000000(^bb0000off^000000)";
+			else			set .@a$[.@a],.@a$[.@a]+" (^00bb00on^000000)";
+		}
+		set .@a,select("^880000Exit^000000",.@a$[0],.@a$[1],.@a$[2],.@a$[3],.@a$[4],.@a$[5]) - 1;
+		if(.@a) {
+			if(br & pow(2,.@a - 1))	set br,br - pow(2,.@a - 1);
+			else			set br,br | pow(2,.@a - 1);
+		}
+	} while(.@a);
+	mes .@n$;
+	mes "Que tengas un buen día.";
+	close;
+}
+

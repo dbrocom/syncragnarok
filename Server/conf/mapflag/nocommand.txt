@@ -54,3 +54,5 @@ arug_cas05	mapflag	nocommand	40
 
 ini_zero	mapflag	nocommand	40
 valhalla	mapflag	nocommand	40
+
+sec_pri	mapflag	nocommand	10

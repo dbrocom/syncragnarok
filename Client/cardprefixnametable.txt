@@ -661,6 +661,26 @@
 31331#Anima#
 31332#Anima#
 31333#Anima#
+31335#FireExhale#
+31336#FireExhale#
+31337#FireExhale#
+31338#FireExhale#
+31340#HolyCross#
+31341#HolyCross#
+31342#HolyCross#
+31343#HolyCross#
+31345#Venom#
+31346#Venom#
+31347#Venom#
+31348#Venom#
+31350#Deceleris#
+31351#Deceleris#
+31352#Deceleris#
+31353#Deceleris#
+31355#Bash#
+31356#Bash#
+31357#Bash#
+31358#Bash#
 31500#Benedictum#
 31501#Benedictum#
 31502#Benedictum#
@@ -681,12 +701,33 @@
 31521#Recuperatio#
 31522#Recuperatio#
 31523#Recuperatio#
+31525#Endurance#
+31526#Endurance#
+31527#Endurance#
+31528#Endurance#
+31530#Safety#
+31531#Safety#
+31532#Safety#
+31533#Safety#
+31535#Frosty#
+31536#Frosty#
+31537#Frosty#
+31538#Frosty#
+31540#Angelus#
+31541#Angelus#
+31542#Angelus#
+31543#Angelus#
+31544#Angelus#
+31545#Provocative#
+31546#Provocative#
+31547#Provocative#
+31548#Provocative#
 31650#Capacitativo#
 31651#Distendido#
 31652#Tensado#
 31653#Maximizadora#
 31654#Amplificadora#
-31655#Intensificadora#
+31655#Intensificador#
 31656#Potenciadora#
 31700#Invocador#
 31701#Invocador#
@@ -720,6 +761,26 @@
 31736#Invocador#
 31737#Invocador#
 31738#Invocador#
+31740#Invocador#
+31741#Invocador#
+31742#Invocador#
+31743#Invocador#
+31745#Invocador#
+31746#Invocador#
+31747#Invocador#
+31748#Invocador#
+31750#Invocador#
+31751#Invocador#
+31752#Invocador#
+31753#Invocador#
+31755#Invocador#
+31756#Invocador#
+31757#Invocador#
+31758#Invocador#
+31760#Invocador#
+31761#Invocador#
+31762#Invocador#
+31763#Invocador#
 31800#Vitalis#
 31801#Vitalis#
 31802#Vitalis#
@@ -762,11 +823,35 @@
 31846#de Soltura Mágica#
 31847#de Soltura Mágica#
 31848#de Soltura Mágica#
-31849#de Celeridad#
 31850#de Celeridad#
 31851#de Celeridad#
 31852#de Celeridad#
-31853#de Velocidad#
-31854#de Velocidad#
+31853#de Celeridad#
 31855#de Velocidad#
 31856#de Velocidad#
+31857#de Velocidad#
+31858#de Velocidad#
+31860#de Críticos#
+31861#de Críticos#
+31862#de Críticos#
+31863#de Críticos#
+31865#Vorpalino#
+31866#Vorpalino#
+31867#Vorpalino#
+31868#Vorpalino#
+31870#Buscador#
+31871#Buscador#
+31872#Buscador#
+31873#Buscador#
+31875#de Ataque#
+31876#de Ataque#
+31877#de Ataque#
+31878#de Ataque#
+31880#de Defensa#
+31881#de Defensa#
+31882#de Defensa#
+31883#de Defensa#
+31885#de Aprendizaje#
+31886#de Aprendizaje#
+31887#de Aprendizaje#
+31888#de Aprendizaje#

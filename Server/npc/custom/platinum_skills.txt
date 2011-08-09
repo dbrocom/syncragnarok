@@ -18,12 +18,12 @@
 //=2.6 Fixed 2nd advanced classes not being able to get their advanced skills. [Ancyker]
 //=2.7 Rewrote to give all correct skills to all proper classes. [Paradox924X]
 //===========================================================================================
-prontera,128,200,6	script	Platinum Skill NPC	94,{
+sec_in01,167,25,7	script	Platinum Skill NPC	94,{
 	mes "[Platinum Skill NPC]";
 	mes "Puedo darte las habilidades especiales disponibles para tu clase";
 	mes "Querrías estas habilidades ahora?";
 	next;
-	if (select("Yes Please:No") == 2) {
+	if (select("Sí, por favor:No") == 2) {
 		mes "[Platinum Skill NPC]";
 		mes "Ten un buen dia... >.>";
 		close;

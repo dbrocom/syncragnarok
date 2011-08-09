@@ -111,10 +111,10 @@ S_MakeDye:
 	switch(getarg(0)) {
 	case 1:
 		mes "Mmm... Necesito Pigmento Rojo, 1 Counteragent, y 1 Medicine Bowl para crear un tinte Rojo. El precio es de sólo 3500 zeny.";
-		setarray .@item[0], 30403, 973, 71344;
+		setarray .@item[0], 30403, 973, 7134;
 		setarray .@count[0], 1,   1,   1;
 		set .@cost,3500;
-		set .@dyestuff,973;
+		set .@dyestuff,975;
 		break;
 	case 2:
 		mes "Mmm... Necesito Pigmento Amarillo, 1 Mixture, y 1 Medicine Bowl para crear un tinte Amarillo. El precio es de sólo 3500 zeny.";
@@ -160,7 +160,7 @@ S_MakeDye:
 		break;
 	case 8:
 		mes "Mmm... Necesito Pigmento Negro, 1 Mixture, 1 Counteragent, y 1 Medicine Bowl.  El coste ascenderá a 5000 zeny.";
-		setarray .@item[0], 30407, 973, 974, 7134;
+		setarray .@item[0], 30406, 973, 974, 7134;
 		setarray .@count[0], 1,   1,   1,   1;
 		set .@cost,5000;
 		set .@dyestuff,983;

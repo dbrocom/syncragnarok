@@ -1,0 +1,90 @@
+//===== Custom eAthena Script =======================================
+//= Derefiner
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Descripción =================================================
+//= NPC que te permite bajarle upgrades a cualquier equipo.
+//===== Version =====================================================
+//= 1.2
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//= 1.1 - Añadida compensatoria por downgrade
+//= 1.2 - Añadida compensatoria diferente para equipo > +10
+//===================================================================
+
+einbech,89,136,5	script	Derefiner	963,{
+
+	set .@npc$,"[ Derefiner ]";
+	mes .@npc$;
+	mes "¡Hola! ¿Te interesaría bajarle el upgrade a algún item?";
+	next;
+
+	// the next line "setarray" is to store the item ID of the character. Because player with their own hexed client ( aka. hacker ) might change equipment during the talk to npc
+	setarray @equip[1],getequipid(1),getequipid(2),getequipid(3),getequipid(4),getequipid(5),getequipid(6),getequipid(7),getequipid(8),getequipid(9),getequipid(10);
+
+	setarray .@position$[1], "Cabeza","Cuerpo","Mano Izquierda","Mano derecha","Túnica","Calzado","Accesorio 1","Accesorio 2","Cabeza 2","Cabeza 3";
+	set .@menu$,"";
+	for( set .@i,1; .@i <= 10; set .@i,.@i+1 )
+	{
+		if( getequipisequiped(.@i) )
+			set .@menu$, .@menu$ + .@position$[.@i] + "-" + "[" + getequipname(.@i) + "]";
+
+		set .@menu$, .@menu$ + ":";
+	}
+	set .@part,select(.@menu$);
+
+	if ( !getequipisequiped(.@part) ) {
+		mes .@npc$;
+		mes "No llevas nada equipado ahí...";
+		close;
+	}
+	if ( getequiprefinerycnt(.@part) > 20 || getequiprefinerycnt(.@part) == 0 ) {
+		mes .@npc$;
+		mes "Este item no puede ser downgradeado.";
+		close;
+	}
+	if ( getequipid(.@part) != @equip[.@part] ) {		//	now we make a check on them ... /GG
+		mes .@npc$;
+		mes "¿Te piensas que soy estúpido?";
+		mes "¡¡Has cambiado el item!!";
+		mes "¡¡ Piérdete !!";
+		close;
+	}
+
+	switch(getequipweaponlv(.@part)){
+		case 0:
+		case 5:
+			if ( getequiprefinerycnt(.@part) > 10 ){
+				getitem 985,1;
+			}else{
+				getitem 757,1;
+			}
+			break;
+		default:
+			if ( getequiprefinerycnt(.@part) > 10 ){
+				getitem 984,1;
+			}else{
+				getitem 756,1;
+			}
+			break;
+	}
+	atcommand "@refine "+ .@a[@menu] +" -1";
+	mes .@npc$;
+	mes "Tu item a sufrido un downgrade exitoso.";
+	close;
+}
+

@@ -812,6 +812,7 @@ mal_dun01
 iz_dun05
 evt_mobroom
 alde_tt03
+dic_dun03
 //mjolnir_04_1
 //evt_swar_b
 //evt_swar_r
@@ -940,6 +941,7 @@ vip_ice
 vip_lou
 vip_orc
 vip_ayo
+vip_bybalan
 
 // ==== BG Duplicados ====
 rush_cas01
