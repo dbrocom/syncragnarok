@@ -20,13 +20,13 @@
 
 alberta,97,51,0	script	Fabian	84,{
 	mes "[Fabian]";
-	mes "Man... When you travel all around the world, you'll hear of some crazy things.";
+	mes "Colega... cuando viajas por todo el mundo, escuchas cosas realmente increibles.";
 	next;
 	mes "[Fabian]";
-	mes "Once, I heard that there are Cards which contain the power of monsters. If someone happens to get their hands on a card, they'll be able to use that monster's power.";
+	mes "Una vez me hablaron de unas cartas que contienen el poder de los monstruos. Dicen que si alguien consigue una, es capaz de utilizar el poder de ese monstruo.";
 	next;
 	mes "[Fabian]";
-	mes "I'm guessing it's some sort of fad or scam, where they make you collect all the cards or whatever. I mean, how can a card really hold the power of a monster?!";
+	mes "Supongo que será algún tipo de estafa o algo así, para hacer que consigas todas las cartas. Porque la verdad, ¡¿como puede una carta llevar dentro el poder de un monstruo?!";
 	next;
 	mes "[Fabian]";
 	mes "En serio...";
@@ -40,25 +40,25 @@ alberta,53,39,0	script	Steiner	100,{
 	mes "joven aventurero!";
 	next;
 	mes "[Steiner]";
-	mes "Pardon me if I seem distracted. I'm milling about, trying to make a plan. You see, I hear that there is a store in Geffen that sells armor that is resistant to magic.";
+	mes "Perdóname si parezco distraido. Estoy concentrado, planeando algo. Verás, he escuchado que hay una tienda en Geffen que vende armaduras resistentes a la magia.";
 	next;
 	mes "[Steiner]";
-	mes "If I buy a lot of them in bulk, and then resell them here for a higher price...";
+	mes "Si comprara una gran cantidad de ellas, y las vendiera por aquí a un precio más alto...";
 	close;
 }
 
 alberta,20,183,0	script	Chad	49,{
 	mes "[Chad]";
-	mes "People say the legendary weapon Gungnir never misses its target. I wonder if it's possibly true...";
+	mes "La gente dice que el arma legendaria Gungnir nunca falla contra un objetivo. Me pregunto si será verdad...";
 	next;
 	mes "[Chad]";
-	mes "People also say that babies are assembled by the storks before delivery, girls dig guys who act like jerks, and that Santa Claus exists! But only in Lutie.";
+	mes "También se dice que los niños los traen las cigueñas, que las chicas solo buscan hombres que se comportan como idiotas, ¡y que Santa Claus existe! Pero solo en Lutie.";
 	next;
 	mes "[Chad]";
 	mes "Me pregunto...";
 	mes "Si es posible ";
 	mes "que alguna de esas cosas";
-	mes "sea verdad...";
+	mes "sea cierta...";
 	close;
 }
 
@@ -71,34 +71,34 @@ alberta,131,139,2	script	Drunken Old Man	54,{
 	switch(select("Say nothing.","Leave him alone.")) {
 		case 1:
 			mes "[Deagle]";
-			mes "Hahahaha ^666666*hiccup*^000000... You've got some nerve. I may look worthless now, but I used to be a sailor on the 'Going Mary.'";
+			mes "Jajajaja ^666666*hiccup*^000000... Tienes pinta de ser valiente. Puede que parezca un cobarde ahora, pero hace años fui marinero del 'Going Mary.'";
 			next;
 			switch(select("Never heard of it.","Really? No kidding!")) {
 				case 1:
 					mes "[Deagle]";
-					mes "Never heard of it?! Everybody knows th'notorious pirate ship 'Going Mary!' ^666666*Hiccup~*^000000";
+					mes "¡¿Nunca escuchaste hablar de él?! Todo el mundo conoce el famoso barco pirata 'Going Mary!' ^666666*Hiccup~*^000000";
 					next;
 					mes "[Deagle]";
-					mes "Ah~ The ol'days. If only... If only we hadn't run into that STORM...^666666*hiccup*^000000";
+					mes "Ah~ Viejos tiempos. Sí... si no hubieramos caido en aquella TORMENTA...^666666*hiccup*^000000";
 					next;
 					mes "[Deagle]";
-					mes "AH~ Captain. I miss our cap'n more than anything... No foe survived before cap'n's sword.";
+					mes "AH~ Capitán. Echo mucho de menos a nuestro capitán... Ningún enemigo sobrevivió a su espada.";
 					close;
 				case 2:
 					mes "[Deagle]";
-					mes "That's right! NOBODY meshes with the crew of the 'Going Mary!' And nobody can beat out cap'n in a sword fight!";
+					mes "¡Es cierto! ¡NADIE se metía con la tripulación del 'Going Mary!' ¡Y nadie podía vencer a nuestro capitán en una pelea de espadas!";
 					next;
 					mes "[Deagle]";
-					mes "CAPTAIN~!!! ^666666*HICCUP~*^000000 He would swing his sword like this, then... THEN!!";
+					mes "¡¡CAPITÁN~!!! ^666666*HICCUP~*^000000 El movería su espada de aquella forma, y entonces...";
 					next;
 					mes "[Deagle]";
-					mes "The bastard the captain was fighting, and anyone of his friends near him, were surrounded in flame!";
+					mes "¡Cuando el cabrón del capitán luchaba, cualquier compañero que estuviera cerca de él se rodeaba de llamas!";
 					next;
 					mes "[Deagle]";
-					mes "Man, that sword must have had some sort of mysterious power, or the captain was just that good...!";
+					mes "Colega, esa espada debía tener algún tipo de poder misterioso, ¡O era el capitán que era así de bueno...!";
 					next;
 					mes "[Deagle]";
-					mes "Phew~~ ^666666*Sob* *Sob...*^000000 God, I miss everyone! Now I'm depressed! Please, go away now.";
+					mes "Buf~~ ^666666*Sollozo* *Sollozo...*^000000 ¡Dios, los echo de menos a todos! ¡Estoy deprimido! Por favor, vete ya.";
 					close;
 			}
 		case 2:
@@ -112,26 +112,26 @@ alberta,131,139,2	script	Drunken Old Man	54,{
 alberta,58,80,2	script	Shakir	99,{
 	mes "[Shakir]";
 	if (rand(2)) {
-		mes "We Merchants have our own negotiating skill when we sell goods. This skill can get us more money than when other people sell goods.";
+		mes "Los Merchants tenemos nuestra propia skill de negociación para vender items. Esta skill nos permite obtener mas dinero que otra gente vendiéndolos.";
 		next;
 		mes "[Shakir]";
-		mes "It's more than just yelling 'You'll have to give more money please!' You need to have charisma, and master rhetoric!";
+		mes "Es más complicado que ir por ahí diciendo simplemente '¡Tendrás que darme más dinero!'. Necesitas tener carisma, ¡Y ser un maestro de la retórica!";
 		next;
 		mes "[Shakir]";
-		mes "We can get up to 24 % more zeny with this incredible skill. But remember to train hard to acquire it!!";
+		mes "Conseguimos hasta un 24 % mas de zeny con esta increible skill. ¡¡Entrena mucho para conseguirla!!";
 	} else {
 		mes "Los Merchants podemos ";
 		mes "abrir tiendas en";
 		mes "cualquier parte para hacer negocios.";
 		next;
 		mes "[Shakir]";
-		mes "With the Discount skill, we can buy goods really cheap from the stores in towns and load them into the cart we rent.";
+		mes "Con la skill Discount, compramos items a muy bajo precio en las tiendas de los pueblos y los cargamos en los cart que alquilamos.";
 		next;
 		mes "[Shakir]";
-		mes "Then afterwards, we can travel anywhere, and sells our goods to make a profit!";
+		mes "Luego viajamos a donde haga falta, ¡Y los vendemos para obtener beneficio!";
 		next;
 		mes "[Shakir]";
-		mes "This way, business is more convenient and safe. Don't fall asleep, although it's too easy to do that.";
+		mes "De esa forma, los negocios salen más rentables.";
 	}
 	close;
 }
