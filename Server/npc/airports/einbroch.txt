@@ -18,19 +18,16 @@
 
 
 airport,126,43,4	script	Airport Staff#01::AirportE	90,{
-	mes "[Airport Staff]";
-	mes "Bienvenido al Aeropuerto.";
-	mes "¿Cómo le puedo ayudar?";
+	mes "[Personal del Aeropuerto]";
+	mes "Bienvenid"+(Sex?"o":"a")+" al Aeropuerto.";
+	mes "¿En qué puedo ayudarte?";
 	next;
-	if (select("Board the Airship:Cancel") == 1) {
-		mes "[Airport Staff]";
-		mes "La tarifa de abordaje";
-		mes "es 1,200 zeny, pero si tiene";
-		mes "un Boleto Gratis Para Dirigible,"; 
-		mes "no tendrá que pagar la tarifa. ¿Desea";
-		mes "abordar la Aeronave?";
+	if (select("Quiero subir al Dirigible:Nada, gracias") == 1) {
+		mes "[Personal del Aeropuerto]";
+		mes "Embarcar en el Dirigible cuesta 1,200 zeny, aunque si tienes un Free Ticket for Flyship te saldrá gratis.";
+		mes "¿Quieres subir?";
 		next;
-		if (select("Yes:No") == 1) {
+		if (select("Sí:No") == 1) {
 			if(countitem(7311) > 0) {
 				delitem 7311,1;
 				warp "airport",148,51;
@@ -41,14 +38,13 @@ airport,126,43,4	script	Airport Staff#01::AirportE	90,{
 				warp "airport",148,51;
 				close;
 			}
-			mes "[Airport Staff]";
-			mes "No tiene suficiente zeny.";
+			mes "[Personal del Aeropuerto]";
+			mes "No tienes suficiente dinero.";
 			close;
 		}
 	}
-	mes "[Airport Staff]";
-	mes "Gracias y que";
-	mes "tenga un buen día.";
+	mes "[Personal del Aeropuerto]";
+	mes "Gracias y ten un buen día.";
 	close;
 }
 
@@ -56,30 +52,22 @@ airport,143,43,4	duplicate(AirportE)	Airport Staff#02	90
 airport,156,43,4	duplicate(AirportE)	Airport Staff#03	90
 
 airport,126,51,4	script	Airport Staff#04::AirportE2	90,{
-	mes "[Airport Staff]";
-	mes "Bienvenido.";
-	mes "Por favor, diríjase por";
-	mes "este camino para abordar el avión.";
+	mes "[Personal del Aeropuerto]";
+	mes "Bienvenid"+(Sex?"o":"a")+"~";
+	mes "Por favor, sal por el centro de esta sala para subir al Dirigible.";
 	next;
-	if (select("Exit to Main Terminal:Cancel") == 1) {
-		mes "[Airport Staff]";
-		mes "Si abandona la";
-		mes "Terminal Principal,";
-		mes "tendrá que pagar la tarifa";
-		mes "nuevamente para abordar";
-		mes "el Dirigible. ¿Está seguro";
-		mes "de que desea salir?";
+	if (select("Salir de aquí:Cancelar") == 1) {
+		mes "[Personal del Aeropuerto]";
+		mes "Si sales de la zona de embarque, tendrás que pagar el peaje otra vez para poder subir al Dirigible.";
+		mes "¿Estás segur"+(Sex?"o":"a")+" de que quieres salir?";
 		next;
-		if (select("Yes:No") == 1) {
+		if (select("Sí:No") == 1) {
 			warp "airport",142,40;
 			close;
 		}
 	}
-	mes "[Airport Staff]";
-	mes "Perfecto, muchas gracias";
-	mes "por su preferencia";
-	mes "y espero que tenga";
-	mes "un vuelo placentero.";
+	mes "[Personal del Aeropuerto]";
+	mes "Gracias por tu patrocinio y esperamos que tengas un agradable vuelo~";
 	close;
 }
 
@@ -87,20 +75,12 @@ airport,143,51,4	duplicate(AirportE2)	Airport Staff#05	90
 airport,156,51,4	duplicate(AirportE2)	Airport Staff#06	90
 
 einbroch,94,267,4	script	Airship Staff#07	91,{
-	mes "[Airship Staff]";
-	mes "Bienvenido al";
-	mes "Aeropuerto de Einbroch";
-	mes "Por favor use esta puerta para";
-	mes "abordar la Aeronave con escalas en";
-	mes "Lighthalzen y Yuno en";
-	mes "la República de Schwarzwald.";
+	mes "[Personal del Dirigible]";
+	mes "Bienvenid"+(Sex?"o":"a")+" al Aeropuerto de Einbroch.";
+	mes "Entra por la puerta de aquí al lado para viajar en el Dirigible hacia Lighthalzen y Yuno en la República Schwaltzvalt.";
 	next;
-	mes "[Airship Staff]";
-	mes "No obstante, si Einbroch es";
-	mes "su destino final,";
-	mes "por favor baje por las escaleras";
-	mes "y pídale al Arrival Staff que lo guíe";
-	mes "al terminal principal. Gracias,";
-	mes "y que disfrute su viaje.";
+	mes "[Personal del Dirigible]";
+	mes "Si por el contrario tu destino es Einbroch, por favor baja las escaleras y habla con Arrival Staff para que te saque de la zona de embarque.";
+	mes "Gracias y disfruta de tu viaje.";
 	close;
 }
