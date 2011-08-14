@@ -17,19 +17,16 @@
 
 
 lhz_airport,126,43,4	script	Airport Staff#1::AirportL	90,{
-	mes "[Airport Staff]";
-	mes "Bienvenido al Aeropuerto.";
-	mes "¿En qué puedo ayudarle?";
+	mes "[Personal del Aeropuerto]";
+	mes "Bienvenid"+(Sex?"o":"a")+" al Aeropuerto.";
+	mes "¿En qué puedo ayudarte?";
 	next;
-	if (select("Board the Airship:Cancel") == 1) {
-		mes "[Airport Staff]";
-		mes "La tarifa de abordaje";
-		mes "es 1.200 zeny, pero si tiene";
-		mes "un Free Ticket for Airship,"; 
-		mes "no tendra que pagar la tarifa. ¿Desea";
-		mes "abordar la Aeronave?";
+	if (select("Quiero subir al Dirigible:Nada, gracias") == 1) {
+		mes "[Personal del Aeropuerto]";
+		mes "Embarcar en el Dirigible cuesta 1,200 zeny, aunque si tienes un Free Ticket for Flyship te saldrá gratis.";
+		mes "¿Quieres subir?";
 		next;
-		if (select("Yes:No") == 1) {
+		if (select("Sí:No") == 1) {
 			if(countitem(7311) > 0) {
 				delitem 7311,1;
 				warp "lhz_airport",148,51;
@@ -40,14 +37,13 @@ lhz_airport,126,43,4	script	Airport Staff#1::AirportL	90,{
 				warp "lhz_airport",148,51;
 				close;
 			}
-			mes "[Airport Staff]";
-			mes "No tiene suficiente zeny";
+			mes "[Personal del Aeropuerto]";
+			mes "No tienes suficiente dinero.";
 			close;
 		}
 	}
-	mes "[Airport Staff]";
-	mes "Gracias y";
-	mes "que tenga un buen día.";
+	mes "[Personal del Aeropuerto]";
+	mes "Gracias y ten un buen día.";
 	close;
 }
 
@@ -55,30 +51,22 @@ lhz_airport,143,43,4	duplicate(AirportL)	Airport Staff#2	90
 lhz_airport,156,43,4	duplicate(AirportL)	Airport Staff#3	90
 
 lhz_airport,126,51,4	script	Airport Staff#4::AirportL2	90,{
-	mes "[Airport Staff]";
-	mes "Bienvenido.";
-	mes "Por favor, siga por";
-	mes "aquí para abordar la Aeronave.";
+	mes "[Personal del Aeropuerto]";
+	mes "Bienvenid"+(Sex?"o":"a")+"~";
+	mes "Por favor, sal por el centro de esta sala para subir al Dirigible.";
 	next;
-	if (select("Exit to Main Terminal:Cancel") == 1) {
-		mes "[Airport Staff]";
-		mes "Sí abandona la";
-		mes "Terminal Principal, tendrá que";
-		mes "pagar nuevamente la tarifa ";
-		mes "para abordar ";
-		mes "la Aeronave. ¿Está seguro que";
-		mes "desea salir?";
+	if (select("Salir de aquí:Cancelar") == 1) {
+		mes "[Personal del Aeropuerto]";
+		mes "Si sales de la zona de embarque, tendrás que pagar el peaje otra vez para poder subir al Dirigible.";
+		mes "¿Estás segur"+(Sex?"o":"a")+" de que quieres salir?";
 		next;
-		if (select("Yes:No") == 1) {
+		if (select("Sí:No") == 1) {
 			warp "lhz_airport",142,40;
 			close;
 		}
 	}
-	mes "[Airport Staff]";
-	mes "De acuerdo, muchas gracias";
-	mes "por su preferencia";
-	mes "y espero que tenga";
-	mes "un viaje placentero.";
+	mes "[Personal del Aeropuerto]";
+	mes "Gracias por tu patrocinio y esperamos que tengas un agradable vuelo~";
 	close;
 }
 
