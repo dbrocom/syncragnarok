@@ -28,8 +28,8 @@ himinn,49,72,0	warp	sign04a	1,1,himinn,49,63
 um_in,33,18,0	warp	sign05	1,1,um_in,89,11
 um_in,89,9,0	warp	sign05a	1,1,um_in,33,16
 
-um_dun01,132,90,0	warp	sign06	1,1,um_in,12,18
-um_in,10,18,0	warp	sign06a	1,1,um_dun01,129,90
+umbala,122,116,0	warp	sign06	1,1,um_in,12,18
+um_in,10,18,0	warp	sign06a	1,1,umbala,121,120
 
 que_sign01,113,132,0	warp	sign07	1,1,nif_in,117,173
 

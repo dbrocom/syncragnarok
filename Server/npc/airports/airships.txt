@@ -591,7 +591,7 @@ airplane_01,50,66,5	script	Apple Merchant#airplane	86,{
 		break;
 	case 2:
 		mes "[Meltz]";
-		mes "Vale, necesito ^FF00003 Manzanas y una 1 Empty Bottle^000000 para hacerte un Zumo de Manzana.";
+		mes "Vale, necesito ^FF00003 Apple y una 1 Empty Bottle^000000 para hacerte un Zumo de Manzana.";
 		mes "¿Quieres continuar?";
 		next;
 		switch(select("Sí:No")) {
@@ -996,13 +996,13 @@ y_airport,141,63,4	script	Airport Staff#Izl	91,{
 	next;
 	if (select("Sí:No") == 1) {
 		mes "[Personal del Dirigible]";
-	mes "Gracias y ten un buen día";
+		mes "Gracias y ten un buen día.";
 		close2;
 		warp "yuno",50,240;
 		end;
 	}
 	mes "[Personal del Dirigible]";
-	mes "Gracias y ten un buen día";
+	mes "Gracias y ten un buen día.";
 	close;
 }
 
@@ -1191,7 +1191,7 @@ L_Table3:
 	next;
 	if(@tablesub > 12) {
 		mes "["+getarg(0)+"]";
-		mes "¡Eh? He sacado un ^0000FF"+@table3+"^000000, haciendo un total de ^0000FF"+@tablesub+"^000000.";
+		mes "¡¿Eh?! He sacado un ^0000FF"+@table3+"^000000, haciendo un total de ^0000FF"+@tablesub+"^000000.";
 		mes "Me duele tener que decir esto, pero me arriesgué y perdí.";
 		mes "¡Toma tu victoria antes de que me ponga a llorar, "+strcharinfo(0)+"~!";
 		close2;
@@ -1206,9 +1206,9 @@ L_Table3:
 		getitem 512,@amount*2;
 		end;
 	} else if(@tablesub > @playersub) {
-	mes "He sacado un ^0000FF"+@table3+"^000000, haciendo un total de ^0000FF"+@tablesub+"^000000. He superado tu ^FF0000"+@playersub+"^000000.";
-	mes "Lo siento "+strcharinfo(0)+", inténtalo la próxima vez.";
-	close;
+		mes "He sacado un ^0000FF"+@table3+"^000000, haciendo un total de ^0000FF"+@tablesub+"^000000. He superado tu ^FF0000"+@playersub+"^000000.";
+		mes "Lo siento "+strcharinfo(0)+", inténtalo la próxima vez.";
+		close;
 	} else if(@tablesub == @playersub) {
 		//Result = tie, --Improvised--
 		mes "He sacado un ^0000FF"+@table3+"^000000, haciendo un total de ^0000FF"+@tablesub+"^000000.";

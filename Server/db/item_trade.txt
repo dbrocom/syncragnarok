@@ -492,7 +492,7 @@
 // PC-Cafe Authoritative Badge
 12262,123,99	// Inspector_Certificate_
 
-12263,91,99	// Comp_Battle_Manual
+12263,123,99	// Comp_Battle_Manual
 12264,91,99	// Comp_Bubble_Gum
 12265,91,99	// Comp_Insurance
 

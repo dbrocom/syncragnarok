@@ -21,3 +21,12 @@ bra_in01,50,145,0	warp	bra_in01_bra_in01#2	1,1,bra_in01,81,143
 bra_in01,79,142,0	warp	bra_in01_bra_in01#3	1,1,bra_in01,47,144
 bra_in01,50,171,0	warp	bra_in01_bra_in01#4	1,1,bra_in01,82,168
 bra_in01,79,169,0	warp	bra_in01_bra_in01#5	1,1,bra_in01,46,170
+
+bra_in01,31,28,0	warp	bra_in01_bra_in01#6	1,1,bra_in01,19,69
+bra_in01,25,70,0	warp	bra_in01_bra_in01#7	1,1,bra_in01,31,23
+
+bra_in01,8,66,0	warp	bra_in01_bra_in01#8	1,1,bra_in01,153,23
+bra_in01,157,23,0	warp	bra_in01_bra_in01#9	1,1,bra_in01,11,66
+
+bra_in01,38,7,0	warp	bra_in01_bra_in01#10	1,1,brasilis,274,146
+brasilis,274,152,0	warp	bra_in01_bra_in01#11	1,1,bra_in01,38,11

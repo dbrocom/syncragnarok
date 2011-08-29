@@ -1,0 +1,28 @@
+ 40:--- CHARACTER CMD ---
+ 40:#statsall <nombre del personaje> - Pone todos los estados de un personaje al máximo.
+ 40:#itemlist <nombre del personaje> - Muestra todos los objetos de un personaje.
+ 40:#storagelist <nombre del personaje> - Muestra todos los objetos del almacén de un personaje.
+ 40:#stats <nombre del personaje> - Muestra los estados de un personaje.
+ 60:#option <nombre del personaje> <param1> <param2> <param3> - Funciona como el comando @option pero sobre otro personaje.
+ 50:#mountpeco <nombre del personaje> - Da/elimina un Peco al personaje (Se requiere ser de la clase correcta, pero no la habilidad).
+ 50:#petrename <nombre del personaje> - Permite a un personaje renombrar a su mascota.
+ 60:#save <nombre del personaje> <mapa> <x> <y> - Cambia el punto de guardado de un personaje.
+ 60:#baselvl/#blvl <nombre del personaje> <#> - Cambia el nivel base de un personaje.
+ 60:#joblvl/#jlvl <nombre del personaje> <#> - cambia el nivel de clase de un personaje.
+ 60:#job/#jobchange <nombre del personaje> <job ID> - Cambia la clase del personaje seleccionado.
+ 60:#zeny <nombre del personaje> <cantidad> - Da/Quita los zenys a un personaje.
+ 60:#cash <nombre del personaje> <cantidad> - Da/Quita los puntos de canjeo a un personaje.
+ 60:#points <nombre del personaje> <cantidad> - Da/Quita los puntos Kafra a un personaje.
+ 60:#stpoint <nombre del personaje> <cantidad> - Da/Quita puntos de estado a un personaje.
+ 60:#skpoint <nombre del personaje> <cantidad> - Da/Quita puntos de habilidades a un personaje
+ 60:#skreset <nombre del personaje> - Resetea las habilidades de un personaje.
+ 60:#streset <nombre del personaje> - Resetea los estados de un personaje.
+ 60:#reset <nombre del personaje> - Resetea los estados y habilidades de un personaje.
+ 60:#questskill <nombre del personaje> <#> - Da a un personaje la habilidad de quest.
+ 60:#lostskill <nombre del personaje> <#> - Quita a un personaje la habilidad de quest.
+ 60:#delitem <nombre del personaje> <nombre_o_ID> <cantidad> - Elimina los objetos de un personaje.
+ 50:#model <nombre del personaje> <tipo_de_pelo> <color_de_pelo> <color_de_ropa> - Cambia la apariencia de un personaje.
+ 60:#disguise <nombre del personaje> <nombre_o_ID> - Cambia la apariencia de un personaje por la de un monstruo.
+ 60:#undisguise <nombre del personaje> - Cancela el cambio de apariencia.
+ 60:#changesex <nombre del personaje> - Cambia el sexo del personaje (y de toda la cuenta)
+ 60:#warp/#rura+ <nombre del personaje> <mapa> <x> <y> - Teletransporta a un personaje a esa localización.

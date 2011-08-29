@@ -97,7 +97,7 @@ brasilis,278,137,3	script	Signpost#bra5	858,{
 
 brasilis,137,77,5	script	Ice-Cream Maker	85,{
 	mes "[Ice Cream Maker]";
-	mes "Acércate~acércate~";
+	mes "Acércate~ acércate~";
 	mes "El helado es el aperitivo perfecto para los días de calor~";
 	mes "Son sólo ^3355FF100 Zeny^000000~";
 	mes "Helado~";

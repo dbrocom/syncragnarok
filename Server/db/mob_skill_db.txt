@@ -5736,7 +5736,7 @@
 2068,Boitata@NPC_SUMMONSLAVE,idle,196,5,10000,1000,30000,no,self,slavele,1,2082,,,,,, 
 2068,Boitata@NPC_SUMMONSLAVE,chase,196,5,10000,1000,30000,no,self,slavele,1,2082,,,,,, 
 2068,Boitata@NPC_CALLSLAVE,attack,352,1,10000,0,30000,yes,self,always,0,,,,,,, 
-2068,Boitata@NPC_CALLSLAVE,idle,352,1,10000,0,30000,yes,self,always,0,,,,,,, 
+2068,Boitata@NPC_CALLSLAVE,idle,352,1,10000,0,30000,yes,self,always,0,,,,,,,
 2069,Iara@NPC_WATERATTACK,attack,184,3,500,0,5000,no,target,always,0,,,,,,6, 
 2069,Iara@PR_LEXDIVINA,attack,76,5,500,1000,5000,yes,target,always,0,,,,,,2, 
 2069,Iara@PR_LEXDIVINA,chase,76,5,500,1000,5000,yes,target,always,0,,,,,,2, 
