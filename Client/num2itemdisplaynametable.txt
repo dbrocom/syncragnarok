@@ -7981,6 +7981,9 @@
 4476#Pinguicula Card#
 4477#Hell Appocalypse Card#
 
+18525#Hat#
+18602#Headgear#
+
 // CUSTOM
 30043#Hairband#
 30044#Mask#
