@@ -301,6 +301,7 @@ alberta,190,173,4	script	Phelix	85,{
 				case 2:
 					mes "[Phelix]";
 					mes "No te puedo dar más de 100 de cada vez, así que no me fastidies, ¿VALE? Si no quieres nada, pon '0'.";
+					mes "Ahora mismo, la cantidad máxima que puedes conseguir es de " + .@max + ", pero recuerda, 100 como máximo, ¿o acaso quieres que me rompa la espalda?";
 					input .@amount;
 					next;
 					mes "[Phelix]";

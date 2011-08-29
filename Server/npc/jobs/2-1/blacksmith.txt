@@ -331,7 +331,7 @@ L_AskQuestions:
 					mes "1. Cuál de las siguientes regiones no esta correctamente asociada";
 					mes "con su especialidad en Items?";
 					next;
-					if (select("Morroc - Thief Clothes:Alberta - Two Hand Axe:Comodo - Berserk Potion:Alberta - Swordmace") == 2)
+					if (select("Morroc - Thief Clothes:Alberta - Two Hand Axe:Comodo - Berserk Potion:Alberta - Swordmace") == 4)
 						set .@black_q,.@black_q+10;
 					mes "[Geschupenschte]";
 					mes "2. ¿Qué estado se puede";

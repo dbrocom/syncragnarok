@@ -2,13 +2,13 @@
 //
 // Structure of Database:
 // CastleID,MapName,CastleName,OnGuildBreakEventName(to abandon captured castles),Flag(reserved)
-//0,aldeg_cas01,Neuschwanstein,Agit#aldeg_cas01,1		// kRO : Noisyubantian
+0,aldeg_cas01,Neuschwanstein,Agit#aldeg_cas01,1		// kRO : Noisyubantian
 //1,aldeg_cas02,Hohenschwangau,Agit#aldeg_cas02,1	// kRO : Hohensyubangawoo
 //2,aldeg_cas03,Nuenberg,Agit#aldeg_cas03,1		// kRO : Nyirenverk
 //3,aldeg_cas04,Wuerzburg,Agit#aldeg_cas04,1		// kRO : Byirtsburi
 //4,aldeg_cas05,Rothenburg,Agit#aldeg_cas05,1		// kRO : Rotenburk
 //5,gefg_cas01,Repherion,Agit#gefg_cas01,1		// kRO : Reprion
-//6,gefg_cas02,Eeyolbriggar,Agit#gefg_cas02,1		// kRO : Yolbriger
+6,gefg_cas02,Eeyolbriggar,Agit#gefg_cas02,1		// kRO : Yolbriger
 //7,gefg_cas03,Yesnelph,Agit#gefg_cas03,1		// kRO : Isinlife
 //8,gefg_cas04,Bergel,Agit#gefg_cas04,1			// kRO : Berigel
 //9,gefg_cas05,Mersetzdeitz,Agit#gefg_cas05,1		// kRO : Melsedetsu
@@ -18,7 +18,7 @@
 //13,payg_cas04,Sacred Altar,Agit#payg_cas04,1		// kRO : Honglou
 //14,payg_cas05,Bamboo Grove Hill,Agit#payg_cas05,1	// kRO : Zhulinxian
 //15,prtg_cas01,Kriemhild,Agit#prtg_cas01,1		// kRO : Creamhilt
-//16,prtg_cas02,Swanhild,Agit#prtg_cas02,1		// kRO : Sbanhealt
+16,prtg_cas02,Swanhild,Agit#prtg_cas02,1		// kRO : Sbanhealt
 //17,prtg_cas03,Fadhgridh,Agit#prtg_cas03,1		// kRO : Lazrigees
 //18,prtg_cas04,Skoegul,Agit#prtg_cas04,1		// kRO : Squagul
 //19,prtg_cas05,Gondul,Agit#prtg_cas05,1		// kRO : Guindull

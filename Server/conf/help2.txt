@@ -1,0 +1,94 @@
+  0:Para usar un comando escríbelo en la ventana que escribes normalmente.
+  1:--- COMANDOS DE OBJETOS ---
+  1:@storage - Abre el almacén.
+ 40:@itemreset - Elimina todos tus objetos.
+ 50:@gstorage - Abre el almacén del gremio.
+ 60:@itemcheck - Revisa tus objetos con objetos autorizados.
+ 60:@idsearch <parte_del_nombre> - Busca todos los objetos que contengan parte_del_nombre
+ 60:@refine <posición del equipo> <+/- cantidad>
+ 60:@produce <nombre/ID del equipo> <elemento> <# de ellos>
+ 60:	Elemento: 0=Ninguno 1=Hielo 2=Tierra 3=Fuego 4=Viento
+ 60:	Puedes añadir 3 Star Crumbs y un elemento.
+ 60:@repairall - Repara todos los objetos del inventario.
+ 60:/item <nombre_del_objeto> - Te da el objeto deseado.
+ 60:@item <nombre/ID del objeto> <cantidad> - Te da la cantidad deseada del objeto.
+ 60:@item2 <nombre/ID del objeto> <cantidad> <indentificación> <mejora> <broken_flag> <Carta1> <Carta2> <Carta3> <Carta4> - Te da cantidad deseada del objeto.
+ 40: 
+ 40:--- COMANDOS DE PVP ---
+ 40:@pvpon - Activa el PVP en el mapa actual.
+ 40:@pvpoff - Desactiva el PVP en el mapa actual.
+ 40:@gvgon/@gpvpon - Activa el GVG en el mapa actual.
+ 40:@gvgoff/@gpvpoff - Desactiva el GVG en el mapa actual.
+ 60:@agitstart - Inicia la Guerra del Emperio.
+ 60:@agitend - Finaliza la Guerra del Emperio.
+  1: 
+  1:--- COMANDOS DE GRUPO ---
+  1:@party <nombre_del_grupo> - Crea un grupo.
+ 50:@guild <nombre_del_gremio> - Crea un gramio.
+ 60:@guildlvup/@guildlvlup <# de niveles> - Incrementa el nivel del gremio la cantidad deseada.
+ 60:@guildrecall <nombre/ID_del_gremio> - Teletransporta a todos los personajes del gremio conectados.
+ 60:@partyrecall <nombre/ID_del_grupo> - Teletransporta a todos los personajes del grupo conectados.
+  1: 
+  1:--- COMANDOS DE MASCOTAS ---
+  1:@petrename - Permite renombrar a uno mascota.
+ 10:@pettalk [Mensaje] - Hace hablar a tu mascota.
+ 40:@petfriendly <#> - Establece el nivel de amistad de la mascota (0-1000) 1000 = Máximo
+ 40:@pethungry <#> - Establece el nivel de hambre de la mascota (0-100) 100 = Máximo
+ 60:@hatch - Eclosiona un huevo de tu inventario.
+ 60:@makeegg <ID> - Da un huevo de mascota del monstruo de la ID especificada.
+ 20: 
+ 20:--- COMANDOS REMOTOS DE PERSONAJES ---
+ 20:@kick <nombre del jugador> - Expulsa al jugador especificado del servidor.
+ 40:@charkillable <nombre del dor> - Hace que el jugador pueda ser asesinado.
+ 60:@unjail/@discharge <nombre del jugador> - Saca al jugador de la cárcel.
+ 60:@kill <nombre del jugador> - Mata al jugador especificado.
+ 60:@chardropall <nombre del jugador> - Tira todos tus objetos al suelo.
+ 60:@charstoreall <nombre del jugador> - Guarda los objetos de todos los personajes en el almacén.
+ 60:/recall/@recall <nombre del jugador> - Teletransporta al jugador hasta tí.
+ 60:@revive <nombre del jugador> - Resucita al personaje.
+ 60:@charblock/@block <nombre del jugador> - Bloquea a un jugador.
+ 60:@charunblock/@unblock <nombre del jugador> - Desbloquea a un jugador.
+ 60:@charban/@ban/@banish/@charbanish <tiempo> <nombre> - Prohibe usar una cuenta temporalmente.
+ 60:	uso del tiemo: ajusta (+/- valor) y (y/a, m, d/j, h, mn, s)
+ 60:	Ejemplo: @ban +1m-2mn1s-6y jugador
+ 60:@charunban/@unban/@unbanish/@charunbanish <nombre> - Quita la prohibición de una cuenta.
+ 60:@jail <nombre del jugador> - Envía al jugador especificado a la cárcel.
+ 60:@trade <nombre del jugador> - Abre una ventana de intercambio con el jugador.
+ 80:@recallall - Teletransporta a todos los jugadores hacia tí.
+ 80:@doom - Mata a todos los jugadores no GM del servidor.
+ 80:@doommap - Mata a todos los jugadores no GM del mapa.
+ 80:@raise - Resucita a todos los personajes del servidor.
+ 80:@raisemap - Resucita a todos loes personajes del mapa.
+ 80: 
+ 80:--- COMANDOS DE AMBIENTE ---
+ 80:@night - Uso @option 00 16 00 sobre todos los personajes. Efecto oscuridad.
+ 80:@day - Uso @option 00 00 00 sobre todos los personajes.
+ 80:@skillon - Habilita el uso de habilidades en un mapa.
+ 80:@skilloff - Desactiva las habilidades en un mapa.
+ 99:@rain - Hace que llueva en todos los mapas.
+ 99:@snow - Hace que nieve en todos los mapas.
+ 99:@clouds - Hace que este nublado en todos los mapas.
+ 99:@clouds2 - Hace que este nublado en todos los mapas.
+ 99:@fog - Hace que haya niebla en todos los mapas.
+ 99:@fireworks - Hace que haya fuegos artificiales en todos los mapas.
+ 99:@sakura - Efecto sakura en todos los mapas.
+ 99:@leaves - Efecto otoño en todos los mapas.
+ 80: 
+ 80:--- COMANDOS DE ADMINISTRADOR ---
+ 80:@shownpc <nombre del NPC> - Habilita un NPC.
+ 80:@hidenpc <nombre del NPC> - Deshabilita un NPC.
+ 80:@loadnpc <dirección del script> - Carga un script.
+ 80:@unloadnpc <nombre del NPC> - Descarga un script.
+ 99:@adjgmlvl <nivel> <nombre del jugador> - Hace un ajuste temporal del nivel de GM de un jugador.
+ 99:@adjcmdlvl <nivel> <comando> - Hace un ajuste temporal del nivel de GM de un comando
+ 99:@kickall - Expulsa a todos los jugadores del servidor.
+ 99:@mapexit - Expulsa a todos los jugadores y cierra el map-server.
+ 99:@reloaditemdb - Recarga la base de datos de objetos.
+ 99:@reloadmobdb - Recarga la base de datos de objetos.
+ 99:@reloadskilldb - Recarga la base de datos de habilidades.
+ 99:@reloadscript - Recarga todos los scripts.
+ 99:@reloadgmdb - Recarga los niveles de GM.
+ 99: 
+ 99:@gat - Para depuración (para inspeccionar el gat)
+ 99:@packet - Para depuración (variedad de paquetes)
+100:@nuke <nombre del jugador> -
