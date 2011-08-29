@@ -22,7 +22,7 @@
 
 
 //Max distance from traders to enable a trade to take place.
-#define TRADE_DISTANCE 13
+#define TRADE_DISTANCE 12
 
 /*==========================================
  * Initiates a trade request.
@@ -372,7 +372,7 @@ void trade_tradeadditem(struct map_session_data *sd, short index, short amount)
 		return;
 	}
 
-	if( (item->bound == 1 || (item->bound == 2 && sd->status.guild_id != target_sd->status.guild_id)) && !pc_isGM(sd) && !pc_isGM(target_sd) )
+	if( (item->bound == 1 || (item->bound == 2 && sd->status.guild_id != target_sd->status.guild_id)) && (pc_isGM(sd) < battle_config.lowest_gm_level) && (pc_isGM(target_sd) < battle_config.lowest_gm_level) )
 	{ // Account/Guild Bound
 		if( item->bound == 1 )
 			clif_displaymessage (sd->fd, "Can't Trade. Account Bounded Item.");
@@ -583,7 +583,7 @@ void trade_tradecommit(struct map_session_data *sd)
 					pc_setglobalreg( tsd, "LastLootID", sd->status.inventory[n].nameid ); //Last lootet Item ID
 					pc_setglobalreg( tsd, "LastLootAmount", sd->deal.item[trade_i].amount ); //Last looted Item Amount
 					npc_event_doall_id( "OnLoot", tsd->bl.id );
-				} 
+				}
 				pc_delitem(sd, n, sd->deal.item[trade_i].amount, 1, 6);
 			} else
 				clif_additem(sd, n, sd->deal.item[trade_i].amount, 0);

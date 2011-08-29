@@ -41,8 +41,8 @@ enum E_MAPSERVER_ST
 #define LOOTITEM_SIZE 10
 #define MAX_MOBSKILL 50
 #define MAX_MOB_LIST_PER_MAP 128
-#define MAX_EVENTQUEUE 99
-#define MAX_EVENTTIMER 60
+#define MAX_EVENTQUEUE 90
+#define MAX_EVENTTIMER 32
 #define NATURAL_HEAL_INTERVAL 500
 #define MIN_FLOORITEM 2
 #define MAX_FLOORITEM START_ACCOUNT_NUM
@@ -246,8 +246,8 @@ enum {
 #define map_pvpevent(m) (map[m].flag.pvp_event && pvpevent_flag)
 
 // WoE Map Types
-#define map_blocked_woe(m) (agit_flag && map[m].flag.gvg && map[m].flag.gvg_castle && !(agit_flag&map[m].flag.woe_set))
-#define map_allowed_woe(m) (agit_flag && map[m].flag.gvg && map[m].flag.gvg_castle && (agit_flag&map[m].flag.woe_set))
+#define map_blocked_woe(m) (agit_flag && woe_set && map[m].flag.gvg && map[m].flag.gvg_castle && woe_set != map[m].flag.woe_set)
+#define map_allowed_woe(m) (agit_flag && map[m].flag.gvg && map[m].flag.gvg_castle && (!woe_set || woe_set == map[m].flag.woe_set))
 
 //This stackable implementation does not means a BL can be more than one type at a time, but it's 
 //meant to make it easier to check for multiple types at a time on invocations such as map_foreach* calls [Skotlex]
@@ -652,6 +652,7 @@ extern int autosave_interval;
 extern int minsave_interval;
 extern int save_settings;
 extern int agit_flag;
+extern int woe_set;
 
 // Ranking System
 extern int pvpevent_flag;

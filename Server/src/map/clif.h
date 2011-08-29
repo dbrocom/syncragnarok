@@ -440,7 +440,7 @@ int clif_hpmeter_sub(struct block_list *bl, va_list ap);
 
 // guild
 int clif_guild_created(struct map_session_data *sd,int flag);
-int clif_guild_belonginfo(struct map_session_data *sd,struct guild *g);
+void clif_guild_belonginfo(struct map_session_data *sd,struct guild *g);
 int clif_guild_masterormember(struct map_session_data *sd);
 int clif_guild_basicinfo(struct map_session_data *sd);
 int clif_guild_allianceinfo(struct map_session_data *sd);
@@ -472,7 +472,7 @@ int clif_guild_xy_remove(struct map_session_data *sd);
 int clif_bg_hp(struct map_session_data *sd);
 int clif_bg_xy(struct map_session_data *sd);
 int clif_bg_xy_remove(struct map_session_data *sd);
-int clif_bg_belonginfo(struct map_session_data *sd);
+void clif_bg_belonginfo(struct map_session_data *sd);
 int clif_visual_guild_id(struct block_list *bl);
 int clif_visual_emblem_id(struct block_list *bl);
 int clif_bg_emblem(struct map_session_data *sd, struct guild *g);

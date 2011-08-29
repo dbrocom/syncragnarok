@@ -12,7 +12,6 @@
 #include "battleground.h" // battleground_queue
 #include "itemdb.h" // MAX_ITEMGROUP
 #include "map.h" // RC_MAX
-#include "pc.h" // struct map_session_data
 #include "script.h" // struct script_reg, struct script_regstr
 #include "searchstore.h"  // struct s_search_store_info
 #include "status.h" // OPTION_*, struct weapon_atk
@@ -501,6 +500,7 @@ struct map_session_data {
 
 	// Bonus Drop Rate [WiseWarrior]
 	double drop_bonus;
+
 	int shadowform_id;
 	short shieldmdef;
 };

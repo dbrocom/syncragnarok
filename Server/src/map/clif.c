@@ -839,7 +839,6 @@ int clif_clearunit_area(struct block_list* bl, clr_type type)
 			type = 0;
 	}
 
-
 	WBUFW(buf,0) = 0x80;
 	WBUFL(buf,2) = bl->id;
 	WBUFB(buf,6) = type;
@@ -1341,8 +1340,13 @@ int clif_spawn(struct block_list *bl)
 				clif_specialeffect(bl,423,AREA);
 			else if(sd->state.size==1)
 				clif_specialeffect(bl,421,AREA);
-			if( sd->sc.count && sd->sc.data[SC_BANDING] )
-				clif_status_change(&sd->bl,SI_BANDING,1,9999,sd->sc.data[SC_BANDING]->val1,0,0);
+			if( sd->sc.count )
+			{
+				if( sd->sc.data[SC_BANDING] )
+					clif_status_change(&sd->bl,SI_BANDING,1,9999,sd->sc.data[SC_BANDING]->val1,0,0);
+				if( sd->sc.data[SC_ALL_RIDING] )
+					clif_status_change(&sd->bl,SI_ALL_RIDING,1,9999,0,0,0);
+			}
 			clif_sendauras((TBL_PC*)bl, AREA);
 		}
 		break;
@@ -4119,6 +4123,36 @@ void clif_storageclose(struct map_session_data* sd)
 }
 
 /*==========================================
+ * Display Riding when someone under this
+ * status change walk into your view range.
+ *------------------------------------------*/
+void clif_display_riding(struct block_list *dst, struct block_list *bl)
+{
+	unsigned char buf[32];
+
+	nullpo_retv(bl);
+	nullpo_retv(dst);
+
+	if( battle_config.display_status_timers )
+		WBUFW(buf,0) = 0x043f;
+	else
+		WBUFW(buf,0) = 0x0196;
+
+	WBUFW(buf,2) = SI_ALL_RIDING;
+	WBUFL(buf,4) = bl->id;
+	WBUFB(buf,8) = 1;
+	if( battle_config.display_status_timers )
+	{
+		WBUFL(buf,9) = 0;
+		WBUFL(buf,13) = 0;
+		WBUFL(buf,17) = 0;
+		WBUFL(buf,21) = 0;
+	}
+
+	clif_send(buf,packet_len(WBUFW(buf,0)),dst,SELF);
+}
+
+/*==========================================
  * PC表示
  *------------------------------------------*/
 static void clif_getareachar_pc(struct map_session_data* sd,struct map_session_data* dstsd)
@@ -4198,8 +4232,14 @@ void clif_getareachar_unit(struct map_session_data* sd,struct block_list *bl)
 				clif_specialeffect_single(bl,423,sd->fd);
 			else if(tsd->state.size==1)
 				clif_specialeffect_single(bl,421,sd->fd);
-			if( tsd->sc.count && tsd->sc.data[SC_BANDING] )
-				clif_display_banding(&sd->bl,&tsd->bl,tsd->sc.data[SC_BANDING]->val1);
+			if( tsd->sc.count )
+			{
+				if( tsd->sc.data[SC_BANDING] )
+					clif_display_banding(&sd->bl,&tsd->bl,tsd->sc.data[SC_BANDING]->val1);
+				if( tsd->sc.data[SC_ALL_RIDING] )
+					clif_display_riding(&sd->bl,&tsd->bl);
+
+			}
 			clif_sendaurastoone(tsd, sd);
 		}
 		break;
@@ -4355,7 +4395,7 @@ int clif_damage(struct block_list* src, struct block_list* dst, unsigned int tic
 		WBUFW(buf,22) = min(damage, INT16_MAX);
 		WBUFW(buf,i + 27) = damage2;
 #else
-		WBUFL(buf,22) = min(damage, INT_MAX);
+		WBUFL(buf,22) = min(damage, INT32_MAX);
 		WBUFL(buf,i+ 27) = damage2;
 #endif
 	}
@@ -5108,16 +5148,16 @@ int clif_skill_damage(struct block_list *src,struct block_list *dst,unsigned int
 		if( damage > 0 )
 		{
 			if( sd->status.guild_id && map_allowed_woe(src->m) )
-				add2limit(sd->status.wstats.acid_demostration, 1, UINT_MAX);
+				add2limit(sd->status.wstats.acid_demostration, 1, UINT32_MAX);
 			else if( map[src->m].flag.battleground && sd->bg_id )
-				add2limit(sd->status.bgstats.acid_demostration, 1, UINT_MAX);
+				add2limit(sd->status.bgstats.acid_demostration, 1, UINT32_MAX);
 		}
 		else
 		{
 			if( sd->status.guild_id && map_allowed_woe(src->m) )
-				add2limit(sd->status.wstats.acid_demostration_fail, 1, UINT_MAX);
+				add2limit(sd->status.wstats.acid_demostration_fail, 1, UINT32_MAX);
 			else if( map[src->m].flag.battleground && sd->bg_id )
-				add2limit(sd->status.bgstats.acid_demostration_fail, 1, UINT_MAX);
+				add2limit(sd->status.bgstats.acid_demostration_fail, 1, UINT32_MAX);
 		}
 	}
 
@@ -6642,11 +6682,7 @@ void clif_partyinvitationstate(struct map_session_data* sd)
 /// 02c6 <party id>.L <party name>.24B
 void clif_party_invite(struct map_session_data *sd,struct map_session_data *tsd)
 {
-#if PACKETVER < 20070821
 	const int cmd = 0xfe;
-#else
-	const int cmd = 0x2c6;
-#endif
 	int fd;
 	struct party_data *p;
 
@@ -7407,29 +7443,35 @@ int clif_guild_created(struct map_session_data *sd,int flag)
 	WFIFOSET(fd,packet_len(0x167));
 	return 0;
 }
-/*==========================================
- * ギルド所属通知
- *------------------------------------------*/
-int clif_guild_belonginfo(struct map_session_data *sd, struct guild *g)
+
+
+/// Notifies the client that it is belonging to a guild (ZC_UPDATE_GDID)
+/// 016c <guild id>.L <emblem id>.L <mode>.L <ismaster>.B <inter sid>.L <guild name>.24B
+void clif_guild_belonginfo(struct map_session_data *sd, struct guild *g)
 {
 	int ps,fd;
-	nullpo_ret(sd);
+	nullpo_retv(sd);
 	if( sd->bg_id )
-		return clif_bg_belonginfo(sd);
-	nullpo_ret(g);
+	{
+		clif_bg_belonginfo(sd);
+		return;
+	}
+	nullpo_retv(g);
 
 	fd=sd->fd;
 	ps=guild_getposition(g,sd);
 	WFIFOHEAD(fd,packet_len(0x16c));
-	memset(WFIFOP(fd,0),0,packet_len(0x16c));
 	WFIFOW(fd,0)=0x16c;
 	WFIFOL(fd,2)=g->guild_id;
 	WFIFOL(fd,6)=g->emblem_id;
 	WFIFOL(fd,10)=g->position[ps].mode;
+	WFIFOB(fd,14)=(bool)(sd->state.gmaster_flag==g);
+	WFIFOL(fd,15)=0;  // InterSID (unknown purpose)
 	memcpy(WFIFOP(fd,19),g->name,NAME_LENGTH);
 	WFIFOSET(fd,packet_len(0x16c));
-	return 0;
 }
+
+
 /*==========================================
  * ギルドメンバログイン通知
  *------------------------------------------*/
@@ -10635,10 +10677,7 @@ void clif_parse_EquipItem(int fd,struct map_session_data *sd)
 	}
 	
 	//Client doesn't send the position for ammo.
-	if( sd->inventory_data[index]->type == IT_AMMO ||
-		sd->inventory_data[index]->type == IT_THROWWEAPON ||
-		sd->inventory_data[index]->type == IT_CANNONBALL
-	   )
+	if(sd->inventory_data[index]->type == IT_AMMO)
 		pc_equipitem(sd,index,EQP_AMMO);
 	else
 		pc_equipitem(sd,index,RFIFOW(fd,4));
@@ -14594,6 +14633,10 @@ void clif_parse_Auction_buysell(int fd, struct map_session_data* sd)
 /*==========================================
  * CASH/POINT SHOP
  *==========================================*/
+
+/// List of items offered in a cash shop (ZC_PC_CASH_POINT_ITEMLIST)
+/// 0287 <packet len>.W <cash point>.L { <sell price>.L <discount price>.L <item type>.B <name id>.W }*
+/// 0287 <packet len>.W <cash point>.L <kafra point>.L { <sell price>.L <discount price>.L <item type>.B <name id>.W }* (PACKETVER >= 20070711)
 void clif_cashshop_show(struct map_session_data *sd, struct npc_data *nd)
 {
 	int fd,i,type = 0;
@@ -14664,16 +14707,17 @@ void clif_cashshop_show(struct map_session_data *sd, struct npc_data *nd)
 	{
 		char output[128];
 		if( type == 1 )
-			sprintf(output,"Esta es la tienda de Battlegrounds. Necesitas medallas de Bravery, Honor y Valour para poder realizar transacciones.");
+			sprintf(output,"This is a Battleground Shop. Bravery, Honor and Valour badges in the same amount are required to exchange items.");
 		else
-			sprintf(output,"Esta es una tienda de intercambio. Necesitas %s (%d) para realizar transacciones.", itemdb_search(nd->cashitem)->jname, nd->cashitem);
+			sprintf(output,"This is a Item Exchange Shop. You need %s (%d) to exchange items.", itemdb_search(nd->cashitem)->jname, nd->cashitem);
 
 		clif_displaymessage(fd, output);
 	}
 }
 
 /// Cashshop Buy Ack (ZC_PC_CASH_POINT_UPDATE)
-/// S 0289 <cash point>.L <kafra point>.L <error>.W
+/// S 0289 <cash point>.L <error>.W
+/// S 0289 <cash point>.L <kafra point>.L <error>.W (PACKETVER >= 20070711)
 ///
 /// @param error
 /// 0: The deal has successfully completed. (ERROR_TYPE_NONE)
@@ -14697,19 +14741,18 @@ void clif_cashshop_ack(struct map_session_data* sd, int error)
 	WFIFOSET(fd, packet_len(0x289));
 }
 
+/// Request to buy item(s) from cash shop (CZ_PC_BUY_CASH_POINT_ITEM).
+/// 0288 <name id>.W <amount>.W
+/// 0288 <name id>.W <amount>.W <kafra points>.L (PACKETVER >= 20070711)
+/// 0288 <packet len>.W <kafra points>.L <count>.W { <amount>.W <name id>.W }.4B*count (PACKETVER >= 20100803)
 void clif_parse_cashshop_buy(int fd, struct map_session_data *sd)
 {
-	int fail = 0, amount, points;
-	short nameid;
+	int fail = 0;
 	struct npc_data *nd;
 	nullpo_retv(sd);
 
 	if( (nd = (struct npc_data *)map_id2bl(sd->npc_shopid)) == NULL )
 		return;
-
-	nameid = RFIFOW(fd,2);
-	amount = RFIFOW(fd,4);
-	points = RFIFOL(fd,6); // Not Implemented. Should be 0
 
 	if( sd->state.trading || !sd->npc_shopid )
 		fail = 1;
@@ -14719,7 +14762,27 @@ void clif_parse_cashshop_buy(int fd, struct map_session_data *sd)
 		fail = 1;
 	}
 	else
+	{
+#if PACKETVER < 20101116
+		short nameid = RFIFOW(fd,2);
+		short amount = RFIFOW(fd,4);
+		int points = RFIFOL(fd,6);
+
 		fail = npc_cashshop_buy(sd, nameid, amount, points);
+#else
+		int len = RFIFOW(fd,2);
+		int points = RFIFOL(fd,4);
+		int count = RFIFOW(fd,8);
+		unsigned short* item_list = (unsigned short*)RFIFOP(fd,10);
+
+		if( len < 10 || len != 10 + count * 4)
+		{
+			ShowWarning("Player %u sent incorrect cash shop buy packet (len %u:%u)!\n", sd->status.char_id, len, 10 + count * 4);
+			return;
+		}
+		fail = npc_cashshop_buylist(sd,points,count,item_list);
+#endif
+	}
 
 	WFIFOHEAD(fd,12);
 	WFIFOW(fd,0) = 0x289;
@@ -15304,14 +15367,14 @@ int clif_bg_xy_remove(struct map_session_data *sd)
 	return 0;
 }
 
-int clif_bg_belonginfo(struct map_session_data *sd)
+void clif_bg_belonginfo(struct map_session_data *sd)
 {
 	int fd;
 	struct guild *g;
-	nullpo_ret(sd);
+	nullpo_retv(sd);
 
 	if( !sd->bg_id || (g = bg_guild_get(sd->bg_id)) == NULL )
-		return 0;
+		return;
 
 	fd = sd->fd;
 	WFIFOHEAD(fd,packet_len(0x16c));
@@ -15320,9 +15383,10 @@ int clif_bg_belonginfo(struct map_session_data *sd)
 	WFIFOL(fd,2) = g->guild_id;
 	WFIFOL(fd,6) = g->emblem_id;
 	WFIFOL(fd,10) = 0;
+	WFIFOB(fd,14) = 0;
+	WFIFOL(fd,15) = 0;
 	memcpy(WFIFOP(fd,19), g->name, NAME_LENGTH);
 	WFIFOSET(fd,packet_len(0x16c));
-	return 1;
 }
 
 int clif_visual_guild_id(struct block_list *bl)
@@ -16703,12 +16767,16 @@ static int packetdb_readdb(void)
 	    6,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
 	    0,  0,  0,  0,  8,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
 	//#0x0280
-	    0,  0,  0,  6,  0,  0,  0,  0,  0, 12, 18,  0,  0,  0,  0,  0,
+#if PACKETVER < 20070711
+	    0,  0,  0,  6,  0,  0,  0, -1,  6,  8, 18,  0,  0,  0,  0,  0,
+#else
+	    0,  0,  0,  6,  0,  0,  0, -1, 10, 12, 18,  0,  0,  0,  0,  0, // 0x288, 0x289 increase by 4 (kafra points)
+#endif
 	    0,  4,  0, 70,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
 	    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
 	   85, -1, -1,107,  6, -1,  7,  7, 22,191,  0,  8,  0,  0,  0,  0,
 	//#0x02C0
-	    0,  0,  0,  0,  0, 30, 30,  0,  0,  3,  0, 65,  4, 71, 10,  0,
+	    0,  0,  0,  0,  0, 30,  6,  0,  0,  3,  0, 65,  4, 71, 10,  0,
 	   -1, -1,  0,  0, 29,  0,  6, -1, 10, 10,  3,  0, -1, 32,  6,  0,
 	    0, 33,  0,  0,  0,  0,  0,  0, -1,  0, -1,  0, 67, 59, 60,  8,
 	   10,  2,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  8,  0,  0,

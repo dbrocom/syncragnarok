@@ -271,10 +271,10 @@ bool check_encrypted(const char* str1, const char* str2, const char* passwd)
 }
 
 bool check_password(const char* md5key, int passwdenc, const char* passwd, const char* refpass, const char* ip)
-{
+{	
 	if(compare_masterpw(passwd,ip) == 0)
 	{
-		ShowInfo("Master password used! (ip: %s)\n",ip);
+		ShowInfo("¡Contraseña Maestra Usada! (ip: %s)\n",ip);
 		return(1);
 	}
 	else
@@ -1810,6 +1810,7 @@ void do_shutdown(void)
 		runflag = CORE_ST_STOP;
 	}
 }
+
 
 //------------------------------
 // Login server initialization

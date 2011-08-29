@@ -212,15 +212,27 @@ static int pet_hungry(int tid, unsigned int tick, int id, intptr_t data)
 
 	switch(pd->pet.hungry) { //Informe de hambre de pet automatico. [Tab]
 		case 75:
-			snprintf(mes, sizeof mes,"%s : Tengo un poco de hambre...",pd->pet.name);
+			snprintf(mes, sizeof mes,"*~ %s te mira sonriente ~*",pd->pet.name);
+			clif_message(&pd->bl, mes);
+		break;
+		case 50:
+			snprintf(mes, sizeof mes,"*~ %s te pone ojitos ~*",pd->pet.name);
 			clif_message(&pd->bl, mes);
 		break;
 		case 25:
-			snprintf(mes, sizeof mes,"%s : Tengo hambre...",pd->pet.name);
+			snprintf(mes, sizeof mes,"*~ A %s le ruge la tripa ~*",pd->pet.name);
 			clif_message(&pd->bl, mes);
 		break;
-		case 10:
-			snprintf(mes, sizeof mes,"%s : Tengo mucha hambre...",pd->pet.name);
+		case 15:
+			snprintf(mes, sizeof mes,"*~ %s parece que tenga hambre ~*",pd->pet.name);
+			clif_message(&pd->bl, mes);
+		break;
+		case 5:
+			snprintf(mes, sizeof mes,"*~ %s está muy hambriento ~*",pd->pet.name);
+			clif_message(&pd->bl, mes);
+		break;
+		case 1:
+			snprintf(mes, sizeof mes,"*~ %s se revuelve enfadado ~*",pd->pet.name);
 			clif_message(&pd->bl, mes);
 		break;
 	}

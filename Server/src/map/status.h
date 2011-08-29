@@ -8,6 +8,7 @@ struct block_list;
 struct mob_data;
 struct pet_data;
 struct homun_data;
+struct mercenary_data;
 struct status_change;
 
 //Use this to refer the max refinery level [Skotlex]
@@ -534,7 +535,6 @@ typedef enum sc_type {
 	SC_BANANA_BOMB_SITDOWN,
 	SC_STOMACHACHE,
 	SC_MYSTERIOUS_POWDER,
-
 	SC_ALL_RIDING,
 
 	SC_PKDELAY = 600, // [Ivion] 

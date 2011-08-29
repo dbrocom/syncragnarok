@@ -889,8 +889,8 @@ static bool itemdb_read_buyingstore(char* fields[], int columns, int current)
 }
 
 /*================================================================== 
-* Reads item stacking restrictions 
-*----------------------------------------------------------------*/ 
+ * Reads item stacking restrictions 
+ *----------------------------------------------------------------*/ 
 static bool itemdb_read_stack(char* fields[], int columns, int current) 
 {// <item id>,<stack limit amount>,<type> 
 	unsigned short nameid, amount; 
@@ -926,7 +926,7 @@ static bool itemdb_read_stack(char* fields[], int columns, int current)
 	id->stack.guildstorage = (type&8)!=0; 
 
 	return true; 
-} 
+}
 
 /*======================================
  * Applies gender restrictions according to settings. [Skotlex]
@@ -974,7 +974,7 @@ static bool itemdb_parse_dbrow(char** str, const char* source, int line, int scr
 
 	id->type = atoi(str[3]);
 
-	if( id->type < 0 || id->type == IT_UNKNOWN || id->type == IT_UNKNOWN2 || ( id->type > IT_DELAYCONSUME && id->type < IT_THROWWEAPON ) || id->type >= IT_MAX )
+	if( id->type < 0 || id->type == IT_UNKNOWN || id->type == IT_UNKNOWN2 || ( id->type > IT_DELAYCONSUME && id->type < IT_CASH ) || id->type >= IT_MAX )
 	{// catch invalid item types
 		ShowWarning("itemdb_parse_dbrow: Invalid item type %d for item %d. IT_ETC will be used.\n", id->type, nameid);
 		id->type = IT_ETC;

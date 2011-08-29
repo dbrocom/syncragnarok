@@ -133,6 +133,7 @@ extern void set_nonblocking(int fd, unsigned long yes);
 void set_defaultparse(ParseFunc defaultparse);
 
 const char* geoip_getcountry(uint32 ipnum);//[Ind/ro-resources.net]
+
 // hostname/ip conversion functions
 uint32 host2ip(const char* hostname);
 const char* ip2str(uint32 ip, char ip_str[16]);

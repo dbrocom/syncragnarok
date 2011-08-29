@@ -220,6 +220,11 @@ static int ext_storage_additem(struct map_session_data* sd, struct item* item_da
 	
 	data = itemdb_search(item_data->nameid);
 
+	if( data->stack.storage && amount > data->stack.amount ) 
+	{// item stack limitation 
+		return 1; 
+	} 
+
 	if( !itemdb_canstore(item_data, pc_isGM(sd)) )
 	{	//Check if item is storable. [Skotlex]
 		clif_displaymessage (sd->fd, msg_txt(264));
@@ -232,7 +237,7 @@ static int ext_storage_additem(struct map_session_data* sd, struct item* item_da
 		{
 			if( compare_item(&stor->items[i], item_data) )
 			{// existing items found, stack them
-				if( amount > MAX_AMOUNT - stor->items[i].amount )
+				if( amount > MAX_AMOUNT - stor->items[i].amount || ( data->stack.storage && amount > data->stack.amount - stor->items[i].amount ) )
 					return 1;
 				stor->items[i].amount += amount;
 				clif_storageitemadded(sd,&stor->items[i],i,amount);
@@ -297,6 +302,11 @@ int ext_storage_delitem(struct map_session_data* sd, int n, int amount)
 
 	if(log_config.enable_logs&0x800)
 		log_pick_pc(sd, "R", sd->status.storage.items[n].nameid, amount, &sd->status.storage.items[n], sd->status.storage.items[n].serial);
+	if( battle_config.lootevent & 1 ) {
+		pc_setglobalreg( sd, "LastLootID", sd->status.storage.items[n].nameid ); //Last lootet Item ID
+		pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
+		npc_event_doall_id( "OnLoot", sd->bl.id );
+	}
 
 	if( sd->status.ext_storage.items[n].amount == 0 )
 	{
@@ -623,7 +633,7 @@ int guild_storage_additem(struct map_session_data* sd, struct guild_storage* sto
 	if( data->stack.guildstorage && amount > data->stack.amount ) 
 	{// item stack limitation 
 		return 1; 
-	} 
+	}
 
 	if( !itemdb_canguildstore(item_data, pc_isGM(sd)) || item_data->expire_time || item_data->bound )
 	{	//Check if item is storable. [Skotlex]
@@ -683,7 +693,7 @@ int guild_storage_delitem(struct map_session_data* sd, struct guild_storage* sto
 		pc_setglobalreg( sd, "LastLootID", stor->items[n].nameid ); //Last lootet Item ID
 		pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
 		npc_event_doall_id( "OnLoot", sd->bl.id );
-	} 
+	}
 	if(stor->items[n].amount==0){
 		memset(&stor->items[n],0,sizeof(stor->items[0]));
 		stor->storage_amount--;
