@@ -1538,8 +1538,6 @@ int pc_isequip2(struct map_session_data *sd, int nameid)
 		if( item->class_upper&2 && sd->class_&(JOBL_UPPER|JOBL_THIRD) ) break;
 		if( item->class_upper&4 && sd->class_&JOBL_BABY ) break;
 		if( item->class_upper&8 && sd->class_&JOBL_THIRD ) break;
-		if( item->class_upper&16 && sd->class_&JOBL_THIRD && sd->class_&JOBL_UPPER ) break;
-		if( item->class_upper&24 && sd->class_&JOBL_THIRD && sd->class_&JOBL_BABY ) break;
 		return 0;
 	}
 
@@ -3790,7 +3788,7 @@ int pc_bonus3(struct map_session_data *sd,int type,int type2,int type3,int val)
 		break;
 	case SP_ADD_CLASS_DROP_ITEM:
 		if(sd->state.lr_flag != 2)
-			pc_bonus_item_drop(sd->add_drop, ARRAYLENGTH(sd->add_drop), type2, 0, type3, val);
+			pc_bonus_item_drop(sd->add_drop, ARRAYLENGTH(sd->add_drop), type2, 0, -type3, val);
 		break;
 	case SP_AUTOSPELL:
 		if(sd->state.lr_flag != 2)
@@ -5997,10 +5995,8 @@ const char* job_name(int class_)
 		
 	case JOB_WEDDING:
 	case JOB_SUPER_NOVICE:
-
-	case JOB_GUNSLINGER: 
+	case JOB_GUNSLINGER:
 	case JOB_NINJA:
-
 	case JOB_XMAS:
 		return msg_txt(570 - JOB_WEDDING+class_);
 
@@ -6081,7 +6077,7 @@ const char* job_name(int class_)
 		return msg_txt(617);
 	case JOB_SOUL_LINKER:
 		return msg_txt(618);
-
+	
 	case JOB_GANGSI:
 	case JOB_DEATH_KNIGHT:
 	case JOB_DARK_COLLECTOR:
@@ -8041,17 +8037,16 @@ int pc_dead(struct map_session_data *sd,struct block_list *src,int skill)
 					}
 				}
 	}
- 
+
 	// Activate SC_PKDELAY [Ivion]
 	if(src && (src->type == BL_PC)) {
 		struct map_session_data *ssd = (struct map_session_data *)src;
 		if(	(ssd->bl.id != sd->bl.id) &&
 			(!battle_config.pk_level_range || ((int)ssd->status.base_level <= ((int)sd->status.base_level + battle_config.pk_level_range))) &&
 			!sd->sc.data[SC_PKDELAY]
-	)
+		)
 			sc_start(&sd->bl,SC_PKDELAY,100,0,60000);
 	}
-
 
 	// PVPMode OFF
 	if( sd->state.pvpmode ) pc_pvpmodeoff(sd, 1, 1);
@@ -9559,7 +9554,7 @@ int pc_equipitem(struct map_session_data *sd,int n,int req_pos)
 	pos = pc_equippoint(sd,n); //With a few exceptions, item should go in all specified slots.
 
 	if(battle_config.battle_log)
-		ShowInfo("equip %d(%d) %x:%x\n",sd->status.inventory[n].nameid,n,id->equip,req_pos);
+		ShowInfo("equip %d(%d) %x:%x\n",sd->status.inventory[n].nameid,n,id?id->equip:0,req_pos);
 	if(!pc_isequip(sd,n) || !(pos&req_pos) || sd->status.inventory[n].equip != 0 || sd->status.inventory[n].attribute==1 ) { // [Valaris]
 		clif_equipitemack(sd,n,0,0);	// fail
 		return 0;
@@ -10269,7 +10264,7 @@ void pc_pvpmode(struct map_session_data* sd)
 	{
 		char pkinfo[100];
 		unsigned int tick = (unsigned int)(sd->idlepvp - last_tick + 120);
-		sprintf(pkinfo, "[PK Inactivo - %d segundos para poder volver a PK]", tick);
+		sprintf(pkinfo, "[PK disable - wait %d seconds to enter again in PK Mode.]", tick);
 		clif_disp_onlyself(sd ,(const char*)pkinfo,(int)strlen((const char*)pkinfo));
 
 		return;

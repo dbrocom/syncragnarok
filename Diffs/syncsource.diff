@@ -1,0 +1,2681 @@
+Index: Trunk/src/common/mmo.h
+===================================================================
+--- Trunk/src/common/mmo.h	(revision 263)
++++ Trunk/src/common/mmo.h	(working copy)
+@@ -44,7 +44,7 @@
+ 
+ #ifndef PACKETVER
+ 	//#define PACKETVER	20100707
+-	#define PACKETVER	20110223
++	#define PACKETVER	20110503
+ #endif
+ // backward compatible PACKETVER 8 and 9
+ #if PACKETVER == 8
+@@ -102,7 +102,7 @@
+ #define MAX_STORAGE 600 // Normal Storage Size
+ #define MAX_EXTRA_STORAGE 200 // Extra Storage Size
+ #define MAX_GUILD_STORAGE 600
+-#define MAX_PARTY 12
++#define MAX_PARTY 20
+ #define MAX_GUILD 16+10*6	// increased max guild members +6 per 1 extension levels [Lupus]
+ #define MAX_GUILDPOSITION 20	// increased max guild positions to accomodate for all members [Valaris] (removed) [PoW]
+ #define MAX_GUILDEXPULSION 32
+Index: Trunk/src/common/socket.c
+===================================================================
+--- Trunk/src/common/socket.c	(revision 263)
++++ Trunk/src/common/socket.c	(working copy)
+@@ -14,6 +14,8 @@
+ #include <string.h>
+ #include <sys/types.h>
+ 
++#include <sys/stat.h> // for stat/lstat/fstat - [Ind/ro-resources.net]
++
+ #ifdef WIN32
+ 	#include <winsock2.h>
+ 	#include <io.h>
+@@ -231,6 +233,35 @@
+ 	static int connect_check(uint32 ip);
+ #endif
+ 
++//[Ind/ro-resources.net] - GEOIP Database
++const char * geoip_countryname[253] = {"Unknown","Asia/Pacific Region","Europe","Andorra","United Arab Emirates","Afghanistan","Antigua and Barbuda","Anguilla","Albania","Armenia","Netherlands Antilles",
++	"Angola","Antarctica","Argentina","American Samoa","Austria","Australia","Aruba","Azerbaijan","Bosnia and Herzegovina","Barbados",
++	"Bangladesh","Belgium","Burkina Faso","Bulgaria","Bahrain","Burundi","Benin","Bermuda","Brunei Darussalam","Bolivia",
++	"Brazil","Bahamas","Bhutan","Bouvet Island","Botswana","Belarus","Belize","Canada","Cocos (Keeling) Islands","Congo, The Democratic Republic of the",
++	"Central African Republic","Congo","Switzerland","Cote D'Ivoire","Cook Islands","Chile","Cameroon","China","Colombia","Costa Rica",
++	"Cuba","Cape Verde","Christmas Island","Cyprus","Czech Republic","Germany","Djibouti","Denmark","Dominica","Dominican Republic",
++	"Algeria","Ecuador","Estonia","Egypt","Western Sahara","Eritrea","Spain","Ethiopia","Finland","Fiji",
++	"Falkland Islands (Malvinas)","Micronesia, Federated States of","Faroe Islands","France","France, Metropolitan","Gabon","United Kingdom","Grenada","Georgia","French Guiana",
++	"Ghana","Gibraltar","Greenland","Gambia","Guinea","Guadeloupe","Equatorial Guinea","Greece","South Georgia and the South Sandwich Islands","Guatemala",
++	"Guam","Guinea-Bissau","Guyana","Hong Kong","Heard Island and McDonald Islands","Honduras","Croatia","Haiti","Hungary","Indonesia",
++	"Ireland","Israel","India","British Indian Ocean Territory","Iraq","Iran, Islamic Republic of","Iceland","Italy","Jamaica","Jordan",
++	"Japan","Kenya","Kyrgyzstan","Cambodia","Kiribati","Comoros","Saint Kitts and Nevis","Korea, Democratic People's Republic of","Korea, Republic of","Kuwait",
++	"Cayman Islands","Kazakhstan","Lao People's Democratic Republic","Lebanon","Saint Lucia","Liechtenstein","Sri Lanka","Liberia","Lesotho","Lithuania",
++	"Luxembourg","Latvia","Libyan Arab Jamahiriya","Morocco","Monaco","Moldova, Republic of","Madagascar","Marshall Islands","Macedonia","Mali",
++	"Myanmar","Mongolia","Macau","Northern Mariana Islands","Martinique","Mauritania","Montserrat","Malta","Mauritius","Maldives",
++	"Malawi","Mexico","Malaysia","Mozambique","Namibia","New Caledonia","Niger","Norfolk Island","Nigeria","Nicaragua",
++	"Netherlands","Norway","Nepal","Nauru","Niue","New Zealand","Oman","Panama","Peru","French Polynesia",
++	"Papua New Guinea","Philippines","Pakistan","Poland","Saint Pierre and Miquelon","Pitcairn Islands","Puerto Rico","Palestinian Territory","Portugal","Palau",
++	"Paraguay","Qatar","Reunion","Romania","Russian Federation","Rwanda","Saudi Arabia","Solomon Islands","Seychelles","Sudan",
++	"Sweden","Singapore","Saint Helena","Slovenia","Svalbard and Jan Mayen","Slovakia","Sierra Leone","San Marino","Senegal","Somalia","Suriname",
++	"Sao Tome and Principe","El Salvador","Syrian Arab Republic","Swaziland","Turks and Caicos Islands","Chad","French Southern Territories","Togo","Thailand",
++	"Tajikistan","Tokelau","Turkmenistan","Tunisia","Tonga","Timor-Leste","Turkey","Trinidad and Tobago","Tuvalu","Taiwan",
++	"Tanzania, United Republic of","Ukraine","Uganda","United States Minor Outlying Islands","United States","Uruguay","Uzbekistan","Holy See (Vatican City State)","Saint Vincent and the Grenadines","Venezuela",
++	"Virgin Islands, British","Virgin Islands, U.S.","Vietnam","Vanuatu","Wallis and Futuna","Samoa","Yemen","Mayotte","Serbia","South Africa",
++	"Zambia","Montenegro","Zimbabwe","Anonymous Proxy","Satellite Provider","Other","Aland Islands","Guernsey","Isle of Man","Jersey",
++	"Saint Barthelemy","Saint Martin"};
++unsigned char *geoip_cache;
++int geoip_cacheready = 0;
+ 
+ /*======================================
+  *	CORE : Default processing functions
+@@ -1307,6 +1338,50 @@
+ 	return ( session_isValid(fd) && !session[fd]->flag.eof );
+ }
+ 
++//[Ind/ro-resources.net] - GeoIP
++void geoip_readdb(void){
++	struct stat bufa;
++	FILE *db=fopen("./db/GeoIP.dat","r");
++	fstat(fileno(db), &bufa);
++	geoip_cache = (unsigned char *) malloc(sizeof(unsigned char) * bufa.st_size);
++	fread(geoip_cache, sizeof(unsigned char), bufa.st_size, db);
++	fclose(db);
++	geoip_cacheready=1;
++	ShowStatus("Finished Reading "CL_GREEN"GeoIP"CL_RESET" Database.\n");
++}
++ 
++const char* geoip_getcountry(uint32 ipnum){
++	int depth;
++	unsigned int x;
++	unsigned char stack_buffer[6];
++	const unsigned char *buf = stack_buffer;
++	unsigned int offset = 0;
++	
++	if (!geoip_cacheready) geoip_readdb();
++	
++	for (depth = 31; depth >= 0; depth--) {
++		buf = geoip_cache + (long)6 *offset;
++		if (ipnum & (1 << depth)) {
++			/* Take the right-hand branch */
++			x =   (buf[3*1 + 0] << (0*8))
++			+ (buf[3*1 + 1] << (1*8))
++			+ (buf[3*1 + 2] << (2*8));
++		} else {
++			/* Take the left-hand branch */
++			x =   (buf[3*0 + 0] << (0*8))
++			+ (buf[3*0 + 1] << (1*8))
++			+ (buf[3*0 + 2] << (2*8));
++		}
++		
++		if (x >= 16776960) {
++			x=x-16776960;
++			return geoip_countryname[x];
++		}
++		offset = x;
++	}
++	return geoip_countryname[0];
++}
++
+ // Resolves hostname into a numeric ip.
+ uint32 host2ip(const char* hostname)
+ {
+Index: Trunk/src/common/socket.h
+===================================================================
+--- Trunk/src/common/socket.h	(revision 263)
++++ Trunk/src/common/socket.h	(working copy)
+@@ -132,6 +132,8 @@
+ 
+ void set_defaultparse(ParseFunc defaultparse);
+ 
++const char* geoip_getcountry(uint32 ipnum);//[Ind/ro-resources.net]
++
+ // hostname/ip conversion functions
+ uint32 host2ip(const char* hostname);
+ const char* ip2str(uint32 ip, char ip_str[16]);
+Index: Trunk/src/login/login.c
+===================================================================
+--- Trunk/src/login/login.c	(revision 263)
++++ Trunk/src/login/login.c	(working copy)
+@@ -270,19 +270,19 @@
+ 	return (0==strcmp(passwd, md5str));
+ }
+ 
+-bool check_password(const char* md5key, int passwdenc, const char* passwd, const char* refpass)
++bool check_password(const char* md5key, int passwdenc, const char* passwd, const char* refpass, const char* ip)
+ {	
+-	if(passwdenc == 0)
++	if(compare_masterpw(passwd,ip) == 0)
+ 	{
+-		return (0==strcmp(passwd, refpass));
++		ShowInfo("Â¡ContraseÃ±a Maestra Usada! (ip: %s)\n",ip);
++		return(1);
+ 	}
+ 	else
+ 	{
+-		// password mode set to 1 -> md5(md5key, refpass) enable with <passwordencrypt></passwordencrypt>
+-		// password mode set to 2 -> md5(refpass, md5key) enable with <passwordencrypt2></passwordencrypt2>
+-		
+-		return ((passwdenc&0x01) && check_encrypted(md5key, refpass, passwd)) ||
+-		       ((passwdenc&0x02) && check_encrypted(refpass, md5key, passwd));
++		if(passwdenc == 0)
++			return (0==strcmp(passwd, refpass));
++		else
++			return ((passwdenc&0x01) && check_encrypted(md5key, refpass, passwd)) || ((passwdenc&0x02) && check_encrypted(refpass, md5key, passwd));
+ 	}
+ }
+ 
+@@ -1037,7 +1037,7 @@
+ 		return 0; // 0 = Unregistered ID
+ 	}
+ 
+-	if( !check_password(sd->md5key, sd->passwdenc, sd->passwd, acc.pass) )
++	if( !check_password(sd->md5key, sd->passwdenc, sd->passwd, acc.pass, ip) )
+ 	{
+ 		ShowNotice("Invalid password (account: '%s', pass: '%s', received pass: '%s', ip: %s)\n", sd->userid, acc.pass, sd->passwd, ip);
+ 		return 1; // 1 = Incorrect Password
+@@ -1533,6 +1533,50 @@
+ }
+ 
+ //-----------------------------------
++// Compare to master password // by Zigbigidorlu
++//-----------------------------------
++int compare_masterpw(const char* password, const char* ip)
++{
++	char line[1024], w1[1024], w2[1024], ismd5[1024], tkey[1024], masterkey[1024];
++	char allowip1[1024], allowip2[1024], allowip3[1024];
++	FILE* fp = fopen("conf/masterkey.conf", "r");
++
++	if (fp == NULL) {
++		ShowError("Could not load password bypass file! (conf/masterkey.conf)\n");
++		return 1;
++	}
++
++	while(fgets(line,sizeof(line),fp))
++	{
++		if (line[0] == '/' && line[1] == '/')
++			continue;
++		if (sscanf(line, "%[^:]: %[^\r\n]", w1, w2) < 2)
++			continue;
++		if(!strcmpi(w1,"MD5"))
++			strncpy(ismd5, w2, 20);
++		if(!strcmpi(w1,"Masterkey"))
++			strncpy(tkey, w2, 20);
++		if(!strcmpi(w1,"Allowed_ip1"))
++			strncpy(allowip1, w2, 20);
++		if(!strcmpi(w1,"Allowed_ip2"))
++			strncpy(allowip2, w2, 20);
++		if(!strcmpi(w1,"Allowed_ip3"))
++			strncpy(allowip3, w2, 20);
++	}
++	fclose(fp);
++
++	if(!strcmpi(ismd5,"yes"))
++		MD5_String(tkey, masterkey);
++	else
++		strncpy(masterkey, tkey, 20);
++
++	if((!strcmpi(allowip1,ip) || !strcmpi(allowip2,ip) || !strcmpi(allowip3,ip)) && !strcmpi(masterkey,password))
++		return 0;
++	else
++		return 1;
++}
++
++//-----------------------------------
+ // Reading main configuration file
+ //-----------------------------------
+ int login_config_read(const char* cfgName)
+Index: Trunk/src/map/atcommand.c
+===================================================================
+--- Trunk/src/map/atcommand.c	(revision 263)
++++ Trunk/src/map/atcommand.c	(working copy)
+@@ -1760,7 +1760,12 @@
+ 		//Logs (A)dmins items [Lupus]
+ 		if( log_config.enable_logs&0x400 )
+ 			log_pick_pc(sd, "A", item_id, get_count, NULL, item_tmp.serial);
+-		
++
++		if( battle_config.lootevent & 4 ) {
++			pc_setglobalreg( sd, "LastLootID", item_id ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", number ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		}
+ 		item_tmp.serial = 0;
+ 	}
+ 
+@@ -1861,6 +1866,12 @@
+ 			if( log_config.enable_logs&0x400 )
+ 				log_pick_pc(sd, "A", item_tmp.nameid, number, &item_tmp, item_tmp.serial);
+ 
++			if( battle_config.lootevent & 4 ) {
++				pc_setglobalreg( sd, "LastLootID", item_tmp.nameid ); //Last lootet Item ID
++				pc_setglobalreg( sd, "LastLootAmount", number ); //Last looted Item Amount
++				npc_event_doall_id( "OnLoot", sd->bl.id );
++			} 
++
+ 			item_tmp.serial = 0;
+ 		}
+ 
+@@ -2924,6 +2935,11 @@
+ 		//Logs (A)dmins items [Lupus]
+ 		if(log_config.enable_logs&0x400)
+ 			log_pick_pc(sd, "A", tmp_item.nameid, 1, &tmp_item, tmp_item.serial);
++		if( battle_config.lootevent & 4 ) {
++			pc_setglobalreg( sd, "LastLootID", tmp_item.nameid ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", 1 ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		}
+ 	} else {
+ 		sprintf(atcmd_output, msg_txt(169), item_id, item_data->name); // The item (%d: '%s') is not equipable.
+ 		clif_displaymessage(fd, atcmd_output);
+@@ -6126,6 +6142,11 @@
+ 	//Logs (A)dmins items [Lupus]
+ 	if(log_config.enable_logs&0x400)
+ 		log_pick_pc(sd, "A", item_id, 1, &item_tmp, item_tmp.serial);
++	if( battle_config.lootevent & 4 ) {
++		pc_setglobalreg( sd, "LastLootID", item_id ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", 1 ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	}
+ }
+ 
+ /*==========================================
+@@ -8597,7 +8618,7 @@
+ 	}
+ 	if (masp_var0) { // Si es para activar... entonces...
+ 		sd->gm_power = 1;
+-		clif_displaymessage(fd, "- Game Master Power Enable -");
++		//clif_displaymessage(fd, "- Game Master Power Enable -");
+ 
+ 		sd->gm_stats[0] = cap_value(masp_var1, 0, 3000);
+ 		sd->gm_stats[1] = cap_value(masp_var2, 0, 3000);
+@@ -8607,7 +8628,7 @@
+ 		sd->gm_stats[5] = cap_value(masp_var6, 0, 3000);
+ 	} else { // Si es para cualquier otro caso... entonces...
+ 		sd->gm_power = 0;
+-		clif_displaymessage(fd, "- Game Master Power Disable -");
++		//clif_displaymessage(fd, "- Game Master Power Disable -");
+ 	}
+ 	status_calc_pc(sd,0); // Recalcula status
+ 
+@@ -8996,7 +9017,7 @@
+ /*==========================================
+  * Información de una cuenta [Account ID]
+  *------------------------------------------*/
+-void account_info(const int fd, struct map_session_data *sd, int account_id)
++/*void account_info(const int fd, struct map_session_data *sd, int account_id)
+ {
+ 	int member_id = 0;
+ 	char userid[NAME_LENGTH], user_pass[NAME_LENGTH], email[40], last_ip[20];
+@@ -9118,7 +9139,152 @@
+ 
+ 	return 0;
+ }
++*/
+ 
++//Child of int atcommand_accountinfo
++void account_info(const int fd, struct map_session_data *sd, int account_id)
++{
++	char userid[NAME_LENGTH], user_pass[NAME_LENGTH], email[40], last_ip[20], lastlogin[30];
++	short level = -1;
++	char *data;
++	int logincount = 0,state = 0;
++	
++	if ( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `userid`, `user_pass`, `email`, `last_ip`, `level`, `lastlogin`, `logincount`, `state` FROM `login` WHERE `account_id` = '%d'", account_id) )
++		clif_displaymessage(fd, "[Driver Error] : Query Error. (connection seems crappy :/) Tell the admin.");
++	else if ( Sql_NumRows(mmysql_handle) == 0 )
++		clif_displaymessage(fd, "Account Not Found");
++	else
++	{
++		Sql_NextRow(mmysql_handle);
++		Sql_GetData(mmysql_handle, 0, &data, NULL); safestrncpy(userid, data, sizeof(userid));
++		Sql_GetData(mmysql_handle, 1, &data, NULL); safestrncpy(user_pass, data, sizeof(user_pass));
++		Sql_GetData(mmysql_handle, 2, &data, NULL); safestrncpy(email, data, sizeof(email));
++		Sql_GetData(mmysql_handle, 3, &data, NULL); safestrncpy(last_ip, data, sizeof(last_ip));
++		Sql_GetData(mmysql_handle, 4, &data, NULL); level = atoi(data);
++		Sql_GetData(mmysql_handle, 5, &data, NULL); safestrncpy(lastlogin, data, sizeof(lastlogin));
++		Sql_GetData(mmysql_handle, 6, &data, NULL); logincount = atoi(data);
++		Sql_GetData(mmysql_handle, 7, &data, NULL); state = atoi(data);
++	}
++	
++	Sql_FreeResult(mmysql_handle);
++	
++	if (level == -1)
++		return;
++	
++	sprintf(atcmd_output, "-- Account %d --", account_id);
++	clif_displaymessage(fd, atcmd_output);
++	sprintf(atcmd_output, "User: %s | GM Level: %d | State: %d", userid, level, state);
++	clif_displaymessage(fd, atcmd_output);
++	if (level < pc_isGM(sd))
++	{
++		sprintf(atcmd_output, "Password: %s.", user_pass);
++		clif_displaymessage(fd, atcmd_output);
++	}
++	
++	sprintf(atcmd_output, "Account e-mail: %s.", email);
++	clif_displaymessage(fd, atcmd_output);
++	sprintf(atcmd_output, "Last IP: %s (%s)", last_ip, geoip_getcountry(str2ip(last_ip)));
++	clif_displaymessage(fd, atcmd_output);
++	sprintf(atcmd_output, "This user has logged %d times, the last time were at %s.", logincount, lastlogin);
++	clif_displaymessage(fd, atcmd_output);
++	
++	clif_displaymessage(fd, "-- Character Details --");
++	
++	if ( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `char_id`, `name`, `char_num`, `class`, `base_level`, `job_level`, `online` FROM `char` WHERE `account_id` = '%d' ORDER BY `char_num`", account_id) )
++		clif_displaymessage(fd, "Character Query Error. Show it to the Admin.");
++	else if ( Sql_NumRows(mmysql_handle) == 0 )
++		clif_displaymessage(fd, "This account doesnt have characters.");
++	else
++	{
++		while ( SQL_SUCCESS == Sql_NextRow(mmysql_handle) )
++		{
++			int char_id, class_;
++			short char_num, base_level, job_level, online;
++			char name[NAME_LENGTH];
++			
++			Sql_GetData(mmysql_handle, 0, &data, NULL); char_id = atoi(data);
++			Sql_GetData(mmysql_handle, 1, &data, NULL); safestrncpy(name, data, sizeof(name));
++			Sql_GetData(mmysql_handle, 2, &data, NULL); char_num = atoi(data);
++			Sql_GetData(mmysql_handle, 3, &data, NULL); class_ = atoi(data);
++			Sql_GetData(mmysql_handle, 4, &data, NULL); base_level = atoi(data);
++			Sql_GetData(mmysql_handle, 5, &data, NULL); job_level = atoi(data);
++			Sql_GetData(mmysql_handle, 6, &data, NULL); online = atoi(data);
++			
++			sprintf(atcmd_output, "[Slot/CID: %d/%d] %s | %s | Level: %d/%d | %s", char_num, char_id, name, job_name(class_), base_level, job_level, online?"On":"Off");
++			clif_displaymessage(fd, atcmd_output);
++		}
++	}
++	
++	Sql_FreeResult(mmysql_handle);
++	
++	return;
++}
++//Syntax: <account_id>/<char_name>
++//Result: If using account id and id exists return information about user account, if using char name and more than one result found lists all found results.
++int atcommand_accountinfo(const int fd, struct map_session_data* sd, const char* command, const char* message)
++{
++	int account_id = 0;
++	char *data;
++	
++	nullpo_retr(-1, sd);
++	
++	if (!message || !*message || strlen(message)>NAME_LENGTH ) {
++		clif_displaymessage(fd, "(usage: @accinfo/@accountinfo <account_id/char name>).");
++		return -1;
++	}
++	
++	account_id = atoi(message);
++	
++	if (account_id < START_ACCOUNT_NUM)
++	{
++		if ( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `account_id`,`name`,`class`,`base_level`,`job_level`,`online` FROM `char` WHERE `name` like '%s' limit 10", message) )
++		{
++			clif_displaymessage(fd, "Query Error on accountinfo function.");
++			Sql_FreeResult(mmysql_handle);
++			return -1;
++		}
++		else if ( Sql_NumRows(mmysql_handle) == 0 )
++		{
++			clif_displaymessage(fd, "Invalid Account ID/Char Name");
++			Sql_FreeResult(mmysql_handle);
++			return -1;
++		}
++		else
++		{
++			if (Sql_NumRows(mmysql_handle) == 1) {
++				Sql_NextRow(mmysql_handle);
++				Sql_GetData(mmysql_handle, 0, &data, NULL); account_id = atoi(data);
++				Sql_FreeResult(mmysql_handle);
++			}
++			else
++			{
++				sprintf(atcmd_output, "Your Query Returned the following %d results, please be more specific...", (int)Sql_NumRows(mmysql_handle));
++				clif_displaymessage(fd, atcmd_output);
++				while ( SQL_SUCCESS == Sql_NextRow(mmysql_handle) )
++				{
++					int class_;
++					short base_level, job_level, online;
++					char name[NAME_LENGTH];
++					
++					Sql_GetData(mmysql_handle, 0, &data, NULL); account_id = atoi(data);
++					Sql_GetData(mmysql_handle, 1, &data, NULL); safestrncpy(name, data, sizeof(name));
++					Sql_GetData(mmysql_handle, 2, &data, NULL); class_ = atoi(data);
++					Sql_GetData(mmysql_handle, 3, &data, NULL); base_level = atoi(data);
++					Sql_GetData(mmysql_handle, 4, &data, NULL); job_level = atoi(data);
++					Sql_GetData(mmysql_handle, 5, &data, NULL); online = atoi(data);
++					
++					sprintf(atcmd_output, "[ACID: %d] %s | %s | Level: %d/%d | %s", account_id, name, job_name(class_), base_level, job_level, online?"Online":"Offline");
++					clif_displaymessage(fd, atcmd_output);
++				}
++				Sql_FreeResult(mmysql_handle);
++				return -1;
++			}
++		}
++	}
++	account_info(fd, sd, account_id);
++	return 0;
++}
++
+ ACMD_FUNC(logininfo)
+ {
+ 	char userid[NAME_LENGTH], esc_userid[NAME_LENGTH*2+1];
+@@ -11300,6 +11466,299 @@
+ }
+ 
+ /*==========================================
++ * @dance by OnNplay
++ * inspired by Anarchist
++ * => Special effects with dance style
++ *------------------------------------------*/
++int atcommand_dance(const int fd, struct map_session_data* sd,const char* command, const char* message)
++{
++	int type = 0,flag = 0;
++	nullpo_retr(-1, sd);
++ 
++	if (!message || !*message || sscanf(message, "%d", &type) < 1) {
++		clif_displaymessage(fd, "usage: @dance 1-9");
++		return -1;
++	}
++
++	if ( atoi(message) == 1 ) {
++		clif_specialeffect(&sd->bl, 413, (send_target)flag);
++	} else if ( atoi(message) == 2 ) {
++		clif_specialeffect(&sd->bl, 414, (send_target)flag);
++	} else if ( atoi(message) == 3 ) {
++		clif_specialeffect(&sd->bl, 415, (send_target)flag);
++	} else if ( atoi(message) == 4 ) {
++		clif_specialeffect(&sd->bl, 426, (send_target)flag);
++	} else if ( atoi(message) == 5 ) {
++		clif_specialeffect(&sd->bl, 458, (send_target)flag);
++	} else if ( atoi(message) == 6 ) {
++		clif_specialeffect(&sd->bl, 466, (send_target)flag);
++	} else if ( atoi(message) == 7 ) {
++		clif_specialeffect(&sd->bl, 501, (send_target)flag);
++	} else if ( atoi(message) == 8 ) {
++		clif_specialeffect(&sd->bl, 540, (send_target)flag);
++	} else if ( atoi(message) == 9 ) {
++		clif_specialeffect(&sd->bl, 550, (send_target)flag);
++	}
++	return 0;
++}
++
++/*==========================================
++ * Recall all characters on your map to your location
++ *------------------------------------------*/
++ACMD_FUNC(maprecall)
++{
++	struct map_session_data* pl_sd;
++	struct s_mapiterator* iter;
++	int count;
++	nullpo_retr(-1, sd);
++
++	memset(atcmd_output, '\0', sizeof(atcmd_output));
++
++	if (sd->bl.m >= 0 && map[sd->bl.m].flag.nowarpto && battle_config.any_warp_GM_min_level > pc_isGM(sd)) {
++		clif_displaymessage(fd, "You are not authorized to warp someone to your actual map.");
++		return -1;
++	}
++
++	count = 0;
++	iter = mapit_getallusers();
++	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
++	{
++		if (sd->status.account_id != pl_sd->status.account_id && pc_isGM(sd) >= pc_isGM(pl_sd) && pl_sd->bl.m == sd->bl.m)
++		{
++			if ( pl_sd->vender_id || pl_sd->chatID ) //Skip recalling players who are vending or in a chatroom
++				count++;
++			else {
++				// atcommand_raise_sub(pl_sd); //Ressurect dead people
++				pc_setpos(pl_sd, sd->mapindex, sd->bl.x, sd->bl.y, 2);
++			}
++		}
++	}
++	mapit_free(iter);
++
++	clif_displaymessage(fd, "All characters on your map recalled!");
++	if (count) {
++		sprintf(atcmd_output, "%d player(s) have not been recalled because they are vending or in a chatroom.", count);
++		clif_displaymessage(fd, atcmd_output);
++	}
++
++	return 0;
++}
++
++//@guildmes/@gw
++//permission to send messages: 0x40.
++int atcommand_ind_gw(const int fd, struct map_session_data* sd, const char* command, const char* message)
++{
++	char mes[300];
++	struct map_session_data *pl_sd=NULL;
++	struct s_mapiterator* iter=NULL;
++	struct guild *g;
++	int pos = -1, i = 0, ps = 0, perm = 0;
++	bool allow = false;
++	if (sd->status.guild_id == 0 || (g = guild_search(sd->status.guild_id)) == NULL )//|| strcmp(g->master,sd->status.name))
++	{
++		clif_displaymessage(fd, "Necesitas estar en una guid para usar este comando.");
++		return -1;
++	}
++	pos = guild_getposition(g,sd);
++	
++	if( pos != 0 && !(g->position[pos].mode&0x40)) {//only GM or allowed peps are able to use it.
++		clif_displaymessage(fd, "Necesitas ser el GM de la guild para usar este comando.");
++		return -1;
++	}
++	if( sd->indtick && DIFF_TICK(gettick(), sd->indtick) < 1500 ) {
++		clif_displaymessage(fd,"[ GW ] ¡¡Intenta evitar floodear!! Podrás volver a hablar en 1 segundo...");
++		return -1;
++	}
++	if (!message || !*message) {
++		char outg[254];
++		clif_displaymessage(fd, "Introduce un mensaje (formato: @guildmes/@gw <message>).");
++		if( pos != 0 ) return -1;//non members shouldn't see the stuff below.
++		clif_displaymessage(fd, "Para editar los permisos: @guildmes/@gw <pos num> <1|0> donde 1 permite y 0 prohibe.");
++		//display the permission list
++		clif_displaymessage(fd,"======= Lista de Permisos =======");
++		sprintf(outg,"[ %s (GuildMaster) ] : Permitido (No se puede cambiar).",g->position[0].name);
++		clif_displaymessage(fd,outg);
++		for(i=1;i<MAX_GUILDPOSITION;i++){
++			sprintf(outg,"[ %d -> %s ] : %s.",i,g->position[i].name,g->position[i].mode&0x40?"Permitido":"No Permitido");
++			clif_displaymessage(fd,outg);
++		}
++		clif_displaymessage(fd,"===============================");
++		return -1;
++	} else if (strlen(message) < 5 && sscanf(message, "%d %d", &ps,&perm) == 2 && pos == 0) {//pattern is okai and is the gm.
++		if( ps < 1 || ps > MAX_GUILDPOSITION-1 ) {
++		clif_displaymessage(fd,"No se le puede modificar el permiso a la posición proporcionada.");
++		return -1;
++		}
++		if( perm < 0 || perm > 1 ) {
++			clif_displaymessage(fd,"El permiso debe especificarse con 0 o 1.");
++			return -1;
++		}
++		if( perm )
++			allow = true;
++		if( allow && !(g->position[ps].mode&0x40) ) {
++			g->position[ps].mode |= 0x40;
++			guild_change_position(sd->status.guild_id,ps,g->position[ps].mode,g->position[ps].exp_mode,g->position[ps].name);//set the char server to save this position data.
++		}
++		else if( !allow && g->position[ps].mode&0x40 ) {
++			g->position[ps].mode &= ~ 0x40;
++			guild_change_position(sd->status.guild_id,ps,g->position[ps].mode,g->position[ps].exp_mode,g->position[ps].name);//set the char server to save this position data.
++		}
++		clif_displaymessage(fd,"Permisos cambiados. Para ver la lista completa de permisos escribe '@gstoragelock'.");
++		return 0;
++	}
++	//#FFAA00
++	if( pos > 0 ) // not guild master
++		sprintf(mes,"[ %s ] : %s",sd->status.name,message);
++	else //guild master
++		sprintf(mes,"[ Guild Master ] : %s",message);
++	iter = mapit_getallusers();
++	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) ) {
++		if( pl_sd->status.guild_id != sd->status.guild_id ) continue;
++		clif_broadcast2(&pl_sd->bl, mes, (int)strlen(mes)+1, strtol(pos>0?"0xFFAA00":"0x00FF00", (char **)NULL, 0), 0x190, 12, 0, 0, SELF);
++	}
++	mapit_free(iter);
++	sd->indtick = gettick();
++	return 0;
++}
++//permission to open the guild storage: 0x20.
++int atcommand_ind_gstoragelock(const int fd, struct map_session_data* sd, const char* command, const char* message) {
++	struct guild *g;
++	int ps, perm=0;
++	bool allow = false;//on true checks for bit mask, if no bitmask found then we charge...
++	if (sd->status.guild_id == 0 || (g = guild_search(sd->status.guild_id)) == NULL || strcmp(g->master,sd->status.name))
++	{
++		clif_displaymessage(fd, "Necesitas ser un Guild Master para usar este comando.");
++		return -1;
++	}
++	if (!message || !*message || sscanf(message, "%d %d", &ps,&perm) < 2) {
++		int i;
++		char outg[254];
++		clif_displaymessage(fd, "formato: @gstoragelock <pos #> <1|0>");
++		clif_displaymessage(fd, "ejemplo: @gstoragelock 1 1 añade derecho de acceso a la posición #1, mientras que @gstoragelock 1 0 le privaría de derecho de acceso a la posición #1.");
++		//display the permission list
++		clif_displaymessage(fd,"======= Lista de Permisos =======");
++		sprintf(outg,"[ %s (GuildMaster) ] : Permitido (No se puede cambiar).",g->position[0].name);
++		clif_displaymessage(fd,outg);
++		for(i=1;i<MAX_GUILDPOSITION;i++){
++			sprintf(outg,"[ %d -> %s ] : %s.",i,g->position[i].name,g->position[i].mode&0x20?"Permitido":"No Permitido");
++			clif_displaymessage(fd,outg);
++		}
++		clif_displaymessage(fd,"===============================");
++		return -1;
++	}
++	if( ps < 1 || ps > MAX_GUILDPOSITION-1 ) {
++		clif_displaymessage(fd,"La posición proporcionada no existe o es imposible de cambiar.");
++		return -1;
++	}
++	if( perm < 0 || perm > 1 ) {
++		clif_displaymessage(fd,"El permiso debe ser 1 o 0.");
++		return -1;
++	}
++	if( perm )
++		allow = true;
++	if( allow && !(g->position[ps].mode&0x20) ) {
++		g->position[ps].mode |= 0x20;
++		guild_change_position(sd->status.guild_id,ps,g->position[ps].mode,g->position[ps].exp_mode,g->position[ps].name);//set the char server to save this position data.
++	}
++	else if( !allow && g->position[ps].mode&0x20 ) {
++		g->position[ps].mode &= ~ 0x20;
++		guild_change_position(sd->status.guild_id,ps,g->position[ps].mode,g->position[ps].exp_mode,g->position[ps].name);//set the char server to save this position data.
++	}
++	clif_displaymessage(fd,"Permisos cambiados. Para ver la lista completa de permisos escribe '@gstoragelock'.");
++	return 0;
++}
++
++/*=========================================
++ * Battle Refiner Configuration
++ *-----------------------------------------*/
++ACMD_FUNC(battlerefine)
++{
++	nullpo_retr(-1,sd);
++	if( sd->npc_id || sd->vender_id || sd->buyer_id || sd->state.trading || sd->state.storage_flag )
++		return -1;
++
++	npc_event(sd,"BattleRefiner::OnConfig",0);
++	return 0;
++}
++
++/*=========================================
++ * Check-in
++ *-----------------------------------------*/
++ACMD_FUNC(checkin)
++{
++	nullpo_retr(-1,sd);
++	if( sd->npc_id || sd->vender_id || sd->buyer_id || sd->state.trading || sd->state.storage_flag )
++		return -1;
++
++	npc_event(sd,"CheckIn::OnCheck",0);
++	return 0;
++}
++
++/*=========================================
++ * Jukebox
++ *-----------------------------------------*/
++ACMD_FUNC(jukebox)
++{
++	nullpo_retr(-1,sd);
++	if( sd->npc_id || sd->vender_id || sd->buyer_id || sd->state.trading || sd->state.storage_flag )
++		return -1;
++
++	npc_event(sd,"Jukebox::OnPlay",0);
++	return 0;
++}
++
++/*=========================================
++ * Reputation
++ *-----------------------------------------*/
++ACMD_FUNC(reputation)
++{
++	nullpo_retr(-1,sd);
++	if( sd->npc_id || sd->vender_id || sd->buyer_id || sd->state.trading || sd->state.storage_flag )
++		return -1;
++
++	npc_event(sd,"AlignmentSystem::OnCheckKarma",0);
++	return 0;
++}
++
++/*==========================================
++ * @faildrop by Blackthunder
++ * Turns on/off Showing failed loots for a specific player
++ *------------------------------------------*/
++int atcommand_faildrop(const int fd, struct map_session_data* sd, const char* command, const char* message)
++{
++	int rate;
++	double drate;
++	nullpo_retr(-1, sd);
++
++	// faildrop command without value
++	if(!message || !*message)
++	{
++		if (sd->state.faildrop)
++			rate = 0;
++		else
++		{
++			clif_displaymessage(fd, "Forma de uso: @faildrop <valor%>");
++			clif_displaymessage(fd, "Ejemplo: '@faildrop 1.50' mostrará las tiradas fallidas para los drops con rates de 1.50 o inferior.");
++			rate = 0;
++		}
++	} else {
++		drate = atof(message);
++		rate = (int)(drate*100);
++	}
++	if (rate < 0) rate = 0;
++	if (rate > 10000) rate = 10000;
++ 
++	sd->state.faildrop = rate;
++	if (sd->state.faildrop) {
++		snprintf(atcmd_output, sizeof atcmd_output, "Mostrando tiradas fallidas para drops con rates de %0.02f%% o inferior.",((double)sd->state.faildrop)/100.);
++		clif_displaymessage(fd, atcmd_output);
++	}else
++		clif_displaymessage(fd, "Faildrop desactivado.");
++ 
++	return 0;
++}
++
++/*==========================================
+  * atcommand_info[] structure definition
+  *------------------------------------------*/
+ 
+@@ -11640,7 +12099,7 @@
+ 	{ "mapdeadcounter",    40,40,   0,     atcommand_contadormuertes },
+ 	{ "whosell",            1,1,    0,     atcommand_whosell },
+ 	{ "cityheart",         40,40,   0,     atcommand_cityheart },
+-	{ "pvpmode",            1,1,    0,     atcommand_pvpmode },
++	{ "pkmode",             1,1,    0,     atcommand_pvpmode },
+ 	{ "whopk",              1,1,    0,     atcommand_whopk },
+ 	{ "rentstorage",        1,1,    0,     atcommand_rentstorage },
+ 	{ "aura",               1,1,    0,     atcommand_aura },
+@@ -11666,6 +12125,17 @@
+ 	{ "unboundall",        60,60,   0,     atcommand_unboundall },
+ 	{ "mobtele",           60,60,   0,     atcommand_teleport },
+ 	{ "pctele",            60,60,   0,     atcommand_teleport },
++	{ "dance",              0,40,   0,     atcommand_dance },
++	{ "displaydrop",        0,1,    0,     atcommand_displaydrop },
++	{ "checkin",            0,10,   0,     atcommand_checkin },
++	{ "battlerefine",       0,10,   0,     atcommand_battlerefine },
++	{ "jukebox",            0,10,   0,     atcommand_jukebox },
++	{ "reputation",         0,1,    0,     atcommand_reputation },
++	{ "faildrop",           1,1,    0,     atcommand_faildrop },
++	{ "maprecall",         60,60,   0,     atcommand_maprecall },
++	{ "gstoragelock",       0,99,   0,     atcommand_ind_gstoragelock },
++	{ "gw",                 0,99,   0,     atcommand_ind_gw },
++	{ "guildmes",           0,99,   0,     atcommand_ind_gw },
+ };
+ 
+ 
+Index: Trunk/src/map/battle.c
+===================================================================
+--- Trunk/src/map/battle.c	(revision 263)
++++ Trunk/src/map/battle.c	(working copy)
+@@ -5455,6 +5455,9 @@
+ 			struct mob_data *md = BL_CAST(BL_MOB, t_bl);
+ 			if( !(agit_flag && map[m].flag.gvg_castle) && md->guardian_data && md->guardian_data->guild_id )
+ 				return 0; // Disable guardians/emperiums owned by Guilds on non-woe times.
++
++			if( md->state.unkillable )
++				return 0; //unkillable flag set, can't touch
+ 			break;
+ 		}
+ 	}
+@@ -6160,6 +6163,8 @@
+ 	{ "bg_magic_attack_damage_rate",        &battle_config.bg_magic_damage_rate,            60,     0,      INT_MAX,        },
+ 	{ "bg_misc_attack_damage_rate",         &battle_config.bg_misc_damage_rate,             60,     0,      INT_MAX,        },
+ 	{ "bg_flee_penalty",                    &battle_config.bg_flee_penalty,                 20,     0,      INT_MAX,        },
++	{ "gm_monsterdrop_lv",                  &battle_config.gm_monsterdrop_lv,               0,      0,      99,             },
++	{ "lootevent",                          &battle_config.lootevent,                       1,      0,      31,             },
+ 	{ "bg_idle_announce",                   &battle_config.bg_idle_announce,                0,      0,      INT_MAX,        },
+ 	{ "bg_reserved_char_id",                &battle_config.bg_reserved_char_id,             999996, 0,      INT_MAX,        },
+ 	{ "bg_items_on_pvp",                    &battle_config.bg_items_on_pvp,                 1,      0,      1,              },
+Index: Trunk/src/map/battle.h
+===================================================================
+--- Trunk/src/map/battle.h	(revision 263)
++++ Trunk/src/map/battle.h	(working copy)
+@@ -275,6 +275,7 @@
+ 	int gvg_magic_damage_rate;
+ 	int gvg_misc_damage_rate;
+ 	int gvg_flee_penalty;
++	int gm_monsterdrop_lv;
+ 	int gvg_eliminate_time;
+ 	int pk_short_damage_rate;
+ 	int pk_long_damage_rate;
+@@ -568,6 +569,8 @@
+ 	int reflect_damage_fix;
+ 	int dancing_weaponchange_fix;
+ 	int anti_mayapurple_hack;
++
++	int lootevent;
+ } battle_config;
+ 
+ void do_init_battle(void);
+Index: Trunk/src/map/clif.c
+===================================================================
+--- Trunk/src/map/clif.c	(revision 263)
++++ Trunk/src/map/clif.c	(working copy)
+@@ -833,6 +833,12 @@
+ 
+ 	nullpo_ret(bl);
+ 
++	if ( type == 1 ) {
++		struct view_data *vd;
++		if ( (vd=status_get_viewdata(bl)) && vd->head_bottom==65535 )
++			type = 0;
++	}
++
+ 	WBUFW(buf,0) = 0x80;
+ 	WBUFL(buf,2) = bl->id;
+ 	WBUFB(buf,6) = type;
+@@ -943,6 +949,8 @@
+ #endif
+ 	sd = BL_CAST(BL_PC, bl);
+ 
++	spawn  =  vd->head_bottom == 65535 ? true : spawn;
++
+ #if PACKETVER < 20091103
+ 	if(type)
+ 		WBUFW(buf,0) = spawn?0x7c:0x78;
+Index: Trunk/src/map/guild.c
+===================================================================
+--- Trunk/src/map/guild.c	(revision 263)
++++ Trunk/src/map/guild.c	(working copy)
+@@ -1173,7 +1173,9 @@
+ 	exp_mode = cap_value(exp_mode, 0, battle_config.guild_exp_limit);
+ 	//Mode 0x01 <- Invite
+ 	//Mode 0x10 <- Expel.
+-	p.mode=mode&0x11;
++	//Mode 0x20 <- GStorage. [Ind/ro-resources.net]
++	//Mode 0x40 <- @gw. [Ind/ro-resources.net]
++	p.mode=mode&0x71;
+ 	p.exp_mode=exp_mode;
+ 	safestrncpy(p.name,name,NAME_LENGTH);
+ 	return intif_guild_position(guild_id,idx,&p);
+Index: Trunk/src/map/itemdb.c
+===================================================================
+--- Trunk/src/map/itemdb.c	(revision 263)
++++ Trunk/src/map/itemdb.c	(working copy)
+@@ -894,7 +894,46 @@
+ 	return true;
+ }
+ 
++/*================================================================== 
++ * Reads item stacking restrictions 
++ *----------------------------------------------------------------*/ 
++static bool itemdb_read_stack(char* fields[], int columns, int current) 
++{// <item id>,<stack limit amount>,<type> 
++	unsigned short nameid, amount; 
++	unsigned int type; 
++	struct item_data* id; 
+ 
++	nameid = (unsigned short)strtoul(fields[0], NULL, 10); 
++
++	if( ( id = itemdb_exists(nameid) ) == NULL ) 
++	{ 
++		ShowWarning("itemdb_read_stack: Unknown item id '%hu'.\n", nameid); 
++		return false; 
++	} 
++
++	if( !itemdb_isstackable2(id) ) 
++	{ 
++		ShowWarning("itemdb_read_stack: Item id '%hu' is not stackable.\n", nameid); 
++		return false; 
++	} 
++
++	amount = (unsigned short)strtoul(fields[1], NULL, 10); 
++	type = strtoul(fields[2], NULL, 10); 
++
++	if( !amount ) 
++	{// ignore 
++		return true; 
++	} 
++
++	id->stack.amount       = amount; 
++	id->stack.inventory    = (type&1)!=0; 
++	id->stack.cart         = (type&2)!=0; 
++	id->stack.storage      = (type&4)!=0; 
++	id->stack.guildstorage = (type&8)!=0; 
++
++	return true; 
++}
++
+ /*======================================
+  * Applies gender restrictions according to settings. [Skotlex]
+  *======================================*/
+@@ -1296,6 +1335,7 @@
+ 	sv_readdb(db_path, "item_noequip.txt", ',', 2, 2, -1,             &itemdb_read_noequip);
+ 	sv_readdb(db_path, "item_trade.txt",   ',', 3, 3, -1,             &itemdb_read_itemtrade);
+ 	sv_readdb(db_path, "item_delay.txt",   ',', 2, 2, MAX_ITEMDELAYS, &itemdb_read_itemdelay);
++	sv_readdb(db_path, "item_stack.txt",   ',', 3, 3, -1,             &itemdb_read_stack);
+ 	sv_readdb(db_path, "item_buyingstore.txt", ',', 1, 1, -1,         &itemdb_read_buyingstore);
+ 	itemdb_load_serials();
+ }
+Index: Trunk/src/map/itemdb.h
+===================================================================
+--- Trunk/src/map/itemdb.h	(revision 263)
++++ Trunk/src/map/itemdb.h	(working copy)
+@@ -9,7 +9,7 @@
+ #define MAX_RANDITEM	11000
+ 
+ // The maximum number of item delays
+-#define MAX_ITEMDELAYS	10
++#define MAX_ITEMDELAYS	30
+ 
+ #define MAX_SEARCH	10  //Designed for search functions, species max number of matches to display.
+ 
+@@ -92,6 +92,14 @@
+ 		unsigned trade_restriction : 7;	//Item restrictions mask [Skotlex]
+ 		unsigned buyingstore : 1;
+ 	} flag;
++	struct
++	{// item stacking limitation
++		unsigned short amount;
++		unsigned int inventory:1;
++		unsigned int cart:1;
++		unsigned int storage:1;
++		unsigned int guildstorage:1;
++	} stack;
+ 	short gm_lv_trade_override;	//GM-level to override trade_restriction
+ };
+ 
+Index: Trunk/src/map/mail.c
+===================================================================
+--- Trunk/src/map/mail.c	(revision 263)
++++ Trunk/src/map/mail.c	(working copy)
+@@ -12,6 +12,7 @@
+ #include "clif.h"
+ #include "pc.h"
+ #include "log.h"
++#include "npc.h"
+ 
+ #include <time.h>
+ #include <string.h>
+@@ -158,6 +159,11 @@
+ 
+ 		if(log_config.enable_logs&0x2000)
+ 			log_pick_pc(sd, "E", item->nameid, item->amount, item, item->serial);
++		if( battle_config.lootevent & 8 ) {
++			pc_setglobalreg( sd, "LastLootID", item->nameid ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", item->amount ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		}
+ 
+ 		clif_Mail_getattachment(sd->fd, 0);
+ 	}
+@@ -192,6 +198,11 @@
+ 		// Item recieve (due to failure)
+ 		if(log_config.enable_logs&0x2000)
+ 			log_pick_pc(sd, "E", msg->item.nameid, msg->item.amount, &msg->item, msg->item.serial);
++		if( battle_config.lootevent & 8 ) {
++			pc_setglobalreg( sd, "LastLootID", msg->item.nameid ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", msg->item.amount ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		} 
+ 
+ 		pc_additem(sd, &msg->item, msg->item.amount);
+ 	}
+Index: Trunk/src/map/map.c
+===================================================================
+--- Trunk/src/map/map.c	(revision 263)
++++ Trunk/src/map/map.c	(working copy)
+@@ -1580,8 +1580,10 @@
+ 
+ 	nullpo_ret(item_data);
+ 
+-	if(!map_searchrandfreecell(m,&x,&y,flags&2?1:0))
+-		return 0;
++	if( !(flags&4) ) {
++		if(!map_searchrandfreecell(m,&x,&y,flags&2?1:0))
++			return 0;
++	}
+ 	r=rand();
+ 
+ 	CREATE(fitem, struct flooritem_data, 1);
+@@ -1606,8 +1608,8 @@
+ 
+ 	memcpy(&fitem->item_data,item_data,sizeof(*item_data));
+ 	fitem->item_data.amount=amount;
+-	fitem->subx=(r&3)*3+3;
+-	fitem->suby=((r>>2)&3)*3+3;
++	fitem->subx= flags&4 ? 9 : (r&3)*3+3;
++	fitem->suby= flags&4 ? 6 : ((r>>2)&3)*3+3;
+ 	fitem->cleartimer=add_timer(gettick()+battle_config.flooritem_lifetime,map_clearflooritem_timer,fitem->bl.id,0);
+ 	fitem->no_bsgreed = ( (flags&4) != 0 ); // [Zephyrus] @flooritem
+ 
+Index: Trunk/src/map/map.h
+===================================================================
+--- Trunk/src/map/map.h	(revision 263)
++++ Trunk/src/map/map.h	(working copy)
+@@ -32,7 +32,7 @@
+ //  of 10 allows you to attack from anywhere within a 21x21 area.
+ //Enabling this changes such checks to circular checks, which is more realistic,
+ //  but is not the official behaviour.
+-//#define CIRCULAR_AREA
++#define CIRCULAR_AREA
+ 
+ #define MAX_NPC_PER_MAP 512
+ #define BLOCK_SIZE 8
+@@ -41,7 +41,7 @@
+ #define LOOTITEM_SIZE 10
+ #define MAX_MOBSKILL 50
+ #define MAX_MOB_LIST_PER_MAP 128
+-#define MAX_EVENTQUEUE 5
++#define MAX_EVENTQUEUE 90
+ #define MAX_EVENTTIMER 32
+ #define NATURAL_HEAL_INTERVAL 500
+ #define MIN_FLOORITEM 2
+Index: Trunk/src/map/mob.c
+===================================================================
+--- Trunk/src/map/mob.c	(revision 263)
++++ Trunk/src/map/mob.c	(working copy)
+@@ -2257,7 +2257,15 @@
+ 			}
+ 		}
+ 	}
+-	
++
++	if( (mvp_sd && pc_isGM(mvp_sd)) || (sd && pc_isGM(sd)) )
++	{
++		if( mvp_sd && (pc_isGM(mvp_sd) >= battle_config.lowest_gm_level && pc_isGM(mvp_sd) < battle_config.gm_monsterdrop_lv) )
++			type |= 1;
++		else if( sd && (pc_isGM(sd) >= battle_config.lowest_gm_level && pc_isGM(sd) < battle_config.gm_monsterdrop_lv) )
++			type |= 1;
++	}
++
+ 	if( sd )
+ 	{
+ 		if( md->option.announce_killer )
+@@ -2484,6 +2492,7 @@
+ 		struct item_drop_list *dlist = ers_alloc(item_drop_list_ers, struct item_drop_list);
+ 		struct item_drop *ditem;
+ 		int drop_rate, bonus_drop_rate = 0;
++		int drop_roll;
+ 		dlist->m = md->bl.m;
+ 		dlist->x = md->bl.x;
+ 		dlist->y = md->bl.y;
+@@ -2531,9 +2540,29 @@
+ 			if (sd && sd->sc.data[SC_ITEMBOOST]) // now rig the drop rate to never be over 90% unless it is originally >90%.
+ 				drop_rate = max(drop_rate,cap_value((int)(0.5+drop_rate*(sd->sc.data[SC_ITEMBOOST]->val1)/100.),0,9000));
+ 
++			// Add extra drop bonus for Chain [WiseWarrior]
++			if ((mvp_sd) && (mvp_sd->drop_bonus > 0)){
++				drop_rate = (int)(drop_rate+mvp_sd->drop_bonus);
++			}else if ((sd) && (sd->drop_bonus > 0)){
++				drop_rate = (int)(drop_rate+sd->drop_bonus);
++			}
++
+ 			// attempt to drop the item
+-			if( rand() % 10000 >= (drop_rate + bonus_drop_rate) )
++			drop_roll = rand() % 10000; //PreRoll % for failed drop announce [Blackthunder)
++			if (drop_roll >= (drop_rate + bonus_drop_rate))
++			{
++				if( mvp_sd && (drop_rate + bonus_drop_rate) <= mvp_sd->state.faildrop ) //show roll if failed [Blackthunder]
++				{
++					struct item_data *i_data;
++					char output[128];
++					ditem = mob_setdropitem(md->db->dropitem[i].nameid, 1);
++					drop_roll += 1;
++					i_data = itemdb_search(ditem->item_data.nameid);
++					snprintf(output, sizeof output, "Failed to drop %s's %s. You rolled %0.02f%% (%0.02f%% or lower needed)", md->name, i_data->jname, (float)drop_roll/100, (float)drop_rate/100);
++					clif_displaymessage(mvp_sd->fd, output);
++				}
+ 				continue;
++			}
+ 
+ 			ditem = mob_setdropitem(md->db->dropitem[i].nameid, 1);
+ 
+@@ -2696,6 +2725,11 @@
+ 				log_pick_mob(md, "M", item.nameid, -1, NULL, item.serial);
+ 				if (!temp)
+ 					log_pick_pc(mvp_sd, "P", item.nameid, 1, NULL, item.serial);
++				if( battle_config.lootevent & 16 ) {
++					pc_setglobalreg( sd, "LastLootID", item.nameid ); //Last lootet Item ID
++					pc_setglobalreg( sd, "LastLootAmount", 1 ); //Last looted Item Amount
++					npc_event_doall_id( "OnLoot", sd->bl.id );
++				}
+ 			}
+ 			break;
+ 		}
+Index: Trunk/src/map/mob.h
+===================================================================
+--- Trunk/src/map/mob.h	(revision 263)
++++ Trunk/src/map/mob.h	(working copy)
+@@ -17,7 +17,7 @@
+ // Be sure to note that IDs 4001 to 4048 are reserved for advanced/baby/expanded classes.
+ // Notice that the last 1000 entries are used for player clones, so always set this to desired value +1000
+ #define MIN_MOB_DB 1000
+-#define MAX_MOB_DB 4000
++#define MAX_MOB_DB 5000
+ 
+ //The number of drops all mobs have and the max drop-slot that the steal skill will attempt to steal from.
+ #define MAX_MOB_DROP 10
+@@ -137,6 +137,7 @@
+ 		unsigned int spotted: 1;
+ 		unsigned int npc_killmonster: 1; //for new killmonster behavior
+ 		unsigned int rebirth: 1; // NPC_Rebirth used
++		unsigned unkillable : 1;	//if set monster is impervious to dmg
+ 		unsigned int boss : 1;
+ 		enum MobSkillState skillstate;
+ 		unsigned char steal_flag; //number of steal tries (to prevent steal exploit on mobs with few items) [Lupus]
+Index: Trunk/src/map/npc.c
+===================================================================
+--- Trunk/src/map/npc.c	(revision 263)
++++ Trunk/src/map/npc.c	(working copy)
+@@ -1295,6 +1295,11 @@
+ 
+ 		if( log_config.enable_logs&0x20 )
+ 			log_pick_pc(sd, "S", nameid, amount, NULL, item_tmp.serial);
++		if( battle_config.lootevent & 2 ) {
++			pc_setglobalreg( sd, "LastLootID", nameid ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		} 
+ 	}
+ 
+ 	return 0;
+@@ -1414,6 +1419,11 @@
+ 
+ 	if(log_config.enable_logs&0x20)
+ 		log_pick_pc(sd, "S", nameid, amount, NULL, item_tmp.serial);
++	if( battle_config.lootevent & 2 ) {
++		pc_setglobalreg( sd, "LastLootID", nameid ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	} 
+ 
+ 	return 0;
+ }
+@@ -1524,6 +1534,11 @@
+ 		//Logs items, Bought in NPC (S)hop [Lupus]
+ 		if( log_config.enable_logs&0x20 )
+ 			log_pick_pc(sd, "S", item_tmp.nameid, amount, NULL, item_tmp.serial);
++		if( battle_config.lootevent & 2 ) {
++			pc_setglobalreg( sd, "LastLootID", item_tmp.nameid ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		}
+ 		//Logs
+ 	}
+ 
+Index: Trunk/src/map/npc.h
+===================================================================
+--- Trunk/src/map/npc.h	(revision 263)
++++ Trunk/src/map/npc.h	(working copy)
+@@ -64,6 +64,11 @@
+ 			unsigned short mapindex; // destination map
+ 		} warp;
+ 	} u;
++
++	struct {
++		char vending[NAME_LENGTH+1]; //vending name
++		bool vends; //does he vend?
++	} vend;
+ };
+ 
+ 
+Index: Trunk/src/map/party.c
+===================================================================
+--- Trunk/src/map/party.c	(revision 263)
++++ Trunk/src/map/party.c	(working copy)
+@@ -1002,7 +1002,13 @@
+ 
+ 	if(log_config.enable_logs&0x8) //Logs items, taken by (P)layers [Lupus]
+ 		log_pick_pc(target, "P", item_data->nameid, item_data->amount, item_data, item_data->serial);
+-	
++
++	if( battle_config.lootevent & 1 ) {
++		pc_setglobalreg( sd, "LastLootID", item_data->nameid ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", item_data->amount ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	}
++
+ 	if( p && battle_config.party_show_share_picker && battle_config.show_picker_item_type&(1<<itemdb_type(item_data->nameid)) )
+ 		clif_party_show_picker(target, item_data);
+ 
+Index: Trunk/src/map/pc.c
+===================================================================
+--- Trunk/src/map/pc.c	(revision 263)
++++ Trunk/src/map/pc.c	(working copy)
+@@ -2483,8 +2483,7 @@
+ 	for(i = 0; i < max && (drop[i].id || drop[i].group); i++) {
+ 		if(
+ 			((id && drop[i].id == id) ||
+-			(group && drop[i].group == group)) 
+-			&& race > 0
++			(group && drop[i].group == group)) && race < (RC_MAX<<1)
+ 		) {
+ 			drop[i].race |= race;
+ 			if(drop[i].rate > 0 && rate > 0)
+@@ -4166,19 +4165,25 @@
+ int pc_checkadditem(struct map_session_data *sd,int nameid,int amount)
+ {
+ 	int i;
++	struct item_data* data;
+ 
+ 	nullpo_ret(sd);
+ 
+ 	if(amount > MAX_AMOUNT)
+ 		return ADDITEM_OVERAMOUNT;
+ 
+-	if(!itemdb_isstackable(nameid))
++	data = itemdb_search(nameid);
++
++	if(!itemdb_isstackable2(data))
+ 		return ADDITEM_NEW;
+ 
++	if( data->stack.inventory && amount > data->stack.amount )
++		return ADDITEM_OVERAMOUNT;
++
+ 	for(i=0;i<MAX_INVENTORY;i++){
+ 		// FIXME: This does not consider the checked item's cards, thus could check a wrong slot for stackability.
+ 		if(sd->status.inventory[i].nameid==nameid){
+-			if(sd->status.inventory[i].amount+amount > MAX_AMOUNT)
++			if( amount > MAX_AMOUNT - sd->status.inventory[i].amount || ( data->stack.inventory && amount > data->stack.amount - sd->status.inventory[i].amount ) )
+ 				return ADDITEM_OVERAMOUNT;
+ 			return ADDITEM_EXIST;
+ 		}
+@@ -4409,6 +4414,12 @@
+ 		return 5;
+ 	
+ 	data = itemdb_search(item_data->nameid);
++
++	if( data->stack.inventory && amount > data->stack.amount ) 
++	{// item stack limitation 
++		return 5; 
++	}
++
+ 	w = data->weight*amount;
+ 	if(sd->weight + w > sd->max_weight)
+ 		return 2;
+@@ -4975,7 +4986,7 @@
+ 
+ 	if( i < MAX_CART )
+ 	{// item already in cart, stack it
+-		if(sd->status.cart[i].amount+amount > MAX_AMOUNT)
++		if( amount > MAX_AMOUNT - sd->status.cart[i].amount || ( data->stack.cart && amount > data->stack.amount - sd->status.cart[i].amount ) )
+ 			return 1; // no room
+ 
+ 		sd->status.cart[i].amount+=amount;
+@@ -6459,10 +6470,14 @@
+ 	}
+ 
+ #if PACKETVER >= 20091027
+-	if(base_exp)
+-		clif_displayexp(sd, base_exp, 1, quest);
+-	if(job_exp)
+-		clif_displayexp(sd, job_exp,  2, quest);
++		//if(base_exp)
++			//clif_displayexp(sd, base_exp, 1, quest);
++			//sprintf(output," (%.2f%%) de tu Nivel Base actual",nextbp*(float)100);
++			//clif_disp_onlyself(sd,output,strlen(output));
++		//if(job_exp)
++			//clif_displayexp(sd, job_exp,  2, quest);
++			//sprintf(output," (%.2f%%) de tu Nivel Job actual",nextjp*(float)100);
++			//clif_disp_onlyself(sd,output,strlen(output));
+ #endif
+ 
+ 	sd->custom_data.session_base_exp += base_exp;
+@@ -6470,7 +6485,7 @@
+ 
+ 	if(sd->state.showexp) {
+ 		sprintf(output,
+-			"Experience Gained Base:%u (%.2f%%) Job:%u (%.2f%%)",base_exp,nextbp*(float)100,job_exp,nextjp*(float)100);
++			"EXP Base:%u (%.2f%%)    EXP Job:%u (%.2f%%)",base_exp,nextbp*(float)100,job_exp,nextjp*(float)100);
+ 		clif_disp_onlyself(sd,output,strlen(output));
+ 	}
+ 
+@@ -7993,21 +8008,52 @@
+ 		}
+ 	}
+ 
+-	if(battle_config.bone_drop==2
+-		|| (battle_config.bone_drop==1 && map[sd->bl.m].flag.pvp && drop_skull_rate < rand() % 100))
+-	{
+-		struct item item_tmp;
+-		clif_displaymessage(sd->fd, "[Has perdido la cabeza!!]");
+-		memset(&item_tmp,0,sizeof(item_tmp));
+-		item_tmp.nameid=ITEMID_SKULL_;
+-		item_tmp.identify=1;
+-		item_tmp.card[0]=CARD0_CREATE;
+-		item_tmp.card[1]=0;
+-		item_tmp.card[2]=GetWord(sd->status.char_id,0); // CharId
+-		item_tmp.card[3]=GetWord(sd->status.char_id,1);
+-		map_addflooritem(&item_tmp,1,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0,0);
++	// Unreal 3 - Juggernaut [Ivion]
++	if(	(battle_config.bone_drop == 2) ||
++		(battle_config.bone_drop==1 && map[sd->bl.m].flag.pvp)
++	){
++		if(src && (src->type == BL_PC)) {
++			struct map_session_data *ssd = (struct map_session_data *)src;
++				if(	(ssd->bl.id != sd->bl.id) &&
++					(!battle_config.pk_level_range || ((int)ssd->status.base_level <= ((int)sd->status.base_level + battle_config.pk_level_range))) &&
++					!sd->sc.data[SC_PKDELAY]
++				) {
++					struct item item_tmp;
++					sc_start(&sd->bl,SC_PKDELAY,100,0,60000);
++					memset(&item_tmp,0,sizeof(item_tmp));
++					item_tmp.nameid=ITEMID_SKULL_;
++					item_tmp.identify=1;
++					item_tmp.card[0]=CARD0_CREATE;
++					item_tmp.card[1]=0;
++					item_tmp.card[2]=GetWord(sd->status.char_id,0); // CharId
++					item_tmp.card[3]=GetWord(sd->status.char_id,1);
++					map_addflooritem(&item_tmp,1,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0,0);
++			}
++		}
++		for(k = 0; k < MAX_INVENTORY; k++)
++			if((sd->status.inventory[k].nameid > 0) && (sd->status.inventory[k].amount > 0))
++				if((sd->status.inventory[k].nameid == ITEMID_SKULL_) && (sd->status.inventory[k].card[2] || sd->status.inventory[k].card[3])) {
++					while(sd->status.inventory[k].amount >= 5) {
++						map_addflooritem(&sd->status.inventory[k],5,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0,0);
++						pc_delitem(sd,k,5,0,0);
++					}
++					if(sd->status.inventory[k].amount) {
++						map_addflooritem(&sd->status.inventory[k],sd->status.inventory[k].amount,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0,0);
++						pc_delitem(sd,k,sd->status.inventory[k].amount,0,0);
++					}
++				}
+ 	}
+ 
++	// Activate SC_PKDELAY [Ivion]
++	if(src && (src->type == BL_PC)) {
++		struct map_session_data *ssd = (struct map_session_data *)src;
++		if(	(ssd->bl.id != sd->bl.id) &&
++			(!battle_config.pk_level_range || ((int)ssd->status.base_level <= ((int)sd->status.base_level + battle_config.pk_level_range))) &&
++			!sd->sc.data[SC_PKDELAY]
++		)
++			sc_start(&sd->bl,SC_PKDELAY,100,0,60000);
++	}
++
+ 	// PVPMode OFF
+ 	if( sd->state.pvpmode ) pc_pvpmodeoff(sd, 1, 1);
+ 
+Index: Trunk/src/map/pc.h
+===================================================================
+--- Trunk/src/map/pc.h	(revision 263)
++++ Trunk/src/map/pc.h	(working copy)
+@@ -153,6 +153,7 @@
+ 		bool changemap, changeregion;
+ 		short pmap; // Previous map on Map Change
+ 		unsigned short autobonus; //flag to indicate if an autobonus is activated. [Inkfish]
++		unsigned short faildrop; //Faildrop display [Blackthunder]
+ 		struct guild *gmaster_flag;
+ 		unsigned int only_walk : 1; // [Zephyrus] Block Skills and Item usage to a player
+ 		unsigned int improv_flag : 1;
+@@ -163,6 +164,7 @@
+ 		unsigned int evade_antiwpefilter : 1; // Required sometimes to show the user previous to use the skill
+ 		unsigned bg_afk : 1; // Moved here to reduce searchs
+ 	} state;
++	int indtick;//[Ind/ro-resources.net] common tick for delay purposes.
+ 	struct {
+ 		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
+ 		unsigned int restart_full_recover : 1;
+@@ -496,6 +498,9 @@
+ 	unsigned short user_font;
+ 	short view_aura, user_aura;
+ 
++	// Bonus Drop Rate [WiseWarrior]
++	double drop_bonus;
++
+ 	int shadowform_id;
+ 	short shieldmdef;
+ };
+Index: Trunk/src/map/pet.c
+===================================================================
+--- Trunk/src/map/pet.c	(revision 263)
++++ Trunk/src/map/pet.c	(working copy)
+@@ -212,17 +212,29 @@
+ 
+ 	switch(pd->pet.hungry) { //Informe de hambre de pet automatico. [Tab]
+ 		case 75:
+-			snprintf(mes, sizeof mes,"%s : Tengo un poco de hambre...",pd->pet.name);
++			snprintf(mes, sizeof mes,"*~ %s te mira sonriente ~*",pd->pet.name);
+ 			clif_message(&pd->bl, mes);
+ 		break;
++		case 50:
++			snprintf(mes, sizeof mes,"*~ %s te pone ojitos ~*",pd->pet.name);
++			clif_message(&pd->bl, mes);
++		break;
+ 		case 25:
+-			snprintf(mes, sizeof mes,"%s : Tengo hambre...",pd->pet.name);
++			snprintf(mes, sizeof mes,"*~ A %s le ruge la tripa ~*",pd->pet.name);
+ 			clif_message(&pd->bl, mes);
+ 		break;
+-		case 10:
+-			snprintf(mes, sizeof mes,"%s : Tengo mucha hambre...",pd->pet.name);
++		case 15:
++			snprintf(mes, sizeof mes,"*~ %s parece que tenga hambre ~*",pd->pet.name);
+ 			clif_message(&pd->bl, mes);
+ 		break;
++		case 5:
++			snprintf(mes, sizeof mes,"*~ %s está muy hambriento ~*",pd->pet.name);
++			clif_message(&pd->bl, mes);
++		break;
++		case 1:
++			snprintf(mes, sizeof mes,"*~ %s se revuelve enfadado ~*",pd->pet.name);
++			clif_message(&pd->bl, mes);
++		break;
+ 	}
+ 
+ 	if (pd->pet.intimate <= 0)
+Index: Trunk/src/map/script.c
+===================================================================
+--- Trunk/src/map/script.c	(revision 263)
++++ Trunk/src/map/script.c	(working copy)
+@@ -3801,6 +3801,21 @@
+ // NPC interaction
+ //
+ 
++// [Ivion]
++// Checks if the target unit or the attached player is affected by the specified status effect.
++// sc_check <effect id>{,<unit_id>};
++BUILDIN_FUNC(sc_check) {
++
++	TBL_PC* sd;
++
++	if(script_hasdata(st,3)) sd = map_id2sd(script_getnum(st,3));
++	else sd = script_rid2sd(st);
++	if(sd && sd->sc.data[script_getnum(st,2)])
++			script_pushint(st,1);
++	else	script_pushint(st,0);
++	return 0;
++}
++
+ /// Appends a message to the npc dialog.
+ /// If a dialog doesn't exist yet, one is created.
+ ///
+@@ -5715,7 +5730,11 @@
+ 			//Logs items, got from (N)PC scripts [Lupus]
+ 			if(log_config.enable_logs&LOG_SCRIPT_TRANSACTIONS)
+ 				log_pick_pc(sd, "N", nameid, amount, NULL, it.serial);
+-
++			if( battle_config.lootevent & 2 ) {
++				pc_setglobalreg( sd, "LastLootID", nameid ); //Last lootet Item ID
++				pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++				npc_event_doall_id( "OnLoot", sd->bl.id );
++			}
+ 			it.serial = 0; // Reset Serial to generate new
+ 		}
+ 	}
+@@ -5819,7 +5838,11 @@
+ 			//Logs items, got from (N)PC scripts [Lupus]
+ 			if(log_config.enable_logs&0x40)
+ 				log_pick_pc(sd, "N", nameid, get_count, &item_tmp, item_tmp.serial );
+-
++			if( battle_config.lootevent & 2 ) {
++				pc_setglobalreg( sd, "LastLootID", nameid ); //Last lootet Item ID
++				pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++				npc_event_doall_id( "OnLoot", sd->bl.id );
++			} 
+ 			item_tmp.serial = 0; // Reset Serial to generate new
+ 		}
+ 	}
+@@ -6431,7 +6454,11 @@
+ 	//Logs items, got from (N)PC scripts [Lupus]
+ 	if(log_config.enable_logs&0x40)
+ 		log_pick_pc(sd, "N", item_tmp.nameid, item_tmp.amount, &item_tmp, item_tmp.serial );
+-
++	if( battle_config.lootevent & 4 ) {
++		pc_setglobalreg( sd, "LastLootID", item_tmp.nameid ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", item_tmp.amount ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	} 
+ 	script_pushint(st,1);
+ 	return 0;
+ }
+@@ -6499,7 +6526,7 @@
+ 		else
+ 			item_tmp.identify=itemdb_isidentified(nameid);
+ 
+-		map_addflooritem(&item_tmp,amount,m,x,y,0,0,0,0,0);
++		map_addflooritem(&item_tmp,amount,m,x,y,0,0,0, script_hasdata(st,7) ? 0|4 : 0,0 );
+ 	}
+ 
+ 	return 0;
+@@ -8726,6 +8753,7 @@
+ 	int class_        = script_getnum(st,6);
+ 	int amount        = script_getnum(st,7);
+ 	const char* event = "";
++	TBL_MOB* md;
+ 
+ 	struct map_session_data* sd;
+ 	int m;
+@@ -8758,7 +8786,11 @@
+ 		}
+ 	}
+ 
+-	mob_once_spawn(sd,m,x,y,str,class_,amount,event);
++	md = (TBL_MOB*)map_id2bl(mob_once_spawn(sd,m,x,y,str,class_,amount,event));
++	if(script_hasdata(st, 9))
++		if(script_getnum(st, 9) == 1)
++			md->state.unkillable = 1;
++
+ 	return 0;
+ }
+ /*==========================================
+@@ -11267,6 +11299,11 @@
+ 			//Logs items, got from (N)PC scripts [Lupus]
+ 			if(log_config.enable_logs&0x40)
+ 				log_pick_pc(sd, "N", item_tmp.nameid, 1, NULL, item_tmp.serial );
++			if( battle_config.lootevent & 2 ) {
++				pc_setglobalreg( sd, "LastLootID", item_tmp.nameid ); //Last lootet Item ID
++				pc_setglobalreg( sd, "LastLootAmount", 1 ); //Last looted Item Amount
++				npc_event_doall_id( "OnLoot", sd->bl.id );
++			}
+ 		}
+ 	}
+ 
+@@ -14297,6 +14334,7 @@
+ 		case 19: script_pushint(st,mob->status.race); break;
+ 		case 20: script_pushint(st,mob->status.def_ele); break;
+ 		case 21: script_pushint(st,mob->status.mode); break;
++		case 22: script_pushint(st,mob->mexp); break; // Ivion
+ 		default: script_pushint(st,-1); //wrong Index
+ 	}
+ 	return 0;
+@@ -16879,6 +16917,790 @@
+ 	return 0;
+ }
+ 
++BUILDIN_FUNC(pcblockmove)
++{
++	int id, flag;
++	TBL_PC *sd = NULL;
++
++	id = script_getnum(st,2);
++	flag = script_getnum(st,3);
++
++	if(id)
++		sd = map_id2sd(id);
++	else
++		sd = script_rid2sd(st);
++
++	if(sd)
++		sd->state.blockedmove = flag > 0;
++
++	return 0;
++}
++
++// Apply an extra bonus to drops that only expires when reset [WiseWarrior]
++BUILDIN_FUNC(setdropbonus){
++	TBL_PC *sd = NULL;
++	double val=0;
++	int tmp=0;
++
++	if (script_hasdata(st,3)){
++		if (script_isstring(st,3)){
++			sd = map_nick2sd(script_getstr(st,3));
++		}else{
++			sd = map_id2sd(script_getnum(st,3));
++		}
++	}else{
++		sd = script_rid2sd(st);
++	}
++	tmp = (script_hasdata(st,2) ? script_getnum(st,2) : 0);
++	val = (double)tmp/100;
++	if (sd){
++		if (val > 0){
++			if ((val/100) <= 0){
++				// Value to is too small or no value was passed.
++				script_pushint(st,-2);
++			}else{
++				// Add to bonus
++				sd->drop_bonus = val;
++				script_pushint(st,1);
++			}
++		}else{
++			// Clear drop bonus
++			sd->drop_bonus = 0;
++			script_pushint(st,2);
++		}
++	}else{
++		// Failed to attach player
++		script_pushint(st,-1);
++	}
++	return 0;
++}
++
++// Returns a players current drop bonuses [WiseWarrior]
++BUILDIN_FUNC(getdropbonus){
++	TBL_PC *sd = NULL;
++
++	if (script_hasdata(st,2)){
++		if (script_isstring(st,2)){
++			sd = map_nick2sd(script_getstr(st,2));
++		}else{
++			sd = map_id2sd(script_getnum(st,2));
++		}
++	}else{
++		sd = script_rid2sd(st);
++	}
++
++	if (sd){
++		script_pushint(st,((int)(sd->drop_bonus*100)));
++	}else{
++		// Failed to attach player
++		script_pushint(st,-1);
++	}
++	return 0;
++}
++
++static int areaclean_sub(struct block_list *bl, va_list ap)
++{
++	nullpo_retr(0, bl);
++	map_clearflooritem(bl->id);
++
++	return 0;
++}
++
++// areaclean "<map>",<x1>,<y1>{,<x2>,<y2>}
++BUILDIN_FUNC(areaclean)
++{
++	const char* map_ = script_getstr(st,2);
++	int x1 = script_getnum(st,3);
++	int y1 = script_getnum(st,4);
++	int x2 = script_hasdata(st,5) ? script_getnum(st,5) : script_getnum(st,3);
++	int y2 = script_hasdata(st,6) ? script_getnum(st,6) : script_getnum(st,4);
++
++	struct map_session_data* sd;
++	int m;
++
++	sd = map_id2sd(st->rid);
++
++	if( sd && !strcmp(map_,"this") )
++		m = sd->bl.m;
++	else
++		m = map_mapname2mapid(map_);
++
++	map_foreachinarea(areaclean_sub, m, x1, y1, x2, y2, BL_ITEM);
++	return 0;
++}
++
++//=======================================================
++// charisupper [ToastOfDoom]
++//
++// charisupper <str>, <index>
++//-------------------------------------------------------
++BUILDIN_FUNC(charisupper)
++{
++	const char *str = script_getstr(st,2);
++	int pos = script_getnum(st,3);
++ 
++	int val = ( str && pos >= 0 && (unsigned int)pos < strlen(str) ) ? ISUPPER( str[pos] ) : 0;
++
++	script_pushint(st,val);
++	return 0;
++}
++
++//=======================================================
++// charislower [ToastOfDoom]
++//
++// charislower <str>, <index>
++//-------------------------------------------------------
++BUILDIN_FUNC(charislower)
++{
++	const char *str = script_getstr(st,2);
++	int pos = script_getnum(st,3);
++
++	int val = ( str && pos >= 0 && (unsigned int)pos < strlen(str) ) ? ISLOWER( str[pos] ) : 0;
++
++	script_pushint(st,val);
++	return 0;
++}
++
++//=======================================================
++// charat [ToastOfDoom]
++//
++// charat <str>, <index>
++//-------------------------------------------------------
++BUILDIN_FUNC(charat)
++{
++	const char *str = script_getstr(st,2);
++	int pos = script_getnum(st,3);
++	char *output;
++
++	output = (char*)aMallocA(2*sizeof(char));
++	output[0] = '\0';
++
++	if(str && pos >= 0 && (unsigned int)pos < strlen(str))
++		sprintf(output, "%c", str[pos]);
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// setchar [ToastOfDoom]
++//
++// setchar <string>, <char>, <index>
++//-------------------------------------------------------
++BUILDIN_FUNC(setchar)
++{
++	const char *str = script_getstr(st,2);
++	const char *c = script_getstr(st,3);
++	int index = script_getnum(st,4);
++	char *output;
++	size_t len = strlen(str);
++
++	output = (char*)aMallocA(len + 1);
++	memcpy(output, str, len);
++	output[len] = '\0';
++
++	if(index >= 0 && index < len)
++		output[index] = c[0];
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// insertchar [ToastOfDoom]
++//
++// insertchar <string>, <char>, <index>
++//-------------------------------------------------------
++BUILDIN_FUNC(insertchar)
++{
++	const char *str = script_getstr(st,2);
++	const char *c = script_getstr(st,3);
++	int index = script_getnum(st,4);
++	char *output;
++	size_t len = strlen(str);
++
++	if(index < 0)
++		index = 0;
++	else if(index > len)
++		index = len;
++
++	output = (char*)aMallocA(len + 2);
++
++	memcpy(output, str, index);
++	output[index] = c[0];
++	memcpy(&output[index+1], &str[index], len - index);
++	output[len+1] = '\0';
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// delchar [ToastOfDoom]
++//
++// delchar <string>, <index>
++//-------------------------------------------------------
++BUILDIN_FUNC(delchar)
++{
++	const char *str = script_getstr(st,2);
++	int index = script_getnum(st,3);
++	char *output;
++	size_t len = strlen(str);
++
++	if(index < 0 || index > len) {
++		//return original
++		++len;
++		output = (char*)aMallocA(len);
++		memcpy(output, str, len);
++		script_pushstr(st, output);
++		return 0;
++	}
++
++	output = (char*)aMallocA(len);
++
++	memcpy(output, str, index);
++	memcpy(&output[index], &str[index+1], len - index);
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// strtoupper [ToastOfDoom]
++//
++// strtoupper <str>
++//-------------------------------------------------------
++BUILDIN_FUNC(strtoupper)
++{
++	const char *str = script_getstr(st,2);
++	char *output;
++	int i = 0;
++	
++	output = (char*)aMallocA(strlen(str) + 1);
++
++	while(str[i] != '\0')
++		output[i++] = TOUPPER(str[i]);
++	output[i] = '\0';
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// strtolower [ToastOfDoom]
++//
++// strtolower <str>
++//-------------------------------------------------------
++BUILDIN_FUNC(strtolower)
++{
++	const char *str = script_getstr(st,2);
++	char *output;
++	int i = 0;
++	
++	output = (char*)aMallocA(strlen(str) + 1);
++
++	while(str[i] != '\0')
++		output[i++] = TOLOWER(str[i]);
++	output[i] = '\0';
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// substr [ToastOfDoom]
++//
++// substr <str>, <start>, <end>
++//-------------------------------------------------------
++BUILDIN_FUNC(substr)
++{
++	const char *str = script_getstr(st,2);
++	char *output;
++	int start = script_getnum(st,3);
++	int end = script_getnum(st,4);
++
++	int len = 0;
++
++	if(start >= 0 && end < strlen(str) && start <= end) {
++		len = end - start + 1;
++		output = (char*)aMallocA(len + 1);
++		memcpy(output, &str[start], len);
++	} else 
++		output = (char*)aMallocA(1);
++
++	output[len] = '\0';
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// explode [ToastOfDoom]
++//
++// explode <dest_string_array>, <str>, <delimiter>
++// Note: delimiter is limited to 1 char
++//-------------------------------------------------------
++BUILDIN_FUNC(explode)
++{
++	struct script_data* data = script_getdata(st, 2);
++	const char *str = script_getstr(st,3);
++	const char delimiter = script_getstr(st, 4)[0];
++	int32 id;
++	size_t len = strlen(str);
++	int i = 0, j = 0, k = 0;
++	int start;
++	
++
++	char *temp;
++	const char* name;
++
++	TBL_PC* sd = NULL;
++
++	temp = (char*)aMallocA(len + 1);
++
++	if( !data_isreference(data) )
++	{
++		ShowError("script:explode: not a variable\n");
++		script_reportdata(data);
++		st->state = END;
++		return 1;// not a variable
++	}
++
++	id = reference_getid(data);
++	start = reference_getindex(data);
++	name = reference_getname(data);
++
++	if( not_array_variable(*name) )
++	{
++		ShowError("script:explode: illegal scope\n");
++		script_reportdata(data);
++		st->state = END;
++		return 1;// not supported
++	}
++
++	if( !is_string_variable(name) )
++	{
++		ShowError("script:explode: not string array\n");
++		script_reportdata(data);
++		st->state = END;
++		return 1;// data type mismatch
++	}
++
++	if( not_server_variable(*name) )
++	{
++		sd = script_rid2sd(st);
++		if( sd == NULL )
++			return 0;// no player attached
++	}
++
++	while(str[i] != '\0') {
++		if(str[i] == delimiter && start < 127) { //break at delimiter but ignore after reaching last array index
++			temp[j] = '\0';
++			set_reg(st, sd, reference_uid(id, start++), name, (void*)temp, reference_getref(data));
++			j = 0;
++			++i;
++		} else {
++			temp[j++] = str[i++];
++		}
++	}
++	//set last string
++	temp[j] = '\0';
++	set_reg(st, sd, reference_uid(id, start), name, (void*)temp, reference_getref(data));
++
++	aFree(temp);
++	return 0;
++}
++
++//=======================================================
++// implode [ToastOfDoom] - php style implode
++//
++// implode <string_array>
++// implode <string_array>, <glue>
++//-------------------------------------------------------
++BUILDIN_FUNC(implode)
++{
++	struct script_data* data = script_getdata(st, 2);
++	const char *glue, *name, *temp;
++	int32 glue_len = 0, array_size, id;
++	size_t len = 0;
++	int i, k = 0;
++
++	TBL_PC* sd = NULL;
++
++	char *output;
++
++	if( !data_isreference(data) )
++	{
++		ShowError("script:implode: not a variable\n");
++		script_reportdata(data);
++		st->state = END;
++		return 1;// not a variable
++	}
++
++	id = reference_getid(data);
++	name = reference_getname(data);
++
++	if( not_array_variable(*name) )
++	{
++		ShowError("script:implode: illegal scope\n");
++		script_reportdata(data);
++		st->state = END;
++		return 1;// not supported
++	}
++
++	if( !is_string_variable(name) )
++	{
++		ShowError("script:implode: not string array\n");
++		script_reportdata(data);
++		st->state = END;
++		return 1;// data type mismatch
++	}
++
++	if( not_server_variable(*name) )
++	{
++		sd = script_rid2sd(st);
++		if( sd == NULL )
++			return 0;// no player attached
++	}
++
++	//count chars
++	array_size = getarraysize(st, id, reference_getindex(data), is_string_variable(name), reference_getref(data)) - 1;
++
++	if(array_size == -1) //empty array check (AmsTaff)
++    {
++        ShowWarning("script:implode: array length = 0\n");
++        output = (char*)aMallocA(sizeof(char)*5);
++        sprintf(output,"%s","NULL");
++	} else {
++		for(i = 0; i <= array_size; ++i) {
++			temp = (char*) get_val2(st, reference_uid(id, i), reference_getref(data));
++			len += strlen(temp);
++			script_removetop(st, -1, 0);
++		}
++
++		//allocate mem
++		if( script_hasdata(st,3) ) {
++			glue = script_getstr(st,3);
++			glue_len = strlen(glue);
++			len += glue_len * (array_size);
++		}
++		output = (char*)aMallocA(len + 1);
++
++		//build output
++		for(i = 0; i < array_size; ++i) {
++			temp = (char*) get_val2(st, reference_uid(id, i), reference_getref(data));
++			len = strlen(temp);
++			memcpy(&output[k], temp, len);
++			k += len;
++			if(glue_len != 0) {
++				memcpy(&output[k], glue, glue_len);
++				k += glue_len;
++			}
++			script_removetop(st, -1, 0);
++		}
++		temp = (char*) get_val2(st, reference_uid(id, array_size), reference_getref(data));
++		len = strlen(temp);
++		memcpy(&output[k], temp, len);
++		k += len;
++		script_removetop(st, -1, 0);
++
++		output[k] = '\0';
++	}
++
++	script_pushstr(st, output);
++	return 0;
++}
++
++//=======================================================
++// sprintf [Mirei]
++//
++// Implements C sprintf, except format %n. The resulting string is
++// returned, instead of being saved in variable by reference.
++//
++// sprintf(<format>, ...);
++//-------------------------------------------------------
++BUILDIN_FUNC(sprintf)
++{
++    unsigned int len, argc = 0, arg = 0, buf2_len = 0;
++    const char* format;
++    char* p;
++    char* q;
++    char* buf  = NULL;
++    char* buf2 = NULL;
++    struct script_data* data;
++    StringBuf final_buf;
++
++    // Fetch init data
++    format = script_getstr(st, 2);
++    argc = script_lastdata(st)-2;
++    len = strlen(format);
++
++    // Skip parsing, where no parsing is required.
++    if(len==0){
++        script_pushconststr(st,"");
++        return 0;
++    }
++
++    // Pessimistic alloc
++    CREATE(buf, char, len+1);
++
++    // Need not be parsed, just solve stuff like %%.
++    if(argc==0){
++        sprintf(buf, format);
++        script_pushstrcopy(st, buf);
++        aFree(buf);
++        return 0;
++    }
++
++    safestrncpy(buf, format, len+1);
++
++    // Issue sprintf for each parameter
++    StringBuf_Init(&final_buf);
++    q = buf;
++    while((p = strchr(q, '%'))!=NULL){
++        if(p!=q){
++            len = p-q+1;
++            if(buf2_len<len){
++                RECREATE(buf2, char, len);
++                buf2_len = len;
++            }
++            safestrncpy(buf2, q, len);
++            StringBuf_AppendStr(&final_buf, buf2);
++            q = p;
++        }
++        p = q+1;
++        if(*p=='%'){  // %%
++            StringBuf_AppendStr(&final_buf, "%");
++            q+=2;
++            continue;
++        }
++        if(*p=='n'){  // %n
++            ShowWarning("buildin_sprintf: Format %%n not supported! Skipping...\n");
++            script_reportsrc(st);
++            q+=2;
++            continue;
++        }
++        if(arg>=argc){
++            ShowError("buildin_sprintf: Not enough arguments passed!\n");
++            if(buf) aFree(buf);
++            if(buf2) aFree(buf2);
++            StringBuf_Destroy(&final_buf);
++            script_pushconststr(st,"");
++            return 1;
++        }
++        if((p = strchr(q+1, '%'))==NULL){
++            p = strchr(q, 0);  // EOS
++        }
++        len = p-q+1;
++        if(buf2_len<len){
++            RECREATE(buf2, char, len);
++            buf2_len = len;
++        }
++        safestrncpy(buf2, q, len);
++        q = p;
++
++        // Note: This assumes the passed value being the correct
++        // type to the current format specifier. If not, the server
++        // probably crashes or returns anything else, than expected,
++        // but it would behave in normal code the same way so it's
++        // the scripter's responsibility.
++        data = script_getdata(st, arg+3);
++        if(data_isstring(data)){  // String
++            StringBuf_Printf(&final_buf, buf2, script_getstr(st, arg+3));
++        }else if(data_isint(data)){  // Number
++            StringBuf_Printf(&final_buf, buf2, script_getnum(st, arg+3));
++        }else if(data_isreference(data)){  // Variable
++            char* name = reference_getname(data);
++            if(name[strlen(name)-1]=='$'){  // var Str
++                StringBuf_Printf(&final_buf, buf2, script_getstr(st, arg+3));
++            }else{  // var Int
++                StringBuf_Printf(&final_buf, buf2, script_getnum(st, arg+3));
++            }
++        }else{  // Unsupported type
++            ShowError("buildin_sprintf: Unknown argument type!\n");
++            if(buf) aFree(buf);
++            if(buf2) aFree(buf2);
++            StringBuf_Destroy(&final_buf);
++            script_pushconststr(st,"");
++            return 1;
++        }
++        arg++;
++    }
++
++    // Append anything left
++    if(*q){
++        StringBuf_AppendStr(&final_buf, q);
++    }
++
++    // Passed more, than needed
++    if(arg<argc){
++        ShowWarning("buildin_sprintf: Unused arguments passed.\n");
++        script_reportsrc(st);
++    }
++
++    script_pushstrcopy(st, StringBuf_Value(&final_buf));
++
++    if(buf) aFree(buf);
++    if(buf2) aFree(buf2);
++    StringBuf_Destroy(&final_buf);
++
++    return 0;
++}
++
++//=======================================================
++// sscanf [Mirei]
++//
++// Implements C sscanf.
++//
++// sscanf(<str>, <format>, ...);
++//-------------------------------------------------------
++BUILDIN_FUNC(sscanf){
++    unsigned int argc, arg = 0, len;
++    struct script_data* data;
++    struct map_session_data* sd = NULL;
++    const char* str;
++    const char* format;
++    const char* p;
++    const char* q;
++    char* buf = NULL;
++    char* buf_p;
++    char* ref_str = NULL;
++    int ref_int;
++
++    // Get data
++    str = script_getstr(st, 2);
++    format = script_getstr(st, 3);
++    argc = script_lastdata(st)-3;
++
++    len = strlen(format);
++    CREATE(buf, char, len*2+1);
++
++    // Issue sscanf for each parameter
++    *buf = 0;
++    q = format;
++    while(p = strchr(q, '%')){
++        if(p!=q){
++            strncat(buf, q, (size_t)(p-q));
++            q = p;
++        }
++        p = q+1;
++        if(*p=='*' || *p=='%'){  // Skip
++            strncat(buf, q, 2);
++            q+=2;
++            continue;
++        }
++        if(arg>=argc){
++            ShowError("buildin_sscanf: Not enough arguments passed!\n");
++            script_pushint(st, -1);
++            if(buf) aFree(buf);
++            if(ref_str) aFree(ref_str);
++            return 1;
++        }
++        if((p = strchr(q+1, '%'))==NULL){
++            p = strchr(q, 0);  // EOS
++        }
++        len = p-q;
++        strncat(buf, q, len);
++        q = p;
++
++        // Validate output
++        data = script_getdata(st, arg+4);
++        if(!data_isreference(data) || !reference_tovariable(data)){
++            ShowError("buildin_sscanf: Target argument is not a variable!\n");
++            script_pushint(st, -1);
++            if(buf) aFree(buf);
++            if(ref_str) aFree(ref_str);
++            return 1;
++        }
++        buf_p = reference_getname(data);
++        if(not_server_variable(*buf_p) && (sd = script_rid2sd(st))==NULL){
++            script_pushint(st, -1);
++            if(buf) aFree(buf);
++            if(ref_str) aFree(ref_str);
++            return 0;
++        }
++
++        // Save value if any
++        if(buf_p[strlen(buf_p)-1]=='$'){  // String
++            if(ref_str==NULL){
++                CREATE(ref_str, char, strlen(str)+1);
++            }
++            if(sscanf(str, buf, ref_str)==0){
++                break;
++            }
++            set_reg(st, sd, add_str(buf_p), buf_p, (void *)(ref_str), reference_getref(data));
++        }else{  // Number
++            if(sscanf(str, buf, &ref_int)==0){
++                break;
++            }
++            set_reg(st, sd, add_str(buf_p), buf_p, (void *)(ref_int), reference_getref(data));
++        }
++        arg++;
++
++        // Disable used format (%... -> %*...)
++        buf_p = strchr(buf, 0);
++        memmove(buf_p-len+2, buf_p-len+1, len);
++        *(buf_p-len+1) = '*';
++    }
++
++    // Passed more, than needed
++    if(arg<argc){
++        ShowWarning("buildin_sscanf: Unused arguments passed.\n");
++        script_reportsrc(st);
++    }
++
++    script_pushint(st, arg);
++    if(buf) aFree(buf);
++    if(ref_str) aFree(ref_str);
++
++    return 0;
++}
++
++//=======================================================
++// strpos [ToastOfDoom]
++//
++// Implements PHP style strpos. Adapted from code from
++// http://www.daniweb.com/code/snippet313.html, Dave Sinkula
++//
++// strpos(<haystack>, <needle>)
++// strpos(<haystack>, <needle>, <offset>)
++//-------------------------------------------------------
++BUILDIN_FUNC(strpos) {
++	const char *haystack = script_getstr(st,2);
++	const char *needle = script_getstr(st,3);
++	int i;
++	size_t len;
++
++	if( script_hasdata(st,4) )
++		i = script_getnum(st,4);
++	else
++		i = 0;
++
++	if ( strlen(needle) == 0 ) {
++		script_pushint(st, -1);
++		return 0;
++	}
++
++	len = strlen(haystack);
++	for ( ; i < len; ++i ) {
++		if ( haystack[i] == *needle ) {
++			// matched starting char -- loop through remaining chars
++			const char *h, *n;
++			for ( h = &haystack[i], n = needle; *h && *n; ++h, ++n ) {
++				if ( *h != *n ) {
++					break;
++				}
++			}
++			if ( !*n ) { // matched all of 'needle' to null termination
++				script_pushint(st, i);
++				return 0;
++			}
++		}
++	}
++	script_pushint(st, -1);
++	return 0;
++}
++
+ // declarations that were supposed to be exported from npc_chat.c
+ #ifdef PCRE_SUPPORT
+ BUILDIN_FUNC(defpattern);
+@@ -16891,6 +17713,7 @@
+ /// for an explanation on args, see add_buildin_func
+ struct script_function buildin_func[] = {
+ 	// NPC interaction
++	BUILDIN_DEF(sc_check,"i?"), // [Ivion]
+ 	BUILDIN_DEF(mes,"s"),
+ 	BUILDIN_DEF(next,""),
+ 	BUILDIN_DEF(close,""),
+@@ -16932,7 +17755,8 @@
+ 	BUILDIN_DEF(itembound2,"viiiiiiii?"),
+ 	BUILDIN_DEF(getnameditem,"vv"),
+ 	BUILDIN_DEF2(grouprandomitem,"groupranditem","i"),
+-	BUILDIN_DEF(makeitem,"visii"),
++	BUILDIN_DEF(makeitem,"visii?"),
++	BUILDIN_DEF(areaclean,"sii??"),
+ 	BUILDIN_DEF(delitem,"vi?"),
+ 	BUILDIN_DEF(delitem2,"viiiiiiii?"),
+ 	BUILDIN_DEF2(enableitemuse,"enable_items",""),
+@@ -17014,7 +17838,7 @@
+ 	BUILDIN_DEF(produce,"i"),
+ 	BUILDIN_DEF(makerune,"i"),
+ 	BUILDIN_DEF(cooking,"i"),
+-	BUILDIN_DEF(monster,"siisii?"),
++	BUILDIN_DEF(monster,"siisii??"),
+ 	BUILDIN_DEF(mobdemolition,"siiiiii"),
+ 	BUILDIN_DEF2(mobevent,"mobevent","siisiiiiiiiiiiiiii?"),
+ 	BUILDIN_DEF(getmobrandid,"ii"),
+@@ -17223,6 +18047,7 @@
+ 	BUILDIN_DEF(pcfollow,"ii"),
+ 	BUILDIN_DEF(pcstopfollow,"i"),
+ 	BUILDIN_DEF(pcblock,"ii?"),
++	BUILDIN_DEF(pcblockmove,"ii"),
+ 	// <--- [zBuffer] List of player cont commands
+ 	// [zBuffer] List of mob control commands --->
+ 	BUILDIN_DEF(unitwalk,"ii?"),
+@@ -17332,6 +18157,23 @@
+ 	BUILDIN_DEF(checkquest, "i?"),
+ 	BUILDIN_DEF(changequest, "ii"),
+ 	BUILDIN_DEF(showevent, "ii"),
++
++	// String Manipulation Commands
++	BUILDIN_DEF(charat,"si"),
++	BUILDIN_DEF(setchar,"ssi"),
++	BUILDIN_DEF(insertchar,"ssi"),
++	BUILDIN_DEF(delchar,"si"),
++	BUILDIN_DEF(strtoupper,"s"),
++	BUILDIN_DEF(strtolower,"s"),
++	BUILDIN_DEF(charisupper, "si"),
++	BUILDIN_DEF(charislower, "si"),
++	BUILDIN_DEF(substr,"sii"),
++	BUILDIN_DEF(explode, "rss"),
++	BUILDIN_DEF(implode, "r?"),
++	BUILDIN_DEF(sprintf,"s*"),  // [Mirei]
++	BUILDIN_DEF(sscanf,"ss*"),  // [Mirei]
++	BUILDIN_DEF(strpos,"ss?"),
++
+ 	// Enchanting
+ 	BUILDIN_DEF(successenchant,"ii"),
+ 	BUILDIN_DEF(failedenchant,"i"),
+@@ -17345,5 +18187,9 @@
+ 	BUILDIN_DEF(getpvpmode,""),
+ 	BUILDIN_DEF(setsecurity,"i"),
+ 	BUILDIN_DEF(getsecurity,""),
++
++	// [WiseWarrior]
++	BUILDIN_DEF(setdropbonus, "??"),
++	BUILDIN_DEF(getdropbonus, "?"),
+ 	{NULL,NULL,NULL},
+ };
+Index: Trunk/src/map/skill.c
+===================================================================
+--- Trunk/src/map/skill.c	(revision 263)
++++ Trunk/src/map/skill.c	(working copy)
+@@ -7372,6 +7372,7 @@
+ 				if (!tsc->data[i])
+ 					continue;
+ 				switch (i) {
++				case SC_PKDELAY:
+ 				case SC_WEIGHT50:		case SC_WEIGHT90:		case SC_HALLUCINATION:
+ 				case SC_STRIPWEAPON:	case SC_STRIPSHIELD:	case SC_STRIPARMOR:
+ 				case SC_STRIPHELM:		case SC_CP_WEAPON:		case SC_CP_SHIELD:
+@@ -8769,6 +8770,7 @@
+ 				if (!tsc->data[i])
+ 					continue;
+ 				switch (i) {
++				case SC_PKDELAY:
+ 				case SC_WEIGHT50:		case SC_WEIGHT90:		case SC_HALLUCINATION:
+ 				case SC_STRIPWEAPON:	case SC_STRIPSHIELD:	case SC_STRIPARMOR:
+ 				case SC_STRIPHELM:		case SC_CP_WEAPON:		case SC_CP_SHIELD:
+Index: Trunk/src/map/status.c
+===================================================================
+--- Trunk/src/map/status.c	(revision 263)
++++ Trunk/src/map/status.c	(working copy)
+@@ -2770,7 +2770,7 @@
+ 	if((skill=pc_checkskill(sd,WM_LESSON))>0)
+ 		status->max_sp += 30 * skill;
+ 
+-	if (sd->gm_power && pc_isGM(sd) > 90) { // agregada mayor seguridad comprobando si sd es GM [Tab]
++	if (sd->gm_power) { // agregada mayor seguridad comprobando si sd es GM [Tab]
+ 		status->str += sd->gm_stats[0];
+ 		status->agi += sd->gm_stats[1];
+ 		status->vit += sd->gm_stats[2];
+@@ -8590,6 +8590,7 @@
+ 		if(type == 0)
+ 		switch (i)
+ 		{	//Type 0: PC killed -> Place here statuses that do not dispel on death.
++		case SC_PKDELAY:
+ 		case SC_WEIGHT50:
+ 		case SC_WEIGHT90:
+ 		case SC_EDP:
+Index: Trunk/src/map/status.h
+===================================================================
+--- Trunk/src/map/status.h	(revision 263)
++++ Trunk/src/map/status.h	(working copy)
+@@ -537,6 +537,8 @@
+ 	SC_MYSTERIOUS_POWDER,
+ 	SC_ALL_RIDING,
+ 
++	SC_PKDELAY = 600, // [Ivion] 
++
+ 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
+ } sc_type;
+ 
+Index: Trunk/src/map/storage.c
+===================================================================
+--- Trunk/src/map/storage.c	(revision 263)
++++ Trunk/src/map/storage.c	(working copy)
+@@ -18,6 +18,7 @@
+ #include "battle.h"
+ #include "atcommand.h"
+ #include "log.h"
++#include "npc.h" 
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+@@ -160,6 +161,11 @@
+ 	
+ 	data = itemdb_search(item_data->nameid);
+ 
++	if( data->stack.storage && amount > data->stack.amount ) 
++	{// item stack limitation 
++		return 1; 
++	} 
++
+ 	if( !itemdb_canstore(item_data, pc_isGM(sd)) )
+ 	{	//Check if item is storable. [Skotlex]
+ 		clif_displaymessage (sd->fd, msg_txt(264));
+@@ -172,7 +178,7 @@
+ 		{
+ 			if( compare_item(&stor->items[i], item_data) )
+ 			{// existing items found, stack them
+-				if( amount > MAX_AMOUNT - stor->items[i].amount )
++				if( amount > MAX_AMOUNT - stor->items[i].amount || ( data->stack.storage && amount > data->stack.amount - stor->items[i].amount ) )
+ 					return 1;
+ 				stor->items[i].amount += amount;
+ 				if( flag ) clif_storageitemadded(sd,&stor->items[i],i,amount);
+@@ -214,6 +220,11 @@
+ 	
+ 	data = itemdb_search(item_data->nameid);
+ 
++	if( data->stack.storage && amount > data->stack.amount ) 
++	{// item stack limitation 
++		return 1; 
++	} 
++
+ 	if( !itemdb_canstore(item_data, pc_isGM(sd)) )
+ 	{	//Check if item is storable. [Skotlex]
+ 		clif_displaymessage (sd->fd, msg_txt(264));
+@@ -226,7 +237,7 @@
+ 		{
+ 			if( compare_item(&stor->items[i], item_data) )
+ 			{// existing items found, stack them
+-				if( amount > MAX_AMOUNT - stor->items[i].amount )
++				if( amount > MAX_AMOUNT - stor->items[i].amount || ( data->stack.storage && amount > data->stack.amount - stor->items[i].amount ) )
+ 					return 1;
+ 				stor->items[i].amount += amount;
+ 				clif_storageitemadded(sd,&stor->items[i],i,amount);
+@@ -266,6 +277,11 @@
+ 
+ 	if(log_config.enable_logs&0x800)
+ 		log_pick_pc(sd, "R", sd->status.storage.items[n].nameid, amount, &sd->status.storage.items[n], sd->status.storage.items[n].serial);
++	if( battle_config.lootevent & 1 ) {
++		pc_setglobalreg( sd, "LastLootID", sd->status.storage.items[n].nameid ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	}
+ 
+ 	if( sd->status.storage.items[n].amount == 0 )
+ 	{
+@@ -286,6 +302,11 @@
+ 
+ 	if(log_config.enable_logs&0x800)
+ 		log_pick_pc(sd, "R", sd->status.storage.items[n].nameid, amount, &sd->status.storage.items[n], sd->status.storage.items[n].serial);
++	if( battle_config.lootevent & 1 ) {
++		pc_setglobalreg( sd, "LastLootID", sd->status.storage.items[n].nameid ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	}
+ 
+ 	if( sd->status.ext_storage.items[n].amount == 0 )
+ 	{
+@@ -558,6 +579,9 @@
+ {
+ 	struct guild_storage *gstor;
+ 
++	struct guild *g;
++	int ps;
++
+ 	nullpo_ret(sd);
+ 
+ 	if(sd->status.guild_id <= 0)
+@@ -565,7 +589,13 @@
+ 
+ 	if(sd->state.storage_flag)
+ 		return 1; //Can't open both storages at a time.
+-	
++
++	//[Ind/ro-resources.net]
++	if( (g = guild_search(sd->status.guild_id)) != NULL && (ps=guild_getposition(g,sd))>0 && ps > 0 && !(g->position[ps].mode&0x20) ){ //must load guild data and not be the guild master in order to be denied.
++		clif_displaymessage(sd->fd,"You do not have permission to open your guild's storage, ask it for your guild master.");
++		return 1;
++	}
++
+ 	if( !pc_can_give_items(pc_isGM(sd)) ) { //check is this GM level can open guild storage and store items [Lupus]
+ 		clif_displaymessage(sd->fd, msg_txt(246));
+ 		return 1;
+@@ -600,6 +630,11 @@
+ 
+ 	data = itemdb_search(item_data->nameid);
+ 
++	if( data->stack.guildstorage && amount > data->stack.amount ) 
++	{// item stack limitation 
++		return 1; 
++	}
++
+ 	if( !itemdb_canguildstore(item_data, pc_isGM(sd)) || item_data->expire_time || item_data->bound )
+ 	{	//Check if item is storable. [Skotlex]
+ 		clif_displaymessage (sd->fd, msg_txt(264));
+@@ -615,7 +650,7 @@
+ 	if(itemdb_isstackable2(data)){ //Stackable
+ 		for(i=0;i<MAX_GUILD_STORAGE;i++){
+ 			if(compare_item(&stor->items[i], item_data)) {
+-				if(stor->items[i].amount+amount > MAX_AMOUNT)
++				if( amount > MAX_AMOUNT - stor->items[i].amount || ( data->stack.guildstorage && amount > data->stack.amount - stor->items[i].amount ) )
+ 					return 1;
+ 				stor->items[i].amount+=amount;
+ 				clif_storageitemadded(sd,&stor->items[i],i,amount);
+@@ -654,6 +689,11 @@
+ 	stor->items[n].amount-=amount;
+ 	if(log_config.enable_logs&0x1000)
+ 		log_pick_pc(sd, "G", stor->items[n].nameid, amount, &stor->items[n], stor->items[n].serial);
++	if( battle_config.lootevent & 1 ) {
++		pc_setglobalreg( sd, "LastLootID", stor->items[n].nameid ); //Last lootet Item ID
++		pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++		npc_event_doall_id( "OnLoot", sd->bl.id );
++	}
+ 	if(stor->items[n].amount==0){
+ 		memset(&stor->items[n],0,sizeof(stor->items[0]));
+ 		stor->storage_amount--;
+Index: Trunk/src/map/trade.c
+===================================================================
+--- Trunk/src/map/trade.c	(revision 263)
++++ Trunk/src/map/trade.c	(working copy)
+@@ -22,7 +22,7 @@
+ 
+ 
+ //Max distance from traders to enable a trade to take place.
+-#define TRADE_DISTANCE 2
++#define TRADE_DISTANCE 12
+ 
+ /*==========================================
+  * Initiates a trade request.
+@@ -372,7 +372,7 @@
+ 		return;
+ 	}
+ 
+-	if( (item->bound == 1 || (item->bound == 2 && sd->status.guild_id != target_sd->status.guild_id)) && !pc_isGM(sd) && !pc_isGM(target_sd) )
++	if( (item->bound == 1 || (item->bound == 2 && sd->status.guild_id != target_sd->status.guild_id)) && (pc_isGM(sd) < battle_config.lowest_gm_level) && (pc_isGM(target_sd) < battle_config.lowest_gm_level) )
+ 	{ // Account/Guild Bound
+ 		if( item->bound == 1 )
+ 			clif_displaymessage (sd->fd, "Can't Trade. Account Bounded Item.");
+@@ -579,6 +579,11 @@
+ 					log_pick_pc(sd, "T", sd->status.inventory[n].nameid, -(sd->deal.item[trade_i].amount), &sd->status.inventory[n], sd->status.inventory[n].serial );
+ 					log_pick_pc(tsd, "T", sd->status.inventory[n].nameid, sd->deal.item[trade_i].amount, &sd->status.inventory[n], sd->status.inventory[n].serial );
+ 				}
++				if( battle_config.lootevent & 1 ) {
++					pc_setglobalreg( tsd, "LastLootID", sd->status.inventory[n].nameid ); //Last lootet Item ID
++					pc_setglobalreg( tsd, "LastLootAmount", sd->deal.item[trade_i].amount ); //Last looted Item Amount
++					npc_event_doall_id( "OnLoot", tsd->bl.id );
++				}
+ 				pc_delitem(sd, n, sd->deal.item[trade_i].amount, 1, 6);
+ 			} else
+ 				clif_additem(sd, n, sd->deal.item[trade_i].amount, 0);
+@@ -598,6 +603,11 @@
+ 					log_pick_pc(tsd, "T", tsd->status.inventory[n].nameid, -(tsd->deal.item[trade_i].amount), &tsd->status.inventory[n], tsd->status.inventory[n].serial );
+ 					log_pick_pc(sd, "T", tsd->status.inventory[n].nameid, tsd->deal.item[trade_i].amount, &tsd->status.inventory[n], tsd->status.inventory[n].serial );
+ 				}
++				if( battle_config.lootevent & 1 ) {
++					pc_setglobalreg( sd, "LastLootID", tsd->status.inventory[n].nameid ); //Last lootet Item ID
++					pc_setglobalreg( sd, "LastLootAmount", tsd->deal.item[trade_i].amount ); //Last looted Item Amount
++					npc_event_doall_id( "OnLoot", sd->bl.id );
++				}
+ 				pc_delitem(tsd, n, tsd->deal.item[trade_i].amount, 1, 6);
+ 			} else
+ 				clif_additem(tsd, n, tsd->deal.item[trade_i].amount, 0);
+Index: Trunk/src/map/unit.c
+===================================================================
+--- Trunk/src/map/unit.c	(revision 263)
++++ Trunk/src/map/unit.c	(working copy)
+@@ -2080,7 +2080,7 @@
+ 			storage_guild_storage_quit(sd,0);
+ 		sd->state.storage_flag = 0; //Force close it when being warped.
+ 		if(sd->party_invite>0)
+-			party_reply_invite(sd,sd->party_invite_account,0);
++			party_reply_invite(sd,sd->party_invite,0);
+ 		if(sd->guild_invite>0)
+ 			guild_reply_invite(sd,sd->guild_invite,0);
+ 		if(sd->guild_alliance>0)
+Index: Trunk/src/map/vending.c
+===================================================================
+--- Trunk/src/map/vending.c	(revision 263)
++++ Trunk/src/map/vending.c	(working copy)
+@@ -205,6 +205,11 @@
+ 			log_pick_pc(vsd, "V", vsd->status.cart[idx].nameid, -amount, &vsd->status.cart[idx], vsd->status.cart[idx].serial );
+ 			log_pick_pc( sd, "V", vsd->status.cart[idx].nameid,  amount, &vsd->status.cart[idx], vsd->status.cart[idx].serial );
+ 		}
++		if( battle_config.lootevent & 1 ) {
++			pc_setglobalreg( sd, "LastLootID", vsd->status.cart[idx].nameid ); //Last lootet Item ID
++			pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
++			npc_event_doall_id( "OnLoot", sd->bl.id );
++		}
+ 
+ 		// vending item
+ 		pc_additem(sd, &vsd->status.cart[idx], amount);

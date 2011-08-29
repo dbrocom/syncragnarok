@@ -163,7 +163,7 @@ void mail_getattachment(struct map_session_data* sd, int zeny, struct item* item
 			pc_setglobalreg( sd, "LastLootID", item->nameid ); //Last lootet Item ID
 			pc_setglobalreg( sd, "LastLootAmount", item->amount ); //Last looted Item Amount
 			npc_event_doall_id( "OnLoot", sd->bl.id );
-		} 
+		}
 
 		clif_Mail_getattachment(sd->fd, 0);
 	}

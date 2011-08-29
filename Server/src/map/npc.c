@@ -1178,6 +1178,133 @@ static int npc_buylist_sub(struct map_session_data* sd, int n, unsigned short* i
 /*==========================================
  * Cash Shop Buy
  *------------------------------------------*/
+int npc_cashshop_buylist(struct map_session_data *sd, int points, int count, unsigned short* item_list)
+{
+	int i, j, nameid, amount, new_, w, vt, vp;
+	struct npc_data *nd = (struct npc_data *)map_id2bl(sd->npc_shopid);
+
+	if( !nd || (nd->subtype != SPSHOP && nd->subtype != CASHSHOP) )
+		return 1;
+
+	if( sd->state.trading )
+		return 4;
+
+	new_ = 0;
+	w = 0;
+	vt = 0; // Global Value
+
+	// Validating Process ----------------------------------------------------
+	for( i = 0; i < count; i++ )
+	{
+		nameid = item_list[i*2+1];
+		amount = item_list[i*2+0];
+
+		if( !itemdb_exists(nameid) || amount <= 0 )
+			return 5;
+
+		ARR_FIND(0,nd->u.shop.count,j,nd->u.shop.shop_item[j].nameid == nameid);
+		if( j == nd->u.shop.count || nd->u.shop.shop_item[j].value <= 0 )
+			return 5;
+
+		if( !itemdb_isstackable(nameid) && amount > 1 )
+		{
+			ShowWarning("Player %s (%d:%d) sent a hexed packet trying to buy %d of nonstackable item %d!\n", sd->status.name, sd->status.account_id, sd->status.char_id, amount, nameid);
+			amount = item_list[i*2+0] = 1;
+		}
+
+		switch( pc_checkadditem(sd,nameid,amount) )
+		{
+			case ADDITEM_NEW:
+				new_++;
+				break;
+			case ADDITEM_OVERAMOUNT:
+				return 3;
+		}
+
+		vp = nd->u.shop.shop_item[j].value * amount;
+		if( pc_isPremium(sd) && nd->subtype == CASHSHOP && battle_config.premium_discount > 0 )
+		{
+			vp -= vp * battle_config.premium_discount / 100;
+			if( vp <= 0 ) vp = 1;
+		}
+
+		vt += vp;
+		w += itemdb_weight(nameid) * amount;
+	}
+
+	if( w + sd->weight > sd->max_weight )
+		return 3;
+	if( pc_inventoryblank(sd) < new_ )
+		return 3;
+	if( points > vt ) points = vt;
+
+	// Payment Process ----------------------------------------------------
+	if( nd->subtype == SPSHOP )
+	{ // Special Shop
+		if( points > 0 )
+		{
+			ShowWarning("Player %s (%d:%d) sent a hexed packet trying to buy with points from a Special Shop.\n", sd->status.name, sd->status.account_id, sd->status.char_id);
+			return 6;
+		}
+
+		if( nd->cashitem < 0 )
+		{ // BG Shop
+			int indexs[3] = { 0,0,0 }, badges[3] = { 7828,7829,7773 };
+			for( j = 0; j < 3; j++ )
+			{
+				i = pc_search_inventory(sd,badges[j]);
+				if( i < 0 || sd->status.inventory[i].amount < vt )
+					return 6;
+				indexs[j] = i;
+			}
+
+			for( j = 0; j < 3; j++ )
+				pc_delitem(sd,indexs[j],vt,0,0);
+		}	
+		else
+		{
+			i = pc_search_inventory(sd,nd->cashitem);
+			if( i < 0 || sd->status.inventory[i].amount < vt )
+				return 6;
+			pc_delitem(sd,i,vt,0,0);
+		}
+	}
+	else
+	{ // Cash Shop
+		if( sd->kafraPoints < points || sd->cashPoints < (vt - points) )
+			return 6;
+		pc_paycash(sd,vt,points);
+	}
+
+	// Delivery Process ----------------------------------------------------
+	for( i = 0; i < count; i++ )
+	{
+		struct item item_tmp;
+
+		nameid = item_list[i*2+1];
+		amount = item_list[i*2+0];
+
+		memset(&item_tmp,0,sizeof(item_tmp));
+
+		if( !pet_create_egg(sd,nameid) )
+		{
+			item_tmp.nameid = nameid;
+			item_tmp.identify = 1;
+			pc_additem(sd,&item_tmp,amount);
+		}
+
+		if( log_config.enable_logs&0x20 )
+			log_pick_pc(sd, "S", nameid, amount, NULL, item_tmp.serial);
+		if( battle_config.lootevent & 2 ) {
+			pc_setglobalreg( sd, "LastLootID", nameid ); //Last lootet Item ID
+			pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
+			npc_event_doall_id( "OnLoot", sd->bl.id );
+		} 
+	}
+
+	return 0;
+}
+
 int npc_cashshop_buy(struct map_session_data *sd, int nameid, int amount, int points)
 {
 	struct npc_data *nd = (struct npc_data *)map_id2bl(sd->npc_shopid);
@@ -1411,7 +1538,7 @@ int npc_buylist(struct map_session_data* sd, int n, unsigned short* item_list)
 			pc_setglobalreg( sd, "LastLootID", item_tmp.nameid ); //Last lootet Item ID
 			pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
 			npc_event_doall_id( "OnLoot", sd->bl.id );
-		} 
+		}
 		//Logs
 	}
 
@@ -3031,7 +3158,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 		if( state )
 		{
 			if( sscanf(w4, "%d", &state) == 1 )
-				map[m].flag.woe_set |= state;
+				map[m].flag.woe_set = state;
 			else
 				ShowWarning("npc_parse_mapflag: Missing value for woe_set mapflag (file '%s', line '%d').\n", filepath, strline(buffer,start-buffer));
 		}

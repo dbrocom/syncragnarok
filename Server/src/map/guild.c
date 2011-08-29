@@ -2145,7 +2145,7 @@ int guild_ranking_save(void)
 			continue;
 		
 		m = map_mapindex2mapid(gc->mapindex);
-		if( !(map[m].flag.woe_set&agit_flag) )
+		if( woe_set && map[m].flag.woe_set != woe_set )
 			continue;
 
 		index = gc->castle_id;

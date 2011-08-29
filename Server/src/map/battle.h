@@ -275,6 +275,7 @@ extern struct Battle_Config
 	int gvg_magic_damage_rate;
 	int gvg_misc_damage_rate;
 	int gvg_flee_penalty;
+	int gm_monsterdrop_lv;
 	int gvg_eliminate_time;
 	int pk_short_damage_rate;
 	int pk_long_damage_rate;
@@ -526,7 +527,6 @@ extern struct Battle_Config
 	int bg_magic_damage_rate;
 	int bg_misc_damage_rate;
 	int bg_flee_penalty;
-	int gm_monsterdrop_lv;
 	int bg_idle_announce;
 	int bg_reserved_char_id;
 	int bg_items_on_pvp;

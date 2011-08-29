@@ -1053,9 +1053,9 @@ int battle_addmastery(struct map_session_data *sd,struct block_list *target,int 
 		case W_2HSPEAR:
 			if((skill = pc_checkskill(sd,KN_SPEARMASTERY)) > 0) {
 				if(!pc_isriding(sd, OPTION_RIDING|OPTION_RIDING_DRAGON))
-					damage += (skill * (4 + pc_checkskill(sd,RK_DRAGONTRAINING)));
+					damage += skill * 4;
 				else
-					damage += (skill * (5 + pc_checkskill(sd,RK_DRAGONTRAINING)));
+					damage += skill * (5 + pc_checkskill(sd,RK_DRAGONTRAINING));//Mastery damage is higher when on a Dragon Mount. [Rytech]
 			}
 			break;
 		case W_1HAXE:
@@ -1822,7 +1822,7 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 					if (index >= 0 &&
 						sd->inventory_data[index] &&
 						sd->inventory_data[index]->type == IT_WEAPON)
-						wd.damage = sd->inventory_data[index]->weight/5;
+						wd.damage = sd->inventory_data[index]->weight;
 				} else
 					wd.damage = sstatus->rhw.atk2*2;
 				i=100+(40*(skill_lv-1));
@@ -2323,19 +2323,17 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 		if( skill_num == CR_SHIELDBOOMERANG || skill_num == PA_SHIELDCHAIN )
 		{ //Refine bonus applies after cards and elements.
 			short index= sd->equip_index[EQI_HAND_L];
-			if( index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR ) {
-				ATK_ADD(10*sd->status.inventory[index].refine);
-			}
+			if( index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR )
+				ATK_ADD(25*sd->status.inventory[index].refine);
 		}
 		if ( skill_num == PA_SHIELDCHAIN ) {
 			short index = sd->equip_index[EQI_HAND_L];
 			if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
-				ATK_ADD(10*sd->inventory_data[index]->weight);
+				ATK_ADD(sd->inventory_data[index]->weight*3);
 			}
 			if( sc && sc->data[SC_GLOOMYDAY_SK] )
 				ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
 		}
-		
 	} //if (sd)
 
 	//Card Fix, tsd sid
@@ -3312,7 +3310,7 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 		{
 		case NC_AXEBOOMERANG:
 			if( sd && (i = sd->equip_index[EQI_HAND_R]) >= 0 && sd->inventory_data[i] && sd->inventory_data[i]->type == IT_WEAPON )
-				i = sd->inventory_data[i]->weight;
+				i = (sd->inventory_data[i]->weight*3);
 			break;
 		case MO_EXTREMITYFIST:
 			i = 250 + 150 * skill_lv;
@@ -3494,12 +3492,12 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 	BON_RATE2(c_bossmod[0],c_bossmod[1]);
 	BON_RATE(c_atkmod[0]);
 	if( sd && (skill_id == CR_SHIELDBOOMERANG || skill_id == PA_SHIELDCHAIN) && (i = sd->equip_index[EQI_HAND_L]) >= 0 && sd->inventory_data[i] && sd->inventory_data[i]->type == IT_ARMOR )
-		BON_ADD(10 * sd->status.inventory[i].refine);
+		BON_ADD(25 * sd->status.inventory[i].refine);
 
 	if ( skill_id == PA_SHIELDCHAIN ) {
 		short index = sd->equip_index[EQI_HAND_L];
 		if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
-			ATK_ADD(10*sd->inventory_data[index]->weight);
+			ATK_ADD(sd->inventory_data[index]->weight*3);
 		}
 		if( sc && sc->data[SC_GLOOMYDAY_SK] )
 			ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
@@ -3695,13 +3693,24 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 	switch( skill_id )
 	{
 	case CR_ACIDDEMONSTRATION:
+		{
+			struct Damage md = battle_calc_magic_attack_renewal(src,target,skill_id,skill_lv,wflag);
+			wd.damage += md.damage;
+			if( skill_id == CR_ACIDDEMONSTRATION && target->type == BL_PC ){
+				wd.damage = wd.damage/(90/10);
+				wd.damage >>= 1; // Half Damage on Players
+			}
+			else
+			{
+				wd.damage = wd.damage/(77/10);
+			}
+		}
+		break;
 	case ASC_BREAKER:
 	case LG_RAYOFGENESIS:
 		{
 			struct Damage md = battle_calc_magic_attack_renewal(src,target,skill_id,skill_lv,wflag);
 			wd.damage += md.damage;
-			if( skill_id == CR_ACIDDEMONSTRATION && target->type == BL_PC )
-				wd.damage >>= 1; // Half Damage on Players
 		}
 		break;
 	case 0: // Melee Attacks
@@ -4603,14 +4612,18 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
 		md.damage = skill_calc_heal(src,target,skill_num,skill_lv,false);
 		break;
 	case RK_DRAGONBREATH:
-		md.damage = ((status_get_hp(src) * 16 / 1000) + (status_get_sp(src) * 192 / 1000)) * skill_lv;
-		if( sd ) md.damage += md.damage * 5 * (pc_checkskill(sd,RK_DRAGONTRAINING) -1) / 100;// Damaged is increased if you know Dragon Training [Rytech]
-		if( s_level > 100) md.damage += md.damage * (s_level - 100) / 200;
+		md.damage = ((status_get_hp(src) / 50) + (status_get_max_sp(src) / 4)) * skill_lv;
+		if (status_get_lv(src) > 100) md.damage = md.damage * s_level / 150;// Base level bonus.
+		if (sd) md.damage = md.damage * (100 + 5 * (pc_checkskill(sd,RK_DRAGONTRAINING) - 1)) / 100;
 		break;
 	case RA_CLUSTERBOMB:
 	case RA_FIRINGTRAP:
  	case RA_ICEBOUNDTRAP:
-		md.damage = (s_level * 2 + ((s_level/50) + 3) * sstatus->dex + 300) * skill_lv + sstatus->int_ * 5 + pc_checkskill(sd,RA_RESEARCHTRAP) * 40;
+		md.damage = (2 * skill_lv * (sstatus->dex + 100));
+		//if (status_get_lv(src) > 100) md.damage += md.damage * (s_level - 50) / 200 + 1.5;// Base level bonus. This formula is official, but left disabled for now for certain reasons. [Rytech]
+		//if (status_get_lv(src) > 100) md.damage += md.damage * (s_level - 50) / 200;// Base level bonus.
+		md.damage = md.damage * 2;// Without BaseLv Bonus
+		md.damage = md.damage + (5 * sstatus->int_) + (40 * pc_checkskill(sd,RA_RESEARCHTRAP));
 		break;
 	case NC_SELFDESTRUCTION:
 		md.damage = (sstatus->hp + sstatus->sp) * 50 * skill_lv / 100;
@@ -6184,7 +6197,7 @@ static const struct _battle_data {
 	{ "bg_misc_attack_damage_rate",         &battle_config.bg_misc_damage_rate,             60,     0,      INT_MAX,        },
 	{ "bg_flee_penalty",                    &battle_config.bg_flee_penalty,                 20,     0,      INT_MAX,        },
 	{ "gm_monsterdrop_lv",                  &battle_config.gm_monsterdrop_lv,               0,      0,      99,             },
-	{ "lootevent",                          &battle_config.lootevent,                       1,      0,      31,             }, 
+	{ "lootevent",                          &battle_config.lootevent,                       1,      0,      31,             },
 	{ "bg_idle_announce",                   &battle_config.bg_idle_announce,                0,      0,      INT_MAX,        },
 	{ "bg_reserved_char_id",                &battle_config.bg_reserved_char_id,             999996, 0,      INT_MAX,        },
 	{ "bg_items_on_pvp",                    &battle_config.bg_items_on_pvp,                 1,      0,      1,              },

@@ -127,6 +127,7 @@ int autosave_interval = DEFAULT_AUTOSAVE_INTERVAL;
 int minsave_interval = 100;
 int save_settings = 0xFFFF;
 int agit_flag = 0;
+int woe_set = 0; // eAmod WoE
 
 // Ranking System
 int pvpevent_flag = 0;
@@ -2587,7 +2588,7 @@ int map_random_dir(struct block_list *bl, short *x, short *y)
 	if (dist < 1) dist =1;
 	
 	do {
-		j = rand()%8; //Pick a random direction
+		j = 1 + 2*(rand()%4); //Pick a random diagonal direction
 		segment = 1+(rand()%dist); //Pick a random interval from the whole vector in that direction
 		xi = bl->x + segment*dirx[j];
 		segment = (short)sqrt((float)(dist2 - segment*segment)); //The complement of the previously picked segment

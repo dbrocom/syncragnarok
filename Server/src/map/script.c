@@ -3797,7 +3797,6 @@ int script_reload()
 #define BUILDIN_DEF2(x,x2,args) { buildin_ ## x , x2 , args }
 #define BUILDIN_FUNC(x) int buildin_ ## x (struct script_state* st)
 
-
 /////////////////////////////////////////////////////////////////////
 // NPC interaction
 //
@@ -4572,7 +4571,7 @@ BUILDIN_FUNC(warpparty)
 	struct party_data* p;
 	int type;
 	int mapindex;
-	int i, j;
+	int i;
 
 	const char* str = script_getstr(st,2);
 	int x = script_getnum(st,3);
@@ -4592,9 +4591,27 @@ BUILDIN_FUNC(warpparty)
 		 : ( strcmp(str,"Leader")==0 ) ? 3
 		 : 4;
 
-	if( type == 2 && ( sd = script_rid2sd(st) ) == NULL )
-	{// "SavePoint" uses save point of the currently attached player
-		return 0;
+	switch (type)
+	{
+	case 3:
+		for(i = 0; i < MAX_PARTY && !p->party.member[i].leader; i++);
+		if (i == MAX_PARTY || !p->data[i].sd) //Leader not found / not online
+			return 0;
+		pl_sd = p->data[i].sd;
+		mapindex = pl_sd->mapindex;
+		x = pl_sd->bl.x;
+		y = pl_sd->bl.y;
+		break;
+	case 4:
+		mapindex = mapindex_name2id(str);
+		break;
+	case 2:
+		//"SavePoint" uses save point of the currently attached player
+		if (( sd = script_rid2sd(st) ) == NULL )
+			return 0;
+	default:
+		mapindex = 0;
+		break;
 	}
 
 	for (i = 0; i < MAX_PARTY; i++)
@@ -4623,25 +4640,9 @@ BUILDIN_FUNC(warpparty)
 				pc_setpos(pl_sd,sd->status.save_point.map,sd->status.save_point.x,sd->status.save_point.y,CLR_TELEPORT);
 		break;
 		case 3: // Leader
-			for(j = 0; j < MAX_PARTY && !p->party.member[j].leader; j++);
-			if (j == MAX_PARTY || !p->data[j].sd) //Leader not found / not online
-				return 0;
-			mapindex = p->data[j].sd->mapindex;
-			x = p->data[j].sd->bl.x;
-			y = p->data[j].sd->bl.y;
-			for (j = 0; j < MAX_PARTY; j++)
-			{
-				pl_sd = p->data[j].sd;
-				if (!pl_sd)
-					continue;
-				if(map[pl_sd->bl.m].flag.noreturn || map[pl_sd->bl.m].flag.nowarp)
-					continue;
-				pc_setpos(pl_sd,mapindex,x,y,CLR_TELEPORT);
-			}
-		break;
 		case 4: // m,x,y
 			if(!map[pl_sd->bl.m].flag.noreturn && !map[pl_sd->bl.m].flag.nowarp) 
-				pc_setpos(pl_sd,mapindex_name2id(str),x,y,CLR_TELEPORT);
+				pc_setpos(pl_sd,mapindex,x,y,CLR_TELEPORT);
 		break;
 		}
 	}
@@ -7152,6 +7153,9 @@ BUILDIN_FUNC(strnpcinfo)
 			break;
 		case 3: // unique name
 			name = aStrdup(nd->exname);
+			break;
+		case 4: // map name
+			name = aStrdup(map[nd->bl.m].name);
 			break;
 	}
 
@@ -10701,7 +10705,7 @@ BUILDIN_FUNC(setmapflag)
 			case MF_PVP_NOCALCRANK:		map[m].flag.pvp_nocalcrank=1; break;
 			case MF_BATTLEGROUND:		map[m].flag.battleground = (!val || atoi(val) < 0 || atoi(val) > 2) ? 1 : atoi(val); break;
 			case MF_NOPVPMODE:     map[m].flag.nopvpmode=1; break;
-			case MF_WOE_SET:       if( val && atoi(val) > 0 ) map[m].flag.woe_set |= atoi(val); break;
+			case MF_WOE_SET:       if( val && atoi(val) > 0 ) map[m].flag.woe_set = atoi(val); break;
 			case MF_BLOCKED:       map[m].flag.blocked=1; break;
 		}
 	}
@@ -10974,7 +10978,13 @@ BUILDIN_FUNC(maprespawnguildid)
 BUILDIN_FUNC(agitstart)
 {
 	if( agit_flag != 0 ) return 0;      // Agit already Start.
-	agit_flag = script_getnum(st,2);
+	agit_flag = 1;
+	if( script_hasdata(st,2) )
+	{
+		int i = script_getnum(st,2);
+		if( i > 0 ) woe_set = i;
+	}
+
 	guild_agit_start();
 	return 0;
 }
@@ -10984,6 +10994,7 @@ BUILDIN_FUNC(agitend)
 	if( agit_flag == 0) return 0;      // Agit already End.
 	guild_agit_end();
 	agit_flag = 0;
+	woe_set = 0;
 	return 0;
 }
 
@@ -11292,7 +11303,7 @@ BUILDIN_FUNC(successremovecards)
 				pc_setglobalreg( sd, "LastLootID", item_tmp.nameid ); //Last lootet Item ID
 				pc_setglobalreg( sd, "LastLootAmount", 1 ); //Last looted Item Amount
 				npc_event_doall_id( "OnLoot", sd->bl.id );
-			} 
+			}
 		}
 	}
 
@@ -12789,61 +12800,61 @@ BUILDIN_FUNC(gethominfo)
 	return 0;
 }
 
-/// Retrieves information about character's mercenary 
-/// getmercinfo <type>[,<char id>]; 
-BUILDIN_FUNC(getmercinfo) 
-{ 
-		int type, char_id; 
-		struct map_session_data* sd; 
-		struct mercenary_data* md; 
+/// Retrieves information about character's mercenary
+/// getmercinfo <type>[,<char id>];
+BUILDIN_FUNC(getmercinfo)
+{
+	int type, char_id;
+	struct map_session_data* sd;
+	struct mercenary_data* md;
 
-	type = script_getnum(st,2); 
+	type = script_getnum(st,2);
 
-	if( script_hasdata(st,3) ) 
-	{ 
-		char_id = script_getnum(st,3); 
+	if( script_hasdata(st,3) )
+	{
+		char_id = script_getnum(st,3);
 
-		if( ( sd = map_charid2sd(char_id) ) == NULL ) 
-		{ 
-			ShowError("buildin_getmercinfo: No such character (char_id=%d).\n", char_id); 
-			script_pushnil(st); 
-			return 1; 
-		} 
-	} 
-	else 
-	{ 
-		if( ( sd = script_rid2sd(st) ) == NULL ) 
-		{ 
-			script_pushnil(st); 
-			return 0; 
-		} 
-	} 
+		if( ( sd = map_charid2sd(char_id) ) == NULL )
+		{
+			ShowError("buildin_getmercinfo: No such character (char_id=%d).\n", char_id);
+			script_pushnil(st);
+			return 1;
+		}
+	}
+	else
+	{
+		if( ( sd = script_rid2sd(st) ) == NULL )
+		{
+			script_pushnil(st);
+			return 0;
+		}
+	}
 
-	md = ( sd->status.mer_id && sd->md ) ? sd->md : NULL; 
+	md = ( sd->status.mer_id && sd->md ) ? sd->md : NULL;
 
-	switch( type ) 
-	{ 
-		case 0: script_pushint(st,md ? md->mercenary.mercenary_id : 0); break; 
-		case 1: script_pushint(st,md ? md->mercenary.class_ : 0); break; 
-		case 2: 
-				if( md ) 
-					script_pushstrcopy(st,md->db->name); 
-				else 
-					script_pushconststr(st,""); 
-				break; 
-		case 3: script_pushint(st,md ? mercenary_get_faith(md) : 0); break; 
-		case 4: script_pushint(st,md ? mercenary_get_calls(md) : 0); break; 
-		case 5: script_pushint(st,md ? md->mercenary.kill_count : 0); break; 
-		case 6: script_pushint(st,md ? mercenary_get_lifetime(md) : 0); break; 
-		case 7: script_pushint(st,md ? md->db->lv : 0); break; 
-		default: 
-				ShowError("buildin_getmercinfo: Invalid type %d (char_id=%d).\n", type, sd->status.char_id); 
-				script_pushnil(st); 
-				return 1; 
-	} 
+	switch( type )
+	{
+		case 0: script_pushint(st,md ? md->mercenary.mercenary_id : 0); break;
+		case 1: script_pushint(st,md ? md->mercenary.class_ : 0); break;
+		case 2:
+			if( md )
+				script_pushstrcopy(st,md->db->name);
+			else
+				script_pushconststr(st,"");
+			break;
+		case 3: script_pushint(st,md ? mercenary_get_faith(md) : 0); break;
+		case 4: script_pushint(st,md ? mercenary_get_calls(md) : 0); break;
+		case 5: script_pushint(st,md ? md->mercenary.kill_count : 0); break;
+		case 6: script_pushint(st,md ? mercenary_get_lifetime(md) : 0); break;
+		case 7: script_pushint(st,md ? md->db->lv : 0); break;
+		default:
+			ShowError("buildin_getmercinfo: Invalid type %d (char_id=%d).\n", type, sd->status.char_id);
+			script_pushnil(st);
+			return 1;
+	}
 
-	return 0; 
-} 
+	return 0;
+}
 
 /*==========================================
  * Shows wether your inventory(and equips) contain
@@ -14500,25 +14511,6 @@ BUILDIN_FUNC(rid2name)
 	return 0;
 }
 
-BUILDIN_FUNC(pcblockmove)
-{
-	int id, flag;
-	TBL_PC *sd = NULL;
-
-	id = script_getnum(st,2);
-	flag = script_getnum(st,3);
-
-	if(id)
-		sd = map_id2sd(id);
-	else
-		sd = script_rid2sd(st);
-
-	if(sd)
-		sd->state.blockedmove = flag > 0;
-
-	return 0;
-}
-
 BUILDIN_FUNC(pcblock)
 {
 	int id = 0, flag, type;
@@ -14640,13 +14632,23 @@ BUILDIN_FUNC(unitwarp)
 	short x;
 	short y;
 	struct block_list* bl;
+	const char *mapname;
 
 	unit_id = script_getnum(st,2);
-	map = map_mapname2mapid(script_getstr(st, 3));
+	mapname = script_getstr(st, 3);
 	x = (short)script_getnum(st,4);
 	y = (short)script_getnum(st,5);
+	
+	if (!unit_id) //Warp the script's runner
+		bl = map_id2bl(st->rid);
+	else
+		bl = map_id2bl(unit_id);
 
-	bl = map_id2bl(unit_id);
+	if( strcmp(mapname,"this") == 0 )
+		map = bl?bl->m:-1;
+	else
+		map = map_mapname2mapid(mapname);
+
 	if( map >= 0 && bl != NULL )
 		script_pushint(st, unit_warp(bl,map,x,y,CLR_OUTSIGHT));
 	else
@@ -16683,68 +16685,6 @@ BUILDIN_FUNC(progressbar)
 	return 0;
 }
 
-// Apply an extra bonus to drops that only expires when reset [WiseWarrior]
-BUILDIN_FUNC(setdropbonus){
-	TBL_PC *sd = NULL;
-	double val=0;
-	int tmp=0;
-
-	if (script_hasdata(st,3)){
-		if (script_isstring(st,3)){
-			sd = map_nick2sd(script_getstr(st,3));
-		}else{
-			sd = map_id2sd(script_getnum(st,3));
-		}
-	}else{
-		sd = script_rid2sd(st);
-	}
-	tmp = (script_hasdata(st,2) ? script_getnum(st,2) : 0);
-	val = (double)tmp/100;
-	if (sd){
-		if (val > 0){
-			if ((val/100) <= 0){
-				// Value to is too small or no value was passed.
-				script_pushint(st,-2);
-			}else{
-				// Add to bonus
-				sd->drop_bonus = val;
-				script_pushint(st,1);
-			}
-		}else{
-			// Clear drop bonus
-			sd->drop_bonus = 0;
-			script_pushint(st,2);
-		}
-	}else{
-		// Failed to attach player
-		script_pushint(st,-1);
-	}
-	return 0;
-}
-
-// Returns a players current drop bonuses [WiseWarrior]
-BUILDIN_FUNC(getdropbonus){
-	TBL_PC *sd = NULL;
-
-	if (script_hasdata(st,2)){
-		if (script_isstring(st,2)){
-			sd = map_nick2sd(script_getstr(st,2));
-		}else{
-			sd = map_id2sd(script_getnum(st,2));
-		}
-	}else{
-		sd = script_rid2sd(st);
-	}
-
-	if (sd){
-		script_pushint(st,((int)(sd->drop_bonus*100)));
-	}else{
-		// Failed to attach player
-		script_pushint(st,-1);
-	}
-	return 0;
-}
-
 BUILDIN_FUNC(pushpc)
 {
 	int direction, cells, dx, dy;
@@ -16974,6 +16914,87 @@ BUILDIN_FUNC(getsecurity)
 		return 0;
 
 	script_pushint(st,sd->state.secure_items);
+	return 0;
+}
+
+BUILDIN_FUNC(pcblockmove)
+{
+	int id, flag;
+	TBL_PC *sd = NULL;
+
+	id = script_getnum(st,2);
+	flag = script_getnum(st,3);
+
+	if(id)
+		sd = map_id2sd(id);
+	else
+		sd = script_rid2sd(st);
+
+	if(sd)
+		sd->state.blockedmove = flag > 0;
+
+	return 0;
+}
+
+// Apply an extra bonus to drops that only expires when reset [WiseWarrior]
+BUILDIN_FUNC(setdropbonus){
+	TBL_PC *sd = NULL;
+	double val=0;
+	int tmp=0;
+
+	if (script_hasdata(st,3)){
+		if (script_isstring(st,3)){
+			sd = map_nick2sd(script_getstr(st,3));
+		}else{
+			sd = map_id2sd(script_getnum(st,3));
+		}
+	}else{
+		sd = script_rid2sd(st);
+	}
+	tmp = (script_hasdata(st,2) ? script_getnum(st,2) : 0);
+	val = (double)tmp/100;
+	if (sd){
+		if (val > 0){
+			if ((val/100) <= 0){
+				// Value to is too small or no value was passed.
+				script_pushint(st,-2);
+			}else{
+				// Add to bonus
+				sd->drop_bonus = val;
+				script_pushint(st,1);
+			}
+		}else{
+			// Clear drop bonus
+			sd->drop_bonus = 0;
+			script_pushint(st,2);
+		}
+	}else{
+		// Failed to attach player
+		script_pushint(st,-1);
+	}
+	return 0;
+}
+
+// Returns a players current drop bonuses [WiseWarrior]
+BUILDIN_FUNC(getdropbonus){
+	TBL_PC *sd = NULL;
+
+	if (script_hasdata(st,2)){
+		if (script_isstring(st,2)){
+			sd = map_nick2sd(script_getstr(st,2));
+		}else{
+			sd = map_id2sd(script_getnum(st,2));
+		}
+	}else{
+		sd = script_rid2sd(st);
+	}
+
+	if (sd){
+		script_pushint(st,((int)(sd->drop_bonus*100)));
+	}else{
+		// Failed to attach player
+		script_pushint(st,-1);
+	}
 	return 0;
 }
 
@@ -17889,7 +17910,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(gvgoff,"s"),
 	BUILDIN_DEF(emotion,"i??"),
 	BUILDIN_DEF(maprespawnguildid,"sii"),
-	BUILDIN_DEF(agitstart,"i"),	// <Agit>
+	BUILDIN_DEF(agitstart,"?"),	// <Agit>
 	BUILDIN_DEF(agitend,""),
 	BUILDIN_DEF(agitcheck,""),   // <Agitcheck>
 	BUILDIN_DEF(flagemblem,"i?"),	// Flag Emblem
@@ -18023,10 +18044,10 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(atoi,"s"),
 	// [zBuffer] List of player cont commands --->
 	BUILDIN_DEF(rid2name,"i"),
-	BUILDIN_DEF(pcblockmove,"ii"),
 	BUILDIN_DEF(pcfollow,"ii"),
 	BUILDIN_DEF(pcstopfollow,"i"),
 	BUILDIN_DEF(pcblock,"ii?"),
+	BUILDIN_DEF(pcblockmove,"ii"),
 	// <--- [zBuffer] List of player cont commands
 	// [zBuffer] List of mob control commands --->
 	BUILDIN_DEF(unitwalk,"ii?"),
