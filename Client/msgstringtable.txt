@@ -811,7 +811,7 @@ Se ha guardado la Información de la Cuenta %s.#
 No se puede acceder debido a un problema de Hacking. Para más detalles consulta la Web y el Foro.#
 No se puede acceder debido a un Error del Sistema.#
 Items Reparables#
-¡Has reparado el Objeto!#
+¡El Item ha sido reparado!#
 Has Fallado al reparar (Comprueba la distancia a la que estás de él) #
 Estado del Sistema activado [GM mode] [/sc ON]#
 Estado del Sistema desactivado [GM mode] [/sc OFF]#
@@ -1765,7 +1765,7 @@ Reclutar#
 Abrir ventana de reclutamiento de party.#
 Buscando - #
 Seleccionar Todo#
-~Debes seleccionar un mínimo de una clase.#
+~Debes seleccionar mínimo una clase.#
 Debes seleccionar al menos 1 o más clases.#
 Has seleccionado la clase %d. Sólo puedes seleccionar hasta 6 diferentes clases.#
 Sólo se permiten carácteres numéricos.#
