@@ -3697,12 +3697,12 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 			struct Damage md = battle_calc_magic_attack_renewal(src,target,skill_id,skill_lv,wflag);
 			wd.damage += md.damage;
 			if( skill_id == CR_ACIDDEMONSTRATION && target->type == BL_PC ){
-				wd.damage = wd.damage/(90/10);
+				wd.damage = wd.damage/25;
 				wd.damage >>= 1; // Half Damage on Players
 			}
 			else
 			{
-				wd.damage = wd.damage/(77/10);
+				wd.damage = wd.damage/(78/10);
 			}
 		}
 		break;

@@ -1519,29 +1519,29 @@
 
 // Epidode 13.3
 // * Eden Group
-1192,123,99	// P_Slayer1
-1193,123,99	// P_Slayer2
-1650,123,99	// P_Staff1
-1651,123,99	// P_Staff2
-1747,123,99	// P_Bow1
-1748,123,99	// P_Bow2
-2456,123,99	// Para_Team_Boots1
-2457,123,99	// Para_Team_Boots2
-2458,123,99	// Para_Team_Boots3
-2560,123,99	// Para_Team_Manteau
+1192,115,99	// P_Slayer1
+1193,115,99	// P_Slayer2
+1650,115,99	// P_Staff1
+1651,115,99	// P_Staff2
+1747,115,99	// P_Bow1
+1748,115,99	// P_Bow2
+2456,115,99	// Para_Team_Boots1
+2457,115,99	// Para_Team_Boots2
+2458,115,99	// Para_Team_Boots3
+2560,115,99	// Para_Team_Manteau
 5583,83,99	// Para_Team_Hat
-6219,123,99	// Para_Team_Mark
-13050,123,99	// P_Dagger1
-13051,123,99	// P_Dagger2
-13112,123,99	// P_Revolver1
-13113,123,99	// P_Revolver2
-13423,123,99	// P_Sabre1
-13424,123,99	// P_Sabre2
-15009,123,99	// Para_Team_Uniform1
-15010,123,99	// Para_Team_Uniform2
-15011,123,99	// Para_Team_Uniform3
-16004,123,99	// P_Mace1
-16005,123,99	// P_Mace2
+6219,115,99	// Para_Team_Mark
+13050,115,99	// P_Dagger1
+13051,115,99	// P_Dagger2
+13112,115,99	// P_Revolver1
+13113,115,99	// P_Revolver2
+13423,115,99	// P_Sabre1
+13424,115,99	// P_Sabre2
+15009,115,99	// Para_Team_Uniform1
+15010,115,99	// Para_Team_Uniform2
+15011,115,99	// Para_Team_Uniform3
+16004,115,99	// P_Mace1
+16005,115,99	// P_Mace2
 
 // * Third Job-related
 1703,123,99	// Bow__

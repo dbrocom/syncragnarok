@@ -1,0 +1,40 @@
+konbini,30,21,0	script	Cartel#Konbini01	111,{
+
+	mes "[Cartel]";
+	mes "Si me buscas y no estoy, seguramente me encuentre fuera de la tienda.";
+	mes " ";
+	mes "Horario: Cualquier hora (excepto durante eventos de Poring Catcher)";
+	close;
+}
+
+konbini,61,37,0	script	Cartel#Konbini02	111,{
+
+	mes "[Cartel]";
+	mes "Comprobad bien el precio y el producto antes de realizar la compra.";
+	mes "¡¡ No se admiten devoluciones !!";
+	close;
+}
+
+//===== eAthena Script =======================================
+//= Conbini Warps
+//============================================================
+
+prontera,175,163,0	warp	conbini01	1,1,konbini,52,21
+konbini,53,17,0	warp	conbini02	1,1,prontera,174,159
+
+
+konbini,30,48,0	warp	conbini03	1,1,evt_coke,20,20
+evt_coke,17,20,0	warp	conbini04	1,1,konbini,30,42
+
+
+//===== eAthena Script =======================================
+//= Conbini Mapflags
+//============================================================
+
+konbini	mapflag	noteleport
+konbini	mapflag	nopenalty
+konbini	mapflag	nobranch
+
+
+
+

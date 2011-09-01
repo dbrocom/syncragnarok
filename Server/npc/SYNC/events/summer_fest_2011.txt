@@ -1,0 +1,575 @@
+
+hugel,115,134,4	script	Marina	905,{
+
+	mes "[Marina]";
+	if (!SUMMERFEST){
+		mes "Creo que me equivoqué con las indicaciones del guía...";
+		mes "¿Sabrías ayudarme? Estoy buscando una ciudad famosa por su interés turístico.";
+		mes "También hay un casino. ¿Sabes de qué ciudad hablo?";
+		next;
+		input .@city$;
+		mes "[Marina]";
+		if (.@city$ != "Comodo" && .@city$ != "comodo" && .@city$ != "COMODO"){
+			mes "Así que piensas que es "+.@city$+"...";
+			next;
+			mes "[Marina]";
+			mes "Lo siento, pero el nombre no me suena...";
+			close;
+		}
+		mes "¡Eso es! ¡Comodo! ¿Cómo puedo ser tan despistada?";
+		mes "Me han dicho que va a haber un festival veraniego muy importante.";
+		mes "¡Debo ponerme en marcha o llegaré tarde!";
+		next;
+		mes "[Marina]";
+		mes "Me gustaría poder darte un ticket para el festival, pero no me queda...";
+		mes "Aunque sé a quién podría sobrarle alguno...";
+		next;
+		mes "[Marina]";
+		mes "¿Por qué no buscas a Morgan?";
+		mes "Estoy segura de que andará por Mjolnir. ¡Le encanta la montaña!";
+		set SUMMERFEST,1;
+		close;
+	}
+	else if( SUMMERFEST > 0 ){
+		mes "¿Has encontrado ya a Morgan?";
+		mes "Es raro que no le encuentres por Mjolnir...";
+		next;
+		mes "[Marina]";
+		mes "Yo no puedo ayudarte más, tengo que prepararme para ir a Comodo.";
+		mes "¡Hasta Luego!";
+		close;
+	}
+}
+
+mjolnir_11,137,124,5	script	Morgan	901,{
+
+	mes "[Morgan]";
+	if(!SUMMERFEST){
+		mes "Estos montes son sorprendentes. ¡Me encantan!";
+		close;
+	}
+	if (SUMMERFEST == 1){
+		mes "Así que Marina te ha dicho que yo podría darte un Ticket para el Festival de Verano de Comodo...";
+		mes "... bueno sí, es verdad.";
+		next;
+		mes "[Morgan]";
+		mes "De hecho, conozco a un tipo, que conoce a un tipo, que está casado con alguien que conoce al cuñado del que organiza el Festival.";
+	} else {
+		mes "¿Vienes a por más tickets?";
+		if (select("No:Sí")==1){ close; }
+	}
+	next;
+	mes "[Morgan]";
+	set .@brigan, 50*SUMMERFEST;
+	mes "Si estás interesado en el Ticket, quizá pueda hacer algo por ti... a cambio de que me consigas "+.@brigan+" Brigan.";
+	mes "¿Te parece bien?";
+	next;
+	if (select("Sí:No")==2){ close; }
+	mes "[Morgan]";
+	if ( countitem(7054) < .@brigan ){
+		mes "Creo que te has equivocado con el cálculo. He dicho "+.@brigan+" Brigan.";
+		close;
+	}
+	mes "¡Genial!";
+	delitem 7054,.@brigan;
+	mes "Como te prometí, aquí tienes tu Ticket para el festival.";
+	getitem 7525,1;
+	next;
+	mes "[Morgan]";
+	mes "¿Pero no pensarás ir con esas pintas, verdad?";
+	next;
+	mes "[Morgan]";
+	mes "Ten.";
+	mes "¡Hay que ir vestido para la ocasión!";
+	getitem 12260,1;
+	set SUMMERFEST, SUMMERFEST+1;
+	close;
+}
+
+comodo,190,138,6	script	Summer Festival	790,{
+
+	mes "[Sorteo del Festival de Verano]";
+	if (countitem (7525) == 0){
+		mes "Sin Tickets para el Sorteo no te puedo dejar participar.";
+		mes "Lo siento, son las normas.";
+		close;
+	}
+	mes "¡Muy bien!, veamos que le ha tocado...";
+	next;
+	delitem 7525,1;
+	mes "";
+	mes "* La Bolita está girando dentro del tambor *";
+	next;
+	sleep2 3500;
+	mes "[Sorteo del Festival de Verano]";
+	set .@sorteo, rand(100);
+	if (.@sorteo <= 5){
+		set .@premio, 5287;
+		set .@cantidad, 1;
+	}
+	else if (.@sorteo > 5 && .@sorteo <= 14){
+		set .@premio, 30793;
+		set .@cantidad, 1;
+	}
+	else if (.@sorteo == 15){
+		set .@premio, 7608;
+		set .@cantidad, 1;
+	}
+	else if (.@sorteo > 15 && .@sorteo <= 30){
+		set .@premio, 12260;
+		set .@cantidad, 5;
+	}
+	else if (.@sorteo > 30 && .@sorteo <= 45){
+		set .@premio, 7539;
+		set .@cantidad, 3;
+	}
+	else if (.@sorteo > 45 && .@sorteo <= 50){
+		set .@premio, 10030;
+		set .@cantidad, 1;
+	}
+	else if (.@sorteo > 50 && .@sorteo <= 55){
+		set .@premio, 5553;
+		set .@cantidad, 0;
+	}
+	else if (.@sorteo > 55 && .@sorteo <= 60){
+		set .@premio, 5552;
+		set .@cantidad, 0;
+	}
+	else if (.@sorteo > 60 && .@sorteo <= 80){
+		set .@premio, 12709;
+		set .@cantidad, 5;
+	}
+	else if (.@sorteo > 80 && .@sorteo <= 90){
+		set .@premio, 617;
+		set .@cantidad, 5;
+	}
+	else if (.@sorteo > 90){
+		set .@premio, 12247;
+		set .@cantidad, 5;
+	}
+	if (!.@cantidad){
+		mes "¡Felicidades! Has conseguido un "+getitemname(.@premio)+" durante una semana.";
+		npctalk "¡A "+strcharinfo(0)+" ha conseguido un "+getitemname(.@premio)+"!";
+		rentitem .@premio, 604800;
+	}else{
+		if (.@cantidad == 1){
+			mes "¡Felicidades! Ha sido un "+getitemname(.@premio)+".";
+			npctalk "¡A "+strcharinfo(0)+" le ha tocado un "+getitemname(.@premio)+"!";
+		}else{
+			mes "¡Felicidades! Han sido "+.@cantidad+" "+getitemname(.@premio)+".";
+			npctalk "¡A "+strcharinfo(0)+" le han tocado "+.@cantidad+" "+getitemname(.@premio)+"!";
+		}
+		getitem .@premio, .@cantidad;
+	}
+	mes "¡Menuda Suerte!";
+	close;
+}
+
+comodo,125,231,3	script	Rose#premiumticket	951,{
+
+	mes "[Rose]";
+	if ( #TestPremium > 0 || countitem(7608) > 0 ){
+		mes "Ya has conseguido un Boleto para probar las Cuentas Premium.";
+		mes "No puedes volver a jugar.";
+		close;
+	}
+	mes "Con motivo del Festival de Verano, estoy repartiendo cuentas premium a todo aquel que resuelva mi acertijo.";
+	next;
+	mes "[Rose]";
+	mes "Deberás adivinar Cual es el monstruo que se oculta en 5 tarjetas, ¡sin fallar ninguna!";
+	mes "¿Te atreves a intentarlo? Por una Poring Coin puedes probar suerte.";
+	next;
+	if(select("No:Sí")==1){ close; }
+	mes "[Rose]";
+	if (countitem(7539) < 1){
+		mes "No puedes jugar si no tienes ninguna Poring Coin.";
+		close;
+	}
+	mes "De acuerdo, ¡Qué comience el juego!";
+	delitem 7539,1;
+	mes "¡Mucha Suerte!";
+	set @punto, 0;
+	next;
+	switch(rand(5)){
+		mes "[Rose]";
+		case 0:
+			mes "¿Cual es el siguiente monstruo?";
+			cutin "acidus",4;
+			next;
+			switch(select("Gold Acidus:Blue Acidus:Gold Ferus:Blue Ferus")){
+				case 2:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "Estoy segura de que no acertarás este.";
+			cutin "darklord",4;
+			next;
+			switch(select("Randgris:Dark Illusion:Beelzebub:Dark Lord")){
+				case 4:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "Quizá este sea un poco más difícil, pero seguro que no te costará.";
+			cutin "hillwind",4;
+			next;
+			switch(select("HillWind:Archdam:Anubis:Aliot")){
+				case 1:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "¡Ánimo! ¿A qué te recuerda este?";
+			cutin "naghtsieger",4;
+			next;
+			switch(select("SwordMaster:Naght Sieger:Baphomet:Orc Hero")){
+				case 2:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "El último: ¡Ya terminamos!";
+			cutin "poporing",4;
+			next;
+			switch(select("Metaling:Santa Poring:Poporing:Stapo")){
+				case 3:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			break;
+		case 1:
+			mes "¿Cual es el siguiente monstruo?";
+			cutin "amon",4;
+			next;
+			switch(select("Amon Ra:Fallen Bishop:Khalitzburg:Abysmal Knight")){
+				case 1:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "Estoy segura de que no acertarás este.";
+			cutin "dryad",4;
+			next;
+			switch(select("Geographer:Dryad:Parasite:Wootan Warrior")){
+				case 2:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "Quizá este sea un poco más difícil, pero seguro que no te costará.";
+			cutin "icetitan",4;
+			next;
+			switch(select("Ancient Tree:Gloom:Ice Titan:Galion")){
+				case 3:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "¡Ánimo! ¿A qué te recuerda este?";
+			cutin "owlbaron",4;
+			next;
+			switch(select("Owl Baron:Owl Duke:Evil Druid:Dryad")){
+				case 1:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "El último: ¡Ya terminamos!";
+			cutin "rsx",4;
+			next;
+			switch(select("Venatu:Old Stove:Dimik:RSX")){
+				case 4:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			break;
+		case 2:
+			mes "¿Cual es el siguiente monstruo?";
+			cutin "anubis",4;
+			next;
+			switch(select("Pharaoh:Owl Baron:Evil Druid:Anubis")){
+				case 4:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "Estoy segura de que no acertarás este.";
+			cutin "echio",4;
+			next;
+			switch(select("Isilla:Vanberk:Aunoe:Echio")){
+				case 4:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "Quizá este sea un poco más difícil, pero seguro que no te costará.";
+			cutin "katrin",4;
+			next;
+			switch(select("Magaleta:Katrinn:Shecil:Trentini")){
+				case 2:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "¡Ánimo! ¿A qué te recuerda este?";
+			cutin "phylla",4;
+			next;
+			switch(select("Phylla:Rhyncho:Pinguicula:Dark Pinguicula")){
+				case 1:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "El último: ¡Ya terminamos!";
+			cutin "wolf",4;
+			next;
+			switch(select("Galion:Hatii Baby:Wolf:Jaguar")){
+				case 3:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			break;
+		case 3:
+			mes "¿Cual es el siguiente monstruo?";
+			cutin "argiope",4;
+			next;
+			switch(select("Centipede:Centipede Larva:Argiope:Ancient Worm")){
+				case 3:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "Estoy segura de que no acertarás este.";
+			cutin "galion",4;
+			next;
+			switch(select("Galion:Jaguar:Roween:Mastering")){
+				case 1:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "Quizá este sea un poco más difícil, pero seguro que no te costará.";
+			cutin "mavka",4;
+			next;
+			switch(select("Bloody Butterfly:Mavka:Retribution:Les")){
+				case 2:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "¡Ánimo! ¿A qué te recuerda este?";
+			cutin "pirateskeleton",4;
+			next;
+			switch(select("Skeleton Worker:Archer Skeleton:Ghoul:Pirate Skeleton")){
+				case 4:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "El último: ¡Ya terminamos!";
+			cutin "wootanshooter",4;
+			next;
+			switch(select("Wootan Shooter:Wootan Warrior:Stone Shooter:Dryad")){
+				case 1:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			break;
+		case 4:
+			mes "¿Cual es el siguiente monstruo?";
+			cutin "boitata",4;
+			next;
+			switch(select("Naga:Boitata:Isis:Coelacanth")){
+				case 2:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "Estoy segura de que no acertarás este.";
+			cutin "hillslion",4;
+			next;
+			switch(select("Litte Fatum:Deleter:Petite:Hills Lion")){
+				case 4:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "Quizá este sea un poco más difícil, pero seguro que no te costará.";
+			cutin "miyabi",4;
+			next;
+			switch(select("Hyegun:Khiel:Sohee:Miyabi Ningyo")){
+				case 4:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "¡Ánimo! ¿A qué te recuerda este?";
+			cutin "poisontoad",4;
+			next;
+			switch(select("Deleter:Poison Toad:Phreeoni:Comodo")){
+				case 2:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			mes "[Rose]";
+			mes "El último: ¡Ya terminamos!";
+			cutin "zealotus",4;
+			next;
+			switch(select("Khiel:Dark Priest:Zealotus:Alice")){
+				case 3:
+					set @punto, @punto+1;
+					break;
+				default:
+					break;
+			}
+			break;
+	}
+	mes "[Rose]";
+	if ( @punto == 5 ){
+		mes "¡Felicidades! Has ganado un Ticket para una Cuenta premium de prueba.";
+		mes "No te olvides de canjear el premio con la Premium Seller de la casa de los GMs.";
+		set #TestPremium, 1;
+		getitem 7608,1;
+	}else{
+		mes "Lo siento, no has tenido suerte esta vez.";
+		mes "¡Puedes volver a participar si así lo deseas!";
+	}
+	cutin "",255;
+	close;
+} 
+
+
+hugel,114,166,3	script	Granjera	67,{
+
+	mes "[Granjera]";
+	if( getgmlevel() >= 80 ){
+		if (!.evporingsorp){
+			mes "¿Quieres ACTIVAR el evento?";
+			next;
+			if ( select("Sí:No...")==1 ) {
+				mes "[Granjera]";
+				mes "¡Inundando Hugel de Sandías!";
+				set .evporingsorp, 1;
+				atcommand "@blockskill 2418";
+				atcommand "@blockskill 2213";
+				atcommand "@blockskill 2216";
+				atcommand "@blockskill 2233";
+				atcommand "@blockskill 2447";
+				atcommand "@blockskill 2450";
+				atcommand "@blockskill 2449";
+				atcommand "@blockskill 2006";
+				atcommand "@blockskill 2280";
+				close2;
+				callsub OnSuikaEventStart;
+			}
+			close;
+		}
+		else{
+			mes "¿Qué deseas hacer?";
+			next;
+			switch(select("Finalizar")){
+				case 1:
+					mes "¿Estás seguro de querer TERMINAR con las sandías?";
+					next;
+					if ( select("Sí:No...")==1 ) {
+						mes "[Granjera]";
+						mes "Recogiendo todas las sandías que quedan...";
+						set .evporingsorp, 0;
+						atcommand "@blockskill 2418";
+						atcommand "@blockskill 2213";
+						atcommand "@blockskill 2216";
+						atcommand "@blockskill 2233";
+						atcommand "@blockskill 2447";
+						atcommand "@blockskill 2450";
+						atcommand "@blockskill 2449";
+						atcommand "@blockskill 2006";
+						atcommand "@blockskill 2280";
+						close2;
+						callsub OnSuikaEventEnd;
+					}
+					break;
+			}
+			close;
+		}
+	}else{
+		if (!.evporingsorp){
+			mes "Estoy preparando algo importante, ¡guárdame el secreto!";
+			close;
+		}else{
+			mes "¿Te gustan las sandías?";
+			mes "Las he cuidado yo con estas manos. ¡Y están muy ricas!";
+			close;
+		}
+	}
+	end;
+
+OnSuikaEventStart:
+	for (set .@i, 0; .@i < 500; set .@i, .@i+1) {
+		monster "hugel",0,0, "Sandía", 2150, 5, "Granjera::OnSuikaCrash";
+	}
+	end;
+
+OnSuikaEventEnd:
+	killmonster "hugel","Granjera::OnSuikaCrash";
+	end;
+
+OnSuikaCrash:
+	switch( rand(80) ){
+		case 1:
+			getitem 7539,1;
+		default:
+			break;
+	}
+	end;
+}
+
+
