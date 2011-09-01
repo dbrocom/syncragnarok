@@ -53,6 +53,13 @@ else
 	PCRE_CFLAGS=
 endif
 
+HAVE_CURL=@HAVE_CURL@
+ifeq ($(HAVE_CURL),yes)
+	CURL_CFLAGS=-DCURL_SUPPORT @CURL_CFLAGS@
+else
+	CURL_CFLAGS=
+endif
+
 @SET_MAKE@
 
 #####################################################################
@@ -94,17 +101,17 @@ obj_sql:
 
 # executables
 map-server: obj_txt $(MAP_TXT_OBJ) $(COMMON_OBJ)
-	@CC@ @LDFLAGS@ -o ../../map-server@EXEEXT@ $(MAP_TXT_OBJ) $(COMMON_OBJ) $(MT19937AR_OBJ) @LIBS@ @PCRE_LIBS@
+	@CC@ @LDFLAGS@ -o ../../map-server@EXEEXT@ $(MAP_TXT_OBJ) $(COMMON_OBJ) $(MT19937AR_OBJ) @LIBS@ @PCRE_LIBS@ @CURL_LIBS@
 
 map-server_sql: obj_sql $(MAP_SQL_OBJ) $(COMMON_OBJ) $(COMMON_SQL_OBJ)
-	@CC@ @LDFLAGS@ -o ../../map-server_sql@EXEEXT@ $(MAP_SQL_OBJ) $(COMMON_OBJ) $(COMMON_SQL_OBJ) $(MT19937AR_OBJ) @LIBS@ @PCRE_LIBS@ @MYSQL_LIBS@
+	@CC@ @LDFLAGS@ -o ../../map-server_sql@EXEEXT@ $(MAP_SQL_OBJ) $(COMMON_OBJ) $(COMMON_SQL_OBJ) $(MT19937AR_OBJ) @LIBS@ @PCRE_LIBS@ @CURL_LIBS@ @MYSQL_LIBS@
 
 # map object files
 obj_txt/%.o: %.c $(MAP_H) $(COMMON_H) $(MT19937AR_H)
-	@CC@ @CFLAGS@ $(MT19937AR_INCLUDE) $(PCRE_CFLAGS) -DTXT_ONLY @CPPFLAGS@ -c $(OUTPUT_OPTION) $<
+	@CC@ @CFLAGS@ $(MT19937AR_INCLUDE) $(PCRE_CFLAGS) $(CURL_CFLAGS) -DTXT_ONLY @CPPFLAGS@ -c $(OUTPUT_OPTION) $<
 
 obj_sql/%.o: %.c $(MAP_H) $(COMMON_H) $(COMMON_SQL_H) $(MT19937AR_H)
-	@CC@ @CFLAGS@ $(MT19937AR_INCLUDE) $(PCRE_CFLAGS) @MYSQL_CFLAGS@ @CPPFLAGS@ -c $(OUTPUT_OPTION) $<
+	@CC@ @CFLAGS@ $(MT19937AR_INCLUDE) $(PCRE_CFLAGS) $(CURL_CFLAGS) @MYSQL_CFLAGS@ @CPPFLAGS@ -c $(OUTPUT_OPTION) $<
 
 # missing object files
 ../common/obj_all/%.o:

@@ -43,6 +43,10 @@
 #include "mail.h"
 #endif
 
+#ifdef CURL_SUPPORT
+	#include <curl/curl.h>
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11758,6 +11762,74 @@ int atcommand_faildrop(const int fd, struct map_session_data* sd, const char* co
 	return 0;
 }
 
+#ifdef CURL_SUPPORT
+
+/*==========================================
+ * Tweets
+ *------------------------------------------*/
+int tcode;
+
+size_t tweet_sub(void *ptr, size_t size, size_t nmemb, void *stream)
+{
+	tcode = 0;
+	tcode = (int)ptr;
+	return 0;
+}
+
+ACMD_FUNC(tweet)
+{
+	const struct { int code; char msg[25]; } response[] = {
+		{ 200, "OK" },
+		{ 304, "Not Modified" },
+		{ 400, "Bad Request" },
+		{ 401, "Unauthorized" },
+		{ 403, "Forbidden" },
+		{ 404, "Not Found" },
+		{ 406, "Not Acceptable" },
+		{ 420, "Enhance Your Calm" },
+		{ 500, "Internal Server Error" },
+		{ 502, "Bad Gateway" },
+		{ 503, "Service Unavailable" },
+	};
+
+	int i, j = 0;
+	char tweet[130];
+	char msg[256], msg2[256];
+	nullpo_retr(-1,sd);
+
+	safesnprintf(msg2, sizeof(msg), "%s", message);
+	safesnprintf(msg, sizeof(msg), "tweet=[ %s ]: %s #SyncRO", sd->status.name, msg2);
+
+	CURL *curl;
+	CURLcode res;
+	curl = curl_easy_init();
+
+	if (curl) {
+		curl_easy_setopt(curl, CURLOPT_URL, "http://app.syncro.ws/twitter/tweet.php");
+		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, msg);
+		curl_easy_setopt(curl, CURLOPT_POST, true);
+		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &tweet_sub);
+		res = curl_easy_perform(curl);
+		curl_easy_cleanup(curl);
+	}
+
+	for (i=0; i < ARRAYLENGTH(response); i++) {
+		if (tcode == response[i].code) {
+			j = response[i].code;
+			break;
+		}
+	}
+
+	sprintf(tweet,"Tweet: \"%s\"     -|-     Status: %s", msg2, response[j].msg);
+	clif_displaymessage(fd,tweet);
+
+	if (response[j].msg == 200) {
+		clif_displaymessage(fd, "El tweet ha sido publicado con éxito en la cuenta de Twitter de SyncRO");
+	}
+	return 0;
+}
+#endif
+
 /*==========================================
  * atcommand_info[] structure definition
  *------------------------------------------*/
@@ -12134,6 +12206,9 @@ AtCommandInfo atcommand_info[] = {
 	{ "gstoragelock",       0,99,   0,     atcommand_ind_gstoragelock },
 	{ "gw",                 0,99,   0,     atcommand_ind_gw },
 	{ "guildmes",           0,99,   0,     atcommand_ind_gw },
+#ifdef CURL_SUPPORT
+	{ "tweet",             80,80,   0,     atcommand_tweet },
+#endif
 };
 
 
