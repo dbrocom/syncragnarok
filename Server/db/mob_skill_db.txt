@@ -8,10 +8,15 @@
 //delay is the time in milliseconds that has to be pass before recasting the same skill.
 //
 //STATE:
-// any (except dead) / idle (in standby) / walk (in movement) / dead (on killed) /
-// loot /attack / angry (like attack, except player has not attacked mob yet) /
-// chase (following target, after being attacked) / follow (following
-// target, without being attacked)
+// any (except dead)
+// idle (in standby) 
+// walk (in movement) 
+// dead (on killed)
+// loot 
+// attack 
+// angry (like attack, except player has not attacked mob yet)
+// chase (following target, after being attacked)
+// follow (following target, without being attacked)
 // anytarget (attack+angry+chase+follow)
 //
 //target: The target of the skill can be: target (current target) / self / friend / 
@@ -296,8 +301,8 @@
 1059,Mistress@AL_PNEUMA,attack,25,1,2000,0,5000,yes,self,longrangeattacked,,,,,,,18,
 1059,Mistress@AL_PNEUMA,chase,25,1,2000,0,5000,yes,self,longrangeattacked,,,,,,,18,
 1059,Mistress@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,,,,,,,,
-1059,Mistress@AL_TELEPORT,idle,26,1,5000,0,5000,yes,self,always,0,,,,,,,
-1059,Mistress@AL_TELEPORT,walk,26,1,5000,0,5000,yes,self,always,0,,,,,,,
+1059,Mistress@AL_TELEPORT,idle,26,1,1000,0,5000,yes,self,always,0,,,,,,,
+1059,Mistress@AL_TELEPORT,walk,26,1,2000,0,5000,yes,self,always,0,,,,,,,
 1059,Mistress@NPC_AGIUP,attack,350,5,10000,0,30000,yes,self,myhpltmaxrate,30,,,,,,6,
 1059,Mistress@NPC_CALLSLAVE,attack,352,1,10000,0,30000,yes,self,always,0,,,,,,,
 1059,Mistress@NPC_CALLSLAVE,idle,352,1,10000,0,30000,yes,self,always,0,,,,,,,

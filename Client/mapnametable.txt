@@ -1,3 +1,22 @@
+malaya.rsw#포트 말라야#
+ma_fild01.rsw#바르요 마히가와#
+ma_fild02.rsw#포레스트#
+ma_scene01.rsw#바코나와 호수#
+ma_in01.rsw#말라야 내부#
+ma_dun01.rsw#방군곳 병원 1층#
+1@ma_h.rsw#방군곳 병원 2층#
+1@ma_c.rsw#부와야의 동굴#
+1@ma_b.rsw#바코나와의 은신처#
+ma_zif01.rsw#지프니 내부#
+ma_zif02.rsw#지프니 내부#
+ma_zif03.rsw#지프니 내부#
+ma_zif04.rsw#지프니 내부#
+ma_zif05.rsw#지프니 내부#
+ma_zif06.rsw#지프니 내부#
+ma_zif07.rsw#지프니 내부#
+ma_zif08.rsw#지프니 내부#
+ma_zif09.rsw#지프니 내부#
+job_ko.rse#숨겨진 장소#
 gld_dun01_2.rsw#길드 지하 던전 2층#
 gld_dun02_2.rsw#길드 지하 던전 2층#
 gld_dun03_2.rsw#길드 지하 던전 2층#
@@ -995,6 +1014,7 @@ moonfild.rsw#Superficie Lunar#
 maze_room.rsw#Laberinto#
 
 gremios.rsw#Casa del Gremio#
+farm1.rsw#Granja 1#
 
 games_room.rsw#Sala de Juegos#
 bomberman.rsw#Bomberman#

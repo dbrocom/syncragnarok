@@ -9952,7 +9952,7 @@ ACMD_FUNC(gpoints)
 }
 
 /*===================================
- * Away message (@away, @aw) [LuzZza]
+ * Away message (@afk) [LuzZza]
  *-----------------------------------*/
 ACMD_FUNC(away)
 {
@@ -9969,7 +9969,7 @@ ACMD_FUNC(away)
 			clif_displaymessage(fd, msg_txt(547));
 			return 0;
 		}
-		//"Usage: @away,@aw <message>. Enter empty message for disable it."
+		//"Usage: @afk/@away <message>. Enter empty message for disable it."
 		clif_displaymessage(fd, msg_txt(548));
 	}
 	return 0;
@@ -12024,8 +12024,6 @@ AtCommandInfo atcommand_info[] = {
 	{ "leave",              1,1,    0,     atcommand_leave },
 	{ "accept",             1,1,    0,     atcommand_accept },
 	{ "reject",             1,1,    0,     atcommand_reject },
-	{ "away",               1,1,    0,     atcommand_away },
-	{ "aw",                 1,1,    0,     atcommand_away },
 	{ "clone",             50,50,   0,     atcommand_clone },
 	{ "slaveclone",        50,50,   0,     atcommand_clone },
 	{ "evilclone",         50,50,   0,     atcommand_clone },

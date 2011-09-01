@@ -830,6 +830,27 @@ gld_dun02_2
 gld_dun03_2
 gld_dun04_2
 
+// -- 2011-08-31
+malaya
+ma_fild01
+ma_fild02
+ma_scene01
+ma_in01
+ma_dun01
+1@ma_h
+1@ma_c
+1@ma_b
+ma_zif01
+ma_zif02
+ma_zif03
+ma_zif04
+ma_zif05
+ma_zif06
+ma_zif07
+ma_zif08
+ma_zif09
+job_ko
+
 // Only add maps under this line if they are not standard maps!
 
 
@@ -924,6 +945,7 @@ ball2
 bomberman
 puissance4
 gremios
+farm1
 ars_in01
 chess01
 maze_room

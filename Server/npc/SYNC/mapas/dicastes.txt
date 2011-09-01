@@ -240,39 +240,6 @@ dic_in01,388,208,4	script	Elevator#10	111,{
 	}
 }
 
-
-//===== eAthena Script ========================================
-//= El Dicastes Dungeon Monster Spawn Script
-//===== By: ==================================================
-//= Chilly
-//===== Current Version: =====================================
-//= 1.1
-//===== Compatible With: =====================================
-//= Any Athena Version
-//===== Description: =========================================
-//= Official kRO monster spawns
-//===== Additional Comments: =================================
-//= 1.0 First Release
-//= 1.1 Added Scaraba Hole Nightmare Mode
-//============================================================
-
-//==================================================
-// dic_dun01 - El Dicastes Dungeon
-//==================================================
-dic_dun01,0,0,0,0	monster	One-Horn Scaraba	2083,50,0,0,0
-dic_dun01,0,0,0,0	monster	Two-Horn Scaraba	2084,45,0,0,0
-dic_dun01,0,0,0,0	monster	One-Horn Scaraba Egg	2088,15,0,0,0
-dic_dun01,0,0,0,0	monster	Two-Horn Scaraba Egg	2089,15,0,0,0
-
-//==================================================
-// dic_dun02 - Scaraba Hole
-//==================================================
-dic_dun02,0,0,0,0	monster	Antler Scaraba	2085,50,0,0,0
-dic_dun02,0,0,0,0	monster	Rake Scaraba	2086,45,0,0,0
-dic_dun02,0,0,0,0	monster	Antler Scaraba Egg	2090,15,0,0,0
-dic_dun02,0,0,0,0	monster	Rake Scaraba Egg	2091,15,0,0,0
-dic_dun02,0,0,0,0	boss_monster	Queen Scaraba	2087,1,7200000,600000,1
-
 //==================================================
 // dic_dun03 - Scaraba Hole Nightmare Mode
 //==================================================
@@ -287,36 +254,6 @@ dic_dun03,0,0,0,0	monster	Rake Scaraba Egg	2169,15,0,0,0
 dic_dun03,0,0,0,0	boss_monster	Queen Scaraba	2165,1,7200000,600000,1
 
 
-//===== eAthena Script ========================================
-//= El Dicastes Monster Spawn Script
-//===== By: ==================================================
-//= Chilly
-//===== Current Version: =====================================
-//= 1.0
-//===== Compatible With: =====================================
-//= Any Athena Version
-//===== Description: =========================================
-//= Official monster spawn in El Dicastes Field.
-//===== Additional Comments: =================================
-//= 1.0 First Release
-//============================================================
-
-//==================================================
-// dic_fild01 - El Dicastes Field
-//==================================================
-dic_fild01,0,0,0,0	monster	Centipede	1987,60,0,0,0
-dic_fild01,0,0,0,0	monster	Centipede Larva	1999,30,0,0,0
-dic_fild01,0,0,0,0	monster	Tatacho	1986,25,0,0,0
-dic_fild01,0,0,0,0	monster	Dolomedes	2092,20,0,0,0
-
-//==================================================
-// dic_fild02 - El Dicastes Field
-//==================================================
-dic_fild02,0,0,0,0	monster	Centipede	1987,35,0,0,0
-dic_fild02,0,0,0,0	monster	Centipede Larva	1999,10,0,0,0
-dic_fild02,0,0,0,0	monster	Tatacho	1986,25,0,0,0
-dic_fild02,0,0,0,0	monster	Dolomedes	2092,80,0,0,0
-dic_fild02,0,0,0,0	monster	Bradium Golem	2024,3,0,0,0
 
 // Mapflags
 dicastes01	mapflag	nightenabled
@@ -335,8 +272,3 @@ dic_fild02	mapflag	nomemo
 dic_dun01	mapflag	nomemo
 dic_dun02	mapflag	nomemo
 dic_dun03	mapflag	nomemo
-
-
-
-
-
