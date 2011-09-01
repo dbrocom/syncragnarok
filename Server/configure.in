@@ -234,6 +234,33 @@ AC_ARG_WITH(
 
 
 #
+# Enable/disable CURL and optionally specify the path (optional library)
+#
+AC_ARG_WITH(
+	[curl],
+	AC_HELP_STRING(
+		[--with-curl@<:@=ARG@:>@],
+		[use CURL library, optionally specify the full path of curl installation directory (by default curl is used if found)]
+	),
+	[
+		if test "$withval" = "no" ; then
+			want_curl="no"
+		else
+			want_curl="yes"
+			require_curl="yes"
+			if test "$withval" != "yes" ; then
+				if test ! -d "$withval" ; then
+					AC_MSG_ERROR([$withval is not a directoy])
+				fi
+				CURL_HOME="$withval"
+			fi
+		fi
+	],
+	[want_curl="yes" require_curl="no"]
+)
+
+
+#
 # Specify the path of the zlib library (required library)
 #
 AC_ARG_WITH(
@@ -733,6 +760,52 @@ fi
 AC_SUBST([HAVE_PCRE])
 AC_SUBST([PCRE_LIBS])
 AC_SUBST([PCRE_CFLAGS])
+
+
+
+#
+# CURL library (optional)
+#
+##TODO CURL version
+CURL_LIBS=""
+CURL_CFLAGS=""
+
+if test "$want_curl" = "no" ; then
+	AC_MSG_NOTICE([ignoring CURL (optional)])
+else
+	if test -z "$CURL_HOME" ; then
+		AC_CHECK_LIB([curl], [HAVE_CURL="yes"], [])
+		if test "$HAVE_CURL" = "yes" ; then
+			CURL_LIBS="-lcurl"
+		fi
+	else
+		CURL_OLD_LDFLAGS="$LDFLAGS" ; LDFLAGS="$LDFLAGS -L$CURL_HOME/lib"
+		CURL_OLD_CPPFLAGS="$CPPFLAGS" ; CPPFLAGS="$CPPFLAGS -I$CURL_HOME/include/curl"
+		AC_CHECK_LIB(curl, curl_compile, [HAVE_CURL="yes"], [])
+		CPPFLAGS="$CURL_OLD_CPPFLAGS"
+		LDFLAGS="$CURL_OLD_LDFLAGS"
+		if test "$HAVE_CURL" = "yes" ; then
+			CURL_LIBS="-L$CURL_HOME/lib -lcurl"
+			test -d "$CURL_HOME/include/curl" && CURL_CFLAGS="-I$CURL_HOME/include/curl"
+		fi
+	fi
+	AC_MSG_CHECKING([CURL library (optional)])
+	if test "$HAVE_CURL" = "yes" ; then
+		AC_MSG_RESULT([yes])
+	else
+		AC_MSG_RESULT([no])
+		if test "$require_curl" = "yes" ; then
+			AC_MSG_ERROR([CURLnot found or incompatible (requested)])
+		else
+			AC_MSG_NOTICE([disabling CURL(optional)])
+		fi
+	fi
+fi
+
+AC_SUBST([HAVE_CURL])
+AC_SUBST([CURL_LIBS])
+AC_SUBST([CURL_CFLAGS])
+
 
 
 #
