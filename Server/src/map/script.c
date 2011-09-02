@@ -5653,8 +5653,8 @@ BUILDIN_FUNC(checkweight)
 }
 
 /*==========================================
- * getitem <item id>,<amount>{,<character ID>};
- * getitem "<item name>",<amount>{,<character ID>};
+ * getitem <item id>,<amount>{,<account ID>};
+ * getitem "<item name>",<amount>{,<account ID>};
  *------------------------------------------*/
 BUILDIN_FUNC(getitem)
 {

@@ -427,6 +427,7 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 	int diff = 0;
 	char save_status[128]; //For displaying save information. [Skotlex]
 	struct mmo_charstatus *cp;
+	int errors = 0; //If there are any errors while saving, "cp" will not be updated at the end. 
 	StringBuf buf;
 
 	if (char_id!=p->char_id) return 0;
@@ -443,22 +444,28 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 	//map inventory data
 	if( memcmp(p->inventory, cp->inventory, sizeof(p->inventory)) )
 	{
-		memitemdata_to_sql(p->inventory, MAX_INVENTORY, p->char_id, TABLE_INVENTORY);
-		strcat(save_status, " inventory");
+		if (!memitemdata_to_sql(p->inventory, MAX_INVENTORY, p->char_id, TABLE_INVENTORY)) 
+			strcat(save_status, " inventory"); 
+		else 
+			errors++;
 	}
 
 	//map cart data
 	if( memcmp(p->cart, cp->cart, sizeof(p->cart)) )
 	{
-		memitemdata_to_sql(p->cart, MAX_CART, p->char_id, TABLE_CART);
-		strcat(save_status, " cart");
+		if (!memitemdata_to_sql(p->cart, MAX_CART, p->char_id, TABLE_CART)) 
+			strcat(save_status, " cart"); 
+		else 
+			errors++; 
 	}
 
 	//map storage data
 	if( memcmp(p->storage.items, cp->storage.items, sizeof(p->storage.items)) )
 	{
-		memitemdata_to_sql(p->storage.items, MAX_STORAGE, p->account_id, TABLE_STORAGE);
-		strcat(save_status, " storage");
+		if (!memitemdata_to_sql(p->storage.items, MAX_STORAGE, p->account_id, TABLE_STORAGE)) 
+			strcat(save_status, " storage"); 
+		else 
+			errors++;
 	}
 
 	//map rentstorage data
@@ -477,9 +484,9 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 		char_db, p->char_id, p->account_id, p->slot, esc_name) )
 	{
 		Sql_ShowDebug(sql_handle);
-	}
-
-	strcat(save_status, " creation");
+		errors++; 
+	} else 
+		strcat(save_status, " creation");
 }
 #endif
 
@@ -525,8 +532,9 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 			p->account_id, p->char_id) )
 		{
 			Sql_ShowDebug(sql_handle);
-		}
-		strcat(save_status, " status");
+			errors++; 
+		} else 
+			strcat(save_status, " status");
 	}
 
 	//Values that will seldom change (to speed up saving)
@@ -551,9 +559,9 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 			p->account_id, p->char_id) )
 		{
 			Sql_ShowDebug(sql_handle);
-		}
-
-		strcat(save_status, " status2");
+			errors++; 
+		} else 
+			strcat(save_status, " status2");
 	}
 
 	/* Player PVP Event Ranking */
@@ -691,8 +699,10 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 		(p->spear_calls != cp->spear_calls) || (p->spear_faith != cp->spear_faith) ||
 		(p->sword_calls != cp->sword_calls) || (p->sword_faith != cp->sword_faith) )
 	{
-		mercenary_owner_tosql(char_id, p);
-		strcat(save_status, " mercenary");
+		if (mercenary_owner_tosql(char_id, p)) 
+			strcat(save_status, " mercenary"); 
+		else 
+			errors++; 
 	}
 
 	//memo points
@@ -702,7 +712,10 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 
 		//`memo` (`memo_id`,`char_id`,`map`,`x`,`y`)
 		if( SQL_ERROR == Sql_Query(sql_handle, "DELETE FROM `%s` WHERE `char_id`='%d'", memo_db, p->char_id) )
+		{
 			Sql_ShowDebug(sql_handle);
+			errors++;
+		}
 
 		//insert here.
 		StringBuf_Clear(&buf);
@@ -721,9 +734,11 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 		if( count )
 		{
 			if( SQL_ERROR == Sql_QueryStr(sql_handle, StringBuf_Value(&buf)) )
+			{
 				Sql_ShowDebug(sql_handle);
+				errors++;
+			}
 		}
-		
 		strcat(save_status, " memo");
 	}
 
@@ -738,7 +753,10 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 	{
 		//`skill` (`char_id`, `id`, `lv`)
 		if( SQL_ERROR == Sql_Query(sql_handle, "DELETE FROM `%s` WHERE `char_id`='%d'", skill_db, p->char_id) )
+		{
 			Sql_ShowDebug(sql_handle);
+			errors++;
+		}
 
 		StringBuf_Clear(&buf);
 		StringBuf_Printf(&buf, "INSERT INTO `%s`(`char_id`,`id`,`lv`) VALUES ", skill_db);
@@ -756,7 +774,10 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 		if( count )
 		{
 			if( SQL_ERROR == Sql_QueryStr(sql_handle, StringBuf_Value(&buf)) )
+			{
 				Sql_ShowDebug(sql_handle);
+				errors++;
+			}
 		}
 
 		strcat(save_status, " skills");
@@ -774,7 +795,10 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 	if(diff == 1)
 	{	//Save friends
 		if( SQL_ERROR == Sql_Query(sql_handle, "DELETE FROM `%s` WHERE `char_id`='%d'", friend_db, char_id) )
+		{
 			Sql_ShowDebug(sql_handle);
+			errors++;
+		}
 
 		StringBuf_Clear(&buf);
 		StringBuf_Printf(&buf, "INSERT INTO `%s` (`char_id`, `friend_account`, `friend_id`) VALUES ", friend_db);
@@ -791,12 +815,12 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 		if( count )
 		{
 			if( SQL_ERROR == Sql_QueryStr(sql_handle, StringBuf_Value(&buf)) )
+			{
 				Sql_ShowDebug(sql_handle);
-			else
-				strcat(save_status, " friends");
+				errors++;
+			}
 		}
-		else //Friend list cleared.
-			strcat(save_status, " friends");
+		strcat(save_status, " friends");
 	}
 
 #ifdef HOTKEY_SAVING
@@ -815,8 +839,10 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 	}
 	if(diff) {
 		if( SQL_ERROR == Sql_QueryStr(sql_handle, StringBuf_Value(&buf)) )
+		{
 			Sql_ShowDebug(sql_handle);
-		else
+			errors++;
+		} else
 			strcat(save_status, " hotkeys");
 	}
 #endif
@@ -824,7 +850,8 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 	if (save_status[0]!='\0' && save_log)
 		ShowInfo("Saved char %d - %s:%s.\n", char_id, p->name, save_status);
 #ifndef TXT_SQL_CONVERT
-	memcpy(cp, p, sizeof(struct mmo_charstatus));
+	if (!errors)
+			memcpy(cp, p, sizeof(struct mmo_charstatus));
 #else
 	aFree(cp);
 #endif
@@ -843,6 +870,7 @@ int memitemdata_to_sql(const struct item items[], int max, int id, int tableswit
 	struct item item; // temp storage variable
 	bool* flag; // bit array for inventory matching
 	bool found;
+	int errors = 0;
 
 	switch (tableswitch) {
 	case TABLE_INVENTORY:     tablename = inventory_db;     selectoption = "char_id";    break;
@@ -929,7 +957,10 @@ int memitemdata_to_sql(const struct item items[], int max, int id, int tableswit
 					StringBuf_Printf(&buf, " WHERE `id`='%d' LIMIT 1", item.id);
 					
 					if( SQL_ERROR == Sql_QueryStr(sql_handle, StringBuf_Value(&buf)) )
+					{
 						Sql_ShowDebug(sql_handle);
+						errors++;
+					}
 				}
 
 				found = flag[i] = true; //Item dealt with,
@@ -939,7 +970,10 @@ int memitemdata_to_sql(const struct item items[], int max, int id, int tableswit
 		if( !found )
 		{// Item not present in inventory, remove it.
 			if( SQL_ERROR == Sql_Query(sql_handle, "DELETE from `%s` where `id`='%d'", tablename, item.id) )
+			{
 				Sql_ShowDebug(sql_handle);
+				errors++;
+			}
 		}
 	}
 	SqlStmt_Free(stmt);
@@ -971,12 +1005,15 @@ int memitemdata_to_sql(const struct item items[], int max, int id, int tableswit
 	}
 
 	if( found && SQL_ERROR == Sql_QueryStr(sql_handle, StringBuf_Value(&buf)) )
+	{
 		Sql_ShowDebug(sql_handle);
+		errors++;
+	}
 
 	StringBuf_Destroy(&buf);
 	aFree(flag);
 
-	return 0;
+	return errors;
 }
 
 int mmo_char_tobuf(uint8* buf, struct mmo_charstatus* p);
