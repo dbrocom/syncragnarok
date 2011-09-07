@@ -1,0 +1,108 @@
+//===== Custom eAthena Script =======================================
+//= Evento Inicio Curso 2011
+//===== By: =========================================================
+//
+//    010100110100100101010010010010010101010101010011
+//   _________      __________         ___  __ ____  ___
+//   \____   / ____ \______   \ ____  |   |/ _|\   \/  /
+//      /   / /    \  |    ___//    \ |     <   \     /
+//     /   /_(  >_> ) |   |   (  ~,~ )|   |  \  /     \ 
+//    /_____ \\____/  |___|    \____/ |__/|__ \/___/\  \
+//          \/                               \/      \_/
+//
+//    010100110100100101010010010010010101010101010011
+//          ____  ____  ____  ____  ____  ____ 
+//         ||S ||||I ||||R ||||I ||||U ||||S ||
+//         ||__||||__||||__||||__||||__||||__||
+//         |/__\||/__\||/__\||/__\||/__\||/__\|
+//
+//===== Description =================================================
+//= Un evento para conmemorar el inicio de un nuevo curso escolar
+//===== Version =====================================================
+//= 1.0
+//===== Changelog ===================================================
+//= 1.0 - Versión Inicial
+//===================================================================
+
+yuno,300,249,3	script	Profesor	778,{
+
+	mes "[Profesor]";
+	mes "Buenas, jovencito.";
+	mes "¿Has disfrutado del Verano?";
+	next;
+	if ( (Class >= 0 && Class <= 6) || Class == Job_SuperNovice || Class == Job_Ninja || Class == Job_Gunslinger || (Class >= 4023 && Class <= 4045) ){
+		mes "[Profesor]";
+		mes "¿Estás preparado para empezar el nuevo curso escolar?";
+		mes "Yo te puedo ayudar, si quieres. Pero me tienes que demostrar que eres un estudiante.";
+		next;
+		mes "[Profesor]";
+		if ( (countitem(738) >= 1) && (countitem(1558) >= 1)  && (countitem(1006) >= 1) ){
+			delitem 738,1;
+			delitem 1558,1;
+			delitem 1006,1;
+			mes "¡Bien! Ya veo que has conseguido todo.";
+			next;
+			mes "[Profesor]";
+			mes "Pues con todo preparado, empecemos la lección:";
+			next;
+			mes "[Lección 1]";
+			mes "Totalmente ^8A0808prohibido faltar al respeto y/o discriminar^000000 a los GM's y a los usuarios según su raza, condición sexual o nacionalidad.";
+			next;
+			mes "[Lección 2]";
+			mes "^8A0808Prohibido^000000 atacar mobs que pertenecen a otro jugador. La única mob ^8A0808Free for All^000000 es la de ^8A0808eventos^000000.";
+			next;
+			mes "[Lección 3]";
+			mes "Los ^8A0808MVPs son Free for All^000000, ^8A0808excepto^000000 los invocados mediante quest.";
+			next;
+			mes "[Lección 4]";
+			mes "Totalmente ^8A0808prohibido^000000 sacar provecho de ^8A0808Bug's^000000 en el juego. Siempre hay que notificarlos a un GM.";
+			next;
+			mes "[Lección 5]";
+			mes "Totalmente ^8A0808prohibido^000000 anunciar o promocionar otros servidores en el foro o juego.";
+			next;
+			mes "[Profesor]";
+			sleep2 1000;
+			mes ". . .";
+			sleep2 1000;
+			mes "Bien, ahora daremos paso al examen.";
+			mes "Si apruebas, te graduarás. Si suspendes, tendrás que volver a repetir.";
+			mes "¿Preparado?";
+			next;
+			mes "[Profesor]";
+			mes "Atacar mobs de otros jugadores está prohibido. Pero... ¿se puede atacar a ^8A0808MVPs^000000 de otro jugador?";
+			next;
+			if(select("Sí, en cualquier caso:Sí, excepto los invocados por quest:No, no son Free4All") == 2){
+				mes "[Profesor]";
+				mes "¡Felicidades! Te has graduado con éxito.";
+				specialeffect 18;
+				getexp 10000,10000;
+				switch( rand(10) ){
+					case 0:	getitem 30030,1;	break;	//Black_Bag
+					case 1:	getitem 30031,1;	break;	//Blue_Bag
+					case 2:	getitem 30032,1;	break;	//Cyan_Bag
+					case 3:	getitem 30033,1;	break;	//Green_Bag
+					case 4:	getitem 30034,1;	break;	//Gold_Bag
+					case 5:	getitem 30035,1;	break;	//Orange_Bag
+					case 6:	getitem 30036,1;	break;	//Red_Bag
+					case 7:	getitem 30037,1;	break;	//Purple_Bag
+					case 8:	getitem 30038,1;	break;	//White_Bag
+					case 9:	getitem 30039,1;	break;	//Brown_Bag
+				}
+				close;
+			}
+			mes "[Profesor]";
+			mes "Lo siento, has suspendido.";
+			mes "Necesitarás volver a examinarte.";
+			close;
+		}
+		mes "Aceptaré ser tu tutor siempre que me entregues lo siguiente:";
+		mes "^61380B1 Pencil Case^000000";
+		mes "^61380B1 Old Magicbook^000000";
+		mes "^61380B1 Girl's Diary^000000";
+	}else{
+		mes "[Profesor]";
+		mes "¡Pues ahora a ponerse las pilas y a trabajar!";
+		mes "Lástima que los gloriosos días de escuela ya pasaran, ¿eh?";
+	}
+	close;
+}

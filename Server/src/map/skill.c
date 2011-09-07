@@ -845,7 +845,7 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		skillratio += 10 * skill_lv - 10;
 		break;
 	case PA_SHIELDCHAIN:
-		skillratio += 100 + 30 * skill_lv;
+		skillratio += 30 * skill_lv;
 		break;
 	case WS_CARTTERMINATION:
 		i = 10 * (16 - skill_lv);
@@ -9270,6 +9270,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 	case LG_INSPIRATION:
 		if( sd )
 		{
+			/*
 			if( !map[src->m].flag.noexppenalty )
 			{
 				sd->status.base_exp -= min(sd->status.base_exp, pc_nextbaseexp(sd) * 1 / 1000); //.1% penalty.
@@ -9277,6 +9278,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 				clif_updatestatus(sd,SP_BASEEXP);
 				clif_updatestatus(sd,SP_JOBEXP);
 			}
+			*/
 			clif_skill_nodamage(bl,src,skillid,skilllv,
 				sc_start(bl, type, 100, skilllv, skill_get_time(skillid, skilllv)));
 		}

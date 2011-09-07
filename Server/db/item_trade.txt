@@ -49,7 +49,7 @@
 7418,91,99	// Mission_ScrollB
 
 // PVP Item
-7420,91,99	// Skull_
+7420,112,99	// Skull_
 
 // 10.3 Quest items
 // * "Gaebolg family Curse" items

@@ -572,7 +572,7 @@ umbala,163,257,3	script	Hibilaithan#lv4	785,{
 		next;
 		mes "[Hibilaithan]";
 		mes "Haha, it's done!";
-		mes "^333333*Phew*^000000 That was pretty tough, but I'm sure you can't wait to see what we've made. Okay, let's take a look...";
+		mes "^1E43CA*Phew*^000000 That was pretty tough, but I'm sure you can't wait to see what we've made. Okay, let's take a look...";
 		next;
 		mes "[Hibilaithan]";
 		if (lv4_weapon == 12) {
@@ -1353,7 +1353,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		mes "You'll need 30 Pyroxene, Turquoise and Phlogopite. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
 		mes "[Bill Thayer]";
-		mes "^333333*Sniff*^000000";
+		mes "^1E43CA*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		close;
@@ -1365,7 +1365,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		mes "and Muscovite. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
 		mes "[Bill Thayer]";
-		mes "^333333*Sniff*^000000";
+		mes "^1E43CA*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		close;
@@ -1388,7 +1388,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 			mes "and Muscovite. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
 			mes "[Bill Thayer]";
-			mes "^333333*Sniff*^000000";
+			mes "^1E43CA*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 			set lv4_weapon,54;
@@ -1400,7 +1400,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 			mes "You'll need 30 Pyroxene, Turquoise and Phlogopite. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
 			mes "[Bill Thayer]";
-			mes "^333333*Sniff*^000000";
+			mes "^1E43CA*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 			set lv4_weapon,55;
@@ -1412,7 +1412,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		mes "Don't you have anything better to do? Quit bothering me and do your best to reach your own goals.";
 		next;
 		mes "[Bill Thayer]";
-		mes "^333333*Sigh...*^000000";
+		mes "^1E43CA*Sigh...*^000000";
 		mes "Still, trying your";
 		mes "best won't always result";
 		mes "in success though.";
@@ -1434,7 +1434,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		mes "Biotite and Rose Quartz. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
 		mes "[Bill Thayer]";
-		mes "^333333*Sniff*^000000";
+		mes "^1E43CA*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		set lv4_weapon,45;
@@ -1447,7 +1447,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		mes "Citrine and Pyroxene. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
 		mes "[Bill Thayer]";
-		mes "^333333*Sniff*^000000";
+		mes "^1E43CA*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		set lv4_weapon,46;
@@ -1471,7 +1471,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 			mes "Biotite and Rose Quartz. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
 			mes "[Bill Thayer]";
-			mes "^333333*Sniff*^000000";
+			mes "^1E43CA*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 			set lv4_weapon,45;
@@ -1484,7 +1484,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 			mes "Citrine and Pyroxene. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
 			mes "[Bill Thayer]";
-			mes "^333333*Sniff*^000000";
+			mes "^1E43CA*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 			set lv4_weapon,46;
@@ -1501,7 +1501,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		mes "my clients. Do you know why?";
 		next;
 		mes "[Bill Thayer]";
-		mes "I always told my sons: 'Never accept payment to forge a good weapon. ^333333It brings bad luck.^000000' Don't ask me how that works. It just is.";
+		mes "I always told my sons: 'Never accept payment to forge a good weapon. ^1E43CAIt brings bad luck.^000000' Don't ask me how that works. It just is.";
 		set lv4_weapon,41;
 		next;
 		mes "[Bill Thayer]";
@@ -1515,7 +1515,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		mes "Agate and Citrin. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
 		mes "[Bill Thayer]";
-		mes "^333333*Sniff*^000000";
+		mes "^1E43CA*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		close;
@@ -1527,7 +1527,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		mes "Peridot and Rose Quartz. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
 		mes "[Bill Thayer]";
-		mes "^333333*Sniff*^000000";
+		mes "^1E43CA*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		close;
@@ -1550,7 +1550,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 			mes "Peridot and Rose Quartz. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
 			mes "[Bill Thayer]";
-			mes "^333333*Sniff*^000000";
+			mes "^1E43CA*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 			set lv4_weapon,36;
@@ -1563,7 +1563,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 			mes "Agate and Citrin. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
 			mes "[Bill Thayer]";
-			mes "^333333*Sniff*^000000";
+			mes "^1E43CA*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 			set lv4_weapon,37;
@@ -1572,7 +1572,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 	}
 	if ((lv4_weapon == 31) || (lv4_weapon == 32)) {
 		mes "[Bill Thayer]";
-		mes "All of my sons broke my heart by dying too young. I remember that I always used to tell them: 'Enjoy your youth. ^333333Live without regret.^000000'";
+		mes "All of my sons broke my heart by dying too young. I remember that I always used to tell them: 'Enjoy your youth. ^1E43CALive without regret.^000000'";
 		set lv4_weapon,32;
 		next;
 		mes "[Bill Thayer]";
@@ -1586,7 +1586,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		mes "Peridot and Agate. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
 		mes "[Bill Thayer]";
-		mes "^333333*Sniff*^000000";
+		mes "^1E43CA*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		close;
@@ -1598,7 +1598,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		mes "Pyroxene and Rose Quartz. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
 		mes "[Bill Thayer]";
-		mes "^333333*Sniff*^000000";
+		mes "^1E43CA*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		close;
@@ -1621,7 +1621,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 			mes "Peridot and Agate. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
 			mes "[Bill Thayer]";
-			mes "^333333*Sniff*^000000";
+			mes "^1E43CA*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 			set lv4_weapon,27;
@@ -1634,7 +1634,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 			mes "Pyroxene and Rose Quartz. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
 			mes "[Bill Thayer]";
-			mes "^333333*Sniff*^000000";
+			mes "^1E43CA*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 			set lv4_weapon,28;
@@ -1645,7 +1645,7 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		mes "[Bill Thayer]";
 		mes "Listen, I told you...";
 		mes "There's nothing I can do.";
-		mes "^333333I'm utterly helpless here.^000000";
+		mes "^1E43CAI'm utterly helpless here.^000000";
 		set lv4_weapon,23;
 		next;
 		mes "[Bill Thayer]";
@@ -1772,7 +1772,7 @@ niflheim,240,193,3	script	Kayron#lv4	794,{
 			next;
 			mes "[Kayron]";
 			mes "Oh no...";
-			mes "^333333*Sigh*^000000 I can feel my memories beginning to fade again. If you ever see me, please let me";
+			mes "^B22151*Sigh*^000000 I can feel my memories beginning to fade again. If you ever see me, please let me";
 			mes "remember my past again.";
 			mes "Thank you...";
 			close;
@@ -1799,7 +1799,7 @@ niflheim,240,193,3	script	Kayron#lv4	794,{
 			next;
 			mes "[Kayron]";
 			mes "Oh no...";
-			mes "^333333*Sigh*^000000 I can feel my memories beginning to fade again. If you ever see me, please let me";
+			mes "^B22151*Sigh*^000000 I can feel my memories beginning to fade again. If you ever see me, please let me";
 			mes "remember my past again.";
 			mes "Thank you...";
 			close;
@@ -1960,7 +1960,7 @@ niflheim,240,193,3	script	Kayron#lv4	794,{
 		if (.@shobu > 1) {
 			mes "[Kayron]";
 			mes "Let's see...";
-			mes "You won " + shobu + " times.";
+			mes "You won " + .@shobu + " times.";
 			mes "You must be really";
 			mes "Without a doubt, you've";
 			mes "got some pretty good luck~";
@@ -2073,7 +2073,7 @@ niflheim,240,193,3	script	Kayron#lv4	794,{
 			mes "My mind's been so hazy.";
 			mes "I forgot that I even used";
 			mes "to be a living human.";
-			mes "^333333*Sigh...*^000000";
+			mes "^1E43CA*Sigh...*^000000";
 			next;
 			mes "[Kayron]";
 			mes "Still, that little memory has brought me a little peace of";
@@ -2222,7 +2222,7 @@ niflheim,99,268,5	script	Reyghema#lv4	794,{
 			set lv4_weapon,0;
 			next;
 			mes "[Reyghema]";
-			mes "^333333*Sigh*^000000 I can feel it happening again. My memories are starting to slip away. Can't I be allowed to hold on to this memory?";
+			mes "^B22151*Sigh*^000000 I can feel it happening again. My memories are starting to slip away. Can't I be allowed to hold on to this memory?";
 			next;
 			mes "[Reyghema]";
 			mes "I guess the dead aren't supposed to remember their past. But thank you for letting achieve my life long desire, even if this moment is short lived.";
@@ -2248,7 +2248,7 @@ niflheim,99,268,5	script	Reyghema#lv4	794,{
 			set lv4_weapon,0;
 			next;
 			mes "[Reyghema]";
-			mes "^333333*Sigh*^000000 I can feel it happening again. My memories are starting to slip away. Can't I be allowed to hold on to this memory?";
+			mes "^B22151*Sigh*^000000 I can feel it happening again. My memories are starting to slip away. Can't I be allowed to hold on to this memory?";
 			next;
 			mes "[Reyghema]";
 			mes "I guess the dead aren't supposed to remember their past. But thank you for letting achieve my life long desire, even if this moment is short lived.";
@@ -2873,7 +2873,7 @@ niflheim,187,280,3	script	Hein#lv4	795,{
 		if (.@shobu > 1) {
 			mes "[Hein]";
 			mes "Let's see...";
-			mes "You won " + shobu + " times.";
+			mes "You won " + .@shobu + " times.";
 			mes "You're really good at game!";
 			mes "Yes, your luck is at its highest!";
 			next;
@@ -2956,7 +2956,7 @@ niflheim,187,280,3	script	Hein#lv4	795,{
 		mes "but I'm not too sure what they were. I guess a bunch of memories from my life are still missing.";
 		next;
 		mes "[Hein]";
-		mes "^333333*Sigh*^000000 I'm sorry to ask this of you, but would you please go out and figure out what those things are? I'm sure you can find some clue in the land of the living.";
+		mes "^B22151*Sigh*^000000 I'm sorry to ask this of you, but would you please go out and figure out what those things are? I'm sure you can find some clue in the land of the living.";
 		next;
 		mes "[Hein]";
 		mes "While you do that, I'll try my best to remember what else I need to make this weapon.";
@@ -3336,7 +3336,7 @@ niflheim,331,72,3	script	Waltboughst#lv4	795,{
 		next;
 		if (.@shobu > 1) {
 			mes "[Waltboughst]";
-			mes "Excellent. You won " + shobu + " times,";
+			mes "Excellent. You won " + .@shobu + " times,";
 			mes "so your luck must be really high.";
 			mes "That means we can begin~!";
 			next;

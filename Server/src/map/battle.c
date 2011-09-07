@@ -3495,12 +3495,14 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 		BON_ADD(25 * sd->status.inventory[i].refine);
 
 	if ( skill_id == PA_SHIELDCHAIN ) {
+		wd.damage = sstatus->batk;
+
 		short index = sd->equip_index[EQI_HAND_L];
 		if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
-			ATK_ADD(sd->inventory_data[index]->weight*3);
+			ATK_ADD(sd->inventory_data[index]->weight*5);
 		}
 		if( sc && sc->data[SC_GLOOMYDAY_SK] )
-			ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
+			ATK_ADD(150 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
 	}
 
 	if( flag.hit && !flag.infdef )
@@ -3697,12 +3699,12 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 			struct Damage md = battle_calc_magic_attack_renewal(src,target,skill_id,skill_lv,wflag);
 			wd.damage += md.damage;
 			if( skill_id == CR_ACIDDEMONSTRATION && target->type == BL_PC ){
-				wd.damage = wd.damage/25;
+				wd.damage = wd.damage/28;
 				wd.damage >>= 1; // Half Damage on Players
 			}
 			else
 			{
-				wd.damage = wd.damage/(78/10);
+				wd.damage = wd.damage/(82/10);
 			}
 		}
 		break;
