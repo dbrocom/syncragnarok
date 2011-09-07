@@ -6568,6 +6568,17 @@ int status_change_start(struct block_list* bl,enum sc_type type,int rate,int val
 			case SC__LAZINESS:
 			case SC__UNLUCKY:
 			case SC__WEAKNESS:
+
+			// Anti MVP Abuse
+			case SC_STOP:
+			case SC_FEAR:
+			case SC_CRYSTALIZE:
+			case SC_VACUUM_EXTREME:
+			case SC_CURSEDCIRCLE_TARGET:
+			case SC_CHAOS:
+			case SC_WHITEIMPRISON:
+			case SC__BLOODYLUST:
+			case SC_DEEPSLEEP:
 				return 0;
 		}
 	}

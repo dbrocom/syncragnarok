@@ -375,7 +375,7 @@ new_1-2,100,105,4	script	Brade#nv	733,{
 		mes "[Instructor Brade]";
 		mes "Lo has hecho bien todo este tiempo.";
 		mes "No es mucho, pero aquí tienes esta pequeña recompensa.";
-		getitem 2393,1;	// N_Adventurer's_Suit
+		getitem 12325,15;	// Novice_Potion
 		completequest 7120;
 		set job_novice_q,9;
 		close;

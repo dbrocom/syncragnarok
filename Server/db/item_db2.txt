@@ -108,9 +108,9 @@
 6144,Heartbroken_Tears,Painful Tear,3,1000,,2,,,,,,,,,,,,,{},{},{}
 
 // Mechanic Mado Gear Skill Required Items
-6145,Vulcan_Bullet,Vulcan Bullet,3,10,,3,,,,,,,,,,,,,{},{},{}
+6145,Vulcan_Bullet,Vulcan Bullet,3,10,,2,,,,,,,,,,,,,{},{},{}
 6146,Mado_Gear_Fuel,Mado Gear Fuel,3,300,,30,,,,,,,,,,,,,{},{},{}
-6147,Liquid_Cold_Bullet,Liquid Cold Bullet,3,100,,30,,,,,,,,,,,,,{},{},{}
+6147,Liquid_Cold_Bullet,Liquid Cold Bullet,3,100,,3,,,,,,,,,,,,,{},{},{}
 
 6186,Monkey_Wrench,Monkey Wrench,3,500,,10,,,,,,,,,,,,,{},{},{}
 
@@ -231,9 +231,9 @@
 //12390,Runstone_Millennium,Something Something Rune Stone 3,3,10,,10,,,,,,,,,,,,,{},{},{}
 
 // Mechanic Mado Gear Repair Items
-12392,RepairA,Repair A,2,220,,100,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-12393,RepairB,Repair B,2,500,,140,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
-12394,RepairC,Repair C,2,1100,,180,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
+12392,Repair_A,Repair A,0,220,,100,,,,,0x00000400,7,2,,,,,,{ madoheal rand(200,300),0; },{},{}
+12393,Repair_B,Repair B,0,500,,140,,,,,0x00000400,7,2,,,,,,{ madoheal rand(300,400),0; },{},{}
+12394,Repair_C,Repair C,0,1100,,180,,,,,0x00000400,7,2,,,,,,{ madoheal rand(400,500),0; },{},{}
 
 // Genetic Created Boosting Items
 12417,Boost500,Boost500,2,100,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_start SC_BOOST500,500000,10; },{},{}
@@ -460,22 +460,22 @@
 30028,Blacked_Design_Sunglasses,Blacked Design Sunglasses,5,5000,,100,,0,,1,0xFFFFFFFF,7,2,512,,0,0,1028,{ bonus bMdef,1; },{},{}
 30029,Pink_Design_Sunglasses,Pink Design Sunglasses,5,5000,,100,,0,,1,0xFFFFFFFF,7,2,512,,0,0,1029,{ bonus bMdef,1; },{},{}
 // ----------- BackPacks + 500
-30030,Black_Bag,Black Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1030,{ set maxweight,maxweight + 250; },{},{}
-30031,Blue_Bag,Blue Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1031,{ set maxweight,maxweight + 250; },{},{}
-30032,Cyan_Bag,Cyan Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1032,{ set maxweight,maxweight + 250; },{},{}
-30033,Green_Bag,Green Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1033,{ set maxweight,maxweight + 250; },{},{}
-30034,Gold_Bag,Gold Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1034,{ set maxweight,maxweight + 250; },{},{}
-30035,Orange_Bag,Orange Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1035,{ set maxweight,maxweight + 250; },{},{}
-30036,Red_Bag,Red Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1036,{ set maxweight,maxweight + 250; },{},{}
-30037,Purple_Bag,Purple Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1037,{ set maxweight,maxweight + 250; },{},{}
-30038,White_Bag,White Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1038,{ set maxweight,maxweight + 250; },{},{}
-30039,Brown_Bag,Brown Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1039,{ set maxweight,maxweight + 250; },{},{}
+30030,Black_Bag,Black Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1030,{ set maxweight,maxweight + 2400; },{},{}
+30031,Blue_Bag,Blue Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1031,{ set maxweight,maxweight + 2400; },{},{}
+30032,Cyan_Bag,Cyan Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1032,{ set maxweight,maxweight + 2400; },{},{}
+30033,Green_Bag,Green Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1033,{ set maxweight,maxweight + 2400; },{},{}
+30034,Gold_Bag,Gold Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1034,{ set maxweight,maxweight + 2400; },{},{}
+30035,Orange_Bag,Orange Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1035,{ set maxweight,maxweight + 2400; },{},{}
+30036,Red_Bag,Red Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1036,{ set maxweight,maxweight + 2400; },{},{}
+30037,Purple_Bag,Purple Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1037,{ set maxweight,maxweight + 2400; },{},{}
+30038,White_Bag,White Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1038,{ set maxweight,maxweight + 2400; },{},{}
+30039,Brown_Bag,Brown Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1039,{ set maxweight,maxweight + 2400; },{},{}
 // ----------- BackPacks + 1000
-30040,Angeling_Rucksack,Angeling Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1040,{ set maxweight,maxweight + 600; },{},{}
-30041,Deviling_Rucksack,Deviling Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1041,{ set maxweight,maxweight + 600; },{},{}
-30042,Archangeling_Rucksack,Archangeling Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1042,{ set maxweight,maxweight + 600; },{},{}
-30043,Orc_Rucksack,Orc Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1043,{ set maxweight,maxweight + 600; },{},{}
-30044,Bombporing_Rucksack,Bombporing Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1044,{ set maxweight,maxweight + 600; },{},{}
+30040,Angeling_Rucksack,Angeling Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1040,{ set maxweight,maxweight + 5400; },{},{}
+30041,Deviling_Rucksack,Deviling Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1041,{ set maxweight,maxweight + 5400; },{},{}
+30042,Archangeling_Rucksack,Archangeling Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1042,{ set maxweight,maxweight + 5400; },{},{}
+30043,Orc_Rucksack,Orc Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1043,{ set maxweight,maxweight + 5400; },{},{}
+30044,Bombporing_Rucksack,Bombporing Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1044,{ set maxweight,maxweight + 5400; },{},{}
 // ----------- Balloon
 30045,Angeling_Balloon,Angeling Balloon,5,10,,20,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1045,{},{},{}
 30046,Archangeling_Balloon,Archangeling Balloon,5,10,,20,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1046,{},{},{}
@@ -740,6 +740,19 @@
 30373,Molinillo_Atascado,Molinillo Atascado,3,0,,20,,,,,,,,,,,,,{},{},{}
 30374,Molinillo_Mecánico_Estropeado,Molinillo Mecánico Estropeado,3,0,,30,,,,,,,,,,,,,{},{},{}
 30375,Llaves_Rotas_del_Molino,Llaves Rotas del Molino,3,0,,10,,,,,,,,,,,,,{},{},{}
+// ---------- Granjas (33381-33400)	// ¡¡ID aumentada en 3000!!
+// Palas
+33381,Pala_de_Madera,Pala de Madera,4,0,0,120,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
+33382,Pala_de_Piedra,Pala de Piedra,4,0,0,120,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
+33383,Pala_de_Hierro,Pala de Hierro,4,0,0,120,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
+33384,Pala_de_Acero,Pala de Acero,4,0,0,120,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
+33385,Pala_de_Oro,Pala de Oro,4,0,0,120,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
+// Palas [broken]
+33391,Pala_de_Madera_Rota,Pala de Madera Rota,3,0,,120,,,,,,,,,,,,,{},{},{}
+33392,Pala_de_Piedra_Rota,Pala de Piedra Rota,3,0,,120,,,,,,,,,,,,,{},{},{}
+33393,Pala_de_Hierro_Rota,Pala de Hierro Rota,3,0,,120,,,,,,,,,,,,,{},{},{}
+33394,Pala_de_Acero_Rota,Pala de Acero Rota,3,0,,120,,,,,,,,,,,,,{},{},{}
+33395,Pala_de_Oro_Rota,Pala de Oro Rota,3,0,,120,,,,,,,,,,,,,{},{},{}
 
 // ---------- Minería: Elementos       (30381-30389)
 30381,Copper_Ore,Copper Ore,3,10,,10,,,,,,,,,,,,,{},{},{}

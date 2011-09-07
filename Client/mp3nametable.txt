@@ -7,6 +7,7 @@ gld2_ald.rsw#bgm\\44.mp3#
 gld2_gef.rsw#bgm\\44.mp3#
 gld2_pay.rsw#bgm\\44.mp3#
 gld2_prt.rsw#bgm\\44.mp3#
+
 lhz_dun04.rsw#bgm\\92.mp3#
 que_lhz.rsw#bgm\\92.mp3#
 1@lhz.rsw#bgm\\92.mp3#
