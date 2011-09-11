@@ -71,6 +71,7 @@ enum e_skill_inf2
 	INF2_GUILD_ONLY     = 0x0800,
 	INF2_NO_ENEMY       = 0x1000,
 	INF2_CHORUS_SKILL   = 0x2000,
+	INF2_BLOCKED_BY_LP  = 0x4000, //Blocks non-unit Skills on Land Protection [Sirius by 3CeAM]
 };
 
 //Walk intervals at which chase-skills are attempted to be triggered.
@@ -200,6 +201,7 @@ enum {
 	UF_ENSEMBLE      = 0x0200,	// Duet
 	UF_SONG          = 0x0400,	// Song
 	UF_DUALMODE      = 0x0800,	// Spells should trigger both ontimer and onplace/onout/onleft effects.
+	UF_RANGEDSINGLEUNIT = 0x1000,	// To display one unit in the client only.
 };
 
 // アイテム作成デ?タベ?ス

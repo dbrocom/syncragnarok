@@ -323,6 +323,12 @@ int bg_team_leave(struct map_session_data *sd, int flag)
 	sd->bmaster_flag = NULL;
 	bg_member_removeskulls(sd);
 
+	// Remove Guild Skill Buffs
+	status_change_end(&sd->bl, SC_GUILDAURA, INVALID_TIMER);
+	status_change_end(&sd->bl, SC_BATTLEORDERS, INVALID_TIMER);
+	status_change_end(&sd->bl, SC_REGENERATION, INVALID_TIMER);
+
+
 	if( sd->status.guild_id && (g = guild_search(sd->status.guild_id)) != NULL )
 	{ // Refresh Guild Information
 		clif_guild_belonginfo(sd, g);

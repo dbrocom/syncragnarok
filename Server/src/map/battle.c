@@ -473,7 +473,7 @@ int battle_calc_damage(struct block_list *src,struct block_list *bl,struct Damag
 			return 0;
 		}
 		
-		if( map_getcell(bl->m,bl->x,bl->y,CELL_CHKMAELSTROM) && (flag&BF_MAGIC) && skill_num && (skill_get_inf(skill_num)&INF_GROUND_SKILL) )
+		if( sc->data[SC__MAELSTROM] && (flag&BF_MAGIC) && skill_num && (skill_get_inf(skill_num)&INF_GROUND_SKILL) )
 		{
 			int sp = damage * 20 / 100; // Steel need official value.
 			status_heal(bl,0,sp,3);
@@ -1805,15 +1805,24 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 				if (sd) {
 					short index = sd->equip_index[EQI_HAND_L];
 
-					if (index >= 0 &&
-						sd->inventory_data[index] &&
-						sd->inventory_data[index]->type == IT_ARMOR)
-						ATK_ADD(sd->inventory_data[index]->weight/10);
+					if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR)
+					{
+						switch ( skill_num ) 
+						{
+							case CR_SHIELDBOOMERANG:
+							case LG_EARTHDRIVE:
+								ATK_ADD(sd->inventory_data[index]->weight/10);
+								break;
+							case LG_SHIELDPRESS:
+								ATK_ADD(sd->inventory_data[index]->weight/2);
+								break;
+					}
+					}
 					break;
 				} else
 					ATK_ADD(sstatus->rhw.atk2); //Else use Atk2
 				if( sc && sc->data[SC_GLOOMYDAY_SK] )
-					ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
+					ATK_ADD(150 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
 				break;
 			case NC_AXEBOOMERANG:
 				//TODO: Need to get official value of weight % as addition to skill damage. [Jobbie]
@@ -2324,15 +2333,7 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 		{ //Refine bonus applies after cards and elements.
 			short index= sd->equip_index[EQI_HAND_L];
 			if( index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR )
-				ATK_ADD(25*sd->status.inventory[index].refine);
-		}
-		if ( skill_num == PA_SHIELDCHAIN ) {
-			short index = sd->equip_index[EQI_HAND_L];
-			if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
-				ATK_ADD(sd->inventory_data[index]->weight*3);
-			}
-			if( sc && sc->data[SC_GLOOMYDAY_SK] )
-				ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
+				ATK_ADD(20*sd->status.inventory[index].refine);
 		}
 	} //if (sd)
 
@@ -2976,14 +2977,24 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 			{
 				short index = sd->equip_index[EQI_HAND_L];
 				if( index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR )
-					ATK_ADD(sd->inventory_data[index]->weight / 10);
+				{
+					switch ( skill_id ) 
+					{
+						case CR_SHIELDBOOMERANG:
+						case LG_EARTHDRIVE:
+							ATK_ADD(sd->inventory_data[index]->weight/10);
+							break;
+						case LG_SHIELDPRESS:
+							ATK_ADD(sd->inventory_data[index]->weight/2);
+							break;
+					}
+				}
 			}
 			else
 				ATK_ADD(sstatus->rhw.atk2); //Else use Atk2
 			if( sc && sc->data[SC_GLOOMYDAY_SK] )
-				ATK_ADD(50 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
+				ATK_ADD(150 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
 			break;
-
 		case HFLI_SBR44:	//[orn]
 			if( src->type == BL_HOM )
 			{
@@ -3042,6 +3053,20 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 				case 2: // Large
 					w_sizemod[0] = w_sizemod[1] = 75;
 					break;
+				}
+				break;
+			case LG_OVERBRAND:
+			case LG_OVERBRAND_BRANDISH:
+			case LG_OVERBRAND_PLUSATK:
+				{
+					if( target->type == BL_PC ){
+						wd.damage = wd.damage/(48/10);
+						wd.damage >>= 1; // Half Damage on Players
+					}
+					else
+					{
+						wd.damage = wd.damage/(28/10);
+					}
 				}
 				break;
 			}
@@ -3492,14 +3517,12 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 	BON_RATE2(c_bossmod[0],c_bossmod[1]);
 	BON_RATE(c_atkmod[0]);
 	if( sd && (skill_id == CR_SHIELDBOOMERANG || skill_id == PA_SHIELDCHAIN) && (i = sd->equip_index[EQI_HAND_L]) >= 0 && sd->inventory_data[i] && sd->inventory_data[i]->type == IT_ARMOR )
-		BON_ADD(25 * sd->status.inventory[i].refine);
+		BON_ADD(40 * sd->status.inventory[i].refine);
 
 	if ( skill_id == PA_SHIELDCHAIN ) {
-		wd.damage = sstatus->batk;
-
 		short index = sd->equip_index[EQI_HAND_L];
 		if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
-			ATK_ADD(sd->inventory_data[index]->weight*5);
+			ATK_ADD(sd->inventory_data[index]->weight*(25/10));
 		}
 		if( sc && sc->data[SC_GLOOMYDAY_SK] )
 			ATK_ADD(150 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
@@ -3699,12 +3722,12 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 			struct Damage md = battle_calc_magic_attack_renewal(src,target,skill_id,skill_lv,wflag);
 			wd.damage += md.damage;
 			if( skill_id == CR_ACIDDEMONSTRATION && target->type == BL_PC ){
-				wd.damage = wd.damage/28;
+				wd.damage = wd.damage/25;
 				wd.damage >>= 1; // Half Damage on Players
 			}
 			else
 			{
-				wd.damage = wd.damage/(82/10);
+				wd.damage = wd.damage/(80/10);
 			}
 		}
 		break;

@@ -777,7 +777,8 @@
 
 // Mechanic
 2256,0,0,3:6:9:12:15,0,0,0,99,0,0,mado,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//NC_BOOSTKNUCKLE#Boost Knuckle#
-2257,0,0,50,0,0,0,99,0,0,mado,0,1549,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//NC_PILEBUNKER#Pile Bunker#
+//2257,0,0,50,0,0,0,99,0,0,mado,0,1549,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//NC_PILEBUNKER#Pile Bunker#
+2257,0,0,50,0,0,0,99,0,0,mado,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//NC_PILEBUNKER#Pile Bunker#
 2258,0,0,2,0,0,0,99,0,0,mado,0,6145,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//NC_VULCANARM#Vulcan Arm#
 2259,0,0,20,0,0,0,99,0,0,mado,0,2139,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//NC_FLAMELAUNCHER#Flame Launcher#
 2260,0,0,20,0,0,0,99,0,0,mado,0,6147,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//NC_COLDSLOWER#Cold Slower#
@@ -965,8 +966,8 @@
 2516,0,0,1,0,0,0,99,0,0,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//WM_SEVERE_RAINSTORM_MELEE#Severe Rainstorm Melee#
 2517,0,0,40:45:50:55:60,0,0,0,99,0,0,none,1:2:3:4:5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//SR_HOWLINGOFLION#Howling of Lion# 
 2518,0,0,40:50:60:70:80,0,0,0,99,0,0,none,1:2:3:4:5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//SR_RIDEINLIGHTNING#Ride In Lightening#
-2519,0,0,1,0,0,0,99,0,0,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//LG_OVERBRAND_BRANDISH#Overbrand Brandish#
-2520,0,0,1,0,0,0,99,0,0,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//LG_OVERBRAND_PLUSATK#Overbrand Plus Attack#
+2519,0,0,1,4:5,0,0,99,0,0,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//LG_OVERBRAND_BRANDISH#Overbrand Brandish#
+2520,0,0,1,4:5,0,0,99,0,0,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//LG_OVERBRAND_PLUSATK#Overbrand Plus Attack#
 
 // Extra Skills
 2533,0,0,1,0,0,0,99,0,0,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//ALL_ODINS_RECALL#Odin's Recall#

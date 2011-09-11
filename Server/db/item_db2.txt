@@ -729,10 +729,10 @@
 30355,Hoz_Profesional_Rota,Hoz Profesional Rota,3,0,,160,,,,,,,,,,,,,{},{},{}
 // ---------- Molienda (30361-30380)
 // Morteros
-30361,Piedra_de_Moler,Piedra de Moler,3,0,,10,,,,,,,,,,,,,{},{},{}
-30362,Mortero,Mortero,3,0,,10,,,,,,,,,,,,,{},{},{}
-30363,Molinillo,Molinillo,3,0,,10,,,,,,,,,,,,,{},{},{}
-30364,Molinillo_Mecánico,Molinillo Mecánico,3,0,,10,,,,,,,,,,,,,{},{},{}
+30361,Piedra_de_Moler,Piedra de Moler,3,0,,220,,,,,,,,,,,,,{},{},{}
+30362,Mortero,Mortero,3,0,,40,,,,,,,,,,,,,{},{},{}
+30363,Molinillo,Molinillo,3,0,,20,,,,,,,,,,,,,{},{},{}
+30364,Molinillo_Mecánico,Molinillo Mecánico,3,0,,30,,,,,,,,,,,,,{},{},{}
 30365,Llaves_del_Molino,Llaves del Molino,3,0,,10,,,,,,,,,,,,,{},{},{}
 // Morteros [broken]
 30371,Piedra_de_Moler_Rota,Piedra de Moler Rota,3,0,,220,,,,,,,,,,,,,{},{},{}
@@ -742,17 +742,17 @@
 30375,Llaves_Rotas_del_Molino,Llaves Rotas del Molino,3,0,,10,,,,,,,,,,,,,{},{},{}
 // ---------- Granjas (33381-33400)	// ¡¡ID aumentada en 3000!!
 // Palas
-33381,Pala_de_Madera,Pala de Madera,4,0,0,120,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
-33382,Pala_de_Piedra,Pala de Piedra,4,0,0,120,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
-33383,Pala_de_Hierro,Pala de Hierro,4,0,0,120,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
-33384,Pala_de_Acero,Pala de Acero,4,0,0,120,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
-33385,Pala_de_Oro,Pala de Oro,4,0,0,120,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
+32381,Pala_de_Madera,Pala de Madera,4,0,0,70,20,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
+32382,Pala_de_Piedra,Pala de Piedra,4,0,0,100,60,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
+32383,Pala_de_Hierro,Pala de Hierro,4,0,0,120,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
+32384,Pala_de_Acero,Pala de Acero,4,0,0,90,50,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
+32385,Pala_de_Oro,Pala de Oro,4,0,0,90,45,,3,0,0xFFFFFFFF,7,2,2,1,0,0,1,{},{},{}
 // Palas [broken]
-33391,Pala_de_Madera_Rota,Pala de Madera Rota,3,0,,120,,,,,,,,,,,,,{},{},{}
-33392,Pala_de_Piedra_Rota,Pala de Piedra Rota,3,0,,120,,,,,,,,,,,,,{},{},{}
-33393,Pala_de_Hierro_Rota,Pala de Hierro Rota,3,0,,120,,,,,,,,,,,,,{},{},{}
-33394,Pala_de_Acero_Rota,Pala de Acero Rota,3,0,,120,,,,,,,,,,,,,{},{},{}
-33395,Pala_de_Oro_Rota,Pala de Oro Rota,3,0,,120,,,,,,,,,,,,,{},{},{}
+32391,Pala_de_Madera_Rota,Pala de Madera Rota,3,0,,70,,,,,,,,,,,,,{},{},{}
+32392,Pala_de_Piedra_Rota,Pala de Piedra Rota,3,0,,100,,,,,,,,,,,,,{},{},{}
+32393,Pala_de_Hierro_Rota,Pala de Hierro Rota,3,0,,120,,,,,,,,,,,,,{},{},{}
+32394,Pala_de_Acero_Rota,Pala de Acero Rota,3,0,,90,,,,,,,,,,,,,{},{},{}
+32395,Pala_de_Oro_Rota,Pala de Oro Rota,3,0,,90,,,,,,,,,,,,,{},{},{}
 
 // ---------- Minería: Elementos       (30381-30389)
 30381,Copper_Ore,Copper Ore,3,10,,10,,,,,,,,,,,,,{},{},{}
@@ -828,8 +828,6 @@
 30441,Polvo_Cacao,Polvo Cacao,3,2500,1250,10,,,,,,,,,,,,,{},{},{}
 30442,Polvo_Cera,Polvo Cera,3,2500,1250,10,,,,,,,,,,,,,{},{},{}
 
-30443,Cuero,Cuero,3,25000,3000,1,,,,,,,,,,,,,{},{},{}
-
 // Esencias		(30445-30455)
 30445,Aceite_Animal,Aceite Animal,3,6500,3250,10,,,,,,,,,,,,,{},{},{}
 30446,Aceite_Vegetal,Aceite Vegetal,3,6500,3250,10,,,,,,,,,,,,,{},{},{}
@@ -861,6 +859,12 @@
 30473,Ganoderma_lucidum,Ganoderma,3,10050,5025,10,,,,,,,,,,,,,{},{},{}
 30474,Lycoperdon_perlatum,Cuesco de Lobo,3,2000,1000,10,,,,,,,,,,,,,{},{},{}
 30475,Scleroderma_verrucosum,Escleroderma,3,2000,1000,10,,,,,,,,,,,,,{},{},{}
+
+// ---------- Granja			(30480-30499)
+30480,Cuero,Cuero,3,25000,3000,10,,,,,,,,,,,,,{},{},{}
+30481,Cuero,Cuero,3,25000,3000,10,,,,,,,,,,,,,{},{},{}
+30482,Excremento_Seco,Excremento Seco,3,10,0,10,,,,,,,,,,,,,{},{},{}
+30483,Ceniza,Ceniza,3,30,10,10,,,,,,,,,,,,,{},{},{}
 
 // ===== EQUIPO (30500-30549)
 // ===== CARDS (30550-30599)
