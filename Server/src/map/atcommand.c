@@ -11762,6 +11762,93 @@ int atcommand_faildrop(const int fd, struct map_session_data* sd, const char* co
 	return 0;
 }
 
+/*==========================================
+ * @mapitem
+ * A way of giving items to all players on a whole map
+ *------------------------------------------*/
+ACMD_FUNC(mapitem)
+{
+	struct map_session_data *pl_sd = NULL;
+	struct s_mapiterator* iter;
+	int j;
+	int pl_GM_level, GM_level;
+	int map_id = 0;
+	char map_name[MAP_NAME_LENGTH];
+	char item_name[100];
+	int number = 0, item_id, flag;
+	struct item item_tmp;
+	struct item_data *item_data;
+	int get_count, count=0;
+
+	memset(item_name, '\0', sizeof(item_name));
+	memset(map_name, '\0', sizeof(map_name));
+
+
+	nullpo_retr(-1, sd);
+
+
+	if (!message || !*message)
+		return -1;
+	if(	sscanf(message, "%15s \"%99[^\"]\" %d", map_name, item_name, &number) != 3 && sscanf(message, "%15s %99s %d", map_name, item_name, &number) != 3)
+	{
+		clif_displaymessage(fd, "Please, enter an item name/id (usage: @mapitem <mapname> <item name or ID> [quantity]).");
+		return -1;
+	}
+
+
+	if (number <= 0)
+		number = 1;
+
+	if ((item_data = itemdb_searchname(item_name)) == NULL && (item_data = itemdb_exists(atoi(item_name))) == NULL)
+	{
+		clif_displaymessage(fd, msg_txt(19)); // Invalid item ID or name.
+		return -1;
+	}
+
+	item_id = item_data->nameid;
+	get_count = number;
+	//Check if it's stackable.
+	if (!itemdb_isstackable2(item_data))
+		get_count = 1;
+
+	GM_level = pc_isGM(sd);
+
+	if (strstr(map_name, ".gat") == NULL && strstr(map_name, ".afm") == NULL && strlen(map_name) < MAP_NAME_LENGTH-4) // 16 - 4 (.gat)
+		strcat(map_name, ".gat");
+	if ((map_id = map_mapname2mapid(map_name)) < 0)
+		map_id = sd->bl.m;
+
+	iter = mapit_getallusers();
+	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
+	{
+		if (pl_sd->fd != fd && pc_isGM(sd) >= pc_isGM(pl_sd))
+		{
+			pl_GM_level = pc_isGM(pl_sd);
+			if (!((battle_config.hide_GM_session || (pl_sd->sc.option & OPTION_INVISIBLE)) && (pl_GM_level > GM_level))) { // you can look only lower or same level
+				if (pl_sd->bl.m == map_id) { // If the player is on the map
+
+					for (j = 0; j < number; j += get_count) {
+						memset(&item_tmp, 0, sizeof(item_tmp));
+						item_tmp.nameid = item_id;
+						item_tmp.identify = 1;
+
+						if ((flag = pc_additem(pl_sd, &item_tmp, get_count)))
+						clif_additem(pl_sd, 0, 0, flag);
+					}
+
+
+					count ++;
+					clif_displaymessage(pl_sd->fd, "Algo ha caído del cielo."); // Message for all players on the map (can't use "mercy.." because we can use a Support or a Attack skill with @skillmap)
+				}
+			}
+		}
+	}
+
+	snprintf(atcmd_output, sizeof(atcmd_output) ,"Has regalado: %d a todos los jugadores.", count);
+	clif_displaymessage(fd, atcmd_output);
+	return 0;
+}
+
 #ifdef CURL_SUPPORT
 
 /*==========================================
@@ -12206,6 +12293,7 @@ AtCommandInfo atcommand_info[] = {
 	{ "gstoragelock",       0,99,   0,     atcommand_ind_gstoragelock },
 	{ "gw",                 0,99,   0,     atcommand_ind_gw },
 	{ "guildmes",           0,99,   0,     atcommand_ind_gw },
+	{ "mapitem",           99,99,   0,     atcommand_mapitem },
 #ifdef CURL_SUPPORT
 	{ "tweet",             80,80,   0,     atcommand_tweet },
 #endif
@@ -12240,6 +12328,13 @@ int get_atcommand_level(const AtCommandFunc func)
 	return ( info != NULL ) ? info->level : 100; // 100: command can not be used
 }
 
+struct Atcmd_Binding* get_atcommandbind_byname(const char* name)
+{
+	int i;
+	if( *name == atcommand_symbol || *name == charcommand_symbol ) name++; // for backwards compatibility
+	ARR_FIND( 0, ARRAYLENGTH(atcmd_binding), i, strcmp(atcmd_binding[i].command, name) == 0 );
+	return ( i < ARRAYLENGTH(atcmd_binding) ) ? &atcmd_binding[i] : NULL;
+}
 
 /// Executes an at-command.
 bool is_atcommand(const int fd, struct map_session_data* sd, const char* message, int type)
@@ -12344,7 +12439,18 @@ bool is_atcommand(const int fd, struct map_session_data* sd, const char* message
 	//check to see if any params exist within this command
 	if( sscanf(atcmd_msg, "%99s %99[^\n]", command, params) < 2 )
 		params[0] = '\0';
-	
+
+	//check for atcmd events
+	if( type == 1 )
+	{
+		Atcmd_Binding * binding = get_atcommandbind_byname(command);
+		if( binding != NULL && binding->npc_event[0] )
+		{ //execute event if binded
+			npc_do_atcmd_event((*atcmd_msg == atcommand_symbol) ? sd : ssd, command, params, binding->npc_event);
+			return true;
+		}
+	}
+
 	//Grab the command information and check for the proper GM level required to use it or if the command exists
 	info = get_atcommandinfo_byname(command);
 	if( info == NULL || info->func == NULL )

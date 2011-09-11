@@ -11675,7 +11675,7 @@ ein_in01,85,208,5	script	Ei'felle#repay01	854,{
 				mes "which Level 4 Weapon";
 				mes "that you want me to create.";
 				next;
-				switch(select("Gae Bolg:Gelerdria:Gungnir:Skewer:Longinus's Spear:Brionac:Bill Guisarme:Zephyrus:Crescent Scythe:Tjungkuletti:Hellfire:Cancel")) {
+				switch(select("Gae Bolg:Gelerdria:Gungnir:Brocca:Longinus's Spear:Brionac:Bill Guisarme:Zephyrus:Crescent Scythe:Tjungkuletti:Hellfire:Cancel")) {
 				case 1:
 					callsub S_BonusReward,1500,1474;
 					end;
@@ -12048,7 +12048,7 @@ S_Reward:
 						mes "enter a number from 1 to 100.";
 						mes "If you want to give me more";
 						mes "medals, then perhaps you";
-						mes "should just give them all to me~ ^FFFFFF ^000000";
+						mes "should just give them all to me~";
 						next;
 					}
 					else

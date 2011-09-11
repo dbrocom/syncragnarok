@@ -158,6 +158,8 @@ int npc_duplicate4instance(struct npc_data *snd, int m);
 int npc_cashshop_buy(struct map_session_data *sd, int nameid, int amount, int points);
 int npc_cashshop_buylist(struct map_session_data *sd, int points, int count, unsigned short* item_list);
 
+int npc_do_atcmd_event(struct map_session_data* sd, const char* command, const char* message, const char* eventname);
+
 extern struct npc_data* fake_nd;
 
 #endif /* _NPC_H_ */

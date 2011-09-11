@@ -1117,15 +1117,15 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case LG_OVERBRAND:
 		skillratio += -100 + (400 * skill_lv + ((sd) ? pc_checkskill(sd,CR_SPEARQUICKEN) * 30 : 1));
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_OVERBRAND_BRANDISH:
 		skillratio += -100 + (300 * skill_lv) + (2 * (sstatus->str + sstatus->dex) / 3);
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_OVERBRAND_PLUSATK:
 		skillratio += -100 + 150 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_EARTHDRIVE:
 		skillratio = (skillratio + 100) * skill_lv;
@@ -2301,7 +2301,7 @@ int skill_additional_effect (struct block_list* src, struct block_list *bl, int 
 		break;
 	case LG_SHIELDPRESS:
 		sc_start(bl, SC_STUN, 30 + 8 * skilllv, skilllv, skill_get_time(skillid,skilllv));
-		break;	
+		break;
 	case LG_PINPOINTATTACK:
 		rate = 12 + (10 * skilllv + (sstatus->agi / 100) ) * 140 / 100;
 		switch( skilllv )
@@ -4406,6 +4406,9 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, int 
 	if (status_isdead(bl))
 		return 1;
 
+	if( (skill_get_inf2(skillid)&INF2_BLOCKED_BY_LP) && map_getcell(bl->m, bl->x, bl->y, CELL_CHKLANDPROTECTOR) )
+		return 1;
+
 	if (skillid && skill_get_type(skillid) == BF_MAGIC && status_isimmune(bl) == 100)
 	{	//GTB makes all targetted magic display miss with a single bolt.
 		sc_type sct = status_skill2sc(skillid);
@@ -5169,7 +5172,7 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, int 
 			int rate = 70 + 4 * skilllv + sd->status.job_level / 5;// Is this int at the beginning really needed? [Rytech]
 			
 			heal = 8 * skilllv;
-			if( status_get_lv(src) > 100 ) heal = heal * status_get_lv(src) / 100;	// Base level bonus.
+			if( status_get_lv(src) > 100 ) heal = heal * status_get_lv(src) / 12;	// Base level bonus.
 
 			if( bl->type == BL_SKILL )
 				heal = 0;	// Don't absorb heal from Ice Walls or other skill units.
@@ -11715,6 +11718,9 @@ struct skill_unit_group* skill_unitsetting (struct block_list *src, short skilli
 			break;
 		}
 
+		if( skill_get_unit_flag(skillid)&UF_RANGEDSINGLEUNIT && i == (layout->count/2))
+			val2 |= UF_RANGEDSINGLEUNIT; // center.
+
 		if( range <= 0 )
 			map_foreachincell(skill_cell_overlap,src->m,ux,uy,BL_SKILL,skillid,&alive, src);
 		if( !alive )
@@ -15600,9 +15606,6 @@ struct skill_unit *skill_initunit (struct skill_unit_group *group, int idx, int 
 	case SA_LANDPROTECTOR:
 		skill_unitsetmapcell(unit,SA_LANDPROTECTOR,group->skill_lv,CELL_LANDPROTECTOR,true);
 		break;
-	case SC_MAELSTROM:
-		skill_unitsetmapcell(unit,SC_MAELSTROM,group->skill_lv,CELL_MAELSTROM,true);
-		break;
 	default:
 		if (group->state.song_dance&0x1) //Check for dissonance.
 			skill_dance_overlap(unit, 1);
@@ -15650,9 +15653,6 @@ int skill_delunit (struct skill_unit* unit)
 		break;
 	case SA_LANDPROTECTOR:
 		skill_unitsetmapcell(unit,SA_LANDPROTECTOR,group->skill_lv,CELL_LANDPROTECTOR,false);
-		break;
-	case SC_MAELSTROM:
-		skill_unitsetmapcell(unit,SC_MAELSTROM,group->skill_lv,CELL_MAELSTROM,false);
 		break;
 	case SC_MANHOLE: // Note : Removing the unit don't remove the status (official info)
 		if( group->val2 )

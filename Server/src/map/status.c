@@ -498,6 +498,7 @@ void initChangeTables(void)
 	set_sc( SC_MANHOLE           , SC__MANHOLE        , SI_MANHOLE         , SCB_NONE );
 	add_sc( SC_CHAOSPANIC        , SC_CHAOS );
 	set_sc( SC_BLOODYLUST        , SC__BLOODYLUST     , SI_BLOODYLUST      , SCB_DEF|SCB_DEF2|SCB_BATK|SCB_WATK );
+	add_sc( SC_MAELSTROM         , SC__MAELSTROM );
 
 	set_sc( LG_REFLECTDAMAGE     , SC_REFLECTDAMAGE   , SI_LG_REFLECTDAMAGE, SCB_NONE );
 	set_sc( LG_FORCEOFVANGUARD   , SC_FORCEOFVANGUARD , SI_FORCEOFVANGUARD , SCB_MAXHP|SCB_DEF );
@@ -2273,6 +2274,8 @@ static unsigned int status_base_pc_maxhp(struct map_session_data* sd, struct sta
 			val *= 3; //Triple max HP for top ranking Taekwons over level 90.
 		if((sd->class_&MAPID_UPPERMASK) == MAPID_SUPER_NOVICE && sd->status.base_level >= 99)
 			val += 2000; //Supernovice lvl99 hp bonus.
+		if((sd->class_&MAPID_UPPERMASK) == MAPID_SUPER_NOVICE_E)
+			val += 2000; //Extended Supernovice // Sirius
 	}
 
 	val += val * status->vit/100; // +1% per each point of VIT
@@ -2750,6 +2753,16 @@ int status_calc_pc_(struct map_session_data* sd, bool first)
 
 	// If a Super Novice has never died and is at least joblv 70, he gets all stats +10
 	if((sd->class_&MAPID_UPPERMASK) == MAPID_SUPER_NOVICE && sd->die_counter == 0 && sd->status.job_level >= 70){
+		status->str += 10;
+		status->agi += 10;
+		status->vit += 10;
+		status->int_+= 10;
+		status->dex += 10;
+		status->luk += 10;
+	}
+
+	// If a Super Novice Extended has never died he gets all stats +10. // Sirius
+	if((sd->class_&MAPID_UPPERMASK) == MAPID_SUPER_NOVICE_E && sd->die_counter == 0){
 		status->str += 10;
 		status->agi += 10;
 		status->vit += 10;

@@ -3772,8 +3772,16 @@ int do_init_script()
 
 int script_reload()
 {
+	int i;
 	userfunc_db->clear(userfunc_db,do_final_userfunc_sub);
 	scriptlabel_db->clear(scriptlabel_db, NULL);
+
+	// clear atcmd bindings
+	for( i = 0; i < MAX_ATCMD_BINDINGS; i++ )
+	{
+		safestrncpy(atcmd_binding[i].command, "", 50);
+		safestrncpy(atcmd_binding[i].npc_event, "", 50);
+	}
 
 	if(sleep_db) {
 		struct linkdb_node *n = (struct linkdb_node *)sleep_db;
@@ -17701,6 +17709,90 @@ BUILDIN_FUNC(strpos) {
 	return 0;
 }
 
+BUILDIN_FUNC(bindatcmd)
+{
+	const char* atcmd;
+	const char* eventName;
+	int i = 0;
+
+	atcmd = script_getstr(st,2);
+	eventName = script_getstr(st,3);
+
+	// check if event is already binded
+	ARR_FIND(0, MAX_ATCMD_BINDINGS, i, strcmp(atcmd_binding[i].command,atcmd) == 0);
+	if( i < MAX_ATCMD_BINDINGS )
+		safestrncpy(atcmd_binding[i].npc_event, eventName, 50);
+	else
+	{ // make new binding
+		ARR_FIND(0, MAX_ATCMD_BINDINGS, i, atcmd_binding[i].command[0] == '\0');
+		if( i < MAX_ATCMD_BINDINGS )
+		{
+			safestrncpy(atcmd_binding[i].command, atcmd, 50);
+			safestrncpy(atcmd_binding[i].npc_event, eventName, 50);
+		}
+	}
+
+	return 0;
+}
+
+BUILDIN_FUNC(unbindatcmd)
+{
+	const char* atcmd;
+	int i =  0;
+
+	atcmd = script_getstr(st, 2);
+
+	ARR_FIND(0, MAX_ATCMD_BINDINGS, i, strcmp(atcmd_binding[i].command, atcmd) == 0);
+	if( i < MAX_ATCMD_BINDINGS )
+	{
+		safestrncpy(atcmd_binding[i].command, "", 50);
+		safestrncpy(atcmd_binding[i].npc_event, "", 50);
+	}
+
+	return 0;
+}
+
+BUILDIN_FUNC(useatcmd)
+{
+	TBL_PC dummy_sd;
+	TBL_PC* sd;
+	int fd;
+	const char* cmd;
+
+	cmd = script_getstr(st,2);
+
+	if( st->rid )
+	{
+		sd = script_rid2sd(st);
+		fd = sd->fd;
+	}
+	else
+	{ // Use a dummy character.
+		sd = &dummy_sd;
+		fd = 0;
+
+		memset(&dummy_sd, 0, sizeof(TBL_PC));
+		if( st->oid )
+		{
+			struct block_list* bl = map_id2bl(st->oid);
+			memcpy(&dummy_sd.bl, bl, sizeof(struct block_list));
+			if( bl->type == BL_NPC )
+				safestrncpy(dummy_sd.status.name, ((TBL_NPC*)bl)->name, NAME_LENGTH);
+		}
+	}
+
+	// compatibility with previous implementation (deprecated!)
+	if( cmd[0] != atcommand_symbol )
+	{
+		cmd += strlen(sd->status.name);
+		while( *cmd != atcommand_symbol && *cmd != 0 )
+			cmd++;
+	}
+
+	is_atcommand(fd, sd, cmd, 2);
+	return 0;
+}
+
 // declarations that were supposed to be exported from npc_chat.c
 #ifdef PCRE_SUPPORT
 BUILDIN_FUNC(defpattern);
@@ -18187,6 +18279,11 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(getpvpmode,""),
 	BUILDIN_DEF(setsecurity,"i"),
 	BUILDIN_DEF(getsecurity,""),
+
+	// At Command Events [ToastOfDoom]
+	BUILDIN_DEF(bindatcmd, "ss"),
+	BUILDIN_DEF(unbindatcmd, "s"),
+	BUILDIN_DEF(useatcmd, "s"),
 
 	// [WiseWarrior]
 	BUILDIN_DEF(setdropbonus, "??"),

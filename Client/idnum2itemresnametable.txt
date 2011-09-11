@@ -8099,6 +8099,17 @@
 30374#grind04#
 30375#grind05#
 
+32381#pala1#
+32382#pala2#
+32383#pala3#
+32384#pala4#
+32385#pala5#
+32391#pala1#
+32392#pala2#
+32393#pala3#
+32394#pala4#
+32395#pala5#
+
 30381#copper_ore#
 30382#platinum_ore#
 30383#bronze_bullion#
@@ -8149,7 +8160,7 @@
 30440#polvo_raiz#
 30441#polvo_cacao#
 30442#polvo_cera#
-30443#cuero#
+
 30445#aceite_animal#
 30446#aceite_vegetal#
 30450#esencia_animal#
@@ -8176,6 +8187,11 @@
 30473#ganoderma#
 30474#pedolobo#
 30475#escleroderma#
+
+30480#cuero#
+30481#cuerob#
+30482#거시기#
+30483#독가루#
 
 30600#pepsi#
 30601#bawls#

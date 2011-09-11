@@ -7792,6 +7792,17 @@
 30374#Molinillo_Mecánico_Estropeado#
 30375#Llaves_Rotas_del_Molino#
 
+32381#Pala_de_Madera#
+32382#Pala_de_Piedra#
+32383#Pala_de_Hierro#
+32384#Pala_de_Acero#
+32385#Pala_Dorada#
+32391#Pala_Rota#
+32392#Pala_Rota#
+32393#Pala_Rota#
+32394#Pala_Rota#
+32395#Pala_Rota#
+
 30381#Copper_Ore#
 30382#Platinum_Ore#
 30383#Bronze_Bullion#
@@ -7842,7 +7853,7 @@
 30440#Polvo_Raíz#
 30441#Polvo_Cacao#
 30442#Polvo_Cera#
-30443#Cuero#
+
 30445#Aceite_Animal#
 30446#Aceite_Vegetal#
 30450#Esencia_Animal#
@@ -7869,6 +7880,11 @@
 30473#Ganoderma_lucidum#
 30474#Lycoperdon_perlatum#
 30475#Scleroderma_verrucosum#
+
+30480#Cuero#
+30481#Cuero#
+30482#Excremento#
+30483#Ceniza#
 
 30600#Pepsi_Bottle#
 30601#Bawls_Bottle#

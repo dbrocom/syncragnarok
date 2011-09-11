@@ -57686,7 +57686,6 @@ Peso :^777777 12^000000
 30352#
 Una vieja hoz oxidada. Está Rota.
 ^ffffff_^000000
-
 Peso :^777777 14^000000
 #
 30353#
@@ -57753,6 +57752,56 @@ Peso :^777777 3^000000
 Las llaves del Molino. ¡Están rotas!
 ^ffffff_^000000
 Peso :^777777 1^000000
+#
+32381#
+Una pala de madera hecha a mano.
+^ffffff_^000000
+Peso :^777777 7^000000
+#
+32382#
+Una pala de piedra hecha a mano.
+^ffffff_^000000
+Peso :^777777 10^000000
+#
+32383#
+Una pala de hierro. Está un poco oxidada.
+^ffffff_^000000
+Peso :^777777 12^000000
+#
+32384#
+Una pala ligera y resistente hecha de acero.
+^ffffff_^000000
+Peso :^777777 9^000000
+#
+32385#
+Una pala dorada. ¡La envidia de todos! 
+^ffffff_^000000
+Peso :^777777 9^000000
+#
+32391#
+Una pala de madera hecha a mano. Está Rota.
+^ffffff_^000000
+Peso :^777777 7^000000
+#
+32392#
+Una pala de piedra hecha a mano. Está Rota.
+^ffffff_^000000
+Peso :^777777 10^000000
+#
+32393#
+Una pala de hierro. Está un poco oxidada. Está Rota.
+^ffffff_^000000
+Peso :^777777 12^000000
+#
+32394#
+Una pala ligera y resistente hecha de acero. Está Rota.
+^ffffff_^000000
+Peso :^777777 9^000000
+#
+32395#
+Una pala dorada. Está Rota.
+^ffffff_^000000
+Peso :^777777 9^000000
 #
 30381#
 An ore containing copper which can be purified with tin to make bronze.
@@ -57998,11 +58047,6 @@ Peso :^777777 1^000000
 Tipo :^777777 Misc.^000000
 Peso :^777777 1^000000
 #
-30443#
-^FF0000Piel tratada de un animal.^000000.
-Tipo :^777777 Misc.^000000
-Peso :^777777 1^000000
-#
 30445#
 ^FF0000Aceite Animal^000000.
 Tipo :^777777 Misc.^000000
@@ -58123,6 +58167,27 @@ Peso :^777777 1^000000
 Una Scleroderma verrucosum.
 Muy parecido al Lycoperdon, pero mucho más duro y más grande que éste.
 ¡^8A0808Seta Tóxica^000000!
+Peso :^777777 1^000000
+#
+30480#
+^FF0000Piel tratada de un animal.^000000.
+Tipo :^777777 Misc.^000000
+Peso :^777777 1^000000
+#
+30481#
+^FF0000Piel tratada de un animal.^000000.
+Tipo :^777777 Misc.^000000
+Peso :^777777 1^000000
+#
+30482#
+^FF0000Heces secas del ganado.^000000.
+Perfectas para ser usadas como Estiércol.
+Tipo :^777777 Misc.^000000
+Peso :^777777 1^000000
+#
+30483#
+^FF0000Restos calcinados de vegetales.^000000.
+Tipo :^777777 Misc.^000000
 Peso :^777777 1^000000
 #
 30600#

@@ -461,8 +461,7 @@ typedef enum {
 	CELL_NPC,
 	CELL_BASILICA,
 	CELL_LANDPROTECTOR,
-	CELL_NOBOARDS,
-	CELL_MAELSTROM,
+	CELL_NOBOARDS
 } cell_t;
 
 // used by map_getcell()
@@ -482,8 +481,7 @@ typedef enum {
 	CELL_CHKNPC,
 	CELL_CHKBASILICA,
 	CELL_CHKLANDPROTECTOR,
-	CELL_CHKNOBOARDS,
-	CELL_CHKMAELSTROM,
+	CELL_CHKNOBOARDS
 } cell_chk;
 
 struct mapcell
@@ -499,8 +497,7 @@ struct mapcell
 		npc : 1,
 		basilica : 1,
 		landprotector : 1,
-		noboards : 1,
-		maelstrom : 1;
+		noboards : 1;
 
 #ifdef CELL_NOSTACK
 	unsigned char cell_bl; //Holds amount of bls in this cell.
