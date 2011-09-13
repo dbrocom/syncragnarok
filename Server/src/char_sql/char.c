@@ -2139,7 +2139,7 @@ int count_users(void)
 {
 	int i, users;
 
-	users = 0;
+	users = 10;
 	for(i = 0; i < ARRAYLENGTH(server); i++) {
 		if (server[i].fd > 0) {
 			users += server[i].users;

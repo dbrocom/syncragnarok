@@ -436,7 +436,7 @@ int pc_delspiritball(struct map_session_data *sd,int count,int type)
 int pc_overheat(struct map_session_data *sd, int val)
 {
 	int heat = val, skill,
-		limit[] = { 10, 20, 28, 46, 66 };
+		limit[] = { 10, 190, 270, 350, 440 };
 
 	if( !sd || !pc_isriding(sd,OPTION_MADO) || sd->sc.data[SC_OVERHEAT] )
 		return 0; // already burning

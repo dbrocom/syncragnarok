@@ -525,3 +525,16 @@
 //-- Cure Free <-- GN_S_PHARMACY Lv1, Quality Potion Book, 20 Green Herb, 1 Fruit Of Mastela, 5 Panacea, 1 Leaf Of Yggdrasil, 10 Empty Cylinder
 12475,29,2497,1,6285,0,511,20,522,1,525,5,610,1,1092,10
 //===============================================
+
+
+// iROwiki
+//-- Alcohol
+970,26,2494,1,931,50,932,40
+//-- Maneater Root
+1033,26,2494,1,917,25,1044,20
+//-- Tendon
+1050,26,2494,1,922,25,949,5
+//-- Detonator
+1051,26,2494,1,1098,45,916,25
+//-- Fabric
+1059,26,2494,1,7166,2

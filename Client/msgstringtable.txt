@@ -176,7 +176,7 @@ Servicio de Ayuda:#
 ^3850a0Consejo del Dia^000000  //^709fed#
 Abrir al iniciar el Juego#
 /tip: Abre el 'Consejo del Día'#
-Hay %d Jugadores conectados a nuestro Servidor.#
+Hay %d Jugadores conectados en SyncRO.#
 (%s) ha Ingresado.#
 (%s) ha salido.#
 (%s) fue expulsado.#
