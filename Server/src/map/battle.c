@@ -1814,7 +1814,7 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 								ATK_ADD(sd->inventory_data[index]->weight/10);
 								break;
 							case LG_SHIELDPRESS:
-								ATK_ADD(sd->inventory_data[index]->weight/2);
+								ATK_ADD(sd->inventory_data[index]->weight/3);
 								break;
 					}
 					}
@@ -2985,7 +2985,7 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 							ATK_ADD(sd->inventory_data[index]->weight/10);
 							break;
 						case LG_SHIELDPRESS:
-							ATK_ADD(sd->inventory_data[index]->weight/2);
+							ATK_ADD(sd->inventory_data[index]->weight/3);
 							break;
 					}
 				}
@@ -3055,17 +3055,53 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 					break;
 				}
 				break;
+			// My nerfing section [Sirius]
 			case LG_OVERBRAND:
 			case LG_OVERBRAND_BRANDISH:
 			case LG_OVERBRAND_PLUSATK:
 				{
 					if( target->type == BL_PC ){
-						wd.damage = wd.damage/(48/10);
-						wd.damage >>= 1; // Half Damage on Players
+						wd.damage = wd.damage/(19/10);
 					}
 					else
 					{
-						wd.damage = wd.damage/(28/10);
+						wd.damage = wd.damage/(12/10);
+					}
+				}
+				break;
+			case SR_GATEOFHELL:
+				{
+					if( target->type == BL_PC ){
+						wd.damage = wd.damage/33;
+					}
+					else
+					{
+						wd.damage = wd.damage/16;
+					}
+				}
+				break;
+			case LG_PINPOINTATTACK:
+			case SR_TIGERCANNON:
+			case SR_RAMPAGEBLASTER:
+				{
+					if( target->type == BL_PC ){
+						wd.damage = wd.damage/(13/10);
+					}
+				}
+			case PA_SHIELDCHAIN:
+				{
+					if( target->type == BL_PC ){
+						wd.damage = wd.damage/(16/10);
+					}
+					else
+					{
+						wd.damage = wd.damage/(12/10);
+					}
+				}
+			case RK_DRAGONBREATH:
+				{
+					if( target->type == BL_PC ){
+						wd.damage = wd.damage/(13/10);
 					}
 				}
 				break;
@@ -3517,12 +3553,12 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 	BON_RATE2(c_bossmod[0],c_bossmod[1]);
 	BON_RATE(c_atkmod[0]);
 	if( sd && (skill_id == CR_SHIELDBOOMERANG || skill_id == PA_SHIELDCHAIN) && (i = sd->equip_index[EQI_HAND_L]) >= 0 && sd->inventory_data[i] && sd->inventory_data[i]->type == IT_ARMOR )
-		BON_ADD(40 * sd->status.inventory[i].refine);
+		BON_ADD(30 * sd->status.inventory[i].refine);
 
 	if ( skill_id == PA_SHIELDCHAIN ) {
 		short index = sd->equip_index[EQI_HAND_L];
 		if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
-			ATK_ADD(sd->inventory_data[index]->weight*(25/10));
+			ATK_ADD(sd->inventory_data[index]->weight*(15/10));
 		}
 		if( sc && sc->data[SC_GLOOMYDAY_SK] )
 			ATK_ADD(150 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
@@ -3722,12 +3758,12 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 			struct Damage md = battle_calc_magic_attack_renewal(src,target,skill_id,skill_lv,wflag);
 			wd.damage += md.damage;
 			if( skill_id == CR_ACIDDEMONSTRATION && target->type == BL_PC ){
-				wd.damage = wd.damage/25;
+				wd.damage = wd.damage/15;
 				wd.damage >>= 1; // Half Damage on Players
 			}
 			else
 			{
-				wd.damage = wd.damage/(80/10);
+				wd.damage = wd.damage/(65/10);
 			}
 		}
 		break;

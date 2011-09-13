@@ -2275,7 +2275,7 @@ static unsigned int status_base_pc_maxhp(struct map_session_data* sd, struct sta
 		if((sd->class_&MAPID_UPPERMASK) == MAPID_SUPER_NOVICE && sd->status.base_level >= 99)
 			val += 2000; //Supernovice lvl99 hp bonus.
 		if((sd->class_&MAPID_UPPERMASK) == MAPID_SUPER_NOVICE_E)
-			val += 2000; //Extended Supernovice // Sirius
+			val += 2000; //Extended Supernovice // [Sirius]
 	}
 
 	val += val * status->vit/100; // +1% per each point of VIT
@@ -2761,7 +2761,7 @@ int status_calc_pc_(struct map_session_data* sd, bool first)
 		status->luk += 10;
 	}
 
-	// If a Super Novice Extended has never died he gets all stats +10. // Sirius
+	// If a Super Novice Extended has never died he gets all stats +10. // [Sirius]
 	if((sd->class_&MAPID_UPPERMASK) == MAPID_SUPER_NOVICE_E && sd->die_counter == 0){
 		status->str += 10;
 		status->agi += 10;
@@ -2975,7 +2975,7 @@ int status_calc_pc_(struct map_session_data* sd, bool first)
 			status->def = cap_value(i, CHAR_MIN, CHAR_MAX);
 	}
 	if( pc_isriding(sd,OPTION_MADO) && (skill = pc_checkskill(sd,NC_MAINFRAME)) > 0 )
-		status->def += skill < 3 ? 1 + 3 * skill : 4 * skill - 1;
+		status->def += 20 + 20*skill;
 
 	if( !battle_config.renewal_system_enable && !battle_config.weapon_defense_type && status->def > battle_config.max_def )
 	{

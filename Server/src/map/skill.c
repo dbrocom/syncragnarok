@@ -845,7 +845,7 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		skillratio += 10 * skill_lv - 10;
 		break;
 	case PA_SHIELDCHAIN:
-		skillratio += 30 * skill_lv;
+		skillratio += 70 * skill_lv;
 		break;
 	case WS_CARTTERMINATION:
 		i = 10 * (16 - skill_lv);
@@ -1212,7 +1212,8 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case GN_CRAZYWEED_ATK:
 		skillratio += 400 + 100 * skill_lv;
-		break;	case GN_SLINGITEM_RANGEMELEEATK:
+		break;
+	case GN_SLINGITEM_RANGEMELEEATK:
 		if( sd )
 		{
 			switch( sd->itemid )
@@ -1221,18 +1222,18 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 				case 13261: // Coconut Bomb
 				case 13262: // Melon Bomb
 				case 13263: // Pinapple Bomb
-					skillratio += 400;	// Unconfirded
+					skillratio += 500;	// Unconfirded
 					break;
 				case 13264: // Banana Bomb 2000%
-					skillratio += 1900;
+					skillratio += 900;
 					break;
-				case 13265: skillratio -= 75; break; // Black Lump 25%
-				case 13266: skillratio -= 25; break; // Hard Black Lump 75%
-				case 13267: skillratio += 100; break; // Extremely Hard Black Lump 200%
+				case 13265: skillratio += 800; break; // Black Lump 25%
+				case 13266: skillratio += 1000; break; // Hard Black Lump 75%
+				case 13267: skillratio += 1200; break; // Extremely Hard Black Lump 200%
 			}
 		}
 		else
-			skillratio += 300;	// Bombs
+			skillratio += 400;	// Bombs
 		break;
 	case EL_CIRCLE_OF_FIRE:
 	case EL_FIRE_BOMB_ATK:
@@ -2405,7 +2406,7 @@ int skill_additional_effect (struct block_list* src, struct block_list *bl, int 
 					sc_start(bl, SC_STUN, 100, skilllv, skill_get_time2(GN_SLINGITEM, skilllv));
 					sc_start(bl, SC_BLEEDING, 100, skilllv, skill_get_time2(GN_SLINGITEM, skilllv));
 					break;
-				case 13262:					
+				case 13262:
 					sc_start(bl, SC_MELON_BOMB, 100, skilllv, skill_get_time(GN_SLINGITEM, skilllv));	// Reduces ASPD and moviment speed
 					break;
 				case 13264:
@@ -16684,6 +16685,11 @@ int skill_produce_mix(struct map_session_data *sd, int skill_id, int nameid, int
 				{
 					case 1010: qty *= 8; break;
 					case 1061: qty *= 2; break;
+					case 970:  qty *= 9; break;
+					case 1051: qty *= 7; break;
+					case 1033: qty *= 4; break;
+					case 1050: qty *= 3; break;
+					case 1059: qty *= 5; break;
 					// Throwable potions
 					case 13275: case 13276: case 13277: case 13278: case 13279: case 13280: case 13281: case 13282: case 13283:
 						qty *= 10;
