@@ -1920,7 +1920,7 @@ int guild_gm_changed(int guild_id, int account_id, int char_id)
 	// announce the change to all guild members
 	for( i = 0; i < g->max_member; i++ )
 	{
-		if( g->member[i].sd && g->member[i].sd->fd && !g->member[i].sd->bg_id )
+		if( g->member[i].sd && g->member[i].sd->fd && !(battle_config.bg_eAmod_mode && g->member[i].sd->bg_id) )
 		{
 			clif_guild_basicinfo(g->member[i].sd);
 			clif_guild_memberlist(g->member[i].sd);

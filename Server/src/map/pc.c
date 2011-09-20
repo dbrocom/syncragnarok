@@ -903,55 +903,13 @@ void pc_inventory_rentals(struct map_session_data *sd)
 
 		if( sd->status.inventory[i].expire_time <= time(NULL) )
 		{
-			clif_rental_expired(sd->fd, sd->status.inventory[i].nameid);
-			pc_delitem(sd, i, sd->status.inventory[i].amount, 0, 0);
+			clif_rental_expired(sd->fd, i, sd->status.inventory[i].nameid);
+			pc_delitem(sd, i, sd->status.inventory[i].amount, 1, 0);
 		}
 		else
 		{
 			expire_tick = (unsigned int)(sd->status.inventory[i].expire_time - time(NULL)) * 1000;
 			clif_rental_time(sd->fd, sd->status.inventory[i].nameid, (int)(expire_tick / 1000));
-			next_tick = min(expire_tick, next_tick);
-			c++;
-		}
-	}
-
-	for( i = 0; i < MAX_CART; i++ )
-	{ // Check for Rentals on Cart
-		if( sd->status.cart[i].nameid == 0 )
-			continue; // Nothing here
-		if( sd->status.cart[i].expire_time == 0 )
-			continue;
-
-		if( sd->status.cart[i].expire_time <= time(NULL) )
-		{
-			clif_rental_expired(sd->fd, sd->status.cart[i].nameid);
-			pc_cart_delitem(sd, i, 1, 0);
-		}
-		else
-		{
-			expire_tick = (unsigned int)(sd->status.cart[i].expire_time - time(NULL)) * 1000;
-			clif_rental_time(sd->fd, sd->status.cart[i].nameid, (int)(expire_tick / 1000));
-			next_tick = min(expire_tick, next_tick);
-			c++;
-		}
-	}
-
-	for( i = 0; i < MAX_STORAGE; i++ )
-	{ // Check for Rentals on Storage
-		if( sd->status.storage.items[i].nameid == 0 )
-			continue;
-		if( sd->status.storage.items[i].expire_time == 0 )
-			continue;
-
-		if( sd->status.storage.items[i].expire_time <= time(NULL) )
-		{
-			clif_rental_expired(sd->fd, sd->status.storage.items[i].nameid);
-			storage_delitem(sd, i, 1);
-		}
-		else
-		{
-			expire_tick = (unsigned int)(sd->status.storage.items[i].expire_time - time(NULL)) * 1000;
-			clif_rental_time(sd->fd, sd->status.storage.items[i].nameid, (int)(expire_tick / 1000));
 			next_tick = min(expire_tick, next_tick);
 			c++;
 		}
@@ -10260,10 +10218,10 @@ void pc_pvpmode(struct map_session_data* sd)
 	if( sd->status.guild_id && guild_isatwar(sd->status.guild_id) )
 		return; // No PK on GuildWars
 	
-	if( !map[sd->bl.m].flag.nopvpmode && sd->idlepvp >= last_tick - 120 )
+	if( !map[sd->bl.m].flag.nopvpmode && sd->idlepvp >= last_tick - battle_config.pvpmode_enable_delay )
 	{
 		char pkinfo[100];
-		unsigned int tick = (unsigned int)(sd->idlepvp - last_tick + 120);
+		unsigned int tick = (unsigned int)(sd->idlepvp - last_tick + battle_config.pvpmode_enable_delay);
 		sprintf(pkinfo, "[PK disable - wait %d seconds to enter again in PK Mode.]", tick);
 		clif_disp_onlyself(sd ,(const char*)pkinfo,(int)strlen((const char*)pkinfo));
 
@@ -10290,9 +10248,9 @@ void pc_pvpmodeoff(struct map_session_data* sd, short force, short flag)
 	if( !sd || !sd->state.pvpmode )
 		return;
 
-	if( !force && sd->idlepvp >= last_tick - 60 )
+	if( !force && sd->idlepvp >= last_tick - battle_config.pvpmode_disable_delay )
 	{
-		unsigned int tick = (unsigned int)(sd->idlepvp - last_tick + 60);
+		unsigned int tick = (unsigned int)(sd->idlepvp - last_tick + battle_config.pvpmode_disable_delay);
 		sprintf(pkinfo, "[PK Enabled - %d seconds to disable it]", tick);
 		clif_disp_onlyself(sd,pkinfo,(int)strlen(pkinfo));
 		return;

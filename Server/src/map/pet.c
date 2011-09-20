@@ -212,26 +212,18 @@ static int pet_hungry(int tid, unsigned int tick, int id, intptr_t data)
 
 	switch(pd->pet.hungry) { //Informe de hambre de pet automatico. [Tab]
 		case 75:
-			snprintf(mes, sizeof mes,"*~ %s te mira sonriente ~*",pd->pet.name);
-			clif_message(&pd->bl, mes);
-		break;
-		case 50:
-			snprintf(mes, sizeof mes,"*~ %s te pone ojitos ~*",pd->pet.name);
+			snprintf(mes, sizeof mes,msg_txt(907),pd->pet.name);
 			clif_message(&pd->bl, mes);
 		break;
 		case 25:
-			snprintf(mes, sizeof mes,"*~ A %s le ruge la tripa ~*",pd->pet.name);
+			snprintf(mes, sizeof mes,msg_txt(906),pd->pet.name);
 			clif_message(&pd->bl, mes);
 		break;
-		case 15:
-			snprintf(mes, sizeof mes,"*~ %s parece que tenga hambre ~*",pd->pet.name);
+		case 10:
+			snprintf(mes, sizeof mes,msg_txt(905),pd->pet.name);
 			clif_message(&pd->bl, mes);
 		break;
 		case 5:
-			snprintf(mes, sizeof mes,"*~ %s está muy hambriento ~*",pd->pet.name);
-			clif_message(&pd->bl, mes);
-		break;
-		case 1:
 			snprintf(mes, sizeof mes,"*~ %s se revuelve enfadado ~*",pd->pet.name);
 			clif_message(&pd->bl, mes);
 		break;
@@ -448,7 +440,7 @@ int pet_birth_process(struct map_session_data *sd, struct s_pet *pet)
 
 	clif_misceffect(&sd->pd->bl, 0); // Efecto 1 de nacimiento [Tab]
 	clif_misceffect(&sd->pd->bl, 344); // Efecto 2 de nacimiento [Tab]
-	sprintf(pet_output,"Get Out %s... NOW!",pet->name); // Cuidado aca con el nombre del pet
+	sprintf(pet_output,"Sal del huevo %s... ¡AHORA!",pet->name); // Cuidado aca con el nombre del pet
 	clif_displaymessage(sd->fd, pet_output); // Frase nacimiento [Tab]
 
 	return 0;

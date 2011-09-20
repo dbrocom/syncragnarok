@@ -15932,7 +15932,14 @@ BUILDIN_FUNC(bg_cleanmap)
 BUILDIN_FUNC(bg_destroy)
 {
 	int bg_id = script_getnum(st,2);
-	bg_team_delete(bg_id);
+	bg_team_clean(bg_id, true);
+	return 0;
+}
+
+BUILDIN_FUNC(bg_clean)
+{
+	int bg_id = script_getnum(st,2);
+	bg_team_clean(bg_id, false);
 	return 0;
 }
 
