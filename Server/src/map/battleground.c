@@ -153,7 +153,7 @@ struct map_session_data* bg_getavailablesd(struct battleground_data *bg)
 	return( i < MAX_BG_MEMBERS ) ? bg->members[i].sd : NULL;
 }
 
-int bg_team_delete(int bg_id)
+int bg_team_clean(int bg_id, bool delete)
 { // Deletes BG Team from db
 	int i;
 	struct map_session_data *sd;
@@ -185,6 +185,11 @@ int bg_team_delete(int bg_id)
 
 		clif_charnameupdate(sd);
 		clif_guild_emblem_area(&sd->bl);
+
+		// Remove Guild Skill Buffs
+		status_change_end(&sd->bl,SC_GUILDAURA,INVALID_TIMER);
+		status_change_end(&sd->bl,SC_BATTLEORDERS,INVALID_TIMER);
+		status_change_end(&sd->bl,SC_REGENERATION,INVALID_TIMER);
 	}
 
 	for( i = 0; i < MAX_GUILDSKILL; i++ )
@@ -194,7 +199,17 @@ int bg_team_delete(int bg_id)
 		delete_timer(bg->skill_block_timer[i], bg_block_skill_end);
 	}
 
-	idb_remove(bg_team_db, bg_id);
+	if( delete )
+		idb_remove(bg_team_db, bg_id);
+	else
+	{
+		bg->count = 0;
+		bg->leader_char_id = 0;
+		bg->team_score = 0;
+		bg->creation_tick = 0;
+		memset(&bg->members, 0, sizeof(bg->members));
+	}
+
 	return 1;
 }
 
@@ -265,6 +280,15 @@ int bg_team_join(int bg_id, struct map_session_data *sd)
 	bg->members[i].x = sd->bl.x;
 	bg->members[i].y = sd->bl.y;
 	bg->count++;
+
+	if( bg->creation_tick == 0 ) bg->creation_tick = last_tick; // Creation Tick = First member joined.
+
+	if( bg->leader_char_id == 0 )
+	{ // First Join = Team Leader
+		bg->leader_char_id = sd->status.char_id;
+		sd->bmaster_flag = bg;
+	}
+
 	if( battle_config.bg_ranked_mode && sd->status.bgstats.rank_games < battle_config.bg_ranked_max_games && DIFF_TICK(last_tick,bg->creation_tick) < 60 )
 	{
 		char output[128];
@@ -274,32 +298,32 @@ int bg_team_join(int bg_id, struct map_session_data *sd)
 		clif_displaymessage(sd->fd,output);
 	}
 
-	if( bg->leader_char_id == 0 )
-	{ // First Join = Team Leader
-		bg->leader_char_id = sd->status.char_id;
-		sd->bmaster_flag = bg;
-	}
-
 	guild_send_dot_remove(sd);
-	clif_bg_belonginfo(sd);
-	// clif_bg_emblem(sd, bg->g);
-	clif_charnameupdate(sd);
+	if( battle_config.bg_eAmod_mode )
+	{
+		clif_bg_belonginfo(sd);
+		clif_charnameupdate(sd);
+	}
 
 	for( i = 0; i < MAX_BG_MEMBERS; i++ )
 	{
 		if( (pl_sd = bg->members[i].sd) == NULL )
 			continue;
-		clif_guild_basicinfo(pl_sd);
-		clif_bg_emblem(pl_sd, bg->g);
-		clif_bg_memberlist(pl_sd);
+
+		if( battle_config.bg_eAmod_mode )
+		{ // Simulate Guild Information
+			clif_guild_basicinfo(pl_sd);
+			clif_bg_emblem(pl_sd, bg->g);
+			clif_bg_memberlist(pl_sd);
+		}
+
 		if( pl_sd != sd )
 			clif_hpmeter_single(sd->fd, pl_sd->bl.id, pl_sd->battle_status.hp, pl_sd->battle_status.max_hp);
 	}
 
-	clif_guild_emblem_area(&sd->bl);
+	if( battle_config.bg_eAmod_mode ) clif_guild_emblem_area(&sd->bl);
 	clif_bg_hp(sd);
 	clif_bg_xy(sd);
-
 	return 1;
 }
 
@@ -314,7 +338,7 @@ int bg_team_leave(struct map_session_data *sd, int flag)
 		return 0;
 
 	// Packets
-	clif_bg_leave_single(sd, sd->status.name, "Leaving Battle...");
+	if( battle_config.bg_eAmod_mode ) clif_bg_leave_single(sd, sd->status.name, "Leaving Battle...");
 	bg_send_dot_remove(sd);
 	bg_id = sd->bg_id;
 	sd->bg_id = 0;
@@ -324,23 +348,28 @@ int bg_team_leave(struct map_session_data *sd, int flag)
 	bg_member_removeskulls(sd);
 
 	// Remove Guild Skill Buffs
-	status_change_end(&sd->bl, SC_GUILDAURA, INVALID_TIMER);
-	status_change_end(&sd->bl, SC_BATTLEORDERS, INVALID_TIMER);
-	status_change_end(&sd->bl, SC_REGENERATION, INVALID_TIMER);
+	status_change_end(&sd->bl,SC_GUILDAURA,INVALID_TIMER);
+	status_change_end(&sd->bl,SC_BATTLEORDERS,INVALID_TIMER);
+	status_change_end(&sd->bl,SC_REGENERATION,INVALID_TIMER);
 
+	if( !battle_config.bg_eAmod_mode )
+		continue; // No need to touch Guild stuff
 
-	if( sd->status.guild_id && (g = guild_search(sd->status.guild_id)) != NULL )
+	if( battle_config.bg_eAmod_mode )
 	{ // Refresh Guild Information
-		clif_guild_belonginfo(sd, g);
-		clif_guild_basicinfo(sd);
-		clif_guild_allianceinfo(sd);
-		clif_guild_memberlist(sd);
-		clif_guild_skillinfo(sd);
-		clif_guild_emblem(sd, g);
-	}
+		if( sd->status.guild_id && (g = guild_search(sd->status.guild_id)) != NULL )
+		{
+			clif_guild_belonginfo(sd, g);
+			clif_guild_basicinfo(sd);
+			clif_guild_allianceinfo(sd);
+			clif_guild_memberlist(sd);
+			clif_guild_skillinfo(sd);
+			clif_guild_emblem(sd, g);
+		}
 
-	clif_charnameupdate(sd);
-	clif_guild_emblem_area(&sd->bl);
+		clif_charnameupdate(sd);
+		clif_guild_emblem_area(&sd->bl);
+	}
 
 	if( (bg = bg_team_search(bg_id)) == NULL )
 		return 0;
@@ -356,12 +385,6 @@ int bg_team_leave(struct map_session_data *sd, int flag)
 	{ // Update other BG members
 		if( (pl_sd = bg->members[i].sd) == NULL )
 			continue;
-		switch( flag )
-		{
-		case 2: clif_bg_expulsion_single(pl_sd, sd->status.name, "Kicked by Team Leader (AFK Report)..."); break;
-		case 1: clif_bg_expulsion_single(pl_sd, sd->status.name, "User has quit the game..."); break;
-		case 0: clif_bg_leave_single(pl_sd, sd->status.name, "Leaving Battle..."); break;
-		}
 
 		if( !bg->leader_char_id )
 		{ // Set new Leader first on the list
@@ -369,9 +392,31 @@ int bg_team_leave(struct map_session_data *sd, int flag)
 			pl_sd->bmaster_flag = bg;
 		}
 
-		clif_guild_basicinfo(pl_sd);
-		clif_bg_emblem(pl_sd, bg->g);
-		clif_bg_memberlist(pl_sd);
+		if( battle_config.bg_eAmod_mode )
+		{
+			switch( flag )
+			{
+			case 2: clif_bg_expulsion_single(pl_sd, sd->status.name, "Kicked by AFK Report..."); break;
+			case 1: clif_bg_expulsion_single(pl_sd, sd->status.name, "User has quit the game..."); break;
+			case 0: clif_bg_leave_single(pl_sd, sd->status.name, "Leaving Battle..."); break;
+			}
+
+			clif_guild_basicinfo(pl_sd);
+			clif_bg_emblem(pl_sd, bg->g);
+			clif_bg_memberlist(pl_sd);
+		}
+	}
+
+	if( !battle_config.bg_eAmod_mode )
+	{
+		char output[128];
+		switch( flag )
+		{
+		case 2: sprintf(output, "Server : %s kicked by AFK Report...", sd->status.name); break;
+		case 1: sprintf(output, "Server : %s has quit the game...", sd->status.name); break;
+		case 0: sprintf(output, "Server : %s is leaving the battlefield...", sd->status.name); break;
+		}
+		clif_bg_message(bg, 0, "Server", output, strlen(output) + 1);
 	}
 
 	if( bg->logout_event[0] && flag )
@@ -408,7 +453,7 @@ int bg_create(unsigned short mapindex, short rx, short ry, int guild_index, cons
 
 	CREATE(bg, struct battleground_data, 1);
 	bg->bg_id = bg_team_counter;
-	bg->creation_tick = last_tick;
+	bg->creation_tick = 0;
 	bg->count = 0;
 	bg->g = &bg_guild[guild_index];
 	bg->mapindex = mapindex;
@@ -429,41 +474,39 @@ int bg_create(unsigned short mapindex, short rx, short ry, int guild_index, cons
 
 int bg_team_get_id(struct block_list *bl)
 {
-	if( bl )
+	nullpo_ret(bl);
+	switch( bl->type )
 	{
-		switch( bl->type )
+		case BL_PC:
+			return ((TBL_PC*)bl)->bg_id;
+		case BL_PET:
+			if( ((TBL_PET*)bl)->msd )
+				return ((TBL_PET*)bl)->msd->bg_id;
+			break;
+		case BL_MOB:
 		{
-			case BL_PC:
-				return ((TBL_PC*)bl)->bg_id;
-			case BL_PET:
-				if( ((TBL_PET*)bl)->msd )
-					return ((TBL_PET*)bl)->msd->bg_id;
-				break;
-			case BL_MOB:
-			{
-				struct map_session_data *msd;
-				struct mob_data *md = (TBL_MOB*)bl;
-				if( md->special_state.ai && (msd = map_id2sd(md->master_id)) != NULL )
-					return msd->bg_id;
-				return md->bg_id;
-			}
-			case BL_HOM:
-				if( ((TBL_HOM*)bl)->master )
-					return ((TBL_HOM*)bl)->master->bg_id;
-				break;
-			case BL_MER:
-				if( ((TBL_MER*)bl)->master )
-					return ((TBL_MER*)bl)->master->bg_id;
-				break;
-			case BL_ELEM:
-				if( ((TBL_ELEM*)bl)->master )
-					return ((TBL_ELEM*)bl)->master->bg_id;
-				break;
-			case BL_SKILL:
-				return ((TBL_SKILL*)bl)->group->bg_id;
-			case BL_NPC:
-				return ((TBL_NPC*)bl)->u.scr.bg_id;
+			struct map_session_data *msd;
+			struct mob_data *md = (TBL_MOB*)bl;
+			if( md->special_state.ai && (msd = map_id2sd(md->master_id)) != NULL )
+				return msd->bg_id;
+			return md->bg_id;
 		}
+		case BL_HOM:
+			if( ((TBL_HOM*)bl)->master )
+				return ((TBL_HOM*)bl)->master->bg_id;
+			break;
+		case BL_MER:
+			if( ((TBL_MER*)bl)->master )
+				return ((TBL_MER*)bl)->master->bg_id;
+			break;
+		case BL_ELEM:
+			if( ((TBL_ELEM*)bl)->master )
+				return ((TBL_ELEM*)bl)->master->bg_id;
+			break;
+		case BL_SKILL:
+			return ((TBL_SKILL*)bl)->group->bg_id;
+		case BL_NPC:
+			return ((TBL_NPC*)bl)->u.scr.bg_id;
 	}
 
 	return 0;
@@ -831,8 +874,15 @@ void bg_team_rewards(int bg_id, int nameid, int amount, int kafrapoints, int que
 	}
 }
 
+// ====================================================================
 // Battleground Queue System
 // ====================================================================
+
+struct queue_data* queue_search(int q_id)
+{ // Search a Queue using q_id
+	if( !q_id ) return NULL;
+	return (struct queue_data *)idb_get(queue_db, q_id);
+}
 
 int queue_create(const char* queue_name, const char* join_event)
 {
@@ -841,6 +891,7 @@ int queue_create(const char* queue_name, const char* join_event)
 	qd->q_id = ++queue_counter;
 	safestrncpy(qd->queue_name, queue_name, sizeof(qd->queue_name));
 	safestrncpy(qd->join_event, join_event, sizeof(qd->join_event));
+	qd->first = qd->last = NULL; // First and Last Queue Members
 	qd->users_db = idb_alloc(DB_OPT_BASE);
 	qd->users = 0;
 
@@ -849,47 +900,117 @@ int queue_create(const char* queue_name, const char* join_event)
 	return qd->q_id;
 }
 
-int queue_destroy(int q_id)
+void queue_members_clean(struct queue_data *qd)
 {
-	struct map_session_data *pl_sd;
-	struct queue_data *qd;
-	DBIterator* iter;
+	struct queue_member *head, *next;
+	nullpo_retv(qd);
 
-	if( (qd = (struct queue_data*)idb_get(queue_db,q_id)) == NULL )
-		return 0;
-	
-	iter = db_iterator(qd->users_db);
-	for( pl_sd = (struct map_session_data *)dbi_first(iter); dbi_exists(iter); pl_sd = (struct map_session_data *)dbi_next(iter) )
-		idb_remove(qd->users_db, pl_sd->bl.id);
+	head = qd->first;
+	while( head != NULL )
+	{
+		next = head->next;
+		aFree(head);
+		head = next;
+	}
 
-	dbi_destroy(iter);
-	
-	db_destroy(qd->users_db);
-	idb_remove(queue_db, q_id);
-	
-	return 1;
+	qd->first = qd->last = NULL;
+	qd->users = 0;
 }
 
-int queue_search(struct map_session_data *sd, struct queue_data *qd)
+int queue_member_add(struct queue_data *qd, struct map_session_data *sd)
 {
-	int i = 0; // Position in Queue
-	struct map_session_data *pl_sd = NULL;
-	DBIterator* iter;
+	struct queue_member *qm;
+	nullpo_retr(0,qd);
+	nullpo_retr(0,sd);
 
-	if( !sd || !qd ) return 0;
+	CREATE(qm, struct queue_member, 1);
+	qd->users++;
+	qm->sd = sd;
+	qm->position = qd->users;
+	qm->next = NULL;
 
-	iter = db_iterator(qd->users_db);
-	for( pl_sd = (struct map_session_data *)dbi_first(iter); dbi_exists(iter); pl_sd = (struct map_session_data *)dbi_next(iter) )
-	{
-		i++;
-		if( pl_sd->bl.id == sd->bl.id ) break; // Found
+	if( qd->last == NULL )
+		qd->first = qd->last = qm; // Attach to first position
+	else
+	{ // Attach at the end of the queue
+		qd->last->next = qm;
+		qd->last = qm;
 	}
-	dbi_destroy(iter);
 
-	if( !pl_sd || pl_sd->bl.id != sd->bl.id )
+	return qm->position;
+}
+
+int queue_member_remove(struct queue_data *qd, int id)
+{
+	struct queue_member *head, *previous;
+	int i;
+	nullpo_retr(0,qd);
+
+	head = qd->first;
+	previous = NULL;
+
+	while( head != NULL )
+	{
+		if( head->sd && head->sd->bl.id == id )
+		{
+			struct queue_member *next;
+
+			next = head->next;
+			i = head->position;
+			qd->users--;
+
+			// De-attach target from the main queue
+			if( previous )
+				previous->next = head->next;
+			else
+				qd->first = head->next; // Deleted is on first position
+
+			if( head->next == NULL ) qd->last = previous; // Deleted is on last position
+
+			while( next != NULL )
+			{ // Reduces positions of the next of the queue in -1
+				next->position--;
+				next = next->next;
+			}
+
+			aFree(head);
+			return i;
+		}
+
+		previous = head;
+		head = head->next;
+	}
+
+	return 0;
+}
+
+int queue_member_search(struct queue_data *qd, int id)
+{
+	struct queue_member *head;
+	nullpo_retr(0,qd);
+
+	head = qd->first;
+	while( head != NULL )
+	{
+		if( head->sd && head->sd->bl.id == id )
+			return head->position;
+
+		head = head->next;
+	}
+
+	return 0; // Not Found
+}
+
+int queue_destroy(int q_id)
+{
+	struct queue_data *qd;
+
+	if( (qd = queue_search(q_id)) == NULL )
 		return 0;
 
-	return i;
+	queue_members_clean(qd);
+	idb_remove(queue_db, q_id);
+	return 1;
 }
 
 int queue_join(struct map_session_data *sd, int q_id)
@@ -904,20 +1025,18 @@ int queue_join(struct map_session_data *sd, int q_id)
 		return 0;
 	}
 
-	if( (qd = (struct queue_data*)idb_get(queue_db,q_id)) == NULL )
+	if( (qd = queue_search(q_id)) == NULL )
 		return 0;
 
-	if( (i = queue_search(sd,qd)) > 0 )
+	if( (i = queue_member_search(qd,sd->bl.id)) != 0 )
 	{
-		sprintf(output,"You are already on queue at %s in position %d.", qd->queue_name, i);
+		sprintf(output,"You are already on %s queue at position %d.", qd->queue_name, i);
 		clif_displaymessage(sd->fd,output);
 		return 0;
 	}
 
-	idb_put(qd->users_db, sd->bl.id, sd);
-	qd->users++;
-
-	sprintf(output,"You have joined %s queue.", qd->queue_name);
+	i = queue_member_add(qd,sd);
+	sprintf(output,"You have joined %s queue at position %d.", qd->queue_name, i);
 	clif_displaymessage(sd->fd,output);
 
 	if( qd->join_event[0] ) npc_event_do(qd->join_event);
@@ -928,20 +1047,16 @@ int queue_leave(struct map_session_data *sd, int q_id)
 {
 	char output[128];
 	struct queue_data *qd;
-	int i;
 
-	if( (qd = (struct queue_data*)idb_get(queue_db,q_id)) == NULL )
+	if( (qd = queue_search(q_id)) == NULL )
 		return 0;
 
-	if( (i = queue_search(sd,qd)) == 0 )
+	if( !queue_member_remove(qd,sd->bl.id) )
 	{
 		sprintf(output,"You are not at %s queue.", qd->queue_name);
 		clif_displaymessage(sd->fd,output);
 		return 0;
 	}
-
-	idb_remove(qd->users_db,sd->bl.id);
-	qd->users--;
 
 	return 1;
 }
@@ -951,16 +1066,13 @@ int queue_leaveall(struct map_session_data *sd)
 	struct queue_data *qd;
 	DBIterator* iter;
 	int i = 0;
+	nullpo_retr(0,sd);
 
 	iter = db_iterator(queue_db);
 	for( qd = (struct queue_data *)dbi_first(iter); dbi_exists(iter); qd = (struct queue_data *)dbi_next(iter) )
 	{
-		if( !idb_get(qd->users_db,sd->bl.id) )
-			continue;
-
-		idb_remove(qd->users_db,sd->bl.id);
-		qd->users--;
-		i++;
+		if( queue_member_remove(qd,sd->bl.id) )
+			i++;
 	}
 	dbi_destroy(iter);
 
@@ -986,8 +1098,15 @@ void do_init_battleground(void)
 	bg_guild_build_data();
 }
 
+static int queue_db_final(DBKey key, void *data, va_list ap)
+{
+	struct queue_data *qd = (struct queue_data *)data;
+	queue_members_clean(qd); // Unlink all queue members
+	return 0;
+}
+
 void do_final_battleground(void)
 {
 	bg_team_db->destroy(bg_team_db, NULL);
-	queue_db->destroy(queue_db, NULL);
+	queue_db->destroy(queue_db, queue_db_final);
 }

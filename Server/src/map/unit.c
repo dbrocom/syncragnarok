@@ -2108,7 +2108,7 @@ int unit_remove_map(struct block_list *bl, clr_type clrtype)
 		party_send_dot_remove(sd);//minimap dot fix [Kevin]
 		guild_send_dot_remove(sd);
 		bg_send_dot_remove(sd);
-		if( map[bl->m].flag.town ) queue_leaveall(sd);
+		if( map[bl->m].flag.town ) queue_leaveall(sd); // Only on Towns you can be on a Queue. Optimized
 
 		if( --map[bl->m].users == 0 && battle_config.dynamic_mobs )
 			map_removemobs(bl->m);

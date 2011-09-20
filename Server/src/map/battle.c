@@ -6267,6 +6267,7 @@ static const struct _battle_data {
 	{ "bg_ranked_mode",                     &battle_config.bg_ranked_mode,                  0,      0,      1,              },
 	{ "bg_ranked_max_games",                &battle_config.bg_ranked_max_games,             50,     10,     100,            },
 	{ "bg_reportafk_leaderonly",            &battle_config.bg_reportafk_leaderonly,         1,      0,      1,              },
+	{ "bg_eAmod_mode",                      &battle_config.bg_eAmod_mode,                   1,      0,      1,              },
 // Renewal System
 	{ "renewal_system_enable",              &battle_config.renewal_system_enable,           0,      0,      1,              },
 	{ "warg_can_falcon",                    &battle_config.warg_can_falcon,                 0,      0,      1,              },
@@ -6282,7 +6283,7 @@ static const struct _battle_data {
 	{ "pvpevent_misc_attack_damage_rate",   &battle_config.pvpevent_misc_damage_rate,       60,     0,      INT_MAX,        },
 	{ "pvpevent_flee_penalty",              &battle_config.pvpevent_flee_penalty,           20,     0,      INT_MAX,        },
 	{ "pvpevent_cashperkill",               &battle_config.pvpevent_cashperkill,            0,      0,      INT_MAX,        },
-// Custom TerraRO Settings
+// Custom Settings
 	{ "channel_system_enable",              &battle_config.channel_system_enable,           0,      0,      1,              },
 	{ "channel_announces",                  &battle_config.channel_announces,               0,      0,      1|2|4|8|16,     },
 	{ "skill_zeny2item",                    &battle_config.skill_zeny2item,                 0,      0,      INT_MAX,        },
@@ -6293,6 +6294,11 @@ static const struct _battle_data {
 	{ "pvpmode_onlypc",                     &battle_config.pvpmode_onlypc,                  1,      0,      1,              },
 	{ "pvpmode_gvgreductions",              &battle_config.pvpmode_gvgreductions,           0,      0,      1,              },
 	{ "pvpmode_expbonus",                   &battle_config.pvpmode_expbonus,                0,      0,      100,            },
+	{ "pvpmode_nowarp_cmd",                 &battle_config.pvpmode_nowarp_cmd,              0,      0,      1,              },
+	{ "pvpmode_enable_delay",               &battle_config.pvpmode_enable_delay,          120,      0,      INT_MAX,        },
+	{ "pvpmode_disable_delay",              &battle_config.pvpmode_disable_delay,          60,      0,      INT_MAX,        },
+
+	{ "guild_wars",                         &battle_config.guild_wars,                      0,      0,      1,              },
 	{ "guild_wars",                         &battle_config.guild_wars,                      0,      0,      1,              },
 	{ "region_display",                     &battle_config.region_display,                  1,      0,      3,              },
 	{ "super_woe_enable",                   &battle_config.super_woe_enable,                0,      0,      2,              },

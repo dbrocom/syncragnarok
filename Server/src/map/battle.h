@@ -487,6 +487,10 @@ extern struct Battle_Config
 	int pvpmode_onlypc;
 	int pvpmode_gvgreductions;
 	int pvpmode_expbonus;
+	int pvpmode_nowarp_cmd;
+	int pvpmode_enable_delay;
+	int pvpmode_disable_delay;
+
 	int ksprotection;
 	int auction_feeperhour;
 	int auction_maximumprice;
@@ -536,6 +540,8 @@ extern struct Battle_Config
 	int bg_ranked_mode;
 	int bg_ranked_max_games;
 	int bg_reportafk_leaderonly;
+
+	int bg_eAmod_mode;
 
 	// Renewal System Configurations
 	int warg_can_falcon;

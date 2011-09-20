@@ -440,6 +440,12 @@ ACMD_FUNC(mapmove)
 			return -1;
 	}
 
+	if( battle_config.pvpmode_nowarp_cmd && sd->state.pvpmode )
+	{
+		clif_displaymessage(sd->fd,"You can not use @go while on PK Mode.");
+		return -1;
+	}
+
 	mapindex = mapindex_name2id(map_name);
 	if (mapindex)
 		m = map_mapindex2mapid(mapindex);
@@ -2387,6 +2393,12 @@ ACMD_FUNC(go)
 	if( map[sd->bl.m].flag.nogo && battle_config.any_warp_GM_min_level > pc_isGM(sd) ) {
 		clif_displaymessage(sd->fd,"You can not use @go on this map.");
 		return 0;
+	}
+ 
+	if( battle_config.pvpmode_nowarp_cmd && sd->state.pvpmode )
+	{
+		clif_displaymessage(sd->fd,"You can not use @go while on PK Mode.");
+		return -1;
 	}
  
 	memset(map_name, '\0', sizeof(map_name));

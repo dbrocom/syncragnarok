@@ -2244,7 +2244,7 @@ int skill_additional_effect (struct block_list* src, struct block_list *bl, int 
 		{
 			int rate = 0, i;
 			const int pos[5] = { EQP_WEAPON, EQP_HELM, EQP_SHIELD, EQP_ARMOR, EQP_ACC };
-			rate = 6 * skilllv + sstatus->dex / 10 + sd->status.job_level / 4 - tstatus->dex /5;// The tstatus->dex / 5 part is unofficial, but players gotta have some kind of way to have resistance. [Rytech]
+			rate = 6 * skilllv + sstatus->dex / 10 + (sd? sd->status.job_level / 4 : 0) - tstatus->dex /5;// The tstatus->dex / 5 part is unofficial, but players gotta have some kind of way to have resistance. [Rytech]
 			//rate -= rate * tstatus->dex / 200; // Disabled until official resistance is found.
 
 			for( i = 0; i < skilllv; i++ )
@@ -10743,7 +10743,7 @@ int skill_castend_pos2(struct block_list* src, int x, int y, int skillid, int sk
 			}
 		} else {
 			int i = skilllv%11 - 1;
-			struct item_data *item = itemdb_search(i);
+			struct item_data *item;
 			i = skill_db[skillid].itemid[i];
 			item = itemdb_search(i);
 			potion_flag = 1;
