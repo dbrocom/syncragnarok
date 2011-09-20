@@ -30,7 +30,7 @@ yuno,300,249,3	script	Profesor	778,{
 	mes "Buenas, jovencito.";
 	mes "¿Has disfrutado del Verano?";
 	next;
-	if ( (Class >= 0 && Class <= 6) || Class == Job_SuperNovice || Class == Job_Ninja || Class == Job_Gunslinger || (Class >= 4023 && Class <= 4045) ){
+	if ( ((Class >= 0 && Class <= 6) || Class == Job_SuperNovice || Class == Job_Ninja || Class == Job_Gunslinger || (Class >= 4023 && Class <= 4045)) && BaseLevel <= 45 ){
 		mes "[Profesor]";
 		mes "¿Estás preparado para empezar el nuevo curso escolar?";
 		mes "Yo te puedo ayudar, si quieres. Pero me tienes que demostrar que eres un estudiante.";

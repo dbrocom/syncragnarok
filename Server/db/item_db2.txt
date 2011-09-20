@@ -459,23 +459,23 @@
 30027,Brown_Design_Sunglasses,Brown Design Sunglasses,5,5000,,100,,0,,1,0xFFFFFFFF,7,2,512,,0,0,1027,{ bonus bMdef,1; },{},{}
 30028,Blacked_Design_Sunglasses,Blacked Design Sunglasses,5,5000,,100,,0,,1,0xFFFFFFFF,7,2,512,,0,0,1028,{ bonus bMdef,1; },{},{}
 30029,Pink_Design_Sunglasses,Pink Design Sunglasses,5,5000,,100,,0,,1,0xFFFFFFFF,7,2,512,,0,0,1029,{ bonus bMdef,1; },{},{}
-// ----------- BackPacks + 420
-30030,Black_Bag,Black Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1030,{ set maxweight,maxweight + 2300; },{},{}
-30031,Blue_Bag,Blue Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1031,{ set maxweight,maxweight + 2300; },{},{}
-30032,Cyan_Bag,Cyan Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1032,{ set maxweight,maxweight + 2300; },{},{}
-30033,Green_Bag,Green Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1033,{ set maxweight,maxweight + 2300; },{},{}
-30034,Gold_Bag,Gold Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1034,{ set maxweight,maxweight + 2300; },{},{}
-30035,Orange_Bag,Orange Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1035,{ set maxweight,maxweight + 2300; },{},{}
-30036,Red_Bag,Red Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1036,{ set maxweight,maxweight + 2300; },{},{}
-30037,Purple_Bag,Purple Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1037,{ set maxweight,maxweight + 2300; },{},{}
-30038,White_Bag,White Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1038,{ set maxweight,maxweight + 2300; },{},{}
-30039,Brown_Bag,Brown Bag,5,10,,200,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1039,{ set maxweight,maxweight + 2300; },{},{}
-// ----------- BackPacks + 500
-30040,Angeling_Rucksack,Angeling Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1040,{ set maxweight,maxweight + 5000; },{},{}
-30041,Deviling_Rucksack,Deviling Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1041,{ set maxweight,maxweight + 5000; },{},{}
-30042,Archangeling_Rucksack,Archangeling Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1042,{ set maxweight,maxweight + 5000; },{},{}
-30043,Orc_Rucksack,Orc Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1043,{ set maxweight,maxweight + 5000; },{},{}
-30044,Bombporing_Rucksack,Bombporing Rucksack,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1044,{ set maxweight,maxweight + 5000; },{},{}
+// ----------- BackPacks + 230
+30030,Black_Bag,Black Bag,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1030,{ set maxweight,maxweight + 2300; },{},{}
+30031,Blue_Bag,Blue Bag,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1031,{ set maxweight,maxweight + 2300; },{},{}
+30032,Cyan_Bag,Cyan Bag,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1032,{ set maxweight,maxweight + 2300; },{},{}
+30033,Green_Bag,Green Bag,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1033,{ set maxweight,maxweight + 2300; },{},{}
+30034,Gold_Bag,Gold Bag,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1034,{ set maxweight,maxweight + 2300; },{},{}
+30035,Orange_Bag,Orange Bag,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1035,{ set maxweight,maxweight + 2300; },{},{}
+30036,Red_Bag,Red Bag,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1036,{ set maxweight,maxweight + 2300; },{},{}
+30037,Purple_Bag,Purple Bag,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1037,{ set maxweight,maxweight + 2300; },{},{}
+30038,White_Bag,White Bag,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1038,{ set maxweight,maxweight + 2300; },{},{}
+30039,Brown_Bag,Brown Bag,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,15,0,1039,{ set maxweight,maxweight + 2300; },{},{}
+// ----------- BackPacks + 480
+30040,Angeling_Rucksack,Angeling Rucksack,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1040,{ set maxweight,maxweight + 4800; },{},{}
+30041,Deviling_Rucksack,Deviling Rucksack,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1041,{ set maxweight,maxweight + 4800; },{},{}
+30042,Archangeling_Rucksack,Archangeling Rucksack,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1042,{ set maxweight,maxweight + 4800; },{},{}
+30043,Orc_Rucksack,Orc Rucksack,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1043,{ set maxweight,maxweight + 4800; },{},{}
+30044,Bombporing_Rucksack,Bombporing Rucksack,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1044,{ set maxweight,maxweight + 4800; },{},{}
 // ----------- Balloon
 30045,Angeling_Balloon,Angeling Balloon,5,10,,20,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1045,{},{},{}
 30046,Archangeling_Balloon,Archangeling Balloon,5,10,,20,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1046,{},{},{}
