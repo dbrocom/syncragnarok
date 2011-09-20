@@ -172,6 +172,14 @@ int bg_team_clean(int bg_id, bool delete)
 		sd->bmaster_flag = NULL;
 		bg_member_removeskulls(sd);
 
+		// Remove Guild Skill Buffs
+		status_change_end(&sd->bl,SC_GUILDAURA,INVALID_TIMER);
+		status_change_end(&sd->bl,SC_BATTLEORDERS,INVALID_TIMER);
+		status_change_end(&sd->bl,SC_REGENERATION,INVALID_TIMER);
+
+		if( !battle_config.bg_eAmod_mode )
+			continue; // No need to touch Guild stuff
+
 		if( sd->status.guild_id && (g = guild_search(sd->status.guild_id)) != NULL )
 		{
 			clif_guild_belonginfo(sd,g);
@@ -185,11 +193,6 @@ int bg_team_clean(int bg_id, bool delete)
 
 		clif_charnameupdate(sd);
 		clif_guild_emblem_area(&sd->bl);
-
-		// Remove Guild Skill Buffs
-		status_change_end(&sd->bl,SC_GUILDAURA,INVALID_TIMER);
-		status_change_end(&sd->bl,SC_BATTLEORDERS,INVALID_TIMER);
-		status_change_end(&sd->bl,SC_REGENERATION,INVALID_TIMER);
 	}
 
 	for( i = 0; i < MAX_GUILDSKILL; i++ )
@@ -351,9 +354,6 @@ int bg_team_leave(struct map_session_data *sd, int flag)
 	status_change_end(&sd->bl,SC_GUILDAURA,INVALID_TIMER);
 	status_change_end(&sd->bl,SC_BATTLEORDERS,INVALID_TIMER);
 	status_change_end(&sd->bl,SC_REGENERATION,INVALID_TIMER);
-
-	if( !battle_config.bg_eAmod_mode )
-		continue; // No need to touch Guild stuff
 
 	if( battle_config.bg_eAmod_mode )
 	{ // Refresh Guild Information
