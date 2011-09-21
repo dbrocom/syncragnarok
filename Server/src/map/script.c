@@ -351,6 +351,7 @@ enum {
 	MF_MONSTER_NOTELEPORT,
 	MF_PVP_NOCALCRANK,	//50
 	MF_BATTLEGROUND,
+	MF_RESET,
 	MF_NOPVPMODE = 70,
 	MF_PVPMODE,
 	MF_WOE_SET,
@@ -10640,6 +10641,7 @@ BUILDIN_FUNC(getmapflag)
 			case MF_MONSTER_NOTELEPORT:	script_pushint(st,map[m].flag.monster_noteleport); break;
 			case MF_PVP_NOCALCRANK:		script_pushint(st,map[m].flag.pvp_nocalcrank); break;
 			case MF_BATTLEGROUND:		script_pushint(st,map[m].flag.battleground); break;
+			case MF_RESET:				script_pushint(st,map[m].flag.reset); break;
 			case MF_NOPVPMODE:		script_pushint(st,map[m].flag.nopvpmode); break;
 			case MF_WOE_SET:		script_pushint(st,map[m].flag.woe_set); break;
 			case MF_BLOCKED:		script_pushint(st,map[m].flag.blocked); break;
@@ -10712,9 +10714,10 @@ BUILDIN_FUNC(setmapflag)
 			case MF_MONSTER_NOTELEPORT:	map[m].flag.monster_noteleport=1; break;
 			case MF_PVP_NOCALCRANK:		map[m].flag.pvp_nocalcrank=1; break;
 			case MF_BATTLEGROUND:		map[m].flag.battleground = (!val || atoi(val) < 0 || atoi(val) > 2) ? 1 : atoi(val); break;
-			case MF_NOPVPMODE:     map[m].flag.nopvpmode=1; break;
-			case MF_WOE_SET:       if( val && atoi(val) > 0 ) map[m].flag.woe_set = atoi(val); break;
-			case MF_BLOCKED:       map[m].flag.blocked=1; break;
+			case MF_RESET:				map[m].flag.reset=1; break;
+			case MF_NOPVPMODE:		map[m].flag.nopvpmode=1; break;
+			case MF_WOE_SET:		if( val && atoi(val) > 0 ) map[m].flag.woe_set = atoi(val); break;
+			case MF_BLOCKED:		map[m].flag.blocked=1; break;
 		}
 	}
 
@@ -10781,9 +10784,10 @@ BUILDIN_FUNC(removemapflag)
 			case MF_MONSTER_NOTELEPORT:	map[m].flag.monster_noteleport=0; break;
 			case MF_PVP_NOCALCRANK:		map[m].flag.pvp_nocalcrank=0; break;
 			case MF_BATTLEGROUND:		map[m].flag.battleground=0; break;
-			case MF_NOPVPMODE:     map[m].flag.nopvpmode=0; break;
-			case MF_WOE_SET:       map[m].flag.woe_set=0; break;
-			case MF_BLOCKED:       map[m].flag.blocked=0; break;
+			case MF_RESET:				map[m].flag.reset=0; break;
+			case MF_NOPVPMODE:		map[m].flag.nopvpmode=0; break;
+			case MF_WOE_SET:		map[m].flag.woe_set=0; break;
+			case MF_BLOCKED:		map[m].flag.blocked=0; break;
 		}
 	}
 

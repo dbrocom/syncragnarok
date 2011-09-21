@@ -474,7 +474,7 @@ int bg_create(unsigned short mapindex, short rx, short ry, int guild_index, cons
 
 int bg_team_get_id(struct block_list *bl)
 {
-	nullpo_ret(bl);
+	if( bl )
 	switch( bl->type )
 	{
 		case BL_PC:
