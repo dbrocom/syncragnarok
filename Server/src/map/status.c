@@ -2671,11 +2671,15 @@ int status_calc_pc_(struct map_session_data* sd, bool first)
 				if(!data->script)
 					continue;
 				if(data->flag.no_equip) { //Card restriction checks.
-					if(map[sd->bl.m].flag.restricted && data->flag.no_equip&map[sd->bl.m].zone)
+					if(map[sd->bl.m].flag.restricted && data->flag.no_equip&(8*map[sd->bl.m].zone))
 						continue;
-					if(map[sd->bl.m].flag.pvp && data->flag.no_equip&1)
+					if(!map_flag_vs(sd->bl.m) && data->flag.no_equip&1)
 						continue;
-					if(map_flag_gvg2(sd->bl.m) && data->flag.no_equip&2)
+					if(map[sd->bl.m].flag.pvp && data->flag.no_equip&2) 
+						continue; 
+					if(map_flag_gvg(sd->bl.m) && data->flag.no_equip&4)  
+						continue; 
+					if(map[sd->bl.m].flag.battleground && data->flag.no_equip&8)
 						continue;
 					if( (map[sd->bl.m].flag.battleground || map[sd->bl.m].flag.pvp_event) && data->flag.no_equip&1|2 )
 						continue;
