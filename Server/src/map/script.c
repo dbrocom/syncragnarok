@@ -15613,78 +15613,370 @@ BUILDIN_FUNC(bg_team_create)
 	return 0;
 }
 
-BUILDIN_FUNC(waitingroom2teams)
-{
-	struct npc_data *nd;
-	struct chat_data *cd;
-	int bg_id, i, j, k;
-	struct map_session_data *sd[20], *p_sd;
-	int suclass, tuclass, c = 0;
+// Creates a Queue
+// bg_queue_create "Queue Name","On Join Event";
 
-	nd = (struct npc_data *)map_id2bl(st->oid);
-	if( nd == NULL || (cd = (struct chat_data *)map_id2bl(nd->chat_id)) == NULL )
+BUILDIN_FUNC(bg_queue_create)
+{
+	const char *queue_name, *jev;
+	int q_id;
+
+	queue_name = script_getstr(st,2);
+	jev = script_getstr(st,3);
+
+	q_id = queue_create(queue_name,jev);
+	script_pushint(st,q_id);
+	return 0;
+}
+
+// Changes the Queue's Join Event.
+// bg_queue_event queue_id,"On Join Event";
+
+BUILDIN_FUNC(bg_queue_event)
+{
+	struct queue_data *qd;
+	const char *jev;
+	int q_id;
+
+	q_id = script_getnum(st,2);
+	if( (qd = queue_search(q_id)) == NULL )
 		return 0;
 
-	i = 2;
+	jev = script_getstr(st,3);
+	safestrncpy(qd->join_event, jev, sizeof(qd->join_event));
+	return 0;
+}
+
+// Joins a Queue
+// bg_queue_join queue_id;
+
+BUILDIN_FUNC(bg_queue_join)
+{
+	int q_id;
+	struct map_session_data *sd = script_rid2sd(st);
+	if( !sd ) return 0;
+
+	q_id = script_getnum(st,2);
+	queue_join(sd,q_id);
+	return 0;
+}
+
+// Party Joins a Queue
+// bg_queue_partyjoin party_id,queue_id;
+
+BUILDIN_FUNC(bg_queue_partyjoin)
+{
+	int q_id, i, party_id;
+	struct map_session_data *sd;
+	struct party_data *p;
+
+	party_id = script_getnum(st,2);
+	if( !party_id || (p = party_search(party_id)) == NULL ) return 0;
+
+	q_id = script_getnum(st,3);
+	if( !queue_search(q_id) ) return 0;
+
+	for( i = 0; i < MAX_PARTY; i++ )
+	{
+		if( (sd = p->data[i].sd) == NULL )
+			continue;
+		queue_join(sd,q_id);
+	}
+
+	return 0;
+}
+
+// Request Information from a Queue
+// bg_queue_data queue_id,type;
+
+BUILDIN_FUNC(bg_queue_data)
+{
+	struct queue_data *qd;
+	int q_id = script_getnum(st,2),
+		type = script_getnum(st,3);
+
+	if( (qd = queue_search(q_id)) == NULL )
+	{
+		script_pushint(st,0);
+		return 0;
+	}
+
+	switch( type )
+	{
+	case 0: script_pushint(st,qd->users); break;
+	case 1: // User List
+		{
+			int j = 0;
+			struct map_session_data *sd;
+			struct queue_member *head;
+			head = qd->first;
+			while( head )
+			{
+				if( (sd = head->sd) != NULL )
+				{
+					mapreg_setregstr(reference_uid(add_str("$@qmembers$"),j),sd->status.name);
+					j++;
+				}
+				head = head->next;
+			}
+			script_pushint(st,j);
+		}
+		break;
+	default:
+		ShowError("script:bg_queue_data: unknown data identifier %d\n", type);
+		break;
+	}
+
+	return 0;
+}
+
+// Creates a Team from a BG Queue
+// bg_queue2team queue_id,max2join,"mapname",x,y,guild_index,"Logout Event","Die Event";
+
+BUILDIN_FUNC(bg_queue2team)
+{
+	struct queue_data *qd;
+	struct queue_member *qm;
+	const char *map_name, *ev = "", *dev = "";
+	int q_id, max, x, y, i, mapindex = 0, guild_index, bg_id;
+
+	q_id = script_getnum(st,2);
+	if( (qd = queue_search(q_id)) == NULL )
+	{
+		script_pushint(st,0);
+		return 0;
+	}
+
+	max = script_getnum(st,3);
+	map_name = script_getstr(st,4);
+
+	if( strcmp(map_name,"-") != 0 && (mapindex = mapindex_name2id(map_name)) == 0 )
+	{
+		script_pushint(st,0);
+		return 0;
+	}
+
+	x = script_getnum(st,5);
+	y = script_getnum(st,6);
+	guild_index = script_getnum(st,7);
+	ev = script_getstr(st,8); // Logout Event
+	dev = script_getstr(st,9); // Die Event
+
+	guild_index = cap_value(guild_index, 0, 12);
+	if( (bg_id = bg_create(mapindex, x, y, guild_index, ev, dev)) == 0 )
+	{ // Creation failed
+		script_pushint(st,0);
+		return 0;
+	}
+
+	i = 0; // Counter
+	while( (qm = qd->first) != NULL && i < max && i < MAX_BG_MEMBERS )
+	{
+		if( qm->sd && bg_team_join(bg_id, qm->sd) )
+		{
+			mapreg_setreg(reference_uid(add_str("$@arenamembers"), i), qm->sd->bl.id);
+			queue_member_remove(qd,qm->sd->bl.id);
+			i++;
+		}
+		else break; // Failed? Should not. Anyway, to avoid a infinite loop
+	}
+
+	mapreg_setreg(add_str("$@arenamembersnum"), i);
+	script_pushint(st,bg_id);
+	return 0;
+}
+
+// Joins the first player from the queue to the given team and warp him.
+// bg_queue2team_single queue_id,bg_id,"mapname",x,y;
+
+BUILDIN_FUNC(bg_queue2team_single)
+{
+	const char* map_name;
+	struct queue_data *qd;
+	struct map_session_data *sd;
+	int x, y, mapindex, bg_id, q_id;
+
+	q_id = script_getnum(st,2);
+	if( (qd = queue_search(q_id)) == NULL || !qd->first || !qd->first->sd )
+		return 0;
+
+	bg_id = script_getnum(st,3);
+	map_name = script_getstr(st,4);
+	if( (mapindex = mapindex_name2id(map_name)) == 0 )
+		return 0; // Invalid Map
+	x = script_getnum(st,5);
+	y = script_getnum(st,6);
+	sd = qd->first->sd;
+
+	if( bg_team_join(bg_id,sd) )
+	{
+		queue_member_remove(qd,sd->bl.id);
+		pc_setpos(sd,mapindex,x,y,CLR_TELEPORT);
+	}
+
+	return 0;
+}
+
+// Build BG Teams from one Queue
+// bg_queue2teams queue_id,maxplayersperteam,type,teamID1,teamID2....
+
+BUILDIN_FUNC(bg_queue2teams)
+{ // Send Users from Queue to Teams. Requires previously created teams.
+	struct queue_data *qd;
+	int i, j = 0, bg_id, c = 0, q_id, max, type, limit;
+	struct map_session_data *sd;
+
+	q_id = script_getnum(st,2); // Queue ID
+	if( (qd = queue_search(q_id)) == NULL )
+	{
+		ShowError("script:bg_queue2teams: Non existant queue id received %d.\n", q_id);
+		return 0;
+	}
+
+	max = script_getnum(st,3); // Max Members per Team
+	type = script_getnum(st,4); // Team Building Method
+
+	i = 5; // Team ID's to build
 	while( script_hasdata(st,i) )
 	{
 		bg_id = script_getnum(st,i);
 		if( bg_team_search(bg_id) == NULL )
 		{
-			ShowError("script:waitingroom2teams: Non existant team id received %d.\n", bg_id);
+			ShowError("script:bg_queue2teams: Non existant team id received %d.\n", bg_id);
 			return 0;
 		}
 
-		c++; // Count of Teams
-		i++;
+		c++; i++;
 	}
 
-	if( c == 0 )
+	if( c < 2 )
 	{
-		ShowError("script:waitingroom2teams: No team ids received to build members.\n");
+		ShowError("script:bg_queue2teams: Less than 2 teams received to build members.\n");
 		return 0;
 	}
 
-	memset(sd,0,sizeof(sd));
-
-	// Backup Copy - Sorting by Class
-	for( i = 0; i < 20; i++ )
+	limit = min(max * c,qd->users); // How many players are we going to take from the Queue
+	if( battle_config.bg_queue2team_balanced )
 	{
-		if( cd->usersd[i] == NULL )
-			continue;
-
-		p_sd = cd->usersd[i];
-		suclass = p_sd->class_&MAPID_UPPERMASK;
-
-		for( j = 0; j < 20; j++ )
-		{
-			if( sd[j] == NULL )
-			{ // Empty Slot
-				sd[j] = p_sd;
-				break; // Inserted, continue with next...
-			}
-
-			tuclass = sd[j]->class_&MAPID_UPPERMASK;
-
-			if( tuclass < suclass || (tuclass == suclass && sd[j]->class_ < p_sd->class_) )
-				continue; // Keep sorting
-
-			for( k = 19; k > j; k-- ) sd[k] = sd[k-1];
-			sd[j] = p_sd;
-
-			break; // Inserted, continue with next...
-		}
+		limit -= limit % c; // Remove the remaining difference to balance teams
+		max = limit / c;
+	}
+	else
+	{
+		max = (limit - (limit % c)) / c;
+		if( limit % c > 0 ) max++; // Extra slot per team to add the remaining members
 	}
 
-	// Members distribution
-
-	k = 0;
-	for( i = 0; i < 20 && sd[i]; i++ )
+	switch( type )
 	{
-		bg_id = script_getnum(st,k+2);
-		bg_team_join(bg_id,sd[i]);
+	case 0: // Lineal - Maybe to keep party together
+		for( i = 0; i < limit; i++ )
+		{
+			if( i % max == 0 )
+			{ // Switch Team
+				bg_id = script_getnum(st,j+5);
+				if( ++j >= c ) j = 0;
+			}
 
-		if( ++k >= c ) k = 0; // Switch Team
+			if( !qd->first || (sd = qd->first->sd) == NULL )
+				break; // No more people to join Teams
+
+			bg_team_join(bg_id,sd);
+			queue_member_remove(qd,sd->bl.id);
+		}
+		break;
+	case 1: // Random
+		{
+			int pos;
+			struct queue_member *qm;
+
+			for( i = 0; i < limit; i++ )
+			{
+				if( i % max == 0 )
+				{ // Switch Team
+					bg_id = script_getnum(st,j+5);
+					if( ++j >= c ) j = 0;
+				}
+
+				pos = 1 + rand() % (limit - i);
+				if( (qm = queue_member_get(qd,pos)) == NULL || (sd = qm->sd) == NULL )
+					break;
+
+				bg_team_join(bg_id,sd);
+				queue_member_remove(qd,sd->bl.id);
+			}
+		}
+		break;
+	case 2: // Job Balance
+		{
+			struct queue_member *qm, *head, *previous, *first = NULL;
+			int s_class, t_class;
+
+			// Building a Temporal Sorted by Class Queue
+			for( i = 0; i < limit; i++ )
+			{
+				if( (qm = qd->first) == NULL || (sd = qm->sd) == NULL )
+					break;
+
+				// Un-plug Member from Queue without deleting from Memory
+				qd->first = qd->first->next;
+				qm->next = NULL;
+				qd->users--;
+				sd->qd = NULL;
+
+				if( !first )
+					first = qm; // Inserted at First
+				else
+				{
+					head = first;
+					previous = NULL;
+					s_class = sd->class_&MAPID_UPPERMASK; // Current Member's Upper Class
+					
+					while( 1 )
+					{
+						if( !head && previous )
+						{
+							previous->next = qm;
+							break; // Inserted at Last
+						}
+						else if( head && head->sd && (s_class < (t_class = head->sd->class_&MAPID_UPPERMASK) || (s_class == t_class && sd->class_ < head->sd->class_)) )
+						{
+							qm->next = head;
+							if( previous ) previous->next = qm;
+							break; // Inserted anywhere else
+						}
+
+						previous = head;
+						if( head ) head = head->next;
+						else break; // Security break, just in case a infinite loop. Should not happen
+					}
+				}
+			}
+			
+			// Updating Queue positions
+			i = 0;
+			head = qd->first;
+			while( head )
+			{
+				i++;
+				head->position = i;
+				head = head->next;
+			}
+
+			// Distribute Players into Teams
+			head = first;
+			while( head )
+			{
+				bg_id = script_getnum(st,j+5);
+				if( ++j >= c ) j = 0;
+				bg_team_join(bg_id,sd);
+
+				qm = head;
+				head = head->next;
+				aFree(qm);
+			}
+		}
+		break;
 	}
 
 	return 0;
@@ -18212,7 +18504,14 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(bg_logincount,""),
 	BUILDIN_DEF(map_logincount,"s"),
 	BUILDIN_DEF(bg_team_create,"siiiss"),
-	BUILDIN_DEF(waitingroom2teams,"ii"),
+	BUILDIN_DEF(bg_queue_create,"ss"),
+	BUILDIN_DEF(bg_queue_event,"is"),
+	BUILDIN_DEF(bg_queue_join,"i"),
+	BUILDIN_DEF(bg_queue_partyjoin,"i"),
+	BUILDIN_DEF(bg_queue_data,"ii"),
+	BUILDIN_DEF(bg_queue2team,"iisiiiss"),
+	BUILDIN_DEF(bg_queue2team_single,"iisii"),
+	BUILDIN_DEF(bg_queue2teams,"iiiii*"),
 	BUILDIN_DEF(waitingroom2bg,"siiiss"),
 	BUILDIN_DEF(waitingroom2bg_single,"isiis"),
 	BUILDIN_DEF(bg_team_setxy,"iii"),

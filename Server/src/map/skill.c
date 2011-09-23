@@ -475,48 +475,48 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case AB_ADORAMUS:
 		skillratio += 400 + 100 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case AB_DUPLELIGHT_MAGIC:
 		skillratio += 100 + 20 * skill_lv;
 		break;
 	case WL_SOULEXPANSION:
 		skillratio += 300 + 100 * skill_lv + sstatus->int_;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		//if( tsc && tsc->data[SC_WHITEIMPRISON] )
 		//	skillratio <<= 1;
 		break;
 	case WL_FROSTMISTY:
 		skillratio += 100 + 100 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case WL_JACKFROST:
 		if( tsc && tsc->data[SC_FREEZING] )
 		{
 			skillratio += 900 + 300 * skill_lv;
-			if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+			//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		}
 		else
 		{
 			skillratio += 400 + 100 * skill_lv;
-			if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
+			//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
 		}
 		break;
 	case WL_DRAINLIFE:
 		skillratio = 200 * skill_lv + sstatus->int_;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		//skillratio += sstatus->int_ * skillratio / 1000; // Increment by INT
 		break;
 	case WL_CRIMSONROCK:
 		skillratio += 1200 + 300 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
 		break;
 	case WL_HELLINFERNO:
 		if( s_ele == ELE_FIRE )
 			skillratio = 60 * skill_lv;
 		else
 			skillratio = 240 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
 		break;
 	case WL_COMET:
 		i = distance_xy(target->x, target->y, sc->comet_x, sc->comet_y);
@@ -530,11 +530,11 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case WL_CHAINLIGHTNING_ATK:
 		skillratio += 100 + 300 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case WL_EARTHSTRAIN:
 		skillratio += 1900 + 100 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case WL_TETRAVORTEX_FIRE:
 	case WL_TETRAVORTEX_WATER:
@@ -547,7 +547,7 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 	case WL_SUMMON_ATK_WIND:
 	case WL_SUMMON_ATK_GROUND:
 		skillratio = skill_lv * (s_level + sd->status.job_level);// This is close to official, but lacking a little info to finalize. [Rytech]
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
 		break;
 	case WM_METALICSOUND:
 		skillratio += 120 * skill_lv + 60 * (sd ? pc_checkskill(sd, WM_LESSON) : 5) - 100;
@@ -560,25 +560,25 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case SO_FIREWALK:
 		skillratio += 200;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		if( sc && sc->data[SC_HEATER_OPTION] )
 			skillratio += skillratio * sc->data[SC_HEATER_OPTION]->val3 / 100;
 		break;
 	case SO_ELECTRICWALK:
 		skillratio += 200;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		if( sc && sc->data[SC_BLAST_OPTION] )
 			skillratio += skillratio * sc->data[SC_BLAST_OPTION]->val2 / 100;
 		break;
 	case SO_EARTHGRAVE:
 		skillratio = 200 * (sd ? pc_checkskill(sd,SA_SEISMICWEAPON) : 1) + (sstatus->int_ * skill_lv);
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		if( sc && sc->data[SC_CURSED_SOIL_OPTION] )
 			skillratio += skillratio * sc->data[SC_CURSED_SOIL_OPTION]->val2 / 100;
 		break;
 	case SO_DIAMONDDUST:
 		skillratio = 200 * (sd ? pc_checkskill(sd, SA_FROSTWEAPON) : 1) + (sstatus->int_ * skill_lv);
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		if( sc && sc->data[SC_COOLER_OPTION] )
 			skillratio += skillratio * sc->data[SC_COOLER_OPTION]->val3 / 100;
 		break;
@@ -589,7 +589,7 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case SO_PSYCHIC_WAVE:
 		skillratio += -100 + skill_lv * 70 + (sstatus->int_ * 3);
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
+		////if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
 		if( sc )
 		{
 			if( sc->data[SC_HEATER_OPTION] )
@@ -604,7 +604,7 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case SO_CLOUD_KILL:
 		skillratio += -100 + skill_lv * 40;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		if( sc && sc->data[SC_CURSED_SOIL_OPTION] )
 			skillratio += skillratio * sc->data[SC_CURSED_SOIL_OPTION]->val2 / 100;
 		break;
@@ -951,15 +951,15 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case RK_SONICWAVE:
 		skillratio += 400 + 100 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
 		break;
 	case RK_HUNDREDSPEAR:
 		skillratio += 500 + 40 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;	// Base level bonus.
 		break;
 	case RK_WINDCUTTER:
 		skillratio += 50 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 50) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 50) / 200;
 		break;
 	case RK_IGNITIONBREAK:
 		i = distance_bl(src,target);
@@ -968,7 +968,7 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		if( i < 4 ) skillratio = 100 + 200 * skill_lv;
 		else
 		skillratio = 100 + 100 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		if( sstatus->rhw.ele == ELE_FIRE ) skillratio +=  skillratio / 2;
 		break;
 	case RK_CRUSHSTRIKE:
@@ -984,8 +984,8 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case RK_PHANTOMTHRUST:
 		skillratio = 50 * skill_lv + 10 * pc_checkskill(sd,KN_SPEARMASTERY);
-		//if( s_level > 100 ) skillratio += skillratio * s_level / 150;	// Base level bonus. This is official, but is disabled until I can confirm something with was changed or not. [Rytech]
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		////if( s_level > 100 ) skillratio += skillratio * s_level / 150;	// Base level bonus. This is official, but is disabled until I can confirm something with was changed or not. [Rytech]
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case GC_CROSSIMPACT:
 		skillratio += 1050 + 50 * skill_lv;
@@ -1009,11 +1009,11 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case RA_ARROWSTORM:
 		skillratio += 100 + 50 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case RA_AIMEDBOLT:
 		skillratio += 400 + 50 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case RA_CLUSTERBOMB:
 		skillratio += 100 + 100 * skill_lv;
@@ -1033,20 +1033,20 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case NC_BOOSTKNUCKLE:
 		skillratio += 100 + 100 * skill_lv + sstatus->dex;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case NC_PILEBUNKER:
 		skillratio += 200 + 100 * skill_lv + sstatus->str;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case NC_VULCANARM:
 		skillratio += 70 * skill_lv - 100 + sstatus->dex;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case NC_FLAMELAUNCHER:
 	case NC_COLDSLOWER:
 		skillratio += 200 + 300 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case NC_ARMSCANNON:
 		switch( tstatus->size )
@@ -1055,19 +1055,19 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		case 1: skillratio += 100 + 400 * skill_lv; break;
 		case 2: skillratio += 100 + 300 * skill_lv; break;
 		}
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case NC_AXEBOOMERANG:
 		skillratio += 60 + 40 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case NC_POWERSWING:
 		skillratio += 80 + 20 * skill_lv + sstatus->str + sstatus->dex;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case NC_AXETORNADO:
 		skillratio += 100 + 100 * skill_lv + sstatus->vit;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		if( sstatus->rhw.ele == ELE_WIND ) skillratio += skillratio / 2;
 		break;
 	case SC_FATALMENACE:
@@ -1081,26 +1081,26 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case LG_CANNONSPEAR:// Stimated formula. Still need confirm it.
 		skillratio += -100 + (50  + sstatus->str) * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_BANISHINGPOINT:
 		skillratio += -100 + ((50 * skill_lv) + (30 * (sd ? pc_checkskill(sd,SM_BASH) : 1)));
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_SHIELDPRESS:
 		skillratio += 60 + 43 * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_PINPOINTATTACK:
 		skillratio += (100 * skill_lv) + (10 * sstatus->agi) - 100;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_RAGEBURST:
 		if( sd && sd->rageball_old )
 			skillratio += -100 + (sd->rageball_old * 200);
 		else
 			skillratio += -100 + 15 * 200;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_SHIELDSPELL:
 		if( sd && sd->inventory_data[sd->equip_index[EQI_HAND_L]] && sd->inventory_data[sd->equip_index[EQI_HAND_L]]->type == IT_ARMOR )
@@ -1113,23 +1113,23 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case LG_MOONSLASHER:
 		skillratio += -100 + (120 * skill_lv + ((sd) ? pc_checkskill(sd,LG_OVERBRAND) : 5) * 80);
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_OVERBRAND:
 		skillratio += -100 + (400 * skill_lv + ((sd) ? pc_checkskill(sd,CR_SPEARQUICKEN) * 30 : 1));
-		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		////if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_OVERBRAND_BRANDISH:
 		skillratio += -100 + (300 * skill_lv) + (2 * (sstatus->str + sstatus->dex) / 3);
-		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		////if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_OVERBRAND_PLUSATK:
 		skillratio += -100 + 150 * skill_lv;
-		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		////if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_EARTHDRIVE:
 		skillratio = (skillratio + 100) * skill_lv;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case LG_HESPERUSLIT:
 		skillratio += 120 * skill_lv - 100;
@@ -1198,7 +1198,7 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		break;
 	case GN_CART_TORNADO:
 		skillratio += 50 * skill_lv + pc_checkskill(sd, GN_REMODELING_CART) * 100 - 100;
-		if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		if( sc && sc->data[SC_GN_CARTBOOST] )
 			skillratio += 10 * sc->data[SC_GN_CARTBOOST]->val1;
 		break;

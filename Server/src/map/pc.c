@@ -5378,7 +5378,8 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
 		party_send_dot_remove(sd); //minimap dot fix [Kevin]
 		guild_send_dot_remove(sd);
 		bg_send_dot_remove(sd);
-		if( map[sd->bl.m].flag.town && !map[m].flag.town ) queue_leaveall(sd);
+		if( sd->qd && map[sd->bl.m].flag.town && !map[m].flag.town )
+			queue_leaveall(sd);
 		if (sd->regen.state.gc)
 			sd->regen.state.gc = 0;
 	}

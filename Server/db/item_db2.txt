@@ -152,14 +152,14 @@
 6245,Black_Powder,Black Powder,3,100,,1,,,,,,,,,,,,,{},{},{}
 6246,Yellow_Powder,Yellow Powder,3,100,,1,,,,,,,,,,,,,{},{},{}
 6247,White_Powder,White Powder,3,100,,1,,,,,,,,,,,,,{},{},{}
-6248,Melange_Pot,Chowder Pot,3,600,,10,,,,,,,,,,,,,{},{},{}
+6248,Melange_Pot,Chowder Pot,3,500,,10,,,,,,,,,,,,,{},{},{}
 6249,Savage_Meat,Savage Meat,3,100,,10,,,,,,,,,,,,,{},{},{}
 6250,Cooking_Skewer,Iron Cooking Skewer,3,300,,10,,,,,,,,,,,,,{},{},{}
 6251,Black_Charcoal,Black Charcoal,3,300,,10,,,,,,,,,,,,,{},{},{}
 6252,Wolf_Blood,Wolf's Blood,3,100,,10,,,,,,,,,,,,,{},{},{}
 6253,Cold_Ice,Cold Ice,3,100,,10,,,,,,,,,,,,,{},{},{}
 6254,Beef_Head_Meat,Seasoned Tough Meat,3,100,,10,,,,,,,,,,,,,{},{},{}
-6255,Large_Cookpot,Large Pan,3,500,,10,,,,,,,,,,,,,{},{},{}
+6255,Large_Cookpot,Large Pan,3,600,,10,,,,,,,,,,,,,{},{},{}
 6256,Ice_Fragment,Powdered Ice,3,100,,10,,,,,,,,,,,,,{},{},{}
 6257,Ice_Crystal,Ice Crystal,3,100,,10,,,,,,,,,,,,,{},{},{}
 6258,Comodo_Tropical_Fruit,Comodo Tropical Fruit,3,800,,10,,,,,,,,,,,,,{},{},{}

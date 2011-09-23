@@ -153,7 +153,7 @@ struct map_session_data* bg_getavailablesd(struct battleground_data *bg)
 	return( i < MAX_BG_MEMBERS ) ? bg->members[i].sd : NULL;
 }
 
-int bg_team_clean(int bg_id, bool delete)
+int bg_team_clean(int bg_id, bool remove)
 { // Deletes BG Team from db
 	int i;
 	struct map_session_data *sd;
@@ -202,7 +202,7 @@ int bg_team_clean(int bg_id, bool delete)
 		delete_timer(bg->skill_block_timer[i], bg_block_skill_end);
 	}
 
-	if( delete )
+	if( remove )
 		idb_remove(bg_team_db, bg_id);
 	else
 	{
@@ -908,6 +908,7 @@ void queue_members_clean(struct queue_data *qd)
 	head = qd->first;
 	while( head != NULL )
 	{
+		if( head->sd ) head->sd->qd = NULL;
 		next = head->next;
 		aFree(head);
 		head = next;
@@ -928,6 +929,7 @@ int queue_member_add(struct queue_data *qd, struct map_session_data *sd)
 	qm->sd = sd;
 	qm->position = qd->users;
 	qm->next = NULL;
+	sd->qd = qd; // Attach user to the Queue too
 
 	if( qd->last == NULL )
 		qd->first = qd->last = qm; // Attach to first position
@@ -938,6 +940,23 @@ int queue_member_add(struct queue_data *qd, struct map_session_data *sd)
 	}
 
 	return qm->position;
+}
+
+struct queue_member* queue_member_get(struct queue_data *qd, int position)
+{
+	struct queue_member *head;
+	if( !qd ) return NULL;
+
+	head = qd->first;
+	while( head != NULL )
+	{
+		if( head->sd && head->position == position )
+			return head;
+
+		head = head->next;
+	}
+
+	return NULL;
 }
 
 int queue_member_remove(struct queue_data *qd, int id)
@@ -957,6 +976,7 @@ int queue_member_remove(struct queue_data *qd, int id)
 
 			next = head->next;
 			i = head->position;
+			head->sd->qd = NULL;
 			qd->users--;
 
 			// De-attach target from the main queue
@@ -1025,15 +1045,16 @@ int queue_join(struct map_session_data *sd, int q_id)
 		return 0;
 	}
 
-	if( (qd = queue_search(q_id)) == NULL )
-		return 0;
-
-	if( (i = queue_member_search(qd,sd->bl.id)) != 0 )
-	{
+	if( (qd = sd->qd) != NULL )
+	{ // You cannot join a Queue if you are already on one.
+		i = queue_member_search(qd,sd->bl.id);
 		sprintf(output,"You are already on %s queue at position %d.", qd->queue_name, i);
 		clif_displaymessage(sd->fd,output);
 		return 0;
 	}
+
+	if( (qd = queue_search(q_id)) == NULL )
+		return 0; // Current Queue don't exists
 
 	i = queue_member_add(qd,sd);
 	sprintf(output,"You have joined %s queue at position %d.", qd->queue_name, i);
@@ -1061,29 +1082,16 @@ int queue_leave(struct map_session_data *sd, int q_id)
 	return 1;
 }
 
-int queue_leaveall(struct map_session_data *sd)
+void queue_leaveall(struct map_session_data *sd)
 {
 	struct queue_data *qd;
-	DBIterator* iter;
-	int i = 0;
-	nullpo_retr(0,sd);
-
-	iter = db_iterator(queue_db);
-	for( qd = (struct queue_data *)dbi_first(iter); dbi_exists(iter); qd = (struct queue_data *)dbi_next(iter) )
-	{
-		if( queue_member_remove(qd,sd->bl.id) )
-			i++;
-	}
-	dbi_destroy(iter);
-
-	if( i > 0 )
+	if( sd && (qd = sd->qd) != NULL )
 	{
 		char output[128];
-		sprintf(output,"You have been removed from %d Battleground Queues.",i);
+		queue_member_remove(qd,sd->bl.id);
+		sprintf(output,"You have been removed from %s BG Queue.",qd->queue_name);
 		clif_displaymessage(sd->fd,output);
 	}
-
-	return i;
 }
 
 // ====================================================================
@@ -1098,11 +1106,30 @@ void do_init_battleground(void)
 	bg_guild_build_data();
 }
 
+static int bg_team_db_reset(DBKey key, void *data, va_list ap)
+{
+	struct battleground_data *bg = (struct battleground_data *)data;
+	bg_team_clean(bg->bg_id,false);
+	return 0;
+}
+
 static int queue_db_final(DBKey key, void *data, va_list ap)
 {
 	struct queue_data *qd = (struct queue_data *)data;
 	queue_members_clean(qd); // Unlink all queue members
 	return 0;
+}
+
+void bg_reload(void)
+{ // @reloadscript
+	bg_team_db->destroy(bg_team_db,bg_team_db_reset);
+	queue_db->destroy(queue_db, queue_db_final);
+
+	bg_team_db = idb_alloc(DB_OPT_RELEASE_DATA);
+	queue_db = idb_alloc(DB_OPT_RELEASE_DATA);
+
+	bg_team_counter = 0;
+	queue_counter = 0;
 }
 
 void do_final_battleground(void)

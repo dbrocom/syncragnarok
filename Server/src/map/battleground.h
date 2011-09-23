@@ -63,7 +63,7 @@ struct map_session_data* bg_getavailablesd(struct battleground_data *bg);
 
 int bg_create(unsigned short mapindex, short rx, short ry, int guild_index, const char *ev, const char *dev);
 int bg_team_join(int bg_id, struct map_session_data *sd);
-int bg_team_clean(int bg_id, bool delete);
+int bg_team_clean(int bg_id, bool remove);
 int bg_team_leave(struct map_session_data *sd, int flag);
 int bg_team_warp(int bg_id, unsigned short mapindex, short x, short y);
 int bg_member_respawn(struct map_session_data *sd);
@@ -80,6 +80,12 @@ void bg_block_skill_start(struct battleground_data *bg, int skillnum, int time);
 struct queue_data* queue_search(int q_id);
 int queue_create(const char* queue_name, const char* join_event);
 int queue_destroy(int q_id);
-int queue_leaveall(struct map_session_data *sd);
+void queue_leaveall(struct map_session_data *sd);
+int queue_join(struct map_session_data *sd, int q_id);
+
+struct queue_member* queue_member_get(struct queue_data *qd, int position);
+int queue_member_remove(struct queue_data *qd, int id);
+
+void bg_reload(void);
 
 #endif /* _BATTLEGROUND_H_ */

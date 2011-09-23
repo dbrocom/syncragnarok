@@ -495,6 +495,8 @@ struct map_session_data {
 	unsigned int bg_id;
 	struct battleground_data *bmaster_flag;
 	unsigned short bg_kills; // Battleground Kill Count
+	struct queue_data *qd;
+
 	unsigned short user_font;
 	short view_aura, user_aura;
 
