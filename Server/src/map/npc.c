@@ -3794,6 +3794,8 @@ int npc_reload(void)
 
 	// reset mapflags
 	map_flags_init();
+	// reset battleground teams and queues
+	bg_reload();
 
 	//TODO: the following code is copy-pasted from do_init_npc(); clean it up
 	// Reloading npcs now

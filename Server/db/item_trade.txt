@@ -349,21 +349,21 @@
 13551,73,99	// Chewy_Ricecake_Box
 13552,73,99	// Oriental_Pastry_Box
 13553,73,99	// Dun_Tele_Scroll1_Box
-14512,91,99	// Meteor_10_Scroll
-14513,91,99	// Storm_10_Scroll
-14514,91,99	// Vermilion_10_Scroll
-14515,91,99	// Lex_Aeterna_Scroll
-14516,91,99	// Magnificat_5_Scroll
-14517,91,99	// CP_Helm_Scroll
-14518,91,99	// CP_Shield_Scroll
-14519,91,99	// CP_Armor_Scroll
-14520,91,99	// CP_Weapon_Scroll
-14521,91,99	// Repair_Scroll
-14522,91,99	// Big_Bun
-14523,91,99	// Pill_
-14524,91,99	// Superb_Fish_Slice
-14525,91,99	// Chewy_Ricecake
-14526,91,99	// Oriental_Pastry
+14512,95,99	// Meteor_10_Scroll
+14513,95,99	// Storm_10_Scroll
+14514,95,99	// Vermilion_10_Scroll
+14515,95,99	// Lex_Aeterna_Scroll
+14516,95,99	// Magnificat_5_Scroll
+14517,95,99	// CP_Helm_Scroll
+14518,95,99	// CP_Shield_Scroll
+14519,95,99	// CP_Armor_Scroll
+14520,95,99	// CP_Weapon_Scroll
+14521,95,99	// Repair_Scroll
+14522,95,99	// Big_Bun
+14523,95,99	// Pill_
+14524,95,99	// Superb_Fish_Slice
+14525,95,99	// Chewy_Ricecake
+14526,95,99	// Oriental_Pastry
 14527,91,99	// Dun_Tele_Scroll1
 7895,115,99	// TRO_Memory_Book01
 7896,115,99	// TRO_Memory_Book02
@@ -493,8 +493,8 @@
 12262,123,99	// Inspector_Certificate_
 
 12263,123,99	// Comp_Battle_Manual
-12264,91,99	// Comp_Bubble_Gum
-12265,91,99	// Comp_Insurance
+12264,95,99	// Comp_Bubble_Gum
+12265,95,99	// Comp_Insurance
 
 // Morocc Continental Guard Certificate
 7826,123,99	// Continental_Guard_Paper
@@ -721,8 +721,8 @@
 7912,123,99	// Portable_Snowman
 7913,123,99	// Test_Certificate
 7914,123,99	// Ancient_Document_TW
-11503,91,99	// Siege_White_Potion
-11504,91,99	// Siege_Blue_Potion
+11503,95,99	// Siege_White_Potion
+11504,95,99	// Siege_Blue_Potion
 12274,95,99	// Gold_Pill_1
 12275,95,99	// Gold_Pill_2
 12287,123,99	// Love_Angel

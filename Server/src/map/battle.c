@@ -6267,6 +6267,7 @@ static const struct _battle_data {
 	{ "bg_ranked_mode",                     &battle_config.bg_ranked_mode,                  0,      0,      1,              },
 	{ "bg_ranked_max_games",                &battle_config.bg_ranked_max_games,             50,     10,     100,            },
 	{ "bg_reportafk_leaderonly",            &battle_config.bg_reportafk_leaderonly,         1,      0,      1,              },
+	{ "bg_queue2team_balanced",             &battle_config.bg_queue2team_balanced,          1,      0,      1,              },
 	{ "bg_eAmod_mode",                      &battle_config.bg_eAmod_mode,                   1,      0,      1,              },
 // Renewal System
 	{ "renewal_system_enable",              &battle_config.renewal_system_enable,           0,      0,      1,              },
