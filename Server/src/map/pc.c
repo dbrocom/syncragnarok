@@ -10195,7 +10195,10 @@ int map_day_timer(int tid, unsigned int tick, int id, intptr_t data)
 	
 	if (!night_flag)
 		return 0; //Already day.
-	
+
+	npc_event_doall("OnNightStop");
+	npc_event_doall("OnDayBegin");
+
 	night_flag = 0; // 0=day, 1=night [Yor]
 	map_foreachpc(pc_daynight_timer_sub);
 
@@ -10213,6 +10216,9 @@ int map_night_timer(int tid, unsigned int tick, int id, intptr_t data)
 	
 	if (night_flag)
 		return 0; //Already nigth.
+
+	npc_event_doall("OnDayStop");
+	npc_event_doall("OnNightBegin");
 
 	night_flag = 1; // 0=day, 1=night [Yor]
 	map_foreachpc(pc_daynight_timer_sub);

@@ -71,13 +71,13 @@ OnInit:
 // [ Configuration:                                         ]
 // [--------------------------------------------------------]
 
-	set .t1,2*24;		// Minimum time to activate a new invasion event. (h)
+	set .t1,3*24;		// Minimum time to activate a new invasion event. (h)
 	set .t2,14*24;		// Maximum time to activate a new invasion event. (h)
 	set .t3,24*60;		// Maximum duration of the invasion event. (min)
 
 	set .r1,100;		// Mob rate. (%)
 	set .pci,7539;		// Item reward dropped by mobs and bosses. (Default = Poring Coin)
-	set .pcr1,75;		// Rate of item rewards dropped by mobs. (0 = off | %)
+	set .pcr1,80;		// Rate of item rewards dropped by mobs. (0 = off | %)
 	set .pcr2,100;		// Rate of item rewards dropped by bosses. (0 = off | %)
 
 	set .t4,0;		// Duration of the experience event after defeating the invader armies. (0 = off | min)
@@ -97,36 +97,39 @@ OnInit:
 	// getarg(1): Map.
 	// getarg(2): Intensity. (0 = off | Intensity)
 
-	callsub Onc0,"Alberta","alberta",9;
-	callsub Onc0,"Al De Baran","aldebaran",12;
-	callsub Onc0,"Amatsu","amatsu",16;
-	callsub Onc0,"Ayothaya","ayothaya",6;
-	callsub Onc0,"Brasilis","brasilis",25;
-	callsub Onc0,"Comodo","comodo",20;
-	callsub Onc0,"Dewata","dewata",21;
-	callsub Onc0,"Einbech","einbech",9;
-	callsub Onc0,"Einbroch","einbroch",20;
-	callsub Onc0,"El Dicastes","dicastes01",12;
-	callsub Onc0,"Geffen","geffen",8;
-	callsub Onc0,"Gonryun","gonryun",12;
-	callsub Onc0,"Hugel","hugel",7;
-	callsub Onc0,"Izlude","izlude",3;
+	callsub Onc0,"Alberta","alberta",6;
+	callsub Onc0,"Al De Baran","aldebaran",9;
+	callsub Onc0,"Amatsu","amatsu",13;
+	callsub Onc0,"Ayothaya","ayothaya",3;
+	callsub Onc0,"Brasilis","brasilis",22;
+	callsub Onc0,"Comodo","comodo",17;
+	callsub Onc0,"Dewata","dewata",18;
+	callsub Onc0,"Einbech","einbech",6;
+	callsub Onc0,"Einbroch","einbroch",17;
+	callsub Onc0,"El Dicastes","dicastes01",9;
+	callsub Onc0,"Geffen","geffen",5;
+	callsub Onc0,"Gonryun","gonryun",9;
+	callsub Onc0,"Hugel","hugel",4;
+	callsub Onc0,"Izlude","izlude",1;
 	callsub Onc0,"Jawaii","jawaii",0; // 7
-	callsub Onc0,"Juno","yuno",28;
-	callsub Onc0,"Lighthalzen","lighthalzen",22;
-	callsub Onc0,"Louyang","louyang",25;
-	callsub Onc0,"Lutie","xmas",18;
-	callsub Onc0,"Manuk","manuk",6;
-	callsub Onc0,"Midgarts Expedition Camp","mid_camp",11;
-	callsub Onc0,"Morroc","morocc",24;
-	callsub Onc0,"Moscovia","moscovia",4;
+	callsub Onc0,"Yuno","yuno",25;
+	callsub Onc0,"Lighthalzen","lighthalzen",19;
+	callsub Onc0,"Louyang","louyang",22;
+	callsub Onc0,"Lutie","xmas",15;
+	callsub Onc0,"Manuk","manuk",3;
+	callsub Onc0,"Midgarts Expedition Camp","mid_camp",8;
+	callsub Onc0,"Morroc","morocc",21;
+	callsub Onc0,"Moscovia","moscovia",1;
 	callsub Onc0,"Niflheim","niflheim",0; // 20
-	callsub Onc0,"Payon","payon",17;
+	callsub Onc0,"Payon","payon",14;
 	callsub Onc0,"Prontera","prontera",0; // 30
-	callsub Onc0,"Rachel","rachel",16;
-	callsub Onc0,"Splendide","splendide",27;
-	callsub Onc0,"Umbala","umbala",4;
-	callsub Onc0,"Veins","veins",18;
+	callsub Onc0,"Rachel","rachel",13;
+	callsub Onc0,"Splendide","splendide",24;
+	callsub Onc0,"Umbala","umbala",1;
+	callsub Onc0,"Veins","veins",15;
+	callsub Onc0,"rent_mb","Villas de Prontera",9;
+	callsub Onc0,"rent_mc","Villas de Morocc",9;
+	callsub Onc0,"rent_md","Villas de Geffen",9;
 
 	// Invaders:
 	// getarg(0): Name.

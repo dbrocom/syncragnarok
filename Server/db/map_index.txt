@@ -946,6 +946,15 @@ bomberman
 puissance4
 gremios
 farm1
+farm2
+farm3
+farm4
+farm5
+farm6
+farm7
+farm8
+farm9
+farm10
 ars_in01
 chess01
 maze_room

@@ -18,7 +18,7 @@ struct battleground_member_data {
 struct battleground_data {
 	unsigned int bg_id;
 	time_t creation_tick; // Creation of this Team
-	unsigned char count;
+	int count;
 	struct battleground_member_data members[MAX_BG_MEMBERS];
 	// Team Leader and BG Skills features
 	int leader_char_id;
@@ -80,6 +80,7 @@ void bg_block_skill_start(struct battleground_data *bg, int skillnum, int time);
 struct queue_data* queue_search(int q_id);
 int queue_create(const char* queue_name, const char* join_event);
 int queue_destroy(int q_id);
+int queue_leave(struct map_session_data *sd, int q_id);
 void queue_leaveall(struct map_session_data *sd);
 int queue_join(struct map_session_data *sd, int q_id);
 

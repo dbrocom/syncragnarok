@@ -2,47 +2,10 @@
 // BattleGround System - Conquest 1
 // ==============================================================================
 
-// Registration NPC's
-// *********************************************************************
-
-bat_room,169,74,0	script	Registration::ConR_Guillaume	418,{
-	end;
-OnInit:
-	waitingroom "Battle Station 20 Players",20,"Conquest::OnGuillaumeJoin",1;
-	end;
-OnEnterBG:
-	set $@Conquest_id1, waitingroom2bg(getvariableofnpc(.Castle$,"Conquest"),getvariableofnpc(.GX,"Conquest"),getvariableofnpc(.GY,"Conquest"),0,"Conquest::OnGuillaumeQuit","");
-	end;
-}
-
-bat_room,169,97,4	script	Registration::ConR_Croix	414,{
-	end;
-OnInit:
-	waitingroom "Battle Station 20 Players",20,"Conquest::OnCroixJoin",1;
-	end;
-OnEnterBG:
-	set $@Conquest_id2, waitingroom2bg(getvariableofnpc(.Castle$,"Conquest"),getvariableofnpc(.CX,"Conquest"),getvariableofnpc(.CY,"Conquest"),1,"Conquest::OnCroixQuit","");
-	end;
-}
-
 // Battleground Engine
 // *********************************************************************
 
 -	script	Conquest	-1,{
-	end;
-
-OnSetRotation:
-	if( set(.Index,.Index + 1) > 5 ) set .Index, 0;
-
-	switch( .Index )
-	{
-	case 0: set .Castle$,"schg_cas06"; set .GX,264; set .GY,379; set .CX,295; set .CY,379; set .DX,120; set .DY,290; set .AX,119; set .AY,  8; break;
-	case 1: set .Castle$,"schg_cas07"; set .GX, 90; set .GY,311; set .CX,113; set .CY,311; set .DX,136; set .DY,188; set .AX,339; set .AY, 78; break;
-	case 2: set .Castle$,"schg_cas08"; set .GX, 28; set .GY, 50; set .CX, 87; set .CY, 50; set .DX,308; set .DY,208; set .AX,337; set .AY,330; break;
-	case 3: set .Castle$,"arug_cas06"; set .GX, 30; set .GY,381; set .CX,126; set .CY,357; set .DX, 67; set .DY,193; set .AX,275; set .AY, 93; break;
-	case 4: set .Castle$,"arug_cas07"; set .GX,298; set .GY,339; set .CX,298; set .CY,308; set .DX, 43; set .DY,256; set .AX,139; set .AY, 31; break;
-	case 5: set .Castle$,"arug_cas08"; set .GX,313; set .GY,154; set .CX,330; set .CY,154; set .DX,121; set .DY,318; set .AX,141; set .AY, 45; break;
-	}
 	end;
 
 OnInit:
@@ -61,99 +24,55 @@ OnInit:
 	setwall "arug_cas07",300,312,4,6,0,"conquest_wall_j2";
 	setwall "arug_cas08",317,150,8,0,0,"conquest_wall_k";
 	setwall "arug_cas08",326,150,8,0,0,"conquest_wall_l";
-
 	set .Index,0;
-	donpcevent "Conquest::OnSetRotation";
 	end;
 
 OnGuillaumeQuit:
 OnCroixQuit:
 	setquest 8506; // Deserter
-	if( $@Conquest != 0 )
-		donpcevent "Conquest::OnDoBalance";
+	if( $@BG_Status != 0 && getvariableofnpc(.BG_Arena$,"BG_Queue_Join") == "Conquest" )
+		donpcevent "BG_Queue_Join::OnJoinEvent";
 	end;
 
-OnGuillaumeJoin:
-OnCroixJoin:
-	if( $@Conquest == 0 )
-		donpcevent "Conquest::OnReadyCheck";
-	else
-		donpcevent "Conquest::OnDoBalance";
-	end;
+OnBuildTeams:
+	if( set(.Index,.Index + 1) > 5 )
+		set .Index, 0;
 
-OnDoBalance:
-	if( $@Conquest != 1 ) 
-		end; // No Balance if BG runing
-
-	set .@Guillaume, bg_get_data($@Conquest_id1, 0);
-	set .@Croix, bg_get_data($@Conquest_id2, 0);
-
-	if( .@Guillaume < .@Croix )
-		waitingroom2bg_single $@Conquest_id1,.Castle$,.GX,.GY,"ConR_Guillaume";
-	else if( .@Guillaume > .@Croix )
-		waitingroom2bg_single $@Conquest_id2,.Castle$,.CX,.CY,"ConR_Croix";
-	else
-	{
-		set .@GuillaumeR, getwaitingroomstate(0,"ConR_Guillaume");
-		set .@CroixR, getwaitingroomstate(0,"ConR_Croix");
-
-		if( .@GuillaumeR <= .@CroixR )
-			set .@Limit, .@GuillaumeR;
-		else
-			set .@Limit, .@CroixR;
-
-		if( .@Limit + .@Guillaume > 50 )
-			set .@Limit, 50 - .@Guillaume;
-		if( .@Limit <= 0 ) end;
-
-		for( set .@i, 0; .@i < .@Limit; set .@i, .@i + 1 )
-		{
-			waitingroom2bg_single $@Conquest_id1,.Castle$,.GX,.GY,"ConR_Guillaume";
-			waitingroom2bg_single $@Conquest_id2,.Castle$,.CX,.CY,"ConR_Croix";
-		}
-
-		set .@Guillaume, .@Guillaume + .@Limit;
-		set .@Croix, .@Croix + .@Limit;
-		mapannounce "bat_room","Battleground -- Conquest [80-99] G: " + .@Guillaume + "/50, C: " + .@Croix + "/50 (Playing)",1,0xFFA500;
-	}
-	end;
-
-OnReadyCheck:
-	if( $@Conquest )
-		end;
-	set .@Guillaume, getwaitingroomstate(0,"ConR_Guillaume");
-	set .@Croix, getwaitingroomstate(0,"ConR_Croix");
-	
-	if( .@Guillaume < 20 || .@Croix < 20 )
-	{
-		if( .@Guillaume > 15 && .@Croix > 15 && !agitcheck() && $@Conquest_Flood < gettimetick(2) )
-		{
-			announce "Battleground -- Conquest [80-99] G: " + .@Guillaume + "/20, C: " + .@Croix + "/20",0,0xFFA500;
-			set $@Conquest_Flood, gettimetick(2) + 15;
-		}
-		else
-			mapannounce "bat_room","Battleground -- Conquest [80-99] G: " + .@Guillaume + "/20, C: " + .@Croix + "/20",1,0xFFA500;
-		end;
+	switch( .Index )
+	{ // Rotate Castle
+	case 0: set .Castle$,"schg_cas06"; set .GX,264; set .GY,379; set .CX,295; set .CY,379; set .DX,120; set .DY,290; set .AX,119; set .AY,  8; break;
+	case 1: set .Castle$,"schg_cas07"; set .GX, 90; set .GY,311; set .CX,113; set .CY,311; set .DX,136; set .DY,188; set .AX,339; set .AY, 78; break;
+	case 2: set .Castle$,"schg_cas08"; set .GX, 28; set .GY, 50; set .CX, 87; set .CY, 50; set .DX,308; set .DY,208; set .AX,337; set .AY,330; break;
+	case 3: set .Castle$,"arug_cas06"; set .GX, 30; set .GY,381; set .CX,126; set .CY,357; set .DX, 67; set .DY,193; set .AX,275; set .AY, 93; break;
+	case 4: set .Castle$,"arug_cas07"; set .GX,298; set .GY,339; set .CX,298; set .CY,308; set .DX, 43; set .DY,256; set .AX,139; set .AY, 31; break;
+	case 5: set .Castle$,"arug_cas08"; set .GX,313; set .GY,154; set .CX,330; set .CY,154; set .DX,121; set .DY,318; set .AX,141; set .AY, 45; break;
 	}
 
-	set $@Conquest, 1;
+	set $@BG_Team1,bg_team_create(.Castle$,.GX,.GY,0,"Conquest::OnGuillaumeQuit","");
+	set $@BG_Team2,bg_team_create(.Castle$,.CX,.CY,1,"Conquest::OnCroixQuit","");
+	end;
+
+OnReady:
+	if( getvariableofnpc(.BG_Arena$,"BG_Queue_Join") != "Conquest" )
+		end;
+
+	initnpctimer;
+	initnpctimer "Conquest_Respawn";
 	set .Score, 0;
-	donpcevent "ConR_Guillaume::OnEnterBG";
-	donpcevent "ConR_Croix::OnEnterBG";
-	announce "Battleground -- Conquest [80-99] has started!",0,0xFFA500;
 	switch( rand(2) )
 	{
 	case 1:
-		set .Defender, $@Conquest_id1;
-		set .Atacker, $@Conquest_id2;
+		set .Defender, $@BG_Team1;
+		set .Atacker, $@BG_Team2;
 		break;
 	case 0:
-		set .Defender, $@Conquest_id2;
-		set .Atacker, $@Conquest_id1;
+		set .Defender, $@BG_Team2;
+		set .Atacker, $@BG_Team1;
 		break;
 	}
-
-	// Build Structures =====================
+	// =========================================================================
+	// Build Structures
+	// =========================================================================
 	switch( .Index )
 	{
 	case 0: // =========================================================================
@@ -368,27 +287,22 @@ OnReadyCheck:
 		bg_monster .Defender,.Castle$,141,293,"Emperium",2107,"Conquest::OnEmperium";
 		break;
 	}
-
 	set .Stone, 2;
 	set .Wall1, 6;
 	set .Wall2, 6;
 	set .Wall3, 4;
 	// ======================================
 	donpcevent "::OnEmblemConquest";
-
 	sleep 2000;
 	bg_warp .Defender,.Castle$,.DX,.DY; // Flag Respawn - Emperium
 	bg_warp .Atacker,.Castle$,.AX,.AY; // Castle Entrance
-
-	initnpctimer;
-	initnpctimer "Conquest_Respawn";
 	sleep 4000;
-	if( .Atacker == $@Conquest_id1 )
+	if( .Atacker == $@BG_Team1 )
 		mapannounce .Castle$,"General Guillaume : Move on warriors!! Let's capture this Castle!!",1,0x0000FF;
 	else
 		mapannounce .Castle$,"Prince Croix : Move on warriors!! Let's capture this Castle!!",1,0xFF0000;
 	sleep 4000;
-	if( .Defender == $@Conquest_id1 )
+	if( .Defender == $@BG_Team1 )
 		mapannounce .Castle$,"General Guillaume : Protect the Castle and it's defenses to all cost!!",1,0x0000FF;
 	else
 		mapannounce .Castle$,"Prince Croix : Protect the Castle and it's defenses to all cost!!",1,0xFF0000;
@@ -459,7 +373,7 @@ OnTimer300000:
 
 OnEmperium:
 	set .Score, .Score + 1;
-	if( .Atacker == $@Conquest_id1 )
+	if( .Atacker == $@BG_Team1 )
 		mapannounce .Castle$,"The Guillaume army has won the Battle and captured the Castle!!",1,0x0000FF;
 	else
 		mapannounce .Castle$,"The Croix army has won the Battle and captured the Castle!!",1,0xFF0000;
@@ -467,7 +381,7 @@ OnEmperium:
 	end;
 
 OnTimer360000:
-	if( .Defender == $@Conquest_id1 )
+	if( .Defender == $@BG_Team1 )
 		mapannounce .Castle$,"The Guillaume army has won the Battle and protected the Castle!!",1,0x0000FF;
 	else
 		mapannounce .Castle$,"The Croix army has won the Battle and protected the Castle!!",1,0xFF0000;
@@ -477,7 +391,6 @@ OnTimer360000:
 OnMatchEnd:
 	stopnpctimer;
 	stopnpctimer "Conquest_Respawn";
-	set $@Conquest, 2; // BG Status
 	killmonster .Castle$,"Conquest::OnBarricade0";
 	killmonster .Castle$,"Conquest::OnBarricade1";
 	killmonster .Castle$,"Conquest::OnBarricade2";
@@ -485,6 +398,7 @@ OnMatchEnd:
 	killmonster .Castle$,"Conquest::OnGuardianStone1";
 	killmonster .Castle$,"Conquest::OnGuardianStone2";
 	killmonster .Castle$,"Conquest::OnEmperium";
+	set $@BG_Status, 2;
 	// =======================================================
 	// Team Rewards
 	// =======================================================
@@ -497,7 +411,7 @@ OnMatchEnd:
 		set .@Won,0;
 	}
 
-	bg_reward .Atacker,7773,.@Reward,0,8509,"BG_CON",1,6,.@Won;
+	bg_reward .Atacker,7773,.@Reward,0,0,"BG_CON",1,6,.@Won;
 
 	set .Score, 6 - .Score; // Switch for Defender
 
@@ -510,26 +424,15 @@ OnMatchEnd:
 		set .@Won,0;
 	}
 
-	bg_reward .Defender,7773,.@Reward,0,8509,"BG_CON",1,6,.@Won;
+	bg_reward .Defender,7773,.@Reward,0,0,"BG_CON",1,6,.@Won;
 	// =======================================================
-	mapannounce .Castle$,"Battle of Conquest will start 15 in seconds!",1,0xFFA500;
-	sleep 2000;
-	bg_destroy $@Conquest_id1;
-	set $@Conquest_id1, 0;
-	bg_destroy $@Conquest_id2;
-	set $@Conquest_id2, 0;
-	mapwarp .Castle$,"bat_room",155,150;
-	sleep 1000;
-	maprespawnguildid .Castle$,0,3; // Just in case someone else
+	set .Score, 0;
+	sleep 5000;
+	donpcevent "BG_Queue_Join::OnRotate";
 	delwall "conq_RL00";
 	delwall "conq_RL01";
 	delwall "conq_RL02";
 	delwall "conq_RL03";
-	sleep 12000;
-	set $@Conquest, 0;
-	set .Score, 0;
-	donpcevent "Conquest::OnSetRotation";
-	donpcevent "Conquest::OnReadyCheck";
 	end;
 }
 
@@ -702,7 +605,7 @@ OnTimer25000:
 	case 0: // schg_cas01 ========================================================================
 		areapercentheal .@Castle$,260,376,267,383,100,100;
 		areapercentheal .@Castle$,292,376,299,383,100,100;
-		if( $@Conquest_id1 == getvariableofnpc(.Defender,"Conquest") )
+		if( $@BG_Team1 == getvariableofnpc(.Defender,"Conquest") )
 		{
 			areawarp .@Castle$,260,376,267,383,.@Castle$,.@DX,.@DY;
 			areawarp .@Castle$,292,376,299,383,.@Castle$,.@AX,.@AY;
@@ -716,7 +619,7 @@ OnTimer25000:
 	case 1: // schg_cas02 ========================================================================
 		areapercentheal .@Castle$,80,301,92,321,100,100;
 		areapercentheal .@Castle$,111,301,123,321,100,100;
-		if( $@Conquest_id1 == getvariableofnpc(.Defender,"Conquest") )
+		if( $@BG_Team1 == getvariableofnpc(.Defender,"Conquest") )
 		{
 			areawarp .@Castle$,80,301,92,321,.@Castle$,.@DX,.@DY;
 			areawarp .@Castle$,111,301,123,321,.@Castle$,.@AX,.@AY;
@@ -730,7 +633,7 @@ OnTimer25000:
 	case 2: // schg_cas03 ========================================================================
 		areapercentheal .@Castle$,18,44,33,55,100,100;
 		areapercentheal .@Castle$,82,44,97,55,100,100;
-		if( $@Conquest_id1 == getvariableofnpc(.Defender,"Conquest") )
+		if( $@BG_Team1 == getvariableofnpc(.Defender,"Conquest") )
 		{
 			areawarp .@Castle$,18,44,33,55,.@Castle$,.@DX,.@DY;
 			areawarp .@Castle$,82,44,97,55,.@Castle$,.@AX,.@AY;
@@ -744,7 +647,7 @@ OnTimer25000:
 	case 3: // arug_cas01 ========================================================================
 		areapercentheal .@Castle$,26,378,33,385,100,100;
 		areapercentheal .@Castle$,122,354,129,361,100,100;
-		if( $@Conquest_id1 == getvariableofnpc(.Defender,"Conquest") )
+		if( $@BG_Team1 == getvariableofnpc(.Defender,"Conquest") )
 		{
 			areawarp .@Castle$,26,378,33,385,.@Castle$,.@DX,.@DY;
 			areawarp .@Castle$,122,354,129,361,.@Castle$,.@AX,.@AY;
@@ -758,7 +661,7 @@ OnTimer25000:
 	case 4: // arug_cas02 ========================================================================
 		areapercentheal .@Castle$,291,336,304,342,100,100;
 		areapercentheal .@Castle$,291,305,304,311,100,100;
-		if( $@Conquest_id1 == getvariableofnpc(.Defender,"Conquest") )
+		if( $@BG_Team1 == getvariableofnpc(.Defender,"Conquest") )
 		{
 			areawarp .@Castle$,291,336,304,342,.@Castle$,.@DX,.@DY;
 			areawarp .@Castle$,291,305,304,311,.@Castle$,.@AX,.@AY;
@@ -772,7 +675,7 @@ OnTimer25000:
 	case 5: // arug_cas03 ========================================================================
 		areapercentheal .@Castle$,310,150,316,157,100,100;
 		areapercentheal .@Castle$,327,150,333,157,100,100;
-		if( $@Conquest_id1 == getvariableofnpc(.Defender,"Conquest") )
+		if( $@BG_Team1 == getvariableofnpc(.Defender,"Conquest") )
 		{
 			areawarp .@Castle$,310,150,316,157,.@Castle$,.@DX,.@DY;
 			areawarp .@Castle$,327,150,333,157,.@Castle$,.@AX,.@AY;

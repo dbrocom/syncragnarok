@@ -45,7 +45,7 @@ job3_gen01,25,58,4	script	Genetist	865,{
 }
 
 
--	shop	GeneticBookShop	-1,6297:-1,6279:150000,6280:150000,6281:150000,6282:150000,6283:150000,6284:150000,6285:150000
+-	shop	GeneticBookShop	-1,6297:-1,6279:150000,6280:150000,6281:150000,6282:150000,6283:150000,6284:150000,6285:150000,11022:150000,11023:150000,11024:150000,6248:-1,6250:-1,6251:-1,6255:-1,6261:-1
 
 alde_alche,31,186,5	script	Craft Book Salesman	805,{
 
@@ -55,5 +55,17 @@ alde_alche,31,186,5	script	Craft Book Salesman	805,{
 		close;
 	}
 	callshop( "GeneticBookShop", 1 );
+	end;
+}
+
+
+-	shop	CmdTropFruitshop	-1,6258:-1
+
+comodo,106,213,4	script	Vendedora de Fruta	66,{
+
+	mes "[Vendedora de Fruta]";
+	mes "¿Te apetece probar una fruta típica de Comodo?";
+	close2;
+	callshop( "CmdTropFruitshop", 1 );
 	end;
 }

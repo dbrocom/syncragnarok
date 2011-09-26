@@ -292,6 +292,7 @@ bc_all	0
 bc_map	1
 bc_area	2
 bc_self	3
+bc_guild	4
 bc_pc	0
 bc_npc	8
 bc_yellow	0
@@ -349,6 +350,10 @@ mf_allowks	48
 mf_monster_noteleport	49
 mf_pvp_nocalcrank	50
 mf_battleground	51
+mf_nopvpmode	70
+mf_pvpmode	71
+mf_woe_level	72
+mf_blocked	73
 
 cell_walkable	0
 cell_shootable	1
@@ -407,6 +412,7 @@ bVit	15
 bInt	16
 bDex	17
 bLuk	18
+bMaxWeight	25
 bAtk	41
 bAtk2	42
 bDef	45
@@ -561,6 +567,8 @@ bAddSkillBlow	2041
 bSPVanishRate	2042
 bMagicSPGainValue	2043
 bMagicHPGainValue	2044
+bAddClassDropItem	2045
+bBaseMatk	2046
 
 EQI_HEAD_TOP	1
 EQI_ARMOR	2
@@ -689,6 +697,7 @@ IG_Cherish_Box	51
 IG_Cherish_Box_Ori	52
 IG_Louise_Costume_Box	53
 IG_Xmas_Gift	54
+IG_TRedBox	55
 
 SC_ALL -1
 SC_PKDELAY	800 // [Ivion]
@@ -955,7 +964,7 @@ SC_SPCOST_RATE	272
 SC_COMMONSC_RESIST	273
 SC_SEVENWIND	274
 SC_DEF_RATE	275
-//SC_SPREGEN	276
+SC_SPREGEN	276
 SC_WALKSPEED	277
 SC_REBIRTH	284
 //SC_SKILLCASTRATE	285
@@ -1387,8 +1396,8 @@ GUILD_AREA_WOS	20
 GUILD_NOBG	21
 DUEL	22
 DUEL_WOS	23
-CHAT_MAINCHAT	24
-SELF	25
+SELF	24
+ALL_REGION	25
 BG	26
 BG_WOS	27
 BG_SAMEMAP	28
@@ -1396,9 +1405,18 @@ BG_SAMEMAP_WOS	29
 BG_AREA	30
 BG_AREA_WOS	31
 
+CHN_MAIN	0
+CHN_VENDING	1
+CHN_BATTLEGROUND	2
+CHN_GAMEMASTER	3
+
 ARCH_MERC_GUILD	0
 SPEAR_MERC_GUILD	1
 SWORD_MERC_GUILD	2
+
+BG_W0N	0
+BG_LOST	1
+BG_TIE	2
 
 EF_HIT1	0
 EF_HIT2	1
@@ -1860,7 +1878,9 @@ HIDDEN_NPC	111
 2_F_MAGICMASTER	123
 4_F_TELEPORTER	124
 4_M_TELEPORTER	125
-// Free ID's 126 - 400
+// Free ID's 126 - 138
+HIDDEN_WARP_NPC	139
+// Free ID's 140 - 400
 4_M_MUT2	401
 4_M_SCIENCE	402
 4_F_VALKYRIE2	403

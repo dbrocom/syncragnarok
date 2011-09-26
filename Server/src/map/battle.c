@@ -892,8 +892,8 @@ int battle_calc_bg_damage(struct block_list *src, struct block_list *bl, int dam
 		case PA_PRESSURE:
 		case HW_GRAVITATION:
 		case NJ_ZENYNAGE:
-		case RK_DRAGONBREATH:
-		case GN_HELLS_PLANT_ATK:
+		//case RK_DRAGONBREATH:
+		//case GN_HELLS_PLANT_ATK:
 			break;
 		default:
 			if( flag&BF_SKILL )
@@ -955,8 +955,8 @@ int battle_calc_gvg_damage(struct block_list *src,struct block_list *bl,int dama
 	case PA_PRESSURE:
 	case HW_GRAVITATION:
 	case NJ_ZENYNAGE:
-	case RK_DRAGONBREATH:
-	case GN_HELLS_PLANT_ATK:
+	//case RK_DRAGONBREATH:
+	//case GN_HELLS_PLANT_ATK:
 		break;
 	default:
 		if (md && md->guardian_data) {
@@ -1069,8 +1069,8 @@ int battle_addmastery(struct map_session_data *sd,struct block_list *target,int 
 		case W_2HMACE:
 			if((skill = pc_checkskill(sd,PR_MACEMASTERY)) > 0)
 				damage += (skill * 3);
-			if((skill = pc_checkskill(sd,NC_TRAININGAXE)) > 0)
-				damage += (skill * 5); //It works with axe also.
+			if((skill = pc_checkskill(sd,NC_TRAININGAXE)) > 0)//Code shows it also works with Maces, but also shows maces is 4 instead of 5. Will recheck later. [Rytech]
+				damage += (skill * 5);//Reminder to also recheck the HIT for this skill on Maces as well when I do.
 			break;
 		case W_FIST:
 			if((skill = pc_checkskill(sd,TK_RUN)) > 0)
@@ -1823,19 +1823,6 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 					ATK_ADD(sstatus->rhw.atk2); //Else use Atk2
 				if( sc && sc->data[SC_GLOOMYDAY_SK] )
 					ATK_ADD(150 + 5 * sc->data[SC_GLOOMYDAY_SK]->val1);
-				break;
-			case NC_AXEBOOMERANG:
-				//TODO: Need to get official value of weight % as addition to skill damage. [Jobbie]
-				if (sd) {
-					short index = sd->equip_index[EQI_HAND_R];
-					if (index >= 0 &&
-						sd->inventory_data[index] &&
-						sd->inventory_data[index]->type == IT_WEAPON)
-						wd.damage = sd->inventory_data[index]->weight;
-				} else
-					wd.damage = sstatus->rhw.atk2*2;
-				i=100+(40*(skill_lv-1));
-				ATK_ADDRATE(i);
 				break;
 			case HFLI_SBR44:	//[orn]
 				if(src->type == BL_HOM) {
@@ -3061,7 +3048,7 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 			case LG_OVERBRAND_PLUSATK:
 				{
 					if( target->type == BL_PC ){
-						wd.damage = wd.damage/(19/10);
+						wd.damage = wd.damage/(20/10);
 					}
 					else
 					{
@@ -3096,12 +3083,6 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 					else
 					{
 						wd.damage = wd.damage/(12/10);
-					}
-				}
-			case RK_DRAGONBREATH:
-				{
-					if( target->type == BL_PC ){
-						wd.damage = wd.damage/(13/10);
 					}
 				}
 				break;
@@ -3758,12 +3739,12 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 			struct Damage md = battle_calc_magic_attack_renewal(src,target,skill_id,skill_lv,wflag);
 			wd.damage += md.damage;
 			if( skill_id == CR_ACIDDEMONSTRATION && target->type == BL_PC ){
-				wd.damage = wd.damage/15;
+				wd.damage = wd.damage/13;
 				wd.damage >>= 1; // Half Damage on Players
 			}
 			else
 			{
-				wd.damage = wd.damage/(65/10);
+				wd.damage = wd.damage/(64/10);
 			}
 		}
 		break;
@@ -4687,7 +4668,10 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
 		md.damage = md.damage + (5 * sstatus->int_) + (40 * pc_checkskill(sd,RA_RESEARCHTRAP));
 		break;
 	case NC_SELFDESTRUCTION:
-		md.damage = (sstatus->hp + sstatus->sp) * 50 * skill_lv / 100;
+		md.damage = pc_checkskill(sd,NC_MAINFRAME) * skill_lv * (status_get_sp(src) + sstatus->vit);
+		//if (status_get_lv(src) > 100) md.damage = md.damage * s_level / 150;// Base level bonus.
+		if (sd) md.damage = md.damage + status_get_hp(src);
+		status_set_sp(src, 0, 0);
 		break;
 	case GN_THORNS_TRAP:
 		md.damage = 100 + 200 * skill_lv + sstatus->int_;
@@ -6290,6 +6274,7 @@ static const struct _battle_data {
 	{ "skill_zeny2item",                    &battle_config.skill_zeny2item,                 0,      0,      INT_MAX,        },
 
 	{ "premium_bonusexp",                   &battle_config.premium_bonusexp,                0,      0,      INT_MAX,        },
+	{ "premium_dropboost",                  &battle_config.premium_dropboost,               0,      0,      100,            },
 	{ "premium_discount",                   &battle_config.premium_discount,                0,      0,      100,            },
 
 	{ "pvpmode_onlypc",                     &battle_config.pvpmode_onlypc,                  1,      0,      1,              },

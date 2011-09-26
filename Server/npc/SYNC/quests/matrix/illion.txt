@@ -877,7 +877,7 @@ il_q03,151,43,8	script	Trinity#il6_2	952,{
 	if(!(il & 256)) {
 		emotion 0;
 		sleep2 500;
-		pcblockmove getcharid(3),0;
+		pcblock getcharid(3),0;
 	}
 	mes .@n1$;
 	mes "Hola "+strcharinfo(0)+".";
@@ -939,7 +939,7 @@ il_q03,151,43,8	script	Trinity#il6_2	952,{
 OnPCLoadMapEvent:
 	getmapxy .@m0$,.@x,.@y,0;
 	if((.@m0$ == "il_q03") && !(il & 256))
-		pcblockmove getcharid(3),1;
+		pcblock getcharid(3),1;
 	end;
 }
 
