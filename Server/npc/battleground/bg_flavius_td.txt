@@ -2,29 +2,6 @@
 // BattleGround System - Flavius TeamDeathMatch
 // ==============================================================================
 
-// Registration NPC's
-// *********************************************************************
-
-bat_room,113,74,0	script	Registration::TDR_Guillaume	418,{
-	end;
-OnInit:
-	waitingroom "Battle Station 5 Players",5,"Flavius_TD::OnGuillaumeJoin",1;
-	end;
-OnEnterBG:
-	set $@FlaviusTD_id1, waitingroom2bg("bat_b03",390,10,0,"Flavius_TD::OnGuillaumeQuit","Flavius_TD::OnGuillaumeDie");
-	end;
-}
-
-bat_room,113,97,4	script	Registration::TDR_Croix	414,{
-	end;
-OnInit:
-	waitingroom "Battle Station 5 Players",5,"Flavius_TD::OnCroixJoin",1;
-	end;
-OnEnterBG:
-	set $@FlaviusTD_id2, waitingroom2bg("bat_b03",10,290,1,"Flavius_TD::OnCroixQuit","Flavius_TD::OnCroixDie");
-	end;
-}
-
 // Battleground Engine
 // *********************************************************************
 
@@ -33,155 +10,81 @@ OnEnterBG:
 
 OnGuillaumeQuit:
 	setquest 8506; // Deserter
-	if( $@FlaviusTD != 0 )
-		donpcevent "Flavius_TD::OnDoBalance";
+	if( $@BG_Status != 0 && getvariableofnpc(.BG_Arena$,"BG_Queue_Join") == "Flavius_TD" )
+		donpcevent "BG_Queue_Join::OnJoinEvent";
 OnGuillaumeDie:
-	if( $@FlaviusTD == 1 )
+	if( $@BG_Status == 1 && getvariableofnpc(.BG_Arena$,"BG_Queue_Join") == "Flavius_TD" )
 	{
 		set .Guillaume_Score, .Guillaume_Score - 1;
 		donpcevent "Flavius_TD::OnValidateScore";
 	}
 	end;
-	
+
 OnCroixQuit:
 	setquest 8506; // Deserter
-	if( $@FlaviusTD != 0 )
-		donpcevent "Flavius_TD::OnDoBalance";
+	if( $@BG_Status != 0 && getvariableofnpc(.BG_Arena$,"BG_Queue_Join") == "Flavius_TD" )
+		donpcevent "BG_Queue_Join::OnJoinEvent";
 OnCroixDie:
-	if( $@FlaviusTD == 1 )
+	if( $@BG_Status == 1 && getvariableofnpc(.BG_Arena$,"BG_Queue_Join") == "Flavius_TD" )
 	{
 		set .Croix_Score, .Croix_Score - 1;
 		donpcevent "Flavius_TD::OnValidateScore";
 	}
 	end;
 
-OnGuillaumeJoin:
-OnCroixJoin:
-	if( $@FlaviusTD == 0 )
-		donpcevent "Flavius_TD::OnReadyCheck";
-	else
-		donpcevent "Flavius_TD::OnDoBalance";
+OnBuildTeams:
+	set $@BG_Team1,bg_team_create("bat_b03",390,10,0,"Flavius_TD::OnGuillaumeQuit","Flavius_TD::OnGuillaumeDie");
+	set $@BG_Team2,bg_team_create("bat_b03",10,290,1,"Flavius_TD::OnCroixQuit","Flavius_TD::OnCroixDie");
 	end;
 
-OnDoBalance:
-	if( $@FlaviusTD != 1 )
+OnReady:
+	if( getvariableofnpc(.BG_Arena$,"BG_Queue_Join") != "Flavius_TD" )
 		end;
 
-	set .@Guillaume, bg_get_data($@FlaviusTD_id1, 0);
-	set .@Croix, bg_get_data($@FlaviusTD_id2, 0);
-
-	if( .@Guillaume < .@Croix )
-		waitingroom2bg_single $@FlaviusTD_id1,"bat_b03",311,224,"TDR_Guillaume";
-	else if( .@Guillaume > .@Croix )
-		waitingroom2bg_single $@FlaviusTD_id2,"bat_b03",87,75,"TDR_Croix";
-	else
-	{
-		set .@GuillaumeR, getwaitingroomstate(0,"TDR_Guillaume");
-		set .@CroixR, getwaitingroomstate(0,"TDR_Croix");
-
-		if( .@GuillaumeR <= .@CroixR )
-			set .@Limit, .@GuillaumeR;
-		else
-			set .@Limit, .@CroixR;
-
-		if( .@Limit + .@Guillaume > 35 )
-			set .@Limit, 35 - .@Guillaume;
-		if( .@Limit <= 0 ) end;
-
-		for( set .@i, 0; .@i < .@Limit; set .@i, .@i + 1 )
-		{
-			waitingroom2bg_single $@FlaviusTD_id1,"bat_b03",311,224,"TDR_Guillaume";
-			waitingroom2bg_single $@FlaviusTD_id2,"bat_b03",87,75,"TDR_Croix";
-		}
-
-		set .@GC, .@Guillaume + .@Limit;
-		set .@CC, .@Croix + .@Limit;
-		mapannounce "bat_room","Battleground -- Flavius TD [80-99] G: " + .@GC + "/35, C: " + .@CC + "/35 (Playing)",1,0x808000;
-	}
-
-	set .@GC, bg_get_data($@FlaviusTD_id1, 0) - .@Guillaume;
-	if( .@GC > 0 )
-	{
-		set .Guillaume_Score, .Guillaume_Score + .@GC;
-		if( .Guillaume_Score > 99 ) set .Guillaume_Score, 99;
-	}
-	
-	set .@CC, bg_get_data($@FlaviusTD_id2, 0) - .@Croix;
-	if( .@CC > 0 )
-	{
-		set .Croix_Score, .Croix_Score + .@CC;
-		if( .Croix_Score > 99 ) set .Croix_Score, 99;
-	}
-
-	if( .@GC > 0 || .@CC > 0 ) bg_updatescore "bat_b03",.Guillaume_Score,.Croix_Score;
-	end;
-
-OnReadyCheck:
-	if( $@FlaviusTD )
-		end;
-	set .@Guillaume, getwaitingroomstate(0,"TDR_Guillaume");
-	set .@Croix, getwaitingroomstate(0,"TDR_Croix");
-	
-	if( .@Guillaume < 5 || .@Croix < 5 )
-	{
-		if( .@Guillaume > 3 && .@Croix > 3 && !agitcheck() && $@FlaviusTD_Flood < gettimetick(2) )
-		{
-			announce "Battleground -- Flavius TD [80-99] G: " + .@Guillaume + "/5, C: " + .@Croix + "/5",0,0x808000;
-			set $@FlaviusTD_Flood, gettimetick(2) + 15;
-		}
-		else
-			mapannounce "bat_room","Battleground -- Flavius TD [80-99] G: " + .@Guillaume + "/5, C: " + .@Croix + "/5",1,0x808000;
-		end;
-	}
-
-	set $@FlaviusTD, 1;
 	initnpctimer;
-	donpcevent "TDR_Croix::OnEnterBG";
-	donpcevent "TDR_Guillaume::OnEnterBG";
 	set .Guillaume_Score, 99;
 	set .Croix_Score, 99;
-	announce "Battleground -- Flavius TD [80-99] has started!",0,0x808000;
 	sleep 2000;
-	bg_warp $@FlaviusTD_id1,"bat_b03",328,150;
-	bg_warp $@FlaviusTD_id2,"bat_b03",62,150;
-	sleep 3000;
-	bg_team_reveal $@FlaviusTD_id1;
-	bg_team_reveal $@FlaviusTD_id2;
+	bg_warp $@BG_Team1,"bat_b03",328,150;
+	bg_warp $@BG_Team2,"bat_b03",62,150;
+	sleep 2000;
+	bg_team_reveal $@BG_Team1;
+	bg_team_reveal $@BG_Team2;
 	donpcevent "#guitd_respawn::OnBGStart";
 	donpcevent "#crotd_respawn::OnBGStart";
 	bg_updatescore "bat_b03",.Guillaume_Score,.Croix_Score;
 	end;
 
 OnValidateScore:
-	if( $@FlaviusTD != 1 )
+	if( $@BG_Status != 1 || getvariableofnpc(.BG_Arena$,"BG_Queue_Join") != "Flavius_TD" )
 		end;
 
 	bg_updatescore "bat_b03",.Guillaume_Score,.Croix_Score;
-	set .@Guillaume, bg_get_data($@FlaviusTD_id1, 0);
-	set .@Croix, bg_get_data($@FlaviusTD_id2, 0);
+	set .@Guillaume, bg_get_data($@BG_Team1, 0);
+	set .@Croix, bg_get_data($@BG_Team2, 0);
 
 	if( .Croix_Score <= 0 )
 	{ // Guillaume Won
-		bg_reward $@FlaviusTD_id1,7829,30,0,8505,"BG_TDM",1,4,0;
-		bg_reward $@FlaviusTD_id2,7829,15,0,8505,"BG_TDM",1,4,2;
+		bg_reward $@BG_Team1,7829,30,0,0,"BG_TDM",1,4,0;
+		bg_reward $@BG_Team2,7829,15,0,0,"BG_TDM",1,4,2;
 		mapannounce "bat_b03","The Guillaume army has won the Battle of Flavius TD!",1,0x0000FF;
 	}
 	else if( .Guillaume_Score <= 0 )
 	{ // Croix Won
-		bg_reward $@FlaviusTD_id1,7829,15,0,8505,"BG_TDM",1,4,2;
-		bg_reward $@FlaviusTD_id2,7829,30,0,8505,"BG_TDM",1,4,0;
+		bg_reward $@BG_Team1,7829,15,0,0,"BG_TDM",1,4,2;
+		bg_reward $@BG_Team2,7829,30,0,0,"BG_TDM",1,4,0;
 		mapannounce "bat_b03","The Croix army has won the Battle of Flavius TD!",1,0xFF0000;
 	}
 	else if( .@Croix == 0 )
 	{ // All Croix Players quit
 		set .@Rate, 99 - .Croix_Score;
-		bg_reward $@FlaviusTD_id1,7829,30 * .@Rate / 99,0,8505,"BG_TDM",1,4,0;
+		bg_reward $@BG_Team1,7829,30 * .@Rate / 99,0,0,"BG_TDM",1,4,0;
 		mapannounce "bat_b03","The Guillaume army has won the Battle of Flavius TD!",1,0x0000FF;
 	}
 	else if( .@Guillaume == 0 )
 	{ // All Guillaume Players quit
 		set .@Rate, 99 - .Guillaume_Score;
-		bg_reward $@FlaviusTD_id2,7829,30 * .@Rate / 99,0,8505,"BG_TDM",1,4,0;
+		bg_reward $@BG_Team2,7829,30 * .@Rate / 99,0,0,"BG_TDM",1,4,0;
 		mapannounce "bat_b03","The Croix army has won the Battle of Flavius TD!",1,0xFF0000;
 	}
 	else end;
@@ -199,60 +102,35 @@ OnTimer840000:
 OnTimer900000:
 	if( .Guillaume_Score > .Croix_Score )
 	{ // Guillaume Won
-		bg_reward $@FlaviusTD_id1,7829,30,0,8505,"BG_TDM",1,4,0;
-		bg_reward $@FlaviusTD_id2,7829,15,0,8505,"BG_TDM",1,4,2;
+		bg_reward $@BG_Team1,7829,30,0,0,"BG_TDM",1,4,0;
+		bg_reward $@BG_Team2,7829,15,0,0,"BG_TDM",1,4,2;
 		mapannounce "bat_b03","The Guillaume army has won the Battle of Flavius TD!",1,0x0000FF;
 	}
 	else if( .Guillaume_Score < .Croix_Score )
 	{ // Croix Won
-		bg_reward $@FlaviusTD_id1,7829,15,0,8505,"BG_TDM",1,4,2;
-		bg_reward $@FlaviusTD_id2,7829,30,0,8505,"BG_TDM",1,4,0;
+		bg_reward $@BG_Team1,7829,15,0,0,"BG_TDM",1,4,2;
+		bg_reward $@BG_Team2,7829,30,0,0,"BG_TDM",1,4,0;
 		mapannounce "bat_b03","The Croix army has won the Battle of Flavius TD!",1,0xFF0000;
 	}
 	else
 	{
-		bg_reward $@FlaviusTD_id1,7829,15,0,8505,"BG_TDM",1,4,1;
-		bg_reward $@FlaviusTD_id2,7829,15,0,8505,"BG_TDM",1,4,1;
+		bg_reward $@BG_Team1,7829,15,0,0,"BG_TDM",1,4,1;
+		bg_reward $@BG_Team2,7829,15,0,0,"BG_TDM",1,4,1;
 		mapannounce "bat_b03","The battle is over. This is a Tie...!",1,0x808000;
 	}
 	donpcevent "Flavius_TD::OnMatchEnd";
 	end;
 
 OnMatchEnd:
-	set $@FlaviusTD, 2;
 	stopnpctimer;
 	donpcevent "#guitd_respawn::OnBGStop";
 	donpcevent "#crotd_respawn::OnBGStop";
-	bg_warp $@FlaviusTD_id1,"bat_b03",390,10;
-	bg_warp $@FlaviusTD_id2,"bat_b03",10,290;
-	sleep 3000;
-	mapannounce "bat_b03","Battle of Flavius TD will start in 15 seconds!",1,0x808000;
-	initnpctimer;
-	end;
-
-OnTimer10000:
-	if( $@FlaviusTD == 2 )
-		mapannounce "bat_b03","Battle of Flavius TD will start in 5 seconds!",1,0x808000;
-	end;
-
-OnTimer15000:
-	if( $@FlaviusTD != 2 )
-		end;
-OnReset:
-	stopnpctimer;
+	set $@BG_Status, 2;
 	set .Guillaume_Score, 99;
 	set .Croix_Score, 99;
-	bg_destroy $@FlaviusTD_id1;
-	bg_destroy $@FlaviusTD_id2;
-	set $@FlaviusTD_id1, 0;
-	set $@FlaviusTD_id2, 0;
-	sleep 1000;
-	mapwarp "bat_b03","bat_room",155,150;
-	sleep 1000;
-	maprespawnguildid "bat_b03",0,3; // Just in case someone else
+	sleep 5000;
+	donpcevent "BG_Queue_Join::OnRotate";
 	bg_updatescore "bat_b03",99,99;
-	set $@FlaviusTD, 0;
-	donpcevent "Flavius_TD::OnReadyCheck";
 	end;
 }
 
@@ -260,44 +138,26 @@ OnReset:
 // *********************************************************************
 
 bat_b03,390,13,5	script	Therapist in battle#td1	95,{
-	switch( $@FlaviusTD )
-	{
-	case 2:
-		bg_leave;
-		warp "bat_room",155,150;
-		break;
-	case 1:
-		mes "[Therapist in battle]";
-		mes "Just close your eyes, and take a deep breathe.";
-		mes "You can be free from pain.";
-		specialeffect2 312;
-		percentheal 100,100;
-		repairall;
-		close2;
-		openstorage;
-		break;
-	}
+	mes "[Therapist in battle]";
+	mes "Just close your eyes, and take a deep breathe.";
+	mes "You can be free from pain.";
+	specialeffect2 312;
+	percentheal 100,100;
+	repairall;
+	close2;
+	openstorage;
 	end;
 }
 
 bat_b03,10,293,5	script	Therapist in battle#td2	95,{
-	switch( $@FlaviusTD )
-	{
-	case 2:
-		bg_leave;
-		warp "bat_room",155,150;
-		break;
-	case 1:
-		mes "[Therapist in battle]";
-		mes "Just close your eyes, and take a deep breathe.";
-		mes "You can be free from pain.";
-		specialeffect2 312;
-		percentheal 100,100;
-		repairall;
-		close2;
-		openstorage;
-		break;
-	}
+	mes "[Therapist in battle]";
+	mes "Just close your eyes, and take a deep breathe.";
+	mes "You can be free from pain.";
+	specialeffect2 312;
+	percentheal 100,100;
+	repairall;
+	close2;
+	openstorage;
 	end;
 }
 

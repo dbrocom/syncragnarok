@@ -7660,7 +7660,7 @@ SKILL_INFO_LIST = {
 		MaxLv = 5,
 		SpAmount = { 20, 24, 28, 32, 36 },
 		_NeedSkillList = {
-			{ SKID.GN_REMODELING_CART,5 }
+			{ SKID.GN_REMODELING_CART,3 }
 		}
 	},
 

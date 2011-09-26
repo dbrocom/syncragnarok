@@ -10016,9 +10016,18 @@ void clif_parse_GetCharNameRequest(int fd, struct map_session_data *sd)
  *------------------------------------------*/
 void clif_parse_GlobalMessage(int fd, struct map_session_data* sd)
 {
+	int gm_lvl = pc_isGM(sd);
 	const char* text = (char*)RFIFOP(fd,4);
 	int textlen = RFIFOW(fd,2) - 4;
 	int tick = gettick();
+
+	unsigned long player = strtoul("0xD1D1D1",NULL,0);	//normal player color leaf
+	unsigned long GM10 = strtoul("0x2F56F4",NULL,0);	//Police color navy blue
+	unsigned long GM40 = strtoul("0x349A84",NULL,0);	//SubGM (en prácticas) color light green
+	unsigned long GM50 = strtoul("0x42A559",NULL,0);	//SubGM color green
+	unsigned long GM60 = strtoul("0x006400",NULL,0);	//GM color dark green
+	unsigned long GM80 = strtoul("0xE90033",NULL,0);	//GM Chief color rojo
+	unsigned long admin = strtoul("0xDFCB33",NULL,0);	//Admin color dorado
 
 	char *name, *message;
 	int namelen, messagelen;
@@ -10069,14 +10078,41 @@ void clif_parse_GlobalMessage(int fd, struct map_session_data* sd)
 	WFIFOW(fd,0) = 0x8d;
 	WFIFOW(fd,2) = 8 + textlen;
 	WFIFOL(fd,4) = sd->bl.id;
-	safestrncpy((char*)WFIFOP(fd,8), text, textlen);
-	//FIXME: chat has range of 9 only
-	clif_send(WFIFOP(fd,0), WFIFOW(fd,2), &sd->bl, sd->chatID ? CHAT_WOS : AREA_CHAT_WOC);
 
-	// send back message to the speaker
-	memcpy(WFIFOP(fd,0), RFIFOP(fd,0), RFIFOW(fd,2));
-	WFIFOW(fd,0) = 0x8e;
-	WFIFOSET(fd, WFIFOW(fd,2));
+	if(gm_lvl == 99){
+		WFIFOL(fd,8) = (admin & 0x0000FF) << 16 | (admin & 0x00FF00) | (admin & 0xFF0000) >> 16;
+	}
+	else if (gm_lvl < 10){
+		WFIFOL(fd,8) = (player & 0x0000FF) << 16 | (player & 0x00FF00) | (player & 0xFF0000) >> 16;
+	}
+	else if (gm_lvl >= 10 && gm_lvl <= 39)
+	{
+		WFIFOL(fd,8) = (GM10 & 0x0000FF) << 16 | (GM10 & 0x00FF00) | (GM10 & 0xFF0000) >> 16;
+	}
+	else if (gm_lvl >= 40 && gm_lvl <= 49)
+	{
+		WFIFOL(fd,8) = (GM40 & 0x0000FF) << 16 | (GM40 & 0x00FF00) | (GM40 & 0xFF0000) >> 16;
+	}
+	else if (gm_lvl >= 50 && gm_lvl <= 59)
+	{
+		WFIFOL(fd,8) = (GM50 & 0x0000FF) << 16 | (GM50 & 0x00FF00) | (GM50 & 0xFF0000) >> 16;
+	}
+	else if (gm_lvl >= 60 && gm_lvl <= 79)
+	{
+		WFIFOL(fd,8) = (GM60 & 0x0000FF) << 16 | (GM60 & 0x00FF00) | (GM60 & 0xFF0000) >> 16;
+	}
+	else if (gm_lvl >= 80 && gm_lvl <= 98)
+	{
+		WFIFOL(fd,8) = (GM80 & 0x0000FF) << 16 | (GM80 & 0x00FF00) | (GM80 & 0xFF0000) >> 16;
+	}
+
+	safestrncpy((char*)WFIFOP(fd,12), text, textlen);
+	if( sd->chatID ) {
+		clif_send(WFIFOP(fd,0), WFIFOW(fd,2), &sd->bl, CHAT_WOS);
+	} else {
+		clif_send(WFIFOP(fd,0), WFIFOW(fd,2), &sd->bl, AREA_CHAT_WOC);
+		clif_send(WFIFOP(fd,0), WFIFOW(fd,2), &sd->bl, SELF);
+	}
 
 #ifdef PCRE_SUPPORT
 	// trigger listening npcs

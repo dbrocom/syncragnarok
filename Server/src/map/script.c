@@ -15686,6 +15686,20 @@ BUILDIN_FUNC(bg_queue_partyjoin)
 	return 0;
 }
 
+// Leaves a Queue
+// bg_queue_leave queue_id;
+
+BUILDIN_FUNC(bg_queue_leave)
+{
+	int q_id;
+	struct map_session_data *sd = script_rid2sd(st);
+	if( !sd ) return 0;
+
+	q_id = script_getnum(st,2);
+	queue_leave(sd,q_id);
+	return 0;
+}
+
 // Request Information from a Queue
 // bg_queue_data queue_id,type;
 
@@ -15818,7 +15832,7 @@ BUILDIN_FUNC(bg_queue2team_single)
 }
 
 // Build BG Teams from one Queue
-// bg_queue2teams queue_id,maxplayersperteam,type,teamID1,teamID2....
+// bg_queue2teams queue_id,maxplayersperteam,type,teamID1,teamID2...;
 
 BUILDIN_FUNC(bg_queue2teams)
 { // Send Users from Queue to Teams. Requires previously created teams.
@@ -15845,9 +15859,9 @@ BUILDIN_FUNC(bg_queue2teams)
 			ShowError("script:bg_queue2teams: Non existant team id received %d.\n", bg_id);
 			return 0;
 		}
-
-		c++; i++;
+		i++;
 	}
+	c = i - 5;
 
 	if( c < 2 )
 	{
@@ -15913,70 +15927,120 @@ BUILDIN_FUNC(bg_queue2teams)
 			int s_class, t_class;
 
 			// Building a Temporal Sorted by Class Queue
-			for( i = 0; i < limit; i++ )
+			i = 0;
+			while( i < limit && (qm = qd->first) != NULL && (sd = qm->sd) != NULL )
 			{
-				if( (qm = qd->first) == NULL || (sd = qm->sd) == NULL )
-					break;
-
-				// Un-plug Member from Queue without deleting from Memory
-				qd->first = qd->first->next;
+				qd->first = qd->first->next; // Move the queue head to the next pos
+				qd->users--; // Reduces the amount of members on queue
+				if( qm->next == NULL ) qd->last = NULL;
 				qm->next = NULL;
-				qd->users--;
 				sd->qd = NULL;
 
-				if( !first )
-					first = qm; // Inserted at First
-				else
-				{
-					head = first;
-					previous = NULL;
-					s_class = sd->class_&MAPID_UPPERMASK; // Current Member's Upper Class
-					
-					while( 1 )
-					{
-						if( !head && previous )
-						{
-							previous->next = qm;
-							break; // Inserted at Last
-						}
-						else if( head && head->sd && (s_class < (t_class = head->sd->class_&MAPID_UPPERMASK) || (s_class == t_class && sd->class_ < head->sd->class_)) )
-						{
-							qm->next = head;
-							if( previous ) previous->next = qm;
-							break; // Inserted anywhere else
-						}
+				// Plug qm into the temporal Queue
+				head = first;
+				previous = NULL;
+				s_class = sd->class_&MAPID_UPPERMASK; // Current Member's Upper Class
 
-						previous = head;
-						if( head ) head = head->next;
-						else break; // Security break, just in case a infinite loop. Should not happen
-					}
+				while( head && head->sd && (s_class > (t_class = (head->sd->class_&MAPID_UPPERMASK)) || (s_class == t_class && sd->class_ > head->sd->class_)) )
+				{ // Search for Insert Position
+					previous = head;
+					head = head->next;
 				}
+
+				qm->next = head;
+				if( previous )
+					previous->next = qm;
+				else
+					first = qm;
 			}
-			
-			// Updating Queue positions
+
+			// Update the Queue new positions
 			i = 0;
 			head = qd->first;
 			while( head )
 			{
-				i++;
-				head->position = i;
+				head->position = ++i;
 				head = head->next;
 			}
 
-			// Distribute Players into Teams
-			head = first;
-			while( head )
+			// Player distribution into Teams
+			while( (head = first) != NULL && (sd = head->sd) != NULL )
 			{
 				bg_id = script_getnum(st,j+5);
 				if( ++j >= c ) j = 0;
 				bg_team_join(bg_id,sd);
 
-				qm = head;
-				head = head->next;
-				aFree(qm);
+				first = first->next;
+				aFree(head);
 			}
 		}
 		break;
+	}
+
+	return 0;
+}
+
+// Fill teams with members from the given Queue
+// bg_balance_teams queue_id,maxplayersperteam,TeamID1,TeamID2,...;
+
+BUILDIN_FUNC(bg_balance_teams)
+{
+	struct queue_data *qd;
+	struct battleground_data *bg;
+	int i,c,q_id,bg_id,m_bg_id = 0,max,min;
+	struct queue_member *head;
+	struct map_session_data *sd;
+
+	q_id = script_getnum(st,2);
+	if( (qd = queue_search(q_id)) == NULL )
+		return 0;
+
+	max = script_getnum(st,3);
+	if( max > MAX_BG_MEMBERS ) max = MAX_BG_MEMBERS;
+	min = MAX_BG_MEMBERS + 1;
+
+	i = 4; // Team ID's to build
+	while( script_hasdata(st,i) )
+	{
+		bg_id = script_getnum(st,i);
+		if( (bg = bg_team_search(bg_id)) == NULL )
+		{
+			ShowError("script:bg_balance_teams: Non existant team id received %d.\n", bg_id);
+			return 0;
+		}
+
+		if( bg->count < min )
+		{
+			m_bg_id = bg_id;
+			min = bg->count;
+		}
+		i++;
+	}
+
+	c = i - 4; // Teams Found
+	if( c < 2 || min >= max ) return 0; // No Balance Required
+
+	head = qd->first;
+	while( min < max && (head = qd->first) != NULL && (sd = head->sd) != NULL )
+	{
+		bg_team_join(m_bg_id,sd);
+		queue_member_remove(qd,sd->bl.id);
+		if( (bg = bg_team_search(m_bg_id)) != NULL && bg->mapindex )
+			pc_setpos(sd,bg->mapindex,bg->x,bg->y,CLR_OUTSIGHT); // Joins and Warps
+		i = 4;
+		min = MAX_BG_MEMBERS + 1;
+
+		for( i = 0; i < c; i++ )
+		{ // Search the new Min value
+			bg_id = script_getnum(st,i+4);
+			if( (bg = bg_team_search(bg_id)) == NULL )
+				continue; // Should not happen
+			if( bg->count < min )
+			{
+				m_bg_id = bg_id;
+				min = bg->count;
+			}
+		}
 	}
 
 	return 0;
@@ -17228,25 +17292,6 @@ BUILDIN_FUNC(getsecurity)
 	return 0;
 }
 
-BUILDIN_FUNC(pcblockmove)
-{
-	int id, flag;
-	TBL_PC *sd = NULL;
-
-	id = script_getnum(st,2);
-	flag = script_getnum(st,3);
-
-	if(id)
-		sd = map_id2sd(id);
-	else
-		sd = script_rid2sd(st);
-
-	if(sd)
-		sd->state.blockedmove = flag > 0;
-
-	return 0;
-}
-
 // Apply an extra bonus to drops that only expires when reset [WiseWarrior]
 BUILDIN_FUNC(setdropbonus){
 	TBL_PC *sd = NULL;
@@ -18442,7 +18487,6 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(pcfollow,"ii"),
 	BUILDIN_DEF(pcstopfollow,"i"),
 	BUILDIN_DEF(pcblock,"ii?"),
-	BUILDIN_DEF(pcblockmove,"ii"),
 	// <--- [zBuffer] List of player cont commands
 	// [zBuffer] List of mob control commands --->
 	BUILDIN_DEF(unitwalk,"ii?"),
@@ -18454,7 +18498,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(unitemote,"ii"),
 	BUILDIN_DEF(unitskilluseid,"ivi?"), // originally by Qamera [Celest]
 	BUILDIN_DEF(unitskillusepos,"iviii"), // [Celest]
-// <--- [zBuffer] List of mob control commands
+	// <--- [zBuffer] List of mob control commands
 	BUILDIN_DEF(sleep,"i"),
 	BUILDIN_DEF(sleep2,"i"),
 	BUILDIN_DEF(awake,"s"),
@@ -18504,14 +18548,18 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(bg_logincount,""),
 	BUILDIN_DEF(map_logincount,"s"),
 	BUILDIN_DEF(bg_team_create,"siiiss"),
+
 	BUILDIN_DEF(bg_queue_create,"ss"),
 	BUILDIN_DEF(bg_queue_event,"is"),
 	BUILDIN_DEF(bg_queue_join,"i"),
-	BUILDIN_DEF(bg_queue_partyjoin,"i"),
+	BUILDIN_DEF(bg_queue_partyjoin,"ii"),
+	BUILDIN_DEF(bg_queue_leave,"i"),
 	BUILDIN_DEF(bg_queue_data,"ii"),
 	BUILDIN_DEF(bg_queue2team,"iisiiiss"),
 	BUILDIN_DEF(bg_queue2team_single,"iisii"),
 	BUILDIN_DEF(bg_queue2teams,"iiiii*"),
+	BUILDIN_DEF(bg_balance_teams,"iiii*"),
+
 	BUILDIN_DEF(waitingroom2bg,"siiiss"),
 	BUILDIN_DEF(waitingroom2bg_single,"isiis"),
 	BUILDIN_DEF(bg_team_setxy,"iii"),

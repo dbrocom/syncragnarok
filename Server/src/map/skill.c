@@ -1040,7 +1040,7 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case NC_VULCANARM:
-		skillratio += 70 * skill_lv - 100 + sstatus->dex;
+		skillratio = 70 * skill_lv + sstatus->dex;
 		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case NC_FLAMELAUNCHER:
@@ -1051,14 +1051,21 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 	case NC_ARMSCANNON:
 		switch( tstatus->size )
 		{
-		case 0: skillratio += 100 + 500 * skill_lv; break;
-		case 1: skillratio += 100 + 400 * skill_lv; break;
-		case 2: skillratio += 100 + 300 * skill_lv; break;
+		case 0: skillratio += 100 + 500 * skill_lv; break;	// Small
+		case 1: skillratio += 100 + 400 * skill_lv; break;	// Medium
+		case 2: skillratio += 100 + 300 * skill_lv; break;	// Large
 		}
 		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
+		//NOTE: Their's some other factors that affects damage, but not sure how exactly. Will recheck one day. [Rytech]
 		break;
 	case NC_AXEBOOMERANG:
 		skillratio += 60 + 40 * skill_lv;
+		if( sd )
+		{
+			short index = sd->equip_index[EQI_HAND_R];
+			if( index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_WEAPON )
+			skillratio += sd->inventory_data[index]->weight; // Weight is divided by 10 since 10 weight in coding make 1 whole actural weight. [Rytech]
+		}
 		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case NC_POWERSWING:
@@ -2280,10 +2287,10 @@ int skill_additional_effect (struct block_list* src, struct block_list *bl, int 
 		break;
 	case NC_PILEBUNKER:
 		if( rand()%100 < 5 + 15*skilllv )
-		{ //Deactivatable Statuses: Kyrie Eleison, Assumptio, Mental Strength, Auto Guard, Millennium Shield
+		{ //Deactivatable Statuses: Kyrie Eleison, Auto Guard, Steel Body, Assumptio, and Millennium Shield
 			status_change_end(bl, SC_KYRIE, -1);
-			status_change_end(bl, SC_ASSUMPTIO, -1);
 			status_change_end(bl, SC_STEELBODY, -1);
+			status_change_end(bl, SC_ASSUMPTIO, -1);
 			status_change_end(bl, SC_AUTOGUARD, -1);
 			status_change_end(bl, SC_BERKANA, -1);
 		}
@@ -3390,7 +3397,6 @@ int skill_attack(int attack_type, struct block_list* src, struct block_list *dsr
 	//Skills that need be passed as a normal attack for the client to display correctly.
 	case HVAN_EXPLOSION:
 	case NPC_SELFDESTRUCTION:
-	case NC_SELFDESTRUCTION:
 		if(src->type==BL_PC)
 			dmg.blewcount = 10;
 		dmg.amotion = 0; //Disable delay or attack will do no damage since source is dead by the time it takes effect. [Skotlex]
@@ -9051,7 +9057,6 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 		if( sd )
 		{
 			pc_setoption(sd, sd->sc.option&~OPTION_MADO);
-			status_zap(src, 0, sd->status.sp);
 			clif_skill_nodamage(src, bl, skillid, skilllv, 1);
 			skill_castend_damage_id(src, src, skillid, skilllv, tick, flag);
 		}
@@ -17065,7 +17070,8 @@ int skill_magicdecoy(struct map_session_data *sd, int nameid)
 	y = sd->menuskill_itemused&0xffff;
 	sd->menuskill_itemused = sd->menuskill_val = 0;
 
-	class_ = 2043 + nameid - 990;
+	class_ = (nameid == 990 || nameid == 991) ? 2043 + nameid - 990 : (nameid == 992) ? 2046 : 2045;
+
 	md =  mob_once_spawn_sub(&sd->bl, sd->bl.m, x, y, sd->status.name, class_, "");
 	if( md )
 	{

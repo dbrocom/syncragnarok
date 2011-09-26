@@ -566,6 +566,7 @@ extern struct Battle_Config
 	int skill_zeny2item;
 
 	int premium_bonusexp;
+	int premium_dropboost;
 	int premium_discount;
 
 	int guild_wars;

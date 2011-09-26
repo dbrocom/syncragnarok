@@ -12,108 +12,170 @@ bat_room	mapflag	nopenalty
 bat_room	mapflag	noteleport
 bat_room	mapflag	nosave	SavePoint
 bat_room	mapflag	allow_bg_items
+// Mapflag Town is required to Join BG Queues
+bat_room	mapflag	town
 
-// BattleGround Warper - Entrance
+// Battleground Queue Admin
 // *********************************************************************
-
-payon,189,104,3	script	Maroll Battle Recruiter::BatRecruit	728,{
-	mes "[Maroll Battle Recruiter]";
-	mes "Good day, adventurer.";
-	mes "I'm a knight from a far country called Maroll Kingdom.";
-	next;
-	mes "[Maroll Battle Recruiter]";
-	mes "The two princes of the kingdom are now battling for the throne of Maroll, and are in need of experienced soldiers like you. How would you like to lend your power to one of the princes in the Maroll Kingdom?";
-	next;
-	if( select("Join:Don't Join") == 2 )
-	{
-		mes "[Maroll Battle Recruiter]";
-		mes "I'll always be stationed here for more soldiers. Fell free to come back whenever you're interested.";
-		close;
-	}
-/* Available only for eAmod-B
-	if( bg_logincount() > 0 )
-	{
-		mes "[Maroll Battle Recruiter]";
-		mes "Double Login is forbidden in Battlegrounds Maps";
-		close;
-	}
-*/
-	mes "[Maroll Battle Recruiter]";
-	mes "May the war god bless you.";
-	close2;
-	warp "bat_room",155,150;
+-	script	BG_Queue_Join	-1,{
 	end;
-}
 
-prontera,123,83,5	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit2	728
-rachel,149,138,5	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit3	728
-moc_ruins,75,162,5	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit4	728
-aldebaran,151,109,5	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit5	728
-lighthalzen,146,90,7	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit6	728
+OnInit:
+	// Configuration
+	// *****************************************************
+	// Battleground Rotation - Main NPC name
+	setarray .BG_Arenas$[0],	     "Flavius_CTF",  "Tierra_EOS",     "Tierra_TI",     "Flavius_TD","Tierra_Boss","Conquest",   "Flavius_SC";//,"Tierra_DOM",    "Rush";
+	// Battleground Arena Name - for announcements
+	setarray .BG_Names$[0],		"Capture the Flag","Eye of Storm","Triple Inferno","Team DeathMatch",    "Bossnia","Conquest","Stone Control";//,"Domination",    "Rush";
+	// Minimum Players to start the BG
+	setarray .BG_Min[0],	                         1,             1,               1,                1,            1,        1,              5;//,           5,        15;
+	// Maximum Players per Team
+	setarray .BG_Max[0],	                        35,            35,              35,               35,           35,        50,             35;//,          35,        30;
+	// BG Message Colors
+	setarray .BG_Color$[0],	                "0xA0522D",    "0x4169E1",      "0x696969",       "0x808000",   "0x483D8B","0xFFA500",     "0x9ACD32";//,  "0x4169E1","0xDDA0DD";
+	// Team Building Mode : 0 = Lineal | 1 = Random | 2 = Class Priority
+	set .TeamMode, 0;
+	// Main Code
+	// *****************************************************
+	set .BG_Count, getarraysize(.BG_Arenas$);
+	set .BG_Queue, bg_queue_create("Battleground Arena","BG_Queue_Join::OnJoinEvent");
+	// Move to Next Arena
+	if( $BG_Index >= .BG_Count ) set $BG_Index,0; // Restart Rotation
+	set .BG_Arena$,.BG_Arenas$[$BG_Index];
+	set .Ready, 1;
+	donpcevent "BG_Queue_Join::OnDoHappyHour";
+	initnpctimer; // Rotation if BG don't start... Comment if you don't want to use this method
 
-// Info Board
-// *********************************************************************
-bat_room,163,154,2	script	Battleground Info Board	837,{
-	if( $@FlaviusCTF == 1 )
-		mes "^A0522DFlavious CTF^000000 * ^FF0000(" + bg_get_data($@FlaviusCTF_id2, 0) + ")^000000 vs ^0000FF(" + bg_get_data($@FlaviusCTF_id1, 0) + ")^000000";
-	else
-		mes "^A0522DFlavious CTF^000000 * ^808080idle^000000";
-	if( $@FlaviusTD == 1 )
-		mes "^808000Flavious TD^000000 * ^FF0000(" + bg_get_data($@FlaviusTD_id2, 0) + ")^000000 vs ^0000FF(" + bg_get_data($@FlaviusTD_id1, 0) + ")^000000";
-	else
-		mes "^808000Flavious TD^000000 * ^808080idle^000000";
-	if( $@FlaviusSC == 1 )
-		mes "^9ACD32Flavious SC^000000 * ^FF0000(" + bg_get_data($@FlaviusSC_id2, 0) + ")^000000 vs ^0000FF(" + bg_get_data($@FlaviusSC_id1, 0) + ")^000000";
-	else
-		mes "^9ACD32Flavious SC^000000 * ^808080idle^000000";
-	if( $@TierraEOS == 1 )
-		mes "^4169E1Tierra EoS^000000 * ^FF0000(" + bg_get_data($@TierraEOS_id2, 0) + ")^000000 vs ^0000FF(" + bg_get_data($@TierraEOS_id1, 0) + ")^000000";
-	else
-		mes "^4169E1Tierra EoS^000000 * ^808080idle^000000";
-	if( $@TierraBoss == 1 )
-		mes "^483D8BTierra Boss^000000 * ^FF0000(" + bg_get_data($@TierraBoss_id2, 0) + ")^000000 vs ^0000FF(" + bg_get_data($@TierraBoss_id1, 0) + ")^000000";
-	else
-		mes "^483D8BTierra Boss^000000 * ^808080idle^000000";
-	if( $@TierraTI == 1 )
-		mes "^696969Tierra TI^000000 * ^008000(" + bg_get_data($@TierraTI_id3, 0) + ")^000000 vs ^FF0000(" + bg_get_data($@TierraTI_id2, 0) + ")^000000 vs ^0000FF(" + bg_get_data($@TierraTI_id1, 0) + ")^000000";
-	else
-		mes "^696969Tierra TI^000000 * ^808080idle^000000";
-	if( $@Conquest == 1 )
-		mes "^FFA500Conquest^000000 * ^FF0000(" + bg_get_data($@Conquest_id2, 0) + ")^000000 vs ^0000FF(" + bg_get_data($@Conquest_id1, 0) + ")^000000";
-	else
-		mes "^FFA500Conquest^000000 * ^808080idle^000000";
-	if( $@Rush == 1 )
-		mes "^DDA0DDRush^000000 * ^FF0000(" + bg_get_data($@Rush_id2, 0) + ")^000000 vs ^0000FF(" + bg_get_data($@Rush_id1, 0) + ")^000000";
-	else
-		mes "^DDA0DDRush^000000 * ^808080idle^000000";
-	close;
+	// Comment the next two lines if you don't want to allow @joinbg and @leavebg commands.
+	bindatcmd "joinbg","BG_Queue_Join::OnDoJoin";
+	bindatcmd "leavebg","BG_Queue_Join::OnDoLeave";
+	end;
 
-OnFri0600:
+OnDoJoin: // @joinbg
+	if( checkquest(8506,PLAYTIME) == 2 )
+		erasequest 8506;
+
+	if( checkquest(8506,PLAYTIME) != -1 )
+	{
+		dispbottom "[You are a Deserter. You can't participate until the indicator goes off]";
+		end;
+	}
+
+	bg_queue_join .BG_Queue;
+	end;
+
+OnDoLeave: // @leavebg
+	bg_queue_leave .BG_Queue;
+	end;
+
+OnRotate:
+OnTimer120000: // Rotation if BG don't start... Comment if you don't want to use this method. 120 = 2 Minutes
+	set $@BG_Status, 0;
+	// Warps Teams
+	bg_warp $@BG_Team1,"bat_room",155,150;
+	bg_warp $@BG_Team2,"bat_room",155,150;
+	bg_warp $@BG_Team3,"bat_room",155,150;
+	// Destroy Teams
+	bg_destroy $@BG_Team1; set $@BG_Team1, 0;
+	bg_destroy $@BG_Team2; set $@BG_Team2, 0;
+	bg_destroy $@BG_Team3; set $@BG_Team3, 0;
+
+	// Move to Next Arena
+	if( set($BG_Index,$BG_Index + 1) >= .BG_Count )
+		set $BG_Index,0; // Restart Rotation
+
+	set .BG_Arena$,.BG_Arenas$[$BG_Index];
+	initnpctimer; // Rotation if BG don't start... Comment if you don't want to use this method
+
+	// Trigger the Event - Maybe people is waiting...
+OnJoinEvent:
+	if( $@BG_Status == 2 )
+		end; // BG Ending... Must wait until OnRotate is called
+
+	set .@Queue_Count, bg_queue_data(.BG_Queue,0);
+	switch( $@BG_Status )
+	{
+	case 0: // Idle - Ready to Start
+		if( .BG_Arena$ == "Tierra_TI" )
+			set .@Req, .BG_Min[$BG_Index] * 3;
+		else
+			set .@Req, .BG_Min[$BG_Index] * 2;
+
+		if( .@Queue_Count >= .@Req )
+		{
+			donpcevent .BG_Arena$ + "::OnBuildTeams";
+
+			// Fill Teams with Queue Members			
+			if( .BG_Arenas$[$BG_Index] == "Tierra_TI" )
+				bg_queue2teams .BG_Queue,.BG_Max[$BG_Index],.TeamMode,$@BG_Team1,$@BG_Team2,$@BG_Team3;
+			else
+				bg_queue2teams .BG_Queue,.BG_Max[$BG_Index],.TeamMode,$@BG_Team1,$@BG_Team2;
+
+			stopnpctimer; // Rotation if BG don't start... Comment if you don't want to use this method
+
+			set $@BG_Status,1;
+			set .@msg$, "Battleground -- " + .BG_Names$[$BG_Index] + " -- Begining";
+			announce .@msg$,0,.BG_Color$[$BG_Index];
+
+			donpcevent .BG_Arena$ + "::OnReady";
+		}
+		else
+		{
+			set .@msg$, "Battleground -- " + .BG_Names$[$BG_Index] + " -- " + (.@Req - .@Queue_Count) + " more players to start.";
+			announce .@msg$,0,.BG_Color$[$BG_Index];
+		}
+		break;
+	case 1: // Running - Others can join
+		if( .@Queue_Count > 0 )
+		{
+			if( .BG_Arena$ == "Tierra_TI" )
+			{
+				bg_balance_teams .BG_Queue,.BG_Max[$BG_Index],$@BG_Team1,$@BG_Team2,$@BG_Team3;
+				set .@BG_Count1, bg_get_data($@BG_Team1,0);
+				set .@BG_Count2, bg_get_data($@BG_Team2,0);
+				set .@BG_Count3, bg_get_data($@BG_Team3,0);
+				set .@msg$, "Battleground -- " + .BG_Names$[$BG_Index] + " -- B: " + .@BG_Count1 + "/" + .BG_Max[$BG_Index] + ", R: " + .@BG_Count2 + "/" + .BG_Max[$BG_Index] + ", G: " + .@BG_Count3 + "/" + .BG_Max[$BG_Index] + " (Playing)";
+			}
+			else
+			{
+				bg_balance_teams .BG_Queue,.BG_Max[$BG_Index],$@BG_Team1,$@BG_Team2;
+				set .@BG_Count1, bg_get_data($@BG_Team1,0);
+				set .@BG_Count2, bg_get_data($@BG_Team2,0);
+				set .@msg$, "Battleground -- " + .BG_Names$[$BG_Index] + " -- B: " + .@BG_Count1 + "/" + .BG_Max[$BG_Index] + ", R: " + .@BG_Count2 + "/" + .BG_Max[$BG_Index] + " (Playing)";
+			}
+
+			announce .@msg$,0,.BG_Color$[$BG_Index];
+		}
+		break;
+	}
+	end;
+
+OnFri0600: // Friday, 6 a.m.
 	rankreset 1; // Ranking Reset
 	end;
 
 // BattleGround Happy Hour
-OnInit:
+OnDoHappyHour:
+OnClock1600:
 OnClock1800:
 OnClock2000:
-OnClock2100:
-OnClock2300:
+OnClock2200:
 	switch( gettime(4) )
 	{
 	case 1:
 	case 3:
 	case 5:
-		if( gettime(3) >= 21 && gettime(3) < 23 )
+		if( gettime(3) >= 20 && gettime(3) < 22 )
 		{
-			announce "-- La Happy Hour de Battleground ha comenzado | Ranked Arena Mode --",0,0x00FF00;
+			announce "-- Battleground Happy Hour has begun | Ranked Arena Mode --",0,0x00FF00;
 			setbattleflag "bg_reward_rates",120; // +20% Reward Rates
 			setbattleflag "bg_ranked_mode",1;
 			end;
 		}
 		
-		if( gettime(3) == 23 )
+		if( gettime(3) == 22 )
 		{
-			announce "-- La Happy Hour de Battleground ha terminado | Regular Arena Mode --",0,0x00BFFF;
+			announce "-- Battleground Happy Hour is over | Regular Arena Mode --",0,0x00BFFF;
 			setbattleflag "bg_reward_rates",100; // Normal Rates
 			setbattleflag "bg_ranked_mode",0;
 			end;
@@ -122,17 +184,17 @@ OnClock2300:
 	case 2:
 	case 4:
 	case 6:
-		if( gettime(3) >= 18 && gettime(3) < 20 )
+		if( gettime(3) >= 16 && gettime(3) < 18 )
 		{
-			announce "-- La Happy Hour de Battleground ha comenzado | Ranked Arena Mode --",0,0x00FF00;
+			announce "-- Battleground Happy Hour has begun | Ranked Arena Mode --",0,0x00FF00;
 			setbattleflag "bg_reward_rates",120; // +20% Reward Rates
 			setbattleflag "bg_ranked_mode",1;
 			end;
 		}
 		
-		if( gettime(3) == 20 )
+		if( gettime(3) == 18 )
 		{
-			announce "-- La Happy Hour de Battleground ha terminado | Regular Arena Mode --",0,0x00BFFF;
+			announce "-- Battleground Happy Hour is over | Regular Arena Mode --",0,0x00BFFF;
 			setbattleflag "bg_reward_rates",100; // Normal Rates
 			setbattleflag "bg_ranked_mode",0;
 			end;
@@ -140,10 +202,233 @@ OnClock2300:
 		break;
 	}
 	end;
-
 }
 
-/*
+// Registration NPC
+// *********************************************************************
+-	script	BG_Register	-1,{
+
+	if( getvariableofnpc(.Ready,"BG_Queue_Join") == 0 )
+		donpcevent "BG_Queue_Join::OnInit";
+
+	mes "[^FFA500Battle Recruiter^000000]";
+	mes "This is the Battleground Information and Registration service.";
+	mes "What do you want to do?";
+	next;
+	switch( select("Register:Party Register:Leave Queue:^0000FFWarp to Battle Room^000000:Battleground Help") )
+	{
+	case 1:
+		if( checkquest(8506,PLAYTIME) == 2 )
+			erasequest 8506;
+		if( checkquest(8506,PLAYTIME) != -1 )
+		{
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "You are a Deserter. You can't participate until the indicator goes off";
+			close;
+		}
+
+		mes "[^FFA500Battle Recruiter^000000]";
+		mes "Let's proceed with the registration...";
+		mes "You must wait on any City until BG starts.";
+		mes "Close this window to continue...";
+		close2;
+		bg_queue_join getvariableofnpc(.BG_Queue,"BG_Queue_Join");
+		end;
+	case 2:
+		if( getcharid(1) == 0 )
+		{
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "You are not on a Party.";
+			close;
+		}
+		
+		mes "[^FFA500Battle Recruiter^000000]";
+		mes "Let's proceed with the registration...";
+		mes "You must wait on any City until BG starts.";
+		mes "Close this window to continue...";
+		close2;
+		bg_queue_partyjoin getcharid(1),getvariableofnpc(.BG_Queue,"BG_Queue_Join");
+		end;
+	case 3:
+		mes "[^FFA500Battle Recruiter^000000]";
+		mes "If you are registered, you will be removed.";
+		mes "Are you sure?";
+		next;
+		if( select("Yes, leave queue:No, I will stay") == 2 )
+		{
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Ok, nothing to change.";
+			close;
+		}
+		
+		mes "[^FFA500Battle Recruiter^000000]";
+		mes "Close this window to continue...";
+		close2;
+		bg_queue_leave getvariableofnpc(.BG_Queue,"BG_Queue_Join");
+		end;
+	case 4:
+		mes "[^FFA500Battle Recruiter^000000]";
+		mes "May the War God bless you.";
+		close2;
+		warp "bat_room",155,150;
+		end;
+	case 5:
+		mes "[^FFA500Battle Recruiter^000000]";
+		mes "Tell me... what battleground you don't understand?";
+		next;
+		switch( select("Capture the Flag:Team DeathMatch:Stone Control:Eye of Storm:Bossnia:Domination:Triple Inferno:Conquest:Rush") )
+		{
+		case 1:
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "The objective of the Flavius Battle CTF is to score 3 points before your enemy, by capture their Flag.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "To capture a Flag you need to take the enemy flag, and bring it to your base flag.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "If your base flag is captured too, you need to kill the flag carrier and take the flag back to your base.";
+			break;
+		case 2:
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Kill all the enemy players to let their Team without points.";
+			mes "Protect our army.";
+			break;
+		case 3:
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Take the Stones in the middle of the battlefield and put in on your base, in the Stone Points.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Each Stone will give points to your team. First team reach 99 points wins the game.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Protect your stones from to be captured by the enemy.";
+			break;
+		case 4:
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "There are two bases, North and South which teams can capture by holding position on the Base more than the other team.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Each base will give you points each 5 seconds of Domination. If your Team control both bases the amount of points increases.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "To get aditional points, in the middle there is a Flag spawn, capture it and put it on any of your team Bases.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "The first Team reach 99 points wins the match.";
+			break;
+		case 5:
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Attack the enemy base and destroy each MVP Guardian. To do damage to the guardian your team must capture the Balance Flag in the middle base.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Each team have 5 guardian to be protected or killed.";
+			break;
+		case 6:
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "There are three bases, North, Center and South which teams can capture by holding position on the Base more than the other team.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Each base will give you points each 5 seconds of Domination.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "The first Team reach 99 points wins the match.";
+			break;
+		case 7:
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "There are 3 teams in the battlefield, your team and other 2 enemies.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Kill the enemy players, collect the skulls and bring then to the Sacrifice Totem to win points.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "You can collect your own team skulls and bring then to your Sacrifice Totem to avoid other teams to score.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "If you get killed all your skulls will be drop to the floor, including your own skull. First Team to get 80 points wins the battle.";
+			break;
+		case 8:
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "If you are Attacking, destroy the enemy defenses and it's Flag.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "If you are Defending, protect your castle defenses and the Flag.";
+			break;
+		case 9:
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Fight to capture the Castle and organize your team to defend it.";
+			next;
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "If you fail on the first capture, kill the defender and take it for your team.";
+			break;
+		}
+		close;
+	}
+	end;
+}
+
+bat_room,160,150,3	duplicate(BG_Register)	Battle Recruiter#bat	728
+prontera,155,180,4	duplicate(BG_Register)	Battle Recruiter#prt	728
+
+// General Guillaume
+// *********************************************************************
+bat_room,160,159,3	script	General Guillaume	420,{
+	cutin "bat_kiyom2",2;
+	mes "[General Guillaume]";
+	mes "Hot-blooded adventurer, we need your ability to win this battle.";
+	next;
+	cutin "bat_kiyom1",2;
+	mes "[General Guillaume]";
+	mes "Our great king, Marcel Marollo VII, is very sick lately. His Majesty has declared that he chosen either me or Prince Croix as the next king amongst his 9 sons.";
+	next;
+	mes "[General Guillaume]";
+	mes "Two kings can't share a nation!";
+	mes "Only the one victorious from His Majesty's appointed battle will be enthroned.";
+	next;
+	mes "[General Guillaume]";
+	mes "This is however, not just a battle between us. This battle will determine the future of this country. I pledge on my honor to prove that I'm the one who can protect this Maroll from outside threats.";
+	next;
+	mes "[General Guillaume]";
+	mes "I'll be the one who will capture the flag!";
+	close2;
+	cutin "",255;
+	end;
+}
+
+// General Croix
+// *********************************************************************
+bat_room,160,140,3	script	Prince Croix	416,{
+	cutin "bat_crua1",2;
+	mes "[Prince Croix]";
+	mes "Wise adventurer, why don't you lend us your power for victory?";
+	next;
+	cutin "bat_crua2",2;
+	mes "[Prince Croix]";
+	mes "I do not wish to shed blood, but I have no choice but to fight for the possibility of peace and for the sake of my people.";
+	next;
+	mes "[Prince Croix]";
+	mes "General Guillaume may have an advantage in this battle as he is the great general of Maroll, but that doesn't automatically mean he'll win. I want to win this battle so that I can grant a better future for my people.";
+	next;
+	mes "[Prince Croix]";
+	mes "For Maroll!";
+	close2;
+	cutin "",255;
+	end;
+}
+
+// Guard Dummy
+// *********************************************************************
+
+bat_room,161,141,3	script	Prince Croix's Aid::bat_aid	415,{ end; }
+bat_room,161,139,3	duplicate(bat_aid)	Prince Croix's Aid::bat_aid2	415
+bat_room,161,160,3	duplicate(bat_aid)	General Guillaume's Aid::bat_aid3	419
+bat_room,161,158,3	duplicate(bat_aid)	General Guillaume's Aid::bat_aid4	419
+
+// Flags
+// *********************************************************************
+
+-	script	Guillaume camp#bat	973,{ end; }
+-	script	Croix camp#bat	974,{ end; }
+
 // BattleGround Warper - Exit
 // *********************************************************************
 
@@ -212,1962 +497,7 @@ bat_room,148,147,4	script	Kafra Staff::kaf_bat	861,{
 	cutin "kafra_09",2;
 	callfunc "F_Kafra",0,2,1,150,0;
 }
-*/
 
-// General Guillaume
-// *********************************************************************
-bat_room,160,159,3	script	General Guillaume	420,{
-	cutin "bat_kiyom2",2;
-	mes "[General Guillaume]";
-	mes "Hot-blooded adventurer, we need your ability to win this battle.";
-	next;
-	cutin "bat_kiyom1",2;
-	mes "[General Guillaume]";
-	mes "Our great king, Marcel Marollo VII, is very sick lately. His Majesty has declared that he chosen either me or Prince Croix as the next king amongst his 9 sons.";
-	next;
-	mes "[General Guillaume]";
-	mes "Two kings can't share a nation!";
-	mes "Only the one victorious from His Majesty's appointed battle will be enthroned.";
-	next;
-	mes "[General Guillaume]";
-	mes "This is however, not just a battle between us. This battle will determine the future of this country. I pledge on my honor to prove that I'm the one who can protect this Maroll from outside threats.";
-	next;
-	if( select("Yes, I want to join you.:End Conversation") == 2 )
-	{
-		mes "[General Guillaume]";
-		mes "I'll be the one who will capture the flag!";
-		close2;
-		cutin "",255;
-		end;
-	}
-	cutin "bat_kiyom2",2;
-	mes "[General Guillaume]";
-	mes "Welcome to my army, comrade.";
-	mes "Your eyes tell me that you're a soldier that I can trust.";
-	set Bat_Team,1;
-	next;
-	mes "[General Guillaume]";
-	mes "Now, go upstairs and apply for battle with your comrades. I'm sure they'll welcome you whole-heartedly!";
-	close2;
-	cutin "",255;
-	end;
-}
-
-// General Croix
-// *********************************************************************
-bat_room,160,140,3	script	Prince Croix	416,{
-	cutin "bat_crua1",2;
-	mes "[Prince Croix]";
-	mes "Wise adventurer, why don't you lend us your power for victory?";
-	next;
-	cutin "bat_crua2",2;
-	mes "[Prince Croix]";
-	mes "I do not wish to shed blood, but I have no choice but to fight for the possibility of peace and for the sake of my people.";
-	next;
-	mes "[Prince Croix]";
-	mes "General Guillaume may have an advantage in this battle as he is the great general of Maroll, but that doesn't automatically mean he'll win. I want to win this battle so that I can grant a better future for my people.";
-	next;
-	if( select("Yes, I want to join you!:End Conversation") == 2 )
-	{
-		mes "[Prince Croix]";
-		mes "For Maroll!";
-		close2;
-		cutin "",255;
-		end;
-	}
-	mes "[Prince Croix]";
-	mes "Thank you so much. I feel like I can win with the help of adventurers like you. Now, please go downstairs and join your comrades in sharpening their skills to fight the enemy!";
-	set Bat_Team,2;
-	close2;
-	cutin "",255;
-	end;
-}
-
-// *********************************************************************
-// Tierra Valley - Join Battle NPC's
-// *********************************************************************
-
-bat_room,156,178,5	script	Tierra Valley Officer#1	418,{
-	mes "[Tierra Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-	
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About Tierra Valley:End Conversation") )
-	{
-	case 1:
-		mes "[Tierra Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8500,PLAYTIME) == 2 ) erasequest 8500;
-		if( checkquest(8500,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",85,224;
-		end;
-	case 2:
-		mes "[Tierra Officer]";
-		mes "Tierra Gorge is a very steep canyon with two forts residing in the north and south ends of the map.";
-		next;
-		mes "[Tierra Officer]";
-		mes "There is a ration depot for the Guillaume and Croix armies at the 11 and 8 o'clock directions.";
-		next;
-		mes "[Tierra Officer]";
-		mes "The battle starts at your army's ship, and the goal is to advance and destroy your enemy's rations depot faster than they can destroy yours.";
-		mes "";
-		mes "The army that captures the neutral flag in the center of the battlefield will be rewarded with extra regeneration points, meaning their soldiers will resurrect more than the other side, giving them an advantage.";
-		next;
-		mes "[Tierra Officer]";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-bat_room,159,178,5	script	Tierra Valley Officer#2	414,{
-	mes "[Tierra Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About Tierra Valley:End Conversation") )
-	{
-	case 1:
-		mes "[Tierra Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8500,PLAYTIME) == 2 ) erasequest 8500;
-		if( checkquest(8500,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",85,208;
-		end;
-	case 2:
-		mes "[Tierra Officer]";
-		mes "Tierra Gorge is a very steep canyon with two forts residing in the north and south ends of the map.";
-		next;
-		mes "[Tierra Officer]";
-		mes "There is a ration depot for the Guillaume and Croix armies at the 11 and 8 o'clock directions.";
-		next;
-		mes "[Tierra Officer]";
-		mes "The battle starts at your army's ship, and the goal is to advance and destroy your enemy's rations depot faster than they can destroy yours.";
-		mes "";
-		mes "The army that captures the neutral flag in the center of the battlefield will be rewarded with extra regeneration points, meaning their soldiers will resurrect more than the other side, giving them an advantage.";
-		next;
-		mes "[Tierra Officer]";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-
-}
-
-// *********************************************************************
-// Flavius CTF - Join Battle NPC's
-// *********************************************************************
-bat_room,159,121,1	script	Flavius CTF Officer#1	418,{
-	mes "[Flavius CTF Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-	
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About Flavius CTF:End Conversation") )
-	{
-	case 1:
-		mes "[Flavius CTF Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8504,PLAYTIME) == 2 ) erasequest 8504;
-		if( checkquest(8504,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",57,77;
-		end;
-	case 2:
-		mes "[Flavius CTF Officer]";
-		mes "The objective of the Flavius Battle CTF is to score 3 points before your enemy, by capture their Flag.";
-		next;
-		mes "[Flavius CTF Officer]";
-		mes "To capture a Flag you need to take the enemy flag, and bring it to your base flag.";
-		next;
-		mes "[Flavius CTF Officer]";
-		mes "If your base flag is captured too, you need to kill the flag carrier and take the flag back to your base.";
-		next;
-		mes "[Flavius CTF Officer]";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-bat_room,156,121,1	script	Flavius CTF Officer#2	414,{
-	mes "[Flavius CTF Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About Flavius CTF:End Conversation") )
-	{
-	case 1:
-		mes "[Flavius CTF Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8504,PLAYTIME) == 2 ) erasequest 8504;
-		if( checkquest(8504,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",57,94;
-		end;
-	case 2:
-		mes "[Flavius CTF Officer]";
-		mes "The objective of the Flavius Battle CTF is to score 3 points before your enemy, by capture their Flag.";
-		next;
-		mes "[Flavius CTF Officer]";
-		mes "To capture a Flag you need to take the enemy flag, and bring it to your base flag.";
-		next;
-		mes "[Flavius CTF Officer]";
-		mes "If your base flag is captured too, you need to kill the flag carrier and take the flag back to your base.";
-		next;
-		mes "[Flavius CTF Officer]";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// Tierra EoS - Join Battle NPC's
-// *********************************************************************
-bat_room,167,178,5	script	Tierra EoS Officer#1	418,{
-	mes "[Tierra EoS Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-	
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About Tierra EoS:End Conversation") )
-	{
-	case 1:
-		mes "[Tierra EoS Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8501,PLAYTIME) == 2 ) erasequest 8501;
-		if( checkquest(8501,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",85,77;
-		end;
-	case 2:
-		mes "[Tierra EoS Officer]";
-		mes "There are two bases, North and South which teams can capture by holding position on the Base more than the other team.";
-		next;
-		mes "[Tierra EoS Officer]";
-		mes "Each base will give you points each 5 seconds of Domination. If your Team control both bases the amount of points increases.";
-		next;
-		mes "[Tierra EoS Officer]";
-		mes "To get aditional points, in the middle there is a Flag spawn, capture it and put it on any of your team Bases.";
-		next;
-		mes "[Tierra EoS Officer]";
-		mes "The first Team reach 99 points wins the match.";
-	case 3:
-		close;
-	}
-
-}
-
-bat_room,164,178,5	script	Tierra EoS Officer#2	414,{
-	mes "[Tierra EoS Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About Tierra EoS:End Conversation") )
-	{
-	case 1:
-		mes "[Tierra EoS Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8501,PLAYTIME) == 2 ) erasequest 8501;
-		if( checkquest(8501,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",85,94;
-		end;
-	case 2:
-		mes "[Tierra EoS Officer]";
-		mes "There are two bases, North and South which teams can capture by holding position on the Base more than the other team.";
-		next;
-		mes "[Tierra EoS Officer]";
-		mes "Each base will give you points each 5 seconds of Domination. If your Team control both bases the amount of points increases.";
-		next;
-		mes "[Tierra EoS Officer]";
-		mes "To get aditional points, in the middle there is a Flag spawn, capture it and put it on any of your team Bases.";
-		next;
-		mes "[Tierra EoS Officer]";
-		mes "The first Team reach 99 points wins the match.";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// Flavius - Join Battle NPC's
-// *********************************************************************
-
-bat_room,167,121,1	script	Flavius Officer#1	418,{
-	mes "[Flavius Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stupid Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About Flavius:End Conversation") )
-	{
-	case 1:
-		mes "[Flavius Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8503,PLAYTIME) == 2 ) erasequest 8503;
-		if( checkquest(8503,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",253,77;
-		end;
-	case 2:
-		mes "[Flavius Officer]";
-		mes "The objective of the Flavius Battle is to score 2 points before your enemy by destroying their crystal.";
-		next;
-		mes "[Flavius Officer]";
-		mes "The crystals for both armies are protected by special barricades that cannot be destroyed by direct attacks.";
-		next;
-		mes "[Flavius Officer]";
-		mes "But they can be removed by destroying the Guardians that protect the enemy army base.";
-		next;
-		mes "[Flavius Officer]";
-		mes "The crystals are immune to every type of skill; your physical attacks are the only choice for destroying your enemy's crystal.";
-		next;
-		mes "[Flavius Officer]";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-bat_room,164,121,1	script	Flavius Officer#2	414,{
-	mes "[Flavius Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About Flavius:End Conversation") )
-	{
-	case 1:
-		mes "[Flavius Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8503,PLAYTIME) == 2 ) erasequest 8503;
-		if( checkquest(8503,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",253,94;
-		end;
-	case 2:
-		mes "[Croix Knight]";
-		mes "The objective of the Flavius Battle is to score 2 points before your enemy by destroying their crystal.";
-		next;
-		mes "[Croix Knight]";
-		mes "The crystals for both armies are protected by special barricades that cannot be destroyed by direct attacks.";
-		next;
-		mes "[Croix Knight]";
-		mes "But they can be removed by destroying the Guardians that protect the enemy army base.";
-		next;
-		mes "[Croix Knight]";
-		mes "The crystals are immune to every type of skill; your physical attacks are the only choice for destroying your enemy's crystal.";
-		next;
-		mes "[Croix Knight]";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// KvM A - Join Battle NPC's
-// *********************************************************************
-
-bat_room,175,178,5	script	KVM-A [80-99] Officer#1	418,{
-	mes "[KVM Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About KvM:End Conversation") )
-	{
-	case 1:
-		mes "[KVM Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: This arena is for players with baselevel from 80 to 99.";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-		if( checkquest(6025,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",253,224;
-		end;
-	case 2:
-		mes "[KVM Officer]";
-		mes "To win the Battle of Kriger Von Midgard you and your team must kill all the other opponents before all of you die.";
-		next;
-		mes "[KVM Officer]";
-		mes "The first team to lose all their soldiers loses.";
-		next;
-		mes "[KVM Officer]";
-		mes "Since you cannot come back to battle after you die, taking care on the battlefield is essential.";
-		next;
-		mes "[KVM Officer]";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-bat_room,172,178,5	script	KVM-A [80-99] Officer#2	414,{
-	mes "[KVM Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About KvM:End Conversation") )
-	{
-	case 1:
-		mes "[KVM Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: This arena is for players with baselevel from 80 to 99.";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-		if( checkquest(6025,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",253,208;
-		end;
-	case 2:
-		mes "[KVM Officer]";
-		mes "To win the Battle of Kriger Von Midgard you and your team must kill all the other opponents before all of you die.";
-		next;
-		mes "[KVM Officer]";
-		mes "The first team to lose all their soldiers loses.";
-		next;
-		mes "[KVM Officer]";
-		mes "Since you cannot come back to battle after you die, taking care on the battlefield is essential.";
-		next;
-		mes "[KVM Officer]";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// KvM B - Join Battle NPC's
-// *********************************************************************
-
-bat_room,175,121,1	script	KVM-B [80-99] Officer#1	418,{
-	mes "[KVM Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About KvM:End Conversation") )
-	{
-	case 1:
-		mes "[KVM Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: This arena is for players with baselevel from 80 to 99.";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-		if( checkquest(6025,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",225,224;
-		end;
-	case 2:
-		mes "[KVM Officer]";
-		mes "To win the Battle of Kriger Von Midgard you and your team must kill all the other opponents before all of you die.";
-		next;
-		mes "[KVM Officer]";
-		mes "The first team to lose all their soldiers loses.";
-		next;
-		mes "[KVM Officer]";
-		mes "Since you cannot come back to battle after you die, taking care on the battlefield is essential.";
-		next;
-		mes "[KVM Officer]";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-bat_room,172,121,1	script	KVM-B [80-99] Officer#2	414,{
-	mes "[KVM Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About KvM:End Conversation") )
-	{
-	case 1:
-		mes "[KVM Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: This arena is for players with baselevel from 80 to 99.";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-		if( checkquest(6025,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",225,208;
-		end;
-	case 2:
-		mes "[KVM Officer]";
-		mes "To win the Battle of Kriger Von Midgard you and your team must kill all the other opponents before all of you die.";
-		next;
-		mes "[KVM Officer]";
-		mes "The first team to lose all their soldiers loses.";
-		next;
-		mes "[KVM Officer]";
-		mes "Since you cannot come back to battle after you die, taking care on the battlefield is essential.";
-		next;
-		mes "[KVM Officer]";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// KvM C - Join Battle NPC's
-// *********************************************************************
-
-bat_room,151,178,5	script	KVM-C [80-99] Officer#1	418,{
-	mes "[KVM Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About KvM:End Conversation") )
-	{
-	case 1:
-		mes "[KVM Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: This arena is for players with baselevel from 80 to 99.";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-		if( checkquest(6025,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",197,224;
-		end;
-	case 2:
-		mes "[KVM Officer]";
-		mes "To win the Battle of Kriger Von Midgard you and your team must kill all the other opponents before all of you die.";
-		next;
-		mes "[KVM Officer]";
-		mes "The first team to lose all their soldiers loses.";
-		next;
-		mes "[KVM Officer]";
-		mes "Since you cannot come back to battle after you die, taking care on the battlefield is essential.";
-		next;
-		mes "[KVM Officer]";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-bat_room,148,178,5	script	KVM-C [80-99] Officer#2	414,{
-	mes "[KVM Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About KvM:End Conversation") )
-	{
-	case 1:
-		mes "[KVM Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: This arena is for players with baselevel from 80 to 99.";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-		if( checkquest(6025,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",197,208;
-		end;
-	case 2:
-		mes "[KVM Officer]";
-		mes "To win the Battle of Kriger Von Midgard you and your team must kill all the other opponents before all of you die.";
-		next;
-		mes "[KVM Officer]";
-		mes "The first team to lose all their soldiers loses.";
-		next;
-		mes "[KVM Officer]";
-		mes "Since you cannot come back to battle after you die, taking care on the battlefield is essential.";
-		next;
-		mes "[KVM Officer]";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// Duel Arena 1 vs 1 - Join Battle NPC's
-// *********************************************************************
-
-bat_room,151,121,1	script	Duel [80-99] Officer#1	418,{
-	mes "[Duel Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About Duel Arena:End Conversation") )
-	{
-	case 1:
-		mes "[Duel Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: This arena is for players with baselevel from 80 to 99.";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-		if( checkquest(6025,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",113,224;
-		end;
-	case 2:
-		mes "[Duel Officer]";
-		mes "To win the Duel Arena you must kill the other opponent before you die.";
-		next;
-		mes "[Duel Officer]";
-		mes "Since you cannot come back to battle after you die, taking care on the battlefield is essential.";
-		next;
-		mes "[Duel Officer]";
-		mes "This Arena is only available from 4p.m to 11p.m.";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-bat_room,148,121,1	script	Duel [80-99] Officer#2	414,{
-	mes "[Duel Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About Duel Arena:End Conversation") )
-	{
-	case 1:
-		mes "[Duel Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: This arena is for players with baselevel from 80 to 99.";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(6025,PLAYTIME) == 2 ) erasequest 6025;
-		if( checkquest(6025,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",113,208;
-		end;
-	case 2:
-		mes "[Duel Officer]";
-		mes "To win the Duel Arena you must kill the other opponent before you die.";
-		next;
-		mes "[Duel Officer]";
-		mes "Since you cannot come back to battle after you die, taking care on the battlefield is essential.";
-		next;
-		mes "[Duel Officer]";
-		mes "This Arena is only available from 4p.m to 11p.m.";
-		mes "Are you ready for battle? Then apply with the recruiter next to me!";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// Tierra Bossnia - Join Battle NPC's
-// *********************************************************************
-
-bat_room,143,178,5	script	Tierra Boss Officer#1	418,{
-	mes "[Tierra Boss Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-	
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About Tierra Boss:End Conversation") )
-	{
-	case 1:
-		mes "[Tierra Boss Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8502,PLAYTIME) == 2 ) erasequest 8502;
-		if( checkquest(8502,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",57,223;
-		end;
-	case 2:
-		mes "[Tierra Boss Officer]";
-		mes "Attack the enemy base and destroy the 3 Guardians. To do damage to the guardian our team must capture the Balance Flag in the middle base.";
-	case 3:
-		close;
-	}
-}
-
-bat_room,140,178,5	script	Tierra Boss Officer#2	414,{
-	mes "[Tierra Boss Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About Tierra Boss:End Conversation") )
-	{
-	case 1:
-		mes "[Tierra Boss Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8502,PLAYTIME) == 2 ) erasequest 8502;
-		if( checkquest(8502,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",57,208;
-		end;
-	case 2:
-		mes "[Tierra Boss Officer]";
-		mes "Attack the enemy base and destroy the 3 Guardians. To do damage to the guardian our team must capture the Balance Flag in the middle base.";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// Flavius TD - Join Battle NPC's
-// *********************************************************************
-
-bat_room,143,121,1	script	Flavius TD Officer#1	418,{
-	mes "[Flavius TD Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-	
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About Flavius TD:End Conversation") )
-	{
-	case 1:
-		mes "[Flavius TD Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8505,PLAYTIME) == 2 ) erasequest 8505;
-		if( checkquest(8505,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",113,78;
-		end;
-	case 2:
-		mes "[Flavius TD Officer]";
-		mes "Kill all the enemy players to let their Team without points.";
-		mes "Protect our army.";
-	case 3:
-		close;
-	}
-}
-
-bat_room,140,121,1	script	Flavius TD Officer#2	414,{
-	mes "[Flavius TD Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About Flavius TD:End Conversation") )
-	{
-	case 1:
-		mes "[Flavius TD Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8505,PLAYTIME) == 2 ) erasequest 8505;
-		if( checkquest(8505,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",113,93;
-		end;
-	case 2:
-		mes "[Flavius TD Officer]";
-		mes "Kill all the enemy players to let their Team without points.";
-		mes "Protect our army.";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// Castle Conquest - Join Battle NPC's
-// *********************************************************************
-
-bat_room,135,178,5	script	Conquest Officer#1	418,{
-	mes "[Conquest Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-	
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About Conquest:End Conversation") )
-	{
-	case 1:
-		mes "[Conquest Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8509,PLAYTIME) == 2 ) erasequest 8509;
-		if( checkquest(8509,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",169,77;
-		end;
-	case 2:
-		mes "[Conquest Officer]";
-		mes "If you are Attacking, destroy the enemy defenses and it's Flag.";
-		next;
-		mes "[Conquest Officer]";
-		mes "If you are Defending, protect your castle defenses and the Flag.";
-	case 3:
-		close;
-	}
-}
-
-bat_room,132,178,5	script	Conquest Officer#2	414,{
-	mes "[Conquest Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About Conquest:End Conversation") )
-	{
-	case 1:
-		mes "[Conquest Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8509,PLAYTIME) == 2 ) erasequest 8509;
-		if( checkquest(8509,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",169,94;
-		end;
-	case 2:
-		mes "[Conquest Officer]";
-		mes "If you are Attacking, destroy the enemy defenses and it's Emperium.";
-		next;
-		mes "[Conquest Officer]";
-		mes "If you are Defending, protect your castle defenses and the Emperium.";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// Flavius Stone Capture - Join Battle NPC's
-// *********************************************************************
-
-bat_room,135,121,1	script	Flavius SC Officer#1	418,{
-	mes "[Flavius SC Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-	
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About Flavius SC:End Conversation") )
-	{
-	case 1:
-		mes "[Flavius SC Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8507,PLAYTIME) == 2 ) erasequest 8507;
-		if( checkquest(8507,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",141,77;
-		end;
-	case 2:
-		mes "[Flavius SC Officer]";
-		mes "Take the Stones in the middle of the battlefield and put in on your base, in the Stone Points.";
-		next;
-		mes "[Flavius SC Officer]";
-		mes "Each Stone will give points to your team. First team reach 99 points wins the game.";
-		next;
-		mes "[Flavius SC Officer]";
-		mes "Protect your stones from to be captured by the enemy.";
-	case 3:
-		close;
-	}
-}
-
-bat_room,132,121,1	script	Flavius SC Officer#2	414,{
-	mes "[Flavius SC Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About Flavius SC:End Conversation") )
-	{
-	case 1:
-		mes "[Flavius SC Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8507,PLAYTIME) == 2 ) erasequest 8507;
-		if( checkquest(8507,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",141,94;
-		end;
-	case 2:
-		mes "[Flavius SC Officer]";
-		mes "Take the Stones in the middle of the battlefield and put in on your base, in the Stone Points.";
-		next;
-		mes "[Flavius SC Officer]";
-		mes "Each Stone will give points to your team. First team reach 99 points wins the game.";
-		next;
-		mes "[Flavius SC Officer]";
-		mes "Protect your stones from to be captured by the enemy.";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// Tierra TI - Join Battle NPC's
-// *********************************************************************
-
-bat_room,127,178,5	script	Tierra TI Officer#1	418,{
-	mes "[Tierra TI Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-	
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:^008000I will fight for my own^000000:About Tierra TI:End Conversation") )
-	{
-	case 1:
-	case 2:
-		mes "[Tierra TI Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8508,PLAYTIME) == 2 ) erasequest 8508;
-		if( checkquest(8508,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		if( @menu == 1 )
-		{
-			mes "Good luck!";
-			close2;
-			warp "bat_room",197,77;
-		}
-		else
-		{
-			mes "I hope you change your main when you see the power of the Guillaume Army.";
-			close2;
-			warp "bat_room",225,77;
-		}
-		end;
-	case 3:
-		mes "[Flavius TD Officer]";
-		mes "Kill all the enemy players. We need to kill 150 enemys to win the game";
-		mes "Protect our army.";
-	case 4:
-		close;
-	}
-}
-
-bat_room,124,178,5	script	Tierra TI Officer#2	414,{
-	mes "[Tierra TI Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:^008000I will fight for my own^000000:About Tierra TI:End Conversation") )
-	{
-	case 1:
-	case 2:
-		mes "[Tierra TI Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8508,PLAYTIME) == 2 ) erasequest 8508;
-		if( checkquest(8508,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		if( @menu == 1 )
-		{
-			mes "Good luck!";
-			close2;
-			warp "bat_room",197,94;
-		}
-		else
-		{
-			mes "I hope you change your main when you see the power of the Guillaume Army.";
-			close2;
-			warp "bat_room",225,77;
-		}
-		end;
-	case 3:
-		mes "[Tierra TI Officer]";
-		mes "Kill all the enemy players. We need to kill 150 enemys to win the game";
-		mes "Protect our army.";
-	case 4:
-		close;
-	}
-}
-
-// *********************************************************************
-// Castle Rush - Join Battle NPC's
-// *********************************************************************
-
-bat_room,127,121,1	script	Rush Officer#1	418,{
-	mes "[Rush Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-	
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About Rush:End Conversation") )
-	{
-	case 1:
-		mes "[Rush Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8510,PLAYTIME) == 2 ) erasequest 8510;
-		if( checkquest(8510,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",169,223;
-		end;
-	case 2:
-		mes "[Rush Officer]";
-		mes "Fight to capture the Castle and organize your team to defend it.";
-		next;
-		mes "[Rush Officer]";
-		mes "If you fail on the first capture, kill the defender and take it for your team.";
-	case 3:
-		close;
-	}
-}
-
-bat_room,124,121,1	script	Rush Officer#2	414,{
-	mes "[Rush Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About Rush:End Conversation") )
-	{
-	case 1:
-		mes "[Rush Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8510,PLAYTIME) == 2 ) erasequest 8510;
-		if( checkquest(8510,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",169,208;
-		end;
-	case 2:
-		mes "[Rush Officer]";
-		mes "Fight to capture the Castle and organize your team to defend it.";
-		next;
-		mes "[Rush Officer]";
-		mes "If you fail on the first capture, kill the defender and take it for your team.";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// Tierra Domination - Join Battle NPC's
-// *********************************************************************
-
-bat_room,180,178,5	script	Tierra DOM Officer#1	418,{
-	mes "[Tierra DOM Officer]";
-	if( Bat_Team == 2 )
-	{
-		mes "Get out of here you stinky Croix!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-	
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Guillaume Army to those stinky Croixs!";
-	next;
-	switch( select("I want to join your army!:About Tierra DOM:End Conversation") )
-	{
-	case 1:
-		mes "[Tierra DOM Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8511,PLAYTIME) == 2 ) erasequest 8511;
-		if( checkquest(8511,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",141,223;
-		end;
-	case 2:
-		mes "[Tierra DOM Officer]";
-		mes "There are three bases, North, Center and South which teams can capture by holding position on the Base more than the other team.";
-		next;
-		mes "[Tierra DOM Officer]";
-		mes "Each base will give you points each 5 seconds of Domination.";
-		next;
-		mes "[Tierra DOM Officer]";
-		mes "The first Team reach 99 points wins the match.";
-	case 3:
-		close;
-	}
-}
-
-bat_room,183,178,5	script	Tierra DOM Officer#2	414,{
-	mes "[Tierra DOM Officer]";
-	if( Bat_Team == 1 )
-	{
-		mes "Get out of here you stupid Guillaume!";
-		close;
-	}
-
-	if( Bat_Team == 0 )
-	{
-		mes "Please sign up for an army with Prince Croix or General Guillaume!";
-		close;
-	}
-
-	mes "Hello " + strcharinfo(0) + ", let's show the power of the Croix Army to those stinky Guillaumes!";
-	next;
-	switch( select("I want to join your army!:About Tierra DOM:End Conversation") )
-	{
-	case 1:
-		mes "[Tierra DOM Officer]";
-		if( BaseLevel < 80 )
-		{
-			mes "I'm very please you want to join our army, but I'm sorry: I can't send a rookie like you to die on the cruel battlefield";
-			close;
-		}
-		// Delay Check ============================================================
-		if( checkquest(8506,PLAYTIME) == 2 ) erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you are a ^FF0000Deserter of Battleground^000000. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		if( checkquest(8511,PLAYTIME) == 2 ) erasequest 8511;
-		if( checkquest(8511,PLAYTIME) != -1 )
-		{
-			mes "You have received an indicator showing that you've participated in this Battle. I can't let you participate until the indicator goes off.";
-			close;
-		}
-		// ========================================================================
-		mes "Good luck!";
-		close2;
-		warp "bat_room",141,208;
-		end;
-	case 2:
-		mes "[Tierra DOM Officer]";
-		mes "There are three bases, North, Center and South which teams can capture by holding position on the Base more than the other team.";
-		next;
-		mes "[Tierra DOM Officer]";
-		mes "Each base will give you points each 5 seconds of Domination.";
-		next;
-		mes "[Tierra DOM Officer]";
-		mes "The first Team reach 99 points wins the match.";
-	case 3:
-		close;
-	}
-}
-
-// *********************************************************************
-// Free Slots - Join Battle NPC's
-// *********************************************************************
-
-bat_room,180,121,1	script	Free BG Slot#15	418,{
-}
-
-bat_room,183,121,1	script	Free BG Slot#16	414,{
-}
-
-// Guard Dummy
-// *********************************************************************
-
-bat_room,161,141,3	script	Prince Croix's Aid::bat_aid	415,{ end; }
-bat_room,161,139,3	duplicate(bat_aid)	Prince Croix's Aid::bat_aid2	415
-bat_room,161,160,3	duplicate(bat_aid)	General Guillaume's Aid::bat_aid3	419
-bat_room,161,158,3	duplicate(bat_aid)	General Guillaume's Aid::bat_aid4	419
-
-// Flags
-// *********************************************************************
-
--	script	Guillaume camp#bat	973,{ end; }
--	script	Croix camp#bat	974,{ end; }
-
-// Exit from Registration
-// *********************************************************************
-
-// Flavius CTF
-bat_room,57,81,0	warp	bat1	1,1,bat_room,154,149
-bat_room,57,90,0	warp	bat2	1,1,bat_room,154,149
-// Tierra Boss
-bat_room,57,220,0	warp	bat3	1,1,bat_room,154,149
-bat_room,57,211,0	warp	bat4	1,1,bat_room,154,149
-// Tierra EOS
-bat_room,85,81,0	warp	bat5	1,1,bat_room,154,149
-bat_room,85,90,0	warp	bat6	1,1,bat_room,154,149
-// Tierra Valley
-bat_room,85,220,0	warp	bat7	1,1,bat_room,154,149
-bat_room,85,211,0	warp	bat8	1,1,bat_room,154,149
-// Flavius TD
-bat_room,113,81,0	warp	bat9	1,1,bat_room,154,149
-bat_room,113,90,0	warp	bat10	1,1,bat_room,154,149
-// KvM
-bat_room,113,220,0	warp	bat11	1,1,bat_room,154,149
-bat_room,113,211,0	warp	bat12	1,1,bat_room,154,149
-// Flavius SC
-bat_room,141,81,0	warp	bat13	1,1,bat_room,154,149
-bat_room,141,90,0	warp	bat14	1,1,bat_room,154,149
-// Tierra Domination
-bat_room,141,220,0	warp	bat15	1,1,bat_room,154,149
-bat_room,141,211,0	warp	bat16	1,1,bat_room,154,149
-// Castle Conquest
-bat_room,169,81,0	warp	bat17	1,1,bat_room,154,149
-bat_room,169,90,0	warp	bat18	1,1,bat_room,154,149
-// Castle Rush
-bat_room,169,220,0	warp	bat19	1,1,bat_room,154,149
-bat_room,169,211,0	warp	bat20	1,1,bat_room,154,149
-// Tierra Triple Infierno
-bat_room,197,81,0	warp	bat21	1,1,bat_room,154,149
-bat_room,197,90,0	warp	bat22	1,1,bat_room,154,149
-bat_room,225,81,0	warp	bat25	1,1,bat_room,154,149
-// KvM
-bat_room,197,220,0	warp	bat23	1,1,bat_room,154,149
-bat_room,197,211,0	warp	bat24	1,1,bat_room,154,149
-// Free BG
-bat_room,225,90,0	warp	bat26	1,1,bat_room,154,149
-// KvM
-bat_room,225,220,0	warp	bat27	1,1,bat_room,154,149
-bat_room,225,211,0	warp	bat28	1,1,bat_room,154,149
-// Flavius
-bat_room,253,81,0	warp	bat29	1,1,bat_room,154,149
-bat_room,253,90,0	warp	bat30	1,1,bat_room,154,149
-// KvM
-bat_room,253,220,0	warp	bat31	1,1,bat_room,154,149
-bat_room,253,211,0	warp	bat32	1,1,bat_room,154,149
-
-// Badges Repairman
-// *********************************************************************
-
-bat_room,138,144,5	script	Repairman#bg	99,{
-	callfunc "repairmain","Repairman";
-	end;
-}
-
-/*
 // Badges Exchange
 // *********************************************************************
 
@@ -2478,13 +808,12 @@ bat_room,163,146,2	script	Telma	701,{
 	mes "Here it is... Now take care and fight for the honor and glory of your prince.";
 	close;
 }
-*/
 
 bat_room,1,1,3,7828	sshop	BraveryExchanger	111,13036:100,13411:100,1425:100,1632:100,1634:100,1543:100,1924:100,1978:100,1574:100,1824:100,1183:100,1380:100,13305:100,1279:100,1739:100,13108:100,13172:100,2538:50,2539:50,2540:50,2435:50,2436:50,2437:50,2376:80,2377:80,2378:80,2379:80,2380:80,2381:80,2382:80,2720:500,2721:500,2722:500,2723:500,2724:500,2725:500,2733:500
 bat_room,1,1,3,7829	sshop	ValorExchanger	111,13037:100,13410:100,1633:100,1635:100,1542:100,1923:100,1977:100,1575:100,1823:100,1184:100,1482:100,1379:100,13306:100,1280:100,1738:100,13171:100,13173:100,13174:100,2538:50,2539:50,2540:50,2435:50,2436:50,2437:50,2376:80,2377:80,2378:80,2379:80,2380:80,2381:80,2382:80,2720:500,2721:500,2722:500,2723:500,2724:500,2725:500,2733:500
 bat_room,1,1,3,7773	sshop	HeroismExchanger	111,1187:2000,1281:2000,1282:2000,1310:2000,1382:2000,1426:2000,1486:2000,1546:2000,1576:2000,1577:2000,1640:2000,1641:2000,1743:2000,1826:2000,1827:2000,1927:2000,1981:2000,2002:2000,13042:2000,13110:2000,13176:2000,13177:2000,13178:2000,13179:2000,13307:2000,13416:2000,13417:2000,13418:2000,2394:840,2395:170,2396:25,2444:580,2445:70,2446:15,2549:630,2772:1200,2773:280,2774:40
 
-bat_room,160,150,3	script	Erundek	109,{
+bat_room,163,154,2	script	Erundek	109,{
 	mes "[Erundek]";
 	mes "Welcome, mighty warrior.";
 	mes "What can I do for you today ?";

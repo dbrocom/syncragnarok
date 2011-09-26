@@ -1015,6 +1015,25 @@ maze_room.rsw#Laberinto#
 
 gremios.rsw#Casa del Gremio#
 farm1.rsw#Granja 1#
+farm2.rsw#Granja 2#
+farm3.rsw#Granja 3#
+farm4.rsw#Granja 4#
+farm5.rsw#Granja 5#
+farm6.rsw#Granja 6#
+farm7.rsw#Granja 7#
+farm8.rsw#Granja 8#
+farm9.rsw#Granja 9#
+farm10.rsw#Granja 10#
+farmin1.rsw#Granja 1#
+farmin2.rsw#Granja 2#
+farmin3.rsw#Granja 3#
+farmin4.rsw#Granja 4#
+farmin5.rsw#Granja 5#
+farmin6.rsw#Granja 6#
+farmin7.rsw#Granja 7#
+farmin8.rsw#Granja 8#
+farmin9.rsw#Granja 9#
+farmin10.rsw#Granja 10#
 
 games_room.rsw#Sala de Juegos#
 bomberman.rsw#Bomberman#
