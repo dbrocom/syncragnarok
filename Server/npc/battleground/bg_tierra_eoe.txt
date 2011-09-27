@@ -209,6 +209,12 @@ OnValidateScore:
 	sleep 5000;
 	donpcevent "BG_Queue_Join::OnRotate";
 	bg_updatescore "bat_a02",0,0;
+	donpcevent "GEoSNBW::OnDisable";
+	donpcevent "GEoSCBW::OnDisable";
+	donpcevent "GEoSSBW::OnDisable";
+	donpcevent "CEoSNBW::OnDisable";
+	donpcevent "CEoSCBW::OnDisable";
+	donpcevent "CEoSSBW::OnDisable";
 	end;
 
 OnBreak:
@@ -361,6 +367,7 @@ OnTimer1000:
 			setnpcdisplay "North_Base","Guillaume Base",1912;
 			mapannounce "bat_a02","North Base captured by Guillaume Team",1,0x0000FF;
 			bg_rankpoints_area $@BG_Team1,"bat_a02",136,329,186,361,"eos_bases",1;
+			donpcevent "GEoSNBW::OnEnable";
 		}
 		else if( .Balance == -50 )
 		{
@@ -369,6 +376,7 @@ OnTimer1000:
 			setnpcdisplay "North_Base","Croix Base",1913;
 			mapannounce "bat_a02","North Base captured by Croix Team",1,0xFF0000;
 			bg_rankpoints_area $@BG_Team2,"bat_a02",136,329,186,361,"eos_bases",1;
+			donpcevent "CEoSNBW::OnEnable";
 		}
 	}
 	else if( .Owner == $@BG_Team1 )
@@ -378,6 +386,7 @@ OnTimer1000:
 			set .Owner, 0;
 			setnpcdisplay "North_Base","North Base",1911;
 			mapannounce "bat_a02","Guillaume Team lost control of the North Base",1,0x0000FF;
+			donpcevent "GEoSNBW::OnDisable";
 		}
 	}
 	else if( .Owner == $@BG_Team2 )
@@ -387,6 +396,7 @@ OnTimer1000:
 			set .Owner, 0;
 			setnpcdisplay "North_Base","North Base",1911;
 			mapannounce "bat_a02","Croix Team lost control of the North Base",1,0xFF0000;
+			donpcevent "CEoSNBW::OnDisable";
 		}
 	}
 
@@ -467,6 +477,7 @@ OnTimer1000:
 			setnpcdisplay "South_Base","Guillaume Base",1912;
 			mapannounce "bat_a02","South Base captured by Guillaume Team",1,0x0000FF;
 			bg_rankpoints_area $@BG_Team1,"bat_a02",129,34,175,65,"eos_bases",1;
+			donpcevent "GEoSSBW::OnEnable";
 		}
 		else if( .Balance == -50 )
 		{
@@ -475,6 +486,7 @@ OnTimer1000:
 			setnpcdisplay "South_Base","Croix Base",1913;
 			mapannounce "bat_a02","South Base captured by Croix Team",1,0xFF0000;
 			bg_rankpoints_area $@BG_Team2,"bat_a02",129,34,175,65,"eos_bases",1;
+			donpcevent "CEoSSBW::OnEnable";
 		}
 	}
 	else if( .Owner == $@BG_Team1 )
@@ -484,6 +496,7 @@ OnTimer1000:
 			set .Owner, 0;
 			setnpcdisplay "South_Base","North Base",1911;
 			mapannounce "bat_a02","Guillaume Team lost control of the South Base",1,0x0000FF;
+			donpcevent "GEoSSBW::OnDisable";
 		}
 	}
 	else if( .Owner == $@BG_Team2 )
@@ -493,6 +506,7 @@ OnTimer1000:
 			set .Owner, 0;
 			setnpcdisplay "South_Base","North Base",1911;
 			mapannounce "bat_a02","Croix Team lost control of the South Base",1,0xFF0000;
+			donpcevent "CEoSSBW::OnDisable";
 		}
 	}
 
@@ -556,6 +570,74 @@ bat_a02,45,18,3	script	Therapist in battle#eoe1	95,{
 // Battleground Respawn
 // *********************************************************************
 
+bat_a02,46,377,0	script	North Base Warp::GEoSNBW	723,{
+	end;
+
+OnEnable:
+	waitingroom "Join To Warp",20;
+	end;
+
+OnDisable:
+	delwaitingroom;
+	end;
+
+OnWarp:
+	warpwaitingpc "bat_a02",115,346,20;
+	end;
+}
+
+bat_a02,53,370,0	script	South Base Warp::GEoSSBW	723,{
+	end;
+
+OnEnable:
+	waitingroom "Join To Warp",20;
+	end;
+
+OnDisable:
+	delwaitingroom;
+	end;
+
+OnWarp:
+	warpwaitingpc "bat_a02",106,48,20;
+	end;
+}
+
+// *********************************************************************
+
+bat_a02,38,19,0	script	North Base Warp::CEoSNBW	723,{
+	end;
+
+OnEnable:
+	waitingroom "Join To Warp",20;
+	end;
+
+OnDisable:
+	delwaitingroom;
+	end;
+
+OnWarp:
+	warpwaitingpc "bat_a02",115,346,20;
+	end;
+}
+
+bat_a02,45,12,0	script	South Base Warp::CEoSSBW	723,{
+	end;
+
+OnEnable:
+	waitingroom "Join To Warp",20;
+	end;
+
+OnDisable:
+	delwaitingroom;
+	end;
+
+OnWarp:
+	warpwaitingpc "bat_a02",106,48,20;
+	end;
+}
+
+// *********************************************************************
+
 bat_a02,50,374,0	script	#guieoe_respawn	139,{
 	end;
 
@@ -573,10 +655,9 @@ OnTimer24000:
 
 OnTimer25000:
 	areapercentheal "bat_a02",46,370,54,378,100,100;
-	if( $@Tierra_Base == 1 )
-		areawarp "bat_a02",46,370,54,378,"bat_a02",285,226;
-	else
-		areawarp "bat_a02",46,370,54,378,"bat_a02",354,340;
+	donpcevent "GEoSNBW::OnWarp";
+	donpcevent "GEoSSBW::OnWarp";
+	areawarp "bat_a02",46,370,54,378,"bat_a02",353,344;
 	initnpctimer;
 	end;
 }
@@ -598,10 +679,9 @@ OnTimer24000:
 
 OnTimer25000:
 	areapercentheal "bat_a02",38,12,47,21,100,100;
-	if( $@Tierra_Base == 2 )
-		areawarp "bat_a02",38,12,47,21,"bat_a02",260,183;
-	else
-		areawarp "bat_a02",38,12,47,21,"bat_a02",354,57;
+	donpcevent "CEoSNBW::OnWarp";
+	donpcevent "CEoSSBW::OnWarp";
+	areawarp "bat_a02",38,12,47,21,"bat_a02",353,52;
 	initnpctimer;
 	end;
 }

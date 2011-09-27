@@ -44,6 +44,7 @@ OnReady:
 	initnpctimer;
 	set .Guillaume_Score, 99;
 	set .Croix_Score, 99;
+	bg_updatescore "bat_b03",.Guillaume_Score,.Croix_Score;
 	sleep 2000;
 	bg_warp $@BG_Team1,"bat_b03",328,150;
 	bg_warp $@BG_Team2,"bat_b03",62,150;
@@ -52,7 +53,6 @@ OnReady:
 	bg_team_reveal $@BG_Team2;
 	donpcevent "#guitd_respawn::OnBGStart";
 	donpcevent "#crotd_respawn::OnBGStart";
-	bg_updatescore "bat_b03",.Guillaume_Score,.Croix_Score;
 	end;
 
 OnValidateScore:

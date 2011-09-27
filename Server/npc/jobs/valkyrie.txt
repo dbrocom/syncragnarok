@@ -65,7 +65,7 @@ valkyrie,48,86,4	script	Valkyrie#	811,{
 		mes "comenzará por completo una nueva.";
 		mes "¡Gloria a los guerreros!";
 		next;
-		if (Weight > 100 || Zeny > 0 || checkcart() != 0 || checkfalcon() != 0 || checkriding() != 0) {
+		if (Weight > 1000 || Zeny > 0 || checkcart() != 0 || checkfalcon() != 0 || checkriding() != 0) {
 			mes "[Valkyrie]";
 			mes "Hay algunas cosas que debe";
 			mes "hacer antes de que comencemos. Primero";

@@ -2,131 +2,40 @@
 // BattleGround System - Tierra Domination
 // ==============================================================================
 
-// Registration NPC's
-// *********************************************************************
-
-bat_room,141,227,0	script	Registration::DOMR_Guillaume	418,{
-	end;
-OnInit:
-	waitingroom "Battle Station 5 Players",5,"Tierra_DOM::OnGuillaumeJoin",1;
-	end;
-OnEnterBG:
-	set $@TierraDOM_id1, waitingroom2bg("bat_a04",50,374,0,"Tierra_DOM::OnGuillaumeQuit","");
-	end;
-}
-
-bat_room,141,204,4	script	Registration::DOMR_Croix	414,{
-	end;
-OnInit:
-	waitingroom "Battle Station 5 Players",5,"Tierra_DOM::OnCroixJoin",1;
-	end;
-OnEnterBG:
-	set $@TierraDOM_id2, waitingroom2bg("bat_a04",42,16,1,"Tierra_DOM::OnCroixQuit","");
-	end;
-}
-
 // Battleground Engine
 // *********************************************************************
 
 -	script	Tierra_DOM	-1,{
 	end;
 
-OnGuillaumeQuit:
-	setquest 8506; // Deserter
-	if( $@TierraDOM != 0 )
-		donpcevent "Tierra_DOM::OnDoBalance";
+OnBuildTeams:
+	set $@BG_Team1,bg_team_create("bat_a04",50,374,0,"Tierra_DOM::OnGuillaumeQuit","");
+	set $@BG_Team2,bg_team_create("bat_a04",42,16,1,"Tierra_DOM::OnCroixQuit","");
 	end;
 
+OnGuillaumeQuit:
 OnCroixQuit:
 	setquest 8506; // Deserter
-	if( $@TierraDOM != 0 )
-		donpcevent "Tierra_DOM::OnDoBalance";
+	if( $@BG_Status != 0 && getvariableofnpc(.BG_Arena$,"BG_Queue_Join") == "Tierra_DOM" )
+		donpcevent "BG_Queue_Join::OnJoinEvent";
 	end;
 
-OnGuillaumeJoin:
-OnCroixJoin:
-	if( $@TierraDOM == 0 )
-		donpcevent "Tierra_DOM::OnReadyCheck";
-	else
-		donpcevent "Tierra_DOM::OnDoBalance";
-	end;
-
-OnDoBalance:
-	if( $@TierraDOM != 1 )
+OnReady:
+	if( getvariableofnpc(.BG_Arena$,"BG_Queue_Join") != "Tierra_DOM" )
 		end;
 
-	set .@Guillaume, bg_get_data($@TierraDOM_id1, 0);
-	set .@Croix, bg_get_data($@TierraDOM_id2, 0);
-
-	if( .@Guillaume < .@Croix )
-		waitingroom2bg_single $@TierraDOM_id1,"bat_a04",353,344,"DOMR_Guillaume";
-	else if( .@Guillaume > .@Croix )
-		waitingroom2bg_single $@TierraDOM_id2,"bat_a04",353,52,"DOMR_Croix";
-	else
-	{
-		set .@GuillaumeR, getwaitingroomstate(0,"DOMR_Guillaume");
-		set .@CroixR, getwaitingroomstate(0,"DOMR_Croix");
-
-		if( .@GuillaumeR <= .@CroixR )
-			set .@Limit, .@GuillaumeR;
-		else
-			set .@Limit, .@CroixR;
-
-		if( .@Limit + .@Guillaume > 35 )
-			set .@Limit, 35 - .@Guillaume;
-		if( .@Limit <= 0 ) end;
-
-		for( set .@i, 0; .@i < .@Limit; set .@i, .@i + 1 )
-		{
-			waitingroom2bg_single $@TierraDOM_id1,"bat_a04",353,344,"DOMR_Guillaume";
-			waitingroom2bg_single $@TierraDOM_id2,"bat_a04",353,52,"DOMR_Croix";
-		}
-
-		set .@Guillaume, .@Guillaume + .@Limit;
-		set .@Croix, .@Croix + .@Limit;
-		mapannounce "bat_room","Battleground -- Tierra DOM [80-99] G: " + .@Guillaume + "/35, C: " + .@Croix + "/35 (Playing)",1,0x4169E1;
-	}
-	end;
-
-OnReadyCheck:
-	if( $@TierraDOM )
-		end;
-	set .@Guillaume, getwaitingroomstate(0,"DOMR_Guillaume");
-	set .@Croix, getwaitingroomstate(0,"DOMR_Croix");
-	
-	if( .@Guillaume < 5 || .@Croix < 5 )
-	{
-		if( .@Guillaume > 3 && .@Croix > 3 && !agitcheck() && $@TierraDOM_Flood < gettimetick(2) )
-		{
-			announce "Battleground -- Tierra DOM [80-99] G: " + .@Guillaume + "/5, C: " + .@Croix + "/5",0,0x4169E1;
-			set $@TierraDOM_Flood, gettimetick(2) + 15;
-		}
-		else
-			mapannounce "bat_room","Battleground -- Tierra DOM [80-99] G: " + .@Guillaume + "/5, C: " + .@Croix + "/5",1,0x4169E1;
-		end;
-	}
-
-	set $@TierraDOM, 1;
-
-	donpcevent "DOMR_Croix::OnEnterBG";
-	donpcevent "DOMR_Guillaume::OnEnterBG";
-	// BG Variables
 	set .Guillaume_Score, 0;
 	set .Croix_Score, 0;
-	announce "Battleground -- Tierra DOM [80-99] has started!",0,0x4169E1;
-	sleep 2000;
-	bg_warp $@TierraDOM_id1,"bat_a04",353,344;
-	bg_warp $@TierraDOM_id2,"bat_a04",353,52;
-	sleep 2000;
-	// Respawn NPC's
-	donpcevent "#guiDOM_respawn::OnBGStart";
-	donpcevent "#croDOM_respawn::OnBGStart";
-	// Start Match!!
+	bg_updatescore "bat_a04",.Guillaume_Score,.Croix_Score;
 	donpcevent "Dom_N_Base::OnBase";
 	donpcevent "Dom_S_Base::OnBase";
 	donpcevent "Dom_C_Base::OnBase";
 	sleep 2000;
-	mapannounce "bat_a04","The Battle of Tierra - Domination has begun",1,0x4169E1;
+	bg_warp $@BG_Team1,"bat_a04",353,344;
+	bg_warp $@BG_Team2,"bat_a04",353,52;
+	sleep 2000;
+	donpcevent "#guiDOM_respawn::OnBGStart";
+	donpcevent "#croDOM_respawn::OnBGStart";
 	end;
 
 OnNScore:
@@ -176,73 +85,45 @@ OnValidateScore:
 	if( .Guillaume_Score < 99 && .Croix_Score < 99 )
 		end; // No winners
 
+	stopnpctimer "Dom_N_Base";
+	stopnpctimer "Dom_S_Base";
+	stopnpctimer "Dom_C_Base";
+	donpcevent "#guiDOM_respawn::OnBGStop";
+	donpcevent "#croDOM_respawn::OnBGStop";
+	set $@BG_Status, 2;
+	// =======================================================
+	// Team Rewards
+	// =======================================================
 	if( .Guillaume_Score >= 99 && .Croix_Score >= 99 )
 	{ // Tie
-		// =======================================================
-		// Team Rewards
-		// =======================================================
-		bg_reward $@TierraDOM_id1,7828,15,0,8501,"BG_DOM",1,0,1;
-		bg_reward $@TierraDOM_id2,7828,15,0,8501,"BG_DOM",1,0,1;
-		// =======================================================
+		bg_reward $@BG_Team1,7828,15,0,0,"BG_DOM",1,0,1;
+		bg_reward $@BG_Team2,7828,15,0,0,"BG_DOM",1,0,1;
 		mapannounce "bat_a04","The battle is over. This is a Tie...!",1,0x4169E1;
 	}
 	else if( .Guillaume_Score >= 99 )
 	{ // Guillaume Won
-		// =======================================================
-		// Team Rewards
-		// =======================================================
-		bg_reward $@TierraDOM_id1,7828,30,0,8501,"BG_DOM",1,0,0;
-		bg_reward $@TierraDOM_id2,7828,15,0,8501,"BG_DOM",1,0,2;
-		// =======================================================
+		bg_reward $@BG_Team1,7828,30,0,0,"BG_DOM",1,0,0;
+		bg_reward $@BG_Team2,7828,15,0,0,"BG_DOM",1,0,2;
 		mapannounce "bat_a04","The Guillaume army has won the Battle of Tierra Domination!",1,0x0000FF;
 	}
 	else if( .Croix_Score >= 99 )
 	{ // Croix Won
-		// =======================================================
-		// Team Rewards
-		// =======================================================
-		bg_reward $@TierraDOM_id1,7828,15,0,8501,"BG_DOM",1,0,2;
-		bg_reward $@TierraDOM_id2,7828,30,0,8501,"BG_DOM",1,0,0;
-		// =======================================================
+		bg_reward $@BG_Team1,7828,15,0,0,"BG_DOM",1,0,2;
+		bg_reward $@BG_Team2,7828,30,0,0,"BG_DOM",1,0,0;
 		mapannounce "bat_a04","The Croix army has won the Battle of Tierra Domination!",1,0x0000FF;
 	}
-
-	set $@TierraDOM, 2;
-	donpcevent "Neutral_Flag::OnDisable";
-	stopnpctimer "Dom_N_Base";
-	stopnpctimer "Dom_S_Base";
-	donpcevent "#guiDOM_respawn::OnBGStop";
-	donpcevent "#croDOM_respawn::OnBGStop";
-	sleep 2000;
-	bg_warp $@TierraDOM_id1,"bat_a04",50,374;
-	bg_warp $@TierraDOM_id2,"bat_a04",42,16;
-	sleep 3000;
-	mapannounce "bat_a04","Battle of Tierra DOM will start in 15 seconds!",1,0x4169E1;
-	initnpctimer;
-	end;
-
-OnTimer10000:
-	mapannounce "bat_a04","Battle of Tierra DOM will start in 5 seconds!",1,0x4169E1;
-	end;
-OnTimer15000:
-OnReset:
-	stopnpctimer;
+	// =======================================================
 	set .Guillaume_Score, 0;
 	set .Croix_Score, 0;
-	stopnpctimer "Dom_N_Base";
-	stopnpctimer "Dom_S_Base";
-	stopnpctimer "Dom_C_Base";
-	bg_destroy $@TierraDOM_id1;
-	bg_destroy $@TierraDOM_id2;
-	set $@TierraDOM_id1, 0;
-	set $@TierraDOM_id2, 0;
-	sleep 1000;
-	mapwarp "bat_a04","bat_room",155,150;
-	sleep 1000;
-	maprespawnguildid "bat_a04",0,3; // Just in case someone else
+	sleep 5000;
+	donpcevent "BG_Queue_Join::OnRotate";
 	bg_updatescore "bat_a04",0,0;
-	set $@TierraDOM, 0;
-	donpcevent "Tierra_DOM::OnReadyCheck";
+	donpcevent "GDomNBW::OnDisable";
+	donpcevent "GDomCBW::OnDisable";
+	donpcevent "GDomSBW::OnDisable";
+	donpcevent "CDomNBW::OnDisable";
+	donpcevent "CDomCBW::OnDisable";
+	donpcevent "CDomSBW::OnDisable";
 	end;
 }
 
@@ -262,11 +143,11 @@ OnBase:
 
 OnTimer1000:
 	stopnpctimer;
-	if( $@TierraDOM != 1 )
+	if( $@BG_Status != 1 || getvariableofnpc(.BG_Arena$,"BG_Queue_Join") != "Tierra_DOM" )
 		end;
 
-	set .@Guillaume, bg_getareausers($@TierraDOM_id1,"bat_a04",136,329,186,361);
-	set .@Croix, bg_getareausers($@TierraDOM_id2,"bat_a04",136,329,186,361);
+	set .@Guillaume, bg_getareausers($@BG_Team1,"bat_a04",136,329,186,361);
+	set .@Croix, bg_getareausers($@BG_Team2,"bat_a04",136,329,186,361);
 	set .Balance, .Balance + set(.@Balance, .@Guillaume - .@Croix);
 
 	if( .Balance < -50 )
@@ -283,7 +164,8 @@ OnTimer1000:
 			set .Owner, 1; // Guillaume
 			setnpcdisplay "Dom_N_Base","Guillaume Base",1912;
 			mapannounce "bat_a04","North Base captured by Guillaume Team",1,0x0000FF;
-			bg_rankpoints_area $@TierraDOM_id1,"bat_a04",136,329,186,361,"DOM_bases",1;
+			bg_rankpoints_area $@BG_Team1,"bat_a04",136,329,186,361,"DOM_bases",1;
+			donpcevent "GDomNBW::OnEnable";
 		}
 		else if( .Balance == -50 )
 		{
@@ -291,7 +173,8 @@ OnTimer1000:
 			set .Owner, 2; // Croix
 			setnpcdisplay "Dom_N_Base","Croix Base",1913;
 			mapannounce "bat_a04","North Base captured by Croix Team",1,0xFF0000;
-			bg_rankpoints_area $@TierraDOM_id2,"bat_a04",136,329,186,361,"DOM_bases",1;
+			bg_rankpoints_area $@BG_Team2,"bat_a04",136,329,186,361,"DOM_bases",1;
+			donpcevent "CDomNBW::OnEnable";
 		}
 		break;
 	case 1:
@@ -300,6 +183,7 @@ OnTimer1000:
 			set .Owner, 0;
 			setnpcdisplay "Dom_N_Base","North Base",1911;
 			mapannounce "bat_a04","Guillaume Team lost control of the North Base",1,0x0000FF;
+			donpcevent "GDomNBW::OnDisable";
 		}
 		break;
 	case 2:
@@ -308,6 +192,7 @@ OnTimer1000:
 			set .Owner, 0;
 			setnpcdisplay "Dom_N_Base","North Base",1911;
 			mapannounce "bat_a04","Croix Team lost control of the North Base",1,0xFF0000;
+			donpcevent "CDomNBW::OnDisable";
 		}
 		break;
 	}
@@ -355,11 +240,11 @@ OnBase:
 
 OnTimer1000:
 	stopnpctimer;
-	if( $@TierraDOM != 1 )
+	if( $@BG_Status != 1 || getvariableofnpc(.BG_Arena$,"BG_Queue_Join") != "Tierra_DOM" )
 		end;
 
-	set .@Guillaume, bg_getareausers($@TierraDOM_id1,"bat_a04",260,194,287,213);
-	set .@Croix, bg_getareausers($@TierraDOM_id2,"bat_a04",260,194,287,213);
+	set .@Guillaume, bg_getareausers($@BG_Team1,"bat_a04",260,194,287,213);
+	set .@Croix, bg_getareausers($@BG_Team2,"bat_a04",260,194,287,213);
 	set .Balance, .Balance + set(.@Balance, .@Guillaume - .@Croix);
 
 	if( .Balance < -50 )
@@ -376,7 +261,8 @@ OnTimer1000:
 			set .Owner, 1; // Guillaume
 			setnpcdisplay "Dom_C_Base","Guillaume Base",1912;
 			mapannounce "bat_a04","Center Base captured by Guillaume Team",1,0x0000FF;
-			bg_rankpoints_area $@TierraDOM_id1,"bat_a04",260,194,287,213,"DOM_bases",1;
+			bg_rankpoints_area $@BG_Team1,"bat_a04",260,194,287,213,"DOM_bases",1;
+			donpcevent "GDomCBW::OnEnable";
 		}
 		else if( .Balance == -50 )
 		{
@@ -384,7 +270,8 @@ OnTimer1000:
 			set .Owner, 2; // Croix
 			setnpcdisplay "Dom_C_Base","Croix Base",1913;
 			mapannounce "bat_a04","Center Base captured by Croix Team",1,0xFF0000;
-			bg_rankpoints_area $@TierraDOM_id2,"bat_a04",260,194,287,213,"DOM_bases",1;
+			bg_rankpoints_area $@BG_Team2,"bat_a04",260,194,287,213,"DOM_bases",1;
+			donpcevent "CDomCBW::OnEnable";
 		}
 		break;
 	case 1:
@@ -393,6 +280,7 @@ OnTimer1000:
 			set .Owner, 0;
 			setnpcdisplay "Dom_C_Base","Center Base",1911;
 			mapannounce "bat_a04","Guillaume Team lost control of the Center Base",1,0x0000FF;
+			donpcevent "GDomCBW::OnDisable";
 		}
 		break;
 	case 2:
@@ -401,6 +289,7 @@ OnTimer1000:
 			set .Owner, 0;
 			setnpcdisplay "Dom_C_Base","Center Base",1911;
 			mapannounce "bat_a04","Croix Team lost control of the Center Base",1,0xFF0000;
+			donpcevent "CDomCBW::OnDisable";
 		}
 		break;
 	}
@@ -448,11 +337,11 @@ OnBase:
 
 OnTimer1000:
 	stopnpctimer;
-	if( $@TierraDOM != 1 )
+	if( $@BG_Status != 1 || getvariableofnpc(.BG_Arena$,"BG_Queue_Join") != "Tierra_DOM" )
 		end;
 
-	set .@Guillaume, bg_getareausers($@TierraDOM_id1,"bat_a04",129,34,175,65);
-	set .@Croix, bg_getareausers($@TierraDOM_id2,"bat_a04",129,34,175,65);
+	set .@Guillaume, bg_getareausers($@BG_Team1,"bat_a04",129,34,175,65);
+	set .@Croix, bg_getareausers($@BG_Team2,"bat_a04",129,34,175,65);
 	set .Balance, .Balance + set(.@Balance, .@Guillaume - .@Croix);
 
 	if( .Balance < -50 )
@@ -469,7 +358,8 @@ OnTimer1000:
 			set .Owner, 1; // Guillaume
 			setnpcdisplay "Dom_S_Base","Guillaume Base",1912;
 			mapannounce "bat_a04","South Base captured by Guillaume Team",1,0x0000FF;
-			bg_rankpoints_area $@TierraDOM_id1,"bat_a04",129,34,175,65,"DOM_bases",1;
+			bg_rankpoints_area $@BG_Team1,"bat_a04",129,34,175,65,"DOM_bases",1;
+			donpcevent "GDomSBW::OnEnable";
 		}
 		else if( .Balance == -50 )
 		{
@@ -477,7 +367,8 @@ OnTimer1000:
 			set .Owner, 2; // Croix
 			setnpcdisplay "Dom_S_Base","Croix Base",1913;
 			mapannounce "bat_a04","South Base captured by Croix Team",1,0xFF0000;
-			bg_rankpoints_area $@TierraDOM_id2,"bat_a04",129,34,175,65,"DOM_bases",1;
+			bg_rankpoints_area $@BG_Team2,"bat_a04",129,34,175,65,"DOM_bases",1;
+			donpcevent "CDomSBW::OnEnable";
 		}
 		break;
 	case 1:
@@ -486,6 +377,7 @@ OnTimer1000:
 			set .Owner, 0;
 			setnpcdisplay "Dom_S_Base","North Base",1911;
 			mapannounce "bat_a04","Guillaume Team lost control of the South Base",1,0x0000FF;
+			donpcevent "GDomSBW::OnDisable";
 		}
 		break;
 	case 2:
@@ -494,6 +386,7 @@ OnTimer1000:
 			set .Owner, 0;
 			setnpcdisplay "Dom_S_Base","North Base",1911;
 			mapannounce "bat_a04","Croix Team lost control of the South Base",1,0xFF0000;
+			donpcevent "CDomSBW::OnDisable";
 		}
 		break;
 	}
@@ -532,48 +425,129 @@ OnTimer1000:
 // *********************************************************************
 
 bat_a04,53,377,3	script	Therapist in battle#DOM2	95,{
-	switch( $@TierraDOM )
-	{
-	case 2:
-		bg_leave;
-		warp "bat_room",155,150;
-		break;
-	case 1:
-		mes "[Therapist in battle]";
-		mes "Just close your eyes, and take a deep breathe.";
-		mes "You can be free from pain.";
-		specialeffect2 312;
-		percentheal 100,100;
-		repairall;
-		close2;
-		openstorage;
-		break;
-	}
+	mes "[Therapist in battle]";
+	mes "Just close your eyes, and take a deep breathe.";
+	mes "You can be free from pain.";
+	specialeffect2 312;
+	percentheal 100,100;
+	repairall;
+	close2;
+	openstorage;
 	end;
 }
 
 bat_a04,45,18,3	script	Therapist in battle#DOM1	95,{
-	switch( $@TierraDOM )
-	{
-	case 2:
-		bg_leave;
-		warp "bat_room",155,150;
-		break;
-	case 1:
-		mes "[Therapist in battle]";
-		mes "Just close your eyes, and take a deep breathe.";
-		mes "You can be free from pain.";
-		specialeffect2 312;
-		percentheal 100,100;
-		repairall;
-		close2;
-		openstorage;
-		break;
-	}
+	mes "[Therapist in battle]";
+	mes "Just close your eyes, and take a deep breathe.";
+	mes "You can be free from pain.";
+	specialeffect2 312;
+	percentheal 100,100;
+	repairall;
+	close2;
+	openstorage;
 	end;
 }
 
 // Battleground Respawn
+// *********************************************************************
+
+bat_a04,46,377,0	script	North Base Warp::GDomNBW	723,{
+	end;
+
+OnEnable:
+	waitingroom "Join To Warp",20;
+	end;
+
+OnDisable:
+	delwaitingroom;
+	end;
+
+OnWarp:
+	warpwaitingpc "bat_a04",115,346,20;
+	end;
+}
+
+bat_a04,46,370,0	script	Center Base Warp::GDomCBW	723,{
+	end;
+
+OnEnable:
+	waitingroom "Join To Warp",20;
+	end;
+
+OnDisable:
+	delwaitingroom;
+	end;
+
+OnWarp:
+	warpwaitingpc "bat_a04",285,226,20;
+	end;
+}
+
+bat_a04,53,370,0	script	South Base Warp::GDomSBW	723,{
+	end;
+
+OnEnable:
+	waitingroom "Join To Warp",20;
+	end;
+
+OnDisable:
+	delwaitingroom;
+	end;
+
+OnWarp:
+	warpwaitingpc "bat_a04",106,48,20;
+	end;
+}
+
+// *********************************************************************
+
+bat_a04,38,19,0	script	North Base Warp::CDomNBW	723,{
+	end;
+
+OnEnable:
+	waitingroom "Join To Warp",20;
+	end;
+
+OnDisable:
+	delwaitingroom;
+	end;
+
+OnWarp:
+	warpwaitingpc "bat_a04",115,346,20;
+	end;
+}
+
+bat_a04,38,12,0	script	Center Base Warp::CDomCBW	723,{
+	end;
+
+OnEnable:
+	waitingroom "Join To Warp",20;
+	end;
+
+OnDisable:
+	delwaitingroom;
+	end;
+OnWarp:
+	warpwaitingpc "bat_a04",260,183,20;
+	end;
+}
+
+bat_a04,45,12,0	script	South Base Warp::CDomSBW	723,{
+	end;
+
+OnEnable:
+	waitingroom "Join To Warp",20;
+	end;
+
+OnDisable:
+	delwaitingroom;
+	end;
+
+OnWarp:
+	warpwaitingpc "bat_a04",106,48,20;
+	end;
+}
+
 // *********************************************************************
 
 bat_a04,50,374,0	script	#guiDOM_respawn	139,{
@@ -593,10 +567,10 @@ OnTimer24000:
 
 OnTimer25000:
 	areapercentheal "bat_a04",46,370,54,378,100,100;
-	if( $@Tierra_Base == 1 )
-		areawarp "bat_a04",46,370,54,378,"bat_a04",285,226;
-	else
-		areawarp "bat_a04",46,370,54,378,"bat_a04",354,340;
+	donpcevent "GDomNBW::OnWarp";
+	donpcevent "GDomCBW::OnWarp";
+	donpcevent "GDomSBW::OnWarp";
+	areawarp "bat_a04",46,370,54,378,"bat_a04",353,344;
 	initnpctimer;
 	end;
 }
@@ -618,10 +592,10 @@ OnTimer24000:
 
 OnTimer25000:
 	areapercentheal "bat_a04",38,12,47,21,100,100;
-	if( $@Tierra_Base == 2 )
-		areawarp "bat_a04",38,12,47,21,"bat_a04",260,183;
-	else
-		areawarp "bat_a04",38,12,47,21,"bat_a04",354,57;
+	donpcevent "GDomNBW::OnWarp";
+	donpcevent "GDomCBW::OnWarp";
+	donpcevent "GDomSBW::OnWarp";
+	areawarp "bat_a04",38,12,47,21,"bat_a04",353,52;
 	initnpctimer;
 	end;
 }

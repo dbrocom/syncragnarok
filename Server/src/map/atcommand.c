@@ -5649,6 +5649,8 @@ ACMD_FUNC(exp)
  *------------------------------------------*/
 ACMD_FUNC(broadcast)
 {
+	int gm_lvl = pc_isGM(sd);
+
 	nullpo_retr(-1, sd);
 
 	memset(atcmd_output, '\0', sizeof(atcmd_output));
@@ -5658,8 +5660,33 @@ ACMD_FUNC(broadcast)
 		return -1;
 	}
 
-	sprintf(atcmd_output, "%s: %s", sd->status.name, message);
-	intif_broadcast(atcmd_output, strlen(atcmd_output) + 1, 0);
+	if ( gm_lvl == 10 ) {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		intif_broadcast2(atcmd_output, strlen(atcmd_output) + 1, 0x7F84FF, 0x190, 14, 0, 0);
+	}
+	else if ( gm_lvl == 40 ) {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		intif_broadcast2(atcmd_output, strlen(atcmd_output) + 1, 0x60F6D6, 0x190, 14, 0, 0);
+	}
+	else if ( gm_lvl == 50 ) {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		intif_broadcast2(atcmd_output, strlen(atcmd_output) + 1, 0x5AE45F, 0x190, 14, 0, 0);
+	}
+	else if ( gm_lvl == 60 ) {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		intif_broadcast2(atcmd_output, strlen(atcmd_output) + 1, 0x12A915, 0x190, 14, 0, 0);
+	}
+	else if ( gm_lvl == 80 ) {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		intif_broadcast2(atcmd_output, strlen(atcmd_output) + 1, 0xFC6666, 0x190, 14, 0, 0);
+	} 
+	else if ( gm_lvl == 99 ) {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		intif_broadcast2(atcmd_output, strlen(atcmd_output) + 1, 0xF5E03F, 0x190, 16, 0, 0);
+	} else {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		intif_broadcast(atcmd_output, strlen(atcmd_output) + 1, 0);
+	}
 
 	return 0;
 }
@@ -5669,6 +5696,8 @@ ACMD_FUNC(broadcast)
  *------------------------------------------*/
 ACMD_FUNC(localbroadcast)
 {
+	int gm_lvl = pc_isGM(sd);
+
 	nullpo_retr(-1, sd);
 
 	memset(atcmd_output, '\0', sizeof(atcmd_output));
@@ -5678,9 +5707,33 @@ ACMD_FUNC(localbroadcast)
 		return -1;
 	}
 
-	sprintf(atcmd_output, "%s: %s", sd->status.name, message);
-
-	clif_broadcast(&sd->bl, atcmd_output, strlen(atcmd_output) + 1, 0, ALL_SAMEMAP);
+	if ( gm_lvl == 10 ) {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		clif_broadcast2(&sd->bl, atcmd_output, (int)strlen(atcmd_output)+1, 0x7F84FF, 0, 14, 0, 0, ALL_SAMEMAP);
+	}
+	else if ( gm_lvl == 40 ) {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		clif_broadcast2(&sd->bl, atcmd_output, (int)strlen(atcmd_output)+1, 0x60F6D6, 0, 14, 0, 0, ALL_SAMEMAP);
+	}
+	else if ( gm_lvl == 50 ) {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		clif_broadcast2(&sd->bl, atcmd_output, (int)strlen(atcmd_output)+1, 0x5AE45F, 0, 14, 0, 0, ALL_SAMEMAP);
+	}
+	else if ( gm_lvl == 60 ) {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		clif_broadcast2(&sd->bl, atcmd_output, (int)strlen(atcmd_output)+1, 0x12A915, 0, 14, 0, 0, ALL_SAMEMAP);
+	}
+	else if ( gm_lvl == 80 ) {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		clif_broadcast2(&sd->bl, atcmd_output, (int)strlen(atcmd_output)+1, 0xFC6666, 0, 14, 0, 0, ALL_SAMEMAP);
+	} 
+	else if ( gm_lvl == 99 ) {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		clif_broadcast2(&sd->bl, atcmd_output, (int)strlen(atcmd_output)+1, 0xF5E03F, 0, 16, 0, 0, ALL_SAMEMAP);
+	} else {
+		sprintf(atcmd_output, "%s: %s", sd->status.name, message);
+		clif_broadcast(&sd->bl, atcmd_output, strlen(atcmd_output) + 1, 0, ALL_SAMEMAP);
+	}
 
 	return 0;
 }

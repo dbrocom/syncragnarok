@@ -962,6 +962,7 @@ guild8vs
 poring_w01b
 Desk
 novicefield
+slot_evt
 
 // ==== VIP Maps ====
 vip_sphinx
