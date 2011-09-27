@@ -24,15 +24,15 @@ OnInit:
 	// Configuration
 	// *****************************************************
 	// Battleground Rotation - Main NPC name
-	setarray .BG_Arenas$[0],	     "Flavius_CTF",  "Tierra_EOS",     "Tierra_TI",     "Flavius_TD","Tierra_Boss","Conquest",   "Flavius_SC";//,"Tierra_DOM",    "Rush";
+	setarray .BG_Arenas$[0],	     "Flavius_CTF",  "Tierra_EOS",     "Tierra_TI",     "Flavius_TD","Tierra_Boss","Conquest",   "Flavius_SC","Tierra_DOM",    "Rush";
 	// Battleground Arena Name - for announcements
-	setarray .BG_Names$[0],		"Capture the Flag","Eye of Storm","Triple Inferno","Team DeathMatch",    "Bossnia","Conquest","Stone Control";//,"Domination",    "Rush";
+	setarray .BG_Names$[0],		"Capture the Flag","Eye of Storm","Triple Inferno","Team DeathMatch",    "Bossnia","Conquest","Stone Control","Domination",    "Rush";
 	// Minimum Players to start the BG
-	setarray .BG_Min[0],	                         1,             1,               1,                1,            1,        1,              5;//,           5,        15;
+	setarray .BG_Min[0],	                         1,             1,               1,                1,            1,        1,              1,           1,        1;
 	// Maximum Players per Team
-	setarray .BG_Max[0],	                        35,            35,              35,               35,           35,        50,             35;//,          35,        30;
+	setarray .BG_Max[0],	                        35,            35,              35,               35,           35,        50,             35,          35,        30;
 	// BG Message Colors
-	setarray .BG_Color$[0],	                "0xA0522D",    "0x4169E1",      "0x696969",       "0x808000",   "0x483D8B","0xFFA500",     "0x9ACD32";//,  "0x4169E1","0xDDA0DD";
+	setarray .BG_Color$[0],	                "0xA0522D",    "0x4169E1",      "0x696969",       "0x808000",   "0x483D8B","0xFFA500",     "0x9ACD32",  "0x4169E1","0xDDA0DD";
 	// Team Building Mode : 0 = Lineal | 1 = Random | 2 = Class Priority
 	set .TeamMode, 0;
 	// Main Code

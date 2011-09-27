@@ -1079,6 +1079,10 @@ poring_w01b.gnd#poring_w01.gnd#
 poring_w01b.gat#poring_w01.gat#
 poring_w01b.rsw#poring_w01.rsw#
 유저인터페이스\map\poring_w01b.bmp#유저인터페이스\map\poring_w01.bmp#
+slot_evt.gnd#slot_evt.gnd#
+slot_evt.gat#slot_evt.gat#
+slot_evt.rsw#slot_evt.rsw#
+유저인터페이스\map\slot_evt.bmp#유저인터페이스\map\slot_evt.bmp#
 
 rwc01.gnd#rwc01.gnd#
 rwc01.gat#rwc01.gat#

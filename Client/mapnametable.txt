@@ -1012,6 +1012,8 @@ konbini.rsw#SyncRO Shop#
 evt_coke.rsw#SyncRO Pub#
 moonfild.rsw#Superficie Lunar#
 maze_room.rsw#Laberinto#
+guild8vs.rsw#Hall of Guilds#
+slot_evt.rsw#Numbers Event Room#
 
 gremios.rsw#Casa del Gremio#
 farm1.rsw#Granja 1#
