@@ -1327,7 +1327,7 @@ function	script	repairmain	{
 	mes "¡Puedes contar conmigo";
 	mes "para reparar items!";
 	next;
-	switch(select("Actually, I do have some items...:None at the moment.")) {
+	switch(select("Creo que tengo algo para ti...:Nada por el momento.")) {
 	case 1:
 		set .@checkitem,1;
 		while (1) {

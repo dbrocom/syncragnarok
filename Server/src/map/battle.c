@@ -1942,7 +1942,8 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 			  	skill_num != ASC_BREAKER &&
 				skill_num != ASC_METEORASSAULT &&
 				skill_num != AS_SPLASHER &&
-				skill_num != AS_VENOMKNIFE)
+				skill_num != AS_VENOMKNIFE &&
+				skill_num != AS_GRIMTOOTH) // RE disabled Grimtooth carrying EDP.
 				ATK_ADDRATE(sc->data[SC_EDP]->val3);
 		}
 
@@ -3739,7 +3740,7 @@ static struct Damage battle_calc_weapon_attack_renewal(struct block_list *src, s
 			struct Damage md = battle_calc_magic_attack_renewal(src,target,skill_id,skill_lv,wflag);
 			wd.damage += md.damage;
 			if( skill_id == CR_ACIDDEMONSTRATION && target->type == BL_PC ){
-				wd.damage = wd.damage/13;
+				wd.damage = wd.damage/10;
 				wd.damage >>= 1; // Half Damage on Players
 			}
 			else
@@ -5974,7 +5975,7 @@ static const struct _battle_data {
 	{ "max_baby_parameter",                 &battle_config.max_baby_parameter,              80,     10,     10000,          },
 	{ "max_third_parameter",                &battle_config.max_third_parameter,            120,     10,     10000,          },
 	{ "max_baby_third_paramater",           &battle_config.max_baby_third_paramater,       108,     10,     10000,          },
-	{ "max_def",                            &battle_config.max_def,                         99,     0,      INT_MAX,        },
+	{ "max_def",                            &battle_config.max_def,                        SHRT_MAX,0,      INT_MAX,        },
 	{ "over_def_bonus",                     &battle_config.over_def_bonus,                  0,      0,      1000,           },
 	{ "skill_log",                          &battle_config.skill_log,                       BL_NUL, BL_NUL, BL_ALL,         },
 	{ "battle_log",                         &battle_config.battle_log,                      0,      0,      1,              },
@@ -6252,6 +6253,7 @@ static const struct _battle_data {
 	{ "bg_ranked_max_games",                &battle_config.bg_ranked_max_games,             50,     10,     100,            },
 	{ "bg_reportafk_leaderonly",            &battle_config.bg_reportafk_leaderonly,         1,      0,      1,              },
 	{ "bg_queue2team_balanced",             &battle_config.bg_queue2team_balanced,          1,      0,      1,              },
+	{ "bg_logincount_check",                &battle_config.bg_logincount_check,             1,      0,      1,              },
 	{ "bg_eAmod_mode",                      &battle_config.bg_eAmod_mode,                   1,      0,      1,              },
 // Renewal System
 	{ "renewal_system_enable",              &battle_config.renewal_system_enable,           0,      0,      1,              },

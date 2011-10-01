@@ -28,7 +28,7 @@ OnInit:
 	// Battleground Arena Name - for announcements
 	setarray .BG_Names$[0],		"Capture the Flag","Eye of Storm","Triple Inferno","Team DeathMatch",    "Bossnia","Conquest","Stone Control","Domination",    "Rush";
 	// Minimum Players to start the BG
-	setarray .BG_Min[0],	                         1,             1,               1,                1,            1,        1,              1,           1,        1;
+	setarray .BG_Min[0],	                         5,             5,               5,                5,            5,        20,              5,           5,        15;
 	// Maximum Players per Team
 	setarray .BG_Max[0],	                        35,            35,              35,               35,           35,        50,             35,          35,        30;
 	// BG Message Colors
@@ -38,7 +38,7 @@ OnInit:
 	// Main Code
 	// *****************************************************
 	set .BG_Count, getarraysize(.BG_Arenas$);
-	set .BG_Queue, bg_queue_create("Battleground Arena","BG_Queue_Join::OnJoinEvent");
+	set .BG_Queue, bg_queue_create("Battleground Arena","BG_Queue_Join::OnJoinEvent",80);
 	// Move to Next Arena
 	if( $BG_Index >= .BG_Count ) set $BG_Index,0; // Restart Rotation
 	set .BG_Arena$,.BG_Arenas$[$BG_Index];
@@ -218,6 +218,12 @@ OnClock2200:
 	switch( select("Register:Party Register:Leave Queue:^0000FFWarp to Battle Room^000000:Battleground Help") )
 	{
 	case 1:
+		if( BaseLevel < 80 )
+		{
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Min required level to join a battleground is 80.";
+			close;
+		}
 		if( checkquest(8506,PLAYTIME) == 2 )
 			erasequest 8506;
 		if( checkquest(8506,PLAYTIME) != -1 )

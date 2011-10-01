@@ -10103,12 +10103,8 @@ void clif_parse_GlobalMessage(int fd, struct map_session_data* sd)
 	}
 
 	safestrncpy((char*)WFIFOP(fd,12), text, textlen);
-	if( sd->chatID ) {
-		clif_send(WFIFOP(fd,0), WFIFOW(fd,2), &sd->bl, CHAT_WOS);
-	} else {
-		clif_send(WFIFOP(fd,0), WFIFOW(fd,2), &sd->bl, AREA_CHAT_WOC);
-		//clif_send(WFIFOP(fd,0), WFIFOW(fd,2), &sd->bl, SELF);
-	}
+	//FIXME: chat has range of 9 only
+	clif_send(WFIFOP(fd,0), WFIFOW(fd,2), &sd->bl, sd->chatID ? CHAT_WOS : AREA_CHAT_WOC);
 
 	// send back message to the speaker
 	memcpy(WFIFOP(fd,0), RFIFOP(fd,0), RFIFOW(fd,2));
@@ -10261,7 +10257,7 @@ void clif_parse_ActionRequest_sub(struct map_session_data *sd, int action_type, 
 	case 0x00: // once attack
 	case 0x07: // continuous attack
 
-		if( pc_cant_act(sd) || sd->sc.option&OPTION_HIDE )
+		if( pc_cant_act(sd) || sd->sc.option&OPTION_HIDE || sd->sc.data[SC_ALL_RIDING] )
 			return;
 
 		if( sd->sc.option&(OPTION_WEDDING|OPTION_XMAS|OPTION_SUMMER) )

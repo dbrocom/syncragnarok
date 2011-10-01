@@ -54,7 +54,7 @@ int bg_member_removeskulls(struct map_session_data *sd)
 	return 1;
 }
 
-int battleground_countlogin(struct map_session_data *sd)
+int battleground_countlogin(struct map_session_data *sd, bool check_bat_room)
 {
 	int c = 0, m = map_mapname2mapid("bat_room");
 	struct map_session_data* pl_sd;
@@ -64,8 +64,8 @@ int battleground_countlogin(struct map_session_data *sd)
 	iter = mapit_getallusers();
 	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
 	{
-		if( pl_sd->bl.m != m && !map[pl_sd->bl.m].flag.battleground )
-			continue; // Not in BG or waiting room
+		if( !(pl_sd->qd || map[pl_sd->bl.m].flag.battleground || (check_bat_room && pl_sd->bl.m == m)) )
+			continue;
 		if( session[sd->fd]->client_addr == session[pl_sd->fd]->client_addr )
 			c++;
 	}
@@ -884,7 +884,7 @@ struct queue_data* queue_search(int q_id)
 	return (struct queue_data *)idb_get(queue_db, q_id);
 }
 
-int queue_create(const char* queue_name, const char* join_event)
+int queue_create(const char* queue_name, const char* join_event, int min_level)
 {
 	struct queue_data *qd;
 	CREATE(qd, struct queue_data, 1);
@@ -894,6 +894,7 @@ int queue_create(const char* queue_name, const char* join_event)
 	qd->first = qd->last = NULL; // First and Last Queue Members
 	qd->users_db = idb_alloc(DB_OPT_BASE);
 	qd->users = 0;
+	qd->min_level = min_level;
 
 	idb_put(queue_db, queue_counter, qd);
 
@@ -1055,6 +1056,20 @@ int queue_join(struct map_session_data *sd, int q_id)
 
 	if( (qd = queue_search(q_id)) == NULL )
 		return 0; // Current Queue don't exists
+
+	if( qd->min_level && sd->status.base_level < qd->min_level )
+	{
+		sprintf(output,"You cannot join %s queue. Required min level is %d.", qd->queue_name, qd->min_level);
+		clif_displaymessage(sd->fd,output);
+		return 0;
+	}
+
+	if( battle_config.bg_logincount_check && battleground_countlogin(sd,false) > 0 )
+	{
+		sprintf(output,"You cannot join %s queue. Double Login detected.", qd->queue_name);
+		clif_displaymessage(sd->fd,output);
+		return 0;
+	}
 
 	i = queue_member_add(qd,sd);
 	sprintf(output,"You have joined %s queue at position %d.", qd->queue_name, i);

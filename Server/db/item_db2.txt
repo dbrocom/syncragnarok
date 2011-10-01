@@ -476,10 +476,11 @@
 30042,Archangeling_Rucksack,Archangeling Rucksack,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1042,{ set maxweight,maxweight + 4800; },{},{}
 30043,Orc_Rucksack,Orc Rucksack,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1043,{ set maxweight,maxweight + 4800; },{},{}
 30044,Bombporing_Rucksack,Bombporing Rucksack,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1044,{ set maxweight,maxweight + 4800; },{},{}
+30045,Pumpkin_Rucksack,Pumpkin Rucksack,5,10,,0,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1045,{ set maxweight,maxweight + 4800; },{},{}
 // ----------- Balloon
-30045,Angeling_Balloon,Angeling Balloon,5,10,,20,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1045,{},{},{}
-30046,Archangeling_Balloon,Archangeling Balloon,5,10,,20,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1046,{},{},{}
-30047,Deviling_Balloon,Deviling Balloon,5,10,,20,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1047,{},{},{}
+30047,Angeling_Balloon,Angeling Balloon,5,10,,20,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1047,{},{},{}
+30048,Archangeling_Balloon,Archangeling Balloon,5,10,,20,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1048,{},{},{}
+30049,Deviling_Balloon,Deviling Balloon,5,10,,20,,0,,0,0xFFFFFFFF,7,2,1,,99,0,1049,{},{},{}
 // ----------- Comida Boca
 30050,Monster_Feed,Monster_Feed,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,40,0,1050,{ bonus bStr,1; },{},{}
 30051,Meet,Meet,5,10,,100,,0,,0,0xFFFFFFFF,7,2,1,,40,0,1051,{ bonus bVit,1; },{},{}
@@ -546,6 +547,18 @@
 30107,Garden_Watcher_Wings,Garden Watcher Wings,5,15000,,50,,0,,0,0xFFFFFFFF,7,2,1,,20,0,1107,{},{},{}
 //30108,Kasa_Wings,Kasa Wings,5,15000,,50,,0,,0,0xFFFFFFFF,7,2,1,,20,0,1108,{},{},{}
 30109,Valkyrie_Wings,Valkyrie Wings,5,15000,,50,,0,,0,0xFFFFFFFF,7,2,1,,20,0,1109,{},{},{}
+// ----------- Wind Milestone Recolour
+30110,Black_Wind_Milestone,Black Wind Milestone,5,20,,100,,2,,1,0xFFFFFFFF,7,2,256,,30,1,1110,{ bonus bAgi,2; skill "AL_TELEPORT",1; },{},{}
+30111,Blue_Wind_Milestone,Blue Wind Milestone,5,20,,100,,2,,1,0xFFFFFFFF,7,2,256,,30,1,1111,{ bonus bAgi,2; skill "AL_TELEPORT",1; },{},{}
+30112,Cyan_Wind_Milestone,Cyan Wind Milestone,5,20,,100,,2,,1,0xFFFFFFFF,7,2,256,,30,1,1112,{ bonus bAgi,2; skill "AL_TELEPORT",1; },{},{}
+30113,Green_Wind_Milestone,Green Wind Milestone,5,20,,100,,2,,1,0xFFFFFFFF,7,2,256,,30,1,1113,{ bonus bAgi,2; skill "AL_TELEPORT",1; },{},{}
+30114,Gold_Wind_Milestone,Gold Wind Milestone,5,20,,100,,2,,1,0xFFFFFFFF,7,2,256,,30,1,1114,{ bonus bAgi,2; skill "AL_TELEPORT",1; },{},{}
+// Orange
+30116,Purple_Wind_Milestone,Purple Wind Milestone,5,20,,100,,2,,1,0xFFFFFFFF,7,2,256,,30,1,1116,{ bonus bAgi,2; skill "AL_TELEPORT",1; },{},{}
+30117,White_Wind_Milestone,White Wind Milestone,5,20,,100,,2,,1,0xFFFFFFFF,7,2,256,,30,1,1117,{ bonus bAgi,2; skill "AL_TELEPORT",1; },{},{}
+// Brown
+// Pink
+// ----------- 
 
 // ===== DISGUISE HATS (30130-30199)
 30130,Hat_of_Deviling,Hat of Deviling,5,0,,10,,0,,0,0xFFFFFFFE,7,2,256,,75,0,298,{},{ disguise 1582; summon "Marin",1595,100,"SlaveSummon::On"+getcharid(0)+""; summon "Marin",1595,100,"SlaveSummon::On"+getcharid(0)+""; summon "Marin",1595,100,"SlaveSummon::On"+getcharid(0)+""; summon "Marin",1595,100,"SlaveSummon::On"+getcharid(0)+""; summon "Deviruchi",1822,100,"SlaveSummon::On"+getcharid(0)+"";},{ undisguise; getmapxy (@map$,@x,@y,0); killmonster ""+@map$+"","SlaveSummon::On"+getcharid(0)+"";}

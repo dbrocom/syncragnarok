@@ -56061,6 +56061,16 @@ Nivel Requerido :^777777 40^000000
 Equipable por :^777777 Cualquier Clase^000000
 #
 30045#
+Un saco para la espalda con forma de una Calabaza.
+¡Exclusiva de Halloween!
+Tipo :^777777 Headgear^000000
+Defensa :^777777 0^000000
+Se equipa en :^777777 Lower^000000
+Peso :^777777 10^000000
+Nivel Requerido :^777777 40^000000
+Equipable por :^777777 Cualquier Clase^000000
+#
+30047#
 Un globo con forma de Angeling.
 Tipo :^777777 Headgear^000000
 Defensa :^777777 0^000000
@@ -56069,7 +56079,7 @@ Peso :^777777 2^000000
 Nivel Requerido :^777777 40^000000
 Equipable por :^777777 Cualquier Clase^000000
 #
-30046#
+30048#
 Un globo con forma de ArchAngeling.
 Tipo :^777777 Headgear^000000
 Defensa :^777777 0^000000
@@ -56078,7 +56088,7 @@ Peso :^777777 2^000000
 Nivel Requerido :^777777 40^000000
 Equipable por :^777777 Cualquier Clase^000000
 #
-30047#
+30049#
 Un globo con forma de Deviling.
 Tipo :^777777 Headgear^000000
 Defensa :^777777 0^000000
@@ -56652,6 +56662,126 @@ Defensa :^777777 0^000000
 Se equipa en :^777777 Lower^000000
 Peso :^777777 1^000000
 Equipable por :^777777 Cualquier Clase^000000
+#
+30110#
+A cap of post man who delivers letters with heart.
+Magic in the cap protects the wearer not to lose their way.
+Enables use of ^008800Level 1 Teleport^000000.
+AGI + 2
+Tipo :^777777 Headgear^000000
+Defense :^777777 2^000000
+Se equipa en :^777777 Upper^000000
+Peso :^777777 10^000000
+Nivel Necesario :^777777 30^000000
+Usable por :^777777 Every Job^000000
+#
+30111#
+A cap of post man who delivers letters with heart.
+Magic in the cap protects the wearer not to lose their way.
+Enables use of ^008800Level 1 Teleport^000000.
+AGI + 2
+Tipo :^777777 Headgear^000000
+Defense :^777777 2^000000
+Se equipa en :^777777 Upper^000000
+Peso :^777777 10^000000
+Nivel Necesario :^777777 30^000000
+Usable por :^777777 Every Job^000000
+#
+30112#
+A cap of post man who delivers letters with heart.
+Magic in the cap protects the wearer not to lose their way.
+Enables use of ^008800Level 1 Teleport^000000.
+AGI + 2
+Tipo :^777777 Headgear^000000
+Defense :^777777 2^000000
+Se equipa en :^777777 Upper^000000
+Peso :^777777 10^000000
+Nivel Necesario :^777777 30^000000
+Usable por :^777777 Every Job^000000
+#
+30113#
+A cap of post man who delivers letters with heart.
+Magic in the cap protects the wearer not to lose their way.
+Enables use of ^008800Level 1 Teleport^000000.
+AGI + 2
+Tipo :^777777 Headgear^000000
+Defense :^777777 2^000000
+Se equipa en :^777777 Upper^000000
+Peso :^777777 10^000000
+Nivel Necesario :^777777 30^000000
+Usable por :^777777 Every Job^000000
+#
+30114#
+A cap of post man who delivers letters with heart.
+Magic in the cap protects the wearer not to lose their way.
+Enables use of ^008800Level 1 Teleport^000000.
+AGI + 2
+Tipo :^777777 Headgear^000000
+Defense :^777777 2^000000
+Se equipa en :^777777 Upper^000000
+Peso :^777777 10^000000
+Nivel Necesario :^777777 30^000000
+Usable por :^777777 Every Job^000000
+#
+30115#
+A cap of post man who delivers letters with heart.
+Magic in the cap protects the wearer not to lose their way.
+Enables use of ^008800Level 1 Teleport^000000.
+AGI + 2
+Tipo :^777777 Headgear^000000
+Defense :^777777 2^000000
+Se equipa en :^777777 Upper^000000
+Peso :^777777 10^000000
+Nivel Necesario :^777777 30^000000
+Usable por :^777777 Every Job^000000
+#
+30116#
+A cap of post man who delivers letters with heart.
+Magic in the cap protects the wearer not to lose their way.
+Enables use of ^008800Level 1 Teleport^000000.
+AGI + 2
+Tipo :^777777 Headgear^000000
+Defense :^777777 2^000000
+Se equipa en :^777777 Upper^000000
+Peso :^777777 10^000000
+Nivel Necesario :^777777 30^000000
+Usable por :^777777 Every Job^000000
+#
+30117#
+A cap of post man who delivers letters with heart.
+Magic in the cap protects the wearer not to lose their way.
+Enables use of ^008800Level 1 Teleport^000000.
+AGI + 2
+Tipo :^777777 Headgear^000000
+Defense :^777777 2^000000
+Se equipa en :^777777 Upper^000000
+Peso :^777777 10^000000
+Nivel Necesario :^777777 30^000000
+Usable por :^777777 Every Job^000000
+#
+30118#
+A cap of post man who delivers letters with heart.
+Magic in the cap protects the wearer not to lose their way.
+Enables use of ^008800Level 1 Teleport^000000.
+AGI + 2
+Tipo :^777777 Headgear^000000
+Defense :^777777 2^000000
+Se equipa en :^777777 Upper^000000
+Peso :^777777 10^000000
+Nivel Necesario :^777777 30^000000
+Usable por :^777777 Every Job^000000
+#
+30119#
+A cap of post man who delivers letters with heart.
+Magic in the cap protects the wearer not to lose their way.
+Enables use of ^008800Level 1 Teleport^000000.
+AGI + 2
+Tipo :^777777 Headgear^000000
+Defense :^777777 2^000000
+Se equipa en :^777777 Upper^000000
+Peso :^777777 10^000000
+Nivel Necesario :^777777 30^000000
+Usable por :^777777 Every Job^000000
 #
 30130#
 Un gorro que parece la cabeza de un Deviling. ¿Qué pasará si te lo equipas?

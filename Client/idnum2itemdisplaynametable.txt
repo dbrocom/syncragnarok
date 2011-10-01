@@ -7507,7 +7507,7 @@
 30007#White_Sunglasses#
 30008#Brown_Sunglasses#
 30009#Pink_Sunglasses#
-
+// ---
 30010#Black_Feather_Beret#
 30011#Green_Feather_Beret#
 30012#Gold_Feather_Beret#
@@ -7546,10 +7546,11 @@
 30042#Deviling_Rucksack#
 30043#Orc_Rucksack#
 30044#Bombporing_Rucksack#
+30045#Pumpkin_Rucksack#
 // ---
-30045#Angeling_Balloon#
-30046#Archangeling_Balloon#
-30047#Deviling_Balloon#
+30047#Angeling_Balloon#
+30048#Archangeling_Balloon#
+30049#Deviling_Balloon#
 // ---
 30050#Monster_Feed#
 30051#Meet#
@@ -7616,6 +7617,17 @@
 30107#Garden_Watcher_Wings#
 30108#Kasa_Wings#
 30109#Valkyrie_Wings#
+// ---
+30110#Black_Wind_Milestone#
+30111#Blue_Wind_Milestone#
+30112#Cyan_Wind_Milestone#
+30113#Green_Wind_Milestone#
+30114#Gold_Wind_Milestone#
+30115#Orange_Wind_Milestone#
+30116#Purple_Wind_Milestone#
+30117#White_Wind_Milestone#
+30118#Brown_Wind_Milestone#
+30119#Pink_Wind_Milestone#
 // ---
 30130#Hat_of_Deviling#
 30131#Hat_of_Moonlight_Flower#

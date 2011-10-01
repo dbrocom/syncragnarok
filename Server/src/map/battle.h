@@ -541,6 +541,7 @@ extern struct Battle_Config
 	int bg_ranked_max_games;
 	int bg_reportafk_leaderonly;
 	int bg_queue2team_balanced;
+	int bg_logincount_check;
 
 	int bg_eAmod_mode;
 

@@ -474,7 +474,7 @@ int skill_get_skillmod(int skill_id, int skill_lv, int s_ele, int wflag, struct 
 		if (skill_lv > 4) skillratio += 20;
 		break;
 	case AB_ADORAMUS:
-		skillratio += 400 + 100 * skill_lv;
+		skillratio += 100 * (skill_lv + 5);
 		//if( s_level > 100 ) skillratio += skillratio * (s_level - 100) / 200;
 		break;
 	case AB_DUPLELIGHT_MAGIC:
