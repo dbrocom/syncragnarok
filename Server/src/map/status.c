@@ -8356,6 +8356,7 @@ int status_change_start(struct block_list* bl,enum sc_type type,int rate,int val
 		case SC_CAMOUFLAGE:
 		case SC_VOICEOFSIREN:
 		case SC_CLOAKINGEXCEED:
+		case SC_ALL_RIDING:
 			unit_stop_attack(bl);
 		break;
 		case SC_SILENCE:

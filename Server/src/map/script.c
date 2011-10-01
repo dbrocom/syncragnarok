@@ -15582,7 +15582,7 @@ BUILDIN_FUNC(bg_logincount)
 	int i = 0;
 
 	if( sd )
-		i = battleground_countlogin(sd);
+		i = battleground_countlogin(sd,true);
 
 	script_pushint(st,i);
 	return 0;
@@ -15614,17 +15614,19 @@ BUILDIN_FUNC(bg_team_create)
 }
 
 // Creates a Queue
-// bg_queue_create "Queue Name","On Join Event";
+// bg_queue_create "Queue Name","On Join Event",min_level;
 
 BUILDIN_FUNC(bg_queue_create)
 {
 	const char *queue_name, *jev;
-	int q_id;
+	int q_id, min_level = 0;
 
 	queue_name = script_getstr(st,2);
 	jev = script_getstr(st,3);
+	if( script_hasdata(st,4) )
+		min_level = script_getnum(st,4);
 
-	q_id = queue_create(queue_name,jev);
+	q_id = queue_create(queue_name,jev,min_level);
 	script_pushint(st,q_id);
 	return 0;
 }
@@ -18549,7 +18551,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(map_logincount,"s"),
 	BUILDIN_DEF(bg_team_create,"siiiss"),
 
-	BUILDIN_DEF(bg_queue_create,"ss"),
+	BUILDIN_DEF(bg_queue_create,"ss?"),
 	BUILDIN_DEF(bg_queue_event,"is"),
 	BUILDIN_DEF(bg_queue_join,"i"),
 	BUILDIN_DEF(bg_queue_partyjoin,"ii"),

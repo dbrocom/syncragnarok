@@ -1,0 +1,429 @@
+//
+// [========================================================]
+// [===========              Climat              ===========]
+// [========================================================]
+// [ Version 16                                             ]
+// [========================================================]
+// [ Original Script: Ivion                                 ]
+// [========================================================]
+// [ Description:                                           ]
+// [--------------------------------------------------------]
+// [                                                        ]
+// [ - Switchs automaticaly the weather effects of all the  ]
+// [   maps in your server.                                 ]
+// [========================================================]
+// [ 5 last updates:                                        ]
+// [--------------------------------------------------------]
+// [                                                        ]
+// [ v12: [Ivion]                                           ]
+// [ - Añadidos multiples mapas que faltaban.               ]
+// [ - Añadidos los mapas de los battlegrouds.              ]
+// [                                                        ]
+// [ v13: [Ivion]                                           ]
+// [ - Añadidos nuevos comentarios.                         ]
+// [ - Añadida conf de tiempo de actualización.             ]
+// [ - Nuevas variables.                                    ]
+// [ - Corregidos algunos errores insignificantes.          ]
+// [                                                        ]
+// [ v14: [Ivion]                                           ]
+// [ - Uso de bitwise.                                      ]
+// [                                                        ]
+// [ v15: [Ivion]                                           ]
+// [ - Añadidos los mapas del episodio 13.1 .               ]
+// [ - Añadidos algunos mapas que faltaban.                 ]
+// [                                                        ]
+// [ v16: [Ivion]                                           ]
+// [ - Added new maps of the 13.1 and 13.2 episodes.        ]
+// [ - Added some missing maps.                             ]
+// [ - Added the Illion maps.                               ]
+// [ - Rewrite of the On0 function.                         ]
+// [ - Increased the chance to add a climatological effect. ]
+// [ - Reviewed all the effects in each map.                ]
+// [========================================================]
+// [ http://www.eathena.ws/board/index.php?showtopic=145029 ]
+// [========================================================]
+
+-	script	SCfunc	-1,{
+
+OnInit:
+
+// [========================================================]
+// [ Configuration:                                         ]
+// [--------------------------------------------------------]
+
+	// Chance to add a climatological effect in a map. (%)
+	set .conf1,4;
+
+	// Chance to remove all the climatological effects of a map. (%)
+	set .conf2,20;
+
+	// Update time. (min)
+	set .conf3,15;
+
+// [--------------------------------------------------------]
+// [ End of configuration.                                  ]
+// [========================================================]
+
+	while(1) {
+		// Argumentos: "<mapa>",<clouds>,<clouds2>,<fog>,<leaves>,<sakura>,<snow>.
+		callsub On0,"airplane",0,1,0,0,0,1;
+		callsub On0,"airplane_01",0,1,0,0,0,1;
+		callsub On0,"5@tower",1,1,0,0,0,1;
+		callsub On0,"alb2trea",0,0,0,1,1,1;
+		callsub On0,"alberta",0,0,0,1,1,1;
+		callsub On0,"alde_gld",0,0,0,1,1,1;
+		callsub On0,"aldebaran",0,0,0,1,1,1;
+		callsub On0,"ama_fild01",0,0,1,1,1,1;
+		callsub On0,"ama_test",0,0,0,1,1,1;
+		callsub On0,"amatsu",0,0,0,1,1,1;
+		callsub On0,"aru_gld",0,0,1,1,0,0;
+		callsub On0,"arug_cas01",0,0,1,0,0,0;
+		callsub On0,"arug_que01",1,0,1,1,1,0;
+		callsub On0,"ayo_fild01",0,0,1,1,1,1;
+		callsub On0,"ayo_fild02",0,0,1,1,1,1;
+		callsub On0,"ayothaya",0,0,0,1,1,1;
+		callsub On0,"bat_a01",0,0,1,1,0,0;
+		callsub On0,"bat_a02",0,0,1,1,0,0;
+		callsub On0,"bat_b01",1,1,0,0,0,1;
+		callsub On0,"bat_b02",1,1,0,0,0,1;
+		callsub On0,"bat_c01",0,0,0,1,1,1;
+		callsub On0,"bat_c02",0,0,0,1,1,1;
+		callsub On0,"cmd_fild01",0,0,1,1,1,1;
+		callsub On0,"cmd_fild02",0,0,0,0,1,0;
+		callsub On0,"cmd_fild03",0,0,1,1,1,1;
+		callsub On0,"cmd_fild04",0,0,0,0,1,0;
+		callsub On0,"cmd_fild05",0,0,1,1,1,1;
+		callsub On0,"cmd_fild06",1,0,1,0,1,0;
+		callsub On0,"cmd_fild07",1,0,1,0,1,0;
+		callsub On0,"cmd_fild08",1,0,1,0,0,0;
+		callsub On0,"cmd_fild09",1,0,1,0,0,0;
+		callsub On0,"comodo",0,0,1,0,1,1;
+		callsub On0,"e_tower",0,0,0,0,0,1;
+		callsub On0,"ein_fild01",0,0,1,1,0,1;
+		callsub On0,"ein_fild02",0,0,1,1,0,1;
+		callsub On0,"ein_fild03",0,0,1,1,1,1;
+		callsub On0,"ein_fild04",1,0,1,1,1,1;
+		callsub On0,"ein_fild05",0,0,1,1,1,1;
+		callsub On0,"ein_fild06",0,0,1,1,1,1;
+		callsub On0,"ein_fild07",0,0,1,1,1,1;
+		callsub On0,"ein_fild08",0,0,1,1,1,1;
+		callsub On0,"ein_fild09",1,0,1,1,1,0;
+		callsub On0,"ein_fild10",0,0,1,1,1,1;
+		callsub On0,"einbech",0,0,1,1,1,1;
+		callsub On0,"einbroch",0,0,1,1,1,1;
+		callsub On0,"gef_fild00",0,0,1,1,1,1;
+		callsub On0,"gef_fild01",0,0,1,1,1,1;
+		callsub On0,"gef_fild02",0,0,1,1,1,1;
+		callsub On0,"gef_fild03",0,0,1,1,1,1;
+		callsub On0,"gef_fild04",1,0,1,1,1,1;
+		callsub On0,"gef_fild05",0,0,1,1,1,1;
+		callsub On0,"gef_fild06",0,0,1,1,1,1;
+		callsub On0,"gef_fild07",0,0,1,1,1,1;
+		callsub On0,"gef_fild08",0,0,1,1,1,1;
+		callsub On0,"gef_fild09",0,0,1,1,1,1;
+		callsub On0,"gef_fild10",0,0,1,1,1,1;
+		callsub On0,"gef_fild11",0,0,1,1,1,1;
+		callsub On0,"gef_fild12",0,0,1,1,1,1;
+		callsub On0,"gef_fild13",1,0,1,1,1,1;
+		callsub On0,"gef_fild14",0,0,1,1,1,1;
+		callsub On0,"gefenia01",0,0,1,1,1,0;
+		callsub On0,"gefenia02",1,1,1,1,1,0;
+		callsub On0,"gefenia03",0,0,1,1,1,0;
+		callsub On0,"gefenia04",1,1,1,1,1,0;
+		callsub On0,"geffen",0,0,1,1,1,1;
+		callsub On0,"glast_01",0,0,0,1,1,1;
+		callsub On0,"gon_dun02",1,1,0,1,0,1;
+		callsub On0,"gon_fild01",0,0,1,1,1,1;
+		callsub On0,"gonryun",1,1,0,1,1,1;
+		callsub On0,"himinn",1,1,0,0,0,1;
+		callsub On0,"hu_fild01",1,1,1,1,1,1;
+		callsub On0,"hu_fild02",0,0,1,1,1,1;
+		callsub On0,"hu_fild03",0,0,1,1,1,1;
+		callsub On0,"hu_fild04",0,0,1,1,1,1;
+		callsub On0,"hu_fild05",1,1,0,1,1,1;
+		callsub On0,"hu_fild06",0,0,1,1,1,1;
+		callsub On0,"hu_fild07",0,0,1,1,1,1;
+		callsub On0,"hugel",0,0,1,1,1,1;
+		callsub On0,"izlu2dun",0,0,0,1,1,1;
+		callsub On0,"izlude",0,1,0,1,1,1;
+		callsub On0,"jawaii",0,0,0,0,1,0;
+		callsub On0,"job_monk",0,0,1,1,1,1;
+		callsub On0,"job_star",0,0,0,0,1,1;
+		callsub On0,"lhz_fild01",0,0,1,1,1,1;
+		callsub On0,"lhz_fild02",1,1,1,1,1,1;
+		callsub On0,"lhz_fild03",0,0,1,1,1,1;
+		callsub On0,"lighthalzen",1,0,0,1,1,0;
+		callsub On0,"lou_fild01",0,0,1,1,1,1;
+		callsub On0,"louyang",0,0,1,1,1,1;
+		callsub On0,"man_fild01",0,0,0,1,1,1;
+		callsub On0,"man_fild02",0,0,0,1,1,1;
+		callsub On0,"man_fild03",0,0,0,1,1,0;
+		callsub On0,"manuk",0,0,0,1,1,0;
+		callsub On0,"mid_camp",0,0,0,1,1,1;
+		callsub On0,"mjolnir_01",0,0,1,1,1,1;
+		callsub On0,"mjolnir_02",0,0,1,1,1,1;
+		callsub On0,"mjolnir_03",1,0,1,1,1,0;
+		callsub On0,"mjolnir_04",0,0,1,1,1,1;
+		callsub On0,"mjolnir_05",0,0,1,1,1,1;
+		callsub On0,"mjolnir_06",0,0,1,1,1,1;
+		callsub On0,"mjolnir_07",0,0,1,1,1,1;
+		callsub On0,"mjolnir_08",0,0,1,1,1,1;
+		callsub On0,"mjolnir_09",1,0,1,1,1,1;
+		callsub On0,"mjolnir_10",0,0,1,1,1,1;
+		callsub On0,"mjolnir_11",0,0,1,1,1,1;
+		callsub On0,"mjolnir_12",0,0,1,1,1,1;
+		callsub On0,"moc_fild01",0,0,1,0,0,0;
+		callsub On0,"moc_fild02",0,0,1,0,1,0;
+		callsub On0,"moc_fild03",1,0,1,1,1,1;
+		callsub On0,"moc_fild07",0,0,1,0,0,0;
+		callsub On0,"moc_fild11",0,0,1,0,1,0;
+		callsub On0,"moc_fild12",0,0,1,0,1,0;
+		callsub On0,"moc_fild13",0,0,1,0,1,0;
+		callsub On0,"moc_fild16",0,0,1,0,1,0;
+		callsub On0,"moc_fild17",1,0,1,0,0,0;
+		callsub On0,"moc_fild18",0,0,1,0,1,0;
+		callsub On0,"moc_fild19",0,0,1,0,1,0;
+		callsub On0,"moc_fild20",0,0,1,0,0,0;
+		callsub On0,"moc_fild21",0,0,1,0,0,0;
+		callsub On0,"moc_fild22",1,1,1,0,0,0;
+		callsub On0,"moc_fild22b",1,1,1,0,0,0;
+		callsub On0,"moc_ruins",0,0,1,0,1,0;
+		callsub On0,"morocc",0,0,1,0,0,0;
+		callsub On0,"moscovia",0,0,0,1,1,1;
+		callsub On0,"mosk_dun01",0,0,1,1,1,1;
+		callsub On0,"mosk_dun02",1,0,1,1,1,0;
+		callsub On0,"mosk_dun03",0,0,1,1,1,1;
+		callsub On0,"mosk_fild01",0,0,0,0,0,1;
+		callsub On0,"mosk_fild02",0,0,0,1,1,1;
+		callsub On0,"mosk_ship",0,0,0,0,0,1;
+		callsub On0,"nameless_i",0,0,0,1,0,1;
+		callsub On0,"nameless_n",0,0,0,1,0,1;
+		callsub On0,"new_1-1",0,0,0,1,1,1;
+		callsub On0,"new_1-3",0,0,1,1,1,1;
+		callsub On0,"new_2-1",0,0,0,1,1,1;
+		callsub On0,"new_2-3",0,0,1,1,1,1;
+		callsub On0,"new_3-1",0,0,0,1,1,1;
+		callsub On0,"new_3-3",0,0,1,1,1,1;
+		callsub On0,"new_4-1",0,0,0,1,1,1;
+		callsub On0,"new_4-3",0,0,1,1,1,1;
+		callsub On0,"new_5-1",0,0,0,1,1,1;
+		callsub On0,"new_5-3",0,0,1,1,1,1;
+		callsub On0,"new_zone01",0,0,0,1,1,1;
+		callsub On0,"new_zone03",0,0,0,1,1,1;
+		callsub On0,"nif_fild01",0,0,0,1,0,1;
+		callsub On0,"nif_fild02",1,1,0,1,0,1;
+		callsub On0,"niflheim",0,0,0,1,0,1;
+		callsub On0,"odin_tem01",0,0,1,1,1,1;
+		callsub On0,"odin_tem02",0,0,0,1,1,1;
+		callsub On0,"odin_tem03",0,0,0,1,1,1;
+		callsub On0,"p_track01",1,0,1,1,1,1;
+		callsub On0,"p_track02",1,0,1,1,1,1;
+		callsub On0,"pay_arche",0,0,1,1,1,1;
+		callsub On0,"pay_fild01",0,0,1,1,1,1;
+		callsub On0,"pay_fild02",0,0,1,1,1,1;
+		callsub On0,"pay_fild03",0,0,1,1,1,1;
+		callsub On0,"pay_fild04",0,0,1,1,1,1;
+		callsub On0,"pay_fild05",0,0,1,1,1,1;
+		callsub On0,"pay_fild06",0,0,1,1,1,1;
+		callsub On0,"pay_fild07",0,0,1,1,1,1;
+		callsub On0,"pay_fild08",0,0,1,1,1,1;
+		callsub On0,"pay_fild09",0,0,1,1,1,1;
+		callsub On0,"pay_fild10",0,0,1,1,1,1;
+		callsub On0,"pay_fild11",0,0,1,1,1,1;
+		callsub On0,"pay_gld",0,0,1,1,1,1;
+		callsub On0,"payon",0,0,1,1,1,1;
+		callsub On0,"poring_c01",0,0,1,1,1,1;
+		callsub On0,"poring_c02",0,0,0,1,1,1;
+		callsub On0,"poring_w01",0,0,1,1,1,1;
+		callsub On0,"poring_w02",0,0,1,1,1,1;
+		callsub On0,"prontera",0,0,0,1,1,1;
+		callsub On0,"prt_fild00",0,0,1,1,1,1;
+		callsub On0,"prt_fild01",1,0,1,1,1,1;
+		callsub On0,"prt_fild02",1,0,1,1,1,1;
+		callsub On0,"prt_fild03",1,0,1,1,1,1;
+		callsub On0,"prt_fild04",0,0,1,1,1,1;
+		callsub On0,"prt_fild05",0,0,1,1,1,1;
+		callsub On0,"prt_fild06",1,0,1,1,1,1;
+		callsub On0,"prt_fild07",0,0,1,1,1,1;
+		callsub On0,"prt_fild08",0,0,1,1,1,1;
+		callsub On0,"prt_fild09",0,0,1,0,0,0;
+		callsub On0,"prt_fild10",0,0,1,1,1,1;
+		callsub On0,"prt_fild11",0,0,1,1,1,1;
+		callsub On0,"prt_gld",0,0,0,1,1,1;
+		callsub On0,"prt_maze01",0,0,0,1,1,1;
+		callsub On0,"prt_maze02",0,0,1,1,1,1;
+		callsub On0,"prt_maze03",0,0,0,1,1,1;
+		callsub On0,"prt_monk",0,0,1,1,1,1;
+		callsub On0,"pvp_n_1-1",0,0,0,1,1,1;
+		callsub On0,"pvp_n_2-1",0,0,0,1,1,1;
+		callsub On0,"pvp_n_3-1",0,0,0,1,1,1;
+		callsub On0,"pvp_n_4-1",0,0,0,1,1,1;
+		callsub On0,"pvp_n_5-1",0,0,0,1,1,1;
+		callsub On0,"pvp_n_6-1",0,0,0,1,1,1;
+		callsub On0,"pvp_n_7-1",0,0,0,1,1,1;
+		callsub On0,"pvp_n_8-1",0,0,0,1,1,1;
+		callsub On0,"pvp_y_1-1",0,0,0,1,1,1;
+		callsub On0,"pvp_y_1-2",0,1,0,1,1,1;
+		callsub On0,"pvp_y_1-3",0,0,1,1,1,1;
+		callsub On0,"pvp_y_1-4",0,0,0,1,1,1;
+		callsub On0,"pvp_y_1-5",0,0,1,0,0,0;
+		callsub On0,"pvp_y_2-1",0,0,0,1,1,1;
+		callsub On0,"pvp_y_2-2",0,1,0,1,1,1;
+		callsub On0,"pvp_y_2-3",0,0,1,1,1,1;
+		callsub On0,"pvp_y_2-4",0,0,0,1,1,1;
+		callsub On0,"pvp_y_2-5",0,0,1,0,0,0;
+		callsub On0,"pvp_y_3-1",0,0,0,1,1,1;
+		callsub On0,"pvp_y_3-2",0,1,0,1,1,1;
+		callsub On0,"pvp_y_3-3",0,0,1,1,1,1;
+		callsub On0,"pvp_y_3-4",0,0,0,1,1,1;
+		callsub On0,"pvp_y_3-5",0,0,1,0,0,0;
+		callsub On0,"pvp_y_4-1",0,0,0,1,1,1;
+		callsub On0,"pvp_y_4-2",0,1,0,1,1,1;
+		callsub On0,"pvp_y_4-3",0,0,1,1,1,1;
+		callsub On0,"pvp_y_4-4",0,0,0,1,1,1;
+		callsub On0,"pvp_y_4-5",0,0,1,0,0,0;
+		callsub On0,"pvp_y_5-1",0,0,0,1,1,1;
+		callsub On0,"pvp_y_5-2",0,1,0,1,1,1;
+		callsub On0,"pvp_y_5-3",0,0,1,1,1,1;
+		callsub On0,"pvp_y_5-4",0,0,0,1,1,1;
+		callsub On0,"pvp_y_5-5",0,0,1,0,0,0;
+		callsub On0,"pvp_y_6-1",0,0,0,1,1,1;
+		callsub On0,"pvp_y_6-2",0,1,0,1,1,1;
+		callsub On0,"pvp_y_6-3",0,0,1,1,1,1;
+		callsub On0,"pvp_y_6-4",0,0,0,1,1,1;
+		callsub On0,"pvp_y_5-5",0,0,1,0,0,0;
+		callsub On0,"pvp_y_7-1",0,0,0,1,1,1;
+		callsub On0,"pvp_y_7-2",0,1,0,1,1,1;
+		callsub On0,"pvp_y_7-3",0,0,1,1,1,1;
+		callsub On0,"pvp_y_7-4",0,0,0,1,1,1;
+		callsub On0,"pvp_y_7-5",0,0,1,0,0,0;
+		callsub On0,"pvp_y_8-1",0,0,0,1,1,1;
+		callsub On0,"pvp_y_8-2",0,1,0,1,1,1;
+		callsub On0,"pvp_y_8-3",0,0,1,1,1,1;
+		callsub On0,"pvp_y_8-4",0,0,0,1,1,1;
+		callsub On0,"pvp_y_8-5",0,0,1,0,0,0;
+		callsub On0,"que_dan01",0,0,1,1,1,1;
+		callsub On0,"que_moon",0,0,0,0,0,1;
+		callsub On0,"que_qaru01",1,1,0,1,1,1;
+		callsub On0,"que_qaru02",1,1,0,1,1,1;
+		callsub On0,"que_qaru03",1,1,0,1,1,1;
+		callsub On0,"que_qaru04",1,1,0,1,1,1;
+		callsub On0,"que_qaru05",1,1,0,1,1,1;
+		callsub On0,"que_qsch01",1,1,0,1,1,1;
+		callsub On0,"que_qsch02",1,1,0,1,1,1;
+		callsub On0,"que_qsch03",1,1,0,1,1,1;
+		callsub On0,"que_qsch04",1,1,0,1,1,1;
+		callsub On0,"que_qsch05",1,1,0,1,1,1;
+		callsub On0,"que_sign02",1,1,0,1,0,1;
+		callsub On0,"que_temsky",1,1,0,0,0,1;
+		callsub On0,"ra_fild01",0,0,1,1,0,0;
+		callsub On0,"ra_fild02",0,0,1,1,0,0;
+		callsub On0,"ra_fild03",0,0,1,1,0,0;
+		callsub On0,"ra_fild04",0,0,1,1,0,0;
+		callsub On0,"ra_fild05",0,0,1,1,0,0;
+		callsub On0,"ra_fild06",0,0,1,1,0,0;
+		callsub On0,"ra_fild07",1,0,1,1,0,0;
+		callsub On0,"ra_fild08",0,0,1,0,0,0;
+		callsub On0,"ra_fild09",0,0,1,1,1,0;
+		callsub On0,"ra_fild10",0,0,1,0,0,0;
+		callsub On0,"ra_fild11",0,0,1,1,0,0;
+		callsub On0,"ra_fild12",0,0,1,0,0,0;
+		callsub On0,"ra_fild13",0,0,1,1,0,0;
+		callsub On0,"ra_temple",0,0,0,1,1,0;
+		callsub On0,"ra_temsky",1,1,0,0,0,1;
+		callsub On0,"rachel",0,0,1,1,0,0;
+		//callsub On0,"rwc01",1,1,0,0,0,1;
+		callsub On0,"sch_gld",1,1,0,1,1,1;
+		callsub On0,"schg_cas02",0,0,0,1,1,1;
+		callsub On0,"schg_que01",1,0,1,1,1,0;
+		callsub On0,"spl_fild01",0,0,1,0,1,1;
+		callsub On0,"spl_fild02",0,0,1,0,1,1;
+		callsub On0,"spl_fild03",0,0,1,0,1,1;
+		callsub On0,"spl_in02",0,0,1,0,1,1;
+		callsub On0,"splendide",0,0,1,0,1,1;
+		callsub On0,"tha_scene01",1,0,0,0,0,1;
+		callsub On0,"thana_boss",1,1,0,0,0,1;
+		callsub On0,"tur_dun01",0,0,0,0,1,1;
+		callsub On0,"um_fild01",0,0,1,1,1,1;
+		callsub On0,"um_fild02",1,0,1,1,1,1;
+		callsub On0,"um_fild03",0,0,1,1,1,1;
+		callsub On0,"um_fild04",0,0,1,1,1,1;
+		callsub On0,"umbala",0,0,1,1,1,1;
+		callsub On0,"valkyrie",1,1,0,0,0,1;
+		callsub On0,"ve_fild01",0,0,1,0,0,0;
+		callsub On0,"ve_fild02",0,0,1,1,0,0;
+		callsub On0,"ve_fild03",0,0,1,0,0,0;
+		callsub On0,"ve_fild04",0,0,1,0,0,0;
+		callsub On0,"ve_fild05",1,0,1,0,0,0;
+		callsub On0,"ve_fild06",1,0,1,0,0,0;
+		callsub On0,"ve_fild07",0,0,1,0,0,0;
+		callsub On0,"veins",0,0,1,0,0,0;
+		callsub On0,"xmas",0,0,0,0,0,1;
+		callsub On0,"xmas_fild01",0,0,0,0,0,1;
+		callsub On0,"yuno",0,1,0,1,1,1;
+		callsub On0,"yuno_fild01",0,0,1,1,1,1;
+		callsub On0,"yuno_fild02",0,0,1,1,1,1;
+		callsub On0,"yuno_fild03",0,0,1,1,1,1;
+		callsub On0,"yuno_fild04",0,0,1,1,1,1;
+		callsub On0,"yuno_fild05",1,0,1,1,1,1;
+		callsub On0,"yuno_fild06",0,0,1,1,1,1;
+		callsub On0,"yuno_fild07",1,0,1,1,1,1;
+		callsub On0,"yuno_fild08",0,0,1,1,1,1;
+		callsub On0,"yuno_fild09",0,0,1,1,1,1;
+		callsub On0,"yuno_fild10",1,0,1,1,1,0;
+		callsub On0,"yuno_fild11",0,0,1,1,1,1;
+		callsub On0,"yuno_fild12",0,0,1,1,1,1;
+		// Illion maps:
+		// See: http://www.eathena.ws/board/index.php?showtopic=173834
+		callsub On0,"il_fild01",1,1,0,1,0,0;
+		set .a,0;
+		sleep .conf3 * 60 * 1000;
+	}
+	end;
+
+On0:
+	set .@m$,getarg(0);
+	if(getmapmobs(.@m$) != -1) {
+		setmapflag .@m$,mf_nightenabled;
+		set .@a,getmapflag(.@m$,mf_clouds) +
+			getmapflag(.@m$,mf_clouds2) +
+			getmapflag(.@m$,mf_fog)	+
+			getmapflag(.@m$,mf_leaves) +
+			getmapflag(.@m$,mf_sakura) +
+			getmapflag(.@m$,mf_snow);
+		if(!.@a || (rand(100) < .conf2)) {
+			removemapflag .@m$,mf_clouds;
+			removemapflag .@m$,mf_clouds2;
+			removemapflag .@m$,mf_fog;
+			removemapflag .@m$,mf_leaves;
+			removemapflag .@m$,mf_sakura;
+			removemapflag .@m$,mf_snow;
+		}
+		if(!.@a && (rand(100) < .conf1)) {
+			set .@c,0;
+			set .@d,1;
+			while(getarg(.@d,-1) != -1) {
+				set .@c,.@c + (getarg(.@d) > 0);
+				set .@d,.@d + 1;
+			}
+			set .@c,rand(1,.@c);
+			set .@d,0;
+			while(.@c) {
+				set .@d,.@d + 1;
+				set .@c,.@c - (getarg(.@d) > 0);
+			}
+			switch(.@d) {
+				case 1: setmapflag .@m$,mf_clouds;	break;
+				case 2: setmapflag .@m$,mf_clouds2;	break;
+				case 3: setmapflag .@m$,mf_fog;		break;
+				case 4: setmapflag .@m$,mf_leaves;	break;
+				case 5: setmapflag .@m$,mf_sakura;	break;
+				case 6: setmapflag .@m$,mf_snow;	break;
+			}
+		}
+	}
+	set .a,.a + 1;
+	if(.a % 100) sleep 1;
+	return;
+}
+

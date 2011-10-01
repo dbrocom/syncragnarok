@@ -7814,7 +7814,7 @@
 30007#White_Sunglasses#
 30008#Brown_Sunglasses#
 30009#Pink_Sunglasses#
-
+// ---
 30010#Black_Feather_Beret#
 30011#Green_Feather_Beret#
 30012#Gold_Feather_Beret#
@@ -7853,10 +7853,11 @@
 30042#devil_rucksack#
 30043#orc_rucksack#
 30044#bombring_rucksack#
+30045#pumpkin_rucksack#
 // ---
-30045#angel_balloon#
-30046#arc_angel_balloon#
-30047#deviling_balloon#
+30047#angel_balloon#
+30048#arc_angel_balloon#
+30049#deviling_balloon#
 // ---
 30050#monster_feed#
 30051#meet#
@@ -7923,6 +7924,17 @@
 30107#gardenkeeperwings#
 30108#kasa_wings#
 30109#valkyrie_wings#
+// ---
+30110#Black_Wind_Milestone#
+30111#Blue_Wind_Milestone#
+30112#Cyan_Wind_Milestone#
+30113#Green_Wind_Milestone#
+30114#Gold_Wind_Milestone#
+30115#Orange_Wind_Milestone#
+30116#Purple_Wind_Milestone#
+30117#White_Wind_Milestone#
+30118#Brown_Wind_Milestone#
+30119#Pink_Wind_Milestone#
 // ---
 30130#데빌링모자#
 30131#월야화모자#
@@ -8372,7 +8384,7 @@
 30964#eye_rose#
 30965#Creed_Helm#
 30966#Danzo_bandage#
-30967#moogle_ball#
+30967#moogle_testie#
 30968#Neptune_Protector#
 30969#Kakashi_Mask#
 30970#Kakashi_Mask_Black#

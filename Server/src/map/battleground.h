@@ -45,7 +45,7 @@ struct queue_member {
 struct queue_data {
 	unsigned int q_id;
 	DBMap* users_db;
-	int users;
+	int min_level, users;
 	struct queue_member *first, *last;
 	char queue_name[50], join_event[EVENT_NAME_LENGTH];
 };
@@ -68,8 +68,7 @@ int bg_team_leave(struct map_session_data *sd, int flag);
 int bg_team_warp(int bg_id, unsigned short mapindex, short x, short y);
 int bg_member_respawn(struct map_session_data *sd);
 int bg_send_message(struct map_session_data *sd, const char *mes, int len);
-int battleground_countlogin(struct map_session_data *sd);
-// void bg_randomize_teams(int bg_id1, int bg_id2);
+int battleground_countlogin(struct map_session_data *sd, bool check_bat_room);
 void bg_team_getitem(int bg_id, int nameid, int amount);
 void bg_team_get_kafrapoints(int bg_id, int amount);
 void bg_team_rewards(int bg_id, int nameid, int amount, int kafrapoints, int quest_id, const char *var, int add_value, int bg_arena, int bg_result);
@@ -78,7 +77,7 @@ void bg_block_skill_status(struct battleground_data *bg, int skillnum);
 void bg_block_skill_start(struct battleground_data *bg, int skillnum, int time);
 
 struct queue_data* queue_search(int q_id);
-int queue_create(const char* queue_name, const char* join_event);
+int queue_create(const char* queue_name, const char* join_event, int min_level);
 int queue_destroy(int q_id);
 int queue_leave(struct map_session_data *sd, int q_id);
 void queue_leaveall(struct map_session_data *sd);
