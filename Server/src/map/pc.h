@@ -28,483 +28,482 @@
 #define MAX_SPELLBOOK 10
 
 struct weapon_data {
-	int atkmods[3];
-	// all the variables except atkmods get zero'ed in each call of status_calc_pc
-	// NOTE: if you want to add a non-zeroed variable, you need to update the memset call
-	//  in status_calc_pc as well! All the following are automatically zero'ed. [Skotlex]
-	int overrefine;
-	int star;
-	int ignore_def_ele;
-	int ignore_def_race;
-	int def_ratio_atk_ele;
-	int def_ratio_atk_race;
-	int addele[ELE_MAX];
-	int addrace[RC_MAX];
-	int addrace2[RC2_MAX];
-	int addsize[3];
+    int atkmods[3];
+    // all the variables except atkmods get zero'ed in each call of status_calc_pc
+    // NOTE: if you want to add a non-zeroed variable, you need to update the memset call
+    //  in status_calc_pc as well! All the following are automatically zero'ed. [Skotlex]
+    int overrefine;
+    int star;
+    int ignore_def_ele;
+    int ignore_def_race;
+    int def_ratio_atk_ele;
+    int def_ratio_atk_race;
+    int addele[ELE_MAX];
+    int addrace[RC_MAX];
+    int addrace2[RC2_MAX];
+    int addsize[3];
 
-	struct drain_data {
-		short rate;
-		short per;
-		short value;
-		unsigned type:1;
-	} hp_drain[RC_MAX], sp_drain[RC_MAX];
+    struct drain_data {
+        short rate;
+        short per;
+        short value;
+        unsigned type:1;
+    } hp_drain[RC_MAX], sp_drain[RC_MAX];
 
-	struct {
-		short class_, rate;
-	}	add_dmg[MAX_PC_BONUS];
+    struct {
+        short class_, rate;
+    }   add_dmg[MAX_PC_BONUS];
 
-	struct {
-		short flag, rate;
-		unsigned char ele;
-	} addele2[MAX_PC_BONUS];
+    struct {
+        short flag, rate;
+        unsigned char ele;
+    } addele2[MAX_PC_BONUS];
 };
 
 struct s_autospell {
-	short id, lv, rate, card_id, flag;
-	bool lock;  // bAutoSpellOnSkill: blocks autospell from triggering again, while being executed
+    short id, lv, rate, card_id, flag;
+    bool lock;  // bAutoSpellOnSkill: blocks autospell from triggering again, while being executed
 };
 
 struct s_addeffect {
-	enum sc_type id;
-	short rate, arrow_rate;
-	unsigned char flag;
+    enum sc_type id;
+    short rate, arrow_rate;
+    unsigned char flag;
 };
 
 struct s_addeffectonskill {
-	enum sc_type id;
-	short rate, skill;
-	unsigned char target;
+    enum sc_type id;
+    short rate, skill;
+    unsigned char target;
 };
 
-struct s_add_drop { 
-	short id, group;
-	int race, rate;
+struct s_add_drop {
+    short id, group;
+    int race, rate;
 };
 
 struct s_autobonus {
-	short rate,atk_type;
-	unsigned int duration;
-	char *bonus_script, *other_script;
-	int active;
-	unsigned short pos;
+    short rate,atk_type;
+    unsigned int duration;
+    char *bonus_script, *other_script;
+    int active;
+    unsigned short pos;
 };
 
 struct skill_cooldown_entry {
-	unsigned short skill_id;
-	int timer;
+    unsigned short skill_id;
+    int timer;
 };
 
 struct s_harmony_map_data;
 struct map_session_data {
-	struct block_list bl;
-	struct unit_data ud;
-	struct view_data vd;
-	struct status_data base_status, battle_status;
-	struct status_change sc;
-	struct regen_data regen;
-	struct regen_data_sub sregen, ssregen;
-	//NOTE: When deciding to add a flag to state or special_state, take into consideration that state is preserved in
-	//status_calc_pc, while special_state is recalculated in each call. [Skotlex]
-	struct {
-		unsigned int active : 1; //Marks active player (not active is logging in/out, or changing map servers)
-		unsigned int menu_or_input : 1;// if a script is waiting for feedback from the player
-		unsigned int dead_sit : 2;
-		unsigned int lr_flag : 2;
-		unsigned int connect_new : 1;
-		unsigned int arrow_atk : 1;
-		unsigned int combo : 2; // 1:Asura, 2:Kick [Inkfish]
-		unsigned int gangsterparadise : 1;
-		unsigned int rest : 1;
-		unsigned int storage_flag : 3; //0: closed, 1: Normal Storage open, 2: guild storage open [Skotlex] 3: Rent Storage [ZephStorage]
-		unsigned int snovice_dead_flag : 1; //Explosion spirits on death: 0 off, 1 used.
-		unsigned int abra_flag : 1; // Abracadabra bugfix by Aru
-		unsigned int autocast : 1; // Autospell flag [Inkfish]
-		unsigned int autotrade : 1;	//By Fantik
-		unsigned int reg_dirty : 3; //By Skotlex (marks whether registry variables have been saved or not yet)
-		unsigned int showdelay :1;
-		unsigned int showcast :1; // [Zephyrus] Display casting time to user
-		unsigned int showcastdelay :1; // [Zephyrus] Display casting delay time to user
-		unsigned int showexp :1;
-		unsigned int showgain :1;
-		unsigned int showzeny :1;
-		unsigned int noask :1; // [LuzZza]
-		unsigned int trading :1; //[Skotlex] is 1 only after a trade has started.
-		unsigned int deal_locked :2; //1: Clicked on OK. 2: Clicked on TRADE
-		unsigned int monster_ignore :1; // for monsters to ignore a character [Valaris] [zzo]
-		unsigned int size :2; // for tiny/large types
-		unsigned int night :1; //Holds whether or not the player currently has the SI_NIGHT effect on. [Skotlex]
-		unsigned int blockedmove :1;
-		unsigned int using_fake_npc :1;
-		unsigned int rewarp :1; //Signals that a player should warp as soon as he is done loading a map. [Skotlex]
-		unsigned int killer : 1;
-		unsigned int killable : 1;
-		unsigned int doridori : 1;
-		unsigned int ignoreAll : 1;
-		unsigned int buyingstore : 1;
-		unsigned int lesseffect : 1;
-		unsigned int vending : 1;
-		short packet_filter; // [Zephyrus] Packet Filter
-		unsigned int battleinfo : 1;
-		unsigned short displaydrop;
-		unsigned int pvpmode : 1; // PK Mode [Zephyrus]
-		unsigned int noks : 3; // [Zeph Kill Steal Protection]
-		unsigned int secure_items : 1; // [Zephyrus] Item Security
-		bool changemap, changeregion;
-		short pmap; // Previous map on Map Change
-		unsigned short autobonus; //flag to indicate if an autobonus is activated. [Inkfish]
-		unsigned short faildrop; //Faildrop display [Blackthunder]
-		struct guild *gmaster_flag;
-		unsigned int only_walk : 1; // [Zephyrus] Block Skills and Item usage to a player
-		unsigned int improv_flag : 1;
-		unsigned int no_gemstone : 1; // If a skill have a partner near, it don't consume gemstone but SP from all (ADORAMUS, COMET)
-		unsigned int fearbreeze : 4; // Arrows used on SC_FEARBREEZE
-		unsigned int cashshop : 1; // [CashShop System]
-		unsigned int view_mob_info : 1;
-		unsigned int evade_antiwpefilter : 1; // Required sometimes to show the user previous to use the skill
-		unsigned bg_afk : 1; // Moved here to reduce searchs
-	} state;
-	int indtick;//[Ind/ro-resources.net] common tick for delay purposes.
-	struct {
-		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
-		unsigned int restart_full_recover : 1;
-		unsigned int no_castcancel : 1;
-		unsigned int no_castcancel2 : 1;
-		unsigned int no_sizefix : 1;
-		unsigned int no_gemstone : 1;
-		unsigned int intravision : 1; // Maya Purple Card effect [DracoRPG]
-		unsigned int perfect_hiding : 1; // [Valaris]
-		unsigned int no_knockback : 1;
-		unsigned int bonus_coma : 1;
-		unsigned int checkshieldmdef : 1;
-	} special_state;
-	struct {
-		unsigned short rate;
-		int nameid[MAX_AUTOLOOTID];
-	} aloot;
+    struct block_list bl;
+    struct unit_data ud;
+    struct view_data vd;
+    struct status_data base_status, battle_status;
+    struct status_change sc;
+    struct regen_data regen;
+    struct regen_data_sub sregen, ssregen;
+    //NOTE: When deciding to add a flag to state or special_state, take into consideration that state is preserved in
+    //status_calc_pc, while special_state is recalculated in each call. [Skotlex]
+    struct {
+        unsigned int active : 1; //Marks active player (not active is logging in/out, or changing map servers)
+        unsigned int menu_or_input : 1;// if a script is waiting for feedback from the player
+        unsigned int dead_sit : 2;
+        unsigned int lr_flag : 2;
+        unsigned int connect_new : 1;
+        unsigned int arrow_atk : 1;
+        unsigned int gangsterparadise : 1;
+        unsigned int rest : 1;
+        unsigned int storage_flag : 3; //0: closed, 1: Normal Storage open, 2: guild storage open [Skotlex] 3: Rent Storage [ZephStorage]
+        unsigned int snovice_dead_flag : 1; //Explosion spirits on death: 0 off, 1 used.
+        unsigned int abra_flag : 1; // Abracadabra bugfix by Aru
+        unsigned int autocast : 1; // Autospell flag [Inkfish]
+        unsigned int autotrade : 1; //By Fantik
+        unsigned int reg_dirty : 3; //By Skotlex (marks whether registry variables have been saved or not yet)
+        unsigned int showdelay :1;
+        unsigned int showcast :1; // [Zephyrus] Display casting time to user
+        unsigned int showcastdelay :1; // [Zephyrus] Display casting delay time to user
+        unsigned int showexp :1;
+        unsigned int showgain :1;
+        unsigned int showzeny :1;
+        unsigned int noask :1; // [LuzZza]
+        unsigned int trading :1; //[Skotlex] is 1 only after a trade has started.
+        unsigned int deal_locked :2; //1: Clicked on OK. 2: Clicked on TRADE
+        unsigned int monster_ignore :1; // for monsters to ignore a character [Valaris] [zzo]
+        unsigned int size :2; // for tiny/large types
+        unsigned int night :1; //Holds whether or not the player currently has the SI_NIGHT effect on. [Skotlex]
+        unsigned int blockedmove :1;
+        unsigned int using_fake_npc :1;
+        unsigned int rewarp :1; //Signals that a player should warp as soon as he is done loading a map. [Skotlex]
+        unsigned int killer : 1;
+        unsigned int killable : 1;
+        unsigned int doridori : 1;
+        unsigned int ignoreAll : 1;
+        unsigned int buyingstore : 1;
+        unsigned int lesseffect : 1;
+        unsigned int vending : 1;
+        short packet_filter; // [Zephyrus] Packet Filter
+        unsigned int battleinfo : 1;
+        unsigned short displaydrop;
+        unsigned int pvpmode : 1; // PK Mode [Zephyrus]
+        unsigned int noks : 3; // [Zeph Kill Steal Protection]
+        unsigned int secure_items : 1; // [Zephyrus] Item Security
+        bool changemap, changeregion;
+        short pmap; // Previous map on Map Change
+        unsigned short autobonus; //flag to indicate if an autobonus is activated. [Inkfish]
+        unsigned short faildrop; //Faildrop display [Blackthunder]
+        struct guild *gmaster_flag;
+        unsigned int only_walk : 1; // [Zephyrus] Block Skills and Item usage to a player
+        unsigned int improv_flag : 1;
+        unsigned int no_gemstone : 1; // If a skill have a partner near, it don't consume gemstone but SP from all (ADORAMUS, COMET)
+        unsigned int fearbreeze : 4; // Arrows used on SC_FEARBREEZE
+        unsigned int cashshop : 1; // [CashShop System]
+        unsigned int view_mob_info : 1;
+        unsigned int evade_antiwpefilter : 1; // Required sometimes to show the user previous to use the skill
+        unsigned bg_afk : 1; // Moved here to reduce searchs
+    } state;
+    int indtick;//[Ind/ro-resources.net] common tick for delay purposes.
+    struct {
+        unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
+        unsigned int restart_full_recover : 1;
+        unsigned int no_castcancel : 1;
+        unsigned int no_castcancel2 : 1;
+        unsigned int no_sizefix : 1;
+        unsigned int no_gemstone : 1;
+        unsigned int intravision : 1; // Maya Purple Card effect [DracoRPG]
+        unsigned int perfect_hiding : 1; // [Valaris]
+        unsigned int no_knockback : 1;
+        unsigned int bonus_coma : 1;
+        unsigned int checkshieldmdef : 1;
+    } special_state;
+    struct {
+        unsigned short rate;
+        int nameid[MAX_AUTOLOOTID];
+    } aloot;
 
-	int login_id1, login_id2;
-	unsigned short class_;	//This is the internal job ID used by the map server to simplify comparisons/queries/etc. [Skotlex]
-	int gmlevel;
+    int login_id1, login_id2;
+    unsigned short class_;  //This is the internal job ID used by the map server to simplify comparisons/queries/etc. [Skotlex]
+    int gmlevel;
 
-	int packet_ver;  // 5: old, 6: 7july04, 7: 13july04, 8: 26july04, 9: 9aug04/16aug04/17aug04, 10: 6sept04, 11: 21sept04, 12: 18oct04, 13: 25oct04 ... 18
-	struct mmo_charstatus status;
-	struct registry save_reg;
-	
-	struct item_data* inventory_data[MAX_INVENTORY]; // direct pointers to itemdb entries (faster than doing item_id lookups)
-	short equip_index[11];
-	unsigned int weight,max_weight;
-	int cart_weight,cart_num;
-	int fd;
-	unsigned short mapindex;
-	unsigned char head_dir; //0: Look forward. 1: Look right, 2: Look left.
-	unsigned int client_tick;
-	int npc_id,areanpc_id,npc_shopid,touching_id;
-	int npc_item_flag; //Marks the npc_id with which you can use items during interactions with said npc (see script command enable_itemuse)
-	int npc_menu; // internal variable, used in npc menu handling
-	int npc_amount;
-	struct script_state *st;
-	char npc_str[CHATBOX_SIZE]; // for passing npc input box text to script engine
-	int npc_timer_id; //For player attached npc timers. [Skotlex]
-	unsigned int chatID;
-	time_t idletime;
-	unsigned int keyboard_action_tick;
-	unsigned int mouse_action_tick;
-	time_t idlepvp; // [Zephyrus] Ultimo Tick de daño PVP
+    int packet_ver;  // 5: old, 6: 7july04, 7: 13july04, 8: 26july04, 9: 9aug04/16aug04/17aug04, 10: 6sept04, 11: 21sept04, 12: 18oct04, 13: 25oct04 ... 18
+    struct mmo_charstatus status;
+    struct registry save_reg;
 
-	struct{
-		int npc_id;
-		unsigned int timeout;
-	} progressbar; //Progress Bar [Inkfish]
+    struct item_data* inventory_data[MAX_INVENTORY]; // direct pointers to itemdb entries (faster than doing item_id lookups)
+    short equip_index[11];
+    unsigned int weight,max_weight;
+    int cart_weight,cart_num;
+    int fd;
+    unsigned short mapindex;
+    unsigned char head_dir; //0: Look forward. 1: Look right, 2: Look left.
+    unsigned int client_tick;
+    int npc_id,areanpc_id,npc_shopid,touching_id;
+    int npc_item_flag; //Marks the npc_id with which you can use items during interactions with said npc (see script command enable_itemuse)
+    int npc_menu; // internal variable, used in npc menu handling
+    int npc_amount;
+    struct script_state *st;
+    char npc_str[CHATBOX_SIZE]; // for passing npc input box text to script engine
+    int npc_timer_id; //For player attached npc timers. [Skotlex]
+    unsigned int chatID;
+    time_t idletime;
+    unsigned int keyboard_action_tick;
+    unsigned int mouse_action_tick;
+    time_t idlepvp; // [Zephyrus] Ultimo Tick de daño PVP
 
-	struct{
-		char name[NAME_LENGTH];
-	} ignore[MAX_IGNORE_LIST];
+    struct{
+        int npc_id;
+        unsigned int timeout;
+    } progressbar; //Progress Bar [Inkfish]
 
-	int followtimer; // [MouseJstr]
-	int followtarget;
+    struct{
+        char name[NAME_LENGTH];
+    } ignore[MAX_IGNORE_LIST];
 
-	time_t emotionlasttime; // to limit flood with emotion packets
+    int followtimer; // [MouseJstr]
+    int followtarget;
 
-	short skillitem,skillitemlv;
-	short skillid_old,skilllv_old;
-	short skillid_dance,skilllv_dance;
-	short cook_mastery; // range: [0,1999] [Inkfish]
-	struct skill_cooldown_entry *scd[MAX_SKILLCOOLDOWN]; // Skill Cooldown
-	int cloneskill_id, reproduceskill_id;
-	int menuskill_id, menuskill_val, menuskill_itemused;
+    time_t emotionlasttime; // to limit flood with emotion packets
 
-	int invincible_timer;
-	unsigned int canlog_tick;
-	unsigned int canescape_tick;
-	unsigned int canuseitem_tick;	// [Skotlex]
-	unsigned int canusecashfood_tick;
-	unsigned int canequip_tick;	// [Inkfish]
-	unsigned int cantalk_tick;
-	unsigned int channel_cantalk_tick; // [Channel Flood Protection]
-	unsigned int canjoinchn_tick;
-	unsigned int cansendmail_tick; // [Mail System Flood Protection]
-	unsigned int ks_floodprotect_tick; // [Kill Steal Protection]
-	
-	struct {
-		int nameid;
-		unsigned int tick;
-	} item_delay[MAX_ITEMDELAYS]; // [Paradox924X]
+    short skillitem,skillitemlv;
+    short skillid_old,skilllv_old;
+    short skillid_dance,skilllv_dance;
+    short cook_mastery; // range: [0,1999] [Inkfish]
+    struct skill_cooldown_entry *scd[MAX_SKILLCOOLDOWN]; // Skill Cooldown
+    int cloneskill_id, reproduceskill_id;
+    int menuskill_id, menuskill_val, menuskill_itemused;
 
-	// [Flood Protection - Automute]
-	unsigned int last_talk_message;
-	short message_count;
+    int invincible_timer;
+    unsigned int canlog_tick;
+    unsigned int canescape_tick;
+    unsigned int canuseitem_tick;   // [Skotlex]
+    unsigned int canusecashfood_tick;
+    unsigned int canequip_tick; // [Inkfish]
+    unsigned int cantalk_tick;
+    unsigned int channel_cantalk_tick; // [Channel Flood Protection]
+    unsigned int canjoinchn_tick;
+    unsigned int cansendmail_tick; // [Mail System Flood Protection]
+    unsigned int ks_floodprotect_tick; // [Kill Steal Protection]
 
-	short weapontype1,weapontype2;
-	short disguise; // [Valaris]
+    struct {
+        int nameid;
+        unsigned int tick;
+    } item_delay[MAX_ITEMDELAYS]; // [Paradox924X]
 
-	struct weapon_data right_weapon, left_weapon;
-	
-	// here start arrays to be globally zeroed at the beginning of status_calc_pc()
-	int param_bonus[6],param_equip[6]; //Stores card/equipment bonuses.
-	int subele[ELE_MAX];
-	int subrace[RC_MAX];
-	int subrace2[RC2_MAX];
-	int subsize[3];
-	int reseff[SC_COMMON_MAX-SC_COMMON_MIN+1];
-	int weapon_coma_ele[ELE_MAX];
-	int weapon_coma_race[RC_MAX];
-	int weapon_atk[16];
-	int weapon_atk_rate[16];
-	int arrow_addele[ELE_MAX];
-	int arrow_addrace[RC_MAX];
-	int arrow_addsize[3];
-	int magic_addele[ELE_MAX];
-	int magic_addrace[RC_MAX];
-	int magic_addsize[3];
-	int critaddrace[RC_MAX];
-	int expaddrace[RC_MAX];
-	int ignore_mdef[RC_MAX];
-	int ignore_def[RC_MAX];
-	int itemgrouphealrate[MAX_ITEMGROUP];
-	short sp_gain_race[RC_MAX];
-	// zeroed arrays end here.
-	// zeroed structures start here
-	struct s_autospell autospell[15], autospell2[15], autospell3[15];
-	struct s_addeffect addeff[MAX_PC_BONUS], addeff2[MAX_PC_BONUS];
-	struct s_addeffectonskill addeff3[MAX_PC_BONUS];
+    // [Flood Protection - Automute]
+    unsigned int last_talk_message;
+    short message_count;
 
-	struct { //skillatk raises bonus dmg% of skills, skillheal increases heal%, skillblown increases bonus blewcount for some skills.
-		unsigned short id;
-		short val;
-	} skillatk[MAX_PC_BONUS], skillheal[5], skillheal2[5], skillblown[MAX_PC_BONUS], skillcast[MAX_PC_BONUS], fixskillcast[MAX_PC_BONUS];
-	struct {
-		short value;
-		int rate;
-		int tick;
-	} hp_loss, sp_loss, hp_regen, sp_regen;
-	struct {
-		short class_, rate;
-	}	add_def[MAX_PC_BONUS], add_mdef[MAX_PC_BONUS], add_mdmg[MAX_PC_BONUS];
-	struct s_add_drop add_drop[MAX_PC_BONUS];
-	struct {
-		int nameid;
-		int rate;
-	} itemhealrate[MAX_PC_BONUS];
-	struct {
-		short flag, rate;
-		unsigned char ele;
-	} subele2[MAX_PC_BONUS];
-	// zeroed structures end here
-	// manually zeroed structures start here.
-	struct s_autobonus autobonus[MAX_PC_BONUS], autobonus2[MAX_PC_BONUS], autobonus3[MAX_PC_BONUS]; //Auto script on attack, when attacked, on skill usage
-	// manually zeroed structures end here.
-	// zeroed vars start here.
-	int atk_rate;
-	int arrow_atk,arrow_ele,arrow_cri,arrow_hit;
-	int nsshealhp,nsshealsp;
-	int critical_def,double_rate;
-	int long_attack_atk_rate; //Long range atk rate, not weapon based. [Skotlex]
-	int near_attack_def_rate,long_attack_def_rate,magic_def_rate,misc_def_rate;
-	int ignore_mdef_ele;
-	int ignore_mdef_race;
-	int perfect_hit;
-	int perfect_hit_add;
-	int get_zeny_rate;
-	int get_zeny_num; //Added Get Zeny Rate [Skotlex]
-	int double_add_rate;
-	int short_weapon_damage_return,long_weapon_damage_return;
-	int magic_damage_return; // AppleGirl Was Here
-	int random_attack_increase_add,random_attack_increase_per; // [Valaris]
-	int break_weapon_rate,break_armor_rate;
-	int crit_atk_rate;
-	int classchange; // [Valaris]
-	int speed_rate, speed_add_rate, aspd_add;
-	int itemhealrate2; // [Epoque] Increase heal rate of all healing items.
-	unsigned int setitem_hash, setitem_hash2; //Split in 2 because shift operations only work on int ranges. [Skotlex]
-	
-	short splash_range, splash_add_range;
-	short add_steal_rate;
-	short add_heal_rate, add_heal2_rate;
-	short sp_gain_value, hp_gain_value, magic_sp_gain_value, magic_hp_gain_value;
-	short sp_vanish_rate;
-	short sp_vanish_per;	
-	unsigned short unbreakable;	// chance to prevent ANY equipment breaking [celest]
-	unsigned short unbreakable_equip; //100% break resistance on certain equipment
-	unsigned short unstripable_equip;
+    short weapontype1,weapontype2;
+    short disguise; // [Valaris]
 
-	// zeroed vars end here.
+    struct weapon_data right_weapon, left_weapon;
 
-	int castrate,delayrate,hprate,sprate,dsprate;
-	int hprecov_rate,sprecov_rate;
-	int matk_rate;
-	int critical_rate,hit_rate,flee_rate,flee2_rate,def_rate,def2_rate,mdef_rate,mdef2_rate;
-	int fixcastrate;	//fixed casting reduction. [Jobbie]
+    // here start arrays to be globally zeroed at the beginning of status_calc_pc()
+    int param_bonus[6],param_equip[6]; //Stores card/equipment bonuses.
+    int subele[ELE_MAX];
+    int subrace[RC_MAX];
+    int subrace2[RC2_MAX];
+    int subsize[3];
+    int reseff[SC_COMMON_MAX-SC_COMMON_MIN+1];
+    int weapon_coma_ele[ELE_MAX];
+    int weapon_coma_race[RC_MAX];
+    int weapon_atk[16];
+    int weapon_atk_rate[16];
+    int arrow_addele[ELE_MAX];
+    int arrow_addrace[RC_MAX];
+    int arrow_addsize[3];
+    int magic_addele[ELE_MAX];
+    int magic_addrace[RC_MAX];
+    int magic_addsize[3];
+    int critaddrace[RC_MAX];
+    int expaddrace[RC_MAX];
+    int ignore_mdef[RC_MAX];
+    int ignore_def[RC_MAX];
+    int itemgrouphealrate[MAX_ITEMGROUP];
+    short sp_gain_race[RC_MAX];
+    // zeroed arrays end here.
+    // zeroed structures start here
+    struct s_autospell autospell[15], autospell2[15], autospell3[15];
+    struct s_addeffect addeff[MAX_PC_BONUS], addeff2[MAX_PC_BONUS];
+    struct s_addeffectonskill addeff3[MAX_PC_BONUS];
 
-	int itemid;
-	short itemindex;	//Used item's index in sd->inventory [Skotlex]
+    struct { //skillatk raises bonus dmg% of skills, skillheal increases heal%, skillblown increases bonus blewcount for some skills.
+        unsigned short id;
+        short val;
+    } skillatk[MAX_PC_BONUS], skillheal[5], skillheal2[5], skillblown[MAX_PC_BONUS], skillcast[MAX_PC_BONUS], fixskillcast[MAX_PC_BONUS];
+    struct {
+        short value;
+        int rate;
+        int tick;
+    } hp_loss, sp_loss, hp_regen, sp_regen;
+    struct {
+        short class_, rate;
+    }   add_def[MAX_PC_BONUS], add_mdef[MAX_PC_BONUS], add_mdmg[MAX_PC_BONUS];
+    struct s_add_drop add_drop[MAX_PC_BONUS];
+    struct {
+        int nameid;
+        int rate;
+    } itemhealrate[MAX_PC_BONUS];
+    struct {
+        short flag, rate;
+        unsigned char ele;
+    } subele2[MAX_PC_BONUS];
+    // zeroed structures end here
+    // manually zeroed structures start here.
+    struct s_autobonus autobonus[MAX_PC_BONUS], autobonus2[MAX_PC_BONUS], autobonus3[MAX_PC_BONUS]; //Auto script on attack, when attacked, on skill usage
+    // manually zeroed structures end here.
+    // zeroed vars start here.
+    int atk_rate;
+    int arrow_atk,arrow_ele,arrow_cri,arrow_hit;
+    int nsshealhp,nsshealsp;
+    int critical_def,double_rate;
+    int long_attack_atk_rate; //Long range atk rate, not weapon based. [Skotlex]
+    int near_attack_def_rate,long_attack_def_rate,magic_def_rate,misc_def_rate;
+    int ignore_mdef_ele;
+    int ignore_mdef_race;
+    int perfect_hit;
+    int perfect_hit_add;
+    int get_zeny_rate;
+    int get_zeny_num; //Added Get Zeny Rate [Skotlex]
+    int double_add_rate;
+    int short_weapon_damage_return,long_weapon_damage_return;
+    int magic_damage_return; // AppleGirl Was Here
+    int random_attack_increase_add,random_attack_increase_per; // [Valaris]
+    int break_weapon_rate,break_armor_rate;
+    int crit_atk_rate;
+    int classchange; // [Valaris]
+    int speed_rate, speed_add_rate, aspd_add;
+    int itemhealrate2; // [Epoque] Increase heal rate of all healing items.
+    unsigned int setitem_hash, setitem_hash2; //Split in 2 because shift operations only work on int ranges. [Skotlex]
 
-	short catch_target_class; // pet catching, stores a pet class to catch (short now) [zzo]
+    short splash_range, splash_add_range;
+    short add_steal_rate;
+    short add_heal_rate, add_heal2_rate;
+    short sp_gain_value, hp_gain_value, magic_sp_gain_value, magic_hp_gain_value;
+    short sp_vanish_rate;
+    short sp_vanish_per;
+    unsigned short unbreakable; // chance to prevent ANY equipment breaking [celest]
+    unsigned short unbreakable_equip; //100% break resistance on certain equipment
+    unsigned short unstripable_equip;
 
-	short spiritball, spiritball_old;
-	int spirit_timer[MAX_SKILL_LEVEL];
-	
-	short rageball, rageball_old;
-	int rage_timer[MAX_RAGE];
+    // zeroed vars end here.
 
-	unsigned char potion_success_counter; //Potion successes in row counter
-	unsigned char mission_count; //Stores the bounty kill count for TK_MISSION
-	short mission_mobid; //Stores the target mob_id for TK_MISSION
-	int die_counter; //Total number of times you've died
-	int devotion[5]; //Stores the account IDs of chars devoted to.
-	int reg_num; //Number of registries (type numeric)
-	int regstr_num; //Number of registries (type string)
+    int castrate,delayrate,hprate,sprate,dsprate;
+    int hprecov_rate,sprecov_rate;
+    int matk_rate;
+    int critical_rate,hit_rate,flee_rate,flee2_rate,def_rate,def2_rate,mdef_rate,mdef2_rate;
+    int fixcastrate;    //fixed casting reduction. [Jobbie]
 
-	struct script_reg *reg;
-	struct script_regstr *regstr;
+    int itemid;
+    short itemindex;    //Used item's index in sd->inventory [Skotlex]
 
-	int trade_partner;
-	struct { 
-		struct {
-			short index, amount;
-		} item[10];
-		int zeny, weight;
-	} deal;
+    short catch_target_class; // pet catching, stores a pet class to catch (short now) [zzo]
 
-	bool party_creating; // whether the char is requesting party creation
-	bool party_joining; // whether the char is accepting party invitation
-	int party_invite, party_invite_account; // for handling party invitation (holds party id and account id)
-	int adopt_invite; // Adoption
+    short spiritball, spiritball_old;
+    int spirit_timer[MAX_SKILL_LEVEL];
 
-	int guild_invite,guild_invite_account;
-	int guild_emblem_id,guild_alliance,guild_alliance_account;
-	short guild_x,guild_y; // For guildmate position display. [Skotlex] should be short [zzo]
-	int guildspy; // [Syrus22]
-	int partyspy; // [Syrus22]
+    short rageball, rageball_old;
+    int rage_timer[MAX_RAGE];
 
-	int vended_id;
-	int vender_id;
-	int vend_num;
-	char message[MESSAGE_SIZE];
-	struct s_vending vending[MAX_VENDING];
+    unsigned char potion_success_counter; //Potion successes in row counter
+    unsigned char mission_count; //Stores the bounty kill count for TK_MISSION
+    short mission_mobid; //Stores the target mob_id for TK_MISSION
+    int die_counter; //Total number of times you've died
+    int devotion[5]; //Stores the account IDs of chars devoted to.
+    int reg_num; //Number of registries (type numeric)
+    int regstr_num; //Number of registries (type string)
 
-	unsigned int buyer_id;  // uid of open buying store
-	struct s_buyingstore buyingstore;
+    struct script_reg *reg;
+    struct script_regstr *regstr;
 
-	struct s_search_store_info searchstore;
+    int trade_partner;
+    struct {
+        struct {
+            short index, amount;
+        } item[10];
+        int zeny, weight;
+    } deal;
 
-	struct pet_data *pd;
-	struct homun_data *hd;	// [blackhole89]
-	struct mercenary_data *md;
-	struct elemental_data *ed;
+    bool party_creating; // whether the char is requesting party creation
+    bool party_joining; // whether the char is accepting party invitation
+    int party_invite, party_invite_account; // for handling party invitation (holds party id and account id)
+    int adopt_invite; // Adoption
 
-	int channels;
-	struct channel_data *cd[MAX_USER_CHANNELS];
-	int channel_invite_timer;
+    int guild_invite,guild_invite_account;
+    int guild_emblem_id,guild_alliance,guild_alliance_account;
+    short guild_x,guild_y; // For guildmate position display. [Skotlex] should be short [zzo]
+    int guildspy; // [Syrus22]
+    int partyspy; // [Syrus22]
 
-	struct{
-		int  m; //-1 - none, other: map index corresponding to map name.
-		unsigned short index; //map index
-	}feel_map[3];// 0 - Sun; 1 - Moon; 2 - Stars
-	short hate_mob[3];
+    int vended_id;
+    int vender_id;
+    int vend_num;
+    char message[MESSAGE_SIZE];
+    struct s_vending vending[MAX_VENDING];
 
-	int pvp_timer;
-	short pvp_point;
-	unsigned short pvp_rank, pvp_lastusers;
-	unsigned short pvp_won, pvp_lost;
+    unsigned int buyer_id;  // uid of open buying store
+    struct s_buyingstore buyingstore;
 
-	char eventqueue[MAX_EVENTQUEUE][EVENT_NAME_LENGTH];
-	int eventtimer[MAX_EVENTTIMER];
-	unsigned short eventcount; // [celest]
+    struct s_search_store_info searchstore;
 
-	unsigned char change_level[2]; // [celest]
-	unsigned gm_power : 1; // Flag para comando maspower [Tab]
-	int gm_stats[6];
+    struct pet_data *pd;
+    struct homun_data *hd;  // [blackhole89]
+    struct mercenary_data *md;
+    struct elemental_data *ed;
 
-	struct {
-		int MVPKiller;
-		time_t session_start;
-		unsigned int session_base_exp, session_job_exp;
-	} custom_data;
+    int channels;
+    struct channel_data *cd[MAX_USER_CHANNELS];
+    int channel_invite_timer;
 
-	unsigned int pvpevent_fame;
+    struct{
+        int  m; //-1 - none, other: map index corresponding to map name.
+        unsigned short index; //map index
+    }feel_map[3];// 0 - Sun; 1 - Moon; 2 - Stars
+    short hate_mob[3];
 
-	char fakename[NAME_LENGTH]; // fake names [Valaris]
+    int pvp_timer;
+    short pvp_point;
+    unsigned short pvp_rank, pvp_lastusers;
+    unsigned short pvp_won, pvp_lost;
 
-	int duel_group; // duel vars [LuzZza]
-	int duel_invite;
+    char eventqueue[MAX_EVENTQUEUE][EVENT_NAME_LENGTH];
+    int eventtimer[MAX_EVENTTIMER];
+    unsigned short eventcount; // [celest]
 
-	int killerrid, killedrid;
+    unsigned char change_level[2]; // [celest]
+    unsigned gm_power : 1; // Flag para comando maspower [Tab]
+    int gm_stats[6];
 
-	char away_message[128]; // [LuzZza]
+    struct {
+        int MVPKiller;
+        time_t session_start;
+        unsigned int session_base_exp, session_job_exp;
+    } custom_data;
 
-	int cashPoints, kafraPoints;
-	int Premium_Tick;
+    unsigned int pvpevent_fame;
 
-	int rental_timer;
+    char fakename[NAME_LENGTH]; // fake names [Valaris]
 
-	// Hunting Missions [Zephyrus]
-	int hunting_time;
-	struct {
-		int mob_id;
-		short count;
-	} hunting[5];
+    int duel_group; // duel vars [LuzZza]
+    int duel_invite;
 
-	// Auction System [Zephyrus]
-	struct {
-		int index, amount;
-	} auction;
+    int killerrid, killedrid;
 
-	// Mail System [Zephyrus]
-	struct {
-		short nameid;
-		int index, amount, zeny;
-		struct mail_data inbox;
-		bool changed; // if true, should sync with charserver on next mailbox request
-	} mail;
+    char away_message[128]; // [LuzZza]
 
-	// Reading SpellBook
-	struct {
-		unsigned short skillid;
-		unsigned char level;
-		unsigned char points;
-	} rsb[MAX_SPELLBOOK];
+    int cashPoints, kafraPoints;
+    int Premium_Tick;
 
-	//Quest log system [Kevin] [Inkfish]
-	int num_quests;
-	int avail_quests;
-	int quest_index[MAX_QUEST_DB];
-	struct quest quest_log[MAX_QUEST_DB];
-	bool save_quest;
+    int rental_timer;
 
-	unsigned int bg_id;
-	struct battleground_data *bmaster_flag;
-	unsigned short bg_kills; // Battleground Kill Count
-	struct queue_data *qd;
+    // Hunting Missions [Zephyrus]
+    int hunting_time;
+    struct {
+        int mob_id;
+        short count;
+    } hunting[5];
 
-	unsigned short user_font;
-	short view_aura, user_aura;
+    // Auction System [Zephyrus]
+    struct {
+        int index, amount;
+    } auction;
 
-	// Bonus Drop Rate [WiseWarrior]
-	double drop_bonus;
+    // Mail System [Zephyrus]
+    struct {
+        short nameid;
+        int index, amount, zeny;
+        struct mail_data inbox;
+        bool changed; // if true, should sync with charserver on next mailbox request
+    } mail;
 
-	int shadowform_id;
-	short shieldmdef;
+    // Reading SpellBook
+    struct {
+        unsigned short skillid;
+        unsigned char level;
+        unsigned char points;
+    } rsb[MAX_SPELLBOOK];
+
+    //Quest log system [Kevin] [Inkfish]
+    int num_quests;
+    int avail_quests;
+    int quest_index[MAX_QUEST_DB];
+    struct quest quest_log[MAX_QUEST_DB];
+    bool save_quest;
+
+    unsigned int bg_id;
+    struct battleground_data *bmaster_flag;
+    unsigned short bg_kills; // Battleground Kill Count
+    struct queue_data *qd;
+
+    unsigned short user_font;
+    short view_aura, user_aura;
+
+    // Bonus Drop Rate [WiseWarrior]
+    double drop_bonus;
+
+    int shadowform_id;
+    short shieldmdef;
 };
 
 
@@ -512,65 +511,65 @@ struct map_session_data {
 #define CLASS_COUNT (JOB_MAX - JOB_NOVICE_HIGH + JOB_MAX_BASIC)
 
 enum weapon_type {
-	W_FIST,	//Bare hands
-	W_DAGGER,	//1
-	W_1HSWORD,	//2
-	W_2HSWORD,	//3
-	W_1HSPEAR,	//4
-	W_2HSPEAR,	//5
-	W_1HAXE,	//6
-	W_2HAXE,	//7
-	W_MACE,	//8
-	W_2HMACE,	//9 (unused)
-	W_STAFF,	//10
-	W_BOW,	//11
-	W_KNUCKLE,	//12	
-	W_MUSICAL,	//13
-	W_WHIP,	//14
-	W_BOOK,	//15
-	W_KATAR,	//16
-	W_REVOLVER,	//17
-	W_RIFLE,	//18
-	W_GATLING,	//19
-	W_SHOTGUN,	//20
-	W_GRENADE,	//21
-	W_HUUMA,	//22
-	W_2HSTAFF,	//23
-	MAX_WEAPON_TYPE,
-	// dual-wield constants
-	W_DOUBLE_DD, // 2 daggers
-	W_DOUBLE_SS, // 2 swords
-	W_DOUBLE_AA, // 2 axes
-	W_DOUBLE_DS, // dagger + sword
-	W_DOUBLE_DA, // dagger + axe
-	W_DOUBLE_SA, // sword + axe
+    W_FIST, //Bare hands
+    W_DAGGER,   //1
+    W_1HSWORD,  //2
+    W_2HSWORD,  //3
+    W_1HSPEAR,  //4
+    W_2HSPEAR,  //5
+    W_1HAXE,    //6
+    W_2HAXE,    //7
+    W_MACE, //8
+    W_2HMACE,   //9 (unused)
+    W_STAFF,    //10
+    W_BOW,  //11
+    W_KNUCKLE,  //12
+    W_MUSICAL,  //13
+    W_WHIP, //14
+    W_BOOK, //15
+    W_KATAR,    //16
+    W_REVOLVER, //17
+    W_RIFLE,    //18
+    W_GATLING,  //19
+    W_SHOTGUN,  //20
+    W_GRENADE,  //21
+    W_HUUMA,    //22
+    W_2HSTAFF,  //23
+    MAX_WEAPON_TYPE,
+    // dual-wield constants
+    W_DOUBLE_DD, // 2 daggers
+    W_DOUBLE_SS, // 2 swords
+    W_DOUBLE_AA, // 2 axes
+    W_DOUBLE_DS, // dagger + sword
+    W_DOUBLE_DA, // dagger + axe
+    W_DOUBLE_SA, // sword + axe
 };
 
 enum ammo_type {
-	A_ARROW = 1,
-	A_DAGGER,		//2
-	A_BULLET,		//3
-	A_SHELL,		//4
-	A_GRENADE,		//5
-	A_SHURIKEN,		//6
-	A_KUNAI,		//7
-	A_CANNONBALL,	//8
-	A_THROWWEAPON	//9
+    A_ARROW = 1,
+    A_DAGGER,       //2
+    A_BULLET,       //3
+    A_SHELL,        //4
+    A_GRENADE,      //5
+    A_SHURIKEN,     //6
+    A_KUNAI,        //7
+    A_CANNONBALL,   //8
+    A_THROWWEAPON   //9
 };
 
 //Equip position constants
 enum equip_pos {
-	EQP_HEAD_LOW = 0x0001, 
-	EQP_HEAD_MID = 0x0200, //512
-	EQP_HEAD_TOP = 0x0100, //256
-	EQP_HAND_R   = 0x0002,
-	EQP_HAND_L   = 0x0020, //32
-	EQP_ARMOR    = 0x0010, //16
-	EQP_SHOES    = 0x0040, //64
-	EQP_GARMENT  = 0x0004,
-	EQP_ACC_L    = 0x0008,
-	EQP_ACC_R    = 0x0080, //128
-	EQP_AMMO     = 0x8000, //32768
+    EQP_HEAD_LOW = 0x0001,
+    EQP_HEAD_MID = 0x0200, //512
+    EQP_HEAD_TOP = 0x0100, //256
+    EQP_HAND_R   = 0x0002,
+    EQP_HAND_L   = 0x0020, //32
+    EQP_ARMOR    = 0x0010, //16
+    EQP_SHOES    = 0x0040, //64
+    EQP_GARMENT  = 0x0004,
+    EQP_ACC_L    = 0x0008,
+    EQP_ACC_R    = 0x0080, //128
+    EQP_AMMO     = 0x8000, //32768
 };
 
 #define EQP_WEAPON EQP_HAND_R
@@ -581,26 +580,26 @@ enum equip_pos {
 
 /// Equip positions that use a visible sprite
 #if PACKETVER < 20110111
-	#define EQP_VISIBLE EQP_HELM
+    #define EQP_VISIBLE EQP_HELM
 #else
-	#define EQP_VISIBLE (EQP_HELM|EQP_GARMENT)
+    #define EQP_VISIBLE (EQP_HELM|EQP_GARMENT)
 #endif
 
 //Equip indexes constants. (eg: sd->equip_index[EQI_AMMO] returns the index
 //where the arrows are equipped)
 enum equip_index {
-	EQI_ACC_L = 0,
-	EQI_ACC_R,
-	EQI_SHOES,
-	EQI_GARMENT,
-	EQI_HEAD_LOW,
-	EQI_HEAD_MID,
-	EQI_HEAD_TOP,
-	EQI_ARMOR,
-	EQI_HAND_L,
-	EQI_HAND_R,
-	EQI_AMMO,
-	EQI_MAX
+    EQI_ACC_L = 0,
+    EQI_ACC_R,
+    EQI_SHOES,
+    EQI_GARMENT,
+    EQI_HEAD_LOW,
+    EQI_HEAD_MID,
+    EQI_HEAD_TOP,
+    EQI_ARMOR,
+    EQI_HAND_L,
+    EQI_HAND_R,
+    EQI_AMMO,
+    EQI_MAX
 };
 
 extern int global_size;
@@ -630,15 +629,15 @@ extern int global_size;
 
 //Weapon check considering dual wielding.
 #define pc_check_weapontype(sd, type) ((type)&((sd)->status.weapon < MAX_WEAPON_TYPE? \
-	1<<(sd)->status.weapon:(1<<(sd)->weapontype1)|(1<<(sd)->weapontype2)))
+    1<<(sd)->status.weapon:(1<<(sd)->weapontype1)|(1<<(sd)->weapontype2)))
 //Checks if the given class value corresponds to a player class. [Skotlex]
 #define pcdb_checkid(class_) \
 ( \
-	( (class_) >= JOB_NOVICE         && (class_) <  JOB_MAX_BASIC     ) \
-||	( (class_) >= JOB_NOVICE_HIGH    && (class_) <= JOB_DARK_COLLECTOR) \
-||	( (class_) >= JOB_RUNE_KNIGHT    && (class_) <= JOB_MECHANIC_T2   ) \
-||	( (class_) >= JOB_BABY_RUNE      && (class_) <= JOB_BABY_MECHANIC2) \
-||	( (class_) >= JOB_SUPER_NOVICE_E && (class_) < JOB_MAX            ) \
+    ( (class_) >= JOB_NOVICE         && (class_) <  JOB_MAX_BASIC     ) \
+||  ( (class_) >= JOB_NOVICE_HIGH    && (class_) <= JOB_DARK_COLLECTOR) \
+||  ( (class_) >= JOB_RUNE_KNIGHT    && (class_) <= JOB_MECHANIC_T2   ) \
+||  ( (class_) >= JOB_BABY_RUNE      && (class_) <= JOB_BABY_MECHANIC2) \
+||  ( (class_) >= JOB_SUPER_NOVICE_E && (class_) < JOB_MAX            ) \
 )
 
 //Ancient WoE Check
@@ -826,29 +825,29 @@ void pc_regen (struct map_session_data *sd, unsigned int diff_tick);
 void pc_setstand(struct map_session_data *sd);
 int pc_candrop(struct map_session_data *sd,struct item *item);
 
-int pc_jobid2mapid(unsigned short b_class);	// Skotlex
-int pc_mapid2jobid(unsigned short class_, int sex);	// Skotlex
+int pc_jobid2mapid(unsigned short b_class); // Skotlex
+int pc_mapid2jobid(unsigned short class_, int sex); // Skotlex
 
 const char * job_name(int class_);
 
 struct skill_tree_entry {
-	short id;
-	unsigned char max;
-	unsigned char joblv;
-	struct {
-		short id;
-		unsigned char lv;
-	} need[MAX_PC_SKILL_REQUIRE];
+    short id;
+    unsigned char max;
+    unsigned char joblv;
+    struct {
+        short id;
+        unsigned char lv;
+    } need[MAX_PC_SKILL_REQUIRE];
 }; // Celest
 extern struct skill_tree_entry skill_tree[CLASS_COUNT][MAX_SKILL_TREE];
 
 struct sg_data {
-	short anger_id;
-	short bless_id;
-	short comfort_id;
-	char feel_var[NAME_LENGTH];
-	char hate_var[NAME_LENGTH];
-	int (*day_func)(void);
+    short anger_id;
+    short bless_id;
+    short comfort_id;
+    char feel_var[NAME_LENGTH];
+    char hate_var[NAME_LENGTH];
+    int (*day_func)(void);
 };
 extern const struct sg_data sg_info[MAX_PC_FEELHATE];
 

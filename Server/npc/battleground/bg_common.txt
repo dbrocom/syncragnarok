@@ -39,6 +39,7 @@ OnInit:
 	// *****************************************************
 	set .BG_Count, getarraysize(.BG_Arenas$);
 	set .BG_Queue, bg_queue_create("Battleground Arena","BG_Queue_Join::OnJoinEvent",80);
+	set .VS_Queue, bg_queue_create("Free For All Arena","BG_Queue_Join::OnVersusJoin",80);
 	// Move to Next Arena
 	if( $BG_Index >= .BG_Count ) set $BG_Index,0; // Restart Rotation
 	set .BG_Arena$,.BG_Arenas$[$BG_Index];
@@ -150,6 +151,23 @@ OnJoinEvent:
 	}
 	end;
 
+OnVersusJoin:
+	if( $@VS_Status != 0 )
+		end;
+
+	set .@Queue_Count, bg_queue_data(.VS_Queue,0);
+	if( .@Queue_Count >= 10 )
+	{
+		donpcevent "FFA_Arena::OnBuildTeams";
+		bg_queue2teams .VS_Queue,1,0,$@VS_Team[0],$@VS_Team[1],$@VS_Team[2],$@VS_Team[3],$@VS_Team[4],$@VS_Team[5],$@VS_Team[6],$@VS_Team[7],$@VS_Team[8],$@VS_Team[9];
+		set $@VS_Status,1;
+		announce "Battleground -- Free For All -- Begining",0,0x483D8B;
+		donpcevent "FFA_Arena::OnReady";
+	}
+	else
+		announce "Battleground -- Free For All -- " + (10 - .@Queue_Count) + " more players to start",0,0x483D8B;
+	end;
+
 OnFri0600: // Friday, 6 a.m.
 	rankreset 1; // Ranking Reset
 	end;
@@ -215,165 +233,224 @@ OnClock2200:
 	mes "This is the Battleground Information and Registration service.";
 	mes "What do you want to do?";
 	next;
-	switch( select("Register:Party Register:Leave Queue:^0000FFWarp to Battle Room^000000:Battleground Help") )
+	switch( select("^FFA500Battleground Arenas^000000:^0000FFFree For All Arena^000000:Warp to Battle Room") )
 	{
 	case 1:
-		if( BaseLevel < 80 )
-		{
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "Min required level to join a battleground is 80.";
-			close;
-		}
-		if( checkquest(8506,PLAYTIME) == 2 )
-			erasequest 8506;
-		if( checkquest(8506,PLAYTIME) != -1 )
-		{
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "You are a Deserter. You can't participate until the indicator goes off";
-			close;
-		}
-
 		mes "[^FFA500Battle Recruiter^000000]";
-		mes "Let's proceed with the registration...";
-		mes "You must wait on any City until BG starts.";
-		mes "Close this window to continue...";
-		close2;
-		bg_queue_join getvariableofnpc(.BG_Queue,"BG_Queue_Join");
-		end;
-	case 2:
-		if( getcharid(1) == 0 )
-		{
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "You are not on a Party.";
-			close;
-		}
-		
-		mes "[^FFA500Battle Recruiter^000000]";
-		mes "Let's proceed with the registration...";
-		mes "You must wait on any City until BG starts.";
-		mes "Close this window to continue...";
-		close2;
-		bg_queue_partyjoin getcharid(1),getvariableofnpc(.BG_Queue,"BG_Queue_Join");
-		end;
-	case 3:
-		mes "[^FFA500Battle Recruiter^000000]";
-		mes "If you are registered, you will be removed.";
-		mes "Are you sure?";
+		mes "Battlegrounds Arena are different kinds of games where Teams fight for victory.";
+		mes "What do you want to do?";
 		next;
-		if( select("Yes, leave queue:No, I will stay") == 2 )
+		switch( select("Register:Party Register:Leave Queue:Battleground Help") )
 		{
+		case 1:
+			if( BaseLevel < 80 )
+			{
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Min required level to join a battleground is 80.";
+				close;
+			}
+			if( checkquest(8506,PLAYTIME) == 2 )
+				erasequest 8506;
+			if( checkquest(8506,PLAYTIME) != -1 )
+			{
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "You are a Deserter. You can't participate until the indicator goes off";
+				close;
+			}
+
 			mes "[^FFA500Battle Recruiter^000000]";
-			mes "Ok, nothing to change.";
-			close;
+			mes "Let's proceed with the registration...";
+			mes "You must wait on any City until BG starts.";
+			mes "Close this window to continue...";
+			close2;
+			bg_queue_join getvariableofnpc(.BG_Queue,"BG_Queue_Join");
+			end;
+		case 2:
+			if( getcharid(1) == 0 )
+			{
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "You are not on a Party.";
+				close;
+			}
+
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Let's proceed with the registration...";
+			mes "You must wait on any City until BG starts.";
+			mes "Close this window to continue...";
+			close2;
+			bg_queue_partyjoin getcharid(1),getvariableofnpc(.BG_Queue,"BG_Queue_Join");
+			end;
+		case 3:
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "If you are registered, you will be removed.";
+			mes "Are you sure?";
+			next;
+			if( select("Yes, leave queue:No, I will stay") == 2 )
+			{
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Ok, nothing to change.";
+				close;
+			}
+
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Close this window to continue...";
+			close2;
+			bg_queue_leave getvariableofnpc(.BG_Queue,"BG_Queue_Join");
+			end;
+		case 4:
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Tell me... what battleground you don't understand?";
+			next;
+			switch( select("Capture the Flag:Team DeathMatch:Stone Control:Eye of Storm:Bossnia:Domination:Triple Inferno:Conquest:Rush") )
+			{
+			case 1:
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "The objective of the Flavius Battle CTF is to score 3 points before your enemy, by capture their Flag.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "To capture a Flag you need to take the enemy flag, and bring it to your base flag.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "If your base flag is captured too, you need to kill the flag carrier and take the flag back to your base.";
+				break;
+			case 2:
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Kill all the enemy players to let their Team without points.";
+				mes "Protect our army.";
+				break;
+			case 3:
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Take the Stones in the middle of the battlefield and put in on your base, in the Stone Points.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Each Stone will give points to your team. First team reach 99 points wins the game.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Protect your stones from to be captured by the enemy.";
+				break;
+			case 4:
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "There are two bases, North and South which teams can capture by holding position on the Base more than the other team.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Each base will give you points each 5 seconds of Domination. If your Team control both bases the amount of points increases.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "To get aditional points, in the middle there is a Flag spawn, capture it and put it on any of your team Bases.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "The first Team reach 99 points wins the match.";
+				break;
+			case 5:
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Attack the enemy base and destroy each MVP Guardian. To do damage to the guardian your team must capture the Balance Flag in the middle base.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Each team have 5 guardian to be protected or killed.";
+				break;
+			case 6:
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "There are three bases, North, Center and South which teams can capture by holding position on the Base more than the other team.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Each base will give you points each 5 seconds of Domination.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "The first Team reach 99 points wins the match.";
+				break;
+			case 7:
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "There are 3 teams in the battlefield, your team and other 2 enemies.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Kill the enemy players, collect the skulls and bring then to the Sacrifice Totem to win points.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "You can collect your own team skulls and bring then to your Sacrifice Totem to avoid other teams to score.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "If you get killed all your skulls will be drop to the floor, including your own skull. First Team to get 80 points wins the battle.";
+				break;
+			case 8:
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "If you are Attacking, destroy the enemy defenses and it's Flag.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "If you are Defending, protect your castle defenses and the Flag.";
+				break;
+			case 9:
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Fight to capture the Castle and organize your team to defend it.";
+				next;
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "If you fail on the first capture, kill the defender and take it for your team.";
+				break;
+			}
+			break;
 		}
-		
+		close;
+	case 2:
 		mes "[^FFA500Battle Recruiter^000000]";
-		mes "Close this window to continue...";
-		close2;
-		bg_queue_leave getvariableofnpc(.BG_Queue,"BG_Queue_Join");
-		end;
-	case 4:
+		mes "Free For All Arena is a Duel between 10 players with No Teams.";
+		mes "The target is to kill 25 players.";
+		mes "What do you want to do?";
+		next;
+		switch( select("Register:Leave Queue") )
+		{
+		case 1:
+			if( BaseLevel < 80 )
+			{
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Min required level to join a battleground is 80.";
+				close;
+			}
+			if( checkquest(8506,PLAYTIME) == 2 )
+				erasequest 8506;
+			if( checkquest(8506,PLAYTIME) != -1 )
+			{
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "You are a Deserter. You can't participate until the indicator goes off";
+				close;
+			}
+
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Let's proceed with the registration...";
+			mes "You must wait on any City until BG starts.";
+			mes "Close this window to continue...";
+			close2;
+			bg_queue_join getvariableofnpc(.VS_Queue,"BG_Queue_Join");
+			end;
+		case 2:
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "If you are registered, you will be removed.";
+			mes "Are you sure?";
+			next;
+			if( select("Yes, leave queue:No, I will stay") == 2 )
+			{
+				mes "[^FFA500Battle Recruiter^000000]";
+				mes "Ok, nothing to change.";
+				close;
+			}
+
+			mes "[^FFA500Battle Recruiter^000000]";
+			mes "Close this window to continue...";
+			close2;
+			bg_queue_leave getvariableofnpc(.VS_Queue,"BG_Queue_Join");
+			end;
+		}
+		break;
+	case 3:
 		mes "[^FFA500Battle Recruiter^000000]";
 		mes "May the War God bless you.";
 		close2;
 		warp "bat_room",155,150;
 		end;
-	case 5:
-		mes "[^FFA500Battle Recruiter^000000]";
-		mes "Tell me... what battleground you don't understand?";
-		next;
-		switch( select("Capture the Flag:Team DeathMatch:Stone Control:Eye of Storm:Bossnia:Domination:Triple Inferno:Conquest:Rush") )
-		{
-		case 1:
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "The objective of the Flavius Battle CTF is to score 3 points before your enemy, by capture their Flag.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "To capture a Flag you need to take the enemy flag, and bring it to your base flag.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "If your base flag is captured too, you need to kill the flag carrier and take the flag back to your base.";
-			break;
-		case 2:
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "Kill all the enemy players to let their Team without points.";
-			mes "Protect our army.";
-			break;
-		case 3:
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "Take the Stones in the middle of the battlefield and put in on your base, in the Stone Points.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "Each Stone will give points to your team. First team reach 99 points wins the game.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "Protect your stones from to be captured by the enemy.";
-			break;
-		case 4:
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "There are two bases, North and South which teams can capture by holding position on the Base more than the other team.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "Each base will give you points each 5 seconds of Domination. If your Team control both bases the amount of points increases.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "To get aditional points, in the middle there is a Flag spawn, capture it and put it on any of your team Bases.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "The first Team reach 99 points wins the match.";
-			break;
-		case 5:
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "Attack the enemy base and destroy each MVP Guardian. To do damage to the guardian your team must capture the Balance Flag in the middle base.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "Each team have 5 guardian to be protected or killed.";
-			break;
-		case 6:
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "There are three bases, North, Center and South which teams can capture by holding position on the Base more than the other team.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "Each base will give you points each 5 seconds of Domination.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "The first Team reach 99 points wins the match.";
-			break;
-		case 7:
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "There are 3 teams in the battlefield, your team and other 2 enemies.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "Kill the enemy players, collect the skulls and bring then to the Sacrifice Totem to win points.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "You can collect your own team skulls and bring then to your Sacrifice Totem to avoid other teams to score.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "If you get killed all your skulls will be drop to the floor, including your own skull. First Team to get 80 points wins the battle.";
-			break;
-		case 8:
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "If you are Attacking, destroy the enemy defenses and it's Flag.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "If you are Defending, protect your castle defenses and the Flag.";
-			break;
-		case 9:
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "Fight to capture the Castle and organize your team to defend it.";
-			next;
-			mes "[^FFA500Battle Recruiter^000000]";
-			mes "If you fail on the first capture, kill the defender and take it for your team.";
-			break;
-		}
-		close;
 	}
 	end;
 }
 
 bat_room,160,150,3	duplicate(BG_Register)	Battle Recruiter#bat	728
-prontera,155,180,4	duplicate(BG_Register)	Battle Recruiter#prt	728
+// prontera,155,180,4	duplicate(BG_Register)	Battle Recruiter#prt	728
 
 // General Guillaume
 // *********************************************************************
