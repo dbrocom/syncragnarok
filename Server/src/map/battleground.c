@@ -449,7 +449,7 @@ int bg_create(unsigned short mapindex, short rx, short ry, int guild_index, cons
 {
 	struct battleground_data *bg;
 	int i;
-	bg_team_counter++;
+	if( ++bg_team_counter <= 0 ) bg_team_counter = 1;
 
 	CREATE(bg, struct battleground_data, 1);
 	bg->bg_id = bg_team_counter;
@@ -887,8 +887,10 @@ struct queue_data* queue_search(int q_id)
 int queue_create(const char* queue_name, const char* join_event, int min_level)
 {
 	struct queue_data *qd;
+	if( ++queue_counter <= 0 ) queue_counter = 1;
+
 	CREATE(qd, struct queue_data, 1);
-	qd->q_id = ++queue_counter;
+	qd->q_id = queue_counter;
 	safestrncpy(qd->queue_name, queue_name, sizeof(qd->queue_name));
 	safestrncpy(qd->join_event, join_event, sizeof(qd->join_event));
 	qd->first = qd->last = NULL; // First and Last Queue Members
@@ -1040,9 +1042,15 @@ int queue_join(struct map_session_data *sd, int q_id)
 	struct queue_data *qd;
 	int i;
 
-	if( !map[sd->bl.m].flag.town )
+	if( battle_config.bg_queue_onlytowns && !map[sd->bl.m].flag.town )
 	{
 		clif_displaymessage(sd->fd,"You only can join BG queues from Towns or BG Waiting Room.");
+		return 0;
+	}
+
+	if( sd->bg_id )
+	{
+		clif_displaymessage(sd->fd,"You cannot join queues when already playing Battlegrounds.");
 		return 0;
 	}
 

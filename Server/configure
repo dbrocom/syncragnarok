@@ -311,7 +311,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS SET_MAKE CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT CPP WITH_PLUGINS EGREP MYSQL_CONFIG_HOME HAVE_MYSQL MYSQL_VERSION MYSQL_CFLAGS MYSQL_LIBS HAVE_PCRE PCRE_LIBS PCRE_CFLAGS HAVE_CURL CURL_LIBS CURL_CFLAGS DLLEXT LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS SET_MAKE CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT CPP WITH_PLUGINS EGREP MYSQL_CONFIG_HOME HAVE_MYSQL MYSQL_VERSION MYSQL_CFLAGS MYSQL_LIBS HAVE_PCRE PCRE_LIBS PCRE_CFLAGS DLLEXT LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -876,9 +876,6 @@ Optional Packages:
   --with-pcre[=ARG] use PCRE library, optionally specify the full path
                           of pcre installation directory (by default pcre is
                           used if found)
-  --with-curl[=ARG] use CURL library, optionally specify the full path
-                          of curl installation directory (by default curl is
-                          used if found)
   --with-zlib=DIR         root directory path of zlib installation (defaults
                           to /usr/local or /usr if not found in /usr/local).
                           Assumes that the header files are in DIR/include and
@@ -1336,7 +1333,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
                     ac_config_files="$ac_config_files Makefile src/common/Makefile"
 
-	          ac_config_files="$ac_config_files 3rdparty/mt19937ar/Makefile"
+          ac_config_files="$ac_config_files 3rdparty/mt19937ar/Makefile"
 
                     ac_config_files="$ac_config_files src/char/Makefile src/login/Makefile"
 
@@ -1553,34 +1550,6 @@ echo "$as_me: error: $withval is not a directoy" >&2;}
 
 else
   want_pcre="yes" require_pcre="no"
-
-fi;
-
-#
-# Enable/disable CURL and optionally specify the path (optional library)
-#
-
-# Check whether --with-curl or --without-curl was given.
-if test "${with_curl+set}" = set; then
-  withval="$with_curl"
-
-		if test "$withval" = "no" ; then
-			want_curl="no"
-		else
-			want_curl="yes"
-			require_curl="yes"
-			if test "$withval" != "yes" ; then
-				if test ! -d "$withval" ; then
-					{ { echo "$as_me:$LINENO: error: $withval is not a directoy" >&5
-echo "$as_me: error: $withval is not a directoy" >&2;}
-   { (exit 1); exit 1; }; }
-				fi
-				CURL_HOME="$withval"
-			fi
-		fi
-
-else
-  want_curl="yes" require_curl="no"
 
 fi;
 
@@ -3552,7 +3521,6 @@ echo "${ECHO_T}no" >&6
 
 fi
 rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-
 
 
 #
@@ -5657,115 +5625,6 @@ fi
 
 
 
-
-#
-# CURL library (optional)
-#
-##TODO CURL version
-CURL_LIBS=""
-CURL_CFLAGS=""
-
-if test "$want_curl" = "no" ; then
-	{ echo "$as_me:$LINENO: ignoring CURL (optional)" >&5
-echo "$as_me: ignoring CURL (optional)" >&6;}
-else
-	if test -z "$CURL_HOME" ; then
-		echo "$as_me:$LINENO: checking for curl in -lcurl" >&5
-echo $ECHO_N "checking for curl in -lcurl... $ECHO_C" >&6
-if test "${ac_cv_lib_curl+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  ac_check_lib_save_LIBS=$LIBS
-LIBS="-lcurl  $LIBS"
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-
-/* Override any gcc2 internal prototype to avoid an error.  */
-#ifdef __cplusplus
-extern "C"
-#endif
-/* We use char because int might match the return type of a gcc2
-   builtin and then its argument prototype would still apply.  */
-char curl_easy_init();
-int
-main ()
-{
-curl_easy_init();
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_lib_curl=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_lib_curl=no
-fi
-rm -f conftest.err conftest.$ac_objext \
-      conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
-fi
-echo "$as_me:$LINENO: result: $ac_cv_lib_curl" >&5
-echo "${ECHO_T}$ac_cv_lib_curl" >&6
-if test $ac_cv_lib_curl = yes; then
-  HAVE_CURL="yes"
-fi
-		if test "$HAVE_CURL" = "yes" ; then
-			CURL_LIBS="-L$CURL_HOME/lib -lcurl"
-			test -d "$CURL_HOME/include/curl" && CURL_CFLAGS="-I$CURL_HOME/include/curl"
-		fi
-	fi
-	echo "$as_me:$LINENO: checking CURL library (optional)" >&5
-echo $ECHO_N "checking CURL library (optional)... $ECHO_C" >&6
-	if test "$HAVE_CURL" = "yes" ; then
-		echo "$as_me:$LINENO: result: yes" >&5
-echo "${ECHO_T}yes" >&6
-	else
-		echo "$as_me:$LINENO: result: no" >&5
-echo "${ECHO_T}no" >&6
-		if test "$require_curl" = "yes" ; then
-			{ { echo "$as_me:$LINENO: error: CURL not found or incompatible (requested)" >&5
-echo "$as_me: error: CURL not found or incompatible (requested)" >&2;}
-   { (exit 1); exit 1; }; }
-		else
-			{ echo "$as_me:$LINENO: disabling CURL (optional)" >&5
-echo "$as_me: disabling CURL (optional)" >&6;}
-		fi
-	fi
-fi
-
-
-
-
-
-
 #
 # Host specific stuff
 #
@@ -6477,9 +6336,6 @@ s,@MYSQL_LIBS@,$MYSQL_LIBS,;t t
 s,@HAVE_PCRE@,$HAVE_PCRE,;t t
 s,@PCRE_LIBS@,$PCRE_LIBS,;t t
 s,@PCRE_CFLAGS@,$PCRE_CFLAGS,;t t
-s,@HAVE_CURL@,$HAVE_CURL,;t t
-s,@CURL_LIBS@,$CURL_LIBS,;t t
-s,@CURL_CFLAGS@,$CURL_CFLAGS,;t t
 s,@DLLEXT@,$DLLEXT,;t t
 s,@LIBOBJS@,$LIBOBJS,;t t
 s,@LTLIBOBJS@,$LTLIBOBJS,;t t
