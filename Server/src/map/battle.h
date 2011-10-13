@@ -124,9 +124,9 @@ extern struct Battle_Config
 	int use_weapon_skill_range; //[Skotlex]
 	int pc_damage_delay_rate;
 	int defnotenemy;
-	int vs_traps_bctall;	
+	int vs_traps_bctall;
 	int traps_setting;
-	int summon_flora; //[Skotlex]	
+	int summon_flora; //[Skotlex]
 	int clear_unit_onwarp; //[Skotlex]
 	int random_monster_checklv;
 	int attr_recover;
@@ -329,7 +329,7 @@ extern struct Battle_Config
 	int pk_level_range;
 
 	int manner_system; // end additions [Valaris]
-	int show_mob_info; 
+	int show_mob_info;
 
 	int agi_penalty_count_lv;
 	int vit_penalty_count_lv;
@@ -366,7 +366,7 @@ extern struct Battle_Config
 	int hack_info_GM_level; // added by [Yor]
 	int any_warp_GM_min_level; // added by [Yor]
 	int packet_ver_flag; // added by [Yor]
-	
+
 	int min_hair_style; // added by [MouseJstr]
 	int max_hair_style; // added by [MouseJstr]
 	int min_hair_color; // added by [MouseJstr]
@@ -380,7 +380,7 @@ extern struct Battle_Config
 	int area_size; // added by [MouseJstr]
 
 	int max_def, over_def_bonus; //added by [Skotlex]
-	
+
 	int zeny_from_mobs; // [Valaris]
 	int mobs_level_up; // [Valaris]
 	int mobs_level_up_exp_rate; // [Valaris]
@@ -440,14 +440,14 @@ extern struct Battle_Config
 	int title_lvl6; // Players titles [Lupus]
 	int title_lvl7; // Players titles [Lupus]
 	int title_lvl8; // Players titles [Lupus]
-	
+
 	int duel_allow_pvp; // [LuzZza]
 	int duel_allow_gvg; // [LuzZza]
 	int duel_allow_teleport; // [LuzZza]
 	int duel_autoleave_when_die; // [LuzZza]
 	int duel_time_interval; // [LuzZza]
 	int duel_only_on_same_map; // [Toms]
-	
+
 	int skip_teleport_lv1_menu; // possibility to disable (skip) Teleport Lv1 menu, that have only two lines `Random` and `Cancel` [LuzZza]
 
 	int allow_skill_without_day; // [Komurka]
@@ -542,6 +542,7 @@ extern struct Battle_Config
 	int bg_reportafk_leaderonly;
 	int bg_queue2team_balanced;
 	int bg_logincount_check;
+	int bg_queue_onlytowns;
 
 	int bg_eAmod_mode;
 
