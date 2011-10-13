@@ -58,7 +58,7 @@ char* jstrescapecpy (char* pt, const char* spt)
 		pt[0] = '\0';
 		return &pt[0];
 	}
-	
+
 	while (spt[i] != '\0') {
 		switch (spt[i]) {
 			case '\'':
@@ -188,7 +188,7 @@ char* normalize_name(char* str,const char* delims)
 	return str;
 }
 
-//stristr: Case insensitive version of strstr, code taken from 
+//stristr: Case insensitive version of strstr, code taken from
 //http://www.daniweb.com/code/snippet313.html, Dave Sinkula
 //
 const char* stristr(const char* haystack, const char* needle)
@@ -245,7 +245,7 @@ char* _strtok_r(char *s1, const char *s2, char **lasts)
    If no '\0' terminator is found in that many characters, return MAXLEN.  */
 size_t strnlen (const char* string, size_t maxlen)
 {
-  const char* end = memchr (string, '\0', maxlen);
+  const char* end = (const char*)memchr(string, '\0', maxlen);
   return end ? (size_t) (end - string) : maxlen;
 }
 #endif
@@ -603,13 +603,13 @@ int sv_parse_next(struct s_svstate* sv)
 /// out_pos[0] and out_pos[1] are the start and end of line.
 /// Other position pairs are the start and end of fields.
 /// Returns the number of fields found or -1 if an error occurs.
-/// 
+///
 /// out_pos can be NULL.
 /// If a line terminator is found, the end position is placed there.
-/// out_pos[2] and out_pos[3] for the first field, out_pos[4] and out_pos[5] 
+/// out_pos[2] and out_pos[3] for the first field, out_pos[4] and out_pos[5]
 /// for the seconds field and so on.
 /// Unfilled positions are set to -1.
-/// 
+///
 /// @param str String to parse
 /// @param len Length of the string
 /// @param startoff Where to start parsing
@@ -655,11 +655,11 @@ int sv_parse(const char* str, int len, int startoff, char delim, int* out_pos, i
 /// out_fields[0] is the start of the next line.
 /// Other entries are the start of fields (nul-teminated).
 /// Returns the number of fields found or -1 if an error occurs.
-/// 
+///
 /// out_fields can be NULL.
 /// Fields that don't fit in out_fields are not nul-terminated.
 /// Extra entries in out_fields are filled with the end of the last field (empty string).
-/// 
+///
 /// @param str String to parse
 /// @param len Length of the string
 /// @param startoff Where to start parsing
@@ -980,7 +980,7 @@ bool sv_readdb(const char* directory, const char* filename, char delim, int minc
 
 	// allocate enough memory for the maximum requested amount of columns plus the reserved one
 	fields_length = maxcols+1;
-	fields = aMalloc(fields_length*sizeof(char*));
+	fields = (char**)aMalloc(fields_length*sizeof(char*));
 
 	// process rows one by one
 	while( fgets(line, sizeof(line), fp) )
@@ -1039,7 +1039,7 @@ bool sv_readdb(const char* directory, const char* filename, char delim, int minc
 // @author MouseJstr (original)
 
 /// Allocates a StringBuf
-StringBuf* StringBuf_Malloc() 
+StringBuf* StringBuf_Malloc()
 {
 	StringBuf* self;
 	CREATE(self, StringBuf, 1);
@@ -1114,7 +1114,7 @@ int StringBuf_Append(StringBuf* self, const StringBuf* sbuf)
 }
 
 // Appends str to the StringBuf
-int StringBuf_AppendStr(StringBuf* self, const char* str) 
+int StringBuf_AppendStr(StringBuf* self, const char* str)
 {
 	int available = self->max_ - (self->ptr_ - self->buf_);
 	int needed = (int)strlen(str);
@@ -1133,20 +1133,20 @@ int StringBuf_AppendStr(StringBuf* self, const char* str)
 }
 
 // Returns the length of the data in the Stringbuf
-int StringBuf_Length(StringBuf* self) 
+int StringBuf_Length(StringBuf* self)
 {
 	return (int)(self->ptr_ - self->buf_);
 }
 
 /// Returns the data in the StringBuf
-char* StringBuf_Value(StringBuf* self) 
+char* StringBuf_Value(StringBuf* self)
 {
 	*self->ptr_ = '\0';
 	return self->buf_;
 }
 
 /// Clears the contents of the StringBuf
-void StringBuf_Clear(StringBuf* self) 
+void StringBuf_Clear(StringBuf* self)
 {
 	self->ptr_ = self->buf_;
 }
@@ -1160,7 +1160,7 @@ void StringBuf_Destroy(StringBuf* self)
 }
 
 // Frees a StringBuf returned by StringBuf_Malloc
-void StringBuf_Free(StringBuf* self) 
+void StringBuf_Free(StringBuf* self)
 {
 	StringBuf_Destroy(self);
 	aFree(self);

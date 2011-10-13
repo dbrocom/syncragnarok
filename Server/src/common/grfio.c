@@ -223,17 +223,17 @@ unsigned long grfio_crc32 (const unsigned char* buf, unsigned int len)
 
 ///////////////////////////////////////////////////////////////////////////////
 ///	Grf data sub : zip decode
-int decode_zip(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen)
+int decode_zip(void* dest, unsigned long* destLen, const void* source, unsigned long sourceLen)
 {
-	return uncompress(dest, destLen, source, sourceLen);
+	return uncompress((Bytef*)dest, destLen, (const Bytef*)source, sourceLen);
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
-///	Grf data sub : zip encode 
-int encode_zip(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen)
+///	Grf data sub : zip encode
+int encode_zip(void* dest, unsigned long* destLen, const void* source, unsigned long sourceLen)
 {
-	return compress(dest, destLen, source, sourceLen);
+	return compress((Bytef*)dest, destLen, (const Bytef*)source, sourceLen);
 }
 
 
@@ -327,7 +327,7 @@ static void filelist_adjust(void)
 {
 	if (filelist == NULL)
 		return;
-	
+
 	if (filelist_entrys < filelist_maxentry) {
 		filelist = (FILELIST *)aRealloc(filelist, filelist_entrys * sizeof(FILELIST));
 		filelist_maxentry = filelist_entrys;
@@ -711,7 +711,7 @@ static void grfio_resourcecheck(void)
 		ShowStatus("Done reading '"CL_WHITE"%d"CL_RESET"' entries in '"CL_WHITE"%s"CL_RESET"'.\n", i, "resnametable.txt");
 		return;	// we're done here!
 	}
-	
+
 	// read resnametable from loaded GRF's, only if it cannot be loaded from the data directory
 	buf = (char *)grfio_reads("data\\resnametable.txt", &size);
 	if (buf) {

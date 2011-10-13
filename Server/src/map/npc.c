@@ -185,7 +185,7 @@ int npc_enable(const char* name, int flag)
 			clif_spawn(&nd->bl);
 	} else
 		clif_changeoption(&nd->bl);
-		
+
 	if( flag&3 && (nd->u.scr.xs >= 0 || nd->u.scr.ys >= 0) )
 		map_foreachinarea( npc_enable_sub, nd->bl.m, nd->bl.x-nd->u.scr.xs, nd->bl.y-nd->u.scr.ys, nd->bl.x+nd->u.scr.xs, nd->bl.y+nd->u.scr.ys, BL_PC, nd );
 
@@ -479,7 +479,7 @@ int npc_timerevent(int tid, unsigned int tick, int id, intptr_t data)
 	}
 
 	// These stuffs might need to be restored.
-	old_rid = nd->u.scr.rid;	
+	old_rid = nd->u.scr.rid;
 	old_tick = nd->u.scr.timertick;
 	old_timer = nd->u.scr.timer;
 
@@ -492,7 +492,7 @@ int npc_timerevent(int tid, unsigned int tick, int id, intptr_t data)
 	te = nd->u.scr.timer_event + ted->next;
 
 	// Arrange for the next event
-	ted->next++;	
+	ted->next++;
 	if( nd->u.scr.timeramount > ted->next )
 	{
 		next = nd->u.scr.timer_event[ ted->next ].timer - nd->u.scr.timer_event[ ted->next - 1 ].timer;
@@ -515,8 +515,8 @@ int npc_timerevent(int tid, unsigned int tick, int id, intptr_t data)
 	}
 
 	// Run the script
-	run_script(nd->u.scr.script,te->pos,nd->u.scr.rid,nd->bl.id);	
-	
+	run_script(nd->u.scr.script,te->pos,nd->u.scr.rid,nd->bl.id);
+
 	nd->u.scr.rid = old_rid; // Attached-rid should be restored anyway.
 	if( sd )
 	{ // Restore previous data, only if this timer is a player-attached one.
@@ -535,7 +535,7 @@ int npc_timerevent_start(struct npc_data* nd, int rid)
 	unsigned int tick = gettick();
 	struct map_session_data *sd = NULL; //Player to whom script is attached.
 	struct timer_event_data *ted;
-		
+
 	nullpo_ret(nd);
 
 	// No need to start because of no events
@@ -562,7 +562,7 @@ int npc_timerevent_start(struct npc_data* nd, int rid)
 	else if( nd->u.scr.timerid != INVALID_TIMER )
 		return 0;
 
-	// Arrange for the next event		
+	// Arrange for the next event
 	ted = ers_alloc(timer_event_ers, struct timer_event_data);
 	ted->next = j; // Set event index
 	ted->time = nd->u.scr.timer_event[j].timer;
@@ -597,14 +597,14 @@ int npc_timerevent_stop(struct npc_data* nd)
 		ShowError("npc_timerevent_stop: Attached player not found!\n");
 		return 1;
 	}
-	
+
 	tid = sd?&sd->npc_timer_id:&nd->u.scr.timerid;
 	if( *tid == INVALID_TIMER ) // Nothing to stop
 		return 0;
 
 	// Delete timer
 	td = get_timer(*tid);
-	if( td && td->data ) 
+	if( td && td->data )
 		ers_free(timer_event_ers, (void*)td->data);
 	delete_timer(*tid,npc_timerevent);
 	*tid = INVALID_TIMER;
@@ -664,10 +664,10 @@ void npc_timerevent_quit(struct map_session_data* sd)
 			old_tick = nd->u.scr.timertick;
 			old_timer = nd->u.scr.timer;
 
-			nd->u.scr.rid = sd->bl.id;			
-			nd->u.scr.timertick = gettick();			
+			nd->u.scr.rid = sd->bl.id;
+			nd->u.scr.timertick = gettick();
 			nd->u.scr.timer = ted->time;
-		
+
 			//Execute label
 			run_script(nd->u.scr.script,ev->pos,sd->bl.id,nd->bl.id);
 
@@ -709,7 +709,7 @@ int npc_settimerevent_tick(struct npc_data* nd, int newtimer)
 
 	nullpo_ret(nd);
 
-	// TODO: Set player attached timer's tick.	
+	// TODO: Set player attached timer's tick.
 
 	old_rid = nd->u.scr.rid;
 	nd->u.scr.rid = 0;
@@ -816,7 +816,7 @@ int npc_touchnext_areanpc(struct map_session_data* sd, bool leavemap)
 	xs = nd->u.scr.xs;
 	ys = nd->u.scr.ys;
 
-	if( sd->bl.m != nd->bl.m || 
+	if( sd->bl.m != nd->bl.m ||
 		sd->bl.x < nd->bl.x - xs || sd->bl.x > nd->bl.x + xs ||
 		sd->bl.y < nd->bl.y - ys || sd->bl.y > nd->bl.y + ys ||
 		pc_ishiding(sd) || leavemap )
@@ -973,7 +973,7 @@ int npc_check_areanpc(int flag, int m, int x, int y, int range)
 	y0 = max(y-range, 0);
 	x1 = min(x+range, map[m].xs-1);
 	y1 = min(y+range, map[m].ys-1);
-	
+
 	//First check for npc_cells on the range given
 	i = 0;
 	for (ys = y0; ys <= y1 && !i; ys++) {
@@ -1108,7 +1108,7 @@ int npc_scriptcont(struct map_session_data* sd, int id)
 		  	nd?(char*)nd->name:"'Unknown NPC'", (int)id);
 		return 1;
 	}
-	
+
 	if(id != fake_nd->bl.id) { // Not item script
 		if ((npc_checknear(sd,map_id2bl(id))) == NULL){
 			ShowWarning("npc_scriptcont: failed npc_checknear test.\n");
@@ -1131,7 +1131,7 @@ int npc_buysellsel(struct map_session_data* sd, int id, int type)
 
 	if ((nd = npc_checknear(sd,map_id2bl(id))) == NULL)
 		return 1;
-	
+
 	if (nd->subtype!=SHOP) {
 		ShowError("no such shop npc : %d\n",id);
 		if (sd->npc_id == id)
@@ -1260,7 +1260,7 @@ int npc_cashshop_buylist(struct map_session_data *sd, int points, int count, uns
 
 			for( j = 0; j < 3; j++ )
 				pc_delitem(sd,indexs[j],vt,0,0);
-		}	
+		}
 		else
 		{
 			i = pc_search_inventory(sd,nd->cashitem);
@@ -1299,7 +1299,7 @@ int npc_cashshop_buylist(struct map_session_data *sd, int points, int count, uns
 			pc_setglobalreg( sd, "LastLootID", nameid ); //Last lootet Item ID
 			pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
 			npc_event_doall_id( "OnLoot", sd->bl.id );
-		} 
+		}
 	}
 
 	return 0;
@@ -1389,7 +1389,7 @@ int npc_cashshop_buy(struct map_session_data *sd, int nameid, int amount, int po
 					return 6;
 				indexs[j] = i;
 			}
-			
+
 			for( j = 0; j < 3; j++ )
 				pc_delitem(sd,indexs[j],price,0,0);
 		}
@@ -1423,7 +1423,7 @@ int npc_cashshop_buy(struct map_session_data *sd, int nameid, int amount, int po
 		pc_setglobalreg( sd, "LastLootID", nameid ); //Last lootet Item ID
 		pc_setglobalreg( sd, "LastLootAmount", amount ); //Last looted Item Amount
 		npc_event_doall_id( "OnLoot", sd->bl.id );
-	} 
+	}
 
 	return 0;
 }
@@ -1456,7 +1456,7 @@ int npc_buylist(struct map_session_data* sd, int n, unsigned short* item_list)
 		int nameid, amount, value;
 
 		// find this entry in the shop's sell list
-		ARR_FIND( 0, nd->u.shop.count, j, 
+		ARR_FIND( 0, nd->u.shop.count, j,
 			item_list[i*2+1] == nd->u.shop.shop_item[j].nameid || //Normal items
 			item_list[i*2+1] == itemdb_viewid(nd->u.shop.shop_item[j].nameid) //item_avail replacement
 		);
@@ -1780,12 +1780,12 @@ int npc_unload(struct npc_data* nd)
 	if( nd->subtype == SCRIPT )
 	{
 		struct s_mapiterator* iter;
-		struct block_list* bl;		
+		struct block_list* bl;
 
 		ev_db->foreach(ev_db,npc_unload_ev,nd->exname); //Clean up all events related
 
-		iter = mapit_geteachpc();  
-		for( bl = (struct block_list*)mapit_first(iter); mapit_exists(iter); bl = (struct block_list*)mapit_next(iter) )  
+		iter = mapit_geteachpc();
+		for( bl = (struct block_list*)mapit_first(iter); mapit_exists(iter); bl = (struct block_list*)mapit_next(iter) )
 		{
 			struct map_session_data *sd = map_id2sd(bl->id);
 			if( sd && sd->npc_timer_id != INVALID_TIMER )
@@ -1800,13 +1800,13 @@ int npc_unload(struct npc_data* nd)
 				delete_timer(sd->npc_timer_id, npc_timerevent);
 				sd->npc_timer_id = INVALID_TIMER;
 			}
-		}  
+		}
 		mapit_free(iter);
 
 		if (nd->u.scr.timerid != INVALID_TIMER) {
 			const struct TimerData *td = NULL;
 			td = get_timer(nd->u.scr.timerid);
-			if (td && td->data) 
+			if (td && td->data)
 				ers_free(timer_event_ers, (void*)td->data);
 			delete_timer(nd->u.scr.timerid, npc_timerevent);
 		}
@@ -2081,7 +2081,7 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, const 
 /// Parses a shop/cashshop npc.
 static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const char* start, const char* buffer, const char* filepath)
 {
-	//TODO: could be rewritten to NOT need this temp array [ultramage] 
+	//TODO: could be rewritten to NOT need this temp array [ultramage]
 	#define MAX_SHOPITEM 100
 	struct npc_item_list items[MAX_SHOPITEM];
 	char *p;
@@ -2128,7 +2128,7 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 			}
 			break;
 		}
-		
+
 		m = map_mapname2mapid(mapname);
 	}
 
@@ -2556,7 +2556,7 @@ const char* npc_parse_duplicate(char* w1, char* w2, char* w3, char* w4, const ch
 	nd->speed = 200;
 	nd->src_id = src_id;
 	nd->bl.type = BL_NPC;
-	nd->subtype = type;
+	nd->subtype = (enum npc_subtype)type;
 	switch( type )
 	{
 	case SCRIPT:
@@ -3178,7 +3178,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
 	if (w4 && !strcmpi(w4, "off"))
 		state = 0;	//Disable mapflag rather than enable it. [Skotlex]
-	
+
 	if (!strcmpi(w3, "nosave")) {
 		char savemap[32];
 		int savex, savey;
@@ -3722,7 +3722,7 @@ void npc_read_event_script(void)
 				ShowWarning("npc_read_event_script: too many occurences of event '%s'!\n", config[i].event_name);
 				break;
 			}
-			
+
 			if( (p=strchr(p,':')) && p && strcmpi(name,p)==0 )
 			{
 				script_event[i].event[count] = ed;
@@ -3902,7 +3902,7 @@ int do_init_npc(void)
 	//Stock view data for normal npcs.
 	memset(&npc_viewdb, 0, sizeof(npc_viewdb));
 	npc_viewdb[0].class_ = INVISIBLE_CLASS; //Invisible class is stored here.
-	for( i = 1; i < MAX_NPC_CLASS; i++ ) 
+	for( i = 1; i < MAX_NPC_CLASS; i++ )
 		npc_viewdb[i].class_ = i;
 
 	ev_db = strdb_alloc((DBOptions)(DB_OPT_DUP_KEY|DB_OPT_RELEASE_DATA),2*NAME_LENGTH+2+1);

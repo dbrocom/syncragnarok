@@ -9,10 +9,10 @@
 ////// Plugin functions ///////////////
 
 // Plugin version <major version>.<minor version>
-// * <major version> is increased and <minor version> reset when at least one 
+// * <major version> is increased and <minor version> reset when at least one
 //   export of the previous version becomes incompatible
 // * <minor version> is increased if the previous version remains compatible
-// 
+//
 // Compatible plugins have:
 // - equal major version
 // - lower or equal minor version
@@ -50,7 +50,7 @@ typedef void Plugin_Event_Func(void);
 #define PLUGIN_MAP			8
 #define PLUGIN_CORE			16
 
-#define IMPORT_SYMBOL(s,n)	(s) = plugin_call_table[n]
+#define IMPORT_SYMBOL(s,n)	SET_FUNCPOINTER((s), plugin_call_table[n])
 
 #define SYMBOL_SERVER_TYPE				0
 #define SYMBOL_SERVER_NAME				1

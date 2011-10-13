@@ -2683,17 +2683,15 @@ int status_calc_pc_(struct map_session_data* sd, bool first)
 				if(!data->script)
 					continue;
 				if(data->flag.no_equip) { //Card restriction checks.
-					if(map[sd->bl.m].flag.restricted && data->flag.no_equip&map[sd->bl.m].zone)
+					if(map[sd->bl.m].flag.restricted && data->flag.no_equip&(8*map[sd->bl.m].zone))
 						continue;
-					if(map[sd->bl.m].flag.pvp && data->flag.no_equip&1)
+					if(!map_flag_vs(sd->bl.m) && data->flag.no_equip&1)
 						continue;
-					if(map_flag_gvg2(sd->bl.m) && data->flag.no_equip&2)
+					if(map[sd->bl.m].flag.pvp && data->flag.no_equip&2)
 						continue;
-					if(map_flag_gvg(sd->bl.m) && data->flag.no_equip&4)
+					if(map_flag_gvg2(sd->bl.m) && data->flag.no_equip&4)
 						continue;
-					if(map[sd->bl.m].flag.battleground && data->flag.no_equip&8)
-						continue;
-					if( (map[sd->bl.m].flag.battleground || map[sd->bl.m].flag.pvp_event) && data->flag.no_equip&1|2 )
+					if((map[sd->bl.m].flag.battleground || map[sd->bl.m].flag.pvp_event) && data->flag.no_equip&8)
 						continue;
 				}
 				if(i == EQI_HAND_L && sd->status.inventory[index].equip == EQP_HAND_L)
@@ -3197,6 +3195,11 @@ int status_calc_pc_(struct map_session_data* sd, bool first)
 	status_cpy(&sd->battle_status, status);
 
 // ----- CLIENT-SIDE REFRESH -----
+	if(!sd->bl.prev) {
+		//Will update on LoadEndAck
+		calculating = 0;
+		return 0;
+	}
 	if(memcmp(b_skill,sd->status.skill,sizeof(sd->status.skill)))
 		clif_skillinfoblock(sd);
 	if(b_weight != sd->weight)
@@ -3576,7 +3579,7 @@ void status_calc_regen_rate(struct block_list *bl, struct regen_data *regen, str
 
 /// Recalculates parts of an object's battle status according to the specified flags.
 /// @param flag bitfield of values from enum scb_flag
-void status_calc_bl_main(struct block_list *bl, enum scb_flag flag)
+void status_calc_bl_main(struct block_list *bl, /*enum scb_flag*/int flag)
 {
 	const struct status_data *b_status = status_get_base_status(bl);
 	struct status_data *status = status_get_status_data(bl);
@@ -7515,45 +7518,17 @@ int status_change_start(struct block_list* bl,enum sc_type type,int rate,int val
 			//val1: Skill ID
 			//val2: When given, target (for autotargetting skills)
 			//val3: When set, this combo time should NOT delay attack/movement
-			//val4: Combo time
+			//val3: TK: Last used kick
+			//val4: TK: Combo time
 			struct unit_data *ud = unit_bl2ud(bl);
-			switch (val1) {
-				case TK_STORMKICK:
-					clif_skill_nodamage(bl,bl,TK_READYSTORM,1,1);
-					break;
-				case TK_DOWNKICK:
-					clif_skill_nodamage(bl,bl,TK_READYDOWN,1,1);
-					break;
-				case TK_TURNKICK:
-					clif_skill_nodamage(bl,bl,TK_READYTURN,1,1);
-					break;
-				case TK_COUNTER:
-					clif_skill_nodamage(bl,bl,TK_READYCOUNTER,1,1);
-					break;
-				case MO_COMBOFINISH:
-				case CH_TIGERFIST:
-				case CH_CHAINCRUSH:
-				case SR_DRAGONCOMBO:
-					if( sd )
-					{
-						sd->state.combo = 1;
-						clif_skillinfoblock(sd);
-					}
-					break;
-				case TK_JUMPKICK:
-					if( sd )
-					{
-						sd->state.combo = 2;
-						clif_skillinfoblock(sd);
-					}
-					break;
-			}
 			if (ud && !val3)
 			{
+				tick += 300 * battle_config.combo_delay_rate/100;
 				ud->attackabletime = gettick()+tick;
 				unit_set_walkdelay(bl, gettick(), tick, 1);
 			}
-			val4 = tick; //Store combo-time in val4.
+			val3 = 0;
+			val4 = tick;
 		}
 			break;
 		case SC_EARTHSCROLL:
@@ -8617,6 +8592,32 @@ int status_change_start(struct block_list* bl,enum sc_type type,int rate,int val
 					clif_clearunit_invisible(&sd->bl); // Dissapear the user from others without intravision
 			}
 			break;
+		case SC_COMBO:
+			switch (sce->val1) {
+				case TK_STORMKICK:
+					clif_skill_nodamage(bl,bl,TK_READYSTORM,1,1);
+					break;
+				case TK_DOWNKICK:
+					clif_skill_nodamage(bl,bl,TK_READYDOWN,1,1);
+					break;
+				case TK_TURNKICK:
+					clif_skill_nodamage(bl,bl,TK_READYTURN,1,1);
+					break;
+				case TK_COUNTER:
+					clif_skill_nodamage(bl,bl,TK_READYCOUNTER,1,1);
+					break;
+				case MO_COMBOFINISH:
+				case CH_TIGERFIST:
+				case CH_CHAINCRUSH:
+				case SR_DRAGONCOMBO:
+					if (sd)
+						clif_skillinfo(sd,MO_EXTREMITYFIST, INF_SELF_SKILL);
+					break;
+				case TK_JUMPKICK:
+					if (sd)
+						clif_skillinfo(sd,TK_JUMPKICK, INF_SELF_SKILL);
+					break;
+			}
 	}
 
 	if( opt_flag&2 && sd && sd->touching_id )
@@ -8939,17 +8940,18 @@ int status_change_end(struct block_list* bl, enum sc_type type, int tid)
 					bl->m, bl->x-range, bl->y-range, bl->x+range,bl->y+range,BL_CHAR,bl,sce,type,gettick());
 			}
 			break;
-		case SC_COMBO: //Clear last used skill when it is part of a combo.
+		case SC_COMBO:
 			if( sd )
-			{
-				if( sd->state.combo )
-				{
-					sd->state.combo = 0;
-					clif_skillinfoblock(sd);
-				}
-				if( sd->skillid_old == sce->val1 )
-					sd->skillid_old = sd->skilllv_old = 0;
-				clif_skillupdateinfo(sd,SR_DRAGONCOMBO,0,0);	// To avoid a glitch with Dragon Combo.
+			switch (sce->val1) {
+				case MO_COMBOFINISH:
+				case CH_TIGERFIST:
+				case CH_CHAINCRUSH:
+				case SR_DRAGONCOMBO:
+					clif_skillinfo(sd, MO_EXTREMITYFIST, 0);
+					break;
+				case TK_JUMPKICK:
+					clif_skillinfo(sd, TK_JUMPKICK, 0);
+					break;
 			}
 			break;
 

@@ -336,7 +336,7 @@ int map_addblock(struct block_list* bl)
 #ifdef CELL_NOSTACK
 	map_addblcell(bl);
 #endif
-	
+
 	return 0;
 }
 
@@ -360,7 +360,7 @@ int map_delblock(struct block_list* bl)
 #ifdef CELL_NOSTACK
 	map_delblcell(bl);
 #endif
-	
+
 	pos = bl->x/BLOCK_SIZE+(bl->y/BLOCK_SIZE)*map[bl->m].bxs;
 
 	if (bl->next)
@@ -397,7 +397,7 @@ int map_moveblock(struct block_list *bl, int x1, int y1, unsigned int tick)
 		//Block not in map, just update coordinates, but do naught else.
 		bl->x = x1;
 		bl->y = y1;
-		return 0;	
+		return 0;
 	}
 
 	//TODO: Perhaps some outs of bounds checking should be placed here?
@@ -477,7 +477,7 @@ int map_moveblock(struct block_list *bl, int x1, int y1, unsigned int tick)
 
 	return 0;
 }
-	
+
 /*==========================================
  * Counts specified number of objects on given cell.
  *------------------------------------------*/
@@ -497,7 +497,7 @@ int map_count_oncell(int m, int x, int y, int type)
 		for( bl = map[m].block[bx+by*map[m].bxs] ; bl != NULL ; bl = bl->next )
 			if(bl->x == x && bl->y == y && bl->type&type)
 				count++;
-	
+
 	if (type&BL_MOB)
 		for( bl = map[m].block_mob[bx+by*map[m].bxs] ; bl != NULL ; bl = bl->next )
 			if(bl->x == x && bl->y == y)
@@ -552,7 +552,7 @@ int map_foreachinrange(int (*func)(struct block_list*,va_list), struct block_lis
 	y0 = max(center->y-range, 0);
 	x1 = min(center->x+range, map[m].xs-1);
 	y1 = min(center->y+range, map[m].ys-1);
-	
+
 	if (type&~BL_MOB)
 		for (by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++) {
 			for(bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++) {
@@ -691,7 +691,7 @@ int map_forcountinrange(int (*func)(struct block_list*,va_list), struct block_li
 	y0 = max(center->y-range, 0);
 	x1 = min(center->x+range, map[m].xs-1);
 	y1 = min(center->y+range, map[m].ys-1);
-	
+
 	if (type&~BL_MOB)
 		for (by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++) {
 			for(bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++) {
@@ -774,7 +774,7 @@ int map_foreachinarea(int (*func)(struct block_list*,va_list), int m, int x0, in
 	if (y0 < 0) y0 = 0;
 	if (x1 >= map[m].xs) x1 = map[m].xs-1;
 	if (y1 >= map[m].ys) y1 = map[m].ys-1;
-	
+
 	if (type&~BL_MOB)
 		for(by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++)
 			for(bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++)
@@ -834,7 +834,7 @@ int map_forcountinarea(int (*func)(struct block_list*,va_list), int m, int x0, i
 	if (y0 < 0) y0 = 0;
 	if (x1 >= map[m].xs) x1 = map[m].xs-1;
 	if (y1 >= map[m].ys) y1 = map[m].ys-1;
-	
+
 	if (type&~BL_MOB)
 		for(by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++)
 			for(bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++)
@@ -1076,19 +1076,19 @@ int map_foreachinpath(int (*func)(struct block_list*,va_list),int m,int x0,int y
 //   x
 //  S
 //////////////////////////////////////////////////////////////
-// Methodology: 
-// My trigonometrics and math are a little rusty... so the approach I am writing 
-// here is basicly do a double for to check for all targets in the square that 
-// contains the initial and final positions (area range increased to match the 
-// radius given), then for each object to test, calculate the distance to the 
+// Methodology:
+// My trigonometrics and math are a little rusty... so the approach I am writing
+// here is basicly do a double for to check for all targets in the square that
+// contains the initial and final positions (area range increased to match the
+// radius given), then for each object to test, calculate the distance to the
 // path and include it if the range fits and the target is in the line (0<k<1,
 // as they call it).
-// The implementation I took as reference is found at 
-// http://astronomy.swin.edu.au/~pbourke/geometry/pointline/ 
+// The implementation I took as reference is found at
+// http://astronomy.swin.edu.au/~pbourke/geometry/pointline/
 // (they have a link to a C implementation, too)
-// This approach is a lot like #2 commented on this function, which I have no 
+// This approach is a lot like #2 commented on this function, which I have no
 // idea why it was commented. I won't use doubles/floats, but pure int math for
-// speed purposes. The range considered is always the same no matter how 
+// speed purposes. The range considered is always the same no matter how
 // close/far the target is because that's how SharpShooting works currently in
 // kRO.
 
@@ -1100,10 +1100,10 @@ int map_foreachinpath(int (*func)(struct block_list*,va_list),int m,int x0,int y
 	int magnitude2, len_limit; //The square of the magnitude
 	int k, xi, yi, xu, yu;
 	int mx0 = x0, mx1 = x1, my0 = y0, my1 = y1;
-	
+
 	//Avoid needless calculations by not getting the sqrt right away.
 	#define MAGNITUDE2(x0, y0, x1, y1) (((x1)-(x0))*((x1)-(x0)) + ((y1)-(y0))*((y1)-(y0)))
-	
+
 	if (m < 0)
 		return 0;
 
@@ -1150,14 +1150,14 @@ int map_foreachinpath(int (*func)(struct block_list*,va_list),int m,int x0,int y
 		my1 = my0;
 		my0 = k;
 	}
-	
+
 	if (mx0 < 0) mx0 = 0;
 	if (my0 < 0) my0 = 0;
 	if (mx1 >= map[m].xs) mx1 = map[m].xs-1;
 	if (my1 >= map[m].ys) my1 = map[m].ys-1;
-	
+
 	range*=range<<8; //Values are shifted later on for higher precision using int math.
-	
+
 	if (type & ~BL_MOB)
 		for (by = my0 / BLOCK_SIZE; by <= my1 / BLOCK_SIZE; by++) {
 			for(bx=mx0/BLOCK_SIZE;bx<=mx1/BLOCK_SIZE;bx++){
@@ -1167,11 +1167,11 @@ int map_foreachinpath(int (*func)(struct block_list*,va_list),int m,int x0,int y
 					{
 						xi = bl->x;
 						yi = bl->y;
-					
+
 						k = (xi-x0)*(x1-x0) + (yi-y0)*(y1-y0);
 						if (k < 0 || k > len_limit) //Since more skills use this, check for ending point as well.
 							continue;
-						
+
 						if (k > magnitude2 && !path_search_long(NULL,m,x0,y0,xi,yi,CELL_CHKWALL))
 							continue; //Targets beyond the initial ending point need the wall check.
 
@@ -1183,7 +1183,7 @@ int map_foreachinpath(int (*func)(struct block_list*,va_list),int m,int x0,int y
 						xu= (x0<<4) +k*(x1-x0);
 						yu= (y0<<4) +k*(y1-y0);
 						k = MAGNITUDE2(xi, yi, xu, yu);
-						
+
 						//If all dot coordinates were <<4 the square of the magnitude is <<8
 						if (k > range)
 							continue;
@@ -1206,17 +1206,17 @@ int map_foreachinpath(int (*func)(struct block_list*,va_list),int m,int x0,int y
 						k = (xi-x0)*(x1-x0) + (yi-y0)*(y1-y0);
 						if (k < 0 || k > len_limit)
 							continue;
-				
+
 						if (k > magnitude2 && !path_search_long(NULL,m,x0,y0,xi,yi,CELL_CHKWALL))
 							continue; //Targets beyond the initial ending point need the wall check.
-	
+
 						k = (k<<4)/magnitude2; //k will be between 1~16 instead of 0~1
 						xi<<=4;
 						yi<<=4;
 						xu= (x0<<4) +k*(x1-x0);
 						yu= (y0<<4) +k*(y1-y0);
 						k = MAGNITUDE2(xi, yi, xu, yu);
-						
+
 						//If all dot coordinates were <<4 the square of the magnitude is <<8
 						if (k > range)
 							continue;
@@ -1311,7 +1311,7 @@ int map_pickrandominrange(int (*func)(struct block_list*,va_list), struct block_
 	y0 = max(center->y-range, 0);
 	x1 = min(center->x+range, map[m].xs-1);
 	y1 = min(center->y+range, map[m].ys-1);
-	
+
 	if( type & ~BL_MOB )
 		for( by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by ++ )
 		{
@@ -1363,7 +1363,7 @@ int map_pickrandominrange(int (*func)(struct block_list*,va_list), struct block_
 		bl_list[index1] = bl_list[index2];
 		bl_list[index2] = temp;
 	}
-	
+
 	map_freeblock_lock();	// ƒƒ‚ƒŠ‚©‚ç‚Ì‰ð•ú‚ð‹ÖŽ~‚·‚é
 
 	for( i = blockcount; i < bl_list_count; i ++ )
@@ -1491,8 +1491,8 @@ static int map_count_sub(struct block_list *bl,va_list ap)
 }
 
 /*==========================================
- * Locates a random spare cell around the object given, using range as max 
- * distance from that spot. Used for warping functions. Use range < 0 for 
+ * Locates a random spare cell around the object given, using range as max
+ * distance from that spot. Used for warping functions. Use range < 0 for
  * whole map range.
  * Returns 1 on success. when it fails and src is available, x/y are set to src's
  * src can be null as long as flag&1
@@ -1529,7 +1529,7 @@ int map_search_freecell(struct block_list *src, int m, short *x,short *y, int rx
 		*y = by;
 		return map_getcell(m,*x,*y,CELL_CHKREACH);
 	}
-	
+
 	if (rx >= 0 && ry >= 0) {
 		tries = rx2*ry2;
 		if (tries > 100) tries = 100;
@@ -1537,14 +1537,14 @@ int map_search_freecell(struct block_list *src, int m, short *x,short *y, int rx
 		tries = map[m].xs*map[m].ys;
 		if (tries > 500) tries = 500;
 	}
-	
+
 	while(tries--) {
 		*x = (rx >= 0)?(rand()%rx2-rx+bx):(rand()%(map[m].xs-2)+1);
 		*y = (ry >= 0)?(rand()%ry2-ry+by):(rand()%(map[m].ys-2)+1);
-		
+
 		if (*x == bx && *y == by)
 			continue; //Avoid picking the same target tile.
-		
+
 		if (map_getcell(m,*x,*y,CELL_CHKREACH))
 		{
 			if(flag&2 && !unit_can_reach_pos(src, *x, *y, 1))
@@ -1838,7 +1838,7 @@ int map_quit(struct map_session_data *sd)
 	if( sd->bg_id ) sd->status.bgstats.deserter++;
 	npc_script_event(sd, NPCE_LOGOUT);
 
-	//Unit_free handles clearing the player related data, 
+	//Unit_free handles clearing the player related data,
 	//map_quit handles extra specific data which is related to quitting normally
 	//(changing map-servers invokes unit_free but bypasses map_quit)
 	if( sd->sc.count )
@@ -1890,7 +1890,7 @@ int map_quit(struct map_session_data *sd)
 			status_change_end(&sd->bl, SC__INVISIBILITY, INVALID_TIMER);
 		}
 	}
-	
+
 	// Return loot to owner
 	if( sd->pd ) pet_lootitem_drop(sd->pd, sd);
 	if( sd->state.storage_flag == 1 || sd->state.storage_flag == 3 )
@@ -1898,7 +1898,7 @@ int map_quit(struct map_session_data *sd)
 	if( sd->ed ) elemental_clean_effect(sd->ed);
 
 	unit_remove_map_pc(sd,CLR_TELEPORT);
-	
+
 	if( map[sd->bl.m].instance_id )
 	{ // Avoid map conflicts and warnings on next login
 		int m;
@@ -1915,7 +1915,7 @@ int map_quit(struct map_session_data *sd)
 			sd->bl.y = pt->y;
 			sd->mapindex = pt->map;
 		}
-	}	
+	}
 
 	party_booking_delete(sd); // Party Booking [Spiria]
 	pc_makesavestatus(sd);
@@ -2066,7 +2066,7 @@ struct mob_data * map_getmob_boss(int m)
 	{
 		if( md->bl.m == m )
 		{
-			found = true;		
+			found = true;
 			break;
 		}
 	}
@@ -2423,7 +2423,7 @@ int map_removemobs_sub(struct block_list *bl, va_list ap)
 	// is a mvp
 	if( md->db->mexp > 0 )
 		return 0;
-	
+
 	unit_free(&md->bl,CLR_OUTSIGHT);
 
 	return 1;
@@ -2452,7 +2452,7 @@ int map_removemobs_timer(int tid, unsigned int tick, int id, intptr_t data)
 
 	if (battle_config.etc_log && count > 0)
 		ShowStatus("Map %s: Removed '"CL_WHITE"%d"CL_RESET"' mobs.\n",map[m].name, count);
-	
+
 	return 1;
 }
 
@@ -2482,10 +2482,10 @@ int map_mapname2mapid(const char* name)
 int map_mapindex2mapid(unsigned short mapindex)
 {
 	struct map_data *md=NULL;
-	
+
 	if (!mapindex)
 		return -1;
-	
+
 	md = (struct map_data*)uidb_get(map_db,(unsigned int)mapindex);
 	if(md==NULL || md->cell==NULL)
 		return -1;
@@ -2534,9 +2534,9 @@ uint8 map_calc_dir(struct block_list* src, int x, int y)
 {
 	unsigned char dir = 0;
 	int dx, dy;
-	
+
 	nullpo_ret(src);
-	
+
 	dx = x-src->x;
 	dy = y-src->y;
 	if( dx == 0 && dy == 0 )
@@ -2567,13 +2567,13 @@ uint8 map_calc_dir(struct block_list* src, int x, int y)
 		if( -dx*2 <= dy )     dir = 0;	// up
 		else if( -dx > dy*2 ) dir = 2;	// left
 		else                  dir = 1;	// up-left
-	
+
 	}
 	return dir;
 }
 
 /*==========================================
- * Randomizes target cell x,y to a random walkable cell that 
+ * Randomizes target cell x,y to a random walkable cell that
  * has the same distance from object as given coordinates do. [Skotlex]
  *------------------------------------------*/
 int map_random_dir(struct block_list *bl, short *x, short *y)
@@ -2584,9 +2584,9 @@ int map_random_dir(struct block_list *bl, short *x, short *y)
 	int dist2 = xi*xi + yi*yi;
 	short dist = (short)sqrt((float)dist2);
 	short segment;
-	
+
 	if (dist < 1) dist =1;
-	
+
 	do {
 		j = 1 + 2*(rand()%4); //Pick a random diagonal direction
 		segment = 1+(rand()%dist); //Pick a random interval from the whole vector in that direction
@@ -2596,7 +2596,7 @@ int map_random_dir(struct block_list *bl, short *x, short *y)
 	} while (
 		(map_getcell(bl->m,xi,yi,CELL_CHKNOPASS) || !path_search(NULL,bl->m,bl->x,bl->y,xi,yi,1,CELL_CHKNOREACH))
 		&& (++i)<100 );
-	
+
 	if (i < 100) {
 		*x = xi;
 		*y = yi;
@@ -2888,7 +2888,7 @@ int map_setipport(unsigned short mapindex, uint32 ip, uint16 port)
 	struct map_data_other_server *mdos=NULL;
 
 	mdos=(struct map_data_other_server *)uidb_ensure(map_db,(unsigned int)mapindex, create_map_data_other_server);
-	
+
 	if(mdos->cell) //Local map,Do nothing. Give priority to our own local maps over ones from another server. [Skotlex]
 		return 0;
 	if(ip == clif_getip() && port == clif_getport()) {
@@ -2956,7 +2956,7 @@ static char *map_init_mapcache(FILE *fp)
 	fseek(fp, 0, SEEK_SET);
 
 	// Allocate enough space
-	CREATE(buffer, unsigned char, size);
+	CREATE(buffer, char, size);
 
 	// No memory? Return..
 	nullpo_ret(buffer);
@@ -2979,7 +2979,7 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 	int i;
 	struct map_cache_main_header *header = (struct map_cache_main_header *)buffer;
 	struct map_cache_map_info *info = NULL;
-	unsigned char *p = buffer + sizeof(struct map_cache_main_header);
+	char *p = buffer + sizeof(struct map_cache_main_header);
 
 	for(i = 0; i < header->map_count; i++) {
 		info = (struct map_cache_map_info *)p;
@@ -3109,7 +3109,7 @@ int map_waterheight(char* mapname)
 
 	found = grfio_find_file(fn);
 	if (found) strcpy(fn, found); // replace with real name
-	
+
 	// read & convert fn
 	rsw = (char *) grfio_read (fn);
 	if (rsw)
@@ -3159,7 +3159,7 @@ int map_readgat (struct map_data* m)
 
 		m->cell[xy] = map_gat2cell(type);
 	}
-	
+
 	aFree(gat);
 
 	return 1;
@@ -3178,10 +3178,10 @@ int map_readregions (void)
 
 	memset(region, 0, sizeof(region));
 	sprintf(line, "%s/region_db.txt", db_path);
-	
+
 	if( (fp = fopen(line, "r")) == NULL ) {
 		ShowError("can't read %s\n", line);
-		return -1; 
+		return -1;
 	}
 
 	while( fgets(line, sizeof(line), fp) )
@@ -3241,8 +3241,8 @@ int map_readallmaps (void)
 	int i;
 	FILE* fp=NULL;
 	int maps_removed = 0;
-	unsigned char *map_cache_buffer = NULL; // Has the uncompressed gat data of all maps, so just one allocation has to be made
-	unsigned char map_cache_decode_buffer[MAX_MAP_SIZE];
+	char *map_cache_buffer = NULL; // Has the uncompressed gat data of all maps, so just one allocation has to be made
+	char map_cache_decode_buffer[MAX_MAP_SIZE];
 
 	if( enable_grf )
 		ShowStatus("Loading maps (using GRF files)...\n");
@@ -3294,7 +3294,7 @@ int map_readallmaps (void)
 			ShowWarning("Map %s already loaded!"CL_CLL"\n", map[i].name);
 			if (map[i].cell) {
 				aFree(map[i].cell);
-				map[i].cell = NULL;	
+				map[i].cell = NULL;
 			}
 			map_delmapid(i);
 			maps_removed++;
@@ -3374,7 +3374,7 @@ int parse_console(const char* buf)
 			return 0;
 		}
 		sd.bl.m = m;
-		map_search_freecell(&sd.bl, m, &sd.bl.x, &sd.bl.y, -1, -1, 0); 
+		map_search_freecell(&sd.bl, m, &sd.bl.x, &sd.bl.y, -1, -1, 0);
 		if( x > 0 )
 			sd.bl.x = x;
 		if( y > 0 )
@@ -3449,10 +3449,10 @@ int map_config_read(char *cfgName)
 		while (--ptr >= w2 && *ptr == ' ');
 		ptr++;
 		*ptr = '\0';
-			
+
 		if(strcmpi(w1,"timestamp_format")==0)
 			strncpy(timestamp_format, w2, 20);
-		else 
+		else
 		if(strcmpi(w1,"stdout_with_ansisequence")==0)
 			stdout_with_ansisequence = config_switch(w2);
 		else
@@ -3575,7 +3575,7 @@ int inter_config_read(char *cfgName)
 		else
 		if(strcmpi(w1, "gamemaster_chat_nick")==0)
 			safestrncpy(gamemaster_chat_nick, w2, sizeof(gamemaster_chat_nick));
-			
+
 	#ifndef TXT_ONLY
 		else
 		if(strcmpi(w1,"item_db_db")==0)
@@ -3806,9 +3806,9 @@ void do_final(void)
 	do_final_battleground();
 	do_final_duel();
 	do_final_elemental();
-	
+
 	map_db->destroy(map_db, map_db_final);
-	
+
 	for (i=0; i<map_num; i++) {
 		if(map[i].cell) aFree(map[i].cell);
 		if(map[i].block) aFree(map[i].block);
@@ -4079,7 +4079,7 @@ int do_init(int argc, char *argv[])
 		ShowNotice("Server is running on '"CL_WHITE"PK Mode"CL_RESET"'.\n");
 
 	ShowStatus("Server is '"CL_GREEN"ready"CL_RESET"' and listening on port '"CL_WHITE"%d"CL_RESET"'.\n\n", map_port);
-	
+
 	if( runflag != CORE_ST_STOP )
 	{
 		shutdown_callback = do_shutdown;

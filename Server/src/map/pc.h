@@ -77,7 +77,7 @@ struct s_addeffectonskill {
 	unsigned char target;
 };
 
-struct s_add_drop { 
+struct s_add_drop {
 	short id, group;
 	int race, rate;
 };
@@ -113,7 +113,6 @@ struct map_session_data {
 		unsigned int lr_flag : 2;
 		unsigned int connect_new : 1;
 		unsigned int arrow_atk : 1;
-		unsigned int combo : 2; // 1:Asura, 2:Kick [Inkfish]
 		unsigned int gangsterparadise : 1;
 		unsigned int rest : 1;
 		unsigned int storage_flag : 3; //0: closed, 1: Normal Storage open, 2: guild storage open [Skotlex] 3: Rent Storage [ZephStorage]
@@ -190,7 +189,7 @@ struct map_session_data {
 	int packet_ver;  // 5: old, 6: 7july04, 7: 13july04, 8: 26july04, 9: 9aug04/16aug04/17aug04, 10: 6sept04, 11: 21sept04, 12: 18oct04, 13: 25oct04 ... 18
 	struct mmo_charstatus status;
 	struct registry save_reg;
-	
+
 	struct item_data* inventory_data[MAX_INVENTORY]; // direct pointers to itemdb entries (faster than doing item_id lookups)
 	short equip_index[11];
 	unsigned int weight,max_weight;
@@ -245,7 +244,7 @@ struct map_session_data {
 	unsigned int canjoinchn_tick;
 	unsigned int cansendmail_tick; // [Mail System Flood Protection]
 	unsigned int ks_floodprotect_tick; // [Kill Steal Protection]
-	
+
 	struct {
 		int nameid;
 		unsigned int tick;
@@ -259,7 +258,7 @@ struct map_session_data {
 	short disguise; // [Valaris]
 
 	struct weapon_data right_weapon, left_weapon;
-	
+
 	// here start arrays to be globally zeroed at the beginning of status_calc_pc()
 	int param_bonus[6],param_equip[6]; //Stores card/equipment bonuses.
 	int subele[ELE_MAX];
@@ -337,13 +336,13 @@ struct map_session_data {
 	int speed_rate, speed_add_rate, aspd_add;
 	int itemhealrate2; // [Epoque] Increase heal rate of all healing items.
 	unsigned int setitem_hash, setitem_hash2; //Split in 2 because shift operations only work on int ranges. [Skotlex]
-	
+
 	short splash_range, splash_add_range;
 	short add_steal_rate;
 	short add_heal_rate, add_heal2_rate;
 	short sp_gain_value, hp_gain_value, magic_sp_gain_value, magic_hp_gain_value;
 	short sp_vanish_rate;
-	short sp_vanish_per;	
+	short sp_vanish_per;
 	unsigned short unbreakable;	// chance to prevent ANY equipment breaking [celest]
 	unsigned short unbreakable_equip; //100% break resistance on certain equipment
 	unsigned short unstripable_equip;
@@ -363,7 +362,7 @@ struct map_session_data {
 
 	short spiritball, spiritball_old;
 	int spirit_timer[MAX_SKILL_LEVEL];
-	
+
 	short rageball, rageball_old;
 	int rage_timer[MAX_RAGE];
 
@@ -379,7 +378,7 @@ struct map_session_data {
 	struct script_regstr *regstr;
 
 	int trade_partner;
-	struct { 
+	struct {
 		struct {
 			short index, amount;
 		} item[10];
@@ -524,7 +523,7 @@ enum weapon_type {
 	W_2HMACE,	//9 (unused)
 	W_STAFF,	//10
 	W_BOW,	//11
-	W_KNUCKLE,	//12	
+	W_KNUCKLE,	//12
 	W_MUSICAL,	//13
 	W_WHIP,	//14
 	W_BOOK,	//15
@@ -560,7 +559,7 @@ enum ammo_type {
 
 //Equip position constants
 enum equip_pos {
-	EQP_HEAD_LOW = 0x0001, 
+	EQP_HEAD_LOW = 0x0001,
 	EQP_HEAD_MID = 0x0200, //512
 	EQP_HEAD_TOP = 0x0100, //256
 	EQP_HAND_R   = 0x0002,
