@@ -46,7 +46,7 @@
 /////////////////////////////////////////////////////////////////////
 #if defined(WIN32)
 /////////////////////////////////////////////////////////////////////
-// windows portability layer 
+// windows portability layer
 
 typedef int socklen_t;
 
@@ -92,7 +92,7 @@ int sock2fd(SOCKET s)
 
 /// Inserts the socket into the global array of sockets.
 /// Returns a new fd associated with the socket.
-/// If there are too many sockets it closes the socket, sets an error and 
+/// If there are too many sockets it closes the socket, sets an error and
 //  returns -1 instead.
 /// Since fd 0 is reserved, it returns values in the range [1,FD_SETSIZE[.
 ///
@@ -283,8 +283,8 @@ void set_defaultparse(ParseFunc defaultparse)
  *--------------------------------------*/
 void set_nonblocking(int fd, unsigned long yes)
 {
-	// FIONBIO Use with a nonzero argp parameter to enable the nonblocking mode of socket s. 
-	// The argp parameter is zero if nonblocking is to be disabled. 
+	// FIONBIO Use with a nonzero argp parameter to enable the nonblocking mode of socket s.
+	// The argp parameter is zero if nonblocking is to be disabled.
 	if( sIoctl(fd, FIONBIO, &yes) != 0 )
 		ShowError("set_nonblocking: Failed to set socket #%d to non-blocking mode (code %d) - Please report this!!!\n", fd, sErrno);
 }
@@ -1349,16 +1349,16 @@ void geoip_readdb(void){
 	geoip_cacheready=1;
 	ShowStatus("Finished Reading "CL_GREEN"GeoIP"CL_RESET" Database.\n");
 }
- 
+
 const char* geoip_getcountry(uint32 ipnum){
 	int depth;
 	unsigned int x;
 	unsigned char stack_buffer[6];
 	const unsigned char *buf = stack_buffer;
 	unsigned int offset = 0;
-	
+
 	if (!geoip_cacheready) geoip_readdb();
-	
+
 	for (depth = 31; depth >= 0; depth--) {
 		buf = geoip_cache + (long)6 *offset;
 		if (ipnum & (1 << depth)) {
@@ -1372,7 +1372,7 @@ const char* geoip_getcountry(uint32 ipnum){
 			+ (buf[3*0 + 1] << (1*8))
 			+ (buf[3*0 + 2] << (2*8));
 		}
-		
+
 		if (x >= 16776960) {
 			x=x-16776960;
 			return geoip_countryname[x];
@@ -1428,12 +1428,11 @@ void send_shortlist_add_fd(int fd)
 	if( (send_shortlist_set[i]>>bit)&1 )
 		return;// already in the list
 
-	if( send_shortlist_count >= ARRAYLENGTH(send_shortlist_array) ) 
-	{ 
-		ShowDebug("send_shortlist_add_fd: shortlist is full, ignoring... (fd=%d shortlist.count=%d shortlist.length=%d)\n", fd, send_shortlist_count, ARRAYLENGTH(send_shortlist_array)); 
-		return; 
-	} 
-
+	if( send_shortlist_count >= ARRAYLENGTH(send_shortlist_array) )
+	{
+		ShowDebug("send_shortlist_add_fd: shortlist is full, ignoring... (fd=%d shortlist.count=%d shortlist.length=%d)\n", fd, send_shortlist_count, ARRAYLENGTH(send_shortlist_array));
+		return;
+	}
 
 	// set the bit
 	send_shortlist_set[i] |= 1<<bit;
@@ -1444,19 +1443,30 @@ void send_shortlist_add_fd(int fd)
 // Do pending network sends and eof handling from the shortlist.
 void send_shortlist_do_sends()
 {
-	int i = 0;
+	int i;
 
-	while( i < send_shortlist_count )
+	for( i = send_shortlist_count-1; i >= 0; --i )
 	{
 		int fd = send_shortlist_array[i];
-		int idx = fd/32; 
-		int bit = fd%32; 
+		int idx = fd/32;
+		int bit = fd%32;
 
-		if( ((send_shortlist_set[idx]>>bit)&1) == 0 ) 
-		{ 
-			ShowDebug("send_shortlist_do_sends: fd is not set, why is it in the shortlist? (fd=%d)\n", fd); 
-		} 
-		else
+		// Remove fd from shortlist, move the last fd to the current position
+		--send_shortlist_count;
+		send_shortlist_array[i] = send_shortlist_array[send_shortlist_count];
+		send_shortlist_array[send_shortlist_count] = 0;
+
+		if( fd <= 0 || fd >= FD_SETSIZE )
+		{
+			ShowDebug("send_shortlist_do_sends: fd is out of range, corrupted memory? (fd=%d)\n", fd);
+			continue;
+		}
+		if( ((send_shortlist_set[idx]>>bit)&1) == 0 )
+		{
+			ShowDebug("send_shortlist_do_sends: fd is not set, why is it in the shortlist? (fd=%d)\n", fd);
+			continue;
+		}
+		send_shortlist_set[idx]&=~(1<<bit);// unset fd
 		// If this session still exists, perform send operations on it and
 		// check for the eof state.
 		if( session[fd] )
@@ -1471,19 +1481,10 @@ void send_shortlist_do_sends()
 				session[fd]->func_parse(fd);
 
 			// If the session still exists, is not eof and has things left to
-			// be sent from it we'll keep it in the shortlist.
+			// be sent from it we'll re-add it to the shortlist.
 			if( session[fd] && !session[fd]->flag.eof && session[fd]->wdata_size )
-			{
-				++i;
-				continue;
-			}
+				send_shortlist_add_fd(fd);
 		}
-
-		// Remove fd from shortlist, move the last fd to the current position
-		--send_shortlist_count; 
-		send_shortlist_array[i] = send_shortlist_array[send_shortlist_count]; 
-		send_shortlist_array[send_shortlist_count] = 0; 
-		send_shortlist_set[idx]&=~(1<<bit); 
-	} 
-} 
+	}
+}
 #endif

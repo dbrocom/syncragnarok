@@ -380,14 +380,15 @@ int intif_create_party(struct party_member *member,char *name,int item,int item2
 	return 0;
 }
 // パーティ情報要求
-int intif_request_partyinfo(int party_id)
+int intif_request_partyinfo(int party_id, int char_id)
 {
 	if (CheckForCharServer())
 		return 0;
-	WFIFOHEAD(inter_fd,6);
+	WFIFOHEAD(inter_fd,10);
 	WFIFOW(inter_fd,0) = 0x3021;
 	WFIFOL(inter_fd,2) = party_id;
-	WFIFOSET(inter_fd,6);
+	WFIFOL(inter_fd,6) = char_id;
+	WFIFOSET(inter_fd,10);
 	return 0;
 }
 // パーティ追加要求
@@ -434,7 +435,7 @@ int intif_party_leave(int party_id,int account_id, int char_id)
 int intif_party_changemap(struct map_session_data *sd,int online)
 {
 	int m, mapindex;
-	
+
 	if (CheckForCharServer())
 		return 0;
 	if(!sd)
@@ -822,7 +823,7 @@ int intif_homunculus_requestdelete(int homun_id)
 
 // Wisp/Page reception // rewritten by [Yor]
 int intif_parse_WisMessage(int fd)
-{ 
+{
 	struct map_session_data* sd;
 	char *wisp_source;
 	char name[NAME_LENGTH];
@@ -846,7 +847,7 @@ int intif_parse_WisMessage(int fd)
 		sd->ignore[i].name[0] != '\0' &&
 		strcmp(sd->ignore[i].name, wisp_source) != 0
 		; i++);
-	
+
 	if (i < MAX_IGNORE_LIST && sd->ignore[i].name[0] != '\0')
 	{	//Ignored
 		intif_wis_replay(id, 2);
@@ -969,7 +970,7 @@ int intif_parse_LoadGuildStorage(int fd)
 	struct guild_storage *gstor;
 	struct map_session_data *sd;
 	int guild_id;
-	
+
 	guild_id = RFIFOL(fd,8);
 	if(guild_id <= 0)
 		return 1;
@@ -1022,15 +1023,15 @@ int intif_parse_PartyCreated(int fd)
 // パーティ情報
 int intif_parse_PartyInfo(int fd)
 {
-	if( RFIFOW(fd,2)==8){
-		ShowWarning("intif: party noinfo %d\n",RFIFOL(fd,4));
-		party_recv_noinfo(RFIFOL(fd,4));
+	if( RFIFOW(fd,2) == 12 ){
+		ShowWarning("intif: party noinfo (char_id=%d party_id=%d)\n", RFIFOL(fd,4), RFIFOL(fd,8));
+		party_recv_noinfo(RFIFOL(fd,8), RFIFOL(fd,4));
 		return 0;
 	}
 
-	if( RFIFOW(fd,2)!=sizeof(struct party)+4 )
-		ShowError("intif: party info : data size error %d %d %d\n",RFIFOL(fd,4),RFIFOW(fd,2),sizeof(struct party)+4);
-	party_recv_info((struct party *)RFIFOP(fd,4));
+	if( RFIFOW(fd,2) != 8+sizeof(struct party) )
+		ShowError("intif: party info : data size error (char_id=%d party_id=%d packet_len=%d expected_len=%d)\n", RFIFOL(fd,4), RFIFOL(fd,8), RFIFOW(fd,2), 8+sizeof(struct party));
+	party_recv_info((struct party *)RFIFOP(fd,8), RFIFOL(fd,4));
 	return 0;
 }
 // パーティ追加通知
@@ -1388,7 +1389,7 @@ int intif_parse_questlog(int fd)
 		sd->quest_index[i] = quest_search_db(sd->quest_log[i].quest_id);
 
 		if( sd->quest_index[i] < 0 )
-		{  
+		{
 			ShowError("intif_parse_questlog: quest %d not found in DB.\n",sd->quest_log[i].quest_id);
 			sd->avail_quests--;
 			sd->num_quests--;
@@ -1761,7 +1762,7 @@ static void intif_parse_Auction_results(int fd)
 int intif_Auction_register(struct auction_data *auction)
 {
 	int len = sizeof(struct auction_data) + 4;
-	
+
 	if( CheckForCharServer() )
 		return 0;
 
@@ -1770,7 +1771,7 @@ int intif_Auction_register(struct auction_data *auction)
 	WFIFOW(inter_fd,2) = len;
 	memcpy(WFIFOP(inter_fd,4), auction, sizeof(struct auction_data));
 	WFIFOSET(inter_fd,len);
-	
+
 	return 1;
 }
 
